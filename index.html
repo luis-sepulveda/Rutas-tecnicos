@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js">
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   body { font-family:'Segoe UI',Arial,sans-serif; background:#0f172a; color:#e2e8f0; height:100vh; display:flex; flex-direction:column; }
@@ -62,6 +63,8 @@
   <select id="selCiudad"><option value="__ALL__">Ambas ciudades</option><option>QUILPUE</option><option>VILLA ALEMANA</option></select>
   <select id="selFranja"><option value="__ALL__">Todas las franjas</option><option>10-13</option><option>13-16</option><option>16-19</option></select>
   <select id="selEstado"><option value="__ALL__">Todos los estados</option><option>Pendiente</option><option>Iniciado</option><option value="en ruta">En ruta</option></select>
+  <button class="btn" onclick="document.getElementById('inExcel').click()">📂 Cargar Excel</button>
+  <input type="file" id="inExcel" accept=".xlsx" style="display:none">
   <button class="btn" id="btnDesp" onclick="toggleDespacho()">🎯 Modo Despacho</button>
   <button class="btn" id="btnAsig" onclick="toggleAsignacion()">📌 Asignar trabajo nuevo</button>
   <div class="stats" id="stats"></div>
@@ -435,6 +438,53 @@ function rankearTecnicos(pos){
     lu.textContent = '⚠️ Mostrando datos de respaldo (embebidos)';
   }
 })();
+
+
+/* ============ CARGA LOCAL DE EXCEL (independiente por despacho) ============ */
+document.getElementById('inExcel').addEventListener('change', function(ev){
+  const file = ev.target.files[0];
+  if(!file) return;
+  const lector = new FileReader();
+  lector.onload = function(e){
+    try {
+      const wb = XLSX.read(e.target.result, {type:'array'});
+      const hoja = wb.Sheets[wb.SheetNames[0]];
+      const filas = XLSX.utils.sheet_to_json(hoja, {raw:false, defval:''});
+      if(!filas.length) throw new Error('vacio');
+      const req = ['Técnico','Orden de Trabajo','Tipo de Actividad','Franja','Dirección','Ciudad','Coord X','Coord Y','Estado'];
+      const falta = req.filter(c=> !(c in filas[0]));
+      if(falta.length){ alert('El Excel no tiene el formato esperado. Faltan columnas: '+falta.join(', ')); return; }
+
+      const nuevo = {};
+      filas.forEach(f=>{
+        const tec = String(f['Técnico']).replace(/^(QA_B2B_)?(FS_)?MM_NFTT_(DOMI|TRAZ)_/,'').trim();
+        const lat = parseFloat(f['Coord Y']), lng = parseFloat(f['Coord X']);
+        if(!tec || isNaN(lat) || isNaN(lng)) return;
+        if(!nuevo[tec]) nuevo[tec] = [];
+        nuevo[tec].push({
+          o: f['Orden de Trabajo'], t: f['Tipo de Actividad'], f: f['Franja'],
+          hi: f['Inicio']||'', hf: f['Fin']||'',
+          d: String(f['Dirección']).trim()+', '+String(f['Ciudad']).trim(),
+          lat: lat, lng: lng, e: f['Estado']
+        });
+      });
+      Object.keys(nuevo).forEach(t=> nuevo[t].sort((a,b)=> (a.hi||'99:99').localeCompare(b.hi||'99:99')));
+
+      DB = nuevo;
+      tecs = Object.keys(DB).sort();
+      colorOf = {}; tecs.forEach((t,i)=>colorOf[t]=COLORS[i%COLORS.length]);
+      sel.innerHTML = '<option value="__ALL__">Todos los técnicos</option>';
+      tecs.forEach(t=>{ const o=document.createElement('option'); o.value=t; o.textContent=t; sel.appendChild(o); });
+      selPos.innerHTML = '<option value="__CLICK__">📍 Clic en el mapa...</option>';
+      tecs.forEach(t=>{ const o=document.createElement('option'); o.value=t; o.textContent='🚐 Última parada de '+t; selPos.appendChild(o); });
+      const ahora = new Date();
+      document.getElementById('lastUpd').textContent = '📂 Excel local: '+('0'+ahora.getHours()).slice(-2)+':'+('0'+ahora.getMinutes()).slice(-2)+' (solo en este PC)';
+      render();
+    } catch(err){ alert('No se pudo leer el Excel. Verifica que sea el export del portal.'); }
+  };
+  lector.readAsArrayBuffer(file);
+  ev.target.value = '';
+});
 
 </script>
 </body>
