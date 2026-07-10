@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rutas Técnicos DOMI - 10.07.26</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Segoe UI',Arial,sans-serif; background:#0f172a; color:#e2e8f0; height:100vh; display:flex; flex-direction:column; }
+  header { background:#1e293b; padding:10px 16px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; border-bottom:2px solid #334155; z-index:1001;}
+  header h1 { font-size:16px; color:#38bdf8; white-space:nowrap; }
+  select { background:#0f172a; color:#e2e8f0; border:1px solid #475569; border-radius:6px; padding:6px 10px; font-size:13px; max-width:280px;}
+  .stats { font-size:12px; color:#94a3b8; margin-left:auto; }
+  #map { flex:1; }
+  .num-icon { display:flex; align-items:center; justify-content:center; border-radius:50%; color:#fff; font-weight:bold; font-size:12px; border:2px solid #fff; box-shadow:0 1px 4px rgba(0,0,0,.6); width:26px; height:26px; }
+  .mk-iniciado { border:3px solid #4ade80 !important; box-shadow:0 0 10px 3px rgba(74,222,128,.9) !important; }
+  .mk-enruta { border:3px solid #fb923c !important; animation:pulso 1.5s infinite; }
+  @keyframes pulso { 0%{box-shadow:0 0 0 0 rgba(251,146,60,.9)} 70%{box-shadow:0 0 0 12px rgba(251,146,60,0)} 100%{box-shadow:0 0 0 0 rgba(251,146,60,0)} }
+  .estados { position:absolute; bottom:16px; right:10px; z-index:1000; background:rgba(30,41,59,.92); border-radius:8px; padding:8px 12px; font-size:11px;}
+  .estados div { display:flex; align-items:center; gap:8px; margin:4px 0;}
+  .estados .mini { width:16px; height:16px; border-radius:50%; background:#64748b; flex-shrink:0;}
+  .leaflet-popup-content-wrapper { background:#1e293b; color:#e2e8f0; border-radius:8px; }
+  .leaflet-popup-tip { background:#1e293b; }
+  .pp b { color:#38bdf8; }
+  .pp .est { display:inline-block; padding:1px 8px; border-radius:10px; font-size:11px; margin-top:4px;}
+  .est-Pendiente{background:#475569}.est-Iniciado{background:#16a34a}.est-enruta{background:#d97706}.est-Cancelado{background:#dc2626}
+  .legend { position:absolute; bottom:16px; left:10px; z-index:1000; background:rgba(30,41,59,.92); border-radius:8px; padding:8px 12px; font-size:11px; max-height:45vh; overflow-y:auto; max-width:240px;}
+  .legend div { display:flex; align-items:center; gap:6px; margin:2px 0; cursor:pointer;}
+  .legend span.dot { width:12px; height:12px; border-radius:50%; display:inline-block; flex-shrink:0;}
+  .btn { background:#0f172a; color:#e2e8f0; border:1px solid #475569; border-radius:6px; padding:6px 12px; font-size:13px; cursor:pointer; }
+  .btn.on { background:#dc2626; border-color:#f87171; font-weight:bold; }
+  #panel { position:absolute; top:70px; right:10px; z-index:1000; background:rgba(30,41,59,.96); border:1px solid #475569; border-radius:10px; padding:12px; width:300px; max-height:70vh; overflow-y:auto; display:none; font-size:12px;}
+  #panel h2 { font-size:13px; color:#f87171; margin-bottom:6px;}
+  #panel .hint { color:#94a3b8; font-size:11px; margin-bottom:8px;}
+  #panel select { width:100%; margin-bottom:8px;}
+  .cand { border-left:4px solid #38bdf8; background:#0f172a; border-radius:6px; padding:6px 8px; margin:6px 0; cursor:pointer;}
+  .cand:hover { background:#1e3a5f;}
+  .cand .km { font-size:15px; font-weight:bold; color:#4ade80;}
+  .cand.top1 { border-left-color:#4ade80; box-shadow:0 0 6px rgba(74,222,128,.4);}
+  .dist-label { background:transparent; border:none; box-shadow:none; color:#4ade80; font-weight:bold; font-size:12px; text-shadow:0 1px 3px #000;}
+  .btn.on2 { background:#7c3aed; border-color:#a78bfa; font-weight:bold; }
+  #panelAsig { position:absolute; top:70px; right:10px; z-index:1000; background:rgba(30,41,59,.96); border:1px solid #475569; border-radius:10px; padding:12px; width:310px; max-height:75vh; overflow-y:auto; display:none; font-size:12px;}
+  #panelAsig h2 { font-size:13px; color:#a78bfa; margin-bottom:6px;}
+  #panelAsig input { width:100%; background:#0f172a; color:#e2e8f0; border:1px solid #475569; border-radius:6px; padding:6px 8px; font-size:13px; margin-bottom:6px;}
+  #panelAsig select { width:100%; margin-bottom:6px;}
+  #panelAsig .btnGo { width:100%; background:#7c3aed; border:none; color:#fff; border-radius:6px; padding:8px; font-size:13px; cursor:pointer; font-weight:bold; margin-bottom:6px;}
+  .tcard { border-left:4px solid #a78bfa; background:#0f172a; border-radius:6px; padding:6px 8px; margin:6px 0; cursor:pointer;}
+  .tcard:hover { background:#2a1f4e;}
+  .tcard.mejor { border-left-color:#4ade80; box-shadow:0 0 8px rgba(74,222,128,.5);}
+  .tcard .nom { font-weight:bold; color:#e2e8f0; font-size:13px;}
+  .tcard .badge { display:inline-block; padding:1px 7px; border-radius:10px; font-size:10px; margin:2px 2px 0 0; background:#334155;}
+  .tcard .badge.ok { background:#166534;} .tcard .badge.medio { background:#92400e;} .tcard .badge.alto { background:#991b1b;}
+</style>
+</head>
+<body>
+<header>
+  <h1>🚐 Rutas Técnicos DOMI — 10.07.26</h1>
+  <select id="selTec"><option value="__ALL__">Todos los técnicos</option></select>
+  <select id="selCiudad"><option value="__ALL__">Ambas ciudades</option><option>QUILPUE</option><option>VILLA ALEMANA</option></select>
+  <select id="selFranja"><option value="__ALL__">Todas las franjas</option><option>10-13</option><option>13-16</option><option>16-19</option></select>
+  <select id="selEstado"><option value="__ALL__">Todos los estados</option><option>Pendiente</option><option>Iniciado</option><option value="en ruta">En ruta</option></select>
+  <button class="btn" id="btnDesp" onclick="toggleDespacho()">🎯 Modo Despacho</button>
+  <button class="btn" id="btnAsig" onclick="toggleAsignacion()">📌 Asignar trabajo nuevo</button>
+  <div class="stats" id="stats"></div>
+</header>
+<div id="map"></div>
+<div id="panelAsig">
+  <h2>📌 ¿A quién cargar el trabajo nuevo?</h2>
+  <input id="inNum" placeholder="N° de petición / orden (del portal)">
+  <input id="inDir" placeholder="Dirección (ej: VOLCAN YELCHO 2865)">
+  <select id="inCiudad"><option>QUILPUE</option><option>VILLA ALEMANA</option></select>
+  <select id="inFranja"><option value="10-13">Franja 10-13</option><option value="13-16">Franja 13-16</option><option value="16-19">Franja 16-19</option></select>
+  <button class="btnGo" onclick="ubicarTrabajo()">🔍 Buscar dirección y rankear técnicos</button>
+  <div class="hint">Si la dirección no se encuentra, haz clic directo en el mapa sobre la ubicación del cliente.</div>
+  <div id="resultAsig"></div>
+</div>
+<div class="estados" id="estadosBox">
+  <div><span class="mini mk-iniciado"></span> Iniciado (trabajando)</div>
+  <div><span class="mini mk-enruta"></span> En ruta (parpadea)</div>
+  <div><span class="mini"></span> Pendiente</div>
+</div>
+<div id="panel">
+  <h2>🎯 Trabajos pendientes más cercanos</h2>
+  <div class="hint">Elige la posición del técnico libre: usa su última parada, o haz clic directo en el mapa donde se encuentra. Los filtros de ciudad y franja de arriba también aplican aquí.</div>
+  <select id="selPos"><option value="__CLICK__">📍 Clic en el mapa...</option></select>
+  <div id="resultados"></div>
+</div>
+<div class="legend" id="legend"></div>
+<script>
+const DB = {"ALEXIS JARA": [{"o": "1-3MHOPKCV", "t": "Migración", "f": "10-13", "hi": "10:00", "hf": "11:59", "c": "OSCAR RICARDO MUNOZ OLAVE", "d": "GABRIEL GONZALEZ VIDELA 1890 CASA 06, QUILPUE", "lat": -33.0585051, "lng": -71.4278527, "e": "Pendiente"}, {"o": "1-3MJ9ZX6H", "t": "Reparación", "f": "13-16", "hi": "14:00", "hf": "14:47", "c": "PILAR DEL CARMEN IRACHETA NARANJO", "d": "VOLCAN YELCHO 2865, QUILPUE", "lat": -33.0707773, "lng": -71.4240541, "e": "Pendiente"}, {"o": "1-3MJP7YIF", "t": "Alta", "f": "13-16", "hi": "14:53", "hf": "16:12", "c": "PAULINA VALEZKA SAN MARTIN LORCA", "d": "LAGO LAS TORRES 170 DEPTO 905, QUILPUE", "lat": -33.0680161, "lng": -71.4118334, "e": "Pendiente"}], "ALFREDO ALCAYAGA F": [{"o": "1-3MKLAQ72", "t": "Reparación", "f": "10-13", "hi": "09:41", "hf": "10:26", "c": "RAMON ENRIQUE AMPUERO RAMIREZ", "d": "BUENOS AIRES 1288, QUILPUE", "lat": -33.0526261, "lng": -71.4360141, "e": "Iniciado"}, {"o": "1-3MHB3KAC", "t": "Alta", "f": "10-13", "hi": "10:41", "hf": "12:26", "c": "EVELYN PATRICIA QUEZADA GODOY", "d": "PJE CAMPO LINDO 2685, QUILPUE", "lat": -33.0747125, "lng": -71.4264412, "e": "Pendiente"}, {"o": "1-3MKAW5XU", "t": "Alta", "f": "13-16", "hi": "14:00", "hf": "15:45", "c": "MONICA ELIA JARA PONCE", "d": "LOS CORCHOS 2809, QUILPUE", "lat": -33.0741664, "lng": -71.4232634, "e": "Pendiente"}, {"o": "1-3MGFHFQ3", "t": "Modificación de Servicio", "f": "16-19", "hi": "16:00", "hf": "16:33", "c": "PAULINA MAEVA GARRIDO ROJAS", "d": "LA VEGA 528, QUILPUE", "lat": -33.0542915, "lng": -71.3974036, "e": "Pendiente"}], "ANTONHY MORALES MENDOZA": [{"o": "1-3MILAKVS", "t": "Migración", "f": "10-13", "hi": "10:00", "hf": "12:10", "c": "JAIME TORRES RIVERA", "d": "HILDA MADRID 735, QUILPUE", "lat": -33.0319936, "lng": -71.4267824, "e": "Pendiente"}, {"o": "1-3MK4ZFX2", "t": "Reparación", "f": "13-16", "hi": "14:00", "hf": "14:59", "c": "LILY EDITH PEREZ ASTUDILLO", "d": "SOR TERESA DE LOS ANDES 699, QUILPUE", "lat": -33.0327381, "lng": -71.429126, "e": "Pendiente"}], "CESAR MENA OLIVEROS": [{"o": "1-3MIKF3KD", "t": "Migración", "f": "10-13", "hi": "09:42", "hf": "11:43", "c": "MARIO SEGUNDO PACHECO FLORES", "d": "RENE RODRIGUEZ 571 EDIF. B-33 DEPTO 201, QUILPUE", "lat": -33.0609677, "lng": -71.4067701, "e": "Iniciado"}, {"o": "1-3MK0SXZB", "t": "Reparación", "f": "13-16", "hi": "14:00", "hf": "14:58", "c": "VANESSA DEL CARMEN RUZ CONTRERAS", "d": "ALFREDO HELSBY 2647, QUILPUE", "lat": -33.0515452, "lng": -71.397817, "e": "Pendiente"}, {"o": "1-3MI58EKZ", "t": "Alta", "f": "16-19", "hi": "16:00", "hf": "18:03", "c": "ERIX JHOSSEN MONTT TAPIA", "d": "ISLOTE SNIPE 1041, QUILPUE", "lat": -33.0587742, "lng": -71.4011387, "e": "Pendiente"}], "CRISTOBAL MIRANDA VALENC": [{"o": "1-3MK564IQ", "t": "Alta", "f": "10-13", "hi": "10:15", "hf": "11:59", "c": "GABRIELA ISABEL BARROS ALARCON", "d": "JOHN KENNEDY 1936 CASA B, QUILPUE", "lat": -33.0617802, "lng": -71.4223883, "e": "en ruta"}, {"o": "1-3MK8CEK0", "t": "Reparación", "f": "13-16", "hi": "14:00", "hf": "15:02", "c": "KARIM CONSTANZA JALDIN COLLAO", "d": "IRMA JOHNSON MOLINA 110 EDIF. D-E DEPTO 413, QUILPUE", "lat": -33.0660094, "lng": -71.4176402, "e": "Pendiente"}, {"o": "1-3MH7XQK6", "t": "Alta", "f": "16-19", "hi": "16:00", "hf": "17:44", "c": "JOSE PABLO JARA MAIRA", "d": "VALENTIN LETELIER 1715 CASA 8, QUILPUE", "lat": -33.0576794, "lng": -71.4469562, "e": "Pendiente"}], "CRISTOBAL SILVA LEIVA": [{"o": "1-3MJOWPBE", "t": "Reparación", "f": "10-13", "hi": "09:56", "hf": "10:48", "c": "DANIEL  DEL CANTO CAMPOS", "d": "EDUARDO ALQUINTA 1260 CASA 131, QUILPUE", "lat": -33.0302627, "lng": -71.3997717, "e": "en ruta"}, {"o": "1-3MKCUU2J", "t": "Alta", "f": "10-13", "hi": "10:55", "hf": "13:10", "c": "NORA JAMEN GONZALEZ", "d": "LEUCOTON 1100 EDIF. 2 DEPTO 104, QUILPUE", "lat": -33.0330049, "lng": -71.413635, "e": "Pendiente"}, {"o": "1-3MKLO2HD", "t": "Reparación", "f": "13-16", "hi": "14:28", "hf": "15:20", "c": "PAULINA ESTEFANIA GALDAMES MERINO", "d": "MARISOL 1881, QUILPUE", "lat": -33.059061, "lng": -71.4281576, "e": "Pendiente"}], "DANIEL NAVARRETE E": [{"o": "1-3MKLHLZT", "t": "Alta", "f": "10-13", "hi": "09:49", "hf": "11:50", "c": "ROLANDO HUMBERTO GUICHARROUSSE RIOS", "d": "LOS ALAMOS 849 EDIF. I DEPTO 22, QUILPUE", "lat": -33.0477263, "lng": -71.4243583, "e": "en ruta"}, {"o": "1-3MK983AH", "t": "Reparación", "f": "13-16", "hi": "14:00", "hf": "14:54", "c": "VALEZKA PATRICIA MOYA AHUMADA", "d": "PJE 610 962, QUILPUE", "lat": -33.0587368, "lng": -71.4144029, "e": "Pendiente"}, {"o": "1-3MKBIEO5", "t": "Alta", "f": "16-19", "hi": "16:00", "hf": "18:01", "c": "MABEL  ELIZABETH GALLARDO ESCOBAR", "d": "PEYRONNET 1392, QUILPUE", "lat": -33.0533633, "lng": -71.4316765, "e": "Pendiente"}], "EDGAR VALERO C": [{"o": "1-3MHTLFXS", "t": "Migración", "f": "10-13", "hi": "09:50", "hf": "12:08", "c": "ANDRES RODRIGO GONZALEZ GONZALEZ", "d": "CONDELL SUR 01583, QUILPUE", "lat": -33.0395289, "lng": -71.4697494, "e": "en ruta"}, {"o": "1-3MK6NSUM", "t": "Reparación", "f": "13-16", "hi": "14:00", "hf": "14:56", "c": "MANUEL ANTONIO ROJAS FARIAS", "d": "ALFONSO LOPEZ EMANUELLI 1462, QUILPUE", "lat": -33.0404846, "lng": -71.4330166, "e": "Pendiente"}, {"o": "1-3MJ4WCBM", "t": "Alta", "f": "16-19", "hi": "16:00", "hf": "17:42", "c": "ULICES VEN LEAL NAVAS", "d": "FREIRE 250, QUILPUE", "lat": -33.0457294, "lng": -71.4009391, "e": "Pendiente"}], "ELIAS ARMIJO L": [{"o": "1-3MJMIGPA", "t": "Reparación", "f": "10-13", "hi": "09:47", "hf": "10:54", "c": "VICENTE ESPINOZA MARTINEZ", "d": "ESMERALDA 145, VILLA ALEMANA", "lat": -33.046076, "lng": -71.3825221, "e": "en ruta"}, {"o": "1-3MK7M71C", "t": "Migración", "f": "10-13", "hi": "11:06", "hf": "13:30", "c": "CARLOS ROBERTO RODRIGUEZ HUERTA", "d": "LAS ACACIAS 240 CASA 12, VILLA ALEMANA", "lat": -33.0532286, "lng": -71.3544792, "e": "Pendiente"}, {"o": "1-3MKE4GJE", "t": "Migración", "f": "10-13", "hi": "14:45", "hf": "17:09", "c": "CAMILA FERNANDA JARA LOPEZ", "d": "VILLA ESMERALDA 1473 DEPTO 13, VILLA ALEMANA", "lat": -33.0645652, "lng": -71.3806068, "e": "Pendiente"}], "ESTEBAN PIZARRO QUINTANA": [{"o": "1-3MK57C5Q", "t": "Alta", "f": "10-13", "hi": "09:39", "hf": "11:21", "c": "JORGE RENE ARAOS GASC", "d": "ALTO MANQUEHUE 3194 EDIF. C DEPTO 403, QUILPUE", "lat": -33.0721596, "lng": -71.4334353, "e": "en ruta"}, {"o": "1-3MKD41PI", "t": "Reparación", "f": "10-13", "hi": "11:39", "hf": "12:37", "c": "FELIPE ANDRES FERNANDEZ PONDE", "d": "EGANA 395, QUILPUE", "lat": -33.0438774, "lng": -71.4481778, "e": "Pendiente"}, {"o": "1-3MK4SWP5", "t": "Alta", "f": "13-16", "hi": "14:00", "hf": "15:42", "c": "YOHANA ABARCA GARCIA", "d": "LOS CORCHOS 2769, QUILPUE", "lat": -33.0739119, "lng": -71.4236785, "e": "Pendiente"}, {"o": "1-3MJMDEYX", "t": "Alta", "f": "16-19", "hi": "16:00", "hf": "17:42", "c": "CRISTIAN ANTONIO LABRANAS ISLAS", "d": "PJE BUSTOS 1230, QUILPUE", "lat": -33.0505743, "lng": -71.4544185, "e": "Pendiente"}], "FELIPE SILVA R": [{"o": "1-3MJW7JAV", "t": "Reparación", "f": "10-13", "hi": "09:35", "hf": "10:28", "c": "VIOLETA CECILIA CRAWFORD SOSA", "d": "CAMINO DEL SOL 2400 EDIF. A DEPTO 37, QUILPUE", "lat": -33.0323942, "lng": -71.4795251, "e": "Iniciado"}, {"o": "1-3MHKEE3I", "t": "Migración", "f": "10-13", "hi": "10:46", "hf": "13:26", "c": "GENARO INOSTROZA CARRASCO", "d": "LAS HORTENCIAS 1532, QUILPUE", "lat": -33.0561248, "lng": -71.4250019, "e": "Pendiente"}, {"o": "1-3MK6YKME", "t": "Reparación", "f": "13-16", "hi": "14:42", "hf": "15:33", "c": "FREDDY GASTON PENA JIMENEZ", "d": "MONTEVIDEO 1478 CASA 1, QUILPUE", "lat": -33.0534017, "lng": -71.4543012, "e": "Pendiente"}], "FREDERIC OVALLE V": [{"o": "1-3MK80VH6", "t": "Migración", "f": "10-13", "hi": "09:47", "hf": "12:27", "c": "FLOR OLMEDO VENEGAS", "d": "FREIRE 1188, QUILPUE", "lat": -33.0439992, "lng": -71.4358145, "e": "Iniciado"}, {"o": "1-3MK74U3M", "t": "Reparación", "f": "13-16", "hi": "14:00", "hf": "14:54", "c": "XIMENA DEL CARMEN SEVERINO LUND", "d": "AV BLANCO ENCALADA 970 CASA A, QUILPUE", "lat": -33.0465103, "lng": -71.4403658, "e": "Pendiente"}], "GEEYSER PEREZ O": [{"o": "1-3MHSKT5E", "t": "Migración", "f": "10-13", "hi": "10:00", "hf": "12:06", "c": "KARINA ALEJANDRA  GONZALEZ SUAREZ", "d": "PJE LARGO 0263, QUILPUE", "lat": -33.0381861, "lng": -71.4833634, "e": "Pendiente"}, {"o": "1-3MK5L27U", "t": "Reparación", "f": "13-16", "hi": "14:00", "hf": "14:42", "c": "EDMUNDO SAMUEL TAPIA MORALES", "d": "COOPERACION 383, QUILPUE", "lat": -33.0454017, "lng": -71.4709992, "e": "Pendiente"}, {"o": "1-3MIVSDT3", "t": "Reparación", "f": "13-16", "hi": "14:45", "hf": "15:55", "c": "CLAUDIA MARGARITA NEGRETE VALENZUELA", "d": "FRANCISCO DE ASIS 01039 CASA B, QUILPUE", "lat": -33.0501057, "lng": -71.4686903, "e": "Pendiente"}], "HERNAN CORTES HERRERA": [{"o": "1-3MKCFZGW", "t": "Reparación", "f": "10-13", "hi": "09:43", "hf": "10:36", "c": "EDUARDO ANDRES BOUILLET CARROZA", "d": "AVENIDA LAS FLORES 1650 CASA 7, VILLA ALEMANA", "lat": -33.0413362, "lng": -71.3870496, "e": "Iniciado"}, {"o": "1-3MK9GD58", "t": "Alta", "f": "10-13", "hi": "10:46", "hf": "12:43", "c": "GABRIEL ARNALDO NUNEZ PARAS", "d": "LOS QUELTEHUES 2248, VILLA ALEMANA", "lat": -33.0515372, "lng": -71.3931696, "e": "Pendiente"}, {"o": "1-3MIRKROV", "t": "Alta", "f": "10-13", "hi": "12:54", "hf": "15:13", "c": "INTRALOT CHILE SPA", "d": "SANTA ANA 26 CASA A, VILLA ALEMANA", "lat": -33.0447724, "lng": -71.3809074, "e": "Pendiente"}, {"o": "1-3MK7F65N", "t": "Alta", "f": "16-19", "hi": "16:28", "hf": "17:58", "c": "FRANCISCO FABIAN MUNOZ RAMOS", "d": "VIA UNO SIETE 2065 EDIF. D DEPTO 23, VILLA ALEMANA", "lat": -33.0635448, "lng": -71.3911937, "e": "Pendiente"}], "JEAN ROODLY ORELIEN": [{"o": "1-3MK2LEX4", "t": "Reparación", "f": "10-13", "hi": "09:30", "hf": "10:28", "c": "EDUARDO FRANCISCO CR ARGANDOÑA LLANOS", "d": "BILBAO 1290, QUILPUE", "lat": -33.0457617, "lng": -71.4349166, "e": "Iniciado"}, {"o": "1-3MJWIOHF", "t": "Alta", "f": "10-13", "hi": "10:46", "hf": "12:29", "c": "JAIME ENRIQUE VEGA BERNAL", "d": "CALLE 3 0262, QUILPUE", "lat": -33.0439562, "lng": -71.4732311, "e": "Pendiente"}, {"o": "1-3MK4GJQH", "t": "Reparación", "f": "13-16", "hi": "14:00", "hf": "14:58", "c": "ROBERTO ALEJANDRO TRICOT NUÑEZ", "d": "VOLCAN LINZOR 2679, QUILPUE", "lat": -33.0716565, "lng": -71.4247767, "e": "Pendiente"}, {"o": "1-3MK5BI4T", "t": "Alta", "f": "16-19", "hi": "16:00", "hf": "17:43", "c": "OSCAR RAFAEL FIGUEROA MALDONADO", "d": "ISIDORA 2801 DEPTO 11, QUILPUE", "lat": -33.0662025, "lng": -71.417058, "e": "Pendiente"}], "JOEL GUSTAVE GUSTA": [{"o": "1-3MK4R4BO", "t": "Alta", "f": "10-13", "hi": "09:45", "hf": "12:01", "c": "NANCY DEL CARMEN OLMEDO MIRANDA", "d": "LAGO BERTRAND 120 EDIF. B DEPTO 403, QUILPUE", "lat": -33.0687641, "lng": -71.4118761, "e": "Iniciado"}, {"o": "1-3MJ6CK39", "t": "Reparación", "f": "13-16", "hi": "14:00", "hf": "15:07", "c": "ALBERTO BERRIOS SILVA", "d": "QUINTRAL 2948, QUILPUE", "lat": -33.0730047, "lng": -71.4231168, "e": "Pendiente"}], "JORDAN ROA PEREZ": [{"o": "1-3MKDQ81D", "t": "Reparación", "f": "10-13", "hi": "09:49", "hf": "10:37", "c": "GLADYS TERESA DAVAGNINO VILLABLANCA", "d": "PJE HUALA 2665, QUILPUE", "lat": -33.0673542, "lng": -71.4259827, "e": "en ruta"}, {"o": "1-3MK8XB7A", "t": "Alta", "f": "10-13", "hi": "10:49", "hf": "12:39", "c": "ANDRES PATRICIO DAVILA JOHNSON", "d": "GENERAL VELASQUEZ 395, QUILPUE", "lat": -33.0425796, "lng": -71.4444863, "e": "Pendiente"}, {"o": "1-3MK426YH", "t": "Alta", "f": "13-16", "hi": "14:00", "hf": "16:10", "c": "PAULA MARIA PONCE FIGUEROA", "d": "AV LOS CARRERA 311 DEPTO 11, QUILPUE", "lat": -33.0469086, "lng": -71.4483368, "e": "Pendiente"}], "JORGE PEZOA VICUÑA": [{"o": "1-3MJ2RJ4O", "t": "Alta", "f": "10-13", "hi": "09:48", "hf": "11:20", "c": "EDITH HERNANDEZ OYADENEL", "d": "DARWIN 0742, QUILPUE", "lat": -33.0521641, "lng": -71.4603273, "e": "Iniciado"}, {"o": "1-3MGS5C9N", "t": "Migración", "f": "10-13", "hi": "11:36", "hf": "13:39", "c": "HARALD ERNST KOHLITZ FELL", "d": "MANUEL BULNES 1140, QUILPUE", "lat": -33.0508547, "lng": -71.4435269, "e": "Pendiente"}, {"o": "1-3MHTJ02O", "t": "Alta", "f": "13-16", "hi": "14:43", "hf": "16:46", "c": "PAULINA ALEJANDRA ONETO ZUNIGA", "d": "LOS ESTANQUES 1129, QUILPUE", "lat": -33.0556953, "lng": -71.4379976, "e": "Pendiente"}], "JOSE CASTRO P": [{"o": "1-3MK3Y4RA", "t": "Reparación", "f": "10-13", "hi": "09:52", "hf": "10:39", "c": "VICTOR HUGO SILVA PEREZ", "d": "GUACOLDA 1745 DEPTO 23, VILLA ALEMANA", "lat": -33.0456494, "lng": -71.3870283, "e": "en ruta"}, {"o": "1-3MK95N5G", "t": "Alta", "f": "10-13", "hi": "10:46", "hf": "13:05", "c": "VALENTINA GALLARDO CARVACHO", "d": "PATRICIO LYNCH 406 EDIF. E DEPTO 304, VILLA ALEMANA", "lat": -33.0484393, "lng": -71.3699211, "e": "Pendiente"}, {"o": "1-3MK6KZX9", "t": "Alta", "f": "10-13", "hi": "13:23", "hf": "15:42", "c": "ANGEL ALEXIS MENDOZA CHAMORRO", "d": "FRANCISCA 674, VILLA ALEMANA", "lat": -33.064773, "lng": -71.371774, "e": "Pendiente"}, {"o": "1-3MJY9ANR", "t": "Reparación", "f": "13-16", "hi": "17:00", "hf": "17:47", "c": "LUCY MAGDALENA MIRANDA MUNOZ", "d": "IGNACIO CARRERA PINTO 321, VILLA ALEMANA", "lat": -33.0492659, "lng": -71.3653782, "e": "Pendiente"}, {"o": "1-3MK0SZ9E", "t": "Reparación", "f": "13-16", "hi": "17:50", "hf": "18:46", "c": "SONIA CARRERA MUNOZ", "d": "IGNACIO CARRERA PINTO 055, VILLA ALEMANA", "lat": -33.0430971, "lng": -71.3651929, "e": "Pendiente"}], "JOSE GALAZ D": [{"o": "1-3MJZVW5E", "t": "Reparación", "f": "10-13", "hi": "09:50", "hf": "10:34", "c": "MARCELA DEL CARMEN PLAZA ACEVEDO", "d": "AV VICEPRESIDENTE BDO LEIGHTON 1431 EDIF. 5 DEPTO 32, VILLA ALEMANA", "lat": -33.0572491, "lng": -71.3539648, "e": "en ruta"}, {"o": "1-3MIDNGZW", "t": "Migración", "f": "10-13", "hi": "10:49", "hf": "12:48", "c": "EDUARDO ALFREDO MORAGA AGURTO", "d": "18 DE SEPTIEMBRE 227, VILLA ALEMANA", "lat": -33.0461611, "lng": -71.3567164, "e": "Pendiente"}, {"o": "1-3MK9LYNP", "t": "Reparación", "f": "13-16", "hi": "14:03", "hf": "15:02", "c": "MILENKA MARINOVIC SILVA", "d": "TACNA 405, VILLA ALEMANA", "lat": -33.0518039, "lng": -71.3705287, "e": "Pendiente"}, {"o": "1-3MK2B9SY", "t": "Reparación", "f": "13-16", "hi": "", "hf": "", "c": "CECILIA VIVIANA FLORES VARELA", "d": "TERESIANAS 119, VILLA ALEMANA", "lat": -33.0546931, "lng": -71.3386415, "e": "Cancelado"}], "JOSE PEREZ RANGEL": [{"o": "1-3MFE1ACT", "t": "Migración", "f": "10-13", "hi": "10:02", "hf": "11:52", "c": "CONSTANZA CAROLINA GARRIDO BARRERA", "d": "ABTAO 163, VILLA ALEMANA", "lat": -33.0389929, "lng": -71.3550638, "e": "en ruta"}, {"o": "1-3MKL6KKQ", "t": "Alta", "f": "10-13", "hi": "12:08", "hf": "13:49", "c": "MILENA LENKA DOBUD GARCIA", "d": "PREBISTERIO O. LIRA PEREZ 0326, VILLA ALEMANA", "lat": -33.049433, "lng": -71.3370236, "e": "Pendiente"}, {"o": "1-3MJM7FR2", "t": "Alta", "f": "13-16", "hi": "15:07", "hf": "16:27", "c": "RENZO DENNIS MALDONADO CASTILLO", "d": "MADRID 225, VILLA ALEMANA", "lat": -33.052, "lng": -71.3669, "e": "Pendiente"}, {"o": "1-3MGCJH9S", "t": "Migración", "f": "16-19", "hi": "16:30", "hf": "18:20", "c": "ASTRID ELIZABETH PEREZ DE ARCE MORCON", "d": "PEDRO MONTT 0150 CASA 7, VILLA ALEMANA", "lat": -33.0476056, "lng": -71.3623313, "e": "Pendiente"}, {"o": "1-3MK6QGJ6", "t": "Alta", "f": "10-13", "hi": "", "hf": "", "c": "MILENA LENKA DOBUD GARCIA", "d": "PREBISTERIO O. LIRA PEREZ 0326, VILLA ALEMANA", "lat": -33.049433, "lng": -71.3370236, "e": "Cancelado"}], "JOSE ROJO A": [{"o": "1-3MK95P4Y", "t": "Reparación", "f": "10-13", "hi": "09:47", "hf": "10:37", "c": "MARISOL NADIARA JEREZ YANEZ", "d": "FERNANDA 568, VILLA ALEMANA", "lat": -33.0643753, "lng": -71.3714958, "e": "Iniciado"}, {"o": "1-3MHZN5D1", "t": "Migración", "f": "10-13", "hi": "10:47", "hf": "13:10", "c": "HECTOR ANDRES GONZALEZ FUENTES", "d": "MILAN 575, VILLA ALEMANA", "lat": -33.0445475, "lng": -71.3505167, "e": "Pendiente"}, {"o": "1-3MILY8Q0", "t": "Alta", "f": "13-16", "hi": "14:14", "hf": "16:25", "c": "SONIA CARTAGENA GODINES", "d": "GABRIEL DAZAROLA 312, VILLA ALEMANA", "lat": -33.0477012, "lng": -71.3617509, "e": "Pendiente"}], "JOSE SALAS MEDINA": [{"o": "1-3MK6EYI7", "t": "Reparación", "f": "10-13", "hi": "09:42", "hf": "10:41", "c": "ROSA ALBA BONTA ELGUETA", "d": "SAN MARTIN 310, VILLA ALEMANA", "lat": -33.0472166, "lng": -71.3729263, "e": "Iniciado"}, {"o": "1-3MHJ8P3V", "t": "Alta", "f": "10-13", "hi": "10:55", "hf": "13:31", "c": "JESUS ALBERTO MONTENEGRO VERA", "d": "PAUL HARRIS 883 EDIF. B DEPTO 206, VILLA ALEMANA", "lat": -33.0550837, "lng": -71.362757, "e": "Pendiente"}, {"o": "1-3MHKNKDR", "t": "Migración", "f": "13-16", "hi": "14:46", "hf": "17:21", "c": "VILMA CECILIA ORELLANA GONZALEZ", "d": "LAS VERBENAS 2727, VILLA ALEMANA", "lat": -33.0455259, "lng": -71.3969529, "e": "Pendiente"}], "JUAN ARRIAGADA C": [{"o": "1-3MK2WK90", "t": "Alta", "f": "10-13", "hi": "09:37", "hf": "11:27", "c": "ALEJANDRA CECILIA DIAZ CABRERA", "d": "VILLA ESMERALDA 1462 DEPTO 202, VILLA ALEMANA", "lat": -33.0637756, "lng": -71.380588, "e": "Iniciado"}, {"o": "1-3MHL2Y1C", "t": "Reparación", "f": "10-13", "hi": "11:43", "hf": "12:30", "c": "EDUARDO ANDRES  CASTILLO GOMEZ", "d": "SANTA ROSA 35 CASA MK, VILLA ALEMANA", "lat": -33.0250869, "lng": -71.390277, "e": "Pendiente"}, {"o": "1-3MK16VQM", "t": "Reparación", "f": "13-16", "hi": "14:00", "hf": "14:47", "c": "CATALINA ANGELICA VERGARA TORRES", "d": "PARIS 810, VILLA ALEMANA", "lat": -33.0409208, "lng": -71.3749361, "e": "Pendiente"}, {"o": "1-3MK1FSOB", "t": "Reparación", "f": "13-16", "hi": "14:55", "hf": "15:41", "c": "JUAN ANTONIO OLIVARES ESPINOZA", "d": "SEVILLA 11, VILLA ALEMANA", "lat": -33.0516036, "lng": -71.3634216, "e": "Pendiente"}, {"o": "1-3MKA5RVE", "t": "Alta", "f": "13-16", "hi": "15:48", "hf": "17:24", "c": "DELIA SARA BRAVO RODRIGUEZ", "d": "SANTA RITA 950 EDIF. B DEPTO 106, VILLA ALEMANA", "lat": -33.0481572, "lng": -71.3759328, "e": "Pendiente"}], "KEVIN TAPIA RETAMAL": [{"o": "1-3MK1FA4D", "t": "Reparación", "f": "10-13", "hi": "09:32", "hf": "10:23", "c": "ALEJANDRA OLIVARES BAZAES", "d": "FRODDEN 01572, QUILPUE", "lat": -33.0537252, "lng": -71.4686143, "e": "Iniciado"}, {"o": "1-3MJVPTN3", "t": "Migración", "f": "10-13", "hi": "10:41", "hf": "13:24", "c": "CLAUDIO PONCE CARTAJENA", "d": "SAN PEDRO 1933, QUILPUE", "lat": -33.0613214, "lng": -71.4196937, "e": "Pendiente"}, {"o": "1-3MHM9WAS", "t": "Reparación", "f": "13-16", "hi": "14:40", "hf": "15:32", "c": "CAROLINA DAYSI OSORIO PLAZA", "d": "PEYRONNET 1401, QUILPUE", "lat": -33.0538669, "lng": -71.4315421, "e": "Pendiente"}, {"o": "1-3MGHKRQS", "t": "Modificación de Servicio", "f": "16-19", "hi": "16:00", "hf": "16:40", "c": "SEBASTIAN IGNACIO ACEITUNO MELLA", "d": "PARINACOTA 2690 EDIF. F DEPTO 402, QUILPUE", "lat": -33.0618884, "lng": -71.4184608, "e": "Pendiente"}], "LEONEL HERNÁNDEZ OJE": [{"o": "1-3MFHFEL0", "t": "Migración", "f": "10-13", "hi": "09:45", "hf": "12:08", "c": "SUSANA EVELYN CARRASCO OJEDA", "d": "LOS PERALES 1027, QUILPUE", "lat": -33.0350599, "lng": -71.4105197, "e": "Iniciado"}, {"o": "1-3MK959DU", "t": "Reparación", "f": "13-16", "hi": "14:00", "hf": "14:58", "c": "GILDA ELIANA ZAMORA MIRANDA", "d": "TARRAGONA 1371, QUILPUE", "lat": -33.031457, "lng": -71.4087509, "e": "Pendiente"}, {"o": "1-3MHJ4YJ8", "t": "Modificación de Servicio", "f": "16-19", "hi": "16:00", "hf": "16:43", "c": "CAROLINA JAKRY MOLINA FERNANDOIS", "d": "ESTER SORE 1330, QUILPUE", "lat": -33.031235, "lng": -71.4004116, "e": "Pendiente"}], "LUIS CASTRO TORRES": [{"o": "1-3MJKY77T", "t": "Migración", "f": "10-13", "hi": "09:47", "hf": "12:08", "c": "ERNA ANA HEIDKE SAAVEDRA", "d": "GRANADA 1550, QUILPUE", "lat": -33.0360348, "lng": -71.440818, "e": "en ruta"}, {"o": "1-3MDTUK1Y", "t": "Modificación de Servicio", "f": "13-16", "hi": "14:00", "hf": "15:02", "c": "PATRICIA VERONICA ARANCIBIA PARDO", "d": "PJE SEGOVIA 879, QUILPUE", "lat": -33.0316876, "lng": -71.4093376, "e": "Pendiente"}], "MARCELO GÓMEZ GÓME": [{"o": "1-3MK8A6Y5", "t": "Reparación", "f": "10-13", "hi": "09:46", "hf": "11:00", "c": "GLADYS DE LAS MERCED CACERES TOLEDO", "d": "PAUL HARRIS 462 CASA 4, VILLA ALEMANA", "lat": -33.0498836, "lng": -71.3631312, "e": "Iniciado"}, {"o": "1-3MK5AJSS", "t": "Alta", "f": "10-13", "hi": "11:17", "hf": "14:06", "c": "MILENA PAOLA CALDERON NARBONA", "d": "LOURDES 1021 EDIF. F DEPTO 401, VILLA ALEMANA", "lat": -33.0618837, "lng": -71.3748244, "e": "Pendiente"}], "MARCO PEREZ G": [{"o": "1-3MJMUCBK", "t": "Reparación", "f": "10-13", "hi": "09:38", "hf": "10:36", "c": "JOSE GASTON AGUILAR ALZAMORA", "d": "AV LOS CARRERA (BTO 2000) 1641, QUILPUE", "lat": -33.0497411, "lng": -71.4201928, "e": "Iniciado"}, {"o": "1-3MKCY1M7", "t": "Alta", "f": "10-13", "hi": "10:47", "hf": "12:16", "c": "ALEJANDRA VITALIA BERNAL VALDES", "d": "LOS ALAMOS 849 EDIF. I DEPTO 21, QUILPUE", "lat": -33.0477263, "lng": -71.4243583, "e": "Pendiente"}, {"o": "1-3MJHIL3S", "t": "Alta", "f": "13-16", "hi": "14:00", "hf": "15:29", "c": "VICTOR MILAN TAPIA SOLIS", "d": "PJE MILANO 940 EDIF. L DEPTO 22, QUILPUE", "lat": -33.051667, "lng": -71.4203117, "e": "Pendiente"}, {"o": "1-3MGZ6G48", "t": "Alta", "f": "16-19", "hi": "16:00", "hf": "17:58", "c": "HECTOR MANUEL BURGOS NUÑEZ", "d": "SAN LUIS 1519, QUILPUE", "lat": -33.0369801, "lng": -71.4404758, "e": "Pendiente"}], "MATIAS APELEO APELEO": [{"o": "1-3MIL0CK0", "t": "Migración", "f": "10-13", "hi": "10:00", "hf": "12:18", "c": "JOSE ALAMIRO CORTES ROJAS", "d": "SAN MIGUEL 25, VILLA ALEMANA", "lat": -33.0501912, "lng": -71.3903609, "e": "Pendiente"}, {"o": "1-3MK7PP3O", "t": "Migración", "f": "10-13", "hi": "12:28", "hf": "14:46", "c": "LUIS HUMBERTO FABRES AGUILERA", "d": "LOS ALGARROBOS 830, VILLA ALEMANA", "lat": -33.0570331, "lng": -71.392637, "e": "Pendiente"}, {"o": "1-3MFPL1OA", "t": "Migración", "f": "16-19", "hi": "16:01", "hf": "18:19", "c": "ALEJANDRO APABLAZA RAMIREZ", "d": "AV JOHN KENNEDY 1720 EDIF. A DEPTO 403, VILLA ALEMANA", "lat": -33.0556735, "lng": -71.3853685, "e": "Pendiente"}], "MATIAS CORNEJO D": [{"o": "1-3MJWQPJK", "t": "Alta", "f": "10-13", "hi": "09:42", "hf": "12:10", "c": "MAWE", "d": "SANTIAGO 585 EDIF. LOCAL 9, QUILPUE", "lat": -33.038295, "lng": -71.4054407, "e": "en ruta"}, {"o": "1-3MFTQUWA", "t": "Modificación de Servicio", "f": "13-16", "hi": "14:00", "hf": "14:53", "c": "JAVIERA ANTONIA ROJAS HENRIQUEZ", "d": "LOS LUCUMOS 3152, QUILPUE", "lat": -33.0343106, "lng": -71.3984476, "e": "Pendiente"}, {"o": "1-3MKLRZB2", "t": "Alta", "f": "13-16", "hi": "15:06", "hf": "17:14", "c": "LUIS ENRIQUE  BRUNA MANRIQUEZ", "d": "LOS OLIVOS 3162, QUILPUE", "lat": -33.0339948, "lng": -71.3988127, "e": "Pendiente"}], "MATÍAS JAQUE AG": [{"o": "1-3MKCC8MQ", "t": "Alta", "f": "10-13", "hi": "09:48", "hf": "11:44", "c": "PRISCILA ABIGAIL CHAURA ALARCON", "d": "IGNACIO CARRERA PINTO 1650 EDIF. 5 DEPTO 44, VILLA ALEMANA", "lat": -33.0664994, "lng": -71.3649129, "e": "en ruta"}, {"o": "1-3MKBIG8X", "t": "Alta", "f": "10-13", "hi": "11:48", "hf": "13:44", "c": "JESSICA ALEJANDRA BURTO LEON", "d": "AV LA PALMA 426 EDIF. B DEPTO 201, VILLA ALEMANA", "lat": -33.0618604, "lng": -71.3594238, "e": "Pendiente"}, {"o": "1-3MK2U9DT", "t": "Alta", "f": "16-19", "hi": "16:00", "hf": "17:38", "c": "JOSE ROBERTO GATICA QUILEÑAN", "d": "CALLE 1 1150 EDIF. 1 DEPTO 203, VILLA ALEMANA", "lat": -33.0565369, "lng": -71.3587408, "e": "Pendiente"}], "NICOLAS MOYANO R": [{"o": "1-3MHSUBLR", "t": "Alta", "f": "10-13", "hi": "10:00", "hf": "11:40", "c": "PATRICIO WAGNER MORA OLIVARES", "d": "VILLA ESMERALDA 1531 DEPTO 103, VILLA ALEMANA", "lat": -33.064614, "lng": -71.3813851, "e": "Pendiente"}, {"o": "1-3MK9VNY0", "t": "Alta", "f": "10-13", "hi": "11:48", "hf": "13:52", "c": "ROSA AIDE PANTOJA PRADENA", "d": "IGNACIO CARRERA PINTO 1364, VILLA ALEMANA", "lat": -33.0671, "lng": -71.3641, "e": "Pendiente"}, {"o": "1-3MI1QZ08", "t": "Alta", "f": "16-19", "hi": "16:00", "hf": "17:40", "c": "KAREN DESIRE FUENZALIDA LEPE", "d": "PJE LOS CANALES 1596, VILLA ALEMANA", "lat": -33.0623581, "lng": -71.3856079, "e": "Pendiente"}], "PABLO HERNANEZ FERNANDEZ": [{"o": "1-3MJXW5H5", "t": "Alta", "f": "10-13", "hi": "09:48", "hf": "11:37", "c": "RENE BENJAMIN GOMEZ OROSTICA", "d": "JOSE MIGUEL CARRERA 846, VILLA ALEMANA", "lat": -33.0539138, "lng": -71.370301, "e": "Iniciado"}, {"o": "1-3MK4622G", "t": "Alta", "f": "10-13", "hi": "11:44", "hf": "13:48", "c": "ELOINA ELIZABETH YAÑEZ  PORTILLA", "d": "LAS PALMAS 1, VILLA ALEMANA", "lat": -33.0605312, "lng": -71.3572359, "e": "Pendiente"}, {"o": "1-3MK3LTVW", "t": "Alta", "f": "16-19", "hi": "16:00", "hf": "18:04", "c": "EDUARDO MAURICIO CASTILLO GONZALEZ", "d": "LOS NARCISOS 1798 DEPTO 501, VILLA ALEMANA", "lat": -33.0553452, "lng": -71.3598554, "e": "Pendiente"}], "RAFAEL VARGAS B": [{"o": "1-3MJXKATE", "t": "Migración", "f": "10-13", "hi": "09:45", "hf": "11:33", "c": "ROMINA FARFAN GUERRERO", "d": "M FERNANDEZ 2442, QUILPUE", "lat": -33.0658072, "lng": -71.423742, "e": "Iniciado"}, {"o": "1-3MK6ZN31", "t": "Alta", "f": "10-13", "hi": "11:49", "hf": "13:13", "c": "MABEL FERNANDEZ GALIES", "d": "ARTURO ALESSANDRI 709 DEPTO 31, QUILPUE", "lat": -33.0615999, "lng": -71.4436965, "e": "Pendiente"}, {"o": "1-3MFJ9HNC", "t": "Migración", "f": "16-19", "hi": "16:00", "hf": "17:48", "c": "LILLIAN TEOTISTA ODE FALCON VACCAREZZA", "d": "CUMMING 937 DEPTO 30, QUILPUE", "lat": -33.0486912, "lng": -71.4408095, "e": "Pendiente"}], "SAMUEL FERNANDEZ VIDAL": [{"o": "1-3MJWIX37", "t": "Reparación", "f": "10-13", "hi": "09:45", "hf": "10:43", "c": "GENESIS CAMILA ACEITUNO CARO", "d": "ARTURO PRAT (SGTO ALDEA) 484, VILLA ALEMANA", "lat": -33.0368253, "lng": -71.3596842, "e": "Iniciado"}, {"o": "1-3MFNYAY3", "t": "Upgrade promoción", "f": "10-13", "hi": "10:55", "hf": "11:42", "c": "GLADIA IRIS DE LAS MERCEDES ARDILES GONZALEZ", "d": "LONGITUDINAL 789 CASA 14, VILLA ALEMANA", "lat": -33.0319577, "lng": -71.3902913, "e": "Pendiente"}, {"o": "1-3MJ7XWVG", "t": "Alta", "f": "10-13", "hi": "11:55", "hf": "13:45", "c": "ALEJANDRA KATHERINA CRUZ PEREZ", "d": "VALDIVIA 378 EDIF. B DEPTO 401, VILLA ALEMANA", "lat": -33.0354943, "lng": -71.3583654, "e": "Pendiente"}, {"o": "1-3MK51GFF", "t": "Alta", "f": "16-19", "hi": "16:00", "hf": "17:50", "c": "PEDRO JUAN MORGADO ESCARATE", "d": "PRIMERA 1181 CASA D, VILLA ALEMANA", "lat": -33.0483493, "lng": -71.3797632, "e": "Pendiente"}], "SEBASTIAN DOSSOW A": [{"o": "1-3MJMFFV8", "t": "Reparación", "f": "10-13", "hi": "09:47", "hf": "10:44", "c": "FABIOLA  ANTONIETA SEPULVEDA CISTERNA", "d": "PJE 2 (MADRID) 1650, VILLA ALEMANA", "lat": -33.0373628, "lng": -71.386743, "e": "Iniciado"}, {"o": "1-3MJYQ0BW", "t": "Alta", "f": "10-13", "hi": "10:45", "hf": "13:23", "c": "ROSA BEATRIZ ASIS MANCILLA", "d": "JOSE JOAQUIN PRIETO 298, VILLA ALEMANA", "lat": -33.0383984, "lng": -71.384513, "e": "Pendiente"}, {"o": "1-3MK5ITJ0", "t": "Reparación", "f": "13-16", "hi": "14:27", "hf": "15:24", "c": "CELESTE LISSETTE CUADRA CHUECA", "d": "LATORRE 533, VILLA ALEMANA", "lat": -33.0374049, "lng": -71.3726031, "e": "Pendiente"}, {"o": "1-3MHJKBKN", "t": "Modificación de Servicio", "f": "16-19", "hi": "16:00", "hf": "17:06", "c": "ROLANDO RUBEN MORALES LOPEZ", "d": "MATURANA 855, VILLA ALEMANA", "lat": -33.0527681, "lng": -71.3739072, "e": "Pendiente"}], "YENDER BOSCAN CADENAS": [{"o": "1-3MKAZFOL", "t": "Alta", "f": "10-13", "hi": "09:42", "hf": "11:55", "c": "NICOLE ANDREA MUÑOZ ZAMORA", "d": "LIBANO 692, QUILPUE", "lat": -33.0312104, "lng": -71.4820532, "e": "Iniciado"}]};
+const COLORS = ["#e6194b","#3cb44b","#4363d8","#f58231","#911eb4","#42d4f4","#f032e6","#bfef45","#fabed4","#469990","#dcbeff","#9a6324","#fffac8","#800000","#aaffc3","#808000","#ffd8b1","#000075","#a9a9a9","#ff4500","#2e8b57","#1e90ff","#ff69b4","#8b4513","#00ced1","#ffa500","#7b68ee","#20b2aa","#dc143c","#00fa9a","#ba55d3","#ff6347","#4682b4","#daa520","#5f9ea0","#d2691e","#6495ed","#adff2f"];
+const tecs = Object.keys(DB).sort();
+const colorOf = {}; tecs.forEach((t,i)=>colorOf[t]=COLORS[i%COLORS.length]);
+
+const map = L.map('map').setView([-33.05,-71.41],13);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{attribution:'&copy; OpenStreetMap &copy; CARTO',maxZoom:19}).addTo(map);
+
+const sel = document.getElementById('selTec');
+tecs.forEach(t=>{ const o=document.createElement('option'); o.value=t; o.textContent=t; sel.appendChild(o); });
+
+let layer = L.layerGroup().addTo(map);
+
+function estClass(e){ return 'est-'+e.replace(/\s/g,''); }
+
+function render(){
+  layer.clearLayers();
+  const ft = sel.value, fc = document.getElementById('selCiudad').value, ff = document.getElementById('selFranja').value, fe = document.getElementById('selEstado').value;
+  const show = ft==='__ALL__' ? tecs : [ft];
+  let bounds=[], nTrab=0, nTec=0, nIni=0, nRuta=0;
+  show.forEach(t=>{
+    let pts = DB[t].filter(p=> p.e!=='Cancelado');
+    if(fc!=='__ALL__') pts = pts.filter(p=> p.d.toUpperCase().includes(fc));
+    if(ff!=='__ALL__') pts = pts.filter(p=> p.f===ff);
+    if(fe!=='__ALL__') pts = pts.filter(p=> p.e===fe);
+    if(!pts.length) return;
+    nTec++; nTrab+=pts.length;
+    const col = colorOf[t];
+    const latlngs = pts.map(p=>[p.lat,p.lng]);
+    if(latlngs.length>1) L.polyline(latlngs,{color:col,weight:3,opacity:.75,dashArray:'6 6'}).addTo(layer);
+    pts.forEach((p,i)=>{
+      if(p.e==='Iniciado') nIni++;
+      if(p.e==='en ruta') nRuta++;
+      const stCls = p.e==='Iniciado' ? ' mk-iniciado' : (p.e==='en ruta' ? ' mk-enruta' : '');
+      const icon = L.divIcon({className:'', html:'<div class="num-icon'+stCls+'" style="background:'+col+'">'+(i+1)+'</div>', iconSize:[26,26], iconAnchor:[13,13]});
+      L.marker([p.lat,p.lng],{icon}).addTo(layer).bindPopup(
+        '<div class="pp"><b>'+t+'</b> — parada '+(i+1)+'<br>'+
+        '📋 '+p.o+' · '+p.t+'<br>'+
+        '🕐 '+(p.hi||'--')+' - '+(p.hf||'--')+' (franja '+p.f+')<br>'+
+        '👤 '+p.c+'<br>📍 '+p.d+'<br>'+
+        '<span class="est '+estClass(p.e)+'">'+p.e+'</span></div>');
+      bounds.push([p.lat,p.lng]);
+    });
+  });
+  document.getElementById('stats').textContent = nTec+' técnicos · '+nTrab+' trabajos · 🟢 '+nIni+' iniciados · 🟠 '+nRuta+' en ruta';
+  if(bounds.length) map.fitBounds(bounds,{padding:[40,40]});
+  renderLegend(show);
+}
+
+function renderLegend(show){
+  const lg = document.getElementById('legend');
+  if(show.length===1){ lg.style.display='none'; return; }
+  lg.style.display='block';
+  const fc = document.getElementById('selCiudad').value, ff = document.getElementById('selFranja').value;
+  lg.innerHTML = show.map(t=>{
+    let n = DB[t].filter(p=> p.e!=='Cancelado' && (fc==='__ALL__'||p.d.toUpperCase().includes(fc)) && (ff==='__ALL__'||p.f===ff)).length;
+    if(!n) return '';
+    return '<div onclick="sel.value=\''+t.replace(/'/g,"\\'")+'\';render()"><span class="dot" style="background:'+colorOf[t]+'"></span>'+t+' ('+n+')</div>';
+  }).join('');
+}
+
+sel.onchange=render;
+document.getElementById('selCiudad').onchange=()=>{ render(); if(despacho && posActual) buscarCercanos(posActual); };
+document.getElementById('selFranja').onchange=()=>{ render(); if(despacho && posActual) buscarCercanos(posActual); };
+document.getElementById('selEstado').onchange=render;
+render();
+
+/* ============ MODO DESPACHO ============ */
+let despacho = false, posActual = null;
+let despLayer = L.layerGroup();
+const selPos = document.getElementById('selPos');
+tecs.forEach(t=>{ const o=document.createElement('option'); o.value=t; o.textContent='🚐 Última parada de '+t; selPos.appendChild(o); });
+
+function toggleDespacho(){
+  if(asignacion) toggleAsignacion();
+  despacho = !despacho;
+  document.getElementById('btnDesp').classList.toggle('on', despacho);
+  document.getElementById('btnDesp').textContent = despacho ? '✖ Salir de Despacho' : '🎯 Modo Despacho';
+  document.getElementById('panel').style.display = despacho ? 'block' : 'none';
+  document.getElementById('legend').style.display = despacho ? 'none' : '';
+  document.getElementById('estadosBox').style.display = despacho ? 'none' : '';
+  if(despacho){
+    map.removeLayer(layer); despLayer.addTo(map);
+    posActual = null; despLayer.clearLayers();
+    document.getElementById('resultados').innerHTML = '';
+    map.getContainer().style.cursor='crosshair';
+  } else {
+    map.removeLayer(despLayer); layer.addTo(map);
+    map.getContainer().style.cursor='';
+    render();
+  }
+}
+
+selPos.onchange = function(){
+  if(this.value==='__CLICK__'){ posActual=null; despLayer.clearLayers(); document.getElementById('resultados').innerHTML=''; return; }
+  const jobs = DB[this.value].filter(p=>p.e!=='Cancelado');
+  if(!jobs.length) return;
+  const u = jobs[jobs.length-1];
+  buscarCercanos({lat:u.lat, lng:u.lng, nombre:this.value, tec:this.value});
+};
+
+map.on('click', function(e){
+  if(!despacho) return;
+  buscarCercanos({lat:e.latlng.lat, lng:e.latlng.lng, nombre:'Posición marcada'});
+});
+
+function hav(a,b){
+  const R=6371, rad=Math.PI/180;
+  const dLat=(b.lat-a.lat)*rad, dLng=(b.lng-a.lng)*rad;
+  const h=Math.sin(dLat/2)**2 + Math.cos(a.lat*rad)*Math.cos(b.lat*rad)*Math.sin(dLng/2)**2;
+  return 2*R*Math.asin(Math.sqrt(h));
+}
+
+function buscarCercanos(pos){
+  posActual = pos;
+  despLayer.clearLayers();
+  const fc = document.getElementById('selCiudad').value, ff = document.getElementById('selFranja').value;
+  // candidatos: todos los trabajos Pendientes (de cualquier técnico) según filtros
+  let cands = [];
+  tecs.forEach(t=>{
+    DB[t].forEach(p=>{
+      if(p.e!=='Pendiente') return;
+      if(pos.tec && t===pos.tec) return;
+      if(fc!=='__ALL__' && !p.d.toUpperCase().includes(fc)) return;
+      if(ff!=='__ALL__' && p.f!==ff) return;
+      cands.push({...p, tec:t, km: hav(pos,p)});
+    });
+  });
+  cands.sort((a,b)=>a.km-b.km);
+  const top = cands.slice(0,6);
+
+  // marcador de posición del técnico libre
+  const vanIcon = L.divIcon({className:'', html:'<div style="font-size:28px; text-shadow:0 2px 6px #000;">🚐</div>', iconSize:[30,30], iconAnchor:[15,15]});
+  L.marker([pos.lat,pos.lng],{icon:vanIcon}).addTo(despLayer).bindPopup('<b>'+pos.nombre+'</b><br>Técnico libre');
+
+  // resto de pendientes como puntitos grises de contexto
+  cands.slice(6).forEach(p=>{
+    L.circleMarker([p.lat,p.lng],{radius:4,color:'#64748b',fillColor:'#64748b',fillOpacity:.6,weight:1}).addTo(despLayer)
+      .bindPopup('<div class="pp"><b>'+p.tec+'</b><br>📋 '+p.o+' · '+p.t+'<br>📍 '+p.d+'<br>'+p.km.toFixed(1)+' km</div>');
+  });
+
+  // top cercanos: línea + número + distancia
+  top.forEach((p,i)=>{
+    const col = i===0 ? '#4ade80' : '#38bdf8';
+    const line = L.polyline([[pos.lat,pos.lng],[p.lat,p.lng]],{color:col,weight:i===0?4:2,opacity:.85,dashArray:i===0?null:'5 7'}).addTo(despLayer);
+    line.bindTooltip(p.km.toFixed(1)+' km',{permanent:true,direction:'center',className:'dist-label'});
+    const icon = L.divIcon({className:'', html:'<div class="num-icon" style="background:'+col+'; color:#0f172a;">'+(i+1)+'</div>', iconSize:[26,26], iconAnchor:[13,13]});
+    L.marker([p.lat,p.lng],{icon}).addTo(despLayer).bindPopup(
+      '<div class="pp"><b>#'+(i+1)+' más cercano — '+p.km.toFixed(1)+' km</b><br>'+
+      '📋 '+p.o+' · '+p.t+'<br>🕐 '+(p.hi||'--')+' - '+(p.hf||'--')+' (franja '+p.f+')<br>'+
+      '👤 '+p.c+'<br>📍 '+p.d+'<br>'+
+      '🔧 Asignado a: '+p.tec+'</div>');
+  });
+
+  // panel de resultados
+  document.getElementById('resultados').innerHTML = top.length ? top.map((p,i)=>
+    '<div class="cand'+(i===0?' top1':'')+'" onclick="map.setView(['+p.lat+','+p.lng+'],16)">'+
+    '<span class="km">'+(i+1)+'º · '+p.km.toFixed(1)+' km</span><br>'+
+    '📋 <b>'+p.o+'</b> · '+p.t+' · franja '+p.f+'<br>'+
+    '📍 '+p.d+'<br>'+
+    '🔧 Hoy asignado a: <b>'+p.tec+'</b></div>'
+  ).join('') : '<div class="hint">No hay trabajos pendientes con los filtros actuales.</div>';
+
+  const b = [[pos.lat,pos.lng], ...top.map(p=>[p.lat,p.lng])];
+  if(b.length>1) map.fitBounds(b,{padding:[60,60]});
+  document.getElementById('stats').textContent = cands.length+' pendientes evaluados';
+}
+
+/* ============ MODO ASIGNACIÓN (trabajo nuevo) ============ */
+let asignacion = false, trabajoNuevo = null;
+let asigLayer = L.layerGroup();
+
+function toggleAsignacion(){
+  if(despacho) toggleDespacho(); // modos excluyentes
+  asignacion = !asignacion;
+  document.getElementById('btnAsig').classList.toggle('on2', asignacion);
+  document.getElementById('btnAsig').textContent = asignacion ? '✖ Salir de Asignación' : '📌 Asignar trabajo nuevo';
+  document.getElementById('panelAsig').style.display = asignacion ? 'block' : 'none';
+  document.getElementById('legend').style.display = asignacion ? 'none' : '';
+  document.getElementById('estadosBox').style.display = asignacion ? 'none' : '';
+  if(asignacion){
+    map.removeLayer(layer); asigLayer.addTo(map);
+    trabajoNuevo = null; asigLayer.clearLayers();
+    document.getElementById('resultAsig').innerHTML = '';
+    map.getContainer().style.cursor='crosshair';
+  } else {
+    map.removeLayer(asigLayer); layer.addTo(map);
+    map.getContainer().style.cursor='';
+    render();
+  }
+}
+
+// posición estimada actual de cada técnico: Iniciado > en ruta > última parada
+function posTecnico(t){
+  const jobs = DB[t].filter(p=>p.e!=='Cancelado');
+  if(!jobs.length) return null;
+  let j = jobs.find(p=>p.e==='Iniciado') || jobs.find(p=>p.e==='en ruta');
+  if(!j) j = jobs[jobs.length-1];
+  return {lat:j.lat, lng:j.lng, ref:j};
+}
+
+// normalizar texto: mayúsculas sin tildes
+function norm(s){ return s.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ').trim(); }
+
+// buscar la calle en los trabajos del día (nuestros propios datos con coordenadas)
+function buscarEnDatos(dir, ciudad){
+  const nd = norm(dir);
+  const calle = nd.replace(/\s+\d+[A-Z]?(\s|$).*/,'').trim(); // sacar numeración y lo que siga
+  const numIn = (nd.match(/\d+/)||[null])[0];
+  let matches = [];
+  tecs.forEach(t=> DB[t].forEach(p=>{
+    const pd = norm(p.d);
+    if(pd.includes(ciudad) && calle.length>3 && pd.includes(calle)) matches.push(p);
+  }));
+  if(!matches.length) return null;
+  if(numIn){
+    matches.sort((a,b)=>{
+      const na=parseInt((norm(a.d).match(/\d+/)||[99999])[0]), nb=parseInt((norm(b.d).match(/\d+/)||[99999])[0]);
+      return Math.abs(na-numIn)-Math.abs(nb-numIn);
+    });
+  }
+  return {lat:matches[0].lat, lng:matches[0].lng, fuente:'datos del día ('+matches[0].d+')'};
+}
+
+// zona operativa Quilpué - Villa Alemana (rechaza resultados fuera de ella)
+const ZONA = {left:-71.52, top:-32.99, right:-71.30, bottom:-33.11};
+
+async function ubicarTrabajo(){
+  const dir = document.getElementById('inDir').value.trim();
+  const ciudad = document.getElementById('inCiudad').value;
+  if(!dir){ alert('Escribe la dirección, o haz clic en el mapa.'); return; }
+  const out = document.getElementById('resultAsig');
+
+  // 1º intento: nuestros propios datos del día (sin internet, sin ambigüedad)
+  const local = buscarEnDatos(dir, ciudad);
+  if(local){
+    rankearTecnicos({lat:local.lat, lng:local.lng});
+    out.insertAdjacentHTML('afterbegin','<div class="hint">✅ Calle ubicada con '+local.fuente+'. Arrastra el 📌 si necesitas ajustar.</div>');
+    return;
+  }
+
+  // 2º intento: buscador online, acotado a la zona Quilpué - Villa Alemana
+  out.innerHTML = '<div class="hint">Buscando dirección en '+ciudad+'...</div>';
+  try {
+    const q = encodeURIComponent(dir + ', ' + ciudad + ', Chile');
+    const vb = '&viewbox='+ZONA.left+','+ZONA.top+','+ZONA.right+','+ZONA.bottom+'&bounded=1';
+    const r = await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=cl'+vb+'&q='+q);
+    const js = await r.json();
+    if(js.length){
+      rankearTecnicos({lat:parseFloat(js[0].lat), lng:parseFloat(js[0].lon)});
+      out.insertAdjacentHTML('afterbegin','<div class="hint">✅ Dirección encontrada en '+ciudad+'. Verifica el 📌 y arrástralo si necesitas ajustar.</div>');
+      return;
+    }
+    out.innerHTML = '<div class="hint">⚠️ No se encontró "'+dir+'" en '+ciudad+'. Haz clic en el mapa sobre la ubicación del cliente.</div>';
+  } catch(e){
+    out.innerHTML = '<div class="hint">⚠️ Sin conexión al buscador. Haz clic en el mapa sobre la ubicación del cliente.</div>';
+  }
+}
+
+map.on('click', function(e){
+  if(!asignacion) return;
+  rankearTecnicos({lat:e.latlng.lat, lng:e.latlng.lng});
+});
+
+function rankearTecnicos(pos){
+  trabajoNuevo = pos;
+  asigLayer.clearLayers();
+  const num = document.getElementById('inNum').value.trim() || 'Trabajo nuevo';
+  const fr = document.getElementById('inFranja').value;
+
+  // evaluar cada técnico
+  let cands = [];
+  tecs.forEach(t=>{
+    const pt = posTecnico(t);
+    if(!pt) return;
+    const jobs = DB[t].filter(p=>p.e!=='Cancelado');
+    const pendFr = jobs.filter(p=>p.e==='Pendiente' && p.f===fr).length;
+    const pendTot = jobs.filter(p=>p.e==='Pendiente').length;
+    const km = hav(pos, pt);
+    // puntaje: distancia + castigo por carga en la franja objetivo
+    const score = km + pendFr*1.5;
+    cands.push({t, km, pendFr, pendTot, score, pt});
+  });
+  cands.sort((a,b)=>a.score-b.score);
+  const top = cands.slice(0,5);
+
+  // marcador del trabajo nuevo (arrastrable para ajuste fino)
+  const star = L.divIcon({className:'', html:'<div style="font-size:30px; text-shadow:0 2px 6px #000;">📌</div>', iconSize:[32,32], iconAnchor:[16,30]});
+  const pin = L.marker([pos.lat,pos.lng],{icon:star, draggable:true}).addTo(asigLayer).bindPopup('<b>'+num+'</b><br>Franja '+fr+'<br><i>Arrástrame para ajustar</i>');
+  pin.on('dragend', function(e){ const ll=e.target.getLatLng(); rankearTecnicos({lat:ll.lat, lng:ll.lng}); });
+
+  // técnicos rankeados en el mapa
+  top.forEach((c,i)=>{
+    const col = i===0 ? '#4ade80' : '#a78bfa';
+    const line = L.polyline([[pos.lat,pos.lng],[c.pt.lat,c.pt.lng]],{color:col,weight:i===0?4:2,opacity:.85,dashArray:i===0?null:'5 7'}).addTo(asigLayer);
+    line.bindTooltip(c.km.toFixed(1)+' km',{permanent:true,direction:'center',className:'dist-label'});
+    const ic = L.divIcon({className:'', html:'<div class="num-icon" style="background:'+col+'; color:#0f172a;">'+(i+1)+'</div>', iconSize:[26,26], iconAnchor:[13,13]});
+    L.marker([c.pt.lat,c.pt.lng],{icon:ic}).addTo(asigLayer).bindPopup(
+      '<div class="pp"><b>'+c.t+'</b><br>'+
+      'Ahora: '+c.pt.ref.e+' en '+c.pt.ref.d+'<br>'+
+      '📏 '+c.km.toFixed(1)+' km al trabajo nuevo<br>'+
+      'Pendientes franja '+fr+': '+c.pendFr+' · Total: '+c.pendTot+'</div>');
+  });
+
+  // panel
+  function badgeCarga(n){ return n===0 ? 'ok' : (n===1 ? 'medio' : 'alto'); }
+  document.getElementById('resultAsig').innerHTML =
+    '<div class="hint" style="margin-top:8px;">Ranking para <b>'+num+'</b> · franja '+fr+' (cercanía + carga):</div>' +
+    top.map((c,i)=>
+      '<div class="tcard'+(i===0?' mejor':'')+'" onclick="map.setView(['+c.pt.lat+','+c.pt.lng+'],15)">'+
+      (i===0?'⭐ ':'')+'<span class="nom">'+(i+1)+'º '+c.t+'</span><br>'+
+      '📏 '+c.km.toFixed(1)+' km · ahora '+c.pt.ref.e+'<br>'+
+      '<span class="badge '+badgeCarga(c.pendFr)+'">franja '+fr+': '+c.pendFr+' pend.</span>'+
+      '<span class="badge">total: '+c.pendTot+' pend.</span></div>'
+    ).join('');
+
+  const b = [[pos.lat,pos.lng], ...top.map(c=>[c.pt.lat,c.pt.lng])];
+  map.fitBounds(b,{padding:[60,60]});
+}
+
+</script>
+</body>
+</html>
