@@ -19,6 +19,8 @@
   .num-icon { display:flex; align-items:center; justify-content:center; border-radius:50%; color:#fff; font-weight:bold; font-size:12px; border:2px solid #fff; box-shadow:0 1px 4px rgba(0,0,0,.6); width:26px; height:26px; }
   .mk-iniciado { border:3px solid #4ade80 !important; box-shadow:0 0 10px 3px rgba(74,222,128,.9) !important; }
   .mk-enruta { border:3px solid #fb923c !important; animation:pulso 1.5s infinite; }
+  .mk-completado { opacity:.45; border:2px solid #94a3b8 !important; }
+  .mk-norealizada { opacity:.5; border:2px dashed #ef4444 !important; }
   @keyframes pulso { 0%{box-shadow:0 0 0 0 rgba(251,146,60,.9)} 70%{box-shadow:0 0 0 12px rgba(251,146,60,0)} 100%{box-shadow:0 0 0 0 rgba(251,146,60,0)} }
   .estados { position:absolute; bottom:16px; right:10px; z-index:1000; background:rgba(30,41,59,.92); border-radius:8px; padding:8px 12px; font-size:11px;}
   .estados div { display:flex; align-items:center; gap:8px; margin:4px 0;}
@@ -26,8 +28,8 @@
   .leaflet-popup-content-wrapper { background:#1e293b; color:#e2e8f0; border-radius:8px; }
   .leaflet-popup-tip { background:#1e293b; }
   .pp b { color:#38bdf8; }
-  .pp .est { display:inline-block; padding:1px 8px; border-radius:10px; font-size:11px; margin-top:4px;}
-  .est-Pendiente{background:#475569}.est-Iniciado{background:#16a34a}.est-enruta{background:#d97706}.est-Cancelado{background:#dc2626}
+  .pp .est { display:inline-block; padding:1px 8px; border-radius:10px; font-size:11px; margin-top:4px; background:#475569;}
+  .est-Pendiente{background:#475569}.est-Iniciado{background:#16a34a}.est-enruta{background:#d97706}.est-Cancelado{background:#dc2626}.est-Completado{background:#334155}.est-NoRealizada{background:#7f1d1d}
   .legend { position:absolute; bottom:16px; left:10px; z-index:1000; background:rgba(30,41,59,.92); border-radius:8px; padding:8px 12px; font-size:11px; max-height:45vh; overflow-y:auto; max-width:240px;}
   .legend div { display:flex; align-items:center; gap:6px; margin:2px 0; cursor:pointer;}
   .legend span.dot { width:12px; height:12px; border-radius:50%; display:inline-block; flex-shrink:0;}
@@ -62,7 +64,7 @@
   <select id="selTec"><option value="__ALL__">Todos los técnicos</option></select>
   <select id="selCiudad"><option value="__ALL__">Ambas ciudades</option><option>QUILPUE</option><option>VILLA ALEMANA</option></select>
   <select id="selFranja"><option value="__ALL__">Todas las franjas</option><option>10-13</option><option>13-16</option><option>16-19</option></select>
-  <select id="selEstado"><option value="__ALL__">Todos los estados</option><option>Pendiente</option><option>Iniciado</option><option value="en ruta">En ruta</option></select>
+  <select id="selEstado"><option value="__ALL__">Todos los estados</option><option>Pendiente</option><option>Iniciado</option><option value="en ruta">En ruta</option><option>Completado</option><option>No Realizada</option></select>
   <button class="btn" onclick="document.getElementById('inExcel').click()">📂 Cargar Excel</button>
   <input type="file" id="inExcel" accept=".xlsx" style="display:none">
   <button class="btn" id="btnDesp" onclick="toggleDespacho()">🎯 Modo Despacho</button>
@@ -85,6 +87,8 @@
   <div><span class="mini mk-iniciado"></span> Iniciado (trabajando)</div>
   <div><span class="mini mk-enruta"></span> En ruta (parpadea)</div>
   <div><span class="mini"></span> Pendiente</div>
+  <div><span class="mini mk-completado"></span> Completado</div>
+  <div><span class="mini mk-norealizada"></span> No realizada</div>
 </div>
 <div id="panel">
   <h2>🎯 Trabajos pendientes más cercanos</h2>
@@ -113,7 +117,7 @@ function render(){
   layer.clearLayers();
   const ft = sel.value, fc = document.getElementById('selCiudad').value, ff = document.getElementById('selFranja').value, fe = document.getElementById('selEstado').value;
   const show = ft==='__ALL__' ? tecs : [ft];
-  let bounds=[], nTrab=0, nTec=0, nIni=0, nRuta=0;
+  let bounds=[], nTrab=0, nTec=0, nIni=0, nRuta=0, nComp=0;
   show.forEach(t=>{
     let pts = DB[t].filter(p=> p.e!=='Cancelado');
     if(fc!=='__ALL__') pts = pts.filter(p=> p.d.toUpperCase().includes(fc));
@@ -127,7 +131,8 @@ function render(){
     pts.forEach((p,i)=>{
       if(p.e==='Iniciado') nIni++;
       if(p.e==='en ruta') nRuta++;
-      const stCls = p.e==='Iniciado' ? ' mk-iniciado' : (p.e==='en ruta' ? ' mk-enruta' : '');
+      if(p.e==='Completado') nComp++;
+      const stCls = p.e==='Iniciado' ? ' mk-iniciado' : (p.e==='en ruta' ? ' mk-enruta' : (p.e==='Completado' ? ' mk-completado' : (p.e==='No Realizada' ? ' mk-norealizada' : '')));
       const icon = L.divIcon({className:'', html:'<div class="num-icon'+stCls+'" style="background:'+col+'">'+(i+1)+'</div>', iconSize:[26,26], iconAnchor:[13,13]});
       L.marker([p.lat,p.lng],{icon}).addTo(layer).bindPopup(
         '<div class="pp"><b>'+t+'</b> — parada '+(i+1)+'<br>'+
@@ -138,7 +143,7 @@ function render(){
       bounds.push([p.lat,p.lng]);
     });
   });
-  document.getElementById('stats').textContent = nTec+' técnicos · '+nTrab+' trabajos · 🟢 '+nIni+' iniciados · 🟠 '+nRuta+' en ruta';
+  document.getElementById('stats').textContent = nTec+' técnicos · '+nTrab+' trabajos · 🟢 '+nIni+' iniciados · 🟠 '+nRuta+' en ruta · ✅ '+nComp+' completados';
   if(bounds.length) map.fitBounds(bounds,{padding:[40,40]});
   renderLegend(show);
 }
@@ -189,10 +194,9 @@ function toggleDespacho(){
 
 selPos.onchange = function(){
   if(this.value==='__CLICK__'){ posActual=null; despLayer.clearLayers(); document.getElementById('resultados').innerHTML=''; return; }
-  const jobs = DB[this.value].filter(p=>p.e!=='Cancelado');
-  if(!jobs.length) return;
-  const u = jobs[jobs.length-1];
-  buscarCercanos({lat:u.lat, lng:u.lng, nombre:this.value, tec:this.value});
+  const pt = posTecnico(this.value);
+  if(!pt) return;
+  buscarCercanos({lat:pt.lat, lng:pt.lng, nombre:this.value, tec:this.value});
 };
 
 map.on('click', function(e){
@@ -291,6 +295,7 @@ function posTecnico(t){
   const jobs = DB[t].filter(p=>p.e!=='Cancelado');
   if(!jobs.length) return null;
   let j = jobs.find(p=>p.e==='Iniciado') || jobs.find(p=>p.e==='en ruta');
+  if(!j){ const comp = jobs.filter(p=>p.e==='Completado'); if(comp.length) j = comp[comp.length-1]; }
   if(!j) j = jobs[jobs.length-1];
   return {lat:j.lat, lng:j.lng, ref:j};
 }
@@ -457,7 +462,11 @@ document.getElementById('inExcel').addEventListener('change', function(ev){
 
       const nuevo = {};
       filas.forEach(f=>{
-        const tec = String(f['Técnico']).replace(/^(QA_B2B_)?(FS_)?MM_NFTT_(DOMI|TRAZ)_/,'').trim();
+        const tecRaw = String(f['Técnico']);
+        if(!/DOMI/i.test(tecRaw)) return;
+        const ciu = String(f['Ciudad']||'').trim().toUpperCase();
+        if(ciu!=='QUILPUE' && ciu!=='VILLA ALEMANA') return;
+        const tec = tecRaw.replace(/^(QA_B2B_)?(FS_)?MM_NFTT_(DOMI|TRAZ)_/,'').trim();
         const lat = parseFloat(f['Coord Y']), lng = parseFloat(f['Coord X']);
         if(!tec || isNaN(lat) || isNaN(lng)) return;
         if(!nuevo[tec]) nuevo[tec] = [];
