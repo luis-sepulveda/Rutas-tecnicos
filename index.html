@@ -94,6 +94,10 @@
   <h2>🎯 Trabajos pendientes más cercanos</h2>
   <div class="hint">Elige la posición del técnico libre: usa su última parada, o haz clic directo en el mapa donde se encuentra. Los filtros de ciudad y franja de arriba también aplican aquí.</div>
   <select id="selPos"><option value="__CLICK__">📍 Clic en el mapa...</option></select>
+  <div class="hint" style="margin:4px 0;">— o escribe dónde terminó el técnico —</div>
+  <input id="inDirDesp" placeholder="Dirección (ej: PARIS 810)" style="width:100%; background:#0f172a; color:#e2e8f0; border:1px solid #475569; border-radius:6px; padding:6px 8px; font-size:13px; margin-bottom:6px;">
+  <select id="inCiudadDesp" style="width:100%; margin-bottom:6px;"><option>QUILPUE</option><option>VILLA ALEMANA</option></select>
+  <button onclick="ubicarDespacho()" style="width:100%; background:#dc2626; border:none; color:#fff; border-radius:6px; padding:8px; font-size:13px; cursor:pointer; font-weight:bold; margin-bottom:6px;">🔍 Ubicar y buscar pendientes cercanos</button>
   <div id="resultados"></div>
 </div>
 <div class="legend" id="legend"></div>
@@ -211,6 +215,38 @@ function hav(a,b){
   return 2*R*Math.asin(Math.sqrt(h));
 }
 
+// ubicar por direccion escrita (donde termino el tecnico) y buscar pendientes
+async function ubicarDespacho(){
+  const dir = document.getElementById('inDirDesp').value.trim();
+  const ciudad = document.getElementById('inCiudadDesp').value;
+  if(!dir){ alert('Escribe la dirección donde terminó el técnico, o haz clic en el mapa.'); return; }
+  const out = document.getElementById('resultados');
+
+  // 1º: buscar la calle en los trabajos del día
+  const local = buscarEnDatos(dir, ciudad);
+  if(local){
+    buscarCercanos({lat:local.lat, lng:local.lng, nombre:'Terminó en: '+dir.toUpperCase()});
+    out.insertAdjacentHTML('afterbegin','<div class="hint">✅ Calle ubicada con '+local.fuente+'. Arrastra el 🚐 si necesitas ajustar.</div>');
+    return;
+  }
+  // 2º: buscador online acotado a la zona
+  out.innerHTML = '<div class="hint">Buscando dirección en '+ciudad+'...</div>';
+  try {
+    const q = encodeURIComponent(dir + ', ' + ciudad + ', Chile');
+    const vb = '&viewbox='+ZONA.left+','+ZONA.top+','+ZONA.right+','+ZONA.bottom+'&bounded=1';
+    const r = await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=cl'+vb+'&q='+q);
+    const js = await r.json();
+    if(js.length){
+      buscarCercanos({lat:parseFloat(js[0].lat), lng:parseFloat(js[0].lon), nombre:'Terminó en: '+dir.toUpperCase()});
+      out.insertAdjacentHTML('afterbegin','<div class="hint">✅ Dirección encontrada en '+ciudad+'. Arrastra el 🚐 si necesitas ajustar.</div>');
+      return;
+    }
+    out.innerHTML = '<div class="hint">⚠️ No se encontró "'+dir+'" en '+ciudad+'. Haz clic en el mapa donde terminó el técnico.</div>';
+  } catch(e){
+    out.innerHTML = '<div class="hint">⚠️ Sin conexión al buscador. Haz clic en el mapa donde terminó el técnico.</div>';
+  }
+}
+
 function buscarCercanos(pos){
   posActual = pos;
   despLayer.clearLayers();
@@ -229,9 +265,10 @@ function buscarCercanos(pos){
   cands.sort((a,b)=>a.km-b.km);
   const top = cands.slice(0,6);
 
-  // marcador de posición del técnico libre
+  // marcador de posición del técnico libre (arrastrable para ajuste fino)
   const vanIcon = L.divIcon({className:'', html:'<div style="font-size:28px; text-shadow:0 2px 6px #000;">🚐</div>', iconSize:[30,30], iconAnchor:[15,15]});
-  L.marker([pos.lat,pos.lng],{icon:vanIcon}).addTo(despLayer).bindPopup('<b>'+pos.nombre+'</b><br>Técnico libre');
+  const van = L.marker([pos.lat,pos.lng],{icon:vanIcon, draggable:true}).addTo(despLayer).bindPopup('<b>'+pos.nombre+'</b><br>Técnico libre<br><i>Arrástrame para ajustar</i>');
+  van.on('dragend', function(e){ const ll=e.target.getLatLng(); buscarCercanos({lat:ll.lat, lng:ll.lng, nombre:pos.nombre}); });
 
   // resto de pendientes como puntitos grises de contexto
   cands.slice(6).forEach(p=>{
