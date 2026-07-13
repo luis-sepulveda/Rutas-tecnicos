@@ -68,6 +68,22 @@
   .sccard .nom { font-weight:bold; color:#e2e8f0; font-size:13px;}
   .sccard .badge { display:inline-block; padding:1px 7px; border-radius:10px; font-size:10px; margin:3px 3px 0 0; background:#334155;}
   .sccard .badge.ini { background:#166534;} .sccard .badge.ruta{ background:#92400e;} .sccard .badge.pend{ background:#475569;} .sccard .badge.nr{ background:#7f1d1d;}
+  .btn.on4 { background:#047857; border-color:#34d399; font-weight:bold; }
+  #panelRGU { position:absolute; top:70px; right:10px; z-index:1000; background:rgba(30,41,59,.96); border:1px solid #475569; border-radius:10px; padding:12px; width:300px; max-height:78vh; overflow-y:auto; display:none; font-size:12px;}
+  #panelRGU h2 { font-size:13px; color:#34d399; margin-bottom:6px;}
+  #panelRGU .hint { color:#94a3b8; font-size:11px; margin-bottom:8px;}
+  #panelRGU .total { text-align:center; background:#0f172a; border:1px solid #065f46; border-radius:8px; padding:10px; margin-bottom:10px;}
+  #panelRGU .total .n { font-size:30px; font-weight:bold; color:#34d399; line-height:1;}
+  #panelRGU .total .l { font-size:11px; color:#94a3b8; margin-top:3px;}
+  #panelRGU .tipos { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:10px;}
+  #panelRGU .tipos .chip { background:#0f172a; border:1px solid #334155; border-radius:6px; padding:4px 7px; font-size:11px; flex:1 1 44%;}
+  #panelRGU .tipos .chip b { color:#34d399; }
+  .rgucard { border-left:4px solid #34d399; background:#0f172a; border-radius:6px; padding:6px 8px; margin:5px 0; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:8px;}
+  .rgucard:hover { background:#0d2e24;}
+  .rgucard .nom { font-weight:bold; color:#e2e8f0; font-size:12px;}
+  .rgucard .sub { color:#94a3b8; font-size:10px; margin-top:2px;}
+  .rgucard .val { font-size:17px; font-weight:bold; color:#34d399; flex-shrink:0;}
+  #panelRGU .vacio { color:#94a3b8; text-align:center; padding:14px 6px; line-height:1.5;}
 </style>
 </head>
 <body>
@@ -82,6 +98,7 @@
   <button class="btn" id="btnDesp" onclick="toggleDespacho()">🎯 Modo Despacho</button>
   <button class="btn" id="btnAsig" onclick="toggleAsignacion()">📌 Asignar trabajo nuevo</button>
   <button class="btn" id="btnSC" onclick="toggleSinCompletar()">🚩 Sin completar</button>
+  <button class="btn" id="btnRGU" onclick="toggleRGU()">💰 RGU</button>
   <div class="stats" id="stats"></div>
   <div class="stats" id="lastUpd" style="margin-left:0;">⏳ cargando datos...</div>
 </header>
@@ -100,6 +117,11 @@
   <h2>🚩 Sin completar</h2>
   <div class="hint">Técnicos que aún no tienen ningún trabajo <b>Completado</b>. Toca un nombre para verlo solo a él en el mapa. Respeta el filtro de ciudad de arriba.</div>
   <div id="listaSC"></div>
+</div>
+<div id="panelRGU">
+  <h2>💰 RGU completados hoy</h2>
+  <div class="hint">Suma de RGU de las órdenes <b>Completadas</b>. Respeta el filtro de ciudad y franja de arriba. Toca un técnico para verlo en el mapa.</div>
+  <div id="cuerpoRGU"></div>
 </div>
 <div class="estados" id="estadosBox">
   <div><span class="mini mk-iniciado"></span> Iniciado (trabajando)</div>
@@ -124,6 +146,7 @@ let DB = {"ALEXIS JARA": [{"o": "1-3MHOPKCV", "t": "Migración", "f": "10-13", "
 const COLORS = ["#e6194b","#3cb44b","#4363d8","#f58231","#911eb4","#42d4f4","#f032e6","#bfef45","#fabed4","#469990","#dcbeff","#9a6324","#fffac8","#800000","#aaffc3","#808000","#ffd8b1","#000075","#a9a9a9","#ff4500","#2e8b57","#1e90ff","#ff69b4","#8b4513","#00ced1","#ffa500","#7b68ee","#20b2aa","#dc143c","#00fa9a","#ba55d3","#ff6347","#4682b4","#daa520","#5f9ea0","#d2691e","#6495ed","#adff2f"];
 let tecs = Object.keys(DB).sort();
 let colorOf = {}; tecs.forEach((t,i)=>colorOf[t]=COLORS[i%COLORS.length]);
+let rgu = false, rguDisponible = false;   // RGU: bandera de panel y si el origen trae datos de RGU
 
 const map = L.map('map').setView([-33.05,-71.41],13);
 L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{attribution:'&copy; OpenStreetMap &copy; CARTO',maxZoom:19}).addTo(map);
@@ -157,6 +180,7 @@ function cerrarSC(){
 function toggleSinCompletar(){
   if(despacho) toggleDespacho();       // modos excluyentes
   if(asignacion) toggleAsignacion();
+  cerrarRGU();
   sinComp = !sinComp;
   document.getElementById('btnSC').classList.toggle('on3', sinComp);
   document.getElementById('btnSC').textContent = sinComp ? '✖ Salir sin completar' : '🚩 Sin completar';
@@ -203,7 +227,7 @@ function render(){
   const ft = sel.value, fc = document.getElementById('selCiudad').value, ff = document.getElementById('selFranja').value, fe = document.getElementById('selEstado').value;
   let show = ft==='__ALL__' ? tecs : [ft];
   if(sinComp && ft==='__ALL__') show = tecnicosSinCompletar(fc);
-  let bounds=[], nTrab=0, nTec=0, nIni=0, nRuta=0, nComp=0;
+  let bounds=[], nTrab=0, nTec=0, nIni=0, nRuta=0, nComp=0, nRGU=0;
   show.forEach(t=>{
     let pts = DB[t].filter(p=> p.e!=='Cancelado');
     if(fc!=='__ALL__') pts = pts.filter(p=> p.d.toUpperCase().includes(fc));
@@ -217,7 +241,7 @@ function render(){
     pts.forEach((p,i)=>{
       if(p.e==='Iniciado') nIni++;
       if(p.e==='en ruta') nRuta++;
-      if(p.e==='Completado') nComp++;
+      if(p.e==='Completado'){ nComp++; nRGU += Number(p.rgu||0); }
       const stCls = p.e==='Iniciado' ? ' mk-iniciado' : (p.e==='en ruta' ? ' mk-enruta' : (p.e==='Completado' ? ' mk-completado' : (p.e==='No Realizada' ? ' mk-norealizada' : '')));
       const icon = L.divIcon({className:'', html:'<div class="num-icon'+stCls+'" style="background:'+col+'">'+(i+1)+'</div>', iconSize:[26,26], iconAnchor:[13,13]});
       L.marker([p.lat,p.lng],{icon}).addTo(layer).bindPopup(
@@ -229,7 +253,7 @@ function render(){
       bounds.push([p.lat,p.lng]);
     });
   });
-  document.getElementById('stats').textContent = nTec+' técnicos · '+nTrab+' trabajos · 🟢 '+nIni+' iniciados · 🟠 '+nRuta+' en ruta · ✅ '+nComp+' completados';
+  document.getElementById('stats').textContent = nTec+' técnicos · '+nTrab+' trabajos · 🟢 '+nIni+' iniciados · 🟠 '+nRuta+' en ruta · ✅ '+nComp+' completados' + (rguDisponible ? ' · 💰 '+fmtRGU(nRGU)+' RGU' : '');
   if(bounds.length) map.fitBounds(bounds,{padding:[40,40]});
   renderLegend(show);
   if(sinComp) renderPanelSC();
@@ -248,8 +272,8 @@ function renderLegend(show){
 }
 
 sel.onchange=render;
-document.getElementById('selCiudad').onchange=()=>{ render(); if(despacho && posActual) buscarCercanos(posActual); };
-document.getElementById('selFranja').onchange=()=>{ render(); if(despacho && posActual) buscarCercanos(posActual); };
+document.getElementById('selCiudad').onchange=()=>{ render(); if(despacho && posActual) buscarCercanos(posActual); if(rgu) renderPanelRGU(); };
+document.getElementById('selFranja').onchange=()=>{ render(); if(despacho && posActual) buscarCercanos(posActual); if(rgu) renderPanelRGU(); };
 document.getElementById('selEstado').onchange=render;
 render();
 
@@ -261,7 +285,7 @@ tecs.forEach(t=>{ const o=document.createElement('option'); o.value=t; o.textCon
 
 function toggleDespacho(){
   if(asignacion) toggleAsignacion();
-  cerrarSC();
+  cerrarSC(); cerrarRGU();
   despacho = !despacho;
   document.getElementById('btnDesp').classList.toggle('on', despacho);
   document.getElementById('btnDesp').textContent = despacho ? '✖ Salir de Despacho' : '🎯 Modo Despacho';
@@ -393,7 +417,7 @@ let asigLayer = L.layerGroup();
 
 function toggleAsignacion(){
   if(despacho) toggleDespacho(); // modos excluyentes
-  cerrarSC();
+  cerrarSC(); cerrarRGU();
   asignacion = !asignacion;
   document.getElementById('btnAsig').classList.toggle('on2', asignacion);
   document.getElementById('btnAsig').textContent = asignacion ? '✖ Salir de Asignación' : '📌 Asignar trabajo nuevo';
@@ -542,6 +566,135 @@ function rankearTecnicos(pos){
 }
 
 
+/* ============ RGU (unidades generadoras de ingreso) ============ */
+function tipoN(t){ return (t||'').toString().trim().toLowerCase(); }
+function dirBase(p){
+  const base = (p.dir_raw!=null ? p.dir_raw : String(p.d||'').split(',')[0]);
+  return base.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ').trim();
+}
+function fmtRGU(n){ return (Math.round(n*10)/10).toString().replace('.',','); }
+
+// RGU de UNA orden según reglas del negocio (calibradas contra Power BI):
+//  Reparación               = 1
+//  Alta / Alta Traslado     = N Play del Subtipo  (contar D-Box infla el número)
+//  Migración                = categorías de servicio en Pasos (Internet + TV + Teléfono)
+//  Modificación             = 0,1 si es sobre orden ya completada misma dirección+fecha; si no 1
+//  Colación / No inicia ... = 0
+function rguOrden(p){
+  const t = tipoN(p.t);
+  if(t.includes('reparaci')) return 1;
+  if(t==='alta' || t.includes('traslado')){
+    const m = String(p.sub||'').match(/(\d+)\s*play/i);
+    return m ? parseInt(m[1],10) : 1;
+  }
+  if(t.includes('migraci')){
+    const desc = (String(p.pasos||'').match(/<descripcion>(.*?)<\/descripcion>/gi)||[])
+      .map(s=>s.replace(/<\/?descripcion>/gi,''))
+      .filter(d=>/^\s*(instalar|actualizar)/i.test(d));
+    let n = 0;
+    if(desc.some(d=>/plan banda ancha/i.test(d))) n++;   // Internet
+    if(desc.some(d=>/d-box iptv/i.test(d)))       n++;   // TV
+    if(desc.some(d=>/\bmta\b|telef/i.test(d)))    n++;   // Teléfono
+    return n || 1;
+  }
+  if(t.includes('modifica')) return 1;   // se ajusta a 0,1 en aplicarRGU si corresponde
+  if(t.includes('upgrade'))  return 1;   // best-effort: validar contra Power BI
+  return 0;                              // Colación, No inicia, etc.
+}
+
+// Calcula y guarda p.rgu en toda la base. Si el pipeline ya trae p.rgu, lo respeta.
+function aplicarRGU(db){
+  const arrs = Object.values(db);
+  const yaTraeRGU  = arrs.some(a=>a.some(p=>p.rgu!=null && p.rgu!==''));
+  const tieneDetalle = arrs.some(a=>a.some(p=>p.sub!=null || p.pasos!=null));
+  rguDisponible = yaTraeRGU || tieneDetalle;
+  if(yaTraeRGU){ arrs.forEach(a=>a.forEach(p=>{ if(p.rgu!=null && p.rgu!=='') p.rgu = Number(p.rgu); })); return; }
+  if(!tieneDetalle) return;
+  // órdenes "generadoras" completadas (para la regla 0,1 de las modificaciones)
+  const gener = new Set();
+  arrs.forEach(a=>a.forEach(p=>{
+    const t = tipoN(p.t);
+    if(p.e==='Completado' && (t==='alta' || t.includes('traslado') || t.includes('migraci')))
+      gener.add(dirBase(p)+'|'+(p.fecha||''));
+  }));
+  arrs.forEach(a=>a.forEach(p=>{
+    let r = rguOrden(p);
+    if(tipoN(p.t).includes('modifica'))
+      r = gener.has(dirBase(p)+'|'+(p.fecha||'')) ? 0.1 : 1;
+    p.rgu = r;
+  }));
+}
+
+function categoriaTipo(t){
+  const n = tipoN(t);
+  if(n==='alta' || n.includes('traslado')) return 'Alta';
+  if(n.includes('migraci'))  return 'Migración';
+  if(n.includes('reparaci')) return 'Reparación';
+  if(n.includes('modifica')) return 'Modificación';
+  return 'Otros';
+}
+
+function cerrarRGU(){
+  if(!rgu) return;
+  rgu = false;
+  document.getElementById('btnRGU').classList.remove('on4');
+  document.getElementById('btnRGU').textContent = '💰 RGU';
+  document.getElementById('panelRGU').style.display = 'none';
+  document.getElementById('estadosBox').style.display = '';
+}
+
+function toggleRGU(){
+  if(despacho) toggleDespacho();       // modos excluyentes
+  if(asignacion) toggleAsignacion();
+  cerrarSC();
+  rgu = !rgu;
+  document.getElementById('btnRGU').classList.toggle('on4', rgu);
+  document.getElementById('btnRGU').textContent = rgu ? '✖ Salir RGU' : '💰 RGU';
+  document.getElementById('panelRGU').style.display = rgu ? 'block' : 'none';
+  document.getElementById('estadosBox').style.display = rgu ? 'none' : '';
+  if(rgu) renderPanelRGU();
+}
+
+function renderPanelRGU(){
+  const cont = document.getElementById('cuerpoRGU');
+  const fc = document.getElementById('selCiudad').value, ff = document.getElementById('selFranja').value;
+  if(!rguDisponible){
+    cont.innerHTML = '<div class="vacio">Este origen de datos no trae la info de RGU.<br><br>📂 Carga el <b>Excel del portal</b> (que incluye las columnas <b>Subtipo</b> y <b>Pasos</b>) para ver los RGU,<br>o agrega el campo <b>rgu</b> a <b>rutas.json</b> desde <b>transformador.py</b>.</div>';
+    return;
+  }
+  let porTec = {}, porTipo = {}, totRGU = 0, totOrd = 0;
+  tecs.forEach(t=>{
+    DB[t].forEach(p=>{
+      if(p.e!=='Completado') return;
+      if(fc!=='__ALL__' && !String(p.d).toUpperCase().includes(fc)) return;
+      if(ff!=='__ALL__' && p.f!==ff) return;
+      const r = Number(p.rgu||0);
+      totRGU += r; totOrd++;
+      porTec[t] = (porTec[t]||0) + r;
+      const cat = categoriaTipo(p.t);
+      if(!porTipo[cat]) porTipo[cat] = {rgu:0, n:0};
+      porTipo[cat].rgu += r; porTipo[cat].n++;
+    });
+  });
+  const ordenCat = ['Alta','Migración','Reparación','Modificación','Otros'];
+  const chips = ordenCat.filter(c=>porTipo[c]).map(c=>
+    '<div class="chip">'+c+': <b>'+fmtRGU(porTipo[c].rgu)+'</b> <span style="color:#64748b">('+porTipo[c].n+')</span></div>').join('');
+  const ranking = Object.keys(porTec).filter(t=>porTec[t]>0).sort((a,b)=>porTec[b]-porTec[a]);
+  const cards = ranking.map(t=>{
+    const nOrd = DB[t].filter(p=> p.e==='Completado' && (fc==='__ALL__'||String(p.d).toUpperCase().includes(fc)) && (ff==='__ALL__'||p.f===ff)).length;
+    const tEsc = t.replace(/'/g,"\\'");
+    return '<div class="rgucard" onclick="verTecnicoSC(\''+tEsc+'\')">'+
+      '<div><div class="nom"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:'+colorOf[t]+';margin-right:5px;"></span>'+t+'</div>'+
+      '<div class="sub">'+nOrd+' orden'+(nOrd>1?'es':'')+' completada'+(nOrd>1?'s':'')+'</div></div>'+
+      '<div class="val">'+fmtRGU(porTec[t])+'</div></div>';
+  }).join('');
+  cont.innerHTML =
+    '<div class="total"><div class="n">'+fmtRGU(totRGU)+'</div><div class="l">RGU · '+totOrd+' órdenes completadas</div></div>'+
+    (chips ? '<div class="tipos">'+chips+'</div>' : '') +
+    (cards || '<div class="vacio">Aún no hay órdenes completadas con estos filtros.</div>');
+}
+
+
 /* ============ CARGA DE DATOS EN VIVO (rutas.json) ============ */
 (async function cargarDatosVivos(){
   const lu = document.getElementById('lastUpd');
@@ -553,6 +706,7 @@ function rankearTecnicos(pos){
     if(!js.tecnicos) throw new Error('formato');
     DB = js.tecnicos;
     tecs = Object.keys(DB).sort();
+    aplicarRGU(DB);
     colorOf = {}; tecs.forEach((t,i)=>colorOf[t]=COLORS[i%COLORS.length]);
     // reconstruir selectores de tecnicos
     sel.innerHTML = '<option value="__ALL__">Todos los técnicos</option>';
@@ -596,18 +750,22 @@ document.getElementById('inExcel').addEventListener('change', function(ev){
           o: f['Orden de Trabajo'], t: f['Tipo de Actividad'], f: f['Franja'],
           hi: f['Inicio']||'', hf: f['Fin']||'',
           d: String(f['Dirección']).trim()+', '+String(f['Ciudad']).trim(),
-          lat: lat, lng: lng, e: f['Estado']
+          lat: lat, lng: lng, e: f['Estado'],
+          sub: f['Subtipo']||'', pasos: f['Pasos']||'', fecha: f['Fecha']||'',
+          dir_raw: String(f['Dirección']).trim()
         });
       });
       Object.keys(nuevo).forEach(t=> nuevo[t].sort((a,b)=> (a.hi||'99:99').localeCompare(b.hi||'99:99')));
 
       DB = nuevo;
       tecs = Object.keys(DB).sort();
+      aplicarRGU(DB);
       colorOf = {}; tecs.forEach((t,i)=>colorOf[t]=COLORS[i%COLORS.length]);
       sel.innerHTML = '<option value="__ALL__">Todos los técnicos</option>';
       tecs.forEach(t=>{ const o=document.createElement('option'); o.value=t; o.textContent=t; sel.appendChild(o); });
       selPos.innerHTML = '<option value="__CLICK__">📍 Clic en el mapa...</option>';
       tecs.forEach(t=>{ const o=document.createElement('option'); o.value=t; o.textContent='🚐 Última parada de '+t; selPos.appendChild(o); });
+      if(rgu) renderPanelRGU();
       const ahora = new Date();
       document.getElementById('lastUpd').textContent = '📂 Excel local: '+('0'+ahora.getHours()).slice(-2)+':'+('0'+ahora.getMinutes()).slice(-2)+' (solo en este PC)';
       render();
