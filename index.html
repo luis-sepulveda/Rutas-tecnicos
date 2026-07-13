@@ -493,7 +493,7 @@ document.getElementById('inExcel').addEventListener('change', function(ev){
       const hoja = wb.Sheets[wb.SheetNames[0]];
       const filas = XLSX.utils.sheet_to_json(hoja, {raw:false, defval:''});
       if(!filas.length) throw new Error('vacio');
-      const req = ['Técnico','Orden de Trabajo','Tipo de Actividad','Franja','Dirección','Ciudad','Coord X','Coord Y','Estado'];
+      const req = ['Técnico','Orden de Trabajo','Tipo de Actividad','Franja','Dirección','Ciudad','Coordenada X','Coordenada Y','Estado'];
       const falta = req.filter(c=> !(c in filas[0]));
       if(falta.length){ alert('El Excel no tiene el formato esperado. Faltan columnas: '+falta.join(', ')); return; }
 
@@ -504,7 +504,7 @@ document.getElementById('inExcel').addEventListener('change', function(ev){
         const ciu = String(f['Ciudad']||'').trim().toUpperCase();
         if(ciu!=='QUILPUE' && ciu!=='VILLA ALEMANA') return;
         const tec = tecRaw.replace(/^(QA_B2B_)?(FS_)?MM_NFTT_(DOMI|TRAZ)_/,'').trim();
-        const lat = parseFloat(f['Coord Y']), lng = parseFloat(f['Coord X']);
+        const lat = parseFloat(f['Coordenada Y']), lng = parseFloat(f['Coordenada X']);
         if(!tec || isNaN(lat) || isNaN(lng)) return;
         if(!nuevo[tec]) nuevo[tec] = [];
         nuevo[tec].push({
