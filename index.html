@@ -56,6 +56,18 @@
   .tcard .nom { font-weight:bold; color:#e2e8f0; font-size:13px;}
   .tcard .badge { display:inline-block; padding:1px 7px; border-radius:10px; font-size:10px; margin:2px 2px 0 0; background:#334155;}
   .tcard .badge.ok { background:#166534;} .tcard .badge.medio { background:#92400e;} .tcard .badge.alto { background:#991b1b;}
+  .btn.on3 { background:#b45309; border-color:#fbbf24; font-weight:bold; }
+  #panelSC { position:absolute; top:70px; right:10px; z-index:1000; background:rgba(30,41,59,.96); border:1px solid #475569; border-radius:10px; padding:12px; width:290px; max-height:75vh; overflow-y:auto; display:none; font-size:12px;}
+  #panelSC h2 { font-size:13px; color:#fbbf24; margin-bottom:6px;}
+  #panelSC .hint { color:#94a3b8; font-size:11px; margin-bottom:8px;}
+  #panelSC .vertodos { color:#38bdf8; font-size:12px; cursor:pointer; margin-bottom:8px; display:inline-block;}
+  #panelSC .vertodos:hover { text-decoration:underline;}
+  #panelSC .vacio { color:#4ade80; text-align:center; padding:12px 4px; line-height:1.4;}
+  .sccard { border-left:4px solid #fbbf24; background:#0f172a; border-radius:6px; padding:6px 8px; margin:6px 0; cursor:pointer;}
+  .sccard:hover { background:#3a2e12;}
+  .sccard .nom { font-weight:bold; color:#e2e8f0; font-size:13px;}
+  .sccard .badge { display:inline-block; padding:1px 7px; border-radius:10px; font-size:10px; margin:3px 3px 0 0; background:#334155;}
+  .sccard .badge.ini { background:#166534;} .sccard .badge.ruta{ background:#92400e;} .sccard .badge.pend{ background:#475569;} .sccard .badge.nr{ background:#7f1d1d;}
 </style>
 </head>
 <body>
@@ -69,6 +81,7 @@
   <input type="file" id="inExcel" accept=".xlsx" style="display:none">
   <button class="btn" id="btnDesp" onclick="toggleDespacho()">🎯 Modo Despacho</button>
   <button class="btn" id="btnAsig" onclick="toggleAsignacion()">📌 Asignar trabajo nuevo</button>
+  <button class="btn" id="btnSC" onclick="toggleSinCompletar()">🚩 Sin completar</button>
   <div class="stats" id="stats"></div>
   <div class="stats" id="lastUpd" style="margin-left:0;">⏳ cargando datos...</div>
 </header>
@@ -82,6 +95,11 @@
   <button class="btnGo" onclick="ubicarTrabajo()">🔍 Buscar dirección y rankear técnicos</button>
   <div class="hint">Si la dirección no se encuentra, haz clic directo en el mapa sobre la ubicación del cliente.</div>
   <div id="resultAsig"></div>
+</div>
+<div id="panelSC">
+  <h2>🚩 Sin completar</h2>
+  <div class="hint">Técnicos que aún no tienen ningún trabajo <b>Completado</b>. Toca un nombre para verlo solo a él en el mapa. Respeta el filtro de ciudad de arriba.</div>
+  <div id="listaSC"></div>
 </div>
 <div class="estados" id="estadosBox">
   <div><span class="mini mk-iniciado"></span> Iniciado (trabajando)</div>
@@ -117,10 +135,74 @@ let layer = L.layerGroup().addTo(map);
 
 function estClass(e){ return 'est-'+e.replace(/\s/g,''); }
 
+/* ============ MODO SIN COMPLETAR ============ */
+let sinComp = false;
+
+// técnicos con al menos un trabajo activo (no Cancelado) y CERO Completado, según filtro de ciudad
+function tecnicosSinCompletar(fc){
+  return tecs.filter(t=>{
+    const act = DB[t].filter(p=> p.e!=='Cancelado' && (fc==='__ALL__' || p.d.toUpperCase().includes(fc)));
+    return act.length>0 && !act.some(p=> p.e==='Completado');
+  });
+}
+
+function cerrarSC(){
+  if(!sinComp) return;
+  sinComp = false;
+  document.getElementById('btnSC').classList.remove('on3');
+  document.getElementById('btnSC').textContent = '🚩 Sin completar';
+  document.getElementById('panelSC').style.display = 'none';
+}
+
+function toggleSinCompletar(){
+  if(despacho) toggleDespacho();       // modos excluyentes
+  if(asignacion) toggleAsignacion();
+  sinComp = !sinComp;
+  document.getElementById('btnSC').classList.toggle('on3', sinComp);
+  document.getElementById('btnSC').textContent = sinComp ? '✖ Salir sin completar' : '🚩 Sin completar';
+  document.getElementById('panelSC').style.display = sinComp ? 'block' : 'none';
+  document.getElementById('estadosBox').style.display = sinComp ? 'none' : '';
+  if(sinComp){ sel.value='__ALL__'; document.getElementById('selEstado').value='__ALL__'; }
+  render();
+}
+
+function verTecnicoSC(t){ sel.value = t; render(); }
+
+function renderPanelSC(){
+  const fc = document.getElementById('selCiudad').value;
+  const lista = tecnicosSinCompletar(fc);
+  const cont = document.getElementById('listaSC');
+  document.querySelector('#panelSC h2').textContent = '🚩 Sin completar ('+lista.length+')';
+  if(!lista.length){
+    cont.innerHTML = '<div class="vacio">✅ Todos los técnicos con trabajos tienen al menos uno completado.</div>';
+    return;
+  }
+  let html = '';
+  if(sel.value!=='__ALL__') html += '<div class="vertodos" onclick="verTecnicoSC(\'__ALL__\')">👥 Ver todos en el mapa</div>';
+  html += lista.map(t=>{
+    const act = DB[t].filter(p=> p.e!=='Cancelado' && (fc==='__ALL__' || p.d.toUpperCase().includes(fc)));
+    const nIni = act.filter(p=>p.e==='Iniciado').length;
+    const nRuta = act.filter(p=>p.e==='en ruta').length;
+    const nPend = act.filter(p=>p.e==='Pendiente').length;
+    const nNR = act.filter(p=>p.e==='No Realizada').length;
+    let b = '';
+    if(nIni)  b += '<span class="badge ini">🟢 '+nIni+' iniciado</span>';
+    if(nRuta) b += '<span class="badge ruta">🟠 '+nRuta+' en ruta</span>';
+    if(nPend) b += '<span class="badge pend">'+nPend+' pendiente'+(nPend>1?'s':'')+'</span>';
+    if(nNR)   b += '<span class="badge nr">'+nNR+' no realizada'+(nNR>1?'s':'')+'</span>';
+    const tEsc = t.replace(/'/g,"\\'");
+    return '<div class="sccard" onclick="verTecnicoSC(\''+tEsc+'\')">'+
+      '<div class="nom"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:'+colorOf[t]+';margin-right:5px;"></span>'+t+' ('+act.length+')</div>'+
+      '<div>'+b+'</div></div>';
+  }).join('');
+  cont.innerHTML = html;
+}
+
 function render(){
   layer.clearLayers();
   const ft = sel.value, fc = document.getElementById('selCiudad').value, ff = document.getElementById('selFranja').value, fe = document.getElementById('selEstado').value;
-  const show = ft==='__ALL__' ? tecs : [ft];
+  let show = ft==='__ALL__' ? tecs : [ft];
+  if(sinComp && ft==='__ALL__') show = tecnicosSinCompletar(fc);
   let bounds=[], nTrab=0, nTec=0, nIni=0, nRuta=0, nComp=0;
   show.forEach(t=>{
     let pts = DB[t].filter(p=> p.e!=='Cancelado');
@@ -150,6 +232,7 @@ function render(){
   document.getElementById('stats').textContent = nTec+' técnicos · '+nTrab+' trabajos · 🟢 '+nIni+' iniciados · 🟠 '+nRuta+' en ruta · ✅ '+nComp+' completados';
   if(bounds.length) map.fitBounds(bounds,{padding:[40,40]});
   renderLegend(show);
+  if(sinComp) renderPanelSC();
 }
 
 function renderLegend(show){
@@ -178,6 +261,7 @@ tecs.forEach(t=>{ const o=document.createElement('option'); o.value=t; o.textCon
 
 function toggleDespacho(){
   if(asignacion) toggleAsignacion();
+  cerrarSC();
   despacho = !despacho;
   document.getElementById('btnDesp').classList.toggle('on', despacho);
   document.getElementById('btnDesp').textContent = despacho ? '✖ Salir de Despacho' : '🎯 Modo Despacho';
@@ -309,6 +393,7 @@ let asigLayer = L.layerGroup();
 
 function toggleAsignacion(){
   if(despacho) toggleDespacho(); // modos excluyentes
+  cerrarSC();
   asignacion = !asignacion;
   document.getElementById('btnAsig').classList.toggle('on2', asignacion);
   document.getElementById('btnAsig').textContent = asignacion ? '✖ Salir de Asignación' : '📌 Asignar trabajo nuevo';
