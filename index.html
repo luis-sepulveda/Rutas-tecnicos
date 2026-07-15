@@ -84,6 +84,17 @@
   .rgucard .sub { color:#94a3b8; font-size:10px; margin-top:2px;}
   .rgucard .val { font-size:17px; font-weight:bold; color:#34d399; flex-shrink:0;}
   #panelRGU .vacio { color:#94a3b8; text-align:center; padding:14px 6px; line-height:1.5;}
+  #panelRGU .rgu-tabs { display:flex; gap:4px; margin-bottom:8px;}
+  #panelRGU .rgu-tabs button { flex:1; background:#0f172a; border:1px solid #334155; color:#94a3b8; border-radius:6px; padding:6px 3px; font-size:11px; font-weight:bold; cursor:pointer;}
+  #panelRGU .rgu-tabs button:hover { border-color:#64748b;}
+  #panelRGU .rgu-tabs button.act { color:#0f172a;}
+  #panelRGU .rgu-tabs button.act-comp { background:#34d399; border-color:#34d399;}
+  #panelRGU .rgu-tabs button.act-pend { background:#fbbf24; border-color:#fbbf24;}
+  #panelRGU .rgu-tabs button.act-tot  { background:#38bdf8; border-color:#38bdf8;}
+  #panelRGU .rgu-resumen { display:flex; gap:5px; margin-bottom:10px;}
+  #panelRGU .rgu-resumen .celda { flex:1; text-align:center; background:#0f172a; border:1px solid #334155; border-radius:7px; padding:6px 3px;}
+  #panelRGU .rgu-resumen .celda .rn { font-size:16px; font-weight:bold; line-height:1.1;}
+  #panelRGU .rgu-resumen .celda .rl { font-size:9px; color:#94a3b8; margin-top:2px; text-transform:uppercase; letter-spacing:.3px;}
 </style>
 </head>
 <body>
@@ -119,8 +130,8 @@
   <div id="listaSC"></div>
 </div>
 <div id="panelRGU">
-  <h2>💰 RGU completados hoy</h2>
-  <div class="hint">Suma de RGU de las órdenes <b>Completadas</b>. Respeta el filtro de ciudad y franja de arriba. Toca un técnico para verlo en el mapa.</div>
+  <h2>💰 RGU — hoy y proyección</h2>
+  <div class="hint">Respeta el filtro de ciudad y franja de arriba. <b>Pendientes</b> = órdenes activas sin cerrar (pendiente, iniciado, en ruta) → proyección si se completan. Toca un técnico para verlo en el mapa.</div>
   <div id="cuerpoRGU"></div>
 </div>
 <div class="estados" id="estadosBox">
@@ -147,6 +158,7 @@ const COLORS = ["#e6194b","#3cb44b","#4363d8","#f58231","#911eb4","#42d4f4","#f0
 let tecs = Object.keys(DB).sort();
 let colorOf = {}; tecs.forEach((t,i)=>colorOf[t]=COLORS[i%COLORS.length]);
 let rgu = false, rguDisponible = false;   // RGU: bandera de panel y si el origen trae datos de RGU
+let rguModo = 'comp';                      // RGU: modo activo del panel -> 'comp' | 'pend' | 'tot'
 
 const map = L.map('map').setView([-33.05,-71.41],13);
 L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{attribution:'&copy; OpenStreetMap &copy; CARTO',maxZoom:19}).addTo(map);
@@ -655,6 +667,32 @@ function toggleRGU(){
   if(rgu) renderPanelRGU();
 }
 
+// Modos del panel RGU. Pendiente = órdenes activas sin cerrar (proyección).
+const RGU_MODOS = {
+  comp: {estados:['Completado'],                                  label:'RGU completados',           color:'#34d399'},
+  pend: {estados:['Pendiente','Iniciado','en ruta'],             label:'RGU pendientes (proyección)', color:'#fbbf24'},
+  tot:  {estados:['Completado','Pendiente','Iniciado','en ruta'], label:'RGU total proyectado',      color:'#38bdf8'}
+};
+
+function setRguModo(m){ rguModo = m; renderPanelRGU(); }
+
+function rguPasaFiltro(p, fc, ff){
+  if(fc!=='__ALL__' && !String(p.d).toUpperCase().includes(fc)) return false;
+  if(ff!=='__ALL__' && p.f!==ff) return false;
+  return true;
+}
+
+// suma de RGU y nº de órdenes para un conjunto de estados, respetando filtros
+function rguSuma(estados, fc, ff){
+  let tot=0, ord=0;
+  tecs.forEach(t=>DB[t].forEach(p=>{
+    if(!estados.includes(p.e)) return;
+    if(!rguPasaFiltro(p, fc, ff)) return;
+    tot += Number(p.rgu||0); ord++;
+  }));
+  return {tot, ord};
+}
+
 function renderPanelRGU(){
   const cont = document.getElementById('cuerpoRGU');
   const fc = document.getElementById('selCiudad').value, ff = document.getElementById('selFranja').value;
@@ -662,12 +700,33 @@ function renderPanelRGU(){
     cont.innerHTML = '<div class="vacio">Este origen de datos no trae la info de RGU.<br><br>📂 Carga el <b>Excel del portal</b> (que incluye las columnas <b>Subtipo</b> y <b>Pasos</b>) para ver los RGU,<br>o agrega el campo <b>rgu</b> a <b>rutas.json</b> desde <b>transformador.py</b>.</div>';
     return;
   }
+
+  // --- resumen fijo: los 3 números siempre visibles (para la proyección) ---
+  const rComp = rguSuma(RGU_MODOS.comp.estados, fc, ff);
+  const rPend = rguSuma(RGU_MODOS.pend.estados, fc, ff);
+  const rTot  = rComp.tot + rPend.tot;
+
+  const tabs =
+    '<div class="rgu-tabs">'+
+      '<button class="'+(rguModo==='comp'?'act act-comp':'')+'" onclick="setRguModo(\'comp\')">✅ Completados</button>'+
+      '<button class="'+(rguModo==='pend'?'act act-pend':'')+'" onclick="setRguModo(\'pend\')">⏳ Pendientes</button>'+
+      '<button class="'+(rguModo==='tot' ?'act act-tot' :'')+'" onclick="setRguModo(\'tot\')">🎯 Total</button>'+
+    '</div>';
+
+  const resumen =
+    '<div class="rgu-resumen">'+
+      '<div class="celda"><div class="rn" style="color:#34d399">'+fmtRGU(rComp.tot)+'</div><div class="rl">Completado</div></div>'+
+      '<div class="celda"><div class="rn" style="color:#fbbf24">'+fmtRGU(rPend.tot)+'</div><div class="rl">Pendiente</div></div>'+
+      '<div class="celda"><div class="rn" style="color:#38bdf8">'+fmtRGU(rTot)+'</div><div class="rl">Proyección</div></div>'+
+    '</div>';
+
+  // --- desglose según el modo activo ---
+  const modo = RGU_MODOS[rguModo];
   let porTec = {}, porTipo = {}, totRGU = 0, totOrd = 0;
   tecs.forEach(t=>{
     DB[t].forEach(p=>{
-      if(p.e!=='Completado') return;
-      if(fc!=='__ALL__' && !String(p.d).toUpperCase().includes(fc)) return;
-      if(ff!=='__ALL__' && p.f!==ff) return;
+      if(!modo.estados.includes(p.e)) return;
+      if(!rguPasaFiltro(p, fc, ff)) return;
       const r = Number(p.rgu||0);
       totRGU += r; totOrd++;
       porTec[t] = (porTec[t]||0) + r;
@@ -681,17 +740,24 @@ function renderPanelRGU(){
     '<div class="chip">'+c+': <b>'+fmtRGU(porTipo[c].rgu)+'</b> <span style="color:#64748b">('+porTipo[c].n+')</span></div>').join('');
   const ranking = Object.keys(porTec).filter(t=>porTec[t]>0).sort((a,b)=>porTec[b]-porTec[a]);
   const cards = ranking.map(t=>{
-    const nOrd = DB[t].filter(p=> p.e==='Completado' && (fc==='__ALL__'||String(p.d).toUpperCase().includes(fc)) && (ff==='__ALL__'||p.f===ff)).length;
+    const nOrd = DB[t].filter(p=> modo.estados.includes(p.e) && (fc==='__ALL__'||String(p.d).toUpperCase().includes(fc)) && (ff==='__ALL__'||p.f===ff)).length;
     const tEsc = t.replace(/'/g,"\\'");
-    return '<div class="rgucard" onclick="verTecnicoSC(\''+tEsc+'\')">'+
+    return '<div class="rgucard" style="border-left-color:'+modo.color+'" onclick="verTecnicoSC(\''+tEsc+'\')">'+
       '<div><div class="nom"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:'+colorOf[t]+';margin-right:5px;"></span>'+t+'</div>'+
-      '<div class="sub">'+nOrd+' orden'+(nOrd>1?'es':'')+' completada'+(nOrd>1?'s':'')+'</div></div>'+
-      '<div class="val">'+fmtRGU(porTec[t])+'</div></div>';
+      '<div class="sub">'+nOrd+' orden'+(nOrd>1?'es':'')+'</div></div>'+
+      '<div class="val" style="color:'+modo.color+'">'+fmtRGU(porTec[t])+'</div></div>';
   }).join('');
+
+  const vacioMsg = rguModo==='pend' ? 'No hay órdenes pendientes con estos filtros.'
+                 : rguModo==='tot'  ? 'No hay órdenes con estos filtros.'
+                 :                    'Aún no hay órdenes completadas con estos filtros.';
+
   cont.innerHTML =
-    '<div class="total"><div class="n">'+fmtRGU(totRGU)+'</div><div class="l">RGU · '+totOrd+' órdenes completadas</div></div>'+
+    tabs + resumen +
+    '<div class="total" style="border-color:'+modo.color+'"><div class="n" style="color:'+modo.color+'">'+fmtRGU(totRGU)+'</div>'+
+      '<div class="l">'+modo.label+' · '+totOrd+' órden'+(totOrd===1?'':'es')+'</div></div>'+
     (chips ? '<div class="tipos">'+chips+'</div>' : '') +
-    (cards || '<div class="vacio">Aún no hay órdenes completadas con estos filtros.</div>');
+    (cards || '<div class="vacio">'+vacioMsg+'</div>');
 }
 
 
