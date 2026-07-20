@@ -95,6 +95,18 @@
   #panelRGU .rgu-resumen .celda { flex:1; text-align:center; background:#0f172a; border:1px solid #334155; border-radius:7px; padding:6px 3px;}
   #panelRGU .rgu-resumen .celda .rn { font-size:16px; font-weight:bold; line-height:1.1;}
   #panelRGU .rgu-resumen .celda .rl { font-size:9px; color:#94a3b8; margin-top:2px; text-transform:uppercase; letter-spacing:.3px;}
+  #panelRGU .rgu-det { margin-top:12px; border-top:1px solid #334155; padding-top:10px; }
+  #panelRGU .det-titulo { font-size:12px; color:#e2e8f0; font-weight:bold; margin-bottom:6px; }
+  #panelRGU .det-grupo { margin-bottom:8px; }
+  #panelRGU .det-head { font-size:11px; font-weight:bold; margin:4px 0; display:flex; justify-content:space-between; align-items:center; gap:6px; }
+  #panelRGU .det-head span { color:#94a3b8; font-weight:normal; }
+  #panelRGU .det-vacia { color:#64748b; font-size:10px; padding:2px 0 4px; }
+  #panelRGU .det-fila { display:flex; justify-content:space-between; align-items:center; gap:6px; background:#0f172a; border-radius:5px; padding:4px 7px; margin:3px 0; cursor:pointer; }
+  #panelRGU .det-fila:hover { background:#0d2e24; }
+  #panelRGU .det-info { display:flex; flex-direction:column; overflow:hidden; }
+  #panelRGU .det-tec { font-size:11px; color:#e2e8f0; font-weight:bold; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  #panelRGU .det-sub { font-size:9px; color:#94a3b8; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  #panelRGU .det-rgu { font-size:14px; font-weight:bold; flex-shrink:0; }
 </style>
 </head>
 <body>
@@ -700,6 +712,43 @@ function rguSuma(estados, fc, ff){
   return {tot, ord};
 }
 
+// Detalle orden por orden de las CERRADAS: Completadas y No Realizadas, con su RGU.
+// Se muestra siempre (independiente del modo activo), respetando ciudad/franja.
+function detalleCerradas(fc, ff){
+  const grupos = {
+    'Completado':   {icon:'✅', label:'Completadas',   color:'#34d399', items:[]},
+    'No Realizada': {icon:'🚫', label:'No realizadas', color:'#ef4444', items:[]}
+  };
+  tecs.forEach(t=>DB[t].forEach(p=>{
+    if(!grupos[p.e]) return;
+    if(!rguPasaFiltro(p, fc, ff)) return;
+    grupos[p.e].items.push({tec:t, o:p.o, tipo:p.t, rgu:Number(p.rgu||0)});
+  }));
+  let html = '';
+  ['Completado','No Realizada'].forEach(est=>{
+    const g = grupos[est];
+    const n = g.items.length;
+    const sum = g.items.reduce((a,b)=>a+b.rgu,0);
+    html += '<div class="det-grupo"><div class="det-head" style="color:'+g.color+'">'+
+            '<span style="color:'+g.color+'">'+g.icon+' '+g.label+'</span>'+
+            '<span>'+n+' órden'+(n===1?'':'es')+' · '+fmtRGU(sum)+' RGU</span></div>';
+    if(!n){
+      html += '<div class="det-vacia">— sin órdenes con estos filtros —</div>';
+    } else {
+      g.items.sort((a,b)=>b.rgu-a.rgu);
+      html += g.items.map(it=>{
+        const tEsc = it.tec.replace(/'/g,"\\'");
+        return '<div class="det-fila" onclick="verTecnicoSC(\''+tEsc+'\')">'+
+          '<div class="det-info"><span class="det-tec">'+it.tec+'</span>'+
+          '<span class="det-sub">'+it.tipo+' · '+it.o+'</span></div>'+
+          '<span class="det-rgu" style="color:'+g.color+'">'+fmtRGU(it.rgu)+'</span></div>';
+      }).join('');
+    }
+    html += '</div>';
+  });
+  return '<div class="rgu-det"><div class="det-titulo">📋 Detalle de órdenes cerradas</div>'+html+'</div>';
+}
+
 function renderPanelRGU(){
   const cont = document.getElementById('cuerpoRGU');
   const fc = document.getElementById('selCiudad').value, ff = document.getElementById('selFranja').value;
@@ -764,7 +813,8 @@ function renderPanelRGU(){
     '<div class="total" style="border-color:'+modo.color+'"><div class="n" style="color:'+modo.color+'">'+fmtRGU(totRGU)+'</div>'+
       '<div class="l">'+modo.label+' · '+totOrd+' órden'+(totOrd===1?'':'es')+'</div></div>'+
     (chips ? '<div class="tipos">'+chips+'</div>' : '') +
-    (cards || '<div class="vacio">'+vacioMsg+'</div>');
+    (cards || '<div class="vacio">'+vacioMsg+'</div>') +
+    detalleCerradas(fc, ff);
 }
 
 
