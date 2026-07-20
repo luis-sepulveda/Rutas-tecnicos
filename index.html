@@ -586,31 +586,38 @@ function dirBase(p){
 }
 function fmtRGU(n){ return (Math.round(n*10)/10).toString().replace('.',','); }
 
-// RGU de UNA orden según reglas del negocio (calibradas contra Power BI):
-//  Reparación               = 1
-//  Alta / Alta Traslado     = N Play del Subtipo  (contar D-Box infla el número)
-//  Migración                = categorías de servicio en Pasos (Internet + TV + Teléfono)
-//  Modificación             = 0,1 si es sobre orden ya completada misma dirección+fecha; si no 1
-//  Colación / No inicia ... = 0
+// RGU de UNA orden — REGLA DE COMPONENTES (calibrada contra Power BI).
+// IDÉNTICA a rgu_componentes()/rgu_orden() de generar_rutas.py -> mantener en sincronía.
+//  Reparación                       = 1 (plano)
+//  Alta/Traslado/Migración/Upgrade  = suma de componentes de los Pasos:
+//      D-Box IPTV : 1º = 1, cada adicional = 0,5 · Extensor = 0,5 c/u
+//      Plan Banda Ancha = 1 · Plan de telefonía = 1
+//      Gateway NextGen y ONT GPON: NO cuentan · (solo pasos Instalar/Actualizar)
+//  Modificación                     = 0,1 si hay Alta/Migración completada misma dir+fecha; si no 1
+//  Colación / No inicia ...         = 0
+function rguComponentes(pasos){
+  const desc = (String(pasos||'').match(/<descripcion>(.*?)<\/descripcion>/gi)||[])
+    .map(s=>s.replace(/<\/?descripcion>/gi,''))
+    .filter(d=>/^\s*(instalar|actualizar)\b/i.test(d));
+  const dbox = desc.filter(d=>/d-?box/i.test(d)).length;
+  const ext  = desc.filter(d=>/extensor/i.test(d)).length;
+  const ba   = desc.filter(d=>/plan banda ancha/i.test(d)).length;
+  const tel  = desc.filter(d=>/plan de telefon|telefon[ií]a/i.test(d)).length;
+  let r = 0;
+  if(dbox) r += 1 + 0.5*(dbox-1);
+  r += 0.5*ext + ba + tel;
+  return r;
+}
 function rguOrden(p){
   const t = tipoN(p.t);
   if(t.includes('reparaci')) return 1;
-  if(t==='alta' || t.includes('traslado')){
-    const m = String(p.sub||'').match(/(\d+)\s*play/i);
+  if(t==='alta' || t.includes('traslado') || t.includes('migraci') || t.includes('upgrade')){
+    const r = rguComponentes(p.pasos);
+    if(r>0) return r;
+    const m = String(p.sub||'').match(/(\d+)\s*play/i);   // respaldo si no hay Pasos
     return m ? parseInt(m[1],10) : 1;
   }
-  if(t.includes('migraci')){
-    const desc = (String(p.pasos||'').match(/<descripcion>(.*?)<\/descripcion>/gi)||[])
-      .map(s=>s.replace(/<\/?descripcion>/gi,''))
-      .filter(d=>/^\s*(instalar|actualizar)/i.test(d));
-    let n = 0;
-    if(desc.some(d=>/plan banda ancha/i.test(d))) n++;   // Internet
-    if(desc.some(d=>/d-box iptv/i.test(d)))       n++;   // TV
-    if(desc.some(d=>/\bmta\b|telef/i.test(d)))    n++;   // Teléfono
-    return n || 1;
-  }
   if(t.includes('modifica')) return 1;   // se ajusta a 0,1 en aplicarRGU si corresponde
-  if(t.includes('upgrade'))  return 1;   // best-effort: validar contra Power BI
   return 0;                              // Colación, No inicia, etc.
 }
 
