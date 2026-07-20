@@ -712,41 +712,81 @@ function rguSuma(estados, fc, ff){
   return {tot, ord};
 }
 
-// Detalle orden por orden de las CERRADAS: Completadas y No Realizadas, con su RGU.
-// Se muestra siempre (independiente del modo activo), respetando ciudad/franja.
+// --- Etiqueta de tipo de actividad con su tramo de Play ---
+// Alta: N Play del Subtipo · Migración: nº de servicios (Internet+TV+Teléfono) de los Pasos
+// (misma lógica que generar_rutas.py; en datos en vivo usa p.cat ya calculado)
+function playSub(sub){ const m = String(sub||'').match(/(\d+)\s*play/i); return m ? m[1] : ''; }
+function catsMigr(pasos){
+  const desc = (String(pasos||'').match(/<descripcion>(.*?)<\/descripcion>/gi)||[])
+    .map(s=>s.replace(/<\/?descripcion>/gi,''))
+    .filter(d=>/^\s*(instalar|actualizar)\b/i.test(d));
+  let c = 0;
+  if(desc.some(d=>/plan banda ancha/i.test(d)))            c++;
+  if(desc.some(d=>/d-?box/i.test(d)))                      c++;
+  if(desc.some(d=>/plan de telefon|telefon[ií]a/i.test(d))) c++;
+  return c || 1;
+}
+function etiquetaOrden(p){
+  if(p.cat) return p.cat;                       // ya viene calculada del pipeline
+  const t = tipoN(p.t);
+  if(t.includes('reparaci')) return 'Reparación';
+  if(t==='alta'){ const pl = playSub(p.sub); return pl ? 'Alta '+pl+' Play' : 'Alta'; }
+  if(t.includes('traslado')){ const pl = playSub(p.sub); return pl ? 'Alta Traslado '+pl+' Play' : 'Alta Traslado'; }
+  if(t.includes('migraci'))  return 'Migración '+catsMigr(p.pasos)+' Play';
+  if(t.includes('upgrade'))  return 'Upgrade promoción';
+  if(t.includes('modifica')) return 'Modificación de Servicio';
+  return String(p.t||'Otros');
+}
+function catOrden(c){
+  let base;
+  if(/^Reparaci/.test(c))         base = 0;
+  else if(/^Alta Traslado/.test(c)) base = 2;
+  else if(/^Alta/.test(c))        base = 1;
+  else if(/^Migraci/.test(c))     base = 3;
+  else if(/^Modifica/.test(c))    base = 4;
+  else if(/^Upgrade/.test(c))     base = 5;
+  else                            base = 6;
+  const m = c.match(/(\d+)\s*Play/);
+  return base*10 + (m ? parseInt(m[1],10) : 0);
+}
+
+// Detalle de las CERRADAS agrupado por TIPO DE ACTIVIDAD (con Play) y su RGU.
+// Dos secciones: Completadas y No Realizadas. Respeta ciudad/franja.
 function detalleCerradas(fc, ff){
   const grupos = {
-    'Completado':   {icon:'✅', label:'Completadas',   color:'#34d399', items:[]},
-    'No Realizada': {icon:'🚫', label:'No realizadas', color:'#ef4444', items:[]}
+    'Completado':   {icon:'✅', label:'Completadas',   color:'#34d399', tipos:{}, n:0, sum:0},
+    'No Realizada': {icon:'🚫', label:'No realizadas', color:'#ef4444', tipos:{}, n:0, sum:0}
   };
   tecs.forEach(t=>DB[t].forEach(p=>{
-    if(!grupos[p.e]) return;
+    const g = grupos[p.e]; if(!g) return;
     if(!rguPasaFiltro(p, fc, ff)) return;
-    grupos[p.e].items.push({tec:t, o:p.o, tipo:p.t, rgu:Number(p.rgu||0)});
+    const cat = etiquetaOrden(p);
+    const r = Number(p.rgu||0);
+    if(!g.tipos[cat]) g.tipos[cat] = {n:0, rgu:0};
+    g.tipos[cat].n++; g.tipos[cat].rgu += r;
+    g.n++; g.sum += r;
   }));
   let html = '';
   ['Completado','No Realizada'].forEach(est=>{
     const g = grupos[est];
-    const n = g.items.length;
-    const sum = g.items.reduce((a,b)=>a+b.rgu,0);
     html += '<div class="det-grupo"><div class="det-head" style="color:'+g.color+'">'+
             '<span style="color:'+g.color+'">'+g.icon+' '+g.label+'</span>'+
-            '<span>'+n+' órden'+(n===1?'':'es')+' · '+fmtRGU(sum)+' RGU</span></div>';
-    if(!n){
+            '<span>'+g.n+' órden'+(g.n===1?'':'es')+' · '+fmtRGU(g.sum)+' RGU</span></div>';
+    if(!g.n){
       html += '<div class="det-vacia">— sin órdenes con estos filtros —</div>';
     } else {
-      g.items.sort((a,b)=>b.rgu-a.rgu);
-      html += g.items.map(it=>{
-        const tEsc = it.tec.replace(/'/g,"\\'");
-        return '<div class="det-fila" onclick="verTecnicoSC(\''+tEsc+'\')">'+
-          '<div class="det-info"><span class="det-tec">'+it.tec+'</span>'+
-          '<span class="det-sub">'+it.tipo+' · '+it.o+'</span></div>'+
+      const cats = Object.keys(g.tipos).sort((a,b)=>catOrden(a)-catOrden(b));
+      html += cats.map(c=>{
+        const it = g.tipos[c];
+        return '<div class="det-fila">'+
+          '<div class="det-info"><span class="det-tec">'+c+'</span>'+
+          '<span class="det-sub">'+it.n+' orden'+(it.n===1?'':'es')+'</span></div>'+
           '<span class="det-rgu" style="color:'+g.color+'">'+fmtRGU(it.rgu)+'</span></div>';
       }).join('');
     }
     html += '</div>';
   });
-  return '<div class="rgu-det"><div class="det-titulo">📋 Detalle de órdenes cerradas</div>'+html+'</div>';
+  return '<div class="rgu-det"><div class="det-titulo">📋 Detalle por tipo de actividad</div>'+html+'</div>';
 }
 
 function renderPanelRGU(){
