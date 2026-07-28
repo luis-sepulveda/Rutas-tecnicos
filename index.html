@@ -111,7 +111,7 @@
 </head>
 <body>
 <header>
-  <h1>🚐 Rutas Técnicos DOMI</h1>
+  <h1>🚐 Rutas Técnicos DOMI <span style="font-size:11px;color:#34d399;font-weight:normal;vertical-align:middle;">· regla GSA ✓ (v2)</span></h1>
   <select id="selTec"><option value="__ALL__">Todos los técnicos</option></select>
   <select id="selCiudad"><option value="__ALL__">Ambas ciudades</option><option>QUILPUE</option><option>VILLA ALEMANA</option></select>
   <select id="selFranja"><option value="__ALL__">Todas las franjas</option><option>10-13</option><option>13-16</option><option>16-19</option></select>
@@ -181,6 +181,33 @@ tecs.forEach(t=>{ const o=document.createElement('option'); o.value=t; o.textCon
 let layer = L.layerGroup().addTo(map);
 
 function estClass(e){ return 'est-'+e.replace(/\s/g,''); }
+
+/* ====== NORMALIZACIÓN (espejo de norm_txt / norm_estado de generar_rutas.py) ====== */
+// minúsculas, sin tildes, sin espacios sobrantes
+function txtN(s){
+  if(s===null || s===undefined) return null;
+  return String(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+                  .replace(/\s+/g,' ').trim().toLowerCase();
+}
+// busca una columna del Excel comparando sin tildes ni mayúsculas
+function col(fila, ...alias){
+  const mapa = {};
+  Object.keys(fila).forEach(k=> mapa[txtN(k)] = fila[k]);
+  for(const a of alias){ const v = mapa[txtN(a)]; if(v!==undefined) return v; }
+  return null;
+}
+// estados canónicos: el panel "Sin completar" compara con estos strings EXACTOS
+const _ESTADOS = {
+  'completado':'Completado', 'completada':'Completado',
+  'no realizada':'No Realizada', 'no realizado':'No Realizada',
+  'pendiente':'Pendiente', 'iniciado':'Iniciado', 'iniciada':'Iniciado',
+  'en ruta':'en ruta', 'enruta':'en ruta',
+  'cancelado':'Cancelado', 'cancelada':'Cancelado',
+  'suspendido':'Suspendido', 'suspendida':'Suspendido'
+};
+function normEstado(e){ return _ESTADOS[txtN(e)] || String(e||'').trim(); }
+function normEstadosDB(db){ Object.values(db).forEach(a=>a.forEach(p=> p.e = normEstado(p.e))); }
+/* ================================================================================= */
 
 /* ============ MODO SIN COMPLETAR ============ */
 let sinComp = false;
@@ -868,6 +895,7 @@ function renderPanelRGU(){
     const js = await r.json();
     if(!js.tecnicos) throw new Error('formato');
     DB = js.tecnicos;
+    normEstadosDB(DB);
     tecs = Object.keys(DB).sort();
     aplicarRGU(DB);
     colorOf = {}; tecs.forEach((t,i)=>colorOf[t]=COLORS[i%COLORS.length]);
@@ -900,24 +928,45 @@ document.getElementById('inExcel').addEventListener('change', function(ev){
       if(falta.length){ alert('El Excel no tiene el formato esperado. Faltan columnas: '+falta.join(', ')); return; }
 
       const nuevo = {};
+      let nGSA = 0, nNR = 0, hayCols = false;
       filas.forEach(f=>{
         const tecRaw = String(f['Técnico']);
-        if(!/DOMI/i.test(tecRaw)) return;
+        if(!/_DOMI_/i.test(tecRaw)) return;              // _DOMI_ con guiones (igual que el .py)
         const ciu = String(f['Ciudad']||'').trim().toUpperCase();
         if(ciu!=='QUILPUE' && ciu!=='VILLA ALEMANA') return;
-        const tec = tecRaw.replace(/^(QA_B2B_)?(FS_)?MM_NFTT_(DOMI|TRAZ)_/,'').trim();
+        const tec = tecRaw.replace(/^(QA_)?(B2B_)?(FS_)?MM_NFTT_(DOMI|TRAZ)_/,'').trim();
         const lat = parseFloat(f['Coordenada Y']), lng = parseFloat(f['Coordenada X']);
         if(!tec || isNaN(lat) || isNaN(lng)) return;
         if(!nuevo[tec]) nuevo[tec] = [];
+        // Regla GSA: "No Realizada" + Código de Cierre "Falla Aprovisionamiento"
+        // + Área derivación "GSA"  ->  cuenta como Completado (igual que generar_rutas.py)
+        // Los encabezados se buscan sin tildes y los valores por CONTENIDO.
+        let est = normEstado(f['Estado']);
+        const _cierre = txtN(col(f,'Código de Cierre','Codigo de Cierre','Cod. de Cierre','Motivo de Cierre'));
+        const _deriv  = txtN(col(f,'Area derivación','Área derivación','Area de derivación','Area derivacion','Derivación'));
+        if(_cierre!==null || _deriv!==null) hayCols = true;
+        let esGSA = false;
+        if(est==='No Realizada'){
+          nNR++;
+          if(/falla/.test(_cierre||'') && /aprovision/.test(_cierre||'') && /\bgsa\b/.test(_deriv||'')){
+            est = 'Completado'; esGSA = true; nGSA++;
+          }
+        }
         nuevo[tec].push({
           o: f['Orden de Trabajo'], t: f['Tipo de Actividad'], f: f['Franja'],
           hi: f['Inicio']||'', hf: f['Fin']||'',
           d: String(f['Dirección']).trim()+', '+String(f['Ciudad']).trim(),
-          lat: lat, lng: lng, e: f['Estado'],
+          lat: lat, lng: lng, e: est, gsa: esGSA?1:0,
           sub: f['Subtipo']||'', pasos: f['Pasos']||'', fecha: f['Fecha']||'',
           dir_raw: String(f['Dirección']).trim()
         });
       });
+      if(!hayCols && nNR){
+        alert('Aviso: este Excel no trae las columnas "Código de Cierre" / "Área derivación".\n'+
+              'Hay '+nNR+' orden(es) No Realizada que NO se pudieron evaluar con la regla GSA.\n'+
+              'Exporta el archivo completo desde el portal si necesitas que apliquen.');
+      }
+      console.log('Regla GSA: '+nGSA+' de '+nNR+' No Realizada reclasificadas como Completado');
       Object.keys(nuevo).forEach(t=> nuevo[t].sort((a,b)=> (a.hi||'99:99').localeCompare(b.hi||'99:99')));
 
       DB = nuevo;
