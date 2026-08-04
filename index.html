@@ -107,6 +107,28 @@
   #panelRGU .det-tec { font-size:11px; color:#e2e8f0; font-weight:bold; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   #panelRGU .det-sub { font-size:9px; color:#94a3b8; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   #panelRGU .det-rgu { font-size:14px; font-weight:bold; flex-shrink:0; }
+  .btn.on5 { background:#be123c; border-color:#fb7185; font-weight:bold; }
+  .btn .pill { display:inline-block; background:#f43f5e; color:#fff; border-radius:10px; padding:0 6px; font-size:11px; margin-left:5px; font-weight:bold; }
+  #panelAtr { position:absolute; top:70px; right:10px; z-index:1000; background:rgba(30,41,59,.96); border:1px solid #475569; border-radius:10px; padding:12px; width:300px; max-height:78vh; overflow-y:auto; display:none; font-size:12px;}
+  #panelAtr h2 { font-size:13px; color:#fb7185; margin-bottom:6px;}
+  #panelAtr .hint { color:#94a3b8; font-size:11px; margin-bottom:8px;}
+  #panelAtr .vertodos { color:#38bdf8; font-size:12px; cursor:pointer; margin-bottom:8px; display:inline-block;}
+  #panelAtr .vertodos:hover { text-decoration:underline;}
+  #panelAtr .vacio { color:#4ade80; text-align:center; padding:14px 6px; line-height:1.5;}
+  #panelAtr .aviso { background:#422006; border:1px solid #b45309; color:#fbbf24; border-radius:6px; padding:6px 8px; font-size:10px; margin-bottom:8px; line-height:1.4;}
+  #panelAtr .umbral { display:flex; gap:4px; margin-bottom:8px;}
+  #panelAtr .umbral button { flex:1; background:#0f172a; border:1px solid #334155; color:#94a3b8; border-radius:6px; padding:5px 3px; font-size:11px; font-weight:bold; cursor:pointer;}
+  #panelAtr .umbral button:hover { border-color:#64748b;}
+  #panelAtr .umbral button.act { background:#fb7185; border-color:#fb7185; color:#0f172a;}
+  .atrcard { border-left:4px solid #fb7185; background:#0f172a; border-radius:6px; padding:6px 8px; margin:6px 0; cursor:pointer;}
+  .atrcard:hover { background:#3b1220;}
+  .atrcard.grave { border-left-color:#dc2626; box-shadow:0 0 8px rgba(220,38,38,.45);}
+  .atrcard .fila1 { display:flex; justify-content:space-between; align-items:center; gap:8px;}
+  .atrcard .nom { font-weight:bold; color:#e2e8f0; font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .atrcard .tiempo { font-size:15px; font-weight:bold; color:#fb7185; flex-shrink:0;}
+  .atrcard.grave .tiempo { color:#f87171;}
+  .atrcard .sub { color:#94a3b8; font-size:10px; margin-top:3px; line-height:1.35;}
+  .atrcard .sub b { color:#cbd5e1; font-weight:bold;}
 </style>
 </head>
 <body>
@@ -121,6 +143,7 @@
   <button class="btn" id="btnDesp" onclick="toggleDespacho()">🎯 Modo Despacho</button>
   <button class="btn" id="btnAsig" onclick="toggleAsignacion()">📌 Asignar trabajo nuevo</button>
   <button class="btn" id="btnSC" onclick="toggleSinCompletar()">🚩 Sin completar</button>
+  <button class="btn" id="btnAtr" onclick="toggleAtrasados()">⏱️ +2h30 iniciado</button>
   <button class="btn" id="btnRGU" onclick="toggleRGU()">💰 RGU</button>
   <div class="stats" id="stats"></div>
   <div class="stats" id="lastUpd" style="margin-left:0;">⏳ cargando datos...</div>
@@ -140,6 +163,17 @@
   <h2>🚩 Sin completar</h2>
   <div class="hint">Técnicos que aún no tienen ningún trabajo <b>Completado</b>. Toca un nombre para verlo solo a él en el mapa. Respeta el filtro de ciudad de arriba.</div>
   <div id="listaSC"></div>
+</div>
+<div id="panelAtr">
+  <h2>⏱️ Llevan mucho rato iniciado</h2>
+  <div id="avisoAtr"></div>
+  <div class="umbral">
+    <button id="umb120" onclick="setUmbral(120)">+2h</button>
+    <button id="umb150" onclick="setUmbral(150)">+2h30</button>
+    <button id="umb180" onclick="setUmbral(180)">+3h</button>
+  </div>
+  <div class="hint">Órdenes en estado <b>Iniciado</b> cuya hora de inicio ya lleva más del umbral. Respeta el filtro de ciudad de arriba. Toca una tarjeta para ver al técnico en el mapa.</div>
+  <div id="listaAtr"></div>
 </div>
 <div id="panelRGU">
   <h2>💰 RGU — hoy y proyección</h2>
@@ -231,7 +265,7 @@ function cerrarSC(){
 function toggleSinCompletar(){
   if(despacho) toggleDespacho();       // modos excluyentes
   if(asignacion) toggleAsignacion();
-  cerrarRGU();
+  cerrarRGU(); cerrarAtr();
   sinComp = !sinComp;
   document.getElementById('btnSC').classList.toggle('on3', sinComp);
   document.getElementById('btnSC').textContent = sinComp ? '✖ Salir sin completar' : '🚩 Sin completar';
@@ -308,6 +342,8 @@ function render(){
   if(bounds.length) map.fitBounds(bounds,{padding:[40,40]});
   renderLegend(show);
   if(sinComp) renderPanelSC();
+  if(atr) renderPanelAtr();
+  actualizarBadgeAtr();
 }
 
 function renderLegend(show){
@@ -323,7 +359,7 @@ function renderLegend(show){
 }
 
 sel.onchange=render;
-document.getElementById('selCiudad').onchange=()=>{ render(); if(despacho && posActual) buscarCercanos(posActual); if(rgu) renderPanelRGU(); };
+document.getElementById('selCiudad').onchange=()=>{ render(); if(despacho && posActual) buscarCercanos(posActual); if(rgu) renderPanelRGU(); if(atr) renderPanelAtr(); };
 document.getElementById('selFranja').onchange=()=>{ render(); if(despacho && posActual) buscarCercanos(posActual); if(rgu) renderPanelRGU(); };
 document.getElementById('selEstado').onchange=render;
 render();
@@ -337,6 +373,7 @@ tecs.forEach(t=>{ const o=document.createElement('option'); o.value=t; o.textCon
 function toggleDespacho(){
   if(asignacion) toggleAsignacion();
   cerrarSC(); cerrarRGU();
+  cerrarAtr();
   despacho = !despacho;
   document.getElementById('btnDesp').classList.toggle('on', despacho);
   document.getElementById('btnDesp').textContent = despacho ? '✖ Salir de Despacho' : '🎯 Modo Despacho';
@@ -469,6 +506,7 @@ let asigLayer = L.layerGroup();
 function toggleAsignacion(){
   if(despacho) toggleDespacho(); // modos excluyentes
   cerrarSC(); cerrarRGU();
+  cerrarAtr();
   asignacion = !asignacion;
   document.getElementById('btnAsig').classList.toggle('on2', asignacion);
   document.getElementById('btnAsig').textContent = asignacion ? '✖ Salir de Asignación' : '📌 Asignar trabajo nuevo';
@@ -704,7 +742,7 @@ function cerrarRGU(){
 function toggleRGU(){
   if(despacho) toggleDespacho();       // modos excluyentes
   if(asignacion) toggleAsignacion();
-  cerrarSC();
+  cerrarSC(); cerrarAtr();
   rgu = !rgu;
   document.getElementById('btnRGU').classList.toggle('on4', rgu);
   document.getElementById('btnRGU').textContent = rgu ? '✖ Salir RGU' : '💰 RGU';
@@ -885,6 +923,154 @@ function renderPanelRGU(){
 }
 
 
+
+/* ============ MODO ATRASADOS (iniciados hace mucho rato) ============ */
+let atr = false;
+let UMBRAL_MIN = 150;            // 2h30 por defecto
+let FECHA_DATOS = null;          // momento del snapshot de datos (rutas.json)
+
+// "dd-mm-yyyy HH:MM" -> Date
+function setFechaDatos(txt){
+  const m = String(txt||'').match(/(\d{2})-(\d{2})-(\d{4})\D+(\d{1,2}):(\d{2})/);
+  FECHA_DATOS = m ? new Date(+m[3], +m[2]-1, +m[1], +m[4], +m[5]) : null;
+}
+
+// Contra qué hora se mide. Si los datos son de HOY se usa la hora real (el
+// reloj sigue corriendo aunque el .bat actualice cada 30 min). Si son de otro
+// día se usa la hora del snapshot, para no inventar atrasos de 20 horas.
+function ahoraRef(){
+  const n = new Date();
+  if(!FECHA_DATOS) return n;
+  const mismoDia = FECHA_DATOS.getFullYear()===n.getFullYear()
+                && FECHA_DATOS.getMonth()===n.getMonth()
+                && FECHA_DATOS.getDate()===n.getDate();
+  return mismoDia ? n : FECHA_DATOS;
+}
+
+// minutos transcurridos desde la hora de inicio ("HH:MM"); null si no aplica
+function minutosDesde(hi){
+  if(!hi || !/^\d{1,2}:\d{2}/.test(hi)) return null;
+  const ref = ahoraRef();
+  const p = hi.split(':');
+  const ini = new Date(ref.getFullYear(), ref.getMonth(), ref.getDate(), +p[0], +p[1]);
+  const d = (ref - ini)/60000;
+  return d < 0 ? null : d;      // inicio en el futuro = hora estimada, no real
+}
+
+function fmtDur(m){
+  const h = Math.floor(m/60), r = Math.round(m%60);
+  return h ? h+'h '+('0'+r).slice(-2)+'m' : r+'m';
+}
+
+function etiquetaUmbral(){
+  return UMBRAL_MIN===120 ? '+2h' : (UMBRAL_MIN===180 ? '+3h' : '+2h30');
+}
+
+// [{t: tecnico, p: orden, m: minutos}] ordenado del más atrasado al menos
+function trabajosAtrasados(){
+  const fc = document.getElementById('selCiudad').value;
+  const out = [];
+  tecs.forEach(t=>{
+    DB[t].forEach(p=>{
+      if(p.e!=='Iniciado') return;
+      if(fc!=='__ALL__' && !p.d.toUpperCase().includes(fc)) return;
+      const m = minutosDesde(p.hi);
+      if(m!==null && m>=UMBRAL_MIN) out.push({t:t, p:p, m:m});
+    });
+  });
+  return out.sort((a,b)=> b.m - a.m);
+}
+
+function setUmbral(v){
+  UMBRAL_MIN = v;
+  renderPanelAtr();
+  actualizarBadgeAtr();
+}
+
+function actualizarBadgeAtr(){
+  const b = document.getElementById('btnAtr');
+  if(!b) return;
+  if(atr){ b.textContent = '✖ Salir '+etiquetaUmbral(); return; }
+  const n = trabajosAtrasados().length;
+  b.innerHTML = '⏱️ '+etiquetaUmbral()+' iniciado' + (n ? '<span class="pill">'+n+'</span>' : '');
+}
+
+function cerrarAtr(){
+  if(!atr) return;
+  atr = false;
+  document.getElementById('btnAtr').classList.remove('on5');
+  document.getElementById('panelAtr').style.display = 'none';
+  document.getElementById('estadosBox').style.display = '';
+  actualizarBadgeAtr();
+}
+
+function toggleAtrasados(){
+  if(despacho) toggleDespacho();       // modos excluyentes
+  if(asignacion) toggleAsignacion();
+  cerrarSC(); cerrarRGU();
+  atr = !atr;
+  document.getElementById('btnAtr').classList.toggle('on5', atr);
+  document.getElementById('panelAtr').style.display = atr ? 'block' : 'none';
+  document.getElementById('estadosBox').style.display = atr ? 'none' : '';
+  actualizarBadgeAtr();
+  if(atr) renderPanelAtr();
+}
+
+function verTecnicoAtr(t){ sel.value = t; render(); }
+
+function renderPanelAtr(){
+  ['120','150','180'].forEach(v=>{
+    const b = document.getElementById('umb'+v);
+    if(b) b.classList.toggle('act', UMBRAL_MIN===+v);
+  });
+
+  // aviso de datos viejos: el .bat sube rutas.json cada 30 min
+  const av = document.getElementById('avisoAtr');
+  av.innerHTML = '';
+  if(FECHA_DATOS){
+    const edad = Math.round((new Date() - FECHA_DATOS)/60000);
+    if(edad > 40){
+      av.innerHTML = '<div class="aviso">⚠️ Los datos son de hace '+fmtDur(edad)+
+        '. Puede que alguna orden ya se haya cerrado en el portal.</div>';
+    }
+  }
+
+  const lista = trabajosAtrasados();
+  const cont = document.getElementById('listaAtr');
+  document.querySelector('#panelAtr h2').textContent =
+    '⏱️ Iniciado hace '+etiquetaUmbral().replace('+','más de ')+' ('+lista.length+')';
+
+  if(!lista.length){
+    cont.innerHTML = '<div class="vacio">✅ Ningún técnico lleva más de '+
+      etiquetaUmbral().replace('+','')+' con un trabajo iniciado.</div>';
+    return;
+  }
+
+  let html = '';
+  if(sel.value!=='__ALL__') html += '<div class="vertodos" onclick="verTecnicoAtr(\'__ALL__\')">👥 Ver todos en el mapa</div>';
+  html += lista.map(x=>{
+    const grave = x.m >= UMBRAL_MIN + 90 ? ' grave' : '';
+    const tEsc = x.t.replace(/'/g,"\\'");
+    return '<div class="atrcard'+grave+'" onclick="verTecnicoAtr(\''+tEsc+'\')">'+
+      '<div class="fila1">'+
+        '<div class="nom"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:'+colorOf[x.t]+';margin-right:5px;"></span>'+x.t+'</div>'+
+        '<div class="tiempo">'+fmtDur(x.m)+'</div>'+
+      '</div>'+
+      '<div class="sub">📋 '+x.p.o+' · '+x.p.t+'<br>'+
+        '🕐 inició <b>'+x.p.hi+'</b> · franja '+x.p.f+'<br>'+
+        '📍 '+x.p.d+'</div>'+
+    '</div>';
+  }).join('');
+  cont.innerHTML = html;
+}
+
+// el reloj sigue corriendo aunque no lleguen datos nuevos
+setInterval(function(){
+  actualizarBadgeAtr();
+  if(atr) renderPanelAtr();
+}, 60000);
+/* ==================================================================== */
+
 /* ============ CARGA DE DATOS EN VIVO (rutas.json) ============ */
 (async function cargarDatosVivos(){
   const lu = document.getElementById('lastUpd');
@@ -904,6 +1090,7 @@ function renderPanelRGU(){
     tecs.forEach(t=>{ const o=document.createElement('option'); o.value=t; o.textContent=t; sel.appendChild(o); });
     selPos.innerHTML = '<option value="__CLICK__">📍 Clic en el mapa...</option>';
     tecs.forEach(t=>{ const o=document.createElement('option'); o.value=t; o.textContent='🚐 Última parada de '+t; selPos.appendChild(o); });
+    setFechaDatos(js.actualizado);
     lu.textContent = '🔄 Actualizado: '+js.actualizado;
     render();
   } catch(e) {
@@ -979,6 +1166,7 @@ document.getElementById('inExcel').addEventListener('change', function(ev){
       tecs.forEach(t=>{ const o=document.createElement('option'); o.value=t; o.textContent='🚐 Última parada de '+t; selPos.appendChild(o); });
       if(rgu) renderPanelRGU();
       const ahora = new Date();
+      FECHA_DATOS = new Date();
       document.getElementById('lastUpd').textContent = '📂 Excel local: '+('0'+ahora.getHours()).slice(-2)+':'+('0'+ahora.getMinutes()).slice(-2)+' (solo en este PC)';
       render();
     } catch(err){ alert('No se pudo leer el Excel. Verifica que sea el export del portal.'); }
