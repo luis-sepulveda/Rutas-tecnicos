@@ -205,6 +205,12 @@ let tecs = Object.keys(DB).sort();
 let colorOf = {}; tecs.forEach((t,i)=>colorOf[t]=COLORS[i%COLORS.length]);
 let rgu = false, rguDisponible = false;   // RGU: bandera de panel y si el origen trae datos de RGU
 let rguModo = 'comp';                      // RGU: modo activo del panel -> 'comp' | 'pend' | 'tot'
+// ATRASADOS: se declaran ACA (y no junto a sus funciones mas abajo) porque el
+// primer render() ya las lee. Con 'let' declarado despues, JS tira ReferenceError
+// por temporal dead zone y se cae el script completo.
+let atr = false;                 // panel de atrasados abierto
+let UMBRAL_MIN = 150;            // 2h30 por defecto
+let FECHA_DATOS = null;          // momento del snapshot de datos (rutas.json)
 
 const map = L.map('map').setView([-33.05,-71.41],13);
 L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{attribution:'&copy; OpenStreetMap &copy; CARTO',maxZoom:19}).addTo(map);
@@ -925,9 +931,6 @@ function renderPanelRGU(){
 
 
 /* ============ MODO ATRASADOS (iniciados hace mucho rato) ============ */
-let atr = false;
-let UMBRAL_MIN = 150;            // 2h30 por defecto
-let FECHA_DATOS = null;          // momento del snapshot de datos (rutas.json)
 
 // "dd-mm-yyyy HH:MM" -> Date
 function setFechaDatos(txt){
