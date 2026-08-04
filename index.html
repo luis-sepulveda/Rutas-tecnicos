@@ -44,18 +44,6 @@
   .cand .km { font-size:15px; font-weight:bold; color:#4ade80;}
   .cand.top1 { border-left-color:#4ade80; box-shadow:0 0 6px rgba(74,222,128,.4);}
   .dist-label { background:transparent; border:none; box-shadow:none; color:#4ade80; font-weight:bold; font-size:12px; text-shadow:0 1px 3px #000;}
-  .btn.on2 { background:#7c3aed; border-color:#a78bfa; font-weight:bold; }
-  #panelAsig { position:absolute; top:70px; right:10px; z-index:1000; background:rgba(30,41,59,.96); border:1px solid #475569; border-radius:10px; padding:12px; width:310px; max-height:75vh; overflow-y:auto; display:none; font-size:12px;}
-  #panelAsig h2 { font-size:13px; color:#a78bfa; margin-bottom:6px;}
-  #panelAsig input { width:100%; background:#0f172a; color:#e2e8f0; border:1px solid #475569; border-radius:6px; padding:6px 8px; font-size:13px; margin-bottom:6px;}
-  #panelAsig select { width:100%; margin-bottom:6px;}
-  #panelAsig .btnGo { width:100%; background:#7c3aed; border:none; color:#fff; border-radius:6px; padding:8px; font-size:13px; cursor:pointer; font-weight:bold; margin-bottom:6px;}
-  .tcard { border-left:4px solid #a78bfa; background:#0f172a; border-radius:6px; padding:6px 8px; margin:6px 0; cursor:pointer;}
-  .tcard:hover { background:#2a1f4e;}
-  .tcard.mejor { border-left-color:#4ade80; box-shadow:0 0 8px rgba(74,222,128,.5);}
-  .tcard .nom { font-weight:bold; color:#e2e8f0; font-size:13px;}
-  .tcard .badge { display:inline-block; padding:1px 7px; border-radius:10px; font-size:10px; margin:2px 2px 0 0; background:#334155;}
-  .tcard .badge.ok { background:#166534;} .tcard .badge.medio { background:#92400e;} .tcard .badge.alto { background:#991b1b;}
   .btn.on3 { background:#b45309; border-color:#fbbf24; font-weight:bold; }
   #panelSC { position:absolute; top:70px; right:10px; z-index:1000; background:rgba(30,41,59,.96); border:1px solid #475569; border-radius:10px; padding:12px; width:290px; max-height:75vh; overflow-y:auto; display:none; font-size:12px;}
   #panelSC h2 { font-size:13px; color:#fbbf24; margin-bottom:6px;}
@@ -140,8 +128,7 @@
   <select id="selEstado"><option value="__ALL__">Todos los estados</option><option>Pendiente</option><option>Iniciado</option><option value="en ruta">En ruta</option><option>Completado</option><option>No Realizada</option></select>
   <button class="btn" onclick="document.getElementById('inExcel').click()">📂 Cargar Excel</button>
   <input type="file" id="inExcel" accept=".xlsx" style="display:none">
-  <button class="btn" id="btnDesp" onclick="toggleDespacho()">🎯 Modo Despacho</button>
-  <button class="btn" id="btnAsig" onclick="toggleAsignacion()">📌 Asignar trabajo nuevo</button>
+  <button class="btn" id="btnLibre" onclick="toggleLibre()">🚐 Técnico libre</button>
   <button class="btn" id="btnSC" onclick="toggleSinCompletar()">🚩 Sin completar</button>
   <button class="btn" id="btnAtr" onclick="toggleAtrasados()">⏱️ +2h30 iniciado</button>
   <button class="btn" id="btnRGU" onclick="toggleRGU()">💰 RGU</button>
@@ -149,16 +136,6 @@
   <div class="stats" id="lastUpd" style="margin-left:0;">⏳ cargando datos...</div>
 </header>
 <div id="map"></div>
-<div id="panelAsig">
-  <h2>📌 ¿A quién cargar el trabajo nuevo?</h2>
-  <input id="inNum" placeholder="N° de petición / orden (del portal)">
-  <input id="inDir" placeholder="Dirección (ej: VOLCAN YELCHO 2865)">
-  <select id="inCiudad"><option>QUILPUE</option><option>VILLA ALEMANA</option></select>
-  <select id="inFranja"><option value="10-13">Franja 10-13</option><option value="13-16">Franja 13-16</option><option value="16-19">Franja 16-19</option></select>
-  <button class="btnGo" onclick="ubicarTrabajo()">🔍 Buscar dirección y rankear técnicos</button>
-  <div class="hint">Si la dirección no se encuentra, haz clic directo en el mapa sobre la ubicación del cliente.</div>
-  <div id="resultAsig"></div>
-</div>
 <div id="panelSC">
   <h2>🚩 Sin completar</h2>
   <div class="hint">Técnicos que aún no tienen ningún trabajo <b>Completado</b>. Toca un nombre para verlo solo a él en el mapa. Respeta el filtro de ciudad de arriba.</div>
@@ -188,13 +165,12 @@
   <div><span class="mini mk-norealizada"></span> No realizada</div>
 </div>
 <div id="panel">
-  <h2>🎯 Trabajos pendientes más cercanos</h2>
-  <div class="hint">Elige la posición del técnico libre: usa su última parada, o haz clic directo en el mapa donde se encuentra. Los filtros de ciudad y franja de arriba también aplican aquí.</div>
-  <select id="selPos"><option value="__CLICK__">📍 Clic en el mapa...</option></select>
-  <div class="hint" style="margin:4px 0;">— o escribe dónde terminó el técnico —</div>
-  <input id="inDirDesp" placeholder="Dirección (ej: PARIS 810)" style="width:100%; background:#0f172a; color:#e2e8f0; border:1px solid #475569; border-radius:6px; padding:6px 8px; font-size:13px; margin-bottom:6px;">
-  <select id="inCiudadDesp" style="width:100%; margin-bottom:6px;"><option>QUILPUE</option><option>VILLA ALEMANA</option></select>
-  <button onclick="ubicarDespacho()" style="width:100%; background:#dc2626; border:none; color:#fff; border-radius:6px; padding:8px; font-size:13px; cursor:pointer; font-weight:bold; margin-bottom:6px;">🔍 Ubicar y buscar pendientes cercanos</button>
+  <h2>🚐 Técnico libre</h2>
+  <div class="hint">Escribe el nombre del técnico que quedó libre y aprieta <b>Iniciar</b>. Se marca dónde terminó y los pendientes más cercanos. Respeta los filtros de <b>ciudad</b> y <b>franja</b> de arriba.</div>
+  <input id="inTecLibre" list="listaTecs" placeholder="Nombre del técnico (ej: JOSE SALAS)" autocomplete="off"
+         style="width:100%; background:#0f172a; color:#e2e8f0; border:1px solid #475569; border-radius:6px; padding:7px 8px; font-size:13px; margin-bottom:6px;">
+  <datalist id="listaTecs"></datalist>
+  <button onclick="iniciarLibre()" style="width:100%; background:#dc2626; border:none; color:#fff; border-radius:6px; padding:8px; font-size:13px; cursor:pointer; font-weight:bold; margin-bottom:6px;">▶️ Iniciar</button>
   <div id="resultados"></div>
 </div>
 <div class="legend" id="legend"></div>
@@ -269,8 +245,7 @@ function cerrarSC(){
 }
 
 function toggleSinCompletar(){
-  if(despacho) toggleDespacho();       // modos excluyentes
-  if(asignacion) toggleAsignacion();
+  if(libre) toggleLibre();             // modos excluyentes
   cerrarRGU(); cerrarAtr();
   sinComp = !sinComp;
   document.getElementById('btnSC').classList.toggle('on3', sinComp);
@@ -365,49 +340,95 @@ function renderLegend(show){
 }
 
 sel.onchange=render;
-document.getElementById('selCiudad').onchange=()=>{ render(); if(despacho && posActual) buscarCercanos(posActual); if(rgu) renderPanelRGU(); if(atr) renderPanelAtr(); };
-document.getElementById('selFranja').onchange=()=>{ render(); if(despacho && posActual) buscarCercanos(posActual); if(rgu) renderPanelRGU(); };
+document.getElementById('selCiudad').onchange=()=>{ render(); if(libre && posActual) buscarCercanos(posActual); if(rgu) renderPanelRGU(); if(atr) renderPanelAtr(); };
+document.getElementById('selFranja').onchange=()=>{ render(); if(libre && posActual) buscarCercanos(posActual); if(rgu) renderPanelRGU(); };
 document.getElementById('selEstado').onchange=render;
 render();
 
-/* ============ MODO DESPACHO ============ */
-let despacho = false, posActual = null;
+/* ============ MODO TÉCNICO LIBRE ============ */
+// Reemplaza a los antiguos "Modo Despacho" y "Asignar trabajo nuevo".
+// Se escribe el nombre del técnico -> Iniciar -> se marca dónde terminó y se
+// buscan los pendientes más cercanos, respetando ciudad y franja.
+let libre = false, posActual = null;
 let despLayer = L.layerGroup();
-const selPos = document.getElementById('selPos');
-tecs.forEach(t=>{ const o=document.createElement('option'); o.value=t; o.textContent='🚐 Última parada de '+t; selPos.appendChild(o); });
 
-function toggleDespacho(){
-  if(asignacion) toggleAsignacion();
-  cerrarSC(); cerrarRGU();
-  cerrarAtr();
-  despacho = !despacho;
-  document.getElementById('btnDesp').classList.toggle('on', despacho);
-  document.getElementById('btnDesp').textContent = despacho ? '✖ Salir de Despacho' : '🎯 Modo Despacho';
-  document.getElementById('panel').style.display = despacho ? 'block' : 'none';
-  document.getElementById('legend').style.display = despacho ? 'none' : '';
-  document.getElementById('estadosBox').style.display = despacho ? 'none' : '';
-  if(despacho){
+// llena el autocompletado del input con los técnicos cargados
+function llenarListaTecs(){
+  const dl = document.getElementById('listaTecs');
+  if(!dl) return;
+  dl.innerHTML = tecs.map(t=>'<option value="'+t.replace(/"/g,'&quot;')+'">').join('');
+}
+llenarListaTecs();
+
+function toggleLibre(){
+  cerrarSC(); cerrarRGU(); cerrarAtr();
+  libre = !libre;
+  document.getElementById('btnLibre').classList.toggle('on', libre);
+  document.getElementById('btnLibre').textContent = libre ? '✖ Salir técnico libre' : '🚐 Técnico libre';
+  document.getElementById('panel').style.display = libre ? 'block' : 'none';
+  document.getElementById('legend').style.display = libre ? 'none' : '';
+  document.getElementById('estadosBox').style.display = libre ? 'none' : '';
+  if(libre){
     map.removeLayer(layer); despLayer.addTo(map);
     posActual = null; despLayer.clearLayers();
     document.getElementById('resultados').innerHTML = '';
-    map.getContainer().style.cursor='crosshair';
+    llenarListaTecs();
+    setTimeout(()=>document.getElementById('inTecLibre').focus(), 50);
   } else {
     map.removeLayer(despLayer); layer.addTo(map);
-    map.getContainer().style.cursor='';
     render();
   }
 }
 
-selPos.onchange = function(){
-  if(this.value==='__CLICK__'){ posActual=null; despLayer.clearLayers(); document.getElementById('resultados').innerHTML=''; return; }
-  const pt = posTecnico(this.value);
-  if(!pt) return;
-  buscarCercanos({lat:pt.lat, lng:pt.lng, nombre:this.value, tec:this.value});
-};
+// busca el técnico escrito: exacto, empieza con, o contiene (sin tildes)
+function buscarTecnico(txt){
+  const q = norm(txt);
+  if(!q) return [];
+  let m = tecs.filter(t=> norm(t)===q);
+  if(m.length) return m;
+  m = tecs.filter(t=> norm(t).startsWith(q));
+  if(m.length) return m;
+  return tecs.filter(t=> norm(t).includes(q));
+}
 
-map.on('click', function(e){
-  if(!despacho) return;
-  buscarCercanos({lat:e.latlng.lat, lng:e.latlng.lng, nombre:'Posición marcada'});
+function iniciarLibre(){
+  const out = document.getElementById('resultados');
+  const txt = document.getElementById('inTecLibre').value.trim();
+  if(!txt){ out.innerHTML = '<div class="hint">⚠️ Escribe el nombre del técnico.</div>'; return; }
+
+  const m = buscarTecnico(txt);
+  if(!m.length){
+    out.innerHTML = '<div class="hint">⚠️ No encuentro ningún técnico que calce con "'+txt+'".</div>';
+    return;
+  }
+  if(m.length > 1){
+    out.innerHTML = '<div class="hint">Hay '+m.length+' que calzan, elige uno:</div>' +
+      m.map(t=>'<div class="cand" onclick="usarTecnico(\''+t.replace(/'/g,"\\'")+'\')">🔧 <b>'+t+'</b></div>').join('');
+    return;
+  }
+  usarTecnico(m[0]);
+}
+
+function usarTecnico(t){
+  document.getElementById('inTecLibre').value = t;
+  const pt = posTecnico(t);
+  if(!pt){
+    document.getElementById('resultados').innerHTML =
+      '<div class="hint">⚠️ '+t+' no tiene trabajos con coordenadas hoy, no puedo ubicarlo.</div>';
+    return;
+  }
+  const r = pt.ref;
+  const estado = r.e==='Iniciado' ? 'está trabajando en'
+               : (r.e==='en ruta' ? 'va en ruta a' : 'terminó en');
+  buscarCercanos({lat:pt.lat, lng:pt.lng, tec:t,
+                  nombre:t+' — '+estado+': '+r.d+' ('+r.e+(r.hi?' · '+r.hi:'')+')'});
+  document.getElementById('resultados').insertAdjacentHTML('afterbegin',
+    '<div class="hint">📍 <b>'+t+'</b> '+estado+' <b>'+r.d+'</b>. Arrastra el 🚐 si necesitas ajustar la posición.</div>');
+}
+
+// permite apretar Enter en vez del botón
+document.getElementById('inTecLibre').addEventListener('keydown', function(e){
+  if(e.key === 'Enter') iniciarLibre();
 });
 
 function hav(a,b){
@@ -415,38 +436,6 @@ function hav(a,b){
   const dLat=(b.lat-a.lat)*rad, dLng=(b.lng-a.lng)*rad;
   const h=Math.sin(dLat/2)**2 + Math.cos(a.lat*rad)*Math.cos(b.lat*rad)*Math.sin(dLng/2)**2;
   return 2*R*Math.asin(Math.sqrt(h));
-}
-
-// ubicar por direccion escrita (donde termino el tecnico) y buscar pendientes
-async function ubicarDespacho(){
-  const dir = document.getElementById('inDirDesp').value.trim();
-  const ciudad = document.getElementById('inCiudadDesp').value;
-  if(!dir){ alert('Escribe la dirección donde terminó el técnico, o haz clic en el mapa.'); return; }
-  const out = document.getElementById('resultados');
-
-  // 1º: buscar la calle en los trabajos del día
-  const local = buscarEnDatos(dir, ciudad);
-  if(local){
-    buscarCercanos({lat:local.lat, lng:local.lng, nombre:'Terminó en: '+dir.toUpperCase()});
-    out.insertAdjacentHTML('afterbegin','<div class="hint">✅ Calle ubicada con '+local.fuente+'. Arrastra el 🚐 si necesitas ajustar.</div>');
-    return;
-  }
-  // 2º: buscador online acotado a la zona
-  out.innerHTML = '<div class="hint">Buscando dirección en '+ciudad+'...</div>';
-  try {
-    const q = encodeURIComponent(dir + ', ' + ciudad + ', Chile');
-    const vb = '&viewbox='+ZONA.left+','+ZONA.top+','+ZONA.right+','+ZONA.bottom+'&bounded=1';
-    const r = await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=cl'+vb+'&q='+q);
-    const js = await r.json();
-    if(js.length){
-      buscarCercanos({lat:parseFloat(js[0].lat), lng:parseFloat(js[0].lon), nombre:'Terminó en: '+dir.toUpperCase()});
-      out.insertAdjacentHTML('afterbegin','<div class="hint">✅ Dirección encontrada en '+ciudad+'. Arrastra el 🚐 si necesitas ajustar.</div>');
-      return;
-    }
-    out.innerHTML = '<div class="hint">⚠️ No se encontró "'+dir+'" en '+ciudad+'. Haz clic en el mapa donde terminó el técnico.</div>';
-  } catch(e){
-    out.innerHTML = '<div class="hint">⚠️ Sin conexión al buscador. Haz clic en el mapa donde terminó el técnico.</div>';
-  }
 }
 
 function buscarCercanos(pos){
@@ -505,32 +494,6 @@ function buscarCercanos(pos){
   document.getElementById('stats').textContent = cands.length+' pendientes evaluados';
 }
 
-/* ============ MODO ASIGNACIÓN (trabajo nuevo) ============ */
-let asignacion = false, trabajoNuevo = null;
-let asigLayer = L.layerGroup();
-
-function toggleAsignacion(){
-  if(despacho) toggleDespacho(); // modos excluyentes
-  cerrarSC(); cerrarRGU();
-  cerrarAtr();
-  asignacion = !asignacion;
-  document.getElementById('btnAsig').classList.toggle('on2', asignacion);
-  document.getElementById('btnAsig').textContent = asignacion ? '✖ Salir de Asignación' : '📌 Asignar trabajo nuevo';
-  document.getElementById('panelAsig').style.display = asignacion ? 'block' : 'none';
-  document.getElementById('legend').style.display = asignacion ? 'none' : '';
-  document.getElementById('estadosBox').style.display = asignacion ? 'none' : '';
-  if(asignacion){
-    map.removeLayer(layer); asigLayer.addTo(map);
-    trabajoNuevo = null; asigLayer.clearLayers();
-    document.getElementById('resultAsig').innerHTML = '';
-    map.getContainer().style.cursor='crosshair';
-  } else {
-    map.removeLayer(asigLayer); layer.addTo(map);
-    map.getContainer().style.cursor='';
-    render();
-  }
-}
-
 // posición estimada actual de cada técnico: Iniciado > en ruta > última parada
 function posTecnico(t){
   const jobs = DB[t].filter(p=>p.e!=='Cancelado');
@@ -566,100 +529,6 @@ function buscarEnDatos(dir, ciudad){
 
 // zona operativa Quilpué - Villa Alemana (rechaza resultados fuera de ella)
 const ZONA = {left:-71.52, top:-32.99, right:-71.30, bottom:-33.11};
-
-async function ubicarTrabajo(){
-  const dir = document.getElementById('inDir').value.trim();
-  const ciudad = document.getElementById('inCiudad').value;
-  if(!dir){ alert('Escribe la dirección, o haz clic en el mapa.'); return; }
-  const out = document.getElementById('resultAsig');
-
-  // 1º intento: nuestros propios datos del día (sin internet, sin ambigüedad)
-  const local = buscarEnDatos(dir, ciudad);
-  if(local){
-    rankearTecnicos({lat:local.lat, lng:local.lng});
-    out.insertAdjacentHTML('afterbegin','<div class="hint">✅ Calle ubicada con '+local.fuente+'. Arrastra el 📌 si necesitas ajustar.</div>');
-    return;
-  }
-
-  // 2º intento: buscador online, acotado a la zona Quilpué - Villa Alemana
-  out.innerHTML = '<div class="hint">Buscando dirección en '+ciudad+'...</div>';
-  try {
-    const q = encodeURIComponent(dir + ', ' + ciudad + ', Chile');
-    const vb = '&viewbox='+ZONA.left+','+ZONA.top+','+ZONA.right+','+ZONA.bottom+'&bounded=1';
-    const r = await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=cl'+vb+'&q='+q);
-    const js = await r.json();
-    if(js.length){
-      rankearTecnicos({lat:parseFloat(js[0].lat), lng:parseFloat(js[0].lon)});
-      out.insertAdjacentHTML('afterbegin','<div class="hint">✅ Dirección encontrada en '+ciudad+'. Verifica el 📌 y arrástralo si necesitas ajustar.</div>');
-      return;
-    }
-    out.innerHTML = '<div class="hint">⚠️ No se encontró "'+dir+'" en '+ciudad+'. Haz clic en el mapa sobre la ubicación del cliente.</div>';
-  } catch(e){
-    out.innerHTML = '<div class="hint">⚠️ Sin conexión al buscador. Haz clic en el mapa sobre la ubicación del cliente.</div>';
-  }
-}
-
-map.on('click', function(e){
-  if(!asignacion) return;
-  rankearTecnicos({lat:e.latlng.lat, lng:e.latlng.lng});
-});
-
-function rankearTecnicos(pos){
-  trabajoNuevo = pos;
-  asigLayer.clearLayers();
-  const num = document.getElementById('inNum').value.trim() || 'Trabajo nuevo';
-  const fr = document.getElementById('inFranja').value;
-
-  // evaluar cada técnico
-  let cands = [];
-  tecs.forEach(t=>{
-    const pt = posTecnico(t);
-    if(!pt) return;
-    const jobs = DB[t].filter(p=>p.e!=='Cancelado');
-    const pendFr = jobs.filter(p=>p.e==='Pendiente' && p.f===fr).length;
-    const pendTot = jobs.filter(p=>p.e==='Pendiente').length;
-    const km = hav(pos, pt);
-    // puntaje: distancia + castigo por carga en la franja objetivo
-    const score = km + pendFr*1.5;
-    cands.push({t, km, pendFr, pendTot, score, pt});
-  });
-  cands.sort((a,b)=>a.score-b.score);
-  const top = cands.slice(0,5);
-
-  // marcador del trabajo nuevo (arrastrable para ajuste fino)
-  const star = L.divIcon({className:'', html:'<div style="font-size:30px; text-shadow:0 2px 6px #000;">📌</div>', iconSize:[32,32], iconAnchor:[16,30]});
-  const pin = L.marker([pos.lat,pos.lng],{icon:star, draggable:true}).addTo(asigLayer).bindPopup('<b>'+num+'</b><br>Franja '+fr+'<br><i>Arrástrame para ajustar</i>');
-  pin.on('dragend', function(e){ const ll=e.target.getLatLng(); rankearTecnicos({lat:ll.lat, lng:ll.lng}); });
-
-  // técnicos rankeados en el mapa
-  top.forEach((c,i)=>{
-    const col = i===0 ? '#4ade80' : '#a78bfa';
-    const line = L.polyline([[pos.lat,pos.lng],[c.pt.lat,c.pt.lng]],{color:col,weight:i===0?4:2,opacity:.85,dashArray:i===0?null:'5 7'}).addTo(asigLayer);
-    line.bindTooltip(c.km.toFixed(1)+' km',{permanent:true,direction:'center',className:'dist-label'});
-    const ic = L.divIcon({className:'', html:'<div class="num-icon" style="background:'+col+'; color:#0f172a;">'+(i+1)+'</div>', iconSize:[26,26], iconAnchor:[13,13]});
-    L.marker([c.pt.lat,c.pt.lng],{icon:ic}).addTo(asigLayer).bindPopup(
-      '<div class="pp"><b>'+c.t+'</b><br>'+
-      'Ahora: '+c.pt.ref.e+' en '+c.pt.ref.d+'<br>'+
-      '📏 '+c.km.toFixed(1)+' km al trabajo nuevo<br>'+
-      'Pendientes franja '+fr+': '+c.pendFr+' · Total: '+c.pendTot+'</div>');
-  });
-
-  // panel
-  function badgeCarga(n){ return n===0 ? 'ok' : (n===1 ? 'medio' : 'alto'); }
-  document.getElementById('resultAsig').innerHTML =
-    '<div class="hint" style="margin-top:8px;">Ranking para <b>'+num+'</b> · franja '+fr+' (cercanía + carga):</div>' +
-    top.map((c,i)=>
-      '<div class="tcard'+(i===0?' mejor':'')+'" onclick="map.setView(['+c.pt.lat+','+c.pt.lng+'],15)">'+
-      (i===0?'⭐ ':'')+'<span class="nom">'+(i+1)+'º '+c.t+'</span><br>'+
-      '📏 '+c.km.toFixed(1)+' km · ahora '+c.pt.ref.e+'<br>'+
-      '<span class="badge '+badgeCarga(c.pendFr)+'">franja '+fr+': '+c.pendFr+' pend.</span>'+
-      '<span class="badge">total: '+c.pendTot+' pend.</span></div>'
-    ).join('');
-
-  const b = [[pos.lat,pos.lng], ...top.map(c=>[c.pt.lat,c.pt.lng])];
-  map.fitBounds(b,{padding:[60,60]});
-}
-
 
 /* ============ RGU (unidades generadoras de ingreso) ============ */
 function tipoN(t){ return (t||'').toString().trim().toLowerCase(); }
@@ -746,8 +615,7 @@ function cerrarRGU(){
 }
 
 function toggleRGU(){
-  if(despacho) toggleDespacho();       // modos excluyentes
-  if(asignacion) toggleAsignacion();
+  if(libre) toggleLibre();             // modos excluyentes
   cerrarSC(); cerrarAtr();
   rgu = !rgu;
   document.getElementById('btnRGU').classList.toggle('on4', rgu);
@@ -1008,8 +876,7 @@ function cerrarAtr(){
 }
 
 function toggleAtrasados(){
-  if(despacho) toggleDespacho();       // modos excluyentes
-  if(asignacion) toggleAsignacion();
+  if(libre) toggleLibre();             // modos excluyentes
   cerrarSC(); cerrarRGU();
   atr = !atr;
   document.getElementById('btnAtr').classList.toggle('on5', atr);
@@ -1091,8 +958,7 @@ setInterval(function(){
     // reconstruir selectores de tecnicos
     sel.innerHTML = '<option value="__ALL__">Todos los técnicos</option>';
     tecs.forEach(t=>{ const o=document.createElement('option'); o.value=t; o.textContent=t; sel.appendChild(o); });
-    selPos.innerHTML = '<option value="__CLICK__">📍 Clic en el mapa...</option>';
-    tecs.forEach(t=>{ const o=document.createElement('option'); o.value=t; o.textContent='🚐 Última parada de '+t; selPos.appendChild(o); });
+    llenarListaTecs();
     setFechaDatos(js.actualizado);
     lu.textContent = '🔄 Actualizado: '+js.actualizado;
     render();
@@ -1165,8 +1031,7 @@ document.getElementById('inExcel').addEventListener('change', function(ev){
       colorOf = {}; tecs.forEach((t,i)=>colorOf[t]=COLORS[i%COLORS.length]);
       sel.innerHTML = '<option value="__ALL__">Todos los técnicos</option>';
       tecs.forEach(t=>{ const o=document.createElement('option'); o.value=t; o.textContent=t; sel.appendChild(o); });
-      selPos.innerHTML = '<option value="__CLICK__">📍 Clic en el mapa...</option>';
-      tecs.forEach(t=>{ const o=document.createElement('option'); o.value=t; o.textContent='🚐 Última parada de '+t; selPos.appendChild(o); });
+      llenarListaTecs();
       if(rgu) renderPanelRGU();
       const ahora = new Date();
       FECHA_DATOS = new Date();
