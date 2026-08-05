@@ -1181,17 +1181,20 @@ setInterval(function(){
    Se lee desde raw.githubusercontent (no tiene limite de llamadas) con un
    ?t= para saltarse el cache de 5 min del CDN. Si raw falla, se reintenta
    por la API de Contents, que era el metodo original. */
-const REFRESCO_MIN = 2;
+const REFRESCO_MIN = 3;
 const URL_RAW = 'https://raw.githubusercontent.com/luis-sepulveda/Rutas-tecnicos/main/rutas.json';
 const URL_API = 'https://api.github.com/repos/luis-sepulveda/Rutas-tecnicos/contents/rutas.json?ref=main';
 
 async function bajarRutasJson(){
+  // La API de Contents entrega el archivo al instante (sin cache de CDN).
+  // raw.githubusercontent guarda 5 min, asi que solo sirve de respaldo:
+  // se usa si la API devuelve 403 por pasarse de las 60 llamadas/hora.
   try {
-    const r = await fetch(URL_RAW + '?t=' + Date.now(), { cache:'no-store' });
+    const r = await fetch(URL_API,
+      { headers:{'Accept':'application/vnd.github.raw'}, cache:'no-store' });
     if(r.ok) return await r.json();
   } catch(e) { /* cae al plan B */ }
-  const r2 = await fetch(URL_API,
-    { headers:{'Accept':'application/vnd.github.raw'}, cache:'no-store' });
+  const r2 = await fetch(URL_RAW + '?t=' + Date.now(), { cache:'no-store' });
   if(!r2.ok) throw new Error(r2.status);
   return await r2.json();
 }
