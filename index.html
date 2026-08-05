@@ -109,6 +109,28 @@
   #panelRGU .det-sub { font-size:9px; color:#94a3b8; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   #panelRGU .det-rgu { font-size:14px; font-weight:bold; flex-shrink:0; }
   .btn.on5 { background:#be123c; border-color:#fb7185; font-weight:bold; }
+  .btn.on6 { background:#0e7490; border-color:#22d3ee; font-weight:bold; }
+  #panelComp { position:absolute; top:70px; right:10px; z-index:1000; background:rgba(30,41,59,.96); border:1px solid #475569; border-radius:10px; padding:12px; width:300px; max-height:78vh; overflow-y:auto; display:none; font-size:12px;}
+  #panelComp h2 { font-size:13px; color:#22d3ee; margin-bottom:6px;}
+  #panelComp .hint { color:#94a3b8; font-size:11px; margin-bottom:8px; line-height:1.4;}
+  #panelComp .marcador { text-align:center; background:#0f172a; border-radius:10px; padding:12px 8px; margin-bottom:10px; border:1px solid #334155;}
+  #panelComp .pctnum { font-size:38px; font-weight:bold; line-height:1;}
+  #panelComp .frac { font-size:13px; color:#cbd5e1; margin-top:4px;}
+  #panelComp .barra { height:8px; background:#0f172a; border-radius:5px; margin-top:10px; overflow:hidden; position:relative; border:1px solid #334155;}
+  #panelComp .barra .fill { height:100%; border-radius:5px; transition:width .4s;}
+  #panelComp .barra .meta { position:absolute; top:-2px; bottom:-2px; width:2px; background:#f8fafc; left:85%;}
+  #panelComp .veredicto { border-radius:8px; padding:8px 10px; margin-bottom:10px; font-size:12px; line-height:1.45;}
+  #panelComp .vok { background:#052e16; border:1px solid #16a34a; color:#86efac;}
+  #panelComp .vfalta { background:#450a0a; border:1px solid #dc2626; color:#fca5a5;}
+  #panelComp .vcerrado { background:#1e293b; border:1px solid #64748b; color:#cbd5e1;}
+  #panelComp .subt { color:#94a3b8; font-size:11px; margin:10px 0 5px; text-transform:uppercase; letter-spacing:.5px;}
+  #panelComp .tec { display:flex; justify-content:space-between; align-items:center; gap:6px; background:#0f172a; border-left:3px solid #dc2626; border-radius:6px; padding:6px 8px; margin:5px 0; cursor:pointer;}
+  #panelComp .tec:hover { background:#1e3a5f;}
+  #panelComp .tec .nom { font-size:11px; font-weight:bold; color:#e2e8f0;}
+  #panelComp .tec .det { font-size:10px; color:#94a3b8; margin-top:2px;}
+  #panelComp .tec .ch { font-size:10px; color:#fbbf24; white-space:nowrap;}
+  #panelComp .ciu { display:flex; justify-content:space-between; background:#0f172a; border-radius:6px; padding:5px 8px; margin:4px 0; font-size:11px;}
+  #panelComp .vacio { color:#4ade80; text-align:center; padding:12px 6px; line-height:1.5;}
   .btn .pill { display:inline-block; background:#f43f5e; color:#fff; border-radius:10px; padding:0 6px; font-size:11px; margin-left:5px; font-weight:bold; }
   #panelAtr { position:absolute; top:70px; right:10px; z-index:1000; background:rgba(30,41,59,.96); border:1px solid #475569; border-radius:10px; padding:12px; width:300px; max-height:78vh; overflow-y:auto; display:none; font-size:12px;}
   #panelAtr h2 { font-size:13px; color:#fb7185; margin-bottom:6px;}
@@ -144,6 +166,7 @@
   <button class="btn" id="btnLibre" onclick="toggleLibre()">🚐 Técnico libre</button>
   <button class="btn" id="btnSC" onclick="toggleSinCompletar()">🚩 Sin completar</button>
   <button class="btn" id="btnAtr" onclick="toggleAtrasados()">⏱️ +2h30 iniciado</button>
+  <button class="btn" id="btnComp" onclick="toggleComp()">📊 Completitud</button>
   <button class="btn" id="btnRGU" onclick="toggleRGU()">💰 RGU</button>
   <div class="stats" id="stats"></div>
   <div class="stats" id="lastUpd" style="margin-left:0;">⏳ cargando datos...</div>
@@ -153,6 +176,11 @@
   <h2>🚩 Sin completar</h2>
   <div class="hint">Técnicos que aún no tienen ningún trabajo <b>Completado</b>. Toca un nombre para verlo solo a él en el mapa. Respeta el filtro de ciudad de arriba.</div>
   <div id="listaSC"></div>
+</div>
+<div id="panelComp">
+  <h2>📊 Completitud al corte de las 13:00</h2>
+  <div class="hint">Meta <b>85%</b>. Cuenta cada técnico que cerró <b>al menos 1 orden antes de las 13:00</b>. Sobre el total de técnicos con trabajo asignado hoy — no le afectan los filtros de arriba.</div>
+  <div id="cuerpoComp"></div>
 </div>
 <div id="panelAtr">
   <h2>⏱️ Llevan mucho rato iniciado</h2>
@@ -198,6 +226,7 @@ let rguModo = 'comp';                      // RGU: modo activo del panel -> 'com
 // primer render() ya las lee. Con 'let' declarado despues, JS tira ReferenceError
 // por temporal dead zone y se cae el script completo.
 let atr = false;                 // panel de atrasados abierto
+let comp = false;                // panel de completitud abierto
 let UMBRAL_MIN = 150;            // 2h30 por defecto
 let FECHA_DATOS = null;          // momento del snapshot de datos (rutas.json)
 
@@ -338,6 +367,7 @@ function cerrarSC(){
 }
 
 function toggleSinCompletar(){
+  cerrarComp();
   if(libre) toggleLibre();             // modos excluyentes
   cerrarRGU(); cerrarAtr();
   sinComp = !sinComp;
@@ -449,7 +479,7 @@ function llenarListaTecs(){
 llenarListaTecs();
 
 function toggleLibre(){
-  cerrarSC(); cerrarRGU(); cerrarAtr();
+  cerrarSC(); cerrarRGU(); cerrarAtr(); cerrarComp();
   libre = !libre;
   document.getElementById('btnLibre').classList.toggle('on', libre);
   document.getElementById('btnLibre').textContent = libre ? '✖ Salir técnico libre' : '🚐 Técnico libre';
@@ -701,6 +731,7 @@ function cerrarRGU(){
 }
 
 function toggleRGU(){
+  cerrarComp();
   if(libre) toggleLibre();             // modos excluyentes
   cerrarSC(); cerrarAtr();
   rgu = !rgu;
@@ -881,6 +912,126 @@ function renderPanelRGU(){
 
 
 
+/* ============ COMPLETITUD (corte 13:00, meta 85%) ============
+   Se cuenta POR TECNICO, no por orden: cada tecnico que cerro al menos
+   una orden antes de las 13:00 suma 1. El denominador son todos los
+   tecnicos con trabajo asignado hoy (sin contar canceladas).
+   Ej: 23 de 38 tecnicos = 60,5%.
+   A proposito NO respeta los filtros de la barra: el numero que mide la
+   empresa es sobre el equipo completo. */
+const COMP_CORTE = '13:00';
+const COMP_META = 0.85;
+
+function calcularCompletitud(){
+  let total=0, cumplen=0, faltantes=[], porCiudad={};
+  tecs.forEach(t=>{
+    const act = DB[t].filter(p=> p.e!=='Cancelado');
+    if(!act.length) return;
+    total++;
+    const cerradas = act.filter(p=> p.e==='Completado' && p.hf && p.hf <= COMP_CORTE);
+    const ciu = act[0].d && act[0].d.toUpperCase().includes('VILLA ALEMANA') ? 'VILLA ALEMANA' : 'QUILPUE';
+    if(!porCiudad[ciu]) porCiudad[ciu] = {tot:0, ok:0};
+    porCiudad[ciu].tot++;
+    if(cerradas.length){ cumplen++; porCiudad[ciu].ok++; }
+    else faltantes.push({
+      t,
+      ini:  act.filter(p=> p.e==='Iniciado').length,
+      ruta: act.filter(p=> p.e==='en ruta').length,
+      pend: act.filter(p=> p.e==='Pendiente').length,
+      // completadas DESPUES del corte: alcanzo a cerrar, pero tarde
+      tarde: act.filter(p=> p.e==='Completado' && p.hf && p.hf > COMP_CORTE).length
+    });
+  });
+  const pct = total ? cumplen/total*100 : 0;
+  const necesarios = Math.ceil(COMP_META*total);
+  // los mas cerca de cerrar primero: iniciado > en ruta > pendiente
+  faltantes.sort((a,b)=> (b.ini-a.ini) || (b.ruta-a.ruta) || (b.pend-a.pend));
+  return {total, cumplen, pct, necesarios, faltan:Math.max(0, necesarios-cumplen), faltantes, porCiudad};
+}
+
+// minutos que quedan para el corte segun la hora de los datos (null si ya paso)
+function minutosParaCorte(){
+  const ref = ahoraRef();
+  if(!ref) return null;
+  const corte = new Date(ref.getFullYear(), ref.getMonth(), ref.getDate(), 13, 0);
+  const min = Math.round((corte - ref)/60000);
+  return min > 0 ? min : null;
+}
+
+function renderPanelComp(){
+  const c = calcularCompletitud();
+  const cont = document.getElementById('cuerpoComp');
+  if(!c.total){ cont.innerHTML = '<div class="vacio">Todavía no hay técnicos con trabajo asignado.</div>'; return; }
+
+  const logrado = c.pct >= COMP_META*100;
+  const color = logrado ? '#4ade80' : (c.pct >= 70 ? '#fbbf24' : '#f87171');
+  const restan = minutosParaCorte();
+
+  const marcador =
+    '<div class="marcador">'+
+      '<div class="pctnum" style="color:'+color+'">'+c.pct.toFixed(1)+'%</div>'+
+      '<div class="frac">'+c.cumplen+' de '+c.total+' técnicos</div>'+
+      '<div class="barra"><div class="fill" style="width:'+Math.min(100,c.pct)+'%; background:'+color+'"></div><div class="meta"></div></div>'+
+    '</div>';
+
+  let veredicto;
+  if(logrado){
+    veredicto = '<div class="veredicto vok">✅ Meta cumplida. Se necesitaban '+c.necesarios+
+      ' y van '+c.cumplen+'.'+(restan ? ' Quedan '+restan+' min de margen.' : '')+'</div>';
+  } else if(restan){
+    veredicto = '<div class="veredicto vfalta">⚠️ Faltan <b>'+c.faltan+' técnico'+(c.faltan>1?'s':'')+
+      '</b> con al menos 1 cierre para llegar al 85%.<br>Quedan <b>'+restan+' min</b> antes del corte.</div>';
+  } else {
+    veredicto = '<div class="veredicto vcerrado">🔒 El corte de las 13:00 ya pasó. Cifra final del día: '+
+      c.cumplen+'/'+c.total+'. Faltaron '+c.faltan+' para la meta.</div>';
+  }
+
+  let lista = '';
+  if(c.faltantes.length){
+    lista = '<div class="subt">Sin cierre antes del corte ('+c.faltantes.length+')</div>'+
+      c.faltantes.map(f=>{
+        let ch = [];
+        if(f.ini)  ch.push('🟢 '+f.ini+' iniciada'+(f.ini>1?'s':''));
+        if(f.ruta) ch.push('🟠 '+f.ruta+' en ruta');
+        if(f.pend) ch.push('⏳ '+f.pend+' pend.');
+        const tEsc = f.t.replace(/'/g,"\\'");
+        return '<div class="tec" onclick="verTecnicoSC(\''+tEsc+'\')">'+
+          '<div><div class="nom">'+f.t+'</div><div class="det">'+(ch.join(' · ')||'sin órdenes activas')+'</div></div>'+
+          (f.tarde ? '<div class="ch">cerró '+f.tarde+' tarde</div>' : '')+
+        '</div>';
+      }).join('');
+  } else {
+    lista = '<div class="vacio">🎉 Todos los técnicos cerraron al menos una antes de las 13:00.</div>';
+  }
+
+  const ciudades = Object.keys(c.porCiudad).sort().map(k=>{
+    const v = c.porCiudad[k], p = v.tot ? v.ok/v.tot*100 : 0;
+    return '<div class="ciu"><span>'+k+'</span><span style="color:'+(p>=85?'#4ade80':'#f87171')+'"><b>'+
+      p.toFixed(0)+'%</b> · '+v.ok+'/'+v.tot+'</span></div>';
+  }).join('');
+
+  cont.innerHTML = marcador + veredicto + lista +
+    '<div class="subt">Por ciudad</div>' + ciudades;
+}
+
+function cerrarComp(){
+  if(!comp) return;
+  comp = false;
+  document.getElementById('btnComp').classList.remove('on6');
+  document.getElementById('panelComp').style.display = 'none';
+  document.getElementById('estadosBox').style.display = '';
+}
+
+function toggleComp(){
+  if(libre) toggleLibre();
+  cerrarSC(); cerrarRGU(); cerrarAtr();
+  comp = !comp;
+  document.getElementById('btnComp').classList.toggle('on6', comp);
+  document.getElementById('panelComp').style.display = comp ? 'block' : 'none';
+  document.getElementById('estadosBox').style.display = comp ? 'none' : '';
+  if(comp) renderPanelComp();
+}
+
 /* ============ MODO ATRASADOS (iniciados hace mucho rato) ============ */
 
 // "dd-mm-yyyy HH:MM" -> Date
@@ -959,7 +1110,7 @@ function cerrarAtr(){
 
 function toggleAtrasados(){
   if(libre) toggleLibre();             // modos excluyentes
-  cerrarSC(); cerrarRGU();
+  cerrarSC(); cerrarRGU(); cerrarComp();
   atr = !atr;
   document.getElementById('btnAtr').classList.toggle('on5', atr);
   document.getElementById('panelAtr').style.display = atr ? 'block' : 'none';
@@ -1068,6 +1219,7 @@ async function cargarDatosVivos(auto){
     llenarListaTecs();
     setFechaDatos(js.actualizado);
     lu.textContent = '🔄 Actualizado: '+js.actualizado;
+    if(comp) renderPanelComp();
     render(auto);          // auto = true -> no reencuadra el mapa
   } catch(e) {
     // si falla un refresco automatico se deja lo que ya estaba en pantalla
