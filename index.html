@@ -288,7 +288,7 @@ function renderPanelSC(){
   cont.innerHTML = html;
 }
 
-function render(){
+function render(mantenerVista){
   layer.clearLayers();
   const ft = sel.value, fc = document.getElementById('selCiudad').value, ff = document.getElementById('selFranja').value, fe = document.getElementById('selEstado').value;
   let show = ft==='__ALL__' ? tecs : [ft];
@@ -320,7 +320,9 @@ function render(){
     });
   });
   document.getElementById('stats').textContent = nTec+' técnicos · '+nTrab+' trabajos · 🟢 '+nIni+' iniciados · 🟠 '+nRuta+' en ruta · ✅ '+nComp+' completados' + (rguDisponible ? ' · 💰 '+fmtRGU(nRGU)+' RGU' : '');
-  if(bounds.length) map.fitBounds(bounds,{padding:[40,40]});
+  // En el refresco automatico NO se reencuadra el mapa: si estabas mirando
+  // un sector con zoom, se respeta donde tenias la vista.
+  if(bounds.length && !mantenerVista) map.fitBounds(bounds,{padding:[40,40]});
   renderLegend(show);
   if(sinComp) renderPanelSC();
   if(atr) renderPanelAtr();
@@ -942,14 +944,36 @@ setInterval(function(){
 /* ==================================================================== */
 
 /* ============ CARGA DE DATOS EN VIVO (rutas.json) ============ */
-(async function cargarDatosVivos(){
+/* Se ejecuta al abrir la pagina y despues sola cada REFRESCO_MIN minutos,
+   asi no hay que apretar F5. El monitor publica rutas.json cada 30 min.
+
+   Se lee desde raw.githubusercontent (no tiene limite de llamadas) con un
+   ?t= para saltarse el cache de 5 min del CDN. Si raw falla, se reintenta
+   por la API de Contents, que era el metodo original. */
+const REFRESCO_MIN = 5;
+const URL_RAW = 'https://raw.githubusercontent.com/luis-sepulveda/Rutas-tecnicos/main/rutas.json';
+const URL_API = 'https://api.github.com/repos/luis-sepulveda/Rutas-tecnicos/contents/rutas.json?ref=main';
+
+async function bajarRutasJson(){
+  try {
+    const r = await fetch(URL_RAW + '?t=' + Date.now(), { cache:'no-store' });
+    if(r.ok) return await r.json();
+  } catch(e) { /* cae al plan B */ }
+  const r2 = await fetch(URL_API,
+    { headers:{'Accept':'application/vnd.github.raw'}, cache:'no-store' });
+  if(!r2.ok) throw new Error(r2.status);
+  return await r2.json();
+}
+
+async function cargarDatosVivos(auto){
   const lu = document.getElementById('lastUpd');
   try {
-    const r = await fetch('https://api.github.com/repos/luis-sepulveda/Rutas-tecnicos/contents/rutas.json?ref=main',
-      { headers:{'Accept':'application/vnd.github.raw'}, cache:'no-store' });
-    if(!r.ok) throw new Error(r.status);
-    const js = await r.json();
+    const js = await bajarRutasJson();
     if(!js.tecnicos) throw new Error('formato');
+
+    // guardar lo que el usuario tenia seleccionado para no perderselo
+    const tecSel = sel.value;
+
     DB = js.tecnicos;
     normEstadosDB(DB);
     tecs = Object.keys(DB).sort();
@@ -958,14 +982,26 @@ setInterval(function(){
     // reconstruir selectores de tecnicos
     sel.innerHTML = '<option value="__ALL__">Todos los técnicos</option>';
     tecs.forEach(t=>{ const o=document.createElement('option'); o.value=t; o.textContent=t; sel.appendChild(o); });
+    // devolver la seleccion si ese tecnico sigue existiendo
+    sel.value = tecs.includes(tecSel) ? tecSel : '__ALL__';
+
     llenarListaTecs();
     setFechaDatos(js.actualizado);
     lu.textContent = '🔄 Actualizado: '+js.actualizado;
-    render();
+    render(auto);          // auto = true -> no reencuadra el mapa
   } catch(e) {
-    lu.textContent = '⚠️ Mostrando datos de respaldo (embebidos)';
+    // si falla un refresco automatico se deja lo que ya estaba en pantalla
+    // (mejor datos de hace un rato que la pagina en blanco)
+    if(!auto) lu.textContent = '⚠️ Mostrando datos de respaldo (embebidos)';
   }
-})();
+}
+
+cargarDatosVivos(false);
+setInterval(function(){ cargarDatosVivos(true); }, REFRESCO_MIN*60*1000);
+// al volver a la pestaña despues de un rato, refrescar al tiro
+document.addEventListener('visibilitychange', function(){
+  if(!document.hidden) cargarDatosVivos(true);
+});
 
 
 /* ============ CARGA LOCAL DE EXCEL (independiente por despacho) ============ */
