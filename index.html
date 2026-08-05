@@ -14,6 +14,19 @@
   header { background:#1e293b; padding:10px 16px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; border-bottom:2px solid #334155; z-index:1001;}
   header h1 { font-size:16px; color:#38bdf8; white-space:nowrap; }
   select { background:#0f172a; color:#e2e8f0; border:1px solid #475569; border-radius:6px; padding:6px 10px; font-size:13px; max-width:280px;}
+  /* --- filtros con casillas (multi-seleccion) --- */
+  .msel { position:relative; display:inline-block; }
+  .mbtn { background:#0f172a; color:#e2e8f0; border:1px solid #475569; border-radius:6px; padding:6px 10px; font-size:13px; cursor:pointer; display:flex; align-items:center; gap:6px; white-space:nowrap; }
+  .mbtn:hover { border-color:#64748b; }
+  .msel.activo .mbtn { border-color:#38bdf8; color:#7dd3fc; }
+  .mcar { font-size:10px; color:#94a3b8; }
+  .mmenu { display:none; position:absolute; top:calc(100% + 4px); left:0; z-index:1200; background:#1e293b; border:1px solid #475569; border-radius:8px; padding:6px; min-width:190px; box-shadow:0 6px 20px rgba(0,0,0,.6); }
+  .msel.abierto .mmenu { display:block; }
+  .mop { display:flex; align-items:center; gap:8px; padding:6px 8px; border-radius:5px; cursor:pointer; font-size:13px; color:#e2e8f0; }
+  .mop:hover { background:#334155; }
+  .mop input { accent-color:#38bdf8; width:15px; height:15px; cursor:pointer; margin:0; }
+  .mop .pt { width:9px; height:9px; border-radius:50%; flex:0 0 auto; }
+  .mtodos { border-bottom:1px solid #475569; margin-bottom:4px; padding-bottom:8px; color:#94a3b8; font-size:12px; }
   .stats { font-size:12px; color:#94a3b8; margin-left:auto; }
   #map { flex:1; }
   .num-icon { display:flex; align-items:center; justify-content:center; border-radius:50%; color:#fff; font-weight:bold; font-size:12px; border:2px solid #fff; box-shadow:0 1px 4px rgba(0,0,0,.6); width:26px; height:26px; }
@@ -123,9 +136,9 @@
 <header>
   <h1>🚐 Rutas Técnicos DOMI <span style="font-size:11px;color:#34d399;font-weight:normal;vertical-align:middle;">· regla GSA ✓ (v2)</span></h1>
   <select id="selTec"><option value="__ALL__">Todos los técnicos</option></select>
-  <select id="selCiudad"><option value="__ALL__">Ambas ciudades</option><option>QUILPUE</option><option>VILLA ALEMANA</option></select>
-  <select id="selFranja"><option value="__ALL__">Todas las franjas</option><option>10-13</option><option>13-16</option><option>16-19</option></select>
-  <select id="selEstado"><option value="__ALL__">Todos los estados</option><option>Pendiente</option><option>Iniciado</option><option value="en ruta">En ruta</option><option>Completado</option><option>No Realizada</option></select>
+  <div class="msel" id="mselCiudad"><button type="button" class="mbtn" onclick="abrirMenu(event,'Ciudad')"><span class="mtxt">Ambas ciudades</span><span class="mcar">▼</span></button><div class="mmenu"></div></div>
+  <div class="msel" id="mselFranja"><button type="button" class="mbtn" onclick="abrirMenu(event,'Franja')"><span class="mtxt">Todas las franjas</span><span class="mcar">▼</span></button><div class="mmenu"></div></div>
+  <div class="msel" id="mselEstado"><button type="button" class="mbtn" onclick="abrirMenu(event,'Estado')"><span class="mtxt">Todos los estados</span><span class="mcar">▼</span></button><div class="mmenu"></div></div>
   <button class="btn" onclick="document.getElementById('inExcel').click()">📂 Cargar Excel</button>
   <input type="file" id="inExcel" accept=".xlsx" style="display:none">
   <button class="btn" id="btnLibre" onclick="toggleLibre()">🚐 Técnico libre</button>
@@ -192,6 +205,86 @@ const map = L.map('map').setView([-33.05,-71.41],13);
 L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{attribution:'&copy; OpenStreetMap &copy; CARTO',maxZoom:19}).addTo(map);
 
 const sel = document.getElementById('selTec');
+
+/* ============ FILTROS CON CASILLAS (multi-seleccion) ============
+   Un Set vacio significa "todos". Al marcar casillas, solo pasan las
+   opciones marcadas. Reemplaza a los antiguos <select> de una opcion. */
+const FILTROS = { Ciudad:new Set(), Franja:new Set(), Estado:new Set() };
+const OPCIONES = {
+  Ciudad: { todos:'Ambas ciudades', items:[
+    {v:'QUILPUE', t:'Quilpué'}, {v:'VILLA ALEMANA', t:'Villa Alemana'} ] },
+  Franja: { todos:'Todas las franjas', items:[
+    {v:'10-13', t:'10-13 (Mañana)'}, {v:'13-16', t:'13-16 (Mediodía)'}, {v:'16-19', t:'16-19 (Tarde)'} ] },
+  Estado: { todos:'Todos los estados', items:[
+    {v:'Pendiente', t:'Pendiente', c:'#94a3b8'}, {v:'Iniciado', t:'Iniciado', c:'#4ade80'},
+    {v:'en ruta', t:'En ruta', c:'#fb923c'}, {v:'Completado', t:'Completado', c:'#64748b'},
+    {v:'No Realizada', t:'No Realizada', c:'#ef4444'}, {v:'Suspendido', t:'Suspendido', c:'#a78bfa'} ] }
+};
+
+function construirMenus(){
+  Object.keys(OPCIONES).forEach(k=>{
+    const menu = document.querySelector('#msel'+k+' .mmenu');
+    let html = '<label class="mop mtodos"><input type="checkbox" data-f="'+k+'" data-v="__ALL__"><span>'+OPCIONES[k].todos+'</span></label>';
+    html += OPCIONES[k].items.map(o=>
+      '<label class="mop"><input type="checkbox" data-f="'+k+'" data-v="'+o.v+'">'+
+      (o.c ? '<span class="pt" style="background:'+o.c+'"></span>' : '')+'<span>'+o.t+'</span></label>').join('');
+    menu.innerHTML = html;
+    menu.onclick = e=> e.stopPropagation();   // no cerrar al marcar
+    menu.querySelectorAll('input').forEach(ch=> ch.onchange = ()=> marcar(k, ch.dataset.v, ch.checked));
+    pintarFiltro(k);
+  });
+}
+
+function marcar(k, valor, activo){
+  if(valor === '__ALL__'){ FILTROS[k].clear(); }        // "todos" limpia el resto
+  else if(activo) FILTROS[k].add(valor);
+  else FILTROS[k].delete(valor);
+  pintarFiltro(k);
+  cambioFiltro();
+}
+
+// deja el boton y las casillas reflejando el estado real del Set
+function pintarFiltro(k){
+  const cont = document.getElementById('msel'+k);
+  const n = FILTROS[k].size;
+  const items = OPCIONES[k].items;
+  cont.querySelector('.mtxt').textContent =
+    n===0 ? OPCIONES[k].todos :
+    n===1 ? (items.find(o=>FILTROS[k].has(o.v))||{}).t :
+    n+' seleccionados';
+  cont.classList.toggle('activo', n>0);
+  cont.querySelectorAll('input').forEach(ch=>{
+    ch.checked = ch.dataset.v==='__ALL__' ? n===0 : FILTROS[k].has(ch.dataset.v);
+  });
+}
+
+function abrirMenu(ev, k){
+  ev.stopPropagation();
+  const yo = document.getElementById('msel'+k);
+  const estaba = yo.classList.contains('abierto');
+  document.querySelectorAll('.msel').forEach(m=> m.classList.remove('abierto'));
+  if(!estaba) yo.classList.add('abierto');
+}
+document.addEventListener('click', ()=> document.querySelectorAll('.msel').forEach(m=> m.classList.remove('abierto')));
+
+// se llama cada vez que cambia cualquier filtro (reemplaza los onchange)
+function cambioFiltro(){
+  render();
+  if(libre && posActual) buscarCercanos(posActual);
+  if(rgu) renderPanelRGU();
+  if(atr) renderPanelAtr();
+  if(sinComp) renderPanelSC();
+}
+
+// --- predicados: un Set vacio deja pasar todo ---
+function okCiudad(p){
+  if(!FILTROS.Ciudad.size) return true;
+  const d = String(p.d).toUpperCase();
+  for(const c of FILTROS.Ciudad) if(d.includes(c)) return true;
+  return false;
+}
+function okFranja(p){ return !FILTROS.Franja.size || FILTROS.Franja.has(p.f); }
+function okEstado(p){ return !FILTROS.Estado.size || FILTROS.Estado.has(p.e); }
 tecs.forEach(t=>{ const o=document.createElement('option'); o.value=t; o.textContent=t; sel.appendChild(o); });
 
 let layer = L.layerGroup().addTo(map);
@@ -229,9 +322,9 @@ function normEstadosDB(db){ Object.values(db).forEach(a=>a.forEach(p=> p.e = nor
 let sinComp = false;
 
 // técnicos con al menos un trabajo activo (no Cancelado) y CERO Completado, según filtro de ciudad
-function tecnicosSinCompletar(fc){
+function tecnicosSinCompletar(){
   return tecs.filter(t=>{
-    const act = DB[t].filter(p=> p.e!=='Cancelado' && (fc==='__ALL__' || p.d.toUpperCase().includes(fc)));
+    const act = DB[t].filter(p=> p.e!=='Cancelado' && okCiudad(p));
     return act.length>0 && !act.some(p=> p.e==='Completado');
   });
 }
@@ -252,15 +345,14 @@ function toggleSinCompletar(){
   document.getElementById('btnSC').textContent = sinComp ? '✖ Salir sin completar' : '🚩 Sin completar';
   document.getElementById('panelSC').style.display = sinComp ? 'block' : 'none';
   document.getElementById('estadosBox').style.display = sinComp ? 'none' : '';
-  if(sinComp){ sel.value='__ALL__'; document.getElementById('selEstado').value='__ALL__'; }
+  if(sinComp){ sel.value='__ALL__'; FILTROS.Estado.clear(); pintarFiltro('Estado'); }
   render();
 }
 
 function verTecnicoSC(t){ sel.value = t; render(); }
 
 function renderPanelSC(){
-  const fc = document.getElementById('selCiudad').value;
-  const lista = tecnicosSinCompletar(fc);
+  const lista = tecnicosSinCompletar();
   const cont = document.getElementById('listaSC');
   document.querySelector('#panelSC h2').textContent = '🚩 Sin completar ('+lista.length+')';
   if(!lista.length){
@@ -270,7 +362,7 @@ function renderPanelSC(){
   let html = '';
   if(sel.value!=='__ALL__') html += '<div class="vertodos" onclick="verTecnicoSC(\'__ALL__\')">👥 Ver todos en el mapa</div>';
   html += lista.map(t=>{
-    const act = DB[t].filter(p=> p.e!=='Cancelado' && (fc==='__ALL__' || p.d.toUpperCase().includes(fc)));
+    const act = DB[t].filter(p=> p.e!=='Cancelado' && okCiudad(p));
     const nIni = act.filter(p=>p.e==='Iniciado').length;
     const nRuta = act.filter(p=>p.e==='en ruta').length;
     const nPend = act.filter(p=>p.e==='Pendiente').length;
@@ -290,15 +382,12 @@ function renderPanelSC(){
 
 function render(mantenerVista){
   layer.clearLayers();
-  const ft = sel.value, fc = document.getElementById('selCiudad').value, ff = document.getElementById('selFranja').value, fe = document.getElementById('selEstado').value;
+  const ft = sel.value;
   let show = ft==='__ALL__' ? tecs : [ft];
-  if(sinComp && ft==='__ALL__') show = tecnicosSinCompletar(fc);
+  if(sinComp && ft==='__ALL__') show = tecnicosSinCompletar();
   let bounds=[], nTrab=0, nTec=0, nIni=0, nRuta=0, nComp=0, nRGU=0;
   show.forEach(t=>{
-    let pts = DB[t].filter(p=> p.e!=='Cancelado');
-    if(fc!=='__ALL__') pts = pts.filter(p=> p.d.toUpperCase().includes(fc));
-    if(ff!=='__ALL__') pts = pts.filter(p=> p.f===ff);
-    if(fe!=='__ALL__') pts = pts.filter(p=> p.e===fe);
+    let pts = DB[t].filter(p=> p.e!=='Cancelado' && okCiudad(p) && okFranja(p) && okEstado(p));
     if(!pts.length) return;
     nTec++; nTrab+=pts.length;
     const col = colorOf[t];
@@ -333,18 +422,15 @@ function renderLegend(show){
   const lg = document.getElementById('legend');
   if(show.length===1){ lg.style.display='none'; return; }
   lg.style.display='block';
-  const fc = document.getElementById('selCiudad').value, ff = document.getElementById('selFranja').value;
   lg.innerHTML = show.map(t=>{
-    let n = DB[t].filter(p=> p.e!=='Cancelado' && (fc==='__ALL__'||p.d.toUpperCase().includes(fc)) && (ff==='__ALL__'||p.f===ff)).length;
+    let n = DB[t].filter(p=> p.e!=='Cancelado' && okCiudad(p) && okFranja(p)).length;
     if(!n) return '';
     return '<div onclick="sel.value=\''+t.replace(/'/g,"\\'")+'\';render()"><span class="dot" style="background:'+colorOf[t]+'"></span>'+t+' ('+n+')</div>';
   }).join('');
 }
 
 sel.onchange=render;
-document.getElementById('selCiudad').onchange=()=>{ render(); if(libre && posActual) buscarCercanos(posActual); if(rgu) renderPanelRGU(); if(atr) renderPanelAtr(); };
-document.getElementById('selFranja').onchange=()=>{ render(); if(libre && posActual) buscarCercanos(posActual); if(rgu) renderPanelRGU(); };
-document.getElementById('selEstado').onchange=render;
+construirMenus();
 render();
 
 /* ============ MODO TÉCNICO LIBRE ============ */
@@ -443,15 +529,13 @@ function hav(a,b){
 function buscarCercanos(pos){
   posActual = pos;
   despLayer.clearLayers();
-  const fc = document.getElementById('selCiudad').value, ff = document.getElementById('selFranja').value;
   // candidatos: todos los trabajos Pendientes (de cualquier técnico) según filtros
   let cands = [];
   tecs.forEach(t=>{
     DB[t].forEach(p=>{
       if(p.e!=='Pendiente') return;
       if(pos.tec && t===pos.tec) return;
-      if(fc!=='__ALL__' && !p.d.toUpperCase().includes(fc)) return;
-      if(ff!=='__ALL__' && p.f!==ff) return;
+      if(!okCiudad(p) || !okFranja(p)) return;
       cands.push({...p, tec:t, km: hav(pos,p)});
     });
   });
@@ -636,18 +720,16 @@ const RGU_MODOS = {
 
 function setRguModo(m){ rguModo = m; renderPanelRGU(); }
 
-function rguPasaFiltro(p, fc, ff){
-  if(fc!=='__ALL__' && !String(p.d).toUpperCase().includes(fc)) return false;
-  if(ff!=='__ALL__' && p.f!==ff) return false;
-  return true;
+function rguPasaFiltro(p){
+  return okCiudad(p) && okFranja(p);
 }
 
 // suma de RGU y nº de órdenes para un conjunto de estados, respetando filtros
-function rguSuma(estados, fc, ff){
+function rguSuma(estados){
   let tot=0, ord=0;
   tecs.forEach(t=>DB[t].forEach(p=>{
     if(!estados.includes(p.e)) return;
-    if(!rguPasaFiltro(p, fc, ff)) return;
+    if(!rguPasaFiltro(p)) return;
     tot += Number(p.rgu||0); ord++;
   }));
   return {tot, ord};
@@ -693,14 +775,14 @@ function catOrden(c){
 
 // Detalle de las CERRADAS agrupado por TIPO DE ACTIVIDAD (con Play) y su RGU.
 // Dos secciones: Completadas y No Realizadas. Respeta ciudad/franja.
-function detalleCerradas(fc, ff){
+function detalleCerradas(){
   const grupos = {
     'Completado':   {icon:'✅', label:'Completadas',   color:'#34d399', tipos:{}, n:0, sum:0},
     'No Realizada': {icon:'🚫', label:'No realizadas', color:'#ef4444', tipos:{}, n:0, sum:0}
   };
   tecs.forEach(t=>DB[t].forEach(p=>{
     const g = grupos[p.e]; if(!g) return;
-    if(!rguPasaFiltro(p, fc, ff)) return;
+    if(!rguPasaFiltro(p)) return;
     const cat = etiquetaOrden(p);
     const r = Number(p.rgu||0);
     if(!g.tipos[cat]) g.tipos[cat] = {n:0, rgu:0};
@@ -732,15 +814,14 @@ function detalleCerradas(fc, ff){
 
 function renderPanelRGU(){
   const cont = document.getElementById('cuerpoRGU');
-  const fc = document.getElementById('selCiudad').value, ff = document.getElementById('selFranja').value;
   if(!rguDisponible){
     cont.innerHTML = '<div class="vacio">Este origen de datos no trae la info de RGU.<br><br>📂 Carga el <b>Excel del portal</b> (que incluye las columnas <b>Subtipo</b> y <b>Pasos</b>) para ver los RGU,<br>o agrega el campo <b>rgu</b> a <b>rutas.json</b> desde <b>transformador.py</b>.</div>';
     return;
   }
 
   // --- resumen fijo: los 3 números siempre visibles (para la proyección) ---
-  const rComp = rguSuma(RGU_MODOS.comp.estados, fc, ff);
-  const rPend = rguSuma(RGU_MODOS.pend.estados, fc, ff);
+  const rComp = rguSuma(RGU_MODOS.comp.estados);
+  const rPend = rguSuma(RGU_MODOS.pend.estados);
   const rTot  = rComp.tot + rPend.tot;
 
   const tabs =
@@ -763,7 +844,7 @@ function renderPanelRGU(){
   tecs.forEach(t=>{
     DB[t].forEach(p=>{
       if(!modo.estados.includes(p.e)) return;
-      if(!rguPasaFiltro(p, fc, ff)) return;
+      if(!rguPasaFiltro(p)) return;
       const r = Number(p.rgu||0);
       totRGU += r; totOrd++;
       porTec[t] = (porTec[t]||0) + r;
@@ -777,7 +858,7 @@ function renderPanelRGU(){
     '<div class="chip">'+c+': <b>'+fmtRGU(porTipo[c].rgu)+'</b> <span style="color:#64748b">('+porTipo[c].n+')</span></div>').join('');
   const ranking = Object.keys(porTec).filter(t=>porTec[t]>0).sort((a,b)=>porTec[b]-porTec[a]);
   const cards = ranking.map(t=>{
-    const nOrd = DB[t].filter(p=> modo.estados.includes(p.e) && (fc==='__ALL__'||String(p.d).toUpperCase().includes(fc)) && (ff==='__ALL__'||p.f===ff)).length;
+    const nOrd = DB[t].filter(p=> modo.estados.includes(p.e) && rguPasaFiltro(p)).length;
     const tEsc = t.replace(/'/g,"\\'");
     return '<div class="rgucard" style="border-left-color:'+modo.color+'" onclick="verTecnicoSC(\''+tEsc+'\')">'+
       '<div><div class="nom"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:'+colorOf[t]+';margin-right:5px;"></span>'+t+'</div>'+
@@ -795,7 +876,7 @@ function renderPanelRGU(){
       '<div class="l">'+modo.label+' · '+totOrd+' órden'+(totOrd===1?'':'es')+'</div></div>'+
     (chips ? '<div class="tipos">'+chips+'</div>' : '') +
     (cards || '<div class="vacio">'+vacioMsg+'</div>') +
-    detalleCerradas(fc, ff);
+    detalleCerradas();
 }
 
 
@@ -841,12 +922,11 @@ function etiquetaUmbral(){
 
 // [{t: tecnico, p: orden, m: minutos}] ordenado del más atrasado al menos
 function trabajosAtrasados(){
-  const fc = document.getElementById('selCiudad').value;
   const out = [];
   tecs.forEach(t=>{
     DB[t].forEach(p=>{
       if(p.e!=='Iniciado') return;
-      if(fc!=='__ALL__' && !p.d.toUpperCase().includes(fc)) return;
+      if(!okCiudad(p)) return;
       const m = minutosDesde(p.hi);
       if(m!==null && m>=UMBRAL_MIN) out.push({t:t, p:p, m:m});
     });
@@ -950,7 +1030,7 @@ setInterval(function(){
    Se lee desde raw.githubusercontent (no tiene limite de llamadas) con un
    ?t= para saltarse el cache de 5 min del CDN. Si raw falla, se reintenta
    por la API de Contents, que era el metodo original. */
-const REFRESCO_MIN = 5;
+const REFRESCO_MIN = 2;
 const URL_RAW = 'https://raw.githubusercontent.com/luis-sepulveda/Rutas-tecnicos/main/rutas.json';
 const URL_API = 'https://api.github.com/repos/luis-sepulveda/Rutas-tecnicos/contents/rutas.json?ref=main';
 
