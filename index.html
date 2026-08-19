@@ -152,6 +152,29 @@
   .atrcard.grave .tiempo { color:#f87171;}
   .atrcard .sub { color:#94a3b8; font-size:10px; margin-top:3px; line-height:1.35;}
   .atrcard .sub b { color:#cbd5e1; font-weight:bold;}
+  /* --- Caidas del dia (ordenes que se salieron de la bandeja) --- */
+  .btn.on-caidas { background:#7f1d1d; border-color:#ef4444; font-weight:bold; }
+  #btnCaidas .badge { display:inline-block; min-width:16px; padding:0 5px; margin-left:5px;
+    background:#ef4444; color:#fff; border-radius:9px; font-size:11px; font-weight:bold; line-height:16px; text-align:center; }
+  #bannerCaidas { display:none; background:#7f1d1d; color:#fecaca; border-bottom:2px solid #ef4444;
+    padding:8px 16px; font-size:13px; align-items:center; gap:10px; cursor:pointer; z-index:1000; }
+  #bannerCaidas:hover { background:#911b1b; }
+  #bannerCaidas .bico { font-size:16px; flex-shrink:0; }
+  #bannerCaidas b { color:#fff; }
+  #bannerCaidas .ver { margin-left:auto; color:#fecaca; text-decoration:underline; font-size:12px; white-space:nowrap; }
+  #panelCaidas { position:absolute; top:70px; right:10px; z-index:1000; background:rgba(30,41,59,.96);
+    border:1px solid #ef4444; border-radius:10px; padding:12px; width:320px; max-height:78vh; overflow-y:auto; display:none; font-size:12px;}
+  #panelCaidas h2 { font-size:13px; color:#f87171; margin-bottom:6px;}
+  #panelCaidas .hint { color:#94a3b8; font-size:11px; margin-bottom:8px;}
+  #panelCaidas .vacio { color:#4ade80; text-align:center; padding:14px 6px; line-height:1.5;}
+  #panelCaidas .resnota { color:#64748b; font-size:10px; margin-top:8px; border-top:1px solid #334155; padding-top:6px;}
+  .caidacard { border-left:4px solid #ef4444; background:#0f172a; border-radius:6px; padding:6px 8px; margin:6px 0; cursor:pointer;}
+  .caidacard:hover { background:#3b1220;}
+  .caidacard .fila1 { display:flex; justify-content:space-between; align-items:center; gap:8px;}
+  .caidacard .ot { font-family:'Consolas',monospace; font-size:11px; color:#93c5fd; }
+  .caidacard .cat { font-weight:bold; color:#e2e8f0; font-size:12px; }
+  .caidacard .sub { color:#94a3b8; font-size:10px; margin-top:3px; line-height:1.35;}
+  .caidacard .sub b { color:#cbd5e1; font-weight:bold;}
 </style>
 </head>
 <body>
@@ -166,12 +189,23 @@
   <button class="btn" id="btnLibre" onclick="toggleLibre()">🚐 Técnico libre</button>
   <button class="btn" id="btnSC" onclick="toggleSinCompletar()">🚩 Sin completar</button>
   <button class="btn" id="btnAtr" onclick="toggleAtrasados()">⏱️ +2h30 iniciado</button>
+  <button class="btn" id="btnCaidas" onclick="toggleCaidas()">🚨 Caídas</button>
   <button class="btn" id="btnComp" onclick="toggleComp()">📊 Completitud</button>
   <button class="btn" id="btnRGU" onclick="toggleRGU()">💰 RGU</button>
   <div class="stats" id="stats"></div>
   <div class="stats" id="lastUpd" style="margin-left:0;">⏳ cargando datos...</div>
 </header>
+<div id="bannerCaidas" onclick="abrirCaidas()">
+  <span class="bico">🚨</span>
+  <span id="bannerCaidasTxt"></span>
+  <span class="ver">ver detalle ▸</span>
+</div>
 <div id="map"></div>
+<div id="panelCaidas">
+  <h2>🚨 Se cayeron de la bandeja</h2>
+  <div class="hint">Órdenes que estaban <b>sin cerrar</b> y desaparecieron de la bandeja de los técnicos (reagendadas, sacadas o movidas fuera de la zona). Acumulado del día. Si una vuelve, sale sola de la lista.</div>
+  <div id="listaCaidas"></div>
+</div>
 <div id="panelSC">
   <h2>🚩 Sin completar</h2>
   <div class="hint">Técnicos que aún no tienen ningún trabajo <b>Completado</b>. Toca un nombre para verlo solo a él en el mapa. Respeta el filtro de ciudad de arriba.</div>
@@ -227,6 +261,8 @@ let rguModo = 'comp';                      // RGU: modo activo del panel -> 'com
 // por temporal dead zone y se cae el script completo.
 let atr = false;                 // panel de atrasados abierto
 let comp = false;                // panel de completitud abierto
+let ALERTAS = null;              // llave 'alertas' del rutas.json (caidas del dia)
+let caidasAbierto = false;       // panel de caidas abierto
 let UMBRAL_MIN = 150;            // 2h30 por defecto
 let FECHA_DATOS = null;          // momento del snapshot de datos (rutas.json)
 
@@ -369,7 +405,7 @@ function cerrarSC(){
 function toggleSinCompletar(){
   cerrarComp();
   if(libre) toggleLibre();             // modos excluyentes
-  cerrarRGU(); cerrarAtr();
+  cerrarRGU(); cerrarAtr(); cerrarCaidas();
   sinComp = !sinComp;
   document.getElementById('btnSC').classList.toggle('on3', sinComp);
   document.getElementById('btnSC').textContent = sinComp ? '✖ Salir sin completar' : '🚩 Sin completar';
@@ -380,6 +416,77 @@ function toggleSinCompletar(){
 }
 
 function verTecnicoSC(t){ sel.value = t; render(); }
+
+/* ============ CAIDAS DEL DIA (ordenes que salieron de la bandeja) ============ */
+function nCaidas(){ return (ALERTAS && ALERTAS.activas) ? ALERTAS.activas.length : 0; }
+
+function renderBannerCaidas(){
+  const n = nCaidas();
+  const banner = document.getElementById('bannerCaidas');
+  const btn = document.getElementById('btnCaidas');
+  // banner arriba: solo cuando hay activas
+  if(n > 0){
+    const pl = n === 1 ? 'orden se cayó' : 'órdenes se cayeron';
+    document.getElementById('bannerCaidasTxt').innerHTML =
+      '<b>'+n+'</b> '+pl+' sin cerrar hoy';
+    banner.style.display = 'flex';
+  } else {
+    banner.style.display = 'none';
+  }
+  // boton del header: globo con el conteo cuando hay
+  btn.innerHTML = '🚨 Caídas' + (n>0 ? ' <span class="badge">'+n+'</span>' : '');
+  btn.classList.toggle('on-caidas', n>0 && !caidasAbierto);
+}
+
+function abrirCaidas(){ if(!caidasAbierto) toggleCaidas(); }
+
+function cerrarCaidas(){
+  if(!caidasAbierto) return;
+  caidasAbierto = false;
+  document.getElementById('panelCaidas').style.display = 'none';
+  renderBannerCaidas();
+}
+
+function toggleCaidas(){
+  // modos excluyentes con los otros paneles (mismo patron que los demas)
+  cerrarComp(); cerrarRGU(); cerrarAtr(); cerrarSC();
+  if(libre) toggleLibre();
+  caidasAbierto = !caidasAbierto;
+  document.getElementById('panelCaidas').style.display = caidasAbierto ? 'block' : 'none';
+  if(caidasAbierto) renderPanelCaidas();
+  renderBannerCaidas();
+}
+
+function verTecnicoCaida(t){
+  // si el tecnico sigue con trabajos hoy, lo enfocamos en el mapa
+  if(DB && DB[t]){ sel.value = t; render(); }
+}
+
+function renderPanelCaidas(){
+  const cont = document.getElementById('listaCaidas');
+  const activas = (ALERTAS && ALERTAS.activas) ? ALERTAS.activas : [];
+  const res = (ALERTAS && ALERTAS.resueltas) ? ALERTAS.resueltas : 0;
+  document.querySelector('#panelCaidas h2').textContent =
+    '🚨 Se cayeron de la bandeja ('+activas.length+')';
+  if(!activas.length){
+    cont.innerHTML = '<div class="vacio">✅ Ninguna orden se ha caído sin cerrar hoy.</div>'
+      + (res ? '<div class="resnota">'+res+' se cayó(eron) y ya volvió(eron) a una bandeja hoy.</div>' : '');
+    return;
+  }
+  let html = activas.map(c=>{
+    const dir = (c.d||'').replace(/</g,'&lt;');
+    return '<div class="caidacard" onclick="verTecnicoCaida(\''+String(c.tec).replace(/'/g,"\\'")+'\')">'
+      + '<div class="fila1"><span class="cat">'+(c.cat||c.tec)+'</span>'
+      + '<span class="ot">'+c.o+'</span></div>'
+      + '<div class="sub">👷 <b>'+c.tec+'</b> · estaba <b>'+(c.e||'?')+'</b>'
+      + (c.hi? ' · '+c.hi : '')+'</div>'
+      + '<div class="sub">📍 '+dir+'</div>'
+      + (c.visto? '<div class="sub">🕒 visto caído: '+c.visto+'</div>' : '')
+      + '</div>';
+  }).join('');
+  if(res) html += '<div class="resnota">'+res+' orden(es) se cayó(eron) y ya volvió(eron) a una bandeja hoy — no cuentan arriba.</div>';
+  cont.innerHTML = html;
+}
 
 function renderPanelSC(){
   const lista = tecnicosSinCompletar();
@@ -479,7 +586,7 @@ function llenarListaTecs(){
 llenarListaTecs();
 
 function toggleLibre(){
-  cerrarSC(); cerrarRGU(); cerrarAtr(); cerrarComp();
+  cerrarSC(); cerrarRGU(); cerrarAtr(); cerrarComp(); cerrarCaidas();
   libre = !libre;
   document.getElementById('btnLibre').classList.toggle('on', libre);
   document.getElementById('btnLibre').textContent = libre ? '✖ Salir técnico libre' : '🚐 Técnico libre';
@@ -733,7 +840,7 @@ function cerrarRGU(){
 function toggleRGU(){
   cerrarComp();
   if(libre) toggleLibre();             // modos excluyentes
-  cerrarSC(); cerrarAtr();
+  cerrarSC(); cerrarAtr(); cerrarCaidas();
   rgu = !rgu;
   document.getElementById('btnRGU').classList.toggle('on4', rgu);
   document.getElementById('btnRGU').textContent = rgu ? '✖ Salir RGU' : '💰 RGU';
@@ -1024,7 +1131,7 @@ function cerrarComp(){
 
 function toggleComp(){
   if(libre) toggleLibre();
-  cerrarSC(); cerrarRGU(); cerrarAtr();
+  cerrarSC(); cerrarRGU(); cerrarAtr(); cerrarCaidas();
   comp = !comp;
   document.getElementById('btnComp').classList.toggle('on6', comp);
   document.getElementById('panelComp').style.display = comp ? 'block' : 'none';
@@ -1110,7 +1217,7 @@ function cerrarAtr(){
 
 function toggleAtrasados(){
   if(libre) toggleLibre();             // modos excluyentes
-  cerrarSC(); cerrarRGU(); cerrarComp();
+  cerrarSC(); cerrarRGU(); cerrarComp(); cerrarCaidas();
   atr = !atr;
   document.getElementById('btnAtr').classList.toggle('on5', atr);
   document.getElementById('panelAtr').style.display = atr ? 'block' : 'none';
@@ -1222,6 +1329,9 @@ async function cargarDatosVivos(auto){
     llenarListaTecs();
     setFechaDatos(js.actualizado);
     lu.textContent = '🔄 Actualizado: '+js.actualizado;
+    ALERTAS = js.alertas || null;      // caidas del dia (si el pipeline las trae)
+    renderBannerCaidas();
+    if(caidasAbierto) renderPanelCaidas();
     if(comp) renderPanelComp();
     render(auto);          // auto = true -> no reencuadra el mapa
   } catch(e) {
