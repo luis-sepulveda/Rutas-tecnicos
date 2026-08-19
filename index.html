@@ -162,19 +162,26 @@
   #bannerCaidas .bico { font-size:16px; flex-shrink:0; }
   #bannerCaidas b { color:#fff; }
   #bannerCaidas .ver { margin-left:auto; color:#fecaca; text-decoration:underline; font-size:12px; white-space:nowrap; }
-  #panelCaidas { position:absolute; top:70px; right:10px; z-index:1000; background:rgba(30,41,59,.96);
-    border:1px solid #ef4444; border-radius:10px; padding:12px; width:320px; max-height:78vh; overflow-y:auto; display:none; font-size:12px;}
-  #panelCaidas h2 { font-size:13px; color:#f87171; margin-bottom:6px;}
-  #panelCaidas .hint { color:#94a3b8; font-size:11px; margin-bottom:8px;}
-  #panelCaidas .vacio { color:#4ade80; text-align:center; padding:14px 6px; line-height:1.5;}
-  #panelCaidas .resnota { color:#64748b; font-size:10px; margin-top:8px; border-top:1px solid #334155; padding-top:6px;}
-  .caidacard { border-left:4px solid #ef4444; background:#0f172a; border-radius:6px; padding:6px 8px; margin:6px 0; cursor:pointer;}
-  .caidacard:hover { background:#3b1220;}
-  .caidacard .fila1 { display:flex; justify-content:space-between; align-items:center; gap:8px;}
-  .caidacard .ot { font-family:'Consolas',monospace; font-size:11px; color:#93c5fd; }
-  .caidacard .cat { font-weight:bold; color:#e2e8f0; font-size:12px; }
-  .caidacard .sub { color:#94a3b8; font-size:10px; margin-top:3px; line-height:1.35;}
-  .caidacard .sub b { color:#cbd5e1; font-weight:bold;}
+  /* --- Modal de caidas a pantalla completa --- */
+  #modalCaidas { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); }
+  #modalCaidas.abierto { display:flex; align-items:flex-start; justify-content:center; padding:4vh 2vw; }
+  .mc-box { background:#0f172a; border:1px solid #ef4444; border-radius:14px; width:min(1150px,96vw); max-height:92vh;
+    display:flex; flex-direction:column; box-shadow:0 20px 60px rgba(0,0,0,.6); }
+  .mc-head { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 18px; border-bottom:1px solid #334155; }
+  .mc-head h2 { font-size:18px; color:#f87171; }
+  .mc-close { background:#1e293b; border:1px solid #475569; color:#e2e8f0; border-radius:8px; width:36px; height:36px; font-size:15px; cursor:pointer; flex-shrink:0; }
+  .mc-close:hover { background:#7f1d1d; border-color:#ef4444; }
+  .mc-hint { color:#94a3b8; font-size:12px; padding:12px 18px 0; line-height:1.45; }
+  .mc-body { padding:14px 18px; overflow-y:auto; display:grid; grid-template-columns:repeat(auto-fill,minmax(330px,1fr)); gap:12px; }
+  .mc-body .vacio { grid-column:1/-1; color:#4ade80; text-align:center; padding:28px 6px; line-height:1.6; font-size:14px; }
+  .mc-resnota { color:#94a3b8; font-size:12px; padding:0 18px 16px; border-top:1px solid #334155; margin-top:2px; padding-top:12px; }
+  .caidacard { border-left:4px solid #ef4444; background:#111c33; border-radius:8px; padding:12px 14px; cursor:pointer; }
+  .caidacard:hover { background:#3b1220; }
+  .caidacard .fila1 { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:6px; }
+  .caidacard .ot { font-family:'Consolas',monospace; font-size:13px; color:#93c5fd; flex-shrink:0; }
+  .caidacard .cat { font-weight:bold; color:#f1f5f9; font-size:16px; }
+  .caidacard .sub { color:#cbd5e1; font-size:13px; margin-top:4px; line-height:1.5; }
+  .caidacard .sub b { color:#fff; font-weight:bold; }
 </style>
 </head>
 <body>
@@ -201,10 +208,16 @@
   <span class="ver">ver detalle ▸</span>
 </div>
 <div id="map"></div>
-<div id="panelCaidas">
-  <h2>🚨 Se cayeron de la bandeja</h2>
-  <div class="hint">Órdenes que estaban <b>sin cerrar</b> y desaparecieron de la bandeja de los técnicos (reagendadas, sacadas o movidas fuera de la zona). Acumulado del día. Si una vuelve, sale sola de la lista.</div>
-  <div id="listaCaidas"></div>
+<div id="modalCaidas" onclick="if(event.target===this) cerrarCaidas()">
+  <div class="mc-box">
+    <div class="mc-head">
+      <h2 id="mcTitulo">🚨 Se cayeron de la bandeja</h2>
+      <button class="mc-close" onclick="cerrarCaidas()" title="Cerrar (Esc)">✖</button>
+    </div>
+    <div class="mc-hint">Órdenes que estaban <b>sin cerrar</b> y desaparecieron de la bandeja de los técnicos (reagendadas, sacadas o movidas fuera de la zona). Acumulado del día. Si una vuelve, sale sola de la lista. Toca una tarjeta para ver al técnico en el mapa.</div>
+    <div id="listaCaidas" class="mc-body"></div>
+    <div id="mcResnota" class="mc-resnota" style="display:none;"></div>
+  </div>
 </div>
 <div id="panelSC">
   <h2>🚩 Sin completar</h2>
@@ -443,49 +456,57 @@ function abrirCaidas(){ if(!caidasAbierto) toggleCaidas(); }
 function cerrarCaidas(){
   if(!caidasAbierto) return;
   caidasAbierto = false;
-  document.getElementById('panelCaidas').style.display = 'none';
+  document.getElementById('modalCaidas').classList.remove('abierto');
   renderBannerCaidas();
 }
 
 function toggleCaidas(){
-  // modos excluyentes con los otros paneles (mismo patron que los demas)
+  // el modal tapa todo: cerramos los paneles laterales para no dejarlos abiertos detras
   cerrarComp(); cerrarRGU(); cerrarAtr(); cerrarSC();
   if(libre) toggleLibre();
   caidasAbierto = !caidasAbierto;
-  document.getElementById('panelCaidas').style.display = caidasAbierto ? 'block' : 'none';
+  document.getElementById('modalCaidas').classList.toggle('abierto', caidasAbierto);
   if(caidasAbierto) renderPanelCaidas();
   renderBannerCaidas();
 }
 
 function verTecnicoCaida(t){
-  // si el tecnico sigue con trabajos hoy, lo enfocamos en el mapa
+  // cerramos el modal y, si el tecnico sigue con trabajos hoy, lo enfocamos en el mapa
+  cerrarCaidas();
   if(DB && DB[t]){ sel.value = t; render(); }
 }
 
+// cerrar el modal con la tecla Esc
+document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarCaidas(); });
+
 function renderPanelCaidas(){
   const cont = document.getElementById('listaCaidas');
+  const nota = document.getElementById('mcResnota');
   const activas = (ALERTAS && ALERTAS.activas) ? ALERTAS.activas : [];
   const res = (ALERTAS && ALERTAS.resueltas) ? ALERTAS.resueltas : 0;
-  document.querySelector('#panelCaidas h2').textContent =
+  document.getElementById('mcTitulo').textContent =
     '🚨 Se cayeron de la bandeja ('+activas.length+')';
   if(!activas.length){
-    cont.innerHTML = '<div class="vacio">✅ Ninguna orden se ha caído sin cerrar hoy.</div>'
-      + (res ? '<div class="resnota">'+res+' se cayó(eron) y ya volvió(eron) a una bandeja hoy.</div>' : '');
-    return;
+    cont.innerHTML = '<div class="vacio">✅ Ninguna orden se ha caído sin cerrar hoy.</div>';
+  } else {
+    cont.innerHTML = activas.map(c=>{
+      const dir = (c.d||'').replace(/</g,'&lt;');
+      return '<div class="caidacard" onclick="verTecnicoCaida(\''+String(c.tec).replace(/'/g,"\\'")+'\')">'
+        + '<div class="fila1"><span class="cat">'+(c.cat||c.tec)+'</span>'
+        + '<span class="ot">'+c.o+'</span></div>'
+        + '<div class="sub">👷 <b>'+c.tec+'</b> · estaba <b>'+(c.e||'?')+'</b>'
+        + (c.hi? ' · '+c.hi : '')+'</div>'
+        + '<div class="sub">📍 '+dir+'</div>'
+        + (c.visto? '<div class="sub">🕒 visto caído: '+c.visto+'</div>' : '')
+        + '</div>';
+    }).join('');
   }
-  let html = activas.map(c=>{
-    const dir = (c.d||'').replace(/</g,'&lt;');
-    return '<div class="caidacard" onclick="verTecnicoCaida(\''+String(c.tec).replace(/'/g,"\\'")+'\')">'
-      + '<div class="fila1"><span class="cat">'+(c.cat||c.tec)+'</span>'
-      + '<span class="ot">'+c.o+'</span></div>'
-      + '<div class="sub">👷 <b>'+c.tec+'</b> · estaba <b>'+(c.e||'?')+'</b>'
-      + (c.hi? ' · '+c.hi : '')+'</div>'
-      + '<div class="sub">📍 '+dir+'</div>'
-      + (c.visto? '<div class="sub">🕒 visto caído: '+c.visto+'</div>' : '')
-      + '</div>';
-  }).join('');
-  if(res) html += '<div class="resnota">'+res+' orden(es) se cayó(eron) y ya volvió(eron) a una bandeja hoy — no cuentan arriba.</div>';
-  cont.innerHTML = html;
+  if(res){
+    nota.textContent = res+' orden(es) se cayó(eron) y ya volvió(eron) a una bandeja hoy — no cuentan arriba.';
+    nota.style.display = 'block';
+  } else {
+    nota.style.display = 'none';
+  }
 }
 
 function renderPanelSC(){
