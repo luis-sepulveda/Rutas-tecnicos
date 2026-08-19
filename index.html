@@ -165,23 +165,24 @@
   /* --- Modal de caidas a pantalla completa --- */
   #modalCaidas { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); }
   #modalCaidas.abierto { display:flex; align-items:flex-start; justify-content:center; padding:4vh 2vw; }
-  .mc-box { background:#0f172a; border:1px solid #ef4444; border-radius:14px; width:min(1150px,96vw); max-height:92vh;
+  .mc-box { background:#0f172a; border:1px solid #ef4444; border-radius:14px; width:min(1280px,97vw); max-height:92vh;
     display:flex; flex-direction:column; box-shadow:0 20px 60px rgba(0,0,0,.6); }
-  .mc-head { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 18px; border-bottom:1px solid #334155; }
-  .mc-head h2 { font-size:18px; color:#f87171; }
-  .mc-close { background:#1e293b; border:1px solid #475569; color:#e2e8f0; border-radius:8px; width:36px; height:36px; font-size:15px; cursor:pointer; flex-shrink:0; }
+  .mc-head { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 16px; border-bottom:1px solid #334155; }
+  .mc-head h2 { font-size:17px; color:#f87171; }
+  .mc-close { background:#1e293b; border:1px solid #475569; color:#e2e8f0; border-radius:8px; width:34px; height:34px; font-size:15px; cursor:pointer; flex-shrink:0; }
   .mc-close:hover { background:#7f1d1d; border-color:#ef4444; }
-  .mc-hint { color:#94a3b8; font-size:12px; padding:12px 18px 0; line-height:1.45; }
-  .mc-body { padding:14px 18px; overflow-y:auto; display:grid; grid-template-columns:repeat(auto-fill,minmax(330px,1fr)); gap:12px; }
+  .mc-hint { color:#94a3b8; font-size:11.5px; padding:9px 16px 0; line-height:1.4; }
+  .mc-body { padding:12px 16px; overflow-y:auto; display:grid; grid-template-columns:repeat(auto-fill,minmax(235px,1fr)); gap:9px; }
   .mc-body .vacio { grid-column:1/-1; color:#4ade80; text-align:center; padding:28px 6px; line-height:1.6; font-size:14px; }
-  .mc-resnota { color:#94a3b8; font-size:12px; padding:0 18px 16px; border-top:1px solid #334155; margin-top:2px; padding-top:12px; }
-  .caidacard { border-left:4px solid #ef4444; background:#111c33; border-radius:8px; padding:12px 14px; cursor:pointer; }
+  .mc-resnota { color:#94a3b8; font-size:11.5px; padding:0 16px 14px; border-top:1px solid #334155; margin-top:2px; padding-top:10px; }
+  .caidacard { border-left:3px solid #ef4444; background:#111c33; border-radius:7px; padding:8px 10px; cursor:pointer; }
   .caidacard:hover { background:#3b1220; }
-  .caidacard .fila1 { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:6px; }
-  .caidacard .ot { font-family:'Consolas',monospace; font-size:13px; color:#93c5fd; flex-shrink:0; }
-  .caidacard .cat { font-weight:bold; color:#f1f5f9; font-size:16px; }
-  .caidacard .sub { color:#cbd5e1; font-size:13px; margin-top:4px; line-height:1.5; }
+  .caidacard .fila1 { display:flex; justify-content:space-between; align-items:baseline; gap:8px; margin-bottom:3px; }
+  .caidacard .ot { font-family:'Consolas',monospace; font-size:10.5px; color:#93c5fd; flex-shrink:0; }
+  .caidacard .cat { font-weight:bold; color:#f1f5f9; font-size:13.5px; }
+  .caidacard .sub { color:#cbd5e1; font-size:11px; margin-top:2px; line-height:1.4; }
   .caidacard .sub b { color:#fff; font-weight:bold; }
+  .caidacard .horas { color:#fca5a5; font-size:11px; margin-top:4px; font-weight:600; }
 </style>
 </head>
 <body>
@@ -491,13 +492,14 @@ function renderPanelCaidas(){
   } else {
     cont.innerHTML = activas.map(c=>{
       const dir = (c.d||'').replace(/</g,'&lt;');
+      const salio = (c.visto||'').split(' ').pop();   // solo HH:MM de cuando se cayo
+      const franja = c.f || '—';
       return '<div class="caidacard" onclick="verTecnicoCaida(\''+String(c.tec).replace(/'/g,"\\'")+'\')">'
         + '<div class="fila1"><span class="cat">'+(c.cat||c.tec)+'</span>'
         + '<span class="ot">'+c.o+'</span></div>'
-        + '<div class="sub">👷 <b>'+c.tec+'</b> · estaba <b>'+(c.e||'?')+'</b>'
-        + (c.hi? ' · '+c.hi : '')+'</div>'
+        + '<div class="sub">👷 <b>'+c.tec+'</b> · '+(c.e||'?')+'</div>'
         + '<div class="sub">📍 '+dir+'</div>'
-        + (c.visto? '<div class="sub">🕒 visto caído: '+c.visto+'</div>' : '')
+        + '<div class="horas">🕒 Franja '+franja+' · Salió '+(salio||'?')+'</div>'
         + '</div>';
     }).join('');
   }
