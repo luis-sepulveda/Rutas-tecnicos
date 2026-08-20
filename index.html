@@ -181,7 +181,8 @@
   .caidacard .sub b { color:#fff; font-weight:bold; }
   .caidacard .horas { color:#fca5a5; font-size:11px; margin-top:4px; font-weight:600; }
   /* contador por franja (chips) y separadores de grupo dentro del modal de caidas */
-  .mc-body .fresumen { grid-column:1/-1; display:flex; flex-wrap:wrap; gap:6px; margin-bottom:2px; }
+  .mc-head-left { display:flex; align-items:center; gap:12px; flex-wrap:wrap; min-width:0; }
+  .mc-cont { display:flex; gap:6px; flex-wrap:wrap; }
   .fchip { background:#1e293b; border:1px solid #475569; color:#e2e8f0; border-radius:999px; padding:3px 11px; font-size:11.5px; white-space:nowrap; }
   .fchip b { color:#fca5a5; }
   .mc-body .fgrupo { grid-column:1/-1; color:#f87171; font-size:12px; font-weight:bold; margin-top:7px; padding-top:7px; border-top:1px solid #334155; }
@@ -215,7 +216,10 @@
 <div id="modalCaidas" onclick="if(event.target===this) cerrarCaidas()">
   <div class="mc-box">
     <div class="mc-head">
-      <h2 id="mcTitulo">🚨 Se cayeron de la bandeja</h2>
+      <div class="mc-head-left">
+        <h2 id="mcTitulo">🚨 Se cayeron de la bandeja</h2>
+        <div id="mcContadores" class="mc-cont"></div>
+      </div>
       <button class="mc-close" onclick="cerrarCaidas()" title="Cerrar (Esc)">✖</button>
     </div>
     <div class="mc-hint">Órdenes que estaban <b>sin cerrar</b> y desaparecieron de la bandeja de los técnicos (reagendadas, sacadas o movidas fuera de la zona). Acumulado del día. Si una vuelve, sale sola de la lista. Toca una tarjeta para ver al técnico en el mapa.</div>
@@ -498,9 +502,11 @@ function renderPanelCaidas(){
   const nota = document.getElementById('mcResnota');
   const activas = (ALERTAS && ALERTAS.activas) ? ALERTAS.activas : [];
   const res = (ALERTAS && ALERTAS.resueltas) ? ALERTAS.resueltas : 0;
+  const cont2 = document.getElementById('mcContadores');
   document.getElementById('mcTitulo').textContent =
     '🚨 Se cayeron de la bandeja ('+activas.length+')';
   if(!activas.length){
+    cont2.innerHTML = '';
     cont.innerHTML = '<div class="vacio">✅ Ninguna orden se ha caído sin cerrar hoy.</div>';
   } else {
     // resolver la franja de cada caida y ordenar: por franja, luego tecnico, luego hora
@@ -509,15 +515,15 @@ function renderPanelCaidas(){
                     || String(a.c.tec).localeCompare(String(b.c.tec))
                     || String(a.c.hi||'').localeCompare(String(b.c.hi||'')));
 
-    // contador por franja
+    // contador por franja (va al lado del titulo, en el encabezado)
     const cuenta = {};
     items.forEach(x=>{ const k = x.fr || 's/franja'; cuenta[k] = (cuenta[k]||0)+1; });
-    const chips = ['10-13','13-16','16-19','s/franja']
+    cont2.innerHTML = ['10-13','13-16','16-19','s/franja']
       .filter(k=>cuenta[k])
       .map(k=>'<span class="fchip">🕒 '+k+' · <b>'+cuenta[k]+'</b></span>').join('');
 
-    // render con chips arriba y un separador por cada grupo de franja
-    let html = '<div class="fresumen">'+chips+'</div>';
+    // render de las tarjetas con un separador por cada grupo de franja
+    let html = '';
     let grupo = null;
     items.forEach(x=>{
       const c = x.c;
