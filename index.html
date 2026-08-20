@@ -67,44 +67,11 @@
   .sccard .badge { display:inline-block; padding:1px 7px; border-radius:10px; font-size:10px; margin:3px 3px 0 0; background:#334155;}
   .sccard .badge.ini { background:#166534;} .sccard .badge.ruta{ background:#92400e;} .sccard .badge.pend{ background:#475569;} .sccard .badge.nr{ background:#7f1d1d;}
   .btn.on4 { background:#047857; border-color:#34d399; font-weight:bold; }
-  #panelRGU { position:absolute; top:70px; right:10px; z-index:1000; background:rgba(30,41,59,.96); border:1px solid #475569; border-radius:10px; padding:12px; width:300px; max-height:78vh; overflow-y:auto; display:none; font-size:12px;}
-  #panelRGU h2 { font-size:13px; color:#34d399; margin-bottom:6px;}
-  #panelRGU .hint { color:#94a3b8; font-size:11px; margin-bottom:8px;}
-  #panelRGU .total { text-align:center; background:#0f172a; border:1px solid #065f46; border-radius:8px; padding:10px; margin-bottom:10px;}
-  #panelRGU .total .n { font-size:30px; font-weight:bold; color:#34d399; line-height:1;}
-  #panelRGU .total .l { font-size:11px; color:#94a3b8; margin-top:3px;}
-  #panelRGU .tipos { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:10px;}
-  #panelRGU .tipos .chip { background:#0f172a; border:1px solid #334155; border-radius:6px; padding:4px 7px; font-size:11px; flex:1 1 44%;}
-  #panelRGU .tipos .chip b { color:#34d399; }
   .rgucard { border-left:4px solid #34d399; background:#0f172a; border-radius:6px; padding:6px 8px; margin:5px 0; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:8px;}
   .rgucard:hover { background:#0d2e24;}
   .rgucard .nom { font-weight:bold; color:#e2e8f0; font-size:12px;}
   .rgucard .sub { color:#94a3b8; font-size:10px; margin-top:2px;}
   .rgucard .val { font-size:17px; font-weight:bold; color:#34d399; flex-shrink:0;}
-  #panelRGU .vacio { color:#94a3b8; text-align:center; padding:14px 6px; line-height:1.5;}
-  #panelRGU .rgu-tabs { display:flex; gap:4px; margin-bottom:8px;}
-  #panelRGU .rgu-tabs button { flex:1; background:#0f172a; border:1px solid #334155; color:#94a3b8; border-radius:6px; padding:6px 3px; font-size:11px; font-weight:bold; cursor:pointer;}
-  #panelRGU .rgu-tabs button:hover { border-color:#64748b;}
-  #panelRGU .rgu-tabs button.act { color:#0f172a;}
-  #panelRGU .rgu-tabs button.act-comp { background:#34d399; border-color:#34d399;}
-  #panelRGU .rgu-tabs button.act-pend { background:#fbbf24; border-color:#fbbf24;}
-  #panelRGU .rgu-tabs button.act-tot  { background:#38bdf8; border-color:#38bdf8;}
-  #panelRGU .rgu-resumen { display:flex; gap:5px; margin-bottom:10px;}
-  #panelRGU .rgu-resumen .celda { flex:1; text-align:center; background:#0f172a; border:1px solid #334155; border-radius:7px; padding:6px 3px;}
-  #panelRGU .rgu-resumen .celda .rn { font-size:16px; font-weight:bold; line-height:1.1;}
-  #panelRGU .rgu-resumen .celda .rl { font-size:9px; color:#94a3b8; margin-top:2px; text-transform:uppercase; letter-spacing:.3px;}
-  #panelRGU .rgu-det { margin-top:12px; border-top:1px solid #334155; padding-top:10px; }
-  #panelRGU .det-titulo { font-size:12px; color:#e2e8f0; font-weight:bold; margin-bottom:6px; }
-  #panelRGU .det-grupo { margin-bottom:8px; }
-  #panelRGU .det-head { font-size:11px; font-weight:bold; margin:4px 0; display:flex; justify-content:space-between; align-items:center; gap:6px; }
-  #panelRGU .det-head span { color:#94a3b8; font-weight:normal; }
-  #panelRGU .det-vacia { color:#64748b; font-size:10px; padding:2px 0 4px; }
-  #panelRGU .det-fila { display:flex; justify-content:space-between; align-items:center; gap:6px; background:#0f172a; border-radius:5px; padding:4px 7px; margin:3px 0; cursor:pointer; }
-  #panelRGU .det-fila:hover { background:#0d2e24; }
-  #panelRGU .det-info { display:flex; flex-direction:column; overflow:hidden; }
-  #panelRGU .det-tec { font-size:11px; color:#e2e8f0; font-weight:bold; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  #panelRGU .det-sub { font-size:9px; color:#94a3b8; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  #panelRGU .det-rgu { font-size:14px; font-weight:bold; flex-shrink:0; }
   .btn.on5 { background:#be123c; border-color:#fb7185; font-weight:bold; }
   .btn.on6 { background:#0e7490; border-color:#22d3ee; font-weight:bold; }
   #panelComp { position:absolute; top:70px; right:10px; z-index:1000; background:rgba(30,41,59,.96); border:1px solid #475569; border-radius:10px; padding:12px; width:300px; max-height:78vh; overflow-y:auto; display:none; font-size:12px;}
@@ -253,7 +220,6 @@
   <button class="btn" id="btnRein" onclick="toggleRein()">🏠 Direcciones</button>
   <button class="btn" id="btnNuevas" onclick="toggleNuevas()">🆕 Nuevas</button>
   <button class="btn" id="btnComp" onclick="toggleComp()">📊 Completitud</button>
-  <button class="btn" id="btnRGU" onclick="toggleRGU()">💰 RGU</button>
   <div class="stats" id="stats"></div>
   <div class="stats" id="lastUpd" style="margin-left:0;">⏳ cargando datos...</div>
 </header>
@@ -322,11 +288,6 @@
   </div>
   <div class="hint">Órdenes en estado <b>Iniciado</b> cuya hora de inicio ya lleva más del umbral. Respeta el filtro de ciudad de arriba. Toca una tarjeta para ver al técnico en el mapa.</div>
   <div id="listaAtr"></div>
-</div>
-<div id="panelRGU">
-  <h2>💰 RGU — hoy y proyección</h2>
-  <div class="hint">Respeta el filtro de ciudad y franja de arriba. <b>Pendientes</b> = órdenes activas sin cerrar (pendiente, iniciado, en ruta) → proyección si se completan. Toca un técnico para verlo en el mapa.</div>
-  <div id="cuerpoRGU"></div>
 </div>
 <div class="estados" id="estadosBox">
   <div><span class="mini mk-iniciado"></span> Iniciado (trabajando)</div>
@@ -431,7 +392,6 @@ document.addEventListener('click', ()=> document.querySelectorAll('.msel').forEa
 function cambioFiltro(){
   render();
   if(libre && posActual) buscarCercanos(posActual);
-  if(rgu) renderPanelRGU();
   if(atr) renderPanelAtr();
   if(sinComp) renderPanelSC();
 }
@@ -644,10 +604,26 @@ function renderNuevas(){
     + fams.map(function(f){
         return '<span class="nchip'+(nuevasFiltro===f?' act':'')+'" onclick="setNuevasFiltro(\''+f+'\')">'
              + f+' · '+cuenta[f]+'</span>';
-      }).join('');
+      }).join('')
+    + '<span class="rsep"></span>';
 
-  const lista = nuevasFiltro === 'todas'
-    ? todas : todas.filter(function(x){ return familiaCat(x.cat) === nuevasFiltro; });
+  const lista0 = (nuevasFiltro === 'todas'
+    ? todas.slice() : todas.filter(function(x){ return familiaCat(x.cat) === nuevasFiltro; }))
+    // orden por FRANJA y luego por hora de la cita, no por cuando la detecto el
+    // ciclo. Asi la lista queda como se lee una bandeja: 10-13, 13-16, 16-19.
+    .sort(function(a,b){
+      return String(a.f||'').localeCompare(String(b.f||''))
+          || String(a.hi||'').localeCompare(String(b.hi||''));
+    });
+  const lista = lista0;
+
+  // conteo por franja, igual que en Caidas. Va sobre lo que se esta MOSTRANDO:
+  // si filtras Altas, te dice como se reparten esas Altas en el dia.
+  const porFr = {};
+  lista.forEach(function(x){ const f = x.f || 's/f'; porFr[f] = (porFr[f]||0)+1; });
+  chips.innerHTML += Object.keys(porFr).sort().map(function(f){
+    return '<span class="fchip">' + escR(f.replace('-', ' a ')) + ' · <b>'+porFr[f]+'</b></span>';
+  }).join('');
 
   if(!lista.length){
     cont.innerHTML = '<div class="vacio">Todavía no ha entrado ninguna orden nueva hoy.<br>'
@@ -666,7 +642,7 @@ function renderNuevas(){
   }
 
   nota.textContent = 'Lo que entró después de la bandeja inicial · jornada '
-    + (ALERTAS && ALERTAS.fecha ? ALERTAS.fecha : '') + ' · más nuevo arriba. '
+    + (ALERTAS && ALERTAS.fecha ? ALERTAS.fecha : '') + ' · ordenado por franja. '
     + 'Las filas en gris ya salieron de la bandeja.';
 }
 
@@ -931,7 +907,7 @@ function render(mantenerVista){
       bounds.push([p.lat,p.lng]);
     });
   });
-  document.getElementById('stats').textContent = nTec+' técnicos · '+nTrab+' trabajos · 🟢 '+nIni+' iniciados · 🟠 '+nRuta+' en ruta · ✅ '+nComp+' completados' + (rguDisponible ? ' · 💰 '+fmtRGU(nRGU)+' RGU' : '');
+  document.getElementById('stats').textContent = nTec+' técnicos · '+nTrab+' trabajos · 🟢 '+nIni+' iniciados · 🟠 '+nRuta+' en ruta · ✅ '+nComp+' completados';
   // En el refresco automatico NO se reencuadra el mapa: si estabas mirando
   // un sector con zoom, se respeta donde tenias la vista.
   if(bounds.length && !mantenerVista) map.fitBounds(bounds,{padding:[40,40]});
@@ -1206,26 +1182,12 @@ function categoriaTipo(t){
   return 'Otros';
 }
 
-function cerrarRGU(){
-  if(!rgu) return;
-  rgu = false;
-  document.getElementById('btnRGU').classList.remove('on4');
-  document.getElementById('btnRGU').textContent = '💰 RGU';
-  document.getElementById('panelRGU').style.display = 'none';
-  document.getElementById('estadosBox').style.display = '';
-}
+/* El panel de RGU se saco del dashboard (boton y ventana). Estas dos quedan
+   como no-op porque las llaman los demas paneles al abrirse (cerrarComp,
+   Tecnico libre, Caidas, etc.); borrarlas obligaria a tocar 5 sitios mas. */
+function cerrarRGU(){ rgu = false; }
 
-function toggleRGU(){
-  cerrarComp();
-  if(libre) toggleLibre();             // modos excluyentes
-  cerrarSC(); cerrarAtr(); cerrarCaidas();
-  rgu = !rgu;
-  document.getElementById('btnRGU').classList.toggle('on4', rgu);
-  document.getElementById('btnRGU').textContent = rgu ? '✖ Salir RGU' : '💰 RGU';
-  document.getElementById('panelRGU').style.display = rgu ? 'block' : 'none';
-  document.getElementById('estadosBox').style.display = rgu ? 'none' : '';
-  if(rgu) renderPanelRGU();
-}
+function toggleRGU(){ rgu = false; }
 
 // Modos del panel RGU. Pendiente = órdenes activas sin cerrar (proyección).
 const RGU_MODOS = {
@@ -1234,7 +1196,6 @@ const RGU_MODOS = {
   tot:  {estados:['Completado','Pendiente','Iniciado','en ruta'], label:'RGU total proyectado',      color:'#38bdf8'}
 };
 
-function setRguModo(m){ rguModo = m; renderPanelRGU(); }
 
 function rguPasaFiltro(p){
   return okCiudad(p) && okFranja(p);
@@ -1327,85 +1288,6 @@ function detalleCerradas(){
   });
   return '<div class="rgu-det"><div class="det-titulo">📋 Detalle por tipo de actividad</div>'+html+'</div>';
 }
-
-function renderPanelRGU(){
-  const cont = document.getElementById('cuerpoRGU');
-  if(!rguDisponible){
-    cont.innerHTML = '<div class="vacio">Este origen de datos no trae la info de RGU.<br><br>📂 Carga el <b>Excel del portal</b> (que incluye las columnas <b>Subtipo</b> y <b>Pasos</b>) para ver los RGU,<br>o agrega el campo <b>rgu</b> a <b>rutas.json</b> desde <b>transformador.py</b>.</div>';
-    return;
-  }
-
-  // --- resumen fijo: los 3 números siempre visibles (para la proyección) ---
-  const rComp = rguSuma(RGU_MODOS.comp.estados);
-  const rPend = rguSuma(RGU_MODOS.pend.estados);
-  const rTot  = rComp.tot + rPend.tot;
-
-  const tabs =
-    '<div class="rgu-tabs">'+
-      '<button class="'+(rguModo==='comp'?'act act-comp':'')+'" onclick="setRguModo(\'comp\')">✅ Completados</button>'+
-      '<button class="'+(rguModo==='pend'?'act act-pend':'')+'" onclick="setRguModo(\'pend\')">⏳ Pendientes</button>'+
-      '<button class="'+(rguModo==='tot' ?'act act-tot' :'')+'" onclick="setRguModo(\'tot\')">🎯 Total</button>'+
-    '</div>';
-
-  const resumen =
-    '<div class="rgu-resumen">'+
-      '<div class="celda"><div class="rn" style="color:#34d399">'+fmtRGU(rComp.tot)+'</div><div class="rl">Completado</div></div>'+
-      '<div class="celda"><div class="rn" style="color:#fbbf24">'+fmtRGU(rPend.tot)+'</div><div class="rl">Pendiente</div></div>'+
-      '<div class="celda"><div class="rn" style="color:#38bdf8">'+fmtRGU(rTot)+'</div><div class="rl">Proyección</div></div>'+
-    '</div>';
-
-  // --- desglose según el modo activo ---
-  const modo = RGU_MODOS[rguModo];
-  let porTec = {}, porTipo = {}, totRGU = 0, totOrd = 0;
-  tecs.forEach(t=>{
-    DB[t].forEach(p=>{
-      if(!modo.estados.includes(p.e)) return;
-      if(!rguPasaFiltro(p)) return;
-      const r = Number(p.rgu||0);
-      totRGU += r; totOrd++;
-      porTec[t] = (porTec[t]||0) + r;
-      const cat = categoriaTipo(p.t);
-      if(!porTipo[cat]) porTipo[cat] = {rgu:0, n:0};
-      porTipo[cat].rgu += r; porTipo[cat].n++;
-    });
-  });
-  const ordenCat = ['Alta','Migración','Reparación','Modificación','Otros'];
-  const chips = ordenCat.filter(c=>porTipo[c]).map(c=>
-    '<div class="chip">'+c+': <b>'+fmtRGU(porTipo[c].rgu)+'</b> <span style="color:#64748b">('+porTipo[c].n+')</span></div>').join('');
-  const ranking = Object.keys(porTec).filter(t=>porTec[t]>0).sort((a,b)=>porTec[b]-porTec[a]);
-  const cards = ranking.map(t=>{
-    const nOrd = DB[t].filter(p=> modo.estados.includes(p.e) && rguPasaFiltro(p)).length;
-    const tEsc = t.replace(/'/g,"\\'");
-    return '<div class="rgucard" style="border-left-color:'+modo.color+'" onclick="verTecnicoSC(\''+tEsc+'\')">'+
-      '<div><div class="nom"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:'+colorOf[t]+';margin-right:5px;"></span>'+t+'</div>'+
-      '<div class="sub">'+nOrd+' orden'+(nOrd>1?'es':'')+'</div></div>'+
-      '<div class="val" style="color:'+modo.color+'">'+fmtRGU(porTec[t])+'</div></div>';
-  }).join('');
-
-  const vacioMsg = rguModo==='pend' ? 'No hay órdenes pendientes con estos filtros.'
-                 : rguModo==='tot'  ? 'No hay órdenes con estos filtros.'
-                 :                    'Aún no hay órdenes completadas con estos filtros.';
-
-  cont.innerHTML =
-    tabs + resumen +
-    '<div class="total" style="border-color:'+modo.color+'"><div class="n" style="color:'+modo.color+'">'+fmtRGU(totRGU)+'</div>'+
-      '<div class="l">'+modo.label+' · '+totOrd+' órden'+(totOrd===1?'':'es')+'</div></div>'+
-    (chips ? '<div class="tipos">'+chips+'</div>' : '') +
-    (cards || '<div class="vacio">'+vacioMsg+'</div>') +
-    detalleCerradas();
-}
-
-
-
-/* ============ COMPLETITUD (corte 13:00, meta 85%) ============
-   Se cuenta POR TECNICO, no por orden: cada tecnico que cerro al menos
-   una orden antes de las 13:00 suma 1. El denominador son todos los
-   tecnicos con trabajo asignado hoy (sin contar canceladas).
-   Ej: 23 de 38 tecnicos = 60,5%.
-   A proposito NO respeta los filtros de la barra: el numero que mide la
-   empresa es sobre el equipo completo. */
-const COMP_CORTE = '13:00';
-const COMP_META = 0.85;
 
 function calcularCompletitud(){
   let total=0, cumplen=0, faltantes=[], porCiudad={};
@@ -1763,7 +1645,11 @@ document.getElementById('inExcel').addEventListener('change', function(ev){
         let esGSA = false;
         if(est==='No Realizada'){
           nNR++;
-          if(/falla/.test(_cierre||'') && /aprovision/.test(_cierre||'') && /\bgsa\b/.test(_deriv||'')){
+          // mismas dos senales que generar_rutas.py: se buscan en las DOS
+          // columnas juntas, y 'provision' sin la 'a' para que calce tanto
+          // "Falla de Aprovisionamiento" como "Falla Provisionamiento".
+          const _amb = (_cierre||'') + ' | ' + (_deriv||'');
+          if(/falla/.test(_amb) && /provision/.test(_amb) && /\bgsa\b/.test(_amb)){
             est = 'Completado'; esGSA = true; nGSA++;
           }
         }
@@ -1791,8 +1677,7 @@ document.getElementById('inExcel').addEventListener('change', function(ev){
       sel.innerHTML = '<option value="__ALL__">Todos los técnicos</option>';
       tecs.forEach(t=>{ const o=document.createElement('option'); o.value=t; o.textContent=t; sel.appendChild(o); });
       llenarListaTecs();
-      if(rgu) renderPanelRGU();
-      const ahora = new Date();
+          const ahora = new Date();
       FECHA_DATOS = new Date();
       document.getElementById('lastUpd').textContent = '📂 Excel local: '+('0'+ahora.getHours()).slice(-2)+':'+('0'+ahora.getMinutes()).slice(-2)+' (solo en este PC)';
       render();
