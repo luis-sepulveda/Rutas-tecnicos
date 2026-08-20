@@ -622,7 +622,7 @@ function renderNuevas(){
   const porFr = {};
   lista.forEach(function(x){ const f = x.f || 's/f'; porFr[f] = (porFr[f]||0)+1; });
   chips.innerHTML += Object.keys(porFr).sort().map(function(f){
-    return '<span class="fchip">' + escR(f.replace('-', ' a ')) + ' · <b>'+porFr[f]+'</b></span>';
+    return '<span class="fchip">\ud83d\udd52 ' + escR(f) + ' · <b>'+porFr[f]+'</b></span>';
   }).join('');
 
   if(!lista.length){
