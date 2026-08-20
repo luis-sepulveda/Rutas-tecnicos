@@ -186,6 +186,28 @@
   .fchip b { color:#cbd5e1; }
   .mc-body .fgrupo { grid-column:1/-1; color:#94a3b8; font-size:12px; font-weight:bold; margin-top:7px; padding-top:7px; border-top:1px solid #334155; }
   .mc-body .fgrupo span { color:#94a3b8; font-weight:normal; }
+  /* --- Modal de direcciones reincidentes (No Realizadas repetidas) --- */
+  #modalRein { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); }
+  #modalRein.abierto { display:flex; align-items:flex-start; justify-content:center; padding:4vh 2vw; }
+  #modalRein .mc-body { display:block; }
+  .rchip { background:#1e293b; border:1px solid #475569; color:#e2e8f0; border-radius:999px;
+    padding:3px 11px; font-size:11.5px; cursor:pointer; white-space:nowrap; }
+  .rchip:hover { background:#334155; }
+  .rchip.act { background:#7f1d1d; border-color:#ef4444; color:#fff; font-weight:bold; }
+  .rcard { border-left:3px solid #f59e0b; background:#111c33; border-radius:0 7px 7px 0;
+    padding:9px 11px; margin-bottom:7px; }
+  .rcard .rtop { display:flex; align-items:baseline; gap:10px; cursor:pointer; }
+  .rcard .rn { background:#7f1d1d; color:#fff; border-radius:6px; padding:2px 8px;
+    font-size:12px; font-weight:bold; flex-shrink:0; }
+  .rcard .rdir { font-weight:bold; color:#f1f5f9; font-size:13.5px; flex:1; min-width:0; }
+  .rcard .rult { color:#94a3b8; font-size:11px; white-space:nowrap; }
+  .rcard .rvis { display:none; margin-top:7px; border-top:1px solid #334155; padding-top:6px; }
+  .rcard.abierta .rvis { display:block; }
+  .rvis .rv { display:flex; gap:9px; font-size:11.5px; color:#cbd5e1; padding:3px 0; flex-wrap:wrap; }
+  .rvis .rv .rf { color:#93c5fd; font-family:'Consolas',monospace; flex-shrink:0; }
+  .rvis .rv .rc { color:#fca5a5; }
+  .rvis .rv .rgsa { background:#334155; color:#93c5fd; border-radius:4px; padding:0 5px; font-size:10px; }
+  #modalRein .vacio { color:#94a3b8; text-align:center; padding:28px 6px; font-size:14px; line-height:1.6; }
 </style>
 </head>
 <body>
@@ -201,6 +223,7 @@
   <button class="btn" id="btnSC" onclick="toggleSinCompletar()">🚩 Sin completar</button>
   <button class="btn" id="btnAtr" onclick="toggleAtrasados()">⏱️ +2h30 iniciado</button>
   <button class="btn" id="btnCaidas" onclick="toggleCaidas()">🚨 Caídas</button>
+  <button class="btn" id="btnRein" onclick="toggleRein()">🏠 Direcciones</button>
   <button class="btn" id="btnComp" onclick="toggleComp()">📊 Completitud</button>
   <button class="btn" id="btnRGU" onclick="toggleRGU()">💰 RGU</button>
   <div class="stats" id="stats"></div>
@@ -223,6 +246,19 @@
     </div>
     <div id="listaCaidas" class="mc-body"></div>
     <div id="mcResnota" class="mc-resnota" style="display:none;"></div>
+  </div>
+</div>
+<div id="modalRein" onclick="if(event.target===this) cerrarRein()">
+  <div class="mc-box">
+    <div class="mc-head">
+      <div class="mc-head-left">
+        <h2>🏠 Direcciones que se repiten</h2>
+        <div id="reinChips" class="mc-cont"></div>
+      </div>
+      <button class="mc-close" onclick="cerrarRein()" title="Cerrar (Esc)">✖</button>
+    </div>
+    <div id="listaRein" class="mc-body"></div>
+    <div id="reinNota" class="mc-resnota"></div>
   </div>
 </div>
 <div id="panelSC">
@@ -492,8 +528,129 @@ function verTecnicoCaida(t){
   if(DB && DB[t]){ sel.value = t; render(); }
 }
 
-// cerrar el modal con la tecla Esc
-document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarCaidas(); });
+// cerrar los modales con la tecla Esc
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape'){ cerrarCaidas(); cerrarRein(); }
+});
+
+/* ======================= DIRECCIONES REINCIDENTES =======================
+   Historico de domicilios con visitas NO REALIZADAS, para ver a que casa
+   se vuelve una y otra vez sin poder cerrar.
+
+   Vive en historial_dir.json, un archivo APARTE de rutas.json: rutas.json es
+   la foto de un dia y se sobreescribe cada 5 min, asi que no sirve para
+   contar entre dias. Se baja una sola vez, al abrir el modal por primera
+   vez, porque cambia pocas veces al dia (solo cuando aparece una nueva No
+   Realizada) y pesa mas que el rutas.json.                                 */
+const URL_HIST_API = 'https://api.github.com/repos/luis-sepulveda/Rutas-tecnicos/contents/historial_dir.json?ref=main';
+const URL_HIST_RAW = 'https://raw.githubusercontent.com/luis-sepulveda/Rutas-tecnicos/main/historial_dir.json';
+
+let HIST = null;             // contenido de historial_dir.json
+let reinAbierto = false;
+let reinMin = 2;             // minimo de visitas para aparecer en la lista
+let reinGSA = true;          // incluir las cerradas por regla GSA
+
+async function bajarHistorial(){
+  try {
+    const r = await fetch(URL_HIST_API,
+      { headers:{'Accept':'application/vnd.github.raw'}, cache:'no-store' });
+    if(r.ok) return await r.json();
+  } catch(e) { /* plan B */ }
+  const r2 = await fetch(URL_HIST_RAW + '?t=' + Date.now(), { cache:'no-store' });
+  if(!r2.ok) throw new Error(r2.status);
+  return await r2.json();
+}
+
+function cerrarRein(){
+  if(!reinAbierto) return;
+  reinAbierto = false;
+  document.getElementById('modalRein').classList.remove('abierto');
+}
+
+async function toggleRein(){
+  cerrarComp(); cerrarRGU(); cerrarAtr(); cerrarSC(); cerrarCaidas();
+  if(libre) toggleLibre();
+  reinAbierto = !reinAbierto;
+  document.getElementById('modalRein').classList.toggle('abierto', reinAbierto);
+  if(!reinAbierto) return;
+
+  if(HIST === null){
+    document.getElementById('listaRein').innerHTML =
+      '<div class="vacio">⏳ cargando historial...</div>';
+    document.getElementById('reinChips').innerHTML = '';
+    document.getElementById('reinNota').textContent = '';
+    try { HIST = await bajarHistorial(); }
+    catch(e){
+      document.getElementById('listaRein').innerHTML =
+        '<div class="vacio">⚠️ No pude bajar el historial.<br>'
+        + 'Revisa que historial_dir.json este publicado en el repo.</div>';
+      return;
+    }
+  }
+  renderRein();
+}
+
+function setReinMin(n){ reinMin = n; renderRein(); }
+function toggleReinGSA(){ reinGSA = !reinGSA; renderRein(); }
+
+// esc(): escapa texto para meterlo en HTML sin romper nada
+function escR(t){ return String(t==null?'':t)
+  .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+function renderRein(){
+  const cont = document.getElementById('listaRein');
+  const chips = document.getElementById('reinChips');
+  const nota = document.getElementById('reinNota');
+  if(!HIST || !HIST.dirs){ cont.innerHTML = '<div class="vacio">Sin datos.</div>'; return; }
+
+  // El JSON ya viene ordenado por cantidad de visitas. Aca solo se filtra:
+  // si el usuario apaga GSA hay que RECONTAR, porque el "n" del archivo
+  // incluye las visitas cerradas por falla de aprovisionamiento.
+  const lista = [];
+  HIST.dirs.forEach(function(d){
+    const vis = reinGSA ? d.v : d.v.filter(function(v){ return !v.gsa; });
+    if(vis.length >= reinMin) lista.push({ d:d.d, lat:d.lat, lng:d.lng, v:vis });
+  });
+  lista.sort(function(a,b){ return b.v.length - a.v.length || a.d.localeCompare(b.d); });
+
+  chips.innerHTML =
+      [2,3,4].map(function(n){
+        return '<span class="rchip'+(reinMin===n?' act':'')+'" onclick="setReinMin('+n+')">'
+             + n+'+ visitas</span>';
+      }).join('')
+    + '<span class="rchip'+(reinGSA?' act':'')+'" onclick="toggleReinGSA()">incluir GSA</span>';
+
+  if(!lista.length){
+    cont.innerHTML = '<div class="vacio">✅ Ninguna dirección con '+reinMin
+      + ' o más visitas no realizadas'+(reinGSA?'':' (sin contar GSA)')+'.</div>';
+  } else {
+    cont.innerHTML = lista.map(function(d, i){
+      const ult = d.v[d.v.length-1].f;
+      const filas = d.v.slice().reverse().map(function(v){
+        return '<div class="rv">'
+          + '<span class="rf">'+escR(v.f)+'</span>'
+          + '<span>'+escR(v.cat)+'</span>'
+          + '<span>· '+escR(v.tec)+'</span>'
+          + (v.cierre ? '<span class="rc">· '+escR(v.cierre)+'</span>' : '')
+          + (v.gsa ? '<span class="rgsa">GSA</span>' : '')
+          + '</div>';
+      }).join('');
+      return '<div class="rcard" id="rc'+i+'">'
+        + '<div class="rtop" onclick="document.getElementById(\'rc'+i+'\').classList.toggle(\'abierta\')">'
+        +   '<span class="rn">'+d.v.length+'x</span>'
+        +   '<span class="rdir">'+escR(d.d)+'</span>'
+        +   '<span class="rult">última: '+escR(ult)+' ▾</span>'
+        + '</div>'
+        + '<div class="rvis">'+filas+'</div>'
+        + '</div>';
+    }).join('');
+  }
+
+  nota.textContent = 'Solo visitas NO REALIZADAS. '
+    + (HIST.desde ? 'Desde '+HIST.desde+' hasta '+HIST.hasta+' · '+HIST.dias+' día(s) · ' : '')
+    + (HIST.total_visitas||0)+' visitas registradas · historial generado '+(HIST.generado||'—')
+    + '. Las marcadas GSA son fallas de aprovisionamiento, no del técnico.';
+}
 
 function renderPanelCaidas(){
   const cont = document.getElementById('listaCaidas');
