@@ -1289,6 +1289,14 @@ function detalleCerradas(){
   return '<div class="rgu-det"><div class="det-titulo">📋 Detalle por tipo de actividad</div>'+html+'</div>';
 }
 
+/* ============ COMPLETITUD (meta 85% antes de las 13:00) ============
+   Cuenta cada tecnico que cerro AL MENOS UNA orden antes del corte.
+   Ej: 23 de 38 tecnicos = 60,5%.
+   A proposito NO respeta los filtros de la barra: el numero que mide la
+   empresa es sobre el equipo completo. */
+const COMP_CORTE = '13:00';
+const COMP_META = 0.85;
+
 function calcularCompletitud(){
   let total=0, cumplen=0, faltantes=[], porCiudad={};
   tecs.forEach(t=>{
