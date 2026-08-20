@@ -432,6 +432,15 @@ function toggleSinCompletar(){
 function verTecnicoSC(t){ sel.value = t; render(); }
 
 /* ============ CAIDAS DEL DIA (ordenes que salieron de la bandeja) ============ */
+// Deriva la franja (10-13 / 13-16 / 16-19) desde una hora "HH:MM" — fallback si la caida no trae c.f
+function franjaDeHora(hi){
+  if(!hi) return '';
+  const h = parseInt(String(hi).slice(0,2),10);
+  if(isNaN(h)) return '';
+  if(h < 13) return '10-13';
+  if(h < 16) return '13-16';
+  return '16-19';
+}
 function nCaidas(){ return (ALERTAS && ALERTAS.activas) ? ALERTAS.activas.length : 0; }
 
 function renderBannerCaidas(){
@@ -493,7 +502,7 @@ function renderPanelCaidas(){
     cont.innerHTML = activas.map(c=>{
       const dir = (c.d||'').replace(/</g,'&lt;');
       const salio = (c.visto||'').split(' ').pop();   // solo HH:MM de cuando se cayo
-      const franja = c.f || '—';
+      const franja = c.f || franjaDeHora(c.hi) || '—';   // usa c.f; si no viene, la deriva de la hora de inicio
       return '<div class="caidacard" onclick="verTecnicoCaida(\''+String(c.tec).replace(/'/g,"\\'")+'\')">'
         + '<div class="fila1"><span class="cat">'+(c.cat||c.tec)+'</span>'
         + '<span class="ot">'+c.o+'</span></div>'
