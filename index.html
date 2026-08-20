@@ -202,6 +202,29 @@
   .rcard .rdir { font-weight:bold; color:#f1f5f9; font-size:13.5px; flex:1; min-width:0; }
   .rcard .rult { color:#94a3b8; font-size:11px; white-space:nowrap; }
   .rsep { width:1px; background:#334155; margin:0 3px; align-self:stretch; }
+  /* --- Ordenes nuevas del dia --- */
+  #modalNuevas { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); }
+  #modalNuevas.abierto { display:flex; align-items:flex-start; justify-content:center; padding:4vh 2vw; }
+  #modalNuevas .mc-body { display:block; }
+  .btn.on-nuevas { background:#065f46; border-color:#10b981; font-weight:bold; }
+  #btnNuevas .badge { display:inline-block; min-width:16px; padding:0 5px; margin-left:5px;
+    background:#10b981; color:#022c22; border-radius:9px; font-size:11px; font-weight:bold;
+    line-height:16px; text-align:center; }
+  .nchip { background:#1e293b; border:1px solid #475569; color:#e2e8f0; border-radius:999px;
+    padding:3px 11px; font-size:11.5px; cursor:pointer; white-space:nowrap; }
+  .nchip:hover { background:#334155; }
+  .nchip.act { background:#065f46; border-color:#10b981; color:#fff; font-weight:bold; }
+  .nfila { display:grid; grid-template-columns:105px 1fr 62px 52px; align-items:center;
+    gap:12px; padding:6px 10px; border-radius:6px; border-left:3px solid #10b981;
+    background:#111c33; margin-bottom:4px; font-size:12.5px; }
+  .nfila .npet { font-family:'Consolas',monospace; font-size:11px; color:#93c5fd;
+    background:#1e293b; border:1px solid #334155; border-radius:5px;
+    padding:1px 6px; text-align:center; }
+  .nfila .ncat { font-weight:bold; color:#f1f5f9; }
+  .nfila .nfr { color:#94a3b8; font-size:11.5px; font-family:'Consolas',monospace; }
+  .nfila .nho { color:#cbd5e1; font-size:11.5px; font-family:'Consolas',monospace; text-align:right; }
+  .nfila.ida { border-left-color:#64748b; opacity:.62; }
+  #modalNuevas .vacio { color:#94a3b8; text-align:center; padding:28px 6px; font-size:14px; line-height:1.6; }
   .rnum { font-family:'Consolas',monospace; font-size:11px; color:#93c5fd;
     background:#1e293b; border:1px solid #334155; border-radius:5px;
     padding:1px 6px; white-space:nowrap; flex-shrink:0; }
@@ -228,6 +251,7 @@
   <button class="btn" id="btnAtr" onclick="toggleAtrasados()">⏱️ +2h30 iniciado</button>
   <button class="btn" id="btnCaidas" onclick="toggleCaidas()">🚨 Caídas</button>
   <button class="btn" id="btnRein" onclick="toggleRein()">🏠 Direcciones</button>
+  <button class="btn" id="btnNuevas" onclick="toggleNuevas()">🆕 Nuevas</button>
   <button class="btn" id="btnComp" onclick="toggleComp()">📊 Completitud</button>
   <button class="btn" id="btnRGU" onclick="toggleRGU()">💰 RGU</button>
   <div class="stats" id="stats"></div>
@@ -250,6 +274,19 @@
     </div>
     <div id="listaCaidas" class="mc-body"></div>
     <div id="mcResnota" class="mc-resnota" style="display:none;"></div>
+  </div>
+</div>
+<div id="modalNuevas" onclick="if(event.target===this) cerrarNuevas()">
+  <div class="mc-box">
+    <div class="mc-head">
+      <div class="mc-head-left">
+        <h2>🆕 Órdenes nuevas de hoy</h2>
+        <div id="nuevasChips" class="mc-cont"></div>
+      </div>
+      <button class="mc-close" onclick="cerrarNuevas()" title="Cerrar (Esc)">✖</button>
+    </div>
+    <div id="listaNuevas" class="mc-body"></div>
+    <div id="nuevasNota" class="mc-resnota"></div>
   </div>
 </div>
 <div id="modalRein" onclick="if(event.target===this) cerrarRein()">
@@ -505,6 +542,8 @@ function renderBannerCaidas(){
   // boton del header: globo con el conteo cuando hay
   btn.innerHTML = '🚨 Caídas' + (n>0 ? ' <span class="badge">'+n+'</span>' : '');
   btn.classList.toggle('on-caidas', n>0 && !caidasAbierto);
+  renderBotonNuevas();
+  if(nuevasAbierto) renderNuevas();   // el modal abierto se refresca solo
 }
 
 function abrirCaidas(){ if(!caidasAbierto) toggleCaidas(); }
@@ -534,8 +573,102 @@ function verTecnicoCaida(t){
 
 // cerrar los modales con la tecla Esc
 document.addEventListener('keydown', function(e){
-  if(e.key === 'Escape'){ cerrarCaidas(); cerrarRein(); }
+  if(e.key === 'Escape'){ cerrarCaidas(); cerrarRein(); cerrarNuevas(); }
 });
+
+/* ======================= ORDENES NUEVAS DEL DIA =======================
+   Lo que el portal fue cargando DURANTE la jornada, sin la bandeja con la
+   que se arranco en la manana.
+
+   No baja ningun archivo: viaja dentro de rutas.json (ALERTAS.nuevas), que
+   el dashboard ya recarga en cada ciclo. Lo calcula alertas_rutas.py con el
+   mismo diff que usa para las caidas, pero al reves: en vez de "estaba y ya
+   no esta", es "no estaba y ahora si".
+
+   El estado que se muestra es el ACTUAL, no el que traia al entrar: una
+   orden que llego a las 10:00 y ya esta cerrada sale como Completado.      */
+let nuevasAbierto = false;
+let nuevasFiltro = 'todas';
+
+function nuevasDelDia(){ return (ALERTAS && ALERTAS.nuevas) ? ALERTAS.nuevas : []; }
+
+// agrupa la categoria en familias para los chips de arriba
+function familiaCat(cat){
+  const c = String(cat||'').toLowerCase();
+  if(c.indexOf('alta') === 0) return 'Altas';
+  if(c.indexOf('migra') === 0) return 'Migraciones';
+  if(c.indexOf('repara') === 0) return 'Reparaciones';
+  if(c.indexOf('modific') === 0) return 'Modificaciones';
+  return 'Otras';
+}
+
+function renderBotonNuevas(){
+  const n = nuevasDelDia().length;
+  const btn = document.getElementById('btnNuevas');
+  if(!btn) return;
+  btn.innerHTML = '🆕 Nuevas' + (n>0 ? ' <span class="badge">'+n+'</span>' : '');
+  btn.classList.toggle('on-nuevas', n>0 && !nuevasAbierto);
+}
+
+function cerrarNuevas(){
+  if(!nuevasAbierto) return;
+  nuevasAbierto = false;
+  document.getElementById('modalNuevas').classList.remove('abierto');
+  renderBotonNuevas();
+}
+
+function toggleNuevas(){
+  cerrarComp(); cerrarRGU(); cerrarAtr(); cerrarSC(); cerrarCaidas(); cerrarRein();
+  if(libre) toggleLibre();
+  nuevasAbierto = !nuevasAbierto;
+  document.getElementById('modalNuevas').classList.toggle('abierto', nuevasAbierto);
+  if(nuevasAbierto) renderNuevas();
+  renderBotonNuevas();
+}
+
+function setNuevasFiltro(f){ nuevasFiltro = f; renderNuevas(); }
+
+function renderNuevas(){
+  const cont = document.getElementById('listaNuevas');
+  const chips = document.getElementById('nuevasChips');
+  const nota = document.getElementById('nuevasNota');
+  const todas = nuevasDelDia();
+
+  // conteo por familia para los chips (siempre sobre el total, no sobre lo filtrado)
+  const cuenta = {};
+  todas.forEach(function(x){ const f = familiaCat(x.cat); cuenta[f] = (cuenta[f]||0)+1; });
+  const fams = Object.keys(cuenta).sort();
+  chips.innerHTML =
+      '<span class="nchip'+(nuevasFiltro==='todas'?' act':'')+'" onclick="setNuevasFiltro(\'todas\')">'
+    + 'todas · '+todas.length+'</span>'
+    + fams.map(function(f){
+        return '<span class="nchip'+(nuevasFiltro===f?' act':'')+'" onclick="setNuevasFiltro(\''+f+'\')">'
+             + f+' · '+cuenta[f]+'</span>';
+      }).join('');
+
+  const lista = nuevasFiltro === 'todas'
+    ? todas : todas.filter(function(x){ return familiaCat(x.cat) === nuevasFiltro; });
+
+  if(!lista.length){
+    cont.innerHTML = '<div class="vacio">Todavía no ha entrado ninguna orden nueva hoy.<br>'
+      + 'Aquí aparece lo que el portal va cargando después de la bandeja inicial.</div>';
+  } else {
+    cont.innerHTML = lista.map(function(x){
+      // se salio de la bandeja despues de entrar: se deja en gris, no se borra
+      const ida = String(x.e||'').indexOf('ya no está') >= 0;
+      return '<div class="nfila'+(ida?' ida':'')+'"'+(ida?' title="ya no está en la bandeja"':'')+'>'
+        + '<span class="npet">'+escR(x.pet || x.o || '')+'</span>'
+        + '<span class="ncat">'+escR(x.cat)+'</span>'
+        + '<span class="nfr">'+escR(x.f)+'</span>'
+        + '<span class="nho">'+escR(x.hi)+'</span>'
+        + '</div>';
+    }).join('');
+  }
+
+  nota.textContent = 'Lo que entró después de la bandeja inicial · jornada '
+    + (ALERTAS && ALERTAS.fecha ? ALERTAS.fecha : '') + ' · más nuevo arriba. '
+    + 'Las filas en gris ya salieron de la bandeja.';
+}
 
 /* ======================= DIRECCIONES REINCIDENTES =======================
    Historico de domicilios con visitas NO REALIZADAS, para ver a que casa
