@@ -201,6 +201,7 @@
     font-size:12px; font-weight:bold; flex-shrink:0; }
   .rcard .rdir { font-weight:bold; color:#f1f5f9; font-size:13.5px; flex:1; min-width:0; }
   .rcard .rult { color:#94a3b8; font-size:11px; white-space:nowrap; }
+  .rsep { width:1px; background:#334155; margin:0 3px; align-self:stretch; }
   .rnum { font-family:'Consolas',monospace; font-size:11px; color:#93c5fd;
     background:#1e293b; border:1px solid #334155; border-radius:5px;
     padding:1px 6px; white-space:nowrap; flex-shrink:0; }
@@ -552,6 +553,7 @@ let HIST = null;             // contenido de historial_dir.json
 let reinAbierto = false;
 let reinMin = 2;             // minimo de visitas para aparecer en la lista
 let reinGSA = true;          // incluir las cerradas por regla GSA
+let reinOrden = 'n';         // 'n' = mas repetidas primero | 'f' = mas recientes primero
 
 async function bajarHistorial(){
   try {
@@ -595,6 +597,15 @@ async function toggleRein(){
 
 function setReinMin(n){ reinMin = n; renderRein(); }
 function toggleReinGSA(){ reinGSA = !reinGSA; renderRein(); }
+function setReinOrden(o){ reinOrden = o; renderRein(); }
+
+// 'dd-mm-yyyy' -> numero comparable (yyyymmdd). Sirve para ordenar sin
+// construir un Date por fila; ademas evita el lio de que new Date('12-08-2026')
+// lo interprete como mes 12 al estilo gringo.
+function fnum(f){
+  const p = String(f||'').split('-');
+  return p.length === 3 ? (+p[2])*10000 + (+p[1])*100 + (+p[0]) : 0;
+}
 
 // esc(): escapa texto para meterlo en HTML sin romper nada
 function escR(t){ return String(t==null?'':t)
@@ -614,14 +625,27 @@ function renderRein(){
     const vis = reinGSA ? d.v : d.v.filter(function(v){ return !v.gsa; });
     if(vis.length >= reinMin) lista.push({ d:d.d, lat:d.lat, lng:d.lng, v:vis });
   });
-  lista.sort(function(a,b){ return b.v.length - a.v.length || a.d.localeCompare(b.d); });
+  // La fecha de la ultima visita se recalcula sobre lo FILTRADO: si apagas GSA,
+  // la mas nueva puede pasar a ser otra.
+  lista.forEach(function(d){ d.ult = d.v[d.v.length-1].f; });
+  if(reinOrden === 'f'){
+    // mas recientes primero; si dos cayeron el mismo dia, gana la que mas se repite
+    lista.sort(function(a,b){
+      return fnum(b.ult) - fnum(a.ult) || b.v.length - a.v.length || a.d.localeCompare(b.d);
+    });
+  } else {
+    lista.sort(function(a,b){ return b.v.length - a.v.length || a.d.localeCompare(b.d); });
+  }
 
   chips.innerHTML =
       [2,3,4].map(function(n){
         return '<span class="rchip'+(reinMin===n?' act':'')+'" onclick="setReinMin('+n+')">'
              + n+'+ visitas</span>';
       }).join('')
-    + '<span class="rchip'+(reinGSA?' act':'')+'" onclick="toggleReinGSA()">incluir GSA</span>';
+    + '<span class="rchip'+(reinGSA?' act':'')+'" onclick="toggleReinGSA()">incluir GSA</span>'
+    + '<span class="rsep"></span>'
+    + '<span class="rchip'+(reinOrden==='n'?' act':'')+'" onclick="setReinOrden(\'n\')">↕ más repetidas</span>'
+    + '<span class="rchip'+(reinOrden==='f'?' act':'')+'" onclick="setReinOrden(\'f\')">📅 más recientes</span>';
 
   if(!lista.length){
     cont.innerHTML = '<div class="vacio">✅ Ninguna dirección con '+reinMin
@@ -629,7 +653,7 @@ function renderRein(){
   } else {
     cont.innerHTML = lista.map(function(d, i){
       const ultV = d.v[d.v.length-1];
-      const ult = ultV.f;
+      const ult = d.ult;
       // numero de la visita MAS NUEVA, para poder buscarla al tiro en el portal
       // sin tener que desplegar la tarjeta. Si el export no trae peticion, va la OT.
       const ultNum = ultV.pet || ultV.o || '';
