@@ -162,29 +162,29 @@
   /* --- Modal de caidas a pantalla completa --- */
   #modalCaidas { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); }
   #modalCaidas.abierto { display:flex; align-items:flex-start; justify-content:center; padding:4vh 2vw; }
-  .mc-box { background:#0f172a; border:1px solid #ef4444; border-radius:14px; width:min(1280px,97vw); max-height:92vh;
+  .mc-box { background:#0f172a; border:1px solid #64748b; border-radius:14px; width:min(1280px,97vw); max-height:92vh;
     display:flex; flex-direction:column; box-shadow:0 20px 60px rgba(0,0,0,.6); }
   .mc-head { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 16px; border-bottom:1px solid #334155; }
-  .mc-head h2 { font-size:17px; color:#f87171; }
+  .mc-head h2 { font-size:17px; color:#cbd5e1; }
   .mc-close { background:#1e293b; border:1px solid #475569; color:#e2e8f0; border-radius:8px; width:34px; height:34px; font-size:15px; cursor:pointer; flex-shrink:0; }
-  .mc-close:hover { background:#7f1d1d; border-color:#ef4444; }
+  .mc-close:hover { background:#334155; border-color:#64748b; }
   .mc-body { padding:12px 16px; overflow-y:auto; display:grid; grid-template-columns:repeat(auto-fill,minmax(235px,1fr)); gap:9px; }
   .mc-body .vacio { grid-column:1/-1; color:#4ade80; text-align:center; padding:28px 6px; line-height:1.6; font-size:14px; }
   .mc-resnota { color:#94a3b8; font-size:11.5px; padding:0 16px 14px; border-top:1px solid #334155; margin-top:2px; padding-top:10px; }
-  .caidacard { border-left:3px solid #ef4444; background:#111c33; border-radius:7px; padding:8px 10px; cursor:pointer; }
-  .caidacard:hover { background:#3b1220; }
+  .caidacard { border-left:3px solid #64748b; background:#111c33; border-radius:0 7px 7px 0; padding:8px 10px; cursor:pointer; }
+  .caidacard:hover { background:#16233f; }
   .caidacard .fila1 { display:flex; justify-content:space-between; align-items:baseline; gap:8px; margin-bottom:3px; }
   .caidacard .ot { font-family:'Consolas',monospace; font-size:10.5px; color:#93c5fd; flex-shrink:0; }
   .caidacard .cat { font-weight:bold; color:#f1f5f9; font-size:13.5px; }
   .caidacard .sub { color:#cbd5e1; font-size:11px; margin-top:2px; line-height:1.4; }
   .caidacard .sub b { color:#fff; font-weight:bold; }
-  .caidacard .horas { color:#fca5a5; font-size:11px; margin-top:4px; font-weight:600; }
+  .caidacard .horas { color:#94a3b8; font-size:11px; margin-top:4px; font-weight:600; }
   /* contador por franja (chips) y separadores de grupo dentro del modal de caidas */
   .mc-head-left { display:flex; align-items:center; gap:12px; flex-wrap:wrap; min-width:0; }
   .mc-cont { display:flex; gap:6px; flex-wrap:wrap; }
   .fchip { background:#1e293b; border:1px solid #475569; color:#e2e8f0; border-radius:999px; padding:3px 11px; font-size:11.5px; white-space:nowrap; }
-  .fchip b { color:#fca5a5; }
-  .mc-body .fgrupo { grid-column:1/-1; color:#f87171; font-size:12px; font-weight:bold; margin-top:7px; padding-top:7px; border-top:1px solid #334155; }
+  .fchip b { color:#cbd5e1; }
+  .mc-body .fgrupo { grid-column:1/-1; color:#94a3b8; font-size:12px; font-weight:bold; margin-top:7px; padding-top:7px; border-top:1px solid #334155; }
   .mc-body .fgrupo span { color:#94a3b8; font-weight:normal; }
 </style>
 </head>
