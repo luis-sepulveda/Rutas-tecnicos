@@ -187,10 +187,10 @@
   .rvis .rv .re.ok { background:#065f46; } .rvis .rv .re.nr { background:#7f1d1d; }
   .rmapa { color:#93c5fd; font-size:11.5px; cursor:pointer; margin-top:6px; display:inline-block; }
   /* --- Modal de SECTORES (agrupado por calle) --- */
-  #modalSec { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); }
-  #modalSec.abierto { display:flex; align-items:flex-start; justify-content:center; padding:4vh 2vw; }
-  #modalSec .mc-body { display:block; }
-  #modalSec .vacio { color:#94a3b8; text-align:center; padding:28px 6px; font-size:14px; line-height:1.6; }
+  #modalPlanta { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); }
+  #modalPlanta.abierto { display:flex; align-items:flex-start; justify-content:center; padding:4vh 2vw; }
+  #modalPlanta .mc-body { display:block; }
+  #modalPlanta .vacio { color:#94a3b8; text-align:center; padding:28px 6px; font-size:14px; line-height:1.6; }
   .btn.on-sec { background:#0c4a6e; border-color:#38bdf8; font-weight:bold; }
   .schip { background:#1e293b; border:1px solid #475569; color:#e2e8f0; border-radius:999px;
     padding:3px 11px; font-size:11.5px; cursor:pointer; white-space:nowrap; }
@@ -257,7 +257,7 @@
   <button class="btn" id="btnAtr" onclick="toggleAtrasados()">⏱️ +2h30 iniciado</button>
   <button class="btn" id="btnCaidas" onclick="toggleCaidas()">🚨 Caídas</button>
   <button class="btn" id="btnRepe" onclick="toggleRepe()">🔁 Direcciones repetidas hoy</button>
-  <button class="btn" id="btnSec" onclick="toggleSec()">📡 Sectores</button>
+  <button class="btn" id="btnPlanta" onclick="togglePlanta()">📡 Fallas de red</button>
   <button class="btn" id="btnNuevas" onclick="toggleNuevas()">🆕 Nuevas</button>
   <button class="btn" id="btnComp" onclick="toggleComp()">📊 Completitud</button>
   <div class="stats" id="stats"></div>
@@ -295,17 +295,17 @@
     <div id="nuevasNota" class="mc-resnota"></div>
   </div>
 </div>
-<div id="modalSec" onclick="if(event.target===this) cerrarSec()">
+<div id="modalPlanta" onclick="if(event.target===this) cerrarPlanta()">
   <div class="mc-box">
     <div class="mc-head">
       <div class="mc-head-left">
-        <h2>📡 Sectores con caídas repetidas</h2>
-        <div id="secChips" class="mc-cont"></div>
+        <h2>📡 Direcciones con falla de red</h2>
+        <div id="plantaChips" class="mc-cont"></div>
       </div>
-      <button class="mc-close" onclick="cerrarSec()" title="Cerrar (Esc)">✖</button>
+      <button class="mc-close" onclick="cerrarPlanta()" title="Cerrar (Esc)">✖</button>
     </div>
-    <div id="listaSec" class="mc-body"></div>
-    <div id="secNota" class="mc-resnota"></div>
+    <div id="listaPlanta" class="mc-body"></div>
+    <div id="plantaNota" class="mc-resnota"></div>
   </div>
 </div>
 <div id="modalRepe" onclick="if(event.target===this) cerrarRepe()">
@@ -586,7 +586,7 @@ function verTecnicoCaida(t){
 
 // cerrar los modales con la tecla Esc
 document.addEventListener('keydown', function(e){
-  if(e.key === 'Escape'){ cerrarCaidas(); cerrarNuevas(); cerrarRepe(); cerrarSec(); }
+  if(e.key === 'Escape'){ cerrarCaidas(); cerrarNuevas(); cerrarRepe(); cerrarPlanta(); }
 });
 
 /* ======================= ORDENES NUEVAS DEL DIA =======================
@@ -938,180 +938,159 @@ function renderRepe(){
     + 'ANTERIORES: lo que se cae hoy no se cuenta a sí mismo. '
     + 'El número azul es la petición (o la OT si el export no la trae).';
 }
-/* ======================= SECTORES (agrupado por calle) =======================
-   El listado de direcciones responde "que casa se cae". Esto responde otra
-   pregunta: "que TRAMO se cae". Si una sola casa acumula 7 caidas es problema
-   de esa casa; si 10 casas DISTINTAS de la misma calle se caen una vez cada
-   una, no lo arregla ningun tecnico: es el tramo, y hay que escalarlo.
 
-   Por eso la tarjeta muestra los DOMICILIOS distintos como dato principal, no
-   el total de caidas, y separa los motivos en familias: un tramo donde manda
-   "red" (ductos, NAP, niveles) va a planta; uno donde manda "cliente" (sin
-   moradores, reagenda) es problema de agenda y confirmacion previa.
+/* ======================= FALLAS DE RED / PLANTA =======================
+   Direcciones donde la visita se cayo por la RED, no por el cliente: NAP
+   (ubicacion, niveles, acceso, copado), ductos tapados, aprovisionamiento,
+   zona roja, sin red, contingencia.
 
-   Los datos vienen en la llave 'sectores' de historial_dir.json, el mismo
-   archivo del boton de Direcciones, asi que si ya se bajo no se baja de nuevo. */
-let secAbierto = false;
-let secFiltro = 'todos';   // 'todos' | 'red' | 'hoy'
-let secOrden = 'nd';       // 'nd' = mas domicilios | 'n' = mas caidas | 'red' = mas red
+   Por que aparte del resto: de las 800+ caidas del historico, la mayoria son
+   sin moradores / reagenda / desiste, o sea agenda. Esas se arreglan llamando
+   al cliente. Estas NO se arreglan mandando otro tecnico de instalacion: hay
+   que escalarlas, y si no, la visita se vuelve a perder.
 
-// Mismo corte que _calle() en Python: se saca lo que viene despues del
-// marcador de depto/casa y se bota UN token numerico (la numeracion), para no
-// romper calles que se llaman con numero como 'PJE 3' o 'CALLE 1'.
-const MARCA_UNIDAD = /\b(CASA|DEPTO|DPTO|EDIF\.?|EDIFICIO|BLOCK|BLK|TORRE|LOCAL|OF\.?|OFICINA|PISO|SITIO|PARCELA)\b/;
-function calleDe(d){
-  const k = claveDir(d);
-  const p = k.split(',');
-  if(p.length < 2) return '';
-  let via = p.slice(0,-1).join(',').trim();
-  const m = via.match(MARCA_UNIDAD);
-  if(m) via = via.slice(0, m.index).trim();
-  const t = via.split(/\s+/);
-  for(let i = t.length-1; i >= 0; i--){
-    if(/^0*\d+[A-Z]?$/.test(t[i])){ t.splice(i,1); break; }
-  }
-  return t.join(' ').replace(/[\s\-(]+$/,'') + '|' + p[p.length-1].trim();
+   '+N en la calle' significa que hay N direcciones MAS del mismo tramo con
+   falla de planta. Mientras mas alto, menos es la acometida de esa casa y mas
+   es el sector.
+
+   Los datos vienen en la llave 'planta' de historial_dir.json.            */
+let plantaAbierto = false;
+let plantaFiltro = 'todos';   // 'todos' | 'nap' | 'ducto' | 'aprov' | 'hoy'
+let plantaOrden = 'n';        // 'n' = mas caidas | 'f' = mas reciente
+
+function cerrarPlanta(){
+  if(!plantaAbierto) return;
+  plantaAbierto = false;
+  document.getElementById('modalPlanta').classList.remove('abierto');
+  document.getElementById('btnPlanta').classList.remove('on-sec');
 }
 
-// cuantas ordenes de HOY hay en cada calle (para saber si el tramo esta activo)
-function ordenesHoyPorCalle(){
-  const m = {};
-  Object.keys(DB || {}).forEach(function(t){
-    (DB[t] || []).forEach(function(w){
-      const c = calleDe(w.d);
-      if(!c) return;
-      (m[c] = m[c] || []).push({ num:(w.pet || w.o || ''), d:w.d, e:w.e, f:w.f, tec:t });
-    });
-  });
-  return m;
-}
-
-function cerrarSec(){
-  if(!secAbierto) return;
-  secAbierto = false;
-  document.getElementById('modalSec').classList.remove('abierto');
-  document.getElementById('btnSec').classList.remove('on-sec');
-}
-
-async function toggleSec(){
+async function togglePlanta(){
   cerrarComp(); cerrarRGU(); cerrarAtr(); cerrarSC(); cerrarCaidas(); cerrarRepe();
   if(typeof cerrarNuevas === 'function') cerrarNuevas();
   if(libre) toggleLibre();
-  secAbierto = !secAbierto;
-  document.getElementById('modalSec').classList.toggle('abierto', secAbierto);
-  document.getElementById('btnSec').classList.toggle('on-sec', secAbierto);
-  if(!secAbierto) return;
+  plantaAbierto = !plantaAbierto;
+  document.getElementById('modalPlanta').classList.toggle('abierto', plantaAbierto);
+  document.getElementById('btnPlanta').classList.toggle('on-sec', plantaAbierto);
+  if(!plantaAbierto) return;
 
   if(HIST === null){
-    document.getElementById('listaSec').innerHTML = '<div class="vacio">⏳ cargando histórico...</div>';
-    document.getElementById('secChips').innerHTML = '';
-    document.getElementById('secNota').textContent = '';
+    document.getElementById('listaPlanta').innerHTML = '<div class="vacio">⏳ cargando histórico...</div>';
+    document.getElementById('plantaChips').innerHTML = '';
+    document.getElementById('plantaNota').textContent = '';
     try { HIST = await bajarHistorial(); }
     catch(e){
-      document.getElementById('listaSec').innerHTML =
+      document.getElementById('listaPlanta').innerHTML =
         '<div class="vacio">⚠️ No pude bajar el histórico.<br>'
         + 'Revisa que historial_dir.json esté publicado en el repo.</div>';
       return;
     }
   }
-  renderSec();
+  renderPlanta();
 }
 
-function setSecFiltro(f){ secFiltro = f; renderSec(); }
-function setSecOrden(o){ secOrden = o; renderSec(); }
-function verEnMapaSec(lat, lng){ cerrarSec(); if(lat && lng) map.setView([lat, lng], 16); }
+function setPlantaFiltro(f){ plantaFiltro = f; renderPlanta(); }
+function setPlantaOrden(o){ plantaOrden = o; renderPlanta(); }
+function verEnMapaPlanta(lat, lng){ cerrarPlanta(); if(lat && lng) map.setView([lat, lng], 17); }
 
-function renderSec(){
-  const cont = document.getElementById('listaSec');
-  const chips = document.getElementById('secChips');
-  const nota = document.getElementById('secNota');
+// ordenes de HOY por direccion exacta (para saber si alguien va para alla)
+function ordenesHoyPorDir(){
+  const m = {};
+  Object.keys(DB || {}).forEach(function(t){
+    (DB[t] || []).forEach(function(w){
+      const k = claveDir(w.d);
+      (m[k] = m[k] || []).push({ num:(w.pet || w.o || ''), e:w.e, f:w.f, tec:t, cat:(w.cat || w.t || '') });
+    });
+  });
+  return m;
+}
 
-  chips.innerHTML =
-      '<span class="schip'+(secFiltro==='todos'?' act':'')+'" onclick="setSecFiltro(\'todos\')">todos</span>'
-    + '<span class="schip'+(secFiltro==='red'?' act':'')+'" onclick="setSecFiltro(\'red\')">🔴 con falla de red</span>'
-    + '<span class="schip'+(secFiltro==='hoy'?' act':'')+'" onclick="setSecFiltro(\'hoy\')">📍 con órdenes hoy</span>'
-    + '<span class="schip'+(secFiltro==='tramo'?' act':'')+'" onclick="setSecFiltro(\'tramo\')">🛣️ solo tramos</span>'
-    + '<span class="schip'+(secFiltro==='cond'?' act':'')+'" onclick="setSecFiltro(\'cond\')">🏢 solo condominios</span>'
+function renderPlanta(){
+  const cont = document.getElementById('listaPlanta');
+  const chips = document.getElementById('plantaChips');
+  const nota = document.getElementById('plantaNota');
+
+  chips.innerHTML = [
+      ['todos','todas'], ['nap','📶 NAP'], ['ducto','🕳️ ductos'],
+      ['aprov','🔌 aprovisionamiento'], ['hoy','📍 con órdenes hoy']
+    ].map(function(o){
+      return '<span class="schip'+(plantaFiltro===o[0]?' act':'')+'" '
+           + 'onclick="setPlantaFiltro(\'' + o[0] + '\')">'+o[1]+'</span>';
+    }).join('')
     + '<span class="rsep"></span>'
-    + '<span class="schip'+(secOrden==='nd'?' act':'')+'" onclick="setSecOrden(\'nd\')">↕ más domicilios</span>'
-    + '<span class="schip'+(secOrden==='n'?' act':'')+'" onclick="setSecOrden(\'n\')">↕ más caídas</span>'
-    + '<span class="schip'+(secOrden==='red'?' act':'')+'" onclick="setSecOrden(\'red\')">🔴 más red</span>';
+    + '<span class="schip'+(plantaOrden==='n'?' act':'')+'" onclick="setPlantaOrden(\'n\')">↕ más caídas</span>'
+    + '<span class="schip'+(plantaOrden==='f'?' act':'')+'" onclick="setPlantaOrden(\'f\')">📅 más reciente</span>';
 
-  const sectores = (HIST && HIST.sectores) ? HIST.sectores : null;
-  if(!sectores){
-    cont.innerHTML = '<div class="vacio">⚠️ El histórico publicado no trae la llave "sectores".<br>'
+  const base = (HIST && HIST.planta) ? HIST.planta : null;
+  if(!base){
+    cont.innerHTML = '<div class="vacio">⚠️ El histórico publicado no trae la llave "planta".<br>'
       + 'Corre el pipeline con la versión nueva de historial_dir.py.</div>';
     nota.textContent = '';
     return;
   }
 
-  const hoyPorCalle = ordenesHoyPorCalle();
-  let lista = sectores.map(function(s){
-    const o = Object.assign({}, s);
-    o.red = (s.fam && s.fam.red) || 0;
-    o.hoy = hoyPorCalle[claveDir(s.c) + '|' + claveDir(s.ciu)] || [];
+  const hoyPorDir = ordenesHoyPorDir();
+  let lista = base.map(function(x){
+    const o = Object.assign({}, x);
+    o.hoy = hoyPorDir[claveDir(x.d)] || [];
+    o.txt = (x.mot || []).map(function(m){ return m[0]; }).join(' ').toLowerCase();
     return o;
   });
 
-  if(secFiltro === 'red') lista = lista.filter(function(s){ return s.red >= 2; });
-  if(secFiltro === 'hoy') lista = lista.filter(function(s){ return s.hoy.length > 0; });
-  if(secFiltro === 'tramo') lista = lista.filter(function(s){ return s.np >= 2; });
-  if(secFiltro === 'cond') lista = lista.filter(function(s){ return s.np === 1; });
+  if(plantaFiltro === 'nap')   lista = lista.filter(function(x){ return x.txt.indexOf('nap') >= 0 || x.txt.indexOf('nivel') >= 0; });
+  if(plantaFiltro === 'ducto') lista = lista.filter(function(x){ return x.txt.indexOf('ducto') >= 0; });
+  if(plantaFiltro === 'aprov') lista = lista.filter(function(x){ return x.txt.indexOf('aprovision') >= 0; });
+  if(plantaFiltro === 'hoy')   lista = lista.filter(function(x){ return x.hoy.length > 0; });
 
-  if(secOrden === 'n')        lista.sort(function(a,b){ return b.n - a.n || b.nd - a.nd; });
-  else if(secOrden === 'red') lista.sort(function(a,b){ return (b.red/b.n) - (a.red/a.n) || b.red - a.red; });
-  else                        lista.sort(function(a,b){ return b.nd - a.nd || b.n - a.n; });
+  if(plantaOrden === 'f') lista.sort(function(a,b){ return fnum(b.ult) - fnum(a.ult) || b.n - a.n; });
+  else                    lista.sort(function(a,b){ return b.n - a.n || b.tramo - a.tramo || fnum(b.ult) - fnum(a.ult); });
 
   if(!lista.length){
-    cont.innerHTML = '<div class="vacio">✅ Ningún sector con ese filtro.</div>';
+    cont.innerHTML = '<div class="vacio">✅ Ninguna dirección con ese filtro.</div>';
   } else {
-    cont.innerHTML = lista.map(function(s, i){
-      const fams = ['red','cliente','datos','otro'].filter(function(f){ return s.fam && s.fam[f]; })
-        .map(function(f){ return '<span class="fam '+f+'">'+f+' '+s.fam[f]+'</span>'; }).join('');
-      const motivos = (s.mot || []).map(function(m){
-        return '<div class="rv"><span class="rf">'+m[1]+'x</span><span>'+escR(m[0])+'</span></div>';
+    cont.innerHTML = lista.map(function(x, i){
+      const motPrin = (x.mot && x.mot[0]) ? x.mot[0][0] : '';
+      const visitas = x.v.slice().reverse().map(function(v){
+        return '<div class="rv">'
+          + '<span class="rf">'+escR(v.f)+'</span>'
+          + '<span class="rnum">'+escR(v.num)+'</span>'
+          + '<span>'+escR(v.cat)+'</span>'
+          + '<span>· '+escR(v.tec)+'</span>'
+          + '<span class="rc">· '+escR(v.cierre)+'</span>'
+          + '</div>';
       }).join('');
-      const doms = (s.dom || []).map(function(d){
-        return '<div class="sdom"><span class="sn">'+d[1]+'x</span><span>'+escR(d[0])+'</span></div>';
-      }).join('');
-      const hoy = s.hoy.length ? '<div class="rvh">Órdenes de hoy en este tramo ('+s.hoy.length+')</div>'
-        + s.hoy.map(function(w){
+      const hoy = x.hoy.length ? '<div class="rvh">Hoy en bandeja ('+x.hoy.length+')</div>'
+        + x.hoy.map(function(w){
             return '<div class="rv"><span class="rh">'+escR(w.f || 's/franja')+'</span>'
-              + '<span class="rnum">'+escR(w.num)+'</span><span>'+escR(w.d)+'</span>'
-              + '<span>· '+escR(w.tec)+'</span><span class="re '+estClase(w.e)+'">'+escR(w.e)+'</span></div>';
+              + '<span class="rnum">'+escR(w.num)+'</span><span>'+escR(w.cat)+'</span>'
+              + '<span>· '+escR(w.tec)+'</span>'
+              + '<span class="re '+estClase(w.e)+'">'+escR(w.e)+'</span></div>';
           }).join('') : '';
-      // se marca en rojo el tramo donde la red pesa: 2+ caidas de planta y al
-      // menos un tercio del total. Ahi el problema no es de terreno.
-      const alerta = s.red >= 2 && s.red >= s.n/3;
-      return '<div class="rcard sec'+(alerta?' alerta':'')+'" id="sc'+i+'">'
-        + '<div class="rtop" onclick="document.getElementById(\'sc'+i+'\').classList.toggle(\'abierta\')">'
-        +   '<span class="rn">'+s.nd+(s.np===1?' unid':' dom')+'</span>'
-        +   '<span class="rdir">'+escR(s.np===1 && s.pr ? s.pr : s.c)+', '+escR(s.ciu)+'</span>'
-        +   '<span class="fam '+(s.np===1?'datos':'cliente')+'">'
-        +     (s.np===1 ? '🏢 condominio' : '🛣️ '+s.np+' predios')+'</span>'
-        +   (s.hoy.length ? '<span class="shoy">hoy '+s.hoy.length+'</span>' : '')
-        +   '<span class="rult">'+s.n+' caídas · últ. '+escR(s.ult || '—')+' ▾</span>'
+      return '<div class="rcard sec alerta" id="pl'+i+'">'
+        + '<div class="rtop" onclick="document.getElementById(\'pl'+i+'\').classList.toggle(\'abierta\')">'
+        +   '<span class="rn">'+x.n+'x</span>'
+        +   '<span class="rdir">'+escR(x.d)+'</span>'
+        +   '<span class="fam red">'+escR(motPrin)+'</span>'
+        +   (x.tramo ? '<span class="fam otro">🛣️ +'+x.tramo+' en la calle</span>' : '')
+        +   (x.hoy.length ? '<span class="shoy">hoy '+x.hoy.length+'</span>' : '')
+        +   '<span class="rult">últ. '+escR(x.ult || '—')+' ▾</span>'
         + '</div>'
         + '<div class="rvis">'
-        +   '<div style="margin-bottom:5px">'+fams+(alerta?'<span class="fam red">⚠ revisar planta</span>':'')+'</div>'
         +   hoy
-        +   '<div class="rvh">Motivos</div>'+motivos
-        +   '<div class="rvh">'+(s.np===1 ? 'Unidades del edificio' : 'Domicilios del tramo')
-        +     ' ('+s.nd+')</div>'+doms
-        +   '<span class="rmapa" onclick="verEnMapaSec('+(s.lat||0)+','+(s.lng||0)+')">📍 ver en el mapa</span>'
+        +   '<div class="rvh">Caídas por red ('+x.n+' de '+x.tot+' totales)</div>'+visitas
+        +   '<span class="rmapa" onclick="verEnMapaPlanta('+(x.lat||0)+','+(x.lng||0)+')">📍 ver en el mapa</span>'
         + '</div>'
         + '</div>';
     }).join('');
   }
 
-  const conRed = lista.filter(function(s){ return s.red >= 2 && s.red >= s.n/3; }).length;
-  const nCond = lista.filter(function(s){ return s.np === 1; }).length;
-  nota.textContent = lista.length + ' sector(es) con 2+ domicilios caídos · '
-    + nCond + ' condominio(s) · ' + conRed + ' con peso de falla de planta. '
-    + '🏢 condominio = un solo predio con varias unidades (acometida o NAP del '
-    + 'edificio). 🛣️ tramo = varios predios de la misma calle (red del sector). '
+  const conHoy = lista.filter(function(x){ return x.hoy.length > 0; }).length;
+  nota.textContent = lista.length + ' dirección(es) con falla de red · ' + conHoy
+    + ' con orden hoy. Solo NAP, ductos, niveles, aprovisionamiento, zona roja '
+    + 'y similares: las caídas por cliente ausente o reagenda no salen acá. '
     + (HIST.desde ? 'Histórico ' + HIST.desde + ' a ' + HIST.hasta + '.' : '');
 }
+
 
 
 function renderPanelCaidas(){
