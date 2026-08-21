@@ -664,7 +664,7 @@ function familiaCat(cat){
 }
 
 /* Clasificacion en CASCADA: cada orden cae en UNA sola categoria, por eso los
-   tres numeros suman el total exacto y ninguna orden se cuenta dos veces.
+   numeros suman el total exacto y ninguna orden se cuenta dos veces.
 
    El orden importa: 'reagendada' manda sobre 'reingreso' porque si es la MISMA
    orden que ya estuvo en una bandeja anterior, no es carga nueva aunque la
@@ -672,7 +672,19 @@ function familiaCat(cat){
 
      reag -> misma OT vista en la bandeja de otro dia   (historial_dir)
      prev -> otra OT, misma direccion, la anterior cayo No Realizada
-     ninguna de las dos -> nuevita, sin ningun antecedente                  */
+     ninguna de las dos -> nuevita, sin ningun antecedente
+
+   OJO - por que 'reagendada' sigue aca si no se muestra:
+   Se midio contra 3054 OTs de tres semanas y dio 0 de 230. En esta operacion
+   el reagendamiento NUNCA conserva el numero: la orden se cierra No Realizada
+   con codigo "Cliente reagenda" y la plataforma emite una nueva (por eso el
+   Area de derivacion dice "Plataforma Reagendamiento"). O sea que esos casos
+   ya salen contados como REINGRESO, que es lo correcto.
+   El chip se saco de la cabecera porque un contador clavado en 0 solo hace
+   dudar de si esta roto. La rama se deja viva y ots_vistas.json se sigue
+   llenando solo: si algun dia el portal cambia y conserva la OT, las
+   reagendadas dejan de contarse como reingresos sin tocar nada, y el chip se
+   vuelve a poner con dos lineas.                                           */
 function clase(x){
   if(x.reag) return 'reagendada';
   if(x.prev && x.prev.length) return 'reingreso';
@@ -700,12 +712,12 @@ function renderBotonNuevas(){
   if(!btn) return;
   // el badge muestra las NUEVITAS, que es el numero que sirve para dimensionar
   // carga entrante. El desglose completo va en el tooltip.
-  const mix = (c.reingreso + c.reagendada) > 0;
+  const mix = c.reingreso > 0;
   btn.innerHTML = '🆕 Nuevas' + (todas.length>0
     ? ' <span class="badge'+(mix?' mix':'')+'">'+c.nuevita+'</span>' : '');
   btn.title = todas.length
-    ? c.nuevita+' nuevas · '+c.reingreso+' reingresos · '+c.reagendada
-      +' reagendadas — '+todas.length+' en total (sin modificaciones)'
+    ? c.nuevita+' nuevas · '+c.reingreso+' reingresos — '
+      +todas.length+' en total (sin modificaciones)'
     : 'Todavía no entra nada nuevo hoy';
   btn.classList.toggle('on-nuevas', todas.length>0 && !nuevasAbierto);
 }
@@ -750,9 +762,6 @@ function renderNuevas(){
     + '<span class="nchip re'+(nuevasFiltro==='reingresos'?' act':'')+'" onclick="setNuevasFiltro(\'reingresos\')" '
     + 'title="otra orden, misma dirección: la visita anterior quedó No Realizada">'
     + '\u21a9 reingresos · '+c.reingreso+'</span>'
-    + '<span class="nchip rg'+(nuevasFiltro==='reagendadas'?' act':'')+'" onclick="setNuevasFiltro(\'reagendadas\')" '
-    + 'title="la misma orden ya estuvo en la bandeja otro día">'
-    + '\u21bb reagendadas · '+c.reagendada+'</span>'
     + '<span class="rsep"></span>'
     + fams.map(function(f){
         return '<span class="nchip'+(nuevasFiltro===f?' act':'')+'" onclick="setNuevasFiltro(\''+f+'\')">'
@@ -767,12 +776,15 @@ function renderNuevas(){
           || String(a.hi||'').localeCompare(String(b.hi||''));
     });
 
-  // conteo por franja, igual que en Caidas. Va sobre lo que se esta MOSTRANDO:
-  // si filtras reingresos, te dice como se reparten ESOS reingresos en el dia.
+  // Contador por franja: va SIEMPRE sobre las NUEVAS, no sobre lo que este
+  // filtrado. Es el reparto de la carga entrante real del dia, o sea el dato
+  // que sirve para dimensionar; no tiene por que cambiar cuando miras los
+  // reingresos. Por eso lleva el mismo icono del chip de nuevas.
   const porFr = {};
-  lista.forEach(function(x){ const f = x.f || 's/f'; porFr[f] = (porFr[f]||0)+1; });
+  todas.filter(function(x){ return clase(x) === 'nuevita'; })
+       .forEach(function(x){ const f = x.f || 's/f'; porFr[f] = (porFr[f]||0)+1; });
   chips.innerHTML += Object.keys(porFr).sort().map(function(f){
-    return '<span class="fchip">\ud83d\udd52 ' + escR(f) + ' · <b>'+porFr[f]+'</b></span>';
+    return '<span class="fchip">\u2728 ' + escR(f) + ' · <b>'+porFr[f]+'</b></span>';
   }).join('');
 
   if(!lista.length){
@@ -815,8 +827,7 @@ function renderNuevas(){
   nota.textContent = 'Lo que entró después de la bandeja inicial · jornada '
     + (ALERTAS && ALERTAS.fecha ? ALERTAS.fecha : '')
     + ' · sin Modificaciones de Servicio · ordenado por franja. '
-    + '✨ nuevas = sin antecedentes · ↩ reingreso = misma dirección, la anterior se cayó · '
-    + '↻ reagendada = misma orden de otro día. '
+    + '✨ nuevas = sin antecedentes · ↩ reingreso = misma dirección, la anterior se cayó. '
     + 'Pasa el mouse por la etiqueta para ver el detalle. '
     + 'Las filas en gris ya salieron de la bandeja.';
 }
