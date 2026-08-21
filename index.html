@@ -169,6 +169,31 @@
   .rcard .rdir { font-weight:bold; color:#f1f5f9; font-size:13.5px; flex:1; min-width:0; }
   .rcard .rult { color:#94a3b8; font-size:11px; white-space:nowrap; }
   .rsep { width:1px; background:#334155; margin:0 3px; align-self:stretch; }
+  /* --- Modal de direcciones REPETIDAS HOY (las de la bandeja de hoy que ya
+         se habian caido antes). Reusa .rcard/.rvis del modal de arriba y solo
+         cambia el color, para que se note al tiro que es otra cosa. --- */
+  #modalRepe { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); }
+  #modalRepe.abierto { display:flex; align-items:flex-start; justify-content:center; padding:4vh 2vw; }
+  #modalRepe .mc-body { display:block; }
+  #modalRepe .vacio { color:#94a3b8; text-align:center; padding:28px 6px; font-size:14px; line-height:1.6; }
+  .btn.on-repe { background:#4c1d95; border-color:#a78bfa; font-weight:bold; }
+  #btnRepe .badge { display:inline-block; min-width:16px; padding:0 5px; margin-left:5px;
+    background:#a78bfa; color:#1e1b4b; border-radius:9px; font-size:11px; font-weight:bold;
+    line-height:16px; text-align:center; }
+  .pchip { background:#1e293b; border:1px solid #475569; color:#e2e8f0; border-radius:999px;
+    padding:3px 11px; font-size:11.5px; cursor:pointer; white-space:nowrap; }
+  .pchip:hover { background:#334155; }
+  .pchip.act { background:#4c1d95; border-color:#a78bfa; color:#fff; font-weight:bold; }
+  .rcard.repe { border-left-color:#a78bfa; }
+  .rcard.repe .rn { background:#4c1d95; }
+  .rvh { color:#94a3b8; font-size:10.5px; font-weight:bold; text-transform:uppercase;
+    letter-spacing:.4px; margin:5px 0 2px; }
+  .rvis .rv .rh { color:#cbd5e1; font-family:'Consolas',monospace; flex-shrink:0; }
+  .rvis .rv .re { border-radius:4px; padding:0 6px; font-size:10px; background:#475569; color:#e2e8f0; }
+  .rvis .rv .re.ini { background:#166534; } .rvis .rv .re.ruta { background:#92400e; }
+  .rvis .rv .re.ok { background:#065f46; } .rvis .rv .re.nr { background:#7f1d1d; }
+  .rmapa { color:#93c5fd; font-size:11.5px; cursor:pointer; margin-top:6px; display:inline-block; }
+  .rmapa:hover { text-decoration:underline; }
   /* --- Ordenes nuevas del dia --- */
   #modalNuevas { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); }
   #modalNuevas.abierto { display:flex; align-items:flex-start; justify-content:center; padding:4vh 2vw; }
@@ -218,6 +243,7 @@
   <button class="btn" id="btnAtr" onclick="toggleAtrasados()">⏱️ +2h30 iniciado</button>
   <button class="btn" id="btnCaidas" onclick="toggleCaidas()">🚨 Caídas</button>
   <button class="btn" id="btnRein" onclick="toggleRein()">🏠 Direcciones</button>
+  <button class="btn" id="btnRepe" onclick="toggleRepe()">🔁 Direcciones repetidas hoy</button>
   <button class="btn" id="btnNuevas" onclick="toggleNuevas()">🆕 Nuevas</button>
   <button class="btn" id="btnComp" onclick="toggleComp()">📊 Completitud</button>
   <div class="stats" id="stats"></div>
@@ -266,6 +292,19 @@
     </div>
     <div id="listaRein" class="mc-body"></div>
     <div id="reinNota" class="mc-resnota"></div>
+  </div>
+</div>
+<div id="modalRepe" onclick="if(event.target===this) cerrarRepe()">
+  <div class="mc-box">
+    <div class="mc-head">
+      <div class="mc-head-left">
+        <h2>🔁 Direcciones repetidas hoy</h2>
+        <div id="repeChips" class="mc-cont"></div>
+      </div>
+      <button class="mc-close" onclick="cerrarRepe()" title="Cerrar (Esc)">✖</button>
+    </div>
+    <div id="listaRepe" class="mc-body"></div>
+    <div id="repeNota" class="mc-resnota"></div>
   </div>
 </div>
 <div id="panelSC">
@@ -517,7 +556,7 @@ function cerrarCaidas(){
 
 function toggleCaidas(){
   // el modal tapa todo: cerramos los paneles laterales para no dejarlos abiertos detras
-  cerrarComp(); cerrarRGU(); cerrarAtr(); cerrarSC();
+  cerrarComp(); cerrarRGU(); cerrarAtr(); cerrarSC(); cerrarRepe();
   if(libre) toggleLibre();
   caidasAbierto = !caidasAbierto;
   document.getElementById('modalCaidas').classList.toggle('abierto', caidasAbierto);
@@ -533,7 +572,7 @@ function verTecnicoCaida(t){
 
 // cerrar los modales con la tecla Esc
 document.addEventListener('keydown', function(e){
-  if(e.key === 'Escape'){ cerrarCaidas(); cerrarRein(); cerrarNuevas(); }
+  if(e.key === 'Escape'){ cerrarCaidas(); cerrarRein(); cerrarNuevas(); cerrarRepe(); }
 });
 
 /* ======================= ORDENES NUEVAS DEL DIA =======================
@@ -578,7 +617,7 @@ function cerrarNuevas(){
 }
 
 function toggleNuevas(){
-  cerrarComp(); cerrarRGU(); cerrarAtr(); cerrarSC(); cerrarCaidas(); cerrarRein();
+  cerrarComp(); cerrarRGU(); cerrarAtr(); cerrarSC(); cerrarCaidas(); cerrarRein(); cerrarRepe();
   if(libre) toggleLibre();
   nuevasAbierto = !nuevasAbierto;
   document.getElementById('modalNuevas').classList.toggle('abierto', nuevasAbierto);
@@ -686,7 +725,7 @@ function cerrarRein(){
 }
 
 async function toggleRein(){
-  cerrarComp(); cerrarRGU(); cerrarAtr(); cerrarSC(); cerrarCaidas();
+  cerrarComp(); cerrarRGU(); cerrarAtr(); cerrarSC(); cerrarCaidas(); cerrarRepe();
   if(libre) toggleLibre();
   reinAbierto = !reinAbierto;
   document.getElementById('modalRein').classList.toggle('abierto', reinAbierto);
@@ -797,6 +836,201 @@ function renderRein(){
     + (HIST.desde ? 'Desde '+HIST.desde+' hasta '+HIST.hasta+' · '+HIST.dias+' día(s) · ' : '')
     + (HIST.total_visitas||0)+' visitas registradas · historial generado '+(HIST.generado||'—')
     + '. Las marcadas GSA son fallas de aprovisionamiento, no del técnico.';
+}
+
+/* ======================= DIRECCIONES REPETIDAS HOY =======================
+   Las direcciones que estan HOY en la bandeja y que YA se habian caido antes:
+   la casa que no se pudo cerrar y que VTR/Claro volvio a crear.
+
+   Diferencia con el boton "Direcciones": ese es el historico completo, mira
+   hacia atras y solo lista las de 2+ visitas. Este mira la jornada de HOY y
+   desde UNA visita previa, que es cuando todavia sirve hacer algo (mandar al
+   mismo tecnico que ya fue, avisar antes al cliente, escalar a cuadrilla).
+
+   No baja ningun archivo: el dato viaja dentro de rutas.json, en el campo
+   'prev' de cada orden, que calcula historial_dir.marcar_repetidas() cruzando
+   contra el historico local. Si el rutas.json viene de la version vieja del
+   pipeline no trae 'prev' y el boton simplemente queda en cero.            */
+let repeAbierto = false;
+let repeMin = 1;            // minimo de visitas previas para listar
+let repeGSA = true;         // contar tambien las previas reclasificadas por GSA
+let repeAbiertas = false;   // solo las que hoy siguen sin cerrar
+let repeOrden = 'n';        // 'n' = mas caidas primero | 'h' = por hora de hoy
+
+// misma normalizacion que _dirbase() en Python: asi dos ordenes del mismo
+// domicilio caen en una sola tarjeta
+function claveDir(d){
+  return String(d||'').toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/\s+/g,' ').trim();
+}
+
+function estClase(e){
+  const x = String(e||'').toLowerCase();
+  if(x === 'iniciado') return 'ini';
+  if(x === 'en ruta') return 'ruta';
+  if(x === 'completado') return 'ok';
+  if(x === 'no realizada') return 'nr';
+  return '';
+}
+
+// direcciones distintas con al menos una visita previa. Sin filtros a proposito:
+// el globo del boton tiene que ser un numero fijo, no cambiar segun los chips.
+function nRepe(){
+  const s = {};
+  Object.keys(DB || {}).forEach(function(t){
+    (DB[t] || []).forEach(function(w){
+      if(w.prev && w.prev.length) s[claveDir(w.d)] = 1;
+    });
+  });
+  return Object.keys(s).length;
+}
+
+function renderBotonRepe(){
+  const btn = document.getElementById('btnRepe');
+  if(!btn) return;
+  const n = nRepe();
+  btn.innerHTML = '🔁 Direcciones repetidas hoy'
+    + (n > 0 ? ' <span class="badge">'+n+'</span>' : '');
+  btn.classList.toggle('on-repe', n > 0 && !repeAbierto);
+}
+
+function agruparRepe(){
+  const g = {};
+  Object.keys(DB || {}).forEach(function(tec){
+    (DB[tec] || []).forEach(function(w){
+      if(!w.prev || !w.prev.length) return;
+      const prev = repeGSA ? w.prev : w.prev.filter(function(p){ return !p.gsa; });
+      if(prev.length < repeMin) return;
+      const k = claveDir(w.d);
+      if(!g[k]) g[k] = { d:w.d, lat:w.lat, lng:w.lng, prev:prev, hoy:[] };
+      // dos ordenes hoy en la misma casa comparten historial; se deja el mas largo
+      if(prev.length > g[k].prev.length) g[k].prev = prev;
+      g[k].hoy.push({ num:(w.pet || w.o || ''), cat:(w.cat || w.t || ''), e:w.e,
+                      f:w.f, hi:w.hi, tec:tec });
+    });
+  });
+
+  let lista = Object.keys(g).map(function(k){ return g[k]; });
+  if(repeAbiertas){
+    lista = lista.filter(function(x){
+      return x.hoy.some(function(w){
+        const e = String(w.e || '').toLowerCase();
+        return e !== 'completado' && e !== 'cancelado';
+      });
+    });
+  }
+  lista.forEach(function(x){
+    x.hoy.sort(function(a,b){ return (a.hi||'99:99').localeCompare(b.hi||'99:99'); });
+    x.h0 = x.hoy.length ? (x.hoy[0].hi || '99:99') : '99:99';
+  });
+  if(repeOrden === 'h'){
+    lista.sort(function(a,b){ return a.h0.localeCompare(b.h0) || b.prev.length - a.prev.length; });
+  } else {
+    lista.sort(function(a,b){ return b.prev.length - a.prev.length || a.d.localeCompare(b.d); });
+  }
+  return lista;
+}
+
+function cerrarRepe(){
+  if(!repeAbierto) return;
+  repeAbierto = false;
+  document.getElementById('modalRepe').classList.remove('abierto');
+  renderBotonRepe();
+}
+
+function toggleRepe(){
+  cerrarComp(); cerrarRGU(); cerrarAtr(); cerrarSC(); cerrarCaidas(); cerrarRein();
+  if(typeof cerrarNuevas === 'function') cerrarNuevas();
+  if(libre) toggleLibre();
+  repeAbierto = !repeAbierto;
+  document.getElementById('modalRepe').classList.toggle('abierto', repeAbierto);
+  if(repeAbierto) renderRepe();
+  renderBotonRepe();
+}
+
+function setRepeMin(n){ repeMin = n; renderRepe(); }
+function toggleRepeGSA(){ repeGSA = !repeGSA; renderRepe(); }
+function toggleRepeAbiertas(){ repeAbiertas = !repeAbiertas; renderRepe(); }
+function setRepeOrden(o){ repeOrden = o; renderRepe(); }
+
+function verEnMapaRepe(lat, lng){
+  cerrarRepe();
+  if(lat && lng) map.setView([lat, lng], 17);
+}
+
+function renderRepe(){
+  const cont = document.getElementById('listaRepe');
+  const chips = document.getElementById('repeChips');
+  const nota = document.getElementById('repeNota');
+  const lista = agruparRepe();
+
+  chips.innerHTML =
+      [1,2,3].map(function(n){
+        return '<span class="pchip'+(repeMin===n?' act':'')+'" onclick="setRepeMin('+n+')">'
+             + n+'+ caída'+(n>1?'s':'')+' antes</span>';
+      }).join('')
+    + '<span class="pchip'+(repeGSA?' act':'')+'" onclick="toggleRepeGSA()">incluir GSA</span>'
+    + '<span class="pchip'+(repeAbiertas?' act':'')+'" onclick="toggleRepeAbiertas()">solo sin cerrar hoy</span>'
+    + '<span class="rsep"></span>'
+    + '<span class="pchip'+(repeOrden==='n'?' act':'')+'" onclick="setRepeOrden(\'n\')">↕ más caídas</span>'
+    + '<span class="pchip'+(repeOrden==='h'?' act':'')+'" onclick="setRepeOrden(\'h\')">🕘 por hora</span>';
+
+  if(!lista.length){
+    const hayCampo = Object.keys(DB||{}).some(function(t){
+      return (DB[t]||[]).some(function(w){ return w.prev !== undefined; }); });
+    cont.innerHTML = '<div class="vacio">'
+      + (nRepe() === 0 && !hayCampo
+          ? '⚠️ El rutas.json no trae el cruce con el histórico.<br>'
+            + 'Corre el pipeline con la versión nueva de generar_rutas.py.'
+          : '✅ Ninguna dirección de hoy con '+repeMin+' o más caídas previas'
+            + (repeGSA?'':' (sin contar GSA)')+(repeAbiertas?' y todavía sin cerrar':'')+'.')
+      + '</div>';
+  } else {
+    cont.innerHTML = lista.map(function(d, i){
+      const filasHoy = d.hoy.map(function(w){
+        return '<div class="rv">'
+          + '<span class="rh">'+escR(w.hi || '--:--')+'</span>'
+          + '<span class="rnum">'+escR(w.num)+'</span>'
+          + '<span>'+escR(w.cat)+'</span>'
+          + '<span>· '+escR(w.tec)+'</span>'
+          + '<span class="re '+estClase(w.e)+'">'+escR(w.e)+'</span>'
+          + '</div>';
+      }).join('');
+      const filasPrev = d.prev.slice().reverse().map(function(v){
+        return '<div class="rv">'
+          + '<span class="rf">'+escR(v.f)+'</span>'
+          + '<span class="rnum">'+escR(v.num)+'</span>'
+          + '<span>'+escR(v.cat)+'</span>'
+          + '<span>· '+escR(v.tec)+'</span>'
+          + (v.cierre ? '<span class="rc">· '+escR(v.cierre)+'</span>' : '')
+          + (v.gsa ? '<span class="rgsa">GSA</span>' : '')
+          + '</div>';
+      }).join('');
+      const estHoy = d.hoy.map(function(w){ return w.e; }).join(' / ');
+      return '<div class="rcard repe" id="pc'+i+'">'
+        + '<div class="rtop" onclick="document.getElementById(\'pc'+i+'\').classList.toggle(\'abierta\')">'
+        +   '<span class="rn">'+d.prev.length+'x antes</span>'
+        +   '<span class="rdir">'+escR(d.d)+'</span>'
+        +   '<span class="rnum">'+escR(d.hoy[0] ? d.hoy[0].num : '')+'</span>'
+        +   '<span class="rult">hoy '+escR(d.h0 === '99:99' ? 's/hora' : d.h0)
+        +     ' · '+escR(estHoy)+' ▾</span>'
+        + '</div>'
+        + '<div class="rvis">'
+        +   '<div class="rvh">Hoy en bandeja</div>'+filasHoy
+        +   '<div class="rvh">No realizadas anteriores ('+d.prev.length+')</div>'+filasPrev
+        +   '<span class="rmapa" onclick="verEnMapaRepe('+(d.lat||0)+','+(d.lng||0)+')">📍 ver en el mapa</span>'
+        + '</div>'
+        + '</div>';
+    }).join('');
+  }
+
+  const nOrd = lista.reduce(function(a, x){ return a + x.hoy.length; }, 0);
+  let total = 0;
+  Object.keys(DB||{}).forEach(function(t){ total += (DB[t]||[]).length; });
+  nota.textContent = lista.length + ' dirección(es) · ' + nOrd + ' orden(es) de hoy'
+    + ' sobre ' + total + ' en bandeja. Cuenta visitas No Realizadas de días '
+    + 'ANTERIORES: lo que se cae hoy no se cuenta a sí mismo. '
+    + 'El número azul es la petición (o la OT si el export no la trae).';
 }
 
 function renderPanelCaidas(){
@@ -1603,6 +1837,8 @@ async function cargarDatosVivos(auto){
     lu.textContent = '🔄 Actualizado: '+js.actualizado;
     ALERTAS = js.alertas || null;      // caidas del dia (si el pipeline las trae)
     renderBannerCaidas();
+    renderBotonRepe();                 // globo con las direcciones repetidas de hoy
+    if(repeAbierto) renderRepe();      // si el modal esta abierto, se refresca solo
     if(caidasAbierto) renderPanelCaidas();
     if(comp) renderPanelComp();
     render(auto);          // auto = true -> no reencuadra el mapa
@@ -1683,6 +1919,7 @@ document.getElementById('inExcel').addEventListener('change', function(ev){
       Object.keys(nuevo).forEach(t=> nuevo[t].sort((a,b)=> (a.hi||'99:99').localeCompare(b.hi||'99:99')));
 
       DB = nuevo;
+      renderBotonRepe();   // el Excel local no trae el cruce: el globo vuelve a 0
       tecs = Object.keys(DB).sort();
       aplicarRGU(DB);
       colorOf = {}; tecs.forEach((t,i)=>colorOf[t]=COLORS[i%COLORS.length]);
