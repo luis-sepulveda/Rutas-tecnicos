@@ -249,6 +249,18 @@
   .nfila .nfr { color:#94a3b8; font-size:11.5px; font-family:'Consolas',monospace; text-align:right; }
   .nfila .nde { color:#6ee7b7; font-size:11.5px; font-family:'Consolas',monospace; text-align:right; }
   .nfila.ida { border-left-color:#64748b; opacity:.62; }
+  /* etiquetas de clasificacion: naranjo = reingreso, azul = reagendada.
+     Van DENTRO de la celda .ncat para no tocar el grid de 4 columnas. */
+  .nfila .nre, .nfila .nrg { display:inline-block; margin-left:8px; padding:1px 7px;
+    border-radius:999px; font-size:10px; font-weight:bold;
+    vertical-align:middle; cursor:help; }
+  .nfila .nre { background:#78350f; border:1px solid #f59e0b; color:#fde68a; }
+  .nfila .nrg { background:#3730a3; border:1px solid #818cf8; color:#e0e7ff; }
+  .nfila.rein { border-left-color:#f59e0b; }
+  .nfila.reag { border-left-color:#818cf8; }
+  .nchip.re.act { background:#78350f; border-color:#f59e0b; }
+  .nchip.rg.act { background:#3730a3; border-color:#818cf8; }
+  #btnNuevas .badge.mix { background:#f59e0b; color:#451a03; }
   #modalNuevas .vacio { color:#94a3b8; text-align:center; padding:28px 6px; font-size:14px; line-height:1.6; }
   .rnum { font-family:'Consolas',monospace; font-size:11px; color:#93c5fd;
     background:#1e293b; border:1px solid #334155; border-radius:5px;
@@ -633,9 +645,15 @@ document.addEventListener('keydown', function(e){
 let nuevasAbierto = false;
 let nuevasFiltro = 'todas';
 
-function nuevasDelDia(){ return (ALERTAS && ALERTAS.nuevas) ? ALERTAS.nuevas : []; }
+function nuevasDelDia(){
+  const todas = (ALERTAS && ALERTAS.nuevas) ? ALERTAS.nuevas : [];
+  // Las Modificaciones de Servicio se sacan del conteo: entran a chorros
+  // durante el dia (17 de 83 el 21-08) y no son carga real de terreno, asi
+  // que solo inflaban el numero del boton.
+  return todas.filter(function(x){ return familiaCat(x.cat) !== 'Modificaciones'; });
+}
 
-// agrupa la categoria en familias para los chips de arriba
+// agrupa la categoria en familias para los chips de tipo
 function familiaCat(cat){
   const c = String(cat||'').toLowerCase();
   if(c.indexOf('alta') === 0) return 'Altas';
@@ -645,12 +663,51 @@ function familiaCat(cat){
   return 'Otras';
 }
 
+/* Clasificacion en CASCADA: cada orden cae en UNA sola categoria, por eso los
+   tres numeros suman el total exacto y ninguna orden se cuenta dos veces.
+
+   El orden importa: 'reagendada' manda sobre 'reingreso' porque si es la MISMA
+   orden que ya estuvo en una bandeja anterior, no es carga nueva aunque la
+   direccion tenga historia de caidas.
+
+     reag -> misma OT vista en la bandeja de otro dia   (historial_dir)
+     prev -> otra OT, misma direccion, la anterior cayo No Realizada
+     ninguna de las dos -> nuevita, sin ningun antecedente                  */
+function clase(x){
+  if(x.reag) return 'reagendada';
+  if(x.prev && x.prev.length) return 'reingreso';
+  return 'nuevita';
+}
+
+function contar(lista){
+  const c = { nuevita:0, reingreso:0, reagendada:0 };
+  lista.forEach(function(x){ c[clase(x)]++; });
+  return c;
+}
+
+function pasaFiltro(x){
+  if(nuevasFiltro === 'todas')       return true;
+  if(nuevasFiltro === 'nuevitas')    return clase(x) === 'nuevita';
+  if(nuevasFiltro === 'reingresos')  return clase(x) === 'reingreso';
+  if(nuevasFiltro === 'reagendadas') return clase(x) === 'reagendada';
+  return familiaCat(x.cat) === nuevasFiltro;
+}
+
 function renderBotonNuevas(){
-  const n = nuevasDelDia().length;
+  const todas = nuevasDelDia();
+  const c = contar(todas);
   const btn = document.getElementById('btnNuevas');
   if(!btn) return;
-  btn.innerHTML = '🆕 Nuevas' + (n>0 ? ' <span class="badge">'+n+'</span>' : '');
-  btn.classList.toggle('on-nuevas', n>0 && !nuevasAbierto);
+  // el badge muestra las NUEVITAS, que es el numero que sirve para dimensionar
+  // carga entrante. El desglose completo va en el tooltip.
+  const mix = (c.reingreso + c.reagendada) > 0;
+  btn.innerHTML = '🆕 Nuevas' + (todas.length>0
+    ? ' <span class="badge'+(mix?' mix':'')+'">'+c.nuevita+'</span>' : '');
+  btn.title = todas.length
+    ? c.nuevita+' nuevas · '+c.reingreso+' reingresos · '+c.reagendada
+      +' reagendadas — '+todas.length+' en total (sin modificaciones)'
+    : 'Todavía no entra nada nuevo hoy';
+  btn.classList.toggle('on-nuevas', todas.length>0 && !nuevasAbierto);
 }
 
 function cerrarNuevas(){
@@ -676,32 +733,42 @@ function renderNuevas(){
   const chips = document.getElementById('nuevasChips');
   const nota = document.getElementById('nuevasNota');
   const todas = nuevasDelDia();
+  const c = contar(todas);
 
-  // conteo por familia para los chips (siempre sobre el total, no sobre lo filtrado)
+  // conteo por familia para los chips de tipo (siempre sobre el total, no
+  // sobre lo filtrado)
   const cuenta = {};
   todas.forEach(function(x){ const f = familiaCat(x.cat); cuenta[f] = (cuenta[f]||0)+1; });
   const fams = Object.keys(cuenta).sort();
+
   chips.innerHTML =
       '<span class="nchip'+(nuevasFiltro==='todas'?' act':'')+'" onclick="setNuevasFiltro(\'todas\')">'
     + 'todas · '+todas.length+'</span>'
+    + '<span class="nchip'+(nuevasFiltro==='nuevitas'?' act':'')+'" onclick="setNuevasFiltro(\'nuevitas\')" '
+    + 'title="sin ningún antecedente: ni la orden ni la dirección aparecen antes">'
+    + '\u2728 nuevas · '+c.nuevita+'</span>'
+    + '<span class="nchip re'+(nuevasFiltro==='reingresos'?' act':'')+'" onclick="setNuevasFiltro(\'reingresos\')" '
+    + 'title="otra orden, misma dirección: la visita anterior quedó No Realizada">'
+    + '\u21a9 reingresos · '+c.reingreso+'</span>'
+    + '<span class="nchip rg'+(nuevasFiltro==='reagendadas'?' act':'')+'" onclick="setNuevasFiltro(\'reagendadas\')" '
+    + 'title="la misma orden ya estuvo en la bandeja otro día">'
+    + '\u21bb reagendadas · '+c.reagendada+'</span>'
+    + '<span class="rsep"></span>'
     + fams.map(function(f){
         return '<span class="nchip'+(nuevasFiltro===f?' act':'')+'" onclick="setNuevasFiltro(\''+f+'\')">'
              + f+' · '+cuenta[f]+'</span>';
       }).join('')
     + '<span class="rsep"></span>';
 
-  const lista0 = (nuevasFiltro === 'todas'
-    ? todas.slice() : todas.filter(function(x){ return familiaCat(x.cat) === nuevasFiltro; }))
-    // orden por FRANJA y luego por hora de la cita, no por cuando la detecto el
-    // ciclo. Asi la lista queda como se lee una bandeja: 10-13, 13-16, 16-19.
-    .sort(function(a,b){
+  // orden por FRANJA y luego por hora de la cita, no por cuando la detecto el
+  // ciclo. Asi la lista queda como se lee una bandeja: 10-13, 13-16, 16-19.
+  const lista = todas.filter(pasaFiltro).sort(function(a,b){
       return String(a.f||'').localeCompare(String(b.f||''))
           || String(a.hi||'').localeCompare(String(b.hi||''));
     });
-  const lista = lista0;
 
   // conteo por franja, igual que en Caidas. Va sobre lo que se esta MOSTRANDO:
-  // si filtras Altas, te dice como se reparten esas Altas en el dia.
+  // si filtras reingresos, te dice como se reparten ESOS reingresos en el dia.
   const porFr = {};
   lista.forEach(function(x){ const f = x.f || 's/f'; porFr[f] = (porFr[f]||0)+1; });
   chips.innerHTML += Object.keys(porFr).sort().map(function(f){
@@ -709,16 +776,34 @@ function renderNuevas(){
   }).join('');
 
   if(!lista.length){
-    cont.innerHTML = '<div class="vacio">Todavía no ha entrado ninguna orden nueva hoy.<br>'
+    cont.innerHTML = '<div class="vacio">Nada que mostrar con este filtro.<br>'
       + 'Aquí aparece lo que el portal va cargando después de la bandeja inicial.</div>';
   } else {
     cont.innerHTML = lista.map(function(x){
       // se salio de la bandeja despues de entrar: se deja en gris, no se borra
       const ida = String(x.e||'').indexOf('ya no está') >= 0;
       const det = String(x.visto||'').split(' ')[1] || '—';
-      return '<div class="nfila'+(ida?' ida':'')+'"'+(ida?' title="ya no está en la bandeja"':'')+'>'
+      const k = clase(x);
+      let badge = '', extra = '';
+
+      if(k === 'reagendada'){
+        extra = ' reag';
+        badge = '<span class="nrg" title="misma orden, ya estaba en la bandeja del '
+              + escR(x.reag)+'">\u21bb desde '+escR(x.reag)+'</span>';
+      } else if(k === 'reingreso'){
+        extra = ' rein';
+        const p = x.prev[x.prev.length-1];   // la caida mas reciente
+        const tip = 'no realizada el '+(p.f||'?')+' · '+(p.cierre||'sin código')
+                  + (p.tec ? ' · '+p.tec : '')
+                  + (p.num ? ' · orden anterior '+p.num : '')
+                  + (x.prev.length>1 ? ' · '+x.prev.length+' visitas previas' : '');
+        badge = '<span class="nre" title="'+escR(tip)+'">\u21a9 reingreso</span>';
+      }
+
+      return '<div class="nfila'+(ida?' ida':'')+extra+'"'
+        + (ida?' title="ya no está en la bandeja"':'')+'>'
         + '<span class="npet">'+escR(x.pet || x.o || '')+'</span>'
-        + '<span class="ncat">'+escR(x.cat)+'</span>'
+        + '<span class="ncat">'+escR(x.cat)+badge+'</span>'
         + '<span class="nfr">'+escR(x.f)+'</span>'
         // hora en que el CICLO la detecto (campo 'visto'), no la hora de la
         // cita. Sirve de referencia de cuando cayo en la bandeja.
@@ -728,11 +813,13 @@ function renderNuevas(){
   }
 
   nota.textContent = 'Lo que entró después de la bandeja inicial · jornada '
-    + (ALERTAS && ALERTAS.fecha ? ALERTAS.fecha : '') + ' · ordenado por franja. '
-    + 'La hora verde de la derecha es cuándo el ciclo detectó la orden. '
+    + (ALERTAS && ALERTAS.fecha ? ALERTAS.fecha : '')
+    + ' · sin Modificaciones de Servicio · ordenado por franja. '
+    + '✨ nuevas = sin antecedentes · ↩ reingreso = misma dirección, la anterior se cayó · '
+    + '↻ reagendada = misma orden de otro día. '
+    + 'Pasa el mouse por la etiqueta para ver el detalle. '
     + 'Las filas en gris ya salieron de la bandeja.';
 }
-
 /* =================== HISTORICO DE DIRECCIONES (descarga) ===================
    historial_dir.json vive APARTE de rutas.json: rutas.json es la foto de un
    dia y se sobreescribe cada 5 min, asi que no sirve para contar entre dias.
