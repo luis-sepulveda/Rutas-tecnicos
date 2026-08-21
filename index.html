@@ -920,11 +920,15 @@ function agruparRepe(){
     });
   }
   lista.forEach(function(x){
-    x.hoy.sort(function(a,b){ return (a.hi||'99:99').localeCompare(b.hi||'99:99'); });
-    x.h0 = x.hoy.length ? (x.hoy[0].hi || '99:99') : '99:99';
+    // se ordena por franja y, dentro de la franja, por la hora de la cita
+    // (la hora NO se muestra: en terreno se trabaja por bloque, no al minuto)
+    x.hoy.sort(function(a,b){
+      return rankFranja(a.f) - rankFranja(b.f) || (a.hi||'99:99').localeCompare(b.hi||'99:99');
+    });
+    x.fr0 = x.hoy.length ? (x.hoy[0].f || '') : '';
   });
   if(repeOrden === 'h'){
-    lista.sort(function(a,b){ return a.h0.localeCompare(b.h0) || b.prev.length - a.prev.length; });
+    lista.sort(function(a,b){ return rankFranja(a.fr0) - rankFranja(b.fr0) || b.prev.length - a.prev.length; });
   } else {
     lista.sort(function(a,b){ return b.prev.length - a.prev.length || a.d.localeCompare(b.d); });
   }
@@ -973,7 +977,7 @@ function renderRepe(){
     + '<span class="pchip'+(repeAbiertas?' act':'')+'" onclick="toggleRepeAbiertas()">solo sin cerrar hoy</span>'
     + '<span class="rsep"></span>'
     + '<span class="pchip'+(repeOrden==='n'?' act':'')+'" onclick="setRepeOrden(\'n\')">↕ más caídas</span>'
-    + '<span class="pchip'+(repeOrden==='h'?' act':'')+'" onclick="setRepeOrden(\'h\')">🕘 por hora</span>';
+    + '<span class="pchip'+(repeOrden==='h'?' act':'')+'" onclick="setRepeOrden(\'h\')">🕘 por franja</span>';
 
   if(!lista.length){
     const hayCampo = Object.keys(DB||{}).some(function(t){
@@ -989,7 +993,7 @@ function renderRepe(){
     cont.innerHTML = lista.map(function(d, i){
       const filasHoy = d.hoy.map(function(w){
         return '<div class="rv">'
-          + '<span class="rh">'+escR(w.hi || '--:--')+'</span>'
+          + '<span class="rh">'+escR(w.f || 's/franja')+'</span>'
           + '<span class="rnum">'+escR(w.num)+'</span>'
           + '<span>'+escR(w.cat)+'</span>'
           + '<span>· '+escR(w.tec)+'</span>'
@@ -1012,7 +1016,7 @@ function renderRepe(){
         +   '<span class="rn">'+d.prev.length+'x antes</span>'
         +   '<span class="rdir">'+escR(d.d)+'</span>'
         +   '<span class="rnum">'+escR(d.hoy[0] ? d.hoy[0].num : '')+'</span>'
-        +   '<span class="rult">hoy '+escR(d.h0 === '99:99' ? 's/hora' : d.h0)
+        +   '<span class="rult">hoy '+escR(d.fr0 || 's/franja')
         +     ' · '+escR(estHoy)+' ▾</span>'
         + '</div>'
         + '<div class="rvis">'
