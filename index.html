@@ -257,6 +257,20 @@
   .nfila .nre { background:#78350f; border:1px solid #f59e0b; color:#fde68a; }
   .nfila .nrg { background:#3730a3; border:1px solid #818cf8; color:#e0e7ff; }
   .nfila.rein { border-left-color:#f59e0b; }
+  /* Detalle del reingreso EN LA MISMA LINEA, no en tooltip: el tooltip no
+     existe en celular ni sale al imprimir, y este es justo el dato que el
+     despachador necesita leer de un vistazo antes de asignar. Va dentro de
+     .ncat (la columna elastica), asi que hace wrap solo si no cabe. */
+  .nfila .nsub { font-weight:normal; font-size:11px; color:#cbd5e1; }
+  .nfila .nsub .ndir { color:#93c5fd; }
+  .nfila .nsub .nfec { color:#94a3b8; font-family:'Consolas',monospace; }
+  .nfila .nsub .nmot { color:#fbbf24; }
+  .nfila .nsub .ntec { color:#6ee7b7; }
+  .nfila .nsub .nord { color:#64748b; font-family:'Consolas',monospace; font-size:10px; }
+  .nfila .nsub .nsep { color:#475569; margin:0 6px; }
+  .nfila .nsub .nmas { color:#94a3b8; font-style:italic; }
+  /* la celda de tipo deja de truncar y el texto respira si cae en dos lineas */
+  .nfila .ncat { line-height:1.6; }
   .nfila.reag { border-left-color:#818cf8; }
   .nchip.re.act { background:#78350f; border-color:#f59e0b; }
   .nchip.rg.act { background:#3730a3; border-color:#818cf8; }
@@ -804,12 +818,29 @@ function renderNuevas(){
               + escR(x.reag)+'">\u21bb desde '+escR(x.reag)+'</span>';
       } else if(k === 'reingreso'){
         extra = ' rein';
-        const p = x.prev[x.prev.length-1];   // la caida mas reciente
-        const tip = 'no realizada el '+(p.f||'?')+' · '+(p.cierre||'sin código')
-                  + (p.tec ? ' · '+p.tec : '')
-                  + (p.num ? ' · orden anterior '+p.num : '')
-                  + (x.prev.length>1 ? ' · '+x.prev.length+' visitas previas' : '');
-        badge = '<span class="nre" title="'+escR(tip)+'">\u21a9 reingreso</span>';
+        badge = '<span class="nre">\u21a9 reingreso</span>';
+        // El detalle va EN LA MISMA LINEA, a continuacion del badge: con una
+        // sola visita previa (10 de 13 casos) ocupaba un bloque aparte al
+        // pedo. La celda .ncat es la columna elastica del grid, asi que si el
+        // texto no cabe hace wrap solo y las demas columnas se mantienen.
+        // Las visitas van de la mas VIEJA a la mas nueva, que es como se lee
+        // una historia. Se muestran las 3 ultimas; el resto se resume.
+        const vis = x.prev.slice(-3);
+        const ocultas = x.prev.length - vis.length;
+        badge += '<span class="nsub">'
+            + '<span class="nsep">·</span>'
+            + '<span class="ndir">\ud83d\udccd '+escR(x.d || '')+'</span>'
+            + vis.map(function(p){
+                return '<span class="nsep">·</span>'
+                  + '<span class="nfec">'+escR(p.f||'?')+'</span> '
+                  + '<span class="nmot">'+escR(p.cierre||'sin código')+'</span>'
+                  + (p.tec ? ' <span class="ntec">'+escR(p.tec)+'</span>' : '')
+                  + (p.num ? ' <span class="nord">'+escR(p.num)+'</span>' : '');
+              }).join('')
+            + (ocultas > 0
+                ? '<span class="nsep">·</span><span class="nmas">+'+ocultas
+                  +' antes</span>' : '')
+            + '</span>';
       }
 
       return '<div class="nfila'+(ida?' ida':'')+extra+'"'
@@ -827,8 +858,8 @@ function renderNuevas(){
   nota.textContent = 'Lo que entró después de la bandeja inicial · jornada '
     + (ALERTAS && ALERTAS.fecha ? ALERTAS.fecha : '')
     + ' · sin Modificaciones de Servicio · ordenado por franja. '
-    + '✨ nuevas = sin antecedentes · ↩ reingreso = misma dirección, la anterior se cayó. '
-    + 'Pasa el mouse por la etiqueta para ver el detalle. '
+    + '✨ nuevas = sin antecedentes · ↩ reingreso = misma dirección, la anterior se cayó '
+    + '(el detalle va bajo la fila). '
     + 'Las filas en gris ya salieron de la bandeja.';
 }
 /* =================== HISTORICO DE DIRECCIONES (descarga) ===================
