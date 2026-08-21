@@ -42,6 +42,14 @@
     font-size:10px; font-weight:bold; text-align:center; padding:0 3px; }
   .num-icon { position:relative; }
   .btn.on-repemapa { background:#4c1d95; border-color:#a78bfa; font-weight:bold; }
+  #modalReca { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); }
+  #modalReca.abierto { display:flex; align-items:flex-start; justify-content:center; padding:4vh 2vw; }
+  #modalReca .mc-body { display:block; }
+  #modalReca .vacio { color:#94a3b8; text-align:center; padding:28px 6px; font-size:14px; }
+  .btn.on-reca { background:#7c2d12; border-color:#fb923c; font-weight:bold; }
+  #btnReca .badge { display:inline-block; min-width:16px; padding:0 5px; margin-left:5px;
+    background:#fb923c; color:#431407; border-radius:9px; font-size:11px; font-weight:bold;
+    line-height:16px; text-align:center; }
   #btnRepeMapa .badge { display:inline-block; padding:0 6px; margin-left:5px; background:#a78bfa;
     color:#1e1b4b; border-radius:9px; font-size:11px; font-weight:bold; line-height:16px; }
   @keyframes pulso { 0%{box-shadow:0 0 0 0 rgba(251,146,60,.9)} 70%{box-shadow:0 0 0 12px rgba(251,146,60,0)} 100%{box-shadow:0 0 0 0 rgba(251,146,60,0)} }
@@ -269,6 +277,7 @@
   <button class="btn" id="btnRepe" onclick="toggleRepe()">🔁 Direcciones repetidas hoy</button>
   <button class="btn" id="btnPlanta" onclick="togglePlanta()">📡 Fallas de red</button>
   <button class="btn" id="btnRepeMapa" onclick="toggleRepeMapa()">🗺️ Repetidas en el mapa</button>
+  <button class="btn" id="btnReca" onclick="toggleReca()">🔄 Recaídas hoy</button>
   <button class="btn" id="btnNuevas" onclick="toggleNuevas()">🆕 Nuevas</button>
   <button class="btn" id="btnComp" onclick="toggleComp()">📊 Completitud</button>
   <div class="stats" id="stats"></div>
@@ -304,6 +313,16 @@
     </div>
     <div id="listaNuevas" class="mc-body"></div>
     <div id="nuevasNota" class="mc-resnota"></div>
+  </div>
+</div>
+<div id="modalReca" onclick="if(event.target===this) cerrarReca()">
+  <div class="mc-box">
+    <div class="mc-head">
+      <div class="mc-head-left"><h2>🔄 Recaídas del mismo día</h2></div>
+      <button class="mc-close" onclick="cerrarReca()" title="Cerrar (Esc)">✖</button>
+    </div>
+    <div id="listaReca" class="mc-body"></div>
+    <div id="recaNota" class="mc-resnota"></div>
   </div>
 </div>
 <div id="modalPlanta" onclick="if(event.target===this) cerrarPlanta()">
@@ -597,7 +616,7 @@ function verTecnicoCaida(t){
 
 // cerrar los modales con la tecla Esc
 document.addEventListener('keydown', function(e){
-  if(e.key === 'Escape'){ cerrarCaidas(); cerrarNuevas(); cerrarRepe(); cerrarPlanta(); }
+  if(e.key === 'Escape'){ cerrarCaidas(); cerrarNuevas(); cerrarRepe(); cerrarPlanta(); cerrarReca(); }
 });
 
 /* ======================= ORDENES NUEVAS DEL DIA =======================
@@ -1186,6 +1205,156 @@ function renderPanelSC(){
       '<div>'+b+'</div></div>';
   }).join('');
   cont.innerHTML = html;
+}
+
+
+/* ======================= RECAIDAS DEL MISMO DIA =======================
+   Caso: una orden se cae No Realizada en la manana y a la tarde aparece OTRA
+   orden en la MISMA direccion, con otro tecnico. El segundo parte de cero: no
+   sabe que el cliente no estaba, que faltaba un pierrack o que la NAP no da
+   niveles. El que ya fue lo sabe.
+
+   Esto lo detecta en vivo, cruzando la bandeja contra si misma: no necesita
+   historico ni pipeline, con el rutas.json de cada ciclo basta.
+
+   Se ignoran a proposito:
+     - la MISMA OT repetida (suspendida/cancelada y vuelta a cargar): no es
+       una segunda visita, es la misma orden cambiando de estado
+     - las que ya se cerraron: si la segunda quedo Completada, se resolvio
+       sola y no hay nada que avisar                                        */
+let recaAbierto = false;
+
+function gruposRecaida(){
+  const porDir = {};
+  Object.keys(DB || {}).forEach(function(tec){
+    (DB[tec] || []).forEach(function(w){
+      const k = claveDir(w.d);
+      if(!k) return;
+      (porDir[k] = porDir[k] || []).push(Object.assign({ tec: tec }, w));
+    });
+  });
+
+  const casos = [];
+  Object.keys(porDir).forEach(function(k){
+    const filas = porDir[k];
+    if(filas.length < 2) return;
+    // pet (o la OT) identifica la orden: la misma repetida no cuenta
+    const idOrden = function(w){ return String(w.pet || w.o || ''); };
+    const caidas = filas.filter(function(w){ return w.e === 'No Realizada' || w.gsa; });
+    if(!caidas.length) return;
+    const idsCaidos = caidas.map(idOrden);
+    const abiertas = filas.filter(function(w){
+      return idsCaidos.indexOf(idOrden(w)) < 0
+          && w.e !== 'Cancelado' && w.e !== 'No Realizada' && !w.gsa;
+    });
+    if(!abiertas.length) return;
+    // pendiente/iniciado/en ruta = todavia se puede intervenir
+    const vivas = abiertas.filter(function(w){ return w.e !== 'Completado'; });
+    casos.push({
+      d: filas[0].d, lat: filas[0].lat, lng: filas[0].lng,
+      caidas: caidas.sort(function(a,b){ return rankFranja(a.f) - rankFranja(b.f); }),
+      sig: abiertas.sort(function(a,b){ return rankFranja(a.f) - rankFranja(b.f); }),
+      viva: vivas.length > 0
+    });
+  });
+  // primero las que todavia se pueden salvar, y dentro de esas las mas caidas
+  casos.sort(function(a,b){
+    return (b.viva - a.viva) || (b.caidas.length - a.caidas.length) || a.d.localeCompare(b.d);
+  });
+  return casos;
+}
+
+function nRecaidasVivas(){
+  return gruposRecaida().filter(function(c){ return c.viva; }).length;
+}
+
+function renderBotonReca(){
+  const btn = document.getElementById('btnReca');
+  if(!btn) return;
+  const n = nRecaidasVivas();
+  btn.innerHTML = '🔄 Recaídas hoy' + (n > 0 ? ' <span class="badge">'+n+'</span>' : '');
+  btn.classList.toggle('on-reca', n > 0 && !recaAbierto);
+}
+
+function cerrarReca(){
+  if(!recaAbierto) return;
+  recaAbierto = false;
+  document.getElementById('modalReca').classList.remove('abierto');
+  renderBotonReca();
+}
+
+function toggleReca(){
+  cerrarComp(); cerrarRGU(); cerrarAtr(); cerrarSC(); cerrarCaidas(); cerrarRepe(); cerrarPlanta();
+  if(typeof cerrarNuevas === 'function') cerrarNuevas();
+  if(libre) toggleLibre();
+  recaAbierto = !recaAbierto;
+  document.getElementById('modalReca').classList.toggle('abierto', recaAbierto);
+  if(recaAbierto) renderReca();
+  renderBotonReca();
+}
+
+function verEnMapaReca(lat, lng){ cerrarReca(); if(lat && lng) map.setView([lat, lng], 17); }
+
+function renderReca(){
+  const cont = document.getElementById('listaReca');
+  const nota = document.getElementById('recaNota');
+  const casos = gruposRecaida();
+
+  if(!casos.length){
+    cont.innerHTML = '<div class="vacio">✅ Ninguna dirección se cayó y volvió a cargarse hoy.</div>';
+    nota.textContent = '';
+    return;
+  }
+
+  cont.innerHTML = casos.map(function(c, i){
+    const caidas = c.caidas.map(function(w){
+      const motivo = w.cie ? escR(w.cie) : (w.gsa ? 'Falla de aprovisionamiento (GSA)' : 'sin código');
+      return '<div class="rv">'
+        + '<span class="rh">'+escR(w.f || 's/franja')+'</span>'
+        + '<span class="rnum">'+escR(w.pet || w.o)+'</span>'
+        + '<span>'+escR(w.cat || w.t)+'</span>'
+        + '<span>· '+escR(w.tec)+'</span>'
+        + '<span class="rc">· '+motivo+'</span>'
+        + (w.der ? '<span class="fam otro">'+escR(w.der)+'</span>' : '')
+        + '</div>';
+    }).join('');
+    const sig = c.sig.map(function(w){
+      return '<div class="rv">'
+        + '<span class="rh">'+escR(w.f || 's/franja')+'</span>'
+        + '<span class="rnum">'+escR(w.pet || w.o)+'</span>'
+        + '<span>'+escR(w.cat || w.t)+'</span>'
+        + '<span>· '+escR(w.tec)+'</span>'
+        + '<span class="re '+estClase(w.e)+'">'+escR(w.e)+'</span>'
+        + '</div>';
+    }).join('');
+    // el tecnico que ya fue es el candidato natural para la segunda
+    const quien = c.caidas[0].tec;
+    const mismo = c.sig.some(function(w){ return w.tec === quien; });
+    const consejo = c.viva
+      ? (mismo
+          ? '<div class="rvh" style="color:#4ade80">✔ va el mismo técnico que ya fue</div>'
+          : '<div class="rvh" style="color:#fbbf24">⚠ la toma otro técnico · '+escR(quien)+' ya estuvo ahí</div>')
+      : '<div class="rvh">— ya cerrada, sin acción</div>';
+    return '<div class="rcard'+(c.viva?' repe':'')+'" id="rc'+i+'">'
+      + '<div class="rtop" onclick="document.getElementById(\'rc'+i+'\').classList.toggle(\'abierta\')">'
+      +   '<span class="rn">'+c.caidas.length+'↺</span>'
+      +   '<span class="rdir">'+escR(c.d)+'</span>'
+      +   (c.viva ? '<span class="shoy">recuperable</span>' : '')
+      +   '<span class="rult">'+escR(c.caidas[0].cie || (c.caidas[0].gsa ? 'GSA' : 'sin código'))+' ▾</span>'
+      + '</div>'
+      + '<div class="rvis">'
+      +   consejo
+      +   '<div class="rvh">Se cayó ('+c.caidas.length+')</div>'+caidas
+      +   '<div class="rvh">Volvió a cargarse ('+c.sig.length+')</div>'+sig
+      +   '<span class="rmapa" onclick="verEnMapaReca('+(c.lat||0)+','+(c.lng||0)+')">📍 ver en el mapa</span>'
+      + '</div>'
+      + '</div>';
+  }).join('');
+
+  const vivas = casos.filter(function(c){ return c.viva; }).length;
+  nota.textContent = casos.length + ' dirección(es) que se cayeron y volvieron a cargarse hoy · '
+    + vivas + ' todavía sin cerrar. Se ignora la misma OT repetida por cambio de '
+    + 'estado: solo cuenta cuando es otra orden en la misma puerta.';
 }
 
 /* ============ REPETIDAS EN EL MAPA ============
@@ -1961,6 +2130,8 @@ async function cargarDatosVivos(auto){
     ALERTAS = js.alertas || null;      // caidas del dia (si el pipeline las trae)
     renderBannerCaidas();
     renderBotonRepe();                 // globo con las direcciones repetidas de hoy
+    renderBotonReca();                 // globo con las recaidas del mismo dia
+    if(recaAbierto) renderReca();
     if(repeAbierto) renderRepe();      // si el modal esta abierto, se refresca solo
     if(caidasAbierto) renderPanelCaidas();
     if(comp) renderPanelComp();
