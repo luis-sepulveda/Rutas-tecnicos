@@ -34,6 +34,16 @@
   .mk-enruta { border:3px solid #fb923c !important; animation:pulso 1.5s infinite; }
   .mk-completado { opacity:.45; border:2px solid #94a3b8 !important; }
   .mk-norealizada { opacity:.5; border:2px dashed #ef4444 !important; }
+  /* marcador del modo 'repetidas en el mapa': anillo violeta y el numero de
+     caidas previas en una burbuja arriba a la derecha */
+  .mk-repe { border:3px solid #a78bfa !important; box-shadow:0 0 10px 3px rgba(167,139,250,.75) !important; }
+  .num-icon .prevb { position:absolute; top:-7px; right:-9px; background:#7f1d1d; color:#fff;
+    border:2px solid #0f172a; border-radius:9px; min-width:17px; height:17px; line-height:13px;
+    font-size:10px; font-weight:bold; text-align:center; padding:0 3px; }
+  .num-icon { position:relative; }
+  .btn.on-repemapa { background:#4c1d95; border-color:#a78bfa; font-weight:bold; }
+  #btnRepeMapa .badge { display:inline-block; padding:0 6px; margin-left:5px; background:#a78bfa;
+    color:#1e1b4b; border-radius:9px; font-size:11px; font-weight:bold; line-height:16px; }
   @keyframes pulso { 0%{box-shadow:0 0 0 0 rgba(251,146,60,.9)} 70%{box-shadow:0 0 0 12px rgba(251,146,60,0)} 100%{box-shadow:0 0 0 0 rgba(251,146,60,0)} }
   .estados { position:absolute; bottom:16px; right:10px; z-index:1000; background:rgba(30,41,59,.92); border-radius:8px; padding:8px 12px; font-size:11px;}
   .estados div { display:flex; align-items:center; gap:8px; margin:4px 0;}
@@ -258,6 +268,7 @@
   <button class="btn" id="btnCaidas" onclick="toggleCaidas()">🚨 Caídas</button>
   <button class="btn" id="btnRepe" onclick="toggleRepe()">🔁 Direcciones repetidas hoy</button>
   <button class="btn" id="btnPlanta" onclick="togglePlanta()">📡 Fallas de red</button>
+  <button class="btn" id="btnRepeMapa" onclick="toggleRepeMapa()">🗺️ Repetidas en el mapa</button>
   <button class="btn" id="btnNuevas" onclick="toggleNuevas()">🆕 Nuevas</button>
   <button class="btn" id="btnComp" onclick="toggleComp()">📊 Completitud</button>
   <div class="stats" id="stats"></div>
@@ -1177,6 +1188,46 @@ function renderPanelSC(){
   cont.innerHTML = html;
 }
 
+/* ============ REPETIDAS EN EL MAPA ============
+   Interruptor: deja en el mapa SOLO las ordenes de hoy cuya direccion ya se
+   habia caido antes (campo 'prev' que calcula historial_dir.marcar_repetidas).
+   Es el mismo criterio del boton 'Direcciones repetidas hoy', pero pintado,
+   para ver de un vistazo quien las tiene cargadas y en que sector estan.
+
+   Se suma a los filtros de arriba en vez de mandar sobre ellos: si tienes
+   elegido un tecnico o una ciudad, se respeta. Asi se puede preguntar "de las
+   repetidas, cuales son de Villa Alemana en la franja 10-13".               */
+let repeMapa = false;
+let repeMapaMin = 1;     // caidas previas minimas para dejar la orden en el mapa
+
+function okRepe(p){
+  if(!repeMapa) return true;
+  return !!(p.prev && p.prev.length >= repeMapaMin);
+}
+
+function toggleRepeMapa(){
+  repeMapa = !repeMapa;
+  const btn = document.getElementById('btnRepeMapa');
+  btn.classList.toggle('on-repemapa', repeMapa);
+  btn.innerHTML = repeMapa
+    ? '🗺️ Repetidas en el mapa <span class="badge">on</span>'
+    : '🗺️ Repetidas en el mapa';
+  render();   // sin mantenerVista: reencuadra sobre lo que quedo filtrado
+}
+
+// Bloque de caidas previas que se agrega al popup del marcador.
+function popupPrev(p){
+  if(!p.prev || !p.prev.length) return '';
+  const filas = p.prev.slice().reverse().slice(0, 6).map(function(v){
+    return '<div style="margin-top:2px">· ' + escR(v.f) + ' — ' + escR(v.cierre || 's/código')
+      + ' <span style="color:#94a3b8">(' + escR(v.tec) + ')</span></div>';
+  }).join('');
+  const mas = p.prev.length > 6 ? '<div style="color:#94a3b8">y ' + (p.prev.length-6) + ' más…</div>' : '';
+  return '<div style="margin-top:6px; padding-top:5px; border-top:1px solid #334155">'
+    + '<b style="color:#c4b5fd">🔁 ' + p.prev.length + ' caída(s) antes en esta dirección</b>'
+    + filas + mas + '</div>';
+}
+
 function render(mantenerVista){
   layer.clearLayers();
   const ft = sel.value;
@@ -1184,7 +1235,7 @@ function render(mantenerVista){
   if(sinComp && ft==='__ALL__') show = tecnicosSinCompletar();
   let bounds=[], nTrab=0, nTec=0, nIni=0, nRuta=0, nComp=0, nRGU=0;
   show.forEach(t=>{
-    let pts = DB[t].filter(p=> p.e!=='Cancelado' && okCiudad(p) && okFranja(p) && okEstado(p));
+    let pts = DB[t].filter(p=> p.e!=='Cancelado' && okCiudad(p) && okFranja(p) && okEstado(p) && okRepe(p));
     if(!pts.length) return;
     nTec++; nTrab+=pts.length;
     const col = colorOf[t];
@@ -1195,13 +1246,18 @@ function render(mantenerVista){
       if(p.e==='en ruta') nRuta++;
       if(p.e==='Completado'){ nComp++; nRGU += Number(p.rgu||0); }
       const stCls = p.e==='Iniciado' ? ' mk-iniciado' : (p.e==='en ruta' ? ' mk-enruta' : (p.e==='Completado' ? ' mk-completado' : (p.e==='No Realizada' ? ' mk-norealizada' : '')));
-      const icon = L.divIcon({className:'', html:'<div class="num-icon'+stCls+'" style="background:'+col+'">'+(i+1)+'</div>', iconSize:[26,26], iconAnchor:[13,13]});
+      // nPrev = caidas No Realizadas de dias anteriores en esta misma direccion
+      const nPrev = (p.prev && p.prev.length) ? p.prev.length : 0;
+      const marca = (repeMapa && nPrev) ? ' mk-repe' : '';
+      const globo = (repeMapa && nPrev) ? '<span class="prevb">'+nPrev+'</span>' : '';
+      const icon = L.divIcon({className:'', html:'<div class="num-icon'+stCls+marca+'" style="background:'+col+'">'+(i+1)+globo+'</div>', iconSize:[26,26], iconAnchor:[13,13]});
       L.marker([p.lat,p.lng],{icon}).addTo(layer).bindPopup(
         '<div class="pp"><b>'+t+'</b> — parada '+(i+1)+'<br>'+
         '📋 '+p.o+' · '+p.t+'<br>'+
-        '🕐 '+(p.hi||'--')+' - '+(p.hf||'--')+' (franja '+p.f+')<br>'+
+        '🕐 franja '+(p.f||'s/franja')+'<br>'+
         '📍 '+p.d+'<br>'+
-        '<span class="est '+estClass(p.e)+'">'+p.e+'</span></div>');
+        '<span class="est '+estClass(p.e)+'">'+p.e+'</span>'+
+        popupPrev(p)+'</div>');
       bounds.push([p.lat,p.lng]);
     });
   });
