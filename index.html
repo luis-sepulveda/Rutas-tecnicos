@@ -1235,12 +1235,19 @@ function render(mantenerVista){
   if(sinComp && ft==='__ALL__') show = tecnicosSinCompletar();
   let bounds=[], nTrab=0, nTec=0, nIni=0, nRuta=0, nComp=0, nRGU=0;
   show.forEach(t=>{
-    let pts = DB[t].filter(p=> p.e!=='Cancelado' && okCiudad(p) && okFranja(p) && okEstado(p) && okRepe(p));
+    // Se numera ANTES del filtro de repetidas: el globo tiene que decir la
+    // parada real del dia. Si no, la parada 6 de un tecnico aparece como "2"
+    // solo porque las cinco anteriores no eran repetidas.
+    const ruta = DB[t].filter(p=> p.e!=='Cancelado' && okCiudad(p) && okFranja(p) && okEstado(p));
+    ruta.forEach((p, i) => { p._np = i + 1; });
+    let pts = ruta.filter(okRepe);
     if(!pts.length) return;
     nTec++; nTrab+=pts.length;
     const col = colorOf[t];
     const latlngs = pts.map(p=>[p.lat,p.lng]);
-    if(latlngs.length>1) L.polyline(latlngs,{color:col,weight:3,opacity:.75,dashArray:'6 6'}).addTo(layer);
+    // En modo repetidas no se dibuja la ruta: al sacar las paradas del medio,
+    // la linea uniria puntos que el tecnico no recorre seguidos y engania.
+    if(latlngs.length>1 && !repeMapa) L.polyline(latlngs,{color:col,weight:3,opacity:.75,dashArray:'6 6'}).addTo(layer);
     pts.forEach((p,i)=>{
       if(p.e==='Iniciado') nIni++;
       if(p.e==='en ruta') nRuta++;
@@ -1250,9 +1257,9 @@ function render(mantenerVista){
       const nPrev = (p.prev && p.prev.length) ? p.prev.length : 0;
       const marca = (repeMapa && nPrev) ? ' mk-repe' : '';
       const globo = (repeMapa && nPrev) ? '<span class="prevb">'+nPrev+'</span>' : '';
-      const icon = L.divIcon({className:'', html:'<div class="num-icon'+stCls+marca+'" style="background:'+col+'">'+(i+1)+globo+'</div>', iconSize:[26,26], iconAnchor:[13,13]});
+      const icon = L.divIcon({className:'', html:'<div class="num-icon'+stCls+marca+'" style="background:'+col+'">'+p._np+globo+'</div>', iconSize:[26,26], iconAnchor:[13,13]});
       L.marker([p.lat,p.lng],{icon}).addTo(layer).bindPopup(
-        '<div class="pp"><b>'+t+'</b> — parada '+(i+1)+'<br>'+
+        '<div class="pp"><b>'+t+'</b> — parada '+p._np+' de '+ruta.length+'<br>'+
         '📋 '+p.o+' · '+p.t+'<br>'+
         '🕐 franja '+(p.f||'s/franja')+'<br>'+
         '📍 '+p.d+'<br>'+
