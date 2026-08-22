@@ -141,12 +141,16 @@
   .btn.on-caidas { background:#7f1d1d; border-color:#ef4444; font-weight:bold; }
   #btnCaidas .badge { display:inline-block; min-width:16px; padding:0 5px; margin-left:5px;
     background:#ef4444; color:#fff; border-radius:9px; font-size:11px; font-weight:bold; line-height:16px; text-align:center; }
-  #bannerCaidas { display:none; background:#7f1d1d; color:#fecaca; border-bottom:2px solid #ef4444;
-    padding:8px 16px; font-size:13px; align-items:center; gap:10px; cursor:pointer; z-index:1000; }
-  #bannerCaidas:hover { background:#911b1b; }
-  #bannerCaidas .bico { font-size:16px; flex-shrink:0; }
-  #bannerCaidas b { color:#fff; }
-  #bannerCaidas .ver { margin-left:auto; color:#fecaca; text-decoration:underline; font-size:12px; white-space:nowrap; }
+  /* Etiqueta con el nombre del tecnico bajo el pin. Cuelga del .num-icon (que
+     ya es position:relative) para no alterar el iconSize de Leaflet: si se
+     cambiara el tamano del icono, se corre el anclaje y los pines dejan de
+     caer sobre su coordenada. pointer-events:none para que no tape el click
+     del marcador. */
+  .num-icon .mk-nom { position:absolute; top:28px; left:50%; transform:translateX(-50%);
+    white-space:nowrap; font-size:9px; font-weight:bold; letter-spacing:.2px;
+    background:rgba(2,6,23,.85); border:1px solid rgba(100,116,139,.55);
+    border-radius:4px; padding:0 4px; line-height:14px; pointer-events:none;
+    text-shadow:0 1px 2px rgba(0,0,0,.9); }
   /* --- Modal de caidas a pantalla completa --- */
   #modalCaidas { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); }
   #modalCaidas.abierto { display:flex; align-items:flex-start; justify-content:center; padding:4vh 2vw; }
@@ -344,6 +348,7 @@
   <button class="btn" id="btnRepe" onclick="toggleRepe()">🔁 Direcciones repetidas hoy</button>
   <button class="btn" id="btnPlanta" onclick="togglePlanta()">📡 Fallas de red</button>
   <button class="btn" id="btnRepeMapa" onclick="toggleRepeMapa()">🗺️ Repetidas en el mapa</button>
+  <button class="btn" id="btnNombres" onclick="toggleNombres()">👷 Nombres</button>
   <button class="btn" id="btnReca" onclick="toggleReca()">🔄 Recaídas hoy</button>
   <button class="btn" id="btnNuevas" onclick="toggleNuevas()">🆕 Nuevas</button>
   <button class="btn" id="btnComp" onclick="toggleComp()">📊 Completitud</button>
@@ -356,11 +361,6 @@
   <div class="stats" id="stats"></div>
   <div class="stats" id="lastUpd" style="margin-left:0;">⏳ cargando datos...</div>
 </header>
-<div id="bannerCaidas" onclick="abrirCaidas()">
-  <span class="bico">🚨</span>
-  <span id="bannerCaidasTxt"></span>
-  <span class="ver">ver detalle ▸</span>
-</div>
 <div id="map"></div>
 <div id="modalCaidas" onclick="if(event.target===this) cerrarCaidas()">
   <div class="mc-box">
@@ -653,19 +653,10 @@ function rankFranja(f){ return {'10-13':1,'13-16':2,'16-19':3}[f] || 9; }
 function nCaidas(){ return (ALERTAS && ALERTAS.activas) ? ALERTAS.activas.length : 0; }
 
 function renderBannerCaidas(){
+  // El banner rojo se saco: duplicaba el globo del boton 🚨 Caídas y comia
+  // una franja del mapa. El conteo vive solo en el boton.
   const n = nCaidas();
-  const banner = document.getElementById('bannerCaidas');
   const btn = document.getElementById('btnCaidas');
-  // banner arriba: solo cuando hay activas
-  if(n > 0){
-    const pl = n === 1 ? 'orden se cayó' : 'órdenes se cayeron';
-    document.getElementById('bannerCaidasTxt').innerHTML =
-      '<b>'+n+'</b> '+pl+' sin cerrar hoy';
-    banner.style.display = 'flex';
-  } else {
-    banner.style.display = 'none';
-  }
-  // boton del header: globo con el conteo cuando hay
   btn.innerHTML = '🚨 Caídas' + (n>0 ? ' <span class="badge">'+n+'</span>' : '');
   btn.classList.toggle('on-caidas', n>0 && !caidasAbierto);
   renderBotonNuevas();
@@ -1831,6 +1822,30 @@ function renderReca(){
    elegido un tecnico o una ciudad, se respeta. Asi se puede preguntar "de las
    repetidas, cuales son de Villa Alemana en la franja 10-13".               */
 let repeMapa = false;
+/* Nombre del tecnico bajo cada pin.
+
+   Va detras de un boton y no fijo, porque con los 40 tecnicos en pantalla son
+   ~220 etiquetas encimadas y no se lee nada. Sirve para dos cosas: filtrar a
+   un tecnico y seguir su ruta, o hacer zoom a un sector y ver de quien son los
+   pines sin ir clickeando uno por uno.
+
+   Se recorta a nombre + apellido ("NICOLAS MOYANO R" -> "NICOLAS MOYANO"): la
+   tercera palabra del export es una inicial o un apellido abreviado que no
+   aporta y estira la etiqueta. Verificado sobre los 40 tecnicos: 0 colisiones
+   y 17 caracteres el mas largo. El popup sigue trayendo el nombre entero. */
+let verNombres = false;
+
+function nombreCorto(t){
+  return String(t||'').trim().split(/\s+/).slice(0, 2).join(' ');
+}
+
+function toggleNombres(){
+  verNombres = !verNombres;
+  const btn = document.getElementById('btnNombres');
+  btn.classList.toggle('on-repemapa', verNombres);
+  render(true);          // true = no reencuadrar, se respeta el zoom actual
+}
+
 let repeMapaMin = 1;     // caidas previas minimas para dejar la orden en el mapa
 
 function okRepe(p){
@@ -1890,7 +1905,11 @@ function render(mantenerVista){
       const nPrev = (p.prev && p.prev.length) ? p.prev.length : 0;
       const marca = (repeMapa && nPrev) ? ' mk-repe' : '';
       const globo = (repeMapa && nPrev) ? '<span class="prevb">'+nPrev+'</span>' : '';
-      const icon = L.divIcon({className:'', html:'<div class="num-icon'+stCls+marca+'" style="background:'+col+'">'+p._np+globo+'</div>', iconSize:[26,26], iconAnchor:[13,13]});
+      // el nombre se pinta del color de la ruta, asi se asocia al tiro con
+      // el pin aunque haya varias etiquetas juntas
+      const nom = verNombres
+        ? '<span class="mk-nom" style="color:'+col+'">'+escR(nombreCorto(t))+'</span>' : '';
+      const icon = L.divIcon({className:'', html:'<div class="num-icon'+stCls+marca+'" style="background:'+col+'">'+p._np+globo+nom+'</div>', iconSize:[26,26], iconAnchor:[13,13]});
       L.marker([p.lat,p.lng],{icon}).addTo(layer).bindPopup(
         '<div class="pp"><b>'+t+'</b> — parada '+p._np+' de '+ruta.length+'<br>'+
         '📋 '+p.o+' · '+p.t+'<br>'+
