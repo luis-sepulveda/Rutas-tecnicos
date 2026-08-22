@@ -1150,8 +1150,9 @@ function renderRepe(){
   let total = 0;
   Object.keys(DB||{}).forEach(function(t){ total += (DB[t]||[]).length; });
   nota.textContent = lista.length + ' dirección(es) · ' + nOrd + ' orden(es) de hoy'
-    + ' sobre ' + total + ' en bandeja. Cuenta visitas No Realizadas de días '
-    + 'ANTERIORES: lo que se cae hoy no se cuenta a sí mismo. '
+    + ' sobre ' + total + ' en bandeja. Cuenta visitas No Realizadas anteriores '
+    + 'de la misma dirección, incluidas las de hoy si son de otra orden: '
+    + 'ninguna orden se cuenta a sí misma. '
     + 'El número azul es la petición (o la OT si el export no la trae).';
 }
 
