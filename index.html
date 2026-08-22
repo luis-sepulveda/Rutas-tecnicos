@@ -45,6 +45,9 @@
   #modalReca { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); }
   #modalReca.abierto { display:flex; align-items:flex-start; justify-content:center; padding:4vh 2vw; }
   #modalReca .mc-body { display:block; }
+  #modalBuscar { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); }
+  #modalBuscar.abierto { display:flex; align-items:flex-start; justify-content:center; padding:4vh 2vw; }
+  #modalBuscar .mc-body { display:block; }
   #modalReca .vacio { color:#94a3b8; text-align:center; padding:28px 6px; font-size:14px; }
   .btn.on-reca { background:#7c2d12; border-color:#fb923c; font-weight:bold; }
   #btnReca .badge { display:inline-block; min-width:16px; padding:0 5px; margin-left:5px;
@@ -257,6 +260,44 @@
   .nfila .nre { background:#78350f; border:1px solid #f59e0b; color:#fde68a; }
   .nfila .nrg { background:#3730a3; border:1px solid #818cf8; color:#e0e7ff; }
   .nfila.rein { border-left-color:#f59e0b; }
+  /* ---------------- BUSCADOR ---------------- */
+  .buscador { display:flex; gap:5px; align-items:center; margin-left:6px; }
+  .buscador input { background:#0f172a; border:1px solid #334155; color:#e2e8f0;
+    border-radius:7px; padding:6px 10px; font-size:12px; width:210px; outline:none; }
+  .buscador input:focus { border-color:#38bdf8; }
+  .buscador input::placeholder { color:#64748b; }
+  /* una tarjeta por direccion; dentro, un bloque por seccion del tablero */
+  .bcard { background:#0f172a; border:1px solid #1e293b; border-left:3px solid #38bdf8;
+    border-radius:8px; margin-bottom:12px; padding:10px 12px; }
+  .bcard h3 { margin:0 0 3px; font-size:14px; color:#e2e8f0; }
+  .bcard .bmeta { font-size:11px; color:#64748b; margin-bottom:8px; }
+  .bsec { margin-top:9px; }
+  .bsec .bt { font-size:11px; font-weight:bold; letter-spacing:.4px;
+    text-transform:uppercase; color:#94a3b8; margin-bottom:4px; }
+  .bsec.hoy   .bt { color:#38bdf8; }
+  .bsec.caida .bt { color:#f87171; }
+  .bsec.nueva .bt { color:#4ade80; }
+  .bsec.hist  .bt { color:#f59e0b; }
+  .bsec.red   .bt { color:#c084fc; }
+  .bsec.reca  .bt { color:#fb923c; }
+  .brow { font-size:12px; color:#cbd5e1; padding:3px 0 3px 9px;
+    border-left:2px solid #1e293b; line-height:1.5; }
+  .brow .bord { font-family:'Consolas',monospace; font-size:11px; color:#7dd3fc; }
+  .brow .bfec { font-family:'Consolas',monospace; color:#94a3b8; }
+  .brow .btec { color:#6ee7b7; }
+  .brow .bmot { color:#fbbf24; }
+  .brow .bsep { color:#475569; margin:0 5px; }
+  .brow .bcat { color:#e2e8f0; font-weight:bold; }
+  /* el estado se pinta con el mismo codigo de color del resto del tablero */
+  .bes { padding:0 6px; border-radius:999px; font-size:10px; font-weight:bold; }
+  .bes.ini  { background:#052e16; color:#4ade80; }
+  .bes.ruta { background:#431407; color:#fb923c; }
+  .bes.ok   { background:#0c4a6e; color:#7dd3fc; }
+  .bes.nr   { background:#450a0a; color:#f87171; }
+  .bes.can  { background:#1e1b4b; color:#a5b4fc; }
+  .bes.pen  { background:#1e293b; color:#94a3b8; }
+  .bvacio { color:#64748b; font-size:12px; padding:18px; text-align:center; }
+  .bhl { background:#78350f; color:#fde68a; border-radius:3px; padding:0 2px; }
   /* Detalle del reingreso EN LA MISMA LINEA, no en tooltip: el tooltip no
      existe en celular ni sale al imprimir, y este es justo el dato que el
      despachador necesita leer de un vistazo antes de asignar. Va dentro de
@@ -306,6 +347,12 @@
   <button class="btn" id="btnReca" onclick="toggleReca()">🔄 Recaídas hoy</button>
   <button class="btn" id="btnNuevas" onclick="toggleNuevas()">🆕 Nuevas</button>
   <button class="btn" id="btnComp" onclick="toggleComp()">📊 Completitud</button>
+  <div class="buscador">
+    <input id="qBuscar" type="search" placeholder="Buscar dirección u orden…"
+           autocomplete="off" spellcheck="false"
+           onkeydown="if(event.key==='Enter') hacerBusqueda(); if(event.key==='Escape') this.blur();">
+    <button class="btn" onclick="hacerBusqueda()" title="Buscar en todo el tablero">🔎</button>
+  </div>
   <div class="stats" id="stats"></div>
   <div class="stats" id="lastUpd" style="margin-left:0;">⏳ cargando datos...</div>
 </header>
@@ -339,6 +386,16 @@
     </div>
     <div id="listaNuevas" class="mc-body"></div>
     <div id="nuevasNota" class="mc-resnota"></div>
+  </div>
+</div>
+<div id="modalBuscar" onclick="if(event.target===this) cerrarBuscar()">
+  <div class="mc-box">
+    <div class="mc-head">
+      <div class="mc-head-left"><h2>🔎 Buscar</h2><span id="buscarChips"></span></div>
+      <button class="mc-close" onclick="cerrarBuscar()" title="Cerrar (Esc)">✖</button>
+    </div>
+    <div id="listaBuscar" class="mc-body"></div>
+    <div id="buscarNota" class="mc-resnota"></div>
   </div>
 </div>
 <div id="modalReca" onclick="if(event.target===this) cerrarReca()">
@@ -642,7 +699,7 @@ function verTecnicoCaida(t){
 
 // cerrar los modales con la tecla Esc
 document.addEventListener('keydown', function(e){
-  if(e.key === 'Escape'){ cerrarCaidas(); cerrarNuevas(); cerrarRepe(); cerrarPlanta(); cerrarReca(); }
+  if(e.key === 'Escape'){ cerrarCaidas(); cerrarNuevas(); cerrarRepe(); cerrarPlanta(); cerrarReca(); cerrarBuscar(); }
 });
 
 /* ======================= ORDENES NUEVAS DEL DIA =======================
@@ -1096,6 +1153,283 @@ function renderRepe(){
     + ' sobre ' + total + ' en bandeja. Cuenta visitas No Realizadas de días '
     + 'ANTERIORES: lo que se cae hoy no se cuenta a sí mismo. '
     + 'El número azul es la petición (o la OT si el export no la trae).';
+}
+
+/* ============================ BUSCADOR GLOBAL ============================
+   Responde una sola pregunta: "que pasa con esta casa". En vez de abrir cinco
+   modales y cruzarlos a ojo, junta TODO lo que el tablero sabe de una
+   direccion y lo agrupa en una ficha.
+
+   No agrega datos al pipeline: lee lo que ya esta cargado en memoria.
+     DB              -> bandeja de hoy (tecnico, franja, estado, cierre)
+     ALERTAS.activas -> caidas de hoy
+     ALERTAS.nuevas  -> entradas despues de la bandeja inicial
+     gruposRecaida() -> se cayo y volvio a entrar hoy
+     HIST.dirs       -> historico de No Realizadas (se baja on-demand)
+     HIST.planta     -> fallas de red
+
+   Busca por direccion (parcial, sin acentos) O por numero de orden, asi que
+   sirve igual para "tolten" que para pegar un 1-3ND... del portal.          */
+let buscarAbierto = false;
+let ultimaBusqueda = '';
+
+function normQ(s){
+  return String(s||'').toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/\s+/g,' ').trim();
+}
+
+function resaltar(txt, q){
+  const t = String(txt||'');
+  if(!q) return escR(t);
+  const i = normQ(t).indexOf(q);
+  if(i < 0) return escR(t);
+  return escR(t.slice(0,i)) + '<span class="bhl">' + escR(t.slice(i, i+q.length))
+       + '</span>' + escR(t.slice(i+q.length));
+}
+
+function esClase(e){
+  const x = String(e||'').toLowerCase();
+  if(x === 'iniciado') return 'ini';
+  if(x === 'en ruta') return 'ruta';
+  if(x === 'completado') return 'ok';
+  if(x === 'no realizada') return 'nr';
+  if(x === 'cancelado') return 'can';
+  return 'pen';
+}
+
+function pill(e){
+  return '<span class="bes '+esClase(e)+'">'+escR(e||'—')+'</span>';
+}
+
+/* Junta por direccion todo lo que matchea. La llave es claveDir(), la MISMA
+   que usan repetidas y recaidas: si el buscador normalizara distinto,
+   encontraria cosas en un modal y no en el otro.
+
+   Va en DOS pasadas y el orden importa:
+     1) buscar el texto en direcciones Y en numeros de orden, de toda fuente
+     2) para cada direccion encontrada, traer SU historial completo
+   Sin la segunda, buscar la OT de hoy mostraba la casa pero con el historial
+   vacio: el historico esta indexado con las ordenes VIEJAS, que son otras.   */
+function buscarTodo(q){
+  const res = {};   // claveDir -> ficha
+
+  function ficha(d){
+    const k = claveDir(d);
+    if(!res[k]) res[k] = { d:d, k:k, hoy:[], caidas:[], nuevas:[],
+                           hist:[], red:null, reca:null };
+    return res[k];
+  }
+  // el texto puede ser parte de la calle o un numero de orden pegado del
+  // portal; se prueban las dos cosas siempre, no cuesta nada
+  function calza(d, ord){
+    return claveDir(d).indexOf(q) >= 0 || normQ(ord).indexOf(q) >= 0;
+  }
+
+  // ---------- PASADA 1: buscar el texto ----------
+  Object.keys(DB || {}).forEach(function(tec){
+    (DB[tec] || []).forEach(function(w){
+      if(calza(w.d, w.o)) ficha(w.d).hoy.push(Object.assign({ tec: tec }, w));
+    });
+  });
+
+  ((ALERTAS && ALERTAS.activas) || []).forEach(function(a){
+    if(calza(a.d, a.o)) ficha(a.d).caidas.push(a);
+  });
+
+  ((ALERTAS && ALERTAS.nuevas) || []).forEach(function(n){
+    if(calza(n.d, n.o) || normQ(n.pet||'').indexOf(q) >= 0) ficha(n.d).nuevas.push(n);
+  });
+
+  gruposRecaida().forEach(function(c){
+    const porOrd = c.caidas.concat(c.sig).some(function(w){
+      return normQ(w.o).indexOf(q) >= 0; });
+    if(claveDir(c.d).indexOf(q) >= 0 || porOrd) ficha(c.d).reca = c;
+  });
+
+  if(HIST){
+    // el historico tambien se busca por texto: asi encontras la casa aunque
+    // hoy no tenga ninguna orden en la bandeja
+    (HIST.dirs || []).forEach(function(h){
+      const porOrd = (h.v||[]).some(function(v){ return normQ(v.o).indexOf(q) >= 0; });
+      if(claveDir(h.d).indexOf(q) >= 0 || porOrd) ficha(h.d);
+    });
+    (HIST.planta || []).forEach(function(p){
+      const porOrd = (p.v||[]).some(function(v){ return normQ(v.num).indexOf(q) >= 0; });
+      if(claveDir(p.d).indexOf(q) >= 0 || porOrd) ficha(p.d);
+    });
+
+    // ---------- PASADA 2: completar cada direccion encontrada ----------
+    const idxH = {}, idxP = {};
+    (HIST.dirs || []).forEach(function(h){ idxH[claveDir(h.d)] = h; });
+    (HIST.planta || []).forEach(function(p){ idxP[claveDir(p.d)] = p; });
+    Object.keys(res).forEach(function(k){
+      if(idxH[k]) res[k].hist = idxH[k].v || [];
+      if(idxP[k]) res[k].red  = idxP[k];
+    });
+  }
+
+  // primero las que tienen actividad HOY: es lo accionable
+  return Object.keys(res).map(function(k){ return res[k]; })
+    .sort(function(a,b){
+      const pa = a.hoy.length + a.caidas.length, pb = b.hoy.length + b.caidas.length;
+      return (pb - pa) || a.d.localeCompare(b.d);
+    });
+}
+
+function cerrarBuscar(){
+  if(!buscarAbierto) return;
+  buscarAbierto = false;
+  document.getElementById('modalBuscar').classList.remove('abierto');
+}
+
+async function hacerBusqueda(){
+  const q = normQ(document.getElementById('qBuscar').value);
+  if(q.length < 3){
+    alert('Escribe al menos 3 caracteres.');
+    return;
+  }
+  ultimaBusqueda = q;
+  cerrarComp(); cerrarRGU(); cerrarAtr(); cerrarSC();
+  cerrarCaidas(); cerrarRepe(); cerrarNuevas(); cerrarReca(); cerrarPlanta();
+  if(libre) toggleLibre();
+  buscarAbierto = true;
+  document.getElementById('modalBuscar').classList.add('abierto');
+  document.getElementById('listaBuscar').innerHTML =
+    '<div class="bvacio">Buscando…</div>';
+
+  // el historico pesa y vive aparte, asi que se baja la primera vez que hace
+  // falta. Sin el, la ficha saldria sin caidas viejas ni fallas de red, que
+  // es justo la mitad interesante.
+  if(HIST === null){
+    try { HIST = await bajarHistorial(); }
+    catch(e){ HIST = false; }
+  }
+  renderBusqueda();
+}
+
+function renderBusqueda(){
+  const cont = document.getElementById('listaBuscar');
+  const chips = document.getElementById('buscarChips');
+  const nota = document.getElementById('buscarNota');
+  const q = ultimaBusqueda;
+  const fichas = buscarTodo(q);
+
+  chips.innerHTML = '<span class="nchip act">"'+escR(q)+'" · '
+    + fichas.length + ' dirección(es)</span>';
+
+  if(!fichas.length){
+    cont.innerHTML = '<div class="bvacio">Sin resultados para <b>'+escR(q)+'</b>.<br>'
+      + 'Prueba con parte del nombre de la calle, o pega un número de orden.</div>';
+    nota.textContent = 'Busca en la bandeja de hoy, caídas, nuevas, recaídas, '
+      + 'histórico de caídas y fallas de red.';
+    return;
+  }
+
+  cont.innerHTML = fichas.map(function(F){
+    let h = '<div class="bcard"><h3>📍 '+resaltar(F.d, q)+'</h3>';
+    const tot = F.hoy.length + F.caidas.length + F.nuevas.length
+              + F.hist.length + (F.red?1:0) + (F.reca?1:0);
+    h += '<div class="bmeta">'+tot+' registro(s) en el tablero</div>';
+
+    // ---- hoy en bandeja ----
+    if(F.hoy.length){
+      h += '<div class="bsec hoy"><div class="bt">📋 Hoy en bandeja ('+F.hoy.length+')</div>';
+      h += F.hoy.map(function(w){
+        return '<div class="brow">'
+          + '<span class="bord">'+resaltar(w.o, q)+'</span><span class="bsep">·</span>'
+          + '<span class="bcat">'+escR(w.cat || w.t || '')+'</span><span class="bsep">·</span>'
+          + escR(w.f||'')+' '+escR(w.hi||'')+'<span class="bsep">·</span>'
+          + '<span class="btec">'+escR(w.tec)+'</span><span class="bsep">·</span>'
+          + pill(w.e)
+          + (w.cie ? '<span class="bsep">·</span><span class="bmot">'+escR(w.cie)+'</span>' : '')
+          + (w.der ? '<span class="bsep">·</span>'+escR(w.der) : '')
+          + (w.prev && w.prev.length
+              ? '<span class="bsep">·</span><span class="bmot">↩ '+w.prev.length
+                +' caída(s) antes</span>' : '')
+          + '</div>';
+      }).join('');
+      h += '</div>';
+    }
+
+    // ---- caidas de hoy ----
+    if(F.caidas.length){
+      h += '<div class="bsec caida"><div class="bt">🚨 Se cayó de la bandeja ('
+         + F.caidas.length+')</div>';
+      h += F.caidas.map(function(a){
+        return '<div class="brow">'
+          + '<span class="bord">'+resaltar(a.o, q)+'</span><span class="bsep">·</span>'
+          + '<span class="bcat">'+escR(a.cat||'')+'</span><span class="bsep">·</span>'
+          + escR(a.f||'')+'<span class="bsep">·</span>'
+          + '<span class="btec">'+escR(a.tec||'')+'</span><span class="bsep">·</span>'
+          + pill(a.e) + '<span class="bsep">·</span>'
+          + 'salió <span class="bfec">'+escR(String(a.visto||'').split(' ')[1]||'')+'</span>'
+          + '</div>';
+      }).join('');
+      h += '</div>';
+    }
+
+    // ---- nuevas del dia ----
+    if(F.nuevas.length){
+      h += '<div class="bsec nueva"><div class="bt">🆕 Entró después de la bandeja inicial ('
+         + F.nuevas.length+')</div>';
+      h += F.nuevas.map(function(n){
+        const k = clase(n);
+        return '<div class="brow">'
+          + '<span class="bord">'+resaltar(n.pet || n.o, q)+'</span><span class="bsep">·</span>'
+          + '<span class="bcat">'+escR(n.cat||'')+'</span><span class="bsep">·</span>'
+          + escR(n.f||'')+'<span class="bsep">·</span>'
+          + '<span class="btec">'+escR(n.tec||'')+'</span><span class="bsep">·</span>'
+          + pill(n.e) + '<span class="bsep">·</span>'
+          + (k==='reingreso' ? '<span class="bmot">↩ reingreso</span>'
+            : k==='reagendada' ? '<span class="bmot">↻ reagendada desde '+escR(n.reag)+'</span>'
+            : '✨ nueva')
+          + '</div>';
+      }).join('');
+      h += '</div>';
+    }
+
+    // ---- recaida del mismo dia ----
+    if(F.reca){
+      h += '<div class="bsec reca"><div class="bt">🔄 Recaída del mismo día</div>'
+        + '<div class="brow">se cayó '+F.reca.caidas.length+' vez(ces) y volvió a entrar '
+        + F.reca.sig.length+' vez(ces) hoy'
+        + (F.reca.viva ? '<span class="bsep">·</span><span class="bmot">todavía sin cerrar</span>' : '')
+        + '</div></div>';
+    }
+
+    // ---- historico de caidas (incluye las de hoy: es el registro completo) --
+    if(F.hist.length){
+      h += '<div class="bsec hist"><div class="bt">↩ Historial de caídas ('
+         + F.hist.length+')</div>';
+      h += F.hist.map(function(v){
+        return '<div class="brow">'
+          + '<span class="bfec">'+escR(v.f||'')+'</span><span class="bsep">·</span>'
+          + '<span class="bord">'+resaltar(v.o||'', q)+'</span><span class="bsep">·</span>'
+          + escR(v.cat||'')+'<span class="bsep">·</span>'
+          + '<span class="bmot">'+escR(v.cierre||'sin código')+'</span><span class="bsep">·</span>'
+          + '<span class="btec">'+escR(v.tec||'')+'</span>'
+          + (v.deriv ? '<span class="bsep">·</span>'+escR(v.deriv) : '')
+          + (v.gsa ? '<span class="bsep">·</span><span class="bmot">GSA</span>' : '')
+          + '</div>';
+      }).join('');
+      h += '</div>';
+    }
+
+    // ---- falla de red ----
+    if(F.red){
+      const mot = (F.red.mot||[]).map(function(m){ return m[0]+' ×'+m[1]; }).join(', ');
+      h += '<div class="bsec red"><div class="bt">📡 Falla de red ('+F.red.n+')</div>'
+        + '<div class="brow">'+escR(mot||'—')+'<span class="bsep">·</span>última '
+        + '<span class="bfec">'+escR(F.red.ult||'')+'</span></div></div>';
+    }
+
+    return h + '</div>';
+  }).join('');
+
+  const conHoy = fichas.filter(function(F){ return F.hoy.length; }).length;
+  nota.textContent = fichas.length+' dirección(es) · '+conHoy+' con órdenes hoy. '
+    + 'Busca en la bandeja, caídas, nuevas, recaídas, histórico de caídas y fallas de red. '
+    + (HIST ? '' : 'Ojo: el histórico no se pudo bajar, faltan las caídas viejas y las fallas de red.');
 }
 
 /* ======================= FALLAS DE RED / PLANTA =======================
