@@ -145,11 +145,20 @@
      ya es position:relative) para no alterar el iconSize de Leaflet: si se
      cambiara el tamano del icono, se corre el anclaje y los pines dejan de
      caer sobre su coordenada. pointer-events:none para que no tape el click
-     del marcador. */
+     del marcador.
+
+     El texto va BLANCO fijo y el color de la ruta queda en la barrita
+     izquierda. Antes el texto se pintaba del color de la ruta y 8 de los 38
+     colores de la paleta quedaban ilegibles sobre el mapa oscuro: #000075 y
+     #800000 no llegaban ni a 2:1 de contraste. Asi cualquier color de la
+     paleta se lee igual de bien.
+
+     Sin border-radius a proposito: con borde en un solo lado marcado, las
+     esquinas redondeadas se ven cortadas. */
   .num-icon .mk-nom { position:absolute; top:28px; left:50%; transform:translateX(-50%);
     white-space:nowrap; font-size:9px; font-weight:bold; letter-spacing:.2px;
-    background:rgba(2,6,23,.85); border:1px solid rgba(100,116,139,.55);
-    border-radius:4px; padding:0 4px; line-height:14px; pointer-events:none;
+    color:#f1f5f9; background:rgba(2,6,23,.9); border-radius:0;
+    padding:0 4px 0 3px; line-height:14px; pointer-events:none;
     text-shadow:0 1px 2px rgba(0,0,0,.9); }
   /* --- Modal de caidas a pantalla completa --- */
   #modalCaidas { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); }
@@ -1905,10 +1914,11 @@ function render(mantenerVista){
       const nPrev = (p.prev && p.prev.length) ? p.prev.length : 0;
       const marca = (repeMapa && nPrev) ? ' mk-repe' : '';
       const globo = (repeMapa && nPrev) ? '<span class="prevb">'+nPrev+'</span>' : '';
-      // el nombre se pinta del color de la ruta, asi se asocia al tiro con
-      // el pin aunque haya varias etiquetas juntas
+      // el color de la ruta va en la barrita izquierda, no en el texto: asi
+      // el nombre se lee igual con cualquiera de los 38 colores de la paleta
       const nom = verNombres
-        ? '<span class="mk-nom" style="color:'+col+'">'+escR(nombreCorto(t))+'</span>' : '';
+        ? '<span class="mk-nom" style="border-left:3px solid '+col+'">'
+          + escR(nombreCorto(t)) + '</span>' : '';
       const icon = L.divIcon({className:'', html:'<div class="num-icon'+stCls+marca+'" style="background:'+col+'">'+p._np+globo+nom+'</div>', iconSize:[26,26], iconAnchor:[13,13]});
       L.marker([p.lat,p.lng],{icon}).addTo(layer).bindPopup(
         '<div class="pp"><b>'+t+'</b> — parada '+p._np+' de '+ruta.length+'<br>'+
