@@ -849,11 +849,16 @@ function renderNuevas(){
       + 'Aquí aparece lo que el portal va cargando después de la bandeja inicial.</div>';
   } else {
     cont.innerHTML = lista.map(function(x){
-      // se salio de la bandeja despues de entrar: se deja en gris, no se borra
-      const ida = String(x.e||'').indexOf('ya no está') >= 0;
       // el sufijo "(ya no está)" no va dentro de la pildora: ensucia el texto y
       // esa condicion ya se comunica con la fila en gris
       const est = String(x.e||'').replace(/\s*\(ya no está\)\s*/, '').trim();
+      // Salir de la bandeja solo es raro si la orden estaba ABIERTA. Una
+      // completada o cancelada que desaparece es el curso normal, asi que no
+      // se marca: si se grisara igual, se leeria como sospechosa y mandaria a
+      // buscarla al boton de Caidas, donde no esta ni tiene por que estar.
+      const fue = String(x.e||'').indexOf('ya no está') >= 0;
+      const cerrada = ['Completado','No Realizada','Cancelado'].indexOf(est) >= 0;
+      const ida = fue && !cerrada;
       const det = String(x.visto||'').split(' ')[1] || '—';
       const k = clase(x);
       let badge = '', extra = '';
@@ -890,7 +895,7 @@ function renderNuevas(){
       }
 
       return '<div class="nfila'+(ida?' ida':'')+extra+'"'
-        + (ida?' title="ya no está en la bandeja"':'')+'>'
+        + (ida?' title="salió de la bandeja sin cerrar — está en el botón Caídas"':'')+'>'
         + '<span class="npet">'+escR(x.pet || x.o || '')+'</span>'
         + '<span class="ncat">'+escR(x.cat)+pill(est)+badge+'</span>'
         + '<span class="nfr">'+escR(x.f)+'</span>'
