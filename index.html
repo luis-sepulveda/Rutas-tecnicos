@@ -27,7 +27,12 @@
   .mop input { accent-color:#38bdf8; width:15px; height:15px; cursor:pointer; margin:0; }
   .mop .pt { width:9px; height:9px; border-radius:50%; flex:0 0 auto; }
   .mtodos { border-bottom:1px solid #475569; margin-bottom:4px; padding-bottom:8px; color:#94a3b8; font-size:12px; }
-  .stats { font-size:12px; color:#94a3b8; margin-left:auto; }
+  .stats { font-size:12px; color:#94a3b8; margin-left:auto;
+    display:flex; align-items:center; flex-wrap:wrap; gap:4px; justify-content:flex-end; }
+  .stats .st-base { white-space:nowrap; }
+  .stats .st-sep { color:#475569; }
+  .stats .bes { white-space:nowrap; }
+  .stats .st-tot { color:#cbd5e1; font-weight:bold; white-space:nowrap; margin-left:2px; }
   #map { flex:1; }
   .num-icon { display:flex; align-items:center; justify-content:center; border-radius:50%; color:#fff; font-weight:bold; font-size:12px; border:2px solid #fff; box-shadow:0 1px 4px rgba(0,0,0,.6); width:26px; height:26px; }
   .mk-iniciado { border:3px solid #4ade80 !important; box-shadow:0 0 10px 3px rgba(74,222,128,.9) !important; }
@@ -921,8 +926,7 @@ function renderNuevas(){
     + (ALERTAS && ALERTAS.fecha ? ALERTAS.fecha : '')
     + ' · sin Modificaciones de Servicio · ordenado por franja. '
     + '✨ nuevas = sin antecedentes · ↩ reingreso = misma dirección, la anterior se cayó '
-    + '(la fecha, el motivo, el técnico y la orden anterior van en la misma fila). '
-    + 'Las filas en gris ya salieron de la bandeja.';
+    + '(la fecha, el motivo, el técnico y la orden anterior van en la misma fila).';
 }
 /* ---------------------- DESCARGA A EXCEL ----------------------
    Exporta lo que se esta MOSTRANDO, respetando el chip activo: si tienes
@@ -1892,7 +1896,41 @@ function render(mantenerVista){
       bounds.push([p.lat,p.lng]);
     });
   });
-  document.getElementById('stats').textContent = nTec+' técnicos · '+nTrab+' trabajos · 🟢 '+nIni+' iniciados · 🟠 '+nRuta+' en ruta · ✅ '+nComp+' completados';
+  /* Contador de actividades por estado.
+
+     Se cuenta APARTE del bucle del mapa por dos razones:
+       - las canceladas no se dibujan (se filtran arriba con p.e!=='Cancelado'),
+         asi que contarlas ahi habria dado siempre cero;
+       - respeta ciudad, franja y tecnico, pero NO el filtro de estado: si
+         filtras "Completado", lo util es seguir viendo cuantas quedan
+         pendientes, no un contador que dice "35 completadas" y nada mas.
+     Por eso la suma de las pildoras no tiene por que cuadrar con "trabajos",
+     que si respeta todos los filtros y excluye canceladas. */
+  const tally = {};
+  show.forEach(function(t){
+    (DB[t] || []).forEach(function(p){
+      if(!okCiudad(p) || !okFranja(p)) return;
+      const e = String(p.e || 'Pendiente').trim() || 'Pendiente';
+      tally[e] = (tally[e] || 0) + 1;
+    });
+  });
+  // orden fijo: primero lo cerrado, despues lo que sigue vivo. Los estados que
+  // no aparecen hoy no se pintan, para no llenar la barra de ceros.
+  const ordenEst = ['Completado','No Realizada','Cancelado','Suspendido',
+                    'Iniciado','en ruta','Pendiente'];
+  const vistos = ordenEst.filter(function(e){ return tally[e]; })
+    .concat(Object.keys(tally).filter(function(e){ return ordenEst.indexOf(e) < 0; }));
+  const totalAct = Object.keys(tally).reduce(function(a,e){ return a + tally[e]; }, 0);
+
+  document.getElementById('stats').innerHTML =
+      '<span class="st-base">'+nTec+' técnicos · '+nTrab+' trabajos</span>'
+    + '<span class="st-sep">·</span>'
+    + vistos.map(function(e){
+        return '<span class="bes '+esClase(e)+'" title="'+escR(e)+'">'
+             + tally[e]+' '+escR(e)+'</span>';
+      }).join('')
+    + '<span class="st-tot" title="total de actividades con los filtros de ciudad, franja y técnico">'
+    + totalAct+' act.</span>';
   // En el refresco automatico NO se reencuadra el mapa: si estabas mirando
   // un sector con zoom, se respeta donde tenias la vista.
   if(bounds.length && !mantenerVista) map.fitBounds(bounds,{padding:[40,40]});
