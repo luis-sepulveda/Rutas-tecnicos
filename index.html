@@ -633,9 +633,7 @@ function cerrarSC(){
 }
 
 function toggleSinCompletar(){
-  cerrarComp();
-  if(libre) toggleLibre();             // modos excluyentes
-  cerrarRGU(); cerrarAtr(); cerrarCaidas();
+  cerrarPaneles('sc');                 // modos excluyentes
   sinComp = !sinComp;
   document.getElementById('btnSC').classList.toggle('on3', sinComp);
   document.getElementById('btnSC').textContent = sinComp ? '✖ Salir sin completar' : '🚩 Sin completar';
@@ -682,9 +680,8 @@ function cerrarCaidas(){
 }
 
 function toggleCaidas(){
-  // el modal tapa todo: cerramos los paneles laterales para no dejarlos abiertos detras
-  cerrarComp(); cerrarRGU(); cerrarAtr(); cerrarSC(); cerrarRepe();
-  if(libre) toggleLibre();
+  // el modal tapa todo: no puede quedar nada abierto detras
+  cerrarPaneles('caidas');
   caidasAbierto = !caidasAbierto;
   document.getElementById('modalCaidas').classList.toggle('abierto', caidasAbierto);
   if(caidasAbierto) renderPanelCaidas();
@@ -801,8 +798,7 @@ function cerrarNuevas(){
 }
 
 function toggleNuevas(){
-  cerrarComp(); cerrarRGU(); cerrarAtr(); cerrarSC(); cerrarCaidas(); cerrarRepe();
-  if(libre) toggleLibre();
+  cerrarPaneles('nuevas');
   nuevasAbierto = !nuevasAbierto;
   document.getElementById('modalNuevas').classList.toggle('abierto', nuevasAbierto);
   if(nuevasAbierto) renderNuevas();
@@ -1061,9 +1057,7 @@ function cerrarRepe(){
 }
 
 function toggleRepe(){
-  cerrarComp(); cerrarRGU(); cerrarAtr(); cerrarSC(); cerrarCaidas();
-  if(typeof cerrarNuevas === 'function') cerrarNuevas();
-  if(libre) toggleLibre();
+  cerrarPaneles('repe');
   repeAbierto = !repeAbierto;
   document.getElementById('modalRepe').classList.toggle('abierto', repeAbierto);
   if(repeAbierto) renderRepe();
@@ -1173,6 +1167,11 @@ function renderRepe(){
    sirve igual para "tolten" que para pegar un 1-3ND... del portal.          */
 let buscarAbierto = false;
 let ultimaBusqueda = '';
+// se marca aparte y NO se toca HIST: si la bajada falla, HIST tiene que
+// quedar en null para que Fallas de red la reintente. Ponerle false lo dejaba
+// distinto de null y ese modal se saltaba la descarga para siempre, mostrando
+// vacio sin avisar hasta recargar la pagina.
+let histFallo = false;
 
 function normQ(s){
   return String(s||'').toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')
@@ -1287,8 +1286,9 @@ async function hacerBusqueda(){
   const q = normQ(document.getElementById('qBuscar').value);
   if(q.length < 3){
     alert('Escribe al menos 3 caracteres.');
-    return;
-  }
+    return;                       // se valida ANTES de cerrar nada: escribir
+  }                               // dos letras no tiene por que borrarte la vista
+  cerrarPaneles('buscar');
   ultimaBusqueda = q;
   cerrarComp(); cerrarRGU(); cerrarAtr(); cerrarSC();
   cerrarCaidas(); cerrarRepe(); cerrarNuevas(); cerrarReca(); cerrarPlanta();
@@ -1302,8 +1302,8 @@ async function hacerBusqueda(){
   // falta. Sin el, la ficha saldria sin caidas viejas ni fallas de red, que
   // es justo la mitad interesante.
   if(HIST === null){
-    try { HIST = await bajarHistorial(); }
-    catch(e){ HIST = false; }
+    try { HIST = await bajarHistorial(); histFallo = false; }
+    catch(e){ histFallo = true; }   // HIST queda en null a proposito
   }
   renderBusqueda();
 }
@@ -1430,7 +1430,7 @@ function renderBusqueda(){
   const conHoy = fichas.filter(function(F){ return F.hoy.length; }).length;
   nota.textContent = fichas.length+' dirección(es) · '+conHoy+' con órdenes hoy. '
     + 'Busca en la bandeja, caídas, nuevas, recaídas, histórico de caídas y fallas de red. '
-    + (HIST ? '' : 'Ojo: el histórico no se pudo bajar, faltan las caídas viejas y las fallas de red.');
+    + (histFallo ? 'Ojo: no se pudo bajar el histórico, faltan las caídas viejas y las fallas de red.' : '');
 }
 
 /* ======================= FALLAS DE RED / PLANTA =======================
@@ -1460,9 +1460,7 @@ function cerrarPlanta(){
 }
 
 async function togglePlanta(){
-  cerrarComp(); cerrarRGU(); cerrarAtr(); cerrarSC(); cerrarCaidas(); cerrarRepe();
-  if(typeof cerrarNuevas === 'function') cerrarNuevas();
-  if(libre) toggleLibre();
+  cerrarPaneles('planta');
   plantaAbierto = !plantaAbierto;
   document.getElementById('modalPlanta').classList.toggle('abierto', plantaAbierto);
   document.getElementById('btnPlanta').classList.toggle('on-sec', plantaAbierto);
@@ -1747,10 +1745,31 @@ function cerrarReca(){
   renderBotonReca();
 }
 
-function toggleReca(){
-  cerrarComp(); cerrarRGU(); cerrarAtr(); cerrarSC(); cerrarCaidas(); cerrarRepe(); cerrarPlanta();
-  if(typeof cerrarNuevas === 'function') cerrarNuevas();
+/* Cierra todos los paneles menos el que se esta abriendo.
+
+   Reemplaza la lista de cerrarX() que cada toggle repetia a mano. Ese patron
+   se rompia solo: cada modal nuevo cerraba a los que ya existian, pero los
+   viejos no sabian del nuevo, asi que quedaban dos abiertos encimados (mismo
+   z-index, gana el ultimo del DOM) y al cerrar el de arriba aparecia el otro.
+
+   El parametro 'salvo' es indispensable: si el helper cerrara tambien el
+   propio panel, le pondria su flag en false justo antes de que el toggle haga
+   !flag, y el boton nunca cerraria — siempre reabriria.                     */
+function cerrarPaneles(salvo){
+  const todos = {
+    comp:   cerrarComp,   rgu:    cerrarRGU,    atr:    cerrarAtr,
+    sc:     cerrarSC,     caidas: cerrarCaidas, repe:   cerrarRepe,
+    nuevas: cerrarNuevas, reca:   cerrarReca,   planta: cerrarPlanta,
+    buscar: cerrarBuscar
+  };
+  Object.keys(todos).forEach(function(k){
+    if(k !== salvo && typeof todos[k] === 'function') todos[k]();
+  });
   if(libre) toggleLibre();
+}
+
+function toggleReca(){
+  cerrarPaneles('reca');
   recaAbierto = !recaAbierto;
   document.getElementById('modalReca').classList.toggle('abierto', recaAbierto);
   if(recaAbierto) renderReca();
@@ -2421,8 +2440,7 @@ function cerrarComp(){
 }
 
 function toggleComp(){
-  if(libre) toggleLibre();
-  cerrarSC(); cerrarRGU(); cerrarAtr(); cerrarCaidas();
+  cerrarPaneles('comp');
   comp = !comp;
   document.getElementById('btnComp').classList.toggle('on6', comp);
   document.getElementById('panelComp').style.display = comp ? 'block' : 'none';
@@ -2507,8 +2525,7 @@ function cerrarAtr(){
 }
 
 function toggleAtrasados(){
-  if(libre) toggleLibre();             // modos excluyentes
-  cerrarSC(); cerrarRGU(); cerrarComp(); cerrarCaidas();
+  cerrarPaneles('atr');                // modos excluyentes
   atr = !atr;
   document.getElementById('btnAtr').classList.toggle('on5', atr);
   document.getElementById('panelAtr').style.display = atr ? 'block' : 'none';
