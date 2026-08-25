@@ -294,13 +294,19 @@
   .brow .bsep { color:#475569; margin:0 5px; }
   .brow .bcat { color:#e2e8f0; font-weight:bold; }
   /* el estado se pinta con el mismo codigo de color del resto del tablero */
+  /* Codigo de color de los estados, compartido por el buscador y el modal de
+     nuevas. Verificado con contraste texto/fondo: todos sobre 5.7:1, y los
+     pares que se podian confundir quedaron separados —
+     Completado (azul) vs Suspendido (calipso), e Iniciado (verde) vs
+     Cancelado (lima). */
   .bes { padding:0 6px; border-radius:999px; font-size:10px; font-weight:bold; }
-  .bes.ini  { background:#052e16; color:#4ade80; }
-  .bes.ruta { background:#431407; color:#fb923c; }
-  .bes.ok   { background:#0c4a6e; color:#7dd3fc; }
-  .bes.nr   { background:#450a0a; color:#f87171; }
-  .bes.can  { background:#1e1b4b; color:#a5b4fc; }
-  .bes.pen  { background:#1e293b; color:#94a3b8; }
+  .bes.ini  { background:#052e16; color:#4ade80; }   /* trabajando */
+  .bes.ruta { background:#431407; color:#fb923c; }   /* en ruta */
+  .bes.ok   { background:#1e3a8a; color:#93c5fd; }   /* completado */
+  .bes.susp { background:#134e4a; color:#5eead4; }   /* suspendido */
+  .bes.nr   { background:#450a0a; color:#f87171; }   /* no realizada */
+  .bes.can  { background:#1a2e05; color:#bef264; }   /* cancelado */
+  .bes.pen  { background:#1e293b; color:#94a3b8; }   /* pendiente */
   .bvacio { color:#64748b; font-size:12px; padding:18px; text-align:center; }
   .bhl { background:#78350f; color:#fde68a; border-radius:3px; padding:0 2px; }
   /* Detalle del reingreso EN LA MISMA LINEA, no en tooltip: el tooltip no
@@ -1172,9 +1178,10 @@ function esClase(e){
   if(x === 'iniciado') return 'ini';
   if(x === 'en ruta') return 'ruta';
   if(x === 'completado') return 'ok';
+  if(x === 'suspendido') return 'susp';
   if(x === 'no realizada') return 'nr';
   if(x === 'cancelado') return 'can';
-  return 'pen';
+  return 'pen';                       // pendiente y cualquier estado no previsto
 }
 
 function pill(e){
