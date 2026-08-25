@@ -34,6 +34,12 @@
   .stats .bes { white-space:nowrap; }
   .stats .st-tot { color:#cbd5e1; font-weight:bold; white-space:nowrap; margin-left:2px; }
   #map { flex:1; }
+  /* Las juntas entre tiles dejaban rayas blancas verticales: Leaflet pinta el
+     contenedor de #ddd por defecto y ese gris claro se asomaba por el pixel
+     que queda entre tile y tile. Con el fondo del tono del basemap oscuro la
+     junta sigue existiendo pero deja de verse. Se toca .leaflet-container y no
+     #map porque el gris lo pone la hoja de estilos de Leaflet. */
+  .leaflet-container { background:#131313; }
   .num-icon { display:flex; align-items:center; justify-content:center; border-radius:50%; color:#fff; font-weight:bold; font-size:12px; border:2px solid #fff; box-shadow:0 1px 4px rgba(0,0,0,.6); width:26px; height:26px; }
   .mk-iniciado { border:3px solid #4ade80 !important; box-shadow:0 0 10px 3px rgba(74,222,128,.9) !important; }
   .mk-enruta { border:3px solid #fb923c !important; animation:pulso 1.5s infinite; }
