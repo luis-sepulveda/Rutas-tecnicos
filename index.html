@@ -1403,6 +1403,93 @@ function renderBusqueda(){
     + (histFallo ? 'Ojo: no se pudo bajar el histórico, faltan las caídas viejas y las fallas de red.' : '');
 }
 
+/* ============ PANELES DE CAIDAS Y SIN COMPLETAR ============
+   Quedaron aparte al sacar el modal de Fallas de red: son los
+   renderers de "Caidas" y "Sin completar", nada que ver con planta. */
+function renderPanelCaidas(){
+  const cont = document.getElementById('listaCaidas');
+  const nota = document.getElementById('mcResnota');
+  const activas = (ALERTAS && ALERTAS.activas) ? ALERTAS.activas : [];
+  const res = (ALERTAS && ALERTAS.resueltas) ? ALERTAS.resueltas : 0;
+  const cont2 = document.getElementById('mcContadores');
+  document.getElementById('mcTitulo').textContent =
+    '🚨 Se cayeron de la bandeja ('+activas.length+')';
+  if(!activas.length){
+    cont2.innerHTML = '';
+    cont.innerHTML = '<div class="vacio">✅ Ninguna orden se ha caído sin cerrar hoy.</div>';
+  } else {
+    // resolver la franja de cada caida y ordenar: por franja, luego tecnico, luego hora
+    const items = activas.map(c=>({ c, fr: (c.f || franjaDeHora(c.hi) || '') }))
+      .sort((a,b)=> rankFranja(a.fr)-rankFranja(b.fr)
+                    || String(a.c.tec).localeCompare(String(b.c.tec))
+                    || String(a.c.hi||'').localeCompare(String(b.c.hi||'')));
+
+    // contador por franja (va al lado del titulo, en el encabezado)
+    const cuenta = {};
+    items.forEach(x=>{ const k = x.fr || 's/franja'; cuenta[k] = (cuenta[k]||0)+1; });
+    cont2.innerHTML = ['10-13','13-16','16-19','s/franja']
+      .filter(k=>cuenta[k])
+      .map(k=>'<span class="fchip">🕒 '+k+' · <b>'+cuenta[k]+'</b></span>').join('');
+
+    // render de las tarjetas con un separador por cada grupo de franja
+    let html = '';
+    let grupo = null;
+    items.forEach(x=>{
+      const c = x.c;
+      const fr = x.fr || 's/franja';
+      if(fr !== grupo){
+        grupo = fr;
+        html += '<div class="fgrupo">🕒 Franja '+fr+' <span>('+cuenta[fr]+')</span></div>';
+      }
+      const dir = (c.d||'').replace(/</g,'&lt;');
+      const salio = (c.visto||'').split(' ').pop();   // solo HH:MM de cuando se cayo
+      html += '<div class="caidacard" onclick="verTecnicoCaida(\''+String(c.tec).replace(/'/g,"\\'")+'\')">'
+        + '<div class="fila1"><span class="cat">'+(c.cat||c.tec)+'</span>'
+        + '<span class="ot">'+c.o+'</span></div>'
+        + '<div class="sub">👷 <b>'+c.tec+'</b> · '+(c.e||'?')+'</div>'
+        + '<div class="sub">📍 '+dir+'</div>'
+        + '<div class="horas">🕒 Franja '+(x.fr||'—')+' · Salió '+(salio||'?')+'</div>'
+        + '</div>';
+    });
+    cont.innerHTML = html;
+  }
+  if(res){
+    nota.textContent = res+' orden(es) se cayó(eron) y ya volvió(eron) a una bandeja hoy — no cuentan arriba.';
+    nota.style.display = 'block';
+  } else {
+    nota.style.display = 'none';
+  }
+}
+
+function renderPanelSC(){
+  const lista = tecnicosSinCompletar();
+  const cont = document.getElementById('listaSC');
+  document.querySelector('#panelSC h2').textContent = '🚩 Sin completar ('+lista.length+')';
+  if(!lista.length){
+    cont.innerHTML = '<div class="vacio">✅ Todos los técnicos con trabajos tienen al menos uno completado.</div>';
+    return;
+  }
+  let html = '';
+  if(sel.value!=='__ALL__') html += '<div class="vertodos" onclick="verTecnicoSC(\'__ALL__\')">👥 Ver todos en el mapa</div>';
+  html += lista.map(t=>{
+    const act = DB[t].filter(p=> p.e!=='Cancelado' && okCiudad(p));
+    const nIni = act.filter(p=>p.e==='Iniciado').length;
+    const nRuta = act.filter(p=>p.e==='en ruta').length;
+    const nPend = act.filter(p=>p.e==='Pendiente').length;
+    const nNR = act.filter(p=>p.e==='No Realizada').length;
+    let b = '';
+    if(nIni)  b += '<span class="badge ini">🟢 '+nIni+' iniciado</span>';
+    if(nRuta) b += '<span class="badge ruta">🟠 '+nRuta+' en ruta</span>';
+    if(nPend) b += '<span class="badge pend">'+nPend+' pendiente'+(nPend>1?'s':'')+'</span>';
+    if(nNR)   b += '<span class="badge nr">'+nNR+' no realizada'+(nNR>1?'s':'')+'</span>';
+    const tEsc = t.replace(/'/g,"\\'");
+    return '<div class="sccard" onclick="verTecnicoSC(\''+tEsc+'\')">'+
+      '<div class="nom"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:'+colorOf[t]+';margin-right:5px;"></span>'+t+' ('+act.length+')</div>'+
+      '<div>'+b+'</div></div>';
+  }).join('');
+  cont.innerHTML = html;
+}
+
 /* ======================= RECAIDAS DEL MISMO DIA =======================
    Caso: una orden se cae No Realizada en la manana y a la tarde aparece OTRA
    orden en la MISMA direccion, con otro tecnico. El segundo parte de cero: no
