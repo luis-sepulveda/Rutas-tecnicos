@@ -261,6 +261,10 @@
   .nfila .nre { background:#78350f; border:1px solid #f59e0b; color:#fde68a; }
   .nfila .nrg { background:#3730a3; border:1px solid #818cf8; color:#e0e7ff; }
   .nfila.rein { border-left-color:#f59e0b; }
+  /* la pildora de estado reusa las clases .bes del buscador para que el codigo
+     de color sea el mismo en todo el tablero: un "No Realizada" se ve igual
+     aca, en el buscador y en las caidas */
+  .nfila .ncat .bes { margin-left:8px; vertical-align:middle; }
   /* ---------------- BUSCADOR ---------------- */
   .buscador { display:flex; gap:5px; align-items:center; margin-left:6px; }
   .buscador input { background:#0f172a; border:1px solid #334155; color:#e2e8f0;
@@ -834,6 +838,9 @@ function renderNuevas(){
     cont.innerHTML = lista.map(function(x){
       // se salio de la bandeja despues de entrar: se deja en gris, no se borra
       const ida = String(x.e||'').indexOf('ya no está') >= 0;
+      // el sufijo "(ya no está)" no va dentro de la pildora: ensucia el texto y
+      // esa condicion ya se comunica con la fila en gris
+      const est = String(x.e||'').replace(/\s*\(ya no está\)\s*/, '').trim();
       const det = String(x.visto||'').split(' ')[1] || '—';
       const k = clase(x);
       let badge = '', extra = '';
@@ -872,7 +879,7 @@ function renderNuevas(){
       return '<div class="nfila'+(ida?' ida':'')+extra+'"'
         + (ida?' title="ya no está en la bandeja"':'')+'>'
         + '<span class="npet">'+escR(x.pet || x.o || '')+'</span>'
-        + '<span class="ncat">'+escR(x.cat)+badge+'</span>'
+        + '<span class="ncat">'+escR(x.cat)+pill(est)+badge+'</span>'
         + '<span class="nfr">'+escR(x.f)+'</span>'
         // hora en que el CICLO la detecto (campo 'visto'), no la hora de la
         // cita. Sirve de referencia de cuando cayo en la bandeja.
