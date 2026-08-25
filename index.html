@@ -35,11 +35,6 @@
   .mk-completado { opacity:.45; border:2px solid #94a3b8 !important; }
   .mk-norealizada { opacity:.5; border:2px dashed #ef4444 !important; }
   /* marcador del modo 'repetidas en el mapa': anillo violeta y el numero de
-     caidas previas en una burbuja arriba a la derecha */
-  .mk-repe { border:3px solid #a78bfa !important; box-shadow:0 0 10px 3px rgba(167,139,250,.75) !important; }
-  .num-icon .prevb { position:absolute; top:-7px; right:-9px; background:#7f1d1d; color:#fff;
-    border:2px solid #0f172a; border-radius:9px; min-width:17px; height:17px; line-height:13px;
-    font-size:10px; font-weight:bold; text-align:center; padding:0 3px; }
   .num-icon { position:relative; }
   .btn.on-repemapa { background:#4c1d95; border-color:#a78bfa; font-weight:bold; }
   #modalReca { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); }
@@ -53,8 +48,6 @@
   #btnReca .badge { display:inline-block; min-width:16px; padding:0 5px; margin-left:5px;
     background:#fb923c; color:#431407; border-radius:9px; font-size:11px; font-weight:bold;
     line-height:16px; text-align:center; }
-  #btnRepeMapa .badge { display:inline-block; padding:0 6px; margin-left:5px; background:#a78bfa;
-    color:#1e1b4b; border-radius:9px; font-size:11px; font-weight:bold; line-height:16px; }
   @keyframes pulso { 0%{box-shadow:0 0 0 0 rgba(251,146,60,.9)} 70%{box-shadow:0 0 0 12px rgba(251,146,60,0)} 100%{box-shadow:0 0 0 0 rgba(251,146,60,0)} }
   .estados { position:absolute; bottom:16px; right:10px; z-index:1000; background:rgba(30,41,59,.92); border-radius:8px; padding:8px 12px; font-size:11px;}
   .estados div { display:flex; align-items:center; gap:8px; margin:4px 0;}
@@ -221,10 +214,6 @@
   .rvis .rv .re.ok { background:#065f46; } .rvis .rv .re.nr { background:#7f1d1d; }
   .rmapa { color:#93c5fd; font-size:11.5px; cursor:pointer; margin-top:6px; display:inline-block; }
   /* --- Modal de SECTORES (agrupado por calle) --- */
-  #modalPlanta { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); }
-  #modalPlanta.abierto { display:flex; align-items:flex-start; justify-content:center; padding:4vh 2vw; }
-  #modalPlanta .mc-body { display:block; }
-  #modalPlanta .vacio { color:#94a3b8; text-align:center; padding:28px 6px; font-size:14px; line-height:1.6; }
   .btn.on-sec { background:#0c4a6e; border-color:#38bdf8; font-weight:bold; }
   .schip { background:#1e293b; border:1px solid #475569; color:#e2e8f0; border-radius:999px;
     padding:3px 11px; font-size:11.5px; cursor:pointer; white-space:nowrap; }
@@ -355,8 +344,6 @@
   <button class="btn" id="btnAtr" onclick="toggleAtrasados()">⏱️ +2h30 iniciado</button>
   <button class="btn" id="btnCaidas" onclick="toggleCaidas()">🚨 Caídas</button>
   <button class="btn" id="btnRepe" onclick="toggleRepe()">🔁 Direcciones repetidas hoy</button>
-  <button class="btn" id="btnPlanta" onclick="togglePlanta()">📡 Fallas de red</button>
-  <button class="btn" id="btnRepeMapa" onclick="toggleRepeMapa()">🗺️ Repetidas en el mapa</button>
   <button class="btn" id="btnNombres" onclick="toggleNombres()">👷 Nombres</button>
   <button class="btn" id="btnReca" onclick="toggleReca()">🔄 Recaídas hoy</button>
   <button class="btn" id="btnNuevas" onclick="toggleNuevas()">🆕 Nuevas</button>
@@ -415,19 +402,6 @@
     </div>
     <div id="listaReca" class="mc-body"></div>
     <div id="recaNota" class="mc-resnota"></div>
-  </div>
-</div>
-<div id="modalPlanta" onclick="if(event.target===this) cerrarPlanta()">
-  <div class="mc-box">
-    <div class="mc-head">
-      <div class="mc-head-left">
-        <h2>📡 Direcciones con falla de red</h2>
-        <div id="plantaChips" class="mc-cont"></div>
-      </div>
-      <button class="mc-close" onclick="cerrarPlanta()" title="Cerrar (Esc)">✖</button>
-    </div>
-    <div id="listaPlanta" class="mc-body"></div>
-    <div id="plantaNota" class="mc-resnota"></div>
   </div>
 </div>
 <div id="modalRepe" onclick="if(event.target===this) cerrarRepe()">
@@ -696,7 +670,7 @@ function verTecnicoCaida(t){
 
 // cerrar los modales con la tecla Esc
 document.addEventListener('keydown', function(e){
-  if(e.key === 'Escape'){ cerrarCaidas(); cerrarNuevas(); cerrarRepe(); cerrarPlanta(); cerrarReca(); cerrarBuscar(); }
+  if(e.key === 'Escape'){ cerrarCaidas(); cerrarNuevas(); cerrarRepe(); cerrarReca(); cerrarBuscar(); }
 });
 
 /* ======================= ORDENES NUEVAS DEL DIA =======================
@@ -1290,9 +1264,6 @@ async function hacerBusqueda(){
   }                               // dos letras no tiene por que borrarte la vista
   cerrarPaneles('buscar');
   ultimaBusqueda = q;
-  cerrarComp(); cerrarRGU(); cerrarAtr(); cerrarSC();
-  cerrarCaidas(); cerrarRepe(); cerrarNuevas(); cerrarReca(); cerrarPlanta();
-  if(libre) toggleLibre();
   buscarAbierto = true;
   document.getElementById('modalBuscar').classList.add('abierto');
   document.getElementById('listaBuscar').innerHTML =
@@ -1433,243 +1404,6 @@ function renderBusqueda(){
     + (histFallo ? 'Ojo: no se pudo bajar el histórico, faltan las caídas viejas y las fallas de red.' : '');
 }
 
-/* ======================= FALLAS DE RED / PLANTA =======================
-   Direcciones donde la visita se cayo por la RED, no por el cliente: NAP
-   (ubicacion, niveles, acceso, copado), ductos tapados, aprovisionamiento,
-   zona roja, sin red, contingencia.
-
-   Por que aparte del resto: de las 800+ caidas del historico, la mayoria son
-   sin moradores / reagenda / desiste, o sea agenda. Esas se arreglan llamando
-   al cliente. Estas NO se arreglan mandando otro tecnico de instalacion: hay
-   que escalarlas, y si no, la visita se vuelve a perder.
-
-   '+N en la calle' significa que hay N direcciones MAS del mismo tramo con
-   falla de planta. Mientras mas alto, menos es la acometida de esa casa y mas
-   es el sector.
-
-   Los datos vienen en la llave 'planta' de historial_dir.json.            */
-let plantaAbierto = false;
-let plantaFiltro = 'todos';   // 'todos' | 'nap' | 'ducto' | 'aprov' | 'hoy'
-let plantaOrden = 'n';        // 'n' = mas caidas | 'f' = mas reciente
-
-function cerrarPlanta(){
-  if(!plantaAbierto) return;
-  plantaAbierto = false;
-  document.getElementById('modalPlanta').classList.remove('abierto');
-  document.getElementById('btnPlanta').classList.remove('on-sec');
-}
-
-async function togglePlanta(){
-  cerrarPaneles('planta');
-  plantaAbierto = !plantaAbierto;
-  document.getElementById('modalPlanta').classList.toggle('abierto', plantaAbierto);
-  document.getElementById('btnPlanta').classList.toggle('on-sec', plantaAbierto);
-  if(!plantaAbierto) return;
-
-  if(HIST === null){
-    document.getElementById('listaPlanta').innerHTML = '<div class="vacio">⏳ cargando histórico...</div>';
-    document.getElementById('plantaChips').innerHTML = '';
-    document.getElementById('plantaNota').textContent = '';
-    try { HIST = await bajarHistorial(); }
-    catch(e){
-      document.getElementById('listaPlanta').innerHTML =
-        '<div class="vacio">⚠️ No pude bajar el histórico.<br>'
-        + 'Revisa que historial_dir.json esté publicado en el repo.</div>';
-      return;
-    }
-  }
-  renderPlanta();
-}
-
-function setPlantaFiltro(f){ plantaFiltro = f; renderPlanta(); }
-function setPlantaOrden(o){ plantaOrden = o; renderPlanta(); }
-function verEnMapaPlanta(lat, lng){ cerrarPlanta(); if(lat && lng) map.setView([lat, lng], 17); }
-
-// ordenes de HOY por direccion exacta (para saber si alguien va para alla)
-function ordenesHoyPorDir(){
-  const m = {};
-  Object.keys(DB || {}).forEach(function(t){
-    (DB[t] || []).forEach(function(w){
-      const k = claveDir(w.d);
-      (m[k] = m[k] || []).push({ num:(w.pet || w.o || ''), e:w.e, f:w.f, tec:t, cat:(w.cat || w.t || '') });
-    });
-  });
-  return m;
-}
-
-function renderPlanta(){
-  const cont = document.getElementById('listaPlanta');
-  const chips = document.getElementById('plantaChips');
-  const nota = document.getElementById('plantaNota');
-
-  chips.innerHTML = [
-      ['todos','todas'], ['nap','📶 NAP'], ['ducto','🕳️ ductos'],
-      ['aprov','🔌 aprovisionamiento'], ['hoy','📍 con órdenes hoy']
-    ].map(function(o){
-      return '<span class="schip'+(plantaFiltro===o[0]?' act':'')+'" '
-           + 'onclick="setPlantaFiltro(\'' + o[0] + '\')">'+o[1]+'</span>';
-    }).join('')
-    + '<span class="rsep"></span>'
-    + '<span class="schip'+(plantaOrden==='n'?' act':'')+'" onclick="setPlantaOrden(\'n\')">↕ más caídas</span>'
-    + '<span class="schip'+(plantaOrden==='f'?' act':'')+'" onclick="setPlantaOrden(\'f\')">📅 más reciente</span>';
-
-  const base = (HIST && HIST.planta) ? HIST.planta : null;
-  if(!base){
-    cont.innerHTML = '<div class="vacio">⚠️ El histórico publicado no trae la llave "planta".<br>'
-      + 'Corre el pipeline con la versión nueva de historial_dir.py.</div>';
-    nota.textContent = '';
-    return;
-  }
-
-  const hoyPorDir = ordenesHoyPorDir();
-  let lista = base.map(function(x){
-    const o = Object.assign({}, x);
-    o.hoy = hoyPorDir[claveDir(x.d)] || [];
-    o.txt = (x.mot || []).map(function(m){ return m[0]; }).join(' ').toLowerCase();
-    return o;
-  });
-
-  if(plantaFiltro === 'nap')   lista = lista.filter(function(x){ return x.txt.indexOf('nap') >= 0 || x.txt.indexOf('nivel') >= 0; });
-  if(plantaFiltro === 'ducto') lista = lista.filter(function(x){ return x.txt.indexOf('ducto') >= 0; });
-  if(plantaFiltro === 'aprov') lista = lista.filter(function(x){ return x.txt.indexOf('aprovision') >= 0; });
-  if(plantaFiltro === 'hoy')   lista = lista.filter(function(x){ return x.hoy.length > 0; });
-
-  if(plantaOrden === 'f') lista.sort(function(a,b){ return fnum(b.ult) - fnum(a.ult) || b.n - a.n; });
-  else                    lista.sort(function(a,b){ return b.n - a.n || b.tramo - a.tramo || fnum(b.ult) - fnum(a.ult); });
-
-  if(!lista.length){
-    cont.innerHTML = '<div class="vacio">✅ Ninguna dirección con ese filtro.</div>';
-  } else {
-    cont.innerHTML = lista.map(function(x, i){
-      const motPrin = (x.mot && x.mot[0]) ? x.mot[0][0] : '';
-      const visitas = x.v.slice().reverse().map(function(v){
-        return '<div class="rv">'
-          + '<span class="rf">'+escR(v.f)+'</span>'
-          + '<span class="rnum">'+escR(v.num)+'</span>'
-          + '<span>'+escR(v.cat)+'</span>'
-          + '<span>· '+escR(v.tec)+'</span>'
-          + '<span class="rc">· '+escR(v.cierre)+'</span>'
-          + '</div>';
-      }).join('');
-      const hoy = x.hoy.length ? '<div class="rvh">Hoy en bandeja ('+x.hoy.length+')</div>'
-        + x.hoy.map(function(w){
-            return '<div class="rv"><span class="rh">'+escR(w.f || 's/franja')+'</span>'
-              + '<span class="rnum">'+escR(w.num)+'</span><span>'+escR(w.cat)+'</span>'
-              + '<span>· '+escR(w.tec)+'</span>'
-              + '<span class="re '+estClase(w.e)+'">'+escR(w.e)+'</span></div>';
-          }).join('') : '';
-      return '<div class="rcard sec alerta" id="pl'+i+'">'
-        + '<div class="rtop" onclick="document.getElementById(\'pl'+i+'\').classList.toggle(\'abierta\')">'
-        +   '<span class="rn">'+x.n+'x</span>'
-        +   '<span class="rdir">'+escR(x.d)+'</span>'
-        +   '<span class="fam red">'+escR(motPrin)+'</span>'
-        +   (x.tramo ? '<span class="fam otro">🛣️ +'+x.tramo+' en la calle</span>' : '')
-        +   (x.hoy.length ? '<span class="shoy">hoy '+x.hoy.length+'</span>' : '')
-        +   '<span class="rult">últ. '+escR(x.ult || '—')+' ▾</span>'
-        + '</div>'
-        + '<div class="rvis">'
-        +   hoy
-        +   '<div class="rvh">Caídas por red ('+x.n+' de '+x.tot+' totales)</div>'+visitas
-        +   '<span class="rmapa" onclick="verEnMapaPlanta('+(x.lat||0)+','+(x.lng||0)+')">📍 ver en el mapa</span>'
-        + '</div>'
-        + '</div>';
-    }).join('');
-  }
-
-  const conHoy = lista.filter(function(x){ return x.hoy.length > 0; }).length;
-  nota.textContent = lista.length + ' dirección(es) con falla de red · ' + conHoy
-    + ' con orden hoy. Solo NAP, ductos, niveles, aprovisionamiento, zona roja '
-    + 'y similares: las caídas por cliente ausente o reagenda no salen acá. '
-    + (HIST.desde ? 'Histórico ' + HIST.desde + ' a ' + HIST.hasta + '.' : '');
-}
-
-
-
-function renderPanelCaidas(){
-  const cont = document.getElementById('listaCaidas');
-  const nota = document.getElementById('mcResnota');
-  const activas = (ALERTAS && ALERTAS.activas) ? ALERTAS.activas : [];
-  const res = (ALERTAS && ALERTAS.resueltas) ? ALERTAS.resueltas : 0;
-  const cont2 = document.getElementById('mcContadores');
-  document.getElementById('mcTitulo').textContent =
-    '🚨 Se cayeron de la bandeja ('+activas.length+')';
-  if(!activas.length){
-    cont2.innerHTML = '';
-    cont.innerHTML = '<div class="vacio">✅ Ninguna orden se ha caído sin cerrar hoy.</div>';
-  } else {
-    // resolver la franja de cada caida y ordenar: por franja, luego tecnico, luego hora
-    const items = activas.map(c=>({ c, fr: (c.f || franjaDeHora(c.hi) || '') }))
-      .sort((a,b)=> rankFranja(a.fr)-rankFranja(b.fr)
-                    || String(a.c.tec).localeCompare(String(b.c.tec))
-                    || String(a.c.hi||'').localeCompare(String(b.c.hi||'')));
-
-    // contador por franja (va al lado del titulo, en el encabezado)
-    const cuenta = {};
-    items.forEach(x=>{ const k = x.fr || 's/franja'; cuenta[k] = (cuenta[k]||0)+1; });
-    cont2.innerHTML = ['10-13','13-16','16-19','s/franja']
-      .filter(k=>cuenta[k])
-      .map(k=>'<span class="fchip">🕒 '+k+' · <b>'+cuenta[k]+'</b></span>').join('');
-
-    // render de las tarjetas con un separador por cada grupo de franja
-    let html = '';
-    let grupo = null;
-    items.forEach(x=>{
-      const c = x.c;
-      const fr = x.fr || 's/franja';
-      if(fr !== grupo){
-        grupo = fr;
-        html += '<div class="fgrupo">🕒 Franja '+fr+' <span>('+cuenta[fr]+')</span></div>';
-      }
-      const dir = (c.d||'').replace(/</g,'&lt;');
-      const salio = (c.visto||'').split(' ').pop();   // solo HH:MM de cuando se cayo
-      html += '<div class="caidacard" onclick="verTecnicoCaida(\''+String(c.tec).replace(/'/g,"\\'")+'\')">'
-        + '<div class="fila1"><span class="cat">'+(c.cat||c.tec)+'</span>'
-        + '<span class="ot">'+c.o+'</span></div>'
-        + '<div class="sub">👷 <b>'+c.tec+'</b> · '+(c.e||'?')+'</div>'
-        + '<div class="sub">📍 '+dir+'</div>'
-        + '<div class="horas">🕒 Franja '+(x.fr||'—')+' · Salió '+(salio||'?')+'</div>'
-        + '</div>';
-    });
-    cont.innerHTML = html;
-  }
-  if(res){
-    nota.textContent = res+' orden(es) se cayó(eron) y ya volvió(eron) a una bandeja hoy — no cuentan arriba.';
-    nota.style.display = 'block';
-  } else {
-    nota.style.display = 'none';
-  }
-}
-
-function renderPanelSC(){
-  const lista = tecnicosSinCompletar();
-  const cont = document.getElementById('listaSC');
-  document.querySelector('#panelSC h2').textContent = '🚩 Sin completar ('+lista.length+')';
-  if(!lista.length){
-    cont.innerHTML = '<div class="vacio">✅ Todos los técnicos con trabajos tienen al menos uno completado.</div>';
-    return;
-  }
-  let html = '';
-  if(sel.value!=='__ALL__') html += '<div class="vertodos" onclick="verTecnicoSC(\'__ALL__\')">👥 Ver todos en el mapa</div>';
-  html += lista.map(t=>{
-    const act = DB[t].filter(p=> p.e!=='Cancelado' && okCiudad(p));
-    const nIni = act.filter(p=>p.e==='Iniciado').length;
-    const nRuta = act.filter(p=>p.e==='en ruta').length;
-    const nPend = act.filter(p=>p.e==='Pendiente').length;
-    const nNR = act.filter(p=>p.e==='No Realizada').length;
-    let b = '';
-    if(nIni)  b += '<span class="badge ini">🟢 '+nIni+' iniciado</span>';
-    if(nRuta) b += '<span class="badge ruta">🟠 '+nRuta+' en ruta</span>';
-    if(nPend) b += '<span class="badge pend">'+nPend+' pendiente'+(nPend>1?'s':'')+'</span>';
-    if(nNR)   b += '<span class="badge nr">'+nNR+' no realizada'+(nNR>1?'s':'')+'</span>';
-    const tEsc = t.replace(/'/g,"\\'");
-    return '<div class="sccard" onclick="verTecnicoSC(\''+tEsc+'\')">'+
-      '<div class="nom"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:'+colorOf[t]+';margin-right:5px;"></span>'+t+' ('+act.length+')</div>'+
-      '<div>'+b+'</div></div>';
-  }).join('');
-  cont.innerHTML = html;
-}
-
-
 /* ======================= RECAIDAS DEL MISMO DIA =======================
    Caso: una orden se cae No Realizada en la manana y a la tarde aparece OTRA
    orden en la MISMA direccion, con otro tecnico. El segundo parte de cero: no
@@ -1759,8 +1493,7 @@ function cerrarPaneles(salvo){
   const todos = {
     comp:   cerrarComp,   rgu:    cerrarRGU,    atr:    cerrarAtr,
     sc:     cerrarSC,     caidas: cerrarCaidas, repe:   cerrarRepe,
-    nuevas: cerrarNuevas, reca:   cerrarReca,   planta: cerrarPlanta,
-    buscar: cerrarBuscar
+    nuevas: cerrarNuevas, reca:   cerrarReca,   buscar: cerrarBuscar
   };
   Object.keys(todos).forEach(function(k){
     if(k !== salvo && typeof todos[k] === 'function') todos[k]();
@@ -1840,17 +1573,8 @@ function renderReca(){
     + 'estado: solo cuenta cuando es otra orden en la misma puerta.';
 }
 
-/* ============ REPETIDAS EN EL MAPA ============
-   Interruptor: deja en el mapa SOLO las ordenes de hoy cuya direccion ya se
-   habia caido antes (campo 'prev' que calcula historial_dir.marcar_repetidas).
-   Es el mismo criterio del boton 'Direcciones repetidas hoy', pero pintado,
-   para ver de un vistazo quien las tiene cargadas y en que sector estan.
-
-   Se suma a los filtros de arriba en vez de mandar sobre ellos: si tienes
-   elegido un tecnico o una ciudad, se respeta. Asi se puede preguntar "de las
-   repetidas, cuales son de Villa Alemana en la franja 10-13".               */
-let repeMapa = false;
-/* Nombre del tecnico bajo cada pin.
+/* ============ NOMBRES DE TECNICOS EN EL MAPA ============
+   Nombre del tecnico bajo cada pin.
 
    Va detras de un boton y no fijo, porque con los 40 tecnicos en pantalla son
    ~220 etiquetas encimadas y no se lee nada. Sirve para dos cosas: filtrar a
@@ -1872,23 +1596,6 @@ function toggleNombres(){
   const btn = document.getElementById('btnNombres');
   btn.classList.toggle('on-repemapa', verNombres);
   render(true);          // true = no reencuadrar, se respeta el zoom actual
-}
-
-let repeMapaMin = 1;     // caidas previas minimas para dejar la orden en el mapa
-
-function okRepe(p){
-  if(!repeMapa) return true;
-  return !!(p.prev && p.prev.length >= repeMapaMin);
-}
-
-function toggleRepeMapa(){
-  repeMapa = !repeMapa;
-  const btn = document.getElementById('btnRepeMapa');
-  btn.classList.toggle('on-repemapa', repeMapa);
-  btn.innerHTML = repeMapa
-    ? '🗺️ Repetidas en el mapa <span class="badge">on</span>'
-    : '🗺️ Repetidas en el mapa';
-  render();   // sin mantenerVista: reencuadra sobre lo que quedo filtrado
 }
 
 // Bloque de caidas previas que se agrega al popup del marcador.
@@ -1916,29 +1623,25 @@ function render(mantenerVista){
     // solo porque las cinco anteriores no eran repetidas.
     const ruta = DB[t].filter(p=> p.e!=='Cancelado' && okCiudad(p) && okFranja(p) && okEstado(p));
     ruta.forEach((p, i) => { p._np = i + 1; });
-    let pts = ruta.filter(okRepe);
+    let pts = ruta.slice();
     if(!pts.length) return;
     nTec++; nTrab+=pts.length;
     const col = colorOf[t];
     const latlngs = pts.map(p=>[p.lat,p.lng]);
     // En modo repetidas no se dibuja la ruta: al sacar las paradas del medio,
     // la linea uniria puntos que el tecnico no recorre seguidos y engania.
-    if(latlngs.length>1 && !repeMapa) L.polyline(latlngs,{color:col,weight:3,opacity:.75,dashArray:'6 6'}).addTo(layer);
+    if(latlngs.length>1) L.polyline(latlngs,{color:col,weight:3,opacity:.75,dashArray:'6 6'}).addTo(layer);
     pts.forEach((p,i)=>{
       if(p.e==='Iniciado') nIni++;
       if(p.e==='en ruta') nRuta++;
       if(p.e==='Completado'){ nComp++; nRGU += Number(p.rgu||0); }
       const stCls = p.e==='Iniciado' ? ' mk-iniciado' : (p.e==='en ruta' ? ' mk-enruta' : (p.e==='Completado' ? ' mk-completado' : (p.e==='No Realizada' ? ' mk-norealizada' : '')));
-      // nPrev = caidas No Realizadas de dias anteriores en esta misma direccion
-      const nPrev = (p.prev && p.prev.length) ? p.prev.length : 0;
-      const marca = (repeMapa && nPrev) ? ' mk-repe' : '';
-      const globo = (repeMapa && nPrev) ? '<span class="prevb">'+nPrev+'</span>' : '';
       // el color de la ruta va en la barrita izquierda, no en el texto: asi
       // el nombre se lee igual con cualquiera de los 38 colores de la paleta
       const nom = verNombres
         ? '<span class="mk-nom" style="border-left:3px solid '+col+'">'
           + escR(nombreCorto(t)) + '</span>' : '';
-      const icon = L.divIcon({className:'', html:'<div class="num-icon'+stCls+marca+'" style="background:'+col+'">'+p._np+globo+nom+'</div>', iconSize:[26,26], iconAnchor:[13,13]});
+      const icon = L.divIcon({className:'', html:'<div class="num-icon'+stCls+'" style="background:'+col+'">'+p._np+nom+'</div>', iconSize:[26,26], iconAnchor:[13,13]});
       L.marker([p.lat,p.lng],{icon}).addTo(layer).bindPopup(
         '<div class="pp"><b>'+t+'</b> — parada '+p._np+' de '+ruta.length+'<br>'+
         '📋 '+p.o+' · '+p.t+'<br>'+
