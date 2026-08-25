@@ -261,6 +261,12 @@
   .nfila .nre { background:#78350f; border:1px solid #f59e0b; color:#fde68a; }
   .nfila .nrg { background:#3730a3; border:1px solid #818cf8; color:#e0e7ff; }
   .nfila.rein { border-left-color:#f59e0b; }
+  /* boton de descarga en la cabecera del modal, al lado del cerrar */
+  .mc-xls { background:#065f46; border:1px solid #10b981; color:#d1fae5; cursor:pointer;
+    border-radius:7px; padding:5px 11px; font-size:12px; font-weight:bold;
+    margin-left:auto; margin-right:8px; white-space:nowrap; }
+  .mc-xls:hover { background:#047857; }
+  .mc-xls:disabled { opacity:.5; cursor:default; }
   /* la pildora de estado reusa las clases .bes del buscador para que el codigo
      de color sea el mismo en todo el tablero: un "No Realizada" se ve igual
      aca, en el buscador y en las caidas */
@@ -387,6 +393,7 @@
         <h2>🆕 Órdenes nuevas de hoy</h2>
         <div id="nuevasChips" class="mc-cont"></div>
       </div>
+      <button class="mc-xls" onclick="bajarNuevasXlsx()" title="Descargar en Excel lo que se está mostrando">⬇️ Excel</button>
       <button class="mc-close" onclick="cerrarNuevas()" title="Cerrar (Esc)">✖</button>
     </div>
     <div id="listaNuevas" class="mc-body"></div>
@@ -901,6 +908,123 @@ function renderNuevas(){
     + '(la fecha, el motivo, el técnico y la orden anterior van en la misma fila). '
     + 'Las filas en gris ya salieron de la bandeja.';
 }
+/* ---------------------- DESCARGA A EXCEL ----------------------
+   Exporta lo que se esta MOSTRANDO, respetando el chip activo: si tienes
+   filtrado "reingresos", baja esos 13 y no los 66. Es lo que uno espera de un
+   boton de descarga que vive dentro de la vista filtrada.
+
+   Sale .xlsx y no .csv a proposito: SheetJS ya esta cargado para el "Cargar
+   Excel", y el csv en Excel-es se rompe por partida doble — separador (aca el
+   sistema espera ; y no ,) y acentos, que sin BOM salen como simbolos raros.
+
+   Dos hojas: el detalle una fila por orden, y un resumen con los conteos por
+   clasificacion, tipo, franja y estado, mas el desglose de motivos de las
+   caidas anteriores, que es el dato que sirve para levantar el tema.       */
+function bajarNuevasXlsx(){
+  if(typeof XLSX === 'undefined'){
+    alert('No se pudo cargar la librería de Excel. Revisa la conexión y recarga.');
+    return;
+  }
+  const todas = nuevasDelDia();
+  const lista = todas.filter(pasaFiltro);
+  if(!lista.length){ alert('No hay órdenes que descargar con este filtro.'); return; }
+
+  const nombreClase = { nuevita:'Nueva', reingreso:'Reingreso', reagendada:'Reagendada' };
+
+  // ---- hoja 1: una fila por orden ----
+  const detalle = lista.map(function(x){
+    const k = clase(x);
+    // de todas las caidas previas se lleva la MAS RECIENTE a columnas propias,
+    // que es la que se mira para decidir. El resto va concatenado al final
+    // para no perder el historial sin inflar la tabla con columnas vacias.
+    const p = (k === 'reingreso') ? x.prev[x.prev.length-1] : null;
+    const otras = (k === 'reingreso' && x.prev.length > 1)
+      ? x.prev.slice(0, -1).map(function(v){
+          return v.f+' '+(v.cierre||'sin código')+(v.tec ? ' ('+v.tec+')' : '');
+        }).join(' | ')
+      : '';
+    return {
+      'Orden':            x.o || '',
+      'Petición':         x.pet || '',
+      'Clasificación':    nombreClase[k] || k,
+      'Tipo':             x.cat || '',
+      'Franja':           x.f || '',
+      'Hora cita':        x.hi || '',
+      'Detectada':        String(x.visto||'').split(' ')[1] || '',
+      'Técnico':          x.tec || '',
+      'Estado':           String(x.e||'').replace(/\s*\(ya no está\)\s*/, '').trim(),
+      'Salió de bandeja': String(x.e||'').indexOf('ya no está') >= 0 ? 'Sí' : '',
+      'Dirección':        x.d || '',
+      'Caídas previas':   (k === 'reingreso') ? x.prev.length : 0,
+      'Última caída':     p ? (p.f || '') : '',
+      'Motivo anterior':  p ? (p.cierre || 'sin código') : '',
+      'Técnico anterior': p ? (p.tec || '') : '',
+      'Orden anterior':   p ? (p.num || '') : '',
+      'Caídas anteriores': otras,
+      'Reagendada desde': x.reag || ''
+    };
+  });
+
+  // ---- hoja 2: resumen ----
+  function cuentaPor(fn){
+    const c = {};
+    lista.forEach(function(x){ const k = fn(x) || '—'; c[k] = (c[k]||0)+1; });
+    return Object.keys(c).sort().map(function(k){ return [k, c[k]]; });
+  }
+  const cls = contar(lista);
+  const motivos = {};
+  lista.forEach(function(x){
+    if(clase(x) !== 'reingreso') return;
+    x.prev.forEach(function(p){
+      const m = p.cierre || 'sin código';
+      motivos[m] = (motivos[m]||0)+1;
+    });
+  });
+
+  const filtroTxt = nuevasFiltro === 'todas' ? 'todas' : nuevasFiltro;
+  const resumen = [
+    ['Órdenes nuevas de hoy'], [],
+    ['Jornada', (ALERTAS && ALERTAS.fecha) ? ALERTAS.fecha : ''],
+    ['Generado', new Date().toLocaleString('es-CL')],
+    ['Filtro aplicado', filtroTxt],
+    ['Órdenes exportadas', lista.length],
+    ['Total del día (sin Modificaciones de Servicio)', todas.length],
+    [],
+    ['CLASIFICACIÓN', 'Cantidad'],
+    ['Nuevas (sin antecedentes)', cls.nuevita],
+    ['Reingresos (misma dirección, la anterior se cayó)', cls.reingreso],
+    ['Reagendadas (misma orden de otro día)', cls.reagendada],
+    [],
+    ['POR TIPO', 'Cantidad'],
+  ].concat(cuentaPor(function(x){ return x.cat; }))
+   .concat([[], ['POR FRANJA', 'Cantidad']])
+   .concat(cuentaPor(function(x){ return x.f; }))
+   .concat([[], ['POR ESTADO', 'Cantidad']])
+   .concat(cuentaPor(function(x){
+      return String(x.e||'').replace(/\s*\(ya no está\)\s*/, '').trim(); }));
+
+  if(Object.keys(motivos).length){
+    resumen.push([], ['MOTIVO DE LA CAÍDA ANTERIOR', 'Visitas']);
+    Object.keys(motivos).sort(function(a,b){ return motivos[b]-motivos[a]; })
+      .forEach(function(m){ resumen.push([m, motivos[m]]); });
+  }
+
+  const wb = XLSX.utils.book_new();
+  const hd = XLSX.utils.json_to_sheet(detalle);
+  // ancho de columna a ojo por campo; sin esto Excel las deja todas iguales y
+  // la direccion sale cortada
+  hd['!cols'] = [{wch:12},{wch:12},{wch:13},{wch:22},{wch:8},{wch:9},{wch:10},
+                 {wch:24},{wch:14},{wch:15},{wch:38},{wch:13},{wch:13},{wch:26},
+                 {wch:24},{wch:14},{wch:46},{wch:16}];
+  const hr = XLSX.utils.aoa_to_sheet(resumen);
+  hr['!cols'] = [{wch:48},{wch:10}];
+  XLSX.utils.book_append_sheet(wb, hd, 'Detalle');
+  XLSX.utils.book_append_sheet(wb, hr, 'Resumen');
+
+  const f = ((ALERTAS && ALERTAS.fecha) ? ALERTAS.fecha : 'sin-fecha').replace(/[^\d]/g,'-');
+  XLSX.writeFile(wb, 'ordenes-nuevas_'+f+(nuevasFiltro!=='todas' ? '_'+nuevasFiltro : '')+'.xlsx');
+}
+
 /* =================== HISTORICO DE DIRECCIONES (descarga) ===================
    historial_dir.json vive APARTE de rutas.json: rutas.json es la foto de un
    dia y se sobreescribe cada 5 min, asi que no sirve para contar entre dias.
