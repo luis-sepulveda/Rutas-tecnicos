@@ -252,7 +252,14 @@
   .nfila .ncat { font-weight:bold; color:#f1f5f9; }
   .nfila .nfr { color:#94a3b8; font-size:11.5px; font-family:'Consolas',monospace; text-align:right; }
   .nfila .nde { color:#6ee7b7; font-size:11.5px; font-family:'Consolas',monospace; text-align:right; }
-  .nfila.ida { border-left-color:#64748b; opacity:.62; }
+  /* Salio de la bandeja estando ABIERTA. Ya no se apaga tanto la fila: el
+     gris fuerte decia "esto importa menos", justo al reves de lo que es —
+     una orden que desaparece sin cerrar es una caida. Se deja apenas
+     atenuada, con el borde rojo y la etiqueta fija. */
+  .nfila.ida { border-left-color:#ef4444; opacity:.82; }
+  .nfila .nida { display:inline-block; margin-left:8px; padding:1px 7px;
+    border-radius:999px; background:#450a0a; border:1px solid #ef4444;
+    color:#fca5a5; font-size:10px; font-weight:bold; vertical-align:middle; }
   /* etiquetas de clasificacion: naranjo = reingreso, azul = reagendada.
      Van DENTRO de la celda .ncat para no tocar el grid de 4 columnas. */
   .nfila .nre, .nfila .nrg { display:inline-block; margin-left:8px; padding:1px 7px;
@@ -862,6 +869,11 @@ function renderNuevas(){
       const det = String(x.visto||'').split(' ')[1] || '—';
       const k = clase(x);
       let badge = '', extra = '';
+      // aviso fijo, no tooltip: el tooltip no existe en celular ni sale al
+      // imprimir, y este es el dato que manda a mirar el boton de Caidas
+      const avisoIda = ida
+        ? '<span class="nida">🚨 salió de la bandeja sin cerrar · está en Caídas</span>'
+        : '';
 
       if(k === 'reagendada'){
         extra = ' reag';
@@ -894,10 +906,9 @@ function renderNuevas(){
             + '</span>';
       }
 
-      return '<div class="nfila'+(ida?' ida':'')+extra+'"'
-        + (ida?' title="salió de la bandeja sin cerrar — está en el botón Caídas"':'')+'>'
+      return '<div class="nfila'+(ida?' ida':'')+extra+'">'
         + '<span class="npet">'+escR(x.pet || x.o || '')+'</span>'
-        + '<span class="ncat">'+escR(x.cat)+pill(est)+badge+'</span>'
+        + '<span class="ncat">'+escR(x.cat)+pill(est)+avisoIda+badge+'</span>'
         + '<span class="nfr">'+escR(x.f)+'</span>'
         // hora en que el CICLO la detecto (campo 'visto'), no la hora de la
         // cita. Sirve de referencia de cuando cayo en la bandeja.
