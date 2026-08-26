@@ -33,6 +33,9 @@
   .stats .st-sep { color:#2c5282; }
   .stats .bes { white-space:nowrap; }
   .stats .st-tot { color:#b8d4ee; font-weight:bold; white-space:nowrap; margin-left:2px; }
+  /* el sello de "Actualizado" se pone ambar cuando el dato pasa de 15 min:
+     no es un error, pero avisa que lo que estas mirando ya no es de ahora */
+  #lastUpd.viejo { color:#fbbf24; }
   #map { flex:1; }
   /* Las juntas entre tiles dejaban rayas blancas verticales: Leaflet pinta el
      contenedor de #ddd por defecto y ese gris claro se asomaba por el pixel
@@ -2622,26 +2625,38 @@ setInterval(function(){
 
 /* ============ CARGA DE DATOS EN VIVO (rutas.json) ============ */
 /* Se ejecuta al abrir la pagina y despues sola cada REFRESCO_MIN minutos,
-   asi no hay que apretar F5. El monitor publica rutas.json cada 30 min.
+   asi no hay que apretar F5.
 
-   Se lee desde raw.githubusercontent (no tiene limite de llamadas) con un
-   ?t= para saltarse el cache de 5 min del CDN. Si raw falla, se reintenta
-   por la API de Contents, que era el metodo original. */
+   ORDEN DE LAS FUENTES — importa, y estaba al reves:
+   Se probaba primero la API de Contents de GitHub. Sin token esa API permite
+   60 llamadas por HORA y por IP, no por pestaña. Con un refresco de 3 minutos
+   una sola pestaña gasta 20, asi que con tres despachadores mirando el tablero
+   desde la misma oficina (misma IP de salida) se llega al tope y GitHub
+   empieza a devolver 403. Ahi el codigo caia al plan B... y encima perdia un
+   viaje de ida y vuelta en cada refresco antes de hacerlo.
+
+   raw.githubusercontent no tiene limite de llamadas. Su unico problema es un
+   cache de CDN de 5 minutos, y eso ya se resuelve con el ?t= de abajo: al ser
+   una URL distinta cada vez, el CDN no puede servir una copia guardada. O sea
+   que raw es a la vez ilimitado y fresco, y le corresponde ir primero.
+
+   La API queda de respaldo por si raw falla. */
 const REFRESCO_MIN = 3;
 const URL_RAW = 'https://raw.githubusercontent.com/luis-sepulveda/Rutas-tecnicos/main/rutas.json';
 const URL_API = 'https://api.github.com/repos/luis-sepulveda/Rutas-tecnicos/contents/rutas.json?ref=main';
+let ORIGEN_DATOS = '';   // de donde salio el ultimo refresco, para diagnosticar
 
 async function bajarRutasJson(){
-  // La API de Contents entrega el archivo al instante (sin cache de CDN).
-  // raw.githubusercontent guarda 5 min, asi que solo sirve de respaldo:
-  // se usa si la API devuelve 403 por pasarse de las 60 llamadas/hora.
+  // 1) raw con ?t= -> sin tope de llamadas y sin cache
   try {
-    const r = await fetch(URL_API,
-      { headers:{'Accept':'application/vnd.github.raw'}, cache:'no-store' });
-    if(r.ok) return await r.json();
+    const r = await fetch(URL_RAW + '?t=' + Date.now(), { cache:'no-store' });
+    if(r.ok){ ORIGEN_DATOS = 'raw'; return await r.json(); }
   } catch(e) { /* cae al plan B */ }
-  const r2 = await fetch(URL_RAW + '?t=' + Date.now(), { cache:'no-store' });
+  // 2) API de Contents -> respaldo, ojo con las 60/hora por IP
+  const r2 = await fetch(URL_API,
+    { headers:{'Accept':'application/vnd.github.raw'}, cache:'no-store' });
   if(!r2.ok) throw new Error(r2.status);
+  ORIGEN_DATOS = 'api';
   return await r2.json();
 }
 
@@ -2667,7 +2682,19 @@ async function cargarDatosVivos(auto){
 
     llenarListaTecs();
     setFechaDatos(js.actualizado);
-    lu.textContent = '🔄 Actualizado: '+js.actualizado;
+    // Edad del dato + de donde vino. Sirve para saber DONDE esta la demora sin
+    // adivinar: si la edad crece pero el numero no cambia, el atraso esta en la
+    // subida (el .bat no publico); si la edad se mantiene baja, la bajada anda
+    // bien. El origen delata si se cayo al respaldo por tope de llamadas.
+    let edad = null;
+    if(FECHA_DATOS) edad = Math.round((new Date() - FECHA_DATOS)/60000);
+    lu.textContent = '🔄 Actualizado: ' + js.actualizado
+      + (edad !== null ? '  ·  hace ' + fmtDur(edad) : '');
+    lu.title = 'Origen: ' + (ORIGEN_DATOS === 'raw'
+        ? 'raw.githubusercontent (sin tope de llamadas)'
+        : 'API de Contents — se cayó al respaldo, probablemente por el tope de 60 llamadas/hora por IP')
+      + '. El tablero se refresca cada ' + REFRESCO_MIN + ' min.';
+    lu.classList.toggle('viejo', edad !== null && edad > 15);
     ALERTAS = js.alertas || null;      // caidas del dia (si el pipeline las trae)
     renderBannerCaidas();
     renderBotonRepe();                 // globo con las direcciones repetidas de hoy
