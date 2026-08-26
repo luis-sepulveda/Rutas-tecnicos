@@ -191,6 +191,14 @@
   .mc-close { background:#132845; border:1px solid #2c5282; color:#dbeafe; border-radius:8px; width:34px; height:34px; font-size:15px; cursor:pointer; flex-shrink:0; }
   .mc-close:hover { background:#1e3a5f; border-color:#4a7ab0; }
   .mc-body { padding:12px 16px; overflow-y:auto; display:grid; grid-template-columns:repeat(auto-fill,minmax(235px,1fr)); gap:9px; }
+  /* Caidas pasa a lista, igual que Nuevas: reusa .nfila para que las dos se
+     lean igual. El grid de tarjetas queda solo para los paneles que todavia
+     lo usan. */
+  #modalCaidas .mc-body { display:block; }
+  .nfila.cai { border-left-color:#ef4444; cursor:pointer; }
+  .nfila.cai:hover { background:#132845; }
+  .nfila .nsub .ntec { color:#6ee7b7; }
+  .nfila .nsub .ndir { color:#93c5fd; }
   .mc-body .vacio { grid-column:1/-1; color:#4ade80; text-align:center; padding:28px 6px; line-height:1.6; font-size:14px; }
   .mc-resnota { color:#8ab4dd; font-size:11.5px; padding:0 16px 14px; border-top:1px solid #1e3a5f; margin-top:2px; padding-top:10px; }
   .caidacard { border-left:3px solid #4a7ab0; background:#111c33; border-radius:0 7px 7px 0; padding:8px 10px; cursor:pointer; }
@@ -891,10 +899,16 @@ function renderNuevas(){
       }).join('')
     + '<span class="rsep"></span>';
 
-  // orden por FRANJA y luego por hora de la cita, no por cuando la detecto el
-  // ciclo. Asi la lista queda como se lee una bandeja: 10-13, 13-16, 16-19.
+  // Orden por HORA DE DETECCION, lo mas reciente arriba: el modal es el
+  // registro de lo que va entrando, asi que lo ultimo en llegar es lo que
+  // todavia no viste. Se compara el sello completo (fecha + hora) y no solo
+  // la hora suelta.
+  // Desempate por franja y hora de cita: el portal suelta las ordenes de a
+  // lote, asi que varias comparten el mismo minuto de deteccion y sin
+  // desempate saldrian en orden distinto en cada refresco.
   const lista = todas.filter(pasaFiltro).sort(function(a,b){
-      return String(a.f||'').localeCompare(String(b.f||''))
+      return String(b.visto||'').localeCompare(String(a.visto||''))
+          || String(a.f||'').localeCompare(String(b.f||''))
           || String(a.hi||'').localeCompare(String(b.hi||''));
     });
 
@@ -977,7 +991,7 @@ function renderNuevas(){
 
   nota.textContent = 'Lo que entró después de la bandeja inicial · jornada '
     + (ALERTAS && ALERTAS.fecha ? ALERTAS.fecha : '')
-    + ' · sin Modificaciones de Servicio · ordenado por franja. '
+    + ' · sin Modificaciones de Servicio · lo último detectado arriba. '
     + '✨ nuevas = sin antecedentes · ↩ reingreso = misma dirección, la anterior se cayó '
     + '(la fecha, el motivo, el técnico y la orden anterior van en la misma fila).';
 }
@@ -1629,46 +1643,52 @@ function renderPanelCaidas(){
     cont2.innerHTML = '';
     cont.innerHTML = '<div class="vacio">✅ Ninguna orden se ha caído sin cerrar hoy.</div>';
   } else {
-    // resolver la franja de cada caida y ordenar: por franja, luego tecnico, luego hora
-    const items = activas.map(c=>({ c, fr: (c.f || franjaDeHora(c.hi) || '') }))
-      .sort((a,b)=> rankFranja(a.fr)-rankFranja(b.fr)
-                    || String(a.c.tec).localeCompare(String(b.c.tec))
-                    || String(a.c.hi||'').localeCompare(String(b.c.hi||'')));
-
-    // contador por franja (va al lado del titulo, en el encabezado)
-    const cuenta = {};
-    items.forEach(x=>{ const k = x.fr || 's/franja'; cuenta[k] = (cuenta[k]||0)+1; });
-    cont2.innerHTML = ['10-13','13-16','16-19','s/franja']
-      .filter(k=>cuenta[k])
-      .map(k=>'<span class="fchip">🕒 '+k+' · <b>'+cuenta[k]+'</b></span>').join('');
-
-    // render de las tarjetas con un separador por cada grupo de franja
-    let html = '';
-    let grupo = null;
-    items.forEach(x=>{
-      const c = x.c;
-      const fr = x.fr || 's/franja';
-      if(fr !== grupo){
-        grupo = fr;
-        html += '<div class="fgrupo">🕒 Franja '+fr+' <span>('+cuenta[fr]+')</span></div>';
-      }
-      const dir = (c.d||'').replace(/</g,'&lt;');
-      const salio = (c.visto||'').split(' ').pop();   // solo HH:MM de cuando se cayo
-      html += '<div class="caidacard" onclick="verTecnicoCaida(\''+String(c.tec).replace(/'/g,"\\'")+'\')">'
-        + '<div class="fila1"><span class="cat">'+(c.cat||c.tec)+'</span>'
-        + '<span class="ot">'+c.o+'</span></div>'
-        + '<div class="sub">👷 <b>'+c.tec+'</b> · '+(c.e||'?')+'</div>'
-        + '<div class="sub">📍 '+dir+'</div>'
-        + '<div class="horas">🕒 Franja '+(x.fr||'—')+' · Salió '+(salio||'?')+'</div>'
-        + '</div>';
+    /* Mismo formato de fila que "Órdenes nuevas": una linea por orden y lo
+       ultimo detectado arriba. Antes eran tarjetas agrupadas por franja, que
+       ocupaban tres veces el alto y obligaban a leer en zigzag para saber que
+       se acaba de caer — que es justo la pregunta del modal.
+       La franja no se pierde: sigue en la fila y en los chips de arriba. */
+    const items = activas.map(function(c){
+      return { c: c, fr: (c.f || franjaDeHora(c.hi) || 's/franja') };
+    }).sort(function(a,b){
+      // desempate por franja y hora de cita: el ciclo confirma varias caidas
+      // en el mismo minuto y sin esto bailarian entre refrescos
+      return String(b.c.visto||'').localeCompare(String(a.c.visto||''))
+          || rankFranja(a.fr)-rankFranja(b.fr)
+          || String(a.c.hi||'').localeCompare(String(b.c.hi||''));
     });
-    cont.innerHTML = html;
+
+    const cuenta = {};
+    items.forEach(function(x){ cuenta[x.fr] = (cuenta[x.fr]||0)+1; });
+    cont2.innerHTML = ['10-13','13-16','16-19','s/franja']
+      .filter(function(k){ return cuenta[k]; })
+      .map(function(k){ return '<span class="fchip">🕒 '+k+' · <b>'+cuenta[k]+'</b></span>'; })
+      .join('');
+
+    cont.innerHTML = items.map(function(x){
+      const c = x.c;
+      const salio = String(c.visto||'').split(' ').pop();   // solo HH:MM
+      return '<div class="nfila cai" onclick="verTecnicoCaida(\''
+           + String(c.tec).replace(/'/g,"\\'")+'\')" title="Ver a '+escR(c.tec)+' en el mapa">'
+        + '<span class="npet">'+escR(c.o||'')+'</span>'
+        + '<span class="ncat">'+escR(c.cat||'')+pill(c.e)
+          + '<span class="nsub"><span class="nsep">·</span>'
+          + '<span class="ntec">👷 '+escR(c.tec||'')+'</span>'
+          + '<span class="nsep">·</span><span class="ndir">📍 '+escR(c.d||'')+'</span>'
+          + '</span></span>'
+        + '<span class="nfr">'+escR(x.fr)+'</span>'
+        + '<span class="nde" title="salió de la bandeja a las '+escR(salio||'?')+'">'
+          + escR(salio||'?')+'</span>'
+        + '</div>';
+    }).join('');
   }
   if(res){
-    nota.textContent = res+' orden(es) se cayó(eron) y ya volvió(eron) a una bandeja hoy — no cuentan arriba.';
+    nota.textContent = res+' orden(es) se cayó(eron) y ya volvió(eron) a una bandeja hoy '
+      + '— no cuentan arriba. Lo último detectado va primero; toca una fila para ver al técnico en el mapa.';
     nota.style.display = 'block';
   } else {
-    nota.style.display = 'none';
+    nota.textContent = 'Lo último detectado va primero. Toca una fila para ver al técnico en el mapa.';
+    nota.style.display = 'block';
   }
 }
 
