@@ -506,7 +506,30 @@ let UMBRAL_MIN = 150;            // 2h30 por defecto
 let FECHA_DATOS = null;          // momento del snapshot de datos (rutas.json)
 
 const map = L.map('map').setView([-33.05,-71.41],13);
-L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{attribution:'&copy; OpenStreetMap &copy; CARTO',maxZoom:19}).addTo(map);
+/* ---- Basemap ----
+   CARTO empezo a exigir API key en sus basemaps raster (antes eran abiertos).
+   Sin llave los tiles llegan tapados con la marca de agua "API key required".
+   Es gratis y sin cola: se pide en carto.com/basemaps/apikey y cubre 5 millones
+   de tiles al mes, muchisimo mas de lo que gasta este tablero.
+
+   Pega la llave aca abajo y listo. Si se deja vacia, el mapa cae solo a los
+   tiles de Esri, que no piden llave y tambien son oscuros, para que el tablero
+   nunca quede sin fondo.
+
+   Nota para mas adelante: CARTO esta retirando el servicio raster en favor del
+   vectorial. El dia que lo apaguen habria que pasar de Leaflet a MapLibre, que
+   es un cambio mayor. Por ahora el raster con llave sigue funcionando. */
+const CARTO_KEY = '';   // <-- pegar aca la llave de carto.com/basemaps/apikey
+
+if(CARTO_KEY){
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png?key='+CARTO_KEY,
+    {attribution:'&copy; OpenStreetMap &copy; CARTO', maxZoom:19}).addTo(map);
+} else {
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}',
+    {attribution:'&copy; OpenStreetMap &copy; Esri', maxZoom:16}).addTo(map);
+  console.warn('[mapa] Sin CARTO_KEY: se usan los tiles de Esri. '
+    + 'Pide la llave gratis en carto.com/basemaps/apikey y pegala en CARTO_KEY.');
+}
 
 const sel = document.getElementById('selTec');
 
