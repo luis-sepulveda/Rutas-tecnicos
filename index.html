@@ -1698,14 +1698,14 @@ function renderPanelCaidas(){
         + '</div>';
     }).join('');
   }
-  if(res){
-    nota.textContent = res+' orden(es) se cayó(eron) y ya volvió(eron) a una bandeja hoy '
-      + '— no cuentan arriba. Lo último detectado va primero; toca una fila para ver al técnico en el mapa.';
-    nota.style.display = 'block';
-  } else {
-    nota.textContent = 'Lo último detectado va primero. Toca una fila para ver al técnico en el mapa.';
-    nota.style.display = 'block';
-  }
+  const buck = (ALERTAS && ALERTAS.al_bucket) ? ALERTAS.al_bucket : 0;
+  const partes = [];
+  if(res) partes.push(res+' orden(es) se cayó(eron) y ya volvió(eron) a una bandeja hoy — no cuentan arriba.');
+  if(buck) partes.push(buck+' pasó(aron) de una bandeja al bucket: no están caídas, están sin técnico asignado.');
+  partes.push('Acá va lo que desapareció sin cerrar y no está en ninguna parte — se canceló o se reagendó. '
+    + 'Lo último detectado va primero; toca una fila para ver al técnico en el mapa.');
+  nota.textContent = partes.join(' ');
+  nota.style.display = 'block';
 }
 
 function renderPanelSC(){
