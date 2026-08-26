@@ -40,6 +40,11 @@
      junta sigue existiendo pero deja de verse. Se toca .leaflet-container y no
      #map porque el gris lo pone la hoja de estilos de Leaflet. */
   .leaflet-container { background:#131313; }
+  /* Oscurece los tiles de Esri para dejarlos parecidos al dark_all de CARTO.
+     Solo se aplica al basemap de respaldo: los marcadores y las rutas son
+     elementos aparte de Leaflet y no los toca el filtro. Si algun dia se pone
+     la CARTO_KEY, esta clase deja de usarse sola. */
+  .tiles-esri { filter:brightness(.38) contrast(1.2); }
   .num-icon { display:flex; align-items:center; justify-content:center; border-radius:50%; color:#fff; font-weight:bold; font-size:12px; border:2px solid #fff; box-shadow:0 1px 4px rgba(0,0,0,.6); width:26px; height:26px; }
   .mk-iniciado { border:3px solid #4ade80 !important; box-shadow:0 0 10px 3px rgba(74,222,128,.9) !important; }
   .mk-enruta { border:3px solid #fb923c !important; animation:pulso 1.5s infinite; }
@@ -525,9 +530,15 @@ if(CARTO_KEY){
   L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png?key='+CARTO_KEY,
     {attribution:'&copy; OpenStreetMap &copy; CARTO', maxZoom:19}).addTo(map);
 } else {
+  // El "Dark Gray" de Esri es bastante mas claro que el dark_all de CARTO, y
+  // con ese gris los pines de colores pierden contraste. Se oscurece por CSS
+  // (ver .tiles-esri) para dejarlo parecido al fondo de siempre. Es un parche
+  // mientras llega la llave: con CARTO_KEY puesta vuelve el basemap real y
+  // este filtro no se aplica.
   L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}',
-    {attribution:'&copy; OpenStreetMap &copy; Esri', maxZoom:16}).addTo(map);
-  console.warn('[mapa] Sin CARTO_KEY: se usan los tiles de Esri. '
+    {attribution:'&copy; OpenStreetMap &copy; Esri', maxZoom:16,
+     className:'tiles-esri'}).addTo(map);
+  console.warn('[mapa] Sin CARTO_KEY: se usan los tiles de Esri oscurecidos. '
     + 'Pide la llave gratis en carto.com/basemaps/apikey y pegala en CARTO_KEY.');
 }
 
