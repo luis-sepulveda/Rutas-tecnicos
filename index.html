@@ -311,6 +311,9 @@
   /* salio de la bandeja pero NO llego a Caidas: puede estar en el bucket o
      con un tecnico de otra comuna. Es un aviso, no una pista que seguir. */
   .nfila .nida.sinver { background:#3d3000; border-color:#a16207; color:#fde68a; }
+  /* volvio al bucket: la orden sigue viva, solo que sin dueno. No es una
+     perdida, asi que no va en rojo ni en ambar de alerta. */
+  .nfila .nida.bucket { background:#132845; border-color:#2c5282; color:#8ab4dd; }
   /* etiquetas de clasificacion: naranjo = reingreso, azul = reagendada.
      Van DENTRO de la celda .ncat para no tocar el grid de 4 columnas. */
   .nfila .nre, .nfila .nrg { display:inline-block; margin-left:8px; padding:1px 7px;
@@ -952,12 +955,15 @@ function renderNuevas(){
       const fue = String(x.e||'').indexOf('ya no está') >= 0;
       const cerrada = ['Completado','No Realizada','Cancelado'].indexOf(est) >= 0;
       const ida = fue && !cerrada;
-      // ...y solo se manda a Caidas si la orden esta REALMENTE ahi. Que no
-      // aparezca en la bandeja no basta: puede haberse ido al bucket, o a un
-      // tecnico de otra comuna que estas credenciales no ven. Antes el aviso
-      // lo afirmaba sin comprobar y mandaba a buscar ordenes que no estaban.
+      // ...y se dice DONDE esta, no solo donde no esta. Tres destinos
+      // posibles para una orden que salio de una bandeja:
+      //   en Caidas  -> desaparecio del todo: cancelada o reagendada
+      //   en bucket  -> sigue viva, el despacho se la quito a alguien
+      //   ninguno    -> se fue a un tecnico de otra comuna, o el registro se
+      //                 limpio a mitad de dia
       const enCaidas = ida && ((ALERTAS && ALERTAS.activas) || [])
         .some(function(a){ return a.o === x.o; });
+      const enBucket = ida && !enCaidas && EN_BUCKET.has(x.o);
       const det = String(x.visto||'').split(' ')[1] || '—';
       const k = clase(x);
       let badge = '', extra = '';
@@ -967,7 +973,9 @@ function renderNuevas(){
       const avisoIda = !ida ? ''
         : enCaidas
           ? '<span class="nida">🚨 salió sin cerrar · está en Caídas</span>'
-          : '<span class="nida sinver">🚨 salió sin cerrar · no está en Caídas</span>';
+          : enBucket
+            ? '<span class="nida bucket">🪣 volvió al bucket · sin técnico asignado</span>'
+            : '<span class="nida sinver">🚨 salió sin cerrar · no está en Caídas</span>';
 
       if(k === 'reagendada'){
         extra = ' reag';
@@ -2738,6 +2746,7 @@ const URL_RAW = 'https://raw.githubusercontent.com/'+REPO_BASE+'/'+RAMA_DATOS+'/
 const URL_API = 'https://api.github.com/repos/'+REPO_BASE+'/contents/rutas.json?ref='+RAMA_DATOS;
 let ORIGEN_DATOS = '';   // de donde salio el ultimo refresco, para diagnosticar
 let SALDO_API = null;    // llamadas que quedan en la hora, segun la API
+let EN_BUCKET = new Set();  // OT sin tecnico asignado, en el bucket del portal
 let SELLO_ULTIMO = null; // 'actualizado' del ultimo snapshot que se pinto
 
 /* Ajusta el intervalo al saldo. La cuenta es directa: si quedan N llamadas y R
@@ -2827,6 +2836,12 @@ async function cargarDatosVivos(auto){
     setFechaDatos(js.actualizado);
     marcarEdad(lu, js.actualizado);
     ALERTAS = js.alertas || null;      // caidas del dia (si el pipeline las trae)
+    // OT que estan en el bucket de la plataforma, sin tecnico asignado.
+    // generar_rutas.py las anota antes del filtro DOMI. No se dibujan en el
+    // mapa, pero sirven para explicar a donde se fue una orden que salio de
+    // una bandeja: sin esto solo se podia decir "no esta en Caidas", que
+    // informa donde NO esta en vez de donde SI esta.
+    EN_BUCKET = new Set(js.fuera_domi || []);
     renderBannerCaidas();
     renderBotonRepe();                 // globo con las direcciones repetidas de hoy
     renderBotonReca();                 // globo con las recaidas del mismo dia
