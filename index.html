@@ -199,6 +199,11 @@
      hay que poder copiarlas para ir a buscarlas al portal. */
   .nfila, .nfila * { user-select:text; -webkit-user-select:text; }
   .nfila.cai { border-left-color:#ef4444; }
+  /* de donde venia la caida: entro durante el dia o ya estaba en la bandeja */
+  .nfila .norig { display:inline-block; margin-left:8px; padding:0 7px;
+    border-radius:999px; font-size:10px; font-weight:bold; vertical-align:middle; }
+  .nfila .norig.hoy { background:#052e16; border:1px solid #4ade80; color:#86efac; }
+  .nfila .norig.ini { background:#132845; border:1px solid #2c5282; color:#8ab4dd; }
   /* el unico elemento clickeable de la fila: el resto queda para copiar */
   .nfila .vermapa { cursor:pointer; text-decoration:underline dotted; text-underline-offset:2px; }
   .nfila .vermapa:hover { color:#a7f3d0; text-decoration:underline solid; }
@@ -1698,18 +1703,30 @@ function renderPanelCaidas(){
       .map(function(k){ return '<span class="fchip">🕒 '+k+' · <b>'+cuenta[k]+'</b></span>'; })
       .join('');
 
+    /* De donde venia cada caida: entro durante el dia o ya estaba en la
+       bandeja inicial. Sirve para leer el caso completo — una que entro a las
+       11:25 y se cayo a las 13:03 estuvo dos horas dando vueltas; una de la
+       bandeja inicial venia arrastrandose desde temprano.
+
+       Se cruza contra ALERTAS.nuevas SIN filtrar: nuevasDelDia() saca las
+       Modificaciones de Servicio, pero para saber si una orden entro hoy da
+       igual su tipo. Usar la lista filtrada marcaria una Modificacion que
+       entro durante el dia como si viniera de la bandeja inicial. */
+    const entroHoy = {};
+    ((ALERTAS && ALERTAS.nuevas) || []).forEach(function(n){
+      entroHoy[n.o] = String(n.visto||'').split(' ')[1] || '';
+    });
+
     cont.innerHTML = items.map(function(x){
       const c = x.c;
       const salio = String(c.visto||'').split(' ').pop();   // solo HH:MM
-      /* Solo el NOMBRE DEL TECNICO lleva al mapa. Antes la fila entera era el
-         boton, y como ir al mapa cierra el modal, cualquier clic dentro —para
-         poner el cursor, para seleccionar una palabra— lo cerraba de golpe y
-         no se alcanzaba a copiar nada. Acotando el clic a un solo elemento, el
-         resto de la fila queda libre para seleccionar la peticion o la
-         direccion, que es a lo que uno viene. */
+      const ent = entroHoy[c.o];
+      const origen = (ent !== undefined)
+        ? '<span class="norig hoy">✨ entró ' + escR(ent || 'hoy') + '</span>'
+        : '<span class="norig ini">📋 bandeja inicial</span>';
       return '<div class="nfila cai">'
         + '<span class="npet">'+escR(c.o||'')+'</span>'
-        + '<span class="ncat">'+escR(c.cat||'')+pill(c.e)
+        + '<span class="ncat">'+escR(c.cat||'')+pill(c.e)+origen
           + '<span class="nsub"><span class="nsep">·</span>'
           + '<span class="ntec vermapa" onclick="verTecnicoCaida(\''
             + String(c.tec).replace(/'/g,"\\'")+'\')" '
@@ -1725,7 +1742,8 @@ function renderPanelCaidas(){
   const buck = (ALERTAS && ALERTAS.al_bucket) ? ALERTAS.al_bucket : 0;
   const curso = (ALERTAS && ALERTAS.en_curso) ? ALERTAS.en_curso : 0;
   const partes = ['Órdenes que desaparecieron de la bandeja de un técnico estando '
-    + 'PENDIENTE: nadie las tocó y no están en ninguna parte — se cancelaron o se reagendaron.'];
+    + 'PENDIENTE: nadie las tocó y no están en ninguna parte — se cancelaron o se reagendaron. '
+    + '✨ entró durante el día · 📋 ya venía en la bandeja inicial.'];
   if(res) partes.push(res+' se cayó(eron) y ya volvió(eron) a una bandeja hoy — no cuentan arriba.');
   if(buck) partes.push(buck+' pasó(aron) al bucket: no están caídas, están sin técnico asignado.');
   if(curso) partes.push(curso+' desapareció(eron) ya iniciada(s) — no se listan acá: el portal '
