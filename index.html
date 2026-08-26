@@ -43,8 +43,18 @@
   /* Oscurece los tiles de Esri para dejarlos parecidos al dark_all de CARTO.
      Solo se aplica al basemap de respaldo: los marcadores y las rutas son
      elementos aparte de Leaflet y no los toca el filtro. Si algun dia se pone
-     la CARTO_KEY, esta clase deja de usarse sola. */
-  .tiles-esri { filter:brightness(.38) contrast(1.2); }
+     la CARTO_KEY, esta clase deja de usarse sola.
+
+     EL ORDEN IMPORTA: los filtros se aplican de izquierda a derecha. Con
+     brightness primero, calle y terreno quedan aplastados en el mismo gris
+     oscuro y despues no hay nada que separar. Poniendo contrast PRIMERO se
+     abre la distancia entre los dos (en el tile de Esri la calle es mas clara
+     que el terreno) y recien despues se baja el brillo del conjunto: el fondo
+     queda negro y la calle conserva su ventaja.
+
+     Para ajustar: contrast sube o baja cuanto se ven las calles, brightness
+     que tan oscuro queda el fondo. */
+  .tiles-esri { filter:contrast(2.4) brightness(.42); }
   .num-icon { display:flex; align-items:center; justify-content:center; border-radius:50%; color:#fff; font-weight:bold; font-size:12px; border:2px solid #fff; box-shadow:0 1px 4px rgba(0,0,0,.6); width:26px; height:26px; }
   .mk-iniciado { border:3px solid #4ade80 !important; box-shadow:0 0 10px 3px rgba(74,222,128,.9) !important; }
   .mk-enruta { border:3px solid #fb923c !important; animation:pulso 1.5s infinite; }
