@@ -303,6 +303,9 @@
   .nfila .nida { display:inline-block; margin-left:8px; padding:1px 7px;
     border-radius:999px; background:#450a0a; border:1px solid #ef4444;
     color:#fca5a5; font-size:10px; font-weight:bold; vertical-align:middle; }
+  /* salio de la bandeja pero NO llego a Caidas: puede estar en el bucket o
+     con un tecnico de otra comuna. Es un aviso, no una pista que seguir. */
+  .nfila .nida.sinver { background:#3d3000; border-color:#a16207; color:#fde68a; }
   /* etiquetas de clasificacion: naranjo = reingreso, azul = reagendada.
      Van DENTRO de la celda .ncat para no tocar el grid de 4 columnas. */
   .nfila .nre, .nfila .nrg { display:inline-block; margin-left:8px; padding:1px 7px;
@@ -944,14 +947,22 @@ function renderNuevas(){
       const fue = String(x.e||'').indexOf('ya no está') >= 0;
       const cerrada = ['Completado','No Realizada','Cancelado'].indexOf(est) >= 0;
       const ida = fue && !cerrada;
+      // ...y solo se manda a Caidas si la orden esta REALMENTE ahi. Que no
+      // aparezca en la bandeja no basta: puede haberse ido al bucket, o a un
+      // tecnico de otra comuna que estas credenciales no ven. Antes el aviso
+      // lo afirmaba sin comprobar y mandaba a buscar ordenes que no estaban.
+      const enCaidas = ida && ((ALERTAS && ALERTAS.activas) || [])
+        .some(function(a){ return a.o === x.o; });
       const det = String(x.visto||'').split(' ')[1] || '—';
       const k = clase(x);
       let badge = '', extra = '';
       // aviso fijo, no tooltip: el tooltip no existe en celular ni sale al
-      // imprimir, y este es el dato que manda a mirar el boton de Caidas
-      const avisoIda = ida
-        ? '<span class="nida">🚨 salió de la bandeja sin cerrar · está en Caídas</span>'
-        : '';
+      // imprimir. Se dice solo lo que se pudo comprobar: si esta en Caidas se
+      // manda para alla, si no, se avisa que salio y punto.
+      const avisoIda = !ida ? ''
+        : enCaidas
+          ? '<span class="nida">🚨 salió sin cerrar · está en Caídas</span>'
+          : '<span class="nida sinver">🚨 salió sin cerrar · no está en Caídas</span>';
 
       if(k === 'reagendada'){
         extra = ' reag';
