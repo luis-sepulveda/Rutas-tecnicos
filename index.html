@@ -2620,6 +2620,10 @@ function renderPanelAtr(){
 setInterval(function(){
   actualizarBadgeAtr();
   if(atr) renderPanelAtr();
+  // la edad del dato tambien avanza sola: si el monitor deja de publicar, el
+  // sello se pone ambar aunque no entre ningun refresco
+  const lu = document.getElementById('lastUpd');
+  if(lu && SELLO_ULTIMO) marcarEdad(lu, SELLO_ULTIMO);
 }, 60000);
 /* ==================================================================== */
 
@@ -2641,10 +2645,41 @@ setInterval(function(){
    que raw es a la vez ilimitado y fresco, y le corresponde ir primero.
 
    La API queda de respaldo por si raw falla. */
-const REFRESCO_MIN = 3;
+/* Cada cuanto pregunta el tablero por datos nuevos.
+
+   Estaba en 3 minutos por el tope de la API de GitHub: con 60 llamadas/hora
+   por IP no se podia apurar mas sin que varios despachadores se pisaran entre
+   ellos. Ahora que se baja de raw, que no tiene tope, esa restriccion no
+   existe y bajarlo sale gratis.
+
+   La cuenta de la demora: el monitor produce un rutas.json nuevo cada 5 min y
+   el tablero pregunta cada REFRESCO_MIN. En el peor caso se suman. Con 3 el
+   techo era de 8 minutos; con 1 baja a 6, y el caso tipico se acerca al ciclo
+   del monitor en vez de sumarle media espera de gratis.
+
+   Por debajo de 1 no tiene sentido: el dato solo cambia cada 5 minutos, asi
+   que preguntar mas seguido es gastar llamadas para recibir lo mismo. */
+const REFRESCO_MIN = 1;
 const URL_RAW = 'https://raw.githubusercontent.com/luis-sepulveda/Rutas-tecnicos/main/rutas.json';
 const URL_API = 'https://api.github.com/repos/luis-sepulveda/Rutas-tecnicos/contents/rutas.json?ref=main';
 let ORIGEN_DATOS = '';   // de donde salio el ultimo refresco, para diagnosticar
+let SELLO_ULTIMO = null; // 'actualizado' del ultimo snapshot que se pinto
+
+/* Escribe el sello con la edad del dato. Sirve para saber DONDE esta la demora
+   sin adivinar: si la edad crece pero el sello no cambia, el atraso esta en la
+   subida (el monitor no publico); si la edad se mantiene baja, la bajada anda
+   bien. El tooltip delata si se cayo al respaldo por tope de llamadas. */
+function marcarEdad(lu, sello){
+  let edad = null;
+  if(FECHA_DATOS) edad = Math.round((new Date() - FECHA_DATOS)/60000);
+  lu.textContent = '🔄 Actualizado: ' + sello
+    + (edad !== null ? '  ·  hace ' + fmtDur(edad) : '');
+  lu.title = 'Origen: ' + (ORIGEN_DATOS === 'raw'
+      ? 'raw.githubusercontent (sin tope de llamadas)'
+      : 'API de Contents — se cayó al respaldo, probablemente por el tope de 60 llamadas/hora por IP')
+    + '. El tablero pregunta cada ' + REFRESCO_MIN + ' min y el monitor publica cada 5.';
+  lu.classList.toggle('viejo', edad !== null && edad > 15);
+}
 
 async function bajarRutasJson(){
   // 1) raw con ?t= -> sin tope de llamadas y sin cache
@@ -2666,6 +2701,16 @@ async function cargarDatosVivos(auto){
     const js = await bajarRutasJson();
     if(!js.tecnicos) throw new Error('formato');
 
+    // El monitor publica cada 5 min y el tablero pregunta cada minuto, asi que
+    // cuatro de cada cinco respuestas traen exactamente lo mismo. Si el sello
+    // no cambio no se repinta: reconstruir el mapa, los selectores y los
+    // modales de gratis hace parpadear la pantalla y pierde el zoom. Igual se
+    // refresca la edad del dato, que es lo unico que si avanza.
+    if(auto && SELLO_ULTIMO && js.actualizado === SELLO_ULTIMO){
+      marcarEdad(lu, js.actualizado);
+      return;
+    }
+    SELLO_ULTIMO = js.actualizado;
     // guardar lo que el usuario tenia seleccionado para no perderselo
     const tecSel = sel.value;
 
@@ -2682,19 +2727,7 @@ async function cargarDatosVivos(auto){
 
     llenarListaTecs();
     setFechaDatos(js.actualizado);
-    // Edad del dato + de donde vino. Sirve para saber DONDE esta la demora sin
-    // adivinar: si la edad crece pero el numero no cambia, el atraso esta en la
-    // subida (el .bat no publico); si la edad se mantiene baja, la bajada anda
-    // bien. El origen delata si se cayo al respaldo por tope de llamadas.
-    let edad = null;
-    if(FECHA_DATOS) edad = Math.round((new Date() - FECHA_DATOS)/60000);
-    lu.textContent = '🔄 Actualizado: ' + js.actualizado
-      + (edad !== null ? '  ·  hace ' + fmtDur(edad) : '');
-    lu.title = 'Origen: ' + (ORIGEN_DATOS === 'raw'
-        ? 'raw.githubusercontent (sin tope de llamadas)'
-        : 'API de Contents — se cayó al respaldo, probablemente por el tope de 60 llamadas/hora por IP')
-      + '. El tablero se refresca cada ' + REFRESCO_MIN + ' min.';
-    lu.classList.toggle('viejo', edad !== null && edad > 15);
+    marcarEdad(lu, js.actualizado);
     ALERTAS = js.alertas || null;      // caidas del dia (si el pipeline las trae)
     renderBannerCaidas();
     renderBotonRepe();                 // globo con las direcciones repetidas de hoy
