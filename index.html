@@ -195,6 +195,9 @@
      lean igual. El grid de tarjetas queda solo para los paneles que todavia
      lo usan. */
   #modalCaidas .mc-body { display:block; }
+  /* Se permite seleccionar el texto de las filas: la peticion y la direccion
+     hay que poder copiarlas para ir a buscarlas al portal. */
+  .nfila, .nfila * { user-select:text; -webkit-user-select:text; }
   .nfila.cai { border-left-color:#ef4444; cursor:pointer; }
   .nfila.cai:hover { background:#132845; }
   .nfila .nsub .ntec { color:#6ee7b7; }
@@ -1647,6 +1650,17 @@ function renderBusqueda(){
 /* ============ PANELES DE CAIDAS Y SIN COMPLETAR ============
    Quedaron aparte al sacar el modal de Fallas de red: son los
    renderers de "Caidas" y "Sin completar", nada que ver con planta. */
+/* La fila de caidas es clickeable (lleva al tecnico en el mapa), pero eso
+   impedia SELECCIONAR el texto: al arrastrar para copiar una peticion o una
+   direccion, el navegador lo tomaba como clic y saltaba al mapa.
+   Se resuelve en dos partes: aca se permite seleccionar, y en el onclick se
+   descarta la navegacion si quedo texto seleccionado. */
+function irTecnicoCaida(ev, tec){
+  const sel = window.getSelection();
+  if(sel && String(sel).trim().length) return;   // estaba copiando, no navegar
+  verTecnicoCaida(tec);
+}
+
 function renderPanelCaidas(){
   const cont = document.getElementById('listaCaidas');
   const nota = document.getElementById('mcResnota');
@@ -1684,7 +1698,7 @@ function renderPanelCaidas(){
     cont.innerHTML = items.map(function(x){
       const c = x.c;
       const salio = String(c.visto||'').split(' ').pop();   // solo HH:MM
-      return '<div class="nfila cai" onclick="verTecnicoCaida(\''
+      return '<div class="nfila cai" onclick="irTecnicoCaida(event, \''
            + String(c.tec).replace(/'/g,"\\'")+'\')" title="Ver a '+escR(c.tec)+' en el mapa">'
         + '<span class="npet">'+escR(c.o||'')+'</span>'
         + '<span class="ncat">'+escR(c.cat||'')+pill(c.e)
@@ -1699,11 +1713,14 @@ function renderPanelCaidas(){
     }).join('');
   }
   const buck = (ALERTAS && ALERTAS.al_bucket) ? ALERTAS.al_bucket : 0;
-  const partes = [];
-  if(res) partes.push(res+' orden(es) se cayó(eron) y ya volvió(eron) a una bandeja hoy — no cuentan arriba.');
-  if(buck) partes.push(buck+' pasó(aron) de una bandeja al bucket: no están caídas, están sin técnico asignado.');
-  partes.push('Acá va lo que desapareció sin cerrar y no está en ninguna parte — se canceló o se reagendó. '
-    + 'Lo último detectado va primero; toca una fila para ver al técnico en el mapa.');
+  const curso = (ALERTAS && ALERTAS.en_curso) ? ALERTAS.en_curso : 0;
+  const partes = ['Órdenes que desaparecieron de la bandeja de un técnico estando '
+    + 'PENDIENTE: nadie las tocó y no están en ninguna parte — se cancelaron o se reagendaron.'];
+  if(res) partes.push(res+' se cayó(eron) y ya volvió(eron) a una bandeja hoy — no cuentan arriba.');
+  if(buck) partes.push(buck+' pasó(aron) al bucket: no están caídas, están sin técnico asignado.');
+  if(curso) partes.push(curso+' desapareció(eron) ya iniciada(s) — no se listan acá: el portal '
+    + 'siempre muestra un paso antes, así que ese paso ocurrió entre dos lecturas del ciclo.');
+  partes.push('Lo último detectado va primero; toca una fila para ver al técnico en el mapa.');
   nota.textContent = partes.join(' ');
   nota.style.display = 'block';
 }
