@@ -10,36 +10,36 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family:'Segoe UI',Arial,sans-serif; background:#0f172a; color:#e2e8f0; height:100vh; display:flex; flex-direction:column; }
-  header { background:#1e293b; padding:10px 16px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; border-bottom:2px solid #334155; z-index:1001;}
-  header h1 { font-size:16px; color:#38bdf8; white-space:nowrap; }
-  select { background:#0f172a; color:#e2e8f0; border:1px solid #475569; border-radius:6px; padding:6px 10px; font-size:13px; max-width:280px;}
+  body { font-family:'Segoe UI',Arial,sans-serif; background:#0a1930; color:#dbeafe; height:100vh; display:flex; flex-direction:column; }
+  header { background:#132845; padding:10px 16px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; border-bottom:2px solid #1e3a5f; z-index:1001;}
+  header h1 { font-size:16px; color:#60a5fa; white-space:nowrap; }
+  select { background:#0a1930; color:#dbeafe; border:1px solid #2c5282; border-radius:6px; padding:6px 10px; font-size:13px; max-width:280px;}
   /* --- filtros con casillas (multi-seleccion) --- */
   .msel { position:relative; display:inline-block; }
-  .mbtn { background:#0f172a; color:#e2e8f0; border:1px solid #475569; border-radius:6px; padding:6px 10px; font-size:13px; cursor:pointer; display:flex; align-items:center; gap:6px; white-space:nowrap; }
-  .mbtn:hover { border-color:#64748b; }
-  .msel.activo .mbtn { border-color:#38bdf8; color:#7dd3fc; }
-  .mcar { font-size:10px; color:#94a3b8; }
-  .mmenu { display:none; position:absolute; top:calc(100% + 4px); left:0; z-index:1200; background:#1e293b; border:1px solid #475569; border-radius:8px; padding:6px; min-width:190px; box-shadow:0 6px 20px rgba(0,0,0,.6); }
+  .mbtn { background:#0a1930; color:#dbeafe; border:1px solid #2c5282; border-radius:6px; padding:6px 10px; font-size:13px; cursor:pointer; display:flex; align-items:center; gap:6px; white-space:nowrap; }
+  .mbtn:hover { border-color:#4a7ab0; }
+  .msel.activo .mbtn { border-color:#60a5fa; color:#93c5fd; }
+  .mcar { font-size:10px; color:#8ab4dd; }
+  .mmenu { display:none; position:absolute; top:calc(100% + 4px); left:0; z-index:1200; background:#132845; border:1px solid #2c5282; border-radius:8px; padding:6px; min-width:190px; box-shadow:0 6px 20px rgba(0,0,0,.6); }
   .msel.abierto .mmenu { display:block; }
-  .mop { display:flex; align-items:center; gap:8px; padding:6px 8px; border-radius:5px; cursor:pointer; font-size:13px; color:#e2e8f0; }
-  .mop:hover { background:#334155; }
-  .mop input { accent-color:#38bdf8; width:15px; height:15px; cursor:pointer; margin:0; }
+  .mop { display:flex; align-items:center; gap:8px; padding:6px 8px; border-radius:5px; cursor:pointer; font-size:13px; color:#dbeafe; }
+  .mop:hover { background:#1e3a5f; }
+  .mop input { accent-color:#60a5fa; width:15px; height:15px; cursor:pointer; margin:0; }
   .mop .pt { width:9px; height:9px; border-radius:50%; flex:0 0 auto; }
-  .mtodos { border-bottom:1px solid #475569; margin-bottom:4px; padding-bottom:8px; color:#94a3b8; font-size:12px; }
-  .stats { font-size:12px; color:#94a3b8; margin-left:auto;
+  .mtodos { border-bottom:1px solid #2c5282; margin-bottom:4px; padding-bottom:8px; color:#8ab4dd; font-size:12px; }
+  .stats { font-size:12px; color:#8ab4dd; margin-left:auto;
     display:flex; align-items:center; flex-wrap:wrap; gap:4px; justify-content:flex-end; }
   .stats .st-base { white-space:nowrap; }
-  .stats .st-sep { color:#475569; }
+  .stats .st-sep { color:#2c5282; }
   .stats .bes { white-space:nowrap; }
-  .stats .st-tot { color:#cbd5e1; font-weight:bold; white-space:nowrap; margin-left:2px; }
+  .stats .st-tot { color:#b8d4ee; font-weight:bold; white-space:nowrap; margin-left:2px; }
   #map { flex:1; }
   /* Las juntas entre tiles dejaban rayas blancas verticales: Leaflet pinta el
      contenedor de #ddd por defecto y ese gris claro se asomaba por el pixel
      que queda entre tile y tile. Con el fondo del tono del basemap oscuro la
      junta sigue existiendo pero deja de verse. Se toca .leaflet-container y no
      #map porque el gris lo pone la hoja de estilos de Leaflet. */
-  .leaflet-container { background:#131313; }
+  .leaflet-container { background:#0a1220; }
   /* Oscurece los tiles de Esri para dejarlos parecidos al dark_all de CARTO.
      Solo se aplica al basemap de respaldo: los marcadores y las rutas son
      elementos aparte de Leaflet y no los toca el filtro. Si algun dia se pone
@@ -58,7 +58,7 @@
   .num-icon { display:flex; align-items:center; justify-content:center; border-radius:50%; color:#fff; font-weight:bold; font-size:12px; border:2px solid #fff; box-shadow:0 1px 4px rgba(0,0,0,.6); width:26px; height:26px; }
   .mk-iniciado { border:3px solid #4ade80 !important; box-shadow:0 0 10px 3px rgba(74,222,128,.9) !important; }
   .mk-enruta { border:3px solid #fb923c !important; animation:pulso 1.5s infinite; }
-  .mk-completado { opacity:.45; border:2px solid #94a3b8 !important; }
+  .mk-completado { opacity:.45; border:2px solid #8ab4dd !important; }
   .mk-norealizada { opacity:.5; border:2px dashed #ef4444 !important; }
   .num-icon { position:relative; }
   .btn.on-repemapa { background:#4c1d95; border-color:#a78bfa; font-weight:bold; }
@@ -68,7 +68,7 @@
   #modalBuscar { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); }
   #modalBuscar.abierto { display:flex; align-items:flex-start; justify-content:center; padding:4vh 2vw; }
   #modalBuscar .mc-body { display:block; }
-  #modalReca .vacio { color:#94a3b8; text-align:center; padding:28px 6px; font-size:14px; }
+  #modalReca .vacio { color:#8ab4dd; text-align:center; padding:28px 6px; font-size:14px; }
   .btn.on-reca { background:#7c2d12; border-color:#fb923c; font-weight:bold; }
   #btnReca .badge { display:inline-block; min-width:16px; padding:0 5px; margin-left:5px;
     background:#fb923c; color:#431407; border-radius:9px; font-size:11px; font-weight:bold;
@@ -76,85 +76,85 @@
   @keyframes pulso { 0%{box-shadow:0 0 0 0 rgba(251,146,60,.9)} 70%{box-shadow:0 0 0 12px rgba(251,146,60,0)} 100%{box-shadow:0 0 0 0 rgba(251,146,60,0)} }
   .estados { position:absolute; bottom:16px; right:10px; z-index:1000; background:rgba(30,41,59,.92); border-radius:8px; padding:8px 12px; font-size:11px;}
   .estados div { display:flex; align-items:center; gap:8px; margin:4px 0;}
-  .estados .mini { width:16px; height:16px; border-radius:50%; background:#64748b; flex-shrink:0;}
-  .leaflet-popup-content-wrapper { background:#1e293b; color:#e2e8f0; border-radius:8px; }
-  .leaflet-popup-tip { background:#1e293b; }
-  .pp b { color:#38bdf8; }
-  .pp .est { display:inline-block; padding:1px 8px; border-radius:10px; font-size:11px; margin-top:4px; background:#475569;}
-  .est-Pendiente{background:#475569}.est-Iniciado{background:#16a34a}.est-enruta{background:#d97706}.est-Cancelado{background:#dc2626}.est-Completado{background:#334155}.est-NoRealizada{background:#7f1d1d}
-  .btn { background:#0f172a; color:#e2e8f0; border:1px solid #475569; border-radius:6px; padding:6px 12px; font-size:13px; cursor:pointer; }
+  .estados .mini { width:16px; height:16px; border-radius:50%; background:#4a7ab0; flex-shrink:0;}
+  .leaflet-popup-content-wrapper { background:#132845; color:#dbeafe; border-radius:8px; }
+  .leaflet-popup-tip { background:#132845; }
+  .pp b { color:#60a5fa; }
+  .pp .est { display:inline-block; padding:1px 8px; border-radius:10px; font-size:11px; margin-top:4px; background:#2c5282;}
+  .est-Pendiente{background:#2c5282}.est-Iniciado{background:#16a34a}.est-enruta{background:#d97706}.est-Cancelado{background:#dc2626}.est-Completado{background:#1e3a5f}.est-NoRealizada{background:#7f1d1d}
+  .btn { background:#0a1930; color:#dbeafe; border:1px solid #2c5282; border-radius:6px; padding:6px 12px; font-size:13px; cursor:pointer; }
   .btn.on { background:#dc2626; border-color:#f87171; font-weight:bold; }
-  #panel { position:absolute; top:70px; right:10px; z-index:1000; background:rgba(30,41,59,.96); border:1px solid #475569; border-radius:10px; padding:12px; width:300px; max-height:70vh; overflow-y:auto; display:none; font-size:12px;}
+  #panel { position:absolute; top:70px; right:10px; z-index:1000; background:rgba(30,41,59,.96); border:1px solid #2c5282; border-radius:10px; padding:12px; width:300px; max-height:70vh; overflow-y:auto; display:none; font-size:12px;}
   #panel h2 { font-size:13px; color:#f87171; margin-bottom:6px;}
-  #panel .hint { color:#94a3b8; font-size:11px; margin-bottom:8px;}
+  #panel .hint { color:#8ab4dd; font-size:11px; margin-bottom:8px;}
   #panel select { width:100%; margin-bottom:8px;}
-  .cand { border-left:4px solid #38bdf8; background:#0f172a; border-radius:6px; padding:6px 8px; margin:6px 0; cursor:pointer;}
+  .cand { border-left:4px solid #60a5fa; background:#0a1930; border-radius:6px; padding:6px 8px; margin:6px 0; cursor:pointer;}
   .cand:hover { background:#1e3a5f;}
   .cand .km { font-size:15px; font-weight:bold; color:#4ade80;}
   .cand.top1 { border-left-color:#4ade80; box-shadow:0 0 6px rgba(74,222,128,.4);}
   .dist-label { background:transparent; border:none; box-shadow:none; color:#4ade80; font-weight:bold; font-size:12px; text-shadow:0 1px 3px #000;}
   .btn.on3 { background:#b45309; border-color:#fbbf24; font-weight:bold; }
-  #panelSC { position:absolute; top:70px; right:10px; z-index:1000; background:rgba(30,41,59,.96); border:1px solid #475569; border-radius:10px; padding:12px; width:290px; max-height:75vh; overflow-y:auto; display:none; font-size:12px;}
+  #panelSC { position:absolute; top:70px; right:10px; z-index:1000; background:rgba(30,41,59,.96); border:1px solid #2c5282; border-radius:10px; padding:12px; width:290px; max-height:75vh; overflow-y:auto; display:none; font-size:12px;}
   #panelSC h2 { font-size:13px; color:#fbbf24; margin-bottom:6px;}
-  #panelSC .hint { color:#94a3b8; font-size:11px; margin-bottom:8px;}
-  #panelSC .vertodos { color:#38bdf8; font-size:12px; cursor:pointer; margin-bottom:8px; display:inline-block;}
+  #panelSC .hint { color:#8ab4dd; font-size:11px; margin-bottom:8px;}
+  #panelSC .vertodos { color:#60a5fa; font-size:12px; cursor:pointer; margin-bottom:8px; display:inline-block;}
   #panelSC .vertodos:hover { text-decoration:underline;}
   #panelSC .vacio { color:#4ade80; text-align:center; padding:12px 4px; line-height:1.4;}
-  .sccard { border-left:4px solid #fbbf24; background:#0f172a; border-radius:6px; padding:6px 8px; margin:6px 0; cursor:pointer;}
+  .sccard { border-left:4px solid #fbbf24; background:#0a1930; border-radius:6px; padding:6px 8px; margin:6px 0; cursor:pointer;}
   .sccard:hover { background:#3a2e12;}
-  .sccard .nom { font-weight:bold; color:#e2e8f0; font-size:13px;}
-  .sccard .badge { display:inline-block; padding:1px 7px; border-radius:10px; font-size:10px; margin:3px 3px 0 0; background:#334155;}
-  .sccard .badge.ini { background:#166534;} .sccard .badge.ruta{ background:#92400e;} .sccard .badge.pend{ background:#475569;} .sccard .badge.nr{ background:#7f1d1d;}
+  .sccard .nom { font-weight:bold; color:#dbeafe; font-size:13px;}
+  .sccard .badge { display:inline-block; padding:1px 7px; border-radius:10px; font-size:10px; margin:3px 3px 0 0; background:#1e3a5f;}
+  .sccard .badge.ini { background:#166534;} .sccard .badge.ruta{ background:#92400e;} .sccard .badge.pend{ background:#2c5282;} .sccard .badge.nr{ background:#7f1d1d;}
   .btn.on4 { background:#047857; border-color:#34d399; font-weight:bold; }
-  .rgucard { border-left:4px solid #34d399; background:#0f172a; border-radius:6px; padding:6px 8px; margin:5px 0; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:8px;}
+  .rgucard { border-left:4px solid #34d399; background:#0a1930; border-radius:6px; padding:6px 8px; margin:5px 0; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:8px;}
   .rgucard:hover { background:#0d2e24;}
-  .rgucard .nom { font-weight:bold; color:#e2e8f0; font-size:12px;}
-  .rgucard .sub { color:#94a3b8; font-size:10px; margin-top:2px;}
+  .rgucard .nom { font-weight:bold; color:#dbeafe; font-size:12px;}
+  .rgucard .sub { color:#8ab4dd; font-size:10px; margin-top:2px;}
   .rgucard .val { font-size:17px; font-weight:bold; color:#34d399; flex-shrink:0;}
   .btn.on5 { background:#be123c; border-color:#fb7185; font-weight:bold; }
   .btn.on6 { background:#0e7490; border-color:#22d3ee; font-weight:bold; }
-  #panelComp { position:absolute; top:70px; right:10px; z-index:1000; background:rgba(30,41,59,.96); border:1px solid #475569; border-radius:10px; padding:12px; width:300px; max-height:78vh; overflow-y:auto; display:none; font-size:12px;}
+  #panelComp { position:absolute; top:70px; right:10px; z-index:1000; background:rgba(30,41,59,.96); border:1px solid #2c5282; border-radius:10px; padding:12px; width:300px; max-height:78vh; overflow-y:auto; display:none; font-size:12px;}
   #panelComp h2 { font-size:13px; color:#22d3ee; margin-bottom:6px;}
-  #panelComp .hint { color:#94a3b8; font-size:11px; margin-bottom:8px; line-height:1.4;}
-  #panelComp .marcador { text-align:center; background:#0f172a; border-radius:10px; padding:12px 8px; margin-bottom:10px; border:1px solid #334155;}
+  #panelComp .hint { color:#8ab4dd; font-size:11px; margin-bottom:8px; line-height:1.4;}
+  #panelComp .marcador { text-align:center; background:#0a1930; border-radius:10px; padding:12px 8px; margin-bottom:10px; border:1px solid #1e3a5f;}
   #panelComp .pctnum { font-size:38px; font-weight:bold; line-height:1;}
-  #panelComp .frac { font-size:13px; color:#cbd5e1; margin-top:4px;}
-  #panelComp .barra { height:8px; background:#0f172a; border-radius:5px; margin-top:10px; overflow:hidden; position:relative; border:1px solid #334155;}
+  #panelComp .frac { font-size:13px; color:#b8d4ee; margin-top:4px;}
+  #panelComp .barra { height:8px; background:#0a1930; border-radius:5px; margin-top:10px; overflow:hidden; position:relative; border:1px solid #1e3a5f;}
   #panelComp .barra .fill { height:100%; border-radius:5px; transition:width .4s;}
-  #panelComp .barra .meta { position:absolute; top:-2px; bottom:-2px; width:2px; background:#f8fafc; left:85%;}
+  #panelComp .barra .meta { position:absolute; top:-2px; bottom:-2px; width:2px; background:#f8fbff; left:85%;}
   #panelComp .veredicto { border-radius:8px; padding:8px 10px; margin-bottom:10px; font-size:12px; line-height:1.45;}
   #panelComp .vok { background:#052e16; border:1px solid #16a34a; color:#86efac;}
   #panelComp .vfalta { background:#450a0a; border:1px solid #dc2626; color:#fca5a5;}
-  #panelComp .vcerrado { background:#1e293b; border:1px solid #64748b; color:#cbd5e1;}
-  #panelComp .subt { color:#94a3b8; font-size:11px; margin:10px 0 5px; text-transform:uppercase; letter-spacing:.5px;}
-  #panelComp .tec { display:flex; justify-content:space-between; align-items:center; gap:6px; background:#0f172a; border-left:3px solid #dc2626; border-radius:6px; padding:6px 8px; margin:5px 0; cursor:pointer;}
+  #panelComp .vcerrado { background:#132845; border:1px solid #4a7ab0; color:#b8d4ee;}
+  #panelComp .subt { color:#8ab4dd; font-size:11px; margin:10px 0 5px; text-transform:uppercase; letter-spacing:.5px;}
+  #panelComp .tec { display:flex; justify-content:space-between; align-items:center; gap:6px; background:#0a1930; border-left:3px solid #dc2626; border-radius:6px; padding:6px 8px; margin:5px 0; cursor:pointer;}
   #panelComp .tec:hover { background:#1e3a5f;}
-  #panelComp .tec .nom { font-size:11px; font-weight:bold; color:#e2e8f0;}
-  #panelComp .tec .det { font-size:10px; color:#94a3b8; margin-top:2px;}
+  #panelComp .tec .nom { font-size:11px; font-weight:bold; color:#dbeafe;}
+  #panelComp .tec .det { font-size:10px; color:#8ab4dd; margin-top:2px;}
   #panelComp .tec .ch { font-size:10px; color:#fbbf24; white-space:nowrap;}
-  #panelComp .ciu { display:flex; justify-content:space-between; background:#0f172a; border-radius:6px; padding:5px 8px; margin:4px 0; font-size:11px;}
+  #panelComp .ciu { display:flex; justify-content:space-between; background:#0a1930; border-radius:6px; padding:5px 8px; margin:4px 0; font-size:11px;}
   #panelComp .vacio { color:#4ade80; text-align:center; padding:12px 6px; line-height:1.5;}
   .btn .pill { display:inline-block; background:#f43f5e; color:#fff; border-radius:10px; padding:0 6px; font-size:11px; margin-left:5px; font-weight:bold; }
-  #panelAtr { position:absolute; top:70px; right:10px; z-index:1000; background:rgba(30,41,59,.96); border:1px solid #475569; border-radius:10px; padding:12px; width:300px; max-height:78vh; overflow-y:auto; display:none; font-size:12px;}
+  #panelAtr { position:absolute; top:70px; right:10px; z-index:1000; background:rgba(30,41,59,.96); border:1px solid #2c5282; border-radius:10px; padding:12px; width:300px; max-height:78vh; overflow-y:auto; display:none; font-size:12px;}
   #panelAtr h2 { font-size:13px; color:#fb7185; margin-bottom:6px;}
-  #panelAtr .hint { color:#94a3b8; font-size:11px; margin-bottom:8px;}
-  #panelAtr .vertodos { color:#38bdf8; font-size:12px; cursor:pointer; margin-bottom:8px; display:inline-block;}
+  #panelAtr .hint { color:#8ab4dd; font-size:11px; margin-bottom:8px;}
+  #panelAtr .vertodos { color:#60a5fa; font-size:12px; cursor:pointer; margin-bottom:8px; display:inline-block;}
   #panelAtr .vertodos:hover { text-decoration:underline;}
   #panelAtr .vacio { color:#4ade80; text-align:center; padding:14px 6px; line-height:1.5;}
   #panelAtr .aviso { background:#422006; border:1px solid #b45309; color:#fbbf24; border-radius:6px; padding:6px 8px; font-size:10px; margin-bottom:8px; line-height:1.4;}
   #panelAtr .umbral { display:flex; gap:4px; margin-bottom:8px;}
-  #panelAtr .umbral button { flex:1; background:#0f172a; border:1px solid #334155; color:#94a3b8; border-radius:6px; padding:5px 3px; font-size:11px; font-weight:bold; cursor:pointer;}
-  #panelAtr .umbral button:hover { border-color:#64748b;}
-  #panelAtr .umbral button.act { background:#fb7185; border-color:#fb7185; color:#0f172a;}
-  .atrcard { border-left:4px solid #fb7185; background:#0f172a; border-radius:6px; padding:6px 8px; margin:6px 0; cursor:pointer;}
+  #panelAtr .umbral button { flex:1; background:#0a1930; border:1px solid #1e3a5f; color:#8ab4dd; border-radius:6px; padding:5px 3px; font-size:11px; font-weight:bold; cursor:pointer;}
+  #panelAtr .umbral button:hover { border-color:#4a7ab0;}
+  #panelAtr .umbral button.act { background:#fb7185; border-color:#fb7185; color:#0a1930;}
+  .atrcard { border-left:4px solid #fb7185; background:#0a1930; border-radius:6px; padding:6px 8px; margin:6px 0; cursor:pointer;}
   .atrcard:hover { background:#3b1220;}
   .atrcard.grave { border-left-color:#dc2626; box-shadow:0 0 8px rgba(220,38,38,.45);}
   .atrcard .fila1 { display:flex; justify-content:space-between; align-items:center; gap:8px;}
-  .atrcard .nom { font-weight:bold; color:#e2e8f0; font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .atrcard .nom { font-weight:bold; color:#dbeafe; font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
   .atrcard .tiempo { font-size:15px; font-weight:bold; color:#fb7185; flex-shrink:0;}
   .atrcard.grave .tiempo { color:#f87171;}
-  .atrcard .sub { color:#94a3b8; font-size:10px; margin-top:3px; line-height:1.35;}
-  .atrcard .sub b { color:#cbd5e1; font-weight:bold;}
+  .atrcard .sub { color:#8ab4dd; font-size:10px; margin-top:3px; line-height:1.35;}
+  .atrcard .sub b { color:#b8d4ee; font-weight:bold;}
   /* --- Caidas del dia (ordenes que se salieron de la bandeja) --- */
   .btn.on-caidas { background:#7f1d1d; border-color:#ef4444; font-weight:bold; }
   #btnCaidas .badge { display:inline-block; min-width:16px; padding:0 5px; margin-left:5px;
@@ -175,76 +175,76 @@
      esquinas redondeadas se ven cortadas. */
   .num-icon .mk-nom { position:absolute; top:28px; left:50%; transform:translateX(-50%);
     white-space:nowrap; font-size:9px; font-weight:bold; letter-spacing:.2px;
-    color:#f1f5f9; background:rgba(2,6,23,.9); border-radius:0;
+    color:#eff6ff; background:rgba(2,6,23,.9); border-radius:0;
     padding:0 4px 0 3px; line-height:14px; pointer-events:none;
     text-shadow:0 1px 2px rgba(0,0,0,.9); }
   /* --- Modal de caidas a pantalla completa --- */
   #modalCaidas { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); }
   #modalCaidas.abierto { display:flex; align-items:flex-start; justify-content:center; padding:4vh 2vw; }
-  .mc-box { background:#0f172a; border:1px solid #64748b; border-radius:14px; width:min(1280px,97vw); max-height:92vh;
+  .mc-box { background:#0a1930; border:1px solid #4a7ab0; border-radius:14px; width:min(1280px,97vw); max-height:92vh;
     display:flex; flex-direction:column; box-shadow:0 20px 60px rgba(0,0,0,.6); }
-  .mc-head { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 16px; border-bottom:1px solid #334155; }
-  .mc-head h2 { font-size:17px; color:#cbd5e1; }
-  .mc-close { background:#1e293b; border:1px solid #475569; color:#e2e8f0; border-radius:8px; width:34px; height:34px; font-size:15px; cursor:pointer; flex-shrink:0; }
-  .mc-close:hover { background:#334155; border-color:#64748b; }
+  .mc-head { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 16px; border-bottom:1px solid #1e3a5f; }
+  .mc-head h2 { font-size:17px; color:#b8d4ee; }
+  .mc-close { background:#132845; border:1px solid #2c5282; color:#dbeafe; border-radius:8px; width:34px; height:34px; font-size:15px; cursor:pointer; flex-shrink:0; }
+  .mc-close:hover { background:#1e3a5f; border-color:#4a7ab0; }
   .mc-body { padding:12px 16px; overflow-y:auto; display:grid; grid-template-columns:repeat(auto-fill,minmax(235px,1fr)); gap:9px; }
   .mc-body .vacio { grid-column:1/-1; color:#4ade80; text-align:center; padding:28px 6px; line-height:1.6; font-size:14px; }
-  .mc-resnota { color:#94a3b8; font-size:11.5px; padding:0 16px 14px; border-top:1px solid #334155; margin-top:2px; padding-top:10px; }
-  .caidacard { border-left:3px solid #64748b; background:#111c33; border-radius:0 7px 7px 0; padding:8px 10px; cursor:pointer; }
+  .mc-resnota { color:#8ab4dd; font-size:11.5px; padding:0 16px 14px; border-top:1px solid #1e3a5f; margin-top:2px; padding-top:10px; }
+  .caidacard { border-left:3px solid #4a7ab0; background:#111c33; border-radius:0 7px 7px 0; padding:8px 10px; cursor:pointer; }
   .caidacard:hover { background:#16233f; }
   .caidacard .fila1 { display:flex; justify-content:space-between; align-items:baseline; gap:8px; margin-bottom:3px; }
   .caidacard .ot { font-family:'Consolas',monospace; font-size:10.5px; color:#93c5fd; flex-shrink:0; }
-  .caidacard .cat { font-weight:bold; color:#f1f5f9; font-size:13.5px; }
-  .caidacard .sub { color:#cbd5e1; font-size:11px; margin-top:2px; line-height:1.4; }
+  .caidacard .cat { font-weight:bold; color:#eff6ff; font-size:13.5px; }
+  .caidacard .sub { color:#b8d4ee; font-size:11px; margin-top:2px; line-height:1.4; }
   .caidacard .sub b { color:#fff; font-weight:bold; }
-  .caidacard .horas { color:#94a3b8; font-size:11px; margin-top:4px; font-weight:600; }
+  .caidacard .horas { color:#8ab4dd; font-size:11px; margin-top:4px; font-weight:600; }
   /* contador por franja (chips) y separadores de grupo dentro del modal de caidas */
   .mc-head-left { display:flex; align-items:center; gap:12px; flex-wrap:wrap; min-width:0; }
   .mc-cont { display:flex; gap:6px; flex-wrap:wrap; }
-  .fchip { background:#1e293b; border:1px solid #475569; color:#e2e8f0; border-radius:999px; padding:3px 11px; font-size:11.5px; white-space:nowrap; }
-  .fchip b { color:#cbd5e1; }
-  .mc-body .fgrupo { grid-column:1/-1; color:#94a3b8; font-size:12px; font-weight:bold; margin-top:7px; padding-top:7px; border-top:1px solid #334155; }
-  .mc-body .fgrupo span { color:#94a3b8; font-weight:normal; }
+  .fchip { background:#132845; border:1px solid #2c5282; color:#dbeafe; border-radius:999px; padding:3px 11px; font-size:11.5px; white-space:nowrap; }
+  .fchip b { color:#b8d4ee; }
+  .mc-body .fgrupo { grid-column:1/-1; color:#8ab4dd; font-size:12px; font-weight:bold; margin-top:7px; padding-top:7px; border-top:1px solid #1e3a5f; }
+  .mc-body .fgrupo span { color:#8ab4dd; font-weight:normal; }
   /* --- Tarjetas del historico: las usan 'Repetidas hoy' y 'Sectores' --- */
   .rcard { border-left:3px solid #f59e0b; background:#111c33; border-radius:0 7px 7px 0;
     padding:9px 11px; margin-bottom:7px; }
   .rcard .rtop { display:flex; align-items:baseline; gap:10px; cursor:pointer; }
   .rcard .rn { background:#7f1d1d; color:#fff; border-radius:6px; padding:2px 8px;
     font-size:12px; font-weight:bold; flex-shrink:0; }
-  .rcard .rdir { font-weight:bold; color:#f1f5f9; font-size:13.5px; flex:1; min-width:0; }
-  .rcard .rult { color:#94a3b8; font-size:11px; white-space:nowrap; }
-  .rsep { width:1px; background:#334155; margin:0 3px; align-self:stretch; }
+  .rcard .rdir { font-weight:bold; color:#eff6ff; font-size:13.5px; flex:1; min-width:0; }
+  .rcard .rult { color:#8ab4dd; font-size:11px; white-space:nowrap; }
+  .rsep { width:1px; background:#1e3a5f; margin:0 3px; align-self:stretch; }
   /* --- Modal de direcciones REPETIDAS HOY (las de la bandeja de hoy que ya
          se habian caido antes). Reusa .rcard/.rvis del modal de arriba y solo
          cambia el color, para que se note al tiro que es otra cosa. --- */
   #modalRepe { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); }
   #modalRepe.abierto { display:flex; align-items:flex-start; justify-content:center; padding:4vh 2vw; }
   #modalRepe .mc-body { display:block; }
-  #modalRepe .vacio { color:#94a3b8; text-align:center; padding:28px 6px; font-size:14px; line-height:1.6; }
+  #modalRepe .vacio { color:#8ab4dd; text-align:center; padding:28px 6px; font-size:14px; line-height:1.6; }
   .btn.on-repe { background:#4c1d95; border-color:#a78bfa; font-weight:bold; }
   #btnRepe .badge { display:inline-block; min-width:16px; padding:0 5px; margin-left:5px;
     background:#a78bfa; color:#1e1b4b; border-radius:9px; font-size:11px; font-weight:bold;
     line-height:16px; text-align:center; }
-  .pchip { background:#1e293b; border:1px solid #475569; color:#e2e8f0; border-radius:999px;
+  .pchip { background:#132845; border:1px solid #2c5282; color:#dbeafe; border-radius:999px;
     padding:3px 11px; font-size:11.5px; cursor:pointer; white-space:nowrap; }
-  .pchip:hover { background:#334155; }
+  .pchip:hover { background:#1e3a5f; }
   .pchip.act { background:#4c1d95; border-color:#a78bfa; color:#fff; font-weight:bold; }
   .rcard.repe { border-left-color:#a78bfa; }
   .rcard.repe .rn { background:#4c1d95; }
-  .rvh { color:#94a3b8; font-size:10.5px; font-weight:bold; text-transform:uppercase;
+  .rvh { color:#8ab4dd; font-size:10.5px; font-weight:bold; text-transform:uppercase;
     letter-spacing:.4px; margin:5px 0 2px; }
-  .rvis .rv .rh { color:#cbd5e1; font-family:'Consolas',monospace; flex-shrink:0; }
-  .rvis .rv .re { border-radius:4px; padding:0 6px; font-size:10px; background:#475569; color:#e2e8f0; }
+  .rvis .rv .rh { color:#b8d4ee; font-family:'Consolas',monospace; flex-shrink:0; }
+  .rvis .rv .re { border-radius:4px; padding:0 6px; font-size:10px; background:#2c5282; color:#dbeafe; }
   .rvis .rv .re.ini { background:#166534; } .rvis .rv .re.ruta { background:#92400e; }
   .rvis .rv .re.ok { background:#065f46; } .rvis .rv .re.nr { background:#7f1d1d; }
   .rmapa { color:#93c5fd; font-size:11.5px; cursor:pointer; margin-top:6px; display:inline-block; }
   /* --- Modal de SECTORES (agrupado por calle) --- */
-  .btn.on-sec { background:#0c4a6e; border-color:#38bdf8; font-weight:bold; }
-  .schip { background:#1e293b; border:1px solid #475569; color:#e2e8f0; border-radius:999px;
+  .btn.on-sec { background:#0c4a6e; border-color:#60a5fa; font-weight:bold; }
+  .schip { background:#132845; border:1px solid #2c5282; color:#dbeafe; border-radius:999px;
     padding:3px 11px; font-size:11.5px; cursor:pointer; white-space:nowrap; }
-  .schip:hover { background:#334155; }
-  .schip.act { background:#0c4a6e; border-color:#38bdf8; color:#fff; font-weight:bold; }
-  .rcard.sec { border-left-color:#38bdf8; }
+  .schip:hover { background:#1e3a5f; }
+  .schip.act { background:#0c4a6e; border-color:#60a5fa; color:#fff; font-weight:bold; }
+  .rcard.sec { border-left-color:#60a5fa; }
   .rcard.sec .rn { background:#0c4a6e; }
   .rcard.sec.alerta { border-left-color:#f87171; }
   .rcard.sec.alerta .rn { background:#7f1d1d; }
@@ -252,9 +252,9 @@
   .fam.red { background:#7f1d1d; color:#fecaca; }
   .fam.cliente { background:#1e3a5f; color:#bfdbfe; }
   .fam.datos { background:#4c1d95; color:#ddd6fe; }
-  .fam.otro { background:#334155; color:#cbd5e1; }
+  .fam.otro { background:#1e3a5f; color:#b8d4ee; }
   .shoy { background:#065f46; color:#a7f3d0; border-radius:4px; padding:0 6px; font-size:10px; }
-  .sdom { display:flex; gap:9px; font-size:11.5px; color:#cbd5e1; padding:2px 0; }
+  .sdom { display:flex; gap:9px; font-size:11.5px; color:#b8d4ee; padding:2px 0; }
   .sdom .sn { color:#93c5fd; font-family:'Consolas',monospace; flex-shrink:0; }
   .rmapa:hover { text-decoration:underline; }
   /* --- Ordenes nuevas del dia --- */
@@ -265,18 +265,18 @@
   #btnNuevas .badge { display:inline-block; min-width:16px; padding:0 5px; margin-left:5px;
     background:#10b981; color:#022c22; border-radius:9px; font-size:11px; font-weight:bold;
     line-height:16px; text-align:center; }
-  .nchip { background:#1e293b; border:1px solid #475569; color:#e2e8f0; border-radius:999px;
+  .nchip { background:#132845; border:1px solid #2c5282; color:#dbeafe; border-radius:999px;
     padding:3px 11px; font-size:11.5px; cursor:pointer; white-space:nowrap; }
-  .nchip:hover { background:#334155; }
+  .nchip:hover { background:#1e3a5f; }
   .nchip.act { background:#065f46; border-color:#10b981; color:#fff; font-weight:bold; }
   .nfila { display:grid; grid-template-columns:105px 1fr 62px 58px; align-items:center;
     gap:12px; padding:6px 10px; border-radius:6px; border-left:3px solid #10b981;
     background:#111c33; margin-bottom:4px; font-size:12.5px; }
   .nfila .npet { font-family:'Consolas',monospace; font-size:11px; color:#93c5fd;
-    background:#1e293b; border:1px solid #334155; border-radius:5px;
+    background:#132845; border:1px solid #1e3a5f; border-radius:5px;
     padding:1px 6px; text-align:center; }
-  .nfila .ncat { font-weight:bold; color:#f1f5f9; }
-  .nfila .nfr { color:#94a3b8; font-size:11.5px; font-family:'Consolas',monospace; text-align:right; }
+  .nfila .ncat { font-weight:bold; color:#eff6ff; }
+  .nfila .nfr { color:#8ab4dd; font-size:11.5px; font-family:'Consolas',monospace; text-align:right; }
   .nfila .nde { color:#6ee7b7; font-size:11.5px; font-family:'Consolas',monospace; text-align:right; }
   /* Salio de la bandeja estando ABIERTA. Ya no se apaga tanto la fila: el
      gris fuerte decia "esto importa menos", justo al reves de lo que es —
@@ -306,32 +306,32 @@
   .nfila .ncat .bes { margin-left:8px; vertical-align:middle; }
   /* ---------------- BUSCADOR ---------------- */
   .buscador { display:flex; gap:5px; align-items:center; margin-left:6px; }
-  .buscador input { background:#0f172a; border:1px solid #334155; color:#e2e8f0;
+  .buscador input { background:#0a1930; border:1px solid #1e3a5f; color:#dbeafe;
     border-radius:7px; padding:6px 10px; font-size:12px; width:210px; outline:none; }
-  .buscador input:focus { border-color:#38bdf8; }
-  .buscador input::placeholder { color:#64748b; }
+  .buscador input:focus { border-color:#60a5fa; }
+  .buscador input::placeholder { color:#4a7ab0; }
   /* una tarjeta por direccion; dentro, un bloque por seccion del tablero */
-  .bcard { background:#0f172a; border:1px solid #1e293b; border-left:3px solid #38bdf8;
+  .bcard { background:#0a1930; border:1px solid #132845; border-left:3px solid #60a5fa;
     border-radius:8px; margin-bottom:12px; padding:10px 12px; }
-  .bcard h3 { margin:0 0 3px; font-size:14px; color:#e2e8f0; }
-  .bcard .bmeta { font-size:11px; color:#64748b; margin-bottom:8px; }
+  .bcard h3 { margin:0 0 3px; font-size:14px; color:#dbeafe; }
+  .bcard .bmeta { font-size:11px; color:#4a7ab0; margin-bottom:8px; }
   .bsec { margin-top:9px; }
   .bsec .bt { font-size:11px; font-weight:bold; letter-spacing:.4px;
-    text-transform:uppercase; color:#94a3b8; margin-bottom:4px; }
-  .bsec.hoy   .bt { color:#38bdf8; }
+    text-transform:uppercase; color:#8ab4dd; margin-bottom:4px; }
+  .bsec.hoy   .bt { color:#60a5fa; }
   .bsec.caida .bt { color:#f87171; }
   .bsec.nueva .bt { color:#4ade80; }
   .bsec.hist  .bt { color:#f59e0b; }
   .bsec.red   .bt { color:#c084fc; }
   .bsec.reca  .bt { color:#fb923c; }
-  .brow { font-size:12px; color:#cbd5e1; padding:3px 0 3px 9px;
-    border-left:2px solid #1e293b; line-height:1.5; }
-  .brow .bord { font-family:'Consolas',monospace; font-size:11px; color:#7dd3fc; }
-  .brow .bfec { font-family:'Consolas',monospace; color:#94a3b8; }
+  .brow { font-size:12px; color:#b8d4ee; padding:3px 0 3px 9px;
+    border-left:2px solid #132845; line-height:1.5; }
+  .brow .bord { font-family:'Consolas',monospace; font-size:11px; color:#93c5fd; }
+  .brow .bfec { font-family:'Consolas',monospace; color:#8ab4dd; }
   .brow .btec { color:#6ee7b7; }
   .brow .bmot { color:#fbbf24; }
-  .brow .bsep { color:#475569; margin:0 5px; }
-  .brow .bcat { color:#e2e8f0; font-weight:bold; }
+  .brow .bsep { color:#2c5282; margin:0 5px; }
+  .brow .bcat { color:#dbeafe; font-weight:bold; }
   /* el estado se pinta con el mismo codigo de color del resto del tablero */
   /* Codigo de color de los estados, compartido por el buscador y el modal de
      nuevas. Verificado con contraste texto/fondo: todos sobre 5.7:1, y los
@@ -345,37 +345,37 @@
   .bes.susp { background:#134e4a; color:#5eead4; }   /* suspendido */
   .bes.nr   { background:#450a0a; color:#f87171; }   /* no realizada */
   .bes.can  { background:#1a2e05; color:#bef264; }   /* cancelado */
-  .bes.pen  { background:#1e293b; color:#94a3b8; }   /* pendiente */
-  .bvacio { color:#64748b; font-size:12px; padding:18px; text-align:center; }
+  .bes.pen  { background:#132845; color:#8ab4dd; }   /* pendiente */
+  .bvacio { color:#4a7ab0; font-size:12px; padding:18px; text-align:center; }
   .bhl { background:#78350f; color:#fde68a; border-radius:3px; padding:0 2px; }
   /* Detalle del reingreso EN LA MISMA LINEA, no en tooltip: el tooltip no
      existe en celular ni sale al imprimir, y este es justo el dato que el
      despachador necesita leer de un vistazo antes de asignar. Va dentro de
      .ncat (la columna elastica), asi que hace wrap solo si no cabe. */
-  .nfila .nsub { font-weight:normal; font-size:11px; color:#cbd5e1; }
+  .nfila .nsub { font-weight:normal; font-size:11px; color:#b8d4ee; }
   .nfila .nsub .ndir { color:#93c5fd; }
-  .nfila .nsub .nfec { color:#94a3b8; font-family:'Consolas',monospace; }
+  .nfila .nsub .nfec { color:#8ab4dd; font-family:'Consolas',monospace; }
   .nfila .nsub .nmot { color:#fbbf24; }
   .nfila .nsub .ntec { color:#6ee7b7; }
-  .nfila .nsub .nord { color:#64748b; font-family:'Consolas',monospace; font-size:10px; }
-  .nfila .nsub .nsep { color:#475569; margin:0 6px; }
-  .nfila .nsub .nmas { color:#94a3b8; font-style:italic; }
+  .nfila .nsub .nord { color:#4a7ab0; font-family:'Consolas',monospace; font-size:10px; }
+  .nfila .nsub .nsep { color:#2c5282; margin:0 6px; }
+  .nfila .nsub .nmas { color:#8ab4dd; font-style:italic; }
   /* la celda de tipo deja de truncar y el texto respira si cae en dos lineas */
   .nfila .ncat { line-height:1.6; }
   .nfila.reag { border-left-color:#818cf8; }
   .nchip.re.act { background:#78350f; border-color:#f59e0b; }
   .nchip.rg.act { background:#3730a3; border-color:#818cf8; }
   #btnNuevas .badge.mix { background:#f59e0b; color:#451a03; }
-  #modalNuevas .vacio { color:#94a3b8; text-align:center; padding:28px 6px; font-size:14px; line-height:1.6; }
+  #modalNuevas .vacio { color:#8ab4dd; text-align:center; padding:28px 6px; font-size:14px; line-height:1.6; }
   .rnum { font-family:'Consolas',monospace; font-size:11px; color:#93c5fd;
-    background:#1e293b; border:1px solid #334155; border-radius:5px;
+    background:#132845; border:1px solid #1e3a5f; border-radius:5px;
     padding:1px 6px; white-space:nowrap; flex-shrink:0; }
-  .rcard .rvis { display:none; margin-top:7px; border-top:1px solid #334155; padding-top:6px; }
+  .rcard .rvis { display:none; margin-top:7px; border-top:1px solid #1e3a5f; padding-top:6px; }
   .rcard.abierta .rvis { display:block; }
-  .rvis .rv { display:flex; gap:9px; font-size:11.5px; color:#cbd5e1; padding:3px 0; flex-wrap:wrap; }
+  .rvis .rv { display:flex; gap:9px; font-size:11.5px; color:#b8d4ee; padding:3px 0; flex-wrap:wrap; }
   .rvis .rv .rf { color:#93c5fd; font-family:'Consolas',monospace; flex-shrink:0; }
   .rvis .rv .rc { color:#fca5a5; }
-  .rvis .rv .rgsa { background:#334155; color:#93c5fd; border-radius:4px; padding:0 5px; font-size:10px; }
+  .rvis .rv .rgsa { background:#1e3a5f; color:#93c5fd; border-radius:4px; padding:0 5px; font-size:10px; }
 </style>
 </head>
 <body>
