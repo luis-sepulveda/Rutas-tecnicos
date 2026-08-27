@@ -1227,6 +1227,24 @@ const TOA_ICONO = { 'reagendada':'\u21bb', 'cancelada':'\u2716',
                     'suspendida':'\u23f8', 'gestionada':'\u2714',
                     'sin informacion':'\u2753', 'sin respuesta':'\u2753' };
 
+/* Fecha para la que quedo reagendada la orden. TOA no la manda en un campo
+   aparte: viene pegada al final del texto del resultado, sin separacion
+   ninguna — "1-3NHWD9EM - 10-13-ReparacionVie, 28 Ago". Se busca el dia
+   abreviado con su coma, que es lo unico estable de ese formato, y se toma
+   lo que sigue.
+
+   Se saca aca y no en toa_estados.py a proposito: el dato ya viaja dentro de
+   'detalle' en los archivos que ya estan subidos, asi que hacerlo del lado
+   del tablero lo muestra hoy mismo sin volver a consultar TOA. Si algun dia
+   el formato cambia, esto devuelve '' y el chip queda como estaba: nunca
+   inventa una fecha. */
+const RE_FECHA_TOA = /(?:Lun|Mar|Mi[e\u00e9]|Jue|Vie|S[a\u00e1]b|Dom)\w*,\s*(\d{1,2})\s+([A-Za-z\u00e1\u00e9\u00ed\u00f3\u00fa]{3,4})/;
+
+function fechaToa(reg){
+  const m = RE_FECHA_TOA.exec(String((reg && reg.detalle) || ''));
+  return m ? (m[1] + ' ' + m[2]) : '';
+}
+
 /* Chip con el desenlace de UNA orden segun TOA. Devuelve '' si no hay dato.
    Solo se consultan las caidas, asi que la mayoria de las ordenes no esta en
    el archivo y su fila queda exactamente como estaba.
@@ -1243,13 +1261,15 @@ function chipToa(ot){
   let tit = 'Consultado en TOA';
   if(TOA.actualizado)
     tit += ' a las ' + String(TOA.actualizado).replace('T',' ').slice(11,16);
+  if(reg.detalle) tit += ' \u00b7 ' + reg.detalle;
   if(reg.nota) tit += ' \u00b7 ' + reg.nota;
   if(reg.previas && reg.previas.length)
     tit += ' \u00b7 ' + reg.previas.length + ' resultado(s) anterior(es) en TOA';
+  const fec = fechaToa(reg);
   const fr = (reg.franja_nueva && reg.franja_nueva !== reg.franja_original)
     ? ' ' + escR(reg.franja_nueva) : '';
   return '<span class="btoa '+cls+'" title="'+escR(tit)+'">'
-    + ico + ' ' + escR(est) + fr + '</span>';
+    + ico + ' ' + escR(est) + (fec ? ' ' + escR(fec) : '') + fr + '</span>';
 }
 
 // 'dd-mm-yyyy' -> numero comparable (yyyymmdd). Sirve para ordenar sin
