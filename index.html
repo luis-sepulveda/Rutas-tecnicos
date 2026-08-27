@@ -374,6 +374,18 @@
   .bes.nr   { background:#450a0a; color:#f87171; }   /* no realizada */
   .bes.can  { background:#1a2e05; color:#bef264; }   /* cancelado */
   .bes.pen  { background:#132845; color:#8ab4dd; }   /* pendiente */
+  /* Chip con el desenlace REAL que devolvio TOA para una orden caida.
+     Va aparte de .bes a proposito: .bes es el estado del portal (Pendiente,
+     Completado...), esto es lo que paso despues de que la orden desaparecio
+     de la bandeja, consultado en el buscador de TOA. */
+  .btoa { padding:0 6px; border-radius:999px; font-size:10px; font-weight:bold;
+    margin-left:6px; white-space:nowrap; }
+  .btoa.reag { background:#78350f; color:#fde68a; }   /* reagendada */
+  .btoa.canc { background:#1a2e05; color:#bef264; }   /* cancelada */
+  .btoa.susp { background:#134e4a; color:#5eead4; }   /* suspendida */
+  .btoa.gest { background:#164e63; color:#67e8f9; }   /* gestionada */
+  .btoa.sinf { background:#1f2937; color:#9ca3af; }   /* sin informacion */
+  .fchip.toa { border-color:#b45309; color:#fde68a; }
   .bvacio { color:#4a7ab0; font-size:12px; padding:18px; text-align:center; }
   .bhl { background:#78350f; color:#fde68a; border-radius:3px; padding:0 2px; }
   /* Detalle del reingreso EN LA MISMA LINEA, no en tooltip: el tooltip no
@@ -1010,7 +1022,7 @@ function renderNuevas(){
 
       return '<div class="nfila'+(ida?' ida':'')+extra+'">'
         + '<span class="npet">'+escR(x.pet || x.o || '')+'</span>'
-        + '<span class="ncat">'+escR(x.cat)+pill(est)+avisoIda+badge+'</span>'
+        + '<span class="ncat">'+escR(x.cat)+pill(est)+chipToa(x.o)+avisoIda+badge+'</span>'
         + '<span class="nfr">'+escR(x.f)+'</span>'
         // hora en que el CICLO la detecto (campo 'visto'), no la hora de la
         // cita. Sirve de referencia de cuando cayo en la bandeja.
@@ -1181,6 +1193,63 @@ async function bajarHistorial(){
   const r2 = await fetch(URL_HIST_RAW + '?t=' + Date.now(), { cache:'no-store' });
   if(!r2.ok) throw new Error(r2.status);
   return await r2.json();
+}
+
+/* ======================= ESTADOS DE TOA =======================
+   estados_toa.json lo escribe toa_estados.py: por cada orden caida, el
+   desenlace real leido en el buscador de TOA (reagendada, cancelada,
+   suspendida, gestionada) o 'sin informacion' cuando la OT ya no existe
+   alla, que pasa cuando VTR la saca del sistema.
+
+   Se baja por raw y NO por la API de Contents a proposito: el archivo se
+   escribe una vez, al arrancar el monitor, asi que no gana nada con la via
+   instantanea y en cambio gastaria saldo de API que necesita rutas.json,
+   que si cambia cada 5 min.
+
+   Si el archivo no esta o falla la bajada, TOA queda en null y las filas
+   salen igual que antes: el chip simplemente no aparece.               */
+const URL_TOA_RAW = 'https://raw.githubusercontent.com/'+REPO_BASE+'/'+RAMA_DATOS+'/estados_toa.json';
+
+let TOA = null;              // { actualizado, resumen, estados:{ OT:{...} } }
+
+async function bajarToa(){
+  try {
+    const r = await fetch(URL_TOA_RAW + '?t=' + Date.now(), { cache:'no-store' });
+    if(!r.ok) return null;
+    return await r.json();
+  } catch(e) { return null; }
+}
+
+const TOA_CLASE = { 'reagendada':'reag', 'cancelada':'canc', 'suspendida':'susp',
+                    'gestionada':'gest', 'sin informacion':'sinf',
+                    'sin respuesta':'sinf' };
+const TOA_ICONO = { 'reagendada':'\u21bb', 'cancelada':'\u2716',
+                    'suspendida':'\u23f8', 'gestionada':'\u2714',
+                    'sin informacion':'\u2753', 'sin respuesta':'\u2753' };
+
+/* Chip con el desenlace de UNA orden segun TOA. Devuelve '' si no hay dato.
+   Solo se consultan las caidas, asi que la mayoria de las ordenes no esta en
+   el archivo y su fila queda exactamente como estaba.
+
+   En las reagendadas se agrega la franja nueva cuando TOA la trae y es
+   distinta de la original: es el dato que sirve para saber para cuando quedo
+   la visita sin tener que entrar al portal a mirarla. */
+function chipToa(ot){
+  const reg = (TOA && TOA.estados) ? TOA.estados[ot] : null;
+  if(!reg || !reg.estado) return '';
+  const est = String(reg.estado);
+  const cls = TOA_CLASE[est] || 'sinf';
+  const ico = TOA_ICONO[est] || '';
+  let tit = 'Consultado en TOA';
+  if(TOA.actualizado)
+    tit += ' a las ' + String(TOA.actualizado).replace('T',' ').slice(11,16);
+  if(reg.nota) tit += ' \u00b7 ' + reg.nota;
+  if(reg.previas && reg.previas.length)
+    tit += ' \u00b7 ' + reg.previas.length + ' resultado(s) anterior(es) en TOA';
+  const fr = (reg.franja_nueva && reg.franja_nueva !== reg.franja_original)
+    ? ' ' + escR(reg.franja_nueva) : '';
+  return '<span class="btoa '+cls+'" title="'+escR(tit)+'">'
+    + ico + ' ' + escR(est) + fr + '</span>';
 }
 
 // 'dd-mm-yyyy' -> numero comparable (yyyymmdd). Sirve para ordenar sin
@@ -1711,6 +1780,15 @@ function renderPanelCaidas(){
       .map(function(k){ return '<span class="fchip">🕒 '+k+' · <b>'+cuenta[k]+'</b></span>'; })
       .join('');
 
+    /* Resumen de lo que dijo TOA, al lado de los chips de franja: cuantas
+       quedaron reagendadas, canceladas o sin informacion. Es la lectura de
+       una pasada; el detalle por orden va en el chip de cada fila. */
+    if(TOA && TOA.resumen){
+      cont2.innerHTML += Object.keys(TOA.resumen).sort().map(function(k){
+        return '<span class="fchip toa">TOA · '+escR(k)+' <b>'+TOA.resumen[k]+'</b></span>';
+      }).join('');
+    }
+
     /* De donde venia cada caida: entro durante el dia o ya estaba en la
        bandeja inicial. Sirve para leer el caso completo — una que entro a las
        11:25 y se cayo a las 13:03 estuvo dos horas dando vueltas; una de la
@@ -1734,7 +1812,7 @@ function renderPanelCaidas(){
         : '<span class="norig ini">📋 bandeja inicial</span>';
       return '<div class="nfila cai">'
         + '<span class="npet">'+escR(c.o||'')+'</span>'
-        + '<span class="ncat">'+escR(c.cat||'')+pill(c.e)+origen
+        + '<span class="ncat">'+escR(c.cat||'')+pill(c.e)+chipToa(c.o)+origen
           + '<span class="nsub"><span class="nsep">·</span>'
           + '<span class="ntec vermapa" onclick="verTecnicoCaida(\''
             + String(c.tec).replace(/'/g,"\\'")+'\')" '
@@ -2836,6 +2914,7 @@ async function cargarDatosVivos(auto){
     setFechaDatos(js.actualizado);
     marcarEdad(lu, js.actualizado);
     ALERTAS = js.alertas || null;      // caidas del dia (si el pipeline las trae)
+    TOA = await bajarToa();            // desenlace de las caidas segun TOA (o null)
     // OT que estan en el bucket de la plataforma, sin tecnico asignado.
     // generar_rutas.py las anota antes del filtro DOMI. No se dibujan en el
     // mapa, pero sirven para explicar a donde se fue una orden que salio de
