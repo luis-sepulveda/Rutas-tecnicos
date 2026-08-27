@@ -1179,20 +1179,20 @@ function bajarNuevasXlsx(){
    lado del tablero no se pierde nada. */
 const RAMA_DATOS = 'data';
 const REPO_BASE = 'luis-sepulveda/Rutas-tecnicos';
-const URL_HIST_API = 'https://api.github.com/repos/'+REPO_BASE+'/contents/historial_dir.json?ref='+RAMA_DATOS;
 const URL_HIST_RAW = 'https://raw.githubusercontent.com/'+REPO_BASE+'/'+RAMA_DATOS+'/historial_dir.json';
 
 let HIST = null;             // contenido de historial_dir.json
 
+/* Se baja SOLO por raw. Antes intentaba primero la API de Contents, pero el
+   saldo de la API (60 llamadas por hora y por IP, sin autenticar) es un pozo
+   compartido: cada llamada que se gasta aca es una que le falta a rutas.json,
+   que es la unica que de verdad necesita llegar al instante. El historico
+   cambia una vez al dia, asi que los minutos de propagacion de raw le dan
+   exactamente lo mismo. */
 async function bajarHistorial(){
-  try {
-    const r = await fetch(URL_HIST_API,
-      { headers:{'Accept':'application/vnd.github.raw'}, cache:'no-store' });
-    if(r.ok) return await r.json();
-  } catch(e) { /* plan B */ }
-  const r2 = await fetch(URL_HIST_RAW + '?t=' + Date.now(), { cache:'no-store' });
-  if(!r2.ok) throw new Error(r2.status);
-  return await r2.json();
+  const r = await fetch(URL_HIST_RAW + '?t=' + Date.now(), { cache:'no-store' });
+  if(!r.ok) throw new Error(r.status);
+  return await r.json();
 }
 
 /* ======================= ESTADOS DE TOA =======================
@@ -2819,11 +2819,18 @@ setInterval(function(){
    andando con 5 minutos de atraso en vez de quedarse en blanco. */
 const REFRESCO_BASE_MIN = 1;     // con saldo holgado
 const REFRESCO_MAX_MIN = 5;      // piso util: el monitor publica cada 5 min
+/* Intervalo cuando se anda por raw. Va MAS APRETADO que el maximo, no mas
+   suelto, aunque parezca al reves: raw no tiene tope de llamadas, asi que
+   espaciar no protege nada y solo agrega espera. Como raw propaga hasta 5
+   minutos tarde, preguntando cada 2 se agarra el archivo nuevo apenas
+   aparece, en vez de descubrirlo un ciclo despues. */
+const REFRESCO_RAW_MIN = 2;
 let refrescoMin = REFRESCO_BASE_MIN;
 const URL_RAW = 'https://raw.githubusercontent.com/'+REPO_BASE+'/'+RAMA_DATOS+'/rutas.json';
 const URL_API = 'https://api.github.com/repos/'+REPO_BASE+'/contents/rutas.json?ref='+RAMA_DATOS;
 let ORIGEN_DATOS = '';   // de donde salio el ultimo refresco, para diagnosticar
 let SALDO_API = null;    // llamadas que quedan en la hora, segun la API
+let RESET_API = 0;       // epoch ms en que la API repone el saldo (0 = no se sabe)
 let EN_BUCKET = new Set();  // OT sin tecnico asignado, en el bucket del portal
 let SELLO_ULTIMO = null; // 'actualizado' del ultimo snapshot que se pinto
 
@@ -2851,13 +2858,19 @@ function marcarEdad(lu, sello){
       ? 'API de Contents (instantánea)'
       : 'raw.githubusercontent — de respaldo, propaga hasta 5 min tarde')
     + (SALDO_API !== null ? '. Saldo API: ' + SALDO_API + '/hora' : '')
+    + (SALDO_API === 0 && RESET_API > Date.now()
+        ? ' (repone ' + new Date(RESET_API).toTimeString().slice(0,5) + ')' : '')
     + '. Pregunta cada ' + refrescoMin + ' min; el monitor publica cada 5.';
   lu.classList.toggle('viejo', edad !== null && edad > 15);
 }
 
 async function bajarRutasJson(){
-  // 1) API de Contents -> entrega el commit al instante
-  try {
+  // 1) API de Contents -> entrega el commit al instante.
+  //    Si el saldo ya llego a cero, ni se intenta hasta que el contador se
+  //    reponga: la llamada volveria 403 igual, y esa ida y vuelta perdida se
+  //    paga en segundos de espera antes de caer a raw.
+  const enCastigo = (SALDO_API === 0 && RESET_API && Date.now() < RESET_API);
+  if(!enCastigo) try {
     const r = await fetch(URL_API,
       { headers:{'Accept':'application/vnd.github.raw'}, cache:'no-store' });
     // Las cabeceras de saldo pueden no venir expuestas por CORS. Si no llegan
@@ -2866,6 +2879,7 @@ async function bajarRutasJson(){
     const reset  = parseInt(r.headers.get('x-ratelimit-reset'), 10);
     if(!isNaN(quedan)){
       SALDO_API = quedan;
+      if(!isNaN(reset)) RESET_API = reset*1000;
       const enMin = !isNaN(reset)
         ? Math.max(1, Math.round((reset*1000 - Date.now())/60000)) : 60;
       ajustarRefresco(quedan, enMin);
@@ -2876,7 +2890,7 @@ async function bajarRutasJson(){
   const r2 = await fetch(URL_RAW + '?t=' + Date.now(), { cache:'no-store' });
   if(!r2.ok) throw new Error(r2.status);
   ORIGEN_DATOS = 'raw';
-  refrescoMin = REFRESCO_MAX_MIN;   // sin saldo, insistir no sirve de nada
+  refrescoMin = REFRESCO_RAW_MIN;   // raw no tiene tope: preguntar seguido sale gratis
   return await r2.json();
 }
 
