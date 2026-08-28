@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Módulo de Actividades</title>
+<title>Rutas Técnicos DOMI</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js">
 </script>
@@ -208,7 +208,7 @@
   .nfila .vermapa { cursor:pointer; text-decoration:underline dotted; text-underline-offset:2px; }
   .nfila .vermapa:hover { color:#a7f3d0; text-decoration:underline solid; }
   .nfila.cai:hover { background:#132845; }
-  .nfila .nsub .ntec { color:#6ee7b7; }
+  .nfila .nsub .ntec { color:#dbeafe; }
   .nfila .nsub .ndir { color:#93c5fd; }
   .mc-body .vacio { grid-column:1/-1; color:#4ade80; text-align:center; padding:28px 6px; line-height:1.6; font-size:14px; }
   .mc-resnota { color:#8ab4dd; font-size:11.5px; padding:0 16px 14px; border-top:1px solid #1e3a5f; margin-top:2px; padding-top:10px; }
@@ -292,14 +292,14 @@
   .nchip:hover { background:#1e3a5f; }
   .nchip.act { background:#065f46; border-color:#10b981; color:#fff; font-weight:bold; }
   .nfila { display:grid; grid-template-columns:105px 1fr 62px 58px; align-items:center;
-    gap:12px; padding:6px 10px; border-radius:6px; border-left:3px solid #10b981;
+    gap:12px; padding:6px 10px; border-radius:6px; border-left:3px solid #2c5282;
     background:#111c33; margin-bottom:4px; font-size:12.5px; }
   .nfila .npet { font-family:'Consolas',monospace; font-size:11px; color:#93c5fd;
     background:#132845; border:1px solid #1e3a5f; border-radius:5px;
     padding:1px 6px; text-align:center; }
   .nfila .ncat { font-weight:bold; color:#eff6ff; }
   .nfila .nfr { color:#8ab4dd; font-size:11.5px; font-family:'Consolas',monospace; text-align:right; }
-  .nfila .nde { color:#6ee7b7; font-size:11.5px; font-family:'Consolas',monospace; text-align:right; }
+  .nfila .nde { color:#8ab4dd; font-size:11.5px; font-family:'Consolas',monospace; text-align:right; }
   /* Salio de la bandeja estando ABIERTA. Ya no se apaga tanto la fila: el
      gris fuerte decia "esto importa menos", justo al reves de lo que es —
      una orden que desaparece sin cerrar es una caida. Se deja apenas
@@ -310,7 +310,7 @@
     color:#fca5a5; font-size:10px; font-weight:bold; vertical-align:middle; }
   /* salio de la bandeja pero NO llego a Caidas: puede estar en el bucket o
      con un tecnico de otra comuna. Es un aviso, no una pista que seguir. */
-  .nfila .nida.sinver { background:#3d3000; border-color:#a16207; color:#fde68a; }
+  .nfila .nida.sinver { background:#3d1414; border-color:#b91c1c; color:#fca5a5; }
   /* volvio al bucket: la orden sigue viva, solo que sin dueno. No es una
      perdida, asi que no va en rojo ni en ambar de alerta. */
   .nfila .nida.bucket { background:#132845; border-color:#2c5282; color:#8ab4dd; }
@@ -321,7 +321,7 @@
     vertical-align:middle; cursor:help; }
   .nfila .nre { background:#78350f; border:1px solid #f59e0b; color:#fde68a; }
   .nfila .nrg { background:#3730a3; border:1px solid #818cf8; color:#e0e7ff; }
-  .nfila.rein { border-left-color:#f59e0b; }
+  .nfila.rein { border-left-color:#a16207; }
   /* boton de descarga en la cabecera del modal, al lado del cerrar */
   .mc-xls { background:#065f46; border:1px solid #10b981; color:#d1fae5; cursor:pointer;
     border-radius:7px; padding:5px 11px; font-size:12px; font-weight:bold;
@@ -332,6 +332,13 @@
      de color sea el mismo en todo el tablero: un "No Realizada" se ve igual
      aca, en el buscador y en las caidas */
   .nfila .ncat .bes { margin-left:8px; vertical-align:middle; }
+  /* ...pero DENTRO de Nuevas van en gris. Este modal no es para ver en que
+     estado esta cada orden, sino QUE ENTRO: el estado es el telon de fondo y
+     la novedad (reingreso, reagendada, se cayo) es lo que hay que mirar. Con
+     los siete colores del portal encendidos, la novedad se perdia entre
+     ellos. Si algun dia se quiere volver atras, se borran estas dos lineas y
+     vuelve el color compartido con el buscador y las caidas. */
+  .nfila .ncat .bes { background:#1f2937; color:#9ca3af; }
   /* ---------------- BUSCADOR ---------------- */
   .buscador { display:flex; gap:5px; align-items:center; margin-left:6px; }
   .buscador input { background:#0a1930; border:1px solid #1e3a5f; color:#dbeafe;
@@ -395,14 +402,14 @@
   .nfila .nsub { font-weight:normal; font-size:11px; color:#b8d4ee; }
   .nfila .nsub .ndir { color:#93c5fd; }
   .nfila .nsub .nfec { color:#8ab4dd; font-family:'Consolas',monospace; }
-  .nfila .nsub .nmot { color:#fbbf24; }
-  .nfila .nsub .ntec { color:#6ee7b7; }
+  .nfila .nsub .nmot { color:#f0997b; }
+  .nfila .nsub .ntec { color:#dbeafe; }
   .nfila .nsub .nord { color:#4a7ab0; font-family:'Consolas',monospace; font-size:10px; }
   .nfila .nsub .nsep { color:#2c5282; margin:0 6px; }
   .nfila .nsub .nmas { color:#8ab4dd; font-style:italic; }
   /* la celda de tipo deja de truncar y el texto respira si cae en dos lineas */
   .nfila .ncat { line-height:1.6; }
-  .nfila.reag { border-left-color:#818cf8; }
+  .nfila.reag { border-left-color:#6366f1; }
   .nchip.re.act { background:#78350f; border-color:#f59e0b; }
   .nchip.rg.act { background:#3730a3; border-color:#818cf8; }
   #btnNuevas .badge.mix { background:#f59e0b; color:#451a03; }
@@ -420,7 +427,7 @@
 </head>
 <body>
 <header>
-  <h1>🚐 Módulo de Actividades <span style="font-size:11px;color:#34d399;font-weight:normal;vertical-align:middle;">· regla GSA ✓ (v2)</span></h1>
+  <h1>🚐 Rutas Técnicos DOMI <span style="font-size:11px;color:#34d399;font-weight:normal;vertical-align:middle;">· regla GSA ✓ (v2)</span></h1>
   <select id="selTec"><option value="__ALL__">Todos los técnicos</option></select>
   <div class="msel" id="mselCiudad"><button type="button" class="mbtn" onclick="abrirMenu(event,'Ciudad')"><span class="mtxt">Ambas ciudades</span><span class="mcar">▼</span></button><div class="mmenu"></div></div>
   <div class="msel" id="mselFranja"><button type="button" class="mbtn" onclick="abrirMenu(event,'Franja')"><span class="mtxt">Todas las franjas</span><span class="mcar">▼</span></button><div class="mmenu"></div></div>
