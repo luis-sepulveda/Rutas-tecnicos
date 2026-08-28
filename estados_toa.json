@@ -1,9 +1,20 @@
 {
-  "actualizado": "2026-08-28T10:57:28",
+  "actualizado": "2026-08-28T11:27:50",
   "resumen": {
-    "reagendada": 2
+    "reagendada": 4,
+    "sin informacion": 1
   },
   "estados": {
+    "1-3NIG4U08": {
+      "tec": "ALFREDO ALCAYAGA F",
+      "cat": "Alta 1 Play",
+      "franja_original": "10-13",
+      "d": "HORNOPIREN 2936, QUILPUE",
+      "estado": "reagendada",
+      "color": "rgb(255, 222, 0)",
+      "detalle": "1-3NIG4U08 - 10-13-AltaSab, 29 Ago",
+      "franja_nueva": "10-13"
+    },
     "1-3NJ0UHMB": {
       "tec": "DANIEL NAVARRETE E",
       "cat": "Migración 1 Play",
@@ -14,6 +25,34 @@
       "detalle": "1-3NJ0UHMB - 10-13-MigraciónLun, 31 Ago",
       "franja_nueva": "10-13"
     },
+    "1-3NJ2256T": {
+      "tec": "HERNAN CORTES HERRERA",
+      "cat": "Alta 1 Play",
+      "franja_original": "13-16",
+      "d": "ESCOCIA 45, QUILPUE",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "ESCOCIA 45",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "gestionada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3NGOFMOJ",
+            "franja": "10-13",
+            "texto": "1-3NGOFMOJ - 10-13-Alta"
+          },
+          {
+            "estado": "cancelada",
+            "color": "rgb(128, 255, 128)",
+            "ot": "1-3ND6K01E",
+            "franja": "10-13",
+            "texto": "1-3ND6K01E - 10-13-AltaMar, 25 Ago"
+          }
+        ]
+      }
+    },
     "1-3NJ28Z39": {
       "tec": "LUIS GATICA DAVILA",
       "cat": "Alta 2 Play",
@@ -23,6 +62,16 @@
       "color": "rgb(255, 222, 0)",
       "detalle": "1-3NJ28Z39 - 13-16-AltaSab, 29 Ago",
       "franja_nueva": "13-16"
+    },
+    "1-3N4VH0M6": {
+      "tec": "MATIAS CORNEJO D",
+      "cat": "Reparación",
+      "franja_original": "16-19",
+      "d": "GABRIEL PARRA 2378, VILLA ALEMANA",
+      "estado": "reagendada",
+      "color": "rgb(255, 222, 0)",
+      "detalle": "1-3N4VH0M6 - 10-13-ReparaciónMar, 8 Sep",
+      "franja_nueva": "10-13"
     }
   }
 }
