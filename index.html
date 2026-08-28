@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rutas Técnicos DOMI</title>
+<title>Módulo de Actividades</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js">
 </script>
@@ -393,6 +393,7 @@
   .btoa.gest { background:#164e63; color:#67e8f9; }   /* gestionada */
   .btoa.sinf { background:#1f2937; color:#9ca3af; }   /* sin informacion */
   .fchip.toa { border-color:#b45309; color:#fde68a; }
+  .fchip.toavieja { border-color:#374151; color:#9ca3af; background:#111827; }
   .bvacio { color:#4a7ab0; font-size:12px; padding:18px; text-align:center; }
   .bhl { background:#78350f; color:#fde68a; border-radius:3px; padding:0 2px; }
   /* Detalle del reingreso EN LA MISMA LINEA, no en tooltip: el tooltip no
@@ -427,7 +428,7 @@
 </head>
 <body>
 <header>
-  <h1>🚐 Rutas Técnicos DOMI <span style="font-size:11px;color:#34d399;font-weight:normal;vertical-align:middle;">· regla GSA ✓ (v2)</span></h1>
+  <h1>🚐 Módulo de Actividades <span style="font-size:11px;color:#34d399;font-weight:normal;vertical-align:middle;">· regla GSA ✓ (v2)</span></h1>
   <select id="selTec"><option value="__ALL__">Todos los técnicos</option></select>
   <div class="msel" id="mselCiudad"><button type="button" class="mbtn" onclick="abrirMenu(event,'Ciudad')"><span class="mtxt">Ambas ciudades</span><span class="mcar">▼</span></button><div class="mmenu"></div></div>
   <div class="msel" id="mselFranja"><button type="button" class="mbtn" onclick="abrirMenu(event,'Franja')"><span class="mtxt">Todas las franjas</span><span class="mcar">▼</span></button><div class="mmenu"></div></div>
@@ -1259,15 +1260,43 @@ function fechaToa(reg){
    En las reagendadas se agrega la franja nueva cuando TOA la trae y es
    distinta de la original: es el dato que sirve para saber para cuando quedo
    la visita sin tener que entrar al portal a mirarla. */
+/* El estados_toa.json puede quedar VIEJO sin que nadie se de cuenta:
+   toa_estados.py no reescribe el archivo cuando arranca el monitor y todavia
+   no hay caidas (a primera hora, lo normal), asi que sobrevive el del dia
+   anterior y se sigue publicando igual. Mostrarlo seria peor que no mostrar
+   nada: el resumen diria "7 reagendadas" con una sola caida en pantalla.
+
+   Por eso se compara la fecha de la consulta con la jornada de los datos, y
+   si no calzan se descarta entero. Vuelve solo, sin que haya que tocar nada,
+   apenas el monitor consulte TOA con caidas de verdad. */
+function toaVigente(){
+  if(!TOA || !TOA.actualizado) return null;
+  let refISO = '';
+  const j = (ALERTAS && ALERTAS.fecha) ? String(ALERTAS.fecha) : '';   // dd-mm-yyyy
+  const p = j.split('-');
+  if(p.length === 3 && p[0].length === 2) refISO = p[2]+'-'+p[1]+'-'+p[0];
+  if(!refISO){
+    // Sin jornada en los datos se cae a la fecha del equipo. El respaldo NO
+    // puede ser "dejar pasar": si no hay contra que comparar, un archivo del
+    // dia anterior se colaria igual, que es justo lo que hay que evitar.
+    const h = new Date();
+    refISO = h.getFullYear() + '-'
+           + String(h.getMonth()+1).padStart(2,'0') + '-'
+           + String(h.getDate()).padStart(2,'0');
+  }
+  return String(TOA.actualizado).slice(0,10) === refISO ? TOA : null;
+}
+
 function chipToa(ot){
-  const reg = (TOA && TOA.estados) ? TOA.estados[ot] : null;
+  const T = toaVigente();
+  const reg = (T && T.estados) ? T.estados[ot] : null;
   if(!reg || !reg.estado) return '';
   const est = String(reg.estado);
   const cls = TOA_CLASE[est] || 'sinf';
   const ico = TOA_ICONO[est] || '';
   let tit = 'Consultado en TOA';
-  if(TOA.actualizado)
-    tit += ' a las ' + String(TOA.actualizado).replace('T',' ').slice(11,16);
+  if(T.actualizado)
+    tit += ' a las ' + String(T.actualizado).replace('T',' ').slice(11,16);
   if(reg.detalle) tit += ' \u00b7 ' + reg.detalle;
   if(reg.nota) tit += ' \u00b7 ' + reg.nota;
   if(reg.previas && reg.previas.length)
@@ -1810,10 +1839,16 @@ function renderPanelCaidas(){
     /* Resumen de lo que dijo TOA, al lado de los chips de franja: cuantas
        quedaron reagendadas, canceladas o sin informacion. Es la lectura de
        una pasada; el detalle por orden va en el chip de cada fila. */
-    if(TOA && TOA.resumen){
-      cont2.innerHTML += Object.keys(TOA.resumen).sort().map(function(k){
-        return '<span class="fchip toa">TOA · '+escR(k)+' <b>'+TOA.resumen[k]+'</b></span>';
+    const Tv = toaVigente();
+    if(Tv && Tv.resumen){
+      cont2.innerHTML += Object.keys(Tv.resumen).sort().map(function(k){
+        return '<span class="fchip toa">TOA · '+escR(k)+' <b>'+Tv.resumen[k]+'</b></span>';
       }).join('');
+    } else if(TOA){
+      // hay archivo, pero es de otra jornada: se dice, en vez de mostrar
+      // numeros que no corresponden a lo que esta abajo.
+      cont2.innerHTML += '<span class="fchip toavieja" title="El monitor todavia '
+        + 'no consulta TOA en esta jornada">TOA · sin consulta de hoy</span>';
     }
 
     /* De donde venia cada caida: entro durante el dia o ya estaba en la
