@@ -1,8 +1,8 @@
 {
-  "actualizado": "2026-08-28T15:52:46",
+  "actualizado": "2026-08-28T17:06:03",
   "resumen": {
     "reagendada": 5,
-    "sin informacion": 1
+    "?": 1
   },
   "estados": {
     "1-3NIG4U08": {
@@ -30,28 +30,10 @@
       "cat": "Alta 1 Play",
       "franja_original": "13-16",
       "d": "ESCOCIA 45, QUILPUE",
-      "estado": "sin informacion",
-      "nota": "la OT ya no existe en TOA",
-      "contexto": {
-        "buscado": "ESCOCIA 45",
-        "aviso": "historial de la direccion, NO es el estado de esta orden",
-        "filas": [
-          {
-            "estado": "gestionada",
-            "color": "rgb(96, 206, 206)",
-            "ot": "1-3NGOFMOJ",
-            "franja": "10-13",
-            "texto": "1-3NGOFMOJ - 10-13-Alta"
-          },
-          {
-            "estado": "cancelada",
-            "color": "rgb(128, 255, 128)",
-            "ot": "1-3ND6K01E",
-            "franja": "10-13",
-            "texto": "1-3ND6K01E - 10-13-AltaMar, 25 Ago"
-          }
-        ]
-      }
+      "estado": "?",
+      "color": "rgb(255, 170, 170)",
+      "detalle": "1-3NJ2256T - 10-13-AltaSab, 29 Ago",
+      "franja_nueva": "10-13"
     },
     "1-3NJ3Y7FE": {
       "tec": "HERNAN CORTES HERRERA",
