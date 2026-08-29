@@ -394,6 +394,33 @@
   .btoa.sinf { background:#1f2937; color:#9ca3af; }   /* sin informacion */
   .fchip.toa { border-color:#b45309; color:#fde68a; }
   .fchip.toavieja { border-color:#374151; color:#9ca3af; background:#111827; }
+  .pchip.exp { border-color:#166534; color:#86efac; }
+  .pchip.foto { border-color:#7e22ce; color:#e9d5ff; }
+  /* vista compacta para captura de pantalla */
+  /* ---- MODO CAPTURA ----
+     Solo repinta la tarjeta abierta en claro. No cambia el HTML: los mismos
+     campos, el mismo orden. Se manda al grupo de gestion, donde compite con
+     mensajes de WhatsApp; en blanco se lee como informe y no como pantallazo
+     de un sistema interno. */
+  #listaRepe.captura .rcard.abierta { background:#fff; border-left-color:#7c3aed; }
+  #listaRepe.captura .rcard.abierta .rn { background:#ede9fe; color:#5b21b6; }
+  #listaRepe.captura .rcard.abierta .rdir { color:#111827; }
+  #listaRepe.captura .rcard.abierta .rnum { color:#1d4ed8; background:#eff6ff; border-color:#bfdbfe; }
+  #listaRepe.captura .rcard.abierta .rult { color:#6b7280; }
+  #listaRepe.captura .rcard.abierta .rvis { border-top-color:#e5e7eb; }
+  #listaRepe.captura .rcard.abierta .rvh { color:#4f46e5; }
+  #listaRepe.captura .rcard.abierta .rv { color:#374151; font-size:13px; }
+  #listaRepe.captura .rcard.abierta .rv .rf,
+  #listaRepe.captura .rcard.abierta .rv .rh { color:#1d4ed8; }
+  #listaRepe.captura .rcard.abierta .rv .rc { color:#b91c1c; }
+  #listaRepe.captura .rcard.abierta .rv .re { background:#e5e7eb; color:#374151; }
+  #listaRepe.captura .rcard.abierta .rv .re.ini { background:#d1fae5; color:#065f46; }
+  #listaRepe.captura .rcard.abierta .rv .re.ok { background:#d1fae5; color:#065f46; }
+  #listaRepe.captura .rcard.abierta .rv .re.nr { background:#fee2e2; color:#991b1b; }
+  #listaRepe.captura .rcard.abierta .rv .re.ruta { background:#ffedd5; color:#9a3412; }
+  #listaRepe.captura .rcard.abierta .rgsa { background:#f3f4f6; color:#374151; }
+  /* el link del mapa no aporta nada en una foto y ensucia el pie */
+  #listaRepe.captura .rcard.abierta .rmapa { display:none; }
   .bvacio { color:#4a7ab0; font-size:12px; padding:18px; text-align:center; }
   .bhl { background:#78350f; color:#fde68a; border-radius:3px; padding:0 2px; }
   /* Detalle del reingreso EN LA MISMA LINEA, no en tooltip: el tooltip no
@@ -1417,6 +1444,204 @@ function agruparRepe(){
   return lista;
 }
 
+
+/* ==================== EXPORTAR DIRECCIONES REPETIDAS ====================
+   Pensado para mandarselo a VTR/Claro, no para uso interno. Por eso no basta
+   con volcar la lista: una direccion repetida suelta se descarta facil ("mala
+   suerte"), pero "cinco visitas a la misma casa, tres por ductos tapados, en
+   17 dias" ya es un problema de planta que alguien tiene que resolver.
+
+   Tres hojas:
+     Direcciones -> una fila por casa, con el motivo que mas se repite
+     Visitas     -> una fila por visita fallida, para que puedan comprobar
+     Resumen     -> los totales, con los motivos separados por responsable
+
+   Exporta lo que se ve EN PANTALLA, con los filtros puestos. Es lo que uno
+   espera al apretar exportar despues de filtrar.                          */
+
+/* Separar el motivo por responsable es lo que hace que el reporte se sostenga.
+   Si va la lista mezclada, la primera respuesta va a ser "varias son culpa del
+   cliente" y el reclamo se diluye entero. Diciendo de antemano cuantas son de
+   red y cuantas no, la conversacion parte del numero que importa.
+
+   Lo que no calza en ninguna lista queda 'Por clasificar' A PROPOSITO: es
+   preferible una fila honesta que decir "red" por si acaso y que te encuentren
+   un caso mal puesto, porque ahi se cae la credibilidad de todo el resto. */
+const REPE_RED = ['ducto', 'nap', 'poste', 'fibra', 'cable', 'planta', 'red',
+                  'senal', 'señal', 'potencia', 'empalme', 'camara', 'cámara',
+                  'factibilidad', 'capacidad', 'puerto'];
+const REPE_CLIENTE = ['cliente', 'morador', 'contacto', 'reagenda', 'desiste',
+                      'no atiende', 'rechaza', 'ausente', 'direccion errada',
+                      'dirección errada', 'no ubicado', 'anula'];
+
+function claseMotivo(m){
+  const t = String(m || '').toLowerCase();
+  if(!t.trim()) return 'Sin código';
+  for(let i = 0; i < REPE_RED.length; i++)
+    if(t.indexOf(REPE_RED[i]) >= 0) return 'Red';
+  for(let i = 0; i < REPE_CLIENTE.length; i++)
+    if(t.indexOf(REPE_CLIENTE[i]) >= 0) return 'Cliente';
+  return 'Por clasificar';
+}
+
+// 'dd-mm-yyyy' -> Date, o null. Las fechas del historico vienen asi.
+function fechaRepe(f){
+  const p = String(f || '').split('-');
+  if(p.length !== 3) return null;
+  const d = new Date(+p[2], +p[1] - 1, +p[0]);
+  return isNaN(d.getTime()) ? null : d;
+}
+
+function exportRepe(){
+  const lista = agruparRepe();
+  if(!lista.length){ alert('No hay direcciones que exportar con los filtros puestos.'); return; }
+
+  const hoy = new Date();
+  const direcciones = [], visitas = [];
+  const porClase = {}, porMotivo = {};
+
+  lista.forEach(function(d){
+    // ciudad: viene pegada al final de la direccion, despues de la ultima coma
+    const partes = String(d.d || '').split(',');
+    const ciudad = partes.length > 1 ? partes[partes.length - 1].trim() : '';
+    const calle  = partes.length > 1 ? partes.slice(0, -1).join(',').trim() : String(d.d || '');
+
+    // motivo que mas se repite en esta casa
+    const cuenta = {};
+    d.prev.forEach(function(v){
+      const m = v.cierre || 'sin código';
+      cuenta[m] = (cuenta[m] || 0) + 1;
+      porMotivo[m] = (porMotivo[m] || 0) + 1;
+      const c = claseMotivo(v.cierre);
+      porClase[c] = (porClase[c] || 0) + 1;
+    });
+    let motivoTop = '', maxTop = 0;
+    Object.keys(cuenta).forEach(function(m){
+      if(cuenta[m] > maxTop){ maxTop = cuenta[m]; motivoTop = m; }
+    });
+
+    // ventana de tiempo: de la visita mas antigua a hoy
+    let f1 = null, f2 = null;
+    d.prev.forEach(function(v){
+      const f = fechaRepe(v.f);
+      if(!f) return;
+      if(!f1 || f < f1) f1 = f;
+      if(!f2 || f > f2) f2 = f;
+    });
+    const dias = f1 ? Math.round((hoy - f1) / 86400000) : '';
+
+    const hoyEst = d.hoy.map(function(w){ return w.e; }).join(' / ');
+    direcciones.push({
+      'Dirección':            calle,
+      'Comuna':               ciudad,
+      'Visitas fallidas':     d.prev.length,
+      'Motivo más repetido':  motivoTop,
+      'Veces ese motivo':     maxTop,
+      'Responsable':          claseMotivo(motivoTop),
+      'Primera visita':       f1 ? f1.toLocaleDateString('es-CL') : '',
+      'Última visita':        f2 ? f2.toLocaleDateString('es-CL') : '',
+      'Días desde la primera': dias,
+      'Órdenes hoy':          d.hoy.length,
+      'Petición de hoy':      d.hoy[0] ? d.hoy[0].num : '',
+      'Franja de hoy':        d.fr0 || '',
+      'Estado hoy':           hoyEst
+    });
+
+    d.prev.slice().reverse().forEach(function(v){
+      visitas.push({
+        'Dirección':   calle,
+        'Comuna':      ciudad,
+        'Fecha':       v.f || '',
+        'Orden':       v.num || '',
+        'Tipo':        v.cat || '',
+        'Motivo de cierre': v.cierre || 'sin código',
+        'Responsable': claseMotivo(v.cierre),
+        'Cerrada por regla GSA': v.gsa ? 'Sí' : '',
+        'Técnico':     v.tec || ''
+      });
+    });
+  });
+
+  const totalVisitas = visitas.length;
+  const filtro = repeMin + '+ caída(s) previa(s)'
+    + (repeGSA ? ', incluyendo GSA' : ', sin contar GSA')
+    + (repeAbiertas ? ', solo las que hoy siguen sin cerrar' : '');
+
+  const resumen = [
+    ['Direcciones con visitas fallidas repetidas'], [],
+    ['Zona', 'Quilpué y Villa Alemana'],
+    ['Jornada', (ALERTAS && ALERTAS.fecha) ? ALERTAS.fecha : ''],
+    ['Generado', hoy.toLocaleString('es-CL')],
+    ['Filtro aplicado', filtro],
+    [],
+    ['Direcciones en el reporte', direcciones.length],
+    ['Visitas fallidas acumuladas', totalVisitas],
+    ['Órdenes de hoy en esas direcciones',
+      lista.reduce(function(a, x){ return a + x.hoy.length; }, 0)],
+    [],
+    ['RESPONSABLE DE LA FALLA', 'Visitas', '% del total']
+  ];
+  ['Red', 'Cliente', 'Por clasificar', 'Sin código'].forEach(function(c){
+    if(porClase[c])
+      resumen.push([c, porClase[c], Math.round(porClase[c] * 100 / totalVisitas) + '%']);
+  });
+  resumen.push([], ['MOTIVO DE CIERRE', 'Visitas', 'Responsable']);
+  Object.keys(porMotivo).sort(function(a, b){ return porMotivo[b] - porMotivo[a]; })
+    .forEach(function(m){ resumen.push([m, porMotivo[m], claseMotivo(m)]); });
+  resumen.push([],
+    ['El alcance del histórico depende de cuánto guarda historial_dir.json:'],
+    ['visitas anteriores a ese período no están contadas acá.']);
+
+  const wb = XLSX.utils.book_new();
+  const h1 = XLSX.utils.json_to_sheet(direcciones);
+  h1['!cols'] = [{wch:42},{wch:15},{wch:9},{wch:26},{wch:9},{wch:14},{wch:13},
+                 {wch:13},{wch:11},{wch:9},{wch:14},{wch:11},{wch:22}];
+  const h2 = XLSX.utils.json_to_sheet(visitas);
+  h2['!cols'] = [{wch:42},{wch:15},{wch:12},{wch:14},{wch:22},{wch:28},{wch:14},
+                 {wch:12},{wch:24}];
+  const h3 = XLSX.utils.aoa_to_sheet(resumen);
+  h3['!cols'] = [{wch:52},{wch:10},{wch:16}];
+  XLSX.utils.book_append_sheet(wb, h1, 'Direcciones');
+  XLSX.utils.book_append_sheet(wb, h2, 'Visitas');
+  XLSX.utils.book_append_sheet(wb, h3, 'Resumen');
+
+  const f = ((ALERTAS && ALERTAS.fecha) ? ALERTAS.fecha : 'sin-fecha').replace(/[^\d]/g, '-');
+  XLSX.writeFile(wb, 'direcciones-repetidas_' + f + '.xlsx');
+}
+
+
+/* ============= RESUMEN PARA EL GRUPO (una sola captura) =============
+   Reemplaza el mandar una foto por direccion al grupo de gestion. Una linea
+   por casa, pensado para que quepa entero en una captura de pantalla.
+
+   Deja fuera a proposito el detalle visita por visita: con 8 direcciones de
+   3+ visitas, desplegarlas todas no cabe en ninguna pantalla, que es
+   justamente el problema que esto viene a resolver. Para el detalle de una
+   direccion puntual sigue estando la tarjeta desplegable de siempre.
+
+   Lo que agrega respecto de mandarlas de a una: el total por responsable al
+   pie. Mandando casa por casa ese numero no se ve nunca, y es el que le
+   habla directo a operaciones.                                          */
+let repeCaptura = false;
+
+/* Enciende el modo captura: la tarjeta que se abra se ve en claro, para
+   fotografiarla y mandarla al grupo de gestion. Las cerradas quedan oscuras
+   como siempre.
+
+   Es un modo y no algo permanente porque el modal se usa todo el dia para
+   trabajar, y una tarjeta blanca dentro del tablero oscuro cansa la vista.
+   Se prende al momento de mandar las fotos y se apaga despues.
+
+   Solo cambia colores: los campos, el orden y el contenido son exactamente
+   los mismos que en la vista normal. */
+function toggleResumenRepe(){
+  repeCaptura = !repeCaptura;
+  const c = document.getElementById('listaRepe');
+  if(c) c.classList.toggle('captura', repeCaptura);
+  renderRepe();
+}
+
+
 function cerrarRepe(){
   if(!repeAbierto) return;
   repeAbierto = false;
@@ -1457,7 +1682,10 @@ function renderRepe(){
     + '<span class="pchip'+(repeAbiertas?' act':'')+'" onclick="toggleRepeAbiertas()">solo sin cerrar hoy</span>'
     + '<span class="rsep"></span>'
     + '<span class="pchip'+(repeOrden==='n'?' act':'')+'" onclick="setRepeOrden(\'n\')">↕ más caídas</span>'
-    + '<span class="pchip'+(repeOrden==='h'?' act':'')+'" onclick="setRepeOrden(\'h\')">🕘 por franja</span>';
+    + '<span class="pchip'+(repeOrden==='h'?' act':'')+'" onclick="setRepeOrden(\'h\')">🕘 por franja</span>'
+    + '<span class="rsep"></span>'
+    + '<span class="pchip foto'+(repeCaptura?' act':'')+'" onclick="toggleResumenRepe()">📷 modo captura</span>'
+    + '<span class="pchip exp" onclick="exportRepe()">📥 Excel</span>';
 
   if(!lista.length){
     const hayCampo = Object.keys(DB||{}).some(function(t){
@@ -1507,6 +1735,10 @@ function renderRepe(){
         + '</div>';
     }).join('');
   }
+
+  // renderRepe rehace la lista entera, asi que la clase del modo captura se
+  // vuelve a poner aca; si no, se pierde en cada refresco de datos.
+  cont.classList.toggle('captura', repeCaptura);
 
   const nOrd = lista.reduce(function(a, x){ return a + x.hoy.length; }, 0);
   let total = 0;
