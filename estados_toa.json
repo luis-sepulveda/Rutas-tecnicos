@@ -1,8 +1,8 @@
 {
-  "actualizado": "2026-08-29T13:15:19",
+  "actualizado": "2026-08-29T13:45:20",
   "resumen": {
     "reagendada": 3,
-    "sin informacion": 2
+    "sin informacion": 3
   },
   "estados": {
     "1-3NJUAKPW": {
@@ -90,6 +90,34 @@
       "color": "rgb(255, 222, 0)",
       "detalle": "1-3NIHRS0A - 10-13-ReparaciónLun, 31 Ago",
       "franja_nueva": "10-13"
+    },
+    "1-3NIANYV6": {
+      "tec": "GEEYSER PEREZ O",
+      "cat": "Alta 2 Play",
+      "franja_original": "16-19",
+      "d": "LAS MAJADAS 436, QUILPUE",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "LAS MAJADAS 436",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "gestionada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3NHSVGVL",
+            "franja": "10-13",
+            "texto": "1-3NHSVGVL - 10-13-AltaJue, 27 Ago"
+          },
+          {
+            "estado": "gestionada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3NGG07KJ",
+            "franja": "13-16",
+            "texto": "1-3NGG07KJ - 13-16-AltaMie, 26 Ago"
+          }
+        ]
+      }
     },
     "1-3NE9AN1Z": {
       "tec": "PABLO HERNANEZ FERNANDEZ",
