@@ -1,79 +1,92 @@
 {
-  "actualizado": "2026-08-28T17:36:08",
+  "actualizado": "2026-08-29T10:14:15",
   "resumen": {
-    "reagendada": 6,
-    "?": 1
+    "sin informacion": 2
   },
   "estados": {
-    "1-3NIG4U08": {
-      "tec": "ALFREDO ALCAYAGA F",
+    "1-3NJBMJEF": {
+      "tec": "ELIAS ARMIJO L",
       "cat": "Alta 1 Play",
-      "franja_original": "10-13",
-      "d": "HORNOPIREN 2936, QUILPUE",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3NIG4U08 - 10-13-AltaSab, 29 Ago",
-      "franja_nueva": "10-13"
+      "franja_original": "13-16",
+      "d": "PERU 43 CASA 32, QUILPUE",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "PERU 43",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "gestionada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3NHW2AU7",
+            "franja": "10-13",
+            "texto": "1-3NHW2AU7 - 10-13-AltaVie, 28 Ago"
+          },
+          {
+            "estado": "gestionada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3NDJY9KM",
+            "franja": "10-13",
+            "texto": "1-3NDJY9KM - 10-13-AltaSab, 22 Ago"
+          },
+          {
+            "estado": "gestionada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3NBCXL61",
+            "franja": "13-16",
+            "texto": "1-3NBCXL61 - 13-16-AltaJue, 20 Ago"
+          },
+          {
+            "estado": "gestionada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3N89P2U8",
+            "franja": "10-13",
+            "texto": "1-3N89P2U8 - 10-13-AltaLun, 17 Ago"
+          },
+          {
+            "estado": "gestionada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3N5P959Z",
+            "franja": "16-19",
+            "texto": "1-3N5P959Z - 16-19-AltaJue, 13 Ago"
+          },
+          {
+            "estado": "gestionada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3N4DGCBS",
+            "franja": "16-19",
+            "texto": "1-3N4DGCBS - 16-19-AltaMar, 11 Ago"
+          }
+        ]
+      }
     },
-    "1-3NJ0UHMB": {
-      "tec": "DANIEL NAVARRETE E",
+    "1-3NE9AN1Z": {
+      "tec": "PABLO HERNANEZ FERNANDEZ",
       "cat": "Migración 1 Play",
       "franja_original": "10-13",
-      "d": "COOPERACION 140 EDIF. 4 DEPTO 33, QUILPUE",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3NJ0UHMB - 10-13-MigraciónLun, 31 Ago",
-      "franja_nueva": "10-13"
-    },
-    "1-3NJ2256T": {
-      "tec": "HERNAN CORTES HERRERA",
-      "cat": "Alta 1 Play",
-      "franja_original": "13-16",
-      "d": "ESCOCIA 45, QUILPUE",
-      "estado": "?",
-      "color": "rgb(255, 170, 170)",
-      "detalle": "1-3NJ2256T - 10-13-AltaSab, 29 Ago",
-      "franja_nueva": "10-13"
-    },
-    "1-3NJ3Y7FE": {
-      "tec": "HERNAN CORTES HERRERA",
-      "cat": "Alta 2 Play",
-      "franja_original": "13-16",
-      "d": "BELGICA (LAS AMERICAS) 2430, QUILPUE",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3NJ3Y7FE - 10-13-AltaSab, 29 Ago",
-      "franja_nueva": "10-13"
-    },
-    "1-3NJ28Z39": {
-      "tec": "LUIS GATICA DAVILA",
-      "cat": "Alta 2 Play",
-      "franja_original": "13-16",
-      "d": "PJE DON VITORIO 999 EDIF. F DEPTO 6, VILLA ALEMANA",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3NJ28Z39 - 13-16-AltaSab, 29 Ago",
-      "franja_nueva": "13-16"
-    },
-    "1-3NJ234VT": {
-      "tec": "LUIS GATICA DAVILA",
-      "cat": "Reparación",
-      "franja_original": "13-16",
-      "d": "PJE COSTA DE LA LUZ 046, VILLA ALEMANA",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3NJ234VT - 13-16-ReparaciónSab, 29 Ago",
-      "franja_nueva": "13-16"
-    },
-    "1-3N4VH0M6": {
-      "tec": "MATIAS CORNEJO D",
-      "cat": "Reparación",
-      "franja_original": "16-19",
-      "d": "GABRIEL PARRA 2378, VILLA ALEMANA",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3N4VH0M6 - 10-13-ReparaciónMar, 8 Sep",
-      "franja_nueva": "10-13"
+      "d": "PJE PEATONAL 01448 CASA D, QUILPUE",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "PJE PEATONAL 01448",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "gestionada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3NAULREW",
+            "franja": "10-13",
+            "texto": "1-3NAULREW - 10-13-MigraciónSab, 22 Ago"
+          },
+          {
+            "estado": "gestionada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3N5ED7K4",
+            "franja": "10-13",
+            "texto": "1-3N5ED7K4 - 10-13-MigraciónVie, 14 Ago"
+          }
+        ]
+      }
     }
   }
 }
