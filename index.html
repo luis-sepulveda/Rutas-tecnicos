@@ -80,6 +80,15 @@
   .estados { position:absolute; bottom:16px; right:10px; z-index:1000; background:rgba(30,41,59,.92); border-radius:8px; padding:8px 12px; font-size:11px;}
   .estados div { display:flex; align-items:center; gap:8px; margin:4px 0;}
   .estados .mini { width:16px; height:16px; border-radius:50%; background:#4a7ab0; flex-shrink:0;}
+  /* Leyenda de las letras del pin: esquina inferior izquierda, a la misma
+     altura que la de estados. */
+  .letras { position:absolute; bottom:16px; left:10px; z-index:1000;
+    background:rgba(30,41,59,.92); border-radius:8px; padding:8px 12px; font-size:11px; }
+  .letras div { display:flex; align-items:center; gap:8px; margin:4px 0; color:#dbeafe; }
+  .letras b { display:inline-flex; align-items:center; justify-content:center;
+    width:16px; height:16px; border-radius:50%; background:#4a7ab0; color:#fff;
+    font-size:10px; flex-shrink:0; }
+  .letras .ltit { color:#8ab4dd; font-size:9.5px; letter-spacing:.5px; margin:0 0 5px; }
   .leaflet-popup-content-wrapper { background:#132845; color:#dbeafe; border-radius:8px; }
   .leaflet-popup-tip { background:#132845; }
   .pp b { color:#60a5fa; }
@@ -535,6 +544,15 @@
   </div>
   <div class="hint">Órdenes en estado <b>Iniciado</b> cuya hora de inicio ya lleva más del umbral. Respeta el filtro de ciudad de arriba. Toca una tarjeta para ver al técnico en el mapa.</div>
   <div id="listaAtr"></div>
+</div>
+<div class="letras" id="letrasBox">
+  <div class="ltit">LETRA DEL PIN</div>
+  <div><b>R</b> Reparación</div>
+  <div><b>A</b> Alta</div>
+  <div><b>M</b> Migración</div>
+  <div><b>T</b> Alta Traslado</div>
+  <div><b>S</b> Modificación de Servicio</div>
+  <div><b>U</b> Upgrade promoción</div>
 </div>
 <div class="estados" id="estadosBox">
   <div><span class="mini mk-iniciado"></span> Iniciado (trabajando)</div>
