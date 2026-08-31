@@ -1,7 +1,7 @@
 {
-  "actualizado": "2026-08-31T16:16:57",
+  "actualizado": "2026-08-31T17:34:18",
   "resumen": {
-    "reagendada": 3,
+    "reagendada": 4,
     "sin informacion": 2
   },
   "estados": {
@@ -12,8 +12,8 @@
       "d": "PORVENIR SUR 1330, VILLA ALEMANA",
       "estado": "reagendada",
       "color": "rgb(255, 222, 0)",
-      "detalle": "1-3NKV544Z - 13-16-AltaMar, 1 Sep",
-      "franja_nueva": "13-16"
+      "detalle": "1-3NKV544Z - 10-13-AltaMar, 1 Sep",
+      "franja_nueva": "10-13"
     },
     "1-3NK34VYT": {
       "tec": "JEAN ROODLY ORELIEN",
@@ -95,6 +95,13 @@
           {
             "estado": "reagendada",
             "color": "rgb(255, 222, 0)",
+            "ot": "1-3NL3GE5X",
+            "franja": "10-13",
+            "texto": "1-3NL3GE5X - 10-13-AltaMie, 2 Sep"
+          },
+          {
+            "estado": "reagendada",
+            "color": "rgb(255, 222, 0)",
             "ot": "1-3NKWG8Y9",
             "franja": "10-13",
             "texto": "1-3NKWG8Y9 - 10-13-AltaMar, 1 Sep"
@@ -126,13 +133,6 @@
             "ot": "1-3NFO5QFE",
             "franja": "13-16",
             "texto": "1-3NFO5QFE - 13-16-MigraciónMie, 26 Ago"
-          },
-          {
-            "estado": "cancelada",
-            "color": "rgb(128, 255, 128)",
-            "ot": "1-3NG0WGY0",
-            "franja": "13-16",
-            "texto": "1-3NG0WGY0 - 13-16-ReparaciónMar, 25 Ago"
           }
         ]
       }
@@ -146,6 +146,16 @@
       "color": "rgb(255, 222, 0)",
       "detalle": "1-3NKT22FZ - 10-13-Upgrade promociónMar, 1 Sep",
       "franja_nueva": "10-13"
+    },
+    "1-3NL2V617": {
+      "tec": "SEBASTIAN DOSSOW A",
+      "cat": "Migración 3 Play",
+      "franja_original": "16-19",
+      "d": "PJE TAHITI 550, QUILPUE",
+      "estado": "reagendada",
+      "color": "rgb(255, 222, 0)",
+      "detalle": "1-3NL2V617 - 13-16-MigraciónMie, 2 Sep",
+      "franja_nueva": "13-16"
     }
   }
 }
