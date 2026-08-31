@@ -1,10 +1,20 @@
 {
-  "actualizado": "2026-08-31T15:16:31",
+  "actualizado": "2026-08-31T15:46:46",
   "resumen": {
-    "sin informacion": 2,
-    "reagendada": 1
+    "reagendada": 3,
+    "sin informacion": 2
   },
   "estados": {
+    "1-3NKV544Z": {
+      "tec": "ANTONHY MORALES MENDOZA",
+      "cat": "Alta 2 Play",
+      "franja_original": "13-16",
+      "d": "PORVENIR SUR 1330, VILLA ALEMANA",
+      "estado": "reagendada",
+      "color": "rgb(255, 222, 0)",
+      "detalle": "1-3NKV544Z - 13-16-AltaMar, 1 Sep",
+      "franja_nueva": "13-16"
+    },
     "1-3NK34VYT": {
       "tec": "JEAN ROODLY ORELIEN",
       "cat": "Alta 1 Play",
@@ -61,6 +71,16 @@
         ]
       }
     },
+    "1-3NKRBKZS": {
+      "tec": "JOSE CASTRO P",
+      "cat": "Alta 1 Play",
+      "franja_original": "13-16",
+      "d": "AV LA PALMA 0210, VILLA ALEMANA",
+      "estado": "reagendada",
+      "color": "rgb(255, 222, 0)",
+      "detalle": "1-3NKRBKZS - 13-16-AltaMar, 1 Sep",
+      "franja_nueva": "13-16"
+    },
     "1-3NK2HHC7": {
       "tec": "MARCO PEREZ G",
       "cat": "Alta 1 Play",
@@ -72,6 +92,13 @@
         "buscado": "EDUARDO ALQUINTA 1260",
         "aviso": "historial de la direccion, NO es el estado de esta orden",
         "filas": [
+          {
+            "estado": "reagendada",
+            "color": "rgb(255, 222, 0)",
+            "ot": "1-3NKWG8Y9",
+            "franja": "10-13",
+            "texto": "1-3NKWG8Y9 - 10-13-AltaMar, 1 Sep"
+          },
           {
             "estado": "?",
             "color": "rgb(93, 190, 63)",
@@ -106,13 +133,6 @@
             "ot": "1-3NG0WGY0",
             "franja": "13-16",
             "texto": "1-3NG0WGY0 - 13-16-ReparaciónMar, 25 Ago"
-          },
-          {
-            "estado": "?",
-            "color": "rgb(121, 182, 235)",
-            "ot": "1-3NFY4D23",
-            "franja": "16-19",
-            "texto": "1-3NFY4D23 - 16-19-AltaMar, 25 Ago"
           }
         ]
       }
