@@ -2246,6 +2246,25 @@ function toggleNombres(){
   render(true);          // true = no reencuadrar, se respeta el zoom actual
 }
 
+/* Letra del tipo de actividad para el pin del mapa. Reemplaza al numero de
+   parada: el orden del recorrido igual queda a mano en el popup ("parada 3 de
+   8"), y en cambio el tipo de trabajo no estaba en ninguna parte del mapa.
+
+   Se compara sin tildes ni mayusculas y por trozo de palabra, porque el portal
+   escribe "Migración" con tilde, "Alta Traslado" con dos palabras y a veces
+   manda variantes. Lo que no calce devuelve su primera letra, asi nunca queda
+   un pin vacio. */
+function letraTipo(t){
+  const x = txtN(t) || '';
+  if(x.indexOf('reparaci') >= 0) return 'R';
+  if(x.indexOf('traslado') >= 0) return 'T';
+  if(x.indexOf('migraci')  >= 0) return 'M';
+  if(x.indexOf('upgrade')  >= 0) return 'U';
+  if(x.indexOf('modifica') >= 0) return 'S';   // Modificacion de Servicio
+  if(x.indexOf('alta')     >= 0) return 'A';
+  return (String(t || '?').trim()[0] || '?').toUpperCase();
+}
+
 // Bloque de caidas previas que se agrega al popup del marcador.
 function popupPrev(p){
   if(!p.prev || !p.prev.length) return '';
@@ -2289,7 +2308,7 @@ function render(mantenerVista){
       const nom = verNombres
         ? '<span class="mk-nom" style="border-left:3px solid '+col+'">'
           + escR(nombreCorto(t)) + '</span>' : '';
-      const icon = L.divIcon({className:'', html:'<div class="num-icon'+stCls+'" style="background:'+col+'">'+p._np+nom+'</div>', iconSize:[26,26], iconAnchor:[13,13]});
+      const icon = L.divIcon({className:'', html:'<div class="num-icon'+stCls+'" style="background:'+col+'">'+letraTipo(p.t)+nom+'</div>', iconSize:[26,26], iconAnchor:[13,13]});
       L.marker([p.lat,p.lng],{icon}).addTo(layer).bindPopup(
         '<div class="pp"><b>'+t+'</b> — parada '+p._np+' de '+ruta.length+'<br>'+
         '📋 '+p.o+' · '+p.t+'<br>'+
