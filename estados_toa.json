@@ -1,161 +1,18 @@
 {
-  "actualizado": "2026-08-31T18:04:26",
+  "actualizado": "2026-09-01T13:42:58",
   "resumen": {
-    "reagendada": 4,
-    "sin informacion": 2
+    "?": 1
   },
   "estados": {
-    "1-3NKV544Z": {
-      "tec": "ANTONHY MORALES MENDOZA",
-      "cat": "Alta 2 Play",
-      "franja_original": "13-16",
-      "d": "PORVENIR SUR 1330, VILLA ALEMANA",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3NKV544Z - 10-13-AltaMar, 1 Sep",
-      "franja_nueva": "10-13"
-    },
-    "1-3NK34VYT": {
-      "tec": "JEAN ROODLY ORELIEN",
-      "cat": "Alta 1 Play",
-      "franja_original": "16-19",
-      "d": "LOS AROMOS 770 CASA 36, VILLA ALEMANA",
-      "estado": "sin informacion",
-      "nota": "la OT ya no existe en TOA",
-      "contexto": {
-        "buscado": "LOS AROMOS 770",
-        "aviso": "historial de la direccion, NO es el estado de esta orden",
-        "filas": [
-          {
-            "estado": "gestionada",
-            "color": "rgb(96, 206, 206)",
-            "ot": "1-3NJKI8Q1",
-            "franja": "13-16",
-            "texto": "1-3NJKI8Q1 - 13-16-AltaSab, 29 Ago"
-          },
-          {
-            "estado": "cancelada",
-            "color": "rgb(128, 255, 128)",
-            "ot": "1-3NDGGGQZ",
-            "franja": "10-13",
-            "texto": "1-3NDGGGQZ - 10-13-AltaSab, 22 Ago"
-          },
-          {
-            "estado": "suspendida",
-            "color": "rgb(153, 255, 255)",
-            "ot": "1-3NDGGGQZ",
-            "franja": "10-13",
-            "texto": "1-3NDGGGQZ - 10-13-AltaSab, 22 Ago"
-          },
-          {
-            "estado": "cancelada",
-            "color": "rgb(128, 255, 128)",
-            "ot": "1-3NDY3R8Y",
-            "franja": "16-19",
-            "texto": "1-3NDY3R8Y - 16-19-AltaSab, 22 Ago"
-          },
-          {
-            "estado": "gestionada",
-            "color": "rgb(96, 206, 206)",
-            "ot": "1-3NCXZ30Z",
-            "franja": "10-13",
-            "texto": "1-3NCXZ30Z - 10-13-AltaVie, 21 Ago"
-          },
-          {
-            "estado": "gestionada",
-            "color": "rgb(96, 206, 206)",
-            "ot": "1-3NB8ZIVL",
-            "franja": "16-19",
-            "texto": "1-3NB8ZIVL - 16-19-AltaVie, 21 Ago"
-          }
-        ]
-      }
-    },
-    "1-3NKRBKZS": {
-      "tec": "JOSE CASTRO P",
-      "cat": "Alta 1 Play",
-      "franja_original": "13-16",
-      "d": "AV LA PALMA 0210, VILLA ALEMANA",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3NKRBKZS - 13-16-AltaMar, 1 Sep",
-      "franja_nueva": "13-16"
-    },
-    "1-3NK2HHC7": {
-      "tec": "MARCO PEREZ G",
-      "cat": "Alta 1 Play",
-      "franja_original": "13-16",
-      "d": "EDUARDO ALQUINTA 1260 CASA 173, QUILPUE",
-      "estado": "sin informacion",
-      "nota": "la OT ya no existe en TOA",
-      "contexto": {
-        "buscado": "EDUARDO ALQUINTA 1260",
-        "aviso": "historial de la direccion, NO es el estado de esta orden",
-        "filas": [
-          {
-            "estado": "reagendada",
-            "color": "rgb(255, 222, 0)",
-            "ot": "1-3NL3GE5X",
-            "franja": "10-13",
-            "texto": "1-3NL3GE5X - 10-13-AltaMie, 2 Sep"
-          },
-          {
-            "estado": "gestionada",
-            "color": "rgb(96, 206, 206)",
-            "ot": "1-3NKSLM8O",
-            "franja": "13-16",
-            "texto": "1-3NKSLM8O - 13-16-Alta"
-          },
-          {
-            "estado": "gestionada",
-            "color": "rgb(96, 206, 206)",
-            "ot": "1-3NK0FMUV",
-            "franja": "13-16",
-            "texto": "1-3NK0FMUV - 13-16-AltaSab, 29 Ago"
-          },
-          {
-            "estado": "?",
-            "color": "rgb(121, 182, 235)",
-            "ot": "1-3NI1X7K9",
-            "franja": "10-13",
-            "texto": "1-3NI1X7K9 - 10-13-ReparaciónVie, 28 Ago"
-          },
-          {
-            "estado": "?",
-            "color": "rgb(121, 182, 235)",
-            "ot": "1-3NFO5QFE",
-            "franja": "13-16",
-            "texto": "1-3NFO5QFE - 13-16-MigraciónMie, 26 Ago"
-          },
-          {
-            "estado": "cancelada",
-            "color": "rgb(128, 255, 128)",
-            "ot": "1-3NG0WGY0",
-            "franja": "13-16",
-            "texto": "1-3NG0WGY0 - 13-16-ReparaciónMar, 25 Ago"
-          }
-        ]
-      }
-    },
-    "1-3NKT22FZ": {
-      "tec": "SEBASTIAN DOSSOW A",
-      "cat": "Upgrade promoción",
-      "franja_original": "13-16",
-      "d": "LAS BARRANCAS 2581 EDIF. B DEPTO 101, QUILPUE",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3NKT22FZ - 10-13-Upgrade promociónMar, 1 Sep",
-      "franja_nueva": "10-13"
-    },
-    "1-3NL2V617": {
-      "tec": "SEBASTIAN DOSSOW A",
+    "1-3NJECRYX": {
+      "tec": "LUIS CASTRO TORRES",
       "cat": "Migración 3 Play",
       "franja_original": "16-19",
-      "d": "PJE TAHITI 550, QUILPUE",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3NL2V617 - 13-16-MigraciónMie, 2 Sep",
-      "franja_nueva": "13-16"
+      "d": "PJE MILANO 924 EDIF. R DEPTO 11, QUILPUE",
+      "estado": "?",
+      "color": "rgb(255, 170, 170)",
+      "detalle": "1-3NJECRYX - 16-19-MigraciónLun, 7 Sep",
+      "franja_nueva": "16-19"
     }
   }
 }
