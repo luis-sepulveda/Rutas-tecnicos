@@ -21,6 +21,10 @@
   .hfila1 { gap:12px; }
   .hgrp { color:#6f9bc9; font-size:9px; letter-spacing:.5px; flex-shrink:0; }
   .hsep { width:1px; height:20px; background:#2c5282; margin:0 3px; flex-shrink:0; }
+  /* Las acciones van en su propia caja para que, cuando no quepan en una
+     linea, las que sobran bajen alineadas bajo el primer boton y no al margen
+     izquierdo de la cabecera, que las dejaba sueltas y sin grupo. */
+  .hacc { display:flex; gap:8px; flex-wrap:wrap; flex:1; min-width:0; }
   header h1 { font-size:16px; color:#60a5fa; white-space:nowrap; }
   select { background:#0a1930; color:#dbeafe; border:1px solid #2c5282; border-radius:6px; padding:6px 10px; font-size:13px; max-width:280px;}
   /* --- filtros con casillas (multi-seleccion) --- */
@@ -475,13 +479,15 @@
     </div>
     <span class="hsep"></span>
     <span class="hgrp">ACCIONES</span>
-    <button class="btn" onclick="document.getElementById('inExcel').click()">📂 Cargar Excel</button>
-    <input type="file" id="inExcel" accept=".xlsx" style="display:none">
-    <button class="btn" id="btnLibre" onclick="toggleLibre()">🚐 Técnico libre</button>
-    <button class="btn" id="btnSC" onclick="toggleSinCompletar()">🚩 Sin completar</button>
-    <button class="btn" id="btnAtr" onclick="toggleAtrasados()">⏱️ Más de 3 horas</button>
-    <button class="btn" id="btnComp" onclick="toggleComp()">📊 Completitud</button>
-    <button class="btn" id="btnNombres" onclick="toggleNombres()">👷 Nombres</button>
+    <div class="hacc">
+      <button class="btn" id="btnNombres" onclick="toggleNombres()">👷 Nombres</button>
+      <button class="btn" id="btnComp" onclick="toggleComp()">📊 Completitud</button>
+      <button class="btn" id="btnSC" onclick="toggleSinCompletar()">🚩 Sin completar</button>
+      <button class="btn" id="btnAtr" onclick="toggleAtrasados()">⏱️ Más de 3 horas</button>
+      <button class="btn" id="btnLibre" onclick="toggleLibre()">🚐 Técnico libre</button>
+      <button class="btn" onclick="document.getElementById('inExcel').click()">📂 Cargar Excel</button>
+      <input type="file" id="inExcel" accept=".xlsx" style="display:none">
+    </div>
   </div>
 
   <div class="hfila">
