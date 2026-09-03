@@ -39,11 +39,16 @@
   /* Resumen del dia: la cifra grande y la etiqueta chica debajo. Antes iba
      todo en una linea de 11px, siete numeros pegados uno tras otro, y habia
      que detenerse a leerlo. */
-  .stats { margin-left:auto; display:flex; align-items:flex-end; gap:13px; flex-wrap:wrap; }
-  .stats .sbloque { text-align:center; line-height:1.15; }
-  .stats .snum { font-size:15px; font-weight:600; display:block; }
-  .stats .stxt { font-size:9px; color:#8ab4dd; display:block; white-space:nowrap; }
-  .stats .sbloque.tot .snum { color:#fff; }
+  .stats { margin-left:auto; display:flex; align-items:flex-end; gap:18px;
+    flex-wrap:wrap; padding-right:4px; }
+  .stats .sbloque { text-align:center; line-height:1.25; }
+  .stats .snum { font-size:16px; font-weight:600; display:block; }
+  .stats .stxt { font-size:9.5px; color:#8ab4dd; display:block; white-space:nowrap; }
+  /* El total va separado del resto por una linea: es la suma de los demas, no
+     una categoria mas. Sin eso se lee como si "124 actividades" fuera otro
+     estado al mismo nivel que "49 completado". */
+  .stats .sbloque.tot { padding-right:18px; border-right:1px solid #2c5282; }
+  .stats .sbloque.tot .snum { color:#fff; font-size:18px; }
   #lastUpd { margin-left:0; font-size:10px; color:#6f9bc9; display:block; }
   /* el sello de "Actualizado" se pone ambar cuando el dato pasa de 15 min:
      no es un error, pero avisa que lo que estas mirando ya no es de ahora */
@@ -475,6 +480,8 @@
     <button class="btn" id="btnLibre" onclick="toggleLibre()">🚐 Técnico libre</button>
     <button class="btn" id="btnSC" onclick="toggleSinCompletar()">🚩 Sin completar</button>
     <button class="btn" id="btnAtr" onclick="toggleAtrasados()">⏱️ Más de 3 horas</button>
+    <button class="btn" id="btnComp" onclick="toggleComp()">📊 Completitud</button>
+    <button class="btn" id="btnNombres" onclick="toggleNombres()">👷 Nombres</button>
   </div>
 
   <div class="hfila">
@@ -483,8 +490,6 @@
     <button class="btn" id="btnReca" onclick="toggleReca()">🔄 Recaídas hoy</button>
     <button class="btn" id="btnNuevas" onclick="toggleNuevas()">🆕 Nuevas</button>
     <button class="btn" id="btnRepe" onclick="toggleRepe()">🔁 Direcciones repetidas hoy</button>
-    <button class="btn" id="btnComp" onclick="toggleComp()">📊 Completitud</button>
-    <button class="btn" id="btnNombres" onclick="toggleNombres()">👷 Nombres</button>
   </div>
 </header>
 <div id="map"></div>
