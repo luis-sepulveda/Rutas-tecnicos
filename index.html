@@ -108,7 +108,7 @@
   .est-Pendiente{background:#2c5282}.est-Iniciado{background:#16a34a}.est-enruta{background:#d97706}.est-Cancelado{background:#dc2626}.est-Completado{background:#1e3a5f}.est-NoRealizada{background:#7f1d1d}
   .btn { background:#0a1930; color:#dbeafe; border:1px solid #2c5282; border-radius:6px; padding:6px 12px; font-size:13px; cursor:pointer; }
   .btn.on { background:#dc2626; border-color:#f87171; font-weight:bold; }
-  #panel { position:absolute; top:70px; right:10px; z-index:1000; background:rgba(30,41,59,.96); border:1px solid #2c5282; border-radius:10px; padding:12px; width:300px; max-height:70vh; overflow-y:auto; display:none; font-size:12px;}
+  #panel { position:absolute; top:118px; right:10px; z-index:1000; background:rgba(30,41,59,.96); border:1px solid #2c5282; border-radius:10px; padding:12px; width:300px; max-height:70vh; overflow-y:auto; display:none; font-size:12px;}
   #panel h2 { font-size:13px; color:#f87171; margin-bottom:6px;}
   #panel .hint { color:#8ab4dd; font-size:11px; margin-bottom:8px;}
   #panel select { width:100%; margin-bottom:8px;}
@@ -118,7 +118,7 @@
   .cand.top1 { border-left-color:#4ade80; box-shadow:0 0 6px rgba(74,222,128,.4);}
   .dist-label { background:transparent; border:none; box-shadow:none; color:#4ade80; font-weight:bold; font-size:12px; text-shadow:0 1px 3px #000;}
   .btn.on3 { background:#b45309; border-color:#fbbf24; font-weight:bold; }
-  #panelSC { position:absolute; top:70px; right:10px; z-index:1000; background:rgba(30,41,59,.96); border:1px solid #2c5282; border-radius:10px; padding:12px; width:290px; max-height:75vh; overflow-y:auto; display:none; font-size:12px;}
+  #panelSC { position:absolute; top:118px; right:10px; z-index:1000; background:rgba(30,41,59,.96); border:1px solid #2c5282; border-radius:10px; padding:12px; width:290px; max-height:75vh; overflow-y:auto; display:none; font-size:12px;}
   #panelSC h2 { font-size:13px; color:#fbbf24; margin-bottom:6px;}
   #panelSC .hint { color:#8ab4dd; font-size:11px; margin-bottom:8px;}
   #panelSC .vertodos { color:#60a5fa; font-size:12px; cursor:pointer; margin-bottom:8px; display:inline-block;}
@@ -137,7 +137,7 @@
   .rgucard .val { font-size:17px; font-weight:bold; color:#34d399; flex-shrink:0;}
   .btn.on5 { background:#be123c; border-color:#fb7185; font-weight:bold; }
   .btn.on6 { background:#0e7490; border-color:#22d3ee; font-weight:bold; }
-  #panelComp { position:absolute; top:70px; right:10px; z-index:1000; background:rgba(30,41,59,.96); border:1px solid #2c5282; border-radius:10px; padding:12px; width:300px; max-height:78vh; overflow-y:auto; display:none; font-size:12px;}
+  #panelComp { position:absolute; top:118px; right:10px; z-index:1000; background:rgba(30,41,59,.96); border:1px solid #2c5282; border-radius:10px; padding:12px; width:300px; max-height:78vh; overflow-y:auto; display:none; font-size:12px;}
   #panelComp h2 { font-size:13px; color:#22d3ee; margin-bottom:6px;}
   #panelComp .hint { color:#8ab4dd; font-size:11px; margin-bottom:8px; line-height:1.4;}
   #panelComp .marcador { text-align:center; background:#0a1930; border-radius:10px; padding:12px 8px; margin-bottom:10px; border:1px solid #1e3a5f;}
@@ -159,7 +159,7 @@
   #panelComp .ciu { display:flex; justify-content:space-between; background:#0a1930; border-radius:6px; padding:5px 8px; margin:4px 0; font-size:11px;}
   #panelComp .vacio { color:#4ade80; text-align:center; padding:12px 6px; line-height:1.5;}
   .btn .pill { display:inline-block; background:#f43f5e; color:#fff; border-radius:10px; padding:0 6px; font-size:11px; margin-left:5px; font-weight:bold; }
-  #panelAtr { position:absolute; top:70px; right:10px; z-index:1000; background:rgba(30,41,59,.96); border:1px solid #2c5282; border-radius:10px; padding:12px; width:300px; max-height:78vh; overflow-y:auto; display:none; font-size:12px;}
+  #panelAtr { position:absolute; top:118px; right:10px; z-index:1000; background:rgba(30,41,59,.96); border:1px solid #2c5282; border-radius:10px; padding:12px; width:300px; max-height:78vh; overflow-y:auto; display:none; font-size:12px;}
   #panelAtr h2 { font-size:13px; color:#fb7185; margin-bottom:6px;}
   #panelAtr .hint { color:#8ab4dd; font-size:11px; margin-bottom:8px;}
   #panelAtr .vertodos { color:#60a5fa; font-size:12px; cursor:pointer; margin-bottom:8px; display:inline-block;}
@@ -474,7 +474,7 @@
     <input type="file" id="inExcel" accept=".xlsx" style="display:none">
     <button class="btn" id="btnLibre" onclick="toggleLibre()">🚐 Técnico libre</button>
     <button class="btn" id="btnSC" onclick="toggleSinCompletar()">🚩 Sin completar</button>
-    <button class="btn" id="btnAtr" onclick="toggleAtrasados()">⏱️ +2h30 iniciado</button>
+    <button class="btn" id="btnAtr" onclick="toggleAtrasados()">⏱️ Más de 3 horas</button>
   </div>
 
   <div class="hfila">
@@ -608,7 +608,7 @@ let atr = false;                 // panel de atrasados abierto
 let comp = false;                // panel de completitud abierto
 let ALERTAS = null;              // llave 'alertas' del rutas.json (caidas del dia)
 let caidasAbierto = false;       // panel de caidas abierto
-let UMBRAL_MIN = 150;            // 2h30 por defecto
+let UMBRAL_MIN = 180;            // 3h por defecto
 let FECHA_DATOS = null;          // momento del snapshot de datos (rutas.json)
 
 const map = L.map('map').setView([-33.05,-71.41],13);
@@ -2945,8 +2945,16 @@ function fmtDur(m){
   return h ? h+'h '+('0'+r).slice(-2)+'m' : r+'m';
 }
 
+/* Dos formas de nombrar el umbral: corta para los botones, en palabras para
+   los titulos. Antes habia una sola y los textos quedaban como "Iniciado hace
+   más de 3h" o "lleva más de 2h30", que se leen a tirones. */
 function etiquetaUmbral(){
   return UMBRAL_MIN===120 ? '+2h' : (UMBRAL_MIN===180 ? '+3h' : '+2h30');
+}
+
+function umbralEnPalabras(){
+  return UMBRAL_MIN===120 ? '2 horas'
+       : (UMBRAL_MIN===180 ? '3 horas' : '2 horas y media');
 }
 
 // [{t: tecnico, p: orden, m: minutos}] ordenado del más atrasado al menos
@@ -2972,9 +2980,9 @@ function setUmbral(v){
 function actualizarBadgeAtr(){
   const b = document.getElementById('btnAtr');
   if(!b) return;
-  if(atr){ b.textContent = '✖ Salir '+etiquetaUmbral(); return; }
+  if(atr){ b.textContent = '✖ Salir'; return; }
   const n = trabajosAtrasados().length;
-  b.innerHTML = '⏱️ '+etiquetaUmbral()+' iniciado' + (n ? '<span class="pill">'+n+'</span>' : '');
+  b.innerHTML = '⏱️ Más de '+umbralEnPalabras() + (n ? '<span class="pill">'+n+'</span>' : '');
 }
 
 function cerrarAtr(){
@@ -3018,11 +3026,11 @@ function renderPanelAtr(){
   const lista = trabajosAtrasados();
   const cont = document.getElementById('listaAtr');
   document.querySelector('#panelAtr h2').textContent =
-    '⏱️ Iniciado hace '+etiquetaUmbral().replace('+','más de ')+' ('+lista.length+')';
+    '⏱️ Iniciado hace más de '+umbralEnPalabras()+' ('+lista.length+')';
 
   if(!lista.length){
     cont.innerHTML = '<div class="vacio">✅ Ningún técnico lleva más de '+
-      etiquetaUmbral().replace('+','')+' con un trabajo iniciado.</div>';
+      umbralEnPalabras()+' con un trabajo iniciado.</div>';
     return;
   }
 
