@@ -81,6 +81,9 @@
   .tiles-esri { filter:contrast(2.4) brightness(.42); }
   .num-icon { display:flex; align-items:center; justify-content:center; border-radius:50%; color:#fff; font-weight:bold; font-size:12px; border:2px solid #fff; box-shadow:0 1px 4px rgba(0,0,0,.6); width:26px; height:26px; }
   .mk-iniciado { border:3px solid #4ade80 !important; box-shadow:0 0 10px 3px rgba(74,222,128,.9) !important; }
+  /* Completado y no realizada son trabajo que ya paso: se atenuan para que lo
+     que esta vivo ahora (iniciado, en ruta, pendiente) resalte solo. */
+  .mk-completado, .mk-norealizada { opacity:.45; }
   .mk-enruta { border:3px solid #fb923c !important; animation:pulso 1.5s infinite; }
   .mk-completado { opacity:.45; border:2px solid #8ab4dd !important; }
   .mk-norealizada { opacity:.5; border:2px dashed #ef4444 !important; }
@@ -481,6 +484,7 @@
     <span class="hgrp">ACCIONES</span>
     <div class="hacc">
       <button class="btn" id="btnNombres" onclick="toggleNombres()">👷 Nombres</button>
+      <button class="btn" id="btnRutas" onclick="toggleRutas()">〰️ Rutas</button>
       <button class="btn" id="btnComp" onclick="toggleComp()">📊 Completitud</button>
       <button class="btn" id="btnSC" onclick="toggleSinCompletar()">🚩 Sin completar</button>
       <button class="btn" id="btnAtr" onclick="toggleAtrasados()">⏱️ Más de 3 horas</button>
@@ -2285,9 +2289,17 @@ function renderReca(){
    aporta y estira la etiqueta. Verificado sobre los 40 tecnicos: 0 colisiones
    y 17 caracteres el mas largo. El popup sigue trayendo el nombre entero. */
 let verNombres = false;
+let verRutas = false;          // lineas punteadas entre paradas
 
 function nombreCorto(t){
   return String(t||'').trim().split(/\s+/).slice(0, 2).join(' ');
+}
+
+function toggleRutas(){
+  verRutas = !verRutas;
+  const b = document.getElementById('btnRutas');
+  if(b) b.classList.toggle('on-repemapa', verRutas);
+  render(true);
 }
 
 function toggleNombres(){
@@ -2348,7 +2360,14 @@ function render(mantenerVista){
     const latlngs = pts.map(p=>[p.lat,p.lng]);
     // En modo repetidas no se dibuja la ruta: al sacar las paradas del medio,
     // la linea uniria puntos que el tecnico no recorre seguidos y engania.
-    if(latlngs.length>1) L.polyline(latlngs,{color:col,weight:3,opacity:.75,dashArray:'6 6'}).addTo(layer);
+    // Con los 26 tecnicos a la vez las lineas cruzan la pantalla de lado a lado
+    // y no se entiende ninguna. Filtrando un tecnico si sirven, asi que se
+    // dibujan solo cuando hay pocos en pantalla o cuando se piden a mano.
+    if(latlngs.length>1 && (verRutas || show.length <= 3))
+      L.polyline(latlngs,{color:col,weight:3,opacity:.75,dashArray:'6 6'}).addTo(layer);
+    let iNombre = pts.findIndex(function(p){ return p.e==='Iniciado' || p.e==='en ruta'; });
+    if(iNombre < 0) iNombre = 0;
+
     pts.forEach((p,i)=>{
       if(p.e==='Iniciado') nIni++;
       if(p.e==='en ruta') nRuta++;
@@ -2356,7 +2375,12 @@ function render(mantenerVista){
       const stCls = p.e==='Iniciado' ? ' mk-iniciado' : (p.e==='en ruta' ? ' mk-enruta' : (p.e==='Completado' ? ' mk-completado' : (p.e==='No Realizada' ? ' mk-norealizada' : '')));
       // el color de la ruta va en la barrita izquierda, no en el texto: asi
       // el nombre se lee igual con cualquiera de los 38 colores de la paleta
-      const nom = verNombres
+      // El nombre va UNA sola vez por tecnico, no en cada parada. Con 26
+      // tecnicos y 128 ordenes se dibujaban 128 etiquetas y el mismo nombre
+      // salia cuatro o cinco veces, tapando el mapa entero. Se elige la parada
+      // que sigue viva (iniciado o en ruta) para que la etiqueta quede donde
+      // el tecnico esta ahora; si ya cerro todo, se pone en la primera.
+      const nom = (verNombres && i === iNombre)
         ? '<span class="mk-nom" style="border-left:3px solid '+col+'">'
           + escR(nombreCorto(t)) + '</span>' : '';
       const icon = L.divIcon({className:'', html:'<div class="num-icon'+stCls+'" style="background:'+col+'">'+letraTipo(p.t)+nom+'</div>', iconSize:[26,26], iconAnchor:[13,13]});
