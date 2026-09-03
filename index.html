@@ -11,7 +11,16 @@
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   body { font-family:'Segoe UI',Arial,sans-serif; background:#0a1930; color:#dbeafe; height:100vh; display:flex; flex-direction:column; }
-  header { background:#132845; padding:10px 16px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; border-bottom:2px solid #1e3a5f; z-index:1001;}
+  /* La cabecera pasa de una sola bolsa de 15 controles a tres filas por
+     funcion: identidad y resumen, luego filtrar+acciones, luego paneles. Antes
+     todos los botones pesaban igual y habia que leerlos uno por uno para
+     encontrar el que se buscaba. */
+  header { background:#132845; padding:8px 16px; display:flex; flex-direction:column;
+    gap:7px; border-bottom:2px solid #1e3a5f; z-index:1001; }
+  .hfila { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  .hfila1 { gap:12px; }
+  .hgrp { color:#6f9bc9; font-size:9px; letter-spacing:.5px; flex-shrink:0; }
+  .hsep { width:1px; height:20px; background:#2c5282; margin:0 3px; flex-shrink:0; }
   header h1 { font-size:16px; color:#60a5fa; white-space:nowrap; }
   select { background:#0a1930; color:#dbeafe; border:1px solid #2c5282; border-radius:6px; padding:6px 10px; font-size:13px; max-width:280px;}
   /* --- filtros con casillas (multi-seleccion) --- */
@@ -27,12 +36,15 @@
   .mop input { accent-color:#60a5fa; width:15px; height:15px; cursor:pointer; margin:0; }
   .mop .pt { width:9px; height:9px; border-radius:50%; flex:0 0 auto; }
   .mtodos { border-bottom:1px solid #2c5282; margin-bottom:4px; padding-bottom:8px; color:#8ab4dd; font-size:12px; }
-  .stats { font-size:12px; color:#8ab4dd; margin-left:auto;
-    display:flex; align-items:center; flex-wrap:wrap; gap:4px; justify-content:flex-end; }
-  .stats .st-base { white-space:nowrap; }
-  .stats .st-sep { color:#2c5282; }
-  .stats .bes { white-space:nowrap; }
-  .stats .st-tot { color:#b8d4ee; font-weight:bold; white-space:nowrap; margin-left:2px; }
+  /* Resumen del dia: la cifra grande y la etiqueta chica debajo. Antes iba
+     todo en una linea de 11px, siete numeros pegados uno tras otro, y habia
+     que detenerse a leerlo. */
+  .stats { margin-left:auto; display:flex; align-items:flex-end; gap:13px; flex-wrap:wrap; }
+  .stats .sbloque { text-align:center; line-height:1.15; }
+  .stats .snum { font-size:15px; font-weight:600; display:block; }
+  .stats .stxt { font-size:9px; color:#8ab4dd; display:block; white-space:nowrap; }
+  .stats .sbloque.tot .snum { color:#fff; }
+  #lastUpd { margin-left:0; font-size:10px; color:#6f9bc9; display:block; }
   /* el sello de "Actualizado" se pone ambar cuando el dato pasa de 15 min:
      no es un error, pero avisa que lo que estas mirando ya no es de ahora */
   #lastUpd.viejo { color:#fbbf24; }
@@ -438,30 +450,42 @@
 </head>
 <body>
 <header>
-  <h1>🚐 Módulo de Actividades <span style="font-size:11px;color:#34d399;font-weight:normal;vertical-align:middle;">· regla GSA ✓ (v2)</span></h1>
-  <select id="selTec"><option value="__ALL__">Todos los técnicos</option></select>
-  <div class="msel" id="mselCiudad"><button type="button" class="mbtn" onclick="abrirMenu(event,'Ciudad')"><span class="mtxt">Ambas ciudades</span><span class="mcar">▼</span></button><div class="mmenu"></div></div>
-  <div class="msel" id="mselFranja"><button type="button" class="mbtn" onclick="abrirMenu(event,'Franja')"><span class="mtxt">Todas las franjas</span><span class="mcar">▼</span></button><div class="mmenu"></div></div>
-  <div class="msel" id="mselEstado"><button type="button" class="mbtn" onclick="abrirMenu(event,'Estado')"><span class="mtxt">Todos los estados</span><span class="mcar">▼</span></button><div class="mmenu"></div></div>
-  <button class="btn" onclick="document.getElementById('inExcel').click()">📂 Cargar Excel</button>
-  <input type="file" id="inExcel" accept=".xlsx" style="display:none">
-  <button class="btn" id="btnLibre" onclick="toggleLibre()">🚐 Técnico libre</button>
-  <button class="btn" id="btnSC" onclick="toggleSinCompletar()">🚩 Sin completar</button>
-  <button class="btn" id="btnAtr" onclick="toggleAtrasados()">⏱️ +2h30 iniciado</button>
-  <button class="btn" id="btnCaidas" onclick="toggleCaidas()">🚨 Caídas</button>
-  <button class="btn" id="btnRepe" onclick="toggleRepe()">🔁 Direcciones repetidas hoy</button>
-  <button class="btn" id="btnNombres" onclick="toggleNombres()">👷 Nombres</button>
-  <button class="btn" id="btnReca" onclick="toggleReca()">🔄 Recaídas hoy</button>
-  <button class="btn" id="btnNuevas" onclick="toggleNuevas()">🆕 Nuevas</button>
-  <button class="btn" id="btnComp" onclick="toggleComp()">📊 Completitud</button>
-  <div class="buscador">
-    <input id="qBuscar" type="search" placeholder="Buscar dirección u orden…"
-           autocomplete="off" spellcheck="false"
-           onkeydown="if(event.key==='Enter') hacerBusqueda(); if(event.key==='Escape') this.blur();">
-    <button class="btn" onclick="hacerBusqueda()" title="Buscar en todo el tablero">🔎</button>
+  <div class="hfila hfila1">
+    <h1>🚐 Módulo de Actividades <span style="font-size:11px;color:#34d399;font-weight:normal;vertical-align:middle;">· regla GSA ✓ (v2)</span></h1>
+    <div class="stats" id="lastUpd">⏳ cargando datos...</div>
+    <div class="stats" id="stats"></div>
   </div>
-  <div class="stats" id="stats"></div>
-  <div class="stats" id="lastUpd" style="margin-left:0;">⏳ cargando datos...</div>
+
+  <div class="hfila">
+    <span class="hgrp">FILTRAR</span>
+    <select id="selTec"><option value="__ALL__">Todos los técnicos</option></select>
+    <div class="msel" id="mselCiudad"><button type="button" class="mbtn" onclick="abrirMenu(event,'Ciudad')"><span class="mtxt">Ambas ciudades</span><span class="mcar">▼</span></button><div class="mmenu"></div></div>
+    <div class="msel" id="mselFranja"><button type="button" class="mbtn" onclick="abrirMenu(event,'Franja')"><span class="mtxt">Todas las franjas</span><span class="mcar">▼</span></button><div class="mmenu"></div></div>
+    <div class="msel" id="mselEstado"><button type="button" class="mbtn" onclick="abrirMenu(event,'Estado')"><span class="mtxt">Todos los estados</span><span class="mcar">▼</span></button><div class="mmenu"></div></div>
+    <div class="buscador">
+      <input id="qBuscar" type="search" placeholder="Buscar dirección u orden…"
+             autocomplete="off" spellcheck="false"
+             onkeydown="if(event.key==='Enter') hacerBusqueda(); if(event.key==='Escape') this.blur();">
+      <button class="btn" onclick="hacerBusqueda()" title="Buscar en todo el tablero">🔎</button>
+    </div>
+    <span class="hsep"></span>
+    <span class="hgrp">ACCIONES</span>
+    <button class="btn" onclick="document.getElementById('inExcel').click()">📂 Cargar Excel</button>
+    <input type="file" id="inExcel" accept=".xlsx" style="display:none">
+    <button class="btn" id="btnLibre" onclick="toggleLibre()">🚐 Técnico libre</button>
+    <button class="btn" id="btnSC" onclick="toggleSinCompletar()">🚩 Sin completar</button>
+    <button class="btn" id="btnAtr" onclick="toggleAtrasados()">⏱️ +2h30 iniciado</button>
+  </div>
+
+  <div class="hfila">
+    <span class="hgrp">PANELES</span>
+    <button class="btn" id="btnCaidas" onclick="toggleCaidas()">🚨 Caídas</button>
+    <button class="btn" id="btnReca" onclick="toggleReca()">🔄 Recaídas hoy</button>
+    <button class="btn" id="btnNuevas" onclick="toggleNuevas()">🆕 Nuevas</button>
+    <button class="btn" id="btnRepe" onclick="toggleRepe()">🔁 Direcciones repetidas hoy</button>
+    <button class="btn" id="btnComp" onclick="toggleComp()">📊 Completitud</button>
+    <button class="btn" id="btnNombres" onclick="toggleNombres()">👷 Nombres</button>
+  </div>
 </header>
 <div id="map"></div>
 <div id="modalCaidas" onclick="if(event.target===this) cerrarCaidas()">
@@ -2363,15 +2387,27 @@ function render(mantenerVista){
     .concat(Object.keys(tally).filter(function(e){ return ordenEst.indexOf(e) < 0; }));
   const totalAct = Object.keys(tally).reduce(function(a,e){ return a + tally[e]; }, 0);
 
+  // Cancelado y Suspendido van juntos: son pocos y cada uno pidiendo su propia
+  // columna llenaba la barra sin aportar. El detalle sigue en el tooltip.
+  const juntos = ['Cancelado','Suspendido'];
+  const nJuntos = juntos.reduce(function(a,e){ return a + (tally[e]||0); }, 0);
+  const bloque = function(n, txt, color, tit, cls){
+    return '<span class="sbloque '+(cls||'')+'" title="'+escR(tit||txt)+'">'
+      + '<span class="snum" style="color:'+color+'">'+n+'</span>'
+      + '<span class="stxt">'+escR(txt)+'</span></span>';
+  };
+  const colorEst = { 'Completado':'#93c5fd', 'Iniciado':'#86efac', 'en ruta':'#fdba74',
+                     'Pendiente':'#dbeafe', 'No Realizada':'#fca5a5' };
   document.getElementById('stats').innerHTML =
-      '<span class="st-base">'+nTec+' técnicos · '+nTrab+' trabajos</span>'
-    + '<span class="st-sep">·</span>'
-    + vistos.map(function(e){
-        return '<span class="bes '+esClase(e)+'" title="'+escR(e)+'">'
-             + tally[e]+' '+escR(e)+'</span>';
-      }).join('')
-    + '<span class="st-tot" title="total de actividades con los filtros de ciudad, franja y técnico">'
-    + totalAct+' act.</span>';
+      bloque(totalAct, 'actividades',
+             '#fff', 'total con los filtros de ciudad, franja y técnico', 'tot')
+    + bloque(nTec, nTec === 1 ? 'técnico' : 'técnicos', '#dbeafe')
+    + vistos.filter(function(e){ return juntos.indexOf(e) < 0; })
+        .map(function(e){ return bloque(tally[e], e.toLowerCase(),
+                                        colorEst[e] || '#dbeafe', e); }).join('')
+    + (nJuntos ? bloque(nJuntos, 'canc/susp', '#9ca3af',
+        juntos.filter(function(e){ return tally[e]; })
+              .map(function(e){ return tally[e]+' '+e; }).join(' · ')) : '');
   // En el refresco automatico NO se reencuadra el mapa: si estabas mirando
   // un sector con zoom, se respeta donde tenias la vista.
   if(bounds.length && !mantenerVista) map.fitBounds(bounds,{padding:[40,40]});
@@ -2532,7 +2568,11 @@ function buscarCercanos(pos){
 
   const b = [[pos.lat,pos.lng], ...top.map(p=>[p.lat,p.lng])];
   if(b.length>1) map.fitBounds(b,{padding:[60,60]});
-  document.getElementById('stats').textContent = cands.length+' pendientes evaluados';
+  // El modo 'tecnico libre' reusa la barra del resumen para su propio dato.
+  // Va con la misma forma que los demas bloques o rompe la alineacion.
+  document.getElementById('stats').innerHTML =
+      '<span class="sbloque tot"><span class="snum">'+cands.length+'</span>'
+    + '<span class="stxt">pendientes evaluados</span></span>';
 }
 
 // posición estimada actual de cada técnico: Iniciado > en ruta > última parada
