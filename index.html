@@ -485,8 +485,6 @@
       <button class="btn" id="btnSC" onclick="toggleSinCompletar()">🚩 Sin completar</button>
       <button class="btn" id="btnAtr" onclick="toggleAtrasados()">⏱️ Más de 3 horas</button>
       <button class="btn" id="btnLibre" onclick="toggleLibre()">🚐 Técnico libre</button>
-      <button class="btn" onclick="document.getElementById('inExcel').click()">📂 Cargar Excel</button>
-      <input type="file" id="inExcel" accept=".xlsx" style="display:none">
     </div>
   </div>
 
@@ -3247,8 +3245,16 @@ document.addEventListener('visibilitychange', function(){
 });
 
 
-/* ============ CARGA LOCAL DE EXCEL (independiente por despacho) ============ */
-document.getElementById('inExcel').addEventListener('change', function(ev){
+/* ============ CARGA LOCAL DE EXCEL (independiente por despacho) ============
+   El boton se saco de la cabecera porque no se usaba y hacia que las acciones
+   no cupieran en una linea. El codigo se deja completo: para revivirlo basta
+   con volver a poner en el header el boton y su <input type="file">.
+
+   El if es obligatorio mientras no esten: sin el, getElementById devuelve null,
+   addEventListener revienta, y como esto corre al final del archivo se caeria
+   todo lo que viene despues. */
+const _inExcel = document.getElementById('inExcel');
+if(_inExcel) _inExcel.addEventListener('change', function(ev){
   const file = ev.target.files[0];
   if(!file) return;
   const lector = new FileReader();
