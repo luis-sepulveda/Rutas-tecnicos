@@ -25,11 +25,11 @@
      linea, las que sobran bajen alineadas bajo el primer boton y no al margen
      izquierdo de la cabecera, que las dejaba sueltas y sin grupo. */
   .hacc { display:flex; gap:8px; flex-wrap:wrap; flex:1; min-width:0; }
-  header h1 { font-size:16px; color:#60a5fa; white-space:nowrap; }
-  select { background:#0a1930; color:#dbeafe; border:1px solid #2c5282; border-radius:6px; padding:6px 10px; font-size:13px; max-width:280px;}
+  header h1 { font-size:15px; color:#60a5fa; white-space:nowrap; }
+  select { background:#0a1930; color:#dbeafe; border:1px solid #2c5282; border-radius:6px; padding:5px 9px; font-size:12px; max-width:250px;}
   /* --- filtros con casillas (multi-seleccion) --- */
   .msel { position:relative; display:inline-block; }
-  .mbtn { background:#0a1930; color:#dbeafe; border:1px solid #2c5282; border-radius:6px; padding:6px 10px; font-size:13px; cursor:pointer; display:flex; align-items:center; gap:6px; white-space:nowrap; }
+  .mbtn { background:#0a1930; color:#dbeafe; border:1px solid #2c5282; border-radius:6px; padding:5px 9px; font-size:12px; cursor:pointer; display:flex; align-items:center; gap:6px; white-space:nowrap; }
   .mbtn:hover { border-color:#4a7ab0; }
   .msel.activo .mbtn { border-color:#60a5fa; color:#93c5fd; }
   .mcar { font-size:10px; color:#8ab4dd; }
@@ -101,13 +101,13 @@
     background:#fb923c; color:#431407; border-radius:9px; font-size:11px; font-weight:bold;
     line-height:16px; text-align:center; }
   @keyframes pulso { 0%{box-shadow:0 0 0 0 rgba(251,146,60,.9)} 70%{box-shadow:0 0 0 12px rgba(251,146,60,0)} 100%{box-shadow:0 0 0 0 rgba(251,146,60,0)} }
-  .estados { position:absolute; bottom:16px; right:10px; z-index:1000; background:rgba(30,41,59,.92); border-radius:8px; padding:8px 12px; font-size:11px;}
+  .estados { position:absolute; bottom:16px; right:10px; z-index:1000; background:rgba(30,41,59,.92); border-radius:8px; padding:7px 10px; font-size:10px;}
   .estados div { display:flex; align-items:center; gap:8px; margin:4px 0;}
   .estados .mini { width:16px; height:16px; border-radius:50%; background:#4a7ab0; flex-shrink:0;}
   /* Leyenda de las letras del pin: esquina inferior izquierda, a la misma
      altura que la de estados. */
   .letras { position:absolute; bottom:16px; left:10px; z-index:1000;
-    background:rgba(30,41,59,.92); border-radius:8px; padding:8px 12px; font-size:11px; }
+    background:rgba(30,41,59,.92); border-radius:8px; padding:7px 10px; font-size:10px; }
   .letras div { display:flex; align-items:center; gap:8px; margin:4px 0; color:#dbeafe; }
   .letras b { display:inline-flex; align-items:center; justify-content:center;
     width:16px; height:16px; border-radius:50%; background:#4a7ab0; color:#fff;
@@ -118,7 +118,7 @@
   .pp b { color:#60a5fa; }
   .pp .est { display:inline-block; padding:1px 8px; border-radius:10px; font-size:11px; margin-top:4px; background:#2c5282;}
   .est-Pendiente{background:#2c5282}.est-Iniciado{background:#16a34a}.est-enruta{background:#d97706}.est-Cancelado{background:#dc2626}.est-Completado{background:#1e3a5f}.est-NoRealizada{background:#7f1d1d}
-  .btn { background:#0a1930; color:#dbeafe; border:1px solid #2c5282; border-radius:6px; padding:6px 12px; font-size:13px; cursor:pointer; }
+  .btn { background:#0a1930; color:#dbeafe; border:1px solid #2c5282; border-radius:6px; padding:5px 10px; font-size:12px; cursor:pointer; }
   .btn.on { background:#dc2626; border-color:#f87171; font-weight:bold; }
   #panel { position:absolute; top:118px; right:10px; z-index:1000; background:rgba(30,41,59,.96); border:1px solid #2c5282; border-radius:10px; padding:12px; width:300px; max-height:70vh; overflow-y:auto; display:none; font-size:12px;}
   #panel h2 { font-size:13px; color:#f87171; margin-bottom:6px;}
