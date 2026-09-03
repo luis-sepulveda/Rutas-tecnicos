@@ -1,10 +1,45 @@
 {
-  "actualizado": "2026-09-03T14:50:58",
+  "actualizado": "2026-09-03T15:21:23",
   "resumen": {
-    "sin informacion": 1,
+    "sin informacion": 2,
     "reagendada": 1
   },
   "estados": {
+    "1-3NHPH4RX": {
+      "tec": "ALFREDO ALCAYAGA F",
+      "cat": "Migración 1 Play",
+      "franja_original": "16-19",
+      "d": "TULIPANES 1043, QUILPUE",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "TULIPANES 1043",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "cancelada",
+            "color": "rgb(128, 255, 128)",
+            "ot": "1-3N1AJEHK",
+            "franja": "16-19",
+            "texto": "1-3N1AJEHK - 16-19-MigraciónVie, 28 Ago"
+          },
+          {
+            "estado": "cancelada",
+            "color": "rgb(128, 255, 128)",
+            "ot": "1-3MPL2OOH",
+            "franja": "10-13",
+            "texto": "1-3MPL2OOH - 10-13-MigraciónSab, 25 Jul"
+          },
+          {
+            "estado": "gestionada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3M7Q36U3",
+            "franja": "16-19",
+            "texto": "1-3M7Q36U3 - 16-19-MigraciónVie, 26 Jun"
+          }
+        ]
+      }
+    },
     "1-3NI6W8M0": {
       "tec": "JORDAN ROA PEREZ",
       "cat": "Migración 2 Play",
