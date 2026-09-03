@@ -79,6 +79,52 @@
      Para ajustar: contrast sube o baja cuanto se ven las calles, brightness
      que tan oscuro queda el fondo. */
   .tiles-esri { filter:contrast(2.4) brightness(.42); }
+
+  /* ---- MODO CLARO ----
+     Sobre fondo blanco el resplandor no se ve y el borde claro se confunde con
+     el mapa. Se cambia por el recurso que usan los mapas claros: borde blanco
+     grueso mas sombra, que separa el pin del fondo sea cual sea su color. */
+  /* Borde blanco grueso y sombra: es lo que separa un pin del mapa cuando el
+     fondo tiene color propio. El borde ademas aisla el color del tecnico del
+     verde o el amarillo que tenga debajo, que si no se mezclan. */
+  body.mapa-claro .num-icon { border:3px solid #fff !important;
+    box-shadow:0 1px 5px rgba(0,0,0,.45); color:#fff;
+    text-shadow:0 1px 2px rgba(0,0,0,.5);
+    filter:saturate(1.3) brightness(.88); }
+  /* Iniciado: anillo verde fijo por fuera del borde blanco. El resplandor del
+     modo oscuro no se ve sobre fondo claro, asi que se reemplaza por un aro
+     nitido, que ademas no se lava con el color del mapa. */
+  body.mapa-claro .mk-iniciado { border-color:#fff !important;
+    box-shadow:0 0 0 3px #059669, 0 0 0 4.5px rgba(5,150,105,.35),
+               0 1px 5px rgba(0,0,0,.45) !important; }
+
+  /* En ruta: sigue parpadeando. OJO — el parpadeo se hace con box-shadow, asi
+     que NO se puede poner aqui una sombra fija: la de la regla general iba con
+     !important y estaba matando la animacion. Por eso el parpadeo se redefine
+     completo para el modo claro (mas opaco, que sobre blanco el naranja claro
+     casi no se notaba) y el anillo base viaja dentro del propio keyframe. */
+  body.mapa-claro .mk-enruta { border-color:#fff !important;
+    box-shadow:none; animation:pulso-claro 1.4s infinite; }
+  @keyframes pulso-claro {
+    0%   { box-shadow:0 0 0 3px #ea580c, 0 0 0 3px rgba(234,88,12,.85), 0 1px 5px rgba(0,0,0,.45); }
+    70%  { box-shadow:0 0 0 3px #ea580c, 0 0 0 14px rgba(234,88,12,0),  0 1px 5px rgba(0,0,0,.45); }
+    100% { box-shadow:0 0 0 3px #ea580c, 0 0 0 3px rgba(234,88,12,0),   0 1px 5px rgba(0,0,0,.45); }
+  }
+  body.mapa-claro .mk-completado, body.mapa-claro .mk-norealizada { opacity:.55; }
+
+  /* Nombre en negro sin caja. El halo blanco alrededor de la letra es lo que
+     lo hace legible: sin el, el texto negro desaparece sobre un parque verde
+     oscuro o una avenida amarilla. Es el mismo recurso que usan los mapas
+     para los nombres de calle. */
+  body.mapa-claro .num-icon .mk-nom { color:#111827; background:transparent;
+    border-left:none !important; box-shadow:none; padding:0 2px;
+    text-shadow:0 0 3px #fff, 0 0 3px #fff, 0 0 5px #fff, 1px 1px 2px #fff,
+                -1px 1px 2px #fff, 1px -1px 2px #fff, -1px -1px 2px #fff; }
+  /* los popup de Leaflet tambien son oscuros: sobre mapa claro chocan menos
+     asi, con el mismo blanco de las etiquetas */
+  body.mapa-claro .leaflet-popup-content-wrapper,
+  body.mapa-claro .leaflet-popup-tip { background:#fff; color:#111827; }
+  body.mapa-claro .pp b { color:#111827; }
   .num-icon { display:flex; align-items:center; justify-content:center; border-radius:50%; color:#fff; font-weight:bold; font-size:12px; border:2px solid #fff; box-shadow:0 1px 4px rgba(0,0,0,.6); width:26px; height:26px; }
   .mk-iniciado { border:3px solid #4ade80 !important; box-shadow:0 0 10px 3px rgba(74,222,128,.9) !important; }
   /* Completado y no realizada son trabajo que ya paso: se atenuan para que lo
@@ -640,21 +686,48 @@ const map = L.map('map').setView([-33.05,-71.41],13);
    es un cambio mayor. Por ahora el raster con llave sigue funcionando. */
 const CARTO_KEY = '';   // <-- pegar aca la llave de carto.com/basemaps/apikey
 
-if(CARTO_KEY){
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png?key='+CARTO_KEY,
-    {attribution:'&copy; OpenStreetMap &copy; CARTO', maxZoom:19}).addTo(map);
-} else {
-  // El "Dark Gray" de Esri es bastante mas claro que el dark_all de CARTO, y
-  // con ese gris los pines de colores pierden contraste. Se oscurece por CSS
-  // (ver .tiles-esri) para dejarlo parecido al fondo de siempre. Es un parche
-  // mientras llega la llave: con CARTO_KEY puesta vuelve el basemap real y
-  // este filtro no se aplica.
-  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}',
-    {attribution:'&copy; OpenStreetMap &copy; Esri', maxZoom:16,
-     className:'tiles-esri'}).addTo(map);
-  console.warn('[mapa] Sin CARTO_KEY: se usan los tiles de Esri oscurecidos. '
-    + 'Pide la llave gratis en carto.com/basemaps/apikey y pegala en CARTO_KEY.');
+/* Fondo claro u oscuro. El claro usa el "Light Gray Canvas" de Esri, que es
+   lo mas parecido al mapa de Google que se puede usar libremente: calles
+   blancas, gris suave, verde en los parques.
+
+   El fondo claro no es solo otro juego de tiles: los pines venian pensados para
+   fondo negro (resplandor, borde claro, etiqueta oscura con letra blanca) y
+   sobre claro se lavaban. Por eso ademas se pone la clase 'mapa-claro' en el
+   body, que reajusta pines, etiquetas y popup (ver el CSS).
+
+   Las ramas de fondo oscuro se dejan escritas: si algun dia se quiere volver,
+   es poner fondoClaro en false. */
+let capaFondo = null;
+let fondoClaro = true;         // el claro quedo como unico fondo del tablero
+
+function ponerFondo(){
+  if(capaFondo) map.removeLayer(capaFondo);
+  if(fondoClaro){
+    /* "World Street Map" de Esri y no el "Light Gray Canvas": el gris claro
+       deja el mapa casi blanco, sin referencias. Este trae los parques en
+       verde, las avenidas en amarillo y los nombres de calle, que es lo que
+       hace reconocible el mapa de un vistazo. No pide llave.
+
+       Si algun dia se pide la llave gratis de CARTO, su basemap "voyager" es
+       todavia mas parecido al de Google; seria cambiar la URL de aca. */
+    capaFondo = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
+      {attribution:'&copy; Esri', maxZoom:19});
+  } else if(CARTO_KEY){
+    capaFondo = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png?key='+CARTO_KEY,
+      {attribution:'&copy; OpenStreetMap &copy; CARTO', maxZoom:19});
+  } else {
+    // El "Dark Gray" de Esri es mas claro que el dark_all de CARTO y los pines
+    // pierden contraste; se oscurece por CSS (.tiles-esri).
+    capaFondo = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}',
+      {attribution:'&copy; OpenStreetMap &copy; Esri', maxZoom:16,
+       className:'tiles-esri'});
+  }
+  capaFondo.addTo(map);
+  if(capaFondo.bringToBack) capaFondo.bringToBack();
+  document.body.classList.toggle('mapa-claro', fondoClaro);
 }
+
+ponerFondo();
 
 const sel = document.getElementById('selTec');
 
