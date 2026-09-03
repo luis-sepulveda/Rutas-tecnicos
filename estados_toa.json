@@ -1,38 +1,36 @@
 {
-  "actualizado": "2026-09-02T16:20:13",
+  "actualizado": "2026-09-03T10:19:16",
   "resumen": {
-    "reagendada": 3
+    "sin informacion": 1
   },
   "estados": {
-    "1-3NMKK7AK": {
-      "tec": "ANTONHY MORALES MENDOZA",
-      "cat": "Alta 2 Play",
+    "1-3NI6W8M0": {
+      "tec": "JORDAN ROA PEREZ",
+      "cat": "Migración 2 Play",
       "franja_original": "13-16",
-      "d": "AV VICEPRESIDENTE BDO LEIGHTON 1251 CASA 114, VILLA ALEMANA",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3NMKK7AK - 13-16-AltaVie, 4 Sep",
-      "franja_nueva": "13-16"
-    },
-    "1-3NMFQ0TT": {
-      "tec": "LUIS MARTIN NUÑEZ",
-      "cat": "Alta 1 Play",
-      "franja_original": "10-13",
-      "d": "IRMA JOHNSON MOLINA 110 EDIF. A-B-C DEPTO 321, QUILPUE",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3NMFQ0TT - 16-19-AltaSab, 5 Sep",
-      "franja_nueva": "16-19"
-    },
-    "1-3NLZ6VJI": {
-      "tec": "SEBASTIAN DOSSOW A",
-      "cat": "Upgrade promoción",
-      "franja_original": "16-19",
-      "d": "LAGO BERTRAND 117 EDIF. 4 DEPTO 402, QUILPUE",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3NLZ6VJI - 10-13-Upgrade promociónJue, 3 Sep",
-      "franja_nueva": "10-13"
+      "d": "G TELLEZ 2681 EDIF. R DEPTO 403, QUILPUE",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "G TELLEZ 2681",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "gestionada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3MCHCEIQ",
+            "franja": "13-16",
+            "texto": "1-3MCHCEIQ - 13-16-MigraciónVie, 3 Jul"
+          },
+          {
+            "estado": "?",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3M3J30BU",
+            "franja": "13-16",
+            "texto": "1-3M3J30BU - 13-16-AltaMar, 16 Jun"
+          }
+        ]
+      }
     }
   }
 }
