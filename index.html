@@ -502,6 +502,30 @@
   .bbar { display:block; height:100%; border-radius:4px; }
   .bnum { color:#fff; font-weight:700; text-align:right; }
   .bpct { color:#8ab4dd; font-size:10.5px; text-align:right; }
+  /* Estado de la jornada */
+  #modalJor { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); }
+  #modalJor.abierto { display:flex; align-items:flex-start; justify-content:center; padding:4vh 2vw; }
+  #modalJor .mc-body { display:block; }
+  #modalJor .vacio { color:#8ab4dd; text-align:center; padding:28px 6px; font-size:14px; }
+  .jgrid { display:grid; grid-template-columns:repeat(4,1fr); gap:9px; margin-bottom:11px; }
+  .jcard { background:#111c33; border:1px solid #1e3a5f; border-radius:8px; padding:11px 13px; }
+  .jnum { font-size:27px; font-weight:700; line-height:1.05; }
+  .jtxt { color:#8ab4dd; font-size:10.5px; margin-top:2px; }
+  /* Barra de una sola linea con el reparto del dia: se lee mas rapido que
+     cinco cifras sueltas cuando lo que se pregunta es "como vamos". */
+  .jbar { display:flex; height:13px; border-radius:6px; overflow:hidden;
+    background:#0a1930; border:1px solid #1e3a5f; }
+  .jbar span { display:block; height:100%; }
+  .jleg { color:#b8d4ee; font-size:11px; margin:6px 0 12px; }
+  .jfila { display:grid; grid-template-columns:1fr 44px 54px; gap:8px;
+    padding:3px 0; font-size:12px; border-bottom:1px solid #16294a; }
+  .jfila:last-child { border-bottom:none; }
+  .jety { color:#dbeafe; }
+  .jbnum { color:#fff; font-weight:700; text-align:right; }
+  .jbpct { color:#8ab4dd; font-size:10.5px; text-align:right; }
+  .jalert { display:flex; gap:18px; flex-wrap:wrap; color:#dbeafe; font-size:12px; }
+  .jalert b { color:#fff; font-size:14px; }
+  .jvacio { color:#8ab4dd; font-size:11.5px; }
   .pchip.exp { border-color:#166534; color:#86efac; }
   .bvacio { color:#4a7ab0; font-size:12px; padding:18px; text-align:center; }
   .bhl { background:#78350f; color:#fde68a; border-radius:3px; padding:0 2px; }
@@ -560,6 +584,7 @@
     <div class="hacc">
       <button class="btn" id="btnNombres" onclick="toggleNombres()">👷 Nombres</button>
       <button class="btn" id="btnRutas" onclick="toggleRutas()">〰️ Rutas</button>
+      <button class="btn" id="btnJornada" onclick="toggleJornada()">📋 Jornada</button>
       <button class="btn" id="btnComp" onclick="toggleComp()">📊 Completitud</button>
       <button class="btn" id="btnSC" onclick="toggleSinCompletar()">🚩 Sin completar</button>
       <button class="btn" id="btnAtr" onclick="toggleAtrasados()">⏱️ Más de 3 horas</button>
@@ -634,6 +659,19 @@
     </div>
     <div id="listaRepe" class="mc-body"></div>
     <div id="repeNota" class="mc-resnota"></div>
+  </div>
+</div>
+<div id="modalJor" onclick="if(event.target===this) cerrarJornada()">
+  <div class="mc-box">
+    <div class="mc-head">
+      <div class="mc-head-left">
+        <h2 id="jorTitulo">📋 Estado de la jornada</h2>
+        <div id="jorChips" class="mc-cont"></div>
+      </div>
+      <button class="mc-close" onclick="cerrarJornada()" title="Cerrar (Esc)">✖</button>
+    </div>
+    <div id="listaJor" class="mc-body"></div>
+    <div id="jorNota" class="mc-resnota"></div>
   </div>
 </div>
 <div id="modalEst" onclick="if(event.target===this) cerrarEst()">
@@ -967,7 +1005,7 @@ function verTecnicoCaida(t){
 
 // cerrar los modales con la tecla Esc
 document.addEventListener('keydown', function(e){
-  if(e.key === 'Escape'){ cerrarCaidas(); cerrarNuevas(); cerrarRepe(); cerrarReca(); cerrarBuscar(); cerrarEst(); }
+  if(e.key === 'Escape'){ cerrarCaidas(); cerrarNuevas(); cerrarRepe(); cerrarReca(); cerrarBuscar(); cerrarEst(); cerrarJornada(); }
 });
 
 /* ======================= ORDENES NUEVAS DEL DIA =======================
@@ -2498,6 +2536,117 @@ function barras(cuenta, total, color){
       + '</div>';
   }).join('');
 }
+
+
+/* ============ ESTADO DE LA JORNADA ============
+   Una sola pantalla para contestar de inmediato lo que preguntan por telefono:
+   cuantas van, cuantas quedan, cuantas fallaron y por que.
+
+   No trae informacion nueva: todo esto ya estaba repartido entre la barra de
+   arriba, el desglose por estado y los paneles de alertas. Lo que aporta es
+   tenerlo junto, porque con alguien esperando al telefono abrir cuatro paneles
+   y armar la respuesta no sirve.
+
+   Respeta ciudad, franja y tecnico. NO el filtro de estado: la pregunta es
+   siempre por el total de la zona, no por lo que se este mirando en el mapa. */
+function toggleJornada(){
+  const m = document.getElementById('modalJor');
+  const abierto = m.classList.toggle('abierto');
+  if(abierto) renderJornada();
+}
+
+function cerrarJornada(){
+  document.getElementById('modalJor').classList.remove('abierto');
+}
+
+function renderJornada(){
+  const m = document.getElementById('modalJor');
+  if(!m.classList.contains('abierto')) return;
+
+  const todas = actividadesDeEstado('__TODAS__');
+  const total = todas.length;
+  const cuenta = {};
+  const motivos = {};
+  const tecs = {};
+  todas.forEach(function(x){
+    cuenta[x.e] = (cuenta[x.e]||0)+1;
+    if(x.p.cie) motivos[x.p.cie] = (motivos[x.p.cie]||0)+1;
+    tecs[x.tec] = true;
+  });
+  const n = function(e){ return cuenta[e] || 0; };
+
+  // "Cerradas" = lo que ya no vuelve: completadas, no realizadas y canceladas.
+  // "Quedan" = lo que todavia puede moverse hoy. Es el corte que importa
+  // cuando preguntan cuanto falta, y no coincide con "completadas vs resto".
+  const cerradas = n('Completado') + n('No Realizada') + n('Cancelado');
+  const quedan   = n('Pendiente') + n('Iniciado') + n('en ruta') + n('Suspendido');
+  const pctComp  = total ? Math.round(n('Completado')*100/total) : 0;
+  const pctCerr  = total ? Math.round(cerradas*100/total) : 0;
+
+  const tarjeta = function(num, txt, color){
+    return '<div class="jcard"><div class="jnum" style="color:'+color+'">'+num+'</div>'
+         + '<div class="jtxt">'+escR(txt)+'</div></div>';
+  };
+
+  let html = '<div class="jgrid">'
+    + tarjeta(total, 'actividades del día', '#fff')
+    + tarjeta(n('Completado'), 'completadas', '#93c5fd')
+    + tarjeta(quedan, 'quedan por cerrar', '#fde68a')
+    + tarjeta(n('No Realizada'), 'no realizadas', '#fca5a5')
+    + '</div>';
+
+  // barra de avance
+  html += '<div class="jbar">'
+    + '<span style="width:'+(total? n('Completado')*100/total : 0)+'%;background:#2563eb"></span>'
+    + '<span style="width:'+(total? n('No Realizada')*100/total : 0)+'%;background:#dc2626"></span>'
+    + '<span style="width:'+(total? n('Cancelado')*100/total : 0)+'%;background:#6b7280"></span>'
+    + '<span style="width:'+(total? n('Iniciado')*100/total : 0)+'%;background:#059669"></span>'
+    + '<span style="width:'+(total? n('en ruta')*100/total : 0)+'%;background:#ea580c"></span>'
+    + '</div>'
+    + '<div class="jleg">'+pctComp+'% completado · '+pctCerr+'% ya cerrado ('
+    + cerradas+' de '+total+') · '+quedan+' todavía en juego</div>';
+
+  // detalle por estado
+  const orden = ['Completado','No Realizada','Cancelado','Suspendido','Iniciado','en ruta','Pendiente'];
+  html += '<div class="bcaja"><div class="btit">DÓNDE ESTÁ CADA ACTIVIDAD</div>'
+    + orden.filter(function(e){ return cuenta[e]; }).map(function(e){
+        return '<div class="jfila"><span class="jety">'+escR(e)+'</span>'
+          + '<span class="jbnum">'+cuenta[e]+'</span>'
+          + '<span class="jbpct">'+(total?(cuenta[e]*100/total).toFixed(1)+'%':'')+'</span>'
+          + '</div>';
+      }).join('') + '</div>';
+
+  // motivos de quiebre
+  const nMot = Object.keys(motivos).reduce(function(a,k){ return a+motivos[k]; },0);
+  html += '<div class="bcaja"><div class="btit">MOTIVOS DE QUIEBRE</div>'
+    + (nMot ? barras(motivos, nMot, 'linear-gradient(90deg,#dc2626,#f87171)')
+            : '<div class="jvacio">Ninguna actividad cerrada con código de quiebre.</div>')
+    + '</div>';
+
+  // alertas del dia
+  const nRep = (typeof agruparRepe === 'function') ? agruparRepe().length : 0;
+  html += '<div class="bcaja"><div class="btit">ALERTAS DEL DÍA</div>'
+    + '<div class="jalert">'
+    +   '<span>🚨 <b>'+nCaidas()+'</b> caída(s) de bandeja</span>'
+    +   '<span>🔄 <b>'+nRecaidasVivas()+'</b> recaída(s)</span>'
+    +   '<span>🔁 <b>'+nRep+'</b> dirección(es) repetida(s)</span>'
+    +   '<span>👷 <b>'+Object.keys(tecs).length+'</b> técnico(s) con carga</span>'
+    + '</div></div>';
+
+  document.getElementById('listaJor').innerHTML = total ? html
+    : '<div class="vacio">Sin actividades con los filtros puestos.</div>';
+
+  document.getElementById('jorChips').innerHTML =
+    '<span class="fchip">jornada <b>'+escR((ALERTAS && ALERTAS.fecha) ? ALERTAS.fecha : '')+'</b></span>'
+    + (FECHA_DATOS ? '<span class="fchip">datos de las <b>'
+        + String(FECHA_DATOS.getHours()).padStart(2,'0') + ':'
+        + String(FECHA_DATOS.getMinutes()).padStart(2,'0') + '</b></span>' : '');
+
+  document.getElementById('jorNota').innerHTML =
+      '"Quedan por cerrar" junta pendientes, iniciadas, en ruta y suspendidas: es lo que '
+    + 'todavía puede moverse hoy. Respeta los filtros de ciudad, franja y técnico, pero no el de estado.';
+}
+
 
 function abrirEst(est){
   estActual = est;
