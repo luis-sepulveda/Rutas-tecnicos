@@ -1,9 +1,10 @@
 {
-  "actualizado": "2026-09-05T12:19:54",
+  "actualizado": "2026-09-05T12:48:27",
   "resumen": {
     "sin informacion": 2,
     "reagendada": 3,
-    "?": 1
+    "?": 1,
+    "sin respuesta": 1
   },
   "estados": {
     "1-3NODJZ90": {
@@ -44,23 +45,79 @@
       "detalle": "1-3NHW8SZJ - 16-19-Modificación de ServicioSab, 12 Sep",
       "franja_nueva": "16-19"
     },
+    "1-3NORA6ZX": {
+      "tec": "JORDAN ROA PEREZ",
+      "cat": "Migración 2 Play",
+      "franja_original": "13-16",
+      "d": "SAN CARLOS 246 CASA B, QUILPUE",
+      "estado": "reagendada",
+      "color": "rgb(255, 222, 0)",
+      "detalle": "1-3NORA6ZX - 13-16-MigraciónMie, 9 Sep",
+      "franja_nueva": "13-16"
+    },
     "1-3NOG4N03": {
       "tec": "JOSE CASTRO P",
       "cat": "Alta 2 Play",
       "franja_original": "13-16",
       "d": "PRIMERA 1430 CASA 10, VILLA ALEMANA",
       "estado": "sin informacion",
-      "nota": "la OT ya no existe en TOA"
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "PRIMERA 1430",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "?",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3LZ5PC7W",
+            "franja": "10-13",
+            "texto": "1-3LZ5PC7W - 10-13-ReparaciónVie, 12 Jun"
+          },
+          {
+            "estado": "cancelada",
+            "color": "rgb(128, 255, 128)",
+            "ot": "1-3NLATIC1",
+            "franja": "16-19",
+            "texto": "1-3NLATIC1 - 16-19-ReparaciónMar, 1 Sep"
+          },
+          {
+            "estado": "?",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3NHOKE47",
+            "franja": "16-19",
+            "texto": "1-3NHOKE47 - 16-19-AltaJue, 27 Ago"
+          },
+          {
+            "estado": "?",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3ND3UQP4",
+            "franja": "16-19",
+            "texto": "1-3ND3UQP4 - 16-19-AltaSab, 22 Ago"
+          },
+          {
+            "estado": "?",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3NDPEOMA",
+            "franja": "10-13",
+            "texto": "1-3NDPEOMA - 10-13-AltaSab, 22 Ago"
+          },
+          {
+            "estado": "cancelada",
+            "color": "rgb(128, 255, 128)",
+            "ot": "1-3N9KXFP4",
+            "franja": "10-13",
+            "texto": "1-3N9KXFP4 - 10-13-ReparaciónMie, 19 Ago"
+          }
+        ]
+      }
     },
     "1-3NOCTIZA": {
       "tec": "LUIS GATICA DAVILA",
       "cat": "Alta 1 Play",
       "franja_original": "13-16",
       "d": "LOURDES 1051 EDIF. F DEPTO 303, VILLA ALEMANA",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3NOCTIZA - 16-19-AltaMar, 8 Sep",
-      "franja_nueva": "16-19"
+      "estado": "sin respuesta",
+      "nota": "TOA no respondio a tiempo"
     }
   }
 }
