@@ -1,7 +1,8 @@
 {
-  "actualizado": "2026-09-05T10:06:00",
+  "actualizado": "2026-09-05T10:36:12",
   "resumen": {
-    "reagendada": 1
+    "reagendada": 2,
+    "sin informacion": 1
   },
   "estados": {
     "1-3NOELLTW": {
@@ -12,6 +13,24 @@
       "estado": "reagendada",
       "color": "rgb(255, 222, 0)",
       "detalle": "1-3NOELLTW - 16-19-AltaLun, 7 Sep",
+      "franja_nueva": "16-19"
+    },
+    "1-3NOG4N03": {
+      "tec": "JOSE CASTRO P",
+      "cat": "Alta 2 Play",
+      "franja_original": "13-16",
+      "d": "PRIMERA 1430 CASA 10, VILLA ALEMANA",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA"
+    },
+    "1-3NOCTIZA": {
+      "tec": "LUIS GATICA DAVILA",
+      "cat": "Alta 1 Play",
+      "franja_original": "13-16",
+      "d": "LOURDES 1051 EDIF. F DEPTO 303, VILLA ALEMANA",
+      "estado": "reagendada",
+      "color": "rgb(255, 222, 0)",
+      "detalle": "1-3NOCTIZA - 16-19-AltaMar, 8 Sep",
       "franja_nueva": "16-19"
     }
   }
