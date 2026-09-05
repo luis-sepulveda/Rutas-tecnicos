@@ -484,6 +484,24 @@
   .btoa.sinf { background:#1f2937; color:#9ca3af; }   /* sin informacion */
   .fchip.toa { border-color:#b45309; color:#fde68a; }
   .fchip.toavieja { border-color:#374151; color:#9ca3af; background:#111827; }
+  /* Barras del desglose por estado */
+  #modalEst { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); }
+  #modalEst.abierto { display:flex; align-items:flex-start; justify-content:center; padding:4vh 2vw; }
+  #modalEst .mc-body { display:block; }
+  #modalEst .vacio { color:#8ab4dd; text-align:center; padding:28px 6px; font-size:14px; }
+  .sbloque.clic { cursor:pointer; border-radius:6px; padding:2px 5px; margin:-2px -5px; }
+  .sbloque.clic:hover { background:#1e3a5f; }
+  .bcaja { background:#111c33; border:1px solid #1e3a5f; border-radius:8px;
+    padding:11px 13px; margin-bottom:10px; }
+  .btit { color:#93c5fd; font-size:10.5px; font-weight:700; letter-spacing:.5px; margin-bottom:8px; }
+  .bsub { color:#8ab4dd; font-weight:normal; letter-spacing:0; }
+  .bfila { display:grid; grid-template-columns:150px 1fr 34px 46px; gap:9px;
+    align-items:center; padding:3px 0; font-size:12px; }
+  .bety { color:#dbeafe; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .bpista { background:#0a1930; border-radius:4px; height:11px; overflow:hidden; }
+  .bbar { display:block; height:100%; border-radius:4px; }
+  .bnum { color:#fff; font-weight:700; text-align:right; }
+  .bpct { color:#8ab4dd; font-size:10.5px; text-align:right; }
   .pchip.exp { border-color:#166534; color:#86efac; }
   .bvacio { color:#4a7ab0; font-size:12px; padding:18px; text-align:center; }
   .bhl { background:#78350f; color:#fde68a; border-radius:3px; padding:0 2px; }
@@ -616,6 +634,19 @@
     </div>
     <div id="listaRepe" class="mc-body"></div>
     <div id="repeNota" class="mc-resnota"></div>
+  </div>
+</div>
+<div id="modalEst" onclick="if(event.target===this) cerrarEst()">
+  <div class="mc-box">
+    <div class="mc-head">
+      <div class="mc-head-left">
+        <h2 id="estTitulo">Detalle</h2>
+        <div id="estChips" class="mc-cont"></div>
+      </div>
+      <button class="mc-close" onclick="cerrarEst()" title="Cerrar (Esc)">✖</button>
+    </div>
+    <div id="listaEst" class="mc-body"></div>
+    <div id="estNota" class="mc-resnota"></div>
   </div>
 </div>
 <div id="panelSC">
@@ -936,7 +967,7 @@ function verTecnicoCaida(t){
 
 // cerrar los modales con la tecla Esc
 document.addEventListener('keydown', function(e){
-  if(e.key === 'Escape'){ cerrarCaidas(); cerrarNuevas(); cerrarRepe(); cerrarReca(); cerrarBuscar(); }
+  if(e.key === 'Escape'){ cerrarCaidas(); cerrarNuevas(); cerrarRepe(); cerrarReca(); cerrarBuscar(); cerrarEst(); }
 });
 
 /* ======================= ORDENES NUEVAS DEL DIA =======================
@@ -2413,6 +2444,124 @@ function letraTipo(t){
 }
 
 // Bloque de caidas previas que se agrega al popup del marcador.
+
+/* ============ DESGLOSE POR ESTADO ============
+   Se abre tocando una cifra del resumen. Contesta lo que la barra de arriba no
+   puede: de esas 20 no realizadas, cuantas son altas y cuantas reparaciones, y
+   por que motivo se cerraron.
+
+   Respeta ciudad, franja y tecnico, igual que la cifra que se toco. NO respeta
+   el filtro de estado, por lo mismo que el contador: si estas viendo solo
+   completadas en el mapa, igual quieres poder abrir las pendientes.
+
+   El motivo de cierre solo existe en las No Realizada (y en las que la regla
+   GSA reclasifico): el pipeline lo guarda ahi y en ningun otro estado. Por eso
+   ese bloque aparece solo cuando hay datos, en vez de una seccion vacia. */
+let estActual = null;
+
+function actividadesDeEstado(est){
+  const ft = document.getElementById('selTec').value;
+  const tecs = Object.keys(DB);
+  const show = ft === '__ALL__' ? tecs : [ft];
+  const out = [];
+  show.forEach(function(t){
+    (DB[t] || []).forEach(function(p){
+      if(!okCiudad(p) || !okFranja(p)) return;
+      const e = String(p.e || 'Pendiente').trim() || 'Pendiente';
+      if(est === '__TODAS__'
+         || (est === '__CANCSUSP__' && (e === 'Cancelado' || e === 'Suspendido'))
+         || e === est){
+        out.push({tec:t, p:p, e:e});
+      }
+    });
+  });
+  return out;
+}
+
+function barras(cuenta, total, color){
+  const claves = Object.keys(cuenta).sort(function(a,b){ return cuenta[b]-cuenta[a]; });
+  if(!claves.length) return '';
+  const max = cuenta[claves[0]];
+  return claves.map(function(k){
+    const n = cuenta[k];
+    return '<div class="bfila">'
+      + '<span class="bety" title="'+escR(k)+'">'+escR(k)+'</span>'
+      + '<span class="bpista"><span class="bbar" style="width:'
+      +   Math.max(2, Math.round(n*100/max))+'%;background:'+color+'"></span></span>'
+      + '<span class="bnum">'+n+'</span>'
+      + '<span class="bpct">'+(total ? (n*100/total).toFixed(1)+'%' : '')+'</span>'
+      + '</div>';
+  }).join('');
+}
+
+function abrirEst(est){
+  estActual = est;
+  document.getElementById('modalEst').classList.add('abierto');
+  renderEst();
+}
+
+function cerrarEst(){
+  estActual = null;
+  document.getElementById('modalEst').classList.remove('abierto');
+}
+
+function renderEst(){
+  if(!estActual) return;
+  const lista = actividadesDeEstado(estActual);
+  const total = lista.length;
+  const nombre = estActual === '__TODAS__' ? 'Todas las actividades'
+               : (estActual === '__CANCSUSP__' ? 'Canceladas y suspendidas' : estActual);
+
+  document.getElementById('estTitulo').textContent = '📊 ' + nombre + ' (' + total + ')';
+
+  // chips: reparto por estado cuando se abrio el total, y por ciudad siempre
+  const porEstado = {}, porCiudad = {}, porFranja = {};
+  lista.forEach(function(x){
+    porEstado[x.e] = (porEstado[x.e]||0)+1;
+    const c = String(x.p.d||'').split(',').pop().trim();
+    if(c) porCiudad[c] = (porCiudad[c]||0)+1;
+    const f = x.p.f || 's/franja';
+    porFranja[f] = (porFranja[f]||0)+1;
+  });
+  document.getElementById('estChips').innerHTML =
+      Object.keys(porCiudad).sort().map(function(c){
+        return '<span class="fchip">'+escR(c)+' <b>'+porCiudad[c]+'</b></span>'; }).join('')
+    + Object.keys(porFranja).sort().map(function(f){
+        return '<span class="fchip">🕒 '+escR(f)+' · <b>'+porFranja[f]+'</b></span>'; }).join('');
+
+  // tipo de actividad: se usa 'cat', que ya trae el tramo de Play calculado
+  const porTipo = {}, porMotivo = {}, porTec = {};
+  lista.forEach(function(x){
+    const t = x.p.cat || x.p.t || 'Sin tipo';
+    porTipo[t] = (porTipo[t]||0)+1;
+    porTec[x.tec] = (porTec[x.tec]||0)+1;
+    if(x.p.cie) porMotivo[x.p.cie] = (porMotivo[x.p.cie]||0)+1;
+  });
+
+  let html = '<div class="bcaja"><div class="btit">TIPO DE ACTIVIDAD</div>'
+           + barras(porTipo, total, '#f87171') + '</div>';
+
+  const nMot = Object.keys(porMotivo).reduce(function(a,k){ return a+porMotivo[k]; }, 0);
+  if(nMot){
+    html += '<div class="bcaja"><div class="btit">CÓDIGO DE CIERRE'
+         +  (nMot < total ? ' <span class="bsub">· '+nMot+' de '+total
+             +' con código registrado</span>' : '') + '</div>'
+         + barras(porMotivo, nMot, '#fb923c') + '</div>';
+  }
+
+  html += '<div class="bcaja"><div class="btit">POR TÉCNICO</div>'
+        + barras(porTec, total, '#60a5fa') + '</div>';
+
+  document.getElementById('listaEst').innerHTML = total ? html
+    : '<div class="vacio">No hay actividades en este estado con los filtros puestos.</div>';
+
+  document.getElementById('estNota').innerHTML =
+      'Respeta los filtros de ciudad, franja y técnico de arriba, pero no el de estado. '
+    + 'El código de cierre solo lo traen las No Realizadas: en los demás estados el '
+    + 'portal no lo entrega, así que ese bloque no aparece.';
+}
+
+
 function popupPrev(p){
   if(!p.prev || !p.prev.length) return '';
   const filas = p.prev.slice().reverse().slice(0, 6).map(function(v){
@@ -2508,8 +2657,13 @@ function render(mantenerVista){
   // columna llenaba la barra sin aportar. El detalle sigue en el tooltip.
   const juntos = ['Cancelado','Suspendido'];
   const nJuntos = juntos.reduce(function(a,e){ return a + (tally[e]||0); }, 0);
-  const bloque = function(n, txt, color, tit, cls){
-    return '<span class="sbloque '+(cls||'')+'" title="'+escR(tit||txt)+'">'
+  /* Cada cifra abre su desglose. Se hace clicable la barra que ya existia en
+     vez de agregar seis botones nuevos: la cabecera ya esta llena, y el numero
+     es justamente lo que uno mira antes de querer el detalle. */
+  const bloque = function(n, txt, color, tit, cls, est){
+    return '<span class="sbloque '+(cls||'')+(est?' clic':'')+'"'
+      + (est ? ' onclick="abrirEst(\''+est+'\')"' : '')
+      + ' title="'+escR(tit||txt)+(est?' · toca para ver el detalle':'')+'">'
       + '<span class="snum" style="color:'+color+'">'+n+'</span>'
       + '<span class="stxt">'+escR(txt)+'</span></span>';
   };
@@ -2517,14 +2671,16 @@ function render(mantenerVista){
                      'Pendiente':'#dbeafe', 'No Realizada':'#fca5a5' };
   document.getElementById('stats').innerHTML =
       bloque(totalAct, 'actividades',
-             '#fff', 'total con los filtros de ciudad, franja y técnico', 'tot')
+             '#fff', 'total con los filtros de ciudad, franja y técnico', 'tot',
+             '__TODAS__')
     + bloque(nTec, nTec === 1 ? 'técnico' : 'técnicos', '#dbeafe')
     + vistos.filter(function(e){ return juntos.indexOf(e) < 0; })
         .map(function(e){ return bloque(tally[e], e.toLowerCase(),
-                                        colorEst[e] || '#dbeafe', e); }).join('')
+                                        colorEst[e] || '#dbeafe', e, '', e); }).join('')
     + (nJuntos ? bloque(nJuntos, 'canc/susp', '#9ca3af',
         juntos.filter(function(e){ return tally[e]; })
-              .map(function(e){ return tally[e]+' '+e; }).join(' · ')) : '');
+              .map(function(e){ return tally[e]+' '+e; }).join(' · '),
+        '', '__CANCSUSP__') : '');
   // En el refresco automatico NO se reencuadra el mapa: si estabas mirando
   // un sector con zoom, se respeta donde tenias la vista.
   if(bounds.length && !mantenerVista) map.fitBounds(bounds,{padding:[40,40]});
