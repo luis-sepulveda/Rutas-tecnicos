@@ -2478,18 +2478,23 @@ function actividadesDeEstado(est){
   return out;
 }
 
+/* La barra se mide contra el TOTAL, no contra el valor mas alto. Con el maximo,
+   cinco tecnicos con una actividad cada uno daban cinco barras llenas, como si
+   cada uno tuviera muchisimas; midiendo contra el total quedan en 20% y se lee
+   lo que de verdad representan. El ancho coincide asi con el porcentaje que
+   dice la fila, que es lo que uno espera al mirarlas. */
 function barras(cuenta, total, color){
   const claves = Object.keys(cuenta).sort(function(a,b){ return cuenta[b]-cuenta[a]; });
   if(!claves.length) return '';
-  const max = cuenta[claves[0]];
   return claves.map(function(k){
     const n = cuenta[k];
+    const pct = total ? n*100/total : 0;
     return '<div class="bfila">'
       + '<span class="bety" title="'+escR(k)+'">'+escR(k)+'</span>'
       + '<span class="bpista"><span class="bbar" style="width:'
-      +   Math.max(2, Math.round(n*100/max))+'%;background:'+color+'"></span></span>'
+      +   Math.max(2, Math.round(pct))+'%;background:'+color+'"></span></span>'
       + '<span class="bnum">'+n+'</span>'
-      + '<span class="bpct">'+(total ? (n*100/total).toFixed(1)+'%' : '')+'</span>'
+      + '<span class="bpct">'+(total ? pct.toFixed(1)+'%' : '')+'</span>'
       + '</div>';
   }).join('');
 }
@@ -2512,7 +2517,8 @@ function renderEst(){
   const nombre = estActual === '__TODAS__' ? 'Todas las actividades'
                : (estActual === '__CANCSUSP__' ? 'Canceladas y suspendidas' : estActual);
 
-  document.getElementById('estTitulo').textContent = '📊 ' + nombre + ' (' + total + ')';
+  const tit = document.getElementById('estTitulo');
+  tit.textContent = '📊 ' + nombre + ' (' + total + ')';
 
   // chips: reparto por estado cuando se abrio el total, y por ciudad siempre
   const porEstado = {}, porCiudad = {}, porFranja = {};
@@ -2538,20 +2544,37 @@ function renderEst(){
     if(x.p.cie) porMotivo[x.p.cie] = (porMotivo[x.p.cie]||0)+1;
   });
 
-  let html = '<div class="bcaja"><div class="btit">TIPO DE ACTIVIDAD</div>'
-           + barras(porTipo, total, '#f87171') + '</div>';
+  /* El panel se tine del color del estado que se abrio: rojo en No Realizada,
+     verde en Completado, azul en Pendiente. Asi el color no decora, dice donde
+     estas parado, y es el mismo con el que se pintan la cifra de arriba y los
+     pines del mapa. */
+  const paleta = {
+    'No Realizada': ['#dc2626','#f87171','#fca5a5'],
+    'Completado':   ['#1d4ed8','#60a5fa','#93c5fd'],
+    'Iniciado':     ['#059669','#34d399','#6ee7b7'],
+    'en ruta':      ['#c2410c','#fb923c','#fdba74'],
+    'Pendiente':    ['#4338ca','#818cf8','#c7d2fe'],
+    '__CANCSUSP__': ['#4b5563','#9ca3af','#d1d5db'],
+    '__TODAS__':    ['#7c3aed','#a78bfa','#ddd6fe']
+  };
+  const pal = paleta[estActual] || paleta['__TODAS__'];
+  const grad = 'linear-gradient(90deg,'+pal[0]+','+pal[1]+')';
+
+  let html = '<div class="bcaja"><div class="btit" style="color:'+pal[2]+'">TIPO DE ACTIVIDAD</div>'
+           + barras(porTipo, total, grad) + '</div>';
 
   const nMot = Object.keys(porMotivo).reduce(function(a,k){ return a+porMotivo[k]; }, 0);
   if(nMot){
-    html += '<div class="bcaja"><div class="btit">CÓDIGO DE CIERRE'
+    html += '<div class="bcaja"><div class="btit" style="color:'+pal[2]+'">CÓDIGO DE CIERRE'
          +  (nMot < total ? ' <span class="bsub">· '+nMot+' de '+total
              +' con código registrado</span>' : '') + '</div>'
-         + barras(porMotivo, nMot, '#fb923c') + '</div>';
+         + barras(porMotivo, nMot, grad) + '</div>';
   }
 
-  html += '<div class="bcaja"><div class="btit">POR TÉCNICO</div>'
-        + barras(porTec, total, '#60a5fa') + '</div>';
+  html += '<div class="bcaja"><div class="btit" style="color:'+pal[2]+'">POR TÉCNICO</div>'
+        + barras(porTec, total, grad) + '</div>';
 
+  tit.style.color = pal[2];
   document.getElementById('listaEst').innerHTML = total ? html
     : '<div class="vacio">No hay actividades en este estado con los filtros puestos.</div>';
 
