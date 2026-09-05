@@ -495,19 +495,25 @@
     padding:11px 13px; margin-bottom:10px; }
   .btit { color:#93c5fd; font-size:10.5px; font-weight:700; letter-spacing:.5px; margin-bottom:8px; }
   .bsub { color:#8ab4dd; font-weight:normal; letter-spacing:0; }
-  /* La pista de la barra se corta a 340px en vez de estirarse hasta el borde:
-     con el ancho completo, una barra del 8% dejaba medio panel en blanco entre
-     su punta y el numero, y seguir la fila con la vista costaba. Ademas se
-     agrega una guia punteada tenue desde donde termina la pista hasta la cifra,
-     que es el recurso de siempre en las tablas de indices. */
-  .bfila { display:grid; grid-template-columns:150px minmax(0,340px) 1fr 34px 46px;
-    gap:9px; align-items:center; padding:3px 0; font-size:12px; }
-  .bety { color:#dbeafe; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-  .bpista { background:#0a1930; border-radius:4px; height:11px; overflow:hidden; }
+  /* El numero va PEGADO al final de su barra, no en una columna al borde del
+     panel. Con la columna fija, una fila de 1,8% dejaba media pantalla en
+     blanco entre la punta de la barra y su cifra, y seguir la linea con la
+     vista costaba.
+
+     Lo que se pierde: las cifras ya no quedan alineadas entre filas, asi que
+     compararlas de un vistazo cuesta un poco mas. Se elige a proposito: aca
+     importa mas leer cada fila que comparar columnas, y el porcentaje ya
+     ordena la lectura. */
+  .bfila { display:flex; align-items:center; gap:9px; padding:3px 0; font-size:12px; }
+  .bety { color:#dbeafe; width:150px; flex-shrink:0;
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  /* la barra ya no vive dentro de una pista: es ella misma la que ocupa su
+     porcentaje del ancho disponible, y el numero viene detras */
+  .bbar { height:11px; border-radius:4px; flex-shrink:0; }
   .bguia { border-bottom:1px dotted #1e3a5f; height:1px; }
   .bbar { display:block; height:100%; border-radius:4px; }
-  .bnum { color:#fff; font-weight:700; text-align:right; }
-  .bpct { color:#8ab4dd; font-size:10.5px; text-align:right; }
+  .bnum { color:#fff; font-weight:700; flex-shrink:0; }
+  .bpct { color:#8ab4dd; font-size:10.5px; flex-shrink:0; }
   /* Estado de la jornada */
   #modalJor { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); }
   #modalJor.abierto { display:flex; align-items:flex-start; justify-content:center; padding:4vh 2vw; }
@@ -2533,11 +2539,12 @@ function barras(cuenta, total, color){
   return claves.map(function(k){
     const n = cuenta[k];
     const pct = total ? n*100/total : 0;
+    /* El 55% es el ancho maximo que puede ocupar una barra dentro de la fila.
+       Sin ese tope, una de 100% empujaria el numero fuera del panel. */
     return '<div class="bfila">'
       + '<span class="bety" title="'+escR(k)+'">'+escR(k)+'</span>'
-      + '<span class="bpista"><span class="bbar" style="width:'
-      +   Math.max(2, Math.round(pct))+'%;background:'+color+'"></span></span>'
-      + '<span class="bguia"></span>'
+      + '<span class="bbar" style="width:'+Math.max(0.6, pct*0.55)
+      +   '%;background:'+color+'"></span>'
       + '<span class="bnum">'+n+'</span>'
       + '<span class="bpct">'+(total ? pct.toFixed(1)+'%' : '')+'</span>'
       + '</div>';
