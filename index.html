@@ -125,6 +125,17 @@
   body.mapa-claro .leaflet-popup-content-wrapper,
   body.mapa-claro .leaflet-popup-tip { background:#fff; color:#111827; }
   body.mapa-claro .pp b { color:#111827; }
+  /* Las pildoras de estado tienen fondo oscuro propio (verde, naranjo, rojo).
+     Al pasar el popup a blanco heredaban el texto negro y quedaban negro sobre
+     azul: ilegibles. Se les fija el texto en blanco, que es lo que tenian
+     cuando el popup era oscuro. */
+  body.mapa-claro .pp .est { color:#fff; }
+  /* Mismo caso en el bloque de caidas anteriores: el morado claro y el gris
+     estaban elegidos contra fondo oscuro. Sobre blanco se lavan. */
+  body.mapa-claro .pp span[style*="#94a3b8"] { color:#6b7280 !important; }
+  body.mapa-claro .pp div[style*="#94a3b8"] { color:#6b7280 !important; }
+  body.mapa-claro .pp b[style*="#c4b5fd"] { color:#6d28d9 !important; }
+  body.mapa-claro .pp div[style*="#334155"] { border-top-color:#e5e7eb !important; }
   .num-icon { display:flex; align-items:center; justify-content:center; border-radius:50%; color:#fff; font-weight:bold; font-size:12px; border:2px solid #fff; box-shadow:0 1px 4px rgba(0,0,0,.6); width:26px; height:26px; }
   .mk-iniciado { border:3px solid #4ade80 !important; box-shadow:0 0 10px 3px rgba(74,222,128,.9) !important; }
   /* Completado y no realizada son trabajo que ya paso: se atenuan para que lo
