@@ -495,10 +495,16 @@
     padding:11px 13px; margin-bottom:10px; }
   .btit { color:#93c5fd; font-size:10.5px; font-weight:700; letter-spacing:.5px; margin-bottom:8px; }
   .bsub { color:#8ab4dd; font-weight:normal; letter-spacing:0; }
-  .bfila { display:grid; grid-template-columns:150px 1fr 34px 46px; gap:9px;
-    align-items:center; padding:3px 0; font-size:12px; }
+  /* La pista de la barra se corta a 340px en vez de estirarse hasta el borde:
+     con el ancho completo, una barra del 8% dejaba medio panel en blanco entre
+     su punta y el numero, y seguir la fila con la vista costaba. Ademas se
+     agrega una guia punteada tenue desde donde termina la pista hasta la cifra,
+     que es el recurso de siempre en las tablas de indices. */
+  .bfila { display:grid; grid-template-columns:150px minmax(0,340px) 1fr 34px 46px;
+    gap:9px; align-items:center; padding:3px 0; font-size:12px; }
   .bety { color:#dbeafe; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
   .bpista { background:#0a1930; border-radius:4px; height:11px; overflow:hidden; }
+  .bguia { border-bottom:1px dotted #1e3a5f; height:1px; }
   .bbar { display:block; height:100%; border-radius:4px; }
   .bnum { color:#fff; font-weight:700; text-align:right; }
   .bpct { color:#8ab4dd; font-size:10.5px; text-align:right; }
@@ -517,8 +523,8 @@
     background:#0a1930; border:1px solid #1e3a5f; }
   .jbar span { display:block; height:100%; }
   .jleg { color:#b8d4ee; font-size:11px; margin:6px 0 12px; }
-  .jfila { display:grid; grid-template-columns:1fr 44px 54px; gap:8px;
-    padding:3px 0; font-size:12px; border-bottom:1px solid #16294a; }
+  .jfila { display:grid; grid-template-columns:auto 1fr 44px 54px; gap:8px;
+    align-items:center; padding:3px 0; font-size:12px; border-bottom:1px solid #16294a; }
   .jfila:last-child { border-bottom:none; }
   .jety { color:#dbeafe; }
   .jbnum { color:#fff; font-weight:700; text-align:right; }
@@ -2531,6 +2537,7 @@ function barras(cuenta, total, color){
       + '<span class="bety" title="'+escR(k)+'">'+escR(k)+'</span>'
       + '<span class="bpista"><span class="bbar" style="width:'
       +   Math.max(2, Math.round(pct))+'%;background:'+color+'"></span></span>'
+      + '<span class="bguia"></span>'
       + '<span class="bnum">'+n+'</span>'
       + '<span class="bpct">'+(total ? pct.toFixed(1)+'%' : '')+'</span>'
       + '</div>';
@@ -2611,6 +2618,7 @@ function renderJornada(){
   html += '<div class="bcaja"><div class="btit">DÓNDE ESTÁ CADA ACTIVIDAD</div>'
     + orden.filter(function(e){ return cuenta[e]; }).map(function(e){
         return '<div class="jfila"><span class="jety">'+escR(e)+'</span>'
+          + '<span class="bguia"></span>'
           + '<span class="jbnum">'+cuenta[e]+'</span>'
           + '<span class="jbpct">'+(total?(cuenta[e]*100/total).toFixed(1)+'%':'')+'</span>'
           + '</div>';
