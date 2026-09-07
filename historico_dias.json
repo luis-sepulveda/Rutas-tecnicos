@@ -20,23 +20,23 @@
    "reagendadas": 4
   },
   "07-09-2026": {
-   "hasta": "17:10",
-   "actividades": 125,
+   "hasta": "17:25",
+   "actividades": 127,
    "tecnicos": 27,
    "estados": {
-    "Completado": 64,
-    "Iniciado": 20,
-    "Pendiente": 4,
+    "Completado": 66,
+    "Iniciado": 19,
     "Cancelado": 11,
-    "Suspendido": 6,
+    "Suspendido": 7,
     "No Realizada": 17,
-    "en ruta": 3
+    "Pendiente": 3,
+    "en ruta": 4
    },
-   "rgu": 180.7,
+   "rgu": 182.7,
    "caidas_total": 6,
    "caidas_activas": 6,
    "caidas_resueltas": 0,
-   "nuevas": 49,
+   "nuevas": 50,
    "al_bucket": 11,
    "repetidas": 21,
    "reagendadas": 2,
@@ -99,8 +99,17 @@
     ],
     "nuevas": [
      {
+      "o": "1-3NPXDRVP",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "17:26",
+      "d": "AV LA PALMA 151 EDIF. 4 DEPTO 316, VILLA ALEMANA",
+      "e": "en ruta"
+     },
+     {
       "o": "1-3NPU43BU",
-      "tec": "ALFREDO ALCAYAGA F",
+      "tec": "LUIS MARTIN NUÑEZ",
       "cat": "Alta 1 Play",
       "f": "16-19",
       "hi": "17:08",
@@ -141,7 +150,7 @@
       "f": "16-19",
       "hi": "17:18",
       "d": "FERNANDO TORTI 415, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3NPSO6NT",
@@ -159,7 +168,7 @@
       "f": "16-19",
       "hi": "16:21",
       "d": "PJE 5 (PRINCIPAL Y TRABAJ 752, QUILPUE",
-      "e": "Iniciado"
+      "e": "Suspendido"
      },
      {
       "o": "1-3NPR43TA",
@@ -817,5 +826,5 @@
    }
   }
  },
- "generado": "07-09-2026 17:10"
+ "generado": "07-09-2026 17:25"
 }
