@@ -1,20 +1,74 @@
 {
-  "actualizado": "2026-09-07T14:29:53",
+  "actualizado": "2026-09-07T15:00:13",
   "resumen": {
-    "reagendada": 2,
+    "sin informacion": 3,
     "?": 1,
-    "sin informacion": 1
+    "reagendada": 1
   },
   "estados": {
+    "1-3NPQ6BEF": {
+      "tec": "ALFREDO ALCAYAGA F",
+      "cat": "Alta 2 Play",
+      "franja_original": "16-19",
+      "d": "PJE 1 2935 EDIF. C DEPTO 32, QUILPUE",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "PJE 1 2935",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "cancelada",
+            "color": "rgb(128, 255, 128)",
+            "ot": "1-3NLSKPCP",
+            "franja": "10-13",
+            "texto": "1-3NLSKPCP - 10-13-AltaSab, 5 Sep"
+          },
+          {
+            "estado": "?",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3NKYNMEI",
+            "franja": "10-13",
+            "texto": "1-3NKYNMEI - 10-13-ReparaciónMar, 1 Sep"
+          },
+          {
+            "estado": "gestionada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3NKU9T0A",
+            "franja": "10-13",
+            "texto": "1-3NKU9T0A - 10-13-AltaMar, 1 Sep"
+          },
+          {
+            "estado": "gestionada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3NHR87VO",
+            "franja": "10-13",
+            "texto": "1-3NHR87VO - 10-13-AltaLun, 31 Ago"
+          },
+          {
+            "estado": "cancelada",
+            "color": "rgb(128, 255, 128)",
+            "ot": "1-3NJTMLIQ",
+            "franja": "16-19",
+            "texto": "1-3NJTMLIQ - 16-19-ReparaciónSab, 29 Ago"
+          },
+          {
+            "estado": "?",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3MQME3M4",
+            "franja": "10-13",
+            "texto": "1-3MQME3M4 - 10-13-AltaJue, 23 Jul"
+          }
+        ]
+      }
+    },
     "1-3NPPOVNZ": {
       "tec": "GEEYSER PEREZ O",
       "cat": "Downgrade promoción",
       "franja_original": "13-16",
       "d": "HOLANDA 528, QUILPUE",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3NPPOVNZ - 13-16-Downgrade promoción",
-      "franja_nueva": "13-16"
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA"
     },
     "1-3NOZ17DA": {
       "tec": "KEVIN TAPIA RETAMAL",
