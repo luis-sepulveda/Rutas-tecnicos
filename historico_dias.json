@@ -20,23 +20,23 @@
    "reagendadas": 4
   },
   "07-09-2026": {
-   "hasta": "16:30",
-   "actividades": 120,
+   "hasta": "16:35",
+   "actividades": 122,
    "tecnicos": 27,
    "estados": {
-    "Completado": 57,
-    "Iniciado": 21,
+    "Completado": 59,
+    "Iniciado": 19,
     "Cancelado": 10,
     "Suspendido": 5,
     "No Realizada": 16,
-    "en ruta": 5,
-    "Pendiente": 6
+    "en ruta": 6,
+    "Pendiente": 7
    },
-   "rgu": 174.7,
+   "rgu": 177.7,
    "caidas_total": 5,
    "caidas_activas": 5,
    "caidas_resueltas": 0,
-   "nuevas": 46,
+   "nuevas": 48,
    "al_bucket": 11,
    "repetidas": 21,
    "reagendadas": 2,
@@ -90,6 +90,24 @@
     ],
     "nuevas": [
      {
+      "o": "1-3NPWG7V8",
+      "tec": "LEONEL HERNÁNDEZ OJE",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "17:02",
+      "d": "HORNOPIREN 2948 CASA, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3NPWIH1O",
+      "tec": "JUAN ARRIAGADA C",
+      "cat": "Migración 2 Play",
+      "f": "16-19",
+      "hi": "17:10",
+      "d": "EL RINCON DE LOS ZORZALES 668, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3NPVIZH2",
       "tec": "ESTEBAN PIZARRO QUINTANA",
       "cat": "Reparación",
@@ -114,7 +132,7 @@
       "f": "16-19",
       "hi": "18:33",
       "d": "TRONCOS VIEJOS 2025, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3NPRR6LR",
@@ -221,7 +239,7 @@
       "f": "13-16",
       "hi": "13:47",
       "d": "WILLIAMSON 395, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3NPNXT3G",
@@ -230,7 +248,7 @@
       "f": "13-16",
       "hi": "14:59",
       "d": "PJE LAS HIJUELAS 2639, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3NPNVZRD",
@@ -747,7 +765,7 @@
       "o": "1-3NPKZHMH",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:37",
+      "hi": "17:49",
       "d": "LAS ACACIAS 730 DEPTO 614, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "YENDER BOSCAN CADENAS",
@@ -781,5 +799,5 @@
    }
   }
  },
- "generado": "07-09-2026 16:30"
+ "generado": "07-09-2026 16:35"
 }
