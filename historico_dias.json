@@ -20,23 +20,23 @@
    "reagendadas": 4
   },
   "07-09-2026": {
-   "hasta": "16:40",
-   "actividades": 123,
+   "hasta": "16:50",
+   "actividades": 124,
    "tecnicos": 27,
    "estados": {
     "Completado": 59,
-    "Iniciado": 20,
-    "Cancelado": 10,
+    "Iniciado": 21,
+    "Pendiente": 7,
+    "Cancelado": 11,
     "Suspendido": 6,
-    "No Realizada": 16,
-    "en ruta": 5,
-    "Pendiente": 7
+    "No Realizada": 17,
+    "en ruta": 3
    },
-   "rgu": 178.7,
-   "caidas_total": 5,
-   "caidas_activas": 5,
+   "rgu": 179.7,
+   "caidas_total": 6,
+   "caidas_activas": 6,
    "caidas_resueltas": 0,
-   "nuevas": 48,
+   "nuevas": 49,
    "al_bucket": 11,
    "repetidas": 21,
    "reagendadas": 2,
@@ -70,6 +70,15 @@
       "e": "Pendiente"
      },
      {
+      "o": "1-3NPWG7V8",
+      "tec": "LEONEL HERNÁNDEZ OJE",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "17:02",
+      "d": "HORNOPIREN 2948 CASA, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3NO46F3G",
       "tec": "NICOLAS MOYANO R",
       "cat": "Downgrade promoción",
@@ -89,6 +98,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3NPU43BU",
+      "tec": "ALFREDO ALCAYAGA F",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "17:08",
+      "d": "LOBO DE MAR 1512, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3NPWG7V8",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -552,7 +570,7 @@
       "f": "16-19",
       "hi": "16:25",
       "d": "PJE DOS 1054, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "CRISTOBAL MIRANDA VALENC",
       "visitas": 1,
       "ult_fecha": "05-08-2026",
@@ -799,5 +817,5 @@
    }
   }
  },
- "generado": "07-09-2026 16:40"
+ "generado": "07-09-2026 16:50"
 }
