@@ -20,23 +20,23 @@
    "reagendadas": 4
   },
   "07-09-2026": {
-   "hasta": "16:10",
-   "actividades": 119,
+   "hasta": "16:25",
+   "actividades": 120,
    "tecnicos": 27,
    "estados": {
-    "Completado": 56,
+    "Completado": 57,
     "Iniciado": 19,
-    "Pendiente": 9,
     "Cancelado": 10,
     "Suspendido": 5,
-    "No Realizada": 14,
-    "en ruta": 6
+    "No Realizada": 16,
+    "en ruta": 7,
+    "Pendiente": 6
    },
-   "rgu": 173.7,
+   "rgu": 174.7,
    "caidas_total": 5,
    "caidas_activas": 5,
    "caidas_resueltas": 0,
-   "nuevas": 45,
+   "nuevas": 46,
    "al_bucket": 11,
    "repetidas": 21,
    "reagendadas": 2,
@@ -89,6 +89,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3NPVIZH2",
+      "tec": "ESTEBAN PIZARRO QUINTANA",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "17:28",
+      "d": "BUENOS AIRES 1705, VILLA ALEMANA",
+      "e": "en ruta"
+     },
      {
       "o": "1-3NPTXSKZ",
       "tec": "LUIS CASTRO TORRES",
@@ -203,7 +212,7 @@
       "f": "16-19",
       "hi": "16:00",
       "d": "ALEMPARTE 0282, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3NPOED2W",
@@ -266,7 +275,7 @@
       "f": "13-16",
       "hi": "15:09",
       "d": "CHAMPAGNAT 385 CASA 1, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3NPLTGYH",
@@ -523,7 +532,7 @@
       "o": "1-3NNPE2SX",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "16:13",
+      "hi": "16:28",
       "d": "PJE DOS 1054, VILLA ALEMANA",
       "e": "en ruta",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -692,7 +701,7 @@
       "f": "16-19",
       "hi": "16:12",
       "d": "ALEMPARTE 0282, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "LUIS MARTIN NUÑEZ",
       "visitas": 1,
       "ult_fecha": "07-09-2026",
@@ -738,7 +747,7 @@
       "o": "1-3NPKZHMH",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:26",
+      "hi": "17:37",
       "d": "LAS ACACIAS 730 DEPTO 614, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "YENDER BOSCAN CADENAS",
@@ -772,5 +781,5 @@
    }
   }
  },
- "generado": "07-09-2026 16:10"
+ "generado": "07-09-2026 16:25"
 }
