@@ -826,17 +826,17 @@
    }
   },
   "08-09-2026": {
-   "hasta": "16:29",
+   "hasta": "16:34",
    "actividades": 109,
    "tecnicos": 22,
    "estados": {
-    "Completado": 52,
-    "Pendiente": 19,
+    "Completado": 55,
+    "Iniciado": 13,
+    "Pendiente": 13,
     "Suspendido": 2,
-    "Iniciado": 17,
     "Cancelado": 4,
-    "No Realizada": 13,
-    "en ruta": 2
+    "No Realizada": 15,
+    "en ruta": 7
    },
    "rgu": 160.0,
    "caidas_total": 6,
@@ -965,7 +965,7 @@
       "f": "13-16",
       "hi": "14:32",
       "d": "LIVERPOOL 595, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3NQE7BXX",
@@ -983,7 +983,7 @@
       "f": "13-16",
       "hi": "14:07",
       "d": "LOS PERALES 3128, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3NQDJYCK",
@@ -1037,7 +1037,7 @@
       "f": "10-13",
       "hi": "14:31",
       "d": "CALLE 6 790 CASA A5, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3NQCJUK4",
@@ -1145,7 +1145,7 @@
       "f": "16-19",
       "hi": "18:10",
       "d": "PJE 817 764 EDIF. A DEPTO 22, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3NPTQJ15",
@@ -1162,9 +1162,9 @@
       "o": "1-3NQGHYWZ",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "16:30",
+      "hi": "16:29",
       "d": "COQUIMBO 5, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "ALFREDO ALCAYAGA F",
       "visitas": 2,
       "ult_fecha": "08-09-2026",
@@ -1246,9 +1246,9 @@
       "o": "1-3NQA2UDX",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "18:49",
+      "hi": "16:47",
       "d": "PJE 817 764 EDIF. A DEPTO 22, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "GEEYSER PEREZ O",
       "visitas": 1,
       "ult_fecha": "08-09-2026",
@@ -1340,5 +1340,5 @@
    }
   }
  },
- "generado": "08-09-2026 16:29"
+ "generado": "08-09-2026 16:34"
 }
