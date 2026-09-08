@@ -826,23 +826,23 @@
    }
   },
   "08-09-2026": {
-   "hasta": "14:39",
-   "actividades": 105,
+   "hasta": "14:49",
+   "actividades": 106,
    "tecnicos": 22,
    "estados": {
     "Completado": 38,
-    "en ruta": 3,
-    "Pendiente": 39,
+    "Iniciado": 13,
+    "Pendiente": 36,
     "Suspendido": 2,
     "Cancelado": 4,
     "No Realizada": 10,
-    "Iniciado": 9
+    "en ruta": 3
    },
-   "rgu": 155.0,
+   "rgu": 156.0,
    "caidas_total": 6,
    "caidas_activas": 6,
    "caidas_resueltas": 0,
-   "nuevas": 25,
+   "nuevas": 26,
    "al_bucket": 12,
    "repetidas": 13,
    "reagendadas": 2,
@@ -904,6 +904,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3NQJK8S0",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "15:01",
+      "d": "SAN DIEGO 2440, VILLA ALEMANA",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3NQHE102",
       "tec": "FREDERIC OVALLE V",
@@ -1028,7 +1037,7 @@
       "f": "13-16",
       "hi": "13:51",
       "d": "LAGO LANALHUE 2442, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3NQCRIBG",
@@ -1135,7 +1144,7 @@
       "o": "1-3NQFR25U",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "18:45",
       "d": "EL PATAGUAL 9994, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -1219,7 +1228,7 @@
       "o": "1-3NQA2UDX",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "19:07",
+      "hi": "18:56",
       "d": "PJE 817 764 EDIF. A DEPTO 22, QUILPUE",
       "e": "Pendiente",
       "tec": "GEEYSER PEREZ O",
@@ -1313,5 +1322,5 @@
    }
   }
  },
- "generado": "08-09-2026 14:39"
+ "generado": "08-09-2026 14:49"
 }
