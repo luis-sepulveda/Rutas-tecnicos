@@ -826,25 +826,25 @@
    }
   },
   "08-09-2026": {
-   "hasta": "12:23",
-   "actividades": 82,
+   "hasta": "12:53",
+   "actividades": 97,
    "tecnicos": 22,
    "estados": {
-    "Completado": 19,
-    "Iniciado": 19,
-    "Pendiente": 34,
-    "No Realizada": 4,
-    "en ruta": 2,
+    "Completado": 24,
+    "Iniciado": 15,
+    "Pendiente": 46,
+    "No Realizada": 7,
+    "en ruta": 1,
     "Cancelado": 3,
     "Suspendido": 1
    },
-   "rgu": 119.5,
+   "rgu": 142.0,
    "caidas_total": 5,
    "caidas_activas": 5,
    "caidas_resueltas": 0,
    "nuevas": 22,
    "al_bucket": 12,
-   "repetidas": 9,
+   "repetidas": 13,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
@@ -960,12 +960,12 @@
      },
      {
       "o": "1-3NQBB3IJ",
-      "tec": "FREDERIC OVALLE V",
+      "tec": "JOSE CASTRO P",
       "cat": "Reparación",
       "f": "10-13",
       "hi": "12:43",
       "d": "CARIBE 229, QUILPUE",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3NQ9VDQG",
@@ -974,7 +974,7 @@
       "f": "10-13",
       "hi": "14:31",
       "d": "CALLE 6 790 CASA A5, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3NQCJUK4",
@@ -1096,16 +1096,16 @@
     ],
     "repetidas": [
      {
-      "o": "1-3NPS50JU",
-      "cat": "Alta 1 Play",
-      "f": "10-13",
-      "hi": "12:38",
-      "d": "COQUIMBO 5, QUILPUE",
+      "o": "1-3NQFR25U",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "EL PATAGUAL 9994, VILLA ALEMANA",
       "e": "Pendiente",
-      "tec": "CRISTOBAL SILVA LEIVA",
-      "visitas": 1,
-      "ult_fecha": "07-09-2026",
-      "ult_cierre": "Cliente reagenda"
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "visitas": 3,
+      "ult_fecha": "05-09-2026",
+      "ult_cierre": "Clte desiste motivo comercial"
      },
      {
       "o": "1-3NPUQ1SQ",
@@ -1120,15 +1120,51 @@
       "ult_cierre": "Sin apoyo vivienda-Pierrack"
      },
      {
+      "o": "1-3NPS50JU",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "12:56",
+      "d": "COQUIMBO 5, QUILPUE",
+      "e": "en ruta",
+      "tec": "DANIEL NAVARRETE E",
+      "visitas": 1,
+      "ult_fecha": "07-09-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3NPJL38O",
+      "cat": "Migración 1 Play",
+      "f": "16-19",
+      "hi": "17:19",
+      "d": "MARIA MERCEDES 1482 EDIF. 1 DEPTO 102, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "EDGAR VALERO C",
+      "visitas": 1,
+      "ult_fecha": "07-09-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3NNO4EGT",
       "cat": "Migración 2 Play",
       "f": "10-13",
       "hi": "11:59",
       "d": "LOS TREBOLES 55 CASA 26, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "ESTEBAN PIZARRO QUINTANA",
       "visitas": 1,
       "ult_fecha": "03-09-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3NQ9KRNQ",
+      "cat": "Reparación",
+      "f": "10-13",
+      "hi": "12:39",
+      "d": "GOMEZ CARRENO 865, QUILPUE",
+      "e": "Iniciado",
+      "tec": "ESTEBAN PIZARRO QUINTANA",
+      "visitas": 1,
+      "ult_fecha": "02-09-2026",
       "ult_cierre": "Cliente reagenda"
      },
      {
@@ -1156,22 +1192,22 @@
       "ult_cierre": "Direccion incorrecta"
      },
      {
-      "o": "1-3NQ9KRNQ",
+      "o": "1-3NQC2NRI",
       "cat": "Reparación",
-      "f": "10-13",
-      "hi": "12:39",
-      "d": "GOMEZ CARRENO 865, QUILPUE",
+      "f": "13-16",
+      "hi": "14:49",
+      "d": "HUANHUALI 1481 EDIF. 2 DEPTO 301, VILLA ALEMANA",
       "e": "Pendiente",
-      "tec": "LUIS CASTRO TORRES",
+      "tec": "JOSE CASTRO P",
       "visitas": 1,
-      "ult_fecha": "02-09-2026",
-      "ult_cierre": "Cliente reagenda"
+      "ult_fecha": "08-09-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3NPSWYTA",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:55",
+      "hi": "15:01",
       "d": "OVALLE 1232, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS CASTRO TORRES",
@@ -1183,7 +1219,7 @@
       "o": "1-3NPXX2VR",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "14:03",
       "d": "ALMIRANTE WILSON 545, QUILPUE",
       "e": "Pendiente",
       "tec": "NICOLAS MOYANO R",
@@ -1195,13 +1231,25 @@
       "o": "1-3NQA2UDX",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:01",
       "d": "PJE 817 764 EDIF. A DEPTO 22, QUILPUE",
       "e": "Pendiente",
       "tec": "NICOLAS MOYANO R",
       "visitas": 1,
       "ult_fecha": "08-09-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3NQ2W7A1",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "18:23",
+      "d": "EL ALAZAN 3155, QUILPUE",
+      "e": "Pendiente",
+      "tec": "NICOLAS MOYANO R",
+      "visitas": 2,
+      "ult_fecha": "26-08-2026",
+      "ult_cierre": "Cliente reagenda"
      }
     ],
     "reagendadas": [
@@ -1229,5 +1277,5 @@
    }
   }
  },
- "generado": "08-09-2026 12:23"
+ "generado": "08-09-2026 12:53"
 }
