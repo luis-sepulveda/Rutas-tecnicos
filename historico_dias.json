@@ -826,17 +826,17 @@
    }
   },
   "08-09-2026": {
-   "hasta": "16:49",
+   "hasta": "16:59",
    "actividades": 109,
    "tecnicos": 22,
    "estados": {
-    "Completado": 57,
-    "Iniciado": 16,
-    "Pendiente": 10,
-    "Suspendido": 2,
-    "Cancelado": 4,
+    "Completado": 58,
+    "No Realizada": 17,
     "en ruta": 5,
-    "No Realizada": 15
+    "Suspendido": 2,
+    "Iniciado": 16,
+    "Pendiente": 7,
+    "Cancelado": 4
    },
    "rgu": 160.0,
    "caidas_total": 6,
@@ -906,7 +906,7 @@
      },
      {
       "o": "1-3NQLNOB9",
-      "tec": "NICOLAS MOYANO R",
+      "tec": "JORDAN ROA PEREZ",
       "cat": "Alta 1 Play",
       "f": "16-19",
       "hi": "18:31",
@@ -1145,7 +1145,7 @@
       "f": "16-19",
       "hi": "18:10",
       "d": "PJE 817 764 EDIF. A DEPTO 22, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3NPTQJ15",
@@ -1164,7 +1164,7 @@
       "f": "13-16",
       "hi": "16:29",
       "d": "COQUIMBO 5, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "ALFREDO ALCAYAGA F",
       "visitas": 2,
       "ult_fecha": "08-09-2026",
@@ -1186,9 +1186,9 @@
       "o": "1-3NQ2W7A1",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "18:27",
+      "hi": "17:08",
       "d": "EL ALAZAN 3155, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "CRISTOBAL SILVA LEIVA",
       "visitas": 2,
       "ult_fecha": "26-08-2026",
@@ -1246,9 +1246,9 @@
       "o": "1-3NQA2UDX",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:47",
+      "hi": "16:51",
       "d": "PJE 817 764 EDIF. A DEPTO 22, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "GEEYSER PEREZ O",
       "visitas": 1,
       "ult_fecha": "08-09-2026",
@@ -1296,7 +1296,7 @@
       "f": "13-16",
       "hi": "16:20",
       "d": "OVALLE 1232, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "LEONEL HERNÁNDEZ OJE",
       "visitas": 1,
       "ult_fecha": "07-09-2026",
@@ -1308,7 +1308,7 @@
       "f": "13-16",
       "hi": "15:35",
       "d": "ALMIRANTE WILSON 545, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "NICOLAS MOYANO R",
       "visitas": 2,
       "ult_fecha": "28-08-2026",
@@ -1340,5 +1340,5 @@
    }
   }
  },
- "generado": "08-09-2026 16:49"
+ "generado": "08-09-2026 16:59"
 }
