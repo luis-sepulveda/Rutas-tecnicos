@@ -826,23 +826,22 @@
    }
   },
   "08-09-2026": {
-   "hasta": "12:58",
-   "actividades": 97,
+   "hasta": "13:08",
+   "actividades": 99,
    "tecnicos": 22,
    "estados": {
-    "Completado": 24,
-    "Iniciado": 15,
-    "Pendiente": 45,
-    "en ruta": 2,
+    "Completado": 25,
+    "Iniciado": 17,
+    "Pendiente": 46,
     "No Realizada": 7,
     "Cancelado": 3,
     "Suspendido": 1
    },
-   "rgu": 142.0,
+   "rgu": 144.0,
    "caidas_total": 5,
    "caidas_activas": 5,
    "caidas_resueltas": 0,
-   "nuevas": 22,
+   "nuevas": 24,
    "al_bucket": 12,
    "repetidas": 13,
    "reagendadas": 2,
@@ -895,6 +894,24 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3NQGA5LL",
+      "tec": "LEONEL HERNÁNDEZ OJE",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "13:02",
+      "d": "RIQUELME 1075 EDIF. B DEPTO 301, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
+      "o": "1-3NQGDHU7",
+      "tec": "ESTEBAN PIZARRO QUINTANA",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "15:06",
+      "d": "AV VICEPRESIDENTE BDO LEIGHTON 653 CASA B DEPTO B66, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3NQE6R48",
       "tec": "LUIS GATICA DAVILA",
@@ -965,7 +982,7 @@
       "f": "10-13",
       "hi": "12:43",
       "d": "CARIBE 229, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3NQ9VDQG",
@@ -1001,7 +1018,7 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "PRESBITERO OSVALDO LIRA PEREZ 212, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3NQASOF1",
@@ -1123,9 +1140,9 @@
       "o": "1-3NPS50JU",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "12:56",
+      "hi": "13:01",
       "d": "COQUIMBO 5, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "DANIEL NAVARRETE E",
       "visitas": 1,
       "ult_fecha": "07-09-2026",
@@ -1135,7 +1152,7 @@
       "o": "1-3NPJL38O",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "17:19",
+      "hi": "17:25",
       "d": "MARIA MERCEDES 1482 EDIF. 1 DEPTO 102, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "EDGAR VALERO C",
@@ -1195,7 +1212,7 @@
       "o": "1-3NQC2NRI",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:49",
+      "hi": "14:19",
       "d": "HUANHUALI 1481 EDIF. 2 DEPTO 301, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE CASTRO P",
@@ -1207,7 +1224,7 @@
       "o": "1-3NPSWYTA",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:01",
+      "hi": "15:19",
       "d": "OVALLE 1232, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS CASTRO TORRES",
@@ -1216,10 +1233,22 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3NQ2W7A1",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:30",
+      "d": "EL ALAZAN 3155, QUILPUE",
+      "e": "Pendiente",
+      "tec": "LUIS CASTRO TORRES",
+      "visitas": 2,
+      "ult_fecha": "26-08-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3NPXX2VR",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:03",
+      "hi": "14:28",
       "d": "ALMIRANTE WILSON 545, QUILPUE",
       "e": "Pendiente",
       "tec": "NICOLAS MOYANO R",
@@ -1231,25 +1260,13 @@
       "o": "1-3NQA2UDX",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:01",
+      "hi": "16:26",
       "d": "PJE 817 764 EDIF. A DEPTO 22, QUILPUE",
       "e": "Pendiente",
       "tec": "NICOLAS MOYANO R",
       "visitas": 1,
       "ult_fecha": "08-09-2026",
       "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3NQ2W7A1",
-      "cat": "Modificación de Servicio",
-      "f": "16-19",
-      "hi": "18:23",
-      "d": "EL ALAZAN 3155, QUILPUE",
-      "e": "Pendiente",
-      "tec": "NICOLAS MOYANO R",
-      "visitas": 2,
-      "ult_fecha": "26-08-2026",
-      "ult_cierre": "Cliente reagenda"
      }
     ],
     "reagendadas": [
@@ -1257,7 +1274,7 @@
       "o": "1-3NOCTIZA",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:01",
+      "hi": "16:13",
       "d": "LOURDES 1051 EDIF. F DEPTO 303, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JEAN ROODLY ORELIEN",
@@ -1277,5 +1294,5 @@
    }
   }
  },
- "generado": "08-09-2026 12:58"
+ "generado": "08-09-2026 13:08"
 }
