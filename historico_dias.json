@@ -826,26 +826,26 @@
    }
   },
   "08-09-2026": {
-   "hasta": "15:34",
-   "actividades": 94,
+   "hasta": "15:59",
+   "actividades": 109,
    "tecnicos": 22,
    "estados": {
-    "Completado": 40,
-    "Iniciado": 18,
-    "Pendiente": 17,
+    "Completado": 48,
+    "Iniciado": 14,
+    "Pendiente": 25,
     "Suspendido": 2,
+    "en ruta": 4,
     "Cancelado": 4,
-    "No Realizada": 11,
-    "en ruta": 2
+    "No Realizada": 12
    },
-   "rgu": 136.0,
+   "rgu": 160.0,
    "caidas_total": 6,
    "caidas_activas": 5,
    "caidas_resueltas": 1,
-   "nuevas": 26,
+   "nuevas": 29,
    "al_bucket": 18,
-   "repetidas": 10,
-   "reagendadas": 1,
+   "repetidas": 13,
+   "reagendadas": 2,
    "detalle": {
     "caidas": [
      {
@@ -896,22 +896,49 @@
     ],
     "nuevas": [
      {
+      "o": "1-3NQLX2QX",
+      "tec": "ALFREDO ALCAYAGA F",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "15:58",
+      "d": "COOPERACION 140 EDIF. 7 DEPTO 43, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
+      "o": "1-3NQLNOB9",
+      "tec": "NICOLAS MOYANO R",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "18:31",
+      "d": "PEDRO AGUIRRE CERDA 594 DEPTO 403, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3NQJOBCX",
+      "tec": "LUIS CASTRO TORRES",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "CALLE HERALDO ORREGO 3201 EDIF. A DEPTO 503, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3NQJK8S0",
       "tec": "ANTONHY MORALES MENDOZA",
       "cat": "Reparación",
       "f": "13-16",
       "hi": "15:01",
       "d": "SAN DIEGO 2440, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3NQHE102",
-      "tec": "FREDERIC OVALLE V",
+      "tec": "DANIEL NAVARRETE E",
       "cat": "Alta 1 Play",
       "f": "16-19",
       "hi": "18:19",
       "d": "COLOMBIA 738, QUILPUE",
-      "e": "Pendiente (ya no está)"
+      "e": "Pendiente"
      },
      {
       "o": "1-3NQGA5LL",
@@ -929,7 +956,7 @@
       "f": "13-16",
       "hi": "15:06",
       "d": "AV VICEPRESIDENTE BDO LEIGHTON 653 CASA B DEPTO B66, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3NQE6R48",
@@ -947,11 +974,11 @@
       "f": "13-16",
       "hi": "13:55",
       "d": "DIEGO DE ALMAGRO 371, QUILPUE",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3NQE0HGM",
-      "tec": "FREDERIC OVALLE V",
+      "tec": "EDGAR VALERO C",
       "cat": "Reparación",
       "f": "13-16",
       "hi": "14:07",
@@ -960,12 +987,12 @@
      },
      {
       "o": "1-3NQDJYCK",
-      "tec": "JOEL GUSTAVE GUSTA",
+      "tec": "ESTEBAN PIZARRO QUINTANA",
       "cat": "Alta 1 Play",
       "f": "13-16",
       "hi": "15:18",
       "d": "MATURANA 115 CASA 5, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3NPLO0DU",
@@ -1055,7 +1082,7 @@
       "f": "13-16",
       "hi": "14:12",
       "d": "GABRIEL DAZAROLA 1049, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3NQBI1IU",
@@ -1073,7 +1100,7 @@
       "f": "13-16",
       "hi": "15:11",
       "d": "PAUL HARRIS 1260, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3NQAPBR1",
@@ -1082,7 +1109,7 @@
       "f": "13-16",
       "hi": "15:32",
       "d": "PJE 2 (DEL JAZMIN) 2043 CASA Q, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3NQA4IDB",
@@ -1127,7 +1154,7 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "PJE JUANA ROSS 1061, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      }
     ],
     "repetidas": [
@@ -1135,13 +1162,37 @@
       "o": "1-3NQGHYWZ",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:51",
+      "hi": "16:55",
       "d": "COQUIMBO 5, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
       "visitas": 2,
       "ult_fecha": "08-09-2026",
       "ult_cierre": "Casa sin medidor-remarcador"
+     },
+     {
+      "o": "1-3NPJL38O",
+      "cat": "Migración 1 Play",
+      "f": "16-19",
+      "hi": "17:10",
+      "d": "MARIA MERCEDES 1482 EDIF. 1 DEPTO 102, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "visitas": 1,
+      "ult_fecha": "07-09-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3NQ2W7A1",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "18:29",
+      "d": "EL ALAZAN 3155, QUILPUE",
+      "e": "Pendiente",
+      "tec": "CRISTOBAL SILVA LEIVA",
+      "visitas": 2,
+      "ult_fecha": "26-08-2026",
+      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3NPUQ1SQ",
@@ -1195,7 +1246,7 @@
       "o": "1-3NQA2UDX",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "17:05",
+      "hi": "18:48",
       "d": "PJE 817 764 EDIF. A DEPTO 22, QUILPUE",
       "e": "Pendiente",
       "tec": "GEEYSER PEREZ O",
@@ -1228,10 +1279,22 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3NQFR25U",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "17:45",
+      "d": "EL PATAGUAL 9994, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JUAN ARRIAGADA C",
+      "visitas": 3,
+      "ult_fecha": "05-09-2026",
+      "ult_cierre": "Clte desiste motivo comercial"
+     },
+     {
       "o": "1-3NPSWYTA",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:57",
+      "hi": "16:05",
       "d": "OVALLE 1232, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -1243,9 +1306,9 @@
       "o": "1-3NPXX2VR",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:29",
+      "hi": "15:35",
       "d": "ALMIRANTE WILSON 545, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "NICOLAS MOYANO R",
       "visitas": 2,
       "ult_fecha": "28-08-2026",
@@ -1257,15 +1320,25 @@
       "o": "1-3NHW8SZJ",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:11",
       "d": "IGNACIO CARRERA PINTO 1484 EDIF. D DEPTO 101, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "ANTONHY MORALES MENDOZA",
+      "desde": "05-09-2026"
+     },
+     {
+      "o": "1-3NOCTIZA",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "17:48",
+      "d": "LOURDES 1051 EDIF. F DEPTO 303, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "CRISTOBAL MIRANDA VALENC",
       "desde": "05-09-2026"
      }
     ]
    }
   }
  },
- "generado": "08-09-2026 15:34"
+ "generado": "08-09-2026 15:59"
 }
