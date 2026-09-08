@@ -826,21 +826,21 @@
    }
   },
   "08-09-2026": {
-   "hasta": "14:03",
-   "actividades": 105,
+   "hasta": "14:24",
+   "actividades": 104,
    "tecnicos": 22,
    "estados": {
-    "Completado": 35,
-    "Iniciado": 8,
-    "Pendiente": 46,
-    "en ruta": 3,
-    "No Realizada": 9,
+    "Completado": 37,
+    "Pendiente": 40,
+    "Iniciado": 9,
+    "No Realizada": 10,
+    "en ruta": 4,
     "Cancelado": 3,
     "Suspendido": 1
    },
-   "rgu": 156.0,
-   "caidas_total": 5,
-   "caidas_activas": 5,
+   "rgu": 154.0,
+   "caidas_total": 6,
+   "caidas_activas": 6,
    "caidas_resueltas": 0,
    "nuevas": 25,
    "al_bucket": 12,
@@ -873,6 +873,15 @@
       "f": "10-13",
       "hi": "10:00",
       "d": "ITALIA 319, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3NQD8G0L",
+      "tec": "LEONEL HERNÁNDEZ OJE",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "16:10",
+      "d": "MANUEL BULNES 920 OFIC 307, QUILPUE",
       "e": "Pendiente"
      },
      {
@@ -929,7 +938,7 @@
       "f": "13-16",
       "hi": "14:32",
       "d": "LIVERPOOL 595, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3NQE7BXX",
@@ -1046,7 +1055,7 @@
       "f": "13-16",
       "hi": "14:12",
       "d": "GABRIEL DAZAROLA 1049, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3NQBI1IU",
@@ -1073,7 +1082,7 @@
       "f": "13-16",
       "hi": "15:32",
       "d": "PJE 2 (DEL JAZMIN) 2043 CASA Q, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3NQA4IDB",
@@ -1082,7 +1091,7 @@
       "f": "13-16",
       "hi": "15:37",
       "d": "BERLIN 1602 EDIF. D DEPTO 206, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "No Realizada"
      },
      {
       "o": "1-3NQD8G0L",
@@ -1091,7 +1100,7 @@
       "f": "13-16",
       "hi": "15:50",
       "d": "MANUEL BULNES 920 OFIC 307, QUILPUE",
-      "e": "Pendiente"
+      "e": "Pendiente (ya no está)"
      },
      {
       "o": "1-3NQBH0QG",
@@ -1113,7 +1122,7 @@
      },
      {
       "o": "1-3NPTQJ15",
-      "tec": "JOEL GUSTAVE GUSTA",
+      "tec": "MATÍAS JAQUE AG",
       "cat": "Alta Traslado",
       "f": "13-16",
       "hi": "14:00",
@@ -1162,7 +1171,7 @@
       "o": "1-3NPJL38O",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "18:10",
+      "hi": "18:20",
       "d": "MARIA MERCEDES 1482 EDIF. 1 DEPTO 102, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "EDGAR VALERO C",
@@ -1234,9 +1243,9 @@
       "o": "1-3NQC2NRI",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:17",
+      "hi": "14:19",
       "d": "HUANHUALI 1481 EDIF. 2 DEPTO 301, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JOSE CASTRO P",
       "visitas": 1,
       "ult_fecha": "08-09-2026",
@@ -1246,7 +1255,7 @@
       "o": "1-3NPSWYTA",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:15",
+      "hi": "15:30",
       "d": "OVALLE 1232, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS CASTRO TORRES",
@@ -1258,7 +1267,7 @@
       "o": "1-3NQ2W7A1",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:26",
+      "hi": "17:41",
       "d": "EL ALAZAN 3155, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS CASTRO TORRES",
@@ -1270,7 +1279,7 @@
       "o": "1-3NPXX2VR",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:42",
+      "hi": "15:28",
       "d": "ALMIRANTE WILSON 545, QUILPUE",
       "e": "Pendiente",
       "tec": "NICOLAS MOYANO R",
@@ -1281,28 +1290,28 @@
     ],
     "reagendadas": [
      {
-      "o": "1-3NOCTIZA",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "17:02",
-      "d": "LOURDES 1051 EDIF. F DEPTO 303, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JEAN ROODLY ORELIEN",
-      "desde": "05-09-2026"
-     },
-     {
       "o": "1-3NHW8SZJ",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "17:06",
       "d": "IGNACIO CARRERA PINTO 1484 EDIF. D DEPTO 101, VILLA ALEMANA",
       "e": "Pendiente",
-      "tec": "MATÍAS JAQUE AG",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "desde": "05-09-2026"
+     },
+     {
+      "o": "1-3NOCTIZA",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "17:13",
+      "d": "LOURDES 1051 EDIF. F DEPTO 303, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JEAN ROODLY ORELIEN",
       "desde": "05-09-2026"
      }
     ]
    }
   }
  },
- "generado": "08-09-2026 14:03"
+ "generado": "08-09-2026 14:24"
 }
