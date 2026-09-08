@@ -826,16 +826,16 @@
    }
   },
   "08-09-2026": {
-   "hasta": "13:53",
+   "hasta": "14:03",
    "actividades": 105,
    "tecnicos": 22,
    "estados": {
-    "Completado": 31,
-    "Iniciado": 13,
-    "Pendiente": 48,
-    "No Realizada": 8,
+    "Completado": 35,
+    "Iniciado": 8,
+    "Pendiente": 46,
+    "en ruta": 3,
+    "No Realizada": 9,
     "Cancelado": 3,
-    "en ruta": 1,
     "Suspendido": 1
    },
    "rgu": 156.0,
@@ -1010,7 +1010,7 @@
       "f": "13-16",
       "hi": "13:00",
       "d": "SAN AGUSTIN 1081, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3NQBHA4I",
@@ -1104,7 +1104,7 @@
      },
      {
       "o": "1-3NQA2UDX",
-      "tec": "NICOLAS MOYANO R",
+      "tec": "GEEYSER PEREZ O",
       "cat": "Alta 2 Play",
       "f": "16-19",
       "hi": "18:10",
@@ -1188,7 +1188,7 @@
       "f": "10-13",
       "hi": "12:39",
       "d": "GOMEZ CARRENO 865, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "ESTEBAN PIZARRO QUINTANA",
       "visitas": 1,
       "ult_fecha": "02-09-2026",
@@ -1207,6 +1207,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3NQA2UDX",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "19:07",
+      "d": "PJE 817 764 EDIF. A DEPTO 22, QUILPUE",
+      "e": "Pendiente",
+      "tec": "GEEYSER PEREZ O",
+      "visitas": 1,
+      "ult_fecha": "08-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3NPV7E2Z",
       "cat": "Alta 2 Play",
       "f": "10-13",
@@ -1222,9 +1234,9 @@
       "o": "1-3NQC2NRI",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:19",
+      "hi": "14:17",
       "d": "HUANHUALI 1481 EDIF. 2 DEPTO 301, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JOSE CASTRO P",
       "visitas": 1,
       "ult_fecha": "08-09-2026",
@@ -1258,24 +1270,12 @@
       "o": "1-3NPXX2VR",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:13",
+      "hi": "15:42",
       "d": "ALMIRANTE WILSON 545, QUILPUE",
       "e": "Pendiente",
       "tec": "NICOLAS MOYANO R",
       "visitas": 2,
       "ult_fecha": "28-08-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3NQA2UDX",
-      "cat": "Alta 2 Play",
-      "f": "16-19",
-      "hi": "17:11",
-      "d": "PJE 817 764 EDIF. A DEPTO 22, QUILPUE",
-      "e": "Pendiente",
-      "tec": "NICOLAS MOYANO R",
-      "visitas": 1,
-      "ult_fecha": "08-09-2026",
       "ult_cierre": "Sin moradores"
      }
     ],
@@ -1284,7 +1284,7 @@
       "o": "1-3NOCTIZA",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:04",
+      "hi": "17:02",
       "d": "LOURDES 1051 EDIF. F DEPTO 303, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JEAN ROODLY ORELIEN",
@@ -1304,5 +1304,5 @@
    }
   }
  },
- "generado": "08-09-2026 13:53"
+ "generado": "08-09-2026 14:03"
 }
