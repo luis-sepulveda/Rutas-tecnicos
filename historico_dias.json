@@ -826,19 +826,19 @@
    }
   },
   "08-09-2026": {
-   "hasta": "14:34",
-   "actividades": 104,
+   "hasta": "14:39",
+   "actividades": 105,
    "tecnicos": 22,
    "estados": {
     "Completado": 38,
-    "en ruta": 4,
+    "en ruta": 3,
     "Pendiente": 39,
-    "Iniciado": 9,
+    "Suspendido": 2,
+    "Cancelado": 4,
     "No Realizada": 10,
-    "Cancelado": 3,
-    "Suspendido": 1
+    "Iniciado": 9
    },
-   "rgu": 154.0,
+   "rgu": 155.0,
    "caidas_total": 6,
    "caidas_activas": 6,
    "caidas_resueltas": 0,
@@ -929,7 +929,7 @@
       "f": "13-16",
       "hi": "15:06",
       "d": "AV VICEPRESIDENTE BDO LEIGHTON 653 CASA B DEPTO B66, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3NQE6R48",
@@ -1082,7 +1082,7 @@
       "f": "13-16",
       "hi": "15:32",
       "d": "PJE 2 (DEL JAZMIN) 2043 CASA Q, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3NQA4IDB",
@@ -1255,7 +1255,7 @@
       "o": "1-3NPSWYTA",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:36",
+      "hi": "15:38",
       "d": "OVALLE 1232, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS CASTRO TORRES",
@@ -1267,7 +1267,7 @@
       "o": "1-3NQ2W7A1",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:47",
+      "hi": "17:49",
       "d": "EL ALAZAN 3155, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS CASTRO TORRES",
@@ -1313,5 +1313,5 @@
    }
   }
  },
- "generado": "08-09-2026 14:34"
+ "generado": "08-09-2026 14:39"
 }
