@@ -1349,23 +1349,23 @@
    }
   },
   "09-09-2026": {
-   "hasta": "17:20",
-   "actividades": 116,
+   "hasta": "17:25",
+   "actividades": 117,
    "tecnicos": 25,
    "estados": {
-    "Completado": 66,
+    "Completado": 67,
     "No Realizada": 23,
-    "Iniciado": 19,
-    "Pendiente": 1,
+    "Iniciado": 18,
+    "en ruta": 2,
     "Cancelado": 4,
-    "en ruta": 1,
+    "Pendiente": 1,
     "Suspendido": 2
    },
-   "rgu": 177.9,
+   "rgu": 178.9,
    "caidas_total": 5,
    "caidas_activas": 5,
    "caidas_resueltas": 0,
-   "nuevas": 27,
+   "nuevas": 28,
    "al_bucket": 10,
    "repetidas": 16,
    "reagendadas": 2,
@@ -1418,6 +1418,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3NRF4K06",
+      "tec": "YENDER BOSCAN CADENAS",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "17:38",
+      "d": "ORIENTE 1345, VILLA ALEMANA",
+      "e": "en ruta"
+     },
      {
       "o": "1-3NRB60G7",
       "tec": "JOSE ROJO A",
@@ -1679,9 +1688,9 @@
       "o": "1-3NOY6GMD",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:49",
+      "hi": "17:38",
       "d": "LAGO LAS TORRES 207 DEPTO 208, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "ANTONHY MORALES MENDOZA",
       "visitas": 1,
       "ult_fecha": "05-09-2026",
@@ -1861,7 +1870,7 @@
       "f": "16-19",
       "hi": "17:22",
       "d": "CALLE VIA V3 1127 EDIF. 4 DEPTO 462, QUILPUE",
-      "e": "en ruta",
+      "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
       "desde": "08-09-2026"
      },
@@ -1879,5 +1888,5 @@
    }
   }
  },
- "generado": "09-09-2026 17:20"
+ "generado": "09-09-2026 17:25"
 }
