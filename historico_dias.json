@@ -1349,27 +1349,36 @@
    }
   },
   "09-09-2026": {
-   "hasta": "10:23",
-   "actividades": 87,
+   "hasta": "10:33",
+   "actividades": 88,
    "tecnicos": 22,
    "estados": {
-    "Completado": 3,
-    "en ruta": 4,
-    "Pendiente": 60,
-    "Iniciado": 17,
+    "Completado": 4,
+    "Iniciado": 19,
+    "Pendiente": 59,
     "Cancelado": 1,
+    "en ruta": 3,
     "No Realizada": 2
    },
-   "rgu": 138.5,
-   "caidas_total": 2,
-   "caidas_activas": 2,
+   "rgu": 141.0,
+   "caidas_total": 3,
+   "caidas_activas": 3,
    "caidas_resueltas": 0,
    "nuevas": 7,
    "al_bucket": 4,
-   "repetidas": 14,
+   "repetidas": 15,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
+     {
+      "o": "1-3NQF38LC",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "17:00",
+      "d": "SANTIAGO 657, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3NOO4TVU",
       "tec": "JUAN ARRIAGADA C",
@@ -1492,10 +1501,22 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3NQN6QSC",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "11:27",
+      "d": "FRANCIA 2179 CASA B, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "visitas": 1,
+      "ult_fecha": "08-09-2026",
+      "ult_cierre": "Direccion incorrecta"
+     },
+     {
       "o": "1-3NR2AL8L",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "15:12",
+      "hi": "16:25",
       "d": "IGNACIO CARRERA PINTO 1237, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -1567,9 +1588,9 @@
       "o": "1-3NQH6Y24",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "10:39",
+      "hi": "10:37",
       "d": "MAURICIO 1194, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JUAN ARRIAGADA C",
       "visitas": 1,
       "ult_fecha": "03-09-2026",
@@ -1629,7 +1650,7 @@
       "o": "1-3NORA6ZX",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "16:31",
+      "hi": "16:33",
       "d": "SAN CARLOS 246 CASA B, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -1639,7 +1660,7 @@
       "o": "1-3NPJFLCY",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:37",
+      "hi": "16:12",
       "d": "CALLE VIA V3 1127 EDIF. 4 DEPTO 462, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
@@ -1649,5 +1670,5 @@
    }
   }
  },
- "generado": "09-09-2026 10:23"
+ "generado": "09-09-2026 10:33"
 }
