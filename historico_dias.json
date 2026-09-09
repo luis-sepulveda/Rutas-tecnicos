@@ -1349,21 +1349,23 @@
    }
   },
   "09-09-2026": {
-   "hasta": "09:52",
-   "actividades": 89,
-   "tecnicos": 23,
+   "hasta": "10:18",
+   "actividades": 86,
+   "tecnicos": 22,
    "estados": {
-    "Iniciado": 15,
-    "Pendiente": 65,
-    "en ruta": 8,
-    "Cancelado": 1
+    "Completado": 3,
+    "en ruta": 4,
+    "Pendiente": 60,
+    "Iniciado": 16,
+    "Cancelado": 1,
+    "No Realizada": 2
    },
-   "rgu": 143.0,
+   "rgu": 137.5,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
-   "nuevas": 5,
-   "al_bucket": 3,
+   "nuevas": 6,
+   "al_bucket": 4,
    "repetidas": 14,
    "reagendadas": 2,
    "detalle": {
@@ -1388,6 +1390,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3NR26337",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "11:29",
+      "d": "LAS AMERICAS 1015 EDIF. 17 DEPTO 6, VILLA ALEMANA",
+      "e": "Pendiente (ya no está)"
+     },
      {
       "o": "1-3NR1BTZG",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -1472,6 +1483,18 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3NQF38LC",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "17:00",
+      "d": "SANTIAGO 657, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "visitas": 1,
+      "ult_fecha": "08-09-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3NQFK90C",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -1496,18 +1519,6 @@
       "ult_cierre": "Direccion incorrecta"
      },
      {
-      "o": "1-3NQGUM6A",
-      "cat": "Reparación",
-      "f": "13-16",
-      "hi": "14:00",
-      "d": "MANUEL MONTT 72, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "EDGAR VALERO C",
-      "visitas": 2,
-      "ult_fecha": "07-09-2026",
-      "ult_cierre": "Sin Apoyo de Poste"
-     },
-     {
       "o": "1-3NQMUG2W",
       "cat": "Alta 1 Play",
       "f": "13-16",
@@ -1523,10 +1534,10 @@
       "o": "1-3NQKQYR4",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:54",
       "d": "MARIA MERCEDES 1482 EDIF. 6 DEPTO 304, VILLA ALEMANA",
       "e": "Pendiente",
-      "tec": "JEAN ROODLY ORELIEN",
+      "tec": "JOEL GUSTAVE GUSTA",
       "visitas": 1,
       "ult_fecha": "22-08-2026",
       "ult_cierre": "Clte desiste motivo comercial"
@@ -1535,22 +1546,10 @@
       "o": "1-3NQMXAQB",
       "cat": "Alta 3 Play",
       "f": "10-13",
-      "hi": "10:31",
+      "hi": "10:14",
       "d": "HUMBOLD 1391, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "JORDAN ROA PEREZ",
-      "visitas": 1,
-      "ult_fecha": "08-09-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
-      "o": "1-3NQF38LC",
-      "cat": "Alta 2 Play",
-      "f": "16-19",
-      "hi": "16:12",
-      "d": "SANTIAGO 657, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOSE CASTRO P",
       "visitas": 1,
       "ult_fecha": "08-09-2026",
       "ult_cierre": "Cliente reagenda"
@@ -1568,10 +1567,22 @@
       "ult_cierre": "Direccion no encontrada"
      },
      {
+      "o": "1-3NQGUM6A",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "13:00",
+      "d": "MANUEL MONTT 72, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "KEVIN TAPIA RETAMAL",
+      "visitas": 2,
+      "ult_fecha": "07-09-2026",
+      "ult_cierre": "Sin Apoyo de Poste"
+     },
+     {
       "o": "1-3NQXWWCJ",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "11:13",
+      "hi": "10:21",
       "d": "HUANHUALI 1481 EDIF. 2 DEPTO 301, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MARCELO GÓMEZ GÓME",
@@ -1583,7 +1594,7 @@
       "o": "1-3NQKX5N4",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "10:48",
+      "hi": "11:17",
       "d": "FRANCISCO DE ASIS 01039 CASA B, QUILPUE",
       "e": "Pendiente",
       "tec": "NICOLAS MOYANO R",
@@ -1595,7 +1606,7 @@
       "o": "1-3NQJHD6R",
       "cat": "Migración 3 Play",
       "f": "10-13",
-      "hi": "12:24",
+      "hi": "12:20",
       "d": "PETEN 843 CASA 59, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -1609,7 +1620,7 @@
       "o": "1-3NORA6ZX",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "16:44",
+      "hi": "16:31",
       "d": "SAN CARLOS 246 CASA B, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -1619,15 +1630,15 @@
       "o": "1-3NPJFLCY",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "19:21",
+      "hi": "16:37",
       "d": "CALLE VIA V3 1127 EDIF. 4 DEPTO 462, QUILPUE",
       "e": "Pendiente",
-      "tec": "GEEYSER PEREZ O",
+      "tec": "LUIS MARTIN NUÑEZ",
       "desde": "08-09-2026"
      }
     ]
    }
   }
  },
- "generado": "09-09-2026 09:52"
+ "generado": "09-09-2026 10:18"
 }
