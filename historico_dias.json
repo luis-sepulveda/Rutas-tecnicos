@@ -1349,20 +1349,21 @@
    }
   },
   "09-09-2026": {
-   "hasta": "09:27",
-   "actividades": 88,
-   "tecnicos": 24,
+   "hasta": "09:42",
+   "actividades": 89,
+   "tecnicos": 23,
    "estados": {
-    "en ruta": 18,
-    "Pendiente": 69,
+    "en ruta": 20,
+    "Pendiente": 67,
+    "Iniciado": 1,
     "Cancelado": 1
    },
-   "rgu": 142.0,
-   "caidas_total": 1,
-   "caidas_activas": 1,
+   "rgu": 143.0,
+   "caidas_total": 2,
+   "caidas_activas": 2,
    "caidas_resueltas": 0,
-   "nuevas": 4,
-   "al_bucket": 0,
+   "nuevas": 5,
+   "al_bucket": 3,
    "repetidas": 14,
    "reagendadas": 2,
    "detalle": {
@@ -1375,9 +1376,27 @@
       "hi": "13:21",
       "d": "AV LA PALMA 151 EDIF. 4 DEPTO 116, VILLA ALEMANA",
       "e": "Pendiente"
+     },
+     {
+      "o": "1-3NQQX5WP",
+      "tec": "NICOLAS MOYANO R",
+      "cat": "Migración 2 Play",
+      "f": "16-19",
+      "hi": "18:21",
+      "d": "PJE CALIFORNIA 2397 CASA A, QUILPUE",
+      "e": "Pendiente"
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3NR1BTZG",
+      "tec": "PABLO HERNANEZ FERNANDEZ",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "18:30",
+      "d": "AVENIDA QUINTA 710 DEPTO 605, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3NQXWWCJ",
       "tec": "MARCELO GÓMEZ GÓME",
@@ -1398,7 +1417,7 @@
      },
      {
       "o": "1-3NQTGRXH",
-      "tec": "FREDERIC OVALLE V",
+      "tec": "GEEYSER PEREZ O",
       "cat": "Alta 2 Play",
       "f": "13-16",
       "hi": "14:03",
@@ -1432,7 +1451,7 @@
       "o": "1-3NQKFDQV",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:21",
+      "hi": "16:52",
       "d": "AV LOS CARRERA 01655 CASA 17, QUILPUE",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
@@ -1444,7 +1463,7 @@
       "o": "1-3NOY6GMD",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "16:44",
+      "hi": "18:15",
       "d": "LAGO LAS TORRES 207 DEPTO 208, QUILPUE",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
@@ -1600,7 +1619,7 @@
       "o": "1-3NPJFLCY",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:19",
+      "hi": "19:35",
       "d": "CALLE VIA V3 1127 EDIF. 4 DEPTO 462, QUILPUE",
       "e": "Pendiente",
       "tec": "GEEYSER PEREZ O",
@@ -1610,5 +1629,5 @@
    }
   }
  },
- "generado": "09-09-2026 09:27"
+ "generado": "09-09-2026 09:42"
 }
