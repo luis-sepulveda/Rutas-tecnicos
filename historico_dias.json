@@ -1349,23 +1349,33 @@
    }
   },
   "09-09-2026": {
-   "hasta": "08:52",
-   "actividades": 74,
+   "hasta": "09:02",
+   "actividades": 75,
    "tecnicos": 24,
    "estados": {
-    "Pendiente": 74
+    "Pendiente": 75
    },
-   "rgu": 121.0,
+   "rgu": 122.0,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 0,
+   "nuevas": 1,
    "al_bucket": 0,
-   "repetidas": 11,
+   "repetidas": 12,
    "reagendadas": 1,
    "detalle": {
     "caidas": [],
-    "nuevas": [],
+    "nuevas": [
+     {
+      "o": "1-3NQKX5N4",
+      "tec": "NICOLAS MOYANO R",
+      "cat": "Reparación",
+      "f": "10-13",
+      "hi": "11:19",
+      "d": "FRANCISCO DE ASIS 01039 CASA B, QUILPUE",
+      "e": "Pendiente"
+     }
+    ],
     "repetidas": [
      {
       "o": "1-3NQK68J2",
@@ -1377,6 +1387,18 @@
       "tec": "ANTONHY MORALES MENDOZA",
       "visitas": 1,
       "ult_fecha": "08-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3NQKFDQV",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "15:21",
+      "d": "AV LOS CARRERA 01655 CASA 17, QUILPUE",
+      "e": "Pendiente",
+      "tec": "CESAR MENA OLIVEROS",
+      "visitas": 4,
+      "ult_fecha": "02-09-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -1419,25 +1441,13 @@
       "o": "1-3NQMUG2W",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:04",
+      "hi": "13:00",
       "d": "MATURANA 115 CASA 5, VILLA ALEMANA",
       "e": "Pendiente",
-      "tec": "EDGAR VALERO C",
+      "tec": "ESTEBAN PIZARRO QUINTANA",
       "visitas": 1,
       "ult_fecha": "08-09-2026",
       "ult_cierre": "Cliente reagenda"
-     },
-     {
-      "o": "1-3NQKFDQV",
-      "cat": "Reparación",
-      "f": "13-16",
-      "hi": "16:19",
-      "d": "AV LOS CARRERA 01655 CASA 17, QUILPUE",
-      "e": "Pendiente",
-      "tec": "FREDERIC OVALLE V",
-      "visitas": 4,
-      "ult_fecha": "02-09-2026",
-      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3NQKQYR4",
@@ -1488,6 +1498,18 @@
       "ult_cierre": "Direccion no encontrada"
      },
      {
+      "o": "1-3NQKX5N4",
+      "cat": "Reparación",
+      "f": "10-13",
+      "hi": "11:19",
+      "d": "FRANCISCO DE ASIS 01039 CASA B, QUILPUE",
+      "e": "Pendiente",
+      "tec": "NICOLAS MOYANO R",
+      "visitas": 1,
+      "ult_fecha": "08-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3NQJHD6R",
       "cat": "Migración 3 Play",
       "f": "10-13",
@@ -1515,5 +1537,5 @@
    }
   }
  },
- "generado": "09-09-2026 08:52"
+ "generado": "09-09-2026 09:02"
 }
