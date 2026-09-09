@@ -1349,24 +1349,24 @@
    }
   },
   "09-09-2026": {
-   "hasta": "10:43",
-   "actividades": 88,
+   "hasta": "11:03",
+   "actividades": 90,
    "tecnicos": 22,
    "estados": {
-    "Completado": 5,
-    "Iniciado": 20,
-    "Pendiente": 57,
-    "Cancelado": 2,
-    "No Realizada": 2,
-    "en ruta": 2
+    "Completado": 7,
+    "No Realizada": 6,
+    "Pendiente": 55,
+    "en ruta": 3,
+    "Iniciado": 17,
+    "Cancelado": 2
    },
-   "rgu": 141.0,
+   "rgu": 144.0,
    "caidas_total": 3,
    "caidas_activas": 3,
    "caidas_resueltas": 0,
-   "nuevas": 7,
+   "nuevas": 9,
    "al_bucket": 4,
-   "repetidas": 15,
+   "repetidas": 16,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
@@ -1399,6 +1399,24 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3NR39ITS",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "cat": "Upgrade promoción",
+      "f": "10-13",
+      "hi": "11:23",
+      "d": "ILUSION 1215, VILLA ALEMANA",
+      "e": "en ruta"
+     },
+     {
+      "o": "1-3NR33SYG",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "cat": "Migración 2 Play",
+      "f": "10-13",
+      "hi": "11:29",
+      "d": "EL BOSQUE 0150 CASA 10, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3NR2AL8L",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -1465,22 +1483,10 @@
     ],
     "repetidas": [
      {
-      "o": "1-3NQK68J2",
-      "cat": "Alta 1 Play",
-      "f": "10-13",
-      "hi": "10:52",
-      "d": "MARGA MARGA 600, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "ANTONHY MORALES MENDOZA",
-      "visitas": 1,
-      "ult_fecha": "08-09-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3NQKFDQV",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "16:52",
+      "hi": "15:21",
       "d": "AV LOS CARRERA 01655 CASA 17, QUILPUE",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
@@ -1492,7 +1498,7 @@
       "o": "1-3NOY6GMD",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "18:15",
+      "hi": "16:44",
       "d": "LAGO LAS TORRES 207 DEPTO 208, QUILPUE",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
@@ -1501,10 +1507,22 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3NR33SYG",
+      "cat": "Migración 2 Play",
+      "f": "10-13",
+      "hi": "11:29",
+      "d": "EL BOSQUE 0150 CASA 10, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "visitas": 1,
+      "ult_fecha": "04-08-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3NR2AL8L",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "15:12",
+      "hi": "16:51",
       "d": "IGNACIO CARRERA PINTO 1237, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -1524,22 +1542,10 @@
       "ult_cierre": "Direccion incorrecta"
      },
      {
-      "o": "1-3NQFK90C",
-      "cat": "Alta 1 Play",
-      "f": "10-13",
-      "hi": "12:27",
-      "d": "CALLE 5 0668, QUILPUE",
-      "e": "Pendiente",
-      "tec": "DANIEL NAVARRETE E",
-      "visitas": 1,
-      "ult_fecha": "08-09-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3NQNINJX",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:17",
+      "hi": "14:00",
       "d": "COQUIMBO 5, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -1577,11 +1583,23 @@
       "f": "10-13",
       "hi": "10:14",
       "d": "HUMBOLD 1391, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JORDAN ROA PEREZ",
       "visitas": 1,
       "ult_fecha": "08-09-2026",
       "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3NQFK90C",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "11:08",
+      "d": "CALLE 5 0668, QUILPUE",
+      "e": "en ruta",
+      "tec": "JOSE GALAZ D",
+      "visitas": 1,
+      "ult_fecha": "08-09-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3NQH6Y24",
@@ -1589,11 +1607,23 @@
       "f": "10-13",
       "hi": "10:33",
       "d": "MAURICIO 1194, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JUAN ARRIAGADA C",
       "visitas": 1,
       "ult_fecha": "03-09-2026",
       "ult_cierre": "Direccion no encontrada"
+     },
+     {
+      "o": "1-3NQK68J2",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "11:09",
+      "d": "MARGA MARGA 600, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JUAN ARRIAGADA C",
+      "visitas": 1,
+      "ult_fecha": "08-09-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3NQGUM6A",
@@ -1649,7 +1679,7 @@
       "o": "1-3NORA6ZX",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "16:33",
+      "hi": "16:30",
       "d": "SAN CARLOS 246 CASA B, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -1659,7 +1689,7 @@
       "o": "1-3NPJFLCY",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:12",
+      "hi": "16:13",
       "d": "CALLE VIA V3 1127 EDIF. 4 DEPTO 462, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
@@ -1669,5 +1699,5 @@
    }
   }
  },
- "generado": "09-09-2026 10:43"
+ "generado": "09-09-2026 11:03"
 }
