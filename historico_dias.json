@@ -1349,22 +1349,22 @@
    }
   },
   "09-09-2026": {
-   "hasta": "10:18",
-   "actividades": 86,
+   "hasta": "10:23",
+   "actividades": 87,
    "tecnicos": 22,
    "estados": {
     "Completado": 3,
     "en ruta": 4,
     "Pendiente": 60,
-    "Iniciado": 16,
+    "Iniciado": 17,
     "Cancelado": 1,
     "No Realizada": 2
    },
-   "rgu": 137.5,
+   "rgu": 138.5,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
-   "nuevas": 6,
+   "nuevas": 7,
    "al_bucket": 4,
    "repetidas": 14,
    "reagendadas": 2,
@@ -1391,13 +1391,22 @@
     ],
     "nuevas": [
      {
-      "o": "1-3NR26337",
+      "o": "1-3NR2AL8L",
       "tec": "CRISTOBAL MIRANDA VALENC",
+      "cat": "Migración 2 Play",
+      "f": "13-16",
+      "hi": "15:12",
+      "d": "IGNACIO CARRERA PINTO 1237, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3NR26337",
+      "tec": "LUIS GATICA DAVILA",
       "cat": "Alta 1 Play",
       "f": "10-13",
       "hi": "11:29",
       "d": "LAS AMERICAS 1015 EDIF. 17 DEPTO 6, VILLA ALEMANA",
-      "e": "Pendiente (ya no está)"
+      "e": "Pendiente"
      },
      {
       "o": "1-3NR1BTZG",
@@ -1415,7 +1424,7 @@
       "f": "10-13",
       "hi": "11:22",
       "d": "HUANHUALI 1481 EDIF. 2 DEPTO 301, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3NOO4TVU",
@@ -1483,16 +1492,16 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3NQF38LC",
-      "cat": "Alta 2 Play",
-      "f": "16-19",
-      "hi": "17:00",
-      "d": "SANTIAGO 657, VILLA ALEMANA",
+      "o": "1-3NR2AL8L",
+      "cat": "Migración 2 Play",
+      "f": "13-16",
+      "hi": "15:12",
+      "d": "IGNACIO CARRERA PINTO 1237, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "CRISTOBAL MIRANDA VALENC",
       "visitas": 1,
-      "ult_fecha": "08-09-2026",
-      "ult_cierre": "Cliente reagenda"
+      "ult_fecha": "09-09-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3NQFK90C",
@@ -1582,9 +1591,9 @@
       "o": "1-3NQXWWCJ",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "10:21",
+      "hi": "10:18",
       "d": "HUANHUALI 1481 EDIF. 2 DEPTO 301, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "MARCELO GÓMEZ GÓME",
       "visitas": 1,
       "ult_fecha": "08-09-2026",
@@ -1640,5 +1649,5 @@
    }
   }
  },
- "generado": "09-09-2026 10:18"
+ "generado": "09-09-2026 10:23"
 }
