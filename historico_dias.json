@@ -1349,22 +1349,22 @@
    }
   },
   "09-09-2026": {
-   "hasta": "13:13",
-   "actividades": 105,
+   "hasta": "13:18",
+   "actividades": 106,
    "tecnicos": 25,
    "estados": {
     "Completado": 27,
     "No Realizada": 15,
-    "Iniciado": 13,
-    "Pendiente": 40,
-    "en ruta": 8,
-    "Cancelado": 2
+    "Iniciado": 15,
+    "Pendiente": 39,
+    "en ruta": 7,
+    "Cancelado": 3
    },
-   "rgu": 167.1,
+   "rgu": 169.1,
    "caidas_total": 5,
    "caidas_activas": 5,
    "caidas_resueltas": 0,
-   "nuevas": 21,
+   "nuevas": 22,
    "al_bucket": 6,
    "repetidas": 16,
    "reagendadas": 2,
@@ -1417,6 +1417,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3NR6ULBX",
+      "tec": "LUIS CASTRO TORRES",
+      "cat": "Migración 2 Play",
+      "f": "13-16",
+      "hi": "14:33",
+      "d": "AV LOS CARRERA 549 CASA A, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3NR7UL56",
       "tec": "KEVIN TAPIA RETAMAL",
@@ -1559,7 +1568,7 @@
       "f": "10-13",
       "hi": "11:29",
       "d": "LAS AMERICAS 1015 EDIF. 17 DEPTO 6, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Cancelado"
      },
      {
       "o": "1-3NR1BTZG",
@@ -1671,9 +1680,9 @@
       "o": "1-3NQGUM6A",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "13:11",
+      "hi": "13:15",
       "d": "MANUEL MONTT 72, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JOEL GUSTAVE GUSTA",
       "visitas": 2,
       "ult_fecha": "07-09-2026",
@@ -1805,7 +1814,7 @@
       "o": "1-3NPJFLCY",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:00",
+      "hi": "17:01",
       "d": "CALLE VIA V3 1127 EDIF. 4 DEPTO 462, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -1825,5 +1834,5 @@
    }
   }
  },
- "generado": "09-09-2026 13:13"
+ "generado": "09-09-2026 13:18"
 }
