@@ -1349,22 +1349,22 @@
    }
   },
   "09-09-2026": {
-   "hasta": "12:13",
-   "actividades": 96,
+   "hasta": "12:23",
+   "actividades": 97,
    "tecnicos": 25,
    "estados": {
     "Completado": 18,
-    "No Realizada": 13,
-    "Iniciado": 12,
+    "No Realizada": 14,
+    "Iniciado": 13,
     "Pendiente": 47,
-    "en ruta": 4,
+    "en ruta": 3,
     "Cancelado": 2
    },
-   "rgu": 152.0,
+   "rgu": 156.5,
    "caidas_total": 4,
    "caidas_activas": 4,
    "caidas_resueltas": 0,
-   "nuevas": 16,
+   "nuevas": 17,
    "al_bucket": 6,
    "repetidas": 16,
    "reagendadas": 2,
@@ -1409,6 +1409,15 @@
     ],
     "nuevas": [
      {
+      "o": "1-3NQTWHC6",
+      "tec": "MARCELO GÓMEZ GÓME",
+      "cat": "Alta Traslado",
+      "f": "13-16",
+      "hi": "13:00",
+      "d": "CARLOS DROGUETT 1280, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3NR5AQUJ",
       "tec": "CRISTOBAL SILVA LEIVA",
       "cat": "Reparación",
@@ -1433,7 +1442,7 @@
       "f": "13-16",
       "hi": "13:00",
       "d": "LOS ALGARROBOS 804, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3NR4KT29",
@@ -1572,7 +1581,7 @@
       "f": "10-13",
       "hi": "11:43",
       "d": "PETEN 843 CASA 59, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "CESAR MENA OLIVEROS",
       "visitas": 1,
       "ult_fecha": "05-09-2026",
@@ -1771,5 +1780,5 @@
    }
   }
  },
- "generado": "09-09-2026 12:13"
+ "generado": "09-09-2026 12:23"
 }
