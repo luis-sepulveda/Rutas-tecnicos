@@ -1349,23 +1349,42 @@
    }
   },
   "09-09-2026": {
-   "hasta": "09:02",
-   "actividades": 75,
+   "hasta": "09:12",
+   "actividades": 76,
    "tecnicos": 24,
    "estados": {
-    "Pendiente": 75
+    "Pendiente": 75,
+    "en ruta": 1
    },
-   "rgu": 122.0,
+   "rgu": 124.0,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 1,
+   "nuevas": 3,
    "al_bucket": 0,
    "repetidas": 12,
    "reagendadas": 1,
    "detalle": {
     "caidas": [],
     "nuevas": [
+     {
+      "o": "1-3NOO4TVU",
+      "tec": "JUAN ARRIAGADA C",
+      "cat": "Downgrade promoción",
+      "f": "13-16",
+      "hi": "13:21",
+      "d": "AV LA PALMA 151 EDIF. 4 DEPTO 116, VILLA ALEMANA",
+      "e": "Pendiente (ya no está)"
+     },
+     {
+      "o": "1-3NQTGRXH",
+      "tec": "FREDERIC OVALLE V",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "14:03",
+      "d": "PJE LAS LECHERAS 3189, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3NQKX5N4",
       "tec": "NICOLAS MOYANO R",
@@ -1527,7 +1546,7 @@
       "o": "1-3NORA6ZX",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "14:23",
+      "hi": "17:01",
       "d": "SAN CARLOS 246 CASA B, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -1537,5 +1556,5 @@
    }
   }
  },
- "generado": "09-09-2026 09:02"
+ "generado": "09-09-2026 09:12"
 }
