@@ -1349,19 +1349,19 @@
    }
   },
   "09-09-2026": {
-   "hasta": "15:34",
-   "actividades": 111,
+   "hasta": "15:54",
+   "actividades": 116,
    "tecnicos": 25,
    "estados": {
-    "Completado": 49,
-    "No Realizada": 20,
-    "en ruta": 7,
-    "Pendiente": 15,
+    "Completado": 51,
+    "No Realizada": 21,
     "Iniciado": 15,
+    "Pendiente": 17,
+    "en ruta": 6,
     "Cancelado": 4,
-    "Suspendido": 1
+    "Suspendido": 2
    },
-   "rgu": 170.9,
+   "rgu": 177.9,
    "caidas_total": 5,
    "caidas_activas": 5,
    "caidas_resueltas": 0,
@@ -1425,16 +1425,16 @@
       "f": "13-16",
       "hi": "15:08",
       "d": "PJE COSTA RICA 600 DEPTO 11, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3NRA3FVN",
-      "tec": "ESTEBAN PIZARRO QUINTANA",
+      "tec": "MATÍAS JAQUE AG",
       "cat": "Reparación",
       "f": "16-19",
       "hi": "17:30",
       "d": "ALC MIGUEL GANDULFO 1351, VILLA ALEMANA",
-      "e": "Pendiente (ya no está)"
+      "e": "Pendiente"
      },
      {
       "o": "1-3NR9DO19",
@@ -1676,6 +1676,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3NOY6GMD",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "16:48",
+      "d": "LAGO LAS TORRES 207 DEPTO 208, QUILPUE",
+      "e": "Pendiente",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "visitas": 1,
+      "ult_fecha": "05-09-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3NQJHD6R",
       "cat": "Migración 3 Play",
       "f": "10-13",
@@ -1714,9 +1726,9 @@
       "o": "1-3NQMUG2W",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:34",
+      "hi": "15:37",
       "d": "MATURANA 115 CASA 5, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "No Realizada",
       "tec": "ESTEBAN PIZARRO QUINTANA",
       "visitas": 1,
       "ult_fecha": "08-09-2026",
@@ -1728,7 +1740,7 @@
       "f": "13-16",
       "hi": "13:15",
       "d": "MANUEL MONTT 72, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JOEL GUSTAVE GUSTA",
       "visitas": 2,
       "ult_fecha": "07-09-2026",
@@ -1793,18 +1805,6 @@
       "visitas": 1,
       "ult_fecha": "08-09-2026",
       "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3NOY6GMD",
-      "cat": "Modificación de Servicio",
-      "f": "16-19",
-      "hi": "16:29",
-      "d": "LAGO LAS TORRES 207 DEPTO 208, QUILPUE",
-      "e": "Pendiente",
-      "tec": "LEONEL HERNÁNDEZ OJE",
-      "visitas": 1,
-      "ult_fecha": "05-09-2026",
-      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3NQNINJX",
@@ -1879,5 +1879,5 @@
    }
   }
  },
- "generado": "09-09-2026 15:34"
+ "generado": "09-09-2026 15:54"
 }
