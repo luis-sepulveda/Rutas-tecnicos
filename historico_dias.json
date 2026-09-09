@@ -1349,22 +1349,22 @@
    }
   },
   "09-09-2026": {
-   "hasta": "14:04",
-   "actividades": 112,
+   "hasta": "14:14",
+   "actividades": 113,
    "tecnicos": 25,
    "estados": {
-    "Completado": 35,
+    "Completado": 38,
     "No Realizada": 17,
-    "en ruta": 6,
-    "Pendiente": 36,
     "Iniciado": 15,
-    "Cancelado": 3
+    "Pendiente": 36,
+    "Cancelado": 3,
+    "en ruta": 4
    },
-   "rgu": 173.3,
+   "rgu": 174.3,
    "caidas_total": 5,
    "caidas_activas": 5,
    "caidas_resueltas": 0,
-   "nuevas": 25,
+   "nuevas": 26,
    "al_bucket": 6,
    "repetidas": 16,
    "reagendadas": 2,
@@ -1418,13 +1418,22 @@
     ],
     "nuevas": [
      {
+      "o": "1-3NRA3FVN",
+      "tec": "ESTEBAN PIZARRO QUINTANA",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "17:30",
+      "d": "ALC MIGUEL GANDULFO 1351, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3NR9DO19",
       "tec": "ALFREDO ALCAYAGA F",
       "cat": "Modificación de Servicio",
       "f": "13-16",
       "hi": "14:03",
       "d": "LOS CONDORES 507, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3NR8LJAH",
@@ -1433,11 +1442,11 @@
       "f": "13-16",
       "hi": "13:53",
       "d": "CALLE HERALDO ORREGO 3201 EDIF. A DEPTO 503, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3NR7R0FB",
-      "tec": "DANIEL NAVARRETE E",
+      "tec": "LEONEL HERNÁNDEZ OJE",
       "cat": "Reparación",
       "f": "13-16",
       "hi": "15:07",
@@ -1451,7 +1460,7 @@
       "f": "13-16",
       "hi": "14:33",
       "d": "AV LOS CARRERA 549 CASA A, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3NR7UL56",
@@ -1469,11 +1478,11 @@
       "f": "13-16",
       "hi": "13:00",
       "d": "GLACIAR PLANCHON 3191 CASA 47, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3NR67TLL",
-      "tec": "LUIS GATICA DAVILA",
+      "tec": "YENDER BOSCAN CADENAS",
       "cat": "Alta 1 Play",
       "f": "13-16",
       "hi": "17:57",
@@ -1815,7 +1824,7 @@
       "o": "1-3NOY6GMD",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:02",
+      "hi": "17:05",
       "d": "LAGO LAS TORRES 207 DEPTO 208, QUILPUE",
       "e": "Pendiente",
       "tec": "SEBASTIAN DOSSOW A",
@@ -1827,7 +1836,7 @@
       "o": "1-3NQKQYR4",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:01",
+      "hi": "18:31",
       "d": "MARIA MERCEDES 1482 EDIF. 6 DEPTO 304, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "YENDER BOSCAN CADENAS",
@@ -1861,5 +1870,5 @@
    }
   }
  },
- "generado": "09-09-2026 14:04"
+ "generado": "09-09-2026 14:14"
 }
