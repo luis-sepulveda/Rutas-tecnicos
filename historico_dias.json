@@ -1349,22 +1349,21 @@
    }
   },
   "09-09-2026": {
-   "hasta": "11:43",
-   "actividades": 94,
+   "hasta": "11:48",
+   "actividades": 96,
    "tecnicos": 25,
    "estados": {
-    "Completado": 15,
-    "No Realizada": 9,
-    "Iniciado": 13,
-    "Pendiente": 49,
-    "Cancelado": 2,
-    "en ruta": 6
+    "Completado": 17,
+    "No Realizada": 10,
+    "Iniciado": 16,
+    "Pendiente": 51,
+    "Cancelado": 2
    },
-   "rgu": 150.0,
+   "rgu": 152.0,
    "caidas_total": 4,
    "caidas_activas": 4,
    "caidas_resueltas": 0,
-   "nuevas": 13,
+   "nuevas": 14,
    "al_bucket": 4,
    "repetidas": 16,
    "reagendadas": 2,
@@ -1409,6 +1408,15 @@
     ],
     "nuevas": [
      {
+      "o": "1-3NR50GGX",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "13:00",
+      "d": "LOS ALGARROBOS 804, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3NR4KT29",
       "tec": "JOSE GALAZ D",
       "cat": "Upgrade promoción",
@@ -1451,7 +1459,7 @@
       "f": "10-13",
       "hi": "11:23",
       "d": "ILUSION 1215, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3NR33SYG",
@@ -1460,7 +1468,7 @@
       "f": "10-13",
       "hi": "11:29",
       "d": "EL BOSQUE 0150 CASA 10, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3NR2AL8L",
@@ -1555,7 +1563,7 @@
       "o": "1-3NR2AL8L",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "15:12",
+      "hi": "16:33",
       "d": "IGNACIO CARRERA PINTO 1237, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -1638,9 +1646,9 @@
       "o": "1-3NQKFDQV",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "12:00",
+      "hi": "11:44",
       "d": "AV LOS CARRERA 01655 CASA 17, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JOSE SALAS MEDINA",
       "visitas": 4,
       "ult_fecha": "02-09-2026",
@@ -1698,9 +1706,9 @@
       "o": "1-3NR33SYG",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "11:27",
+      "hi": "11:45",
       "d": "EL BOSQUE 0150 CASA 10, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "MARCELO GÓMEZ GÓME",
       "visitas": 1,
       "ult_fecha": "04-08-2026",
@@ -1724,7 +1732,7 @@
       "o": "1-3NPJFLCY",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:03",
+      "hi": "17:05",
       "d": "CALLE VIA V3 1127 EDIF. 4 DEPTO 462, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
@@ -1744,5 +1752,5 @@
    }
   }
  },
- "generado": "09-09-2026 11:43"
+ "generado": "09-09-2026 11:48"
 }
