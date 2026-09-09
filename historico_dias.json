@@ -1349,22 +1349,22 @@
    }
   },
   "09-09-2026": {
-   "hasta": "11:23",
-   "actividades": 90,
-   "tecnicos": 22,
+   "hasta": "11:43",
+   "actividades": 94,
+   "tecnicos": 25,
    "estados": {
-    "Completado": 11,
+    "Completado": 15,
     "No Realizada": 9,
-    "en ruta": 6,
-    "Pendiente": 49,
     "Iniciado": 13,
-    "Cancelado": 2
+    "Pendiente": 49,
+    "Cancelado": 2,
+    "en ruta": 6
    },
-   "rgu": 144.0,
+   "rgu": 150.0,
    "caidas_total": 4,
    "caidas_activas": 4,
    "caidas_resueltas": 0,
-   "nuevas": 10,
+   "nuevas": 13,
    "al_bucket": 4,
    "repetidas": 16,
    "reagendadas": 2,
@@ -1408,6 +1408,33 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3NR4KT29",
+      "tec": "JOSE GALAZ D",
+      "cat": "Upgrade promoción",
+      "f": "13-16",
+      "hi": "14:54",
+      "d": "EL TAMARUGO 697, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3NR4E59Z",
+      "tec": "LUIS MARTIN NUÑEZ",
+      "cat": "Migración 3 Play",
+      "f": "13-16",
+      "hi": "14:03",
+      "d": "TOLOMIRO 2166, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3NR47SNY",
+      "tec": "NICOLAS MOYANO R",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "11:27",
+      "d": "FRANCISCO DE ASIS 01039 CASA B, QUILPUE",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3NR3IA25",
       "tec": "JUAN ARRIAGADA C",
@@ -1504,31 +1531,19 @@
       "o": "1-3NQJHD6R",
       "cat": "Migración 3 Play",
       "f": "10-13",
-      "hi": "11:40",
+      "hi": "11:43",
       "d": "PETEN 843 CASA 59, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "CESAR MENA OLIVEROS",
       "visitas": 1,
       "ult_fecha": "05-09-2026",
       "ult_cierre": "Direccion no encontrada"
      },
      {
-      "o": "1-3NQKFDQV",
-      "cat": "Reparación",
-      "f": "13-16",
-      "hi": "16:11",
-      "d": "AV LOS CARRERA 01655 CASA 17, QUILPUE",
-      "e": "Pendiente",
-      "tec": "CESAR MENA OLIVEROS",
-      "visitas": 4,
-      "ult_fecha": "02-09-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3NOY6GMD",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:34",
+      "hi": "16:09",
       "d": "LAGO LAS TORRES 207 DEPTO 208, QUILPUE",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
@@ -1620,6 +1635,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3NQKFDQV",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "12:00",
+      "d": "AV LOS CARRERA 01655 CASA 17, QUILPUE",
+      "e": "en ruta",
+      "tec": "JOSE SALAS MEDINA",
+      "visitas": 4,
+      "ult_fecha": "02-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3NQH6Y24",
       "cat": "Migración 1 Play",
       "f": "10-13",
@@ -1635,9 +1662,9 @@
       "o": "1-3NQK68J2",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "11:23",
+      "hi": "11:33",
       "d": "MARGA MARGA 600, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JUAN ARRIAGADA C",
       "visitas": 1,
       "ult_fecha": "08-09-2026",
@@ -1694,28 +1721,28 @@
     ],
     "reagendadas": [
      {
-      "o": "1-3NORA6ZX",
-      "cat": "Migración 2 Play",
-      "f": "13-16",
-      "hi": "17:29",
-      "d": "SAN CARLOS 246 CASA B, QUILPUE",
-      "e": "Pendiente",
-      "tec": "ALFREDO ALCAYAGA F",
-      "desde": "05-09-2026"
-     },
-     {
       "o": "1-3NPJFLCY",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "17:03",
       "d": "CALLE VIA V3 1127 EDIF. 4 DEPTO 462, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
       "desde": "08-09-2026"
+     },
+     {
+      "o": "1-3NORA6ZX",
+      "cat": "Migración 2 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "SAN CARLOS 246 CASA B, QUILPUE",
+      "e": "Pendiente",
+      "tec": "SEBASTIAN DOSSOW A",
+      "desde": "05-09-2026"
      }
     ]
    }
   }
  },
- "generado": "09-09-2026 11:23"
+ "generado": "09-09-2026 11:43"
 }
