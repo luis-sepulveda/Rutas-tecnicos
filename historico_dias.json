@@ -1349,22 +1349,22 @@
    }
   },
   "09-09-2026": {
-   "hasta": "13:39",
-   "actividades": 108,
+   "hasta": "13:59",
+   "actividades": 111,
    "tecnicos": 25,
    "estados": {
-    "Completado": 31,
-    "No Realizada": 16,
-    "Pendiente": 40,
+    "Completado": 34,
+    "No Realizada": 17,
+    "Pendiente": 37,
     "Iniciado": 16,
     "Cancelado": 3,
-    "en ruta": 2
+    "en ruta": 4
    },
-   "rgu": 171.1,
+   "rgu": 173.2,
    "caidas_total": 5,
    "caidas_activas": 5,
    "caidas_resueltas": 0,
-   "nuevas": 22,
+   "nuevas": 24,
    "al_bucket": 6,
    "repetidas": 16,
    "reagendadas": 2,
@@ -1418,13 +1418,31 @@
     ],
     "nuevas": [
      {
-      "o": "1-3NR6ULBX",
+      "o": "1-3NR8LJAH",
       "tec": "LUIS CASTRO TORRES",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "13:53",
+      "d": "CALLE HERALDO ORREGO 3201 EDIF. A DEPTO 503, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
+      "o": "1-3NR7R0FB",
+      "tec": "DANIEL NAVARRETE E",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "15:07",
+      "d": "RAFAEL SOTOMAYOR 0346, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3NR6ULBX",
+      "tec": "SEBASTIAN DOSSOW A",
       "cat": "Migración 2 Play",
       "f": "13-16",
       "hi": "14:33",
       "d": "AV LOS CARRERA 549 CASA A, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3NR7UL56",
@@ -1433,7 +1451,7 @@
       "f": "13-16",
       "hi": "18:12",
       "d": "LONCOCHE 433, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3NR66AHV",
@@ -1656,7 +1674,7 @@
       "o": "1-3NQMUG2W",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:17",
+      "hi": "15:14",
       "d": "MATURANA 115 CASA 5, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
@@ -1788,7 +1806,7 @@
       "o": "1-3NOY6GMD",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "16:03",
+      "hi": "17:02",
       "d": "LAGO LAS TORRES 207 DEPTO 208, QUILPUE",
       "e": "Pendiente",
       "tec": "SEBASTIAN DOSSOW A",
@@ -1800,7 +1818,7 @@
       "o": "1-3NQKQYR4",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:01",
       "d": "MARIA MERCEDES 1482 EDIF. 6 DEPTO 304, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "YENDER BOSCAN CADENAS",
@@ -1814,7 +1832,7 @@
       "o": "1-3NPJFLCY",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:01",
+      "hi": "17:09",
       "d": "CALLE VIA V3 1127 EDIF. 4 DEPTO 462, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -1826,7 +1844,7 @@
       "f": "13-16",
       "hi": "13:19",
       "d": "SAN CARLOS 246 CASA B, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "SEBASTIAN DOSSOW A",
       "desde": "05-09-2026"
      }
@@ -1834,5 +1852,5 @@
    }
   }
  },
- "generado": "09-09-2026 13:39"
+ "generado": "09-09-2026 13:59"
 }
