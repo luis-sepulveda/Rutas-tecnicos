@@ -1349,16 +1349,16 @@
    }
   },
   "09-09-2026": {
-   "hasta": "10:33",
+   "hasta": "10:43",
    "actividades": 88,
    "tecnicos": 22,
    "estados": {
-    "Completado": 4,
-    "Iniciado": 19,
-    "Pendiente": 59,
-    "Cancelado": 1,
-    "en ruta": 3,
-    "No Realizada": 2
+    "Completado": 5,
+    "Iniciado": 20,
+    "Pendiente": 57,
+    "Cancelado": 2,
+    "No Realizada": 2,
+    "en ruta": 2
    },
    "rgu": 141.0,
    "caidas_total": 3,
@@ -1460,7 +1460,7 @@
       "f": "10-13",
       "hi": "11:19",
       "d": "FRANCISCO DE ASIS 01039 CASA B, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      }
     ],
     "repetidas": [
@@ -1468,7 +1468,7 @@
       "o": "1-3NQK68J2",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:42",
+      "hi": "10:52",
       "d": "MARGA MARGA 600, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ANTONHY MORALES MENDOZA",
@@ -1501,28 +1501,27 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3NQN6QSC",
-      "cat": "Alta 2 Play",
-      "f": "10-13",
-      "hi": "11:27",
-      "d": "FRANCIA 2179 CASA B, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "CRISTOBAL MIRANDA VALENC",
-      "visitas": 1,
-      "ult_fecha": "08-09-2026",
-      "ult_cierre": "Direccion incorrecta"
-     },
-     {
       "o": "1-3NR2AL8L",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "16:25",
+      "hi": "15:12",
       "d": "IGNACIO CARRERA PINTO 1237, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "CRISTOBAL MIRANDA VALENC",
       "visitas": 1,
       "ult_fecha": "09-09-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3NQN6QSC",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "d": "FRANCIA 2179 CASA B, VILLA ALEMANA",
+      "e": "Cancelado",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "visitas": 1,
+      "ult_fecha": "08-09-2026",
+      "ult_cierre": "Direccion incorrecta"
      },
      {
       "o": "1-3NQFK90C",
@@ -1588,9 +1587,9 @@
       "o": "1-3NQH6Y24",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "10:37",
+      "hi": "10:33",
       "d": "MAURICIO 1194, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JUAN ARRIAGADA C",
       "visitas": 1,
       "ult_fecha": "03-09-2026",
@@ -1624,9 +1623,9 @@
       "o": "1-3NQKX5N4",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "11:17",
+      "hi": "10:56",
       "d": "FRANCISCO DE ASIS 01039 CASA B, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "NICOLAS MOYANO R",
       "visitas": 1,
       "ult_fecha": "08-09-2026",
@@ -1670,5 +1669,5 @@
    }
   }
  },
- "generado": "09-09-2026 10:33"
+ "generado": "09-09-2026 10:43"
 }
