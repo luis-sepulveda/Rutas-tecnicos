@@ -1349,18 +1349,19 @@
    }
   },
   "09-09-2026": {
-   "hasta": "14:24",
-   "actividades": 113,
+   "hasta": "14:39",
+   "actividades": 114,
    "tecnicos": 25,
    "estados": {
-    "Completado": 38,
+    "Completado": 40,
     "No Realizada": 17,
-    "Iniciado": 16,
-    "Pendiente": 36,
+    "Pendiente": 35,
+    "en ruta": 3,
+    "Iniciado": 15,
     "Cancelado": 3,
-    "en ruta": 3
+    "Suspendido": 1
    },
-   "rgu": 174.3,
+   "rgu": 176.8,
    "caidas_total": 5,
    "caidas_activas": 5,
    "caidas_resueltas": 0,
@@ -1433,7 +1434,7 @@
       "f": "13-16",
       "hi": "14:03",
       "d": "LOS CONDORES 507, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3NR8LJAH",
@@ -1545,12 +1546,12 @@
      },
      {
       "o": "1-3NR4E59Z",
-      "tec": "JOEL GUSTAVE GUSTA",
+      "tec": "JOSE GALAZ D",
       "cat": "Migración 3 Play",
       "f": "13-16",
       "hi": "14:03",
       "d": "TOLOMIRO 2166, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3NR47SNY",
@@ -1595,7 +1596,7 @@
       "f": "13-16",
       "hi": "15:12",
       "d": "IGNACIO CARRERA PINTO 1237, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3NR26337",
@@ -1659,7 +1660,7 @@
       "f": "13-16",
       "hi": "14:49",
       "d": "IGNACIO CARRERA PINTO 1237, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "ANTONHY MORALES MENDOZA",
       "visitas": 1,
       "ult_fecha": "09-09-2026",
@@ -1870,5 +1871,5 @@
    }
   }
  },
- "generado": "09-09-2026 14:24"
+ "generado": "09-09-2026 14:39"
 }
