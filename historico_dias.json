@@ -1888,21 +1888,22 @@
    }
   },
   "10-09-2026": {
-   "hasta": "10:18",
-   "actividades": 96,
+   "hasta": "10:44",
+   "actividades": 102,
    "tecnicos": 27,
    "estados": {
-    "Iniciado": 22,
-    "Pendiente": 70,
+    "Completado": 4,
+    "en ruta": 5,
+    "Pendiente": 68,
     "Cancelado": 1,
-    "No Realizada": 2,
-    "en ruta": 1
+    "Iniciado": 20,
+    "No Realizada": 4
    },
-   "rgu": 144.5,
+   "rgu": 152.5,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
-   "nuevas": 2,
+   "nuevas": 5,
    "al_bucket": 0,
    "repetidas": 17,
    "reagendadas": 2,
@@ -1929,8 +1930,35 @@
     ],
     "nuevas": [
      {
+      "o": "1-3NRK1BJA",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "16:40",
+      "d": "AV JOHN KENNEDY 1720 EDIF. B DEPTO 104, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3NRT1LVG",
+      "tec": "LUIS GATICA DAVILA",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "13:42",
+      "d": "BERLIN 1408, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3NRSW4P6",
+      "tec": "JOSE GALAZ D",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "10:34",
+      "d": "ARTURO ALESSANDRI 719 DEPTO 34, QUILPUE",
+      "e": "en ruta"
+     },
+     {
       "o": "1-3NRS81LX",
-      "tec": "JOSE CASTRO P",
+      "tec": "YENDER BOSCAN CADENAS",
       "cat": "Migración 1 Play",
       "f": "13-16",
       "hi": "15:08",
@@ -1952,9 +1980,9 @@
       "o": "1-3NR921AP",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "10:50",
+      "hi": "10:53",
       "d": "OJOS DE AGUA 108 EDIF. B4 DEPTO 502, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "ALFREDO ALCAYAGA F",
       "visitas": 1,
       "ult_fecha": "21-08-2026",
@@ -1964,7 +1992,7 @@
       "o": "1-3NRB9X0Y",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "14:19",
+      "hi": "14:22",
       "d": "AV LOS CARRERA 549 CASA A, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -2012,7 +2040,7 @@
       "o": "1-3NR2C9NP",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:37",
       "d": "TONGOY 01698, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -2036,19 +2064,31 @@
       "o": "1-3NR56W4B",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "12:14",
+      "hi": "10:36",
       "d": "MARGA MARGA 600, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "JOEL GUSTAVE GUSTA",
       "visitas": 2,
       "ult_fecha": "09-09-2026",
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3NOVXO1H",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "12:38",
+      "d": "TOQUI 2436, QUILPUE",
+      "e": "Pendiente",
+      "tec": "JORDAN ROA PEREZ",
+      "visitas": 1,
+      "ult_fecha": "05-09-2026",
+      "ult_cierre": "Clte desiste motivo comercial"
+     },
+     {
       "o": "1-3NR77UUJ",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "17:40",
       "d": "PEDRO AGUIRRE CERDA 407, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -2060,9 +2100,9 @@
       "o": "1-3NOEPSXK",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "10:16",
+      "hi": "10:21",
       "d": "LAS AMAPOLAS 593 CASA 6A, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "JOSE SALAS MEDINA",
       "visitas": 1,
       "ult_fecha": "04-09-2026",
@@ -2072,7 +2112,7 @@
       "o": "1-3NR9SHGA",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "14:13",
+      "hi": "14:18",
       "d": "ROLANDO PEREIRA 2188, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE SALAS MEDINA",
@@ -2090,6 +2130,18 @@
       "tec": "JUAN ARRIAGADA C",
       "visitas": 2,
       "ult_fecha": "08-09-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3NR5PQ7E",
+      "cat": "Migración 3 Play",
+      "f": "10-13",
+      "hi": "12:16",
+      "d": "PETEN 843 CASA 59, QUILPUE",
+      "e": "Pendiente",
+      "tec": "LUIS CASTRO TORRES",
+      "visitas": 2,
+      "ult_fecha": "09-09-2026",
       "ult_cierre": "Cliente reagenda"
      },
      {
@@ -2117,18 +2169,6 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3NR5PQ7E",
-      "cat": "Migración 3 Play",
-      "f": "10-13",
-      "hi": "10:23",
-      "d": "PETEN 843 CASA 59, QUILPUE",
-      "e": "Pendiente",
-      "tec": "PABLO HERNANEZ FERNANDEZ",
-      "visitas": 2,
-      "ult_fecha": "09-09-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
       "o": "1-3NM16WP7",
       "cat": "Migración 3 Play",
       "f": "16-19",
@@ -2139,18 +2179,6 @@
       "visitas": 1,
       "ult_fecha": "01-09-2026",
       "ult_cierre": "Cliente reagenda"
-     },
-     {
-      "o": "1-3NOVXO1H",
-      "cat": "Alta 1 Play",
-      "f": "10-13",
-      "hi": "14:53",
-      "d": "TOQUI 2436, QUILPUE",
-      "e": "Pendiente",
-      "tec": "SAMUEL FERNANDEZ VIDAL",
-      "visitas": 1,
-      "ult_fecha": "05-09-2026",
-      "ult_cierre": "Clte desiste motivo comercial"
      }
     ],
     "reagendadas": [
@@ -2158,9 +2186,9 @@
       "o": "1-3NQON4O1",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "10:40",
+      "hi": "10:27",
       "d": "RECOLETA 1944, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "JORDAN ROA PEREZ",
       "desde": "09-09-2026"
      },
@@ -2168,15 +2196,15 @@
       "o": "1-3NMFQ0TT",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "13:00",
+      "hi": "10:52",
       "d": "IRMA JOHNSON MOLINA 110 EDIF. A-B-C DEPTO 321, QUILPUE",
       "e": "Pendiente",
-      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "tec": "PABLO HERNANEZ FERNANDEZ",
       "desde": "02-09-2026"
      }
     ]
    }
   }
  },
- "generado": "10-09-2026 10:18"
+ "generado": "10-09-2026 10:44"
 }
