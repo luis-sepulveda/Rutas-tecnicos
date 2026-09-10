@@ -1888,28 +1888,37 @@
    }
   },
   "10-09-2026": {
-   "hasta": "12:39",
-   "actividades": 113,
+   "hasta": "13:14",
+   "actividades": 125,
    "tecnicos": 27,
    "estados": {
-    "Completado": 18,
-    "No Realizada": 16,
-    "Iniciado": 21,
-    "Pendiente": 50,
+    "Completado": 27,
+    "No Realizada": 18,
+    "Pendiente": 55,
     "Cancelado": 4,
-    "en ruta": 2,
+    "en ruta": 3,
+    "Iniciado": 16,
     "Suspendido": 2
    },
-   "rgu": 175.0,
-   "caidas_total": 2,
-   "caidas_activas": 2,
+   "rgu": 192.1,
+   "caidas_total": 3,
+   "caidas_activas": 3,
    "caidas_resueltas": 0,
-   "nuevas": 9,
+   "nuevas": 12,
    "al_bucket": 9,
-   "repetidas": 19,
+   "repetidas": 21,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
+     {
+      "o": "1-3NQA5F0G",
+      "tec": "JOSE ROJO A",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:58",
+      "d": "LISBOA 932, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3NR2X1GR",
       "tec": "JOSE SALAS MEDINA",
@@ -1931,13 +1940,40 @@
     ],
     "nuevas": [
      {
+      "o": "1-3NRX9YZM",
+      "tec": "PABLO HERNANEZ FERNANDEZ",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "13:57",
+      "d": "LOS CONDORES 507, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3NRFA8PK",
+      "tec": "CRISTOBAL SILVA LEIVA",
+      "cat": "Migración 3 Play",
+      "f": "16-19",
+      "hi": "18:25",
+      "d": "SERRANO 1417 CASA A, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3NQA5F0G",
+      "tec": "JOSE ROJO A",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:58",
+      "d": "LISBOA 932, QUILPUE",
+      "e": "Pendiente (ya no está)"
+     },
+     {
       "o": "1-3NRUYNVH",
       "tec": "CRISTOBAL MIRANDA VALENC",
       "cat": "Reparación",
       "f": "10-13",
       "hi": "12:34",
       "d": "AV LA PALMA 151 EDIF. 11 DEPTO 243, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3NRVOVH1",
@@ -1958,12 +1994,12 @@
      },
      {
       "o": "1-3NRU8YBU",
-      "tec": "CRISTOBAL SILVA LEIVA",
+      "tec": "LEONEL HERNÁNDEZ OJE",
       "cat": "Alta 1 Play",
       "f": "13-16",
       "hi": "15:20",
       "d": "PJE ALIANZA 2014, QUILPUE",
-      "e": "en ruta"
+      "e": "Pendiente"
      },
      {
       "o": "1-3NRK1BJA",
@@ -1976,7 +2012,7 @@
      },
      {
       "o": "1-3NRT1LVG",
-      "tec": "LUIS GATICA DAVILA",
+      "tec": "YENDER BOSCAN CADENAS",
       "cat": "Alta 1 Play",
       "f": "13-16",
       "hi": "13:42",
@@ -2030,10 +2066,22 @@
       "f": "10-13",
       "hi": "12:30",
       "d": "PETEN 843 CASA 59, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "ALFREDO ALCAYAGA F",
       "visitas": 2,
       "ult_fecha": "09-09-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3NRW2K4N",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "14:15",
+      "d": "CALLE 5 0668, QUILPUE",
+      "e": "Pendiente",
+      "tec": "ALFREDO ALCAYAGA F",
+      "visitas": 3,
+      "ult_fecha": "10-09-2026",
       "ult_cierre": "Cliente reagenda"
      },
      {
@@ -2042,7 +2090,7 @@
       "f": "10-13",
       "hi": "09:57",
       "d": "ANTONIO VARAS 102 CASA F, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "CESAR MENA OLIVEROS",
       "visitas": 1,
       "ult_fecha": "10-08-2026",
@@ -2054,22 +2102,34 @@
       "f": "10-13",
       "hi": "12:27",
       "d": "AV LA PALMA 151 EDIF. 11 DEPTO 243, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "CRISTOBAL MIRANDA VALENC",
       "visitas": 1,
       "ult_fecha": "11-08-2026",
       "ult_cierre": "Cliente Desiste"
      },
      {
-      "o": "1-3NRCNW0A",
-      "cat": "Alta 2 Play",
-      "f": "10-13",
-      "hi": "11:41",
-      "d": "CALLE 5 0668, QUILPUE",
-      "e": "No Realizada",
+      "o": "1-3NRFA8PK",
+      "cat": "Migración 3 Play",
+      "f": "16-19",
+      "hi": "17:15",
+      "d": "SERRANO 1417 CASA A, QUILPUE",
+      "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
-      "visitas": 2,
-      "ult_fecha": "09-09-2026",
+      "visitas": 1,
+      "ult_fecha": "11-08-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3NRVRGIK",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "15:28",
+      "d": "ESMERALDA 1660, QUILPUE",
+      "e": "Pendiente",
+      "tec": "DANIEL NAVARRETE E",
+      "visitas": 1,
+      "ult_fecha": "10-09-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -2090,7 +2150,7 @@
       "f": "10-13",
       "hi": "12:23",
       "d": "TOQUI 2436, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "GEEYSER PEREZ O",
       "visitas": 1,
       "ult_fecha": "05-09-2026",
@@ -2109,28 +2169,28 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3NR8U1MS",
-      "cat": "Reparación",
-      "f": "13-16",
-      "hi": "13:00",
-      "d": "FRESIA 226, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOEL GUSTAVE GUSTA",
-      "visitas": 1,
-      "ult_fecha": "09-09-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3NOUXBTT",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:52",
       "d": "ALCALDE ALEJANDRO PERALTA 185, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOEL GUSTAVE GUSTA",
       "visitas": 1,
       "ult_fecha": "05-09-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3NR77UUJ",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "18:05",
+      "d": "PEDRO AGUIRRE CERDA 407, QUILPUE",
+      "e": "Pendiente",
+      "tec": "JOSE ROJO A",
+      "visitas": 1,
+      "ult_fecha": "05-09-2026",
+      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3NOEPSXK",
@@ -2148,7 +2208,7 @@
       "o": "1-3NRB9X0Y",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "14:10",
+      "hi": "14:32",
       "d": "AV LOS CARRERA 549 CASA A, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE SALAS MEDINA",
@@ -2157,24 +2217,12 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3NR77UUJ",
-      "cat": "Modificación de Servicio",
-      "f": "16-19",
-      "hi": "16:55",
-      "d": "PEDRO AGUIRRE CERDA 407, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JOSE SALAS MEDINA",
-      "visitas": 1,
-      "ult_fecha": "05-09-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
       "o": "1-3NQFA4XX",
       "cat": "Migración 2 Play",
       "f": "10-13",
       "hi": "09:46",
       "d": "LOS TREBOLES 55 CASA 26, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JUAN ARRIAGADA C",
       "visitas": 2,
       "ult_fecha": "08-09-2026",
@@ -2184,13 +2232,25 @@
       "o": "1-3NPS7NEX",
       "cat": "Migración 3 Play",
       "f": "16-19",
-      "hi": "16:42",
+      "hi": "19:27",
       "d": "ACHERNAR 1044, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
       "visitas": 1,
       "ult_fecha": "07-09-2026",
       "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3NR8U1MS",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "14:38",
+      "d": "FRESIA 226, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "LUIS GATICA DAVILA",
+      "visitas": 1,
+      "ult_fecha": "09-09-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3NM16WP7",
@@ -2219,9 +2279,9 @@
       "o": "1-3NR9SHGA",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "13:00",
+      "hi": "13:02",
       "d": "ROLANDO PEREIRA 2188, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "SAMUEL FERNANDEZ VIDAL",
       "visitas": 2,
       "ult_fecha": "26-08-2026",
@@ -2231,7 +2291,7 @@
       "o": "1-3NR2C9NP",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:29",
+      "hi": "17:52",
       "d": "TONGOY 01698, QUILPUE",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -2265,5 +2325,5 @@
    }
   }
  },
- "generado": "10-09-2026 12:39"
+ "generado": "10-09-2026 13:14"
 }
