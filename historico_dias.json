@@ -1888,23 +1888,23 @@
    }
   },
   "10-09-2026": {
-   "hasta": "15:00",
-   "actividades": 127,
-   "tecnicos": 29,
+   "hasta": "15:15",
+   "actividades": 130,
+   "tecnicos": 30,
    "estados": {
+    "Iniciado": 22,
+    "Completado": 41,
+    "No Realizada": 26,
     "en ruta": 5,
-    "Completado": 40,
-    "No Realizada": 24,
-    "Iniciado": 18,
-    "Pendiente": 34,
+    "Pendiente": 30,
     "Cancelado": 4,
     "Suspendido": 2
    },
-   "rgu": 192.3,
+   "rgu": 193.5,
    "caidas_total": 4,
    "caidas_activas": 4,
    "caidas_resueltas": 0,
-   "nuevas": 14,
+   "nuevas": 16,
    "al_bucket": 9,
    "repetidas": 21,
    "reagendadas": 2,
@@ -1948,6 +1948,24 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3NS1UFHG",
+      "tec": "JOSE SALAS MEDINA",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "15:13",
+      "d": "LAS AMAPOLAS 593 CASA 6A, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
+      "o": "1-3NS1V7X2",
+      "tec": "GEEYSER PEREZ O",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "15:20",
+      "d": "PJE 1 825 CASA, QUILPUE",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3NS0UB49",
       "tec": "YENDER BOSCAN CADENAS",
@@ -2009,7 +2027,7 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "PJE REPUBLICA 1271, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3NRVO460",
@@ -2105,7 +2123,7 @@
       "f": "13-16",
       "hi": "14:27",
       "d": "CALLE 5 0668, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "ALFREDO ALCAYAGA F",
       "visitas": 3,
       "ult_fecha": "10-09-2026",
@@ -2153,7 +2171,7 @@
       "f": "13-16",
       "hi": "14:50",
       "d": "ESMERALDA 1660, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "DANIEL NAVARRETE E",
       "visitas": 1,
       "ult_fecha": "10-09-2026",
@@ -2199,7 +2217,7 @@
       "o": "1-3NOUXBTT",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:34",
       "d": "ALCALDE ALEJANDRO PERALTA 185, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOEL GUSTAVE GUSTA",
@@ -2235,7 +2253,7 @@
       "o": "1-3NRB9X0Y",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "17:05",
+      "hi": "16:21",
       "d": "AV LOS CARRERA 549 CASA A, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE SALAS MEDINA",
@@ -2271,7 +2289,7 @@
       "o": "1-3NM16WP7",
       "cat": "Migración 3 Play",
       "f": "16-19",
-      "hi": "16:22",
+      "hi": "16:24",
       "d": "PJE 1 (SERENA) 490, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -2352,5 +2370,5 @@
    }
   }
  },
- "generado": "10-09-2026 15:00"
+ "generado": "10-09-2026 15:15"
 }
