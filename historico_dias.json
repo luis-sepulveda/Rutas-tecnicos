@@ -1888,24 +1888,24 @@
    }
   },
   "10-09-2026": {
-   "hasta": "11:09",
-   "actividades": 103,
-   "tecnicos": 27,
+   "hasta": "11:39",
+   "actividades": 107,
+   "tecnicos": 26,
    "estados": {
-    "Completado": 6,
+    "Completado": 10,
+    "No Realizada": 10,
+    "en ruta": 6,
+    "Pendiente": 56,
     "Iniciado": 20,
-    "Pendiente": 65,
-    "Cancelado": 2,
-    "en ruta": 3,
-    "No Realizada": 6,
-    "Suspendido": 1
+    "Cancelado": 3,
+    "Suspendido": 2
    },
-   "rgu": 155.5,
+   "rgu": 163.0,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
-   "nuevas": 5,
-   "al_bucket": 0,
+   "nuevas": 6,
+   "al_bucket": 1,
    "repetidas": 17,
    "reagendadas": 2,
    "detalle": {
@@ -1931,6 +1931,15 @@
     ],
     "nuevas": [
      {
+      "o": "1-3NRU8YBU",
+      "tec": "LEONEL HERNÁNDEZ OJE",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "15:20",
+      "d": "PJE ALIANZA 2014, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3NRK1BJA",
       "tec": "JOEL GUSTAVE GUSTA",
       "cat": "Alta 2 Play",
@@ -1955,7 +1964,7 @@
       "f": "10-13",
       "hi": "10:34",
       "d": "ARTURO ALESSANDRI 719 DEPTO 34, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3NRS81LX",
@@ -1968,12 +1977,12 @@
      },
      {
       "o": "1-3NRRUVZW",
-      "tec": "GEEYSER PEREZ O",
+      "tec": "SAMUEL FERNANDEZ VIDAL",
       "cat": "Reparación",
       "f": "10-13",
       "hi": "12:01",
       "d": "EL RETIRO SUR 1180, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      }
     ],
     "repetidas": [
@@ -1983,7 +1992,7 @@
       "f": "10-13",
       "hi": "11:02",
       "d": "OJOS DE AGUA 108 EDIF. B4 DEPTO 502, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "ALFREDO ALCAYAGA F",
       "visitas": 1,
       "ult_fecha": "21-08-2026",
@@ -1993,7 +2002,7 @@
       "o": "1-3NRB9X0Y",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "14:31",
+      "hi": "15:23",
       "d": "AV LOS CARRERA 549 CASA A, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -2005,7 +2014,7 @@
       "o": "1-3NR77UUJ",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:05",
+      "hi": "17:57",
       "d": "PEDRO AGUIRRE CERDA 407, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -2041,10 +2050,10 @@
       "o": "1-3NRCNW0A",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "11:57",
+      "hi": "11:50",
       "d": "CALLE 5 0668, QUILPUE",
-      "e": "Pendiente",
-      "tec": "DANIEL NAVARRETE E",
+      "e": "en ruta",
+      "tec": "CRISTOBAL SILVA LEIVA",
       "visitas": 2,
       "ult_fecha": "09-09-2026",
       "ult_cierre": "Sin moradores"
@@ -2053,7 +2062,7 @@
       "o": "1-3NR2C9NP",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:37",
+      "hi": "16:43",
       "d": "TONGOY 01698, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -2122,6 +2131,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3NM16WP7",
+      "cat": "Migración 3 Play",
+      "f": "16-19",
+      "hi": "17:12",
+      "d": "PJE 1 (SERENA) 490, QUILPUE",
+      "e": "Pendiente",
+      "tec": "JOSE SALAS MEDINA",
+      "visitas": 1,
+      "ult_fecha": "01-09-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3NQFA4XX",
       "cat": "Migración 2 Play",
       "f": "10-13",
@@ -2149,7 +2170,7 @@
       "o": "1-3NR8U1MS",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:03",
+      "hi": "15:17",
       "d": "FRESIA 226, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MARCELO GÓMEZ GÓME",
@@ -2168,21 +2189,19 @@
       "visitas": 1,
       "ult_fecha": "07-09-2026",
       "ult_cierre": "Cliente reagenda"
-     },
-     {
-      "o": "1-3NM16WP7",
-      "cat": "Migración 3 Play",
-      "f": "16-19",
-      "hi": "16:37",
-      "d": "PJE 1 (SERENA) 490, QUILPUE",
-      "e": "Pendiente",
-      "tec": "PABLO HERNANEZ FERNANDEZ",
-      "visitas": 1,
-      "ult_fecha": "01-09-2026",
-      "ult_cierre": "Cliente reagenda"
      }
     ],
     "reagendadas": [
+     {
+      "o": "1-3NMFQ0TT",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "11:31",
+      "d": "IRMA JOHNSON MOLINA 110 EDIF. A-B-C DEPTO 321, QUILPUE",
+      "e": "Iniciado",
+      "tec": "GEEYSER PEREZ O",
+      "desde": "02-09-2026"
+     },
      {
       "o": "1-3NQON4O1",
       "cat": "Alta 2 Play",
@@ -2192,20 +2211,10 @@
       "e": "Iniciado",
       "tec": "JORDAN ROA PEREZ",
       "desde": "09-09-2026"
-     },
-     {
-      "o": "1-3NMFQ0TT",
-      "cat": "Alta 1 Play",
-      "f": "10-13",
-      "hi": "11:01",
-      "d": "IRMA JOHNSON MOLINA 110 EDIF. A-B-C DEPTO 321, QUILPUE",
-      "e": "Pendiente",
-      "tec": "PABLO HERNANEZ FERNANDEZ",
-      "desde": "02-09-2026"
      }
     ]
    }
   }
  },
- "generado": "10-09-2026 11:09"
+ "generado": "10-09-2026 11:39"
 }
