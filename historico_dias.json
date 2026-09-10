@@ -1888,18 +1888,19 @@
    }
   },
   "10-09-2026": {
-   "hasta": "10:44",
-   "actividades": 102,
+   "hasta": "11:09",
+   "actividades": 103,
    "tecnicos": 27,
    "estados": {
-    "Completado": 4,
-    "en ruta": 5,
-    "Pendiente": 68,
-    "Cancelado": 1,
+    "Completado": 6,
     "Iniciado": 20,
-    "No Realizada": 4
+    "Pendiente": 65,
+    "Cancelado": 2,
+    "en ruta": 3,
+    "No Realizada": 6,
+    "Suspendido": 1
    },
-   "rgu": 152.5,
+   "rgu": 155.5,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
@@ -1980,9 +1981,9 @@
       "o": "1-3NR921AP",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "10:53",
+      "hi": "11:02",
       "d": "OJOS DE AGUA 108 EDIF. B4 DEPTO 502, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "ALFREDO ALCAYAGA F",
       "visitas": 1,
       "ult_fecha": "21-08-2026",
@@ -1992,12 +1993,24 @@
       "o": "1-3NRB9X0Y",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "14:22",
+      "hi": "14:31",
       "d": "AV LOS CARRERA 549 CASA A, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
       "visitas": 1,
       "ult_fecha": "09-09-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3NR77UUJ",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:05",
+      "d": "PEDRO AGUIRRE CERDA 407, QUILPUE",
+      "e": "Pendiente",
+      "tec": "ALFREDO ALCAYAGA F",
+      "visitas": 1,
+      "ult_fecha": "05-09-2026",
       "ult_cierre": "Cliente reagenda"
      },
      {
@@ -2066,7 +2079,7 @@
       "f": "10-13",
       "hi": "10:36",
       "d": "MARGA MARGA 600, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JOEL GUSTAVE GUSTA",
       "visitas": 2,
       "ult_fecha": "09-09-2026",
@@ -2083,18 +2096,6 @@
       "visitas": 1,
       "ult_fecha": "05-09-2026",
       "ult_cierre": "Clte desiste motivo comercial"
-     },
-     {
-      "o": "1-3NR77UUJ",
-      "cat": "Modificación de Servicio",
-      "f": "16-19",
-      "hi": "17:40",
-      "d": "PEDRO AGUIRRE CERDA 407, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JOSE ROJO A",
-      "visitas": 1,
-      "ult_fecha": "05-09-2026",
-      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3NOEPSXK",
@@ -2172,7 +2173,7 @@
       "o": "1-3NM16WP7",
       "cat": "Migración 3 Play",
       "f": "16-19",
-      "hi": "16:31",
+      "hi": "16:37",
       "d": "PJE 1 (SERENA) 490, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -2196,7 +2197,7 @@
       "o": "1-3NMFQ0TT",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:52",
+      "hi": "11:01",
       "d": "IRMA JOHNSON MOLINA 110 EDIF. A-B-C DEPTO 321, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -2206,5 +2207,5 @@
    }
   }
  },
- "generado": "10-09-2026 10:44"
+ "generado": "10-09-2026 11:09"
 }
