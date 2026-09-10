@@ -1888,24 +1888,24 @@
    }
   },
   "10-09-2026": {
-   "hasta": "15:15",
-   "actividades": 130,
+   "hasta": "15:38",
+   "actividades": 132,
    "tecnicos": 30,
    "estados": {
-    "Iniciado": 22,
-    "Completado": 41,
-    "No Realizada": 26,
-    "en ruta": 5,
-    "Pendiente": 30,
+    "No Realizada": 27,
+    "en ruta": 6,
+    "Pendiente": 26,
+    "Completado": 47,
+    "Iniciado": 20,
     "Cancelado": 4,
     "Suspendido": 2
    },
-   "rgu": 193.5,
+   "rgu": 197.0,
    "caidas_total": 4,
    "caidas_activas": 4,
    "caidas_resueltas": 0,
    "nuevas": 16,
-   "al_bucket": 9,
+   "al_bucket": 16,
    "repetidas": 21,
    "reagendadas": 2,
    "detalle": {
@@ -1964,7 +1964,7 @@
       "f": "13-16",
       "hi": "15:20",
       "d": "PJE 1 825 CASA, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3NS0UB49",
@@ -1973,7 +1973,7 @@
       "f": "13-16",
       "hi": "14:32",
       "d": "EUGENIO GRANDI 935, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3NS023V6",
@@ -1995,7 +1995,7 @@
      },
      {
       "o": "1-3NRFA8PK",
-      "tec": "CRISTOBAL SILVA LEIVA",
+      "tec": "CESAR MENA OLIVEROS",
       "cat": "Migración 3 Play",
       "f": "16-19",
       "hi": "18:25",
@@ -2027,7 +2027,7 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "PJE REPUBLICA 1271, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3NRVO460",
@@ -2044,7 +2044,7 @@
       "f": "13-16",
       "hi": "15:20",
       "d": "PJE ALIANZA 2014, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3NRK1BJA",
@@ -2142,6 +2142,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3NRFA8PK",
+      "cat": "Migración 3 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "SERRANO 1417 CASA A, QUILPUE",
+      "e": "Pendiente",
+      "tec": "CESAR MENA OLIVEROS",
+      "visitas": 1,
+      "ult_fecha": "11-08-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3NRUYNVH",
       "cat": "Reparación",
       "f": "10-13",
@@ -2154,16 +2166,16 @@
       "ult_cierre": "Cliente Desiste"
      },
      {
-      "o": "1-3NRFA8PK",
+      "o": "1-3NM16WP7",
       "cat": "Migración 3 Play",
       "f": "16-19",
-      "hi": "17:24",
-      "d": "SERRANO 1417 CASA A, QUILPUE",
+      "hi": "17:22",
+      "d": "PJE 1 (SERENA) 490, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
       "visitas": 1,
-      "ult_fecha": "11-08-2026",
-      "ult_cierre": "Sin moradores"
+      "ult_fecha": "01-09-2026",
+      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3NRVRGIK",
@@ -2214,30 +2226,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3NOUXBTT",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "16:34",
-      "d": "ALCALDE ALEJANDRO PERALTA 185, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOEL GUSTAVE GUSTA",
-      "visitas": 1,
-      "ult_fecha": "05-09-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3NR77UUJ",
-      "cat": "Modificación de Servicio",
-      "f": "16-19",
-      "hi": "18:04",
-      "d": "PEDRO AGUIRRE CERDA 407, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JOSE ROJO A",
-      "visitas": 1,
-      "ult_fecha": "05-09-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
       "o": "1-3NOEPSXK",
       "cat": "Migración 1 Play",
       "f": "10-13",
@@ -2248,18 +2236,6 @@
       "visitas": 1,
       "ult_fecha": "04-09-2026",
       "ult_cierre": "Falta de dotación"
-     },
-     {
-      "o": "1-3NRB9X0Y",
-      "cat": "Migración 2 Play",
-      "f": "13-16",
-      "hi": "16:21",
-      "d": "AV LOS CARRERA 549 CASA A, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JOSE SALAS MEDINA",
-      "visitas": 1,
-      "ult_fecha": "09-09-2026",
-      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3NQFA4XX",
@@ -2286,15 +2262,51 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3NM16WP7",
+      "o": "1-3NR77UUJ",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:04",
+      "d": "PEDRO AGUIRRE CERDA 407, QUILPUE",
+      "e": "Pendiente",
+      "tec": "LUIS MARTIN NUÑEZ",
+      "visitas": 1,
+      "ult_fecha": "05-09-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3NR2C9NP",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "18:01",
+      "d": "TONGOY 01698, QUILPUE",
+      "e": "Pendiente",
+      "tec": "LUIS MARTIN NUÑEZ",
+      "visitas": 2,
+      "ult_fecha": "08-09-2026",
+      "ult_cierre": "Casa sin medidor-remarcador"
+     },
+     {
+      "o": "1-3NPS7NEX",
       "cat": "Migración 3 Play",
       "f": "16-19",
-      "hi": "16:24",
-      "d": "PJE 1 (SERENA) 490, QUILPUE",
+      "hi": "16:52",
+      "d": "ACHERNAR 1044, QUILPUE",
       "e": "Pendiente",
+      "tec": "NICOLAS MOYANO R",
+      "visitas": 1,
+      "ult_fecha": "07-09-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3NRB9X0Y",
+      "cat": "Migración 2 Play",
+      "f": "13-16",
+      "hi": "15:44",
+      "d": "AV LOS CARRERA 549 CASA A, QUILPUE",
+      "e": "en ruta",
       "tec": "PABLO HERNANEZ FERNANDEZ",
       "visitas": 1,
-      "ult_fecha": "01-09-2026",
+      "ult_fecha": "09-09-2026",
       "ult_cierre": "Cliente reagenda"
      },
      {
@@ -2314,35 +2326,23 @@
       "f": "13-16",
       "hi": "13:02",
       "d": "ROLANDO PEREIRA 2188, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "SAMUEL FERNANDEZ VIDAL",
       "visitas": 2,
       "ult_fecha": "26-08-2026",
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3NR2C9NP",
+      "o": "1-3NOUXBTT",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:52",
-      "d": "TONGOY 01698, QUILPUE",
-      "e": "Pendiente",
-      "tec": "SAMUEL FERNANDEZ VIDAL",
-      "visitas": 2,
-      "ult_fecha": "08-09-2026",
-      "ult_cierre": "Casa sin medidor-remarcador"
-     },
-     {
-      "o": "1-3NPS7NEX",
-      "cat": "Migración 3 Play",
-      "f": "16-19",
-      "hi": "16:00",
-      "d": "ACHERNAR 1044, QUILPUE",
-      "e": "Pendiente",
+      "hi": "15:41",
+      "d": "ALCALDE ALEJANDRO PERALTA 185, VILLA ALEMANA",
+      "e": "en ruta",
       "tec": "YENDER BOSCAN CADENAS",
       "visitas": 1,
-      "ult_fecha": "07-09-2026",
-      "ult_cierre": "Cliente reagenda"
+      "ult_fecha": "05-09-2026",
+      "ult_cierre": "Sin moradores"
      }
     ],
     "reagendadas": [
@@ -2370,5 +2370,5 @@
    }
   }
  },
- "generado": "10-09-2026 15:15"
+ "generado": "10-09-2026 15:38"
 }
