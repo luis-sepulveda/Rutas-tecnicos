@@ -1888,16 +1888,16 @@
    }
   },
   "10-09-2026": {
-   "hasta": "14:35",
+   "hasta": "14:45",
    "actividades": 126,
-   "tecnicos": 27,
+   "tecnicos": 29,
    "estados": {
-    "Completado": 36,
+    "Pendiente": 37,
+    "Completado": 39,
     "No Realizada": 23,
-    "Iniciado": 18,
-    "Pendiente": 42,
+    "Iniciado": 15,
+    "en ruta": 6,
     "Cancelado": 4,
-    "en ruta": 1,
     "Suspendido": 2
    },
    "rgu": 192.2,
@@ -1964,7 +1964,7 @@
       "f": "13-16",
       "hi": "15:12",
       "d": "LOS TREBOLES 55 CASA 26, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3NRX9YZM",
@@ -1973,7 +1973,7 @@
       "f": "13-16",
       "hi": "13:57",
       "d": "LOS CONDORES 507, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3NRFA8PK",
@@ -2009,7 +2009,7 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "PJE REPUBLICA 1271, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3NRVO460",
@@ -2039,12 +2039,12 @@
      },
      {
       "o": "1-3NRT1LVG",
-      "tec": "YENDER BOSCAN CADENAS",
+      "tec": "ANTONHY MORALES MENDOZA",
       "cat": "Alta 1 Play",
       "f": "13-16",
       "hi": "13:42",
       "d": "BERLIN 1408, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3NRSW4P6",
@@ -2151,9 +2151,9 @@
       "o": "1-3NRVRGIK",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:58",
+      "hi": "14:54",
       "d": "ESMERALDA 1660, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "DANIEL NAVARRETE E",
       "visitas": 1,
       "ult_fecha": "10-09-2026",
@@ -2225,7 +2225,7 @@
       "f": "10-13",
       "hi": "10:21",
       "d": "LAS AMAPOLAS 593 CASA 6A, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JOSE SALAS MEDINA",
       "visitas": 1,
       "ult_fecha": "04-09-2026",
@@ -2235,7 +2235,7 @@
       "o": "1-3NRB9X0Y",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "16:03",
+      "hi": "15:55",
       "d": "AV LOS CARRERA 549 CASA A, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE SALAS MEDINA",
@@ -2271,7 +2271,7 @@
       "o": "1-3NM16WP7",
       "cat": "Migración 3 Play",
       "f": "16-19",
-      "hi": "17:21",
+      "hi": "16:22",
       "d": "PJE 1 (SERENA) 490, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -2318,7 +2318,7 @@
       "o": "1-3NPS7NEX",
       "cat": "Migración 3 Play",
       "f": "16-19",
-      "hi": "17:56",
+      "hi": "16:00",
       "d": "ACHERNAR 1044, QUILPUE",
       "e": "Pendiente",
       "tec": "YENDER BOSCAN CADENAS",
@@ -2352,5 +2352,5 @@
    }
   }
  },
- "generado": "10-09-2026 14:35"
+ "generado": "10-09-2026 14:45"
 }
