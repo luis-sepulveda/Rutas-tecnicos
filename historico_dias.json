@@ -1888,23 +1888,23 @@
    }
   },
   "10-09-2026": {
-   "hasta": "17:08",
-   "actividades": 142,
+   "hasta": "17:24",
+   "actividades": 143,
    "tecnicos": 30,
    "estados": {
-    "No Realizada": 36,
-    "Iniciado": 23,
-    "Completado": 64,
-    "Pendiente": 6,
+    "No Realizada": 37,
+    "Iniciado": 25,
+    "Completado": 65,
     "en ruta": 3,
     "Cancelado": 6,
+    "Pendiente": 3,
     "Suspendido": 4
    },
-   "rgu": 209.2,
+   "rgu": 209.3,
    "caidas_total": 5,
    "caidas_activas": 5,
    "caidas_resueltas": 0,
-   "nuevas": 26,
+   "nuevas": 27,
    "al_bucket": 16,
    "repetidas": 21,
    "reagendadas": 2,
@@ -1958,6 +1958,15 @@
     ],
     "nuevas": [
      {
+      "o": "1-3NS6DJ1E",
+      "tec": "FELIPE SILVA R",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:13",
+      "d": "AVENIDA LOS REYES 1118, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
       "o": "1-3NS67D7P",
       "tec": "JOEL GUSTAVE GUSTA",
       "cat": "Modificación de Servicio",
@@ -1982,7 +1991,7 @@
       "f": "16-19",
       "hi": "17:10",
       "d": "LAS ROSAS 1071 DEPTO 11, QUILPUE",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3NS5B6UB",
@@ -2036,7 +2045,7 @@
       "f": "16-19",
       "hi": "16:29",
       "d": "BARROS JARPA 137, QUILPUE",
-      "e": "Iniciado"
+      "e": "No Realizada"
      },
      {
       "o": "1-3NS4B55J",
@@ -2227,18 +2236,6 @@
       "visitas": 3,
       "ult_fecha": "10-09-2026",
       "ult_cierre": "Cliente reagenda"
-     },
-     {
-      "o": "1-3NR2C9NP",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "17:20",
-      "d": "TONGOY 01698, QUILPUE",
-      "e": "Pendiente",
-      "tec": "ALFREDO ALCAYAGA F",
-      "visitas": 2,
-      "ult_fecha": "08-09-2026",
-      "ult_cierre": "Casa sin medidor-remarcador"
      },
      {
       "o": "1-3NR8Q843",
@@ -2432,6 +2429,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3NR2C9NP",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "17:41",
+      "d": "TONGOY 01698, QUILPUE",
+      "e": "en ruta",
+      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "visitas": 2,
+      "ult_fecha": "08-09-2026",
+      "ult_cierre": "Casa sin medidor-remarcador"
+     },
+     {
       "o": "1-3NOUXBTT",
       "cat": "Alta 1 Play",
       "f": "16-19",
@@ -2469,5 +2478,5 @@
    }
   }
  },
- "generado": "10-09-2026 17:08"
+ "generado": "10-09-2026 17:24"
 }
