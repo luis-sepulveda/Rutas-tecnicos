@@ -1,8 +1,8 @@
 {
-  "actualizado": "2026-09-10T16:39:25",
+  "actualizado": "2026-09-10T17:09:26",
   "resumen": {
     "sin informacion": 2,
-    "?": 1,
+    "cancelada": 1,
     "reagendada": 2
   },
   "estados": {
@@ -19,10 +19,19 @@
       "cat": "Modificación de Servicio",
       "franja_original": "16-19",
       "d": "LISBOA 932, QUILPUE",
-      "estado": "?",
-      "color": "rgb(255, 170, 170)",
+      "estado": "cancelada",
+      "color": "rgb(128, 255, 128)",
       "detalle": "1-3NQA5F0G - 16-19-Modificacion postventa",
-      "franja_nueva": "16-19"
+      "franja_nueva": "16-19",
+      "previas": [
+        {
+          "estado": "suspendida",
+          "color": "rgb(153, 255, 255)",
+          "ot": "1-3NQA5F0G",
+          "franja": "16-19",
+          "texto": "1-3NQA5F0G - 16-19-Modificacion postventa"
+        }
+      ]
     },
     "1-3NR2X1GR": {
       "tec": "JOSE SALAS MEDINA",
