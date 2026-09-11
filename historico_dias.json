@@ -2478,25 +2478,25 @@
    }
   },
   "11-09-2026": {
-   "hasta": "16:21",
-   "actividades": 161,
+   "hasta": "16:51",
+   "actividades": 163,
    "tecnicos": 33,
    "estados": {
-    "No Realizada": 45,
-    "Completado": 63,
-    "en ruta": 5,
-    "Iniciado": 26,
-    "Pendiente": 16,
+    "No Realizada": 49,
+    "Completado": 67,
+    "Iniciado": 29,
+    "Pendiente": 10,
     "Suspendido": 2,
-    "Cancelado": 4
+    "Cancelado": 4,
+    "en ruta": 2
    },
-   "rgu": 235.3,
+   "rgu": 236.4,
    "caidas_total": 11,
    "caidas_activas": 10,
    "caidas_resueltas": 1,
-   "nuevas": 36,
+   "nuevas": 38,
    "al_bucket": 28,
-   "repetidas": 23,
+   "repetidas": 24,
    "reagendadas": 1,
    "detalle": {
     "caidas": [
@@ -2593,6 +2593,24 @@
     ],
     "nuevas": [
      {
+      "o": "1-3NSVCLYU",
+      "tec": "SEBASTIAN DOSSOW A",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "16:33",
+      "d": "GLACIAR GREY 2000 EDIF. C DEPTO 301, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
+      "o": "1-3NSUKJVV",
+      "tec": "PABLO HERNANEZ FERNANDEZ",
+      "cat": "Migración 1 Play",
+      "f": "16-19",
+      "hi": "16:35",
+      "d": "SAN MARTIN 1048 DEPTO 32, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
       "o": "1-3NSTRIFG",
       "tec": "JOEL GUSTAVE GUSTA",
       "cat": "Modificación de Servicio",
@@ -2608,16 +2626,16 @@
       "f": "16-19",
       "hi": "17:27",
       "d": "LEUCOTON 990 CASA C, QUILPUE",
-      "e": "Iniciado"
+      "e": "No Realizada"
      },
      {
       "o": "1-3NSS0HMG",
-      "tec": "GEEYSER PEREZ O",
+      "tec": "DANIEL NAVARRETE E",
       "cat": "Reparación",
       "f": "16-19",
       "hi": "16:55",
       "d": "BADEN POWELL 1601 DEPTO 31, QUILPUE",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3NSQSQZI",
@@ -2666,12 +2684,12 @@
      },
      {
       "o": "1-3NSPW2SS",
-      "tec": "HERNAN CORTES HERRERA",
+      "tec": "JOSE CASTRO P",
       "cat": "Alta 1 Play",
       "f": "16-19",
       "hi": "16:59",
       "d": "GUSTAVO ZAMORA 0950 CASA A, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3NSPTYIX",
@@ -2770,7 +2788,7 @@
       "f": "13-16",
       "hi": "15:51",
       "d": "EDWIN GUAJARDO 176, QUILPUE",
-      "e": "Iniciado"
+      "e": "No Realizada"
      },
      {
       "o": "1-3NSN3Q7K",
@@ -2801,7 +2819,7 @@
      },
      {
       "o": "1-3NSM0OXP",
-      "tec": "PABLO HERNANEZ FERNANDEZ",
+      "tec": "LUIS CASTRO TORRES",
       "cat": "Alta 1 Play",
       "f": "16-19",
       "hi": "18:21",
@@ -2824,7 +2842,7 @@
       "f": "13-16",
       "hi": "16:34",
       "d": "PRIMERA 358, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "No Realizada"
      },
      {
       "o": "1-3NSLXUBQ",
@@ -3087,24 +3105,12 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3NRYWDYH",
-      "cat": "Migración 2 Play",
-      "f": "16-19",
-      "hi": "17:44",
-      "d": "ALCALDE RODOLFO GALLEGUILLOS 1160, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOSE SALAS MEDINA",
-      "visitas": 1,
-      "ult_fecha": "25-08-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3NOXGFYB",
       "cat": "Migración 3 Play",
       "f": "13-16",
-      "hi": "16:29",
+      "hi": "16:23",
       "d": "PATRICIO LYNCH 308, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JUAN ARRIAGADA C",
       "visitas": 1,
       "ult_fecha": "05-09-2026",
@@ -3126,10 +3132,10 @@
       "o": "1-3NS1OXAI",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:43",
+      "hi": "17:22",
       "d": "VALLE DEL PARAISO 2907 EDIF. A DEPTO 104, QUILPUE",
       "e": "Pendiente",
-      "tec": "LUIS CASTRO TORRES",
+      "tec": "LEONEL HERNÁNDEZ OJE",
       "visitas": 1,
       "ult_fecha": "10-09-2026",
       "ult_cierre": "Sin Acceso a camara"
@@ -3159,6 +3165,18 @@
       "ult_cierre": "Direccion incorrecta"
      },
      {
+      "o": "1-3NRYWDYH",
+      "cat": "Migración 2 Play",
+      "f": "16-19",
+      "hi": "16:36",
+      "d": "ALCALDE RODOLFO GALLEGUILLOS 1160, VILLA ALEMANA",
+      "e": "Iniciado",
+      "tec": "LUIS GATICA DAVILA",
+      "visitas": 1,
+      "ult_fecha": "25-08-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3NRSXW1D",
       "cat": "Alta 1 Play",
       "f": "16-19",
@@ -3169,6 +3187,18 @@
       "visitas": 1,
       "ult_fecha": "10-09-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3NSUKJVV",
+      "cat": "Migración 1 Play",
+      "f": "16-19",
+      "hi": "16:35",
+      "d": "SAN MARTIN 1048 DEPTO 32, QUILPUE",
+      "e": "Iniciado",
+      "tec": "PABLO HERNANEZ FERNANDEZ",
+      "visitas": 1,
+      "ult_fecha": "11-09-2026",
+      "ult_cierre": "Casa sin medidor-remarcador"
      },
      {
       "o": "1-3NSPTYIX",
@@ -3209,5 +3239,5 @@
    }
   }
  },
- "generado": "11-09-2026 16:21"
+ "generado": "11-09-2026 16:51"
 }
