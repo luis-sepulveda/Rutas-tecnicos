@@ -2478,23 +2478,23 @@
    }
   },
   "11-09-2026": {
-   "hasta": "11:12",
-   "actividades": 114,
+   "hasta": "11:32",
+   "actividades": 123,
    "tecnicos": 33,
    "estados": {
-    "No Realizada": 11,
-    "Iniciado": 26,
-    "Pendiente": 67,
+    "No Realizada": 13,
+    "Pendiente": 72,
     "Completado": 9,
-    "en ruta": 1
+    "Iniciado": 24,
+    "en ruta": 5
    },
-   "rgu": 178.5,
+   "rgu": 189.6,
    "caidas_total": 5,
    "caidas_activas": 5,
    "caidas_resueltas": 0,
-   "nuevas": 8,
-   "al_bucket": 0,
-   "repetidas": 17,
+   "nuevas": 15,
+   "al_bucket": 1,
+   "repetidas": 18,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
@@ -2546,6 +2546,69 @@
     ],
     "nuevas": [
      {
+      "o": "1-3NSMA84Q",
+      "tec": "JOSE PEREZ RANGEL",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "12:25",
+      "d": "ESMERALDA 1570, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3NSM8YME",
+      "tec": "GEEYSER PEREZ O",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "15:29",
+      "d": "MANUEL PLAZA 1664, QUILPUE",
+      "e": "Pendiente (ya no está)"
+     },
+     {
+      "o": "1-3NSM0OXP",
+      "tec": "PABLO HERNANEZ FERNANDEZ",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "18:21",
+      "d": "YUNGAY 913, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3NSLQOAO",
+      "tec": "JOSE ROJO A",
+      "cat": "Reparación",
+      "f": "10-13",
+      "hi": "11:36",
+      "d": "PAUL HARRIS 1260, VILLA ALEMANA",
+      "e": "en ruta"
+     },
+     {
+      "o": "1-3NSLPWI4",
+      "tec": "JOSE SALAS MEDINA",
+      "cat": "Migración 2 Play",
+      "f": "13-16",
+      "hi": "16:34",
+      "d": "PRIMERA 358, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3NSLXUBQ",
+      "tec": "GEEYSER PEREZ O",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "11:15",
+      "d": "LEUCOTON 1101 EDIF. 1 DEPTO 208, QUILPUE",
+      "e": "en ruta"
+     },
+     {
+      "o": "1-3NSLXYZ8",
+      "tec": "NICOLAS MOYANO R",
+      "cat": "Migración 3 Play",
+      "f": "13-16",
+      "hi": "16:54",
+      "d": "AVENIDA QUINTA 709 DEPTO 303, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3NSLJLZ3",
       "tec": "PABLO HERNANEZ FERNANDEZ",
       "cat": "Alta 2 Play",
@@ -2570,7 +2633,7 @@
       "f": "10-13",
       "hi": "12:26",
       "d": "ILLAPEL 14, QUILPUE",
-      "e": "Iniciado"
+      "e": "No Realizada"
      },
      {
       "o": "1-3NSKEIM2",
@@ -2625,7 +2688,7 @@
       "f": "10-13",
       "hi": "11:02",
       "d": "ILLAPEL 14, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "ALEXIS JARA",
       "visitas": 1,
       "ult_fecha": "21-08-2026",
@@ -2635,7 +2698,7 @@
       "o": "1-3NS7T34X",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:01",
+      "hi": "14:00",
       "d": "TONGOY 01698, QUILPUE",
       "e": "Pendiente",
       "tec": "ALEXIS JARA",
@@ -2668,10 +2731,22 @@
       "ult_cierre": "Falta de dotación"
      },
      {
+      "o": "1-3NSKYOXK",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "11:37",
+      "d": "BRASILIA 2332, VILLA ALEMANA",
+      "e": "en ruta",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "visitas": 1,
+      "ult_fecha": "11-09-2026",
+      "ult_cierre": "Direccion incorrecta"
+     },
+     {
       "o": "1-3NOXGFYB",
       "cat": "Migración 3 Play",
       "f": "13-16",
-      "hi": "13:36",
+      "hi": "15:16",
       "d": "PATRICIO LYNCH 308, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ANTONHY MORALES MENDOZA",
@@ -2695,12 +2770,24 @@
       "o": "1-3NS34YFR",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "12:11",
+      "hi": "12:07",
       "d": "AVENIDA INDUSTRIAL 950 CASA 22, QUILPUE",
       "e": "Pendiente",
       "tec": "GEEYSER PEREZ O",
       "visitas": 1,
       "ult_fecha": "03-08-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3NRXH222",
+      "cat": "Migración 1 Play",
+      "f": "10-13",
+      "hi": "11:51",
+      "d": "MAURICIO 1194, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "HERNAN CORTES HERRERA",
+      "visitas": 2,
+      "ult_fecha": "09-09-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -2716,10 +2803,22 @@
       "ult_cierre": "Sin acceso a vivienda"
      },
      {
+      "o": "1-3NSLNLXM",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "16:53",
+      "d": "OHIGGINS 396, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOSE CASTRO P",
+      "visitas": 1,
+      "ult_fecha": "11-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3NS22RWG",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:22",
+      "hi": "16:34",
       "d": "CALLE 5 0668, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -2728,28 +2827,16 @@
       "ult_cierre": "Clte desiste motivo comercial"
      },
      {
-      "o": "1-3NRXH222",
-      "cat": "Migración 1 Play",
-      "f": "10-13",
-      "hi": "11:14",
-      "d": "MAURICIO 1194, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOSE ROJO A",
-      "visitas": 2,
-      "ult_fecha": "09-09-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3NSKYOXK",
-      "cat": "Alta 2 Play",
-      "f": "10-13",
-      "hi": "12:25",
-      "d": "BRASILIA 2332, VILLA ALEMANA",
+      "o": "1-3NRSXW1D",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "17:01",
+      "d": "ARMANDO CARRERA 1499, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE SALAS MEDINA",
       "visitas": 1,
-      "ult_fecha": "11-09-2026",
-      "ult_cierre": "Direccion incorrecta"
+      "ult_fecha": "10-09-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3NRD3ZGS",
@@ -2779,7 +2866,7 @@
       "o": "1-3NRTTWLG",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "11:30",
+      "hi": "11:56",
       "d": "MARGA MARGA 600, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATÍAS JAQUE AG",
@@ -2791,7 +2878,7 @@
       "o": "1-3NS1VY1E",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:28",
+      "hi": "14:54",
       "d": "GERONA 41, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATÍAS JAQUE AG",
@@ -2807,18 +2894,6 @@
       "d": "LORD COCHRANE 2411, QUILPUE",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
-      "visitas": 1,
-      "ult_fecha": "10-09-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3NRSXW1D",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "16:21",
-      "d": "ARMANDO CARRERA 1499, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "YENDER BOSCAN CADENAS",
       "visitas": 1,
       "ult_fecha": "10-09-2026",
       "ult_cierre": "Sin moradores"
@@ -2849,5 +2924,5 @@
    }
   }
  },
- "generado": "11-09-2026 11:12"
+ "generado": "11-09-2026 11:32"
 }
