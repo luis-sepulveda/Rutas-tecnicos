@@ -2478,28 +2478,37 @@
    }
   },
   "11-09-2026": {
-   "hasta": "12:38",
-   "actividades": 135,
+   "hasta": "13:08",
+   "actividades": 142,
    "tecnicos": 33,
    "estados": {
-    "No Realizada": 21,
-    "Iniciado": 18,
-    "Pendiente": 61,
-    "Completado": 25,
-    "en ruta": 7,
-    "Cancelado": 2,
+    "No Realizada": 23,
+    "Iniciado": 25,
+    "Pendiente": 58,
+    "Completado": 29,
+    "Cancelado": 3,
+    "en ruta": 3,
     "Suspendido": 1
    },
-   "rgu": 204.6,
-   "caidas_total": 7,
-   "caidas_activas": 7,
+   "rgu": 211.3,
+   "caidas_total": 8,
+   "caidas_activas": 8,
    "caidas_resueltas": 0,
-   "nuevas": 18,
-   "al_bucket": 13,
+   "nuevas": 25,
+   "al_bucket": 14,
    "repetidas": 19,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
+     {
+      "o": "1-3NRSKVBB",
+      "tec": "ALEXIS JARA",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "16:49",
+      "d": "OVALLE 1232, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3NRVWZ33",
       "tec": "ANTONHY MORALES MENDOZA",
@@ -2565,6 +2574,69 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3NSPCFFA",
+      "tec": "JUAN ARRIAGADA C",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "14:16",
+      "d": "LAS AMERICAS 1015 EDIF. 5 DEPTO 6, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3NSP8EKM",
+      "tec": "JORDAN ROA PEREZ",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "13:02",
+      "d": "LAS ROSAS 412, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
+      "o": "1-3NRS8XW4",
+      "tec": "JORDAN ROA PEREZ",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "17:25",
+      "d": "HUMBERSTONE 2006, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3NSP5EYG",
+      "tec": "CRISTOBAL SILVA LEIVA",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "13:41",
+      "d": "LOS TOPACIOS 1380 EDIF. K4 DEPTO 102, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
+      "o": "1-3NSOBF2P",
+      "tec": "FELIPE SILVA R",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "12:58",
+      "d": "AVENIDA LOS REYES 1118, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
+      "o": "1-3NSOJI8Z",
+      "tec": "LUIS GATICA DAVILA",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "15:04",
+      "d": "LOURDES 670, VILLA ALEMANA",
+      "e": "Iniciado"
+     },
+     {
+      "o": "1-3NSOIMI2",
+      "tec": "JUAN ARRIAGADA C",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "16:26",
+      "d": "PJE RIO CISNES 1977, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3NSOJ5KZ",
       "tec": "LUIS MARTIN NUÑEZ",
@@ -2653,7 +2725,7 @@
       "f": "13-16",
       "hi": "16:54",
       "d": "AVENIDA QUINTA 709 DEPTO 303, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3NSLJLZ3",
@@ -2745,25 +2817,13 @@
       "o": "1-3NS7T34X",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:06",
+      "hi": "15:12",
       "d": "TONGOY 01698, QUILPUE",
       "e": "Pendiente",
       "tec": "ALEXIS JARA",
       "visitas": 2,
       "ult_fecha": "08-09-2026",
       "ult_cierre": "Casa sin medidor-remarcador"
-     },
-     {
-      "o": "1-3NRSKVBB",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "16:43",
-      "d": "OVALLE 1232, QUILPUE",
-      "e": "Pendiente",
-      "tec": "ALEXIS JARA",
-      "visitas": 2,
-      "ult_fecha": "08-09-2026",
-      "ult_cierre": "Falta de dotación"
      },
      {
       "o": "1-3NSKYOXK",
@@ -2805,7 +2865,7 @@
       "o": "1-3NOXGFYB",
       "cat": "Migración 3 Play",
       "f": "13-16",
-      "hi": "15:01",
+      "hi": "15:08",
       "d": "PATRICIO LYNCH 308, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
@@ -2817,7 +2877,7 @@
       "o": "1-3NS68TC2",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "13:00",
+      "hi": "13:43",
       "d": "BARROS JARPA 137, QUILPUE",
       "e": "Pendiente",
       "tec": "FELIPE SILVA R",
@@ -2850,10 +2910,22 @@
       "ult_cierre": "Sin apoyo vivienda-Pierrack"
      },
      {
+      "o": "1-3NRS8XW4",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "17:26",
+      "d": "HUMBERSTONE 2006, QUILPUE",
+      "e": "Pendiente",
+      "tec": "JORDAN ROA PEREZ",
+      "visitas": 1,
+      "ult_fecha": "10-09-2026",
+      "ult_cierre": "Direccion incorrecta"
+     },
+     {
       "o": "1-3NRD3ZGS",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "18:21",
+      "hi": "18:28",
       "d": "RAMON REYES ARANCIBIA 2177, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE CASTRO P",
@@ -2877,7 +2949,7 @@
       "o": "1-3NS4ZD3O",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "13:00",
+      "hi": "15:50",
       "d": "LORD COCHRANE 2411, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE PEREZ RANGEL",
@@ -2889,7 +2961,7 @@
       "o": "1-3NS1VY1E",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:16",
+      "hi": "15:12",
       "d": "GERONA 41, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -2913,7 +2985,7 @@
       "o": "1-3NSN3Q7K",
       "cat": "Downgrade promoción",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "16:13",
       "d": "ALMIRANTE NEFF 653 EDIF. 3 DEPTO 10, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
@@ -2937,7 +3009,7 @@
       "o": "1-3NSKX4I4",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "15:48",
+      "hi": "16:28",
       "d": "EL BOSQUE(ESQ LOS PLATANOS) 265, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MARCO PEREZ G",
@@ -2949,7 +3021,7 @@
       "o": "1-3NSLNLXM",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:55",
+      "hi": "18:09",
       "d": "OHIGGINS 396, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "YENDER BOSCAN CADENAS",
@@ -2973,7 +3045,7 @@
       "o": "1-3NRB0RLP",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:53",
+      "hi": "18:49",
       "d": "INES DE SUAREZ 0357, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "KEVIN TAPIA RETAMAL",
@@ -2983,5 +3055,5 @@
    }
   }
  },
- "generado": "11-09-2026 12:38"
+ "generado": "11-09-2026 13:08"
 }
