@@ -1,7 +1,7 @@
 {
-  "actualizado": "2026-09-11T12:08:25",
+  "actualizado": "2026-09-11T12:38:48",
   "resumen": {
-    "sin informacion": 2,
+    "sin informacion": 3,
     "reagendada": 4
   },
   "estados": {
@@ -69,6 +69,62 @@
       "color": "rgb(255, 222, 0)",
       "detalle": "1-3NS97LTB - 16-19-AltaSab, 12 Sep",
       "franja_nueva": "16-19"
+    },
+    "1-3NOWJ9PW": {
+      "tec": "JUAN ARRIAGADA C",
+      "cat": "Migración 3 Play",
+      "franja_original": "13-16",
+      "d": "LAS ACACIAS 1575 CASA 21, VILLA ALEMANA",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "LAS ACACIAS 1575",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "?",
+            "color": "rgb(255, 170, 170)",
+            "ot": "1-3NOZ17DA",
+            "franja": "10-13",
+            "texto": "1-3NOZ17DA - 10-13-MigraciónSab, 12 Sep"
+          },
+          {
+            "estado": "cancelada",
+            "color": "rgb(128, 255, 128)",
+            "ot": "1-3NS7W5P8",
+            "franja": "10-13",
+            "texto": "1-3NS7W5P8 - 10-13-ReparaciónSab, 12 Sep"
+          },
+          {
+            "estado": "gestionada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3NMSLXP4",
+            "franja": "13-16",
+            "texto": "1-3NMSLXP4 - 13-16-MigraciónSab, 5 Sep"
+          },
+          {
+            "estado": "cancelada",
+            "color": "rgb(128, 255, 128)",
+            "ot": "1-3NMTZ496",
+            "franja": "13-16",
+            "texto": "1-3NMTZ496 - 13-16-ReparaciónJue, 3 Sep"
+          },
+          {
+            "estado": "suspendida",
+            "color": "rgb(153, 255, 255)",
+            "ot": "1-3NMTZ496",
+            "franja": "13-16",
+            "texto": "1-3NMTZ496 - 13-16-ReparaciónJue, 3 Sep"
+          },
+          {
+            "estado": "?",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3NNIVH9V",
+            "franja": "13-16",
+            "texto": "1-3NNIVH9V - 13-16-ReparaciónJue, 3 Sep"
+          }
+        ]
+      }
     },
     "1-3NRW93BX": {
       "tec": "MARCELO GÓMEZ GÓME",
