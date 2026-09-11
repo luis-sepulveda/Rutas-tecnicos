@@ -2478,19 +2478,21 @@
    }
   },
   "11-09-2026": {
-   "hasta": "12:17",
-   "actividades": 118,
+   "hasta": "12:33",
+   "actividades": 120,
    "tecnicos": 33,
    "estados": {
-    "No Realizada": 16,
-    "Iniciado": 26,
-    "Pendiente": 53,
-    "Completado": 20,
-    "en ruta": 3
+    "No Realizada": 20,
+    "Iniciado": 19,
+    "Pendiente": 51,
+    "Completado": 24,
+    "en ruta": 3,
+    "Cancelado": 2,
+    "Suspendido": 1
    },
-   "rgu": 179.1,
-   "caidas_total": 6,
-   "caidas_activas": 6,
+   "rgu": 182.6,
+   "caidas_total": 7,
+   "caidas_activas": 7,
    "caidas_resueltas": 0,
    "nuevas": 17,
    "al_bucket": 13,
@@ -2532,6 +2534,15 @@
       "f": "16-19",
       "hi": "16:47",
       "d": "LAS ROSAS 670 CASA A, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3NOWJ9PW",
+      "tec": "JUAN ARRIAGADA C",
+      "cat": "Migración 3 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "LAS ACACIAS 1575 CASA 21, VILLA ALEMANA",
       "e": "Pendiente"
      },
      {
@@ -2624,7 +2635,7 @@
       "f": "10-13",
       "hi": "11:15",
       "d": "LEUCOTON 1101 EDIF. 1 DEPTO 208, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3NSLXYZ8",
@@ -2763,7 +2774,7 @@
       "f": "10-13",
       "hi": "12:03",
       "d": "MAURICIO 1194, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "ANTONHY MORALES MENDOZA",
       "visitas": 2,
       "ult_fecha": "09-09-2026",
@@ -2773,7 +2784,7 @@
       "o": "1-3NRSXW1D",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:27",
+      "hi": "16:00",
       "d": "ARMANDO CARRERA 1499, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -2823,7 +2834,7 @@
       "f": "10-13",
       "hi": "11:56",
       "d": "MARGA MARGA 600, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JOEL GUSTAVE GUSTA",
       "visitas": 3,
       "ult_fecha": "10-09-2026",
@@ -2835,7 +2846,7 @@
       "f": "10-13",
       "hi": "12:07",
       "d": "AVENIDA INDUSTRIAL 950 CASA 22, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JOSE PEREZ RANGEL",
       "visitas": 1,
       "ult_fecha": "03-08-2026",
@@ -2845,7 +2856,7 @@
       "o": "1-3NS4ZD3O",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:54",
+      "hi": "13:00",
       "d": "LORD COCHRANE 2411, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE PEREZ RANGEL",
@@ -2857,7 +2868,7 @@
       "o": "1-3NS1VY1E",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "13:00",
+      "hi": "15:16",
       "d": "GERONA 41, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -2905,7 +2916,7 @@
       "o": "1-3NSKX4I4",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "15:47",
+      "hi": "15:48",
       "d": "EL BOSQUE(ESQ LOS PLATANOS) 265, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MARCO PEREZ G",
@@ -2929,5 +2940,5 @@
    }
   }
  },
- "generado": "11-09-2026 12:17"
+ "generado": "11-09-2026 12:33"
 }
