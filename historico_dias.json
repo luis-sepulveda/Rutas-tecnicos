@@ -2478,23 +2478,23 @@
    }
   },
   "11-09-2026": {
-   "hasta": "13:13",
-   "actividades": 143,
+   "hasta": "13:28",
+   "actividades": 146,
    "tecnicos": 33,
    "estados": {
-    "No Realizada": 24,
-    "Iniciado": 25,
+    "No Realizada": 26,
+    "Iniciado": 21,
     "Pendiente": 57,
-    "Completado": 31,
-    "en ruta": 2,
+    "Completado": 33,
+    "en ruta": 5,
     "Cancelado": 3,
     "Suspendido": 1
    },
-   "rgu": 211.4,
-   "caidas_total": 8,
-   "caidas_activas": 8,
+   "rgu": 214.5,
+   "caidas_total": 9,
+   "caidas_activas": 9,
    "caidas_resueltas": 0,
-   "nuevas": 26,
+   "nuevas": 29,
    "al_bucket": 14,
    "repetidas": 19,
    "reagendadas": 2,
@@ -2555,6 +2555,15 @@
       "e": "Pendiente"
      },
      {
+      "o": "1-3NSPCFFA",
+      "tec": "JUAN ARRIAGADA C",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "14:16",
+      "d": "LAS AMERICAS 1015 EDIF. 5 DEPTO 6, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3NRW93BX",
       "tec": "MARCELO GÓMEZ GÓME",
       "cat": "Alta 1 Play",
@@ -2574,6 +2583,33 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3NSQ300I",
+      "tec": "YENDER BOSCAN CADENAS",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "14:05",
+      "d": "BRITANIA 1077, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3NSPW2SS",
+      "tec": "MARCO PEREZ G",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "16:59",
+      "d": "GUSTAVO ZAMORA 0950 CASA A, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3NSPTYIX",
+      "tec": "SEBASTIAN DOSSOW A",
+      "cat": "Migración 2 Play",
+      "f": "16-19",
+      "hi": "17:09",
+      "d": "CAMINO DEL SOL 2300 CASA 3-J, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3NSP8ZK1",
       "tec": "KEVIN TAPIA RETAMAL",
@@ -2626,7 +2662,7 @@
       "f": "10-13",
       "hi": "12:58",
       "d": "AVENIDA LOS REYES 1118, QUILPUE",
-      "e": "Iniciado"
+      "e": "No Realizada"
      },
      {
       "o": "1-3NSOJI8Z",
@@ -2886,9 +2922,9 @@
       "o": "1-3NS68TC2",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "13:43",
+      "hi": "13:39",
       "d": "BARROS JARPA 137, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "FELIPE SILVA R",
       "visitas": 1,
       "ult_fecha": "10-09-2026",
@@ -3018,7 +3054,7 @@
       "o": "1-3NSKX4I4",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "16:28",
+      "hi": "14:35",
       "d": "EL BOSQUE(ESQ LOS PLATANOS) 265, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MARCO PEREZ G",
@@ -3030,7 +3066,7 @@
       "o": "1-3NSLNLXM",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "18:09",
+      "hi": "19:03",
       "d": "OHIGGINS 396, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "YENDER BOSCAN CADENAS",
@@ -3054,15 +3090,15 @@
       "o": "1-3NRB0RLP",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "19:12",
+      "hi": "17:12",
       "d": "INES DE SUAREZ 0357, VILLA ALEMANA",
       "e": "Pendiente",
-      "tec": "KEVIN TAPIA RETAMAL",
+      "tec": "JOSE ROJO A",
       "desde": "10-09-2026"
      }
     ]
    }
   }
  },
- "generado": "11-09-2026 13:13"
+ "generado": "11-09-2026 13:28"
 }
