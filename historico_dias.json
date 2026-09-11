@@ -2478,17 +2478,17 @@
    }
   },
   "11-09-2026": {
-   "hasta": "17:06",
+   "hasta": "17:16",
    "actividades": 165,
    "tecnicos": 33,
    "estados": {
     "No Realizada": 50,
-    "Completado": 68,
-    "Iniciado": 31,
-    "Pendiente": 9,
+    "Completado": 72,
+    "Iniciado": 27,
+    "en ruta": 4,
     "Suspendido": 2,
-    "Cancelado": 4,
-    "en ruta": 1
+    "Pendiente": 6,
+    "Cancelado": 4
    },
    "rgu": 236.6,
    "caidas_total": 11,
@@ -2496,7 +2496,7 @@
    "caidas_resueltas": 1,
    "nuevas": 38,
    "al_bucket": 28,
-   "repetidas": 24,
+   "repetidas": 25,
    "reagendadas": 1,
    "detalle": {
     "caidas": [
@@ -2599,7 +2599,7 @@
       "f": "16-19",
       "hi": "16:33",
       "d": "GLACIAR GREY 2000 EDIF. C DEPTO 301, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3NSUKJVV",
@@ -3201,6 +3201,18 @@
       "ult_cierre": "Casa sin medidor-remarcador"
      },
      {
+      "o": "1-3NRS0BKH",
+      "cat": "Migración 2 Play",
+      "f": "10-13",
+      "hi": "09:45",
+      "d": "BADEN POWELL 1601 DEPTO 31, QUILPUE",
+      "e": "Completado",
+      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "visitas": 1,
+      "ult_fecha": "11-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3NSPTYIX",
       "cat": "Migración 2 Play",
       "f": "16-19",
@@ -3239,5 +3251,5 @@
    }
   }
  },
- "generado": "11-09-2026 17:06"
+ "generado": "11-09-2026 17:16"
 }
