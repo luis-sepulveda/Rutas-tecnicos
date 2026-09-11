@@ -2478,23 +2478,23 @@
    }
   },
   "11-09-2026": {
-   "hasta": "17:16",
-   "actividades": 165,
+   "hasta": "17:26",
+   "actividades": 167,
    "tecnicos": 33,
    "estados": {
-    "No Realizada": 50,
+    "No Realizada": 52,
     "Completado": 72,
-    "Iniciado": 27,
+    "Iniciado": 28,
     "en ruta": 4,
     "Suspendido": 2,
-    "Pendiente": 6,
+    "Pendiente": 5,
     "Cancelado": 4
    },
-   "rgu": 236.6,
+   "rgu": 238.6,
    "caidas_total": 11,
    "caidas_activas": 10,
    "caidas_resueltas": 1,
-   "nuevas": 38,
+   "nuevas": 40,
    "al_bucket": 28,
    "repetidas": 25,
    "reagendadas": 1,
@@ -2593,6 +2593,24 @@
     ],
     "nuevas": [
      {
+      "o": "1-3NSW6FTS",
+      "tec": "DANIEL NAVARRETE E",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "17:24",
+      "d": "BADEN POWELL 1601 DEPTO 31, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
+      "o": "1-3NSWNQN9",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:20",
+      "d": "PJE 1 (MARIA MERCEDES) 1063, VILLA ALEMANA",
+      "e": "Iniciado"
+     },
+     {
       "o": "1-3NSVCLYU",
       "tec": "SEBASTIAN DOSSOW A",
       "cat": "Modificación de Servicio",
@@ -2689,7 +2707,7 @@
       "f": "16-19",
       "hi": "16:59",
       "d": "GUSTAVO ZAMORA 0950 CASA A, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "No Realizada"
      },
      {
       "o": "1-3NSPTYIX",
@@ -3009,6 +3027,18 @@
       "ult_cierre": "Casa sin medidor-remarcador"
      },
      {
+      "o": "1-3NSW6FTS",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "17:24",
+      "d": "BADEN POWELL 1601 DEPTO 31, QUILPUE",
+      "e": "Iniciado",
+      "tec": "DANIEL NAVARRETE E",
+      "visitas": 1,
+      "ult_fecha": "11-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3NS68TC2",
       "cat": "Alta 2 Play",
       "f": "13-16",
@@ -3096,9 +3126,9 @@
       "o": "1-3NRD3ZGS",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:14",
+      "hi": "17:19",
       "d": "RAMON REYES ARANCIBIA 2177, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JOSE ROJO A",
       "visitas": 1,
       "ult_fecha": "09-09-2026",
@@ -3201,18 +3231,6 @@
       "ult_cierre": "Casa sin medidor-remarcador"
      },
      {
-      "o": "1-3NRS0BKH",
-      "cat": "Migración 2 Play",
-      "f": "10-13",
-      "hi": "09:45",
-      "d": "BADEN POWELL 1601 DEPTO 31, QUILPUE",
-      "e": "Completado",
-      "tec": "SAMUEL FERNANDEZ VIDAL",
-      "visitas": 1,
-      "ult_fecha": "11-09-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3NSPTYIX",
       "cat": "Migración 2 Play",
       "f": "16-19",
@@ -3251,5 +3269,5 @@
    }
   }
  },
- "generado": "11-09-2026 17:16"
+ "generado": "11-09-2026 17:26"
 }
