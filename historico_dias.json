@@ -2478,23 +2478,23 @@
    }
   },
   "11-09-2026": {
-   "hasta": "10:12",
-   "actividades": 106,
+   "hasta": "10:22",
+   "actividades": 108,
    "tecnicos": 33,
    "estados": {
-    "No Realizada": 1,
-    "en ruta": 5,
-    "Pendiente": 71,
-    "Iniciado": 27,
+    "No Realizada": 2,
+    "en ruta": 3,
+    "Pendiente": 72,
+    "Iniciado": 29,
     "Completado": 2
    },
-   "rgu": 164.5,
+   "rgu": 168.0,
    "caidas_total": 4,
    "caidas_activas": 4,
    "caidas_resueltas": 0,
-   "nuevas": 5,
+   "nuevas": 6,
    "al_bucket": 0,
-   "repetidas": 16,
+   "repetidas": 17,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
@@ -2537,6 +2537,15 @@
     ],
     "nuevas": [
      {
+      "o": "1-3NSK8XLY",
+      "tec": "ALEXIS JARA",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "12:26",
+      "d": "ILLAPEL 14, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3NSKEIM2",
       "tec": "ESTEBAN PIZARRO QUINTANA",
       "cat": "Reparación",
@@ -2547,7 +2556,7 @@
      },
      {
       "o": "1-3NSKC7VS",
-      "tec": "JOSE ROJO A",
+      "tec": "MARCELO GÓMEZ GÓME",
       "cat": "Alta 2 Play",
       "f": "10-13",
       "hi": "12:38",
@@ -2556,12 +2565,12 @@
      },
      {
       "o": "1-3NSK3IXK",
-      "tec": "LUIS GATICA DAVILA",
+      "tec": "MARCELO GÓMEZ GÓME",
       "cat": "Reparación",
       "f": "10-13",
       "hi": "12:35",
       "d": "ALCALDE ALEJANDRO PERALTA 808, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3NS7T34X",
@@ -2583,6 +2592,18 @@
      }
     ],
     "repetidas": [
+     {
+      "o": "1-3NSK8XLY",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "12:26",
+      "d": "ILLAPEL 14, QUILPUE",
+      "e": "Pendiente",
+      "tec": "ALEXIS JARA",
+      "visitas": 1,
+      "ult_fecha": "21-08-2026",
+      "ult_cierre": "Direccion incorrecta"
+     },
      {
       "o": "1-3NS68TC2",
       "cat": "Alta 2 Play",
@@ -2801,5 +2822,5 @@
    }
   }
  },
- "generado": "11-09-2026 10:12"
+ "generado": "11-09-2026 10:22"
 }
