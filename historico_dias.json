@@ -2478,21 +2478,21 @@
    }
   },
   "11-09-2026": {
-   "hasta": "14:35",
-   "actividades": 153,
+   "hasta": "15:00",
+   "actividades": 155,
    "tecnicos": 33,
    "estados": {
-    "No Realizada": 32,
-    "Completado": 48,
-    "Pendiente": 46,
-    "Iniciado": 16,
-    "en ruta": 6,
+    "No Realizada": 34,
+    "Completado": 50,
+    "en ruta": 7,
+    "Pendiente": 38,
+    "Iniciado": 21,
     "Cancelado": 4,
     "Suspendido": 1
    },
-   "rgu": 227.1,
-   "caidas_total": 10,
-   "caidas_activas": 9,
+   "rgu": 228.2,
+   "caidas_total": 11,
+   "caidas_activas": 10,
    "caidas_resueltas": 1,
    "nuevas": 33,
    "al_bucket": 14,
@@ -2580,6 +2580,15 @@
       "hi": "18:13",
       "d": "SERENA 1020 DEPTO 24, QUILPUE",
       "e": "Pendiente"
+     },
+     {
+      "o": "1-3NSK7VOH",
+      "tec": "PABLO HERNANEZ FERNANDEZ",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "18:27",
+      "d": "LAS AMERICAS 1015 EDIF. 3 DEPTO 5, VILLA ALEMANA",
+      "e": "Pendiente"
      }
     ],
     "nuevas": [
@@ -2590,7 +2599,7 @@
       "f": "13-16",
       "hi": "16:30",
       "d": "PORVENIR 520, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "No Realizada"
      },
      {
       "o": "1-3NSQAYI4",
@@ -2608,7 +2617,7 @@
       "f": "13-16",
       "hi": "14:48",
       "d": "COLOMBIA 1334, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3NSPZW5C",
@@ -2680,7 +2689,7 @@
       "f": "13-16",
       "hi": "17:25",
       "d": "HUMBERSTONE 2006, QUILPUE",
-      "e": "en ruta"
+      "e": "No Realizada"
      },
      {
       "o": "1-3NSP5EYG",
@@ -2743,7 +2752,7 @@
       "f": "13-16",
       "hi": "15:12",
       "d": "ALMIRANTE NEFF 653 EDIF. 3 DEPTO 10, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3NSMA84Q",
@@ -2922,9 +2931,9 @@
       "o": "1-3NRVWZ33",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:48",
+      "hi": "14:45",
       "d": "MATURANA 115 CASA 5, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "CRISTOBAL MIRANDA VALENC",
       "visitas": 3,
       "ult_fecha": "10-09-2026",
@@ -2934,7 +2943,7 @@
       "o": "1-3NRSXW1D",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "18:20",
+      "hi": "18:17",
       "d": "ARMANDO CARRERA 1499, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -2946,7 +2955,7 @@
       "o": "1-3NSPZW5C",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "20:17",
+      "hi": "20:14",
       "d": "DINAMARCA 1451 EDIF. 6 DEPTO 404, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -3030,9 +3039,9 @@
       "o": "1-3NRS8XW4",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:53",
+      "hi": "14:46",
       "d": "HUMBERSTONE 2006, QUILPUE",
-      "e": "en ruta",
+      "e": "No Realizada",
       "tec": "JOSE GALAZ D",
       "visitas": 1,
       "ult_fecha": "10-09-2026",
@@ -3066,7 +3075,7 @@
       "o": "1-3NS1VY1E",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:53",
+      "hi": "16:03",
       "d": "GERONA 41, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -3090,9 +3099,9 @@
       "o": "1-3NSN3Q7K",
       "cat": "Downgrade promoción",
       "f": "13-16",
-      "hi": "15:02",
+      "hi": "14:51",
       "d": "ALMIRANTE NEFF 653 EDIF. 3 DEPTO 10, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "LUIS GATICA DAVILA",
       "visitas": 4,
       "ult_fecha": "02-09-2026",
@@ -3102,7 +3111,7 @@
       "o": "1-3NRYWDYH",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "19:21",
+      "hi": "16:33",
       "d": "ALCALDE RODOLFO GALLEGUILLOS 1160, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
@@ -3114,9 +3123,9 @@
       "o": "1-3NSKX4I4",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:39",
+      "hi": "14:52",
       "d": "EL BOSQUE(ESQ LOS PLATANOS) 265, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "MARCO PEREZ G",
       "visitas": 1,
       "ult_fecha": "11-09-2026",
@@ -3126,7 +3135,7 @@
       "o": "1-3NSLNLXM",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "18:48",
+      "hi": "16:00",
       "d": "OHIGGINS 396, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "YENDER BOSCAN CADENAS",
@@ -3150,5 +3159,5 @@
    }
   }
  },
- "generado": "11-09-2026 14:35"
+ "generado": "11-09-2026 15:00"
 }
