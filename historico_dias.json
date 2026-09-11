@@ -2478,23 +2478,23 @@
    }
   },
   "11-09-2026": {
-   "hasta": "13:08",
-   "actividades": 142,
+   "hasta": "13:13",
+   "actividades": 143,
    "tecnicos": 33,
    "estados": {
-    "No Realizada": 23,
+    "No Realizada": 24,
     "Iniciado": 25,
-    "Pendiente": 58,
-    "Completado": 29,
+    "Pendiente": 57,
+    "Completado": 31,
+    "en ruta": 2,
     "Cancelado": 3,
-    "en ruta": 3,
     "Suspendido": 1
    },
-   "rgu": 211.3,
+   "rgu": 211.4,
    "caidas_total": 8,
    "caidas_activas": 8,
    "caidas_resueltas": 0,
-   "nuevas": 25,
+   "nuevas": 26,
    "al_bucket": 14,
    "repetidas": 19,
    "reagendadas": 2,
@@ -2575,13 +2575,22 @@
     ],
     "nuevas": [
      {
+      "o": "1-3NSP8ZK1",
+      "tec": "KEVIN TAPIA RETAMAL",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "13:10",
+      "d": "PADRE CRISTOBAL KENNEDY 061, VILLA ALEMANA",
+      "e": "Iniciado"
+     },
+     {
       "o": "1-3NSPCFFA",
       "tec": "JUAN ARRIAGADA C",
       "cat": "Reparación",
       "f": "13-16",
       "hi": "14:16",
       "d": "LAS AMERICAS 1015 EDIF. 5 DEPTO 6, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Pendiente (ya no está)"
      },
      {
       "o": "1-3NSP8EKM",
@@ -2608,7 +2617,7 @@
       "f": "13-16",
       "hi": "13:41",
       "d": "LOS TOPACIOS 1380 EDIF. K4 DEPTO 102, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3NSOBF2P",
@@ -2949,7 +2958,7 @@
       "o": "1-3NS4ZD3O",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:50",
+      "hi": "15:43",
       "d": "LORD COCHRANE 2411, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE PEREZ RANGEL",
@@ -3045,7 +3054,7 @@
       "o": "1-3NRB0RLP",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "18:49",
+      "hi": "19:12",
       "d": "INES DE SUAREZ 0357, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "KEVIN TAPIA RETAMAL",
@@ -3055,5 +3064,5 @@
    }
   }
  },
- "generado": "11-09-2026 13:08"
+ "generado": "11-09-2026 13:13"
 }
