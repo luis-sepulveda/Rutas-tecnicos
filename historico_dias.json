@@ -2478,25 +2478,25 @@
    }
   },
   "11-09-2026": {
-   "hasta": "16:01",
-   "actividades": 160,
+   "hasta": "16:21",
+   "actividades": 161,
    "tecnicos": 33,
    "estados": {
-    "No Realizada": 42,
-    "Completado": 60,
-    "Iniciado": 24,
-    "Pendiente": 21,
-    "en ruta": 7,
+    "No Realizada": 45,
+    "Completado": 63,
+    "en ruta": 5,
+    "Iniciado": 26,
+    "Pendiente": 16,
     "Suspendido": 2,
     "Cancelado": 4
    },
-   "rgu": 234.3,
+   "rgu": 235.3,
    "caidas_total": 11,
    "caidas_activas": 10,
    "caidas_resueltas": 1,
    "nuevas": 36,
    "al_bucket": 28,
-   "repetidas": 21,
+   "repetidas": 23,
    "reagendadas": 1,
    "detalle": {
     "caidas": [
@@ -2608,7 +2608,7 @@
       "f": "16-19",
       "hi": "17:27",
       "d": "LEUCOTON 990 CASA C, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3NSS0HMG",
@@ -2752,7 +2752,7 @@
       "f": "16-19",
       "hi": "16:26",
       "d": "PJE RIO CISNES 1977, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3NSOJ5KZ",
@@ -2801,7 +2801,7 @@
      },
      {
       "o": "1-3NSM0OXP",
-      "tec": "NICOLAS MOYANO R",
+      "tec": "PABLO HERNANEZ FERNANDEZ",
       "cat": "Alta 1 Play",
       "f": "16-19",
       "hi": "18:21",
@@ -2860,7 +2860,7 @@
       "f": "13-16",
       "hi": "13:00",
       "d": "SAN MARTIN 1048 DEPTO 32, QUILPUE",
-      "e": "Iniciado"
+      "e": "No Realizada"
      },
      {
       "o": "1-3NSK8XLY",
@@ -3090,12 +3090,24 @@
       "o": "1-3NRYWDYH",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "17:12",
+      "hi": "17:44",
       "d": "ALCALDE RODOLFO GALLEGUILLOS 1160, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE SALAS MEDINA",
       "visitas": 1,
       "ult_fecha": "25-08-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3NOXGFYB",
+      "cat": "Migración 3 Play",
+      "f": "13-16",
+      "hi": "16:29",
+      "d": "PATRICIO LYNCH 308, VILLA ALEMANA",
+      "e": "en ruta",
+      "tec": "JUAN ARRIAGADA C",
+      "visitas": 1,
+      "ult_fecha": "05-09-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -3109,6 +3121,18 @@
       "visitas": 2,
       "ult_fecha": "10-09-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3NS1OXAI",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "16:43",
+      "d": "VALLE DEL PARAISO 2907 EDIF. A DEPTO 104, QUILPUE",
+      "e": "Pendiente",
+      "tec": "LUIS CASTRO TORRES",
+      "visitas": 1,
+      "ult_fecha": "10-09-2026",
+      "ult_cierre": "Sin Acceso a camara"
      },
      {
       "o": "1-3NSN3Q7K",
@@ -3135,36 +3159,35 @@
       "ult_cierre": "Direccion incorrecta"
      },
      {
-      "o": "1-3NOXGFYB",
-      "cat": "Migración 3 Play",
-      "f": "13-16",
-      "hi": "15:48",
-      "d": "PATRICIO LYNCH 308, VILLA ALEMANA",
-      "e": "en ruta",
-      "tec": "LUIS MARTIN NUÑEZ",
-      "visitas": 1,
-      "ult_fecha": "05-09-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3NRSXW1D",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:03",
+      "hi": "16:01",
       "d": "ARMANDO CARRERA 1499, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "MARCO PEREZ G",
       "visitas": 1,
       "ult_fecha": "10-09-2026",
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3NSPTYIX",
+      "cat": "Migración 2 Play",
+      "f": "16-19",
+      "d": "CAMINO DEL SOL 2300 CASA 3-J, QUILPUE",
+      "e": "Cancelado",
+      "tec": "SEBASTIAN DOSSOW A",
+      "visitas": 1,
+      "ult_fecha": "11-09-2026",
+      "ult_cierre": "Cliente Desiste"
+     },
+     {
       "o": "1-3NSLNLXM",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:01",
+      "hi": "16:08",
       "d": "OHIGGINS 396, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "YENDER BOSCAN CADENAS",
       "visitas": 1,
       "ult_fecha": "11-09-2026",
@@ -3186,5 +3209,5 @@
    }
   }
  },
- "generado": "11-09-2026 16:01"
+ "generado": "11-09-2026 16:21"
 }
