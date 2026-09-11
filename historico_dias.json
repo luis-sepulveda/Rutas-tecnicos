@@ -2478,25 +2478,25 @@
    }
   },
   "11-09-2026": {
-   "hasta": "13:48",
-   "actividades": 152,
+   "hasta": "13:58",
+   "actividades": 154,
    "tecnicos": 33,
    "estados": {
-    "No Realizada": 27,
-    "Iniciado": 23,
-    "Pendiente": 58,
-    "Completado": 36,
+    "No Realizada": 28,
+    "Completado": 39,
+    "Pendiente": 57,
+    "Iniciado": 22,
     "en ruta": 3,
     "Cancelado": 4,
     "Suspendido": 1
    },
-   "rgu": 223.6,
+   "rgu": 228.1,
    "caidas_total": 10,
-   "caidas_activas": 10,
-   "caidas_resueltas": 0,
-   "nuevas": 32,
+   "caidas_activas": 9,
+   "caidas_resueltas": 1,
+   "nuevas": 33,
    "al_bucket": 14,
-   "repetidas": 20,
+   "repetidas": 21,
    "reagendadas": 1,
    "detalle": {
     "caidas": [
@@ -2507,15 +2507,6 @@
       "f": "16-19",
       "hi": "16:49",
       "d": "OVALLE 1232, QUILPUE",
-      "e": "Pendiente"
-     },
-     {
-      "o": "1-3NRVWZ33",
-      "tec": "ANTONHY MORALES MENDOZA",
-      "cat": "Alta 1 Play",
-      "f": "10-13",
-      "hi": "10:39",
-      "d": "MATURANA 115 CASA 5, VILLA ALEMANA",
       "e": "Pendiente"
      },
      {
@@ -2592,6 +2583,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3NSQSQZI",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "cat": "Migración 3 Play",
+      "f": "13-16",
+      "hi": "16:30",
+      "d": "PORVENIR 520, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3NSQAYI4",
       "tec": "JUAN ARRIAGADA C",
@@ -2815,7 +2815,7 @@
       "f": "10-13",
       "hi": "12:29",
       "d": "PJE 613 1079, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3NSJMTJG",
@@ -2898,7 +2898,7 @@
       "o": "1-3NS7T34X",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:12",
+      "hi": "15:15",
       "d": "TONGOY 01698, QUILPUE",
       "e": "Pendiente",
       "tec": "ALEXIS JARA",
@@ -2970,11 +2970,23 @@
       "o": "1-3NS68TC2",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "13:39",
+      "hi": "13:53",
       "d": "BARROS JARPA 137, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "FELIPE SILVA R",
       "visitas": 1,
+      "ult_fecha": "10-09-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3NRVWZ33",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "16:17",
+      "d": "MATURANA 115 CASA 5, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "HERNAN CORTES HERRERA",
+      "visitas": 3,
       "ult_fecha": "10-09-2026",
       "ult_cierre": "Cliente reagenda"
      },
@@ -3068,7 +3080,7 @@
       "f": "10-13",
       "hi": "12:02",
       "d": "ESMERALDA 1660, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "LEONEL HERNÁNDEZ OJE",
       "visitas": 2,
       "ult_fecha": "10-09-2026",
@@ -3138,5 +3150,5 @@
    }
   }
  },
- "generado": "11-09-2026 13:48"
+ "generado": "11-09-2026 13:58"
 }
