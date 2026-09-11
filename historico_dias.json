@@ -2478,25 +2478,25 @@
    }
   },
   "11-09-2026": {
-   "hasta": "15:10",
-   "actividades": 156,
+   "hasta": "15:25",
+   "actividades": 142,
    "tecnicos": 33,
    "estados": {
     "No Realizada": 34,
-    "Completado": 52,
-    "Iniciado": 21,
-    "Pendiente": 39,
-    "en ruta": 5,
+    "Completado": 54,
+    "Iniciado": 26,
+    "Pendiente": 19,
+    "en ruta": 4,
     "Cancelado": 4,
     "Suspendido": 1
    },
-   "rgu": 230.7,
+   "rgu": 210.2,
    "caidas_total": 11,
    "caidas_activas": 10,
    "caidas_resueltas": 1,
    "nuevas": 33,
-   "al_bucket": 14,
-   "repetidas": 21,
+   "al_bucket": 28,
+   "repetidas": 18,
    "reagendadas": 1,
    "detalle": {
     "caidas": [
@@ -2617,16 +2617,16 @@
       "f": "13-16",
       "hi": "14:48",
       "d": "COLOMBIA 1334, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3NSPZW5C",
-      "tec": "CRISTOBAL MIRANDA VALENC",
+      "tec": "JOEL GUSTAVE GUSTA",
       "cat": "Alta 1 Play",
       "f": "16-19",
       "hi": "17:57",
       "d": "DINAMARCA 1451 EDIF. 6 DEPTO 404, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Pendiente (ya no está)"
      },
      {
       "o": "1-3NSQ300I",
@@ -2644,7 +2644,7 @@
       "f": "16-19",
       "hi": "16:59",
       "d": "GUSTAVO ZAMORA 0950 CASA A, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Pendiente (ya no está)"
      },
      {
       "o": "1-3NSPTYIX",
@@ -2720,7 +2720,7 @@
      },
      {
       "o": "1-3NSOIMI2",
-      "tec": "JUAN ARRIAGADA C",
+      "tec": "MARCELO GÓMEZ GÓME",
       "cat": "Reparación",
       "f": "16-19",
       "hi": "16:26",
@@ -2738,7 +2738,7 @@
      },
      {
       "o": "1-3NSNH8PX",
-      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "tec": "GEEYSER PEREZ O",
       "cat": "Alta 1 Play",
       "f": "13-16",
       "hi": "15:51",
@@ -2752,7 +2752,7 @@
       "f": "13-16",
       "hi": "15:12",
       "d": "ALMIRANTE NEFF 653 EDIF. 3 DEPTO 10, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3NSMA84Q",
@@ -2774,7 +2774,7 @@
      },
      {
       "o": "1-3NSM0OXP",
-      "tec": "LUIS CASTRO TORRES",
+      "tec": "NICOLAS MOYANO R",
       "cat": "Alta 1 Play",
       "f": "16-19",
       "hi": "18:21",
@@ -2797,7 +2797,7 @@
       "f": "13-16",
       "hi": "16:34",
       "d": "PRIMERA 358, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3NSLXUBQ",
@@ -2833,7 +2833,7 @@
       "f": "13-16",
       "hi": "13:00",
       "d": "SAN MARTIN 1048 DEPTO 32, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3NSK8XLY",
@@ -2846,7 +2846,7 @@
      },
      {
       "o": "1-3NSKEIM2",
-      "tec": "JUAN ARRIAGADA C",
+      "tec": "ESTEBAN PIZARRO QUINTANA",
       "cat": "Reparación",
       "f": "10-13",
       "hi": "11:56",
@@ -2878,7 +2878,7 @@
       "f": "13-16",
       "hi": "16:03",
       "d": "TONGOY 01698, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3NSJXILT",
@@ -2940,52 +2940,16 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3NRSXW1D",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "18:17",
-      "d": "ARMANDO CARRERA 1499, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "CRISTOBAL MIRANDA VALENC",
-      "visitas": 1,
-      "ult_fecha": "10-09-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3NSPZW5C",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "20:14",
-      "d": "DINAMARCA 1451 EDIF. 6 DEPTO 404, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "CRISTOBAL MIRANDA VALENC",
-      "visitas": 1,
-      "ult_fecha": "11-09-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3NS7T34X",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:38",
+      "hi": "15:33",
       "d": "TONGOY 01698, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "DANIEL NAVARRETE E",
       "visitas": 2,
       "ult_fecha": "08-09-2026",
       "ult_cierre": "Casa sin medidor-remarcador"
-     },
-     {
-      "o": "1-3NOXGFYB",
-      "cat": "Migración 3 Play",
-      "f": "13-16",
-      "hi": "15:46",
-      "d": "PATRICIO LYNCH 308, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "ESTEBAN PIZARRO QUINTANA",
-      "visitas": 1,
-      "ult_fecha": "05-09-2026",
-      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3NS68TC2",
@@ -3024,18 +2988,6 @@
       "ult_cierre": "Sin apoyo vivienda-Pierrack"
      },
      {
-      "o": "1-3NRD3ZGS",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "18:10",
-      "d": "RAMON REYES ARANCIBIA 2177, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOSE CASTRO P",
-      "visitas": 1,
-      "ult_fecha": "09-09-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3NRS8XW4",
       "cat": "Alta 1 Play",
       "f": "13-16",
@@ -3072,18 +3024,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3NS1VY1E",
-      "cat": "Alta 1 Play",
-      "f": "13-16",
-      "hi": "16:03",
-      "d": "GERONA 41, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOSE ROJO A",
-      "visitas": 1,
-      "ult_fecha": "05-09-2026",
-      "ult_cierre": "Direccion incorrecta"
-     },
-     {
       "o": "1-3NS1RWY8",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -3101,17 +3041,29 @@
       "f": "13-16",
       "hi": "14:51",
       "d": "ALMIRANTE NEFF 653 EDIF. 3 DEPTO 10, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "LUIS GATICA DAVILA",
       "visitas": 4,
       "ult_fecha": "02-09-2026",
       "ult_cierre": "Falla Masiva"
      },
      {
+      "o": "1-3NOXGFYB",
+      "cat": "Migración 3 Play",
+      "f": "13-16",
+      "hi": "15:48",
+      "d": "PATRICIO LYNCH 308, VILLA ALEMANA",
+      "e": "en ruta",
+      "tec": "LUIS MARTIN NUÑEZ",
+      "visitas": 1,
+      "ult_fecha": "05-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3NRYWDYH",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "16:33",
+      "hi": "19:37",
       "d": "ALCALDE RODOLFO GALLEGUILLOS 1160, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
@@ -3132,10 +3084,22 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3NS1VY1E",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "16:15",
+      "d": "GERONA 41, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "YENDER BOSCAN CADENAS",
+      "visitas": 1,
+      "ult_fecha": "05-09-2026",
+      "ult_cierre": "Direccion incorrecta"
+     },
+     {
       "o": "1-3NSLNLXM",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "18:45",
+      "hi": "18:38",
       "d": "OHIGGINS 396, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "YENDER BOSCAN CADENAS",
@@ -3159,5 +3123,5 @@
    }
   }
  },
- "generado": "11-09-2026 15:10"
+ "generado": "11-09-2026 15:25"
 }
