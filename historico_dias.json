@@ -2478,20 +2478,21 @@
    }
   },
   "11-09-2026": {
-   "hasta": "10:07",
-   "actividades": 104,
+   "hasta": "10:12",
+   "actividades": 106,
    "tecnicos": 33,
    "estados": {
-    "Iniciado": 27,
+    "No Realizada": 1,
+    "en ruta": 5,
     "Pendiente": 71,
-    "en ruta": 4,
+    "Iniciado": 27,
     "Completado": 2
    },
-   "rgu": 161.0,
+   "rgu": 164.5,
    "caidas_total": 4,
    "caidas_activas": 4,
    "caidas_resueltas": 0,
-   "nuevas": 3,
+   "nuevas": 5,
    "al_bucket": 0,
    "repetidas": 16,
    "reagendadas": 2,
@@ -2535,6 +2536,24 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3NSKEIM2",
+      "tec": "ESTEBAN PIZARRO QUINTANA",
+      "cat": "Reparación",
+      "f": "10-13",
+      "hi": "11:56",
+      "d": "AVIADOR FIGUEROA 1321 CASA 16, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3NSKC7VS",
+      "tec": "JOSE ROJO A",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "12:38",
+      "d": "ANA MARIA FRESNO 150 CASA 8 DEPTO 113, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3NSK3IXK",
       "tec": "LUIS GATICA DAVILA",
@@ -2782,5 +2801,5 @@
    }
   }
  },
- "generado": "11-09-2026 10:07"
+ "generado": "11-09-2026 10:12"
 }
