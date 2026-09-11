@@ -1,7 +1,7 @@
 {
-  "actualizado": "2026-09-11T13:09:01",
+  "actualizado": "2026-09-11T13:39:14",
   "resumen": {
-    "reagendada": 5,
+    "reagendada": 6,
     "sin informacion": 3
   },
   "estados": {
@@ -92,6 +92,13 @@
         "aviso": "historial de la direccion, NO es el estado de esta orden",
         "filas": [
           {
+            "estado": "reagendada",
+            "color": "rgb(255, 222, 0)",
+            "ot": "1-3NSO9L9W",
+            "franja": "10-13",
+            "texto": "1-3NSO9L9W - 10-13-MigraciónMar, 15 Sep"
+          },
+          {
             "estado": "?",
             "color": "rgb(255, 170, 170)",
             "ot": "1-3NOZ17DA",
@@ -125,16 +132,19 @@
             "ot": "1-3NMTZ496",
             "franja": "13-16",
             "texto": "1-3NMTZ496 - 13-16-ReparaciónJue, 3 Sep"
-          },
-          {
-            "estado": "?",
-            "color": "rgb(121, 182, 235)",
-            "ot": "1-3NNIVH9V",
-            "franja": "13-16",
-            "texto": "1-3NNIVH9V - 13-16-ReparaciónJue, 3 Sep"
           }
         ]
       }
+    },
+    "1-3NSPCFFA": {
+      "tec": "JUAN ARRIAGADA C",
+      "cat": "Reparación",
+      "franja_original": "13-16",
+      "d": "LAS AMERICAS 1015 EDIF. 5 DEPTO 6, VILLA ALEMANA",
+      "estado": "reagendada",
+      "color": "rgb(255, 222, 0)",
+      "detalle": "1-3NSPCFFA - 13-16-ReparaciónSab, 12 Sep",
+      "franja_nueva": "13-16"
     },
     "1-3NRW93BX": {
       "tec": "MARCELO GÓMEZ GÓME",
