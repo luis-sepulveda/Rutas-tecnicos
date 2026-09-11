@@ -2478,30 +2478,52 @@
    }
   },
   "11-09-2026": {
-   "hasta": "09:11",
-   "actividades": 104,
+   "hasta": "09:27",
+   "actividades": 103,
    "tecnicos": 30,
    "estados": {
-    "Pendiente": 102,
-    "en ruta": 2
+    "en ruta": 22,
+    "Pendiente": 81
    },
-   "rgu": 160.0,
-   "caidas_total": 0,
-   "caidas_activas": 0,
+   "rgu": 159.0,
+   "caidas_total": 1,
+   "caidas_activas": 1,
    "caidas_resueltas": 0,
    "nuevas": 0,
    "al_bucket": 0,
    "repetidas": 15,
    "reagendadas": 2,
    "detalle": {
-    "caidas": [],
+    "caidas": [
+     {
+      "o": "1-3NRZCOA0",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "12:25",
+      "d": "BARROS ARANA 121 CASA A, VILLA ALEMANA",
+      "e": "Pendiente"
+     }
+    ],
     "nuevas": [],
     "repetidas": [
+     {
+      "o": "1-3NS68TC2",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "14:14",
+      "d": "BARROS JARPA 137, QUILPUE",
+      "e": "Pendiente",
+      "tec": "ALFREDO ALCAYAGA F",
+      "visitas": 1,
+      "ult_fecha": "10-09-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
      {
       "o": "1-3NRSKVBB",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:38",
       "d": "OVALLE 1232, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -2513,7 +2535,7 @@
       "o": "1-3NRVWZ33",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "12:43",
+      "hi": "10:52",
       "d": "MATURANA 115 CASA 5, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ANTONHY MORALES MENDOZA",
@@ -2522,22 +2544,22 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3NS1VY1E",
+      "o": "1-3NS1RWY8",
       "cat": "Alta 1 Play",
-      "f": "13-16",
-      "hi": "18:09",
-      "d": "GERONA 41, VILLA ALEMANA",
+      "f": "10-13",
+      "hi": "11:49",
+      "d": "ESMERALDA 1660, QUILPUE",
       "e": "Pendiente",
-      "tec": "CRISTOBAL MIRANDA VALENC",
-      "visitas": 1,
-      "ult_fecha": "05-09-2026",
-      "ult_cierre": "Direccion incorrecta"
+      "tec": "DANIEL NAVARRETE E",
+      "visitas": 2,
+      "ult_fecha": "10-09-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3NS34YFR",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "11:47",
+      "hi": "11:22",
       "d": "AVENIDA INDUSTRIAL 950 CASA 22, QUILPUE",
       "e": "Pendiente",
       "tec": "GEEYSER PEREZ O",
@@ -2549,9 +2571,9 @@
       "o": "1-3NRVUKSG",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:51",
       "d": "LOS CASTANOS 178, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JOEL GUSTAVE GUSTA",
       "visitas": 1,
       "ult_fecha": "10-09-2026",
@@ -2573,55 +2595,43 @@
       "o": "1-3NRD3ZGS",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "19:34",
+      "hi": "17:07",
       "d": "RAMON REYES ARANCIBIA 2177, VILLA ALEMANA",
       "e": "Pendiente",
-      "tec": "KEVIN TAPIA RETAMAL",
+      "tec": "JUAN ARRIAGADA C",
       "visitas": 1,
       "ult_fecha": "09-09-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3NRYWDYH",
-      "cat": "Migración 2 Play",
-      "f": "16-19",
-      "hi": "17:55",
-      "d": "ALCALDE RODOLFO GALLEGUILLOS 1160, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "LUIS GATICA DAVILA",
-      "visitas": 1,
-      "ult_fecha": "25-08-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3NS1RWY8",
-      "cat": "Alta 1 Play",
-      "f": "10-13",
-      "hi": "12:19",
-      "d": "ESMERALDA 1660, QUILPUE",
-      "e": "Pendiente",
-      "tec": "LUIS MARTIN NUÑEZ",
-      "visitas": 2,
-      "ult_fecha": "10-09-2026",
       "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3NOXGFYB",
       "cat": "Migración 3 Play",
       "f": "13-16",
-      "hi": "17:50",
+      "hi": "16:35",
       "d": "PATRICIO LYNCH 308, VILLA ALEMANA",
       "e": "Pendiente",
-      "tec": "MARCELO GÓMEZ GÓME",
+      "tec": "LUIS CASTRO TORRES",
       "visitas": 1,
       "ult_fecha": "05-09-2026",
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3NS1VY1E",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "GERONA 41, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "LUIS MARTIN NUÑEZ",
+      "visitas": 1,
+      "ult_fecha": "05-09-2026",
+      "ult_cierre": "Direccion incorrecta"
+     },
+     {
       "o": "1-3NRTTWLG",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "11:02",
+      "hi": "10:38",
       "d": "MARGA MARGA 600, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATÍAS JAQUE AG",
@@ -2633,7 +2643,7 @@
       "o": "1-3NRXH222",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "12:52",
+      "hi": "12:28",
       "d": "MAURICIO 1194, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATÍAS JAQUE AG",
@@ -2642,28 +2652,16 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3NRSXW1D",
-      "cat": "Alta 1 Play",
+      "o": "1-3NRYWDYH",
+      "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "18:15",
-      "d": "ARMANDO CARRERA 1499, VILLA ALEMANA",
+      "hi": "16:14",
+      "d": "ALCALDE RODOLFO GALLEGUILLOS 1160, VILLA ALEMANA",
       "e": "Pendiente",
-      "tec": "MATÍAS JAQUE AG",
+      "tec": "PABLO HERNANEZ FERNANDEZ",
       "visitas": 1,
-      "ult_fecha": "10-09-2026",
+      "ult_fecha": "25-08-2026",
       "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3NS68TC2",
-      "cat": "Alta 2 Play",
-      "f": "13-16",
-      "hi": "14:00",
-      "d": "BARROS JARPA 137, QUILPUE",
-      "e": "Pendiente",
-      "tec": "NICOLAS MOYANO R",
-      "visitas": 1,
-      "ult_fecha": "10-09-2026",
-      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3NS4ZD3O",
@@ -2676,6 +2674,18 @@
       "visitas": 1,
       "ult_fecha": "10-09-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3NRSXW1D",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "16:55",
+      "d": "ARMANDO CARRERA 1499, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "YENDER BOSCAN CADENAS",
+      "visitas": 1,
+      "ult_fecha": "10-09-2026",
+      "ult_cierre": "Sin moradores"
      }
     ],
     "reagendadas": [
@@ -2683,9 +2693,9 @@
       "o": "1-3NRF3NYM",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:38",
       "d": "AV LOS CARRERA 993, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JOSE GALAZ D",
       "desde": "10-09-2026"
      },
@@ -2693,15 +2703,15 @@
       "o": "1-3NRB0RLP",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "19:24",
+      "hi": "16:02",
       "d": "INES DE SUAREZ 0357, VILLA ALEMANA",
       "e": "Pendiente",
-      "tec": "JUAN ARRIAGADA C",
+      "tec": "LEONEL HERNÁNDEZ OJE",
       "desde": "10-09-2026"
      }
     ]
    }
   }
  },
- "generado": "11-09-2026 09:11"
+ "generado": "11-09-2026 09:27"
 }
