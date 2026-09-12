@@ -3269,11 +3269,12 @@
    }
   },
   "12-09-2026": {
-   "hasta": "08:57",
+   "hasta": "09:12",
    "actividades": 130,
    "tecnicos": 33,
    "estados": {
-    "Pendiente": 130
+    "Pendiente": 129,
+    "en ruta": 1
    },
    "rgu": 197.5,
    "caidas_total": 0,
@@ -3399,7 +3400,7 @@
       "o": "1-3NSWV0XT",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:07",
+      "hi": "14:00",
       "d": "RAMON REYES ARANCIBIA 2177, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE CASTRO P",
@@ -3495,7 +3496,7 @@
       "o": "1-3NOZ17DA",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "11:12",
       "d": "LAS ACACIAS 1575 CASA 09, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MARCELO GÓMEZ GÓME",
@@ -3507,7 +3508,7 @@
       "o": "1-3NOV8025",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "15:12",
       "d": "DEL VALLE 853, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MARCELO GÓMEZ GÓME",
@@ -3519,7 +3520,7 @@
       "o": "1-3NSND7OK",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "17:13",
+      "hi": "18:25",
       "d": "HUANHUALI 1626, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MARCELO GÓMEZ GÓME",
@@ -3549,6 +3550,18 @@
       "tec": "MATÍAS JAQUE AG",
       "visitas": 1,
       "ult_fecha": "11-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3NMJ2HH8",
+      "cat": "Migración 1 Play",
+      "f": "10-13",
+      "hi": "11:59",
+      "d": "CALLE 1 1150 EDIF. 9 DEPTO 401, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "MATÍAS JAQUE AG",
+      "visitas": 1,
+      "ult_fecha": "02-09-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -3591,25 +3604,13 @@
       "o": "1-3NS39R50",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "12:30",
       "d": "ILUSION 21 CASA B, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "YENDER BOSCAN CADENAS",
       "visitas": 1,
       "ult_fecha": "15-08-2026",
       "ult_cierre": "Cliente reagenda"
-     },
-     {
-      "o": "1-3NMJ2HH8",
-      "cat": "Migración 1 Play",
-      "f": "10-13",
-      "hi": "11:03",
-      "d": "CALLE 1 1150 EDIF. 9 DEPTO 401, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "YENDER BOSCAN CADENAS",
-      "visitas": 1,
-      "ult_fecha": "02-09-2026",
-      "ult_cierre": "Sin moradores"
      }
     ],
     "reagendadas": [
@@ -3644,6 +3645,16 @@
       "desde": "11-09-2026"
      },
      {
+      "o": "1-3NRZCOA0",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "BARROS ARANA 121 CASA A, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "ESTEBAN PIZARRO QUINTANA",
+      "desde": "11-09-2026"
+     },
+     {
       "o": "1-3NS97LTB",
       "cat": "Alta 1 Play",
       "f": "16-19",
@@ -3657,7 +3668,7 @@
       "o": "1-3NOZ17DA",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "11:12",
       "d": "LAS ACACIAS 1575 CASA 09, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MARCELO GÓMEZ GÓME",
@@ -3677,7 +3688,7 @@
       "o": "1-3NRB0RLP",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:25",
+      "hi": "18:04",
       "d": "INES DE SUAREZ 0357, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATÍAS JAQUE AG",
@@ -3702,20 +3713,10 @@
       "e": "Pendiente",
       "tec": "NICOLAS MOYANO R",
       "desde": "11-09-2026"
-     },
-     {
-      "o": "1-3NRZCOA0",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "16:55",
-      "d": "BARROS ARANA 121 CASA A, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "YENDER BOSCAN CADENAS",
-      "desde": "11-09-2026"
      }
     ]
    }
   }
  },
- "generado": "12-09-2026 08:57"
+ "generado": "12-09-2026 09:12"
 }
