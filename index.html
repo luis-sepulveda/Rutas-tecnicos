@@ -513,6 +513,11 @@
   .bguia { border-bottom:1px dotted #1e3a5f; height:1px; }
   .bnum { color:#fff; font-weight:700; flex-shrink:0; }
   .bpct { color:#8ab4dd; font-size:10.5px; flex-shrink:0; }
+  /* Resumen por tramo de Play, arriba del desglose. */
+  .bres .bety { color:#fff; font-weight:600; }
+  .bsep { border-top:1px solid rgba(148,163,184,.18); margin:11px 0 8px; }
+  .bcap { color:#8ab4dd; font-size:10px; font-weight:700; letter-spacing:.5px;
+          margin-bottom:6px; }
   /* Estado de la jornada */
   #modalJor { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); }
   #modalJor.abierto { display:flex; align-items:flex-start; justify-content:center; padding:4vh 2vw; }
@@ -2532,15 +2537,11 @@ function actividadesDeEstado(est){
    cada uno tuviera muchisimas; midiendo contra el total quedan en 20% y se lee
    lo que de verdad representan. El ancho coincide asi con el porcentaje que
    dice la fila, que es lo que uno espera al mirarlas. */
-/* Orden por tramo de Play, para el panel de TIPO DE ACTIVIDAD.
-   Primero todo lo de 1 Play junto, despues lo de 2, despues lo de 3, y al
-   final lo que no tiene play (Modificacion, Alta Traslado, Upgrade...).
-   Dentro de cada tramo: Alta, Migracion y despues Reparacion.
-   La reparacion va en el grupo de 1 Play porque vale 1, igual que en el
-   dashboard de historial por tecnico. */
+/* Orden del desglose: primero todo lo de 1 Play junto, despues 2, despues 3,
+   y al final lo que no tiene play. Dentro de cada tramo: Alta, Migracion,
+   Reparacion. La reparacion se cuenta en el tramo de 1 Play porque vale 1. */
 function ordenPlay(k){
-  const t = String(k);
-  const T = t.toUpperCase();
+  const T = String(k).toUpperCase();
   const m = T.match(/(\d)\s*PLAY/);
   let play = m ? +m[1] : 9;
   let fam = 3;
@@ -2548,7 +2549,42 @@ function ordenPlay(k){
   else if(T.indexOf('ALTA') === 0)     fam = 0;
   else if(T.indexOf('MIGRAC') === 0)   fam = 1;
   else if(T.indexOf('REPARAC') === 0){ fam = 2; play = 1; }
-  return [play, fam, t];
+  return [play, fam, String(k)];
+}
+
+/* Resumen de arriba: cuatro lineas. Aqui las reparaciones van APARTE del
+   1 Play, para que cada linea sea una sola cosa. Las actividades sin play
+   (traslados, modificaciones, upgrades) no salen en el resumen a proposito:
+   por eso las cuatro lineas no suman el total. Igual aparecen completas en
+   el desglose de abajo. */
+function resumenPlay(cuenta){
+  const g = {'Actividades 1 Play':0,'Actividades 2 Play':0,
+             'Actividades 3 Play':0,'Reparaciones':0};
+  Object.keys(cuenta).forEach(function(k){
+    const T = String(k).toUpperCase();
+    if(T.indexOf('REPARAC') === 0){ g['Reparaciones'] += cuenta[k]; return; }
+    const m = T.match(/(\d)\s*PLAY/);
+    const esAlta = T.indexOf('ALTA') === 0 && T.indexOf('ALTA TRASLADO') !== 0;
+    if(m && (esAlta || T.indexOf('MIGRAC') === 0))
+      g['Actividades ' + m[1] + ' Play'] += cuenta[k];
+  });
+  Object.keys(g).forEach(function(k){ if(!g[k]) delete g[k]; });
+  return g;
+}
+
+/* Igual que barras(), pero respetando el orden en que vienen las llaves. */
+function barrasFijas(cuenta, total, color, clase){
+  return Object.keys(cuenta).map(function(k){
+    const n = cuenta[k];
+    const pct = total ? n*100/total : 0;
+    return '<div class="bfila '+(clase||'')+'">'
+      + '<span class="bety" title="'+escR(k)+'">'+escR(k)+'</span>'
+      + '<span class="bbar" style="width:'+Math.max(0.6, pct*0.55)
+      +   '%;background:'+color+'"></span>'
+      + '<span class="bnum">'+n+'</span>'
+      + '<span class="bpct">'+(total ? pct.toFixed(1)+'%' : '')+'</span>'
+      + '</div>';
+  }).join('');
 }
 
 function barras(cuenta, total, color, orden){
@@ -2753,6 +2789,9 @@ function renderEst(){
   const grad = 'linear-gradient(90deg,'+pal[0]+','+pal[1]+')';
 
   let html = '<div class="bcaja"><div class="btit" style="color:'+pal[2]+'">TIPO DE ACTIVIDAD</div>'
+           + barrasFijas(resumenPlay(porTipo), total, grad, 'bres')
+           + '<div class="bsep"></div>'
+           + '<div class="bcap">DETALLE</div>'
            + barras(porTipo, total, grad, ordenPlay) + '</div>';
 
   const nMot = Object.keys(porMotivo).reduce(function(a,k){ return a+porMotivo[k]; }, 0);
