@@ -3269,24 +3269,34 @@
    }
   },
   "12-09-2026": {
-   "hasta": "09:12",
-   "actividades": 130,
+   "hasta": "09:17",
+   "actividades": 131,
    "tecnicos": 33,
    "estados": {
-    "Pendiente": 129,
+    "Pendiente": 130,
     "en ruta": 1
    },
-   "rgu": 197.5,
+   "rgu": 199.5,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 0,
+   "nuevas": 1,
    "al_bucket": 0,
    "repetidas": 27,
    "reagendadas": 10,
    "detalle": {
     "caidas": [],
-    "nuevas": [],
+    "nuevas": [
+     {
+      "o": "1-3NT54RYR",
+      "tec": "JOSE CASTRO P",
+      "cat": "Migración 2 Play",
+      "f": "10-13",
+      "hi": "12:18",
+      "d": "CONDELL 377, VILLA ALEMANA",
+      "e": "Pendiente"
+     }
+    ],
     "repetidas": [
      {
       "o": "1-3NSM2IYA",
@@ -3400,7 +3410,7 @@
       "o": "1-3NSWV0XT",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "16:09",
       "d": "RAMON REYES ARANCIBIA 2177, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE CASTRO P",
@@ -3718,5 +3728,5 @@
    }
   }
  },
- "generado": "12-09-2026 09:12"
+ "generado": "12-09-2026 09:17"
 }
