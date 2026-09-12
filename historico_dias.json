@@ -3269,23 +3269,23 @@
    }
   },
   "12-09-2026": {
-   "hasta": "12:28",
-   "actividades": 146,
+   "hasta": "12:33",
+   "actividades": 147,
    "tecnicos": 33,
    "estados": {
     "Completado": 27,
-    "en ruta": 8,
-    "Pendiente": 67,
-    "Iniciado": 23,
+    "Iniciado": 28,
+    "Pendiente": 68,
     "No Realizada": 14,
+    "en ruta": 3,
     "Cancelado": 4,
     "Suspendido": 3
    },
-   "rgu": 215.1,
+   "rgu": 215.2,
    "caidas_total": 11,
    "caidas_activas": 11,
    "caidas_resueltas": 0,
-   "nuevas": 14,
+   "nuevas": 15,
    "al_bucket": 15,
    "repetidas": 28,
    "reagendadas": 10,
@@ -3393,13 +3393,22 @@
     ],
     "nuevas": [
      {
+      "o": "1-3NT8CNT7",
+      "tec": "LUIS CASTRO TORRES",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "15:50",
+      "d": "BADEN POWELL 956 EDIF. P DEPTO 11, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3NT84KPF",
       "tec": "ALEXIS JARA",
       "cat": "Modificación de Servicio",
       "f": "16-19",
       "hi": "12:26",
       "d": "SANTA ROSA 114 CASA A, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3NT7ZWF9",
@@ -3498,7 +3507,7 @@
       "f": "10-13",
       "hi": "12:01",
       "d": "LOS INCAS 1327, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3NT4Y27B",
@@ -3536,7 +3545,7 @@
       "o": "1-3NOWS1CD",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "14:44",
+      "hi": "14:54",
       "d": "LEUCOTON 985 CASA B, QUILPUE",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
@@ -3680,7 +3689,7 @@
       "o": "1-3NSKX6PD",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:17",
+      "hi": "16:16",
       "d": "LOS LINGUES 996, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -3704,7 +3713,7 @@
       "o": "1-3NPUIGLT",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:33",
+      "hi": "17:34",
       "d": "AV JOHN KENNEDY 1550 EDIF. D DEPTO 403, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JUAN ARRIAGADA C",
@@ -3862,7 +3871,7 @@
       "o": "1-3NS97LTB",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:20",
+      "hi": "17:23",
       "d": "LAS ROSAS 670 CASA A, QUILPUE",
       "e": "Pendiente",
       "tec": "ALEXIS JARA",
@@ -3962,5 +3971,5 @@
    }
   }
  },
- "generado": "12-09-2026 12:28"
+ "generado": "12-09-2026 12:33"
 }
