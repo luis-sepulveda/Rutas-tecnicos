@@ -2532,8 +2532,37 @@ function actividadesDeEstado(est){
    cada uno tuviera muchisimas; midiendo contra el total quedan en 20% y se lee
    lo que de verdad representan. El ancho coincide asi con el porcentaje que
    dice la fila, que es lo que uno espera al mirarlas. */
-function barras(cuenta, total, color){
-  const claves = Object.keys(cuenta).sort(function(a,b){ return cuenta[b]-cuenta[a]; });
+/* Orden por tramo de Play, para el panel de TIPO DE ACTIVIDAD.
+   Primero todo lo de 1 Play junto, despues lo de 2, despues lo de 3, y al
+   final lo que no tiene play (Modificacion, Alta Traslado, Upgrade...).
+   Dentro de cada tramo: Alta, Migracion y despues Reparacion.
+   La reparacion va en el grupo de 1 Play porque vale 1, igual que en el
+   dashboard de historial por tecnico. */
+function ordenPlay(k){
+  const t = String(k);
+  const T = t.toUpperCase();
+  const m = T.match(/(\d)\s*PLAY/);
+  let play = m ? +m[1] : 9;
+  let fam = 3;
+  if(T.indexOf('ALTA TRASLADO') === 0) { fam = 3; play = 9; }
+  else if(T.indexOf('ALTA') === 0)     fam = 0;
+  else if(T.indexOf('MIGRAC') === 0)   fam = 1;
+  else if(T.indexOf('REPARAC') === 0){ fam = 2; play = 1; }
+  return [play, fam, t];
+}
+
+function barras(cuenta, total, color, orden){
+  const claves = Object.keys(cuenta).sort(function(a,b){
+    if(orden){
+      const A = orden(a), B = orden(b);
+      for(let i = 0; i < A.length; i++){
+        if(A[i] < B[i]) return -1;
+        if(A[i] > B[i]) return 1;
+      }
+      return 0;
+    }
+    return cuenta[b]-cuenta[a];
+  });
   if(!claves.length) return '';
   return claves.map(function(k){
     const n = cuenta[k];
@@ -2724,7 +2753,7 @@ function renderEst(){
   const grad = 'linear-gradient(90deg,'+pal[0]+','+pal[1]+')';
 
   let html = '<div class="bcaja"><div class="btit" style="color:'+pal[2]+'">TIPO DE ACTIVIDAD</div>'
-           + barras(porTipo, total, grad) + '</div>';
+           + barras(porTipo, total, grad, ordenPlay) + '</div>';
 
   const nMot = Object.keys(porMotivo).reduce(function(a,k){ return a+porMotivo[k]; }, 0);
   if(nMot){
