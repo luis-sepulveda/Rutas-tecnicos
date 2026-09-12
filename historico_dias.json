@@ -3269,25 +3269,25 @@
    }
   },
   "12-09-2026": {
-   "hasta": "12:33",
-   "actividades": 147,
+   "hasta": "12:42",
+   "actividades": 151,
    "tecnicos": 33,
    "estados": {
-    "Completado": 27,
-    "Iniciado": 28,
-    "Pendiente": 68,
+    "Completado": 28,
+    "Iniciado": 30,
+    "Pendiente": 71,
     "No Realizada": 14,
-    "en ruta": 3,
     "Cancelado": 4,
-    "Suspendido": 3
+    "Suspendido": 3,
+    "en ruta": 1
    },
-   "rgu": 215.2,
+   "rgu": 219.2,
    "caidas_total": 11,
    "caidas_activas": 11,
    "caidas_resueltas": 0,
    "nuevas": 15,
    "al_bucket": 15,
-   "repetidas": 28,
+   "repetidas": 29,
    "reagendadas": 10,
    "detalle": {
     "caidas": [
@@ -3399,7 +3399,7 @@
       "f": "10-13",
       "hi": "15:50",
       "d": "BADEN POWELL 956 EDIF. P DEPTO 11, QUILPUE",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3NT84KPF",
@@ -3583,7 +3583,7 @@
       "f": "10-13",
       "hi": "10:30",
       "d": "CALLE 5 0668, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "DANIEL NAVARRETE E",
       "visitas": 4,
       "ult_fecha": "10-09-2026",
@@ -3593,7 +3593,7 @@
       "o": "1-3NSM2IYA",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "15:54",
+      "hi": "17:19",
       "d": "ILLAPEL 14, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -3725,9 +3725,9 @@
       "o": "1-3NOZ17DA",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "12:35",
+      "hi": "12:41",
       "d": "LAS ACACIAS 1575 CASA 09, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "KEVIN TAPIA RETAMAL",
       "visitas": 1,
       "ult_fecha": "05-09-2026",
@@ -3864,6 +3864,18 @@
       "visitas": 1,
       "ult_fecha": "10-09-2026",
       "ult_cierre": "Sin Acceso a camara"
+     },
+     {
+      "o": "1-3NOWWEGQ",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "18:09",
+      "d": "LUXEMBURGO 109, QUILPUE",
+      "e": "Pendiente",
+      "tec": "SEBASTIAN DOSSOW A",
+      "visitas": 1,
+      "ult_fecha": "05-09-2026",
+      "ult_cierre": "Cliente reagenda"
      }
     ],
     "reagendadas": [
@@ -3941,9 +3953,9 @@
       "o": "1-3NOZ17DA",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "12:35",
+      "hi": "12:41",
       "d": "LAS ACACIAS 1575 CASA 09, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "KEVIN TAPIA RETAMAL",
       "desde": "07-09-2026"
      },
@@ -3961,7 +3973,7 @@
       "o": "1-3NSM0OXP",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:20",
+      "hi": "16:46",
       "d": "YUNGAY 913, QUILPUE",
       "e": "Pendiente",
       "tec": "NICOLAS MOYANO R",
@@ -3971,5 +3983,5 @@
    }
   }
  },
- "generado": "12-09-2026 12:33"
+ "generado": "12-09-2026 12:42"
 }
