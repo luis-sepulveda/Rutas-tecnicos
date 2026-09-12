@@ -1,202 +1,28 @@
 {
-  "actualizado": "2026-09-11T17:27:22",
+  "actualizado": "2026-09-12T09:27:58",
   "resumen": {
-    "reagendada": 6,
-    "sin informacion": 2,
-    "cancelada": 2
+    "reagendada": 2
   },
   "estados": {
-    "1-3NRSKVBB": {
-      "tec": "ALEXIS JARA",
-      "cat": "Alta 1 Play",
-      "franja_original": "16-19",
-      "d": "OVALLE 1232, QUILPUE",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3NRSKVBB - 13-16-AltaSab, 12 Sep",
-      "franja_nueva": "13-16"
-    },
-    "1-3NSASZJM": {
-      "tec": "ESTEBAN PIZARRO QUINTANA",
-      "cat": "Alta 1 Play",
-      "franja_original": "13-16",
-      "d": "EL RODEO 181, VILLA ALEMANA",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3NSASZJM - 10-13-AltaSab, 12 Sep",
-      "franja_nueva": "10-13"
-    },
-    "1-3NRZCOA0": {
-      "tec": "JOEL GUSTAVE GUSTA",
-      "cat": "Alta 1 Play",
-      "franja_original": "10-13",
-      "d": "BARROS ARANA 121 CASA A, VILLA ALEMANA",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3NRZCOA0 - 16-19-AltaSab, 12 Sep",
-      "franja_nueva": "16-19"
-    },
-    "1-3NS97LTB": {
-      "tec": "JORDAN ROA PEREZ",
-      "cat": "Alta 1 Play",
-      "franja_original": "16-19",
-      "d": "LAS ROSAS 670 CASA A, QUILPUE",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3NS97LTB - 16-19-AltaSab, 12 Sep",
-      "franja_nueva": "16-19"
-    },
-    "1-3NRB0RLP": {
-      "tec": "JOSE ROJO A",
-      "cat": "Alta 1 Play",
-      "franja_original": "16-19",
-      "d": "INES DE SUAREZ 0357, VILLA ALEMANA",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3NRB0RLP - 16-19-AltaSab, 12 Sep",
-      "franja_nueva": "16-19"
-    },
-    "1-3NOWJ9PW": {
-      "tec": "JUAN ARRIAGADA C",
-      "cat": "Migración 3 Play",
-      "franja_original": "13-16",
-      "d": "LAS ACACIAS 1575 CASA 21, VILLA ALEMANA",
-      "estado": "sin informacion",
-      "nota": "la OT ya no existe en TOA",
-      "contexto": {
-        "buscado": "LAS ACACIAS 1575",
-        "aviso": "historial de la direccion, NO es el estado de esta orden",
-        "filas": [
-          {
-            "estado": "reagendada",
-            "color": "rgb(255, 222, 0)",
-            "ot": "1-3NSO9L9W",
-            "franja": "10-13",
-            "texto": "1-3NSO9L9W - 10-13-MigraciónMar, 15 Sep"
-          },
-          {
-            "estado": "?",
-            "color": "rgb(255, 170, 170)",
-            "ot": "1-3NOZ17DA",
-            "franja": "10-13",
-            "texto": "1-3NOZ17DA - 10-13-MigraciónSab, 12 Sep"
-          },
-          {
-            "estado": "cancelada",
-            "color": "rgb(128, 255, 128)",
-            "ot": "1-3NS7W5P8",
-            "franja": "10-13",
-            "texto": "1-3NS7W5P8 - 10-13-ReparaciónSab, 12 Sep"
-          },
-          {
-            "estado": "gestionada",
-            "color": "rgb(96, 206, 206)",
-            "ot": "1-3NMSLXP4",
-            "franja": "13-16",
-            "texto": "1-3NMSLXP4 - 13-16-MigraciónSab, 5 Sep"
-          },
-          {
-            "estado": "cancelada",
-            "color": "rgb(128, 255, 128)",
-            "ot": "1-3NMTZ496",
-            "franja": "13-16",
-            "texto": "1-3NMTZ496 - 13-16-ReparaciónJue, 3 Sep"
-          },
-          {
-            "estado": "suspendida",
-            "color": "rgb(153, 255, 255)",
-            "ot": "1-3NMTZ496",
-            "franja": "13-16",
-            "texto": "1-3NMTZ496 - 13-16-ReparaciónJue, 3 Sep"
-          }
-        ]
-      }
-    },
-    "1-3NSPCFFA": {
-      "tec": "JUAN ARRIAGADA C",
-      "cat": "Reparación",
-      "franja_original": "13-16",
-      "d": "LAS AMERICAS 1015 EDIF. 5 DEPTO 6, VILLA ALEMANA",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3NSPCFFA - 13-16-ReparaciónSab, 12 Sep",
-      "franja_nueva": "13-16"
-    },
-    "1-3NRW93BX": {
-      "tec": "MARCELO GÓMEZ GÓME",
-      "cat": "Alta 1 Play",
-      "franja_original": "10-13",
-      "d": "HAYDN 1690 EDIF. B DEPTO 404, VILLA ALEMANA",
-      "estado": "sin informacion",
-      "nota": "la OT ya no existe en TOA",
-      "contexto": {
-        "buscado": "HAYDN 1690",
-        "aviso": "historial de la direccion, NO es el estado de esta orden",
-        "filas": [
-          {
-            "estado": "cancelada",
-            "color": "rgb(128, 255, 128)",
-            "ot": "1-3NMPG492",
-            "franja": "16-19",
-            "texto": "1-3NMPG492 - 16-19-ReparaciónSab, 5 Sep"
-          },
-          {
-            "estado": "?",
-            "color": "rgb(121, 182, 235)",
-            "ot": "1-3NOCUZMQ",
-            "franja": "13-16",
-            "texto": "1-3NOCUZMQ - 13-16-AltaSab, 5 Sep"
-          },
-          {
-            "estado": "?",
-            "color": "rgb(121, 182, 235)",
-            "ot": "1-3NOBPKZW",
-            "franja": "10-13",
-            "texto": "1-3NOBPKZW - 10-13-AltaSab, 5 Sep"
-          },
-          {
-            "estado": "?",
-            "color": "rgb(121, 182, 235)",
-            "ot": "1-3NMVGUMA",
-            "franja": "16-19",
-            "texto": "1-3NMVGUMA - 16-19-ReparaciónMie, 2 Sep"
-          },
-          {
-            "estado": "?",
-            "color": "rgb(121, 182, 235)",
-            "ot": "1-3NKFV8OJ",
-            "franja": "10-13",
-            "texto": "1-3NKFV8OJ - 10-13-AltaLun, 31 Ago"
-          },
-          {
-            "estado": "?",
-            "color": "rgb(121, 182, 235)",
-            "ot": "1-3MY5ZX24",
-            "franja": "16-19",
-            "texto": "1-3MY5ZX24 - 16-19-AltaVie, 31 Jul"
-          }
-        ]
-      }
-    },
-    "1-3NS8A0L8": {
-      "tec": "PABLO HERNANEZ FERNANDEZ",
+    "1-3NSWQ7C5": {
+      "tec": "CRISTOBAL SILVA LEIVA",
       "cat": "Alta 2 Play",
       "franja_original": "16-19",
-      "d": "SERENA 1020 DEPTO 24, QUILPUE",
-      "estado": "cancelada",
-      "color": "rgb(128, 255, 128)",
-      "detalle": "1-3NS8A0L8 - 16-19-AltaSab, 12 Sep",
+      "d": "FREIRE 139 DEPTO 30, QUILPUE",
+      "estado": "reagendada",
+      "color": "rgb(255, 222, 0)",
+      "detalle": "1-3NSWQ7C5 - 16-19-AltaLun, 14 Sep",
       "franja_nueva": "16-19"
     },
-    "1-3NSK7VOH": {
-      "tec": "PABLO HERNANEZ FERNANDEZ",
-      "cat": "Reparación",
-      "franja_original": "16-19",
-      "d": "LAS AMERICAS 1015 EDIF. 3 DEPTO 5, VILLA ALEMANA",
-      "estado": "cancelada",
-      "color": "rgb(128, 255, 128)",
-      "detalle": "1-3NSK7VOH - 10-13-ReparaciónSab, 12 Sep",
-      "franja_nueva": "10-13"
+    "1-3NT54RYR": {
+      "tec": "JOSE CASTRO P",
+      "cat": "Migración 2 Play",
+      "franja_original": "10-13",
+      "d": "CONDELL 377, VILLA ALEMANA",
+      "estado": "reagendada",
+      "color": "rgb(255, 222, 0)",
+      "detalle": "1-3NT54RYR - 16-19-MigraciónMar, 15 Sep",
+      "franja_nueva": "16-19"
     }
   }
 }
