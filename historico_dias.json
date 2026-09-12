@@ -3269,24 +3269,24 @@
    }
   },
   "12-09-2026": {
-   "hasta": "10:58",
-   "actividades": 132,
+   "hasta": "11:03",
+   "actividades": 133,
    "tecnicos": 33,
    "estados": {
-    "Iniciado": 26,
-    "Pendiente": 82,
-    "Completado": 7,
+    "Iniciado": 28,
+    "Pendiente": 81,
+    "Completado": 8,
     "No Realizada": 7,
-    "en ruta": 6,
-    "Suspendido": 2,
-    "Cancelado": 2
+    "en ruta": 4,
+    "Cancelado": 3,
+    "Suspendido": 2
    },
-   "rgu": 197.0,
+   "rgu": 199.0,
    "caidas_total": 7,
    "caidas_activas": 7,
    "caidas_resueltas": 0,
-   "nuevas": 4,
-   "al_bucket": 0,
+   "nuevas": 6,
+   "al_bucket": 1,
    "repetidas": 25,
    "reagendadas": 9,
    "detalle": {
@@ -3357,6 +3357,24 @@
     ],
     "nuevas": [
      {
+      "o": "1-3NT6GH6F",
+      "tec": "NICOLAS MOYANO R",
+      "cat": "Migración 2 Play",
+      "f": "13-16",
+      "hi": "16:05",
+      "d": "AVENIDA LAS AMERICAS 331, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3NT604FU",
+      "tec": "YENDER BOSCAN CADENAS",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "16:28",
+      "d": "PAUL HARRIS 462 CASA 3, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3NT54UFW",
       "tec": "LUIS MARTIN NUÑEZ",
       "cat": "Modificación de Servicio",
@@ -3422,7 +3440,7 @@
       "o": "1-3NOWS1CD",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "14:36",
+      "hi": "14:44",
       "d": "LEUCOTON 985 CASA B, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
@@ -3626,9 +3644,9 @@
       "o": "1-3NQF38LC",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "10:57",
+      "hi": "10:58",
       "d": "SANTIAGO 657, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "MARCO PEREZ G",
       "visitas": 1,
       "ult_fecha": "08-09-2026",
@@ -3700,9 +3718,9 @@
       "o": "1-3NQQX5WP",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "11:01",
+      "hi": "10:58",
       "d": "PJE CALIFORNIA 2397 CASA A, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "CRISTOBAL SILVA LEIVA",
       "desde": "09-09-2026"
      },
@@ -3760,9 +3778,9 @@
       "o": "1-3NQF38LC",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "10:57",
+      "hi": "10:58",
       "d": "SANTIAGO 657, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "MARCO PEREZ G",
       "desde": "09-09-2026"
      },
@@ -3790,5 +3808,5 @@
    }
   }
  },
- "generado": "12-09-2026 10:58"
+ "generado": "12-09-2026 11:03"
 }
