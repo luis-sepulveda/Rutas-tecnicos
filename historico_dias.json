@@ -3269,18 +3269,20 @@
    }
   },
   "12-09-2026": {
-   "hasta": "10:03",
-   "actividades": 130,
+   "hasta": "10:23",
+   "actividades": 129,
    "tecnicos": 33,
    "estados": {
-    "Iniciado": 29,
-    "Pendiente": 97,
-    "No Realizada": 1,
-    "en ruta": 3
+    "Iniciado": 28,
+    "Pendiente": 92,
+    "Completado": 1,
+    "en ruta": 5,
+    "No Realizada": 2,
+    "Cancelado": 1
    },
-   "rgu": 196.5,
-   "caidas_total": 4,
-   "caidas_activas": 4,
+   "rgu": 192.5,
+   "caidas_total": 5,
+   "caidas_activas": 5,
    "caidas_resueltas": 0,
    "nuevas": 4,
    "al_bucket": 0,
@@ -3323,6 +3325,15 @@
       "hi": "15:46",
       "d": "CONDELL 478 DEPTO 202, VILLA ALEMANA",
       "e": "Pendiente"
+     },
+     {
+      "o": "1-3NSV679Y",
+      "tec": "YENDER BOSCAN CADENAS",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "16:30",
+      "d": "SANTA MARIA 0241, VILLA ALEMANA",
+      "e": "Pendiente"
      }
     ],
     "nuevas": [
@@ -3337,7 +3348,7 @@
      },
      {
       "o": "1-3NT1RQD8",
-      "tec": "NICOLAS MOYANO R",
+      "tec": "ALEXIS JARA",
       "cat": "Migración 1 Play",
       "f": "10-13",
       "hi": "12:01",
@@ -3368,7 +3379,7 @@
       "o": "1-3NSM2IYA",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "15:35",
+      "hi": "16:43",
       "d": "ILLAPEL 14, QUILPUE",
       "e": "Pendiente",
       "tec": "ALEXIS JARA",
@@ -3404,9 +3415,9 @@
       "o": "1-3NT01T7O",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "11:40",
+      "hi": "10:36",
       "d": "CALLE 5 0668, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "DANIEL NAVARRETE E",
       "visitas": 4,
       "ult_fecha": "10-09-2026",
@@ -3416,7 +3427,7 @@
       "o": "1-3NRYELH1",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "14:01",
+      "hi": "12:57",
       "d": "AV LOS CARRERA 2409, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -3428,7 +3439,7 @@
       "o": "1-3NOWWEGQ",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "18:35",
+      "hi": "17:31",
       "d": "LUXEMBURGO 109, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -3440,9 +3451,9 @@
       "o": "1-3NOWFZJE",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "12:37",
+      "hi": "10:17",
       "d": "GABRIEL PARRA 2378, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "ELIAS ARMIJO L",
       "visitas": 2,
       "ult_fecha": "05-09-2026",
@@ -3644,7 +3655,7 @@
       "o": "1-3NRSKVBB",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:44",
+      "hi": "14:45",
       "d": "OVALLE 1232, QUILPUE",
       "e": "Pendiente",
       "tec": "NICOLAS MOYANO R",
@@ -3701,16 +3712,6 @@
       "desde": "09-09-2026"
      },
      {
-      "o": "1-3NR3IA25",
-      "cat": "Alta 2 Play",
-      "f": "10-13",
-      "hi": "10:00",
-      "d": "LOS AROMOS 770 CASA 3, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "ELIAS ARMIJO L",
-      "desde": "09-09-2026"
-     },
-     {
       "o": "1-3NSASZJM",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -3739,6 +3740,16 @@
       "e": "Pendiente",
       "tec": "GEEYSER PEREZ O",
       "desde": "11-09-2026"
+     },
+     {
+      "o": "1-3NR3IA25",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "13:35",
+      "d": "LOS AROMOS 770 CASA 3, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JUAN ARRIAGADA C",
+      "desde": "09-09-2026"
      },
      {
       "o": "1-3NOZ17DA",
@@ -3774,7 +3785,7 @@
       "o": "1-3NRSKVBB",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:44",
+      "hi": "14:45",
       "d": "OVALLE 1232, QUILPUE",
       "e": "Pendiente",
       "tec": "NICOLAS MOYANO R",
@@ -3784,7 +3795,7 @@
       "o": "1-3NSM0OXP",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "17:39",
+      "hi": "16:40",
       "d": "YUNGAY 913, QUILPUE",
       "e": "Pendiente",
       "tec": "NICOLAS MOYANO R",
@@ -3794,5 +3805,5 @@
    }
   }
  },
- "generado": "12-09-2026 10:03"
+ "generado": "12-09-2026 10:23"
 }
