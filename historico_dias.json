@@ -12390,24 +12390,24 @@
    }
   },
   "28-09-2026": {
-   "hasta": "13:27",
-   "actividades": 134,
+   "hasta": "13:42",
+   "actividades": 136,
    "tecnicos": 36,
    "estados": {
-    "No Realizada": 18,
-    "Completado": 39,
-    "Iniciado": 19,
-    "Pendiente": 46,
+    "No Realizada": 19,
+    "Completado": 43,
+    "Iniciado": 17,
+    "Pendiente": 40,
     "Suspendido": 6,
-    "Cancelado": 4,
-    "en ruta": 2
+    "en ruta": 7,
+    "Cancelado": 4
    },
-   "rgu": 182.7,
+   "rgu": 185.7,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
-   "nuevas": 26,
-   "al_bucket": 2,
+   "nuevas": 27,
+   "al_bucket": 3,
    "repetidas": 27,
    "reagendadas": 4,
    "detalle": {
@@ -12432,6 +12432,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3O3FX7U1",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "14:29",
+      "d": "PUERTO DEL SUR 2555, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3O3BU9ID",
       "tec": "JOSE SALAS MEDINA",
@@ -12729,18 +12738,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3O3FEVKE",
-      "cat": "Alta 2 Play",
-      "f": "13-16",
-      "hi": "16:39",
-      "d": "EL MIRADOR 738 CASA 23, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "EDGAR VALERO C",
-      "visitas": 2,
-      "ult_fecha": "28-09-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3O0X0NU5",
       "cat": "Migración 3 Play",
       "f": "10-13",
@@ -12777,6 +12774,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3O2EJ1UN",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "12:01",
+      "d": "EL MIRADOR 738 CASA 23, VILLA ALEMANA",
+      "e": "No Realizada",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "visitas": 1,
+      "ult_fecha": "26-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3O2MNFRY",
       "cat": "Modificación de Servicio",
       "f": "16-19",
@@ -12804,7 +12813,7 @@
       "o": "1-3O39E93G",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:42",
+      "hi": "15:07",
       "d": "AVENIDA VALPARAISO 1646 CASA 3, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE CASTRO P",
@@ -12854,7 +12863,7 @@
       "f": "10-13",
       "hi": "11:20",
       "d": "PJE.LA BOIRA 1445, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "KEVIN TAPIA RETAMAL",
       "visitas": 1,
       "ult_fecha": "26-09-2026",
@@ -12924,9 +12933,9 @@
       "o": "1-3O2GWP1S",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:54",
+      "hi": "13:41",
       "d": "CONDELL 19, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "MATIAS APELEO APELEO",
       "visitas": 1,
       "ult_fecha": "26-09-2026",
@@ -12948,7 +12957,7 @@
       "o": "1-3O2F0GK8",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "13:05",
+      "hi": "13:46",
       "d": "LAGO LAS TORRES 29 DEPTO 1203, QUILPUE",
       "e": "en ruta",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -12960,7 +12969,7 @@
       "o": "1-3O2LN631",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:07",
+      "hi": "14:52",
       "d": "LOS ARRAYANES 9998, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -12984,7 +12993,7 @@
       "o": "1-3O2WLQ6Z",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:59",
       "d": "CANAL KING 569, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SEBASTIAN DOSSOW A",
@@ -13028,7 +13037,7 @@
       "o": "1-3O2F0GK8",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "13:05",
+      "hi": "13:46",
       "d": "LAGO LAS TORRES 29 DEPTO 1203, QUILPUE",
       "e": "en ruta",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -13038,5 +13047,5 @@
    }
   }
  },
- "generado": "28-09-2026 13:27"
+ "generado": "28-09-2026 13:42"
 }
