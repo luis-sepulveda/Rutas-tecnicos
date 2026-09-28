@@ -5282,6 +5282,9 @@ const URL_EQUIPO = URL_HISTORIAL + '#equipo';
 /* Tiempos en terreno (26-09-2026): el boton nuevo del historial, que arma
    generar_dashboard.py. Abre directo con su marca, igual que los dos de arriba. */
 const URL_TIEMPOS = URL_HISTORIAL + '#tiempos';
+/* Negocios (28-09-2026): boton Negocios del historial (cantidades, tiempos,
+   por tipo de negocio y por direccion). Abre directo con su marca. */
+const URL_NEGOCIOS = URL_HISTORIAL + '#negocios';
 /* Tabla completa del historial, directo (26-09-2026): boton Historial */
 const URL_TABLA_HIST = URL_HISTORIAL + '#tabla';
 
@@ -6188,6 +6191,10 @@ function pintarPortada(){
        estuvo un rato en "Reportes"). Abre el boton Tiempos en terreno del
        historial en otra pestana, como Historial y Seguimiento. */
     +     '<a class="b-inf b-tie" href="' + URL_TIEMPOS + '" target="_blank">Tiempos</a>'
+    /* Negocios (28-09-2026, pedido de Luis): entre Tiempos e Historial, mismo
+       estilo que Tiempos. Abre el boton Negocios del historial en otra
+       pestana, con "Volver al panel". Clase b-neg por si se quiere colorear. */
+    +     '<a class="b-inf b-neg" href="' + URL_NEGOCIOS + '" target="_blank">Negocios</a>'
     /* Historial (26-09-2026, pedido de Luis): se movio a la derecha de Tiempos
        y abre DIRECTO la tabla completa del historial (#tabla), sin pasar por
        la pantalla de consulta. */
