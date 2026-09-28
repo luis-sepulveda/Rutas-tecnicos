@@ -12390,25 +12390,25 @@
    }
   },
   "28-09-2026": {
-   "hasta": "15:48",
+   "hasta": "15:58",
    "actividades": 144,
    "tecnicos": 36,
    "estados": {
     "No Realizada": 23,
-    "Completado": 65,
-    "en ruta": 7,
-    "Pendiente": 19,
-    "Iniciado": 17,
+    "Completado": 67,
+    "en ruta": 8,
+    "Iniciado": 21,
+    "Pendiente": 12,
     "Suspendido": 8,
     "Cancelado": 5
    },
-   "rgu": 195.3,
+   "rgu": 194.3,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
-   "nuevas": 30,
+   "nuevas": 31,
    "al_bucket": 3,
-   "repetidas": 27,
+   "repetidas": 26,
    "reagendadas": 4,
    "detalle": {
     "caidas": [
@@ -12432,6 +12432,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3O3KK6LL",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "16:12",
+      "d": "AVENIDA VALPARAISO 2018, VILLA ALEMANA",
+      "e": "en ruta"
+     },
      {
       "o": "1-3O3K8KK0",
       "tec": "MARCO PEREZ G",
@@ -12529,7 +12538,7 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "AVENIDA VALPARAISO 1646 CASA 3, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O3BI5JV",
@@ -12744,9 +12753,9 @@
       "o": "1-3O2LF6GW",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:04",
       "d": "PJE 610 865, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "CESAR MENA OLIVEROS",
       "visitas": 4,
       "ult_fecha": "26-09-2026",
@@ -12852,9 +12861,9 @@
       "o": "1-3O39E93G",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:40",
+      "hi": "15:51",
       "d": "AVENIDA VALPARAISO 1646 CASA 3, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JOSE CASTRO P",
       "visitas": 2,
       "ult_fecha": "28-09-2026",
@@ -12981,18 +12990,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3O2WUUZ9",
-      "cat": "Migración 2 Play",
-      "f": "16-19",
-      "hi": "16:17",
-      "d": "BELLAVISTA 1138, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "NICOLAS MOYANO R",
-      "visitas": 1,
-      "ult_fecha": "11-09-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3O2F0GK8",
       "cat": "Reparación",
       "f": "10-13",
@@ -13074,5 +13071,5 @@
    }
   }
  },
- "generado": "28-09-2026 15:48"
+ "generado": "28-09-2026 15:58"
 }
