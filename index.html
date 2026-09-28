@@ -5285,6 +5285,10 @@ const URL_TIEMPOS = URL_HISTORIAL + '#tiempos';
 /* Negocios (28-09-2026): boton Negocios del historial (cantidades, tiempos,
    por tipo de negocio y por direccion). Abre directo con su marca. */
 const URL_NEGOCIOS = URL_HISTORIAL + '#negocios';
+/* Metas (28-09-2026): dashboard de cumplimiento de metas por tecnico
+   (produccion, calidad reactiva, asistencia). Proyecto aparte: carpeta
+   metas-tecnicos, repo metas-tecnicos. */
+const URL_METAS = 'https://luis-sepulveda.github.io/metas-tecnicos/';
 /* Tabla completa del historial, directo (26-09-2026): boton Historial */
 const URL_TABLA_HIST = URL_HISTORIAL + '#tabla';
 
@@ -6195,6 +6199,9 @@ function pintarPortada(){
        estilo que Tiempos. Abre el boton Negocios del historial en otra
        pestana, con "Volver al panel". Clase b-neg por si se quiere colorear. */
     +     '<a class="b-inf b-neg" href="' + URL_NEGOCIOS + '" target="_blank">Negocios</a>'
+    /* Metas (28-09-2026, pedido de Luis): despues de Negocios, antes de
+       Historial. Abre el dashboard de metas en otra pestana. Clase b-met. */
+    +     '<a class="b-inf b-met" href="' + URL_METAS + '" target="_blank">Metas</a>'
     /* Historial (26-09-2026, pedido de Luis): se movio a la derecha de Tiempos
        y abre DIRECTO la tabla completa del historial (#tabla), sin pasar por
        la pantalla de consulta. */
