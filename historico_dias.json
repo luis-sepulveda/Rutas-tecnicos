@@ -12390,25 +12390,25 @@
    }
   },
   "28-09-2026": {
-   "hasta": "11:06",
-   "actividades": 112,
+   "hasta": "11:16",
+   "actividades": 116,
    "tecnicos": 36,
    "estados": {
-    "No Realizada": 11,
-    "Pendiente": 55,
-    "Iniciado": 25,
-    "Completado": 14,
+    "No Realizada": 12,
+    "Pendiente": 59,
+    "Iniciado": 21,
+    "Completado": 16,
+    "Suspendido": 2,
     "en ruta": 4,
-    "Suspendido": 1,
     "Cancelado": 2
    },
-   "rgu": 149.5,
+   "rgu": 156.0,
    "caidas_total": 1,
    "caidas_activas": 1,
    "caidas_resueltas": 0,
-   "nuevas": 15,
+   "nuevas": 18,
    "al_bucket": 2,
-   "repetidas": 25,
+   "repetidas": 26,
    "reagendadas": 4,
    "detalle": {
     "caidas": [
@@ -12423,6 +12423,33 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3O3B781I",
+      "tec": "LUIS MARTIN NUÑEZ",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "LO MOSCOSO 1127, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3O3BADIA",
+      "tec": "LUIS GATICA DAVILA",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "PJE GRANIZO 1449, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3O3AZR0N",
+      "tec": "JOSE GALAZ D",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "CENTENARIO 859 DEPTO 31, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3O3AEEW7",
       "tec": "JEAN ROODLY ORELIEN",
@@ -12547,7 +12574,7 @@
       "f": "10-13",
       "hi": "10:00",
       "d": "PORVENIR 1893, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3O24IUMS",
@@ -12681,6 +12708,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3O3AZR0N",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "15:21",
+      "d": "CENTENARIO 859 DEPTO 31, QUILPUE",
+      "e": "Pendiente",
+      "tec": "JOSE GALAZ D",
+      "visitas": 3,
+      "ult_fecha": "21-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3O2L6W4D",
       "cat": "Alta 2 Play",
       "f": "10-13",
@@ -12758,7 +12797,7 @@
       "f": "10-13",
       "hi": "09:45",
       "d": "PORVENIR 1893, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "LUIS GATICA DAVILA",
       "visitas": 1,
       "ult_fecha": "26-09-2026",
@@ -12906,5 +12945,5 @@
    }
   }
  },
- "generado": "28-09-2026 11:06"
+ "generado": "28-09-2026 11:16"
 }
