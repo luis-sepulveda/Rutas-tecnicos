@@ -12390,29 +12390,66 @@
    }
   },
   "28-09-2026": {
-   "hasta": "10:36",
-   "actividades": 104,
+   "hasta": "11:01",
+   "actividades": 110,
    "tecnicos": 36,
    "estados": {
-    "No Realizada": 6,
-    "Iniciado": 30,
-    "Pendiente": 57,
+    "No Realizada": 10,
+    "Pendiente": 54,
+    "Iniciado": 29,
+    "Completado": 11,
     "en ruta": 3,
-    "Completado": 5,
     "Suspendido": 1,
     "Cancelado": 2
    },
-   "rgu": 142.0,
-   "caidas_total": 0,
-   "caidas_activas": 0,
+   "rgu": 147.5,
+   "caidas_total": 1,
+   "caidas_activas": 1,
    "caidas_resueltas": 0,
-   "nuevas": 12,
+   "nuevas": 15,
    "al_bucket": 2,
-   "repetidas": 26,
+   "repetidas": 25,
    "reagendadas": 4,
    "detalle": {
-    "caidas": [],
+    "caidas": [
+     {
+      "o": "1-3NJ3JKMO",
+      "tec": "LUIS CASTRO TORRES",
+      "cat": "Migración 2 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "MANUEL BULNES 1140, QUILPUE",
+      "e": "Pendiente"
+     }
+    ],
     "nuevas": [
+     {
+      "o": "1-3O3AEEW7",
+      "tec": "JEAN ROODLY ORELIEN",
+      "cat": "Migración 2 Play",
+      "f": "13-16",
+      "hi": "15:14",
+      "d": "IGNACIO CARRERA PINTO 034, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3O39I7SZ",
+      "tec": "YENDER BOSCAN CADENAS",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "PERU (NODO 92) 272 DEPTO 32, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3O2J4J9D",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "14:20",
+      "d": "9 DE JUNIO 1834, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3O39UX60",
       "tec": "JUAN ARRIAGADA C",
@@ -12438,7 +12475,7 @@
       "f": "10-13",
       "hi": "10:34",
       "d": "ALDO FRANCIA 2425, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O2O21E0",
@@ -12456,7 +12493,7 @@
       "f": "10-13",
       "hi": "11:53",
       "d": "CAMINO VIEJO 2029 CASA 43, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3O38NW6I",
@@ -12474,7 +12511,7 @@
       "f": "10-13",
       "hi": "11:24",
       "d": "AV LOS CARRERA 496, QUILPUE",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O38KSRZ",
@@ -12492,7 +12529,7 @@
       "f": "10-13",
       "hi": "10:59",
       "d": "LOS DANIELES 1220 DEPTO 102, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O388H0C",
@@ -12519,7 +12556,7 @@
       "f": "10-13",
       "hi": "10:00",
       "d": "MADRID 353 CASA 2, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      }
     ],
     "repetidas": [
@@ -12635,9 +12672,9 @@
       "o": "1-3O2LTQ17",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "11:24",
+      "hi": "10:50",
       "d": "LIBERTAD 150, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "JOSE GALAZ D",
       "visitas": 1,
       "ult_fecha": "16-09-2026",
@@ -12659,24 +12696,12 @@
       "o": "1-3O2LMNHQ",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "11:15",
+      "hi": "11:21",
       "d": "PJE.LA BOIRA 1445, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOSE SALAS MEDINA",
-      "visitas": 1,
-      "ult_fecha": "26-09-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3O1Q3UVA",
-      "cat": "Reparación",
-      "f": "10-13",
-      "hi": "10:48",
-      "d": "RAFAEL SOTOMAYOR 0842, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "KEVIN TAPIA RETAMAL",
       "visitas": 1,
-      "ult_fecha": "25-09-2026",
+      "ult_fecha": "26-09-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -12709,23 +12734,23 @@
       "f": "10-13",
       "hi": "09:46",
       "d": "MANUEL PLAZA 1373 CASA 5, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "LUIS CASTRO TORRES",
       "visitas": 2,
       "ult_fecha": "07-09-2026",
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3NJ3JKMO",
-      "cat": "Migración 2 Play",
-      "f": "13-16",
-      "hi": "14:00",
-      "d": "MANUEL BULNES 1140, QUILPUE",
-      "e": "Pendiente",
+      "o": "1-3O1Q3UVA",
+      "cat": "Reparación",
+      "f": "10-13",
+      "hi": "11:00",
+      "d": "RAFAEL SOTOMAYOR 0842, QUILPUE",
+      "e": "Iniciado",
       "tec": "LUIS CASTRO TORRES",
       "visitas": 1,
-      "ult_fecha": "05-08-2026",
-      "ult_cierre": "Cliente reagenda"
+      "ult_fecha": "25-09-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3O2DU9R6",
@@ -12779,7 +12804,7 @@
       "o": "1-3O2F0GK8",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "12:10",
+      "hi": "12:00",
       "d": "LAGO LAS TORRES 29 DEPTO 1203, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -12817,7 +12842,7 @@
       "f": "10-13",
       "hi": "09:54",
       "d": "PJE I (ALEJANDRO PERALTA) 2375 EDIF. M DEPTO 303, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "SEBASTIAN DOSSOW A",
       "visitas": 1,
       "ult_fecha": "25-09-2026",
@@ -12827,9 +12852,9 @@
       "o": "1-3O2EJ1UN",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "11:07",
+      "hi": "11:16",
       "d": "EL MIRADOR 738 CASA 23, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "SEBASTIAN DOSSOW A",
       "visitas": 1,
       "ult_fecha": "26-09-2026",
@@ -12871,7 +12896,7 @@
       "o": "1-3O2F0GK8",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "12:10",
+      "hi": "12:00",
       "d": "LAGO LAS TORRES 29 DEPTO 1203, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -12881,5 +12906,5 @@
    }
   }
  },
- "generado": "28-09-2026 10:36"
+ "generado": "28-09-2026 11:01"
 }
