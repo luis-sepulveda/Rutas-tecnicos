@@ -12390,25 +12390,25 @@
    }
   },
   "28-09-2026": {
-   "hasta": "12:01",
-   "actividades": 74,
+   "hasta": "12:16",
+   "actividades": 123,
    "tecnicos": 36,
    "estados": {
-    "No Realizada": 13,
+    "No Realizada": 14,
     "Iniciado": 17,
-    "Completado": 26,
-    "en ruta": 3,
+    "Pendiente": 57,
+    "Completado": 28,
+    "en ruta": 2,
     "Suspendido": 2,
-    "Pendiente": 10,
     "Cancelado": 3
    },
-   "rgu": 100.6,
-   "caidas_total": 1,
-   "caidas_activas": 1,
+   "rgu": 162.7,
+   "caidas_total": 2,
+   "caidas_activas": 2,
    "caidas_resueltas": 0,
    "nuevas": 22,
    "al_bucket": 2,
-   "repetidas": 16,
+   "repetidas": 26,
    "reagendadas": 4,
    "detalle": {
     "caidas": [
@@ -12419,6 +12419,15 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "MANUEL BULNES 1140, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3O3C3DHB",
+      "tec": "LUIS GATICA DAVILA",
+      "cat": "Migración 2 Play",
+      "f": "10-13",
+      "hi": "12:05",
+      "d": "MADRID 1050 CASA 14, VILLA ALEMANA",
       "e": "Pendiente"
      }
     ],
@@ -12443,12 +12452,12 @@
      },
      {
       "o": "1-3O39E93G",
-      "tec": "JOSE SALAS MEDINA",
+      "tec": "JOSE CASTRO P",
       "cat": "Alta 1 Play",
       "f": "13-16",
       "hi": "14:00",
       "d": "AVENIDA VALPARAISO 1646 CASA 3, VILLA ALEMANA",
-      "e": "Pendiente (ya no está)"
+      "e": "Pendiente"
      },
      {
       "o": "1-3O3BI5JV",
@@ -12466,16 +12475,16 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "LO MOSCOSO 1127, QUILPUE",
-      "e": "Pendiente (ya no está)"
+      "e": "Pendiente"
      },
      {
       "o": "1-3O3BADIA",
-      "tec": "LUIS GATICA DAVILA",
+      "tec": "SAMUEL FERNANDEZ VIDAL",
       "cat": "Alta 2 Play",
       "f": "16-19",
       "hi": "16:00",
       "d": "PJE GRANIZO 1449, VILLA ALEMANA",
-      "e": "Pendiente (ya no está)"
+      "e": "Pendiente"
      },
      {
       "o": "1-3O3AZR0N",
@@ -12484,7 +12493,7 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "CENTENARIO 859 DEPTO 31, QUILPUE",
-      "e": "Pendiente (ya no está)"
+      "e": "Pendiente"
      },
      {
       "o": "1-3O3AEEW7",
@@ -12493,25 +12502,25 @@
       "f": "13-16",
       "hi": "15:14",
       "d": "IGNACIO CARRERA PINTO 034, VILLA ALEMANA",
-      "e": "Pendiente (ya no está)"
+      "e": "Pendiente"
      },
      {
       "o": "1-3O39I7SZ",
-      "tec": "YENDER BOSCAN CADENAS",
+      "tec": "CRISTOBAL MIRANDA VALENC",
       "cat": "Reparación",
       "f": "13-16",
       "hi": "14:00",
       "d": "PERU (NODO 92) 272 DEPTO 32, QUILPUE",
-      "e": "Pendiente (ya no está)"
+      "e": "Pendiente"
      },
      {
       "o": "1-3O2J4J9D",
-      "tec": "ANTONHY MORALES MENDOZA",
+      "tec": "GEEYSER PEREZ O",
       "cat": "Reparación",
       "f": "13-16",
       "hi": "14:20",
       "d": "9 DE JUNIO 1834, QUILPUE",
-      "e": "Pendiente (ya no está)"
+      "e": "en ruta"
      },
      {
       "o": "1-3O39UX60",
@@ -12524,12 +12533,12 @@
      },
      {
       "o": "1-3O39AX80",
-      "tec": "HERNAN CORTES HERRERA",
+      "tec": "ALEXIS JARA",
       "cat": "Alta 1 Play",
       "f": "16-19",
       "hi": "16:00",
       "d": "DAVID CORTES 1377, QUILPUE",
-      "e": "Pendiente (ya no está)"
+      "e": "Pendiente"
      },
      {
       "o": "1-3O3973QI",
@@ -12547,7 +12556,7 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "HOJAS SECAS 357, QUILPUE",
-      "e": "Pendiente (ya no está)"
+      "e": "Pendiente"
      },
      {
       "o": "1-3O2L538U",
@@ -12560,12 +12569,12 @@
      },
      {
       "o": "1-3O38NW6I",
-      "tec": "CRISTOBAL SILVA LEIVA",
+      "tec": "LUIS MARTIN NUÑEZ",
       "cat": "Modificación de Servicio",
       "f": "16-19",
       "hi": "16:00",
       "d": "OVALLE 1296, QUILPUE",
-      "e": "Pendiente (ya no está)"
+      "e": "Pendiente"
      },
      {
       "o": "1-3O2ZM8GV",
@@ -12636,6 +12645,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3O2JY0CY",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "DARWIN 0786, QUILPUE",
+      "e": "Pendiente",
+      "tec": "ALEXIS JARA",
+      "visitas": 1,
+      "ult_fecha": "26-09-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3O1YO3SO",
       "cat": "Alta 2 Play",
       "f": "10-13",
@@ -12645,6 +12666,18 @@
       "tec": "CESAR MENA OLIVEROS",
       "visitas": 2,
       "ult_fecha": "25-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3O2LF6GW",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "PJE 610 865, QUILPUE",
+      "e": "Pendiente",
+      "tec": "CESAR MENA OLIVEROS",
+      "visitas": 4,
+      "ult_fecha": "26-09-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -12672,16 +12705,52 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3O22IL19",
+      "cat": "Migración 1 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "BILBAO 1544 DEPTO 42, QUILPUE",
+      "e": "Pendiente",
+      "tec": "GEEYSER PEREZ O",
+      "visitas": 1,
+      "ult_fecha": "23-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3O2O21E0",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "HOJAS SECAS 357, QUILPUE",
+      "e": "Pendiente",
+      "tec": "HERNAN CORTES HERRERA",
+      "visitas": 1,
+      "ult_fecha": "26-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3O2EJ1UN",
       "cat": "Alta 1 Play",
       "f": "10-13",
       "hi": "12:01",
       "d": "EL MIRADOR 738 CASA 23, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JOEL GUSTAVE GUSTA",
       "visitas": 1,
       "ult_fecha": "26-09-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3O2MNFRY",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "CERRO ALMUD 3077, QUILPUE",
+      "e": "Pendiente",
+      "tec": "JORDAN ROA PEREZ",
+      "visitas": 1,
+      "ult_fecha": "26-09-2026",
+      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3O2F1C96",
@@ -12696,6 +12765,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3O39E93G",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "14:32",
+      "d": "AVENIDA VALPARAISO 1646 CASA 3, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOSE CASTRO P",
+      "visitas": 2,
+      "ult_fecha": "28-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3O2LTQ17",
       "cat": "Migración 1 Play",
       "f": "10-13",
@@ -12705,6 +12786,18 @@
       "tec": "JOSE GALAZ D",
       "visitas": 1,
       "ult_fecha": "16-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3O3AZR0N",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "CENTENARIO 859 DEPTO 31, QUILPUE",
+      "e": "Pendiente",
+      "tec": "JOSE GALAZ D",
+      "visitas": 3,
+      "ult_fecha": "21-09-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -12737,7 +12830,7 @@
       "f": "10-13",
       "hi": "09:45",
       "d": "PJE 14 875 DEPTO 12, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "LEONEL HERNÁNDEZ OJE",
       "visitas": 1,
       "ult_fecha": "15-09-2026",
@@ -12761,7 +12854,7 @@
       "f": "10-13",
       "hi": "11:00",
       "d": "RAFAEL SOTOMAYOR 0842, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "LUIS CASTRO TORRES",
       "visitas": 1,
       "ult_fecha": "25-09-2026",
@@ -12780,28 +12873,52 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3O2N5BF9",
+      "o": "1-3O38NW6I",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "OVALLE 1296, QUILPUE",
+      "e": "Pendiente",
+      "tec": "LUIS MARTIN NUÑEZ",
+      "visitas": 3,
+      "ult_fecha": "27-08-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3O2GWP1S",
       "cat": "Alta 1 Play",
-      "f": "10-13",
-      "hi": "09:53",
-      "d": "AVENIDA VALPARAISO 1646 CASA 3, VILLA ALEMANA",
-      "e": "No Realizada",
-      "tec": "MATÍAS JAQUE AG",
+      "f": "13-16",
+      "hi": "14:17",
+      "d": "CONDELL 19, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "MATIAS APELEO APELEO",
       "visitas": 1,
       "ult_fecha": "26-09-2026",
-      "ult_cierre": "Cliente reagenda"
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3O2F0GK8",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "12:13",
+      "hi": "12:26",
       "d": "LAGO LAS TORRES 29 DEPTO 1203, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNANDEZ",
       "visitas": 2,
       "ult_fecha": "21-09-2026",
       "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3O2LN631",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "15:25",
+      "d": "LOS ARRAYANES 9998, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "RAFAEL VARGAS B",
+      "visitas": 2,
+      "ult_fecha": "26-09-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3O228J1E",
@@ -12814,6 +12931,18 @@
       "visitas": 1,
       "ult_fecha": "25-09-2026",
       "ult_cierre": "Falta de dotación"
+     },
+     {
+      "o": "1-3O2WLQ6Z",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "CANAL KING 569, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "SEBASTIAN DOSSOW A",
+      "visitas": 1,
+      "ult_fecha": "08-08-2026",
+      "ult_cierre": "Orden mal generada"
      }
     ],
     "reagendadas": [
@@ -12851,7 +12980,7 @@
       "o": "1-3O2F0GK8",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "12:13",
+      "hi": "12:26",
       "d": "LAGO LAS TORRES 29 DEPTO 1203, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -12861,5 +12990,5 @@
    }
   }
  },
- "generado": "28-09-2026 12:01"
+ "generado": "28-09-2026 12:16"
 }
