@@ -12390,19 +12390,19 @@
    }
   },
   "28-09-2026": {
-   "hasta": "15:12",
-   "actividades": 141,
+   "hasta": "15:27",
+   "actividades": 142,
    "tecnicos": 36,
    "estados": {
     "No Realizada": 22,
-    "Completado": 59,
-    "en ruta": 7,
-    "Pendiente": 23,
-    "Iniciado": 18,
-    "Suspendido": 7,
+    "Completado": 61,
+    "en ruta": 12,
+    "Pendiente": 19,
+    "Iniciado": 15,
+    "Suspendido": 8,
     "Cancelado": 5
    },
-   "rgu": 191.3,
+   "rgu": 193.3,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
@@ -12466,7 +12466,7 @@
       "f": "13-16",
       "hi": "15:44",
       "d": "LOS ALMENDROS 2915 EDIF. D DEPTO 24, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3O3E9A3B",
@@ -12511,7 +12511,7 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "AVENIDA VALPARAISO 1646 CASA 3, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3O3BI5JV",
@@ -12533,7 +12533,7 @@
      },
      {
       "o": "1-3O3BADIA",
-      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "tec": "MATIAS APELEO APELEO",
       "cat": "Alta 2 Play",
       "f": "16-19",
       "hi": "16:00",
@@ -12623,7 +12623,7 @@
      },
      {
       "o": "1-3O38NW6I",
-      "tec": "LUIS MARTIN NUÑEZ",
+      "tec": "JORDAN ROA PEREZ",
       "cat": "Modificación de Servicio",
       "f": "16-19",
       "hi": "16:00",
@@ -12735,6 +12735,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3O2MNFRY",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "16:06",
+      "d": "CERRO ALMUD 3077, QUILPUE",
+      "e": "Pendiente",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "visitas": 1,
+      "ult_fecha": "26-09-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3O2N29YL",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -12795,16 +12807,16 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3O2MNFRY",
+      "o": "1-3O38NW6I",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "16:25",
-      "d": "CERRO ALMUD 3077, QUILPUE",
+      "hi": "16:17",
+      "d": "OVALLE 1296, QUILPUE",
       "e": "Pendiente",
       "tec": "JORDAN ROA PEREZ",
-      "visitas": 1,
-      "ult_fecha": "26-09-2026",
-      "ult_cierre": "Cliente reagenda"
+      "visitas": 3,
+      "ult_fecha": "27-08-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3O2F1C96",
@@ -12824,7 +12836,7 @@
       "f": "13-16",
       "hi": "15:40",
       "d": "AVENIDA VALPARAISO 1646 CASA 3, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JOSE CASTRO P",
       "visitas": 2,
       "ult_fecha": "28-09-2026",
@@ -12865,6 +12877,18 @@
       "visitas": 1,
       "ult_fecha": "26-09-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3O2WLQ6Z",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "15:36",
+      "d": "CANAL KING 569, VILLA ALEMANA",
+      "e": "en ruta",
+      "tec": "JOSE ROJO A",
+      "visitas": 1,
+      "ult_fecha": "08-08-2026",
+      "ult_cierre": "Orden mal generada"
      },
      {
       "o": "1-3O2LMNHQ",
@@ -12927,18 +12951,6 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3O38NW6I",
-      "cat": "Modificación de Servicio",
-      "f": "16-19",
-      "hi": "16:10",
-      "d": "OVALLE 1296, QUILPUE",
-      "e": "Pendiente",
-      "tec": "LUIS MARTIN NUÑEZ",
-      "visitas": 3,
-      "ult_fecha": "27-08-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3O2GWP1S",
       "cat": "Alta 1 Play",
       "f": "13-16",
@@ -12997,18 +13009,6 @@
       "visitas": 1,
       "ult_fecha": "25-09-2026",
       "ult_cierre": "Falta de dotación"
-     },
-     {
-      "o": "1-3O2WLQ6Z",
-      "cat": "Reparación",
-      "f": "16-19",
-      "hi": "17:08",
-      "d": "CANAL KING 569, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "SEBASTIAN DOSSOW A",
-      "visitas": 1,
-      "ult_fecha": "08-08-2026",
-      "ult_cierre": "Orden mal generada"
      }
     ],
     "reagendadas": [
@@ -13056,5 +13056,5 @@
    }
   }
  },
- "generado": "28-09-2026 15:12"
+ "generado": "28-09-2026 15:27"
 }
