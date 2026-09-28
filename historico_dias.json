@@ -12390,23 +12390,23 @@
    }
   },
   "28-09-2026": {
-   "hasta": "16:18",
-   "actividades": 147,
+   "hasta": "16:33",
+   "actividades": 149,
    "tecnicos": 36,
    "estados": {
-    "No Realizada": 24,
-    "Completado": 70,
-    "Iniciado": 28,
-    "Suspendido": 8,
+    "No Realizada": 29,
+    "Completado": 73,
+    "Iniciado": 25,
     "en ruta": 5,
-    "Cancelado": 5,
-    "Pendiente": 7
+    "Suspendido": 9,
+    "Pendiente": 3,
+    "Cancelado": 5
    },
-   "rgu": 197.3,
+   "rgu": 199.3,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
-   "nuevas": 32,
+   "nuevas": 33,
    "al_bucket": 3,
    "repetidas": 26,
    "reagendadas": 4,
@@ -12433,13 +12433,22 @@
     ],
     "nuevas": [
      {
+      "o": "1-3O3LSVB2",
+      "tec": "JOSE GALAZ D",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "16:47",
+      "d": "VOLCAN LASTARRIA 2623, QUILPUE",
+      "e": "en ruta"
+     },
+     {
       "o": "1-3O3L7DZD",
       "tec": "JOSE SALAS MEDINA",
       "cat": "Reparación",
       "f": "16-19",
       "hi": "16:59",
       "d": "VINA DEL MAR 43, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O3KK6LL",
@@ -12466,7 +12475,7 @@
       "f": "16-19",
       "hi": "16:47",
       "d": "NICANOR MOLINARES 1327, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O3H1Z1Y",
@@ -12547,7 +12556,7 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "AVENIDA VALPARAISO 1646 CASA 3, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "No Realizada"
      },
      {
       "o": "1-3O3BI5JV",
@@ -12574,7 +12583,7 @@
       "f": "16-19",
       "hi": "16:00",
       "d": "PJE GRANIZO 1449, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "No Realizada"
      },
      {
       "o": "1-3O3AZR0N",
@@ -12664,7 +12673,7 @@
       "f": "16-19",
       "hi": "16:00",
       "d": "OVALLE 1296, QUILPUE",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O2ZM8GV",
@@ -12776,7 +12785,7 @@
       "f": "16-19",
       "hi": "16:17",
       "d": "CERRO ALMUD 3077, QUILPUE",
-      "e": "Iniciado",
+      "e": "Suspendido",
       "tec": "CRISTOBAL MIRANDA VALENC",
       "visitas": 1,
       "ult_fecha": "26-09-2026",
@@ -12846,9 +12855,9 @@
       "o": "1-3O38NW6I",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "16:17",
+      "hi": "16:32",
       "d": "OVALLE 1296, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "JORDAN ROA PEREZ",
       "visitas": 3,
       "ult_fecha": "27-08-2026",
@@ -12872,7 +12881,7 @@
       "f": "13-16",
       "hi": "15:51",
       "d": "AVENIDA VALPARAISO 1646 CASA 3, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JOSE CASTRO P",
       "visitas": 2,
       "ult_fecha": "28-09-2026",
@@ -13080,5 +13089,5 @@
    }
   }
  },
- "generado": "28-09-2026 16:18"
+ "generado": "28-09-2026 16:33"
 }
