@@ -12390,25 +12390,43 @@
    }
   },
   "28-09-2026": {
-   "hasta": "09:23",
-   "actividades": 85,
+   "hasta": "09:33",
+   "actividades": 88,
    "tecnicos": 37,
    "estados": {
-    "en ruta": 17,
-    "Pendiente": 66,
+    "en ruta": 25,
+    "Pendiente": 61,
     "Cancelado": 2
    },
-   "rgu": 119.0,
+   "rgu": 122.0,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 2,
+   "nuevas": 4,
    "al_bucket": 1,
-   "repetidas": 23,
+   "repetidas": 24,
    "reagendadas": 4,
    "detalle": {
     "caidas": [],
     "nuevas": [
+     {
+      "o": "1-3O383AIR",
+      "tec": "MARCELO GÓMEZ GÓME",
+      "cat": "Reparación",
+      "f": "10-13",
+      "hi": "10:59",
+      "d": "LOS DANIELES 1220 DEPTO 102, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3O388H0C",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "cat": "Reparación",
+      "f": "10-13",
+      "hi": "10:38",
+      "d": "LASTRA 770, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3O2DU9R6",
       "tec": "LUIS GATICA DAVILA",
@@ -12416,7 +12434,7 @@
       "f": "10-13",
       "hi": "10:00",
       "d": "PORVENIR 1893, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3O24IUMS",
@@ -12429,18 +12447,6 @@
      }
     ],
     "repetidas": [
-     {
-      "o": "1-3O2F0GK8",
-      "cat": "Reparación",
-      "f": "10-13",
-      "hi": "10:00",
-      "d": "LAGO LAS TORRES 29 DEPTO 1203, QUILPUE",
-      "e": "Pendiente",
-      "tec": "ALFREDO ALCAYAGA F",
-      "visitas": 2,
-      "ult_fecha": "21-09-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
      {
       "o": "1-3O1YO3SO",
       "cat": "Alta 2 Play",
@@ -12553,9 +12559,9 @@
       "o": "1-3O2L6W4D",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:35",
       "d": "HAYDN 1690 EDIF. E DEPTO 205, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JOSE ROJO A",
       "visitas": 1,
       "ult_fecha": "26-09-2026",
@@ -12577,7 +12583,7 @@
       "o": "1-3O1Q3UVA",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "11:03",
+      "hi": "10:45",
       "d": "RAFAEL SOTOMAYOR 0842, QUILPUE",
       "e": "Pendiente",
       "tec": "KEVIN TAPIA RETAMAL",
@@ -12625,9 +12631,9 @@
       "o": "1-3O2DU9R6",
       "cat": "Alta Traslado",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:37",
       "d": "PORVENIR 1893, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "LUIS GATICA DAVILA",
       "visitas": 1,
       "ult_fecha": "26-09-2026",
@@ -12661,12 +12667,24 @@
       "o": "1-3O2N5BF9",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:34",
       "d": "AVENIDA VALPARAISO 1646 CASA 3, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "MATÍAS JAQUE AG",
       "visitas": 1,
       "ult_fecha": "26-09-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3O2F0GK8",
+      "cat": "Reparación",
+      "f": "10-13",
+      "hi": "12:25",
+      "d": "LAGO LAS TORRES 29 DEPTO 1203, QUILPUE",
+      "e": "Pendiente",
+      "tec": "PABLO HERNANEZ FERNANDEZ",
+      "visitas": 2,
+      "ult_fecha": "21-09-2026",
       "ult_cierre": "Cliente reagenda"
      },
      {
@@ -12697,26 +12715,28 @@
       "o": "1-3O228J1E",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:35",
       "d": "PJE I (ALEJANDRO PERALTA) 2375 EDIF. M DEPTO 303, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "SEBASTIAN DOSSOW A",
       "visitas": 1,
       "ult_fecha": "25-09-2026",
       "ult_cierre": "Falta de dotación"
+     },
+     {
+      "o": "1-3O2EJ1UN",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "10:48",
+      "d": "EL MIRADOR 738 CASA 23, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "SEBASTIAN DOSSOW A",
+      "visitas": 1,
+      "ult_fecha": "26-09-2026",
+      "ult_cierre": "Sin moradores"
      }
     ],
     "reagendadas": [
-     {
-      "o": "1-3O2F0GK8",
-      "cat": "Reparación",
-      "f": "10-13",
-      "hi": "10:00",
-      "d": "LAGO LAS TORRES 29 DEPTO 1203, QUILPUE",
-      "e": "Pendiente",
-      "tec": "ALFREDO ALCAYAGA F",
-      "desde": "26-09-2026"
-     },
      {
       "o": "1-3O1YO3SO",
       "cat": "Alta 2 Play",
@@ -12746,10 +12766,20 @@
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNANDEZ",
       "desde": "26-09-2026"
+     },
+     {
+      "o": "1-3O2F0GK8",
+      "cat": "Reparación",
+      "f": "10-13",
+      "hi": "12:25",
+      "d": "LAGO LAS TORRES 29 DEPTO 1203, QUILPUE",
+      "e": "Pendiente",
+      "tec": "PABLO HERNANEZ FERNANDEZ",
+      "desde": "26-09-2026"
      }
     ]
    }
   }
  },
- "generado": "28-09-2026 09:23"
+ "generado": "28-09-2026 09:33"
 }
