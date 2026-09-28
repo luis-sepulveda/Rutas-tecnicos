@@ -12390,25 +12390,25 @@
    }
   },
   "28-09-2026": {
-   "hasta": "11:31",
-   "actividades": 118,
+   "hasta": "11:41",
+   "actividades": 120,
    "tecnicos": 36,
    "estados": {
     "No Realizada": 13,
-    "Pendiente": 58,
+    "Pendiente": 59,
     "Iniciado": 20,
-    "Completado": 20,
+    "Completado": 21,
     "Suspendido": 2,
     "en ruta": 2,
     "Cancelado": 3
    },
-   "rgu": 158.6,
+   "rgu": 160.6,
    "caidas_total": 1,
    "caidas_activas": 1,
    "caidas_resueltas": 0,
-   "nuevas": 19,
+   "nuevas": 21,
    "al_bucket": 2,
-   "repetidas": 26,
+   "repetidas": 27,
    "reagendadas": 4,
    "detalle": {
     "caidas": [
@@ -12423,6 +12423,24 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3O3C0ZD3",
+      "tec": "JORDAN ROA PEREZ",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "11:57",
+      "d": "PJE SANTA JULIA 131 CASA C, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3O39E93G",
+      "tec": "JOSE SALAS MEDINA",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "AVENIDA VALPARAISO 1646 CASA 3, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3O3BI5JV",
       "tec": "GEEYSER PEREZ O",
@@ -12681,6 +12699,30 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3O2EJ1UN",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "11:51",
+      "d": "EL MIRADOR 738 CASA 23, VILLA ALEMANA",
+      "e": "en ruta",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "visitas": 1,
+      "ult_fecha": "26-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3O3C0ZD3",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "11:57",
+      "d": "PJE SANTA JULIA 131 CASA C, QUILPUE",
+      "e": "Pendiente",
+      "tec": "JORDAN ROA PEREZ",
+      "visitas": 1,
+      "ult_fecha": "26-08-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3O2MNFRY",
       "cat": "Modificación de Servicio",
       "f": "16-19",
@@ -12738,6 +12780,18 @@
       "tec": "JOSE ROJO A",
       "visitas": 1,
       "ult_fecha": "26-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3O39E93G",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "AVENIDA VALPARAISO 1646 CASA 3, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOSE SALAS MEDINA",
+      "visitas": 2,
+      "ult_fecha": "28-09-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -12837,18 +12891,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3O2N5BF9",
-      "cat": "Alta 1 Play",
-      "f": "10-13",
-      "hi": "09:53",
-      "d": "AVENIDA VALPARAISO 1646 CASA 3, VILLA ALEMANA",
-      "e": "No Realizada",
-      "tec": "MATÍAS JAQUE AG",
-      "visitas": 1,
-      "ult_fecha": "26-09-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
       "o": "1-3O2F0GK8",
       "cat": "Reparación",
       "f": "10-13",
@@ -12895,18 +12937,6 @@
       "visitas": 1,
       "ult_fecha": "25-09-2026",
       "ult_cierre": "Falta de dotación"
-     },
-     {
-      "o": "1-3O2EJ1UN",
-      "cat": "Alta 1 Play",
-      "f": "10-13",
-      "hi": "11:27",
-      "d": "EL MIRADOR 738 CASA 23, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "SEBASTIAN DOSSOW A",
-      "visitas": 1,
-      "ult_fecha": "26-09-2026",
-      "ult_cierre": "Sin moradores"
      }
     ],
     "reagendadas": [
@@ -12954,5 +12984,5 @@
    }
   }
  },
- "generado": "28-09-2026 11:31"
+ "generado": "28-09-2026 11:41"
 }
