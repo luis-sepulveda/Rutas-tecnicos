@@ -12390,23 +12390,23 @@
    }
   },
   "28-09-2026": {
-   "hasta": "11:41",
-   "actividades": 120,
+   "hasta": "11:56",
+   "actividades": 121,
    "tecnicos": 36,
    "estados": {
     "No Realizada": 13,
-    "Pendiente": 59,
-    "Iniciado": 20,
-    "Completado": 21,
+    "Iniciado": 16,
+    "Pendiente": 58,
+    "Completado": 26,
     "Suspendido": 2,
-    "en ruta": 2,
+    "en ruta": 3,
     "Cancelado": 3
    },
-   "rgu": 160.6,
+   "rgu": 161.6,
    "caidas_total": 1,
    "caidas_activas": 1,
    "caidas_resueltas": 0,
-   "nuevas": 21,
+   "nuevas": 22,
    "al_bucket": 2,
    "repetidas": 27,
    "reagendadas": 4,
@@ -12424,13 +12424,22 @@
     ],
     "nuevas": [
      {
+      "o": "1-3O3C3DHB",
+      "tec": "LUIS GATICA DAVILA",
+      "cat": "Migración 2 Play",
+      "f": "10-13",
+      "hi": "12:05",
+      "d": "MADRID 1050 CASA 14, VILLA ALEMANA",
+      "e": "Pendiente (ya no está)"
+     },
+     {
       "o": "1-3O3C0ZD3",
-      "tec": "JORDAN ROA PEREZ",
+      "tec": "ALEXIS JARA",
       "cat": "Modificación de Servicio",
       "f": "10-13",
       "hi": "11:57",
       "d": "PJE SANTA JULIA 131 CASA C, QUILPUE",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O39E93G",
@@ -12448,7 +12457,7 @@
       "f": "13-16",
       "hi": "11:30",
       "d": "BARROS ARANA 1715 CASA 24, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3O3B781I",
@@ -12574,7 +12583,7 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "LAS PALMAS 2490, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3O383AIR",
@@ -12614,6 +12623,18 @@
      }
     ],
     "repetidas": [
+     {
+      "o": "1-3O3C0ZD3",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "11:44",
+      "d": "PJE SANTA JULIA 131 CASA C, QUILPUE",
+      "e": "Iniciado",
+      "tec": "ALEXIS JARA",
+      "visitas": 1,
+      "ult_fecha": "26-08-2026",
+      "ult_cierre": "Sin moradores"
+     },
      {
       "o": "1-3O1YO3SO",
       "cat": "Alta 2 Play",
@@ -12680,7 +12701,7 @@
       "f": "10-13",
       "hi": "09:41",
       "d": "LOS MOCHES 392, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "FELIPE SILVA R",
       "visitas": 1,
       "ult_fecha": "24-09-2026",
@@ -12702,24 +12723,12 @@
       "o": "1-3O2EJ1UN",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "11:51",
+      "hi": "12:06",
       "d": "EL MIRADOR 738 CASA 23, VILLA ALEMANA",
       "e": "en ruta",
       "tec": "JOEL GUSTAVE GUSTA",
       "visitas": 1,
       "ult_fecha": "26-09-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3O3C0ZD3",
-      "cat": "Modificación de Servicio",
-      "f": "10-13",
-      "hi": "11:57",
-      "d": "PJE SANTA JULIA 131 CASA C, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JORDAN ROA PEREZ",
-      "visitas": 1,
-      "ult_fecha": "26-08-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -12776,7 +12785,7 @@
       "f": "10-13",
       "hi": "10:10",
       "d": "HAYDN 1690 EDIF. E DEPTO 205, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JOSE ROJO A",
       "visitas": 1,
       "ult_fecha": "26-09-2026",
@@ -12882,7 +12891,7 @@
       "o": "1-3O2LN631",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "14:28",
       "d": "LOS ARRAYANES 9998, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -12894,7 +12903,7 @@
       "o": "1-3O2F0GK8",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "12:00",
+      "hi": "12:13",
       "d": "LAGO LAS TORRES 29 DEPTO 1203, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -12974,7 +12983,7 @@
       "o": "1-3O2F0GK8",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "12:00",
+      "hi": "12:13",
       "d": "LAGO LAS TORRES 29 DEPTO 1203, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -12984,5 +12993,5 @@
    }
   }
  },
- "generado": "28-09-2026 11:41"
+ "generado": "28-09-2026 11:56"
 }
