@@ -12390,23 +12390,23 @@
    }
   },
   "28-09-2026": {
-   "hasta": "11:26",
-   "actividades": 117,
+   "hasta": "11:31",
+   "actividades": 118,
    "tecnicos": 36,
    "estados": {
     "No Realizada": 13,
-    "Pendiente": 59,
-    "en ruta": 3,
-    "Completado": 18,
-    "Iniciado": 19,
+    "Pendiente": 58,
+    "Iniciado": 20,
+    "Completado": 20,
     "Suspendido": 2,
+    "en ruta": 2,
     "Cancelado": 3
    },
-   "rgu": 158.5,
+   "rgu": 158.6,
    "caidas_total": 1,
    "caidas_activas": 1,
    "caidas_resueltas": 0,
-   "nuevas": 18,
+   "nuevas": 19,
    "al_bucket": 2,
    "repetidas": 26,
    "reagendadas": 4,
@@ -12423,6 +12423,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3O3BI5JV",
+      "tec": "GEEYSER PEREZ O",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "11:30",
+      "d": "BARROS ARANA 1715 CASA 24, QUILPUE",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3O3B781I",
       "tec": "LUIS MARTIN NUÑEZ",
@@ -12547,7 +12556,7 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "LAS PALMAS 2490, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O383AIR",
@@ -12891,7 +12900,7 @@
       "o": "1-3O2EJ1UN",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "11:35",
+      "hi": "11:27",
       "d": "EL MIRADOR 738 CASA 23, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SEBASTIAN DOSSOW A",
@@ -12945,5 +12954,5 @@
    }
   }
  },
- "generado": "28-09-2026 11:26"
+ "generado": "28-09-2026 11:31"
 }
