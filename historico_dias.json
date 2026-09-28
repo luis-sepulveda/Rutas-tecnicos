@@ -12390,25 +12390,25 @@
    }
   },
   "28-09-2026": {
-   "hasta": "12:37",
-   "actividades": 125,
+   "hasta": "12:47",
+   "actividades": 131,
    "tecnicos": 36,
    "estados": {
     "No Realizada": 14,
     "Completado": 32,
-    "Pendiente": 51,
+    "Pendiente": 52,
+    "Iniciado": 19,
+    "Suspendido": 4,
     "en ruta": 7,
-    "Iniciado": 15,
-    "Suspendido": 3,
     "Cancelado": 3
    },
-   "rgu": 164.7,
+   "rgu": 177.7,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
-   "nuevas": 23,
+   "nuevas": 25,
    "al_bucket": 2,
-   "repetidas": 26,
+   "repetidas": 27,
    "reagendadas": 4,
    "detalle": {
     "caidas": [
@@ -12432,6 +12432,24 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3O3E5LNA",
+      "tec": "MARCO PEREZ G",
+      "cat": "Migración 1 Play",
+      "f": "13-16",
+      "hi": "15:44",
+      "d": "LOS ALMENDROS 2915 EDIF. D DEPTO 24, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3O3E9A3B",
+      "tec": "JEAN ROODLY ORELIEN",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "16:29",
+      "d": "PJE LOS GRANADOS 18, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3O3DD8R4",
       "tec": "JOSE ROJO A",
@@ -12484,7 +12502,7 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "LO MOSCOSO 1127, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O3BADIA",
@@ -12511,7 +12529,7 @@
       "f": "13-16",
       "hi": "15:14",
       "d": "IGNACIO CARRERA PINTO 034, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O39I7SZ",
@@ -12565,7 +12583,7 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "HOJAS SECAS 357, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3O2L538U",
@@ -12729,9 +12747,9 @@
       "o": "1-3O2O21E0",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "13:00",
+      "hi": "12:50",
       "d": "HOJAS SECAS 357, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "HERNAN CORTES HERRERA",
       "visitas": 1,
       "ult_fecha": "26-09-2026",
@@ -12777,7 +12795,7 @@
       "o": "1-3O39E93G",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:32",
+      "hi": "14:42",
       "d": "AVENIDA VALPARAISO 1646 CASA 3, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE CASTRO P",
@@ -12897,12 +12915,24 @@
       "o": "1-3O2GWP1S",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:17",
+      "hi": "14:25",
       "d": "CONDELL 19, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
       "visitas": 1,
       "ult_fecha": "26-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3O2WUUZ9",
+      "cat": "Migración 2 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "BELLAVISTA 1138, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "NICOLAS MOYANO R",
+      "visitas": 1,
+      "ult_fecha": "11-09-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -12921,7 +12951,7 @@
       "o": "1-3O2LN631",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:00",
+      "hi": "15:07",
       "d": "LOS ARRAYANES 9998, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -12999,5 +13029,5 @@
    }
   }
  },
- "generado": "28-09-2026 12:37"
+ "generado": "28-09-2026 12:47"
 }
