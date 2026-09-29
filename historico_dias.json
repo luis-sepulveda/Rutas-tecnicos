@@ -13106,23 +13106,23 @@
    }
   },
   "29-09-2026": {
-   "hasta": "14:57",
-   "actividades": 133,
+   "hasta": "15:03",
+   "actividades": 134,
    "tecnicos": 31,
    "estados": {
-    "No Realizada": 18,
-    "Completado": 51,
-    "Iniciado": 24,
-    "Pendiente": 30,
+    "No Realizada": 19,
+    "Completado": 52,
+    "Iniciado": 23,
+    "Pendiente": 29,
     "Cancelado": 7,
-    "en ruta": 1,
+    "en ruta": 2,
     "Suspendido": 2
    },
-   "rgu": 192.2,
+   "rgu": 192.3,
    "caidas_total": 9,
    "caidas_activas": 9,
    "caidas_resueltas": 0,
-   "nuevas": 27,
+   "nuevas": 28,
    "al_bucket": 35,
    "repetidas": 31,
    "reagendadas": 3,
@@ -13211,6 +13211,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3O4BS3PI",
+      "tec": "MATIAS APELEO APELEO",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "15:00",
+      "d": "CHIANG 1943, VILLA ALEMANA",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3O489K5J",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -13522,7 +13531,7 @@
       "f": "13-16",
       "hi": "13:32",
       "d": "ANIBAL PINTO 986 DEPTO 42, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "CRISTOBAL SILVA LEIVA",
       "visitas": 1,
       "ult_fecha": "29-08-2026",
@@ -13594,7 +13603,7 @@
       "f": "13-16",
       "hi": "14:20",
       "d": "ISLA MOCHA 990 CASA C, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "HERNAN CORTES HERRERA",
       "visitas": 1,
       "ult_fecha": "28-09-2026",
@@ -13604,7 +13613,7 @@
       "o": "1-3O42N6LF",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:02",
+      "hi": "16:00",
       "d": "ARTURUS 680, QUILPUE",
       "e": "Pendiente",
       "tec": "HERNAN CORTES HERRERA",
@@ -13687,7 +13696,7 @@
       "o": "1-3O3LZ5XG",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:01",
+      "hi": "16:10",
       "d": "AV VICEPRESIDENTE BDO LEIGHTON 1431 EDIF. 5 DEPTO 24, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -13819,9 +13828,9 @@
       "o": "1-3O2E2EYP",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "15:58",
+      "hi": "15:15",
       "d": "CALLE HERALDO ORREGO 3011 DEPTO 106, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "PABLO HERNANEZ FERNANDEZ",
       "visitas": 1,
       "ult_fecha": "26-09-2026",
@@ -13862,5 +13871,5 @@
    }
   }
  },
- "generado": "29-09-2026 14:57"
+ "generado": "29-09-2026 15:03"
 }
