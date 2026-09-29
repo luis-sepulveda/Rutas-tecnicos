@@ -13106,24 +13106,24 @@
    }
   },
   "29-09-2026": {
-   "hasta": "15:18",
-   "actividades": 131,
+   "hasta": "15:28",
+   "actividades": 129,
    "tecnicos": 31,
    "estados": {
     "No Realizada": 20,
-    "Completado": 55,
-    "Iniciado": 21,
-    "Pendiente": 25,
+    "Completado": 57,
+    "en ruta": 3,
     "Cancelado": 7,
-    "en ruta": 1,
+    "Iniciado": 19,
+    "Pendiente": 21,
     "Suspendido": 2
    },
-   "rgu": 188.3,
+   "rgu": 185.3,
    "caidas_total": 9,
    "caidas_activas": 9,
    "caidas_resueltas": 0,
    "nuevas": 28,
-   "al_bucket": 36,
+   "al_bucket": 39,
    "repetidas": 30,
    "reagendadas": 3,
    "detalle": {
@@ -13502,15 +13502,15 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3O3LTVNP",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "16:00",
-      "d": "LAS CAMELIAS 2525 CASA B, QUILPUE",
-      "e": "Pendiente",
+      "o": "1-3O01LHNH",
+      "cat": "Migración 2 Play",
+      "f": "13-16",
+      "hi": "15:27",
+      "d": "AVIADOR ACEVEDO 792, QUILPUE",
+      "e": "en ruta",
       "tec": "ALFREDO ALCAYAGA F",
-      "visitas": 2,
-      "ult_fecha": "25-09-2026",
+      "visitas": 1,
+      "ult_fecha": "23-09-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -13548,18 +13548,6 @@
       "visitas": 1,
       "ult_fecha": "10-08-2026",
       "ult_cierre": "Cliente Desiste"
-     },
-     {
-      "o": "1-3O3N9J1U",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "17:03",
-      "d": "AV CHILE 330 DEPTO 609-5, QUILPUE",
-      "e": "Pendiente",
-      "tec": "DANIEL NAVARRETE E",
-      "visitas": 1,
-      "ult_fecha": "28-09-2026",
-      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3O0VKF7D",
@@ -13610,16 +13598,16 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3O42N6LF",
-      "cat": "Reparación",
+      "o": "1-3O3N9J1U",
+      "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:35",
-      "d": "ARTURUS 680, QUILPUE",
+      "hi": "16:27",
+      "d": "AV CHILE 330 DEPTO 609-5, QUILPUE",
       "e": "Pendiente",
       "tec": "HERNAN CORTES HERRERA",
       "visitas": 1,
-      "ult_fecha": "29-09-2026",
-      "ult_cierre": "Cliente reagenda"
+      "ult_fecha": "28-09-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3O45LZUQ",
@@ -13669,18 +13657,6 @@
       "ult_cierre": "Orden mal generada"
      },
      {
-      "o": "1-3O3MAFA3",
-      "cat": "Migración 2 Play",
-      "f": "16-19",
-      "hi": "16:59",
-      "d": "BELLAVISTA 1138, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOSE PEREZ RANGEL",
-      "visitas": 1,
-      "ult_fecha": "11-09-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3O3PF8QU",
       "cat": "Alta 2 Play",
       "f": "10-13",
@@ -13702,6 +13678,18 @@
       "tec": "JOSE ROJO A",
       "visitas": 1,
       "ult_fecha": "28-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3O3LTVNP",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "LAS CAMELIAS 2525 CASA B, QUILPUE",
+      "e": "Pendiente",
+      "tec": "JOSE SALAS MEDINA",
+      "visitas": 2,
+      "ult_fecha": "25-09-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -13765,12 +13753,24 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3O42N6LF",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "ARTURUS 680, QUILPUE",
+      "e": "Pendiente",
+      "tec": "LUIS MARTIN NUÑEZ",
+      "visitas": 1,
+      "ult_fecha": "29-09-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3O3Q2LHX",
       "cat": "Reparación",
       "f": "13-16",
       "hi": "14:05",
       "d": "WILLIAMSON 392 EDIF. C DEPTO 102, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "MARCELO GÓMEZ GÓME",
       "visitas": 1,
       "ult_fecha": "28-09-2026",
@@ -13859,5 +13859,5 @@
    }
   }
  },
- "generado": "29-09-2026 15:18"
+ "generado": "29-09-2026 15:28"
 }
