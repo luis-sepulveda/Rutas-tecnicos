@@ -13106,15 +13106,15 @@
    }
   },
   "29-09-2026": {
-   "hasta": "16:16",
+   "hasta": "16:36",
    "actividades": 137,
    "tecnicos": 31,
    "estados": {
-    "No Realizada": 24,
-    "Completado": 66,
-    "Iniciado": 26,
+    "No Realizada": 26,
+    "Completado": 68,
+    "Iniciado": 27,
     "Cancelado": 7,
-    "Pendiente": 9,
+    "Pendiente": 4,
     "en ruta": 3,
     "Suspendido": 2
    },
@@ -13124,7 +13124,7 @@
    "caidas_resueltas": 0,
    "nuevas": 29,
    "al_bucket": 39,
-   "repetidas": 31,
+   "repetidas": 32,
    "reagendadas": 3,
    "detalle": {
     "caidas": [
@@ -13576,7 +13576,7 @@
       "f": "16-19",
       "hi": "15:59",
       "d": "BELLAVISTA 1138, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "EDGAR VALERO C",
       "visitas": 1,
       "ult_fecha": "11-09-2026",
@@ -13622,9 +13622,9 @@
       "o": "1-3O3N9J1U",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:11",
+      "hi": "16:50",
       "d": "AV CHILE 330 DEPTO 609-5, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "HERNAN CORTES HERRERA",
       "visitas": 1,
       "ult_fecha": "28-09-2026",
@@ -13690,6 +13690,18 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3O46K431",
+      "cat": "Migración 2 Play",
+      "f": "13-16",
+      "hi": "13:07",
+      "d": "MARGA MARGA 2210, VILLA ALEMANA",
+      "e": "Suspendido",
+      "tec": "JOSE ROJO A",
+      "visitas": 1,
+      "ult_fecha": "29-09-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3O3LZ5XG",
       "cat": "Alta 1 Play",
       "f": "16-19",
@@ -13707,7 +13719,7 @@
       "f": "16-19",
       "hi": "16:31",
       "d": "LAS CAMELIAS 2525 CASA B, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "JOSE SALAS MEDINA",
       "visitas": 2,
       "ult_fecha": "25-09-2026",
@@ -13777,9 +13789,9 @@
       "o": "1-3O42N6LF",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:15",
+      "hi": "16:19",
       "d": "ARTURUS 680, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "LUIS MARTIN NUÑEZ",
       "visitas": 1,
       "ult_fecha": "29-09-2026",
@@ -13880,5 +13892,5 @@
    }
   }
  },
- "generado": "29-09-2026 16:16"
+ "generado": "29-09-2026 16:36"
 }
