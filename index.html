@@ -1870,7 +1870,7 @@
   .pv-bar a.b-res { color:#dbeafe; }
   #modalRes { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); }
   #modalRes.abierto { display:flex; align-items:flex-start; justify-content:center; padding:4vh 2vw; }
-  #modalRes .rs-box { background:#fff; color:#16232f; border-radius:14px; width:min(860px,100%);
+  #modalRes .rs-box { background:#fff; color:#16232f; border-radius:14px; width:min(920px,100%);
     max-height:92vh; display:flex; flex-direction:column; box-shadow:0 20px 60px rgba(0,0,0,.35);
     font-family:'DM Sans','Segoe UI',Arial,sans-serif; }
   #modalRes .rs-head { display:flex; justify-content:space-between; align-items:flex-start; gap:12px;
@@ -1884,6 +1884,13 @@
     padding:5px 13px; font:inherit; font-size:12.5px; cursor:pointer; }
   #modalRes .rs-rangos button.on { background:#0f1d2e; border-color:#0f1d2e; color:#fff; }
   #modalRes .rs-cuerpo { padding:12px 22px 20px; overflow:auto; }
+  /* promedio por dia en la linea de los rangos (29-09-2026, pedido de Luis) */
+  #modalRes .rs-rangos { align-items:center; }
+  #modalRes .rs-prom { margin-left:auto; display:flex; gap:11px; flex-wrap:wrap; font-size:12.5px;
+    color:#5f7386; font-variant-numeric:tabular-nums; }
+  #modalRes .rs-prom b { color:#16232f; font-weight:700; }
+  #modalRes .rs-prom .ok b { color:#0f766e; } #modalRes .rs-prom .nr b { color:#b91c1c; }
+  @media (max-width:640px){ #modalRes .rs-prom { margin-left:0; width:100%; } }
   #modalRes .rs-tot { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:0 0 14px; }
   #modalRes .rs-tot div { background:#f1f5f9; border-radius:10px; padding:9px 12px; }
   #modalRes .rs-tot b { display:block; font-size:21px; font-family:'Archivo',sans-serif; letter-spacing:-.01em; }
@@ -5560,9 +5567,10 @@ function pintarResumen(){
   const rangos = document.getElementById('rsRangos');
   if(!cuerpo) return;
   const pct = function(a, b){ return b ? (100 * a / b).toFixed(1).replace('.', ',') + '%' : '—'; };
-  rangos.innerHTML = RES_RANGOS.map(function(x){
+  const botones = RES_RANGOS.map(function(x){
     return '<button class="' + (x[0] === resRango ? 'on' : '') + '" onclick="setRangoRes(' + x[0] + ')">' + x[1] + '</button>';
   }).join('');
+  rangos.innerHTML = botones;
   if(resFallo){
     cuerpo.innerHTML = '<div class="rs-vacio">No se pudo bajar el <b>datos.json</b> del Dashboard de Actividades. '
       + 'Revisa la conexión y vuelve a abrir el botón.</div>';
@@ -5575,6 +5583,16 @@ function pintarResumen(){
   const dias = resRango ? RES.slice(-resRango) : RES.slice();
   const t = dias.reduce(function(a, d){
     a.asig += d.asig; a.comp += d.comp; a.nr += d.nr; return a; }, {asig:0, comp:0, nr:0});
+  /* (29-09-2026, Luis) Promedio POR DIA del rango elegido, en la misma linea
+     de los botones. La efectividad promedio es la del periodo (completadas
+     totales / asignadas totales), igual que la tarjeta de arriba. */
+  const nD = dias.length, prom = function(v){ return (v / nD).toFixed(1).replace('.', ',').replace(',0', ''); };
+  rangos.innerHTML = botones + '<div class="rs-prom" title="Promedio por día del rango elegido">'
+    + '<span>Prom. por día:</span>'
+    + '<span><b>' + prom(t.asig) + '</b> asignadas</span>'
+    + '<span class="ok"><b>' + prom(t.comp) + '</b> completadas</span>'
+    + '<span class="nr"><b>' + prom(t.nr) + '</b> no realizadas</span>'
+    + '<span><b>' + pct(t.comp, t.asig) + '</b> efectividad</span></div>';
   const primero = dias[0].f, ultimo = dias[dias.length - 1].f;
   document.getElementById('rsSub').textContent = dias.length + ' día' + (dias.length === 1 ? '' : 's')
     + ' · del ' + primero.slice(0, 5) + ' al ' + ultimo.slice(0, 5)
