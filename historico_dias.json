@@ -13106,19 +13106,19 @@
    }
   },
   "29-09-2026": {
-   "hasta": "14:22",
-   "actividades": 130,
+   "hasta": "14:32",
+   "actividades": 132,
    "tecnicos": 31,
    "estados": {
     "No Realizada": 18,
-    "Completado": 45,
-    "Pendiente": 37,
+    "Completado": 46,
+    "en ruta": 5,
+    "Pendiente": 34,
     "Cancelado": 6,
-    "Iniciado": 20,
-    "en ruta": 3,
+    "Iniciado": 22,
     "Suspendido": 1
    },
-   "rgu": 190.1,
+   "rgu": 191.2,
    "caidas_total": 9,
    "caidas_activas": 9,
    "caidas_resueltas": 0,
@@ -13245,7 +13245,7 @@
       "f": "13-16",
       "hi": "14:44",
       "d": "PATRICIO LYNCH 270 CASA 11, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3O471U8G",
@@ -13276,7 +13276,7 @@
      },
      {
       "o": "1-3O44UO0K",
-      "tec": "PABLO HERNANEZ FERNANDEZ",
+      "tec": "ESTEBAN PIZARRO QUINTANA",
       "cat": "Migración 2 Play",
       "f": "16-19",
       "hi": "17:49",
@@ -13544,7 +13544,7 @@
       "o": "1-3O3N9J1U",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:32",
+      "hi": "17:03",
       "d": "AV CHILE 330 DEPTO 609-5, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -13696,6 +13696,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3O3K3C0O",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "14:55",
+      "d": "PJE LOS GRANADOS 18, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JUAN ARRIAGADA C",
+      "visitas": 1,
+      "ult_fecha": "28-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3O2E57GT",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -13814,18 +13826,6 @@
       "visitas": 1,
       "ult_fecha": "26-09-2026",
       "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3O3K3C0O",
-      "cat": "Alta 2 Play",
-      "f": "13-16",
-      "hi": "16:17",
-      "d": "PJE LOS GRANADOS 18, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "SAMUEL FERNANDEZ VIDAL",
-      "visitas": 1,
-      "ult_fecha": "28-09-2026",
-      "ult_cierre": "Sin moradores"
      }
     ],
     "reagendadas": [
@@ -13862,5 +13862,5 @@
    }
   }
  },
- "generado": "29-09-2026 14:22"
+ "generado": "29-09-2026 14:32"
 }
