@@ -1861,6 +1861,50 @@
   .pv-tlf .fr .ah.amb { color:#b45309; }
   .pv-tlf .fr .ah.roj { color:#b91c1c; }
   /* =================================================================== */
+  /* ==== RESUMEN POR DIA (29-09-2026, pedido de Luis) ====
+     Boton "Resumen" de la barra: ventana con asignadas, completadas, no
+     realizadas y efectividad por dia. Los numeros salen del datos.json del
+     Dashboard de Actividades (los mismos de esa pagina). Para quitarlo:
+     borrar este bloque, el div #modalRes, el boton b-res y el bloque JS
+     "RESUMEN POR DIA". */
+  .pv-bar a.b-res { color:#dbeafe; }
+  #modalRes { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); }
+  #modalRes.abierto { display:flex; align-items:flex-start; justify-content:center; padding:4vh 2vw; }
+  #modalRes .rs-box { background:#fff; color:#16232f; border-radius:14px; width:min(860px,100%);
+    max-height:92vh; display:flex; flex-direction:column; box-shadow:0 20px 60px rgba(0,0,0,.35);
+    font-family:'DM Sans','Segoe UI',Arial,sans-serif; }
+  #modalRes .rs-head { display:flex; justify-content:space-between; align-items:flex-start; gap:12px;
+    padding:18px 22px 12px; border-bottom:1px solid #e2e8f0; }
+  #modalRes h2 { margin:0; font-family:'Archivo',sans-serif; font-size:18px; color:#0f1d2e; }
+  #modalRes .rs-sub { margin:3px 0 0; font-size:12.5px; color:#5f7386; }
+  #modalRes .rs-x { border:1px solid #d3dde6; background:#fff; border-radius:8px; padding:5px 11px;
+    cursor:pointer; font-size:14px; color:#16232f; }
+  #modalRes .rs-rangos { display:flex; gap:6px; flex-wrap:wrap; padding:12px 22px 0; }
+  #modalRes .rs-rangos button { border:1px solid #d3dde6; background:#fff; color:#5f7386; border-radius:999px;
+    padding:5px 13px; font:inherit; font-size:12.5px; cursor:pointer; }
+  #modalRes .rs-rangos button.on { background:#0f1d2e; border-color:#0f1d2e; color:#fff; }
+  #modalRes .rs-cuerpo { padding:12px 22px 20px; overflow:auto; }
+  #modalRes .rs-tot { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:0 0 14px; }
+  #modalRes .rs-tot div { background:#f1f5f9; border-radius:10px; padding:9px 12px; }
+  #modalRes .rs-tot b { display:block; font-size:21px; font-family:'Archivo',sans-serif; letter-spacing:-.01em; }
+  #modalRes .rs-tot span { font-size:12px; color:#5f7386; }
+  #modalRes .rs-tot .ok b { color:#0f766e; } #modalRes .rs-tot .nr b { color:#b91c1c; }
+  #modalRes table { width:100%; border-collapse:collapse; font-size:13.5px; font-variant-numeric:tabular-nums; }
+  #modalRes th { text-align:right; font-size:11.5px; font-weight:600; color:#5f7386; padding:6px 8px;
+    border-bottom:1px solid #d3dde6; white-space:nowrap; position:sticky; top:0; background:#fff; }
+  #modalRes th:first-child, #modalRes td:first-child { text-align:left; }
+  #modalRes td { text-align:right; padding:7px 8px; border-bottom:1px solid #eef2f6; white-space:nowrap; }
+  #modalRes td .dia { color:#8fa1b3; font-size:12px; margin-left:4px; }
+  #modalRes td.ok { color:#0f766e; font-weight:600; } #modalRes td.nr { color:#b91c1c; font-weight:600; }
+  #modalRes .rs-ef { display:flex; align-items:center; gap:8px; justify-content:flex-end; }
+  #modalRes .rs-ef i { display:block; width:90px; height:7px; background:#e2e8f0; border-radius:4px; overflow:hidden; }
+  #modalRes .rs-ef i s { display:block; height:100%; background:#2563eb; border-radius:4px; }
+  #modalRes .rs-ef b { min-width:46px; }
+  #modalRes .rs-nota { font-size:12px; color:#5f7386; margin:12px 0 0; }
+  #modalRes .rs-vacio { color:#5f7386; padding:24px 0; text-align:center; }
+  @media (max-width:640px){ #modalRes .rs-tot { grid-template-columns:repeat(2,1fr); }
+    #modalRes .rs-ef i { width:48px; } }
+  /* =================================================================== */
 </style>
 </head>
 <body>
@@ -2094,6 +2138,18 @@
     </div>
     <div id="listaEst" class="mc-body"></div>
     <div id="estNota" class="mc-resnota"></div>
+  </div>
+</div>
+<!-- RESUMEN POR DIA (29-09-2026): ventana del boton Resumen de la barra -->
+<div id="modalRes" onclick="if(event.target===this) cerrarResumen()">
+  <div class="rs-box" role="dialog" aria-labelledby="rsTitulo">
+    <div class="rs-head">
+      <div><h2 id="rsTitulo">Resumen por día</h2>
+        <p class="rs-sub" id="rsSub">Mismos números del Dashboard de Actividades</p></div>
+      <button class="rs-x" onclick="cerrarResumen()" title="Cerrar (Esc)">✖</button>
+    </div>
+    <div class="rs-rangos" id="rsRangos"></div>
+    <div class="rs-cuerpo" id="rsCuerpo"></div>
   </div>
 </div>
 <div id="panelSC">
@@ -2436,7 +2492,7 @@ function verTecnicoCaida(t){
 
 // cerrar los modales con la tecla Esc
 document.addEventListener('keydown', function(e){
-  if(e.key === 'Escape'){ cerrarCaidas(); cerrarNuevas(); cerrarRepe(); cerrarReca(); cerrarBuscar(); cerrarEst(); cerrarJornada(); cerrarRed(); cerrarReit(); cerrarVistaRed(); cerrarCuadratura(); cerrarNoOperativos(); }
+  if(e.key === 'Escape'){ cerrarCaidas(); cerrarNuevas(); cerrarRepe(); cerrarReca(); cerrarBuscar(); cerrarEst(); cerrarJornada(); cerrarRed(); cerrarReit(); cerrarVistaRed(); cerrarCuadratura(); cerrarNoOperativos(); cerrarResumen(); }
 });
 
 /* ======================= ORDENES NUEVAS DEL DIA =======================
@@ -5446,6 +5502,108 @@ function verPortada(){
   window.scrollTo(0,0);
 }
 /* abre un panel sin salir de la portada */
+/* ==================== RESUMEN POR DIA (29-09-2026) ====================
+   Pedido de Luis: un boton "Resumen" con actividades asignadas, completadas,
+   no realizadas y efectividad POR DIA. Los numeros salen del datos.json del
+   Dashboard de Actividades (luis-sepulveda.github.io/Actividades-diario/),
+   el mismo archivo de esa pagina, para que los dos digan lo mismo
+   (comprobado: 28-09 = 148 asignadas, 100 completadas, 38 no realizadas,
+   67,6%). Definiciones de ese dashboard (confirmadas el 23-09-2026):
+     asignadas   = TODAS las ordenes del dia (canceladas y suspendidas incluidas)
+     efectividad = completadas / asignadas
+   Ese dashboard se actualiza cada manana con el dia ANTERIOR: hoy no aparece.
+   Se baja una vez por sesion (cambia una vez al dia). */
+const URL_DATOS_ACT = URL_ACTIVIDADES + 'datos.json';
+let RES = null, resBajando = false, resFallo = false, resRango = 10;
+const RES_RANGOS = [[10, '10 días'], [20, '20 días'], [30, '30 días'], [0, 'Todo']];
+const DIAS_SEM = ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'];
+
+async function bajarResumen(){
+  const r = await fetch(URL_DATOS_ACT + '?t=' + Date.now(), { cache:'no-store' });
+  if(!r.ok) throw new Error(r.status);
+  const js = await r.json();
+  const cols = js.cols || [], dic = js.dic || {};
+  const iF = cols.indexOf('Fecha'), iE = cols.indexOf('Estado');
+  if(iF < 0 || iE < 0) throw new Error('datos.json sin Fecha o Estado');
+  const val = function(c, v){ return (dic[c] && typeof v === 'number') ? dic[c][v] : v; };
+  const por = {};
+  (js.rows || []).forEach(function(row){
+    const f = val('Fecha', row[iF]), e = val('Estado', row[iE]);
+    if(!f) return;
+    const d = por[f] || (por[f] = {f:f, asig:0, comp:0, nr:0, canc:0, susp:0});
+    d.asig++;
+    if(e === 'Completado') d.comp++;
+    else if(e === 'No Realizada') d.nr++;
+    else if(e === 'Cancelado') d.canc++;
+    else if(e === 'Suspendido') d.susp++;
+  });
+  return ordenarDias(Object.keys(por)).map(function(k){ return por[k]; });
+}
+
+function abrirResumen(){
+  document.getElementById('modalRes').classList.add('abierto');
+  pintarResumen();
+  if(RES !== null || resBajando) return;
+  resBajando = true; resFallo = false;
+  bajarResumen()
+    .then(function(d){ RES = d; resBajando = false; pintarResumen(); })
+    .catch(function(e){ console.warn('resumen:', e); resFallo = true; resBajando = false; pintarResumen(); });
+}
+function cerrarResumen(){
+  const m = document.getElementById('modalRes');
+  if(m) m.classList.remove('abierto');
+}
+function setRangoRes(n){ resRango = n; pintarResumen(); }
+
+function pintarResumen(){
+  const cuerpo = document.getElementById('rsCuerpo');
+  const rangos = document.getElementById('rsRangos');
+  if(!cuerpo) return;
+  const pct = function(a, b){ return b ? (100 * a / b).toFixed(1).replace('.', ',') + '%' : '—'; };
+  rangos.innerHTML = RES_RANGOS.map(function(x){
+    return '<button class="' + (x[0] === resRango ? 'on' : '') + '" onclick="setRangoRes(' + x[0] + ')">' + x[1] + '</button>';
+  }).join('');
+  if(resFallo){
+    cuerpo.innerHTML = '<div class="rs-vacio">No se pudo bajar el <b>datos.json</b> del Dashboard de Actividades. '
+      + 'Revisa la conexión y vuelve a abrir el botón.</div>';
+    resFallo = false;            // al volver a abrir, reintenta
+    return;
+  }
+  if(RES === null){ cuerpo.innerHTML = '<div class="rs-vacio">Bajando los datos día por día…</div>'; return; }
+  if(!RES.length){ cuerpo.innerHTML = '<div class="rs-vacio">Todavía no hay días cargados.</div>'; return; }
+
+  const dias = resRango ? RES.slice(-resRango) : RES.slice();
+  const t = dias.reduce(function(a, d){
+    a.asig += d.asig; a.comp += d.comp; a.nr += d.nr; return a; }, {asig:0, comp:0, nr:0});
+  const primero = dias[0].f, ultimo = dias[dias.length - 1].f;
+  document.getElementById('rsSub').textContent = dias.length + ' día' + (dias.length === 1 ? '' : 's')
+    + ' · del ' + primero.slice(0, 5) + ' al ' + ultimo.slice(0, 5)
+    + ' · mismos números del Dashboard de Actividades (hasta ayer)';
+
+  let h = '<div class="rs-tot">'
+    + '<div><b>' + t.asig + '</b><span>asignadas</span></div>'
+    + '<div class="ok"><b>' + t.comp + '</b><span>completadas</span></div>'
+    + '<div class="nr"><b>' + t.nr + '</b><span>no realizadas</span></div>'
+    + '<div><b>' + pct(t.comp, t.asig) + '</b><span>efectividad del período</span></div>'
+    + '</div>';
+  h += '<table><thead><tr><th>Día</th><th>Asignadas</th><th>Completadas</th><th>No realizadas</th><th>Efectividad</th></tr></thead><tbody>';
+  dias.slice().reverse().forEach(function(d){
+    const p = d.f.split('-');
+    const sem = DIAS_SEM[new Date(+p[2], +p[1] - 1, +p[0]).getDay()];
+    const ef = d.asig ? 100 * d.comp / d.asig : 0;
+    h += '<tr><td>' + d.f.slice(0, 5) + '<span class="dia">' + sem + '</span></td>'
+      + '<td>' + d.asig + '</td><td class="ok">' + d.comp + '</td><td class="nr">' + d.nr + '</td>'
+      + '<td><div class="rs-ef"><i><s style="width:' + Math.min(100, ef).toFixed(1) + '%"></s></i><b>'
+      + pct(d.comp, d.asig) + '</b></div></td></tr>';
+  });
+  h += '</tbody></table>'
+    + '<p class="rs-nota">Asignadas = todas las actividades del día, canceladas y suspendidas incluidas, '
+    + 'por eso completadas + no realizadas no suman las asignadas. Efectividad = completadas ÷ asignadas. '
+    + 'Hoy no aparece: el Dashboard de Actividades se actualiza cada mañana con el día anterior.</p>';
+  cuerpo.innerHTML = h;
+}
+/* ================== FIN RESUMEN POR DIA ================== */
+
 function desdePortada(fn){
   try { fn(); } catch(e){ console.warn('panel:', e); }
   marcarAlertasPortada();
@@ -6202,6 +6360,10 @@ function pintarPortada(){
     /* Metas (28-09-2026, pedido de Luis): despues de Negocios, antes de
        Historial. Abre el dashboard de metas en otra pestana. Clase b-met. */
     +     '<a class="b-inf b-met" href="' + URL_METAS + '" target="_blank">Metas</a>'
+    /* Resumen (29-09-2026, pedido de Luis): asignadas, completadas, no
+       realizadas y efectividad por dia, en una ventana (no abre otra pagina).
+       Clase b-res. */
+    +     '<a class="b-inf b-res" onclick="abrirResumen()">Resumen</a>'
     /* Historial (26-09-2026, pedido de Luis): se movio a la derecha de Tiempos
        y abre DIRECTO la tabla completa del historial (#tabla), sin pasar por
        la pantalla de consulta. */
