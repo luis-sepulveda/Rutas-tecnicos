@@ -13106,23 +13106,23 @@
    }
   },
   "29-09-2026": {
-   "hasta": "15:38",
-   "actividades": 136,
+   "hasta": "15:41",
+   "actividades": 137,
    "tecnicos": 31,
    "estados": {
-    "No Realizada": 21,
+    "No Realizada": 23,
     "Completado": 60,
-    "Iniciado": 17,
     "Cancelado": 7,
-    "Pendiente": 26,
-    "Suspendido": 2,
-    "en ruta": 3
+    "Pendiente": 23,
+    "Iniciado": 16,
+    "en ruta": 6,
+    "Suspendido": 2
    },
-   "rgu": 196.3,
+   "rgu": 197.3,
    "caidas_total": 9,
    "caidas_activas": 9,
    "caidas_resueltas": 0,
-   "nuevas": 28,
+   "nuevas": 29,
    "al_bucket": 39,
    "repetidas": 31,
    "reagendadas": 3,
@@ -13212,6 +13212,15 @@
     ],
     "nuevas": [
      {
+      "o": "1-3O4BZ1VJ",
+      "tec": "LUIS MARTIN NUÑEZ",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "15:40",
+      "d": "LINCOYAN 1410 EDIF. A DEPTO 12, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
       "o": "1-3O4BS3PI",
       "tec": "MATIAS APELEO APELEO",
       "cat": "Modificación de Servicio",
@@ -13290,7 +13299,7 @@
       "f": "16-19",
       "hi": "17:49",
       "d": "LAGO LAS TORRES 170 DEPTO 904, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3O44BXNE",
@@ -13407,7 +13416,7 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "LAGO LAS TORRES 23 EDIF. A DEPTO 1701, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3O41AL8H",
@@ -13507,7 +13516,7 @@
       "f": "13-16",
       "hi": "15:30",
       "d": "AVIADOR ACEVEDO 792, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "ALFREDO ALCAYAGA F",
       "visitas": 1,
       "ult_fecha": "23-09-2026",
@@ -13768,7 +13777,7 @@
       "o": "1-3O42N6LF",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "19:45",
+      "hi": "19:34",
       "d": "ARTURUS 680, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
@@ -13871,5 +13880,5 @@
    }
   }
  },
- "generado": "29-09-2026 15:38"
+ "generado": "29-09-2026 15:41"
 }
