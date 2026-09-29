@@ -13106,18 +13106,19 @@
    }
   },
   "29-09-2026": {
-   "hasta": "13:52",
-   "actividades": 128,
+   "hasta": "13:57",
+   "actividades": 129,
    "tecnicos": 31,
    "estados": {
-    "No Realizada": 17,
+    "No Realizada": 18,
     "Completado": 44,
-    "Pendiente": 45,
+    "Pendiente": 46,
     "Cancelado": 4,
-    "Iniciado": 14,
-    "en ruta": 4
+    "en ruta": 3,
+    "Iniciado": 13,
+    "Suspendido": 1
    },
-   "rgu": 187.1,
+   "rgu": 189.1,
    "caidas_total": 9,
    "caidas_activas": 9,
    "caidas_resueltas": 0,
@@ -13325,7 +13326,7 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "VERGARA 0866, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O42FH5Z",
@@ -13509,7 +13510,7 @@
       "f": "13-16",
       "hi": "13:33",
       "d": "PJE QUILLAGUA 2710 EDIF. Y DEPTO 102, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "CESAR MENA OLIVEROS",
       "visitas": 1,
       "ult_fecha": "28-09-2026",
@@ -13686,7 +13687,7 @@
       "o": "1-3O3LZ5XG",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:46",
+      "hi": "16:09",
       "d": "AV VICEPRESIDENTE BDO LEIGHTON 1431 EDIF. 5 DEPTO 24, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -13770,9 +13771,9 @@
       "o": "1-3O43N6R3",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "13:28",
+      "hi": "13:24",
       "d": "CAUPOLICAN 779, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Pendiente",
       "tec": "MATÍAS JAQUE AG",
       "visitas": 1,
       "ult_fecha": "29-09-2026",
@@ -13861,5 +13862,5 @@
    }
   }
  },
- "generado": "29-09-2026 13:52"
+ "generado": "29-09-2026 13:57"
 }
