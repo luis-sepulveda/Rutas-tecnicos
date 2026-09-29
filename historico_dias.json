@@ -13106,23 +13106,43 @@
    }
   },
   "29-09-2026": {
-   "hasta": "09:13",
-   "actividades": 96,
+   "hasta": "09:24",
+   "actividades": 98,
    "tecnicos": 37,
    "estados": {
-    "Pendiente": 95,
-    "Cancelado": 1
+    "en ruta": 19,
+    "Pendiente": 77,
+    "Cancelado": 2
    },
-   "rgu": 141.0,
-   "caidas_total": 0,
-   "caidas_activas": 0,
+   "rgu": 143.0,
+   "caidas_total": 2,
+   "caidas_activas": 2,
    "caidas_resueltas": 0,
    "nuevas": 3,
-   "al_bucket": 1,
+   "al_bucket": 2,
    "repetidas": 29,
    "reagendadas": 3,
    "detalle": {
-    "caidas": [],
+    "caidas": [
+     {
+      "o": "1-3O12MI6S",
+      "tec": "CRISTOBAL SILVA LEIVA",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "10:00",
+      "d": "CALLE VIA V3 1127 CASA 1 DEPTO 135, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3O3LV48K",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "10:59",
+      "d": "PJE GRANIZO 1449, VILLA ALEMANA",
+      "e": "Pendiente"
+     }
+    ],
     "nuevas": [
      {
       "o": "1-3O382JJD",
@@ -13157,7 +13177,7 @@
       "o": "1-3O3P2WCW",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "10:52",
+      "hi": "10:22",
       "d": "SERENA 1020 DEPTO 11, QUILPUE",
       "e": "Pendiente",
       "tec": "ALEXIS JARA",
@@ -13169,7 +13189,7 @@
       "o": "1-3O38XVU2",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:08",
+      "hi": "14:00",
       "d": "PJE QUILLAGUA 2710 EDIF. Y DEPTO 102, QUILPUE",
       "e": "Pendiente",
       "tec": "ALEXIS JARA",
@@ -13229,7 +13249,7 @@
       "o": "1-3O38XC3R",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "11:06",
+      "hi": "10:35",
       "d": "AVENIDA BELLOTO 1080, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -13253,7 +13273,7 @@
       "o": "1-3O3MYK1T",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "11:08",
+      "hi": "10:38",
       "d": "VALLE DEL PARAISO 2746, QUILPUE",
       "e": "Pendiente",
       "tec": "FELIPE SILVA R",
@@ -13288,9 +13308,9 @@
       "o": "1-3O39JDMJ",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:30",
       "d": "TIERRAS ROJAS 641 CASA A, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JOSE GALAZ D",
       "visitas": 1,
       "ult_fecha": "28-09-2026",
@@ -13300,7 +13320,7 @@
       "o": "1-3O3FB4JH",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "11:21",
+      "hi": "10:51",
       "d": "CENTENARIO 859 DEPTO 31, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -13324,7 +13344,7 @@
       "o": "1-3O3PF8QU",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "12:06",
+      "hi": "11:37",
       "d": "PJE MARANATA 1177, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -13480,9 +13500,9 @@
       "o": "1-3O39ZC0C",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:31",
       "d": "LAGO LAS TORRES 29 DEPTO 401, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "NICOLAS MOYANO R",
       "visitas": 1,
       "ult_fecha": "28-09-2026",
@@ -13506,9 +13526,9 @@
       "o": "1-3O1T184P",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:30",
       "d": "LAS GARZAS 989, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "ANTONHY MORALES MENDOZA",
       "desde": "25-09-2026"
      },
@@ -13526,9 +13546,8 @@
       "o": "1-3O0022A3",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "16:04",
       "d": "LOS AROMOS 1151 CASA 84, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Cancelado",
       "tec": "JOSE PEREZ RANGEL",
       "desde": "24-09-2026"
      }
@@ -13536,5 +13555,5 @@
    }
   }
  },
- "generado": "29-09-2026 09:13"
+ "generado": "29-09-2026 09:24"
 }
