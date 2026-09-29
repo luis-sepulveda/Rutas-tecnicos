@@ -1,9 +1,20 @@
 {
-  "actualizado": "2026-09-29T09:41:28",
+  "actualizado": "2026-09-29T10:12:05",
   "resumen": {
-    "sin informacion": 2
+    "reagendada": 1,
+    "sin informacion": 3
   },
   "estados": {
+    "1-3O415N0M": {
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "cat": "Migración 2 Play",
+      "franja_original": "10-13",
+      "d": "GENERAL CRUZ 440, QUILPUE",
+      "estado": "reagendada",
+      "color": "rgb(255, 222, 0)",
+      "detalle": "1-3O415N0M - 10-13-Migración-Migración-GENERAL CRUZ 440Jue, 1 Oct",
+      "franja_nueva": "10-13"
+    },
     "1-3O12MI6S": {
       "tec": "CRISTOBAL SILVA LEIVA",
       "cat": "Alta 1 Play",
@@ -72,46 +83,74 @@
         "aviso": "historial de la direccion, NO es el estado de esta orden",
         "filas": [
           {
+            "estado": "reagendada",
+            "color": "rgb(255, 222, 0)",
+            "ot": "1-3O3ZW4MY",
+            "franja": "10-13",
+            "texto": "1-3O3ZW4MY - 10-13-Alta-2 Play-PJE GRANIZO 1449Mie, 30 Sep"
+          },
+          {
             "estado": "no realizada",
             "color": "rgb(96, 206, 206)",
             "ot": "1-3O3BADIA",
             "franja": "16-19",
             "texto": "1-3O3BADIA - 16-19-Alta-2 Play-PJE GRANIZO 1449Lun, 28 Sep"
-          },
+          }
+        ]
+      }
+    },
+    "1-3O3FB4JH": {
+      "tec": "JOSE GALAZ D",
+      "cat": "Alta 1 Play",
+      "franja_original": "10-13",
+      "d": "CENTENARIO 859 DEPTO 31, QUILPUE",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "CENTENARIO 859",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
           {
-            "estado": "completada",
-            "color": "rgb(121, 182, 235)",
-            "ot": "1-3MRQBEIH",
-            "franja": "10-13",
-            "texto": "1-3MRQBEIH - 10-13-Migración-Migración-PJE GRANIZO 1362Mie, 5 Ago"
-          },
-          {
-            "estado": "completada",
-            "color": "rgb(121, 182, 235)",
-            "ot": "1-3N1H6KAH",
-            "franja": "13-16",
-            "texto": "1-3N1H6KAH - 13-16-Modificación de Servicio-Modificación-PJE GRANIZO 1362Mie, 5 Ago"
-          },
-          {
-            "estado": "completada",
-            "color": "rgb(121, 182, 235)",
-            "ot": "1-3MWMPTNZ",
-            "franja": "10-13",
-            "texto": "1-3MWMPTNZ - 10-13-Migración-Migración-PJE GRANIZO 1455Sab, 1 Ago"
-          },
-          {
-            "estado": "completada",
-            "color": "rgb(121, 182, 235)",
-            "ot": "1-3MVJAQ39",
+            "estado": "cancelada",
+            "color": "rgb(128, 255, 128)",
+            "ot": "1-3O39HF2E",
             "franja": "16-19",
-            "texto": "1-3MVJAQ39 - 16-19-Migración-Migración-PJE GRANIZO 1378Vie, 31 Jul"
+            "texto": "1-3O39HF2E - 16-19-Alta-1 Play-CENTENARIO 859 DEPTO 31"
           },
           {
             "estado": "no realizada",
             "color": "rgb(96, 206, 206)",
-            "ot": "1-3MTXCH7L",
-            "franja": "10-13",
-            "texto": "1-3MTXCH7L - 10-13-Migración-Migración-PJE GRANIZO 1378Mar, 28 Jul"
+            "ot": "1-3O3AZR0N",
+            "franja": "13-16",
+            "texto": "1-3O3AZR0N - 13-16-Alta-1 Play-CENTENARIO 859 DEPTO 31Lun, 28 Sep"
+          },
+          {
+            "estado": "cancelada",
+            "color": "rgb(128, 255, 128)",
+            "ot": "1-3NZ27EQK",
+            "franja": "16-19",
+            "texto": "1-3NZ27EQK - 16-19-Alta-1 Play-CENTENARIO 859 DEPTO 31Mar, 22 Sep"
+          },
+          {
+            "estado": "cancelada",
+            "color": "rgb(128, 255, 128)",
+            "ot": "1-3NZ3OG48",
+            "franja": "16-19",
+            "texto": "1-3NZ3OG48 - 16-19-Alta-1 Play-CENTENARIO 859 DEPTO 31Mar, 22 Sep"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3NWUYK1K",
+            "franja": "16-19",
+            "texto": "1-3NWUYK1K - 16-19-Alta-1 Play-CENTENARIO 859 DEPTO 31Lun, 21 Sep"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3NW6SLLH",
+            "franja": "16-19",
+            "texto": "1-3NW6SLLH - 16-19-Alta-1 Play-CENTENARIO 859 DEPTO 31Jue, 17 Sep"
           }
         ]
       }
