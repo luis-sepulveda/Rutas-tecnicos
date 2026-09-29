@@ -13106,21 +13106,22 @@
    }
   },
   "29-09-2026": {
-   "hasta": "09:41",
-   "actividades": 101,
+   "hasta": "09:46",
+   "actividades": 102,
    "tecnicos": 37,
    "estados": {
-    "Pendiente": 73,
-    "en ruta": 26,
+    "Iniciado": 7,
+    "Pendiente": 71,
+    "en ruta": 22,
     "Cancelado": 2
    },
-   "rgu": 146.0,
+   "rgu": 147.0,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
-   "nuevas": 4,
+   "nuevas": 5,
    "al_bucket": 2,
-   "repetidas": 29,
+   "repetidas": 30,
    "reagendadas": 3,
    "detalle": {
     "caidas": [
@@ -13144,6 +13145,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3O4145FU",
+      "tec": "ALEXIS JARA",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "09:43",
+      "d": "DARWIN 0786, QUILPUE",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3O40OWB0",
       "tec": "YENDER BOSCAN CADENAS",
@@ -13183,10 +13193,22 @@
     ],
     "repetidas": [
      {
+      "o": "1-3O4145FU",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "09:43",
+      "d": "DARWIN 0786, QUILPUE",
+      "e": "Iniciado",
+      "tec": "ALEXIS JARA",
+      "visitas": 1,
+      "ult_fecha": "26-09-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3O3P2WCW",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "11:25",
+      "hi": "11:32",
       "d": "SERENA 1020 DEPTO 11, QUILPUE",
       "e": "Pendiente",
       "tec": "ALEXIS JARA",
@@ -13198,7 +13220,7 @@
       "o": "1-3O38XVU2",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:41",
+      "hi": "14:48",
       "d": "PJE QUILLAGUA 2710 EDIF. Y DEPTO 102, QUILPUE",
       "e": "Pendiente",
       "tec": "ALEXIS JARA",
@@ -13258,7 +13280,7 @@
       "o": "1-3O38XC3R",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:35",
+      "hi": "11:06",
       "d": "AVENIDA BELLOTO 1080, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -13270,7 +13292,7 @@
       "o": "1-3O0VKF7D",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "10:57",
+      "hi": "10:48",
       "d": "EL PIMIENTO 885, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "EDGAR VALERO C",
@@ -13413,9 +13435,9 @@
       "o": "1-3O3MFFHS",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "09:42",
+      "hi": "09:45",
       "d": "BUENOS AIRES 1403, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "LUIS GATICA DAVILA",
       "visitas": 1,
       "ult_fecha": "05-09-2026",
@@ -13425,7 +13447,7 @@
       "o": "1-3O2GEM86",
       "cat": "Alta Traslado",
       "f": "10-13",
-      "hi": "10:40",
+      "hi": "10:43",
       "d": "LAS PETUNIAS 1650 CASA 64, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
@@ -13509,9 +13531,9 @@
       "o": "1-3O39ZC0C",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "09:31",
+      "hi": "09:45",
       "d": "LAGO LAS TORRES 29 DEPTO 401, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "NICOLAS MOYANO R",
       "visitas": 1,
       "ult_fecha": "28-09-2026",
@@ -13564,5 +13586,5 @@
    }
   }
  },
- "generado": "29-09-2026 09:41"
+ "generado": "29-09-2026 09:46"
 }
