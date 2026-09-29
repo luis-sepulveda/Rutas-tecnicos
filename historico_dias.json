@@ -13106,25 +13106,23 @@
    }
   },
   "29-09-2026": {
-   "hasta": "17:22",
-   "actividades": 138,
+   "hasta": "18:07",
+   "actividades": 142,
    "tecnicos": 31,
    "estados": {
     "No Realizada": 31,
-    "Completado": 80,
+    "Completado": 92,
     "Cancelado": 7,
-    "Iniciado": 16,
-    "Suspendido": 2,
-    "Pendiente": 1,
-    "en ruta": 1
+    "Iniciado": 10,
+    "Suspendido": 2
    },
-   "rgu": 198.3,
+   "rgu": 199.6,
    "caidas_total": 9,
    "caidas_activas": 9,
    "caidas_resueltas": 0,
-   "nuevas": 29,
+   "nuevas": 33,
    "al_bucket": 39,
-   "repetidas": 32,
+   "repetidas": 33,
    "reagendadas": 3,
    "detalle": {
     "caidas": [
@@ -13211,6 +13209,42 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3O4GLYVV",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:29",
+      "d": "SIRIUS 1011, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
+      "o": "1-3O4GG5KZ",
+      "tec": "MARCELO GÓMEZ GÓME",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:29",
+      "d": "VIA UNO SIETE 2065 EDIF. E DEPTO 53, VILLA ALEMANA",
+      "e": "Completado"
+     },
+     {
+      "o": "1-3O4GX45V",
+      "tec": "DANIEL NAVARRETE E",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:36",
+      "d": "PJE 913 940, QUILPUE",
+      "e": "Completado"
+     },
+     {
+      "o": "1-3O4HEPD7",
+      "tec": "LUIS CASTRO TORRES",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:52",
+      "d": "VOLCAN VILLARRICA 2814, QUILPUE",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3O4BZ1VJ",
       "tec": "LUIS MARTIN NUÑEZ",
@@ -13416,7 +13450,7 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "LAGO LAS TORRES 23 EDIF. A DEPTO 1701, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3O41AL8H",
@@ -13624,7 +13658,7 @@
       "f": "16-19",
       "hi": "17:02",
       "d": "AV CHILE 330 DEPTO 609-5, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "HERNAN CORTES HERRERA",
       "visitas": 1,
       "ult_fecha": "28-09-2026",
@@ -13707,7 +13741,7 @@
       "f": "16-19",
       "hi": "16:09",
       "d": "AV VICEPRESIDENTE BDO LEIGHTON 1431 EDIF. 5 DEPTO 24, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JOSE ROJO A",
       "visitas": 1,
       "ult_fecha": "28-09-2026",
@@ -13810,6 +13844,18 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3O4GG5KZ",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:29",
+      "d": "VIA UNO SIETE 2065 EDIF. E DEPTO 53, VILLA ALEMANA",
+      "e": "Completado",
+      "tec": "MARCELO GÓMEZ GÓME",
+      "visitas": 1,
+      "ult_fecha": "24-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3O43N6R3",
       "cat": "Alta 1 Play",
       "f": "13-16",
@@ -13892,5 +13938,5 @@
    }
   }
  },
- "generado": "29-09-2026 17:22"
+ "generado": "29-09-2026 18:07"
 }
