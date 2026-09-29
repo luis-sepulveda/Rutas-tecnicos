@@ -13106,25 +13106,25 @@
    }
   },
   "29-09-2026": {
-   "hasta": "15:33",
-   "actividades": 129,
+   "hasta": "15:38",
+   "actividades": 136,
    "tecnicos": 31,
    "estados": {
-    "No Realizada": 20,
-    "Completado": 58,
-    "Iniciado": 20,
+    "No Realizada": 21,
+    "Completado": 60,
+    "Iniciado": 17,
     "Cancelado": 7,
-    "Pendiente": 21,
+    "Pendiente": 26,
     "Suspendido": 2,
-    "en ruta": 1
+    "en ruta": 3
    },
-   "rgu": 185.3,
+   "rgu": 196.3,
    "caidas_total": 9,
    "caidas_activas": 9,
    "caidas_resueltas": 0,
    "nuevas": 28,
    "al_bucket": 39,
-   "repetidas": 30,
+   "repetidas": 31,
    "reagendadas": 3,
    "detalle": {
     "caidas": [
@@ -13272,7 +13272,7 @@
       "f": "13-16",
       "hi": "13:00",
       "d": "EPSILON 2030 EDIF. E DEPTO 31, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3O44O26M",
@@ -13562,6 +13562,18 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3O3MAFA3",
+      "cat": "Migración 2 Play",
+      "f": "16-19",
+      "hi": "16:10",
+      "d": "BELLAVISTA 1138, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "EDGAR VALERO C",
+      "visitas": 1,
+      "ult_fecha": "11-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3O38XC3R",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -13756,7 +13768,7 @@
       "o": "1-3O42N6LF",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "19:45",
       "d": "ARTURUS 680, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
@@ -13859,5 +13871,5 @@
    }
   }
  },
- "generado": "29-09-2026 15:33"
+ "generado": "29-09-2026 15:38"
 }
