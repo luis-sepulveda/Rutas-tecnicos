@@ -13106,24 +13106,24 @@
    }
   },
   "29-09-2026": {
-   "hasta": "13:12",
-   "actividades": 125,
+   "hasta": "13:22",
+   "actividades": 126,
    "tecnicos": 31,
    "estados": {
-    "No Realizada": 15,
-    "Completado": 33,
-    "Iniciado": 18,
-    "Pendiente": 53,
+    "No Realizada": 16,
+    "Completado": 34,
+    "Pendiente": 52,
     "Cancelado": 4,
-    "en ruta": 2
+    "Iniciado": 17,
+    "en ruta": 3
    },
-   "rgu": 184.1,
+   "rgu": 185.1,
    "caidas_total": 9,
    "caidas_activas": 9,
    "caidas_resueltas": 0,
-   "nuevas": 26,
+   "nuevas": 27,
    "al_bucket": 35,
-   "repetidas": 30,
+   "repetidas": 31,
    "reagendadas": 3,
    "detalle": {
     "caidas": [
@@ -13210,6 +13210,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3O489K5J",
+      "tec": "LEONEL HERNÁNDEZ OJE",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "13:20",
+      "d": "PJE 14 875 DEPTO 12, QUILPUE",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3O47O0S7",
       "tec": "YENDER BOSCAN CADENAS",
@@ -13476,7 +13485,7 @@
       "f": "13-16",
       "hi": "13:04",
       "d": "TORBENITA 2643, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "ALFREDO ALCAYAGA F",
       "visitas": 1,
       "ult_fecha": "26-09-2026",
@@ -13486,7 +13495,7 @@
       "o": "1-3O3LTVNP",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:47",
+      "hi": "16:00",
       "d": "LAS CAMELIAS 2525 CASA B, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -13630,7 +13639,7 @@
       "o": "1-3O437RHC",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:14",
+      "hi": "14:45",
       "d": "HUMBOLD 01192 CASA 1, QUILPUE",
       "e": "Pendiente",
       "tec": "JORDAN ROA PEREZ",
@@ -13698,6 +13707,18 @@
       "ult_cierre": "Direccion incorrecta"
      },
      {
+      "o": "1-3O489K5J",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "13:20",
+      "d": "PJE 14 875 DEPTO 12, QUILPUE",
+      "e": "Iniciado",
+      "tec": "LEONEL HERNÁNDEZ OJE",
+      "visitas": 1,
+      "ult_fecha": "15-09-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3O3MFFHS",
       "cat": "Reparación",
       "f": "10-13",
@@ -13725,7 +13746,7 @@
       "o": "1-3O01LHNH",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "15:18",
+      "hi": "15:47",
       "d": "AVIADOR ACEVEDO 792, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
@@ -13785,7 +13806,7 @@
       "o": "1-3O2E2EYP",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:27",
+      "hi": "14:45",
       "d": "CALLE HERALDO ORREGO 3011 DEPTO 106, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -13821,10 +13842,10 @@
       "o": "1-3O3C3DHB",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "14:03",
+      "hi": "13:25",
       "d": "MADRID 1050 CASA 14, VILLA ALEMANA",
       "e": "Pendiente",
-      "tec": "JEAN ROODLY ORELIEN",
+      "tec": "JOSE PEREZ RANGEL",
       "desde": "28-09-2026"
      },
      {
@@ -13840,5 +13861,5 @@
    }
   }
  },
- "generado": "29-09-2026 13:12"
+ "generado": "29-09-2026 13:22"
 }
