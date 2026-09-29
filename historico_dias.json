@@ -13106,19 +13106,19 @@
    }
   },
   "29-09-2026": {
-   "hasta": "09:29",
-   "actividades": 98,
+   "hasta": "09:34",
+   "actividades": 101,
    "tecnicos": 37,
    "estados": {
-    "en ruta": 23,
-    "Pendiente": 73,
+    "Pendiente": 74,
+    "en ruta": 25,
     "Cancelado": 2
    },
-   "rgu": 143.0,
+   "rgu": 146.0,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
-   "nuevas": 3,
+   "nuevas": 4,
    "al_bucket": 2,
    "repetidas": 29,
    "reagendadas": 3,
@@ -13144,6 +13144,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3O40OWB0",
+      "tec": "YENDER BOSCAN CADENAS",
+      "cat": "Reparación",
+      "f": "10-13",
+      "hi": "11:36",
+      "d": "GABRIEL GONZALEZ VIDELA 1555, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3O382JJD",
       "tec": "ELIAS ARMIJO L",
@@ -13177,7 +13186,7 @@
       "o": "1-3O3P2WCW",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "10:22",
+      "hi": "11:25",
       "d": "SERENA 1020 DEPTO 11, QUILPUE",
       "e": "Pendiente",
       "tec": "ALEXIS JARA",
@@ -13189,7 +13198,7 @@
       "o": "1-3O38XVU2",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "14:41",
       "d": "PJE QUILLAGUA 2710 EDIF. Y DEPTO 102, QUILPUE",
       "e": "Pendiente",
       "tec": "ALEXIS JARA",
@@ -13404,9 +13413,9 @@
       "o": "1-3O3MFFHS",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:42",
       "d": "BUENOS AIRES 1403, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "LUIS GATICA DAVILA",
       "visitas": 1,
       "ult_fecha": "05-09-2026",
@@ -13416,7 +13425,7 @@
       "o": "1-3O2GEM86",
       "cat": "Alta Traslado",
       "f": "10-13",
-      "hi": "10:58",
+      "hi": "10:40",
       "d": "LAS PETUNIAS 1650 CASA 64, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
@@ -13555,5 +13564,5 @@
    }
   }
  },
- "generado": "29-09-2026 09:29"
+ "generado": "29-09-2026 09:34"
 }
