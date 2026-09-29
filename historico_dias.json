@@ -13106,24 +13106,24 @@
    }
   },
   "29-09-2026": {
-   "hasta": "12:37",
-   "actividades": 109,
+   "hasta": "12:42",
+   "actividades": 115,
    "tecnicos": 31,
    "estados": {
-    "No Realizada": 11,
+    "No Realizada": 12,
     "Completado": 26,
-    "Pendiente": 46,
-    "en ruta": 4,
-    "Iniciado": 19,
-    "Cancelado": 3
+    "Pendiente": 53,
+    "Iniciado": 20,
+    "Cancelado": 3,
+    "en ruta": 1
    },
-   "rgu": 157.1,
+   "rgu": 168.6,
    "caidas_total": 9,
    "caidas_activas": 9,
    "caidas_resueltas": 0,
    "nuevas": 22,
    "al_bucket": 34,
-   "repetidas": 29,
+   "repetidas": 30,
    "reagendadas": 3,
    "detalle": {
     "caidas": [
@@ -13230,12 +13230,12 @@
      },
      {
       "o": "1-3O44UO0K",
-      "tec": "NICOLAS MOYANO R",
+      "tec": "PABLO HERNANEZ FERNANDEZ",
       "cat": "Migración 2 Play",
       "f": "16-19",
       "hi": "17:49",
       "d": "LAGO LAS TORRES 170 DEPTO 904, QUILPUE",
-      "e": "Pendiente (ya no está)"
+      "e": "Pendiente"
      },
      {
       "o": "1-3O44BXNE",
@@ -13450,7 +13450,7 @@
       "o": "1-3O3LTVNP",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:16",
       "d": "LAS CAMELIAS 2525 CASA B, QUILPUE",
       "e": "Pendiente",
       "tec": "ANTONHY MORALES MENDOZA",
@@ -13474,7 +13474,7 @@
       "o": "1-3O19AR8O",
       "cat": "Modificación de Servicio",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "14:37",
       "d": "ANIBAL PINTO 986 DEPTO 42, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
@@ -13534,9 +13534,9 @@
       "o": "1-3O3FSJGP",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "12:35",
+      "hi": "12:40",
       "d": "INGENIERO HYATT 2551 CASA 82, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "HERNAN CORTES HERRERA",
       "visitas": 1,
       "ult_fecha": "21-09-2026",
@@ -13546,7 +13546,7 @@
       "o": "1-3O3A28DX",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:33",
+      "hi": "14:38",
       "d": "ISLA MOCHA 990 CASA C, QUILPUE",
       "e": "Pendiente",
       "tec": "HERNAN CORTES HERRERA",
@@ -13558,7 +13558,7 @@
       "o": "1-3O42N6LF",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:15",
+      "hi": "16:20",
       "d": "ARTURUS 680, QUILPUE",
       "e": "Pendiente",
       "tec": "HERNAN CORTES HERRERA",
@@ -13567,10 +13567,22 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3O45LZUQ",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "12:56",
+      "d": "PJE GRANIZO 1449, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "visitas": 1,
+      "ult_fecha": "28-09-2026",
+      "ult_cierre": "Clte desiste motivo comercial"
+     },
+     {
       "o": "1-3O3BJKX0",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "16:28",
       "d": "BERLIN 1602 EDIF. D DEPTO 403, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOEL GUSTAVE GUSTA",
@@ -13629,7 +13641,7 @@
       "o": "1-3O3LZ5XG",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:39",
       "d": "AV VICEPRESIDENTE BDO LEIGHTON 1431 EDIF. 5 DEPTO 24, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -13792,5 +13804,5 @@
    }
   }
  },
- "generado": "29-09-2026 12:37"
+ "generado": "29-09-2026 12:42"
 }
