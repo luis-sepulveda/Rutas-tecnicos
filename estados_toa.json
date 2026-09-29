@@ -1,28 +1,120 @@
 {
-  "actualizado": "2026-09-29T08:43:59",
+  "actualizado": "2026-09-29T09:41:28",
   "resumen": {
-    "reagendada": 2
+    "sin informacion": 2
   },
   "estados": {
-    "1-3NJ3JKMO": {
-      "tec": "LUIS CASTRO TORRES",
-      "cat": "Migración 2 Play",
-      "franja_original": "13-16",
-      "d": "MANUEL BULNES 1140, QUILPUE",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3NJ3JKMO - 13-16-Migración-Migración-MANUEL BULNES 1140Mie, 30 Sep",
-      "franja_nueva": "13-16"
-    },
-    "1-3O3C3DHB": {
-      "tec": "LUIS GATICA DAVILA",
-      "cat": "Migración 2 Play",
+    "1-3O12MI6S": {
+      "tec": "CRISTOBAL SILVA LEIVA",
+      "cat": "Alta 1 Play",
       "franja_original": "10-13",
-      "d": "MADRID 1050 CASA 14, VILLA ALEMANA",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3O3C3DHB - 13-16-Migración-Migración-MADRID 1050 CASA 14",
-      "franja_nueva": "13-16"
+      "d": "CALLE VIA V3 1127 CASA 1 DEPTO 135, QUILPUE",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "CALLE VIA V3 1127",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3O0UD9GH",
+            "franja": "10-13",
+            "texto": "1-3O0UD9GH - 10-13-Alta-1 Play-CALLE VIA V3 1127 CASA 1 DEPTO 135Jue, 24 Sep"
+          },
+          {
+            "estado": "completada",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3NRH3UB3",
+            "franja": "16-19",
+            "texto": "1-3NRH3UB3 - 16-19-Alta-1 Play-CALLE VIA V3 1127 EDIF. 4 DEPTO 462Jue, 10 Sep"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3NPJFLCY",
+            "franja": "16-19",
+            "texto": "1-3NPJFLCY - 16-19-Alta-1 Play-CALLE VIA V3 1127 EDIF. 4 DEPTO 462Mie, 9 Sep"
+          },
+          {
+            "estado": "completada",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3NOON5H3",
+            "franja": "10-13",
+            "texto": "1-3NOON5H3 - 10-13-Alta-2 Play-CALLE VIA V3 1127 EDIF. 6 DEPTO 653Lun, 7 Sep"
+          },
+          {
+            "estado": "completada",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3NOWEDCO",
+            "franja": "10-13",
+            "texto": "1-3NOWEDCO - 10-13-Reparación-2 Play Servicio Degradado-CALLE VIA V3 1127 EDIF. 1 DEPTO 132Lun, 7 Sep"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3NOONGW8",
+            "franja": "16-19",
+            "texto": "1-3NOONGW8 - 16-19-Reparación-2 Play Servicio Degradado-CALLE VIA V3 1127 EDIF. 1 DEPTO 132Sab, 5 Sep"
+          }
+        ]
+      }
+    },
+    "1-3O3LV48K": {
+      "tec": "JOEL GUSTAVE GUSTA",
+      "cat": "Alta 2 Play",
+      "franja_original": "10-13",
+      "d": "PJE GRANIZO 1449, VILLA ALEMANA",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "PJE GRANIZO 1449",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3O3BADIA",
+            "franja": "16-19",
+            "texto": "1-3O3BADIA - 16-19-Alta-2 Play-PJE GRANIZO 1449Lun, 28 Sep"
+          },
+          {
+            "estado": "completada",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3MRQBEIH",
+            "franja": "10-13",
+            "texto": "1-3MRQBEIH - 10-13-Migración-Migración-PJE GRANIZO 1362Mie, 5 Ago"
+          },
+          {
+            "estado": "completada",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3N1H6KAH",
+            "franja": "13-16",
+            "texto": "1-3N1H6KAH - 13-16-Modificación de Servicio-Modificación-PJE GRANIZO 1362Mie, 5 Ago"
+          },
+          {
+            "estado": "completada",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3MWMPTNZ",
+            "franja": "10-13",
+            "texto": "1-3MWMPTNZ - 10-13-Migración-Migración-PJE GRANIZO 1455Sab, 1 Ago"
+          },
+          {
+            "estado": "completada",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3MVJAQ39",
+            "franja": "16-19",
+            "texto": "1-3MVJAQ39 - 16-19-Migración-Migración-PJE GRANIZO 1378Vie, 31 Jul"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3MTXCH7L",
+            "franja": "10-13",
+            "texto": "1-3MTXCH7L - 10-13-Migración-Migración-PJE GRANIZO 1378Mar, 28 Jul"
+          }
+        ]
+      }
     }
   }
 }
