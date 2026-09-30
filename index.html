@@ -5354,6 +5354,10 @@ const URL_NEGOCIOS = URL_HISTORIAL + '#negocios';
 const URL_METAS = 'https://luis-sepulveda.github.io/metas-tecnicos/';
 /* Tabla completa del historial, directo (26-09-2026): boton Historial */
 const URL_TABLA_HIST = URL_HISTORIAL + '#tabla';
+/* Quiebres (30-09-2026): vista "Quiebres por tecnico" del Dashboard de
+   Actividades, directo. El #quiebres lo maneja cargar() del index.html de
+   Actividades-diario; sin eso, abre la portada de meses. */
+const URL_QUIEBRES = URL_ACTIVIDADES + '#quiebres';
 
 /* ============ ESTA VIVO EL MONITOR? ============
    El monitor publica cada 5 minutos, asi que 15 sin novedad ya es senal de
@@ -6386,6 +6390,10 @@ function pintarPortada(){
        y abre DIRECTO la tabla completa del historial (#tabla), sin pasar por
        la pantalla de consulta. */
     +     '<a class="b-inf b-hist" href="' + URL_TABLA_HIST + '" target="_blank">Historial</a>'
+    /* Quiebres (30-09-2026, pedido de Luis): al lado de Historial, al final.
+       Abre directo "Quiebres por tecnico" (altas y migraciones por semana)
+       en otra pestana. Clase b-qb por si se quiere colorear. */
+    +     '<a class="b-inf b-qb" href="' + URL_QUIEBRES + '" target="_blank">Quiebres</a>'
     +   '</nav>'
     +   '<span class="pv-upd"><i></i><span class="upd"></span></span>'
     + '</header>'
