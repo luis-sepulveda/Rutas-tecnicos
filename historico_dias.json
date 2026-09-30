@@ -13947,27 +13947,36 @@
    }
   },
   "30-09-2026": {
-   "hasta": "11:21",
+   "hasta": "11:41",
    "actividades": 103,
    "tecnicos": 31,
    "estados": {
-    "Completado": 9,
-    "Iniciado": 25,
-    "Pendiente": 52,
+    "Completado": 12,
+    "Iniciado": 23,
+    "Pendiente": 51,
     "Cancelado": 1,
-    "en ruta": 5,
-    "No Realizada": 11
+    "en ruta": 2,
+    "No Realizada": 14
    },
-   "rgu": 153.5,
-   "caidas_total": 2,
-   "caidas_activas": 2,
+   "rgu": 152.0,
+   "caidas_total": 5,
+   "caidas_activas": 5,
    "caidas_resueltas": 0,
    "nuevas": 8,
    "al_bucket": 3,
-   "repetidas": 28,
-   "reagendadas": 3,
+   "repetidas": 27,
+   "reagendadas": 2,
    "detalle": {
     "caidas": [
+     {
+      "o": "1-3O4482K7",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "cat": "Migración 3 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "FREIRE 917 CASA 8, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3O4KMUHB",
       "tec": "JOSE ROJO A",
@@ -13984,6 +13993,24 @@
       "f": "16-19",
       "hi": "16:00",
       "d": "EL BAILARIN 2637, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3O41QX2D",
+      "tec": "LUIS CASTRO TORRES",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "GLACIAR GREY 2000 EDIF. B DEPTO 704, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3O41W278",
+      "tec": "SEBASTIAN DOSSOW A",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "16:23",
+      "d": "ACACIAS 390 CASA 29, VILLA ALEMANA",
       "e": "Pendiente"
      }
     ],
@@ -14040,7 +14067,7 @@
       "f": "10-13",
       "hi": "12:39",
       "d": "VALDIVIA 41 CASA A, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O387PNH",
@@ -14099,18 +14126,6 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3O4A65XI",
-      "cat": "Alta 2 Play",
-      "f": "10-13",
-      "hi": "12:48",
-      "d": "LOS CRISTALES 506 DEPTO 24, QUILPUE",
-      "e": "Pendiente",
-      "tec": "GEEYSER PEREZ O",
-      "visitas": 2,
-      "ult_fecha": "29-09-2026",
-      "ult_cierre": "Clte desiste motivo comercial"
-     },
-     {
       "o": "1-3O4F0HNY",
       "cat": "Reparación",
       "f": "10-13",
@@ -14159,10 +14174,22 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3O4A65XI",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "11:56",
+      "d": "LOS CRISTALES 506 DEPTO 24, QUILPUE",
+      "e": "en ruta",
+      "tec": "JORDAN ROA PEREZ",
+      "visitas": 2,
+      "ult_fecha": "29-09-2026",
+      "ult_cierre": "Clte desiste motivo comercial"
+     },
+     {
       "o": "1-3O48LJTT",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:47",
       "d": "TORBENITA 2643, QUILPUE",
       "e": "Pendiente",
       "tec": "JORDAN ROA PEREZ",
@@ -14198,9 +14225,9 @@
       "o": "1-3O4SZD47",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "11:33",
+      "hi": "11:24",
       "d": "VALDIVIA 41 CASA A, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JOSE ROJO A",
       "visitas": 1,
       "ult_fecha": "26-08-2026",
@@ -14222,7 +14249,7 @@
       "o": "1-3O13MH5B",
       "cat": "Modificación de Servicio",
       "f": "13-16",
-      "hi": "15:01",
+      "hi": "15:59",
       "d": "CAMINO DEL SOL 800 EDIF. E DEPTO 63, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE SALAS MEDINA",
@@ -14264,18 +14291,6 @@
       "tec": "KEVIN TAPIA RETAMAL",
       "visitas": 2,
       "ult_fecha": "26-09-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3O41QX2D",
-      "cat": "Alta 2 Play",
-      "f": "16-19",
-      "hi": "16:00",
-      "d": "GLACIAR GREY 2000 EDIF. B DEPTO 704, QUILPUE",
-      "e": "Pendiente",
-      "tec": "LUIS CASTRO TORRES",
-      "visitas": 1,
-      "ult_fecha": "29-09-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -14332,7 +14347,7 @@
       "f": "10-13",
       "hi": "09:42",
       "d": "LAGO LAS TORRES 170 DEPTO 904, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "NICOLAS MOYANO R",
       "visitas": 1,
       "ult_fecha": "29-09-2026",
@@ -14366,7 +14381,7 @@
       "o": "1-3O3IEYG6",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "14:02",
+      "hi": "14:00",
       "d": "BELGRANO 913 CASA A, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -14414,25 +14429,15 @@
       "o": "1-3O41R3YH",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "15:16",
+      "hi": "15:29",
       "d": "PJE LOS SUSPIROS 145, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
-      "desde": "29-09-2026"
-     },
-     {
-      "o": "1-3O41W278",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "16:23",
-      "d": "ACACIAS 390 CASA 29, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "SEBASTIAN DOSSOW A",
       "desde": "29-09-2026"
      }
     ]
    }
   }
  },
- "generado": "30-09-2026 11:21"
+ "generado": "30-09-2026 11:41"
 }
