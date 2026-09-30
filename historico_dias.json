@@ -13947,23 +13947,23 @@
    }
   },
   "30-09-2026": {
-   "hasta": "13:31",
-   "actividades": 121,
+   "hasta": "13:36",
+   "actividades": 124,
    "tecnicos": 31,
    "estados": {
-    "Completado": 37,
-    "Iniciado": 14,
+    "Completado": 38,
+    "Iniciado": 13,
     "Pendiente": 43,
+    "Suspendido": 2,
+    "Cancelado": 4,
     "No Realizada": 21,
-    "en ruta": 2,
-    "Cancelado": 3,
-    "Suspendido": 1
+    "en ruta": 3
    },
-   "rgu": 170.1,
+   "rgu": 173.1,
    "caidas_total": 7,
    "caidas_activas": 7,
    "caidas_resueltas": 0,
-   "nuevas": 14,
+   "nuevas": 16,
    "al_bucket": 11,
    "repetidas": 32,
    "reagendadas": 2,
@@ -14034,6 +14034,24 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3O50VO14",
+      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "13:34",
+      "d": "LAGO JANOSA 2675 DEPTO 33, VILLA ALEMANA",
+      "e": "Iniciado"
+     },
+     {
+      "o": "1-3O50VW61",
+      "tec": "DANIEL NAVARRETE E",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "13:47",
+      "d": "PORTO FINO 026, QUILPUE",
+      "e": "en ruta"
+     },
      {
       "o": "1-3O4ZFEKC",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -14168,7 +14186,7 @@
       "f": "13-16",
       "hi": "13:17",
       "d": "CAMINO DEL SOL 800 EDIF. E DEPTO 63, QUILPUE",
-      "e": "Iniciado",
+      "e": "Suspendido",
       "tec": "ANTONHY MORALES MENDOZA",
       "visitas": 1,
       "ult_fecha": "14-08-2026",
@@ -14178,7 +14196,7 @@
       "o": "1-3O4WI31J",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:24",
+      "hi": "15:57",
       "d": "ISLOTE SNIPE 975, QUILPUE",
       "e": "Pendiente",
       "tec": "ANTONHY MORALES MENDOZA",
@@ -14526,7 +14544,7 @@
       "o": "1-3O4FJ6PL",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "17:23",
+      "hi": "17:47",
       "d": "CUMMING 1040 CASA 6, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -14572,5 +14590,5 @@
    }
   }
  },
- "generado": "30-09-2026 13:31"
+ "generado": "30-09-2026 13:36"
 }
