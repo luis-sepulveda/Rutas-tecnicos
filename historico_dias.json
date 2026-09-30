@@ -13947,23 +13947,23 @@
    }
   },
   "30-09-2026": {
-   "hasta": "13:56",
-   "actividades": 127,
+   "hasta": "14:11",
+   "actividades": 129,
    "tecnicos": 31,
    "estados": {
-    "Completado": 43,
-    "Pendiente": 37,
+    "Completado": 45,
+    "Pendiente": 36,
     "Suspendido": 2,
     "Iniciado": 17,
     "Cancelado": 4,
-    "No Realizada": 21,
+    "No Realizada": 22,
     "en ruta": 3
    },
-   "rgu": 178.1,
+   "rgu": 182.1,
    "caidas_total": 7,
    "caidas_activas": 7,
    "caidas_resueltas": 0,
-   "nuevas": 18,
+   "nuevas": 19,
    "al_bucket": 11,
    "repetidas": 32,
    "reagendadas": 2,
@@ -14035,6 +14035,15 @@
     ],
     "nuevas": [
      {
+      "o": "1-3O51R3VV",
+      "tec": "JUAN ARRIAGADA C",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "14:25",
+      "d": "GABRIEL DAZAROLA 353 CASA D, VILLA ALEMANA",
+      "e": "en ruta"
+     },
+     {
       "o": "1-3O519YIK",
       "tec": "ANTONHY MORALES MENDOZA",
       "cat": "Modificación de Servicio",
@@ -14045,7 +14054,7 @@
      },
      {
       "o": "1-3O519BV6",
-      "tec": "LEONEL HERNÁNDEZ OJE",
+      "tec": "DANIEL NAVARRETE E",
       "cat": "Alta 2 Play",
       "f": "13-16",
       "hi": "16:19",
@@ -14059,7 +14068,7 @@
       "f": "13-16",
       "hi": "13:34",
       "d": "LAGO JANOSA 2675 DEPTO 33, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3O50VW61",
@@ -14276,7 +14285,7 @@
       "f": "16-19",
       "hi": "13:54",
       "d": "DAVID BEAR 142, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "GEEYSER PEREZ O",
       "visitas": 1,
       "ult_fecha": "30-09-2026",
@@ -14403,6 +14412,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3O4FJ6PL",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "16:24",
+      "d": "CUMMING 1040 CASA 6, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOSE ROJO A",
+      "visitas": 1,
+      "ult_fecha": "29-09-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3NY7N3P2",
       "cat": "Migración 2 Play",
       "f": "10-13",
@@ -14502,9 +14523,9 @@
       "o": "1-3O4UNSO8",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "13:41",
+      "hi": "14:01",
       "d": "PJE LOS MUSCARIS 54, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "MATÍAS JAQUE AG",
       "visitas": 1,
       "ult_fecha": "30-09-2026",
@@ -14559,18 +14580,6 @@
       "ult_cierre": "Direccion incorrecta"
      },
      {
-      "o": "1-3O4FJ6PL",
-      "cat": "Alta 2 Play",
-      "f": "16-19",
-      "hi": "17:47",
-      "d": "CUMMING 1040 CASA 6, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "SAMUEL FERNANDEZ VIDAL",
-      "visitas": 1,
-      "ult_fecha": "29-09-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
       "o": "1-3O4KQUV7",
       "cat": "Migración 1 Play",
       "f": "16-19",
@@ -14608,5 +14617,5 @@
    }
   }
  },
- "generado": "30-09-2026 13:56"
+ "generado": "30-09-2026 14:11"
 }
