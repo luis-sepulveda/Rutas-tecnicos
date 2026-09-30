@@ -13947,24 +13947,42 @@
    }
   },
   "30-09-2026": {
-   "hasta": "09:20",
-   "actividades": 93,
+   "hasta": "09:25",
+   "actividades": 94,
    "tecnicos": 32,
    "estados": {
-    "Pendiente": 88,
-    "en ruta": 5
+    "en ruta": 17,
+    "Pendiente": 77
    },
-   "rgu": 142.5,
+   "rgu": 144.5,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 2,
+   "nuevas": 4,
    "al_bucket": 0,
-   "repetidas": 23,
+   "repetidas": 24,
    "reagendadas": 3,
    "detalle": {
     "caidas": [],
     "nuevas": [
+     {
+      "o": "1-3O4SSLHF",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "cat": "Migración 2 Play",
+      "f": "10-13",
+      "hi": "12:05",
+      "d": "ORQUIDEAS 1041, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3O4SZD47",
+      "tec": "MARCELO GÓMEZ GÓME",
+      "cat": "Migración 1 Play",
+      "f": "10-13",
+      "hi": "12:39",
+      "d": "VALDIVIA 41 CASA A, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3O387PNH",
       "tec": "ELIAS ARMIJO L",
@@ -13989,9 +14007,9 @@
       "o": "1-3O46TPFE",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:33",
       "d": "LOS CRATEUS 2480, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "CESAR MENA OLIVEROS",
       "visitas": 1,
       "ult_fecha": "29-09-2026",
@@ -14154,6 +14172,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3O4SZD47",
+      "cat": "Migración 1 Play",
+      "f": "10-13",
+      "hi": "12:39",
+      "d": "VALDIVIA 41 CASA A, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "MARCELO GÓMEZ GÓME",
+      "visitas": 1,
+      "ult_fecha": "26-08-2026",
+      "ult_cierre": "Direccion no encontrada"
+     },
+     {
       "o": "1-3O4FMGM5",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -14193,9 +14223,9 @@
       "o": "1-3O4FVDJY",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:32",
       "d": "LAGO LAS TORRES 170 DEPTO 904, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "NICOLAS MOYANO R",
       "visitas": 1,
       "ult_fecha": "29-09-2026",
@@ -14241,7 +14271,7 @@
       "o": "1-3O4DCV5V",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "11:50",
+      "hi": "11:22",
       "d": "REINICKE 59 CASA 5, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -14267,9 +14297,9 @@
       "o": "1-3O429A7P",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:30",
       "d": "FELIU HURTADO 0369, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "ANTONHY MORALES MENDOZA",
       "desde": "29-09-2026"
      },
@@ -14297,5 +14327,5 @@
    }
   }
  },
- "generado": "30-09-2026 09:20"
+ "generado": "30-09-2026 09:25"
 }
