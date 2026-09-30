@@ -13947,21 +13947,21 @@
    }
   },
   "30-09-2026": {
-   "hasta": "16:57",
+   "hasta": "17:12",
    "actividades": 140,
    "tecnicos": 31,
    "estados": {
-    "Completado": 66,
-    "en ruta": 3,
+    "Completado": 67,
+    "Iniciado": 25,
     "Suspendido": 3,
-    "Iniciado": 24,
     "Cancelado": 4,
-    "No Realizada": 35,
-    "Pendiente": 5
+    "No Realizada": 36,
+    "en ruta": 3,
+    "Pendiente": 2
    },
    "rgu": 198.1,
-   "caidas_total": 8,
-   "caidas_activas": 8,
+   "caidas_total": 9,
+   "caidas_activas": 9,
    "caidas_resueltas": 0,
    "nuevas": 26,
    "al_bucket": 14,
@@ -13985,6 +13985,15 @@
       "f": "13-16",
       "hi": "15:00",
       "d": "ANCUD 750, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3O57E0LE",
+      "tec": "DANIEL NAVARRETE E",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "17:42",
+      "d": "VALENTIN LETELIER 1929, QUILPUE",
       "e": "Pendiente"
      },
      {
@@ -14050,7 +14059,7 @@
       "f": "16-19",
       "hi": "17:09",
       "d": "COVADONGA 1655, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3O57E0LE",
@@ -14077,7 +14086,7 @@
       "f": "16-19",
       "hi": "16:49",
       "d": "EPSILON 2030 EDIF. C DEPTO 24, QUILPUE",
-      "e": "Iniciado"
+      "e": "No Realizada"
      },
      {
       "o": "1-3O53AT5P",
@@ -14095,7 +14104,7 @@
       "f": "16-19",
       "hi": "16:20",
       "d": "MENA 1719, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O532050",
@@ -14321,7 +14330,7 @@
       "f": "13-16",
       "hi": "12:20",
       "d": "BELGRANO 913 CASA A, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "CRISTOBAL MIRANDA VALENC",
       "visitas": 1,
       "ult_fecha": "17-08-2026",
@@ -14669,7 +14678,7 @@
       "f": "16-19",
       "hi": "16:20",
       "d": "EPSILON 2030 EDIF. C DEPTO 24, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "YENDER BOSCAN CADENAS",
       "visitas": 1,
       "ult_fecha": "26-09-2026",
@@ -14701,5 +14710,5 @@
    }
   }
  },
- "generado": "30-09-2026 16:57"
+ "generado": "30-09-2026 17:12"
 }
