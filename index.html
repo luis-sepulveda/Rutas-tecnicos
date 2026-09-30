@@ -6393,7 +6393,10 @@ function pintarPortada(){
     /* Quiebres (30-09-2026, pedido de Luis): al lado de Historial, al final.
        Abre directo "Quiebres por tecnico" (altas y migraciones por semana)
        en otra pestana. Clase b-qb por si se quiere colorear. */
-    +     '<a class="b-inf b-qb" href="' + URL_QUIEBRES + '" target="_blank">Quiebres</a>'
+    /* (30-09-2026, tarde) el link lleva ?t=<hora> para que el navegador NO
+       use una copia guardada de Actividades: con la copia vieja no entendia
+       el #quiebres y abria la portada de meses (le paso a Luis). */
+    +     '<a class="b-inf b-qb" href="' + URL_ACTIVIDADES + '?t=' + Date.now() + '#quiebres" target="_blank">Quiebres</a>'
     +   '</nav>'
     +   '<span class="pv-upd"><i></i><span class="upd"></span></span>'
     + '</header>'
