@@ -13947,23 +13947,23 @@
    }
   },
   "30-09-2026": {
-   "hasta": "10:50",
-   "actividades": 103,
+   "hasta": "11:00",
+   "actividades": 104,
    "tecnicos": 31,
    "estados": {
     "Completado": 5,
-    "Iniciado": 25,
-    "Pendiente": 60,
+    "Iniciado": 27,
+    "Pendiente": 59,
+    "en ruta": 2,
     "Cancelado": 1,
-    "No Realizada": 9,
-    "en ruta": 3
+    "No Realizada": 10
    },
-   "rgu": 156.5,
+   "rgu": 158.0,
    "caidas_total": 1,
    "caidas_activas": 1,
    "caidas_resueltas": 0,
-   "nuevas": 7,
-   "al_bucket": 1,
+   "nuevas": 8,
+   "al_bucket": 2,
    "repetidas": 27,
    "reagendadas": 3,
    "detalle": {
@@ -13980,8 +13980,17 @@
     ],
     "nuevas": [
      {
+      "o": "1-3O4VJ6Q1",
+      "tec": "SEBASTIAN DOSSOW A",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "14:09",
+      "d": "LAGO JANOSA 2675 DEPTO 33, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3O4UL0R6",
-      "tec": "EDGAR VALERO C",
+      "tec": "ESTEBAN PIZARRO QUINTANA",
       "cat": "Reparación",
       "f": "13-16",
       "hi": "16:22",
@@ -14013,7 +14022,7 @@
       "f": "10-13",
       "hi": "12:05",
       "d": "ORQUIDEAS 1041, QUILPUE",
-      "e": "Pendiente"
+      "e": "Pendiente (ya no está)"
      },
      {
       "o": "1-3O4SZD47",
@@ -14057,10 +14066,22 @@
       "ult_cierre": "Orden mal generada"
      },
      {
+      "o": "1-3O4DCV5V",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "11:52",
+      "d": "REINICKE 59 CASA 5, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "EDGAR VALERO C",
+      "visitas": 1,
+      "ult_fecha": "29-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3O4E6I7G",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "14:47",
       "d": "VENECIA 307 CASA B, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "EDGAR VALERO C",
@@ -14084,7 +14105,7 @@
       "o": "1-3O4F0HNY",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "12:23",
+      "hi": "12:53",
       "d": "AZALEAS PONIENTE 2782, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JEAN ROODLY ORELIEN",
@@ -14093,10 +14114,22 @@
       "ult_cierre": "Ductos tapados"
      },
      {
+      "o": "1-3O2DW4I4",
+      "cat": "Migración 2 Play",
+      "f": "13-16",
+      "hi": "14:17",
+      "d": "MARIA MERCEDES 1482 EDIF. 3 DEPTO 101, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "visitas": 2,
+      "ult_fecha": "26-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3O2N6G1H",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "17:23",
       "d": "GARAY ALTO 825, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOEL GUSTAVE GUSTA",
@@ -14153,18 +14186,6 @@
       "ult_cierre": "Direccion no encontrada"
      },
      {
-      "o": "1-3O2DW4I4",
-      "cat": "Migración 2 Play",
-      "f": "13-16",
-      "hi": "17:24",
-      "d": "MARIA MERCEDES 1482 EDIF. 3 DEPTO 101, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOSE CASTRO P",
-      "visitas": 2,
-      "ult_fecha": "26-09-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3O4FJ04Q",
       "cat": "Migración 1 Play",
       "f": "10-13",
@@ -14182,7 +14203,7 @@
       "f": "10-13",
       "hi": "10:38",
       "d": "LAS YERBAS 1994, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JOSE SALAS MEDINA",
       "visitas": 2,
       "ult_fecha": "21-09-2026",
@@ -14192,7 +14213,7 @@
       "o": "1-3O13MH5B",
       "cat": "Modificación de Servicio",
       "f": "13-16",
-      "hi": "14:50",
+      "hi": "14:00",
       "d": "CAMINO DEL SOL 800 EDIF. E DEPTO 63, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE SALAS MEDINA",
@@ -14261,22 +14282,10 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3O4FMGM5",
-      "cat": "Alta 1 Play",
-      "f": "10-13",
-      "hi": "12:43",
-      "d": "MATURANA 988, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "MATIAS APELEO APELEO",
-      "visitas": 1,
-      "ult_fecha": "29-09-2026",
-      "ult_cierre": "Direccion incorrecta"
-     },
-     {
       "o": "1-3O4FJ6PL",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:18",
       "d": "CUMMING 1040 CASA 6, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -14288,9 +14297,9 @@
       "o": "1-3O4HPJHP",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:29",
+      "hi": "10:55",
       "d": "CALLE 1 1150 EDIF. 13 DEPTO 102, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "MATÍAS JAQUE AG",
       "visitas": 2,
       "ult_fecha": "21-09-2026",
@@ -14336,7 +14345,7 @@
       "o": "1-3O3IEYG6",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "14:04",
+      "hi": "14:02",
       "d": "BELGRANO 913 CASA A, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -14345,16 +14354,16 @@
       "ult_cierre": "Cliente Desiste"
      },
      {
-      "o": "1-3O4DCV5V",
+      "o": "1-3O4FMGM5",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:41",
-      "d": "REINICKE 59 CASA 5, VILLA ALEMANA",
-      "e": "Pendiente",
+      "hi": "11:11",
+      "d": "MATURANA 988, VILLA ALEMANA",
+      "e": "en ruta",
       "tec": "SAMUEL FERNANDEZ VIDAL",
       "visitas": 1,
       "ult_fecha": "29-09-2026",
-      "ult_cierre": "Sin moradores"
+      "ult_cierre": "Direccion incorrecta"
      },
      {
       "o": "1-3O4KQUV7",
@@ -14384,7 +14393,7 @@
       "o": "1-3O41R3YH",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "15:16",
       "d": "PJE LOS SUSPIROS 145, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
@@ -14404,5 +14413,5 @@
    }
   }
  },
- "generado": "30-09-2026 10:50"
+ "generado": "30-09-2026 11:00"
 }
