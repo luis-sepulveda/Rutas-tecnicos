@@ -13947,17 +13947,17 @@
    }
   },
   "30-09-2026": {
-   "hasta": "12:26",
+   "hasta": "12:41",
    "actividades": 102,
    "tecnicos": 31,
    "estados": {
-    "Completado": 21,
-    "Iniciado": 22,
-    "Pendiente": 38,
+    "Completado": 27,
+    "Iniciado": 17,
+    "Pendiente": 35,
+    "No Realizada": 18,
     "Cancelado": 2,
-    "en ruta": 1,
-    "No Realizada": 17,
-    "Suspendido": 1
+    "Suspendido": 1,
+    "en ruta": 2
    },
    "rgu": 144.6,
    "caidas_total": 6,
@@ -14063,12 +14063,12 @@
      },
      {
       "o": "1-3O4TWPZ0",
-      "tec": "JOSE PEREZ RANGEL",
+      "tec": "JOSE ROJO A",
       "cat": "Migración 3 Play",
       "f": "13-16",
       "hi": "16:07",
       "d": "SANTA ANA 839 CASA B, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3O4T553V",
@@ -14077,7 +14077,7 @@
       "f": "10-13",
       "hi": "12:11",
       "d": "SAN SEBASTIAN 940, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O4SSLHF",
@@ -14104,7 +14104,7 @@
       "f": "10-13",
       "hi": "10:00",
       "d": "LOS PINOS 1132, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3O47JDO4",
@@ -14121,7 +14121,7 @@
       "o": "1-3O13MH5B",
       "cat": "Modificación de Servicio",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "13:00",
       "d": "CAMINO DEL SOL 800 EDIF. E DEPTO 63, QUILPUE",
       "e": "Pendiente",
       "tec": "ANTONHY MORALES MENDOZA",
@@ -14152,18 +14152,6 @@
       "visitas": 1,
       "ult_fecha": "17-08-2026",
       "ult_cierre": "Cliente Desiste"
-     },
-     {
-      "o": "1-3O4DCV5V",
-      "cat": "Alta 1 Play",
-      "f": "10-13",
-      "hi": "14:00",
-      "d": "REINICKE 59 CASA 5, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "EDGAR VALERO C",
-      "visitas": 1,
-      "ult_fecha": "29-09-2026",
-      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3O4V9JJB",
@@ -14250,18 +14238,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3O4TWPZ0",
-      "cat": "Migración 3 Play",
-      "f": "13-16",
-      "hi": "15:22",
-      "d": "SANTA ANA 839 CASA B, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOSE PEREZ RANGEL",
-      "visitas": 1,
-      "ult_fecha": "01-08-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3O4SZD47",
       "cat": "Migración 1 Play",
       "f": "10-13",
@@ -14283,6 +14259,18 @@
       "tec": "JOSE ROJO A",
       "visitas": 1,
       "ult_fecha": "11-08-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3O4TWPZ0",
+      "cat": "Migración 3 Play",
+      "f": "13-16",
+      "hi": "12:44",
+      "d": "SANTA ANA 839 CASA B, VILLA ALEMANA",
+      "e": "en ruta",
+      "tec": "JOSE ROJO A",
+      "visitas": 1,
+      "ult_fecha": "01-08-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -14327,17 +14315,29 @@
       "f": "10-13",
       "hi": "10:49",
       "d": "LOS PINOS 1132, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "KEVIN TAPIA RETAMAL",
       "visitas": 2,
       "ult_fecha": "26-09-2026",
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3O4DCV5V",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "12:57",
+      "d": "REINICKE 59 CASA 5, VILLA ALEMANA",
+      "e": "en ruta",
+      "tec": "LEONEL HERNÁNDEZ OJE",
+      "visitas": 1,
+      "ult_fecha": "29-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3O2N6G1H",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:22",
+      "hi": "16:00",
       "d": "GARAY ALTO 825, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
@@ -14351,7 +14351,7 @@
       "f": "10-13",
       "hi": "10:55",
       "d": "CALLE 1 1150 EDIF. 13 DEPTO 102, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "MATÍAS JAQUE AG",
       "visitas": 2,
       "ult_fecha": "21-09-2026",
@@ -14445,7 +14445,7 @@
       "o": "1-3O41R3YH",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "13:33",
       "d": "PJE LOS SUSPIROS 145, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
@@ -14455,5 +14455,5 @@
    }
   }
  },
- "generado": "30-09-2026 12:26"
+ "generado": "30-09-2026 12:41"
 }
