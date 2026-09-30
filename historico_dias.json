@@ -13947,19 +13947,20 @@
    }
   },
   "30-09-2026": {
-   "hasta": "09:15",
-   "actividades": 88,
+   "hasta": "09:20",
+   "actividades": 93,
    "tecnicos": 32,
    "estados": {
-    "Pendiente": 88
+    "Pendiente": 88,
+    "en ruta": 5
    },
-   "rgu": 135.5,
+   "rgu": 142.5,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
    "nuevas": 2,
    "al_bucket": 0,
-   "repetidas": 21,
+   "repetidas": 23,
    "reagendadas": 3,
    "detalle": {
     "caidas": [],
@@ -13980,7 +13981,7 @@
       "f": "10-13",
       "hi": "10:00",
       "d": "ALEMPARTE 0545, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      }
     ],
     "repetidas": [
@@ -14057,6 +14058,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3O48LJTT",
+      "cat": "Migración 1 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "TORBENITA 2643, QUILPUE",
+      "e": "Pendiente",
+      "tec": "JORDAN ROA PEREZ",
+      "visitas": 2,
+      "ult_fecha": "29-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3O2DW4I4",
       "cat": "Migración 2 Play",
       "f": "13-16",
@@ -14084,7 +14097,7 @@
       "o": "1-3O46Q5JD",
       "cat": "Migración 3 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "17:58",
       "d": "SAN ENRIQUE (NODO 82) 550 CASA 4, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE PEREZ RANGEL",
@@ -14120,7 +14133,7 @@
       "o": "1-3NY7N3P2",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "10:54",
+      "hi": "12:22",
       "d": "LAS YERBAS 1994, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS CASTRO TORRES",
@@ -14235,6 +14248,18 @@
       "visitas": 1,
       "ult_fecha": "29-09-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3O4KQUV7",
+      "cat": "Migración 1 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "PERU 515 CASA 17, QUILPUE",
+      "e": "Pendiente",
+      "tec": "YENDER BOSCAN CADENAS",
+      "visitas": 1,
+      "ult_fecha": "29-09-2026",
+      "ult_cierre": "Cliente reagenda"
      }
     ],
     "reagendadas": [
@@ -14252,7 +14277,7 @@
       "o": "1-3O41R3YH",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "14:06",
+      "hi": "14:00",
       "d": "PJE LOS SUSPIROS 145, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
@@ -14272,5 +14297,5 @@
    }
   }
  },
- "generado": "30-09-2026 09:15"
+ "generado": "30-09-2026 09:20"
 }
