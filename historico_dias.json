@@ -13947,23 +13947,23 @@
    }
   },
   "30-09-2026": {
-   "hasta": "13:36",
-   "actividades": 124,
+   "hasta": "13:41",
+   "actividades": 126,
    "tecnicos": 31,
    "estados": {
-    "Completado": 38,
-    "Iniciado": 13,
-    "Pendiente": 43,
+    "Completado": 39,
+    "Pendiente": 41,
     "Suspendido": 2,
     "Cancelado": 4,
     "No Realizada": 21,
-    "en ruta": 3
+    "Iniciado": 15,
+    "en ruta": 4
    },
-   "rgu": 173.1,
+   "rgu": 177.1,
    "caidas_total": 7,
    "caidas_activas": 7,
    "caidas_resueltas": 0,
-   "nuevas": 16,
+   "nuevas": 18,
    "al_bucket": 11,
    "repetidas": 32,
    "reagendadas": 2,
@@ -14035,6 +14035,24 @@
     ],
     "nuevas": [
      {
+      "o": "1-3O519YIK",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "13:40",
+      "d": "CAMINO DEL SOL 800 EDIF. E DEPTO 63, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3O519BV6",
+      "tec": "LEONEL HERNÁNDEZ OJE",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "16:19",
+      "d": "ANCUD 750, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3O50VO14",
       "tec": "SAMUEL FERNANDEZ VIDAL",
       "cat": "Modificación de Servicio",
@@ -14077,7 +14095,7 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "TIERRAS ROJAS 923, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O4YUM58",
@@ -14196,7 +14214,7 @@
       "o": "1-3O4WI31J",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:57",
+      "hi": "15:47",
       "d": "ISLOTE SNIPE 975, QUILPUE",
       "e": "Pendiente",
       "tec": "ANTONHY MORALES MENDOZA",
@@ -14280,9 +14298,9 @@
       "o": "1-3O4E6I7G",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "14:35",
+      "hi": "13:38",
       "d": "VENECIA 307 CASA B, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "JEAN ROODLY ORELIEN",
       "visitas": 1,
       "ult_fecha": "09-09-2026",
@@ -14412,9 +14430,9 @@
       "o": "1-3O48LJTT",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "13:59",
       "d": "TORBENITA 2643, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JOSE SALAS MEDINA",
       "visitas": 2,
       "ult_fecha": "29-09-2026",
@@ -14484,9 +14502,9 @@
       "o": "1-3O4UNSO8",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "13:44",
+      "hi": "13:41",
       "d": "PJE LOS MUSCARIS 54, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "MATÍAS JAQUE AG",
       "visitas": 1,
       "ult_fecha": "30-09-2026",
@@ -14580,9 +14598,9 @@
       "o": "1-3O41R3YH",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "13:35",
+      "hi": "13:36",
       "d": "PJE LOS SUSPIROS 145, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "LUIS GATICA DAVILA",
       "desde": "29-09-2026"
      }
@@ -14590,5 +14608,5 @@
    }
   }
  },
- "generado": "30-09-2026 13:36"
+ "generado": "30-09-2026 13:41"
 }
