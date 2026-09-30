@@ -13947,21 +13947,21 @@
    }
   },
   "30-09-2026": {
-   "hasta": "09:50",
-   "actividades": 93,
+   "hasta": "10:00",
+   "actividades": 96,
    "tecnicos": 31,
    "estados": {
-    "Iniciado": 14,
+    "Iniciado": 25,
     "Pendiente": 67,
-    "en ruta": 12
+    "en ruta": 4
    },
-   "rgu": 142.5,
+   "rgu": 146.5,
    "caidas_total": 1,
    "caidas_activas": 1,
    "caidas_resueltas": 0,
    "nuevas": 5,
    "al_bucket": 1,
-   "repetidas": 23,
+   "repetidas": 24,
    "reagendadas": 3,
    "detalle": {
     "caidas": [
@@ -14005,12 +14005,12 @@
      },
      {
       "o": "1-3O387PNH",
-      "tec": "ELIAS ARMIJO L",
+      "tec": "KEVIN TAPIA RETAMAL",
       "cat": "Alta Traslado",
       "f": "10-13",
       "hi": "10:00",
       "d": "LOS PINOS 1132, QUILPUE",
-      "e": "Pendiente (ya no está)"
+      "e": "Pendiente"
      },
      {
       "o": "1-3O47JDO4",
@@ -14039,7 +14039,7 @@
       "o": "1-3O4E6I7G",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "14:19",
+      "hi": "14:12",
       "d": "VENECIA 307 CASA B, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "EDGAR VALERO C",
@@ -14120,18 +14120,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3O46Q5JD",
-      "cat": "Migración 3 Play",
-      "f": "16-19",
-      "hi": "17:58",
-      "d": "SAN ENRIQUE (NODO 82) 550 CASA 4, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOSE PEREZ RANGEL",
-      "visitas": 1,
-      "ult_fecha": "22-08-2026",
-      "ult_cierre": "Cliente Desiste"
-     },
-     {
       "o": "1-3O13MH5B",
       "cat": "Modificación de Servicio",
       "f": "13-16",
@@ -14156,10 +14144,22 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3O387PNH",
+      "cat": "Alta Traslado",
+      "f": "10-13",
+      "hi": "12:38",
+      "d": "LOS PINOS 1132, QUILPUE",
+      "e": "Pendiente",
+      "tec": "KEVIN TAPIA RETAMAL",
+      "visitas": 2,
+      "ult_fecha": "26-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3NY7N3P2",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "12:22",
+      "hi": "12:13",
       "d": "LAS YERBAS 1994, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS CASTRO TORRES",
@@ -14183,7 +14183,7 @@
       "o": "1-3O4SZD47",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "12:39",
+      "hi": "13:02",
       "d": "VALDIVIA 41 CASA A, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MARCELO GÓMEZ GÓME",
@@ -14192,10 +14192,22 @@
       "ult_cierre": "Direccion no encontrada"
      },
      {
+      "o": "1-3O46Q5JD",
+      "cat": "Migración 3 Play",
+      "f": "16-19",
+      "hi": "17:06",
+      "d": "SAN ENRIQUE (NODO 82) 550 CASA 4, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "MARCELO GÓMEZ GÓME",
+      "visitas": 1,
+      "ult_fecha": "22-08-2026",
+      "ult_cierre": "Cliente Desiste"
+     },
+     {
       "o": "1-3O4FMGM5",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "12:10",
+      "hi": "12:16",
       "d": "MATURANA 988, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -14255,9 +14267,9 @@
       "o": "1-3O44XLUO",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "09:57",
+      "hi": "09:58",
       "d": "AVENIDA BELLOTO 1080, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "PABLO HERNANEZ FERNANDEZ",
       "visitas": 4,
       "ult_fecha": "29-09-2026",
@@ -14279,7 +14291,7 @@
       "o": "1-3O4DCV5V",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "11:22",
+      "hi": "11:42",
       "d": "REINICKE 59 CASA 5, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -14335,5 +14347,5 @@
    }
   }
  },
- "generado": "30-09-2026 09:50"
+ "generado": "30-09-2026 10:00"
 }
