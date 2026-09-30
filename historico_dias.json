@@ -13947,24 +13947,43 @@
    }
   },
   "30-09-2026": {
-   "hasta": "09:25",
-   "actividades": 94,
+   "hasta": "09:35",
+   "actividades": 95,
    "tecnicos": 32,
    "estados": {
-    "en ruta": 17,
-    "Pendiente": 77
+    "en ruta": 21,
+    "Pendiente": 74
    },
-   "rgu": 144.5,
-   "caidas_total": 0,
-   "caidas_activas": 0,
+   "rgu": 145.5,
+   "caidas_total": 1,
+   "caidas_activas": 1,
    "caidas_resueltas": 0,
-   "nuevas": 4,
+   "nuevas": 5,
    "al_bucket": 0,
    "repetidas": 24,
    "reagendadas": 3,
    "detalle": {
-    "caidas": [],
+    "caidas": [
+     {
+      "o": "1-3O4AT08M",
+      "tec": "KEVIN TAPIA RETAMAL",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "EL BAILARIN 2637, QUILPUE",
+      "e": "Pendiente"
+     }
+    ],
     "nuevas": [
+     {
+      "o": "1-3O4T553V",
+      "tec": "JUAN ARRIAGADA C",
+      "cat": "Reparación",
+      "f": "10-13",
+      "hi": "12:11",
+      "d": "SAN SEBASTIAN 940, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3O4SSLHF",
       "tec": "ANTONHY MORALES MENDOZA",
@@ -14067,7 +14086,7 @@
       "o": "1-3O41Y9OU",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "11:00",
+      "hi": "10:35",
       "d": "LOS MAQUIS 1608 CASA A, QUILPUE",
       "e": "Pendiente",
       "tec": "JORDAN ROA PEREZ",
@@ -14211,7 +14230,7 @@
       "o": "1-3O4HPJHP",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "11:34",
+      "hi": "11:14",
       "d": "CALLE 1 1150 EDIF. 13 DEPTO 102, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATÍAS JAQUE AG",
@@ -14327,5 +14346,5 @@
    }
   }
  },
- "generado": "30-09-2026 09:25"
+ "generado": "30-09-2026 09:35"
 }
