@@ -14710,26 +14710,26 @@
    }
   },
   "01-10-2026": {
-   "hasta": "12:54",
-   "actividades": 136,
+   "hasta": "13:14",
+   "actividades": 137,
    "tecnicos": 33,
    "estados": {
-    "Completado": 28,
+    "Completado": 32,
+    "Pendiente": 60,
     "Iniciado": 21,
-    "Pendiente": 63,
     "No Realizada": 12,
+    "en ruta": 2,
     "Cancelado": 8,
-    "Suspendido": 2,
-    "en ruta": 2
+    "Suspendido": 2
    },
-   "rgu": 212.5,
-   "caidas_total": 7,
-   "caidas_activas": 7,
+   "rgu": 209.1,
+   "caidas_total": 8,
+   "caidas_activas": 8,
    "caidas_resueltas": 0,
-   "nuevas": 15,
+   "nuevas": 17,
    "al_bucket": 14,
    "repetidas": 30,
-   "reagendadas": 11,
+   "reagendadas": 10,
    "detalle": {
     "caidas": [
      {
@@ -14794,9 +14794,36 @@
       "hi": "15:16",
       "d": "HUMBOLD 1044, QUILPUE",
       "e": "Pendiente"
+     },
+     {
+      "o": "1-3O5BAZMX",
+      "tec": "MATÍAS JAQUE AG",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "16:27",
+      "d": "SEXTA 0786 EDIF. 3 DEPTO 301, VILLA ALEMANA",
+      "e": "Pendiente"
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3O5S68T9",
+      "tec": "PABLO HERNANEZ FERNANDEZ",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "13:08",
+      "d": "GENERAL CRUZ 440, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
+      "o": "1-3O5RVYAC",
+      "tec": "MARCELO GÓMEZ GÓME",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "13:13",
+      "d": "BEETHOVEN 2662, VILLA ALEMANA",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3O5PN2M7",
       "tec": "KEVIN TAPIA RETAMAL",
@@ -14822,7 +14849,7 @@
       "f": "13-16",
       "hi": "16:39",
       "d": "LOMAS DE MACUL 2743, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3O5NTPIO",
@@ -14894,7 +14921,7 @@
       "f": "10-13",
       "hi": "10:50",
       "d": "MADRID 353 CASA 2, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3O3MTZHV",
@@ -14940,7 +14967,7 @@
       "f": "10-13",
       "hi": "10:02",
       "d": "MADRID 353 CASA 2, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "ALFREDO ALCAYAGA F",
       "visitas": 1,
       "ult_fecha": "28-09-2026",
@@ -14950,7 +14977,7 @@
       "o": "1-3O3PJG51",
       "cat": "Migración 3 Play",
       "f": "16-19",
-      "hi": "17:05",
+      "hi": "17:06",
       "d": "PARGUAS 717, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -14962,7 +14989,7 @@
       "o": "1-3O4EVXBV",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:20",
+      "hi": "16:29",
       "d": "MANUEL BULNES 1369, QUILPUE",
       "e": "Pendiente",
       "tec": "ANTONHY MORALES MENDOZA",
@@ -14974,7 +15001,7 @@
       "o": "1-3O54JJ9S",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:54",
+      "hi": "17:59",
       "d": "ISLOTE SNIPE 975, QUILPUE",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
@@ -14986,7 +15013,7 @@
       "o": "1-3O57EKYI",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:10",
+      "hi": "16:35",
       "d": "ARAUCANOS 1839 DEPTO 11, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -15031,12 +15058,24 @@
       "ult_cierre": "Direccion incorrecta"
      },
      {
+      "o": "1-3O5RLYNN",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "18:01",
+      "d": "VOLCAN LICANCABUR 2163, QUILPUE",
+      "e": "Pendiente",
+      "tec": "DANIEL NAVARRETE E",
+      "visitas": 1,
+      "ult_fecha": "15-08-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3O56G481",
       "cat": "Alta 1 Play",
       "f": "10-13",
       "hi": "09:52",
       "d": "SANTA MARIA 050, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "EDGAR VALERO C",
       "visitas": 1,
       "ult_fecha": "30-09-2026",
@@ -15105,7 +15144,7 @@
       "o": "1-3O50DVZY",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "12:38",
+      "hi": "14:11",
       "d": "REINICKE 59 CASA 5, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -15117,7 +15156,7 @@
       "o": "1-3O4DPX4S",
       "cat": "Alta Traslado",
       "f": "16-19",
-      "hi": "17:37",
+      "hi": "18:10",
       "d": "LAS PETUNIAS 1650 CASA 64, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -15141,7 +15180,7 @@
       "o": "1-3O58K13I",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "18:03",
+      "hi": "18:06",
       "d": "AV LOS CARRERA 549 CASA A, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS CASTRO TORRES",
@@ -15177,7 +15216,7 @@
       "o": "1-3O5NH6A5",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "15:11",
+      "hi": "15:20",
       "d": "AVENIDA BELLOTO 1205 CASA 40A, QUILPUE",
       "e": "Pendiente",
       "tec": "MARCO PEREZ G",
@@ -15189,9 +15228,9 @@
       "o": "1-3O4FJ6PL",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "13:01",
+      "hi": "13:03",
       "d": "CUMMING 1040 CASA 6, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "MATÍAS JAQUE AG",
       "visitas": 1,
       "ult_fecha": "29-09-2026",
@@ -15201,7 +15240,7 @@
       "o": "1-3O3ERQ0K",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "18:10",
+      "hi": "16:25",
       "d": "VALENTIN LETELIER 231, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATÍAS JAQUE AG",
@@ -15225,7 +15264,7 @@
       "o": "1-3O4VXDUC",
       "cat": "Migración 3 Play",
       "f": "13-16",
-      "hi": "16:00",
+      "hi": "16:06",
       "d": "AVENIDA QUINTA 709 DEPTO 303, QUILPUE",
       "e": "Pendiente",
       "tec": "NICOLAS MOYANO R",
@@ -15239,23 +15278,11 @@
       "f": "10-13",
       "hi": "10:33",
       "d": "GENERAL CRUZ 440, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "PABLO HERNANEZ FERNANDEZ",
       "visitas": 1,
       "ult_fecha": "10-08-2026",
       "ult_cierre": "Cliente Desiste"
-     },
-     {
-      "o": "1-3NUWXYHV",
-      "cat": "Migración 2 Play",
-      "f": "16-19",
-      "hi": "17:45",
-      "d": "CONDELL SUR 01565 CASA G, QUILPUE",
-      "e": "Pendiente",
-      "tec": "PABLO HERNANEZ FERNANDEZ",
-      "visitas": 1,
-      "ult_fecha": "20-08-2026",
-      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3O560K87",
@@ -15285,7 +15312,7 @@
       "o": "1-3O3O3WIZ",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:22",
+      "hi": "15:45",
       "d": "VOLCAN LASTARRIA 2623, QUILPUE",
       "e": "Pendiente",
       "tec": "YENDER BOSCAN CADENAS",
@@ -15309,7 +15336,7 @@
       "o": "1-3O4482K7",
       "cat": "Migración 3 Play",
       "f": "13-16",
-      "hi": "15:16",
+      "hi": "15:21",
       "d": "FREIRE 917 CASA 8, QUILPUE",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
@@ -15319,7 +15346,7 @@
       "o": "1-3O4AT08M",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:07",
       "d": "EL BAILARIN 2637, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -15329,7 +15356,7 @@
       "o": "1-3O41W278",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "13:15",
+      "hi": "13:19",
       "d": "ACACIAS 390 CASA 29, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "EDGAR VALERO C",
@@ -15348,7 +15375,7 @@
       "o": "1-3O519BV6",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:57",
+      "hi": "16:00",
       "d": "ANCUD 750, QUILPUE",
       "e": "Pendiente",
       "tec": "KEVIN TAPIA RETAMAL",
@@ -15368,9 +15395,9 @@
       "o": "1-3O4FJ6PL",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "13:01",
+      "hi": "13:03",
       "d": "CUMMING 1040 CASA 6, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "MATÍAS JAQUE AG",
       "desde": "30-09-2026"
      },
@@ -15380,19 +15407,9 @@
       "f": "10-13",
       "hi": "10:33",
       "d": "GENERAL CRUZ 440, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "PABLO HERNANEZ FERNANDEZ",
       "desde": "29-09-2026"
-     },
-     {
-      "o": "1-3NUWXYHV",
-      "cat": "Migración 2 Play",
-      "f": "16-19",
-      "hi": "17:45",
-      "d": "CONDELL SUR 01565 CASA G, QUILPUE",
-      "e": "Pendiente",
-      "tec": "PABLO HERNANEZ FERNANDEZ",
-      "desde": "21-09-2026"
      },
      {
       "o": "1-3O4H86DC",
@@ -15408,5 +15425,5 @@
    }
   }
  },
- "generado": "01-10-2026 12:54"
+ "generado": "01-10-2026 13:14"
 }
