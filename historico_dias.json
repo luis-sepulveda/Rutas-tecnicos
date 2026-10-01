@@ -14710,23 +14710,23 @@
    }
   },
   "01-10-2026": {
-   "hasta": "17:10",
-   "actividades": 147,
+   "hasta": "17:26",
+   "actividades": 148,
    "tecnicos": 33,
    "estados": {
     "Completado": 73,
-    "No Realizada": 32,
-    "en ruta": 4,
-    "Iniciado": 21,
-    "Pendiente": 3,
+    "No Realizada": 33,
+    "Iniciado": 25,
     "Cancelado": 10,
-    "Suspendido": 4
+    "Pendiente": 1,
+    "Suspendido": 4,
+    "en ruta": 2
    },
-   "rgu": 217.5,
+   "rgu": 218.5,
    "caidas_total": 11,
    "caidas_activas": 11,
    "caidas_resueltas": 0,
-   "nuevas": 22,
+   "nuevas": 23,
    "al_bucket": 18,
    "repetidas": 32,
    "reagendadas": 10,
@@ -14833,6 +14833,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3O60SYOY",
+      "tec": "DANIEL NAVARRETE E",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "18:09",
+      "d": "VOLCAN LICANCABUR 2163, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3O5UZM14",
       "tec": "CRISTOBAL SILVA LEIVA",
@@ -15253,7 +15262,7 @@
       "f": "13-16",
       "hi": "16:40",
       "d": "AVENIDA QUINTA 709 DEPTO 303, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "LEONEL HERNÁNDEZ OJE",
       "visitas": 1,
       "ult_fecha": "11-09-2026",
@@ -15520,5 +15529,5 @@
    }
   }
  },
- "generado": "01-10-2026 17:10"
+ "generado": "01-10-2026 17:26"
 }
