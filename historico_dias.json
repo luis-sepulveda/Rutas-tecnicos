@@ -14710,25 +14710,25 @@
    }
   },
   "01-10-2026": {
-   "hasta": "13:14",
+   "hasta": "13:19",
    "actividades": 137,
    "tecnicos": 33,
    "estados": {
-    "Completado": 32,
-    "Pendiente": 60,
-    "Iniciado": 21,
+    "Completado": 33,
+    "Pendiente": 59,
+    "Iniciado": 22,
     "No Realizada": 12,
-    "en ruta": 2,
     "Cancelado": 8,
-    "Suspendido": 2
+    "Suspendido": 2,
+    "en ruta": 1
    },
-   "rgu": 209.1,
+   "rgu": 208.2,
    "caidas_total": 8,
    "caidas_activas": 8,
    "caidas_resueltas": 0,
-   "nuevas": 17,
+   "nuevas": 18,
    "al_bucket": 14,
-   "repetidas": 30,
+   "repetidas": 29,
    "reagendadas": 10,
    "detalle": {
     "caidas": [
@@ -14807,6 +14807,15 @@
     ],
     "nuevas": [
      {
+      "o": "1-3O5SJYAH",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "13:18",
+      "d": "AVENIDA BELLOTO 1205 CASA 3A, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
       "o": "1-3O5S68T9",
       "tec": "PABLO HERNANEZ FERNANDEZ",
       "cat": "Modificación de Servicio",
@@ -14849,7 +14858,7 @@
       "f": "13-16",
       "hi": "16:39",
       "d": "LOMAS DE MACUL 2743, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O5NTPIO",
@@ -14989,7 +14998,7 @@
       "o": "1-3O4EVXBV",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "16:29",
+      "hi": "16:32",
       "d": "MANUEL BULNES 1369, QUILPUE",
       "e": "Pendiente",
       "tec": "ANTONHY MORALES MENDOZA",
@@ -15141,22 +15150,10 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3O50DVZY",
-      "cat": "Alta 1 Play",
-      "f": "10-13",
-      "hi": "14:11",
-      "d": "REINICKE 59 CASA 5, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOSE ROJO A",
-      "visitas": 2,
-      "ult_fecha": "30-09-2026",
-      "ult_cierre": "Direccion incorrecta"
-     },
-     {
       "o": "1-3O4DPX4S",
       "cat": "Alta Traslado",
       "f": "16-19",
-      "hi": "18:10",
+      "hi": "16:12",
       "d": "LAS PETUNIAS 1650 CASA 64, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -15385,7 +15382,7 @@
       "o": "1-3O4HLI4E",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:06",
+      "hi": "16:00",
       "d": "HAYDN 1690 EDIF. D DEPTO 404, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -15425,5 +15422,5 @@
    }
   }
  },
- "generado": "01-10-2026 13:14"
+ "generado": "01-10-2026 13:19"
 }
