@@ -1,9 +1,20 @@
 {
-  "actualizado": "2026-10-01T09:32:14",
+  "actualizado": "2026-10-01T09:54:10",
   "resumen": {
-    "reagendada": 1
+    "reagendada": 3,
+    "sin informacion": 1
   },
   "estados": {
+    "1-3O4Z024Y": {
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "cat": "Alta 1 Play",
+      "franja_original": "13-16",
+      "d": "COVADONGA 1443 DEPTO 32, QUILPUE",
+      "estado": "reagendada",
+      "color": "rgb(255, 222, 0)",
+      "detalle": "1-3O4Z024Y - 10-13-Alta-1 Play-COVADONGA 1443 DEPTO 32Sab, 3 Oct",
+      "franja_nueva": "10-13"
+    },
     "1-3O5A1Z9P": {
       "tec": "JOEL GUSTAVE GUSTA",
       "cat": "Alta 2 Play",
@@ -13,6 +24,72 @@
       "color": "rgb(255, 222, 0)",
       "detalle": "1-3O5A1Z9P - 16-19-Alta-2 Play-EL MIRADOR 741 CASA 12Sab, 3 Oct",
       "franja_nueva": "16-19"
+    },
+    "1-3O539YEC": {
+      "tec": "JOSE ROJO A",
+      "cat": "Migración 3 Play",
+      "franja_original": "10-13",
+      "d": "LAS ACACIAS 749 EDIF. 8 DEPTO 821, VILLA ALEMANA",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "LAS ACACIAS 749",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "reagendada",
+            "color": "rgb(255, 222, 0)",
+            "ot": "1-3O5DUVGI",
+            "franja": "13-16",
+            "texto": "1-3O5DUVGI - 13-16-Migración-Migración-LAS ACACIAS 749 EDIF. 2 DEPTO 214Sab, 3 Oct"
+          },
+          {
+            "estado": "reagendada",
+            "color": "rgb(255, 222, 0)",
+            "ot": "1-3O4ZCXVS",
+            "franja": "10-13",
+            "texto": "1-3O4ZCXVS - 10-13-Migración-Migración-LAS ACACIAS 749 EDIF. 7 DEPTO 754"
+          },
+          {
+            "estado": "completada",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3O4E5SKS",
+            "franja": "10-13",
+            "texto": "1-3O4E5SKS - 10-13-Migración-Migración-LAS ACACIAS 749 EDIF. 4 DEPTO 434Mie, 30 Sep"
+          },
+          {
+            "estado": "completada",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3O4XKA1C",
+            "franja": "10-13",
+            "texto": "1-3O4XKA1C - 10-13-Modificación de Servicio-Modificación-LAS ACACIAS 749 EDIF. 4 DEPTO 434Mie, 30 Sep"
+          },
+          {
+            "estado": "completada",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3O2M291C",
+            "franja": "10-13",
+            "texto": "1-3O2M291C - 10-13-Alta-1 Play-LAS ACACIAS 749 EDIF. 7 DEPTO 713Lun, 28 Sep"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3NYILCFR",
+            "franja": "10-13",
+            "texto": "1-3NYILCFR - 10-13-Migración-Migración-LAS ACACIAS 749 EDIF. 7 DEPTO 712Sab, 26 Sep"
+          }
+        ]
+      }
+    },
+    "1-3O4VSA7A": {
+      "tec": "JOSE ROJO A",
+      "cat": "Modificación de Servicio",
+      "franja_original": "16-19",
+      "d": "GARCIA 340, VILLA ALEMANA",
+      "estado": "reagendada",
+      "color": "rgb(255, 222, 0)",
+      "detalle": "1-3O4VSA7A - 10-13-Modificación de Servicio-Modificación-GARCIA 340Vie, 2 Oct",
+      "franja_nueva": "10-13"
     }
   }
 }
