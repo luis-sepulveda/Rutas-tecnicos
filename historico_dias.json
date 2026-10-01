@@ -14710,23 +14710,23 @@
    }
   },
   "01-10-2026": {
-   "hasta": "14:40",
-   "actividades": 140,
+   "hasta": "14:45",
+   "actividades": 141,
    "tecnicos": 33,
    "estados": {
-    "Completado": 50,
-    "Iniciado": 16,
-    "Pendiente": 43,
-    "No Realizada": 16,
+    "Completado": 51,
+    "No Realizada": 17,
     "en ruta": 4,
+    "Pendiente": 41,
+    "Iniciado": 17,
     "Cancelado": 8,
     "Suspendido": 3
    },
-   "rgu": 210.3,
+   "rgu": 210.4,
    "caidas_total": 11,
    "caidas_activas": 11,
    "caidas_resueltas": 0,
-   "nuevas": 21,
+   "nuevas": 22,
    "al_bucket": 14,
    "repetidas": 30,
    "reagendadas": 9,
@@ -14834,6 +14834,15 @@
     ],
     "nuevas": [
      {
+      "o": "1-3O5UZM14",
+      "tec": "CRISTOBAL SILVA LEIVA",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "14:43",
+      "d": "FELIU HURTADO 0615, QUILPUE",
+      "e": "en ruta"
+     },
+     {
       "o": "1-3O5U0XIY",
       "tec": "JOSE SALAS MEDINA",
       "cat": "Modificación de Servicio",
@@ -14867,7 +14876,7 @@
       "f": "13-16",
       "hi": "13:18",
       "d": "AVENIDA BELLOTO 1205 CASA 3A, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3O5S68T9",
@@ -15020,7 +15029,7 @@
       "f": "13-16",
       "hi": "14:16",
       "d": "VINA DEL MAR 037, QUILPUE",
-      "e": "Iniciado"
+      "e": "No Realizada"
      }
     ],
     "repetidas": [
@@ -15040,9 +15049,9 @@
       "o": "1-3O3PJG51",
       "cat": "Migración 3 Play",
       "f": "16-19",
-      "hi": "17:04",
+      "hi": "15:08",
       "d": "PARGUAS 717, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "ALFREDO ALCAYAGA F",
       "visitas": 1,
       "ult_fecha": "01-09-2026",
@@ -15052,7 +15061,7 @@
       "o": "1-3O4EVXBV",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "17:12",
+      "hi": "17:11",
       "d": "MANUEL BULNES 1369, QUILPUE",
       "e": "Pendiente",
       "tec": "ANTONHY MORALES MENDOZA",
@@ -15100,7 +15109,7 @@
       "o": "1-3O5LZ5SI",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:41",
+      "hi": "15:45",
       "d": "MARGA MARGA 1544 CASA B, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
@@ -15112,7 +15121,7 @@
       "o": "1-3O516FMF",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "19:22",
+      "hi": "19:26",
       "d": "LAS ROSAS 859, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
@@ -15243,7 +15252,7 @@
       "o": "1-3O58K13I",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "16:08",
+      "hi": "16:02",
       "d": "AV LOS CARRERA 549 CASA A, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS CASTRO TORRES",
@@ -15267,7 +15276,7 @@
       "o": "1-3O3O3WIZ",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:35",
+      "hi": "14:54",
       "d": "VOLCAN LASTARRIA 2623, QUILPUE",
       "e": "Pendiente",
       "tec": "MARCELO GÓMEZ GÓME",
@@ -15279,7 +15288,7 @@
       "o": "1-3O53IZUT",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:14",
+      "hi": "16:33",
       "d": "LASTRA 816 CASA B, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MARCELO GÓMEZ GÓME",
@@ -15478,5 +15487,5 @@
    }
   }
  },
- "generado": "01-10-2026 14:40"
+ "generado": "01-10-2026 14:45"
 }
