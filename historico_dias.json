@@ -14710,17 +14710,17 @@
    }
   },
   "01-10-2026": {
-   "hasta": "12:14",
+   "hasta": "12:34",
    "actividades": 125,
    "tecnicos": 33,
    "estados": {
-    "Completado": 23,
-    "Iniciado": 24,
-    "Pendiente": 57,
-    "en ruta": 3,
+    "Completado": 26,
+    "Iniciado": 25,
+    "Pendiente": 54,
+    "No Realizada": 11,
     "Cancelado": 7,
-    "No Realizada": 10,
-    "Suspendido": 1
+    "Suspendido": 1,
+    "en ruta": 1
    },
    "rgu": 189.5,
    "caidas_total": 7,
@@ -14799,12 +14799,12 @@
     "nuevas": [
      {
       "o": "1-3O5PN2M7",
-      "tec": "ALFREDO ALCAYAGA F",
+      "tec": "KEVIN TAPIA RETAMAL",
       "cat": "Alta 1 Play",
       "f": "10-13",
       "hi": "12:20",
       "d": "PJE 811 771, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3O5NEC3H",
@@ -14867,7 +14867,7 @@
       "f": "10-13",
       "hi": "10:00",
       "d": "SANTIAGO 945, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O4DPX4S",
@@ -14950,7 +14950,7 @@
       "o": "1-3O57EKYI",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:21",
+      "hi": "16:10",
       "d": "ARAUCANOS 1839 DEPTO 11, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -15054,10 +15054,22 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3O50DVZY",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "12:32",
+      "d": "REINICKE 59 CASA 5, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOSE ROJO A",
+      "visitas": 2,
+      "ult_fecha": "30-09-2026",
+      "ult_cierre": "Direccion incorrecta"
+     },
+     {
       "o": "1-3O4DPX4S",
       "cat": "Alta Traslado",
       "f": "16-19",
-      "hi": "16:01",
+      "hi": "17:31",
       "d": "LAS PETUNIAS 1650 CASA 64, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -15093,25 +15105,13 @@
       "o": "1-3O4WT9D8",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "12:08",
+      "hi": "12:15",
       "d": "PJE UNO 1238, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "LUIS MARTIN NUÑEZ",
       "visitas": 1,
       "ult_fecha": "30-09-2026",
       "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3O50DVZY",
-      "cat": "Alta 1 Play",
-      "f": "10-13",
-      "hi": "12:20",
-      "d": "REINICKE 59 CASA 5, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "MARCELO GÓMEZ GÓME",
-      "visitas": 2,
-      "ult_fecha": "30-09-2026",
-      "ult_cierre": "Direccion incorrecta"
      },
      {
       "o": "1-3O53IZUT",
@@ -15237,7 +15237,7 @@
       "o": "1-3O4482K7",
       "cat": "Migración 3 Play",
       "f": "13-16",
-      "hi": "14:59",
+      "hi": "15:16",
       "d": "FREIRE 917 CASA 8, QUILPUE",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
@@ -15257,7 +15257,7 @@
       "o": "1-3O41W278",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "12:18",
+      "hi": "12:48",
       "d": "ACACIAS 390 CASA 29, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "EDGAR VALERO C",
@@ -15306,5 +15306,5 @@
    }
   }
  },
- "generado": "01-10-2026 12:14"
+ "generado": "01-10-2026 12:34"
 }
