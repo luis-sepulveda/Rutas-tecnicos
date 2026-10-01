@@ -14710,15 +14710,15 @@
    }
   },
   "01-10-2026": {
-   "hasta": "13:49",
+   "hasta": "13:59",
    "actividades": 139,
    "tecnicos": 33,
    "estados": {
-    "Completado": 39,
-    "Pendiente": 58,
+    "Completado": 40,
+    "Pendiente": 55,
     "Iniciado": 17,
-    "en ruta": 1,
-    "No Realizada": 14,
+    "en ruta": 2,
+    "No Realizada": 15,
     "Cancelado": 8,
     "Suspendido": 2
    },
@@ -14826,12 +14826,12 @@
     "nuevas": [
      {
       "o": "1-3O5TDFJ4",
-      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "tec": "JOSE PEREZ RANGEL",
       "cat": "Modificación de Servicio",
       "f": "13-16",
       "hi": "15:07",
       "d": "SAN ENRIQUE (NODO 82) 550 CASA 4, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O5TE6WW",
@@ -15106,7 +15106,7 @@
       "o": "1-3O5RLYNN",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "18:01",
+      "hi": "17:54",
       "d": "VOLCAN LICANCABUR 2163, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -15186,6 +15186,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3O5TDFJ4",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "13:51",
+      "d": "SAN ENRIQUE (NODO 82) 550 CASA 4, VILLA ALEMANA",
+      "e": "Iniciado",
+      "tec": "JOSE PEREZ RANGEL",
+      "visitas": 1,
+      "ult_fecha": "22-08-2026",
+      "ult_cierre": "Cliente Desiste"
+     },
+     {
       "o": "1-3O4DPX4S",
       "cat": "Alta Traslado",
       "f": "16-19",
@@ -15227,7 +15239,7 @@
       "f": "10-13",
       "hi": "12:15",
       "d": "PJE UNO 1238, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "LUIS MARTIN NUÑEZ",
       "visitas": 1,
       "ult_fecha": "30-09-2026",
@@ -15342,18 +15354,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3O5TDFJ4",
-      "cat": "Modificación de Servicio",
-      "f": "13-16",
-      "hi": "15:07",
-      "d": "SAN ENRIQUE (NODO 82) 550 CASA 4, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "SAMUEL FERNANDEZ VIDAL",
-      "visitas": 1,
-      "ult_fecha": "22-08-2026",
-      "ult_cierre": "Cliente Desiste"
-     },
-     {
       "o": "1-3O4FLVIU",
       "cat": "Upgrade promoción",
       "f": "10-13",
@@ -15391,7 +15391,7 @@
       "o": "1-3O4AT08M",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:07",
+      "hi": "16:00",
       "d": "EL BAILARIN 2637, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -15460,7 +15460,7 @@
       "o": "1-3O4H86DC",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "17:16",
       "d": "GABRIEL DAZAROLA 312, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -15470,5 +15470,5 @@
    }
   }
  },
- "generado": "01-10-2026 13:49"
+ "generado": "01-10-2026 13:59"
 }
