@@ -6243,7 +6243,11 @@ function pintarPortada(){
   const hoy = (typeof FECHA_DATOS !== 'undefined' && FECHA_DATOS)
     && FECHA_DATOS.toDateString() === new Date().toDateString();
   const pct = filas.length ? Math.round(1000*comp/filas.length)/10 : 0;
-  const nTec = Object.keys(DB || {}).length;
+  /* 01-10-2026: solo cuentan los tecnicos con alguna orden NO cancelada
+     (igual que dotacion.py). Caso Elias Armijo: una sola repa cancelada. */
+  const nTec = Object.keys(DB || {}).filter(function(t){
+    return (DB[t] || []).some(function(o){ return o.e !== 'Cancelado'; });
+  }).length;
 
   /* ---- cada cifra abre su detalle, el mismo que dentro del mapa ---- */
   const cif = (v, l, clase, est) =>
