@@ -14710,14 +14710,14 @@
    }
   },
   "01-10-2026": {
-   "hasta": "14:04",
+   "hasta": "14:09",
    "actividades": 139,
    "tecnicos": 33,
    "estados": {
     "Completado": 40,
-    "Pendiente": 54,
+    "en ruta": 6,
+    "Pendiente": 51,
     "Iniciado": 16,
-    "en ruta": 3,
     "No Realizada": 16,
     "Cancelado": 8,
     "Suspendido": 2
@@ -14726,10 +14726,10 @@
    "caidas_total": 10,
    "caidas_activas": 10,
    "caidas_resueltas": 0,
-   "nuevas": 20,
+   "nuevas": 21,
    "al_bucket": 14,
    "repetidas": 30,
-   "reagendadas": 10,
+   "reagendadas": 9,
    "detalle": {
     "caidas": [
      {
@@ -14824,6 +14824,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3O5U0XIY",
+      "tec": "JOSE SALAS MEDINA",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "14:06",
+      "d": "POPAYAN (P.MENA) 212, QUILPUE",
+      "e": "en ruta"
+     },
      {
       "o": "1-3O5TDFJ4",
       "tec": "JOSE PEREZ RANGEL",
@@ -15002,7 +15011,7 @@
       "f": "13-16",
       "hi": "14:16",
       "d": "VINA DEL MAR 037, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      }
     ],
     "repetidas": [
@@ -15022,7 +15031,7 @@
       "o": "1-3O3PJG51",
       "cat": "Migración 3 Play",
       "f": "16-19",
-      "hi": "17:06",
+      "hi": "17:03",
       "d": "PARGUAS 717, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -15034,7 +15043,7 @@
       "o": "1-3O4EVXBV",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "16:32",
+      "hi": "16:52",
       "d": "MANUEL BULNES 1369, QUILPUE",
       "e": "Pendiente",
       "tec": "ANTONHY MORALES MENDOZA",
@@ -15082,7 +15091,7 @@
       "o": "1-3O5LZ5SI",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:02",
+      "hi": "14:32",
       "d": "MARGA MARGA 1544 CASA B, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
@@ -15094,7 +15103,7 @@
       "o": "1-3O516FMF",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:43",
+      "hi": "18:13",
       "d": "LAS ROSAS 859, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
@@ -15201,7 +15210,7 @@
       "o": "1-3O4DPX4S",
       "cat": "Alta Traslado",
       "f": "16-19",
-      "hi": "16:12",
+      "hi": "16:25",
       "d": "LAS PETUNIAS 1650 CASA 64, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -15321,7 +15330,7 @@
       "o": "1-3O4VXDUC",
       "cat": "Migración 3 Play",
       "f": "13-16",
-      "hi": "16:19",
+      "hi": "16:48",
       "d": "AVENIDA QUINTA 709 DEPTO 303, QUILPUE",
       "e": "Pendiente",
       "tec": "NICOLAS MOYANO R",
@@ -15398,16 +15407,6 @@
       "desde": "30-09-2026"
      },
      {
-      "o": "1-3O41W278",
-      "cat": "Alta 1 Play",
-      "f": "10-13",
-      "hi": "14:29",
-      "d": "ACACIAS 390 CASA 29, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "EDGAR VALERO C",
-      "desde": "29-09-2026"
-     },
-     {
       "o": "1-3O41QX2D",
       "cat": "Alta 2 Play",
       "f": "16-19",
@@ -15470,5 +15469,5 @@
    }
   }
  },
- "generado": "01-10-2026 14:04"
+ "generado": "01-10-2026 14:09"
 }
