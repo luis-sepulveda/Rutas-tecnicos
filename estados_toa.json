@@ -1,10 +1,30 @@
 {
-  "actualizado": "2026-10-01T10:54:36",
+  "actualizado": "2026-10-01T11:24:56",
   "resumen": {
-    "reagendada": 3,
+    "reagendada": 5,
     "sin informacion": 1
   },
   "estados": {
+    "1-3O5NTPIO": {
+      "tec": "CESAR MENA OLIVEROS",
+      "cat": "Migración 3 Play",
+      "franja_original": "10-13",
+      "d": "VINA DEL MAR 74, QUILPUE",
+      "estado": "reagendada",
+      "color": "rgb(255, 222, 0)",
+      "detalle": "1-3O5NTPIO - 10-13-Migración-Migración-VINA DEL MAR 74Mar, 6 Oct",
+      "franja_nueva": "10-13"
+    },
+    "1-3O59MV0D": {
+      "tec": "CESAR MENA OLIVEROS",
+      "cat": "Alta 2 Play",
+      "franja_original": "16-19",
+      "d": "LAS AZUCENAS 1069, QUILPUE",
+      "estado": "reagendada",
+      "color": "rgb(255, 222, 0)",
+      "detalle": "1-3O59MV0D - 10-13-Alta-2 Play-LAS AZUCENAS 1069Vie, 2 Oct",
+      "franja_nueva": "10-13"
+    },
     "1-3O4Z024Y": {
       "tec": "CRISTOBAL MIRANDA VALENC",
       "cat": "Alta 1 Play",
@@ -46,6 +66,13 @@
           {
             "estado": "reagendada",
             "color": "rgb(255, 222, 0)",
+            "ot": "1-3O5OHH1Q",
+            "franja": "16-19",
+            "texto": "1-3O5OHH1Q - 16-19-Modificación de Servicio-Modificación-LAS ACACIAS 749 EDIF. 3 DEPTO 353Vie, 2 Oct"
+          },
+          {
+            "estado": "reagendada",
+            "color": "rgb(255, 222, 0)",
             "ot": "1-3O4ZCXVS",
             "franja": "10-13",
             "texto": "1-3O4ZCXVS - 10-13-Migración-Migración-LAS ACACIAS 749 EDIF. 7 DEPTO 754"
@@ -70,13 +97,6 @@
             "ot": "1-3O2M291C",
             "franja": "10-13",
             "texto": "1-3O2M291C - 10-13-Alta-1 Play-LAS ACACIAS 749 EDIF. 7 DEPTO 713Lun, 28 Sep"
-          },
-          {
-            "estado": "no realizada",
-            "color": "rgb(96, 206, 206)",
-            "ot": "1-3NYILCFR",
-            "franja": "10-13",
-            "texto": "1-3NYILCFR - 10-13-Migración-Migración-LAS ACACIAS 749 EDIF. 7 DEPTO 712Sab, 26 Sep"
           }
         ]
       }
