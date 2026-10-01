@@ -14710,15 +14710,15 @@
    }
   },
   "01-10-2026": {
-   "hasta": "16:00",
+   "hasta": "16:05",
    "actividades": 145,
    "tecnicos": 33,
    "estados": {
-    "Completado": 61,
-    "No Realizada": 23,
+    "Completado": 63,
+    "No Realizada": 24,
+    "en ruta": 7,
     "Iniciado": 21,
-    "Pendiente": 22,
-    "en ruta": 5,
+    "Pendiente": 17,
     "Cancelado": 10,
     "Suspendido": 3
    },
@@ -14975,7 +14975,7 @@
       "f": "16-19",
       "hi": "16:59",
       "d": "LAS PETUNIAS 1650 CASA 64, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O4JCQXM",
@@ -15049,9 +15049,9 @@
       "o": "1-3O3PJG51",
       "cat": "Migración 3 Play",
       "f": "16-19",
-      "hi": "16:54",
+      "hi": "16:27",
       "d": "PARGUAS 717, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "ALFREDO ALCAYAGA F",
       "visitas": 1,
       "ult_fecha": "01-09-2026",
@@ -15061,9 +15061,9 @@
       "o": "1-3O58K13I",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:49",
+      "hi": "16:03",
       "d": "AV LOS CARRERA 549 CASA A, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "CESAR MENA OLIVEROS",
       "visitas": 1,
       "ult_fecha": "09-09-2026",
@@ -15097,7 +15097,7 @@
       "o": "1-3O5LZ5SI",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "16:17",
+      "hi": "16:24",
       "d": "MARGA MARGA 1544 CASA B, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
@@ -15182,7 +15182,7 @@
       "f": "13-16",
       "hi": "15:42",
       "d": "MANUEL BULNES 1369, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "FELIPE SILVA R",
       "visitas": 1,
       "ult_fecha": "29-09-2026",
@@ -15347,9 +15347,9 @@
       "o": "1-3O4DPX4S",
       "cat": "Alta Traslado",
       "f": "16-19",
-      "hi": "15:46",
+      "hi": "16:02",
       "d": "LAS PETUNIAS 1650 CASA 64, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "MATÍAS JAQUE AG",
       "visitas": 2,
       "ult_fecha": "29-09-2026",
@@ -15395,9 +15395,9 @@
       "o": "1-3O3ERQ0K",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "16:10",
+      "hi": "16:08",
       "d": "VALENTIN LETELIER 231, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "SAMUEL FERNANDEZ VIDAL",
       "visitas": 1,
       "ult_fecha": "28-09-2026",
@@ -15510,7 +15510,7 @@
       "o": "1-3O4AT08M",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:21",
+      "hi": "17:29",
       "d": "EL BAILARIN 2637, QUILPUE",
       "e": "Pendiente",
       "tec": "YENDER BOSCAN CADENAS",
@@ -15520,5 +15520,5 @@
    }
   }
  },
- "generado": "01-10-2026 16:00"
+ "generado": "01-10-2026 16:05"
 }
