@@ -14710,26 +14710,26 @@
    }
   },
   "01-10-2026": {
-   "hasta": "15:15",
-   "actividades": 142,
+   "hasta": "15:25",
+   "actividades": 135,
    "tecnicos": 33,
    "estados": {
-    "Completado": 55,
-    "No Realizada": 20,
-    "Pendiente": 31,
-    "en ruta": 7,
+    "Completado": 56,
+    "No Realizada": 22,
+    "en ruta": 5,
+    "Pendiente": 23,
     "Iniciado": 17,
     "Cancelado": 9,
     "Suspendido": 3
    },
-   "rgu": 212.4,
+   "rgu": 197.9,
    "caidas_total": 11,
    "caidas_activas": 11,
    "caidas_resueltas": 0,
    "nuevas": 22,
-   "al_bucket": 14,
-   "repetidas": 31,
-   "reagendadas": 10,
+   "al_bucket": 18,
+   "repetidas": 29,
+   "reagendadas": 7,
    "detalle": {
     "caidas": [
      {
@@ -14970,7 +14970,7 @@
      },
      {
       "o": "1-3O4DPX4S",
-      "tec": "JOSE ROJO A",
+      "tec": "MATÍAS JAQUE AG",
       "cat": "Alta Traslado",
       "f": "16-19",
       "hi": "16:59",
@@ -15049,7 +15049,7 @@
       "o": "1-3O3PJG51",
       "cat": "Migración 3 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:57",
       "d": "PARGUAS 717, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -15058,38 +15058,14 @@
       "ult_cierre": "Cliente Desiste"
      },
      {
-      "o": "1-3O4EVXBV",
-      "cat": "Alta 1 Play",
-      "f": "13-16",
-      "hi": "16:31",
-      "d": "MANUEL BULNES 1369, QUILPUE",
-      "e": "Pendiente",
-      "tec": "ANTONHY MORALES MENDOZA",
-      "visitas": 1,
-      "ult_fecha": "29-09-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
       "o": "1-3O54JJ9S",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "15:35",
+      "hi": "16:00",
       "d": "ISLOTE SNIPE 975, QUILPUE",
-      "e": "en ruta",
+      "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
       "visitas": 2,
-      "ult_fecha": "30-09-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3O57EKYI",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "18:32",
-      "d": "ARAUCANOS 1839 DEPTO 11, QUILPUE",
-      "e": "Pendiente",
-      "tec": "CRISTOBAL MIRANDA VALENC",
-      "visitas": 1,
       "ult_fecha": "30-09-2026",
       "ult_cierre": "Sin moradores"
      },
@@ -15109,7 +15085,7 @@
       "o": "1-3O5LZ5SI",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:48",
+      "hi": "15:42",
       "d": "MARGA MARGA 1544 CASA B, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
@@ -15128,6 +15104,18 @@
       "visitas": 1,
       "ult_fecha": "15-08-2026",
       "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3O516FMF",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "16:39",
+      "d": "LAS ROSAS 859, QUILPUE",
+      "e": "Pendiente",
+      "tec": "DANIEL NAVARRETE E",
+      "visitas": 5,
+      "ult_fecha": "26-09-2026",
+      "ult_cierre": "Direccion incorrecta"
      },
      {
       "o": "1-3O56G481",
@@ -15171,23 +15159,11 @@
       "f": "13-16",
       "hi": "15:11",
       "d": "PABLO RAMIREZ 0219, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "FELIPE SILVA R",
       "visitas": 2,
       "ult_fecha": "25-09-2026",
       "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3O516FMF",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "17:54",
-      "d": "LAS ROSAS 859, QUILPUE",
-      "e": "Pendiente",
-      "tec": "FELIPE SILVA R",
-      "visitas": 5,
-      "ult_fecha": "26-09-2026",
-      "ult_cierre": "Direccion incorrecta"
      },
      {
       "o": "1-3O41QX2D",
@@ -15225,18 +15201,6 @@
       "ult_cierre": "Cliente Desiste"
      },
      {
-      "o": "1-3O4DPX4S",
-      "cat": "Alta Traslado",
-      "f": "16-19",
-      "hi": "16:28",
-      "d": "LAS PETUNIAS 1650 CASA 64, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOSE ROJO A",
-      "visitas": 2,
-      "ult_fecha": "29-09-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3O5E0U7J",
       "cat": "Reparación",
       "f": "10-13",
@@ -15252,13 +15216,25 @@
       "o": "1-3O58K13I",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "16:02",
+      "hi": "16:36",
       "d": "AV LOS CARRERA 549 CASA A, QUILPUE",
       "e": "Pendiente",
-      "tec": "LUIS CASTRO TORRES",
+      "tec": "JOSE SALAS MEDINA",
       "visitas": 1,
       "ult_fecha": "09-09-2026",
       "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3O3NMT10",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "16:03",
+      "d": "CLAUDIO VICUNA 825, QUILPUE",
+      "e": "Pendiente",
+      "tec": "LUIS CASTRO TORRES",
+      "visitas": 1,
+      "ult_fecha": "28-09-2026",
+      "ult_cierre": "Direccion incorrecta"
      },
      {
       "o": "1-3O4WT9D8",
@@ -15273,16 +15249,16 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3NUWXYHV",
-      "cat": "Migración 2 Play",
-      "f": "16-19",
-      "hi": "17:32",
-      "d": "CONDELL SUR 01565 CASA G, QUILPUE",
+      "o": "1-3O4EVXBV",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "16:10",
+      "d": "MANUEL BULNES 1369, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
       "visitas": 1,
-      "ult_fecha": "20-08-2026",
-      "ult_cierre": "Sin moradores"
+      "ult_fecha": "29-09-2026",
+      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3O3O3WIZ",
@@ -15300,7 +15276,7 @@
       "o": "1-3O53IZUT",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:27",
+      "hi": "16:21",
       "d": "LASTRA 816 CASA B, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MARCELO GÓMEZ GÓME",
@@ -15314,7 +15290,7 @@
       "f": "13-16",
       "hi": "15:06",
       "d": "AVENIDA BELLOTO 1205 CASA 40A, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "MARCO PEREZ G",
       "visitas": 1,
       "ult_fecha": "10-08-2026",
@@ -15333,15 +15309,15 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3O3ERQ0K",
-      "cat": "Modificación de Servicio",
+      "o": "1-3O4DPX4S",
+      "cat": "Alta Traslado",
       "f": "16-19",
       "hi": "16:00",
-      "d": "VALENTIN LETELIER 231, VILLA ALEMANA",
+      "d": "LAS PETUNIAS 1650 CASA 64, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATÍAS JAQUE AG",
-      "visitas": 1,
-      "ult_fecha": "28-09-2026",
+      "visitas": 2,
+      "ult_fecha": "29-09-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -15351,18 +15327,6 @@
       "hi": "10:49",
       "d": "VALLE DEL PARAISO 2746, QUILPUE",
       "e": "Completado",
-      "tec": "NICOLAS MOYANO R",
-      "visitas": 1,
-      "ult_fecha": "11-09-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3O4VXDUC",
-      "cat": "Migración 3 Play",
-      "f": "13-16",
-      "hi": "16:38",
-      "d": "AVENIDA QUINTA 709 DEPTO 303, QUILPUE",
-      "e": "Pendiente",
       "tec": "NICOLAS MOYANO R",
       "visitas": 1,
       "ult_fecha": "11-09-2026",
@@ -15390,6 +15354,18 @@
       "tec": "RAFAEL VARGAS B",
       "visitas": 1,
       "ult_fecha": "30-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3O3ERQ0K",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "16:10",
+      "d": "VALENTIN LETELIER 231, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "visitas": 1,
+      "ult_fecha": "28-09-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -15427,16 +15403,6 @@
       "desde": "30-09-2026"
      },
      {
-      "o": "1-3O4AT08M",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "16:49",
-      "d": "EL BAILARIN 2637, QUILPUE",
-      "e": "Pendiente",
-      "tec": "DANIEL NAVARRETE E",
-      "desde": "30-09-2026"
-     },
-     {
       "o": "1-3O41QX2D",
       "cat": "Alta 2 Play",
       "f": "16-19",
@@ -15444,26 +15410,6 @@
       "e": "Cancelado",
       "tec": "JORDAN ROA PEREZ",
       "desde": "30-09-2026"
-     },
-     {
-      "o": "1-3O519BV6",
-      "cat": "Alta 2 Play",
-      "f": "16-19",
-      "hi": "17:35",
-      "d": "ANCUD 750, QUILPUE",
-      "e": "Pendiente",
-      "tec": "KEVIN TAPIA RETAMAL",
-      "desde": "30-09-2026"
-     },
-     {
-      "o": "1-3NUWXYHV",
-      "cat": "Migración 2 Play",
-      "f": "16-19",
-      "hi": "17:32",
-      "d": "CONDELL SUR 01565 CASA G, QUILPUE",
-      "e": "Pendiente",
-      "tec": "LUIS MARTIN NUÑEZ",
-      "desde": "21-09-2026"
      },
      {
       "o": "1-3O4HLI4E",
@@ -15499,15 +15445,15 @@
       "o": "1-3O4H86DC",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:15",
+      "hi": "16:00",
       "d": "GABRIEL DAZAROLA 312, VILLA ALEMANA",
       "e": "Pendiente",
-      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "tec": "RAFAEL VARGAS B",
       "desde": "30-09-2026"
      }
     ]
    }
   }
  },
- "generado": "01-10-2026 15:15"
+ "generado": "01-10-2026 15:25"
 }
