@@ -15529,16 +15529,16 @@
    }
   },
   "02-10-2026": {
-   "hasta": "11:44",
+   "hasta": "11:59",
    "actividades": 138,
    "tecnicos": 35,
    "estados": {
-    "Iniciado": 33,
-    "Pendiente": 83,
-    "Completado": 11,
-    "No Realizada": 6,
-    "en ruta": 1,
-    "Cancelado": 3,
+    "Iniciado": 30,
+    "Pendiente": 79,
+    "Completado": 14,
+    "No Realizada": 7,
+    "en ruta": 3,
+    "Cancelado": 4,
     "Suspendido": 1
    },
    "rgu": 206.6,
@@ -15547,7 +15547,7 @@
    "caidas_resueltas": 0,
    "nuevas": 12,
    "al_bucket": 5,
-   "repetidas": 30,
+   "repetidas": 31,
    "reagendadas": 8,
    "detalle": {
     "caidas": [
@@ -15784,12 +15784,36 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3O5O14JG",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "09:46",
+      "d": "PJE DEL JAZMIN 2096, QUILPUE",
+      "e": "Completado",
+      "tec": "DANIEL NAVARRETE E",
+      "visitas": 1,
+      "ult_fecha": "02-10-2026",
+      "ult_cierre": "Orden mal generada"
+     },
+     {
+      "o": "1-3O5CE8ZX",
+      "cat": "Migración 1 Play",
+      "f": "10-13",
+      "hi": "12:06",
+      "d": "PERU 515 CASA 17, QUILPUE",
+      "e": "en ruta",
+      "tec": "DANIEL NAVARRETE E",
+      "visitas": 2,
+      "ult_fecha": "30-09-2026",
+      "ult_cierre": "Zona Roja"
+     },
+     {
       "o": "1-3O47V8J4",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "12:24",
+      "hi": "12:05",
       "d": "LOS TREBOLES 50 CASA 27, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "EDGAR VALERO C",
       "visitas": 1,
       "ult_fecha": "29-09-2026",
@@ -15811,9 +15835,9 @@
       "o": "1-3O4U6A5I",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "11:49",
+      "hi": "11:59",
       "d": "CONDELL 89 CASA C, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JOEL GUSTAVE GUSTA",
       "visitas": 1,
       "ult_fecha": "30-09-2026",
@@ -15892,18 +15916,6 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3O5CE8ZX",
-      "cat": "Migración 1 Play",
-      "f": "10-13",
-      "hi": "12:02",
-      "d": "PERU 515 CASA 17, QUILPUE",
-      "e": "Pendiente",
-      "tec": "LUIS CASTRO TORRES",
-      "visitas": 2,
-      "ult_fecha": "30-09-2026",
-      "ult_cierre": "Zona Roja"
-     },
-     {
       "o": "1-3O4EI6NR",
       "cat": "Migración 2 Play",
       "f": "16-19",
@@ -15943,7 +15955,7 @@
       "o": "1-3O47YSJ7",
       "cat": "Migración 3 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:34",
       "d": "SAN MARTIN 1048 DEPTO 21, QUILPUE",
       "e": "Pendiente",
       "tec": "MARCO PEREZ G",
@@ -15955,7 +15967,7 @@
       "o": "1-3O4FHMH0",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:03",
+      "hi": "17:58",
       "d": "DEL PARQUE 304, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -15964,28 +15976,27 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3O6IDMUV",
-      "cat": "Alta 1 Play",
-      "f": "13-16",
-      "hi": "14:27",
-      "d": "LAS ROSAS 859, QUILPUE",
-      "e": "Pendiente",
-      "tec": "NICOLAS MOYANO R",
-      "visitas": 5,
-      "ult_fecha": "26-09-2026",
-      "ult_cierre": "Direccion incorrecta"
-     },
-     {
       "o": "1-3O5Z9V81",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:31",
+      "hi": "16:00",
       "d": "ANCUD 750, QUILPUE",
       "e": "Pendiente",
       "tec": "NICOLAS MOYANO R",
       "visitas": 1,
       "ult_fecha": "01-10-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3O6IDMUV",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "d": "LAS ROSAS 859, QUILPUE",
+      "e": "Cancelado",
+      "tec": "NICOLAS MOYANO R",
+      "visitas": 5,
+      "ult_fecha": "26-09-2026",
+      "ult_cierre": "Direccion incorrecta"
      },
      {
       "o": "1-3O5XQJ9H",
@@ -16064,7 +16075,7 @@
       "o": "1-3O41W278",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "11:59",
+      "hi": "12:03",
       "d": "ACACIAS 390 CASA 29, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
@@ -16074,7 +16085,7 @@
       "o": "1-3O3AUE91",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:40",
+      "hi": "15:50",
       "d": "LAS AMERICAS 1015 EDIF. 15 DEPTO 8, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOEL GUSTAVE GUSTA",
@@ -16144,5 +16155,5 @@
    }
   }
  },
- "generado": "02-10-2026 11:44"
+ "generado": "02-10-2026 11:59"
 }
