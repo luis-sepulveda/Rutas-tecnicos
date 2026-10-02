@@ -1,8 +1,9 @@
 {
-  "actualizado": "2026-10-02T10:39:36",
+  "actualizado": "2026-10-02T11:10:05",
   "resumen": {
     "?": 1,
-    "sin informacion": 1
+    "sin informacion": 2,
+    "reagendada": 1
   },
   "estados": {
     "1-3O619BXR": {
@@ -14,6 +15,72 @@
       "color": "rgb(255, 170, 170)",
       "detalle": "1-3O619BXR - 16-19-Upgrade promoción-Upgrade promoción-PJE NINA FRICK 390Sab, 3 Oct",
       "franja_nueva": "16-19"
+    },
+    "1-3O64BS3E": {
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "cat": "Alta 1 Play",
+      "franja_original": "16-19",
+      "d": "LAS ROSAS 859, QUILPUE",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "LAS ROSAS 859",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "cancelada",
+            "color": "rgb(128, 255, 128)",
+            "ot": "1-3O62OXCC",
+            "franja": "16-19",
+            "texto": "1-3O62OXCC - 16-19-Alta-1 Play-LAS ROSAS 859"
+          },
+          {
+            "estado": "reagendada",
+            "color": "rgb(255, 222, 0)",
+            "ot": "1-3O6IDMUV",
+            "franja": "13-16",
+            "texto": "1-3O6IDMUV - 13-16-Alta-1 Play-LAS ROSAS 859"
+          },
+          {
+            "estado": "cancelada",
+            "color": "rgb(128, 255, 128)",
+            "ot": "1-3O516FMF",
+            "franja": "16-19",
+            "texto": "1-3O516FMF - 16-19-Alta-1 Play-LAS ROSAS 859Jue, 1 Oct"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3O22EMBD",
+            "franja": "10-13",
+            "texto": "1-3O22EMBD - 10-13-Alta-1 Play-LAS ROSAS 859Sab, 26 Sep"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3O0EU8WW",
+            "franja": "16-19",
+            "texto": "1-3O0EU8WW - 16-19-Alta-1 Play-LAS ROSAS 859Vie, 25 Sep"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3NZX98TA",
+            "franja": "10-13",
+            "texto": "1-3NZX98TA - 10-13-Alta-1 Play-LAS ROSAS 859Mie, 23 Sep"
+          }
+        ]
+      }
+    },
+    "1-3O5QLEG9": {
+      "tec": "JOEL GUSTAVE GUSTA",
+      "cat": "Reparación",
+      "franja_original": "10-13",
+      "d": "EL CIRUELILLO 1477, VILLA ALEMANA",
+      "estado": "reagendada",
+      "color": "rgb(255, 222, 0)",
+      "detalle": "1-3O5QLEG9 - 10-13-Reparación-2 Play Servicio Degradado-EL CIRUELILLO 1477Sab, 3 Oct",
+      "franja_nueva": "10-13"
     },
     "1-3O5SNQYZ": {
       "tec": "JOSE ROJO A",
