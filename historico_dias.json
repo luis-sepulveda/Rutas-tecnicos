@@ -15529,23 +15529,23 @@
    }
   },
   "02-10-2026": {
-   "hasta": "15:55",
-   "actividades": 160,
+   "hasta": "16:00",
+   "actividades": 162,
    "tecnicos": 35,
    "estados": {
-    "Completado": 73,
-    "Iniciado": 19,
-    "Pendiente": 17,
+    "Completado": 75,
+    "Iniciado": 21,
+    "Pendiente": 16,
     "No Realizada": 27,
-    "en ruta": 9,
+    "en ruta": 8,
     "Cancelado": 10,
     "Suspendido": 5
    },
-   "rgu": 225.8,
+   "rgu": 226.9,
    "caidas_total": 5,
    "caidas_activas": 5,
    "caidas_resueltas": 0,
-   "nuevas": 23,
+   "nuevas": 24,
    "al_bucket": 15,
    "repetidas": 32,
    "reagendadas": 8,
@@ -15599,6 +15599,15 @@
     ],
     "nuevas": [
      {
+      "o": "1-3O6SCYN0",
+      "tec": "SEBASTIAN DOSSOW A",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "16:12",
+      "d": "ALCALDE RODOLFO GALLEGUILLOS 35 CASA 4, VILLA ALEMANA",
+      "e": "en ruta"
+     },
+     {
       "o": "1-3O6S0JQ8",
       "tec": "ALEXIS JARA",
       "cat": "Reparación",
@@ -15614,7 +15623,7 @@
       "f": "13-16",
       "hi": "15:39",
       "d": "LIVERPOOL 515, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3O6RJ8SH",
@@ -15767,7 +15776,7 @@
       "f": "16-19",
       "hi": "16:02",
       "d": "SEVILLA 168, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3O55NE20",
@@ -15918,9 +15927,9 @@
       "o": "1-3O3BXYCJ",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "15:31",
+      "hi": "16:00",
       "d": "CUMMING 1790 EDIF. DEPTO 22, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "FELIPE SILVA R",
       "visitas": 1,
       "ult_fecha": "26-09-2026",
@@ -16037,7 +16046,7 @@
       "o": "1-3O4EI6NR",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "16:27",
+      "hi": "16:15",
       "d": "BELLAVISTA 1138, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE PEREZ RANGEL",
@@ -16273,5 +16282,5 @@
    }
   }
  },
- "generado": "02-10-2026 15:55"
+ "generado": "02-10-2026 16:00"
 }
