@@ -15529,11 +15529,11 @@
    }
   },
   "02-10-2026": {
-   "hasta": "14:05",
-   "actividades": 149,
+   "hasta": "14:10",
+   "actividades": 150,
    "tecnicos": 35,
    "estados": {
-    "Completado": 50,
+    "Completado": 51,
     "Pendiente": 46,
     "Iniciado": 16,
     "No Realizada": 20,
@@ -15541,13 +15541,13 @@
     "en ruta": 4,
     "Suspendido": 4
    },
-   "rgu": 213.6,
+   "rgu": 215.6,
    "caidas_total": 5,
    "caidas_activas": 5,
    "caidas_resueltas": 0,
-   "nuevas": 17,
+   "nuevas": 18,
    "al_bucket": 14,
-   "repetidas": 31,
+   "repetidas": 32,
    "reagendadas": 8,
    "detalle": {
     "caidas": [
@@ -15598,6 +15598,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3O6JFQ32",
+      "tec": "JOSE SALAS MEDINA",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "17:07",
+      "d": "LAS BARRANCAS 2581 EDIF. B DEPTO 103, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3O6NUPIX",
       "tec": "MARCELO GÓMEZ GÓME",
@@ -15704,7 +15713,7 @@
       "f": "10-13",
       "hi": "10:21",
       "d": "BUENOS AIRES 540, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3O5ODL6J",
@@ -15818,7 +15827,7 @@
       "f": "10-13",
       "hi": "10:23",
       "d": "BUENOS AIRES 540, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "CRISTOBAL SILVA LEIVA",
       "visitas": 1,
       "ult_fecha": "02-10-2026",
@@ -15828,7 +15837,7 @@
       "o": "1-3O695338",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:18",
+      "hi": "15:25",
       "d": "MARGA MARGA 1544 CASA B, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
@@ -15840,7 +15849,7 @@
       "o": "1-3O3BXYCJ",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:50",
+      "hi": "17:57",
       "d": "CUMMING 1790 EDIF. DEPTO 22, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
@@ -16014,6 +16023,18 @@
       "visitas": 1,
       "ult_fecha": "06-08-2026",
       "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3O6JFQ32",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "17:07",
+      "d": "LAS BARRANCAS 2581 EDIF. B DEPTO 103, QUILPUE",
+      "e": "Pendiente",
+      "tec": "JOSE SALAS MEDINA",
+      "visitas": 1,
+      "ult_fecha": "02-10-2026",
+      "ult_cierre": "Orden mal generada"
      },
      {
       "o": "1-3O60XB93",
@@ -16207,5 +16228,5 @@
    }
   }
  },
- "generado": "02-10-2026 14:05"
+ "generado": "02-10-2026 14:10"
 }
