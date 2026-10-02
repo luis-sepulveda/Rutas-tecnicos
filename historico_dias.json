@@ -15529,15 +15529,15 @@
    }
   },
   "02-10-2026": {
-   "hasta": "12:29",
+   "hasta": "12:44",
    "actividades": 133,
    "tecnicos": 35,
    "estados": {
-    "Iniciado": 24,
+    "Iniciado": 25,
     "Pendiente": 61,
-    "Completado": 24,
-    "No Realizada": 10,
-    "en ruta": 7,
+    "Completado": 27,
+    "No Realizada": 11,
+    "en ruta": 2,
     "Cancelado": 5,
     "Suspendido": 2
    },
@@ -15614,7 +15614,7 @@
       "f": "10-13",
       "hi": "11:11",
       "d": "TAITAO 286, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3O6HOVI1",
@@ -15650,7 +15650,7 @@
       "f": "10-13",
       "hi": "14:00",
       "d": "AV VICEPRESIDENTE BDO LEIGHTON 0310, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O6GN3N2",
@@ -15677,7 +15677,7 @@
       "f": "10-13",
       "hi": "10:00",
       "d": "LAS MARGARITAS 1825 CASA 3, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O5NEC3H",
@@ -15686,7 +15686,7 @@
       "f": "10-13",
       "hi": "10:00",
       "d": "HUMBOLD 1044, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3O5UXIW5",
@@ -15695,7 +15695,7 @@
       "f": "10-13",
       "hi": "10:00",
       "d": "EPSILON 1731, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3O61QBF8",
@@ -15805,28 +15805,28 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3O47V8J4",
-      "cat": "Migración 2 Play",
-      "f": "10-13",
-      "hi": "12:26",
-      "d": "LOS TREBOLES 50 CASA 27, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "EDGAR VALERO C",
-      "visitas": 1,
-      "ult_fecha": "29-09-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
       "o": "1-3O6HEODO",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "15:47",
+      "hi": "14:00",
       "d": "EL MIRADOR 670 CASA 38, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "EDGAR VALERO C",
       "visitas": 1,
       "ult_fecha": "02-10-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3O47V8J4",
+      "cat": "Migración 2 Play",
+      "f": "10-13",
+      "hi": "15:03",
+      "d": "LOS TREBOLES 50 CASA 27, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "ESTEBAN PIZARRO QUINTANA",
+      "visitas": 1,
+      "ult_fecha": "29-09-2026",
+      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3O5MM1N5",
@@ -15848,9 +15848,9 @@
       "d": "TAITAO 286, VILLA ALEMANA",
       "e": "Completado",
       "tec": "JEAN ROODLY ORELIEN",
-      "visitas": 1,
-      "ult_fecha": "01-10-2026",
-      "ult_cierre": "Cliente reagenda"
+      "visitas": 2,
+      "ult_fecha": "02-10-2026",
+      "ult_cierre": "Falla Aprovisionamiento"
      },
      {
       "o": "1-3O4U6A5I",
@@ -15870,7 +15870,7 @@
       "f": "10-13",
       "hi": "10:00",
       "d": "HUMBOLD 1044, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JORDAN ROA PEREZ",
       "visitas": 1,
       "ult_fecha": "01-10-2026",
@@ -15940,7 +15940,7 @@
       "o": "1-3O60KVLO",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "16:34",
+      "hi": "16:43",
       "d": "AVENIDA QUINTA 0684, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -15976,7 +15976,7 @@
       "o": "1-3O5CE8ZX",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "12:55",
+      "hi": "13:13",
       "d": "PERU 515 CASA 17, QUILPUE",
       "e": "Pendiente",
       "tec": "NICOLAS MOYANO R",
@@ -15988,7 +15988,7 @@
       "o": "1-3O5TTABF",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "17:26",
+      "hi": "17:44",
       "d": "SANTA MATILDE 1829 CASA 1, QUILPUE",
       "e": "Pendiente",
       "tec": "NICOLAS MOYANO R",
@@ -16050,7 +16050,7 @@
       "f": "10-13",
       "hi": "12:44",
       "d": "ACACIAS 390 CASA 29, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
       "desde": "29-09-2026"
      },
@@ -16060,7 +16060,7 @@
       "f": "10-13",
       "hi": "10:00",
       "d": "HUMBOLD 1044, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JORDAN ROA PEREZ",
       "desde": "01-10-2026"
      },
@@ -16078,7 +16078,7 @@
       "o": "1-3O3AUE91",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:24",
+      "hi": "15:33",
       "d": "LAS AMERICAS 1015 EDIF. 15 DEPTO 8, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -16118,5 +16118,5 @@
    }
   }
  },
- "generado": "02-10-2026 12:29"
+ "generado": "02-10-2026 12:44"
 }
