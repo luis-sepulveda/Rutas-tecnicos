@@ -15529,24 +15529,24 @@
    }
   },
   "02-10-2026": {
-   "hasta": "10:44",
-   "actividades": 131,
+   "hasta": "10:54",
+   "actividades": 130,
    "tecnicos": 35,
    "estados": {
-    "Iniciado": 30,
-    "Pendiente": 90,
-    "Completado": 4,
+    "Iniciado": 29,
+    "Pendiente": 85,
+    "Completado": 6,
+    "en ruta": 5,
     "No Realizada": 4,
-    "en ruta": 2,
     "Cancelado": 1
    },
-   "rgu": 196.0,
-   "caidas_total": 2,
-   "caidas_activas": 2,
+   "rgu": 195.0,
+   "caidas_total": 3,
+   "caidas_activas": 3,
    "caidas_resueltas": 0,
    "nuevas": 10,
    "al_bucket": 5,
-   "repetidas": 29,
+   "repetidas": 28,
    "reagendadas": 8,
    "detalle": {
     "caidas": [
@@ -15557,6 +15557,15 @@
       "f": "10-13",
       "hi": "12:01",
       "d": "PJE NINA FRICK 390, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3O5QLEG9",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "cat": "Reparación",
+      "f": "10-13",
+      "hi": "10:43",
+      "d": "EL CIRUELILLO 1477, VILLA ALEMANA",
       "e": "Pendiente"
      },
      {
@@ -15711,18 +15720,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3O64BS3E",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "16:46",
-      "d": "LAS ROSAS 859, QUILPUE",
-      "e": "Pendiente",
-      "tec": "CRISTOBAL MIRANDA VALENC",
-      "visitas": 5,
-      "ult_fecha": "26-09-2026",
-      "ult_cierre": "Direccion incorrecta"
-     },
-     {
       "o": "1-3O6GN3N2",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -15735,22 +15732,10 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3O0G1SLD",
-      "cat": "Alta 1 Play",
-      "f": "13-16",
-      "hi": "16:18",
-      "d": "LAS BARRANCAS 2581 CASA S1, QUILPUE",
-      "e": "Pendiente",
-      "tec": "CRISTOBAL SILVA LEIVA",
-      "visitas": 2,
-      "ult_fecha": "23-09-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3O5SZ1DI",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "18:18",
+      "hi": "16:17",
       "d": "LOMAS DE MACUL 2743, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
@@ -15762,7 +15747,7 @@
       "o": "1-3O5Z9V81",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "18:09",
       "d": "ANCUD 750, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -15776,7 +15761,7 @@
       "f": "10-13",
       "hi": "09:31",
       "d": "TAITAO 286, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JEAN ROODLY ORELIEN",
       "visitas": 1,
       "ult_fecha": "01-10-2026",
@@ -15810,9 +15795,9 @@
       "o": "1-3O3H6IJS",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "10:48",
+      "hi": "10:59",
       "d": "SAN ENRIQUE 1165, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JOSE PEREZ RANGEL",
       "visitas": 1,
       "ult_fecha": "24-08-2026",
@@ -15891,10 +15876,22 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3O0G1SLD",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "14:37",
+      "d": "LAS BARRANCAS 2581 CASA S1, QUILPUE",
+      "e": "Pendiente",
+      "tec": "MARCO PEREZ G",
+      "visitas": 2,
+      "ult_fecha": "23-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3O47YSJ7",
       "cat": "Migración 3 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:26",
       "d": "SAN MARTIN 1048 DEPTO 21, QUILPUE",
       "e": "Pendiente",
       "tec": "MARCO PEREZ G",
@@ -16026,7 +16023,7 @@
       "o": "1-3O41W278",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "12:33",
+      "hi": "11:01",
       "d": "ACACIAS 390 CASA 29, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JEAN ROODLY ORELIEN",
@@ -16096,5 +16093,5 @@
    }
   }
  },
- "generado": "02-10-2026 10:44"
+ "generado": "02-10-2026 10:54"
 }
