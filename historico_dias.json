@@ -15529,16 +15529,16 @@
    }
   },
   "02-10-2026": {
-   "hasta": "17:00",
+   "hasta": "17:15",
    "actividades": 164,
    "tecnicos": 35,
    "estados": {
-    "Completado": 83,
-    "en ruta": 5,
-    "Iniciado": 23,
+    "Completado": 85,
+    "Iniciado": 26,
     "No Realizada": 33,
     "Cancelado": 10,
-    "Pendiente": 5,
+    "Pendiente": 4,
+    "en ruta": 1,
     "Suspendido": 5
    },
    "rgu": 229.9,
@@ -15614,7 +15614,7 @@
       "f": "13-16",
       "hi": "16:16",
       "d": "FRESIA 211, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O6RZOA8",
@@ -15632,7 +15632,7 @@
       "f": "16-19",
       "hi": "17:03",
       "d": "NUEVA TOLTEN 2599, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O6QETO4",
@@ -15654,7 +15654,7 @@
      },
      {
       "o": "1-3O6JFQ32",
-      "tec": "PABLO HERNANEZ FERNANDEZ",
+      "tec": "MARCO PEREZ G",
       "cat": "Alta 2 Play",
       "f": "16-19",
       "hi": "17:07",
@@ -15749,7 +15749,7 @@
       "f": "16-19",
       "hi": "16:37",
       "d": "GARCIA 340, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O66GDVM",
@@ -15936,18 +15936,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3O6J3OEV",
-      "cat": "Alta 2 Play",
-      "f": "16-19",
-      "hi": "17:14",
-      "d": "AV LOS CARRERA (BTO 2000) 2211, QUILPUE",
-      "e": "Pendiente",
-      "tec": "FELIPE SILVA R",
-      "visitas": 1,
-      "ult_fecha": "09-09-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3O5MM1N5",
       "cat": "Reparación",
       "f": "13-16",
@@ -16005,6 +15993,18 @@
       "tec": "JOEL GUSTAVE GUSTA",
       "visitas": 1,
       "ult_fecha": "17-08-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3O6J3OEV",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "17:30",
+      "d": "AV LOS CARRERA (BTO 2000) 2211, QUILPUE",
+      "e": "en ruta",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "visitas": 1,
+      "ult_fecha": "09-09-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -16091,18 +16091,6 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3O47YSJ7",
-      "cat": "Migración 3 Play",
-      "f": "16-19",
-      "hi": "17:26",
-      "d": "SAN MARTIN 1048 DEPTO 21, QUILPUE",
-      "e": "Pendiente",
-      "tec": "LEONEL HERNÁNDEZ OJE",
-      "visitas": 1,
-      "ult_fecha": "24-08-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3O5NF9RJ",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -16125,6 +16113,18 @@
       "visitas": 2,
       "ult_fecha": "30-09-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3O6JFQ32",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "17:26",
+      "d": "LAS BARRANCAS 2581 EDIF. B DEPTO 103, QUILPUE",
+      "e": "Pendiente",
+      "tec": "MARCO PEREZ G",
+      "visitas": 1,
+      "ult_fecha": "02-10-2026",
+      "ult_cierre": "Orden mal generada"
      },
      {
       "o": "1-3O5CE8ZX",
@@ -16161,18 +16161,6 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3O6JFQ32",
-      "cat": "Alta 2 Play",
-      "f": "16-19",
-      "hi": "18:05",
-      "d": "LAS BARRANCAS 2581 EDIF. B DEPTO 103, QUILPUE",
-      "e": "Pendiente",
-      "tec": "PABLO HERNANEZ FERNANDEZ",
-      "visitas": 1,
-      "ult_fecha": "02-10-2026",
-      "ult_cierre": "Orden mal generada"
-     },
-     {
       "o": "1-3O50DVZY",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -16206,6 +16194,18 @@
       "tec": "SEBASTIAN DOSSOW A",
       "visitas": 1,
       "ult_fecha": "01-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3O47YSJ7",
+      "cat": "Migración 3 Play",
+      "f": "16-19",
+      "hi": "17:21",
+      "d": "SAN MARTIN 1048 DEPTO 21, QUILPUE",
+      "e": "Pendiente",
+      "tec": "YENDER BOSCAN CADENAS",
+      "visitas": 1,
+      "ult_fecha": "24-08-2026",
       "ult_cierre": "Sin moradores"
      }
     ],
@@ -16294,5 +16294,5 @@
    }
   }
  },
- "generado": "02-10-2026 17:00"
+ "generado": "02-10-2026 17:15"
 }
