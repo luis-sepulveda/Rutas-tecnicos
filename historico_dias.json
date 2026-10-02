@@ -15529,23 +15529,23 @@
    }
   },
   "02-10-2026": {
-   "hasta": "11:24",
-   "actividades": 137,
+   "hasta": "11:44",
+   "actividades": 138,
    "tecnicos": 35,
    "estados": {
     "Iniciado": 33,
-    "Pendiente": 88,
-    "Completado": 8,
+    "Pendiente": 83,
+    "Completado": 11,
+    "No Realizada": 6,
     "en ruta": 1,
-    "No Realizada": 5,
-    "Suspendido": 1,
-    "Cancelado": 1
+    "Cancelado": 3,
+    "Suspendido": 1
    },
-   "rgu": 205.6,
+   "rgu": 206.6,
    "caidas_total": 4,
    "caidas_activas": 4,
    "caidas_resueltas": 0,
-   "nuevas": 11,
+   "nuevas": 12,
    "al_bucket": 5,
    "repetidas": 30,
    "reagendadas": 8,
@@ -15589,6 +15589,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3O6JPSPB",
+      "tec": "JOSE CASTRO P",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "12:30",
+      "d": "SAN JORGE (BAQUEDANO) 211, VILLA ALEMANA",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3O6IP8MZ",
       "tec": "JEAN ROODLY ORELIEN",
@@ -15766,22 +15775,10 @@
       "o": "1-3O5SZ1DI",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "18:57",
+      "hi": "16:47",
       "d": "LOMAS DE MACUL 2743, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
-      "visitas": 1,
-      "ult_fecha": "01-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3O5Z9V81",
-      "cat": "Alta 2 Play",
-      "f": "16-19",
-      "hi": "18:09",
-      "d": "ANCUD 750, QUILPUE",
-      "e": "Pendiente",
-      "tec": "DANIEL NAVARRETE E",
       "visitas": 1,
       "ult_fecha": "01-10-2026",
       "ult_cierre": "Sin moradores"
@@ -15811,15 +15808,15 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3O6HEODO",
-      "cat": "Alta 2 Play",
-      "f": "13-16",
-      "hi": "17:08",
-      "d": "EL MIRADOR 670 CASA 38, VILLA ALEMANA",
-      "e": "Pendiente",
+      "o": "1-3O4U6A5I",
+      "cat": "Migración 2 Play",
+      "f": "10-13",
+      "hi": "11:49",
+      "d": "CONDELL 89 CASA C, VILLA ALEMANA",
+      "e": "en ruta",
       "tec": "JOEL GUSTAVE GUSTA",
       "visitas": 1,
-      "ult_fecha": "02-10-2026",
+      "ult_fecha": "30-09-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -15946,7 +15943,7 @@
       "o": "1-3O47YSJ7",
       "cat": "Migración 3 Play",
       "f": "16-19",
-      "hi": "17:11",
+      "hi": "16:00",
       "d": "SAN MARTIN 1048 DEPTO 21, QUILPUE",
       "e": "Pendiente",
       "tec": "MARCO PEREZ G",
@@ -15967,12 +15964,35 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3O6IDMUV",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "14:27",
+      "d": "LAS ROSAS 859, QUILPUE",
+      "e": "Pendiente",
+      "tec": "NICOLAS MOYANO R",
+      "visitas": 5,
+      "ult_fecha": "26-09-2026",
+      "ult_cierre": "Direccion incorrecta"
+     },
+     {
+      "o": "1-3O5Z9V81",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "16:31",
+      "d": "ANCUD 750, QUILPUE",
+      "e": "Pendiente",
+      "tec": "NICOLAS MOYANO R",
+      "visitas": 1,
+      "ult_fecha": "01-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3O5XQJ9H",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:24",
       "d": "MANUEL BULNES 1369, QUILPUE",
-      "e": "Pendiente",
+      "e": "Cancelado",
       "tec": "NICOLAS MOYANO R",
       "visitas": 2,
       "ult_fecha": "01-10-2026",
@@ -15982,7 +16002,7 @@
       "o": "1-3O50DVZY",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "11:14",
+      "hi": "11:47",
       "d": "REINICKE 59 CASA 5, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -15991,15 +16011,15 @@
       "ult_cierre": "Direccion incorrecta"
      },
      {
-      "o": "1-3O4U6A5I",
-      "cat": "Migración 2 Play",
-      "f": "10-13",
-      "hi": "12:29",
-      "d": "CONDELL 89 CASA C, VILLA ALEMANA",
+      "o": "1-3O6HEODO",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "15:34",
+      "d": "EL MIRADOR 670 CASA 38, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
       "visitas": 1,
-      "ult_fecha": "30-09-2026",
+      "ult_fecha": "02-10-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -16030,53 +16050,31 @@
       "o": "1-3O60KVLO",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "15:16",
+      "hi": "15:43",
       "d": "AVENIDA QUINTA 0684, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SEBASTIAN DOSSOW A",
       "visitas": 1,
       "ult_fecha": "01-10-2026",
       "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3O6IDMUV",
-      "cat": "Alta 1 Play",
-      "f": "13-16",
-      "hi": "15:26",
-      "d": "LAS ROSAS 859, QUILPUE",
-      "e": "Pendiente",
-      "tec": "YENDER BOSCAN CADENAS",
-      "visitas": 5,
-      "ult_fecha": "26-09-2026",
-      "ult_cierre": "Direccion incorrecta"
      }
     ],
     "reagendadas": [
      {
-      "o": "1-3O5PN2M7",
-      "cat": "Alta 1 Play",
-      "f": "10-13",
-      "hi": "15:46",
-      "d": "PJE 811 771, QUILPUE",
-      "e": "Pendiente",
-      "tec": "CRISTOBAL SILVA LEIVA",
-      "desde": "01-10-2026"
-     },
-     {
       "o": "1-3O41W278",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "12:30",
+      "hi": "11:59",
       "d": "ACACIAS 390 CASA 29, VILLA ALEMANA",
       "e": "Pendiente",
-      "tec": "JEAN ROODLY ORELIEN",
+      "tec": "ESTEBAN PIZARRO QUINTANA",
       "desde": "29-09-2026"
      },
      {
       "o": "1-3O3AUE91",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "15:40",
       "d": "LAS AMERICAS 1015 EDIF. 15 DEPTO 8, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOEL GUSTAVE GUSTA",
@@ -16116,7 +16114,7 @@
       "o": "1-3O50DVZY",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "11:14",
+      "hi": "11:47",
       "d": "REINICKE 59 CASA 5, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -16131,10 +16129,20 @@
       "e": "Iniciado",
       "tec": "YENDER BOSCAN CADENAS",
       "desde": "01-10-2026"
+     },
+     {
+      "o": "1-3O5PN2M7",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "12:29",
+      "d": "PJE 811 771, QUILPUE",
+      "e": "Pendiente",
+      "tec": "YENDER BOSCAN CADENAS",
+      "desde": "01-10-2026"
      }
     ]
    }
   }
  },
- "generado": "02-10-2026 11:24"
+ "generado": "02-10-2026 11:44"
 }
