@@ -15529,22 +15529,22 @@
    }
   },
   "02-10-2026": {
-   "hasta": "09:37",
-   "actividades": 119,
-   "tecnicos": 37,
+   "hasta": "09:47",
+   "actividades": 122,
+   "tecnicos": 35,
    "estados": {
-    "Pendiente": 92,
-    "en ruta": 25,
-    "Iniciado": 1,
+    "en ruta": 12,
+    "Pendiente": 90,
+    "Iniciado": 19,
     "Cancelado": 1
    },
-   "rgu": 181.5,
+   "rgu": 185.5,
    "caidas_total": 1,
    "caidas_activas": 1,
    "caidas_resueltas": 0,
    "nuevas": 4,
    "al_bucket": 2,
-   "repetidas": 27,
+   "repetidas": 28,
    "reagendadas": 8,
    "detalle": {
     "caidas": [
@@ -15561,7 +15561,7 @@
     "nuevas": [
      {
       "o": "1-3O55NE20",
-      "tec": "ELIAS ARMIJO L",
+      "tec": "KEVIN TAPIA RETAMAL",
       "cat": "Alta Traslado",
       "f": "10-13",
       "hi": "10:00",
@@ -15584,7 +15584,7 @@
       "f": "10-13",
       "hi": "10:00",
       "d": "EPSILON 1731, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O61QBF8",
@@ -15593,7 +15593,7 @@
       "f": "10-13",
       "hi": "10:00",
       "d": "SOTOMAYOR 824, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Pendiente"
      }
     ],
     "repetidas": [
@@ -15613,13 +15613,25 @@
       "o": "1-3O5PFUXQ",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "10:20",
+      "hi": "10:32",
       "d": "PJE MESANIA 2831, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
       "visitas": 2,
       "ult_fecha": "02-09-2026",
       "ult_cierre": "Cliente Desiste"
+     },
+     {
+      "o": "1-3O5TTABF",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "14:26",
+      "d": "SANTA MATILDE 1829 CASA 1, QUILPUE",
+      "e": "Pendiente",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "visitas": 1,
+      "ult_fecha": "01-10-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3O3BXYCJ",
@@ -15682,18 +15694,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3O5TTABF",
-      "cat": "Reparación",
-      "f": "13-16",
-      "hi": "14:00",
-      "d": "SANTA MATILDE 1829 CASA 1, QUILPUE",
-      "e": "Pendiente",
-      "tec": "ELIAS ARMIJO L",
-      "visitas": 1,
-      "ult_fecha": "01-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3O64RXO9",
       "cat": "Migración 3 Play",
       "f": "10-13",
@@ -15709,7 +15709,7 @@
       "o": "1-3O5QLEG9",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "10:27",
+      "hi": "10:43",
       "d": "EL CIRUELILLO 1477, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOEL GUSTAVE GUSTA",
@@ -15757,9 +15757,9 @@
       "o": "1-3O4VSA7A",
       "cat": "Modificación de Servicio",
       "f": "10-13",
-      "hi": "09:29",
+      "hi": "09:46",
       "d": "GARCIA 340, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JOSE ROJO A",
       "visitas": 1,
       "ult_fecha": "06-08-2026",
@@ -15769,9 +15769,9 @@
       "o": "1-3O60XB93",
       "cat": "Migración 3 Play",
       "f": "10-13",
-      "hi": "09:30",
+      "hi": "09:44",
       "d": "AVENIDA QUINTA 709 DEPTO 303, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "LEONEL HERNÁNDEZ OJE",
       "visitas": 2,
       "ult_fecha": "01-10-2026",
@@ -15781,7 +15781,7 @@
       "o": "1-3O5CE8ZX",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "12:14",
+      "hi": "12:01",
       "d": "PERU 515 CASA 17, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS CASTRO TORRES",
@@ -15805,7 +15805,7 @@
       "o": "1-3O5NF9RJ",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:26",
+      "hi": "10:43",
       "d": "HUMBOLD 0344, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
@@ -15862,6 +15862,18 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3O695338",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "16:34",
+      "d": "MARGA MARGA 1544 CASA B, QUILPUE",
+      "e": "Pendiente",
+      "tec": "NICOLAS MOYANO R",
+      "visitas": 1,
+      "ult_fecha": "01-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3O50DVZY",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -15889,7 +15901,7 @@
       "o": "1-3O5OB1N6",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "12:04",
+      "hi": "12:19",
       "d": "LOS ABETOS 415, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -15947,7 +15959,7 @@
       "o": "1-3O3AUE91",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:44",
+      "hi": "15:00",
       "d": "LAS AMERICAS 1015 EDIF. 15 DEPTO 8, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOEL GUSTAVE GUSTA",
@@ -15977,9 +15989,9 @@
       "o": "1-3O4VSA7A",
       "cat": "Modificación de Servicio",
       "f": "10-13",
-      "hi": "09:29",
+      "hi": "09:46",
       "d": "GARCIA 340, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JOSE ROJO A",
       "desde": "01-10-2026"
      },
@@ -15997,9 +16009,9 @@
       "o": "1-3O59MV0D",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "09:30",
+      "hi": "09:42",
       "d": "LAS AZUCENAS 1069, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "YENDER BOSCAN CADENAS",
       "desde": "01-10-2026"
      }
@@ -16007,5 +16019,5 @@
    }
   }
  },
- "generado": "02-10-2026 09:37"
+ "generado": "02-10-2026 09:47"
 }
