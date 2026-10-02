@@ -15529,24 +15529,24 @@
    }
   },
   "02-10-2026": {
-   "hasta": "10:07",
-   "actividades": 122,
+   "hasta": "10:17",
+   "actividades": 123,
    "tecnicos": 35,
    "estados": {
-    "en ruta": 3,
+    "Iniciado": 29,
     "Pendiente": 85,
-    "Iniciado": 31,
-    "Completado": 1,
-    "No Realizada": 1,
+    "Completado": 3,
+    "en ruta": 3,
+    "No Realizada": 2,
     "Cancelado": 1
    },
-   "rgu": 184.5,
-   "caidas_total": 1,
-   "caidas_activas": 1,
+   "rgu": 185.5,
+   "caidas_total": 2,
+   "caidas_activas": 2,
    "caidas_resueltas": 0,
    "nuevas": 5,
    "al_bucket": 4,
-   "repetidas": 28,
+   "repetidas": 29,
    "reagendadas": 8,
    "detalle": {
     "caidas": [
@@ -15557,6 +15557,15 @@
       "f": "10-13",
       "hi": "12:01",
       "d": "PJE NINA FRICK 390, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3O5SNQYZ",
+      "tec": "JOSE ROJO A",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "10:33",
+      "d": "PAUL HARRIS 388 CASA F, VILLA ALEMANA",
       "e": "Pendiente"
      }
     ],
@@ -15885,6 +15894,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3O5XQJ9H",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "16:42",
+      "d": "MANUEL BULNES 1369, QUILPUE",
+      "e": "Pendiente",
+      "tec": "NICOLAS MOYANO R",
+      "visitas": 2,
+      "ult_fecha": "01-10-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3O50DVZY",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -15950,10 +15971,10 @@
       "o": "1-3O5PN2M7",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "11:05",
+      "hi": "10:25",
       "d": "PJE 811 771, QUILPUE",
       "e": "Pendiente",
-      "tec": "CRISTOBAL MIRANDA VALENC",
+      "tec": "CRISTOBAL SILVA LEIVA",
       "desde": "01-10-2026"
      },
      {
@@ -16030,5 +16051,5 @@
    }
   }
  },
- "generado": "02-10-2026 10:07"
+ "generado": "02-10-2026 10:17"
 }
