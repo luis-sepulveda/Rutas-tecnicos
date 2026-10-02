@@ -15529,16 +15529,16 @@
    }
   },
   "02-10-2026": {
-   "hasta": "13:05",
+   "hasta": "13:15",
    "actividades": 148,
    "tecnicos": 35,
    "estados": {
-    "Completado": 32,
-    "Pendiente": 67,
-    "Iniciado": 20,
-    "No Realizada": 16,
-    "Cancelado": 6,
-    "en ruta": 4,
+    "Completado": 33,
+    "en ruta": 6,
+    "Pendiente": 61,
+    "Iniciado": 21,
+    "No Realizada": 17,
+    "Cancelado": 7,
     "Suspendido": 3
    },
    "rgu": 215.0,
@@ -15659,7 +15659,7 @@
       "f": "10-13",
       "hi": "14:00",
       "d": "SAN RAFAEL 1863, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3O6HENR7",
@@ -15748,6 +15748,18 @@
       "ult_cierre": "Cliente Desiste"
      },
      {
+      "o": "1-3O5TTABF",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "14:43",
+      "d": "SANTA MATILDE 1829 CASA 1, QUILPUE",
+      "e": "Pendiente",
+      "tec": "CESAR MENA OLIVEROS",
+      "visitas": 1,
+      "ult_fecha": "01-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3O5SZ1DI",
       "cat": "Reparación",
       "f": "16-19",
@@ -15798,7 +15810,7 @@
       "o": "1-3O695338",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:27",
+      "hi": "14:34",
       "d": "MARGA MARGA 1544 CASA B, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
@@ -15810,7 +15822,7 @@
       "o": "1-3O3BXYCJ",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "16:59",
+      "hi": "17:06",
       "d": "CUMMING 1790 EDIF. DEPTO 22, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
@@ -15846,7 +15858,7 @@
       "o": "1-3O6HEODO",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "16:29",
+      "hi": "16:34",
       "d": "EL MIRADOR 670 CASA 38, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "EDGAR VALERO C",
@@ -15858,7 +15870,7 @@
       "o": "1-3O4EI6NR",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "18:52",
+      "hi": "18:57",
       "d": "BELLAVISTA 1138, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "EDGAR VALERO C",
@@ -15882,7 +15894,7 @@
       "o": "1-3O5MM1N5",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:05",
+      "hi": "13:14",
       "d": "CALLE 3 035, QUILPUE",
       "e": "Pendiente",
       "tec": "GEEYSER PEREZ O",
@@ -16014,7 +16026,7 @@
       "o": "1-3O5LZ7MZ",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "16:37",
+      "hi": "16:44",
       "d": "LOS AROMOS 1151 CASA 92, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
@@ -16038,25 +16050,13 @@
       "o": "1-3O5CE8ZX",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "13:26",
+      "hi": "13:33",
       "d": "PERU 515 CASA 17, QUILPUE",
       "e": "Pendiente",
       "tec": "NICOLAS MOYANO R",
       "visitas": 2,
       "ult_fecha": "30-09-2026",
       "ult_cierre": "Zona Roja"
-     },
-     {
-      "o": "1-3O5TTABF",
-      "cat": "Reparación",
-      "f": "13-16",
-      "hi": "17:57",
-      "d": "SANTA MATILDE 1829 CASA 1, QUILPUE",
-      "e": "Pendiente",
-      "tec": "NICOLAS MOYANO R",
-      "visitas": 1,
-      "ult_fecha": "01-10-2026",
-      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3O6IDMUV",
@@ -16110,9 +16110,9 @@
       "o": "1-3O41W278",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "13:08",
+      "hi": "13:13",
       "d": "ACACIAS 390 CASA 29, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "EDGAR VALERO C",
       "desde": "29-09-2026"
      },
@@ -16160,7 +16160,7 @@
       "o": "1-3O52O6F3",
       "cat": "Alta 3 Play",
       "f": "16-19",
-      "hi": "17:39",
+      "hi": "17:21",
       "d": "AV LOS CARRERA 0747 CASA C, QUILPUE",
       "e": "Pendiente",
       "tec": "MARCO PEREZ G",
@@ -16190,5 +16190,5 @@
    }
   }
  },
- "generado": "02-10-2026 13:05"
+ "generado": "02-10-2026 13:15"
 }
