@@ -15529,15 +15529,15 @@
    }
   },
   "02-10-2026": {
-   "hasta": "13:25",
+   "hasta": "13:35",
    "actividades": 148,
    "tecnicos": 35,
    "estados": {
-    "Completado": 38,
-    "en ruta": 3,
-    "Pendiente": 57,
-    "Iniciado": 21,
-    "No Realizada": 18,
+    "Completado": 41,
+    "en ruta": 6,
+    "Pendiente": 52,
+    "Iniciado": 19,
+    "No Realizada": 19,
     "Cancelado": 8,
     "Suspendido": 3
    },
@@ -15659,7 +15659,7 @@
       "f": "10-13",
       "hi": "14:00",
       "d": "SAN RAFAEL 1863, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O6HENR7",
@@ -15751,9 +15751,9 @@
       "o": "1-3O5TTABF",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:43",
+      "hi": "13:37",
       "d": "SANTA MATILDE 1829 CASA 1, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "CESAR MENA OLIVEROS",
       "visitas": 1,
       "ult_fecha": "01-10-2026",
@@ -15867,24 +15867,12 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3O4EI6NR",
-      "cat": "Migración 2 Play",
-      "f": "16-19",
-      "hi": "18:57",
-      "d": "BELLAVISTA 1138, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "EDGAR VALERO C",
-      "visitas": 2,
-      "ult_fecha": "29-09-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3O47V8J4",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "13:14",
+      "hi": "13:26",
       "d": "LOS TREBOLES 50 CASA 27, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "ESTEBAN PIZARRO QUINTANA",
       "visitas": 1,
       "ult_fecha": "29-09-2026",
@@ -15963,6 +15951,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3O4EI6NR",
+      "cat": "Migración 2 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "BELLAVISTA 1138, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOSE CASTRO P",
+      "visitas": 2,
+      "ult_fecha": "29-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3O4FHMH0",
       "cat": "Reparación",
       "f": "16-19",
@@ -15996,18 +15996,6 @@
       "visitas": 1,
       "ult_fecha": "06-08-2026",
       "ult_cierre": "Cliente reagenda"
-     },
-     {
-      "o": "1-3O60KVLO",
-      "cat": "Alta 2 Play",
-      "f": "13-16",
-      "hi": "16:43",
-      "d": "AVENIDA QUINTA 0684, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOSE ROJO A",
-      "visitas": 1,
-      "ult_fecha": "01-10-2026",
-      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3O60XB93",
@@ -16102,6 +16090,18 @@
       "visitas": 1,
       "ult_fecha": "28-09-2026",
       "ult_cierre": "Sin Apoyo de Poste"
+     },
+     {
+      "o": "1-3O60KVLO",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "13:42",
+      "d": "AVENIDA QUINTA 0684, VILLA ALEMANA",
+      "e": "en ruta",
+      "tec": "SEBASTIAN DOSSOW A",
+      "visitas": 1,
+      "ult_fecha": "01-10-2026",
+      "ult_cierre": "Sin moradores"
      }
     ],
     "reagendadas": [
@@ -16159,7 +16159,7 @@
       "o": "1-3O52O6F3",
       "cat": "Alta 3 Play",
       "f": "16-19",
-      "hi": "17:21",
+      "hi": "17:00",
       "d": "AV LOS CARRERA 0747 CASA C, QUILPUE",
       "e": "Pendiente",
       "tec": "MARCO PEREZ G",
@@ -16189,5 +16189,5 @@
    }
   }
  },
- "generado": "02-10-2026 13:25"
+ "generado": "02-10-2026 13:35"
 }
