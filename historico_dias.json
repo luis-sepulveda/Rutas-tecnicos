@@ -15529,23 +15529,23 @@
    }
   },
   "02-10-2026": {
-   "hasta": "15:35",
-   "actividades": 157,
+   "hasta": "15:50",
+   "actividades": 160,
    "tecnicos": 35,
    "estados": {
-    "Completado": 68,
-    "Iniciado": 24,
-    "Pendiente": 23,
-    "No Realizada": 23,
+    "Completado": 73,
+    "Iniciado": 19,
+    "Pendiente": 19,
+    "No Realizada": 26,
+    "en ruta": 8,
     "Cancelado": 10,
-    "en ruta": 4,
     "Suspendido": 5
    },
-   "rgu": 222.8,
+   "rgu": 225.8,
    "caidas_total": 5,
    "caidas_activas": 5,
    "caidas_resueltas": 0,
-   "nuevas": 21,
+   "nuevas": 23,
    "al_bucket": 15,
    "repetidas": 32,
    "reagendadas": 8,
@@ -15599,6 +15599,24 @@
     ],
     "nuevas": [
      {
+      "o": "1-3O6S0JQ8",
+      "tec": "ALEXIS JARA",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "16:16",
+      "d": "FRESIA 211, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3O6RZOA8",
+      "tec": "JOSE PEREZ RANGEL",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "15:39",
+      "d": "LIVERPOOL 515, VILLA ALEMANA",
+      "e": "Iniciado"
+     },
+     {
       "o": "1-3O6RJ8SH",
       "tec": "ESTEBAN PIZARRO QUINTANA",
       "cat": "Alta 1 Play",
@@ -15632,7 +15650,7 @@
       "f": "16-19",
       "hi": "17:07",
       "d": "LAS BARRANCAS 2581 EDIF. B DEPTO 103, QUILPUE",
-      "e": "en ruta"
+      "e": "Pendiente"
      },
      {
       "o": "1-3O6NUPIX",
@@ -15838,18 +15856,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3O5Z9V81",
-      "cat": "Alta 2 Play",
-      "f": "16-19",
-      "hi": "17:32",
-      "d": "ANCUD 750, QUILPUE",
-      "e": "Pendiente",
-      "tec": "CRISTOBAL MIRANDA VALENC",
-      "visitas": 1,
-      "ult_fecha": "01-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3O0G1SLD",
       "cat": "Alta 1 Play",
       "f": "13-16",
@@ -15933,6 +15939,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3O5Z9V81",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "15:46",
+      "d": "ANCUD 750, QUILPUE",
+      "e": "Iniciado",
+      "tec": "GEEYSER PEREZ O",
+      "visitas": 1,
+      "ult_fecha": "01-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3O64RXO9",
       "cat": "Migración 3 Play",
       "f": "10-13",
@@ -15954,6 +15972,18 @@
       "tec": "JOEL GUSTAVE GUSTA",
       "visitas": 1,
       "ult_fecha": "30-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3O5LZ7MZ",
+      "cat": "Migración 1 Play",
+      "f": "16-19",
+      "hi": "16:01",
+      "d": "LOS AROMOS 1151 CASA 92, VILLA ALEMANA",
+      "e": "en ruta",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "visitas": 1,
+      "ult_fecha": "17-08-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -16007,7 +16037,7 @@
       "o": "1-3O4EI6NR",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "16:42",
+      "hi": "16:27",
       "d": "BELLAVISTA 1138, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE PEREZ RANGEL",
@@ -16031,9 +16061,9 @@
       "o": "1-3O6JFQ32",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "15:26",
+      "hi": "16:00",
       "d": "LAS BARRANCAS 2581 EDIF. B DEPTO 103, QUILPUE",
-      "e": "en ruta",
+      "e": "Pendiente",
       "tec": "JOSE SALAS MEDINA",
       "visitas": 1,
       "ult_fecha": "02-10-2026",
@@ -16073,18 +16103,6 @@
       "tec": "LUIS MARTIN NUÑEZ",
       "visitas": 1,
       "ult_fecha": "01-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3O5LZ7MZ",
-      "cat": "Migración 1 Play",
-      "f": "16-19",
-      "hi": "16:46",
-      "d": "LOS AROMOS 1151 CASA 92, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "MARCELO GÓMEZ GÓME",
-      "visitas": 1,
-      "ult_fecha": "17-08-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -16163,7 +16181,7 @@
       "f": "13-16",
       "hi": "14:58",
       "d": "AVENIDA QUINTA 0684, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "SEBASTIAN DOSSOW A",
       "visitas": 1,
       "ult_fecha": "01-10-2026",
@@ -16217,7 +16235,7 @@
       "f": "13-16",
       "hi": "15:14",
       "d": "LAS AMERICAS 1015 EDIF. 15 DEPTO 8, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JOSE ROJO A",
       "desde": "01-10-2026"
      },
@@ -16255,5 +16273,5 @@
    }
   }
  },
- "generado": "02-10-2026 15:35"
+ "generado": "02-10-2026 15:50"
 }
