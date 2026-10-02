@@ -15529,22 +15529,22 @@
    }
   },
   "02-10-2026": {
-   "hasta": "10:25",
-   "actividades": 126,
+   "hasta": "10:31",
+   "actividades": 128,
    "tecnicos": 35,
    "estados": {
-    "Iniciado": 30,
+    "Iniciado": 28,
     "Pendiente": 86,
-    "Completado": 3,
-    "No Realizada": 3,
-    "en ruta": 3,
+    "Completado": 4,
+    "No Realizada": 4,
+    "en ruta": 5,
     "Cancelado": 1
    },
-   "rgu": 188.5,
+   "rgu": 190.5,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
-   "nuevas": 7,
+   "nuevas": 9,
    "al_bucket": 4,
    "repetidas": 30,
    "reagendadas": 8,
@@ -15570,6 +15570,24 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3O6HJG5C",
+      "tec": "JOSE ROJO A",
+      "cat": "Reparación",
+      "f": "10-13",
+      "hi": "14:00",
+      "d": "SAN RAFAEL 1863, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3O6HENR7",
+      "tec": "MATÍAS JAQUE AG",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "16:37",
+      "d": "GARCIA 340, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3O66GDVM",
       "tec": "ALEXIS JARA",
@@ -15631,7 +15649,7 @@
       "f": "10-13",
       "hi": "10:00",
       "d": "SOTOMAYOR 824, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      }
     ],
     "repetidas": [
@@ -15903,9 +15921,9 @@
       "o": "1-3O47V8J4",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "12:05",
+      "hi": "10:29",
       "d": "LOS TREBOLES 50 CASA 27, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "MATÍAS JAQUE AG",
       "visitas": 1,
       "ult_fecha": "29-09-2026",
@@ -16081,5 +16099,5 @@
    }
   }
  },
- "generado": "02-10-2026 10:25"
+ "generado": "02-10-2026 10:31"
 }
