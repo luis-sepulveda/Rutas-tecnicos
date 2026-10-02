@@ -15529,21 +15529,21 @@
    }
   },
   "02-10-2026": {
-   "hasta": "13:50",
+   "hasta": "14:05",
    "actividades": 149,
    "tecnicos": 35,
    "estados": {
-    "Completado": 45,
-    "Pendiente": 51,
-    "Iniciado": 18,
-    "No Realizada": 19,
-    "Cancelado": 8,
-    "en ruta": 5,
-    "Suspendido": 3
+    "Completado": 50,
+    "Pendiente": 46,
+    "Iniciado": 16,
+    "No Realizada": 20,
+    "Cancelado": 9,
+    "en ruta": 4,
+    "Suspendido": 4
    },
-   "rgu": 215.1,
-   "caidas_total": 4,
-   "caidas_activas": 4,
+   "rgu": 213.6,
+   "caidas_total": 5,
+   "caidas_activas": 5,
    "caidas_resueltas": 0,
    "nuevas": 17,
    "al_bucket": 14,
@@ -15567,6 +15567,15 @@
       "f": "16-19",
       "hi": "16:12",
       "d": "LAS ROSAS 859, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3O6HOVI1",
+      "tec": "ESTEBAN PIZARRO QUINTANA",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "17:02",
+      "d": "PAMPA DEL TAMARUGAL 2151, VILLA ALEMANA",
       "e": "Pendiente"
      },
      {
@@ -15596,7 +15605,7 @@
       "f": "13-16",
       "hi": "13:48",
       "d": "SAN ENRIQUE (NODO 82) 301, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O6MFGH2",
@@ -15623,7 +15632,7 @@
       "f": "13-16",
       "hi": "12:53",
       "d": "HUANHUALI 434 EDIF. B4 DEPTO 12, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3O6KMLLR",
@@ -15659,7 +15668,7 @@
       "f": "16-19",
       "hi": "16:34",
       "d": "PAMPA DEL TAMARUGAL 2151, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Pendiente (ya no está)"
      },
      {
       "o": "1-3O6HJG5C",
@@ -15686,7 +15695,7 @@
       "f": "10-13",
       "hi": "14:00",
       "d": "AV VICEPRESIDENTE BDO LEIGHTON 0310, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3O6GN3N2",
@@ -15740,7 +15749,7 @@
       "f": "10-13",
       "hi": "10:00",
       "d": "SOTOMAYOR 824, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Suspendido"
      }
     ],
     "repetidas": [
@@ -15893,7 +15902,7 @@
       "f": "13-16",
       "hi": "13:22",
       "d": "CALLE 3 035, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "GEEYSER PEREZ O",
       "visitas": 1,
       "ult_fecha": "01-10-2026",
@@ -16022,7 +16031,7 @@
       "o": "1-3O5LZ7MZ",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "17:01",
+      "hi": "17:19",
       "d": "LOS AROMOS 1151 CASA 92, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
@@ -16046,7 +16055,7 @@
       "o": "1-3O5CE8ZX",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "13:59",
+      "hi": "13:54",
       "d": "PERU 515 CASA 17, QUILPUE",
       "e": "Pendiente",
       "tec": "NICOLAS MOYANO R",
@@ -16148,7 +16157,7 @@
       "o": "1-3O3AUE91",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:33",
+      "hi": "15:11",
       "d": "LAS AMERICAS 1015 EDIF. 15 DEPTO 8, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -16168,7 +16177,7 @@
       "o": "1-3O52O6F3",
       "cat": "Alta 3 Play",
       "f": "16-19",
-      "hi": "18:39",
+      "hi": "18:20",
       "d": "AV LOS CARRERA 0747 CASA C, QUILPUE",
       "e": "Pendiente",
       "tec": "MARCO PEREZ G",
@@ -16198,5 +16207,5 @@
    }
   }
  },
- "generado": "02-10-2026 13:50"
+ "generado": "02-10-2026 14:05"
 }
