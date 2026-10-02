@@ -15529,23 +15529,23 @@
    }
   },
   "02-10-2026": {
-   "hasta": "14:35",
-   "actividades": 150,
+   "hasta": "14:50",
+   "actividades": 151,
    "tecnicos": 35,
    "estados": {
-    "Completado": 51,
-    "Pendiente": 41,
-    "Iniciado": 21,
+    "Completado": 57,
+    "en ruta": 7,
+    "Pendiente": 35,
     "No Realizada": 21,
-    "en ruta": 3,
+    "Iniciado": 18,
     "Cancelado": 9,
     "Suspendido": 4
    },
-   "rgu": 215.6,
+   "rgu": 215.7,
    "caidas_total": 5,
    "caidas_activas": 5,
    "caidas_resueltas": 0,
-   "nuevas": 18,
+   "nuevas": 19,
    "al_bucket": 14,
    "repetidas": 32,
    "reagendadas": 8,
@@ -15598,6 +15598,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3O6P55SZ",
+      "tec": "JOSE GALAZ D",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "14:44",
+      "d": "FERMIN LEON 136, VILLA ALEMANA",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3O6JFQ32",
       "tec": "JOSE SALAS MEDINA",
@@ -15763,12 +15772,24 @@
     ],
     "repetidas": [
      {
+      "o": "1-3O695338",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "15:55",
+      "d": "MARGA MARGA 1544 CASA B, QUILPUE",
+      "e": "Pendiente",
+      "tec": "ALFREDO ALCAYAGA F",
+      "visitas": 1,
+      "ult_fecha": "01-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3O5PFUXQ",
       "cat": "Migración 2 Play",
       "f": "10-13",
       "hi": "11:17",
       "d": "PJE MESANIA 2831, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "ANTONHY MORALES MENDOZA",
       "visitas": 2,
       "ult_fecha": "02-09-2026",
@@ -15790,7 +15811,7 @@
       "o": "1-3O5SZ1DI",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:03",
       "d": "LOMAS DE MACUL 2743, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -15802,7 +15823,7 @@
       "o": "1-3O47YSJ7",
       "cat": "Migración 3 Play",
       "f": "16-19",
-      "hi": "17:08",
+      "hi": "17:11",
       "d": "SAN MARTIN 1048 DEPTO 21, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -15834,22 +15855,10 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3O695338",
-      "cat": "Alta 1 Play",
-      "f": "13-16",
-      "hi": "15:25",
-      "d": "MARGA MARGA 1544 CASA B, QUILPUE",
-      "e": "Pendiente",
-      "tec": "CRISTOBAL SILVA LEIVA",
-      "visitas": 1,
-      "ult_fecha": "01-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3O3BXYCJ",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:57",
+      "hi": "16:00",
       "d": "CUMMING 1790 EDIF. DEPTO 22, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
@@ -15897,7 +15906,7 @@
       "o": "1-3O5Z9V81",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "17:27",
+      "hi": "16:33",
       "d": "ANCUD 750, QUILPUE",
       "e": "Pendiente",
       "tec": "FELIPE SILVA R",
@@ -15954,18 +15963,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3O50OXN1",
-      "cat": "Migración 1 Play",
-      "f": "13-16",
-      "hi": "15:02",
-      "d": "PJE 2 260, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JORDAN ROA PEREZ",
-      "visitas": 2,
-      "ult_fecha": "30-09-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3O5OB1N6",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -16004,7 +16001,7 @@
       "o": "1-3O4EI6NR",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "16:02",
+      "hi": "16:01",
       "d": "BELLAVISTA 1138, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE PEREZ RANGEL",
@@ -16073,6 +16070,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3O50OXN1",
+      "cat": "Migración 1 Play",
+      "f": "13-16",
+      "hi": "14:48",
+      "d": "PJE 2 260, QUILPUE",
+      "e": "Iniciado",
+      "tec": "MARCO PEREZ G",
+      "visitas": 2,
+      "ult_fecha": "30-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3O5CE8ZX",
       "cat": "Migración 1 Play",
       "f": "10-13",
@@ -16134,9 +16143,9 @@
       "o": "1-3O60KVLO",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:46",
+      "hi": "14:56",
       "d": "AVENIDA QUINTA 0684, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "SEBASTIAN DOSSOW A",
       "visitas": 1,
       "ult_fecha": "01-10-2026",
@@ -16161,6 +16170,16 @@
       "hi": "10:00",
       "d": "HUMBOLD 1044, QUILPUE",
       "e": "Completado",
+      "tec": "JORDAN ROA PEREZ",
+      "desde": "01-10-2026"
+     },
+     {
+      "o": "1-3O52O6F3",
+      "cat": "Alta 3 Play",
+      "f": "16-19",
+      "hi": "16:53",
+      "d": "AV LOS CARRERA 0747 CASA C, QUILPUE",
+      "e": "Pendiente",
       "tec": "JORDAN ROA PEREZ",
       "desde": "01-10-2026"
      },
@@ -16195,16 +16214,6 @@
       "desde": "01-10-2026"
      },
      {
-      "o": "1-3O52O6F3",
-      "cat": "Alta 3 Play",
-      "f": "16-19",
-      "hi": "17:00",
-      "d": "AV LOS CARRERA 0747 CASA C, QUILPUE",
-      "e": "Pendiente",
-      "tec": "MARCO PEREZ G",
-      "desde": "01-10-2026"
-     },
-     {
       "o": "1-3O50DVZY",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -16228,5 +16237,5 @@
    }
   }
  },
- "generado": "02-10-2026 14:35"
+ "generado": "02-10-2026 14:50"
 }
