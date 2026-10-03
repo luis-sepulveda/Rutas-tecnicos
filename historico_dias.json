@@ -16294,24 +16294,24 @@
    }
   },
   "03-10-2026": {
-   "hasta": "13:08",
+   "hasta": "13:13",
    "actividades": 138,
    "tecnicos": 35,
    "estados": {
     "Completado": 38,
-    "Iniciado": 22,
-    "Pendiente": 56,
-    "No Realizada": 17,
-    "en ruta": 3,
-    "Cancelado": 1,
+    "Iniciado": 21,
+    "Pendiente": 52,
+    "No Realizada": 19,
+    "en ruta": 5,
+    "Cancelado": 2,
     "Suspendido": 1
    },
-   "rgu": 221.0,
+   "rgu": 218.6,
    "caidas_total": 4,
    "caidas_activas": 4,
    "caidas_resueltas": 0,
-   "nuevas": 9,
-   "al_bucket": 25,
+   "nuevas": 10,
+   "al_bucket": 26,
    "repetidas": 30,
    "reagendadas": 5,
    "detalle": {
@@ -16354,6 +16354,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3O7DQJ6B",
+      "tec": "KEVIN TAPIA RETAMAL",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "13:10",
+      "d": "ISLA NAVARINO 744, QUILPUE",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3O7BOQZG",
       "tec": "YENDER BOSCAN CADENAS",
@@ -16693,7 +16702,7 @@
       "o": "1-3O6XNRPI",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:01",
+      "hi": "14:42",
       "d": "LAS ROSAS 859, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -16705,7 +16714,7 @@
       "o": "1-3O6XH6E7",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:11",
+      "hi": "16:52",
       "d": "GREGORIA 812 CASA B, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -16729,9 +16738,8 @@
       "o": "1-3O1N5X6Z",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "15:29",
       "d": "SANTA MARGARITA 1319, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Cancelado",
       "tec": "MATÍAS JAQUE AG",
       "visitas": 1,
       "ult_fecha": "25-09-2026",
@@ -16765,9 +16773,9 @@
       "o": "1-3O6WORP5",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "15:27",
+      "hi": "13:32",
       "d": "PERU 515 CASA 17, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "PABLO HERNANEZ FERNANDEZ",
       "visitas": 3,
       "ult_fecha": "02-10-2026",
@@ -16820,24 +16828,23 @@
       "desde": "01-10-2026"
      },
      {
-      "o": "1-3O1N5X6Z",
-      "cat": "Alta 2 Play",
-      "f": "13-16",
-      "hi": "15:29",
-      "d": "SANTA MARGARITA 1319, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "MATÍAS JAQUE AG",
-      "desde": "25-09-2026"
-     },
-     {
       "o": "1-3O5A1Z9P",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "17:50",
+      "hi": "16:00",
       "d": "EL MIRADOR 741 CASA 12, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATÍAS JAQUE AG",
       "desde": "01-10-2026"
+     },
+     {
+      "o": "1-3O1N5X6Z",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "d": "SANTA MARGARITA 1319, VILLA ALEMANA",
+      "e": "Cancelado",
+      "tec": "MATÍAS JAQUE AG",
+      "desde": "25-09-2026"
      },
      {
       "o": "1-3O5QLEG9",
@@ -16853,5 +16860,5 @@
    }
   }
  },
- "generado": "03-10-2026 13:08"
+ "generado": "03-10-2026 13:13"
 }
