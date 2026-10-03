@@ -16294,26 +16294,26 @@
    }
   },
   "03-10-2026": {
-   "hasta": "12:53",
-   "actividades": 138,
+   "hasta": "12:58",
+   "actividades": 137,
    "tecnicos": 35,
    "estados": {
     "Completado": 36,
-    "Iniciado": 22,
-    "Pendiente": 58,
+    "Iniciado": 25,
+    "Pendiente": 56,
     "No Realizada": 16,
-    "en ruta": 4,
     "Cancelado": 1,
-    "Suspendido": 1
+    "Suspendido": 1,
+    "en ruta": 2
    },
-   "rgu": 221.5,
+   "rgu": 220.0,
    "caidas_total": 3,
    "caidas_activas": 3,
    "caidas_resueltas": 0,
    "nuevas": 9,
    "al_bucket": 25,
    "repetidas": 30,
-   "reagendadas": 6,
+   "reagendadas": 5,
    "detalle": {
     "caidas": [
      {
@@ -16370,7 +16370,7 @@
       "f": "13-16",
       "hi": "16:52",
       "d": "CALLE 5 80 EDIF. 3 DEPTO 133, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3O7AEBPT",
@@ -16672,9 +16672,9 @@
       "o": "1-3O3NP2ZQ",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "13:01",
+      "hi": "12:55",
       "d": "AV JOHN KENNEDY 1550 EDIF. E DEPTO 201, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JUAN ARRIAGADA C",
       "visitas": 1,
       "ult_fecha": "28-09-2026",
@@ -16720,7 +16720,7 @@
       "o": "1-3O1N5X6Z",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "15:22",
+      "hi": "15:29",
       "d": "SANTA MARGARITA 1319, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATÍAS JAQUE AG",
@@ -16801,16 +16801,6 @@
       "desde": "02-10-2026"
      },
      {
-      "o": "1-3O5BAZMX",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "17:37",
-      "d": "SEXTA 0786 EDIF. 3 DEPTO 301, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JEAN ROODLY ORELIEN",
-      "desde": "01-10-2026"
-     },
-     {
       "o": "1-3O4Z024Y",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -16824,7 +16814,7 @@
       "o": "1-3O1N5X6Z",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "15:22",
+      "hi": "15:29",
       "d": "SANTA MARGARITA 1319, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATÍAS JAQUE AG",
@@ -16834,7 +16824,7 @@
       "o": "1-3O5A1Z9P",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "17:43",
+      "hi": "17:50",
       "d": "EL MIRADOR 741 CASA 12, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATÍAS JAQUE AG",
@@ -16854,5 +16844,5 @@
    }
   }
  },
- "generado": "03-10-2026 12:53"
+ "generado": "03-10-2026 12:58"
 }
