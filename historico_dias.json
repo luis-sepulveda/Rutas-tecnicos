@@ -16294,27 +16294,48 @@
    }
   },
   "03-10-2026": {
-   "hasta": "10:17",
-   "actividades": 133,
+   "hasta": "10:42",
+   "actividades": 137,
    "tecnicos": 35,
    "estados": {
-    "Iniciado": 32,
-    "Pendiente": 96,
+    "Iniciado": 29,
+    "Pendiente": 91,
     "Completado": 3,
-    "en ruta": 1,
-    "Cancelado": 1
+    "en ruta": 6,
+    "No Realizada": 6,
+    "Cancelado": 1,
+    "Suspendido": 1
    },
-   "rgu": 215.5,
-   "caidas_total": 0,
-   "caidas_activas": 0,
+   "rgu": 219.5,
+   "caidas_total": 1,
+   "caidas_activas": 1,
    "caidas_resueltas": 0,
-   "nuevas": 4,
-   "al_bucket": 2,
+   "nuevas": 5,
+   "al_bucket": 3,
    "repetidas": 31,
    "reagendadas": 6,
    "detalle": {
-    "caidas": [],
+    "caidas": [
+     {
+      "o": "1-3O6ZW90C",
+      "tec": "RAFAEL VARGAS B",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "15:42",
+      "d": "PAULA JARA QUEMADA 982, VILLA ALEMANA",
+      "e": "Pendiente"
+     }
+    ],
     "nuevas": [
+     {
+      "o": "1-3O7A1DNF",
+      "tec": "ALFREDO ALCAYAGA F",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "11:34",
+      "d": "PRINCIPAL 665, QUILPUE",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3O6R79KN",
       "tec": "MARCELO GÓMEZ GÓME",
@@ -16322,7 +16343,7 @@
       "f": "10-13",
       "hi": "12:35",
       "d": "CASSANO 1842, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O71LSCR",
@@ -16349,10 +16370,22 @@
       "f": "10-13",
       "hi": "11:39",
       "d": "GALLEGUILLOS 1900, QUILPUE",
-      "e": "Pendiente"
+      "e": "Iniciado"
      }
     ],
     "repetidas": [
+     {
+      "o": "1-3O2N0MAF",
+      "cat": "Migración 2 Play",
+      "f": "10-13",
+      "hi": "11:54",
+      "d": "FRANCISCO COLOANE 1868, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "ALEXIS JARA",
+      "visitas": 1,
+      "ult_fecha": "26-09-2026",
+      "ult_cierre": "Falta de dotación"
+     },
      {
       "o": "1-3O6ZXX16",
       "cat": "Reparación",
@@ -16369,7 +16402,7 @@
       "o": "1-3O2E8XNJ",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "11:05",
+      "hi": "12:19",
       "d": "HORNITOS 84, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -16438,22 +16471,10 @@
       "ult_cierre": "Direccion incorrecta"
      },
      {
-      "o": "1-3O2N0MAF",
-      "cat": "Migración 2 Play",
-      "f": "10-13",
-      "hi": "10:45",
-      "d": "FRANCISCO COLOANE 1868, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "EDGAR VALERO C",
-      "visitas": 1,
-      "ult_fecha": "26-09-2026",
-      "ult_cierre": "Falta de dotación"
-     },
-     {
       "o": "1-3O6Y04H3",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "15:04",
+      "hi": "15:16",
       "d": "LAS BARRANCAS 2581 EDIF. B DEPTO 103, QUILPUE",
       "e": "Pendiente",
       "tec": "FELIPE SILVA R",
@@ -16491,7 +16512,7 @@
       "f": "10-13",
       "hi": "09:46",
       "d": "RAMON REYES ARANCIBIA 2184, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JEAN ROODLY ORELIEN",
       "visitas": 1,
       "ult_fecha": "28-08-2026",
@@ -16585,7 +16606,7 @@
       "o": "1-3O1N5X6Z",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:42",
+      "hi": "14:00",
       "d": "SANTA MARGARITA 1319, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JUAN ARRIAGADA C",
@@ -16621,7 +16642,7 @@
       "o": "1-3O6H2YGW",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:17",
+      "hi": "14:26",
       "d": "PJE CONDELL 1344, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
@@ -16635,7 +16656,7 @@
       "f": "10-13",
       "hi": "10:07",
       "d": "COVADONGA 1443 DEPTO 32, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "LUIS MARTIN NUÑEZ",
       "visitas": 1,
       "ult_fecha": "30-09-2026",
@@ -16645,7 +16666,7 @@
       "o": "1-3O6XYVJI",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:31",
+      "hi": "14:21",
       "d": "MARGA MARGA 1544 CASA B, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
@@ -16657,7 +16678,7 @@
       "o": "1-3O6TVDW1",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:35",
+      "hi": "14:55",
       "d": "SEXTA 0786 EDIF. 2 DEPTO 502, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATÍAS JAQUE AG",
@@ -16681,9 +16702,9 @@
       "o": "1-3O5OPY5M",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "12:19",
+      "hi": "10:45",
       "d": "AVENIDA SEGUNDA 0770, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "PABLO HERNANEZ FERNANDEZ",
       "visitas": 1,
       "ult_fecha": "01-10-2026",
@@ -16693,7 +16714,7 @@
       "o": "1-3O6XH6E7",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:53",
+      "hi": "16:33",
       "d": "GREGORIA 812 CASA B, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -16707,7 +16728,7 @@
       "f": "10-13",
       "hi": "09:47",
       "d": "EL CIRUELILLO 1477, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "SEBASTIAN DOSSOW A",
       "visitas": 1,
       "ult_fecha": "01-10-2026",
@@ -16717,9 +16738,9 @@
       "o": "1-3O6H1PDT",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "10:48",
+      "hi": "10:33",
       "d": "VIA UNO SIETE 2065 EDIF. F DEPTO 12, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "SEBASTIAN DOSSOW A",
       "visitas": 1,
       "ult_fecha": "12-08-2026",
@@ -16731,7 +16752,7 @@
       "o": "1-3O5A1Z9P",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:23",
+      "hi": "16:00",
       "d": "EL MIRADOR 741 CASA 12, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
@@ -16761,7 +16782,7 @@
       "o": "1-3O1N5X6Z",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:42",
+      "hi": "14:00",
       "d": "SANTA MARGARITA 1319, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JUAN ARRIAGADA C",
@@ -16773,7 +16794,7 @@
       "f": "10-13",
       "hi": "10:07",
       "d": "COVADONGA 1443 DEPTO 32, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "LUIS MARTIN NUÑEZ",
       "desde": "01-10-2026"
      },
@@ -16783,7 +16804,7 @@
       "f": "10-13",
       "hi": "09:47",
       "d": "EL CIRUELILLO 1477, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "SEBASTIAN DOSSOW A",
       "desde": "02-10-2026"
      }
@@ -16791,5 +16812,5 @@
    }
   }
  },
- "generado": "03-10-2026 10:17"
+ "generado": "03-10-2026 10:42"
 }
