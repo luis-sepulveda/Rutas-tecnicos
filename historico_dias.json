@@ -16294,26 +16294,35 @@
    }
   },
   "03-10-2026": {
-   "hasta": "09:31",
-   "actividades": 132,
+   "hasta": "09:36",
+   "actividades": 133,
    "tecnicos": 35,
    "estados": {
-    "Pendiente": 104,
-    "en ruta": 26,
+    "en ruta": 29,
+    "Pendiente": 101,
     "Cancelado": 1,
-    "Iniciado": 1
+    "Iniciado": 2
    },
-   "rgu": 217.0,
+   "rgu": 218.0,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 2,
+   "nuevas": 3,
    "al_bucket": 1,
-   "repetidas": 30,
+   "repetidas": 31,
    "reagendadas": 6,
    "detalle": {
     "caidas": [],
     "nuevas": [
+     {
+      "o": "1-3O71LSCR",
+      "tec": "GEEYSER PEREZ O",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "09:45",
+      "d": "ANCUD 750, QUILPUE",
+      "e": "en ruta"
+     },
      {
       "o": "1-3O78VZYH",
       "tec": "LUIS MARTIN NUÑEZ",
@@ -16443,10 +16452,22 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3O71LSCR",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "09:45",
+      "d": "ANCUD 750, QUILPUE",
+      "e": "en ruta",
+      "tec": "GEEYSER PEREZ O",
+      "visitas": 1,
+      "ult_fecha": "01-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3O6WRRUI",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "10:35",
+      "hi": "10:45",
       "d": "GLACIAR GREY 2000 EDIF. B DEPTO 704, QUILPUE",
       "e": "Pendiente",
       "tec": "GEEYSER PEREZ O",
@@ -16578,7 +16599,7 @@
       "o": "1-3O664XLA",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "14:27",
+      "hi": "14:13",
       "d": "LAS QUILAS 3078, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS CASTRO TORRES",
@@ -16626,7 +16647,7 @@
       "o": "1-3O6TVDW1",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:59",
+      "hi": "14:35",
       "d": "SEXTA 0786 EDIF. 2 DEPTO 502, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATÍAS JAQUE AG",
@@ -16760,5 +16781,5 @@
    }
   }
  },
- "generado": "03-10-2026 09:31"
+ "generado": "03-10-2026 09:36"
 }
