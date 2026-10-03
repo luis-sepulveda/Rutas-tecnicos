@@ -16294,32 +16294,43 @@
    }
   },
   "03-10-2026": {
-   "hasta": "09:17",
-   "actividades": 119,
+   "hasta": "09:21",
+   "actividades": 130,
    "tecnicos": 35,
    "estados": {
-    "Pendiente": 118,
+    "Pendiente": 116,
+    "en ruta": 13,
     "Cancelado": 1
    },
-   "rgu": 194.0,
+   "rgu": 215.0,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 0,
+   "nuevas": 1,
    "al_bucket": 1,
-   "repetidas": 27,
-   "reagendadas": 5,
+   "repetidas": 29,
+   "reagendadas": 6,
    "detalle": {
     "caidas": [],
-    "nuevas": [],
+    "nuevas": [
+     {
+      "o": "1-3O78X4GG",
+      "tec": "MARCO PEREZ G",
+      "cat": "Migración 3 Play",
+      "f": "10-13",
+      "hi": "11:39",
+      "d": "GALLEGUILLOS 1900, QUILPUE",
+      "e": "Pendiente"
+     }
+    ],
     "repetidas": [
      {
       "o": "1-3O6ZXX16",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:30",
       "d": "PRINCIPAL 665, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "ALFREDO ALCAYAGA F",
       "visitas": 1,
       "ult_fecha": "01-09-2026",
@@ -16329,7 +16340,7 @@
       "o": "1-3O2E8XNJ",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "11:43",
+      "hi": "11:13",
       "d": "HORNITOS 84, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -16365,9 +16376,9 @@
       "o": "1-3O2OLCI9",
       "cat": "Migración 3 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:27",
       "d": "LAUTARO 477 CASA 2, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "CRISTOBAL SILVA LEIVA",
       "visitas": 2,
       "ult_fecha": "26-09-2026",
@@ -16377,7 +16388,7 @@
       "o": "1-3O6RDE9R",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "17:00",
+      "hi": "16:40",
       "d": "LOBO DE MAR 1500, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
@@ -16389,7 +16400,7 @@
       "o": "1-3O6XNRPI",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:28",
+      "hi": "14:59",
       "d": "LAS ROSAS 859, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -16413,7 +16424,7 @@
       "o": "1-3O6Y04H3",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "15:23",
+      "hi": "15:01",
       "d": "LAS BARRANCAS 2581 EDIF. B DEPTO 103, QUILPUE",
       "e": "Pendiente",
       "tec": "FELIPE SILVA R",
@@ -16497,9 +16508,9 @@
       "o": "1-3O6JH26M",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:30",
       "d": "DEL CANELO 1613, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JOSE SALAS MEDINA",
       "visitas": 1,
       "ult_fecha": "02-10-2026",
@@ -16509,7 +16520,7 @@
       "o": "1-3O6WORP5",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "14:02",
+      "hi": "14:00",
       "d": "PERU 515 CASA 17, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE SALAS MEDINA",
@@ -16602,6 +16613,18 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3O5QY26L",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "17:25",
+      "d": "BUENOS AIRES 1031 DEPTO 41, QUILPUE",
+      "e": "Pendiente",
+      "tec": "NICOLAS MOYANO R",
+      "visitas": 1,
+      "ult_fecha": "01-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3O5OPY5M",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -16612,6 +16635,18 @@
       "visitas": 1,
       "ult_fecha": "01-10-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3O6XH6E7",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "18:07",
+      "d": "GREGORIA 812 CASA B, QUILPUE",
+      "e": "Pendiente",
+      "tec": "PABLO HERNANEZ FERNANDEZ",
+      "visitas": 1,
+      "ult_fecha": "02-10-2026",
+      "ult_cierre": "Falta de dotación"
      },
      {
       "o": "1-3O5QLEG9",
@@ -16639,6 +16674,16 @@
      }
     ],
     "reagendadas": [
+     {
+      "o": "1-3O5A1Z9P",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "EL MIRADOR 741 CASA 12, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "ESTEBAN PIZARRO QUINTANA",
+      "desde": "01-10-2026"
+     },
      {
       "o": "1-3O619BXR",
       "cat": "Upgrade promoción",
@@ -16693,5 +16738,5 @@
    }
   }
  },
- "generado": "03-10-2026 09:17"
+ "generado": "03-10-2026 09:21"
 }
