@@ -16294,15 +16294,15 @@
    }
   },
   "03-10-2026": {
-   "hasta": "12:12",
+   "hasta": "12:28",
    "actividades": 125,
    "tecnicos": 35,
    "estados": {
-    "Iniciado": 28,
-    "Pendiente": 55,
-    "Completado": 24,
+    "Completado": 28,
+    "en ruta": 4,
+    "Pendiente": 52,
     "No Realizada": 13,
-    "en ruta": 3,
+    "Iniciado": 26,
     "Cancelado": 1,
     "Suspendido": 1
    },
@@ -16432,7 +16432,7 @@
       "o": "1-3O6TVDW1",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "15:27",
+      "hi": "15:36",
       "d": "SEXTA 0786 EDIF. 2 DEPTO 502, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ALEXIS JARA",
@@ -16462,6 +16462,18 @@
       "tec": "ALFREDO ALCAYAGA F",
       "visitas": 1,
       "ult_fecha": "26-09-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3O6XYVJI",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "13:00",
+      "d": "MARGA MARGA 1544 CASA B, QUILPUE",
+      "e": "Pendiente",
+      "tec": "ALFREDO ALCAYAGA F",
+      "visitas": 2,
+      "ult_fecha": "02-10-2026",
       "ult_cierre": "Cliente reagenda"
      },
      {
@@ -16612,9 +16624,9 @@
       "o": "1-3O6S6ZZP",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "12:21",
+      "hi": "12:27",
       "d": "BARCELONA 42, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "JOSE CASTRO P",
       "visitas": 1,
       "ult_fecha": "02-10-2026",
@@ -16678,18 +16690,6 @@
       "tec": "LUIS MARTIN NUÑEZ",
       "visitas": 1,
       "ult_fecha": "30-09-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
-      "o": "1-3O6XYVJI",
-      "cat": "Alta 1 Play",
-      "f": "13-16",
-      "hi": "15:49",
-      "d": "MARGA MARGA 1544 CASA B, QUILPUE",
-      "e": "Pendiente",
-      "tec": "LUIS MARTIN NUÑEZ",
-      "visitas": 2,
-      "ult_fecha": "02-10-2026",
       "ult_cierre": "Cliente reagenda"
      },
      {
@@ -16758,7 +16758,7 @@
       "o": "1-3O619BXR",
       "cat": "Upgrade promoción",
       "f": "16-19",
-      "hi": "16:30",
+      "hi": "19:01",
       "d": "PJE NINA FRICK 390, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -16798,5 +16798,5 @@
    }
   }
  },
- "generado": "03-10-2026 12:12"
+ "generado": "03-10-2026 12:28"
 }
