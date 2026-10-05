@@ -16860,23 +16860,23 @@
    }
   },
   "05-10-2026": {
-   "hasta": "16:06",
-   "actividades": 147,
+   "hasta": "16:11",
+   "actividades": 148,
    "tecnicos": 33,
    "estados": {
-    "Completado": 61,
+    "Completado": 62,
     "Iniciado": 21,
-    "Pendiente": 19,
+    "Pendiente": 18,
     "No Realizada": 30,
-    "en ruta": 8,
+    "en ruta": 9,
     "Cancelado": 5,
     "Suspendido": 3
    },
-   "rgu": 218.0,
+   "rgu": 218.1,
    "caidas_total": 11,
    "caidas_activas": 11,
    "caidas_resueltas": 0,
-   "nuevas": 43,
+   "nuevas": 44,
    "al_bucket": 14,
    "repetidas": 30,
    "reagendadas": 2,
@@ -16983,6 +16983,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3O8Q69SY",
+      "tec": "RAFAEL VARGAS B",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "18:04",
+      "d": "SAN ENRIQUE (NODO 82) 555 CASA 3, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3O8OHRP7",
       "tec": "MARCO PEREZ G",
@@ -17558,7 +17567,7 @@
       "f": "13-16",
       "hi": "13:43",
       "d": "RAFAEL SOTOMAYOR 0615, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JOSE GALAZ D",
       "visitas": 1,
       "ult_fecha": "03-10-2026",
@@ -17616,9 +17625,9 @@
       "o": "1-3O7JCAX7",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "16:12",
+      "hi": "16:24",
       "d": "ANTONIO VARAS 1406, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "LUIS CASTRO TORRES",
       "visitas": 1,
       "ult_fecha": "03-10-2026",
@@ -17699,7 +17708,7 @@
       "o": "1-3O7FR25M",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "18:10",
+      "hi": "18:56",
       "d": "NUEVA HIPODROMO 43 CASA A, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -17757,5 +17766,5 @@
    }
   }
  },
- "generado": "05-10-2026 16:06"
+ "generado": "05-10-2026 16:11"
 }
