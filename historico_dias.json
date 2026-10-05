@@ -16860,15 +16860,15 @@
    }
   },
   "05-10-2026": {
-   "hasta": "16:11",
+   "hasta": "16:21",
    "actividades": 148,
    "tecnicos": 33,
    "estados": {
-    "Completado": 62,
-    "Iniciado": 21,
-    "Pendiente": 18,
-    "No Realizada": 30,
+    "Completado": 65,
     "en ruta": 9,
+    "Pendiente": 12,
+    "No Realizada": 30,
+    "Iniciado": 24,
     "Cancelado": 5,
     "Suspendido": 3
    },
@@ -16990,7 +16990,7 @@
       "f": "16-19",
       "hi": "18:04",
       "d": "SAN ENRIQUE (NODO 82) 555 CASA 3, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O8OHRP7",
@@ -17044,7 +17044,7 @@
       "f": "13-16",
       "hi": "15:54",
       "d": "MANUEL BULNES 1533 CASA 19, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3O8M1FDF",
@@ -17152,7 +17152,7 @@
       "f": "16-19",
       "hi": "16:47",
       "d": "PJE LAS MANDARINAS 4, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3O8EM30M",
@@ -17233,7 +17233,7 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "LOS ALMENDROS 052, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O8D1X4W",
@@ -17282,7 +17282,7 @@
      },
      {
       "o": "1-3O7FR25M",
-      "tec": "RAFAEL VARGAS B",
+      "tec": "LEONEL HERNÁNDEZ OJE",
       "cat": "Alta 1 Play",
       "f": "16-19",
       "hi": "16:00",
@@ -17610,6 +17610,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3O7FR25M",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "17:22",
+      "d": "NUEVA HIPODROMO 43 CASA A, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "LEONEL HERNÁNDEZ OJE",
+      "visitas": 1,
+      "ult_fecha": "03-10-2026",
+      "ult_cierre": "Direccion incorrecta"
+     },
+     {
       "o": "1-3O79XVA5",
       "cat": "Migración 2 Play",
       "f": "10-13",
@@ -17625,9 +17637,9 @@
       "o": "1-3O7JCAX7",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "16:24",
+      "hi": "16:13",
       "d": "ANTONIO VARAS 1406, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "LUIS CASTRO TORRES",
       "visitas": 1,
       "ult_fecha": "03-10-2026",
@@ -17637,9 +17649,9 @@
       "o": "1-3O7B32D5",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "16:08",
+      "hi": "16:19",
       "d": "PJE CONDELL 1344, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "LUIS GATICA DAVILA",
       "visitas": 1,
       "ult_fecha": "02-10-2026",
@@ -17705,18 +17717,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3O7FR25M",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "18:56",
-      "d": "NUEVA HIPODROMO 43 CASA A, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "RAFAEL VARGAS B",
-      "visitas": 1,
-      "ult_fecha": "03-10-2026",
-      "ult_cierre": "Direccion incorrecta"
-     },
-     {
       "o": "1-3O7HF85Y",
       "cat": "Reparación",
       "f": "10-13",
@@ -17766,5 +17766,5 @@
    }
   }
  },
- "generado": "05-10-2026 16:11"
+ "generado": "05-10-2026 16:21"
 }
