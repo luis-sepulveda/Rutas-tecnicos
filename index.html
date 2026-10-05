@@ -4472,7 +4472,8 @@ function toggleReit(){
      ultimo dia, con el estado y cierre con que quedo.
    - El periodo se filtra por la fecha de la REPARACION.                  */
 let reitVista = 'hoy';     // 'hoy' | 'tec'
-let reitPer = 'mes';       // '7' | 'mes' | 'ant' | 'todo'
+let reitPer = 'mes';       // '7' | 'todo' | 'AAAA-MM' (un mes); 'mes' = el mes en curso
+const MESES_REIT = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 let reitTecAb = null;      // nombre del tecnico con el detalle abierto
 let REIT_TECS = [];        // lo que esta pintado, para abrir por indice
 
@@ -4492,11 +4493,34 @@ function pintarTabsReit(){
         + '<button class="rt-tab' + (reitVista === 'tec' ? ' act' : '') + '" onclick="verReitVista(\'tec\')">Por técnico</button>';
   if(reitVista === 'tec'){
     h += '<span class="rt-sep"></span>';
-    [['7','Últimos 7 días'],['mes','Este mes'],['ant','Mes anterior'],['todo','Todo lo guardado']].forEach(function(p){
-      h += '<button class="rt-per' + (reitPer === p[0] ? ' act' : '') + '" onclick="verReitPer(\'' + p[0] + '\')">' + p[1] + '</button>';
+    // (05-10-2026) un boton por cada MES con datos, pedido de Luis
+    const ms = mesesReit(), act = perReit();
+    const variosAnos = ms.length && ms[0].slice(0,4) !== ms[ms.length-1].slice(0,4);
+    const bot = [['7','Últimos 7 días']];
+    ms.forEach(function(m){ bot.push([m, nomMesReit(m, variosAnos)]); });
+    bot.push(['todo', 'Todo lo guardado']);
+    bot.forEach(function(p){
+      h += '<button class="rt-per' + (act === p[0] ? ' act' : '') + '" onclick="verReitPer(\'' + p[0] + '\')">' + p[1] + '</button>';
     });
   }
   el.innerHTML = h;
+}
+
+// meses (AAAA-MM) que tienen reparaciones en el registro, mas el mes en curso
+function mesesReit(){
+  const set = {};
+  set[isoLocal(new Date()).slice(0, 7)] = 1;
+  (filasReitHist() || []).forEach(function(f){ if(/^\d{4}-\d{2}/.test(f.fecha)) set[f.fecha.slice(0, 7)] = 1; });
+  return Object.keys(set).sort();
+}
+function nomMesReit(m, conAno){
+  return MESES_REIT[parseInt(m.slice(5, 7), 10) - 1] + (conAno ? ' ' + m.slice(0, 4) : '');
+}
+// periodo vigente: 'mes' o un mes que ya no esta publicado -> el mes en curso
+function perReit(){
+  if(reitPer === '7' || reitPer === 'todo') return reitPer;
+  const hoyM = isoLocal(new Date()).slice(0, 7);
+  return (reitPer !== 'mes' && mesesReit().indexOf(reitPer) >= 0) ? reitPer : hoyM;
 }
 
 function isoLocal(d){
@@ -4530,14 +4554,10 @@ function agruparReitTec(filas, per, hoy){
   const hoyIso = isoLocal(hoy);
   const d7 = new Date(hoy); d7.setDate(d7.getDate() - 6);
   const desde7 = isoLocal(d7);
-  const mes = hoyIso.slice(0, 7);
-  const dAnt = new Date(hoy.getFullYear(), hoy.getMonth() - 1, 1);
-  const mesAnt = isoLocal(dAnt).slice(0, 7);
   const reps = Object.keys(ult).map(function(k){ return ult[k]; }).filter(function(f){
     if(per === '7') return f.fecha >= desde7;
-    if(per === 'mes') return f.fecha.slice(0, 7) === mes;
-    if(per === 'ant') return f.fecha.slice(0, 7) === mesAnt;
-    return true;
+    if(per === 'todo') return true;
+    return f.fecha.slice(0, 7) === per;          // un mes: 'AAAA-MM'
   });
   // 3) por tecnico y por trabajo
   const tecs = {};
@@ -4610,11 +4630,13 @@ function renderReitTec(){
       + '05-10-2026 de generar_rutas.py en la carpeta Rutas tecnicos (y reiniciar el monitor).</div>';
     return;
   }
-  const g = agruparReitTec(filas, reitPer, new Date());
+  const per = perReit();
+  const g = agruparReitTec(filas, per, new Date());
   REIT_TECS = g.tecs;
   const fechas = filas.map(function(f){ return f.fecha; }).filter(Boolean).sort();
   const desde = fechas.length ? fechaCL(fechas[0]) : '';
-  const nomPer = { '7':'los últimos 7 días', 'mes':'este mes', 'ant':'el mes anterior', 'todo':'todo lo guardado' }[reitPer];
+  const nomPer = per === '7' ? 'los últimos 7 días' : per === 'todo' ? 'todo lo guardado'
+    : nomMesReit(per, true).toLowerCase();
   chips.innerHTML = '<span class="fchip"><b>' + g.nTrab + '</b> reiterados</span>'
     + '<span class="fchip"><b>' + g.tecs.length + '</b> técnicos</span>'
     + '<span class="fchip"><b>' + g.nRep + '</b> reparaciones</span>';
@@ -4640,8 +4662,10 @@ function renderReitTec(){
   nota.textContent = 'Se cuenta un reiterado por trabajo: si la misma casa tuvo dos reparaciones por el mismo '
     + 'trabajo, cuenta una y las dos se ven en el detalle. Una reparación reagendada cuenta una vez, con el '
     + 'estado en que quedó su último día. Incluye las que quedaron en el bucket o atendió otro técnico. '
-    + 'Sale del registro que el monitor anota cada 5 minutos (reiterados_log.csv); se publican los últimos '
-    + ((REIT.hist && REIT.hist.dias_pub) || 62) + ' días. En rojo, las reparaciones a 7 días o menos del trabajo.';
+    + 'Cada mes cuenta las reparaciones de ese mes: un trabajo con una reparación en cada mes cuenta 1 en cada uno '
+    + 'y 1 en el total. Sale del registro que el monitor anota cada 5 minutos (reiterados_log.csv); se ven el mes '
+    + 'en curso y los ' + (((REIT.hist && REIT.hist.meses_pub) || 3) - 1) + ' anteriores. '
+    + 'En rojo, las reparaciones a 7 días o menos del trabajo.';
 }
 /* ---------------------------------------------------------------------- */
 
