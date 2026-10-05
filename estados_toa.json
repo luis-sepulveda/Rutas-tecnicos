@@ -1,9 +1,20 @@
 {
-  "actualizado": "2026-10-05T11:06:55",
+  "actualizado": "2026-10-05T11:36:46",
   "resumen": {
-    "reagendada": 3
+    "reagendada": 5,
+    "sin informacion": 1
   },
   "estados": {
+    "1-3O8EEPZ7": {
+      "tec": "ALFREDO ALCAYAGA F",
+      "cat": "Alta 1 Play",
+      "franja_original": "13-16",
+      "d": "BAQUEDANO 1648, QUILPUE",
+      "estado": "reagendada",
+      "color": "rgb(255, 222, 0)",
+      "detalle": "1-3O8EEPZ7 - 10-13-Alta-1 Play-BAQUEDANO 1648Mar, 6 Oct",
+      "franja_nueva": "10-13"
+    },
     "1-3O6NEFRP": {
       "tec": "EDGAR VALERO C",
       "cat": "Alta Traslado",
@@ -33,6 +44,44 @@
       "color": "rgb(255, 222, 0)",
       "detalle": "1-3O6OM78V - 16-19-Alta-2 Play-CALLE 1 850 EDIF. O DEPTO 44Mie, 7 Oct",
       "franja_nueva": "16-19"
+    },
+    "1-3O557Q3Q": {
+      "tec": "LUIS GATICA DAVILA",
+      "cat": "Migración 2 Play",
+      "franja_original": "13-16",
+      "d": "MARIA MERCEDES 1482 EDIF. 3 DEPTO 101, VILLA ALEMANA",
+      "estado": "reagendada",
+      "color": "rgb(255, 222, 0)",
+      "detalle": "1-3O557Q3Q - 16-19-Migración-Migración-MARIA MERCEDES 1482 EDIF. 3 DEPTO 101Mar, 6 Oct",
+      "franja_nueva": "16-19"
+    },
+    "1-3O7KLZAD": {
+      "tec": "PABLO HERNANEZ FERNANDEZ",
+      "cat": "Alta 1 Play",
+      "franja_original": "13-16",
+      "d": "GREGORIA 812 CASA B, QUILPUE",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "GREGORIA 812",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3O6XH6E7",
+            "franja": "16-19",
+            "texto": "1-3O6XH6E7 - 16-19-Alta-1 Play-GREGORIA 812 CASA BSab, 3 Oct"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3O6RODZ3",
+            "franja": "13-16",
+            "texto": "1-3O6RODZ3 - 13-16-Alta-1 Play-GREGORIA 812 CASA BVie, 2 Oct"
+          }
+        ]
+      }
     }
   }
 }
