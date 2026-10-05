@@ -16860,23 +16860,23 @@
    }
   },
   "05-10-2026": {
-   "hasta": "12:16",
-   "actividades": 115,
-   "tecnicos": 34,
+   "hasta": "12:26",
+   "actividades": 116,
+   "tecnicos": 33,
    "estados": {
-    "Completado": 20,
-    "Pendiente": 50,
-    "No Realizada": 17,
-    "Iniciado": 20,
-    "en ruta": 3,
+    "Completado": 21,
+    "en ruta": 4,
+    "Pendiente": 47,
+    "No Realizada": 18,
+    "Iniciado": 21,
     "Cancelado": 3,
     "Suspendido": 2
    },
-   "rgu": 173.0,
+   "rgu": 174.0,
    "caidas_total": 6,
    "caidas_activas": 6,
    "caidas_resueltas": 0,
-   "nuevas": 27,
+   "nuevas": 28,
    "al_bucket": 7,
    "repetidas": 26,
    "reagendadas": 2,
@@ -16939,6 +16939,15 @@
     ],
     "nuevas": [
      {
+      "o": "1-3O8HNKX5",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "12:24",
+      "d": "PRIMERA 1430 CASA 10, VILLA ALEMANA",
+      "e": "Iniciado"
+     },
+     {
       "o": "1-3O8FEPFB",
       "tec": "JOSE PEREZ RANGEL",
       "cat": "Modificación de Servicio",
@@ -16990,7 +16999,7 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "ISIDORA ZEGERS 455, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3O8EEPZ7",
@@ -17107,7 +17116,7 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "OVALLE 1241 CASA B, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3O8CRNRO",
@@ -17189,7 +17198,7 @@
       "f": "10-13",
       "hi": "12:13",
       "d": "PJE 3 1210 CASA E36, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "ALFREDO ALCAYAGA F",
       "visitas": 1,
       "ult_fecha": "02-10-2026",
@@ -17247,9 +17256,9 @@
       "o": "1-3O47POIV",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "11:58",
+      "hi": "12:18",
       "d": "EL RINCON 940 CASA 12, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "ESTEBAN PIZARRO QUINTANA",
       "visitas": 1,
       "ult_fecha": "29-09-2026",
@@ -17340,6 +17349,18 @@
       "ult_cierre": "Direccion incorrecta"
      },
      {
+      "o": "1-3O3K55NC",
+      "cat": "Migración 1 Play",
+      "f": "10-13",
+      "hi": "13:20",
+      "d": "SAN ENRIQUE (NODO 82) 555 CASA 3, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "visitas": 1,
+      "ult_fecha": "19-08-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3O8G5I7L",
       "cat": "Modificación de Servicio",
       "f": "10-13",
@@ -17367,7 +17388,7 @@
       "o": "1-3O7IEG61",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "14:19",
       "d": "RAFAEL SOTOMAYOR 0615, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -17420,18 +17441,6 @@
       "tec": "LUIS MARTIN NUÑEZ",
       "visitas": 2,
       "ult_fecha": "03-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3O3K55NC",
-      "cat": "Migración 1 Play",
-      "f": "10-13",
-      "hi": "10:00",
-      "d": "SAN ENRIQUE (NODO 82) 555 CASA 3, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "MARCELO GÓMEZ GÓME",
-      "visitas": 1,
-      "ult_fecha": "19-08-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -17520,5 +17529,5 @@
    }
   }
  },
- "generado": "05-10-2026 12:16"
+ "generado": "05-10-2026 12:26"
 }
