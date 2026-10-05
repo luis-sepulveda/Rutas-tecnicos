@@ -16860,23 +16860,25 @@
    }
   },
   "05-10-2026": {
-   "hasta": "10:16",
-   "actividades": 96,
+   "hasta": "10:31",
+   "actividades": 102,
    "tecnicos": 34,
    "estados": {
-    "Iniciado": 30,
-    "Pendiente": 62,
-    "No Realizada": 2,
-    "Cancelado": 1,
-    "en ruta": 1
+    "Iniciado": 25,
+    "Pendiente": 63,
+    "No Realizada": 7,
+    "en ruta": 4,
+    "Completado": 1,
+    "Suspendido": 1,
+    "Cancelado": 1
    },
-   "rgu": 150.5,
+   "rgu": 157.5,
    "caidas_total": 3,
    "caidas_activas": 3,
    "caidas_resueltas": 0,
-   "nuevas": 10,
+   "nuevas": 14,
    "al_bucket": 0,
-   "repetidas": 22,
+   "repetidas": 23,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
@@ -16909,6 +16911,42 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3O8D7W4J",
+      "tec": "YENDER BOSCAN CADENAS",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "PORVENIR 1550, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3O8CWGUA",
+      "tec": "EDGAR VALERO C",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "LOS NARCISOS 1798 DEPTO 304, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3O8CUEHG",
+      "tec": "JOSE SALAS MEDINA",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "OSMAN PEREZ FREIRE 622 CASA B, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3O7FR25M",
+      "tec": "MATIAS APELEO APELEO",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "NUEVA HIPODROMO 43 CASA A, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3O8CMZXK",
       "tec": "SEBASTIAN DOSSOW A",
@@ -16965,7 +17003,7 @@
      },
      {
       "o": "1-3O8C5ZBC",
-      "tec": "JOSE CASTRO P",
+      "tec": "GEEYSER PEREZ O",
       "cat": "Alta 2 Play",
       "f": "10-13",
       "hi": "12:03",
@@ -17031,7 +17069,7 @@
       "f": "10-13",
       "hi": "09:42",
       "d": "SERENA 890 DEPTO 14, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "CESAR MENA OLIVEROS",
       "visitas": 2,
       "ult_fecha": "03-10-2026",
@@ -17091,7 +17129,7 @@
       "f": "10-13",
       "hi": "09:47",
       "d": "SAN LUIS 1730, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "FELIPE SILVA R",
       "visitas": 1,
       "ult_fecha": "07-09-2026",
@@ -17151,7 +17189,7 @@
       "f": "10-13",
       "hi": "09:47",
       "d": "OJOS DE AGUA 108 EDIF. A1 DEPTO 204, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "LEONEL HERNÁNDEZ OJE",
       "visitas": 1,
       "ult_fecha": "03-08-2026",
@@ -17163,7 +17201,7 @@
       "f": "10-13",
       "hi": "09:45",
       "d": "VALENTIN LETELIER 1245, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "LUIS CASTRO TORRES",
       "visitas": 1,
       "ult_fecha": "15-09-2026",
@@ -17230,6 +17268,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3O7FR25M",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "NUEVA HIPODROMO 43 CASA A, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "MATIAS APELEO APELEO",
+      "visitas": 1,
+      "ult_fecha": "03-10-2026",
+      "ult_cierre": "Direccion incorrecta"
+     },
+     {
       "o": "1-3O7A2Y1V",
       "cat": "Reparación",
       "f": "16-19",
@@ -17259,7 +17309,7 @@
       "f": "10-13",
       "hi": "09:46",
       "d": "GARCIA 340, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "SEBASTIAN DOSSOW A",
       "visitas": 3,
       "ult_fecha": "03-10-2026",
@@ -17291,5 +17341,5 @@
    }
   }
  },
- "generado": "05-10-2026 10:16"
+ "generado": "05-10-2026 10:31"
 }
