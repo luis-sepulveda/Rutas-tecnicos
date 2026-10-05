@@ -16860,25 +16860,24 @@
    }
   },
   "05-10-2026": {
-   "hasta": "16:21",
-   "actividades": 148,
+   "hasta": "17:20",
+   "actividades": 149,
    "tecnicos": 33,
    "estados": {
-    "Completado": 65,
-    "en ruta": 9,
-    "Pendiente": 12,
-    "No Realizada": 30,
+    "Completado": 76,
     "Iniciado": 24,
-    "Cancelado": 5,
-    "Suspendido": 3
+    "No Realizada": 37,
+    "Suspendido": 4,
+    "Cancelado": 6,
+    "en ruta": 2
    },
-   "rgu": 218.1,
+   "rgu": 219.1,
    "caidas_total": 11,
    "caidas_activas": 11,
    "caidas_resueltas": 0,
-   "nuevas": 44,
+   "nuevas": 45,
    "al_bucket": 14,
-   "repetidas": 30,
+   "repetidas": 29,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
@@ -16984,13 +16983,22 @@
     ],
     "nuevas": [
      {
+      "o": "1-3O8S1WFT",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "17:10",
+      "d": "PJE ANGAMOS 275 CASA L, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
       "o": "1-3O8Q69SY",
       "tec": "RAFAEL VARGAS B",
       "cat": "Modificación de Servicio",
       "f": "16-19",
       "hi": "18:04",
       "d": "SAN ENRIQUE (NODO 82) 555 CASA 3, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3O8OHRP7",
@@ -17008,7 +17016,7 @@
       "f": "13-16",
       "hi": "15:31",
       "d": "LOS ABEDULES 690, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3O8MJ9J5",
@@ -17035,7 +17043,7 @@
       "f": "13-16",
       "hi": "15:43",
       "d": "PEDRO MONTT 1857, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3O8MFNBV",
@@ -17053,7 +17061,7 @@
       "f": "13-16",
       "hi": "16:18",
       "d": "EDWIN GUAJARDO 35, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3O8M38SE",
@@ -17080,7 +17088,7 @@
       "f": "13-16",
       "hi": "16:42",
       "d": "SANTA MARGARITA 1319, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3O7ZS23J",
@@ -17152,7 +17160,7 @@
       "f": "16-19",
       "hi": "16:47",
       "d": "PJE LAS MANDARINAS 4, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O8EM30M",
@@ -17161,7 +17169,7 @@
       "f": "13-16",
       "hi": "16:25",
       "d": "SANTA SARA 1648 EDIF. 3A DEPTO 107, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3O8E7B5T",
@@ -17251,7 +17259,7 @@
       "f": "16-19",
       "hi": "16:30",
       "d": "AV LOS CARRERA 530, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3O8D7W4J",
@@ -17287,7 +17295,7 @@
       "f": "16-19",
       "hi": "16:00",
       "d": "NUEVA HIPODROMO 43 CASA A, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Pendiente (ya no está)"
      },
      {
       "o": "1-3O8CMZXK",
@@ -17399,7 +17407,7 @@
       "f": "13-16",
       "hi": "14:10",
       "d": "SANTA MARGARITA 1319, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "ALFREDO ALCAYAGA F",
       "visitas": 1,
       "ult_fecha": "25-09-2026",
@@ -17428,6 +17436,18 @@
       "visitas": 2,
       "ult_fecha": "03-10-2026",
       "ult_cierre": "Sin acceso a vivienda"
+     },
+     {
+      "o": "1-3O7GSV2E",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "17:17",
+      "d": "AV LOS CARRERA (BTO 2000) 2211, QUILPUE",
+      "e": "en ruta",
+      "tec": "DANIEL NAVARRETE E",
+      "visitas": 3,
+      "ult_fecha": "05-10-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3O7HFY13",
@@ -17478,18 +17498,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3O7GSV2E",
-      "cat": "Alta 2 Play",
-      "f": "16-19",
-      "hi": "16:55",
-      "d": "AV LOS CARRERA (BTO 2000) 2211, QUILPUE",
-      "e": "Pendiente",
-      "tec": "FELIPE SILVA R",
-      "visitas": 3,
-      "ult_fecha": "05-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3O7C95M4",
       "cat": "Alta 2 Play",
       "f": "13-16",
@@ -17526,18 +17534,6 @@
       "ult_cierre": "Direccion incorrecta"
      },
      {
-      "o": "1-3O7A2Y1V",
-      "cat": "Reparación",
-      "f": "16-19",
-      "hi": "17:17",
-      "d": "EL CIRUELILLO 1477, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOEL GUSTAVE GUSTA",
-      "visitas": 2,
-      "ult_fecha": "03-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3O8G5I7L",
       "cat": "Modificación de Servicio",
       "f": "10-13",
@@ -17547,6 +17543,18 @@
       "tec": "JOSE CASTRO P",
       "visitas": 1,
       "ult_fecha": "02-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3O7A2Y1V",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "16:57",
+      "d": "EL CIRUELILLO 1477, VILLA ALEMANA",
+      "e": "Iniciado",
+      "tec": "JOSE CASTRO P",
+      "visitas": 2,
+      "ult_fecha": "03-10-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -17589,9 +17597,9 @@
       "o": "1-3O7KJRPU",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:18",
+      "hi": "16:50",
       "d": "MALLECO 2178, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "JUAN ARRIAGADA C",
       "visitas": 1,
       "ult_fecha": "03-10-2026",
@@ -17608,18 +17616,6 @@
       "visitas": 1,
       "ult_fecha": "03-08-2026",
       "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3O7FR25M",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "17:22",
-      "d": "NUEVA HIPODROMO 43 CASA A, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "LEONEL HERNÁNDEZ OJE",
-      "visitas": 1,
-      "ult_fecha": "03-10-2026",
-      "ult_cierre": "Direccion incorrecta"
      },
      {
       "o": "1-3O79XVA5",
@@ -17651,7 +17647,7 @@
       "f": "13-16",
       "hi": "16:19",
       "d": "PJE CONDELL 1344, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "LUIS GATICA DAVILA",
       "visitas": 1,
       "ult_fecha": "02-10-2026",
@@ -17748,7 +17744,7 @@
       "f": "13-16",
       "hi": "14:33",
       "d": "PAULA JARA QUEMADA 982, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JOSE ROJO A",
       "desde": "03-10-2026"
      },
@@ -17756,15 +17752,15 @@
       "o": "1-3O5BAZMX",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:25",
+      "hi": "17:17",
       "d": "SEXTA 0786 EDIF. 3 DEPTO 301, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOSE ROJO A",
+      "e": "en ruta",
+      "tec": "LUIS GATICA DAVILA",
       "desde": "01-10-2026"
      }
     ]
    }
   }
  },
- "generado": "05-10-2026 16:21"
+ "generado": "05-10-2026 17:20"
 }
