@@ -1721,7 +1721,12 @@
   .rt-n { min-width:34px; text-align:center; font-size:18px; font-weight:800; color:#5b21b6; }
   .rt-nom { font-size:14px; font-weight:700; color:#0f172a; }
   .rt-sup { font-size:12px; color:#64748b; }
-  .rt-mix { margin-left:auto; font-size:12px; color:#475569; text-align:right; }
+  .rt-mix { font-size:12px; color:#475569; text-align:right; min-width:170px; }
+  .rt-pct { margin-left:auto; font-size:13px; color:#166534; background:#dcfce7; border-radius:8px;
+    padding:4px 10px; text-align:center; white-space:nowrap; line-height:1.3; }
+  .rt-pct.mal { color:#991b1b; background:#fee2e2; }
+  .rt-pct.poco { color:#475569; background:#f1f5f9; }
+  .rt-pct small { font-size:10.5px; font-weight:400; }
   .rt-flecha { color:#7c3aed; font-size:12px; width:14px; }
   .rt-det { background:#f5f3ff; border-left:4px solid #7c3aed; border-radius:0 0 10px 10px;
     padding:4px 12px 10px; margin-bottom:6px; }
@@ -4472,7 +4477,9 @@ function toggleReit(){
      ultimo dia, con el estado y cierre con que quedo.
    - El periodo se filtra por la fecha de la REPARACION.                  */
 let reitVista = 'hoy';     // 'hoy' | 'tec'
-let reitPer = 'mes';       // '7' | 'todo' | 'AAAA-MM' (un mes); 'mes' = el mes en curso
+let reitPer = 'mes';       // '7' | '30' | 'todo' | 'AAAA-MM' (un mes); 'mes' = el mes en curso
+const META_REIT = 5.32;    // % maximo de calidad FTTH (meta oficial ZCEN jul-dic 2026)
+const MIN_COMP_REIT = 20;  // con menos completadas el % no se pinta de rojo: muy pocas ordenes
 const MESES_REIT = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 let reitTecAb = null;      // nombre del tecnico con el detalle abierto
 let REIT_TECS = [];        // lo que esta pintado, para abrir por indice
@@ -4496,7 +4503,7 @@ function pintarTabsReit(){
     // (05-10-2026) un boton por cada MES con datos, pedido de Luis
     const ms = mesesReit(), act = perReit();
     const variosAnos = ms.length && ms[0].slice(0,4) !== ms[ms.length-1].slice(0,4);
-    const bot = [['7','Últimos 7 días']];
+    const bot = [['7','Últimos 7 días'], ['30','Últimos 30 días']];
     ms.forEach(function(m){ bot.push([m, nomMesReit(m, variosAnos)]); });
     bot.push(['todo', 'Todo lo guardado']);
     bot.forEach(function(p){
@@ -4518,7 +4525,7 @@ function nomMesReit(m, conAno){
 }
 // periodo vigente: 'mes' o un mes que ya no esta publicado -> el mes en curso
 function perReit(){
-  if(reitPer === '7' || reitPer === 'todo') return reitPer;
+  if(reitPer === '7' || reitPer === '30' || reitPer === 'todo') return reitPer;
   const hoyM = isoLocal(new Date()).slice(0, 7);
   return (reitPer !== 'mes' && mesesReit().indexOf(reitPer) >= 0) ? reitPer : hoyM;
 }
@@ -4542,6 +4549,49 @@ function filasReitHist(){
   });
 }
 
+// dias que abarca un periodo: {d0, d1} en AAAA-MM-DD (los dos incluidos)
+function rangoReit(per, hoy){
+  const hoyIso = isoLocal(hoy);
+  if(per === 'todo') return { d0: '0000-00-00', d1: hoyIso };
+  if(per === '7' || per === '30'){
+    const d = new Date(hoy); d.setDate(d.getDate() - (per === '7' ? 6 : 29));
+    return { d0: isoLocal(d), d1: hoyIso };
+  }
+  return { d0: per + '-01', d1: per + '-31' };   // un mes: 'AAAA-MM'
+}
+
+/* % de reiterados (05-10-2026). Misma metrica de la pagina de metas:
+   Q Fallas / Q Actividades = reiterados del tecnico / trabajos que completo.
+   - Arriba: sus reiterados del periodo (uno por trabajo).
+   - Abajo: sus altas, traslados, migraciones y reparaciones COMPLETADAS en
+     Quilpue y Villa Alemana en los MISMOS dias (rutas.json -> reit.hist.comp,
+     que generar_rutas.py saca de historico_completadas.csv).
+   - Los dos lados cuentan los mismos dias: si el periodo parte antes que el
+     registro de reiterados (29-09-2026), las completadas se cuentan desde
+     el primer dia del registro, no antes. Si no, el % saldria mas bajo.
+   Devuelve una funcion nombre -> completadas, o null si no hay datos. */
+function compReit(d0, d1){
+  const c = REIT && REIT.hist && REIT.hist.comp;
+  if(!c || !c.fechas || !c.tecs) return null;
+  const idx = [];
+  c.fechas.forEach(function(f, i){ if(f >= d0 && f <= d1) idx.push(i); });
+  const f = function(nom){
+    const a = c.tecs[String(nom || '').replace(/\s+/g, ' ').trim().toUpperCase()];
+    if(!a) return null;
+    let n = 0; idx.forEach(function(i){ n += a[i] || 0; });
+    return n;
+  };
+  f.total = function(){
+    let n = 0;
+    Object.keys(c.tecs).forEach(function(k){ idx.forEach(function(i){ n += c.tecs[k][i] || 0; }); });
+    return n;
+  };
+  return f;
+}
+function pctReit(n, comp){            // "4,1%"
+  return (100 * n / comp).toFixed(1).replace('.', ',') + '%';
+}
+
 // agrupa: tecnico del trabajo anterior -> trabajos -> reparaciones
 function agruparReitTec(filas, per, hoy){
   // 1) una reparacion = una fila: la de su ultimo dia
@@ -4551,13 +4601,9 @@ function agruparReitTec(filas, per, hoy){
     if(!ult[f.rep_ot] || f.fecha > ult[f.rep_ot].fecha) ult[f.rep_ot] = f;
   });
   // 2) periodo, por la fecha de la reparacion
-  const hoyIso = isoLocal(hoy);
-  const d7 = new Date(hoy); d7.setDate(d7.getDate() - 6);
-  const desde7 = isoLocal(d7);
+  const rg = rangoReit(per, hoy);
   const reps = Object.keys(ult).map(function(k){ return ult[k]; }).filter(function(f){
-    if(per === '7') return f.fecha >= desde7;
-    if(per === 'todo') return true;
-    return f.fecha.slice(0, 7) === per;          // un mes: 'AAAA-MM'
+    return f.fecha >= rg.d0 && f.fecha <= rg.d1;
   });
   // 3) por tecnico y por trabajo
   const tecs = {};
@@ -4635,25 +4681,48 @@ function renderReitTec(){
   REIT_TECS = g.tecs;
   const fechas = filas.map(function(f){ return f.fecha; }).filter(Boolean).sort();
   const desde = fechas.length ? fechaCL(fechas[0]) : '';
-  const nomPer = per === '7' ? 'los últimos 7 días' : per === 'todo' ? 'todo lo guardado'
+  // divisor del %: completadas en los mismos dias (nunca antes del registro)
+  const rg = rangoReit(per, new Date());
+  const d0c = fechas.length && fechas[0] > rg.d0 ? fechas[0] : rg.d0;
+  const comp = compReit(d0c, rg.d1);
+  const recortado = fechas.length && fechas[0] > rg.d0 && per !== 'todo';
+  const totComp = comp ? comp.total() : 0;
+  const nomPer = per === '7' ? 'los últimos 7 días' : per === '30' ? 'los últimos 30 días' : per === 'todo' ? 'todo lo guardado'
     : nomMesReit(per, true).toLowerCase();
   chips.innerHTML = '<span class="fchip"><b>' + g.nTrab + '</b> reiterados</span>'
     + '<span class="fchip"><b>' + g.tecs.length + '</b> técnicos</span>'
-    + '<span class="fchip"><b>' + g.nRep + '</b> reparaciones</span>';
+    + '<span class="fchip"><b>' + g.nRep + '</b> reparaciones</span>'
+    + (totComp ? '<span class="fchip">Equipo: <b>' + g.nTrab + ' de ' + totComp + ' · ' + pctReit(g.nTrab, totComp)
+        + '</b> (meta ' + String(META_REIT).replace('.', ',') + '%)</span>' : '');
   intro.innerHTML = 'Reiterados de <b>' + nomPer + '</b>, contados al técnico que hizo el <b>trabajo anterior</b> '
     + '(el alta, traslado, migración o reparación), no al que fue a reparar. Presione un técnico para ver el detalle.'
-    + (desde ? ' El registro parte el <b>' + escR(desde) + '</b>.' : '');
+    + (desde ? ' El registro parte el <b>' + escR(desde) + '</b>.' : '')
+    + (comp ? ' El <b>%</b> es reiterados sobre los trabajos que completó en los mismos días'
+        + (recortado ? ' (contados desde el ' + escR(desde) + ', cuando parte el registro)' : '') + '.'
+      : ' Para ver el %, falta la versión nueva de generar_rutas.py.');
   if(!g.tecs.length){
     cont.innerHTML = '<div class="vacio">No hay reiterados anotados en ' + nomPer + '.</div>';
   } else {
     cont.innerHTML = g.tecs.map(function(t, i){
       const ab = reitTecAb === t.nom;
       const mix = Object.keys(t.mix).sort().map(function(k){ return t.mix[k] + ' ' + escR(k.toLowerCase()); }).join(' · ');
+      // % del tecnico: reiterados / completadas en los mismos dias
+      const nc = comp ? comp(t.nom) : null;
+      let pct = '';
+      if(nc){
+        const mal = nc >= MIN_COMP_REIT && (100 * t.n / nc) > META_REIT;
+        pct = '<span class="rt-pct' + (mal ? ' mal' : '') + (nc < MIN_COMP_REIT ? ' poco' : '') + '">'
+          + t.n + ' de ' + nc + ' · <b>' + pctReit(t.n, nc) + '</b>'
+          + (nc < MIN_COMP_REIT ? '<br><small>pocas órdenes</small>' : '') + '</span>';
+      } else if(comp){
+        pct = '<span class="rt-pct poco">sin completadas<br><small>en estos días</small></span>';
+      }
       return '<div class="rt-fila' + (ab ? ' ab' : '') + '" onclick="abrirReitTec(' + i + ')">'
         + '<span class="rt-flecha">' + (ab ? '▼' : '▶') + '</span>'
         + '<span class="rt-n">' + t.n + '</span>'
         + '<span><div class="rt-nom">' + escR(t.nom) + '</div>'
         + '<div class="rt-sup">' + escR(t.sup || 'sin supervisor') + '</div></span>'
+        + pct
         + '<span class="rt-mix">' + mix + (t.cerca ? '<br><b style="color:#991b1b">' + t.cerca + ' antes de 7 días</b>' : '') + '</span>'
         + '</div>'
         + (ab ? '<div class="rt-det">' + detalleReitTec(t) + '</div>' : '');
@@ -4662,6 +4731,10 @@ function renderReitTec(){
   nota.textContent = 'Se cuenta un reiterado por trabajo: si la misma casa tuvo dos reparaciones por el mismo '
     + 'trabajo, cuenta una y las dos se ven en el detalle. Una reparación reagendada cuenta una vez, con el '
     + 'estado en que quedó su último día. Incluye las que quedaron en el bucket o atendió otro técnico. '
+    + 'El % es reiterados dividido por las altas, traslados, migraciones y reparaciones que el técnico completó '
+    + 'en Quilpué y Villa Alemana en los mismos días (hasta ayer); en rojo si pasa la meta de '
+    + String(META_REIT).replace('.', ',') + '% con al menos ' + MIN_COMP_REIT + ' completadas. Es la misma fórmula de la '
+    + 'página de metas (fallas / actividades), pero puede no dar idéntico. '
     + 'Cada mes cuenta las reparaciones de ese mes: un trabajo con una reparación en cada mes cuenta 1 en cada uno '
     + 'y 1 en el total. Sale del registro que el monitor anota cada 5 minutos (reiterados_log.csv); se ven el mes '
     + 'en curso y los ' + (((REIT.hist && REIT.hist.meses_pub) || 3) - 1) + ' anteriores. '
