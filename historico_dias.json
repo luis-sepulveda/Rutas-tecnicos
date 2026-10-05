@@ -16860,23 +16860,23 @@
    }
   },
   "05-10-2026": {
-   "hasta": "11:01",
-   "actividades": 115,
+   "hasta": "11:10",
+   "actividades": 118,
    "tecnicos": 34,
    "estados": {
-    "Iniciado": 26,
-    "Pendiente": 66,
-    "Completado": 5,
-    "en ruta": 3,
+    "Iniciado": 24,
+    "Pendiente": 67,
+    "Completado": 6,
+    "en ruta": 4,
     "No Realizada": 12,
-    "Cancelado": 2,
-    "Suspendido": 1
+    "Cancelado": 3,
+    "Suspendido": 2
    },
-   "rgu": 174.5,
+   "rgu": 180.0,
    "caidas_total": 3,
    "caidas_activas": 3,
    "caidas_resueltas": 0,
-   "nuevas": 23,
+   "nuevas": 25,
    "al_bucket": 0,
    "repetidas": 27,
    "reagendadas": 2,
@@ -16912,6 +16912,24 @@
     ],
     "nuevas": [
      {
+      "o": "1-3O8EM30M",
+      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "cat": "Alta Traslado",
+      "f": "13-16",
+      "hi": "16:25",
+      "d": "SANTA SARA 1648 EDIF. 3A DEPTO 107, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3O8E7B5T",
+      "tec": "JOSE CASTRO P",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "16:09",
+      "d": "SAN ENRIQUE 1950 EDIF. 3 DEPTO 101, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3O8E3CSW",
       "tec": "LEONEL HERNÁNDEZ OJE",
       "cat": "Modificación de Servicio",
@@ -16936,7 +16954,7 @@
       "f": "13-16",
       "hi": "14:49",
       "d": "BAQUEDANO 1648, QUILPUE",
-      "e": "Pendiente"
+      "e": "Pendiente (ya no está)"
      },
      {
       "o": "1-3O8EB29A",
@@ -17098,7 +17116,7 @@
       "f": "10-13",
       "hi": "10:00",
       "d": "SEXTA 0786 EDIF. 4 DEPTO 103, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3O6T71JO",
@@ -17136,7 +17154,7 @@
       "o": "1-3O7GSV2E",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:55",
+      "hi": "16:00",
       "d": "AV LOS CARRERA (BTO 2000) 2211, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -17241,18 +17259,6 @@
       "ult_cierre": "Direccion incorrecta"
      },
      {
-      "o": "1-3O7JFVZ0",
-      "cat": "Alta 2 Play",
-      "f": "13-16",
-      "hi": "16:08",
-      "d": "LOMBARDI 189, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOSE CASTRO P",
-      "visitas": 1,
-      "ult_fecha": "03-10-2026",
-      "ult_cierre": "Direccion incorrecta"
-     },
-     {
       "o": "1-3O5X4GZI",
       "cat": "Migración 3 Play",
       "f": "10-13",
@@ -17287,6 +17293,18 @@
       "visitas": 1,
       "ult_fecha": "03-10-2026",
       "ult_cierre": "Cliente Desiste"
+     },
+     {
+      "o": "1-3O7JFVZ0",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "LOMBARDI 189, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOSE SALAS MEDINA",
+      "visitas": 1,
+      "ult_fecha": "03-10-2026",
+      "ult_cierre": "Direccion incorrecta"
      },
      {
       "o": "1-3O7WEAES",
@@ -17469,5 +17487,5 @@
    }
   }
  },
- "generado": "05-10-2026 11:01"
+ "generado": "05-10-2026 11:10"
 }
