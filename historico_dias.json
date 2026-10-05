@@ -16860,15 +16860,15 @@
    }
   },
   "05-10-2026": {
-   "hasta": "11:36",
+   "hasta": "11:46",
    "actividades": 121,
    "tecnicos": 34,
    "estados": {
-    "Iniciado": 26,
-    "Pendiente": 64,
-    "Completado": 9,
-    "No Realizada": 14,
-    "en ruta": 3,
+    "Completado": 13,
+    "Pendiente": 61,
+    "No Realizada": 15,
+    "en ruta": 6,
+    "Iniciado": 21,
     "Cancelado": 3,
     "Suspendido": 2
    },
@@ -16945,7 +16945,7 @@
       "f": "10-13",
       "hi": "11:39",
       "d": "AV VICTORIA 0508 CASA 1, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3O8F1DME",
@@ -17184,6 +17184,18 @@
     ],
     "repetidas": [
      {
+      "o": "1-3O7YQJMG",
+      "cat": "Migración 1 Play",
+      "f": "10-13",
+      "hi": "12:02",
+      "d": "PJE 3 1210 CASA E36, QUILPUE",
+      "e": "en ruta",
+      "tec": "ALFREDO ALCAYAGA F",
+      "visitas": 1,
+      "ult_fecha": "02-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3O7GSV2E",
       "cat": "Alta 2 Play",
       "f": "16-19",
@@ -17235,9 +17247,9 @@
       "o": "1-3O47POIV",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "11:51",
+      "hi": "11:58",
       "d": "EL RINCON 940 CASA 12, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "ESTEBAN PIZARRO QUINTANA",
       "visitas": 1,
       "ult_fecha": "29-09-2026",
@@ -17290,18 +17302,6 @@
       "visitas": 1,
       "ult_fecha": "03-10-2026",
       "ult_cierre": "Direccion incorrecta"
-     },
-     {
-      "o": "1-3O7YQJMG",
-      "cat": "Migración 1 Play",
-      "f": "10-13",
-      "hi": "11:40",
-      "d": "PJE 3 1210 CASA E36, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JOSE CASTRO P",
-      "visitas": 1,
-      "ult_fecha": "02-10-2026",
-      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3O5X4GZI",
@@ -17508,5 +17508,5 @@
    }
   }
  },
- "generado": "05-10-2026 11:36"
+ "generado": "05-10-2026 11:46"
 }
