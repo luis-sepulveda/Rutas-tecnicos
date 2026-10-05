@@ -1609,6 +1609,9 @@
     font-size:10.5px; font-weight:700; line-height:15px; padding:0 6px; margin-left:4px;
     border-radius:5px; background:#ede9fe; color:#5b21b6; white-space:nowrap; vertical-align:1px; }
   .tg-neg.reit { background:#fee2e2; color:#991b1b; }
+  /* colegio con Fortinet (05-10-2026) */
+  .tg-neg.fort { background:#dbeafe; color:#1e3a8a; }
+  .rt-fort { color:#1e3a8a; font-weight:700; }
   /* ============ MAPA DE RED (vista aparte) — 24-09-2026 ============
      Pantalla propia con su propio mapa: solo NAP y zonas de nodo, sin los
      pines de los tecnicos (a pedido de Luis, para que no se mezclen).
@@ -4476,6 +4479,15 @@ function toggleReit(){
    - Una reparacion que aparece en dos dias (reagendada) es UNA: vale su
      ultimo dia, con el estado y cierre con que quedo.
    - El periodo se filtra por la fecha de la REPARACION.                  */
+// Colegio con Fortinet (05-10-2026). La marca viene en rutas.json: 'fort' en
+// cada reiterado de hoy y columna 'fort' en el historial. generar_rutas.py
+// la pone por DIRECCION, con las ordenes cuyos Pasos traen "Router FORTINET"
+// (plan Fibra Lite Escuelas), anotadas en fortinet_dirs.csv.
+function tagFort(si){
+  return si ? ' <span class="tg-neg fort" title="En esta dirección se instaló un router Fortinet '
+    + '(plan Fibra Lite Escuelas), según los Pasos de la orden">Colegio · Fortinet</span>' : '';
+}
+
 let reitVista = 'hoy';     // 'hoy' | 'tec'
 let reitPer = 'mes';       // '7' | '30' | 'todo' | 'AAAA-MM' (un mes); 'mes' = el mes en curso
 const META_REIT = 5.32;    // % maximo de calidad FTTH (meta oficial ZCEN jul-dic 2026)
@@ -4615,6 +4627,7 @@ function agruparReitTec(filas, per, hoy){
     const w = t.trab[kt] || (t.trab[kt] = { ot: f.prev_ot, f: f.prev_fecha, cat: f.prev_categoria || f.prev_tipo,
                                            tipo: f.prev_tipo, cie: f.prev_cierre, dir: f.direccion, reps: [] });
     w.reps.push(f); t.nRep++;
+    if(f.fort === '1') w.fort = true;
   });
   const lista = Object.keys(tecs).map(function(k){
     const t = tecs[k];
@@ -4629,11 +4642,13 @@ function agruparReitTec(filas, per, hoy){
     t.mix = {};
     t.trabajos.forEach(function(w){ const k2 = w.tipo || 'Otro'; t.mix[k2] = (t.mix[k2] || 0) + 1; });
     t.cerca = t.trabajos.filter(function(w){ return w.dias <= 7; }).length;
+    t.fort = t.trabajos.filter(function(w){ return w.fort; }).length;
     delete t.trab;
     return t;
   }).sort(function(a, b){ return b.n - a.n || (a.nom < b.nom ? -1 : 1); });
   return { tecs: lista, nRep: reps.length,
-           nTrab: lista.reduce(function(s, t){ return s + t.n; }, 0) };
+           nTrab: lista.reduce(function(s, t){ return s + t.n; }, 0),
+           nFort: lista.reduce(function(s, t){ return s + t.fort; }, 0) };
 }
 
 function detalleReitTec(t){
@@ -4652,7 +4667,7 @@ function detalleReitTec(t){
         + '</tr>';
     }).join('');
     return '<div class="rd-card reit' + (w.dias <= 7 ? ' cerca' : '') + '">'
-      + '<div class="rd-top"><span class="rd-tit">' + escR(w.dir) + '</span>'
+      + '<div class="rd-top"><span class="rd-tit">' + escR(w.dir) + tagFort(w.fort) + '</span>'
       + '<span class="rd-sello">' + escR(w.cat || 'Trabajo') + ' del ' + escR(fechaCL(w.f)) + '</span></div>'
       + '<div class="rd-hoy"><b>Su trabajo:</b> <span class="rd-ot">' + escR(w.ot) + '</span>'
       + ' · ' + escR(w.cat || '') + ' · cerró: ' + escR(w.cie || '—') + '</div>'
@@ -4692,6 +4707,7 @@ function renderReitTec(){
   chips.innerHTML = '<span class="fchip"><b>' + g.nTrab + '</b> reiterados</span>'
     + '<span class="fchip"><b>' + g.tecs.length + '</b> técnicos</span>'
     + '<span class="fchip"><b>' + g.nRep + '</b> reparaciones</span>'
+    + (g.nFort ? '<span class="fchip"><b>' + g.nFort + '</b> en colegios con Fortinet</span>' : '')
     + (totComp ? '<span class="fchip">Equipo: <b>' + g.nTrab + ' de ' + totComp + ' · ' + pctReit(g.nTrab, totComp)
         + '</b> (meta ' + String(META_REIT).replace('.', ',') + '%)</span>' : '');
   intro.innerHTML = 'Reiterados de <b>' + nomPer + '</b>, contados al técnico que hizo el <b>trabajo anterior</b> '
@@ -4723,7 +4739,8 @@ function renderReitTec(){
         + '<span><div class="rt-nom">' + escR(t.nom) + '</div>'
         + '<div class="rt-sup">' + escR(t.sup || 'sin supervisor') + '</div></span>'
         + pct
-        + '<span class="rt-mix">' + mix + (t.cerca ? '<br><b style="color:#991b1b">' + t.cerca + ' antes de 7 días</b>' : '') + '</span>'
+        + '<span class="rt-mix">' + mix + (t.cerca ? '<br><b style="color:#991b1b">' + t.cerca + ' antes de 7 días</b>' : '')
+          + (t.fort ? '<br><span class="rt-fort">' + t.fort + ' en colegio con Fortinet</span>' : '') + '</span>'
         + '</div>'
         + (ab ? '<div class="rt-det">' + detalleReitTec(t) + '</div>' : '');
     }).join('');
@@ -4735,6 +4752,8 @@ function renderReitTec(){
     + 'en Quilpué y Villa Alemana en los mismos días (hasta ayer); en rojo si pasa la meta de '
     + String(META_REIT).replace('.', ',') + '% con al menos ' + MIN_COMP_REIT + ' completadas. Es la misma fórmula de la '
     + 'página de metas (fallas / actividades), pero puede no dar idéntico. '
+    + '"Colegio · Fortinet" = en esa dirección se instaló un router Fortinet (plan Fibra Lite Escuelas), según los '
+    + 'Pasos de la orden; se reconocen los colegios instalados por Dominion que estén en los export guardados. '
     + 'Cada mes cuenta las reparaciones de ese mes: un trabajo con una reparación en cada mes cuenta 1 en cada uno '
     + 'y 1 en el total. Sale del registro que el monitor anota cada 5 minutos (reiterados_log.csv); se ven el mes '
     + 'en curso y los ' + (((REIT.hist && REIT.hist.meses_pub) || 3) - 1) + ' anteriores. '
@@ -4769,7 +4788,9 @@ function renderReit(){
   const cerca = items.filter(function(w){ return w.prev[0].dias <= 7; }).length;
   chips.innerHTML = '<span class="fchip"><b>' + (REIT.n_rep||0) + '</b> reparaciones hoy</span>'
     + '<span class="fchip"><b>' + items.length + '</b> reiteradas</span>'
-    + '<span class="fchip"><b>' + cerca + '</b> de la última semana</span>';
+    + '<span class="fchip"><b>' + cerca + '</b> de la última semana</span>'
+    + (items.some(function(w){ return w.fort; }) ? '<span class="fchip"><b>'
+        + items.filter(function(w){ return w.fort; }).length + '</b> en colegios con Fortinet</span>' : '');
   intro.innerHTML = 'Reparaciones de hoy en una casa donde un técnico de Dominion completó una '
     + '<b>alta, traslado, migración o reparación en los últimos ' + dias + ' días</b>, '
     + 'o hoy mismo antes de la reparación. '
@@ -4793,7 +4814,7 @@ function renderReit(){
           + '</tr>';
       }).join('');
       return '<div class="rd-card reit' + (p0.dias <= 7 ? ' cerca' : '') + '">'
-        + '<div class="rd-top"><span class="rd-tit">' + escR(w.d) + '</span>'
+        + '<div class="rd-top"><span class="rd-tit">' + escR(w.d) + tagFort(w.fort) + '</span>'
         + '<span class="rd-sello">' + escR(p0.cat || p0.tipo) + (p0.dias === 0 ? ' hoy mismo' : ' hace ' + haceReit(p0.dias))
         + ' · ' + escR(p0.tec) + '</span></div>'
         + '<div class="rd-hoy"><b>Hoy:</b> <span class="rd-ot">' + escR(w.pet || w.o) + '</span>' + tagNeg(w.o)
