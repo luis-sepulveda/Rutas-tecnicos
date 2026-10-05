@@ -16860,21 +16860,22 @@
    }
   },
   "05-10-2026": {
-   "hasta": "17:30",
-   "actividades": 150,
+   "hasta": "17:35",
+   "actividades": 151,
    "tecnicos": 33,
    "estados": {
-    "Completado": 79,
-    "Iniciado": 24,
+    "Completado": 80,
+    "Iniciado": 23,
     "No Realizada": 37,
     "Suspendido": 4,
-    "Cancelado": 6
+    "Cancelado": 6,
+    "en ruta": 1
    },
-   "rgu": 219.2,
+   "rgu": 220.2,
    "caidas_total": 11,
    "caidas_activas": 11,
    "caidas_resueltas": 0,
-   "nuevas": 46,
+   "nuevas": 47,
    "al_bucket": 14,
    "repetidas": 29,
    "reagendadas": 2,
@@ -16981,6 +16982,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3O8SY5SC",
+      "tec": "FELIPE SILVA R",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:31",
+      "d": "AV LOS CARRERA 530, QUILPUE",
+      "e": "en ruta"
+     },
      {
       "o": "1-3O8SS836",
       "tec": "JOSE ROJO A",
@@ -17770,5 +17780,5 @@
    }
   }
  },
- "generado": "05-10-2026 17:30"
+ "generado": "05-10-2026 17:35"
 }
