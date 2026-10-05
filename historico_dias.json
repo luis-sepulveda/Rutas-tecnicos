@@ -16860,23 +16860,23 @@
    }
   },
   "05-10-2026": {
-   "hasta": "14:52",
-   "actividades": 147,
+   "hasta": "15:17",
+   "actividades": 148,
    "tecnicos": 33,
    "estados": {
-    "Completado": 49,
-    "Pendiente": 39,
-    "No Realizada": 26,
-    "Iniciado": 23,
-    "en ruta": 3,
+    "Completado": 53,
+    "en ruta": 4,
+    "Pendiente": 34,
+    "No Realizada": 29,
+    "Iniciado": 20,
     "Cancelado": 5,
-    "Suspendido": 2
+    "Suspendido": 3
    },
-   "rgu": 220.4,
-   "caidas_total": 9,
-   "caidas_activas": 9,
+   "rgu": 220.5,
+   "caidas_total": 11,
+   "caidas_activas": 11,
    "caidas_resueltas": 0,
-   "nuevas": 42,
+   "nuevas": 43,
    "al_bucket": 9,
    "repetidas": 30,
    "reagendadas": 2,
@@ -16928,6 +16928,15 @@
       "e": "Pendiente"
      },
      {
+      "o": "1-3O8EQJJQ",
+      "tec": "JOSE PEREZ RANGEL",
+      "cat": "Migración 2 Play",
+      "f": "16-19",
+      "hi": "17:43",
+      "d": "ORREGO LUCO 2068, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3O8EES01",
       "tec": "KEVIN TAPIA RETAMAL",
       "cat": "Alta 1 Play",
@@ -16962,9 +16971,27 @@
       "hi": "14:00",
       "d": "GREGORIA 812 CASA B, QUILPUE",
       "e": "Pendiente"
+     },
+     {
+      "o": "1-3O8MJ32G",
+      "tec": "PABLO HERNANEZ FERNANDEZ",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "15:59",
+      "d": "PJE EL OVERO 50, VILLA ALEMANA",
+      "e": "Pendiente"
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3O8OHRP7",
+      "tec": "MARCO PEREZ G",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "15:15",
+      "d": "LAS HORTENCIAS 1428, QUILPUE",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3O8MGX0F",
       "tec": "JUAN ARRIAGADA C",
@@ -16981,7 +17008,7 @@
       "f": "10-13",
       "hi": "17:10",
       "d": "LAS ACACIAS 1575 CASA 18, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3O8MD6WS",
@@ -16990,7 +17017,7 @@
       "f": "13-16",
       "hi": "15:05",
       "d": "SAN PABLO 01454, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3O8MKOCI",
@@ -16999,7 +17026,7 @@
       "f": "13-16",
       "hi": "15:43",
       "d": "PEDRO MONTT 1857, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O8MFNBV",
@@ -17008,7 +17035,7 @@
       "f": "13-16",
       "hi": "15:54",
       "d": "MANUEL BULNES 1533 CASA 19, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3O8M1FDF",
@@ -17021,7 +17048,7 @@
      },
      {
       "o": "1-3O8M38SE",
-      "tec": "JOSE CASTRO P",
+      "tec": "LUIS GATICA DAVILA",
       "cat": "Reparación",
       "f": "13-16",
       "hi": "16:49",
@@ -17035,7 +17062,7 @@
       "f": "13-16",
       "hi": "14:06",
       "d": "PJE 2 1593, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3O8I4WLP",
@@ -17134,7 +17161,7 @@
       "f": "13-16",
       "hi": "16:09",
       "d": "SAN ENRIQUE 1950 EDIF. 3 DEPTO 101, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O8E3CSW",
@@ -17282,12 +17309,12 @@
      },
      {
       "o": "1-3O7KEXMO",
-      "tec": "SEBASTIAN DOSSOW A",
+      "tec": "JUAN ARRIAGADA C",
       "cat": "Alta 2 Play",
       "f": "13-16",
       "hi": "14:00",
       "d": "PORVENIR 365, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Pendiente"
      },
      {
       "o": "1-3O8CMX61",
@@ -17397,7 +17424,7 @@
       "o": "1-3O7GSV2E",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:50",
+      "hi": "16:00",
       "d": "AV LOS CARRERA (BTO 2000) 2211, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -17550,10 +17577,22 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3O7KEXMO",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "15:37",
+      "d": "PORVENIR 365, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JUAN ARRIAGADA C",
+      "visitas": 1,
+      "ult_fecha": "03-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3O7KJRPU",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "17:17",
+      "hi": "19:52",
       "d": "MALLECO 2178, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JUAN ARRIAGADA C",
@@ -17660,7 +17699,7 @@
       "o": "1-3O7B32D5",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "17:34",
+      "hi": "18:01",
       "d": "PJE CONDELL 1344, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -17681,22 +17720,10 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3O7KEXMO",
-      "cat": "Alta 2 Play",
-      "f": "13-16",
-      "hi": "14:20",
-      "d": "PORVENIR 365, VILLA ALEMANA",
-      "e": "Iniciado",
-      "tec": "SEBASTIAN DOSSOW A",
-      "visitas": 1,
-      "ult_fecha": "03-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3O7FR25M",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:55",
+      "hi": "16:00",
       "d": "NUEVA HIPODROMO 43 CASA A, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SEBASTIAN DOSSOW A",
@@ -17730,5 +17757,5 @@
    }
   }
  },
- "generado": "05-10-2026 14:52"
+ "generado": "05-10-2026 15:17"
 }
