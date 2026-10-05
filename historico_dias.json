@@ -16860,25 +16860,25 @@
    }
   },
   "05-10-2026": {
-   "hasta": "13:06",
-   "actividades": 126,
+   "hasta": "13:16",
+   "actividades": 127,
    "tecnicos": 33,
    "estados": {
-    "Completado": 31,
-    "Iniciado": 21,
-    "Pendiente": 47,
-    "No Realizada": 19,
-    "en ruta": 3,
+    "Completado": 33,
+    "Iniciado": 19,
+    "Pendiente": 48,
+    "No Realizada": 20,
     "Cancelado": 3,
-    "Suspendido": 2
+    "Suspendido": 2,
+    "en ruta": 2
    },
-   "rgu": 188.2,
-   "caidas_total": 7,
-   "caidas_activas": 7,
+   "rgu": 191.2,
+   "caidas_total": 8,
+   "caidas_activas": 8,
    "caidas_resueltas": 0,
-   "nuevas": 33,
+   "nuevas": 34,
    "al_bucket": 8,
-   "repetidas": 27,
+   "repetidas": 28,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
@@ -16919,6 +16919,15 @@
       "e": "Pendiente"
      },
      {
+      "o": "1-3O8EES01",
+      "tec": "KEVIN TAPIA RETAMAL",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "AVENIDA SEGUNDA 182, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3O6OM78V",
       "tec": "LUIS CASTRO TORRES",
       "cat": "Alta 2 Play",
@@ -16947,6 +16956,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3O8I4WLP",
+      "tec": "SEBASTIAN DOSSOW A",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "16:42",
+      "d": "SANTA MARGARITA 1319, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3O7ZS23J",
       "tec": "KEVIN TAPIA RETAMAL",
@@ -16981,7 +16999,7 @@
       "f": "10-13",
       "hi": "12:29",
       "d": "PABLO RAMIREZ 0219, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3O8HOLEN",
@@ -17143,7 +17161,7 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "OSMAN PEREZ FREIRE 622 CASA B, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O7FR25M",
@@ -17312,7 +17330,7 @@
       "f": "13-16",
       "hi": "12:58",
       "d": "LOMBARDI 189, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "EDGAR VALERO C",
       "visitas": 1,
       "ult_fecha": "03-10-2026",
@@ -17358,7 +17376,7 @@
       "o": "1-3O7C95M4",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:22",
+      "hi": "14:32",
       "d": "LOS QUILLAYES 110, QUILPUE",
       "e": "Pendiente",
       "tec": "GEEYSER PEREZ O",
@@ -17370,7 +17388,7 @@
       "o": "1-3O7JCAX7",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "16:16",
+      "hi": "16:26",
       "d": "ANTONIO VARAS 1406, QUILPUE",
       "e": "Pendiente",
       "tec": "GEEYSER PEREZ O",
@@ -17430,7 +17448,7 @@
       "o": "1-3O7IEG61",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:25",
+      "hi": "14:22",
       "d": "RAFAEL SOTOMAYOR 0615, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -17568,6 +17586,18 @@
       "visitas": 1,
       "ult_fecha": "03-10-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3O8I4WLP",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "16:42",
+      "d": "SANTA MARGARITA 1319, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "SEBASTIAN DOSSOW A",
+      "visitas": 1,
+      "ult_fecha": "25-09-2026",
+      "ult_cierre": "Sin moradores"
      }
     ],
     "reagendadas": [
@@ -17575,7 +17605,7 @@
       "o": "1-3O6ZW90C",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:21",
+      "hi": "14:22",
       "d": "PAULA JARA QUEMADA 982, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -17585,7 +17615,7 @@
       "o": "1-3O5BAZMX",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:13",
+      "hi": "16:14",
       "d": "SEXTA 0786 EDIF. 3 DEPTO 301, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -17595,5 +17625,5 @@
    }
   }
  },
- "generado": "05-10-2026 13:06"
+ "generado": "05-10-2026 13:16"
 }
