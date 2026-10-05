@@ -16860,23 +16860,23 @@
    }
   },
   "05-10-2026": {
-   "hasta": "14:06",
-   "actividades": 134,
+   "hasta": "14:17",
+   "actividades": 135,
    "tecnicos": 33,
    "estados": {
-    "Completado": 44,
-    "Iniciado": 12,
-    "Pendiente": 40,
-    "No Realizada": 23,
-    "en ruta": 8,
+    "Completado": 46,
+    "Iniciado": 13,
+    "Pendiente": 36,
+    "No Realizada": 24,
+    "en ruta": 9,
     "Cancelado": 5,
     "Suspendido": 2
    },
-   "rgu": 204.3,
+   "rgu": 205.3,
    "caidas_total": 8,
    "caidas_activas": 8,
    "caidas_resueltas": 0,
-   "nuevas": 35,
+   "nuevas": 36,
    "al_bucket": 8,
    "repetidas": 30,
    "reagendadas": 2,
@@ -16957,13 +16957,22 @@
     ],
     "nuevas": [
      {
+      "o": "1-3O8M38SE",
+      "tec": "JUAN ARRIAGADA C",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "16:49",
+      "d": "PAUL HARRIS 249, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3O8LJW3P",
       "tec": "DANIEL NAVARRETE E",
       "cat": "Modificación de Servicio",
       "f": "13-16",
       "hi": "14:06",
       "d": "PJE 2 1593, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O8I4WLP",
@@ -16972,7 +16981,7 @@
       "f": "13-16",
       "hi": "16:42",
       "d": "SANTA MARGARITA 1319, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O7ZS23J",
@@ -17161,7 +17170,7 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "LOS NARCISOS 1798 DEPTO 304, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3O8CUEHG",
@@ -17289,9 +17298,9 @@
       "o": "1-3O8I4WLP",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:08",
+      "hi": "14:10",
       "d": "SANTA MARGARITA 1319, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "ALFREDO ALCAYAGA F",
       "visitas": 1,
       "ult_fecha": "25-09-2026",
@@ -17397,9 +17406,9 @@
       "o": "1-3O7C95M4",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:59",
+      "hi": "14:12",
       "d": "LOS QUILLAYES 110, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "GEEYSER PEREZ O",
       "visitas": 3,
       "ult_fecha": "22-09-2026",
@@ -17409,7 +17418,7 @@
       "o": "1-3O7JCAX7",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "16:53",
+      "hi": "16:06",
       "d": "ANTONIO VARAS 1406, QUILPUE",
       "e": "Pendiente",
       "tec": "GEEYSER PEREZ O",
@@ -17540,7 +17549,7 @@
       "o": "1-3O7A2Y1V",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:55",
+      "hi": "17:08",
       "d": "EL CIRUELILLO 1477, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATÍAS JAQUE AG",
@@ -17638,9 +17647,9 @@
       "o": "1-3O6ZW90C",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:22",
+      "hi": "14:21",
       "d": "PAULA JARA QUEMADA 982, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JOSE ROJO A",
       "desde": "03-10-2026"
      },
@@ -17648,7 +17657,7 @@
       "o": "1-3O5BAZMX",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:14",
+      "hi": "16:13",
       "d": "SEXTA 0786 EDIF. 3 DEPTO 301, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -17658,5 +17667,5 @@
    }
   }
  },
- "generado": "05-10-2026 14:06"
+ "generado": "05-10-2026 14:17"
 }
