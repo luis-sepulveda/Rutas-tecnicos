@@ -16860,21 +16860,22 @@
    }
   },
   "05-10-2026": {
-   "hasta": "09:37",
-   "actividades": 84,
-   "tecnicos": 35,
+   "hasta": "09:52",
+   "actividades": 87,
+   "tecnicos": 34,
    "estados": {
-    "en ruta": 23,
-    "Pendiente": 60,
+    "en ruta": 8,
+    "Pendiente": 59,
+    "Iniciado": 19,
     "Cancelado": 1
    },
-   "rgu": 136.5,
-   "caidas_total": 1,
-   "caidas_activas": 1,
+   "rgu": 139.0,
+   "caidas_total": 2,
+   "caidas_activas": 2,
    "caidas_resueltas": 0,
-   "nuevas": 1,
+   "nuevas": 4,
    "al_bucket": 0,
-   "repetidas": 18,
+   "repetidas": 19,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
@@ -16886,9 +16887,7 @@
       "hi": "14:00",
       "d": "VENECIA NORTE 1098 CASA 1, VILLA ALEMANA",
       "e": "Pendiente"
-     }
-    ],
-    "nuevas": [
+     },
      {
       "o": "1-3O8BMLA5",
       "tec": "JORDAN ROA PEREZ",
@@ -16897,6 +16896,44 @@
       "hi": "13:19",
       "d": "GABRIEL GONZALEZ VIDELA 1890 CASA 06, QUILPUE",
       "e": "Pendiente"
+     }
+    ],
+    "nuevas": [
+     {
+      "o": "1-3O8C5ZBC",
+      "tec": "JOSE CASTRO P",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "12:03",
+      "d": "NUEVA ZELANDIA 148, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3O8C6PI9",
+      "tec": "MATIAS APELEO APELEO",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "10:00",
+      "d": "SEXTA 0786 EDIF. 4 DEPTO 103, VILLA ALEMANA",
+      "e": "en ruta"
+     },
+     {
+      "o": "1-3O6T71JO",
+      "tec": "LUIS GATICA DAVILA",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "14:00",
+      "d": "REINICKE 59 CASA 5, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3O8BMLA5",
+      "tec": "JORDAN ROA PEREZ",
+      "cat": "Migración 2 Play",
+      "f": "10-13",
+      "hi": "13:19",
+      "d": "GABRIEL GONZALEZ VIDELA 1890 CASA 06, QUILPUE",
+      "e": "Pendiente (ya no está)"
      }
     ],
     "repetidas": [
@@ -16913,12 +16950,24 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3O7GSV2E",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "AV LOS CARRERA (BTO 2000) 2211, QUILPUE",
+      "e": "Pendiente",
+      "tec": "ALFREDO ALCAYAGA F",
+      "visitas": 2,
+      "ult_fecha": "02-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3O7EJZ28",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "09:18",
+      "hi": "09:42",
       "d": "SERENA 890 DEPTO 14, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "CESAR MENA OLIVEROS",
       "visitas": 2,
       "ult_fecha": "03-10-2026",
@@ -16937,6 +16986,18 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3O47POIV",
+      "cat": "Migración 2 Play",
+      "f": "10-13",
+      "hi": "11:51",
+      "d": "EL RINCON 940 CASA 12, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "ESTEBAN PIZARRO QUINTANA",
+      "visitas": 1,
+      "ult_fecha": "29-09-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3O7KJRPU",
       "cat": "Alta 2 Play",
       "f": "16-19",
@@ -16952,24 +17013,12 @@
       "o": "1-3O793840",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "09:31",
+      "hi": "09:47",
       "d": "SAN LUIS 1730, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "FELIPE SILVA R",
       "visitas": 1,
       "ult_fecha": "07-09-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3O7CF7N4",
-      "cat": "Alta 2 Play",
-      "f": "10-13",
-      "hi": "10:00",
-      "d": "AV LOS CARRERA (BTO 2000) 2211, QUILPUE",
-      "e": "Pendiente",
-      "tec": "GEEYSER PEREZ O",
-      "visitas": 2,
-      "ult_fecha": "02-10-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -16988,9 +17037,9 @@
       "o": "1-3O5X4GZI",
       "cat": "Migración 3 Play",
       "f": "10-13",
-      "hi": "09:30",
+      "hi": "09:48",
       "d": "PABLO RAMIREZ 0219, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JOSE GALAZ D",
       "visitas": 3,
       "ult_fecha": "01-10-2026",
@@ -17024,9 +17073,9 @@
       "o": "1-3O7WEAES",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "09:30",
+      "hi": "09:47",
       "d": "OJOS DE AGUA 108 EDIF. A1 DEPTO 204, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "LEONEL HERNÁNDEZ OJE",
       "visitas": 1,
       "ult_fecha": "03-08-2026",
@@ -17036,9 +17085,9 @@
       "o": "1-3O79XVA5",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:45",
       "d": "VALENTIN LETELIER 1245, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "LUIS CASTRO TORRES",
       "visitas": 1,
       "ult_fecha": "15-09-2026",
@@ -17055,6 +17104,18 @@
       "visitas": 1,
       "ult_fecha": "03-10-2026",
       "ult_cierre": "Direccion incorrecta"
+     },
+     {
+      "o": "1-3O6T71JO",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "14:00",
+      "d": "REINICKE 59 CASA 5, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "LUIS GATICA DAVILA",
+      "visitas": 3,
+      "ult_fecha": "02-10-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3O7A8R6B",
@@ -17081,18 +17142,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3O47POIV",
-      "cat": "Migración 2 Play",
-      "f": "10-13",
-      "hi": "10:00",
-      "d": "EL RINCON 940 CASA 12, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "MATIAS APELEO APELEO",
-      "visitas": 1,
-      "ult_fecha": "29-09-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
       "o": "1-3O7A2Y1V",
       "cat": "Reparación",
       "f": "16-19",
@@ -17108,9 +17157,9 @@
       "o": "1-3O7HF85Y",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "09:38",
+      "hi": "09:46",
       "d": "GARCIA 340, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "SEBASTIAN DOSSOW A",
       "visitas": 3,
       "ult_fecha": "03-10-2026",
@@ -17142,5 +17191,5 @@
    }
   }
  },
- "generado": "05-10-2026 09:37"
+ "generado": "05-10-2026 09:52"
 }
