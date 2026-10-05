@@ -1,8 +1,8 @@
 {
-  "actualizado": "2026-10-05T15:07:59",
+  "actualizado": "2026-10-05T16:02:24",
   "resumen": {
-    "reagendada": 8,
-    "sin informacion": 2
+    "sin informacion": 4,
+    "reagendada": 7
   },
   "estados": {
     "1-3O7AA8HD": {
@@ -10,10 +10,56 @@
       "cat": "Migración 2 Play",
       "franja_original": "16-19",
       "d": "EDUARDO ALQUINTA 1260 CASA 114, QUILPUE",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3O7AA8HD - 16-19-Migración-Migración-EDUARDO ALQUINTA 1260 CASA 114Mar, 6 Oct",
-      "franja_nueva": "16-19"
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "EDUARDO ALQUINTA 1260",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "reagendada",
+            "color": "rgb(255, 222, 0)",
+            "ot": "1-3O8OICI5",
+            "franja": "16-19",
+            "texto": "1-3O8OICI5 - 16-19-Migración-Migración-EDUARDO ALQUINTA 1260 CASA 114Mar, 6 Oct"
+          },
+          {
+            "estado": "completada",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3NYKWB7M",
+            "franja": "10-13",
+            "texto": "1-3NYKWB7M - 10-13-Alta-1 Play-EDUARDO ALQUINTA 1260 CASA 143Mie, 23 Sep"
+          },
+          {
+            "estado": "completada",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3NYF739G",
+            "franja": "16-19",
+            "texto": "1-3NYF739G - 16-19-Alta-1 Play-EDUARDO ALQUINTA 1260 CASA 154Lun, 21 Sep"
+          },
+          {
+            "estado": "cancelada",
+            "color": "rgb(128, 255, 128)",
+            "ot": "1-3NVDMV6H",
+            "franja": "10-13",
+            "texto": "1-3NVDMV6H - 10-13-Reparación-1 Play Servicio Degradado-EDUARDO ALQUINTA 1260 CASA 161Mie, 16 Sep"
+          },
+          {
+            "estado": "completada",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3NT1A1BG",
+            "franja": "10-13",
+            "texto": "1-3NT1A1BG - 10-13-Reparación-1 Play Sin Servicio-EDUARDO ALQUINTA 1260 CASA 134Sab, 12 Sep"
+          },
+          {
+            "estado": "completada",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3NOIIBV5",
+            "franja": "13-16",
+            "texto": "1-3NOIIBV5 - 13-16-Reparación-2 Play Servicio Degradado-EDUARDO ALQUINTA 1260 CASA 156Sab, 5 Sep"
+          }
+        ]
+      }
     },
     "1-3O8EEPZ7": {
       "tec": "ALFREDO ALCAYAGA F",
@@ -52,6 +98,14 @@
       "color": "rgb(255, 222, 0)",
       "detalle": "1-3O8BMLA5 - 10-13-Migración-Migración-GABRIEL GONZALEZ VIDELA 1890 CASA 06Jue, 8 Oct",
       "franja_nueva": "10-13"
+    },
+    "1-3O8EQJJQ": {
+      "tec": "JOSE PEREZ RANGEL",
+      "cat": "Migración 2 Play",
+      "franja_original": "16-19",
+      "d": "ORREGO LUCO 2068, VILLA ALEMANA",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA"
     },
     "1-3O8EES01": {
       "tec": "KEVIN TAPIA RETAMAL",
