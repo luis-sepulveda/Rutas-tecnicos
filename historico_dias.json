@@ -16860,21 +16860,22 @@
    }
   },
   "05-10-2026": {
-   "hasta": "17:50",
-   "actividades": 151,
+   "hasta": "17:55",
+   "actividades": 152,
    "tecnicos": 33,
    "estados": {
-    "Completado": 85,
-    "No Realizada": 38,
-    "Iniciado": 18,
+    "Completado": 87,
+    "No Realizada": 39,
     "Suspendido": 4,
-    "Cancelado": 6
+    "Iniciado": 15,
+    "Cancelado": 6,
+    "Pendiente": 1
    },
-   "rgu": 220.2,
+   "rgu": 221.2,
    "caidas_total": 11,
    "caidas_activas": 11,
    "caidas_resueltas": 0,
-   "nuevas": 47,
+   "nuevas": 48,
    "al_bucket": 14,
    "repetidas": 29,
    "reagendadas": 2,
@@ -16981,6 +16982,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3O8TQOVZ",
+      "tec": "LUIS MARTIN NUÑEZ",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "19:02",
+      "d": "FRAGATA LAUTARO 3277, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3O8SY5SC",
       "tec": "FELIPE SILVA R",
@@ -17460,7 +17470,7 @@
       "f": "16-19",
       "hi": "17:20",
       "d": "AV LOS CARRERA (BTO 2000) 2211, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "DANIEL NAVARRETE E",
       "visitas": 3,
       "ult_fecha": "05-10-2026",
@@ -17779,5 +17789,5 @@
    }
   }
  },
- "generado": "05-10-2026 17:50"
+ "generado": "05-10-2026 17:55"
 }
