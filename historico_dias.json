@@ -16860,22 +16860,23 @@
    }
   },
   "05-10-2026": {
-   "hasta": "09:57",
-   "actividades": 86,
+   "hasta": "10:11",
+   "actividades": 94,
    "tecnicos": 34,
    "estados": {
+    "Iniciado": 27,
+    "Pendiente": 60,
+    "No Realizada": 2,
     "en ruta": 4,
-    "Pendiente": 57,
-    "Iniciado": 24,
     "Cancelado": 1
    },
-   "rgu": 137.0,
-   "caidas_total": 2,
-   "caidas_activas": 2,
+   "rgu": 148.5,
+   "caidas_total": 3,
+   "caidas_activas": 3,
    "caidas_resueltas": 0,
-   "nuevas": 4,
+   "nuevas": 9,
    "al_bucket": 0,
-   "repetidas": 19,
+   "repetidas": 22,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
@@ -16896,9 +16897,63 @@
       "hi": "13:19",
       "d": "GABRIEL GONZALEZ VIDELA 1890 CASA 06, QUILPUE",
       "e": "Pendiente"
+     },
+     {
+      "o": "1-3O6OM78V",
+      "tec": "LUIS CASTRO TORRES",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "CALLE 1 850 EDIF. O DEPTO 44, QUILPUE",
+      "e": "Pendiente"
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3O8CGNCJ",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "OVALLE 1241 CASA B, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3O8CRNRO",
+      "tec": "MATIAS APELEO APELEO",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "SEXTA 0470, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3O7KEXMO",
+      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "PORVENIR 365, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3O8CMX61",
+      "tec": "JEAN ROODLY ORELIEN",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "ESPANA 1229, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3O8CPZUI",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "cat": "Migración 1 Play",
+      "f": "13-16",
+      "hi": "15:34",
+      "d": "CLAUDIO VICUNA 807, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3O8C5ZBC",
       "tec": "JOSE CASTRO P",
@@ -16941,7 +16996,7 @@
       "o": "1-3O7YQJMG",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "10:55",
+      "hi": "11:15",
       "d": "PJE 3 1210 CASA E36, QUILPUE",
       "e": "Pendiente",
       "tec": "ALEXIS JARA",
@@ -16974,12 +17029,24 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3O7AGK9J",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "14:00",
+      "d": "PJE 817 771, QUILPUE",
+      "e": "Pendiente",
+      "tec": "CRISTOBAL SILVA LEIVA",
+      "visitas": 2,
+      "ult_fecha": "03-10-2026",
+      "ult_cierre": "Sin acceso a vivienda"
+     },
+     {
       "o": "1-3O7HFY13",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "10:09",
       "d": "CONDELL 89 CASA C, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "EDGAR VALERO C",
       "visitas": 3,
       "ult_fecha": "03-10-2026",
@@ -17025,9 +17092,9 @@
       "o": "1-3O79KGCK",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "09:42",
+      "hi": "10:00",
       "d": "RAMON REYES ARANCIBIA 2184, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JEAN ROODLY ORELIEN",
       "visitas": 2,
       "ult_fecha": "03-10-2026",
@@ -17094,6 +17161,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3O7IEG61",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "RAFAEL SOTOMAYOR 0615, QUILPUE",
+      "e": "Pendiente",
+      "tec": "LUIS CASTRO TORRES",
+      "visitas": 1,
+      "ult_fecha": "03-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3O7GS79Z",
       "cat": "Alta 2 Play",
       "f": "10-13",
@@ -17154,6 +17233,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3O7KEXMO",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "PORVENIR 365, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "visitas": 1,
+      "ult_fecha": "03-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3O7HF85Y",
       "cat": "Reparación",
       "f": "10-13",
@@ -17171,7 +17262,7 @@
       "o": "1-3O6ZW90C",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "14:21",
       "d": "PAULA JARA QUEMADA 982, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -17181,7 +17272,7 @@
       "o": "1-3O5BAZMX",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:13",
       "d": "SEXTA 0786 EDIF. 3 DEPTO 301, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -17191,5 +17282,5 @@
    }
   }
  },
- "generado": "05-10-2026 09:57"
+ "generado": "05-10-2026 10:11"
 }
