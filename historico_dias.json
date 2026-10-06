@@ -17788,21 +17788,21 @@
    }
   },
   "06-10-2026": {
-   "hasta": "16:08",
-   "actividades": 160,
+   "hasta": "16:18",
+   "actividades": 159,
    "tecnicos": 34,
    "estados": {
-    "No Realizada": 42,
+    "No Realizada": 43,
     "Completado": 53,
-    "en ruta": 15,
+    "Iniciado": 23,
     "Suspendido": 3,
-    "Iniciado": 16,
-    "Pendiente": 26,
-    "Cancelado": 5
+    "Pendiente": 24,
+    "Cancelado": 5,
+    "en ruta": 8
    },
-   "rgu": 248.2,
-   "caidas_total": 7,
-   "caidas_activas": 7,
+   "rgu": 247.2,
+   "caidas_total": 10,
+   "caidas_activas": 10,
    "caidas_resueltas": 0,
    "nuevas": 24,
    "al_bucket": 41,
@@ -17826,6 +17826,15 @@
       "f": "13-16",
       "hi": "15:47",
       "d": "CHINA 210, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3O7DCB49",
+      "tec": "EDGAR VALERO C",
+      "cat": "Migración 1 Play",
+      "f": "16-19",
+      "hi": "18:10",
+      "d": "AV JOHN KENNEDY 1550 EDIF. E DEPTO 201, VILLA ALEMANA",
       "e": "Pendiente"
      },
      {
@@ -17853,6 +17862,24 @@
       "f": "10-13",
       "hi": "10:44",
       "d": "PJE CONDELL 1344, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3O7F8EBI",
+      "tec": "LEONEL HERNÁNDEZ OJE",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "17:23",
+      "d": "COQUIMBO 4, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3O8POUZY",
+      "tec": "LUIS GATICA DAVILA",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "18:11",
+      "d": "LOS ALGARROBOS 581, VILLA ALEMANA",
       "e": "Pendiente"
      },
      {
@@ -17891,7 +17918,7 @@
       "f": "16-19",
       "hi": "17:44",
       "d": "HUEMUL 569, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O9E6MRJ",
@@ -18133,9 +18160,9 @@
       "o": "1-3O8ELT11",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "16:05",
+      "hi": "16:11",
       "d": "VALLE DEL PARAISO 2907 EDIF. A DEPTO 402, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "ALEXIS JARA",
       "visitas": 4,
       "ult_fecha": "25-08-2026",
@@ -18301,7 +18328,7 @@
       "f": "16-19",
       "hi": "14:36",
       "d": "AV LOS CARRERA 311 DEPTO 23, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JOSE GALAZ D",
       "visitas": 1,
       "ult_fecha": "05-10-2026",
@@ -18311,9 +18338,9 @@
       "o": "1-3O8SDBMP",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:52",
+      "hi": "16:25",
       "d": "TIERRAS ROJAS 574 EDIF. C DEPTO 41, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JOSE GALAZ D",
       "visitas": 1,
       "ult_fecha": "05-10-2026",
@@ -18467,9 +18494,9 @@
       "o": "1-3O8O1N1Q",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "16:07",
+      "hi": "16:12",
       "d": "OJOS DE AGUA 108 EDIF. A1 DEPTO 204, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "NICOLAS MOYANO R",
       "visitas": 1,
       "ult_fecha": "03-08-2026",
@@ -18479,7 +18506,7 @@
       "o": "1-3O6IFEWF",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "17:26",
+      "hi": "17:31",
       "d": "CARMEN 1280, QUILPUE",
       "e": "Pendiente",
       "tec": "NICOLAS MOYANO R",
@@ -18575,7 +18602,7 @@
       "o": "1-3O8EES01",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:07",
+      "hi": "17:09",
       "d": "AVENIDA SEGUNDA 182, QUILPUE",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
@@ -18635,5 +18662,5 @@
    }
   }
  },
- "generado": "06-10-2026 16:08"
+ "generado": "06-10-2026 16:18"
 }
