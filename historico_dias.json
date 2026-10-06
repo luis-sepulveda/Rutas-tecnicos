@@ -17788,25 +17788,25 @@
    }
   },
   "06-10-2026": {
-   "hasta": "11:16",
-   "actividades": 135,
+   "hasta": "11:21",
+   "actividades": 136,
    "tecnicos": 34,
    "estados": {
     "No Realizada": 8,
-    "Pendiente": 84,
+    "Pendiente": 83,
     "Suspendido": 2,
     "Iniciado": 31,
     "Cancelado": 2,
-    "Completado": 7,
-    "en ruta": 1
+    "Completado": 8,
+    "en ruta": 2
    },
-   "rgu": 212.0,
+   "rgu": 213.0,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
-   "nuevas": 14,
+   "nuevas": 15,
    "al_bucket": 2,
-   "repetidas": 34,
+   "repetidas": 35,
    "reagendadas": 7,
    "detalle": {
     "caidas": [
@@ -17830,6 +17830,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3O8ZI7OO",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "11:34",
+      "d": "LOS TREBOLES 210 CASA 324, VILLA ALEMANA",
+      "e": "en ruta"
+     },
      {
       "o": "1-3O98158Y",
       "tec": "JOSE ROJO A",
@@ -18139,6 +18148,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3O8ZI7OO",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "11:34",
+      "d": "LOS TREBOLES 210 CASA 324, VILLA ALEMANA",
+      "e": "en ruta",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "visitas": 1,
+      "ult_fecha": "05-10-2026",
+      "ult_cierre": "NAP Problema niveles PO"
+     },
+     {
       "o": "1-3O8EGLU9",
       "cat": "Reparación",
       "f": "16-19",
@@ -18384,7 +18405,7 @@
       "f": "10-13",
       "hi": "09:57",
       "d": "PJE EL OVERO 50, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "ESTEBAN PIZARRO QUINTANA",
       "desde": "05-10-2026"
      },
@@ -18442,5 +18463,5 @@
    }
   }
  },
- "generado": "06-10-2026 11:16"
+ "generado": "06-10-2026 11:21"
 }
