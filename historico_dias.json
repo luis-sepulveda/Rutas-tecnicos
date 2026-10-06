@@ -17788,20 +17788,21 @@
    }
   },
   "06-10-2026": {
-   "hasta": "09:31",
-   "actividades": 116,
+   "hasta": "09:41",
+   "actividades": 117,
    "tecnicos": 34,
    "estados": {
-    "en ruta": 20,
-    "Pendiente": 96
+    "en ruta": 24,
+    "Pendiente": 91,
+    "Iniciado": 2
    },
-   "rgu": 189.0,
+   "rgu": 190.0,
    "caidas_total": 1,
    "caidas_activas": 1,
    "caidas_resueltas": 0,
-   "nuevas": 3,
-   "al_bucket": 0,
-   "repetidas": 31,
+   "nuevas": 4,
+   "al_bucket": 1,
+   "repetidas": 32,
    "reagendadas": 6,
    "detalle": {
     "caidas": [
@@ -17817,8 +17818,17 @@
     ],
     "nuevas": [
      {
+      "o": "1-3O961IR4",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "cat": "Reparación",
+      "f": "10-13",
+      "hi": "12:18",
+      "d": "MONTEVIDEO 442, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3O960IJW",
-      "tec": "NICOLAS MOYANO R",
+      "tec": "CESAR MENA OLIVEROS",
       "cat": "Alta 2 Play",
       "f": "13-16",
       "hi": "16:29",
@@ -17832,7 +17842,7 @@
       "f": "16-19",
       "hi": "16:52",
       "d": "MONTEVIDEO 442, QUILPUE",
-      "e": "Pendiente"
+      "e": "Pendiente (ya no está)"
      },
      {
       "o": "1-3O7FR25M",
@@ -17873,7 +17883,7 @@
       "o": "1-3O5NTPIO",
       "cat": "Migración 3 Play",
       "f": "10-13",
-      "hi": "11:23",
+      "hi": "11:30",
       "d": "VINA DEL MAR 74, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -17904,6 +17914,18 @@
       "visitas": 1,
       "ult_fecha": "03-10-2026",
       "ult_cierre": "Cliente Desiste"
+     },
+     {
+      "o": "1-3O7FBIPL",
+      "cat": "Migración 1 Play",
+      "f": "13-16",
+      "hi": "14:13",
+      "d": "PERU 515 CASA 17, QUILPUE",
+      "e": "Pendiente",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "visitas": 4,
+      "ult_fecha": "03-10-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3O8SDBMP",
@@ -17969,9 +17991,9 @@
       "o": "1-3O8CW5C3",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:41",
       "d": "CONDELL 89 CASA C, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JEAN ROODLY ORELIEN",
       "visitas": 4,
       "ult_fecha": "05-10-2026",
@@ -18053,7 +18075,7 @@
       "o": "1-3O8RU8HC",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "10:58",
+      "hi": "10:44",
       "d": "PJE CONDELL 1344, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JUAN ARRIAGADA C",
@@ -18089,9 +18111,9 @@
       "o": "1-3O8FSEF3",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:46",
       "d": "GARCIA 340, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "LUIS GATICA DAVILA",
       "visitas": 4,
       "ult_fecha": "05-10-2026",
@@ -18101,7 +18123,7 @@
       "o": "1-3O8NHU32",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "10:55",
+      "hi": "10:41",
       "d": "SAN MARTIN 1288, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
@@ -18113,7 +18135,7 @@
       "o": "1-3O8R1KZT",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:10",
+      "hi": "14:00",
       "d": "MARGA MARGA 2060, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
@@ -18125,7 +18147,7 @@
       "o": "1-3O557Q3Q",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "16:01",
+      "hi": "16:00",
       "d": "MARIA MERCEDES 1482 EDIF. 3 DEPTO 101, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
@@ -18149,9 +18171,9 @@
       "o": "1-3O8BSY8C",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:51",
       "d": "PJE 21 1869, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "MATIAS APELEO APELEO",
       "visitas": 1,
       "ult_fecha": "27-08-2026",
@@ -18161,7 +18183,7 @@
       "o": "1-3O8U0CLO",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "12:04",
       "d": "CALLE 5 0553, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -18173,7 +18195,7 @@
       "o": "1-3O8O1N1Q",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:18",
+      "hi": "15:32",
       "d": "OJOS DE AGUA 108 EDIF. A1 DEPTO 204, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -18223,7 +18245,7 @@
       "o": "1-3O5NTPIO",
       "cat": "Migración 3 Play",
       "f": "10-13",
-      "hi": "11:23",
+      "hi": "11:30",
       "d": "VINA DEL MAR 74, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -18263,7 +18285,7 @@
       "o": "1-3O557Q3Q",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "16:01",
+      "hi": "16:00",
       "d": "MARIA MERCEDES 1482 EDIF. 3 DEPTO 101, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
@@ -18283,5 +18305,5 @@
    }
   }
  },
- "generado": "06-10-2026 09:31"
+ "generado": "06-10-2026 09:41"
 }
