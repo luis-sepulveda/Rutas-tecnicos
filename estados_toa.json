@@ -1,7 +1,8 @@
 {
-  "actualizado": "2026-10-06T09:46:36",
+  "actualizado": "2026-10-06T10:16:52",
   "resumen": {
-    "reagendada": 1
+    "reagendada": 1,
+    "sin informacion": 1
   },
   "estados": {
     "1-3O8HHOVR": {
@@ -13,6 +14,34 @@
       "color": "rgb(255, 222, 0)",
       "detalle": "1-3O8HHOVR - 16-19-Alta-2 Play-AV JOHN KENNEDY 1720 EDIF. A DEPTO 201Jue, 8 Oct",
       "franja_nueva": "16-19"
+    },
+    "1-3O8RU8HC": {
+      "tec": "JUAN ARRIAGADA C",
+      "cat": "Alta 2 Play",
+      "franja_original": "10-13",
+      "d": "PJE CONDELL 1344, VILLA ALEMANA",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "PJE CONDELL 1344",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3O7B32D5",
+            "franja": "13-16",
+            "texto": "1-3O7B32D5 - 13-16-Alta-2 Play-PJE CONDELL 1344Lun, 5 Oct"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3O5SUE3C",
+            "franja": "10-13",
+            "texto": "1-3O5SUE3C - 10-13-Alta-2 Play-PJE CONDELL 1344Vie, 2 Oct"
+          }
+        ]
+      }
     }
   }
 }
