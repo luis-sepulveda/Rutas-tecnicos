@@ -1,8 +1,8 @@
 {
-  "actualizado": "2026-10-06T15:48:47",
+  "actualizado": "2026-10-06T16:19:22",
   "resumen": {
     "reagendada": 5,
-    "sin informacion": 2
+    "sin informacion": 5
   },
   "estados": {
     "1-3O9D9D83": {
@@ -24,6 +24,62 @@
       "color": "rgb(255, 222, 0)",
       "detalle": "1-3O8S05CU - 13-16-Alta-1 Play-CHINA 210Lun, 19 Oct",
       "franja_nueva": "13-16"
+    },
+    "1-3O7DCB49": {
+      "tec": "EDGAR VALERO C",
+      "cat": "Migración 1 Play",
+      "franja_original": "16-19",
+      "d": "AV JOHN KENNEDY 1550 EDIF. E DEPTO 201, VILLA ALEMANA",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "AV JOHN KENNEDY 1550",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "reagendada",
+            "color": "rgb(255, 222, 0)",
+            "ot": "1-3O7YDT97",
+            "franja": "10-13",
+            "texto": "1-3O7YDT97 - 10-13-Migración-Migración-AV JOHN KENNEDY 1550 EDIF. D DEPTO 303Mie, 7 Oct"
+          },
+          {
+            "estado": "reagendada",
+            "color": "rgb(255, 222, 0)",
+            "ot": "1-3O8HO4DJ",
+            "franja": "16-19",
+            "texto": "1-3O8HO4DJ - 16-19-Alta-1 Play-AV JOHN KENNEDY 1550 EDIF. D DEPTO 104"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3O3NP2ZQ",
+            "franja": "10-13",
+            "texto": "1-3O3NP2ZQ - 10-13-Migración-Migración-AV JOHN KENNEDY 1550 EDIF. E DEPTO 201Sab, 3 Oct"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3O1YPY9J",
+            "franja": "16-19",
+            "texto": "1-3O1YPY9J - 16-19-Migración-Migración-AV JOHN KENNEDY 1550 EDIF. E DEPTO 201Lun, 28 Sep"
+          },
+          {
+            "estado": "completada",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3O2F1C96",
+            "franja": "10-13",
+            "texto": "1-3O2F1C96 - 10-13-Alta-2 Play-AV JOHN KENNEDY 1550 EDIF. B DEPTO 301Lun, 28 Sep"
+          },
+          {
+            "estado": "suspendida",
+            "color": "rgb(153, 255, 255)",
+            "ot": "1-3O2F1C96",
+            "franja": "10-13",
+            "texto": "1-3O2F1C96 - 10-13-Alta-2 Play-AV JOHN KENNEDY 1550 EDIF. B DEPTO 301Lun, 28 Sep"
+          }
+        ]
+      }
     },
     "1-3O8FOWM8": {
       "tec": "GEEYSER PEREZ O",
@@ -90,6 +146,35 @@
           }
         ]
       }
+    },
+    "1-3O7F8EBI": {
+      "tec": "LEONEL HERNÁNDEZ OJE",
+      "cat": "Alta 2 Play",
+      "franja_original": "16-19",
+      "d": "COQUIMBO 4, QUILPUE",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "COQUIMBO 4",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3O6NR1RB",
+            "franja": "13-16",
+            "texto": "1-3O6NR1RB - 13-16-Alta-2 Play-COQUIMBO 4Sab, 3 Oct"
+          }
+        ]
+      }
+    },
+    "1-3O8POUZY": {
+      "tec": "LUIS GATICA DAVILA",
+      "cat": "Alta 2 Play",
+      "franja_original": "13-16",
+      "d": "LOS ALGARROBOS 581, VILLA ALEMANA",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA"
     },
     "1-3O96BRNF": {
       "tec": "LUIS MARTIN NUÑEZ",
