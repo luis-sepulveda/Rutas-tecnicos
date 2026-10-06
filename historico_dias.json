@@ -17788,25 +17788,25 @@
    }
   },
   "06-10-2026": {
-   "hasta": "13:47",
-   "actividades": 160,
+   "hasta": "13:57",
+   "actividades": 159,
    "tecnicos": 34,
    "estados": {
     "No Realizada": 23,
-    "Iniciado": 18,
-    "Pendiente": 80,
+    "Completado": 32,
+    "Pendiente": 79,
     "Suspendido": 3,
     "Cancelado": 5,
-    "Completado": 29,
+    "Iniciado": 15,
     "en ruta": 2
    },
-   "rgu": 251.1,
+   "rgu": 250.1,
    "caidas_total": 5,
    "caidas_activas": 5,
    "caidas_resueltas": 0,
    "nuevas": 22,
-   "al_bucket": 31,
-   "repetidas": 42,
+   "al_bucket": 32,
+   "repetidas": 41,
    "reagendadas": 7,
    "detalle": {
     "caidas": [
@@ -18075,7 +18075,7 @@
       "f": "10-13",
       "hi": "11:52",
       "d": "CALLE 5 0553, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "ALEXIS JARA",
       "visitas": 1,
       "ult_fecha": "05-10-2026",
@@ -18085,7 +18085,7 @@
       "o": "1-3O9E6MRJ",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "15:05",
+      "hi": "15:16",
       "d": "PUELCHES 747, QUILPUE",
       "e": "Pendiente",
       "tec": "ALEXIS JARA",
@@ -18097,7 +18097,7 @@
       "o": "1-3O8ELT11",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "17:27",
+      "hi": "17:38",
       "d": "VALLE DEL PARAISO 2907 EDIF. A DEPTO 402, QUILPUE",
       "e": "Pendiente",
       "tec": "ALEXIS JARA",
@@ -18152,6 +18152,18 @@
       "visitas": 1,
       "ult_fecha": "05-10-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3O6IFEWF",
+      "cat": "Migración 1 Play",
+      "f": "16-19",
+      "hi": "17:41",
+      "d": "CARMEN 1280, QUILPUE",
+      "e": "Pendiente",
+      "tec": "CRISTOBAL SILVA LEIVA",
+      "visitas": 1,
+      "ult_fecha": "02-10-2026",
+      "ult_cierre": "Cliente Desiste"
      },
      {
       "o": "1-3O8KWZLR",
@@ -18356,18 +18368,6 @@
       "ult_cierre": "Sin apoyo vivienda-Pierrack"
      },
      {
-      "o": "1-3O6IFEWF",
-      "cat": "Migración 1 Play",
-      "f": "16-19",
-      "hi": "18:08",
-      "d": "CARMEN 1280, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JOSE SALAS MEDINA",
-      "visitas": 1,
-      "ult_fecha": "02-10-2026",
-      "ult_cierre": "Cliente Desiste"
-     },
-     {
       "o": "1-3O8R05D7",
       "cat": "Reparación",
       "f": "10-13",
@@ -18500,18 +18500,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3O7DCB49",
-      "cat": "Migración 1 Play",
-      "f": "16-19",
-      "hi": "18:27",
-      "d": "AV JOHN KENNEDY 1550 EDIF. E DEPTO 201, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "RAFAEL VARGAS B",
-      "visitas": 2,
-      "ult_fecha": "03-10-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
       "o": "1-3O8F5D4Q",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -18635,5 +18623,5 @@
    }
   }
  },
- "generado": "06-10-2026 13:47"
+ "generado": "06-10-2026 13:57"
 }
