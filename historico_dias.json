@@ -17788,26 +17788,26 @@
    }
   },
   "06-10-2026": {
-   "hasta": "10:26",
-   "actividades": 127,
+   "hasta": "10:41",
+   "actividades": 128,
    "tecnicos": 34,
    "estados": {
-    "Iniciado": 28,
-    "Pendiente": 87,
-    "Suspendido": 1,
+    "No Realizada": 5,
+    "en ruta": 8,
+    "Pendiente": 80,
+    "Suspendido": 2,
     "Cancelado": 2,
-    "Completado": 3,
-    "No Realizada": 3,
-    "en ruta": 3
+    "Completado": 5,
+    "Iniciado": 26
    },
-   "rgu": 203.5,
+   "rgu": 205.0,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
-   "nuevas": 10,
-   "al_bucket": 1,
-   "repetidas": 31,
-   "reagendadas": 6,
+   "nuevas": 11,
+   "al_bucket": 2,
+   "repetidas": 32,
+   "reagendadas": 7,
    "detalle": {
     "caidas": [
      {
@@ -17831,6 +17831,15 @@
     ],
     "nuevas": [
      {
+      "o": "1-3O97KT3U",
+      "tec": "ALEXIS JARA",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "12:02",
+      "d": "POPAYAN (P.MENA) 850, QUILPUE",
+      "e": "en ruta"
+     },
+     {
       "o": "1-3O96YK3U",
       "tec": "FELIPE SILVA R",
       "cat": "Modificación de Servicio",
@@ -17841,7 +17850,7 @@
      },
      {
       "o": "1-3O8TXFI2",
-      "tec": "JUAN ARRIAGADA C",
+      "tec": "RAFAEL VARGAS B",
       "cat": "Alta 1 Play",
       "f": "10-13",
       "hi": "12:05",
@@ -17923,6 +17932,18 @@
     ],
     "repetidas": [
      {
+      "o": "1-3O97KT3U",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "10:49",
+      "d": "POPAYAN (P.MENA) 850, QUILPUE",
+      "e": "en ruta",
+      "tec": "ALEXIS JARA",
+      "visitas": 1,
+      "ult_fecha": "30-09-2026",
+      "ult_cierre": "Direccion incorrecta"
+     },
+     {
       "o": "1-3O8ELT11",
       "cat": "Migración 2 Play",
       "f": "16-19",
@@ -17938,7 +17959,7 @@
       "o": "1-3O5NTPIO",
       "cat": "Migración 3 Play",
       "f": "10-13",
-      "hi": "12:29",
+      "hi": "11:49",
       "d": "VINA DEL MAR 74, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -17950,7 +17971,7 @@
       "o": "1-3O7F8EBI",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:05",
+      "hi": "16:00",
       "d": "COQUIMBO 4, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -17962,9 +17983,9 @@
       "o": "1-3O8CXY7E",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "10:48",
+      "hi": "10:43",
       "d": "MUNOZ GAMERO 787, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "ANTONHY MORALES MENDOZA",
       "visitas": 1,
       "ult_fecha": "03-10-2026",
@@ -17974,7 +17995,7 @@
       "o": "1-3O7FBIPL",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "14:28",
+      "hi": "14:23",
       "d": "PERU 515 CASA 17, QUILPUE",
       "e": "Pendiente",
       "tec": "ANTONHY MORALES MENDOZA",
@@ -17998,9 +18019,9 @@
       "o": "1-3O8I1DCD",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "11:16",
+      "hi": "10:50",
       "d": "EL RINCON 940 CASA 12, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "EDGAR VALERO C",
       "visitas": 2,
       "ult_fecha": "05-10-2026",
@@ -18127,10 +18148,22 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3O7KEXMO",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "11:36",
+      "d": "PORVENIR 365, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JUAN ARRIAGADA C",
+      "visitas": 1,
+      "ult_fecha": "03-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3O7FR25M",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:07",
+      "hi": "16:30",
       "d": "NUEVA HIPODROMO 43 CASA A, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JUAN ARRIAGADA C",
@@ -18142,9 +18175,9 @@
       "o": "1-3O8LIBNT",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "11:00",
+      "hi": "10:55",
       "d": "VALLE DEL PARAISO 2907 CASA CONSERJE, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "LEONEL HERNÁNDEZ OJE",
       "visitas": 1,
       "ult_fecha": "05-10-2026",
@@ -18190,7 +18223,7 @@
       "o": "1-3O8R1KZT",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "14:05",
       "d": "MARGA MARGA 2060, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
@@ -18214,7 +18247,7 @@
       "o": "1-3O8FCV4S",
       "cat": "Migración 3 Play",
       "f": "16-19",
-      "hi": "17:32",
+      "hi": "16:00",
       "d": "AV LOS CARRERA 311 DEPTO 23, QUILPUE",
       "e": "Pendiente",
       "tec": "MARCO PEREZ G",
@@ -18259,22 +18292,10 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3O8F5D4Q",
-      "cat": "Alta 1 Play",
-      "f": "10-13",
-      "hi": "11:23",
-      "d": "EL CIRUELILLO 1365, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "RAFAEL VARGAS B",
-      "visitas": 1,
-      "ult_fecha": "05-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3O6T4WUD",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:20",
+      "hi": "16:26",
       "d": "SEVILLA 168, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -18283,15 +18304,15 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3O7KEXMO",
-      "cat": "Alta 2 Play",
+      "o": "1-3O8F5D4Q",
+      "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "09:54",
-      "d": "PORVENIR 365, VILLA ALEMANA",
-      "e": "Iniciado",
+      "hi": "10:44",
+      "d": "EL CIRUELILLO 1365, VILLA ALEMANA",
+      "e": "en ruta",
       "tec": "SAMUEL FERNANDEZ VIDAL",
       "visitas": 1,
-      "ult_fecha": "03-10-2026",
+      "ult_fecha": "05-10-2026",
       "ult_cierre": "Sin moradores"
      }
     ],
@@ -18300,7 +18321,7 @@
       "o": "1-3O5NTPIO",
       "cat": "Migración 3 Play",
       "f": "10-13",
-      "hi": "12:29",
+      "hi": "11:49",
       "d": "VINA DEL MAR 74, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -18327,10 +18348,20 @@
       "desde": "05-10-2026"
      },
      {
+      "o": "1-3O7KEXMO",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "11:36",
+      "d": "PORVENIR 365, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JUAN ARRIAGADA C",
+      "desde": "05-10-2026"
+     },
+     {
       "o": "1-3O7FR25M",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:07",
+      "hi": "16:30",
       "d": "NUEVA HIPODROMO 43 CASA A, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JUAN ARRIAGADA C",
@@ -18352,7 +18383,7 @@
       "f": "10-13",
       "hi": "09:54",
       "d": "PORVENIR 365, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Suspendido",
       "tec": "SAMUEL FERNANDEZ VIDAL",
       "desde": "05-10-2026"
      }
@@ -18360,5 +18391,5 @@
    }
   }
  },
- "generado": "06-10-2026 10:26"
+ "generado": "06-10-2026 10:41"
 }
