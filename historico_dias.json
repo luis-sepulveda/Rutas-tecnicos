@@ -17788,25 +17788,25 @@
    }
   },
   "06-10-2026": {
-   "hasta": "14:37",
-   "actividades": 160,
+   "hasta": "14:42",
+   "actividades": 161,
    "tecnicos": 34,
    "estados": {
     "No Realizada": 28,
     "Completado": 36,
     "Pendiente": 64,
     "Suspendido": 3,
+    "en ruta": 4,
     "Cancelado": 5,
-    "en ruta": 7,
-    "Iniciado": 17
+    "Iniciado": 21
    },
-   "rgu": 249.2,
+   "rgu": 252.2,
    "caidas_total": 6,
    "caidas_activas": 6,
    "caidas_resueltas": 0,
-   "nuevas": 22,
+   "nuevas": 23,
    "al_bucket": 32,
-   "repetidas": 41,
+   "repetidas": 40,
    "reagendadas": 7,
    "detalle": {
     "caidas": [
@@ -17866,6 +17866,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3O9G151N",
+      "tec": "CESAR MENA OLIVEROS",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "17:44",
+      "d": "HUEMUL 569, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3O9E6MRJ",
       "tec": "ALEXIS JARA",
@@ -17954,7 +17963,7 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "CHINA 210, QUILPUE",
-      "e": "Pendiente"
+      "e": "Pendiente (ya no está)"
      },
      {
       "o": "1-3O96GENV",
@@ -18161,18 +18170,6 @@
       "visitas": 1,
       "ult_fecha": "05-10-2026",
       "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3O8S05CU",
-      "cat": "Alta 1 Play",
-      "f": "13-16",
-      "hi": "15:47",
-      "d": "CHINA 210, QUILPUE",
-      "e": "Pendiente",
-      "tec": "CRISTOBAL MIRANDA VALENC",
-      "visitas": 1,
-      "ult_fecha": "05-10-2026",
-      "ult_cierre": "Sin apoyo vivienda-Pierrack"
      },
      {
       "o": "1-3O6IFEWF",
@@ -18440,7 +18437,7 @@
       "o": "1-3O8EGLU9",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "18:46",
+      "hi": "19:30",
       "d": "HAYDN 1661, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
@@ -18464,7 +18461,7 @@
       "o": "1-3O557Q3Q",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "19:04",
+      "hi": "19:45",
       "d": "MARIA MERCEDES 1482 EDIF. 3 DEPTO 101, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -18488,7 +18485,7 @@
       "o": "1-3O8O1N1Q",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:47",
+      "hi": "16:01",
       "d": "OJOS DE AGUA 108 EDIF. A1 DEPTO 204, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -18602,7 +18599,7 @@
       "o": "1-3O557Q3Q",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "19:04",
+      "hi": "19:45",
       "d": "MARIA MERCEDES 1482 EDIF. 3 DEPTO 101, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -18612,7 +18609,7 @@
       "o": "1-3O8EES01",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:09",
+      "hi": "17:04",
       "d": "AVENIDA SEGUNDA 182, QUILPUE",
       "e": "Pendiente",
       "tec": "NICOLAS MOYANO R",
@@ -18632,5 +18629,5 @@
    }
   }
  },
- "generado": "06-10-2026 14:37"
+ "generado": "06-10-2026 14:42"
 }
