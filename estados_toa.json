@@ -1,10 +1,38 @@
 {
-  "actualizado": "2026-10-06T12:17:24",
+  "actualizado": "2026-10-06T12:47:42",
   "resumen": {
-    "reagendada": 1,
-    "sin informacion": 1
+    "sin informacion": 2,
+    "reagendada": 2
   },
   "estados": {
+    "1-3O8FOWM8": {
+      "tec": "GEEYSER PEREZ O",
+      "cat": "Migración 3 Play",
+      "franja_original": "10-13",
+      "d": "PJE 12 866 DEPTO 22, QUILPUE",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "PJE 12 866",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "cancelada",
+            "color": "rgb(128, 255, 128)",
+            "ot": "1-3MPLL0IA",
+            "franja": "10-13",
+            "texto": "1-3MPLL0IA - 10-13-Reparación-1 Play Servicio Degradado-PJE 12 866 DEPTO 12Sab, 1 Ago"
+          },
+          {
+            "estado": "completada",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3MPXLKBV",
+            "franja": "16-19",
+            "texto": "1-3MPXLKBV - 16-19-Reparación-1 Play Sin Servicio-PJE 12 866 DEPTO 12Jue, 23 Jul"
+          }
+        ]
+      }
+    },
     "1-3O8HHOVR": {
       "tec": "JOEL GUSTAVE GUSTA",
       "cat": "Alta 2 Play",
@@ -42,6 +70,16 @@
           }
         ]
       }
+    },
+    "1-3O96BRNF": {
+      "tec": "LUIS MARTIN NUÑEZ",
+      "cat": "Alta 1 Play",
+      "franja_original": "13-16",
+      "d": "GOMEZ CARRENO 581 CASA 21, QUILPUE",
+      "estado": "reagendada",
+      "color": "rgb(255, 222, 0)",
+      "detalle": "1-3O96BRNF - 10-13-Alta-1 Play-GOMEZ CARRENO 581 CASA 21Mie, 7 Oct",
+      "franja_nueva": "10-13"
     }
   }
 }
