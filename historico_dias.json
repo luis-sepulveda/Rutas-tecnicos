@@ -18700,25 +18700,25 @@
    }
   },
   "07-10-2026": {
-   "hasta": "11:39",
-   "actividades": 114,
+   "hasta": "11:49",
+   "actividades": 116,
    "tecnicos": 34,
    "estados": {
-    "Completado": 16,
-    "en ruta": 3,
+    "Completado": 18,
+    "en ruta": 4,
     "Pendiente": 59,
-    "Iniciado": 17,
+    "Iniciado": 16,
     "No Realizada": 14,
     "Cancelado": 2,
     "Suspendido": 3
    },
-   "rgu": 172.5,
-   "caidas_total": 1,
-   "caidas_activas": 1,
+   "rgu": 176.0,
+   "caidas_total": 2,
+   "caidas_activas": 2,
    "caidas_resueltas": 0,
    "nuevas": 13,
    "al_bucket": 5,
-   "repetidas": 35,
+   "repetidas": 36,
    "reagendadas": 6,
    "detalle": {
     "caidas": [
@@ -18730,6 +18730,15 @@
       "hi": "10:00",
       "d": "AV JOHN KENNEDY 1550 EDIF. D DEPTO 303, VILLA ALEMANA",
       "e": "Pendiente"
+     },
+     {
+      "o": "1-3OA0A0W5",
+      "tec": "LUIS MARTIN NUÑEZ",
+      "cat": "Migración 1 Play",
+      "f": "10-13",
+      "hi": "11:55",
+      "d": "CONDELL SUR 01565 CASA D, QUILPUE",
+      "e": "Pendiente"
      }
     ],
     "nuevas": [
@@ -18740,7 +18749,7 @@
       "f": "10-13",
       "hi": "11:52",
       "d": "LOS NARCISOS 1798 DEPTO 304, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3O9Z3I5L",
@@ -18794,7 +18803,7 @@
       "f": "10-13",
       "hi": "10:00",
       "d": "EL BOSQUE 145 CASA 4, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3O9WPQ4T",
@@ -19092,16 +19101,16 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3O9K6B6W",
-      "cat": "Migración 1 Play",
-      "f": "13-16",
-      "hi": "15:07",
-      "d": "PAUL HARRIS 883 EDIF. B DEPTO 310, VILLA ALEMANA",
-      "e": "Pendiente",
+      "o": "1-3OA0EC13",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "11:59",
+      "d": "AVENIDA QUINTA 0684, VILLA ALEMANA",
+      "e": "en ruta",
       "tec": "JOSE PEREZ RANGEL",
-      "visitas": 1,
-      "ult_fecha": "06-10-2026",
-      "ult_cierre": "Cliente reagenda"
+      "visitas": 2,
+      "ult_fecha": "02-10-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3O9D9D83",
@@ -19150,6 +19159,18 @@
       "visitas": 1,
       "ult_fecha": "01-10-2026",
       "ult_cierre": "Cliente Desiste"
+     },
+     {
+      "o": "1-3O9K6B6W",
+      "cat": "Migración 1 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "PAUL HARRIS 883 EDIF. B DEPTO 310, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "LUIS CASTRO TORRES",
+      "visitas": 1,
+      "ult_fecha": "06-10-2026",
+      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3O9FZDWO",
@@ -19337,5 +19358,5 @@
    }
   }
  },
- "generado": "07-10-2026 11:39"
+ "generado": "07-10-2026 11:49"
 }
