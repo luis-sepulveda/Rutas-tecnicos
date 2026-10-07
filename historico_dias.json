@@ -18700,23 +18700,23 @@
    }
   },
   "07-10-2026": {
-   "hasta": "10:14",
-   "actividades": 96,
+   "hasta": "10:19",
+   "actividades": 97,
    "tecnicos": 34,
    "estados": {
-    "Completado": 4,
-    "Iniciado": 26,
+    "Completado": 5,
+    "Iniciado": 25,
     "Pendiente": 62,
-    "en ruta": 2,
+    "en ruta": 3,
     "No Realizada": 2
    },
-   "rgu": 143.5,
+   "rgu": 144.5,
    "caidas_total": 1,
    "caidas_activas": 1,
    "caidas_resueltas": 0,
-   "nuevas": 9,
+   "nuevas": 10,
    "al_bucket": 3,
-   "repetidas": 30,
+   "repetidas": 31,
    "reagendadas": 6,
    "detalle": {
     "caidas": [
@@ -18731,6 +18731,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3O9XNTFO",
+      "tec": "EDGAR VALERO C",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "10:28",
+      "d": "EL RINCON 940 CASA 12, VILLA ALEMANA",
+      "e": "en ruta"
+     },
      {
       "o": "1-3O9WYDLW",
       "tec": "JOSE ROJO A",
@@ -18899,10 +18908,22 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3O9XNTFO",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "10:28",
+      "d": "EL RINCON 940 CASA 12, VILLA ALEMANA",
+      "e": "en ruta",
+      "tec": "EDGAR VALERO C",
+      "visitas": 2,
+      "ult_fecha": "05-10-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3O9WUY59",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:01",
       "d": "VALENTIN LETELIER 231, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "EDGAR VALERO C",
@@ -19240,5 +19261,5 @@
    }
   }
  },
- "generado": "07-10-2026 10:14"
+ "generado": "07-10-2026 10:19"
 }
