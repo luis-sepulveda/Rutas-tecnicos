@@ -18700,23 +18700,23 @@
    }
   },
   "07-10-2026": {
-   "hasta": "16:00",
-   "actividades": 125,
+   "hasta": "16:21",
+   "actividades": 126,
    "tecnicos": 30,
    "estados": {
-    "Pendiente": 20,
+    "en ruta": 4,
     "Cancelado": 5,
-    "Completado": 53,
-    "No Realizada": 24,
-    "Iniciado": 18,
-    "en ruta": 3,
+    "Completado": 55,
+    "Iniciado": 24,
+    "Pendiente": 11,
+    "No Realizada": 25,
     "Suspendido": 2
    },
-   "rgu": 186.7,
+   "rgu": 186.8,
    "caidas_total": 5,
    "caidas_activas": 5,
    "caidas_resueltas": 0,
-   "nuevas": 16,
+   "nuevas": 17,
    "al_bucket": 16,
    "repetidas": 37,
    "reagendadas": 5,
@@ -18770,6 +18770,15 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OA9A3PB",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "16:05",
+      "d": "INGENIERO HYATT 2551 CASA 62, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
       "o": "1-3OA4558G",
       "tec": "JUAN ARRIAGADA C",
       "cat": "Modificación de Servicio",
@@ -18821,7 +18830,7 @@
       "f": "16-19",
       "hi": "16:00",
       "d": "PJE COSTA RICA 600 DEPTO 31, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3O9XNTFO",
@@ -18875,7 +18884,7 @@
       "f": "16-19",
       "hi": "16:00",
       "d": "MARIA MERCEDES 1482 EDIF. 3 DEPTO 101, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O9WR4ZW",
@@ -18980,7 +18989,7 @@
       "f": "16-19",
       "hi": "15:55",
       "d": "SAN MARINO 995 CASA B, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "DANIEL NAVARRETE E",
       "visitas": 1,
       "ult_fecha": "06-10-2026",
@@ -19124,7 +19133,7 @@
       "f": "13-16",
       "hi": "14:12",
       "d": "GARCIA 340, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JOSE PEREZ RANGEL",
       "visitas": 5,
       "ult_fecha": "06-10-2026",
@@ -19134,9 +19143,9 @@
       "o": "1-3O9AUXC7",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "17:35",
+      "hi": "16:13",
       "d": "IGNACIO CARRERA PINTO 1650 EDIF. 4 DEPTO 22, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "JOSE PEREZ RANGEL",
       "visitas": 1,
       "ult_fecha": "06-10-2026",
@@ -19194,9 +19203,9 @@
       "o": "1-3O9LSS9O",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:16",
       "d": "MARIA MERCEDES 1482 EDIF. 3 DEPTO 101, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "LUIS CASTRO TORRES",
       "visitas": 4,
       "ult_fecha": "06-10-2026",
@@ -19218,9 +19227,9 @@
       "o": "1-3O8UKR3Z",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:35",
+      "hi": "16:19",
       "d": "SEXTA 0786 EDIF. 3 DEPTO 301, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "LUIS GATICA DAVILA",
       "visitas": 1,
       "ult_fecha": "05-10-2026",
@@ -19328,7 +19337,7 @@
       "f": "16-19",
       "hi": "16:14",
       "d": "NUEVA HIPODROMO 43 CASA A, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "MATÍAS JAQUE AG",
       "visitas": 2,
       "ult_fecha": "06-10-2026",
@@ -19350,7 +19359,7 @@
       "o": "1-3O9NG0PY",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:22",
       "d": "AVENIDA SEGUNDA 182, QUILPUE",
       "e": "Pendiente",
       "tec": "YENDER BOSCAN CADENAS",
@@ -19413,5 +19422,5 @@
    }
   }
  },
- "generado": "07-10-2026 16:00"
+ "generado": "07-10-2026 16:21"
 }
