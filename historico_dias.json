@@ -18700,23 +18700,23 @@
    }
   },
   "07-10-2026": {
-   "hasta": "16:26",
-   "actividades": 126,
+   "hasta": "17:15",
+   "actividades": 127,
    "tecnicos": 30,
    "estados": {
-    "en ruta": 2,
+    "Iniciado": 23,
     "Cancelado": 5,
-    "Completado": 55,
-    "Iniciado": 25,
-    "Pendiente": 11,
-    "No Realizada": 26,
-    "Suspendido": 2
+    "Completado": 65,
+    "No Realizada": 30,
+    "Pendiente": 1,
+    "Suspendido": 2,
+    "en ruta": 1
    },
-   "rgu": 186.8,
+   "rgu": 186.9,
    "caidas_total": 5,
    "caidas_activas": 5,
    "caidas_resueltas": 0,
-   "nuevas": 17,
+   "nuevas": 18,
    "al_bucket": 16,
    "repetidas": 37,
    "reagendadas": 5,
@@ -18770,13 +18770,22 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OAB3E9X",
+      "tec": "MARCO PEREZ G",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:12",
+      "d": "BILBAO 1544 DEPTO 21, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
       "o": "1-3OA9A3PB",
       "tec": "ANTONHY MORALES MENDOZA",
       "cat": "Modificación de Servicio",
       "f": "16-19",
       "hi": "16:05",
       "d": "INGENIERO HYATT 2551 CASA 62, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OA4558G",
@@ -18830,7 +18839,7 @@
       "f": "16-19",
       "hi": "16:00",
       "d": "PJE COSTA RICA 600 DEPTO 31, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O9XNTFO",
@@ -18906,21 +18915,21 @@
      },
      {
       "o": "1-3O9NG0PY",
-      "tec": "YENDER BOSCAN CADENAS",
+      "tec": "DANIEL NAVARRETE E",
       "cat": "Alta 1 Play",
       "f": "16-19",
       "hi": "16:00",
       "d": "AVENIDA SEGUNDA 182, QUILPUE",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O9WUY59",
-      "tec": "MATIAS APELEO APELEO",
+      "tec": "KEVIN TAPIA RETAMAL",
       "cat": "Modificación de Servicio",
       "f": "16-19",
       "hi": "16:00",
       "d": "VALENTIN LETELIER 231, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Iniciado"
      }
     ],
     "repetidas": [
@@ -18996,6 +19005,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3O9NG0PY",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "17:05",
+      "d": "AVENIDA SEGUNDA 182, QUILPUE",
+      "e": "Iniciado",
+      "tec": "DANIEL NAVARRETE E",
+      "visitas": 1,
+      "ult_fecha": "06-10-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3O9XNTFO",
       "cat": "Modificación de Servicio",
       "f": "10-13",
@@ -19025,7 +19046,7 @@
       "f": "13-16",
       "hi": "14:59",
       "d": "GOMEZ CARRENO 581 CASA 21, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "FELIPE SILVA R",
       "visitas": 1,
       "ult_fecha": "07-10-2026",
@@ -19095,9 +19116,9 @@
       "o": "1-3O9Y1CUR",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:32",
+      "hi": "16:42",
       "d": "FRESIA 26, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "No Realizada",
       "tec": "JEAN ROODLY ORELIEN",
       "visitas": 2,
       "ult_fecha": "07-10-2026",
@@ -19181,11 +19202,23 @@
       "f": "13-16",
       "hi": "15:50",
       "d": "BUENOS AIRES 1360 CASA 5, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "KEVIN TAPIA RETAMAL",
       "visitas": 1,
       "ult_fecha": "07-10-2026",
       "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3O9WUY59",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:03",
+      "d": "VALENTIN LETELIER 231, VILLA ALEMANA",
+      "e": "Iniciado",
+      "tec": "KEVIN TAPIA RETAMAL",
+      "visitas": 2,
+      "ult_fecha": "01-10-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3O97RINM",
@@ -19277,7 +19310,7 @@
       "f": "16-19",
       "hi": "15:13",
       "d": "BILBAO 1544 DEPTO 21, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "MARCO PEREZ G",
       "visitas": 1,
       "ult_fecha": "05-10-2026",
@@ -19308,18 +19341,6 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3O9WUY59",
-      "cat": "Modificación de Servicio",
-      "f": "16-19",
-      "hi": "17:32",
-      "d": "VALENTIN LETELIER 231, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "MATIAS APELEO APELEO",
-      "visitas": 2,
-      "ult_fecha": "01-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3O99UXSM",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -19337,7 +19358,7 @@
       "f": "16-19",
       "hi": "16:14",
       "d": "NUEVA HIPODROMO 43 CASA A, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "MATÍAS JAQUE AG",
       "visitas": 2,
       "ult_fecha": "06-10-2026",
@@ -19351,18 +19372,6 @@
       "d": "CIUDAD DEL VIENTO 1925, VILLA ALEMANA",
       "e": "Iniciado",
       "tec": "SEBASTIAN DOSSOW A",
-      "visitas": 1,
-      "ult_fecha": "06-10-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
-      "o": "1-3O9NG0PY",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "16:37",
-      "d": "AVENIDA SEGUNDA 182, QUILPUE",
-      "e": "Pendiente",
-      "tec": "YENDER BOSCAN CADENAS",
       "visitas": 1,
       "ult_fecha": "06-10-2026",
       "ult_cierre": "Cliente reagenda"
@@ -19422,5 +19431,5 @@
    }
   }
  },
- "generado": "07-10-2026 16:26"
+ "generado": "07-10-2026 17:15"
 }
