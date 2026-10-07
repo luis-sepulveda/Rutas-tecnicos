@@ -18700,21 +18700,21 @@
    }
   },
   "07-10-2026": {
-   "hasta": "13:10",
+   "hasta": "13:20",
    "actividades": 124,
    "tecnicos": 30,
    "estados": {
-    "Pendiente": 58,
-    "Cancelado": 4,
+    "Pendiente": 56,
+    "Cancelado": 5,
     "Completado": 27,
-    "No Realizada": 14,
-    "Iniciado": 16,
     "en ruta": 3,
+    "No Realizada": 15,
+    "Iniciado": 16,
     "Suspendido": 2
    },
    "rgu": 187.6,
-   "caidas_total": 2,
-   "caidas_activas": 2,
+   "caidas_total": 3,
+   "caidas_activas": 3,
    "caidas_resueltas": 0,
    "nuevas": 15,
    "al_bucket": 12,
@@ -18722,6 +18722,15 @@
    "reagendadas": 6,
    "detalle": {
     "caidas": [
+     {
+      "o": "1-3O7HF8N7",
+      "tec": "JORDAN ROA PEREZ",
+      "cat": "Migración 2 Play",
+      "f": "13-16",
+      "hi": "14:58",
+      "d": "BARROS ARANA 1977, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3O7YDT97",
       "tec": "JOSE ROJO A",
@@ -18883,9 +18892,9 @@
       "o": "1-3O9D9D83",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:04",
+      "hi": "13:31",
       "d": "INGENIERO HYATT 2551 CASA 62, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "ANTONHY MORALES MENDOZA",
       "visitas": 1,
       "ult_fecha": "06-10-2026",
@@ -18966,7 +18975,7 @@
       "o": "1-3O9XW95N",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:10",
+      "hi": "14:37",
       "d": "GOMEZ CARRENO 581 CASA 21, QUILPUE",
       "e": "Pendiente",
       "tec": "FELIPE SILVA R",
@@ -18978,7 +18987,7 @@
       "o": "1-3O9KAP05",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:09",
+      "hi": "16:36",
       "d": "SAN MARINO 995 CASA B, QUILPUE",
       "e": "Pendiente",
       "tec": "FELIPE SILVA R",
@@ -19004,7 +19013,7 @@
       "f": "13-16",
       "hi": "12:50",
       "d": "SAN ENRIQUE (STA MARGARITA) 1883 CASA 35, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "GEEYSER PEREZ O",
       "visitas": 1,
       "ult_fecha": "06-10-2026",
@@ -19086,7 +19095,7 @@
       "o": "1-3O9FZDWO",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:27",
+      "hi": "15:32",
       "d": "GARCIA 340, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE CASTRO P",
@@ -19098,7 +19107,7 @@
       "o": "1-3O9LSS9O",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "17:45",
+      "hi": "17:50",
       "d": "MARIA MERCEDES 1482 EDIF. 3 DEPTO 101, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE CASTRO P",
@@ -19328,9 +19337,9 @@
       "o": "1-3O9D9D83",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:04",
+      "hi": "13:31",
       "d": "INGENIERO HYATT 2551 CASA 62, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "ANTONHY MORALES MENDOZA",
       "desde": "06-10-2026"
      },
@@ -19387,5 +19396,5 @@
    }
   }
  },
- "generado": "07-10-2026 13:10"
+ "generado": "07-10-2026 13:20"
 }
