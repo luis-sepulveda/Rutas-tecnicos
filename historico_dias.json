@@ -18700,25 +18700,25 @@
    }
   },
   "07-10-2026": {
-   "hasta": "12:39",
-   "actividades": 103,
+   "hasta": "12:44",
+   "actividades": 107,
    "tecnicos": 30,
    "estados": {
-    "Pendiente": 46,
+    "Pendiente": 49,
     "Cancelado": 3,
     "Iniciado": 15,
     "No Realizada": 14,
-    "Completado": 20,
+    "Completado": 21,
     "en ruta": 3,
     "Suspendido": 2
    },
-   "rgu": 152.5,
+   "rgu": 161.0,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
    "nuevas": 15,
    "al_bucket": 12,
-   "repetidas": 33,
+   "repetidas": 35,
    "reagendadas": 6,
    "detalle": {
     "caidas": [
@@ -18834,12 +18834,12 @@
      },
      {
       "o": "1-3O9LSS9O",
-      "tec": "JUAN ARRIAGADA C",
+      "tec": "JOSE CASTRO P",
       "cat": "Migración 2 Play",
       "f": "16-19",
       "hi": "16:00",
       "d": "MARIA MERCEDES 1482 EDIF. 3 DEPTO 101, VILLA ALEMANA",
-      "e": "Pendiente (ya no está)"
+      "e": "Pendiente"
      },
      {
       "o": "1-3O9WR4ZW",
@@ -18930,9 +18930,9 @@
       "o": "1-3O98L2KO",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "12:40",
+      "hi": "12:42",
       "d": "CONDELL SUR 01565 CASA G, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "CRISTOBAL MIRANDA VALENC",
       "visitas": 2,
       "ult_fecha": "01-10-2026",
@@ -19083,6 +19083,18 @@
       "ult_cierre": "Evento Contingencia"
      },
      {
+      "o": "1-3O9LSS9O",
+      "cat": "Migración 2 Play",
+      "f": "16-19",
+      "hi": "17:32",
+      "d": "MARIA MERCEDES 1482 EDIF. 3 DEPTO 101, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOSE CASTRO P",
+      "visitas": 4,
+      "ult_fecha": "06-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OA0EC13",
       "cat": "Alta 2 Play",
       "f": "10-13",
@@ -19230,7 +19242,7 @@
       "o": "1-3O8UKR3Z",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "17:36",
       "d": "SEXTA 0786 EDIF. 3 DEPTO 301, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -19273,6 +19285,18 @@
       "visitas": 1,
       "ult_fecha": "03-10-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3O9XOYRX",
+      "cat": "Migración 2 Play",
+      "f": "13-16",
+      "hi": "15:11",
+      "d": "BUENOS AIRES 1360 CASA 5, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "SEBASTIAN DOSSOW A",
+      "visitas": 1,
+      "ult_fecha": "07-10-2026",
+      "ult_cierre": "Cliente reagenda"
      }
     ],
     "reagendadas": [
@@ -19340,5 +19364,5 @@
    }
   }
  },
- "generado": "07-10-2026 12:39"
+ "generado": "07-10-2026 12:44"
 }
