@@ -18700,25 +18700,25 @@
    }
   },
   "07-10-2026": {
-   "hasta": "15:50",
-   "actividades": 126,
+   "hasta": "16:00",
+   "actividades": 125,
    "tecnicos": 30,
    "estados": {
+    "Pendiente": 20,
     "Cancelado": 5,
-    "Completado": 49,
-    "Iniciado": 18,
-    "Pendiente": 25,
+    "Completado": 53,
     "No Realizada": 24,
-    "Suspendido": 2,
-    "en ruta": 3
+    "Iniciado": 18,
+    "en ruta": 3,
+    "Suspendido": 2
    },
-   "rgu": 187.7,
+   "rgu": 186.7,
    "caidas_total": 5,
    "caidas_activas": 5,
    "caidas_resueltas": 0,
    "nuevas": 16,
-   "al_bucket": 15,
-   "repetidas": 38,
+   "al_bucket": 16,
+   "repetidas": 37,
    "reagendadas": 5,
    "detalle": {
     "caidas": [
@@ -18816,7 +18816,7 @@
      },
      {
       "o": "1-3O9YSAUD",
-      "tec": "JORDAN ROA PEREZ",
+      "tec": "ALFREDO ALCAYAGA F",
       "cat": "Reparación",
       "f": "16-19",
       "hi": "16:00",
@@ -18921,7 +18921,7 @@
       "f": "13-16",
       "hi": "13:40",
       "d": "INGENIERO HYATT 2551 CASA 62, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "ANTONHY MORALES MENDOZA",
       "visitas": 1,
       "ult_fecha": "06-10-2026",
@@ -18978,9 +18978,9 @@
       "o": "1-3O9KAP05",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "15:55",
       "d": "SAN MARINO 995 CASA B, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "DANIEL NAVARRETE E",
       "visitas": 1,
       "ult_fecha": "06-10-2026",
@@ -19020,18 +19020,6 @@
       "tec": "FELIPE SILVA R",
       "visitas": 1,
       "ult_fecha": "07-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3O7GTF1J",
-      "cat": "Migración 1 Play",
-      "f": "16-19",
-      "hi": "17:08",
-      "d": "EL OCASO 391, QUILPUE",
-      "e": "Pendiente",
-      "tec": "FELIPE SILVA R",
-      "visitas": 1,
-      "ult_fecha": "03-10-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -19182,9 +19170,9 @@
       "o": "1-3O9XOYRX",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "15:49",
+      "hi": "15:50",
       "d": "BUENOS AIRES 1360 CASA 5, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "KEVIN TAPIA RETAMAL",
       "visitas": 1,
       "ult_fecha": "07-10-2026",
@@ -19338,9 +19326,9 @@
       "o": "1-3O9NMAII",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:14",
       "d": "NUEVA HIPODROMO 43 CASA A, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "MATÍAS JAQUE AG",
       "visitas": 2,
       "ult_fecha": "06-10-2026",
@@ -19350,9 +19338,9 @@
       "o": "1-3O9FPC83",
       "cat": "Migración 3 Play",
       "f": "13-16",
-      "hi": "15:50",
+      "hi": "15:52",
       "d": "CIUDAD DEL VIENTO 1925, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "SEBASTIAN DOSSOW A",
       "visitas": 1,
       "ult_fecha": "06-10-2026",
@@ -19378,7 +19366,7 @@
       "f": "13-16",
       "hi": "13:40",
       "d": "INGENIERO HYATT 2551 CASA 62, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "ANTONHY MORALES MENDOZA",
       "desde": "06-10-2026"
      },
@@ -19425,5 +19413,5 @@
    }
   }
  },
- "generado": "07-10-2026 15:50"
+ "generado": "07-10-2026 16:00"
 }
