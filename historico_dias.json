@@ -18700,12 +18700,13 @@
    }
   },
   "07-10-2026": {
-   "hasta": "09:36",
-   "actividades": 85,
+   "hasta": "09:43",
+   "actividades": 84,
    "tecnicos": 34,
    "estados": {
-    "en ruta": 22,
-    "Pendiente": 62,
+    "en ruta": 21,
+    "Pendiente": 59,
+    "Iniciado": 3,
     "Completado": 1
    },
    "rgu": 124.0,
@@ -18713,8 +18714,8 @@
    "caidas_activas": 0,
    "caidas_resueltas": 0,
    "nuevas": 8,
-   "al_bucket": 1,
-   "repetidas": 28,
+   "al_bucket": 3,
+   "repetidas": 27,
    "reagendadas": 6,
    "detalle": {
     "caidas": [],
@@ -18726,7 +18727,7 @@
       "f": "10-13",
       "hi": "10:59",
       "d": "CHIRIMOYOS 3130, QUILPUE",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O9WV0JF",
@@ -18762,7 +18763,7 @@
       "f": "10-13",
       "hi": "10:00",
       "d": "EDUARDO ALQUINTA 1260 CASA 146, QUILPUE",
-      "e": "Pendiente"
+      "e": "Pendiente (ya no está)"
      },
      {
       "o": "1-3O9WM00I",
@@ -18818,24 +18819,12 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3O9BZ11U",
-      "cat": "Reparación",
-      "f": "10-13",
-      "hi": "12:45",
-      "d": "LAS PATAGUAS 1565, QUILPUE",
-      "e": "Pendiente",
-      "tec": "ALFREDO ALCAYAGA F",
-      "visitas": 1,
-      "ult_fecha": "06-10-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
       "o": "1-3O98XDUZ",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "09:29",
+      "hi": "09:43",
       "d": "POPAYAN (P.MENA) 850, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "CESAR MENA OLIVEROS",
       "visitas": 2,
       "ult_fecha": "06-10-2026",
@@ -19185,9 +19174,9 @@
       "o": "1-3O96BRNF",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:50",
       "d": "GOMEZ CARRENO 581 CASA 21, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "KEVIN TAPIA RETAMAL",
       "desde": "06-10-2026"
      }
@@ -19195,5 +19184,5 @@
    }
   }
  },
- "generado": "07-10-2026 09:36"
+ "generado": "07-10-2026 09:43"
 }
