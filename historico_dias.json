@@ -18700,25 +18700,25 @@
    }
   },
   "07-10-2026": {
-   "hasta": "12:24",
-   "actividades": 116,
-   "tecnicos": 34,
+   "hasta": "12:34",
+   "actividades": 103,
+   "tecnicos": 30,
    "estados": {
-    "Completado": 21,
-    "Iniciado": 19,
-    "Pendiente": 55,
-    "No Realizada": 15,
-    "Cancelado": 2,
+    "Pendiente": 48,
+    "Cancelado": 3,
+    "Iniciado": 15,
+    "No Realizada": 14,
+    "Completado": 20,
     "en ruta": 1,
-    "Suspendido": 3
+    "Suspendido": 2
    },
-   "rgu": 172.5,
+   "rgu": 152.5,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
    "nuevas": 15,
-   "al_bucket": 7,
-   "repetidas": 36,
+   "al_bucket": 12,
+   "repetidas": 33,
    "reagendadas": 6,
    "detalle": {
     "caidas": [
@@ -18857,7 +18857,7 @@
       "f": "16-19",
       "hi": "16:00",
       "d": "CALLE OCHO 1708, QUILPUE",
-      "e": "Pendiente"
+      "e": "Cancelado"
      },
      {
       "o": "1-3O9NG0PY",
@@ -18879,30 +18879,6 @@
      }
     ],
     "repetidas": [
-     {
-      "o": "1-3O9JI74M",
-      "cat": "Reparación",
-      "f": "10-13",
-      "hi": "09:50",
-      "d": "LOS LINGUES 996, QUILPUE",
-      "e": "Completado",
-      "tec": "ALEXIS JARA",
-      "visitas": 3,
-      "ult_fecha": "14-09-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3O9CTD2U",
-      "cat": "Migración 2 Play",
-      "f": "10-13",
-      "hi": "11:59",
-      "d": "VALLE DEL PARAISO 2907 CASA CONSERJE, QUILPUE",
-      "e": "Iniciado",
-      "tec": "ALEXIS JARA",
-      "visitas": 2,
-      "ult_fecha": "06-10-2026",
-      "ult_cierre": "Evento Contingencia"
-     },
      {
       "o": "1-3O9D9D83",
       "cat": "Alta 2 Play",
@@ -18954,7 +18930,7 @@
       "o": "1-3O98L2KO",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "13:00",
       "d": "CONDELL SUR 01565 CASA G, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -18985,18 +18961,6 @@
       "visitas": 1,
       "ult_fecha": "06-10-2026",
       "ult_cierre": "Evento Contingencia"
-     },
-     {
-      "o": "1-3O9BBA1A",
-      "cat": "Reparación",
-      "f": "13-16",
-      "hi": "16:00",
-      "d": "EL BOSQUE 1241, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "ESTEBAN PIZARRO QUINTANA",
-      "visitas": 1,
-      "ult_fecha": "06-10-2026",
-      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3O9XW95N",
@@ -19038,9 +19002,9 @@
       "o": "1-3O9F8U9Z",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "12:41",
       "d": "SAN ENRIQUE (STA MARGARITA) 1883 CASA 35, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "GEEYSER PEREZ O",
       "visitas": 1,
       "ult_fecha": "06-10-2026",
@@ -19251,6 +19215,18 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3O9BBA1A",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "EL BOSQUE 1241, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "MATIAS APELEO APELEO",
+      "visitas": 1,
+      "ult_fecha": "06-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3O8UKR3Z",
       "cat": "Alta 1 Play",
       "f": "16-19",
@@ -19285,18 +19261,6 @@
       "visitas": 2,
       "ult_fecha": "06-10-2026",
       "ult_cierre": "Evento Contingencia"
-     },
-     {
-      "o": "1-3O9XOYRX",
-      "cat": "Migración 2 Play",
-      "f": "13-16",
-      "hi": "14:59",
-      "d": "BUENOS AIRES 1360 CASA 5, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "RAFAEL VARGAS B",
-      "visitas": 1,
-      "ult_fecha": "07-10-2026",
-      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3O7XUX9R",
@@ -19376,5 +19340,5 @@
    }
   }
  },
- "generado": "07-10-2026 12:24"
+ "generado": "07-10-2026 12:34"
 }
