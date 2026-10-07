@@ -1,7 +1,8 @@
 {
-  "actualizado": "2026-10-07T11:14:53",
+  "actualizado": "2026-10-07T11:45:05",
   "resumen": {
-    "sin informacion": 1
+    "sin informacion": 1,
+    "reagendada": 1
   },
   "estados": {
     "1-3O7YDT97": {
@@ -16,8 +17,8 @@
         "aviso": "historial de la direccion, NO es el estado de esta orden",
         "filas": [
           {
-            "estado": "reagendada",
-            "color": "rgb(255, 222, 0)",
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
             "ot": "1-3O8HO4DJ",
             "franja": "10-13",
             "texto": "1-3O8HO4DJ - 10-13-Alta-1 Play-AV JOHN KENNEDY 1550 EDIF. D DEPTO 104"
@@ -59,6 +60,16 @@
           }
         ]
       }
+    },
+    "1-3OA0A0W5": {
+      "tec": "LUIS MARTIN NUÑEZ",
+      "cat": "Migración 1 Play",
+      "franja_original": "10-13",
+      "d": "CONDELL SUR 01565 CASA D, QUILPUE",
+      "estado": "reagendada",
+      "color": "rgb(255, 222, 0)",
+      "detalle": "1-3OA0A0W5 - 16-19-Migración-Migración-CONDELL SUR 01565 CASA DMie, 14 Oct",
+      "franja_nueva": "16-19"
     }
   }
 }
