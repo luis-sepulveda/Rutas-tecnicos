@@ -18700,17 +18700,17 @@
    }
   },
   "07-10-2026": {
-   "hasta": "14:55",
+   "hasta": "15:05",
    "actividades": 125,
    "tecnicos": 30,
    "estados": {
-    "Pendiente": 35,
+    "Pendiente": 33,
     "Cancelado": 5,
-    "Completado": 42,
-    "Iniciado": 20,
+    "Completado": 45,
+    "Iniciado": 18,
     "No Realizada": 20,
-    "en ruta": 1,
-    "Suspendido": 2
+    "Suspendido": 2,
+    "en ruta": 2
    },
    "rgu": 186.7,
    "caidas_total": 5,
@@ -18916,6 +18916,18 @@
     ],
     "repetidas": [
      {
+      "o": "1-3O9XOYRX",
+      "cat": "Migración 2 Play",
+      "f": "13-16",
+      "hi": "15:17",
+      "d": "BUENOS AIRES 1360 CASA 5, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "ALFREDO ALCAYAGA F",
+      "visitas": 1,
+      "ult_fecha": "07-10-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3O9D9D83",
       "cat": "Alta 2 Play",
       "f": "13-16",
@@ -19014,9 +19026,9 @@
       "o": "1-3O9XW95N",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:03",
+      "hi": "14:59",
       "d": "GOMEZ CARRENO 581 CASA 21, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "FELIPE SILVA R",
       "visitas": 1,
       "ult_fecha": "07-10-2026",
@@ -19026,7 +19038,7 @@
       "o": "1-3O9KAP05",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:02",
+      "hi": "16:58",
       "d": "SAN MARINO 995 CASA B, QUILPUE",
       "e": "Pendiente",
       "tec": "FELIPE SILVA R",
@@ -19182,7 +19194,7 @@
       "o": "1-3O9NG0PY",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "17:59",
       "d": "AVENIDA SEGUNDA 182, QUILPUE",
       "e": "Pendiente",
       "tec": "KEVIN TAPIA RETAMAL",
@@ -19290,9 +19302,9 @@
       "o": "1-3O8U0C5N",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "15:08",
       "d": "BILBAO 1544 DEPTO 21, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "MARCO PEREZ G",
       "visitas": 1,
       "ult_fecha": "05-10-2026",
@@ -19304,7 +19316,7 @@
       "f": "13-16",
       "hi": "13:30",
       "d": "EL BOSQUE 1241, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "MATIAS APELEO APELEO",
       "visitas": 1,
       "ult_fecha": "06-10-2026",
@@ -19314,7 +19326,7 @@
       "o": "1-3O8UKR3Z",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:40",
+      "hi": "16:00",
       "d": "SEXTA 0786 EDIF. 3 DEPTO 301, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -19345,18 +19357,6 @@
       "visitas": 2,
       "ult_fecha": "06-10-2026",
       "ult_cierre": "Evento Contingencia"
-     },
-     {
-      "o": "1-3O9XOYRX",
-      "cat": "Migración 2 Play",
-      "f": "13-16",
-      "hi": "15:37",
-      "d": "BUENOS AIRES 1360 CASA 5, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "SEBASTIAN DOSSOW A",
-      "visitas": 1,
-      "ult_fecha": "07-10-2026",
-      "ult_cierre": "Cliente reagenda"
      }
     ],
     "reagendadas": [
@@ -19413,5 +19413,5 @@
    }
   }
  },
- "generado": "07-10-2026 14:55"
+ "generado": "07-10-2026 15:05"
 }
