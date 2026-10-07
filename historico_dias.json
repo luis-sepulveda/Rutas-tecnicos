@@ -18700,31 +18700,69 @@
    }
   },
   "07-10-2026": {
-   "hasta": "08:59",
-   "actividades": 78,
+   "hasta": "09:21",
+   "actividades": 82,
    "tecnicos": 34,
    "estados": {
-    "Pendiente": 78
+    "en ruta": 9,
+    "Pendiente": 73
    },
-   "rgu": 115.5,
+   "rgu": 119.5,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 0,
+   "nuevas": 4,
    "al_bucket": 0,
-   "repetidas": 26,
+   "repetidas": 28,
    "reagendadas": 6,
    "detalle": {
     "caidas": [],
-    "nuevas": [],
+    "nuevas": [
+     {
+      "o": "1-3O9WR4ZW",
+      "tec": "ALFREDO ALCAYAGA F",
+      "cat": "Migración 1 Play",
+      "f": "10-13",
+      "hi": "10:00",
+      "d": "EDUARDO ALQUINTA 1260 CASA 146, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3O9WM00I",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "CALLE OCHO 1708, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3O9NG0PY",
+      "tec": "DANIEL NAVARRETE E",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "AVENIDA SEGUNDA 182, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3O9WUY59",
+      "tec": "EDGAR VALERO C",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "VALENTIN LETELIER 231, VILLA ALEMANA",
+      "e": "Pendiente"
+     }
+    ],
     "repetidas": [
      {
       "o": "1-3O9JI74M",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:31",
       "d": "LOS LINGUES 996, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "ALEXIS JARA",
       "visitas": 3,
       "ult_fecha": "14-09-2026",
@@ -18746,7 +18784,7 @@
       "o": "1-3O9BZ11U",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "12:45",
       "d": "LAS PATAGUAS 1565, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -18758,9 +18796,9 @@
       "o": "1-3O98XDUZ",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:29",
       "d": "POPAYAN (P.MENA) 850, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "CESAR MENA OLIVEROS",
       "visitas": 2,
       "ult_fecha": "06-10-2026",
@@ -18776,6 +18814,30 @@
       "tec": "CESAR MENA OLIVEROS",
       "visitas": 2,
       "ult_fecha": "06-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3O9NG0PY",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "AVENIDA SEGUNDA 182, QUILPUE",
+      "e": "Pendiente",
+      "tec": "DANIEL NAVARRETE E",
+      "visitas": 1,
+      "ult_fecha": "06-10-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3O9WUY59",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "VALENTIN LETELIER 231, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "EDGAR VALERO C",
+      "visitas": 2,
+      "ult_fecha": "01-10-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -18986,7 +19048,7 @@
       "o": "1-3O9CC26R",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "11:55",
+      "hi": "11:25",
       "d": "AVENIDA VALPARAISO 1646 CASA 3, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -18998,7 +19060,7 @@
       "o": "1-3O9LDO7W",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:23",
+      "hi": "14:00",
       "d": "AV BAQUEDANO 218, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -19096,5 +19158,5 @@
    }
   }
  },
- "generado": "07-10-2026 08:59"
+ "generado": "07-10-2026 09:21"
 }
