@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-10-07T13:45:44",
+  "actualizado": "2026-10-07T14:16:06",
   "resumen": {
     "reagendada": 3,
     "sin informacion": 1
@@ -26,6 +26,13 @@
         "buscado": "AV JOHN KENNEDY 1550",
         "aviso": "historial de la direccion, NO es el estado de esta orden",
         "filas": [
+          {
+            "estado": "reagendada",
+            "color": "rgb(255, 222, 0)",
+            "ot": "1-3OA05TAJ",
+            "franja": "16-19",
+            "texto": "1-3OA05TAJ - 16-19-Alta-1 Play-AV JOHN KENNEDY 1550 EDIF. D DEPTO 104Jue, 8 Oct"
+          },
           {
             "estado": "no realizada",
             "color": "rgb(96, 206, 206)",
@@ -60,13 +67,6 @@
             "ot": "1-3O2F1C96",
             "franja": "10-13",
             "texto": "1-3O2F1C96 - 10-13-Alta-2 Play-AV JOHN KENNEDY 1550 EDIF. B DEPTO 301Lun, 28 Sep"
-          },
-          {
-            "estado": "cancelada",
-            "color": "rgb(128, 255, 128)",
-            "ot": "1-3O1XEWV1",
-            "franja": "16-19",
-            "texto": "1-3O1XEWV1 - 16-19-Alta-2 Play-AV JOHN KENNEDY 1550 EDIF. B DEPTO 301Sab, 26 Sep"
           }
         ]
       }
