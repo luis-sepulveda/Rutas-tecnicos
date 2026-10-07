@@ -1,35 +1,14 @@
 {
-  "actualizado": "2026-10-06T18:17:37",
+  "actualizado": "2026-10-07T10:14:39",
   "resumen": {
-    "reagendada": 6,
-    "sin informacion": 3
+    "sin informacion": 1
   },
   "estados": {
-    "1-3O9D9D83": {
-      "tec": "CESAR MENA OLIVEROS",
-      "cat": "Alta 2 Play",
-      "franja_original": "16-19",
-      "d": "INGENIERO HYATT 2551 CASA 62, QUILPUE",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3O9D9D83 - 13-16-Alta-2 Play-INGENIERO HYATT 2551 CASA 62Mie, 7 Oct",
-      "franja_nueva": "13-16"
-    },
-    "1-3O8S05CU": {
-      "tec": "CRISTOBAL MIRANDA VALENC",
-      "cat": "Alta 1 Play",
-      "franja_original": "13-16",
-      "d": "CHINA 210, QUILPUE",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3O8S05CU - 13-16-Alta-1 Play-CHINA 210Lun, 19 Oct",
-      "franja_nueva": "13-16"
-    },
-    "1-3O7DCB49": {
-      "tec": "EDGAR VALERO C",
+    "1-3O7YDT97": {
+      "tec": "JOSE ROJO A",
       "cat": "Migración 1 Play",
-      "franja_original": "16-19",
-      "d": "AV JOHN KENNEDY 1550 EDIF. E DEPTO 201, VILLA ALEMANA",
+      "franja_original": "10-13",
+      "d": "AV JOHN KENNEDY 1550 EDIF. D DEPTO 303, VILLA ALEMANA",
       "estado": "sin informacion",
       "nota": "la OT ya no existe en TOA",
       "contexto": {
@@ -39,13 +18,6 @@
           {
             "estado": "reagendada",
             "color": "rgb(255, 222, 0)",
-            "ot": "1-3O7YDT97",
-            "franja": "10-13",
-            "texto": "1-3O7YDT97 - 10-13-Migración-Migración-AV JOHN KENNEDY 1550 EDIF. D DEPTO 303Mie, 7 Oct"
-          },
-          {
-            "estado": "reagendada",
-            "color": "rgb(255, 170, 170)",
             "ot": "1-3O8HO4DJ",
             "franja": "16-19",
             "texto": "1-3O8HO4DJ - 16-19-Alta-1 Play-AV JOHN KENNEDY 1550 EDIF. D DEPTO 104"
@@ -77,105 +49,16 @@
             "ot": "1-3O2F1C96",
             "franja": "10-13",
             "texto": "1-3O2F1C96 - 10-13-Alta-2 Play-AV JOHN KENNEDY 1550 EDIF. B DEPTO 301Lun, 28 Sep"
-          }
-        ]
-      }
-    },
-    "1-3O8FOWM8": {
-      "tec": "GEEYSER PEREZ O",
-      "cat": "Migración 3 Play",
-      "franja_original": "10-13",
-      "d": "PJE 12 866 DEPTO 22, QUILPUE",
-      "estado": "sin informacion",
-      "nota": "la OT ya no existe en TOA",
-      "contexto": {
-        "buscado": "PJE 12 866",
-        "aviso": "historial de la direccion, NO es el estado de esta orden",
-        "filas": [
+          },
           {
             "estado": "cancelada",
             "color": "rgb(128, 255, 128)",
-            "ot": "1-3MPLL0IA",
-            "franja": "10-13",
-            "texto": "1-3MPLL0IA - 10-13-Reparación-1 Play Servicio Degradado-PJE 12 866 DEPTO 12Sab, 1 Ago"
-          },
-          {
-            "estado": "completada",
-            "color": "rgb(121, 182, 235)",
-            "ot": "1-3MPXLKBV",
+            "ot": "1-3O1XEWV1",
             "franja": "16-19",
-            "texto": "1-3MPXLKBV - 16-19-Reparación-1 Play Sin Servicio-PJE 12 866 DEPTO 12Jue, 23 Jul"
+            "texto": "1-3O1XEWV1 - 16-19-Alta-2 Play-AV JOHN KENNEDY 1550 EDIF. B DEPTO 301Sab, 26 Sep"
           }
         ]
       }
-    },
-    "1-3O8WY6PM": {
-      "tec": "JEAN ROODLY ORELIEN",
-      "cat": "Alta 1 Play",
-      "franja_original": "13-16",
-      "d": "MADRESELVA 1982, VILLA ALEMANA",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3O8WY6PM - 10-13-Alta-1 Play-MADRESELVA 1982Mie, 7 Oct",
-      "franja_nueva": "10-13"
-    },
-    "1-3O8HHOVR": {
-      "tec": "JOEL GUSTAVE GUSTA",
-      "cat": "Alta 2 Play",
-      "franja_original": "10-13",
-      "d": "AV JOHN KENNEDY 1720 EDIF. A DEPTO 201, VILLA ALEMANA",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3O8HHOVR - 16-19-Alta-2 Play-AV JOHN KENNEDY 1720 EDIF. A DEPTO 201Jue, 8 Oct",
-      "franja_nueva": "16-19"
-    },
-    "1-3O8RU8HC": {
-      "tec": "JUAN ARRIAGADA C",
-      "cat": "Alta 2 Play",
-      "franja_original": "10-13",
-      "d": "PJE CONDELL 1344, VILLA ALEMANA",
-      "estado": "sin informacion",
-      "nota": "la OT ya no existe en TOA",
-      "contexto": {
-        "buscado": "PJE CONDELL 1344",
-        "aviso": "historial de la direccion, NO es el estado de esta orden",
-        "filas": [
-          {
-            "estado": "no realizada",
-            "color": "rgb(96, 206, 206)",
-            "ot": "1-3O7B32D5",
-            "franja": "13-16",
-            "texto": "1-3O7B32D5 - 13-16-Alta-2 Play-PJE CONDELL 1344Lun, 5 Oct"
-          },
-          {
-            "estado": "no realizada",
-            "color": "rgb(96, 206, 206)",
-            "ot": "1-3O5SUE3C",
-            "franja": "10-13",
-            "texto": "1-3O5SUE3C - 10-13-Alta-2 Play-PJE CONDELL 1344Vie, 2 Oct"
-          }
-        ]
-      }
-    },
-    "1-3O96BRNF": {
-      "tec": "LUIS MARTIN NUÑEZ",
-      "cat": "Alta 1 Play",
-      "franja_original": "13-16",
-      "d": "GOMEZ CARRENO 581 CASA 21, QUILPUE",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3O96BRNF - 10-13-Alta-1 Play-GOMEZ CARRENO 581 CASA 21Mie, 7 Oct",
-      "franja_nueva": "10-13"
-    },
-    "1-3O9BATER": {
-      "tec": "NICOLAS MOYANO R",
-      "cat": "Migración 1 Play",
-      "franja_original": "13-16",
-      "d": "PJE B 0836 CASA 5 DEPTO 22, QUILPUE",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3O9BATER - 10-13-Migración-Migración-PJE B 0836 CASA 5 DEPTO 22Mar, 13 Oct",
-      "franja_nueva": "10-13"
     }
   }
 }
