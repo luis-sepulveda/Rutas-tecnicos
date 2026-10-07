@@ -18700,23 +18700,25 @@
    }
   },
   "07-10-2026": {
-   "hasta": "10:24",
-   "actividades": 98,
+   "hasta": "10:34",
+   "actividades": 103,
    "tecnicos": 34,
    "estados": {
-    "Completado": 6,
-    "Iniciado": 25,
-    "Pendiente": 62,
-    "en ruta": 2,
-    "No Realizada": 3
+    "Completado": 9,
+    "Iniciado": 21,
+    "Pendiente": 59,
+    "en ruta": 8,
+    "No Realizada": 3,
+    "Suspendido": 2,
+    "Cancelado": 1
    },
-   "rgu": 146.5,
+   "rgu": 156.0,
    "caidas_total": 1,
    "caidas_activas": 1,
    "caidas_resueltas": 0,
    "nuevas": 10,
    "al_bucket": 3,
-   "repetidas": 32,
+   "repetidas": 33,
    "reagendadas": 6,
    "detalle": {
     "caidas": [
@@ -18738,7 +18740,7 @@
       "f": "10-13",
       "hi": "10:28",
       "d": "EL RINCON 940 CASA 12, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3O9WYDLW",
@@ -18747,7 +18749,7 @@
       "f": "10-13",
       "hi": "09:58",
       "d": "EL BOSQUE 1881, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Suspendido"
      },
      {
       "o": "1-3O9WYCHY",
@@ -18792,7 +18794,7 @@
       "f": "10-13",
       "hi": "10:00",
       "d": "EDUARDO ALQUINTA 1260 CASA 146, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3O9WM00I",
@@ -18839,7 +18841,7 @@
       "o": "1-3O9CTD2U",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "14:00",
+      "hi": "12:24",
       "d": "VALLE DEL PARAISO 2907 CASA CONSERJE, QUILPUE",
       "e": "Pendiente",
       "tec": "ALEXIS JARA",
@@ -18913,7 +18915,7 @@
       "f": "10-13",
       "hi": "10:19",
       "d": "EL RINCON 940 CASA 12, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "EDGAR VALERO C",
       "visitas": 2,
       "ult_fecha": "05-10-2026",
@@ -19004,6 +19006,18 @@
       "ult_cierre": "Clte desiste motivo comercial"
      },
      {
+      "o": "1-3O9CC26R",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "10:43",
+      "d": "AVENIDA VALPARAISO 1646 CASA 3, VILLA ALEMANA",
+      "e": "en ruta",
+      "tec": "JEAN ROODLY ORELIEN",
+      "visitas": 3,
+      "ult_fecha": "28-09-2026",
+      "ult_cierre": "Direccion incorrecta"
+     },
+     {
       "o": "1-3O9FPC83",
       "cat": "Migración 3 Play",
       "f": "13-16",
@@ -19031,7 +19045,7 @@
       "o": "1-3O9BBA1A",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:07",
+      "hi": "14:32",
       "d": "EL BOSQUE 1241, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE CASTRO P",
@@ -19052,6 +19066,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3O9K6B6W",
+      "cat": "Migración 1 Play",
+      "f": "13-16",
+      "hi": "15:07",
+      "d": "PAUL HARRIS 883 EDIF. B DEPTO 310, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOSE PEREZ RANGEL",
+      "visitas": 1,
+      "ult_fecha": "06-10-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3O9LSS9O",
       "cat": "Migración 2 Play",
       "f": "16-19",
@@ -19067,7 +19093,7 @@
       "o": "1-3O5VUR46",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "14:24",
       "d": "FREIRE 1065, QUILPUE",
       "e": "Pendiente",
       "tec": "KEVIN TAPIA RETAMAL",
@@ -19103,7 +19129,7 @@
       "o": "1-3O8U0C5N",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "16:08",
+      "hi": "16:00",
       "d": "BILBAO 1544 DEPTO 21, QUILPUE",
       "e": "Pendiente",
       "tec": "MARCO PEREZ G",
@@ -19112,22 +19138,10 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3O9K1EDA",
-      "cat": "Migración 1 Play",
-      "f": "10-13",
-      "hi": "11:22",
-      "d": "AV VICEPRESIDENTE BDO LEIGHTON 1251 CASA 05, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "MATIAS APELEO APELEO",
-      "visitas": 1,
-      "ult_fecha": "06-10-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
       "o": "1-3O8CNT75",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:54",
+      "hi": "14:00",
       "d": "EL SENDERO 990 CASA 14, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -19148,28 +19162,28 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3O9K6B6W",
-      "cat": "Migración 1 Play",
-      "f": "13-16",
-      "hi": "16:33",
-      "d": "PAUL HARRIS 883 EDIF. B DEPTO 310, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "MATÍAS JAQUE AG",
-      "visitas": 1,
-      "ult_fecha": "06-10-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
       "o": "1-3O9NMAII",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "18:55",
+      "hi": "16:38",
       "d": "NUEVA HIPODROMO 43 CASA A, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATÍAS JAQUE AG",
       "visitas": 2,
       "ult_fecha": "06-10-2026",
       "ult_cierre": "Evento Contingencia"
+     },
+     {
+      "o": "1-3O9K1EDA",
+      "cat": "Migración 1 Play",
+      "f": "10-13",
+      "hi": "10:42",
+      "d": "AV VICEPRESIDENTE BDO LEIGHTON 1251 CASA 05, VILLA ALEMANA",
+      "e": "en ruta",
+      "tec": "RAFAEL VARGAS B",
+      "visitas": 1,
+      "ult_fecha": "06-10-2026",
+      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3O9LDO7W",
@@ -19243,7 +19257,7 @@
       "o": "1-3O8HO4DJ",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "17:10",
       "d": "AV JOHN KENNEDY 1550 EDIF. D DEPTO 104, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE PEREZ RANGEL",
@@ -19273,5 +19287,5 @@
    }
   }
  },
- "generado": "07-10-2026 10:24"
+ "generado": "07-10-2026 10:34"
 }
