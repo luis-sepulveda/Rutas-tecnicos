@@ -18700,24 +18700,24 @@
    }
   },
   "07-10-2026": {
-   "hasta": "10:44",
-   "actividades": 103,
+   "hasta": "10:59",
+   "actividades": 105,
    "tecnicos": 34,
    "estados": {
-    "Completado": 10,
+    "Completado": 11,
     "Iniciado": 24,
-    "Pendiente": 59,
-    "en ruta": 3,
-    "No Realizada": 4,
+    "Pendiente": 56,
+    "No Realizada": 7,
+    "en ruta": 4,
     "Suspendido": 2,
     "Cancelado": 1
    },
-   "rgu": 156.0,
+   "rgu": 159.5,
    "caidas_total": 1,
    "caidas_activas": 1,
    "caidas_resueltas": 0,
-   "nuevas": 10,
-   "al_bucket": 3,
+   "nuevas": 11,
+   "al_bucket": 5,
    "repetidas": 33,
    "reagendadas": 6,
    "detalle": {
@@ -18733,6 +18733,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3O9YSAUD",
+      "tec": "LEONEL HERNÁNDEZ OJE",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "PJE COSTA RICA 600 DEPTO 31, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3O9XNTFO",
       "tec": "EDGAR VALERO C",
@@ -18762,12 +18771,12 @@
      },
      {
       "o": "1-3O9WV0JF",
-      "tec": "MATIAS APELEO APELEO",
+      "tec": "SAMUEL FERNANDEZ VIDAL",
       "cat": "Reparación",
       "f": "10-13",
       "hi": "10:00",
       "d": "EL BOSQUE 145 CASA 4, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3O9WPQ4T",
@@ -18794,7 +18803,7 @@
       "f": "10-13",
       "hi": "10:00",
       "d": "EDUARDO ALQUINTA 1260 CASA 146, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3O9WM00I",
@@ -18867,7 +18876,7 @@
       "f": "10-13",
       "hi": "09:43",
       "d": "POPAYAN (P.MENA) 850, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "CESAR MENA OLIVEROS",
       "visitas": 2,
       "ult_fecha": "06-10-2026",
@@ -18877,9 +18886,9 @@
       "o": "1-3O9BZ11U",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "11:20",
+      "hi": "11:05",
       "d": "LAS PATAGUAS 1565, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "CESAR MENA OLIVEROS",
       "visitas": 1,
       "ult_fecha": "06-10-2026",
@@ -19078,10 +19087,22 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3O9K1EDA",
+      "cat": "Migración 1 Play",
+      "f": "10-13",
+      "hi": "11:09",
+      "d": "AV VICEPRESIDENTE BDO LEIGHTON 1251 CASA 05, VILLA ALEMANA",
+      "e": "en ruta",
+      "tec": "JUAN ARRIAGADA C",
+      "visitas": 1,
+      "ult_fecha": "06-10-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3O9LSS9O",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:32",
       "d": "MARIA MERCEDES 1482 EDIF. 3 DEPTO 101, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JUAN ARRIAGADA C",
@@ -19093,7 +19114,7 @@
       "o": "1-3O5VUR46",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "14:22",
+      "hi": "14:00",
       "d": "FREIRE 1065, QUILPUE",
       "e": "Pendiente",
       "tec": "KEVIN TAPIA RETAMAL",
@@ -19141,7 +19162,7 @@
       "o": "1-3O8CNT75",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:01",
+      "hi": "14:00",
       "d": "EL SENDERO 990 CASA 14, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -19172,18 +19193,6 @@
       "visitas": 2,
       "ult_fecha": "06-10-2026",
       "ult_cierre": "Evento Contingencia"
-     },
-     {
-      "o": "1-3O9K1EDA",
-      "cat": "Migración 1 Play",
-      "f": "10-13",
-      "hi": "10:39",
-      "d": "AV VICEPRESIDENTE BDO LEIGHTON 1251 CASA 05, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "RAFAEL VARGAS B",
-      "visitas": 1,
-      "ult_fecha": "06-10-2026",
-      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3O9LDO7W",
@@ -19234,6 +19243,16 @@
       "desde": "05-10-2026"
      },
      {
+      "o": "1-3O8HO4DJ",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "11:14",
+      "d": "AV JOHN KENNEDY 1550 EDIF. D DEPTO 104, VILLA ALEMANA",
+      "e": "en ruta",
+      "tec": "EDGAR VALERO C",
+      "desde": "06-10-2026"
+     },
+     {
       "o": "1-3O8EHMLD",
       "cat": "Alta 2 Play",
       "f": "16-19",
@@ -19251,16 +19270,6 @@
       "d": "INGENIERO HYATT 2551 CASA 62, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
-      "desde": "06-10-2026"
-     },
-     {
-      "o": "1-3O8HO4DJ",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "17:10",
-      "d": "AV JOHN KENNEDY 1550 EDIF. D DEPTO 104, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOSE PEREZ RANGEL",
       "desde": "06-10-2026"
      },
      {
@@ -19287,5 +19296,5 @@
    }
   }
  },
- "generado": "07-10-2026 10:44"
+ "generado": "07-10-2026 10:59"
 }
