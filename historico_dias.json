@@ -19429,23 +19429,44 @@
    }
   },
   "08-10-2026": {
-   "hasta": "09:09",
-   "actividades": 99,
+   "hasta": "09:24",
+   "actividades": 111,
    "tecnicos": 30,
    "estados": {
-    "Pendiente": 99
+    "Pendiente": 97,
+    "en ruta": 13,
+    "Cancelado": 1
    },
-   "rgu": 153.5,
+   "rgu": 180.0,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 0,
+   "nuevas": 2,
    "al_bucket": 0,
-   "repetidas": 26,
+   "repetidas": 29,
    "reagendadas": 2,
    "detalle": {
     "caidas": [],
-    "nuevas": [],
+    "nuevas": [
+     {
+      "o": "1-3OACJTDV",
+      "tec": "JUAN ARRIAGADA C",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "NUEVA HIPODROMO 43 CASA A, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OANFTWP",
+      "tec": "ESTEBAN PIZARRO QUINTANA",
+      "cat": "Migración 2 Play",
+      "f": "13-16",
+      "hi": "14:40",
+      "d": "LAS GAVIOTAS 2587, QUILPUE",
+      "e": "Pendiente"
+     }
+    ],
     "repetidas": [
      {
       "o": "1-3OA4LWO7",
@@ -19475,13 +19496,25 @@
       "o": "1-3O7HF8N7",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "12:20",
+      "hi": "11:50",
       "d": "BARROS ARANA 1977, QUILPUE",
       "e": "Pendiente",
       "tec": "ANTONHY MORALES MENDOZA",
       "visitas": 1,
       "ult_fecha": "03-10-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3O9XNFLT",
+      "cat": "Migración 2 Play",
+      "f": "16-19",
+      "hi": "16:47",
+      "d": "OJOS DE AGUA 108 EDIF. A1 DEPTO 201, QUILPUE",
+      "e": "Pendiente",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "visitas": 2,
+      "ult_fecha": "25-08-2026",
+      "ult_cierre": "Direccion no encontrada"
      },
      {
       "o": "1-3O6LKK2N",
@@ -19523,7 +19556,7 @@
       "o": "1-3O97HJ0E",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "12:54",
+      "hi": "15:49",
       "d": "CLAUDIO VICUNA 951, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
@@ -19547,7 +19580,7 @@
       "o": "1-3OA932P9",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:05",
+      "hi": "16:00",
       "d": "SAN MARINO 995 CASA B, QUILPUE",
       "e": "Pendiente",
       "tec": "FELIPE SILVA R",
@@ -19571,7 +19604,7 @@
       "o": "1-3OAFEJR4",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:20",
+      "hi": "14:00",
       "d": "LAS PETUNIAS 1650 CASA 64, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOEL GUSTAVE GUSTA",
@@ -19583,9 +19616,9 @@
       "o": "1-3O9GQ1FN",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:31",
       "d": "BUENOS AIRES 1619, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JORDAN ROA PEREZ",
       "visitas": 1,
       "ult_fecha": "06-10-2026",
@@ -19595,7 +19628,7 @@
       "o": "1-3OA64G66",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "12:04",
+      "hi": "11:35",
       "d": "ESMERALDA 2617 EDIF. 7 DEPTO 33, QUILPUE",
       "e": "Pendiente",
       "tec": "JORDAN ROA PEREZ",
@@ -19607,7 +19640,7 @@
       "o": "1-3OAE77EW",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "11:28",
+      "hi": "10:57",
       "d": "AV LOS CARRERA 01347, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE SALAS MEDINA",
@@ -19625,6 +19658,18 @@
       "tec": "JUAN ARRIAGADA C",
       "visitas": 6,
       "ult_fecha": "31-08-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OACJTDV",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "NUEVA HIPODROMO 43 CASA A, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JUAN ARRIAGADA C",
+      "visitas": 3,
+      "ult_fecha": "07-10-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -19679,12 +19724,24 @@
       "o": "1-3O9Z3I5L",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:24",
+      "hi": "16:00",
       "d": "POPAYAN (P.MENA) 850, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
       "visitas": 3,
       "ult_fecha": "07-10-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3O9I7NYP",
+      "cat": "Migración 2 Play",
+      "f": "16-19",
+      "hi": "17:04",
+      "d": "PUELCHES 747, QUILPUE",
+      "e": "Pendiente",
+      "tec": "MARCO PEREZ G",
+      "visitas": 2,
+      "ult_fecha": "06-10-2026",
       "ult_cierre": "Cliente reagenda"
      },
      {
@@ -19703,7 +19760,7 @@
       "o": "1-3O6M1D8K",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "12:26",
+      "hi": "11:59",
       "d": "SAN ENRIQUE 1165, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATÍAS JAQUE AG",
@@ -19715,7 +19772,7 @@
       "o": "1-3OA4L9O3",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "12:25",
+      "hi": "11:58",
       "d": "PASAJE EL PUANGUE 3067, QUILPUE",
       "e": "Pendiente",
       "tec": "NICOLAS MOYANO R",
@@ -19765,7 +19822,7 @@
       "o": "1-3O7HF8N7",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "12:20",
+      "hi": "11:50",
       "d": "BARROS ARANA 1977, QUILPUE",
       "e": "Pendiente",
       "tec": "ANTONHY MORALES MENDOZA",
@@ -19775,7 +19832,7 @@
       "o": "1-3O9Z3I5L",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:24",
+      "hi": "16:00",
       "d": "POPAYAN (P.MENA) 850, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
@@ -19785,5 +19842,5 @@
    }
   }
  },
- "generado": "08-10-2026 09:09"
+ "generado": "08-10-2026 09:24"
 }
