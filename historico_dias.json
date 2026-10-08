@@ -19429,25 +19429,25 @@
    }
   },
   "08-10-2026": {
-   "hasta": "12:43",
-   "actividades": 116,
+   "hasta": "12:53",
+   "actividades": 129,
    "tecnicos": 30,
    "estados": {
-    "Iniciado": 24,
-    "Pendiente": 54,
-    "No Realizada": 9,
-    "Completado": 20,
-    "en ruta": 4,
+    "Iniciado": 25,
+    "Pendiente": 67,
+    "No Realizada": 10,
+    "Completado": 21,
     "Cancelado": 4,
-    "Suspendido": 1
+    "Suspendido": 1,
+    "en ruta": 1
    },
-   "rgu": 183.6,
+   "rgu": 208.1,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
-   "nuevas": 7,
+   "nuevas": 8,
    "al_bucket": 10,
-   "repetidas": 28,
+   "repetidas": 30,
    "reagendadas": 3,
    "detalle": {
     "caidas": [
@@ -19472,22 +19472,31 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OATO0J8",
+      "tec": "JUAN ARRIAGADA C",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "17:39",
+      "d": "PAUL HARRIS 596, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3OAT4NDY",
       "tec": "JEAN ROODLY ORELIEN",
       "cat": "Modificación de Servicio",
       "f": "10-13",
       "hi": "12:42",
       "d": "BUENOS AIRES 1481, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OAQCBAV",
-      "tec": "LUIS GATICA DAVILA",
+      "tec": "MATIAS APELEO APELEO",
       "cat": "Migración 1 Play",
       "f": "16-19",
       "hi": "17:25",
       "d": "SANTA MARIA 816, VILLA ALEMANA",
-      "e": "Pendiente (ya no está)"
+      "e": "Pendiente"
      },
      {
       "o": "1-3OAONU4U",
@@ -19540,7 +19549,7 @@
       "o": "1-3OAE76MI",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "12:51",
+      "hi": "13:09",
       "d": "AV LOS CARRERA 01347, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -19552,7 +19561,7 @@
       "o": "1-3O9BZ1J4",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "18:14",
+      "hi": "18:32",
       "d": "LISBOA 475, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -19588,7 +19597,7 @@
       "o": "1-3OA932P9",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:12",
+      "hi": "16:21",
       "d": "SAN MARINO 995 CASA B, QUILPUE",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
@@ -19612,7 +19621,7 @@
       "o": "1-3O9ME1HJ",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "15:29",
+      "hi": "15:56",
       "d": "CARMEN 1280, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
@@ -19624,7 +19633,7 @@
       "o": "1-3O9Z3I5L",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:03",
       "d": "POPAYAN (P.MENA) 850, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -19648,7 +19657,7 @@
       "o": "1-3OAAL6E3",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "15:43",
+      "hi": "14:06",
       "d": "MARGARITAS 1884, QUILPUE",
       "e": "Pendiente",
       "tec": "FELIPE SILVA R",
@@ -19660,7 +19669,7 @@
       "o": "1-3OAFEJR4",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:51",
+      "hi": "14:53",
       "d": "LAS PETUNIAS 1650 CASA 64, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JEAN ROODLY ORELIEN",
@@ -19708,7 +19717,7 @@
       "o": "1-3OAN4AMN",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:53",
+      "hi": "15:47",
       "d": "GABRIEL DAZAROLA 711, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE PEREZ RANGEL",
@@ -19720,7 +19729,7 @@
       "o": "1-3OAFT8KZ",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:50",
+      "hi": "15:57",
       "d": "SANTA ELENA 098 EDIF. 1 DEPTO 301, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JUAN ARRIAGADA C",
@@ -19791,7 +19800,7 @@
       "o": "1-3O9I7NYP",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:01",
       "d": "PUELCHES 747, QUILPUE",
       "e": "Pendiente",
       "tec": "MARCO PEREZ G",
@@ -19810,6 +19819,18 @@
       "visitas": 2,
       "ult_fecha": "02-10-2026",
       "ult_cierre": "No Factible"
+     },
+     {
+      "o": "1-3O8KNLC2",
+      "cat": "Migración 3 Play",
+      "f": "16-19",
+      "hi": "17:42",
+      "d": "AV VICTORIA 298, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "MATÍAS JAQUE AG",
+      "visitas": 1,
+      "ult_fecha": "30-09-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OA4L9O3",
@@ -19836,10 +19857,22 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3O9XNFLT",
+      "cat": "Migración 2 Play",
+      "f": "16-19",
+      "hi": "17:37",
+      "d": "OJOS DE AGUA 108 EDIF. A1 DEPTO 201, QUILPUE",
+      "e": "Pendiente",
+      "tec": "NICOLAS MOYANO R",
+      "visitas": 2,
+      "ult_fecha": "25-08-2026",
+      "ult_cierre": "Direccion no encontrada"
+     },
+     {
       "o": "1-3O9OEJUO",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:41",
+      "hi": "14:53",
       "d": "PJE CRISANTEMOS 1977, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -19851,7 +19884,7 @@
       "o": "1-3OA05TAJ",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:31",
+      "hi": "16:43",
       "d": "AV JOHN KENNEDY 1550 EDIF. D DEPTO 104, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -19863,7 +19896,7 @@
       "o": "1-3OAA0GCL",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:08",
+      "hi": "15:18",
       "d": "IGNACIO CARRERA PINTO 1650 EDIF. 4 DEPTO 22, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SEBASTIAN DOSSOW A",
@@ -19897,7 +19930,7 @@
       "o": "1-3O9Z3I5L",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:03",
       "d": "POPAYAN (P.MENA) 850, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -19907,5 +19940,5 @@
    }
   }
  },
- "generado": "08-10-2026 12:43"
+ "generado": "08-10-2026 12:53"
 }
