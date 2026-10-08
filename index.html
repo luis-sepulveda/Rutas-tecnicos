@@ -2064,6 +2064,103 @@
   .pv-linea .pv-al .tx .t { font-size:11.5px; }
   .pv-linea .pv-lk { gap:3px; }
   /* =================================================================== */
+  .pv-bar a.b-der { color:#dbeafe; }
+  /* =================================================================== */
+  /* ==== DERIVACION EN MIGRACIONES (08-10-2026, pedido de Luis) ====
+     Ventana del boton "Derivacion" de la barra. Para sacarla: borrar este
+     bloque, el div #modalDer, el boton b-der y el bloque JS "DERIVACION EN
+     MIGRACIONES". */
+  #modalDer { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); }
+  #modalDer.abierto { display:flex; align-items:flex-start; justify-content:center; padding:3vh 2vw; }
+  #modalDer .dv-box { background:#fff; color:#16232f; border-radius:14px; width:min(1120px,100%);
+    max-height:94vh; display:flex; flex-direction:column; box-shadow:0 24px 60px rgba(2,6,23,.45); }
+  #modalDer .dv-head { display:flex; justify-content:space-between; align-items:flex-start; gap:12px;
+    padding:18px 22px 12px; border-bottom:1px solid #e6edf4; }
+  #modalDer h2 { margin:0; font-family:'Archivo',sans-serif; font-size:18px; color:#0f1d2e; }
+  #modalDer .dv-sub { margin:3px 0 0; font-size:12.5px; color:#5f7386; }
+  #modalDer .dv-x { border:1px solid #d3dde6; background:#fff; border-radius:8px; padding:5px 11px;
+    cursor:pointer; font-size:13px; color:#16232f; }
+  #modalDer .dv-fil { display:flex; gap:6px; flex-wrap:wrap; align-items:center; padding:11px 22px 0; }
+  #modalDer .dv-fil .rot { font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:#8fa1b3;
+    font-weight:600; margin-right:4px; }
+  #modalDer .dv-fil button { border:1px solid #d3dde6; background:#fff; color:#5f7386; border-radius:999px;
+    padding:5px 11px; font-family:inherit; font-size:12.5px; cursor:pointer; white-space:nowrap; }
+  #modalDer .dv-fil button b { font-weight:700; color:#16232f; margin-left:4px; }
+  #modalDer .dv-fil button.alto b { color:#b91c1c; }
+  #modalDer .dv-fil button.on { background:#0f1d2e; border-color:#0f1d2e; color:#fff; }
+  #modalDer .dv-fil button.on b { color:#fff; }
+  #modalDer .dv-cuerpo { padding:12px 22px 20px; overflow:auto; }
+  #modalDer .dv-tot { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:0 0 10px; }
+  #modalDer .dv-tot div { background:#f1f5f9; border-radius:10px; padding:9px 12px; }
+  #modalDer .dv-tot b { display:block; font-size:21px; font-family:'Archivo',sans-serif; letter-spacing:-.01em; }
+  #modalDer .dv-tot span { font-size:12px; color:#5f7386; }
+  #modalDer .dv-tot .mal b { color:#b91c1c; }
+  #modalDer .dv-cau { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 12px; font-size:12.5px; align-items:center; }
+  #modalDer .dv-cau .rot { font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:#8fa1b3; font-weight:600; }
+  #modalDer .dv-cau span.c { background:#fff7ed; border:1px solid #fed7aa; border-radius:999px; padding:3px 10px; color:#7c2d12; }
+  #modalDer .dv-cau span.c.no { background:#f1f5f9; border-color:#dbe4ed; color:#41586f; }
+  #modalDer .dv-cau span.c b { font-family:'Archivo',sans-serif; margin-right:4px; }
+  #modalDer table { width:100%; border-collapse:collapse; font-size:13px; font-variant-numeric:tabular-nums; }
+  #modalDer th { text-align:right; font-size:11px; font-weight:600; color:#5f7386; padding:6px 8px;
+    border-bottom:2px solid #e2e8f0; white-space:nowrap; position:sticky; top:0; background:#fff; }
+  #modalDer th:first-child, #modalDer td:first-child { text-align:left; }
+  #modalDer td { text-align:right; padding:7px 8px; border-bottom:1px solid #eef2f6; white-space:nowrap; }
+  #modalDer tr.t { cursor:pointer; }
+  #modalDer tr.t:hover td { background:#f8fafc; }
+  #modalDer tr.t td:first-child small { color:#8fa1b3; margin-left:6px; font-size:11.5px; }
+  #modalDer tr.t.sobre td { background:#fef2f2; }
+  #modalDer tr.t.sobre td.p { color:#b91c1c; font-weight:700; }
+  #modalDer tr.t.pocas td.p { color:#b45309; font-weight:700; }
+  #modalDer td .marca { display:inline-block; margin-left:7px; font-size:10.5px; font-weight:700; border-radius:999px;
+    padding:1px 8px; background:#b91c1c; color:#fff; vertical-align:1px; }
+  #modalDer td .marca.pocas { background:#fde9c8; color:#92400e; }
+  #modalDer td.cero { color:#c3d2e0; }
+  #modalDer tr.det td { background:#f8fafc; padding:4px 8px 12px 26px; white-space:normal; text-align:left; }
+  #modalDer tr.det table { font-size:12.5px; }
+  #modalDer tr.det th { position:static; background:transparent; text-align:left; font-size:10.5px;
+    letter-spacing:.06em; text-transform:uppercase; border-bottom:1px solid #dbe4ed; }
+  #modalDer tr.det td td { background:transparent; text-align:left; padding:5px 8px 5px 0; white-space:normal; }
+  #modalDer .tg { display:inline-block; font-size:11px; border-radius:999px; padding:1px 8px; }
+  #modalDer .tg.at { background:#fff7ed; color:#9a3412; border:1px solid #fed7aa; }
+  #modalDer .tg.na { background:#f1f5f9; color:#41586f; border:1px solid #dbe4ed; }
+  #modalDer .tg.ok { background:#e3f6ea; color:#17603a; }
+  #modalDer .dv-nota { font-size:12px; color:#5f7386; margin:12px 0 0; line-height:1.5; }
+  #modalDer .dv-vacio { color:#5f7386; padding:24px 0; text-align:center; }
+  @media (max-width:700px){ #modalDer .dv-tot { grid-template-columns:repeat(2,1fr); }
+ }
+  /* tendencia de las ultimas semanas (08-10-2026, 17:30) */
+  #modalDer .dv-tend { display:inline-flex; gap:3px; align-items:center; }
+  #modalDer .dv-tend i { font-style:normal; font-size:11px; min-width:27px; text-align:center; border-radius:5px; padding:2px 0;
+    background:#eef2f6; color:#5f7386; }
+  #modalDer .dv-tend i.r { background:#fee2e2; color:#b91c1c; font-weight:700; }
+  #modalDer .dv-tend i.a { background:#fde9c8; color:#92400e; }
+  #modalDer .dv-tend i.na { color:#c3d2e0; }
+  #modalDer .dv-tend i.hoy { outline:1.5px solid #0f1d2e; outline-offset:-1.5px; }
+  #modalDer table.dv-dir > tbody > tr.t > td:first-child { white-space:normal; }
+  #modalDer table.dv-dir > tbody > tr.t > td:nth-child(5) { white-space:normal; }
+  /* con la columna de tendencia la tabla no cabia: titulos en dos renglones
+     y la ventana un poco mas ancha */
+  #modalDer .dv-box { width:min(1240px,100%); }
+  #modalDer .dv-cuerpo > table > thead > tr > th { white-space:normal; line-height:1.25; vertical-align:bottom; }
+  #modalDer .dv-cuerpo > table > thead > tr > th:not(:first-child) { max-width:86px; }
+  #modalDer .dv-tend .seg { font-size:10.5px; font-weight:700; color:#fff; background:#b91c1c; border-radius:999px; padding:1px 7px; margin-left:4px; }
+  /* detalle completo de un tecnico (08-10-2026, 17:10) */
+  #modalDer .dv-rt { background:#fff; border:1px solid #dbe4ed; border-radius:10px; padding:10px 13px; margin:6px 0 8px; }
+  #modalDer .dv-rt .l1 { font-size:13.5px; display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+  #modalDer .dv-rt .kp { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+  #modalDer .dv-rt .kp span { font-size:12px; background:#f1f5f9; border-radius:8px; padding:4px 10px; color:#41586f; }
+  #modalDer .dv-rt .kp span b { font-family:'Archivo',sans-serif; font-size:14px; color:#16232f; margin-right:4px; }
+  #modalDer .dv-rt .kp span.si { background:#fff7ed; color:#7c2d12; } #modalDer .dv-rt .kp span.si b { color:#c2410c; }
+  #modalDer .dv-rt .kp span.ok { background:#e3f6ea; color:#17603a; } #modalDer .dv-rt .kp span.ok b { color:#17603a; }
+  #modalDer .dv-rt .ot { font-size:12.5px; color:#41586f; margin-top:8px; line-height:1.5; }
+  #modalDer .dv-ord { border-left:3px solid #dbe4ed; padding:5px 0 7px 12px; margin:0 0 8px; }
+  #modalDer .dv-ord .c1 { font-size:13px; color:#16232f; line-height:1.7; }
+  #modalDer .dv-ord .c2 { font-size:12.5px; color:#41586f; margin-top:2px; }
+  #modalDer .dv-ord .c2 .gr { color:#8fa1b3; }
+  #modalDer table.dv-vis { width:auto; margin-top:4px; font-size:12.5px; }
+  #modalDer tr.det table.dv-vis td { padding:3px 16px 3px 0; border-bottom:1px solid #edf1f6; color:#41586f; white-space:nowrap; }
+  #modalDer tr.det table.dv-vis tr.esta td { color:#16232f; font-weight:600; }
+  /* =================================================================== */
 </style>
 </head>
 <body>
@@ -2310,6 +2407,19 @@
     </div>
     <div class="rs-rangos" id="rsRangos"></div>
     <div class="rs-cuerpo" id="rsCuerpo"></div>
+  </div>
+</div>
+<!-- DERIVACION EN MIGRACIONES (08-10-2026): ventana del boton Derivacion de la barra -->
+<div id="modalDer" onclick="if(event.target===this) cerrarDeriv()">
+  <div class="dv-box" role="dialog" aria-labelledby="dvTitulo">
+    <div class="dv-head">
+      <div><h2 id="dvTitulo">Derivación en migraciones</h2>
+        <p class="dv-sub" id="dvSub">Por técnico, semana a semana · toca un técnico para ver el detalle completo de cada orden y de su dirección</p></div>
+      <button class="dv-x" onclick="cerrarDeriv()" title="Cerrar (Esc)">✖</button>
+    </div>
+    <div class="dv-fil" id="dvSemanas"></div>
+    <div class="dv-fil" id="dvSups"></div>
+    <div class="dv-cuerpo" id="dvCuerpo"></div>
   </div>
 </div>
 <div id="panelSC">
@@ -2652,7 +2762,7 @@ function verTecnicoCaida(t){
 
 // cerrar los modales con la tecla Esc
 document.addEventListener('keydown', function(e){
-  if(e.key === 'Escape'){ cerrarCaidas(); cerrarNuevas(); cerrarRepe(); cerrarReca(); cerrarBuscar(); cerrarEst(); cerrarJornada(); cerrarRed(); cerrarReit(); cerrarVistaRed(); cerrarCuadratura(); cerrarNoOperativos(); cerrarResumen(); }
+  if(e.key === 'Escape'){ cerrarCaidas(); cerrarNuevas(); cerrarRepe(); cerrarReca(); cerrarBuscar(); cerrarEst(); cerrarJornada(); cerrarRed(); cerrarReit(); cerrarVistaRed(); cerrarCuadratura(); cerrarDeriv(); cerrarNoOperativos(); cerrarResumen(); }
 });
 
 /* ======================= ORDENES NUEVAS DEL DIA =======================
@@ -5967,6 +6077,419 @@ function verPortada(){
   window.scrollTo(0,0);
 }
 /* abre un panel sin salir de la portada */
+/* ================= DERIVACION EN MIGRACIONES (08-10-2026) =================
+   Pedido de Luis, a partir de un mensaje de su jefatura: diagnostico por
+   tecnico con mas de 50% de derivacion en migraciones, con las causales
+   separadas entre las que pueden tener que ver con la gestion del tecnico
+   (sin moradores, cliente reagenda, cliente desiste) y las que no.
+
+   De donde salen los numeros: el datos.json del Dashboard de Actividades
+   (el mismo archivo que usa el boton Resumen). Se actualiza cada manana con
+   el dia ANTERIOR, asi que hoy no aparece. Se baja una vez por sesion.
+
+   Definiciones (las mismas del Excel "Derivacion_migraciones_por_semana"):
+   - Migracion VISITADA: tipo que empieza con "Migra", de un tecnico _DOMI_,
+     que termino Completada o No Realizada. Canceladas y suspendidas no
+     entran: el tecnico no llego a cerrarlas.
+   - DERIVADA: la que termino No Realizada. % = derivadas / visitadas.
+   - Semana: de lunes a sabado, con su numero ISO (igual que Quiebres).
+   - "Gestion del tecnico": sin moradores, reagenda, desiste. OJO: en Quiebres
+     esas mismas causales figuran como "del cliente". Aca van asi porque es
+     lo que pide auditar la jefatura; no significa que sean culpa del tecnico.
+   - Marca roja: mas de DER_UMBRAL % y DER_MINIMO migraciones o mas en la
+     semana. Con menos migraciones va en ambar ("pocas"): 1 de 1 ya es 100%.
+   Para cambiar los cortes, tocar las dos constantes de abajo.
+
+   (08-10-2026, 17:10, Luis: "el detalle completo, para las preguntas de la
+   gerenta") Al abrir un tecnico, cada orden derivada trae ahora la HISTORIA
+   DE SU DIRECCION: cuantas veces fallo una visita ahi, en que fecha, con que
+   tecnico y por que causal; y arriba un resumen del tecnico (cuantas de sus
+   derivadas ya venian fallando, cuantas con otro tecnico, cuantas se
+   completaron despues, y que otros tecnicos aparecen en esas direcciones).
+   Sale de historial_dir.json (rama data, el del Reporte historico de
+   direcciones): visitas NO REALIZADAS desde el 01-08, de cualquier tipo de
+   actividad. LIMITE: ese archivo publica solo las direcciones con 2 o mas
+   visitas fallidas. Las de una sola visita vienen aparte, en el bloque
+   'unicas' del mismo archivo ({OT: direccion}, desde el 08-10-2026).
+   Los botones "Copiar resumen" y "Copiar detalle" se sacaron el mismo dia a
+   pedido de Luis.
+
+   (08-10-2026, 17:30) Dos cosas mas, para las preguntas de la gerenta:
+   - Columna "Ultimas 4 semanas" en la tabla por tecnico: su % de cada una
+     de las 4 semanas que terminan en la elegida, y cuantas lleva SEGUIDAS
+     sobre el umbral. Separa al que tuvo una semana mala del que viene asi
+     hace un mes.
+   - Vista "Por direccion": las direcciones donde hubo derivadas esta semana,
+     ordenadas por cuantas visitas fallidas acumulan y cuantos tecnicos
+     distintos pasaron. Si una casa le falla a tres tecnicos, el problema no
+     es el tecnico. Solo lista las que tienen 2 o mas visitas fallidas.
+   Tambien hay un filtro de tipo: Migraciones (lo que pide la jefatura),
+   Altas, o las dos juntas. */
+const DER_UMBRAL = 50;      // % de derivacion sobre el que se marca al tecnico
+const DER_MINIMO = 5;       // migraciones visitadas en la semana para marcarlo
+const DER_SEMANAS = 8;      // cuantas semanas se ofrecen arriba
+let DER = null, derBajando = false, derFallo = false, derSem = null, derSup = 'Todos', derAbierto = null;
+let DER_UNI = {};          // OT -> direccion, para las que tienen UNA sola visita fallida (historial_dir.json -> unicas)
+let DER_DIR = {};          // OT -> direccion con su historia de visitas fallidas (historial_dir.json)
+let derDirOk = false;      // se pudo bajar el historial de direcciones
+let derVista = 'tec';      // 'tec' = por tecnico | 'dir' = por direccion
+const DER_TEND = 4;        // semanas que muestra la columna de tendencia
+let derTipo = 'MIGRA';     // 'MIGRA' | 'ALTA' | 'AMBAS'
+const DER_TIPOS = [['MIGRA', 'Migraciones'], ['ALTA', 'Altas'], ['AMBAS', 'Altas y migraciones']];
+const DER_MESES = ['ene','feb','mar','abr','may','jun','jul','ago','sept','oct','nov','dic'];
+
+function derGrupo(cod){
+  const c = String(cod || '').toLowerCase();
+  if(c.indexOf('sin moradores') >= 0) return 'sm';
+  if(c.indexOf('reagenda') >= 0) return 're';
+  if(c.indexOf('desiste') >= 0) return 'de';
+  return 'ot';
+}
+async function bajarDeriv(){
+  const r = await fetch(URL_DATOS_ACT + '?t=' + Date.now(), { cache:'no-store' });
+  if(!r.ok) throw new Error(r.status);
+  const js = await r.json();
+  const cols = js.cols || [], dic = js.dic || {};
+  const ix = {}; cols.forEach(function(c, i){ ix[c] = i; });
+  ['Nombre','Orden de Trabajo','Tipo de Actividad','Fecha','Estado'].forEach(function(c){
+    if(ix[c] === undefined) throw new Error('datos.json sin ' + c); });
+  const val = function(row, c){ const v = row[ix[c]]; return (ix[c] === undefined) ? '' : ((dic[c] && typeof v === 'number') ? dic[c][v] : v); };
+  const filas = [], compl = {};
+  (js.rows || []).forEach(function(row){
+    const est = val(row, 'Estado'), ot = String(val(row, 'Orden de Trabajo') || '');
+    const p = /^(\d{2})-(\d{2})-(\d{4})$/.exec(String(val(row, 'Fecha') || ''));
+    if(!p) return;
+    const iso = p[3] + p[2] + p[1];
+    if(est === 'Completado' && ot) (compl[ot] = compl[ot] || []).push(iso);
+    const nom = String(val(row, 'Nombre') || ''), k = nom.indexOf('_DOMI_');
+    if(k < 0) return;
+    const tipoU = String(val(row, 'Tipo de Actividad') || '').trim().toUpperCase();
+    const tp = tipoU.indexOf('MIGRA') === 0 ? 'MIGRA' : tipoU.indexOf('ALTA') === 0 ? 'ALTA' : '';
+    if(!tp) return;
+    if(est !== 'Completado' && est !== 'No Realizada') return;
+    const d = new Date(+p[3], +p[2] - 1, +p[1]);
+    const lun = new Date(d); lun.setDate(d.getDate() - (d.getDay() + 6) % 7);
+    const cod = String(val(row, 'Código de Cierre') || '').trim();
+    const play = String(val(row, 'Play') || '').trim();
+    filas.push({
+      sem: lun.getFullYear() + '-' + String(lun.getMonth() + 1).padStart(2, '0') + '-' + String(lun.getDate()).padStart(2, '0'),
+      iso: iso, f: p[1] + '-' + p[2], ot: ot,
+      tec: nom.slice(k + 6).replace(/ /g, ' ').replace(/\s+/g, ' ').trim(),
+      sup: String(val(row, 'supervisor') || '').trim(),
+      tp: tp,
+      act: String(val(row, 'Tipo de Actividad') || '').trim() + (play ? ' ' + play + ' Play' : ''),
+      fr: String(val(row, 'Franja') || ''), ciu: String(val(row, 'Ciudad') || ''),
+      der: est === 'No Realizada', cod: cod || 'Sin código', g: est === 'No Realizada' ? derGrupo(cod) : ''
+    });
+  });
+  filas.forEach(function(x){
+    if(!x.der) return;
+    const l = (compl[x.ot] || []).filter(function(i){ return i > x.iso; }).sort();
+    x.desp = l.length ? l[0].slice(6, 8) + '-' + l[0].slice(4, 6) : '';
+  });
+  /* Historia de cada direccion. Blindado: si no baja, la ventana funciona
+     igual, solo que sin esa parte. */
+  DER_DIR = {}; DER_UNI = {}; derDirOk = false;
+  try {
+    const r2 = await fetch(URL_HIST_RAW + '?t=' + Date.now(), { cache:'no-store' });
+    if(r2.ok){
+      const hj = await r2.json();
+      (hj.dirs || []).forEach(function(d){
+        const vis = (d.v || []).map(function(v){
+          const q = /^(\d{2})-(\d{2})-(\d{4})$/.exec(String(v.f || ''));
+          return { iso: q ? q[3] + q[2] + q[1] : '', f: q ? q[1] + '-' + q[2] : String(v.f || ''), o: String(v.o || ''),
+                   tec: String(v.tec || '').replace(/\u00a0/g, ' ').replace(/\s+/g, ' ').trim(),
+                   cat: String(v.cat || ''), cie: String(v.cierre || ''), gsa: v.gsa ? 1 : 0 };
+        }).sort(function(a, b){ return a.iso.localeCompare(b.iso); });
+        const obj = { d: String(d.d || ''), v: vis };
+        vis.forEach(function(v){ if(v.o) DER_DIR[v.o] = obj; });
+      });
+      DER_UNI = (hj.unicas && typeof hj.unicas === 'object') ? hj.unicas : {};
+      derDirOk = true;
+    }
+  } catch(e){ console.warn('derivacion, historial de direcciones:', e); }
+  return filas;
+}
+/* Lo que se sabe de la direccion de una orden derivada. */
+function derHist(x){
+  const h = DER_DIR[x.ot];
+  if(!h) return null;
+  const antes = h.v.filter(function(v){ return v.iso < x.iso; });
+  const desp  = h.v.filter(function(v){ return v.iso > x.iso; });
+  const otros = {};
+  h.v.forEach(function(v){ if(v.o !== x.ot && v.tec && v.tec !== x.tec) otros[v.tec] = (otros[v.tec] || 0) + 1; });
+  return { d: h.d, v: h.v, antes: antes, desp: desp, otros: otros };
+}
+function setTipoDeriv(t){ derTipo = t; derAbierto = null; pintarDeriv(); }
+function setVistaDeriv(v){ derVista = v; derAbierto = null; pintarDeriv(); }
+function derEntra(x){ return derTipo === 'AMBAS' || x.tp === derTipo; }
+function derNomTipo(){ return derTipo === 'MIGRA' ? 'migraciones' : derTipo === 'ALTA' ? 'altas' : 'altas y migraciones'; }
+function derNumSemana(k){
+  const p = k.split('-'), d = new Date(+p[0], +p[1] - 1, +p[2]);
+  d.setDate(d.getDate() + 3);
+  const ene4 = new Date(d.getFullYear(), 0, 4);
+  return 1 + Math.round(((d - ene4) / 86400000 - 3 + (ene4.getDay() + 6) % 7) / 7);
+}
+function derRango(k){
+  const p = k.split('-'), a = new Date(+p[0], +p[1] - 1, +p[2]), b = new Date(a); b.setDate(a.getDate() + 5);
+  return a.getMonth() === b.getMonth()
+    ? a.getDate() + ' al ' + b.getDate() + ' ' + DER_MESES[b.getMonth()]
+    : a.getDate() + ' ' + DER_MESES[a.getMonth()] + ' al ' + b.getDate() + ' ' + DER_MESES[b.getMonth()];
+}
+function derTitulo(s){ return String(s || '').toLowerCase().replace(/(^|\s)\S/g, function(c){ return c.toUpperCase(); }); }
+function derPct(a, b){ return b ? Math.round(100 * a / b) : 0; }
+
+function abrirDeriv(){
+  document.getElementById('modalDer').classList.add('abierto');
+  pintarDeriv();
+  if(DER !== null || derBajando) return;
+  derBajando = true; derFallo = false;
+  bajarDeriv()
+    .then(function(d){ DER = d; derBajando = false; pintarDeriv(); })
+    .catch(function(e){ console.warn('derivacion:', e); derFallo = true; derBajando = false; pintarDeriv(); });
+}
+function cerrarDeriv(){ const m = document.getElementById('modalDer'); if(m) m.classList.remove('abierto'); }
+function setSemDeriv(k){ derSem = k; derAbierto = null; pintarDeriv(); }
+function setSupDeriv(s){ derSup = s; derAbierto = null; pintarDeriv(); }
+function verTecDeriv(i){ derAbierto = (derAbierto === i ? null : i); pintarDeriv(); }
+
+/* La tabla de una semana: un objeto por tecnico, ya ordenada. */
+function derTabla(sem, sup){
+  const t = {};
+  (DER || []).forEach(function(x){
+    if(x.sem !== sem || !derEntra(x)) return;
+    if(sup !== 'Todos' && x.sup !== sup) return;
+    const o = t[x.tec] || (t[x.tec] = {tec:x.tec, sup:x.sup, n:0, d:0, sm:0, re:0, de:0, ot:0, l:[]});
+    o.n++;
+    if(x.der){ o.d++; o[x.g]++; o.l.push(x); }
+  });
+  return Object.keys(t).map(function(k){ return t[k]; }).sort(function(a, b){
+    const sa = (a.n >= DER_MINIMO && 100 * a.d / a.n > DER_UMBRAL) ? 1 : 0;
+    const sb = (b.n >= DER_MINIMO && 100 * b.d / b.n > DER_UMBRAL) ? 1 : 0;
+    return sb - sa || (b.d / b.n) - (a.d / a.n) || b.n - a.n || a.tec.localeCompare(b.tec);
+  });
+}
+function derSobre(o){ return o.n >= DER_MINIMO && 100 * o.d / o.n > DER_UMBRAL; }
+function derPocas(o){ return o.n < DER_MINIMO && 100 * o.d / o.n > DER_UMBRAL; }
+
+/* ---- Detalle completo de un tecnico (08-10-2026) ---- */
+function derResumenTec(o){
+  const r = { rep:0, repOtro:0, volvio:0, compl:0, unica:0, otros:{} };
+  o.l.forEach(function(x){
+    if(x.desp) r.compl++;
+    const h = derHist(x);
+    if(!h){ r.unica++; return; }
+    if(h.antes.length){ r.rep++; if(h.antes.some(function(v){ return v.tec && v.tec !== x.tec; })) r.repOtro++; }
+    if(h.desp.length) r.volvio++;
+    Object.keys(h.otros).forEach(function(t){ r.otros[t] = (r.otros[t] || 0) + h.otros[t]; });
+  });
+  r.lista = Object.keys(r.otros).map(function(t){ return [t, r.otros[t]]; }).sort(function(a, b){ return b[1] - a[1] || a[0].localeCompare(b[0]); });
+  return r;
+}
+function derDetalleHtml(o, i){
+  if(!o.l.length) return 'No derivó ninguna esta semana.';
+  const r = derResumenTec(o);
+  const pl = function(n, uno, varios){ return n + ' ' + (n === 1 ? uno : varios); };
+  let h = '<div class="dv-rt">'
+    + '<div class="l1"><b>' + escR(derTitulo(o.tec)) + '</b> derivó <b>' + o.d + ' de ' + o.n + '</b> ' + derNomTipo() + ' (' + derPct(o.d, o.n) + '%)</div>';
+  if(derDirOk){
+    h += '<div class="kp">'
+      + '<span' + (r.rep ? ' class="si"' : '') + '><b>' + r.rep + '</b> en direcciones que ya habían fallado antes</span>'
+      + '<span' + (r.repOtro ? ' class="si"' : '') + '><b>' + r.repOtro + '</b> de esas, con otro técnico</span>'
+      + '<span><b>' + r.unica + '</b> sin otras visitas fallidas a la dirección</span>'
+      + '<span' + (r.volvio ? ' class="si"' : '') + '><b>' + r.volvio + '</b> volvieron a fallar después</span>'
+      + '<span' + (r.compl ? ' class="ok"' : '') + '><b>' + r.compl + '</b> se completaron después</span></div>';
+    if(r.lista.length) h += '<div class="ot"><b>Otros técnicos con visitas fallidas en estas mismas direcciones:</b> '
+      + r.lista.map(function(t){ return escR(derTitulo(t[0])) + ' (' + t[1] + ')'; }).join(', ') + '.</div>';
+  } else {
+    h += '<div class="ot">No se pudo bajar el historial de direcciones; se muestra solo el detalle de la semana.</div>';
+  }
+  h += '</div>';
+  o.l.slice().sort(function(a, b){ return a.iso.localeCompare(b.iso) || a.ot.localeCompare(b.ot); }).forEach(function(x){
+    const hi = derHist(x);
+    h += '<div class="dv-ord"><div class="c1"><b>' + x.f + '</b> · <b>' + escR(x.ot) + '</b> · ' + escR(x.act) + ' · franja ' + escR(x.fr) + ' · ' + escR(derTitulo(x.ciu))
+      + ' <span class="tg ' + (x.g === 'ot' ? 'na' : 'at') + '">' + escR(x.cod) + '</span>'
+      + (x.desp ? ' <span class="tg ok">se completó el ' + x.desp + '</span>' : '') + '</div>';
+    if(hi){
+      const nOt = Object.keys(hi.otros).length;
+      h += '<div class="c2"><b>' + escR(derTitulo(hi.d)) + '</b> · ' + pl(hi.v.length, 'visita fallida', 'visitas fallidas') + ' desde el 01-08'
+        + (nOt ? ' · ' + pl(nOt, 'otro técnico', 'otros técnicos') : ' · siempre el mismo técnico') + '</div>'
+        + '<table class="dv-vis"><tbody>' + hi.v.map(function(v){
+            const esta = v.o === x.ot;
+            return '<tr' + (esta ? ' class="esta"' : '') + '><td>' + v.f + '</td><td>' + escR(derTitulo(v.tec)) + '</td><td>' + escR(v.cat) + '</td><td>'
+              + escR(v.cie) + (v.gsa ? ' <span class="tg ok">GSA: cuenta como completada</span>' : '') + '</td><td>' + escR(v.o) + (esta ? ' <span class="tg at">esta visita</span>' : '') + '</td></tr>';
+          }).join('') + '</tbody></table>';
+    } else if(derDirOk){
+      /* (08-10-2026, 17:20) la direccion de las de una sola visita viene en
+         historial_dir.json -> unicas. Con un historial_dir.py antiguo ese
+         bloque no existe y se muestra solo el texto. */
+      const du = DER_UNI[x.ot];
+      h += '<div class="c2">' + (du ? '<b>' + escR(derTitulo(du)) + '</b> · ' : '')
+        + '<span class="gr">única visita fallida a esta dirección desde el 01-08</span></div>';
+    }
+    h += '</div>';
+  });
+  return h;
+}
+
+/* ---- Vista por direccion (08-10-2026, 17:30) ---- */
+function derVistaDirHtml(tb, tot){
+  if(!derDirOk) return '<div class="dv-vacio">No se pudo bajar el historial de direcciones. Vuelve a abrir la ventana en un rato.</div>';
+  const dirs = {}; let sinDir = 0;
+  tb.forEach(function(o){ o.l.forEach(function(x){
+    const h = DER_DIR[x.ot], nom = h ? h.d : DER_UNI[x.ot];
+    if(!nom){ sinDir++; return; }
+    const d = dirs[nom] || (dirs[nom] = { d: nom, v: h ? h.v : null, sem: [] });
+    d.sem.push(x);
+  }); });
+  const lista = Object.keys(dirs).map(function(k){
+    const d = dirs[k];
+    d.nv = d.v ? d.v.length : 1;
+    const tecs = {}; (d.v || d.sem).forEach(function(v){ if(v.tec) tecs[v.tec] = 1; });
+    d.nt = Object.keys(tecs).length;
+    d.compl = d.sem.some(function(x){ return x.desp; });
+    return d;
+  });
+  const rep = lista.filter(function(d){ return d.nv >= 2; });
+  const varios = lista.filter(function(d){ return d.nt >= 2; });
+  const derRep = rep.reduce(function(a, d){ return a + d.sem.length; }, 0);
+  const derVar = varios.reduce(function(a, d){ return a + d.sem.length; }, 0);
+  /* sin el bloque 'unicas' (historial_dir.py antiguo) las de una sola visita
+     no traen direccion: se cuentan igual, por descarte */
+  const unicas = tot.d - derRep - sinDir;
+  rep.sort(function(a, b){ return b.nv - a.nv || b.nt - a.nt || a.d.localeCompare(b.d); });
+  let h = '<div class="dv-rt"><div class="l1">De las <b>' + tot.d + '</b> derivadas de la semana:</div><div class="kp">'
+    + '<span' + (derRep ? ' class="si"' : '') + '><b>' + derRep + '</b> (' + derPct(derRep, tot.d) + '%) en direcciones con 2 o más visitas fallidas desde el 01-08</span>'
+    + '<span' + (derVar ? ' class="si"' : '') + '><b>' + derVar + '</b> (' + derPct(derVar, tot.d) + '%) en direcciones donde falló más de un técnico</span>'
+    + '<span><b>' + unicas + '</b> en direcciones con esta sola visita fallida</span></div></div>';
+  if(!rep.length) return h + '<div class="dv-vacio">Ninguna dirección de esta semana tiene otra visita fallida desde el 01-08.</div>';
+  h += '<table class="dv-dir"><thead><tr><th>Dirección</th><th title="Derivadas en esta dirección durante la semana elegida">Derivadas en la semana</th>'
+    + '<th title="Visitas no realizadas a esta dirección desde el 01-08, de cualquier tipo">Visitas fallidas</th><th title="Técnicos distintos con visitas fallidas en esta dirección">Técnicos</th>'
+    + '<th>Causal más repetida</th><th title="Alguna de las derivadas de la semana se completó en una fecha posterior">¿Completada después?</th></tr></thead><tbody>';
+  rep.forEach(function(d, i){
+    const cau = {}; d.v.forEach(function(v){ cau[v.cie] = (cau[v.cie] || 0) + 1; });
+    const top = Object.keys(cau).sort(function(a, b){ return cau[b] - cau[a] || a.localeCompare(b); })[0];
+    const otsSem = {}; d.sem.forEach(function(x){ otsSem[x.ot] = x; });
+    h += '<tr class="t' + (d.nt >= 3 ? ' sobre' : '') + '" onclick="verTecDeriv(' + i + ')" title="Toca para ver cada visita">'
+      + '<td>' + (derAbierto === i ? '▾ ' : '▸ ') + escR(derTitulo(d.d)) + '</td><td>' + d.sem.length + '</td><td class="p">' + d.nv + '</td><td' + (d.nt >= 2 ? ' class="p"' : '') + '>' + d.nt + '</td>'
+      + '<td>' + escR(top) + (cau[top] > 1 ? ' ×' + cau[top] : '') + '</td><td>' + (d.compl ? '<span class="tg ok">Sí</span>' : 'No') + '</td></tr>';
+    if(derAbierto === i){
+      h += '<tr class="det"><td colspan="6"><table class="dv-vis"><tbody>' + d.v.map(function(v){
+          const x = otsSem[v.o];
+          return '<tr' + (x ? ' class="esta"' : '') + '><td>' + v.f + '</td><td>' + escR(derTitulo(v.tec)) + '</td><td>' + escR(v.cat) + '</td><td>' + escR(v.cie)
+            + (v.gsa ? ' <span class="tg ok">GSA: cuenta como completada</span>' : '') + '</td><td>' + escR(v.o)
+            + (x ? ' <span class="tg at">esta semana</span>' + (x.desp ? ' <span class="tg ok">se completó el ' + x.desp + '</span>' : '') : '') + '</td></tr>';
+        }).join('') + '</tbody></table></td></tr>';
+    }
+  });
+  return h + '</tbody></table>'
+    + '<p class="dv-nota">Direcciones donde hubo ' + derNomTipo() + ' derivadas en la semana ' + derNumSemana(derSem) + ' y que acumulan 2 o más visitas fallidas desde el 01-08, '
+    + 'de cualquier tipo de actividad. En rojo, las que le fallaron a 3 o más técnicos distintos. Cuentan solo visitas no realizadas; las completadas no están en este historial.'
+    + (sinDir ? ' ' + sinDir + ' derivada' + (sinDir === 1 ? '' : 's') + ' de la semana no tiene' + (sinDir === 1 ? '' : 'n') + ' dirección en el historial (otras comunas).' : '') + '</p>';
+}
+
+function pintarDeriv(){
+
+  const cuerpo = document.getElementById('dvCuerpo'), semBox = document.getElementById('dvSemanas'), supBox = document.getElementById('dvSups');
+  if(!cuerpo) return;
+  semBox.innerHTML = ''; supBox.innerHTML = '';
+  if(derFallo){
+    cuerpo.innerHTML = '<div class="dv-vacio">No se pudo bajar el <b>datos.json</b> del Dashboard de Actividades. '
+      + 'Revisa que <b>' + escR(URL_ACTIVIDADES) + '</b> abra bien y vuelve a tocar el botón.</div>';
+    DER = null; return;
+  }
+  if(DER === null){ cuerpo.innerHTML = '<div class="dv-vacio">Bajando los datos…</div>'; return; }
+  if(!DER.length){ cuerpo.innerHTML = '<div class="dv-vacio">Todavía no hay migraciones cargadas.</div>'; return; }
+
+  const porSem = {};
+  DER.forEach(function(x){ if(!derEntra(x)) return;
+    const s = porSem[x.sem] || (porSem[x.sem] = {n:0, d:0, dias:{}}); s.n++; if(x.der) s.d++; s.dias[x.iso] = 1; });
+  const tit = document.getElementById('dvTitulo'); if(tit) tit.textContent = 'Derivación en ' + derNomTipo();
+  const semanas = Object.keys(porSem).sort().reverse().slice(0, DER_SEMANAS);
+  if(!derSem || semanas.indexOf(derSem) < 0) derSem = semanas[0];
+  const ultIso = DER.reduce(function(m, x){ return x.iso > m ? x.iso : m; }, '');
+  semBox.innerHTML = '<span class="rot">Semana</span>' + semanas.map(function(k){
+    const s = porSem[k], p = derPct(s.d, s.n);
+    return '<button class="' + (k === derSem ? 'on' : '') + (p > DER_UMBRAL ? ' alto' : '') + '" onclick="setSemDeriv(\'' + k + '\')" title="'
+      + s.n + ' ' + derNomTipo() + ' visitadas, ' + s.d + ' derivadas · ' + derRango(k) + '">' + derNumSemana(k) + '<b>' + p + '%</b></button>';
+  }).join('');
+  const sups = ['Todos'].concat(Object.keys(DER.reduce(function(a, x){ if(x.sup) a[x.sup] = 1; return a; }, {})).sort());
+  if(sups.indexOf(derSup) < 0) derSup = 'Todos';
+  supBox.innerHTML = '<span class="rot">Vista</span>'
+    + '<button class="' + (derVista === 'tec' ? 'on' : '') + '" onclick="setVistaDeriv(\'tec\')">Por técnico</button>'
+    + '<button class="' + (derVista === 'dir' ? 'on' : '') + '" onclick="setVistaDeriv(\'dir\')">Por dirección</button>'
+    + '<span class="rot" style="margin-left:14px">Supervisor</span>' + sups.map(function(s){
+    return '<button class="' + (s === derSup ? 'on' : '') + '" onclick="setSupDeriv(\'' + escR(s) + '\')">' + (s === 'Todos' ? 'Todos' : derTitulo(s)) + '</button>';
+  }).join('') + '<span class="rot" style="margin-left:14px">Tipo</span>' + DER_TIPOS.map(function(t){
+    return '<button class="' + (t[0] === derTipo ? 'on' : '') + '" onclick="setTipoDeriv(\'' + t[0] + '\')">' + t[1] + '</button>';
+  }).join('');
+
+  /* Tendencia: las DER_TEND semanas que terminan en la elegida. */
+  const todasSem = Object.keys(porSem).sort();
+  const iSem = todasSem.indexOf(derSem);
+  const semTend = todasSem.slice(Math.max(0, iSem - DER_TEND + 1), iSem + 1);
+  const porTS = {};
+  DER.forEach(function(x){ if(!derEntra(x)) return;
+    const k = x.tec + '|' + x.sem, o = porTS[k] || (porTS[k] = {n:0, d:0}); o.n++; if(x.der) o.d++; });
+  const tendHtml = function(tec){
+    let seg = 0, corta = false;
+    for(let j = semTend.length - 1; j >= 0; j--){
+      const o = porTS[tec + '|' + semTend[j]];
+      if(!corta && o && o.n >= DER_MINIMO && 100 * o.d / o.n > DER_UMBRAL) seg++; else corta = true;
+    }
+    return '<span class="dv-tend">' + semTend.map(function(k){
+      const o = porTS[tec + '|' + k];
+      if(!o) return '<i class="na" title="Semana ' + derNumSemana(k) + ': sin ' + derNomTipo() + '">–</i>';
+      const p = derPct(o.d, o.n), alto = p > DER_UMBRAL;
+      return '<i class="' + (alto ? (o.n >= DER_MINIMO ? 'r' : 'a') : 'v') + (k === derSem ? ' hoy' : '') + '" title="Semana ' + derNumSemana(k)
+        + ': derivó ' + o.d + ' de ' + o.n + '">' + p + '</i>';
+    }).join('') + (seg >= 2 ? '<b class="seg" title="Semanas seguidas sobre ' + DER_UMBRAL + '% con ' + DER_MINIMO + ' o más">' + seg + ' seguidas</b>' : '') + '</span>';
+  };
+
+  const tb = derTabla(derSem, derSup);
+  const tot = tb.reduce(function(a, o){ a.n += o.n; a.d += o.d; a.sm += o.sm; a.re += o.re; a.de += o.de; a.ot += o.ot; return a; }, {n:0,d:0,sm:0,re:0,de:0,ot:0});
+  const nSobre = tb.filter(derSobre).length;
+  const nDias = Object.keys(porSem[derSem].dias).length;
+  const enCurso = nDias < 6 && derSem === semanas[0];
+  const cel = function(v){ return '<td' + (v ? '' : ' class="cero"') + '>' + v + '</td>'; };
+
+  let h = '<div class="dv-tot">'
+    + '<div><b>' + tot.n + '</b><span>' + derNomTipo() + ' visitadas</span></div>'
+    + '<div><b>' + tot.d + '</b><span>derivadas (no realizadas)</span></div>'
+    + '<div class="' + (derPct(tot.d, tot.n) > DER_UMBRAL ? 'mal' : '') + '"><b>' + (tot.n ? (100 * tot.d / tot.n).toFixed(1).replace('.', ',') : '0') + '%</b><span>derivación</span></div>'
+    + '<div class="' + (nSobre ? 'mal' : '') + '"><b>' + nSobre + '</b><span>técnicos sobre ' + DER_UMBRAL + '%</span></div>'
+    + '</div>'
+    + '<div class="dv-cau"><span class="rot">Causales</span>'
+    + '<span class="c"><b>' + tot.sm + '</b>sin moradores</span><span class="c"><b>' + tot.re + '</b>cliente reagenda</span>'
+    + '<span class="c"><b>' + tot.de + '</b>cliente desiste</span><span class="c no"><b>' + tot.ot + '</b>no atribuibles al técnico</span>'
+    + (tot.d ? '<span style="color:#5f7386">· las tres primeras son el ' + derPct(tot.sm + tot.re + tot.de, tot.d) + '% de las derivadas</span>' : '')
+    + '</div>';
+  if(!tb.length){ cuerpo.innerHTML = h + '<div class="dv-vacio">Sin ' + derNomTipo() + ' en esta semana para ese supervisor.</div>'; return; }
+  if(derVista === 'dir'){ cuerpo.innerHTML = h + derVistaDirHtml(tb, tot); return; }
+  h += '<table><thead><tr><th>Técnico</th><th>Visitadas</th><th>Completadas</th><th>Derivadas</th><th>% derivación</th>'
+    + '<th title="Su % de derivación en cada una de las ' + DER_TEND + ' semanas que terminan en esta">Últimas ' + DER_TEND + ' semanas</th><th>Sin moradores</th><th>Cliente reagenda</th><th>Cliente desiste</th><th>No atribuibles</th></tr></thead><tbody>';
+  tb.forEach(function(o, i){
+    const sobre = derSobre(o), pocas = derPocas(o);
+    h += '<tr class="t' + (sobre ? ' sobre' : pocas ? ' pocas' : '') + '" onclick="verTecDeriv(' + i + ')" title="Toca para ver el detalle completo de sus derivadas">'
+      + '<td>' + (derAbierto === i ? '▾ ' : '▸ ') + escR(derTitulo(o.tec)) + '<small>' + escR(derTitulo(o.sup)) + '</small>'
+      +   (sobre ? '<span class="marca">sobre ' + DER_UMBRAL + '%</span>' : pocas ? '<span class="marca pocas">pocas migraciones</span>' : '') + '</td>'
+      + '<td>' + o.n + '</td><td>' + (o.n - o.d) + '</td>' + cel(o.d) + '<td class="p">' + derPct(o.d, o.n) + '%</td>'
+      + '<td>' + tendHtml(o.tec) + '</td>' + cel(o.sm) + cel(o.re) + cel(o.de) + cel(o.ot) + '</tr>';
+    if(derAbierto === i) h += '<tr class="det"><td colspan="10">' + derDetalleHtml(o, i) + '</td></tr>';
+  });
+  h += '</tbody></table>'
+    + '<p class="dv-nota">Semana ' + derNumSemana(derSem) + ', ' + derRango(derSem) + (enCurso ? ' <b>(en curso: ' + nDias + ' día' + (nDias === 1 ? '' : 's') + ' con datos)</b>' : '')
+    + '. Datos hasta el ' + ultIso.slice(6, 8) + '-' + ultIso.slice(4, 6) + '; el día de hoy entra mañana.<br>'
+    + '<b>Historia de la dirección</b> (al abrir un técnico): visitas no realizadas a esa misma dirección desde el 01-08, de cualquier tipo de actividad. '
+    + 'No incluye las visitas completadas. Si dice "es la única", no hay otra visita fallida a esa dirección en el período.<br>'
+    + '<b>Visitadas</b> = completadas más no realizadas (sin canceladas ni suspendidas). <b>Derivada</b> = no realizada. '
+    + 'En rojo, los técnicos con más de ' + DER_UMBRAL + '% de derivación y ' + DER_MINIMO + ' o más en la semana; en ámbar, los que superan el ' + DER_UMBRAL + '% con menos de ' + DER_MINIMO + '.<br>'
+    + 'Sin moradores, cliente reagenda y cliente desiste son las causales que se pidió auditar como posiblemente relacionadas con la gestión del técnico. '
+    + 'En Quiebres esas mismas figuran como "del cliente": que haya que auditarlas no significa que sean culpa del técnico.</p>';
+  cuerpo.innerHTML = h;
+}
+/* ========================================================================== */
+
 /* ==================== RESUMEN POR DIA (29-09-2026) ====================
    Pedido de Luis: un boton "Resumen" con actividades asignadas, completadas,
    no realizadas y efectividad POR DIA. Los numeros salen del datos.json del
@@ -6976,6 +7499,9 @@ function pintarPortada(){
        use una copia guardada de Actividades: con la copia vieja no entendia
        el #quiebres y abria la portada de meses (le paso a Luis). */
     +     '<a class="b-inf b-qb" href="' + URL_ACTIVIDADES + '?t=' + Date.now() + '#quiebres" target="_blank">Quiebres</a>'
+    /* Derivacion (08-10-2026, pedido de Luis): derivacion en migraciones por
+       tecnico y semana, en una ventana (no abre otra pagina). Clase b-der. */
+    +     '<a class="b-inf b-der" onclick="abrirDeriv()">Derivaci\u00f3n</a>'
     +   '</nav>'
     +   '<span class="pv-upd"><i></i><span class="upd"></span></span>'
     + '</header>'
