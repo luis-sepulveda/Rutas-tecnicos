@@ -19429,23 +19429,23 @@
    }
   },
   "08-10-2026": {
-   "hasta": "13:29",
-   "actividades": 131,
+   "hasta": "13:34",
+   "actividades": 133,
    "tecnicos": 30,
    "estados": {
-    "Iniciado": 21,
-    "Pendiente": 63,
+    "Iniciado": 22,
+    "Pendiente": 65,
     "No Realizada": 10,
-    "Completado": 29,
-    "en ruta": 3,
+    "Completado": 30,
     "Cancelado": 4,
-    "Suspendido": 1
+    "Suspendido": 1,
+    "en ruta": 1
    },
-   "rgu": 212.2,
+   "rgu": 215.7,
    "caidas_total": 3,
    "caidas_activas": 3,
    "caidas_resueltas": 0,
-   "nuevas": 10,
+   "nuevas": 11,
    "al_bucket": 10,
    "repetidas": 31,
    "reagendadas": 3,
@@ -19481,6 +19481,15 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OAUYJ4T",
+      "tec": "LUIS GATICA DAVILA",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "16:33",
+      "d": "PORVENIR 1211 EDIF. 3 DEPTO 404, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3O8IP8HD",
       "tec": "JOSE ROJO A",
       "cat": "Migración 2 Play",
@@ -19496,7 +19505,7 @@
       "f": "13-16",
       "hi": "13:12",
       "d": "ALEMPARTE 277 CASA 9, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OATO0J8",
@@ -19636,7 +19645,7 @@
       "o": "1-3O9ME1HJ",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "16:13",
+      "hi": "16:20",
       "d": "CARMEN 1280, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
@@ -19979,5 +19988,5 @@
    }
   }
  },
- "generado": "08-10-2026 13:29"
+ "generado": "08-10-2026 13:34"
 }
