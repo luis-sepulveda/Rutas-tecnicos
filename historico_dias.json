@@ -19429,23 +19429,23 @@
    }
   },
   "08-10-2026": {
-   "hasta": "12:39",
-   "actividades": 114,
+   "hasta": "12:43",
+   "actividades": 116,
    "tecnicos": 30,
    "estados": {
     "Iniciado": 24,
     "Pendiente": 54,
     "No Realizada": 9,
     "Completado": 20,
+    "en ruta": 4,
     "Cancelado": 4,
-    "Suspendido": 1,
-    "en ruta": 2
+    "Suspendido": 1
    },
-   "rgu": 182.5,
+   "rgu": 183.6,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
-   "nuevas": 6,
+   "nuevas": 7,
    "al_bucket": 10,
    "repetidas": 28,
    "reagendadas": 3,
@@ -19471,6 +19471,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OAT4NDY",
+      "tec": "JEAN ROODLY ORELIEN",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "12:42",
+      "d": "BUENOS AIRES 1481, VILLA ALEMANA",
+      "e": "en ruta"
+     },
      {
       "o": "1-3OAQCBAV",
       "tec": "LUIS GATICA DAVILA",
@@ -19651,7 +19660,7 @@
       "o": "1-3OAFEJR4",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:27",
+      "hi": "14:51",
       "d": "LAS PETUNIAS 1650 CASA 64, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JEAN ROODLY ORELIEN",
@@ -19711,7 +19720,7 @@
       "o": "1-3OAFT8KZ",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:35",
+      "hi": "15:50",
       "d": "SANTA ELENA 098 EDIF. 1 DEPTO 301, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JUAN ARRIAGADA C",
@@ -19818,9 +19827,9 @@
       "o": "1-3OA4LWO7",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "12:52",
+      "hi": "12:59",
       "d": "PJE 2 260, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "NICOLAS MOYANO R",
       "visitas": 3,
       "ult_fecha": "02-10-2026",
@@ -19898,5 +19907,5 @@
    }
   }
  },
- "generado": "08-10-2026 12:39"
+ "generado": "08-10-2026 12:43"
 }
