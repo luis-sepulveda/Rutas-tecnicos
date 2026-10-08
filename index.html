@@ -2128,6 +2128,12 @@
   #modalDer .dv-vacio { color:#5f7386; padding:24px 0; text-align:center; }
   @media (max-width:700px){ #modalDer .dv-tot { grid-template-columns:repeat(2,1fr); }
  }
+  /* historia completa y senales (08-10-2026, 18:00) */
+  #modalDer .tg.sn { background:#ede9fe; color:#5b21b6; border:1px solid #c4b5fd; }
+  #modalDer .dv-rt .kp span.sn { background:#ede9fe; color:#5b21b6; } #modalDer .dv-rt .kp span.sn b { color:#5b21b6; }
+  #modalDer td.sn { color:#5b21b6; font-weight:700; }
+  #modalDer .dv-ord.sen { border-left-color:#8b5cf6; }
+  #modalDer tr.det table.dv-vis tr.cok td { color:#17603a; }
   /* tendencia de las ultimas semanas (08-10-2026, 17:30) */
   #modalDer .dv-tend { display:inline-flex; gap:3px; align-items:center; }
   #modalDer .dv-tend i { font-style:normal; font-size:11px; min-width:27px; text-align:center; border-radius:5px; padding:2px 0;
@@ -6123,6 +6129,8 @@ function verPortada(){
      ordenadas por cuantas visitas fallidas acumulan y cuantos tecnicos
      distintos pasaron. Si una casa le falla a tres tecnicos, el problema no
      es el tecnico. Solo lista las que tienen 2 o mas visitas fallidas.
+   (18:00) Desde ese mismo dia la fuente principal es visitas_dir.json, que
+   trae TODAS las visitas (tambien las completadas) con horas; ver derHist().
    Tambien hay un filtro de tipo: Migraciones (lo que pide la jefatura),
    Altas, o las dos juntas. */
 const DER_UMBRAL = 50;      // % de derivacion sobre el que se marca al tecnico
@@ -6132,6 +6140,10 @@ let DER = null, derBajando = false, derFallo = false, derSem = null, derSup = 'T
 let DER_UNI = {};          // OT -> direccion, para las que tienen UNA sola visita fallida (historial_dir.json -> unicas)
 let DER_DIR = {};          // OT -> direccion con su historia de visitas fallidas (historial_dir.json)
 let derDirOk = false;      // se pudo bajar el historial de direcciones
+let derVisOk = false;      // se pudo bajar visitas_dir.json (todas las visitas, con horas)
+let DER_GRP = {};          // grupo de predio -> direcciones (condominios)
+let derDesde = '01-08';    // desde cuando hay historia de direcciones
+const URL_VIS_RAW = 'https://raw.githubusercontent.com/' + REPO_BASE + '/' + RAMA_DATOS + '/visitas_dir.json';
 let derVista = 'tec';      // 'tec' = por tecnico | 'dir' = por direccion
 const DER_TEND = 4;        // semanas que muestra la columna de tendencia
 let derTipo = 'MIGRA';     // 'MIGRA' | 'ALTA' | 'AMBAS'
@@ -6199,26 +6211,46 @@ async function bajarDeriv(){
           const q = /^(\d{2})-(\d{2})-(\d{4})$/.exec(String(v.f || ''));
           return { iso: q ? q[3] + q[2] + q[1] : '', f: q ? q[1] + '-' + q[2] : String(v.f || ''), o: String(v.o || ''),
                    tec: String(v.tec || '').replace(/\u00a0/g, ' ').replace(/\s+/g, ' ').trim(),
-                   cat: String(v.cat || ''), cie: String(v.cierre || ''), gsa: v.gsa ? 1 : 0 };
+                   cat: String(v.cat || ''), cie: String(v.cierre || ''), ok: 0, hi: -1, dur: -1 };
         }).sort(function(a, b){ return a.iso.localeCompare(b.iso); });
-        const obj = { d: String(d.d || ''), v: vis };
+        const obj = { d: String(d.d || ''), g: -1, v: vis };
         vis.forEach(function(v){ if(v.o) DER_DIR[v.o] = obj; });
       });
       DER_UNI = (hj.unicas && typeof hj.unicas === 'object') ? hj.unicas : {};
       derDirOk = true;
     }
   } catch(e){ console.warn('derivacion, historial de direcciones:', e); }
+  /* visitas_dir.json: TODAS las visitas, completadas y fallidas, con horas.
+     Si baja, reemplaza a lo anterior como fuente de la historia. */
+  derVisOk = false; DER_GRP = {}; derDesde = '01-08';
+  try {
+    const r3 = await fetch(URL_VIS_RAW + '?t=' + Date.now(), { cache:'no-store' });
+    if(r3.ok){
+      const vj = await r3.json();
+      const dirs = (vj.dirs || []).map(function(d){ return { d: String(d[0] || ''), g: (typeof d[1] === 'number' ? d[1] : -1), v: [] }; });
+      const nuevo = {};
+      (vj.v || []).forEach(function(v){
+        const d = dirs[v[0]]; if(!d) return;
+        const s = String(v[1]);
+        const vis = { iso: s, f: s.slice(6, 8) + '-' + s.slice(4, 6), o: String(v[2] || ''),
+          tec: String((vj.tecs || [])[v[3]] || '').replace(/\u00a0/g, ' ').replace(/\s+/g, ' ').trim(),
+          cat: String((vj.cats || [])[v[4]] || ''), ok: v[5] ? 1 : 0, cie: String((vj.cies || [])[v[6]] || ''),
+          hi: (typeof v[7] === 'number' ? v[7] : -1), dur: (typeof v[8] === 'number' ? v[8] : -1) };
+        d.v.push(vis);
+        if(vis.o) nuevo[vis.o] = d;
+      });
+      if(Object.keys(nuevo).length){
+        dirs.forEach(function(d){
+          d.v.sort(function(a, b){ return a.iso.localeCompare(b.iso) || a.hi - b.hi; });
+          if(d.g >= 0) (DER_GRP[d.g] = DER_GRP[d.g] || []).push(d);
+        });
+        DER_DIR = nuevo; derVisOk = true; derDirOk = true;
+        const de = String(vj.desde || '');
+        if(de.length === 8) derDesde = de.slice(6, 8) + '-' + de.slice(4, 6);
+      }
+    }
+  } catch(e){ console.warn('derivacion, visitas por direccion:', e); }
   return filas;
-}
-/* Lo que se sabe de la direccion de una orden derivada. */
-function derHist(x){
-  const h = DER_DIR[x.ot];
-  if(!h) return null;
-  const antes = h.v.filter(function(v){ return v.iso < x.iso; });
-  const desp  = h.v.filter(function(v){ return v.iso > x.iso; });
-  const otros = {};
-  h.v.forEach(function(v){ if(v.o !== x.ot && v.tec && v.tec !== x.tec) otros[v.tec] = (otros[v.tec] || 0) + 1; });
-  return { d: h.d, v: h.v, antes: antes, desp: desp, otros: otros };
 }
 function setTipoDeriv(t){ derTipo = t; derAbierto = null; pintarDeriv(); }
 function setVistaDeriv(v){ derVista = v; derAbierto = null; pintarDeriv(); }
@@ -6272,14 +6304,81 @@ function derTabla(sem, sup){
 function derSobre(o){ return o.n >= DER_MINIMO && 100 * o.d / o.n > DER_UMBRAL; }
 function derPocas(o){ return o.n < DER_MINIMO && 100 * o.d / o.n > DER_UMBRAL; }
 
+/* ---- Lo que se sabe de la direccion de una orden (08-10-2026, 18:00) ----
+   Dos fuentes, en este orden:
+   1) visitas_dir.json (visitas_dir.py, desde el 08-10-2026): TODAS las visitas
+      a cada direccion, completadas y no realizadas, con hora de inicio y
+      minutos en terreno. Si esta, derVisOk = true.
+   2) historial_dir.json: solo las NO realizadas, sin horas. Es el respaldo
+      si el primero no existe o no baja.
+   Cada visita queda como {iso, f, o, tec, cat, cie, ok, hi, dur}; ok = 1 si
+   fue completada. Con el respaldo, todas son ok = 0 y no hay horas. */
+function derHM(m){ return (m >= 0) ? String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0') : ''; }
+function derHist(x){
+  const h = DER_DIR[x.ot];
+  if(!h) return null;
+  const fall = h.v.filter(function(v){ return !v.ok; });
+  const otros = {};
+  fall.forEach(function(v){ if(v.o !== x.ot && v.tec && v.tec !== x.tec) otros[v.tec] = (otros[v.tec] || 0) + 1; });
+  const yo = h.v.filter(function(v){ return v.o === x.ot && v.iso === x.iso; })[0] || null;
+  /* otro tecnico fallo en otra unidad del mismo predio (condominio) */
+  let cond = 0;
+  if(h.g >= 0 && DER_GRP[h.g]) DER_GRP[h.g].forEach(function(d2){
+    if(d2 !== h && d2.v.some(function(v){ return !v.ok && v.tec && v.tec !== x.tec; })) cond++; });
+  return { d: h.d, v: h.v, fall: fall, yo: yo, cond: cond,
+    antes: fall.filter(function(v){ return v.iso < x.iso; }),
+    desp:  fall.filter(function(v){ return v.iso > x.iso; }),
+    otros: otros,
+    compDesp: h.v.filter(function(v){ return v.ok && v.iso > x.iso; }) };
+}
+/* Senales para auditar una derivada. Solo existen con visitas_dir.json.
+     otro  = despues OTRO tecnico fue a la misma direccion y la completo
+     corta = estuvo DER_MIN_CORTA minutos o menos en terreno
+     fuera = toda la visita quedo fuera de la franja del cliente */
+const DER_MIN_CORTA = 10;
+function derSenales(x, hi){
+  const s = { otro: null, corta: false, fuera: false, n: 0 };
+  /* solo para sin moradores / reagenda / desiste: en una causal que no
+     depende del tecnico (falta de dotacion, ductos...) no dicen nada */
+  if(!derVisOk || !hi || x.g === 'ot') return s;
+  s.otro = hi.compDesp.filter(function(v){ return v.tec && v.tec !== x.tec; })[0] || null;
+  const yo = hi.yo;
+  if(yo && yo.dur >= 0 && yo.dur <= DER_MIN_CORTA) s.corta = true;
+  const m = /^(\d{1,2})\s*-\s*(\d{1,2})$/.exec(String(x.fr || ''));
+  if(yo && m && yo.hi >= 0 && yo.dur >= 0 && (yo.hi + yo.dur <= +m[1] * 60 || yo.hi >= +m[2] * 60)) s.fuera = true;
+  s.n = (s.otro ? 1 : 0) + (s.corta ? 1 : 0) + (s.fuera ? 1 : 0);
+  return s;
+}
+function derSenalesHtml(s){
+  return (s.otro ? ' <span class="tg sn">después la completó ' + escR(derTitulo(s.otro.tec)) + ' el ' + s.otro.f + '</span>' : '')
+    + (s.corta ? ' <span class="tg sn">' + DER_MIN_CORTA + ' min o menos en terreno</span>' : '')
+    + (s.fuera ? ' <span class="tg sn">visita fuera de la franja</span>' : '');
+}
+/* Una fila de la historia de una direccion. */
+function derFilaVis(v, marca, clase){
+  return '<tr class="' + (clase || '') + (v.ok ? ' cok' : '') + '"><td>' + v.f + '</td><td>' + escR(derTitulo(v.tec)) + '</td><td>' + escR(v.cat) + '</td><td>'
+    + (v.ok ? '<span class="tg ok">Completada</span>' : escR(v.cie || 'No realizada')) + '</td><td>'
+    + (v.hi >= 0 ? derHM(v.hi) + (v.dur >= 0 ? ' · ' + v.dur + ' min' : '') : '') + '</td><td>' + escR(v.o) + (marca || '') + '</td></tr>';
+}
+function derPl(n, uno, varios){ return n + ' ' + (n === 1 ? uno : varios); }
+function derCabDir(hi){
+  const nOt = Object.keys(hi.otros).length, nc = hi.v.length - hi.fall.length;
+  return '<b>' + escR(derTitulo(hi.d)) + '</b> · ' + derPl(hi.fall.length, 'visita fallida', 'visitas fallidas')
+    + (derVisOk ? ' y ' + derPl(nc, 'completada', 'completadas') : '') + ' desde el ' + derDesde
+    + (hi.fall.length > 1 ? (nOt ? ' · falló también con ' + derPl(nOt, 'otro técnico', 'otros técnicos') : ' · siempre falló con el mismo técnico') : '')
+    + (hi.cond ? ' · <span class="gr">en el mismo condominio falló otro técnico en ' + derPl(hi.cond, 'otra unidad', 'otras unidades') + '</span>' : '');
+}
+
 /* ---- Detalle completo de un tecnico (08-10-2026) ---- */
 function derResumenTec(o){
-  const r = { rep:0, repOtro:0, volvio:0, compl:0, unica:0, otros:{} };
+  const r = { rep:0, repOtro:0, volvio:0, compl:0, unica:0, otroComp:0, otros:{} };
   o.l.forEach(function(x){
-    if(x.desp) r.compl++;
     const h = derHist(x);
+    if(x.desp || (h && h.compDesp.length)) r.compl++;
     if(!h){ r.unica++; return; }
+    if(derSenales(x, h).otro) r.otroComp++;
     if(h.antes.length){ r.rep++; if(h.antes.some(function(v){ return v.tec && v.tec !== x.tec; })) r.repOtro++; }
+    else if(h.fall.length <= 1) r.unica++;
     if(h.desp.length) r.volvio++;
     Object.keys(h.otros).forEach(function(t){ r.otros[t] = (r.otros[t] || 0) + h.otros[t]; });
   });
@@ -6289,7 +6388,6 @@ function derResumenTec(o){
 function derDetalleHtml(o, i){
   if(!o.l.length) return 'No derivó ninguna esta semana.';
   const r = derResumenTec(o);
-  const pl = function(n, uno, varios){ return n + ' ' + (n === 1 ? uno : varios); };
   let h = '<div class="dv-rt">'
     + '<div class="l1"><b>' + escR(derTitulo(o.tec)) + '</b> derivó <b>' + o.d + ' de ' + o.n + '</b> ' + derNomTipo() + ' (' + derPct(o.d, o.n) + '%)</div>';
   if(derDirOk){
@@ -6298,7 +6396,8 @@ function derDetalleHtml(o, i){
       + '<span' + (r.repOtro ? ' class="si"' : '') + '><b>' + r.repOtro + '</b> de esas, con otro técnico</span>'
       + '<span><b>' + r.unica + '</b> sin otras visitas fallidas a la dirección</span>'
       + '<span' + (r.volvio ? ' class="si"' : '') + '><b>' + r.volvio + '</b> volvieron a fallar después</span>'
-      + '<span' + (r.compl ? ' class="ok"' : '') + '><b>' + r.compl + '</b> se completaron después</span></div>';
+      + '<span' + (r.compl ? ' class="ok"' : '') + '><b>' + r.compl + '</b> se completaron después</span>'
+      + (derVisOk ? '<span' + (r.otroComp ? ' class="sn"' : '') + '><b>' + r.otroComp + '</b> las completó después otro técnico</span>' : '') + '</div>';
     if(r.lista.length) h += '<div class="ot"><b>Otros técnicos con visitas fallidas en estas mismas direcciones:</b> '
       + r.lista.map(function(t){ return escR(derTitulo(t[0])) + ' (' + t[1] + ')'; }).join(', ') + '.</div>';
   } else {
@@ -6306,26 +6405,20 @@ function derDetalleHtml(o, i){
   }
   h += '</div>';
   o.l.slice().sort(function(a, b){ return a.iso.localeCompare(b.iso) || a.ot.localeCompare(b.ot); }).forEach(function(x){
-    const hi = derHist(x);
+    const hi = derHist(x), sn = derSenales(x, hi);
     h += '<div class="dv-ord"><div class="c1"><b>' + x.f + '</b> · <b>' + escR(x.ot) + '</b> · ' + escR(x.act) + ' · franja ' + escR(x.fr) + ' · ' + escR(derTitulo(x.ciu))
       + ' <span class="tg ' + (x.g === 'ot' ? 'na' : 'at') + '">' + escR(x.cod) + '</span>'
-      + (x.desp ? ' <span class="tg ok">se completó el ' + x.desp + '</span>' : '') + '</div>';
+      + (x.desp ? ' <span class="tg ok">la misma orden se completó el ' + x.desp + '</span>' : '') + derSenalesHtml(sn) + '</div>';
     if(hi){
-      const nOt = Object.keys(hi.otros).length;
-      h += '<div class="c2"><b>' + escR(derTitulo(hi.d)) + '</b> · ' + pl(hi.v.length, 'visita fallida', 'visitas fallidas') + ' desde el 01-08'
-        + (nOt ? ' · ' + pl(nOt, 'otro técnico', 'otros técnicos') : ' · siempre el mismo técnico') + '</div>'
-        + '<table class="dv-vis"><tbody>' + hi.v.map(function(v){
-            const esta = v.o === x.ot;
-            return '<tr' + (esta ? ' class="esta"' : '') + '><td>' + v.f + '</td><td>' + escR(derTitulo(v.tec)) + '</td><td>' + escR(v.cat) + '</td><td>'
-              + escR(v.cie) + (v.gsa ? ' <span class="tg ok">GSA: cuenta como completada</span>' : '') + '</td><td>' + escR(v.o) + (esta ? ' <span class="tg at">esta visita</span>' : '') + '</td></tr>';
-          }).join('') + '</tbody></table>';
+      h += '<div class="c2">' + derCabDir(hi) + '</div>';
+      if(hi.v.length > 1 || derVisOk) h += '<table class="dv-vis"><tbody>' + hi.v.map(function(v){
+          const esta = v.o === x.ot && v.iso === x.iso;
+          return derFilaVis(v, esta ? ' <span class="tg at">esta visita</span>' : '', esta ? 'esta' : '');
+        }).join('') + '</tbody></table>';
     } else if(derDirOk){
-      /* (08-10-2026, 17:20) la direccion de las de una sola visita viene en
-         historial_dir.json -> unicas. Con un historial_dir.py antiguo ese
-         bloque no existe y se muestra solo el texto. */
       const du = DER_UNI[x.ot];
       h += '<div class="c2">' + (du ? '<b>' + escR(derTitulo(du)) + '</b> · ' : '')
-        + '<span class="gr">única visita fallida a esta dirección desde el 01-08</span></div>';
+        + '<span class="gr">' + (derVisOk ? 'sin dirección en el histórico (otra comuna o día sin registro)' : 'única visita fallida a esta dirección desde el ' + derDesde) + '</span></div>';
     }
     h += '</div>';
   });
@@ -6344,47 +6437,51 @@ function derVistaDirHtml(tb, tot){
   }); });
   const lista = Object.keys(dirs).map(function(k){
     const d = dirs[k];
-    d.nv = d.v ? d.v.length : 1;
-    const tecs = {}; (d.v || d.sem).forEach(function(v){ if(v.tec) tecs[v.tec] = 1; });
+    d.fall = d.v ? d.v.filter(function(v){ return !v.ok; }) : null;
+    d.nv = d.fall ? d.fall.length : 1;
+    d.nc = d.v ? d.v.length - d.fall.length : 0;
+    const tecs = {}; (d.fall || d.sem).forEach(function(v){ if(v.tec) tecs[v.tec] = 1; });
     d.nt = Object.keys(tecs).length;
-    d.compl = d.sem.some(function(x){ return x.desp; });
+    const ultIso = d.sem.reduce(function(m, x){ return x.iso > m ? x.iso : m; }, '');
+    d.cd = (d.v || []).filter(function(v){ return v.ok && v.iso > ultIso; })[0] || null;
+    d.compl = d.cd || d.sem.some(function(x){ return x.desp; });
     return d;
   });
   const rep = lista.filter(function(d){ return d.nv >= 2; });
   const varios = lista.filter(function(d){ return d.nt >= 2; });
   const derRep = rep.reduce(function(a, d){ return a + d.sem.length; }, 0);
   const derVar = varios.reduce(function(a, d){ return a + d.sem.length; }, 0);
-  /* sin el bloque 'unicas' (historial_dir.py antiguo) las de una sola visita
-     no traen direccion: se cuentan igual, por descarte */
   const unicas = tot.d - derRep - sinDir;
   rep.sort(function(a, b){ return b.nv - a.nv || b.nt - a.nt || a.d.localeCompare(b.d); });
   let h = '<div class="dv-rt"><div class="l1">De las <b>' + tot.d + '</b> derivadas de la semana:</div><div class="kp">'
-    + '<span' + (derRep ? ' class="si"' : '') + '><b>' + derRep + '</b> (' + derPct(derRep, tot.d) + '%) en direcciones con 2 o más visitas fallidas desde el 01-08</span>'
+    + '<span' + (derRep ? ' class="si"' : '') + '><b>' + derRep + '</b> (' + derPct(derRep, tot.d) + '%) en direcciones con 2 o más visitas fallidas desde el ' + derDesde + '</span>'
     + '<span' + (derVar ? ' class="si"' : '') + '><b>' + derVar + '</b> (' + derPct(derVar, tot.d) + '%) en direcciones donde falló más de un técnico</span>'
     + '<span><b>' + unicas + '</b> en direcciones con esta sola visita fallida</span></div></div>';
-  if(!rep.length) return h + '<div class="dv-vacio">Ninguna dirección de esta semana tiene otra visita fallida desde el 01-08.</div>';
+  if(!rep.length) return h + '<div class="dv-vacio">Ninguna dirección de esta semana tiene otra visita fallida desde el ' + derDesde + '.</div>';
   h += '<table class="dv-dir"><thead><tr><th>Dirección</th><th title="Derivadas en esta dirección durante la semana elegida">Derivadas en la semana</th>'
-    + '<th title="Visitas no realizadas a esta dirección desde el 01-08, de cualquier tipo">Visitas fallidas</th><th title="Técnicos distintos con visitas fallidas en esta dirección">Técnicos</th>'
-    + '<th>Causal más repetida</th><th title="Alguna de las derivadas de la semana se completó en una fecha posterior">¿Completada después?</th></tr></thead><tbody>';
+    + '<th title="Visitas no realizadas a esta dirección, de cualquier tipo">Visitas fallidas</th><th title="Técnicos distintos con visitas fallidas en esta dirección">Técnicos</th>'
+    + (derVisOk ? '<th title="Visitas completadas en esta dirección, de cualquier tipo">Visitas completadas</th>' : '')
+    + '<th>Causal más repetida</th><th title="Después de la última derivada de la semana, alguien completó un trabajo en esta dirección">¿Completada después?</th></tr></thead><tbody>';
   rep.forEach(function(d, i){
-    const cau = {}; d.v.forEach(function(v){ cau[v.cie] = (cau[v.cie] || 0) + 1; });
+    const cau = {}; d.fall.forEach(function(v){ cau[v.cie] = (cau[v.cie] || 0) + 1; });
     const top = Object.keys(cau).sort(function(a, b){ return cau[b] - cau[a] || a.localeCompare(b); })[0];
-    const otsSem = {}; d.sem.forEach(function(x){ otsSem[x.ot] = x; });
+    const otsSem = {}; d.sem.forEach(function(x){ otsSem[x.ot + '|' + x.iso] = x; });
     h += '<tr class="t' + (d.nt >= 3 ? ' sobre' : '') + '" onclick="verTecDeriv(' + i + ')" title="Toca para ver cada visita">'
       + '<td>' + (derAbierto === i ? '▾ ' : '▸ ') + escR(derTitulo(d.d)) + '</td><td>' + d.sem.length + '</td><td class="p">' + d.nv + '</td><td' + (d.nt >= 2 ? ' class="p"' : '') + '>' + d.nt + '</td>'
-      + '<td>' + escR(top) + (cau[top] > 1 ? ' ×' + cau[top] : '') + '</td><td>' + (d.compl ? '<span class="tg ok">Sí</span>' : 'No') + '</td></tr>';
+      + (derVisOk ? '<td' + (d.nc ? '' : ' class="cero"') + '>' + d.nc + '</td>' : '')
+      + '<td>' + escR(top) + (cau[top] > 1 ? ' ×' + cau[top] : '') + '</td><td>'
+      + (d.cd ? '<span class="tg ok">Sí, ' + escR(derTitulo(d.cd.tec)) + ' el ' + d.cd.f + '</span>' : d.compl ? '<span class="tg ok">Sí</span>' : 'No') + '</td></tr>';
     if(derAbierto === i){
-      h += '<tr class="det"><td colspan="6"><table class="dv-vis"><tbody>' + d.v.map(function(v){
-          const x = otsSem[v.o];
-          return '<tr' + (x ? ' class="esta"' : '') + '><td>' + v.f + '</td><td>' + escR(derTitulo(v.tec)) + '</td><td>' + escR(v.cat) + '</td><td>' + escR(v.cie)
-            + (v.gsa ? ' <span class="tg ok">GSA: cuenta como completada</span>' : '') + '</td><td>' + escR(v.o)
-            + (x ? ' <span class="tg at">esta semana</span>' + (x.desp ? ' <span class="tg ok">se completó el ' + x.desp + '</span>' : '') : '') + '</td></tr>';
+      h += '<tr class="det"><td colspan="' + (derVisOk ? 7 : 6) + '"><table class="dv-vis"><tbody>' + d.v.map(function(v){
+          const x = otsSem[v.o + '|' + v.iso];
+          return derFilaVis(v, x ? ' <span class="tg at">esta semana</span>' : '', x ? 'esta' : '');
         }).join('') + '</tbody></table></td></tr>';
     }
   });
   return h + '</tbody></table>'
-    + '<p class="dv-nota">Direcciones donde hubo ' + derNomTipo() + ' derivadas en la semana ' + derNumSemana(derSem) + ' y que acumulan 2 o más visitas fallidas desde el 01-08, '
-    + 'de cualquier tipo de actividad. En rojo, las que le fallaron a 3 o más técnicos distintos. Cuentan solo visitas no realizadas; las completadas no están en este historial.'
+    + '<p class="dv-nota">Direcciones donde hubo ' + derNomTipo() + ' derivadas en la semana ' + derNumSemana(derSem) + ' y que acumulan 2 o más visitas fallidas desde el ' + derDesde + ', '
+    + 'de cualquier tipo de actividad. En rojo, las que le fallaron a 3 o más técnicos distintos.'
+    + (derVisOk ? ' Al abrir una dirección se ven todas sus visitas, también las completadas.' : ' Cuentan solo visitas no realizadas; las completadas no están en este historial.')
     + (sinDir ? ' ' + sinDir + ' derivada' + (sinDir === 1 ? '' : 's') + ' de la semana no tiene' + (sinDir === 1 ? '' : 'n') + ' dirección en el historial (otras comunas).' : '') + '</p>';
 }
 
@@ -6397,14 +6494,20 @@ function derVistaDirHtml(tb, tot){
        NAP, contingencia...).
      - DIRECCION COMPARTIDA: la causal es sin moradores / reagenda / desiste,
        pero en esa misma direccion tambien le fallo una visita a OTRO tecnico
-       (antes o despues, desde el 01-08). No es de este tecnico.
+       (antes o despues). No es de este tecnico.
      - PROPIA: sin moradores / reagenda / desiste en una direccion donde no ha
        fallado ningun otro tecnico. Son las unicas que vale la pena auditar.
    Derivacion propia = propias / visitadas. Se marca "Auditar" al tecnico cuya
    derivacion propia es DER_AUD_FACTOR veces la del equipo o mas, con al menos
    DER_AUD_MIN_SEM visitadas (una semana) o DER_AUD_MIN_4 (cuatro semanas).
    OJO: "propia" NO prueba mala gestion. Una direccion visitada una sola vez
-   no puede tener otro tecnico. Solo dice donde mirar primero. */
+   no puede tener otro tecnico. Solo dice donde mirar primero.
+
+   (18:00) Con visitas_dir.json cada propia trae ademas sus SENALES (ver
+   derSenales): despues la completo otro tecnico, estuvo 10 minutos o menos,
+   o la visita quedo fuera de la franja. Las propias con senal van primero y
+   son las que conviene auditar antes. La marca "auditar" NO cambio de regla;
+   las senales ordenan el trabajo, no condenan a nadie. */
 const DER_AUD_FACTOR = 1.5;    // veces la derivacion propia del equipo
 const DER_AUD_MIN_SEM = 5;     // visitadas minimas, periodo de una semana
 const DER_AUD_MIN_4 = 12;      // visitadas minimas, periodo de cuatro semanas
@@ -6413,18 +6516,18 @@ function setAudPerDeriv(n){ derAudPer = n; derAbierto = null; pintarDeriv(); }
 function derClase(x){
   if(x.g === 'ot') return 'na';
   const h = DER_DIR[x.ot];
-  return (h && h.v.some(function(v){ return v.tec && v.tec !== x.tec; })) ? 'comp' : 'prop';
+  return (h && h.v.some(function(v){ return !v.ok && v.tec && v.tec !== x.tec; })) ? 'comp' : 'prop';
 }
 function derAudTabla(sems, sup){
   const t = {};
   (DER || []).forEach(function(x){
     if(sems.indexOf(x.sem) < 0 || !derEntra(x)) return;
     if(sup !== 'Todos' && x.sup !== sup) return;
-    const o = t[x.tec] || (t[x.tec] = {tec:x.tec, sup:x.sup, n:0, d:0, na:0, comp:0, prop:0, l:[]});
+    const o = t[x.tec] || (t[x.tec] = {tec:x.tec, sup:x.sup, n:0, d:0, na:0, comp:0, prop:0, sen:0, l:[]});
     o.n++;
     if(!x.der) return;
     o.d++; const c = derClase(x); o[c]++;
-    if(c === 'prop') o.l.push(x);
+    if(c === 'prop'){ const hi = derHist(x), sn = derSenales(x, hi); if(sn.n) o.sen++; o.l.push({x:x, hi:hi, sn:sn}); }
   });
   return Object.keys(t).map(function(k){ return t[k]; });
 }
@@ -6433,7 +6536,7 @@ function derVistaAudHtml(todasSem){
   const iSem = todasSem.indexOf(derSem);
   const sems = todasSem.slice(Math.max(0, iSem - derAudPer + 1), iSem + 1);
   const minimo = derAudPer === 1 ? DER_AUD_MIN_SEM : DER_AUD_MIN_4;
-  const suma = function(l){ return l.reduce(function(a, o){ a.n += o.n; a.d += o.d; a.na += o.na; a.comp += o.comp; a.prop += o.prop; return a; }, {n:0,d:0,na:0,comp:0,prop:0}); };
+  const suma = function(l){ return l.reduce(function(a, o){ a.n += o.n; a.d += o.d; a.na += o.na; a.comp += o.comp; a.prop += o.prop; a.sen += o.sen; return a; }, {n:0,d:0,na:0,comp:0,prop:0,sen:0}); };
   const eq = suma(derAudTabla(sems, 'Todos'));           // la referencia es SIEMPRE todo el equipo
   const pEq = eq.n ? 100 * eq.prop / eq.n : 0, corte = pEq * DER_AUD_FACTOR;
   const tb = derAudTabla(sems, derSup);
@@ -6443,7 +6546,7 @@ function derVistaAudHtml(todasSem){
   tb.sort(function(a, b){ return (audita(b) ? 1 : 0) - (audita(a) ? 1 : 0) || pp(b) - pp(a) || b.prop - a.prop || a.tec.localeCompare(b.tec); });
   const nAud = tb.filter(audita).length;
   const f1 = function(v){ return v.toFixed(1).replace('.', ','); };
-  const cel = function(v){ return '<td' + (v ? '' : ' class="cero"') + '>' + v + '</td>'; };
+  const cel = function(v, cls){ return '<td class="' + (v ? (cls || '') : 'cero') + '">' + v + '</td>'; };
   const per = sems.length > 1 ? 'semanas ' + derNumSemana(sems[0]) + ' a ' + derNumSemana(sems[sems.length - 1]) : 'semana ' + derNumSemana(sems[0]);
   let h = '<div class="dv-fil" style="padding:0 0 10px"><span class="rot">Período</span>'
     + '<button class="' + (derAudPer === 4 ? 'on' : '') + '" onclick="setAudPerDeriv(4)">Últimas 4 semanas</button>'
@@ -6452,39 +6555,50 @@ function derVistaAudHtml(todasSem){
     + '<span><b>' + tot.na + '</b> (' + derPct(tot.na, tot.d) + '%) por causales que no dependen del técnico</span>'
     + '<span><b>' + tot.comp + '</b> (' + derPct(tot.comp, tot.d) + '%) en direcciones donde también falló otro técnico</span>'
     + '<span class="si"><b>' + tot.prop + '</b> (' + derPct(tot.prop, tot.d) + '%) propias: solo falló este técnico</span>'
+    + (derVisOk ? '<span' + (tot.sen ? ' class="sn"' : '') + '><b>' + tot.sen + '</b> de las propias, con alguna señal</span>' : '')
     + '<span' + (nAud ? ' class="si"' : '') + '><b>' + nAud + '</b> técnico' + (nAud === 1 ? '' : 's') + ' para auditar</span></div>'
     + '<div class="ot">Derivación propia del equipo: <b>' + f1(pEq) + '%</b> de las visitadas. Se marca para auditar a quien llega a <b>' + f1(corte)
     + '%</b> o más (' + String(DER_AUD_FACTOR).replace('.', ',') + ' veces el equipo), con ' + minimo + ' o más visitadas y al menos 2 propias.</div></div>';
   if(!tb.length) return h + '<div class="dv-vacio">Sin ' + derNomTipo() + ' en ese período para ese supervisor.</div>';
   h += '<table><thead><tr><th>Técnico</th><th>Visitadas</th><th>Derivadas</th><th>% derivación</th>'
     + '<th title="Causales que no dependen del técnico">No atribuibles</th><th title="Sin moradores, reagenda o desiste en una dirección donde también falló otro técnico">Dirección compartida</th>'
-    + '<th title="Sin moradores, reagenda o desiste en una dirección donde no ha fallado ningún otro técnico">Propias</th><th title="Propias / visitadas">% derivación propia</th></tr></thead><tbody>';
+    + '<th title="Sin moradores, reagenda o desiste en una dirección donde no ha fallado ningún otro técnico">Propias</th>'
+    + (derVisOk ? '<th title="Propias con alguna señal: después la completó otro técnico, 10 minutos o menos en terreno, o visita fuera de la franja">Propias con señal</th>' : '')
+    + '<th title="Propias / visitadas">% derivación propia</th></tr></thead><tbody>';
   tb.forEach(function(o, i){
     const a = audita(o), pocas = o.n < minimo;
     h += '<tr class="t' + (a ? ' sobre' : '') + '" onclick="verTecDeriv(' + i + ')" title="Toca para ver las órdenes propias, que son las que hay que auditar">'
       + '<td>' + (derAbierto === i ? '▾ ' : '▸ ') + escR(derTitulo(o.tec)) + '<small>' + escR(derTitulo(o.sup)) + '</small>'
       +   (a ? '<span class="marca">auditar</span>' : (pocas && pp(o) >= corte ? '<span class="marca pocas">pocas ' + derNomTipo() + '</span>' : '')) + '</td>'
       + '<td>' + o.n + '</td>' + cel(o.d) + '<td>' + derPct(o.d, o.n) + '%</td>' + cel(o.na) + cel(o.comp) + cel(o.prop)
-      + '<td class="p">' + Math.round(pp(o)) + '%</td></tr>';
+      + (derVisOk ? cel(o.sen, 'sn') : '') + '<td class="p">' + Math.round(pp(o)) + '%</td></tr>';
     if(derAbierto === i){
-      h += '<tr class="det"><td colspan="8">' + (o.l.length
-        ? '<div class="dv-rt"><div class="l1"><b>' + o.l.length + '</b> ' + (o.l.length === 1 ? 'orden propia' : 'órdenes propias') + ' de ' + escR(derTitulo(o.tec)) + ', para auditar</div></div>'
-          + '<table class="dv-vis"><tbody>' + o.l.slice().sort(function(x, y){ return x.iso.localeCompare(y.iso) || x.ot.localeCompare(y.ot); }).map(function(x){
-              const hd = DER_DIR[x.ot], nom = hd ? hd.d : DER_UNI[x.ot];
-              const suyas = hd ? hd.v.length : 1;
-              return '<tr><td>' + x.f + '</td><td><b>' + escR(x.ot) + '</b></td><td>' + escR(x.act) + '</td><td>' + escR(x.fr) + '</td><td><span class="tg at">' + escR(x.cod) + '</span></td><td>'
-                + (nom ? escR(derTitulo(nom)) : '<span class="sd">sin dirección en el historial</span>') + '</td><td>'
-                + (suyas > 1 ? '<span class="tg at">' + suyas + ' visitas fallidas, todas suyas</span>' : 'única visita fallida')
-                + (x.desp ? ' <span class="tg ok">se completó el ' + x.desp + '</span>' : '') + '</td></tr>';
-            }).join('') + '</tbody></table>'
-        : 'Ninguna de sus derivadas es propia: todas fueron por causales ajenas o en direcciones donde también falló otro técnico.') + '</td></tr>';
+      h += '<tr class="det"><td colspan="' + (derVisOk ? 9 : 8) + '">';
+      if(!o.l.length){ h += 'Ninguna de sus derivadas es propia: todas fueron por causales ajenas o en direcciones donde también falló otro técnico.</td></tr>'; return; }
+      h += '<div class="dv-rt"><div class="l1"><b>' + o.l.length + '</b> ' + (o.l.length === 1 ? 'orden propia' : 'órdenes propias') + ' de ' + escR(derTitulo(o.tec))
+        + ', para auditar' + (derVisOk ? ' · <b>' + o.sen + '</b> con alguna señal (van primero)' : '') + '</div></div>';
+      o.l.slice().sort(function(p, q){ return q.sn.n - p.sn.n || p.x.iso.localeCompare(q.x.iso) || p.x.ot.localeCompare(q.x.ot); }).forEach(function(e){
+        const x = e.x, hi = e.hi, yo = hi ? hi.yo : null, nom = hi ? hi.d : DER_UNI[x.ot];
+        const suyas = hi ? hi.fall.length : 1;
+        h += '<div class="dv-ord' + (e.sn.n ? ' sen' : '') + '"><div class="c1"><b>' + x.f + '</b> · <b>' + escR(x.ot) + '</b> · ' + escR(x.act) + ' · franja ' + escR(x.fr)
+          + (yo && yo.hi >= 0 ? ' · inició ' + derHM(yo.hi) + (yo.dur >= 0 ? ', ' + yo.dur + ' min en terreno' : '') : '')
+          + ' <span class="tg at">' + escR(x.cod) + '</span>' + derSenalesHtml(e.sn) + '</div>'
+          + '<div class="c2">' + (nom ? '<b>' + escR(derTitulo(nom)) + '</b> · ' : '')
+          + (suyas > 1 ? derPl(suyas, 'visita fallida', 'visitas fallidas') + ', todas suyas' : 'única visita fallida')
+          + (derVisOk && hi ? (hi.compDesp.length ? (e.sn.otro ? '' : ' · después la completó él mismo el ' + hi.compDesp[0].f) : ' · después nadie ha vuelto') : '')
+          + (hi && hi.cond ? ' · <span class="gr">en el mismo condominio falló otro técnico en ' + derPl(hi.cond, 'otra unidad', 'otras unidades') + '</span>' : '')
+          + '</div></div>';
+      });
+      h += '</td></tr>';
     }
   });
   return h + '</tbody></table>'
     + '<p class="dv-nota"><b>Cómo se clasifica cada derivada.</b> <b>No atribuible</b>: la causal no depende del técnico (ductos, dirección, NAP, contingencia). '
-    + '<b>Dirección compartida</b>: sin moradores, cliente reagenda o cliente desiste en una dirección donde también le falló una visita a otro técnico desde el 01-08. '
+    + '<b>Dirección compartida</b>: sin moradores, cliente reagenda o cliente desiste en una dirección donde también le falló una visita a otro técnico desde el ' + derDesde + '. '
     + '<b>Propia</b>: esas mismas causales en una dirección donde no ha fallado ningún otro técnico.<br>'
-    + '<b>Ojo:</b> que una derivada sea "propia" no prueba mala gestión; solo indica dónde mirar primero. Una dirección visitada una sola vez no puede tener otro técnico. '
+    + (derVisOk ? '<b>Señales</b> de una propia: después otro técnico fue a esa misma dirección y completó el trabajo; el técnico estuvo ' + DER_MIN_CORTA
+        + ' minutos o menos en terreno; o toda la visita quedó fuera de la franja del cliente. Las propias con señal van primero: son las que conviene auditar antes.<br>' : '')
+    + '<b>Ojo:</b> que una derivada sea "propia", o que tenga una señal, no prueba mala gestión; solo indica dónde mirar primero. Una dirección visitada una sola vez no puede tener otro técnico. '
     + 'La marca "auditar" compara a cada técnico con el equipo completo, no con su supervisor.</p>';
 }
 
@@ -6583,8 +6697,10 @@ function pintarDeriv(){
   h += '</tbody></table>'
     + '<p class="dv-nota">Semana ' + derNumSemana(derSem) + ', ' + derRango(derSem) + (enCurso ? ' <b>(en curso: ' + nDias + ' día' + (nDias === 1 ? '' : 's') + ' con datos)</b>' : '')
     + '. Datos hasta el ' + ultIso.slice(6, 8) + '-' + ultIso.slice(4, 6) + '; el día de hoy entra mañana.<br>'
-    + '<b>Historia de la dirección</b> (al abrir un técnico): visitas no realizadas a esa misma dirección desde el 01-08, de cualquier tipo de actividad. '
-    + 'No incluye las visitas completadas. Si dice "es la única", no hay otra visita fallida a esa dirección en el período.<br>'
+    + '<b>Historia de la dirección</b> (al abrir un técnico): ' + (derVisOk
+        ? 'todas las visitas a esa misma dirección desde el ' + derDesde + ', completadas y no realizadas, de cualquier tipo de actividad, con la hora de inicio y los minutos en terreno. '
+          + 'Las etiquetas moradas son señales para auditar: después la completó otro técnico, ' + DER_MIN_CORTA + ' minutos o menos en terreno, o visita fuera de la franja.<br>'
+        : 'visitas no realizadas a esa misma dirección desde el ' + derDesde + ', de cualquier tipo de actividad. No incluye las visitas completadas.<br>')
     + '<b>Visitadas</b> = completadas más no realizadas (sin canceladas ni suspendidas). <b>Derivada</b> = no realizada. '
     + 'En rojo, los técnicos con más de ' + DER_UMBRAL + '% de derivación y ' + DER_MINIMO + ' o más en la semana; en ámbar, los que superan el ' + DER_UMBRAL + '% con menos de ' + DER_MINIMO + '.<br>'
     + 'Sin moradores, cliente reagenda y cliente desiste son las causales que se pidió auditar como posiblemente relacionadas con la gestión del técnico. '
