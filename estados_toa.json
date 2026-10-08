@@ -1,7 +1,7 @@
 {
-  "actualizado": "2026-10-08T12:44:11",
+  "actualizado": "2026-10-08T13:14:32",
   "resumen": {
-    "sin informacion": 1,
+    "sin informacion": 2,
     "reagendada": 1
   },
   "estados": {
@@ -22,6 +22,13 @@
             "ot": "1-3OASOAU3",
             "franja": "10-13",
             "texto": "1-3OASOAU3 - 10-13-Alta-2 Play-PASO HONDO 02030 EDIF. D DEPTO 504Vie, 9 Oct"
+          },
+          {
+            "estado": "reagendada",
+            "color": "rgb(255, 222, 0)",
+            "ot": "1-3OANXQRG",
+            "franja": "16-19",
+            "texto": "1-3OANXQRG - 16-19-Alta-1 Play-PASO HONDO 02030 EDIF. B DEPTO 501Vie, 9 Oct"
           },
           {
             "estado": "?",
@@ -50,13 +57,6 @@
             "ot": "1-3MYU0IQS",
             "franja": "10-13",
             "texto": "1-3MYU0IQS - 10-13-Reparación-2 Play Servicio Degradado-PASO HONDO 02030 EDIF. C DEPTO 103Mar, 4 Ago"
-          },
-          {
-            "estado": "no realizada",
-            "color": "rgb(96, 206, 206)",
-            "ot": "1-3MYEPG2Q",
-            "franja": "13-16",
-            "texto": "1-3MYEPG2Q - 13-16-Reparación-1 Play Servicio Degradado-PASO HONDO 02030 EDIF. C DEPTO 403Lun, 3 Ago"
           }
         ]
       }
@@ -70,6 +70,14 @@
       "color": "rgb(255, 222, 0)",
       "detalle": "1-3OAG6JNK - 16-19-Reparación-1 Play Servicio Degradado-GABRIEL DAZAROLA 843Vie, 9 Oct",
       "franja_nueva": "16-19"
+    },
+    "1-3OAGI7AZ": {
+      "tec": "YENDER BOSCAN CADENAS",
+      "cat": "Reparación",
+      "franja_original": "13-16",
+      "d": "GALLEGUILLOS 1279, QUILPUE",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA"
     }
   }
 }
