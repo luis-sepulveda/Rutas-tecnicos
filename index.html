@@ -1987,6 +1987,53 @@
     .pv-linea-sep { display:none; }
   }
   /* =================================================================== */
+  /* =================================================================== */
+  /* ==== PRUEBA 08-10-2026: cuatro ideas para la portada ====
+     1 efectividad de lo ya cerrado (.pv-pct2), 2 iniciadas / sin iniciar en
+     cada franja (.det), 3 pastilla Sin iniciar con su lista (.pv-sinini),
+     4 lo que sigue en el bucket por franja (.pv-bk). */
+  .pv-pct { display:flex; align-items:center; }
+  .pv-pct2 { display:inline-grid; grid-template-columns:auto auto; column-gap:7px; align-items:baseline;
+    margin-left:22px; padding:7px 13px; border-radius:11px; background:#eef6f3;
+    border:1px solid #cfe6de; letter-spacing:0; line-height:1.25; }
+  .pv-pct2 b { font-family:'Archivo',sans-serif; font-size:21px; font-weight:700; color:#0e7c6b; }
+  .pv-pct2 .a { font-size:13px; font-weight:500; color:#1f4d43; }
+  .pv-pct2 .d { grid-column:1 / -1; font-size:12px; font-weight:400; color:#5b7086; }
+  .pv-tlf .fr .q .det { float:right; display:inline-flex; gap:6px; font-size:12px; }
+  .pv-tlf .fr .q .det span { padding:1px 8px; border-radius:999px; background:#f1f5f9; color:#41586f; }
+  .pv-tlf .fr .q .det b { font-size:12.5px; }
+  .pv-tlf .fr .q .det .in { background:#e3f6ea; color:#17603a; }
+  .pv-tlf .fr .q .det .in b { color:#17603a; }
+  .pv-tlf .fr .q .det .no.ojo { background:#fdecea; color:#a3261d; }
+  .pv-tlf .fr .q .det .no.ojo b { color:#a3261d; }
+  .pv-bk-tot { font-family:'Archivo',sans-serif; background:#ea580c; color:#fff; border-radius:999px;
+    padding:1px 8px; font-size:12px; letter-spacing:0; margin-left:6px; }
+  .pv-bk { display:flex; gap:8px; }
+  .pv-bk .b { flex:1 1 0; background:#fff7ed; border:1px solid #fed7aa; border-radius:10px;
+    padding:8px 11px; display:flex; align-items:baseline; gap:7px; }
+  .pv-bk .b .f { font-size:12.5px; font-weight:600; color:#7c2d12; }
+  .pv-bk .b b { font-family:'Archivo',sans-serif; font-size:19px; font-weight:700; color:#c2410c; margin-left:auto; }
+  .pv-bk .b small { font-size:11.5px; color:#9a6a4f; }
+  .pv-bk .b.mal { background:#fdecea; border-color:#f5b5ae; }
+  .pv-bk .b.mal b { color:#b42318; }
+  .pv-bk .b.cero { background:#f5f8fb; border-color:#dbe4ed; }
+  .pv-bk .b.cero b, .pv-bk .b.cero .f { color:#9fb0c0; }
+  .pv-bk .b.nue { background:#eff6ff; border-color:#bfdbfe; }
+  .pv-bk .b.nue b, .pv-bk .b.nue .f { color:#1d4ed8; }
+  .pv-sinini { margin-top:9px; background:#fff; border:1px solid #dbe4ed; border-left:4px solid #0f766e;
+    border-radius:12px; padding:12px 15px; }
+  .pv-sinini .h { font-size:13.5px; color:#15293e; margin-bottom:9px; }
+  .pv-sinini .h span { color:#8fa1b3; font-size:12px; margin-left:6px; }
+  .pv-sinini .l { display:flex; flex-wrap:wrap; gap:6px; }
+  .pv-sinini .l span { font-size:12.5px; background:#f1f5f9; border-radius:8px; padding:5px 10px; color:#15293e; }
+  .pv-sinini .l span.tmp { background:#fdecea; }
+  .pv-sinini .l small { color:#5b7086; font-size:11.5px; margin-left:4px; }
+  /* con once pastillas, un poco mas apretadas para que quepan */
+  .pv-linea { gap:4px; }
+  .pv-linea .pv-al, .pv-linea .pv-ch, .pv-linea .pv-lk { padding:8px 6px; gap:5px; font-size:11.5px; }
+  .pv-linea .pv-al .tx .t { font-size:11.5px; }
+  .pv-linea .pv-lk { gap:3px; }
+  /* =================================================================== */
 </style>
 </head>
 <body>
@@ -6593,9 +6640,12 @@ function pintarPortada(){
   const porFranja = {};
   filas.forEach(o => {
     const f = String(o.f || 's/franja');
-    porFranja[f] = porFranja[f] || {t:0, ab:0};
+    porFranja[f] = porFranja[f] || {t:0, ab:0, ini:0};
     porFranja[f].t++;
     if(abierta(o)) porFranja[f].ab++;
+    /* PRUEBA 08-10-2026 (idea 2): de las sin cerrar, cuantas ya estan
+       iniciadas o en ruta; el resto nadie las ha tocado. */
+    if(String(o.e) === 'Iniciado' || String(o.e) === 'en ruta') porFranja[f].ini++;
   });
 
   /* Como va cada comuna por separado: el promedio de las dos puede esconder
@@ -6620,6 +6670,56 @@ function pintarPortada(){
   const hoy = (typeof FECHA_DATOS !== 'undefined' && FECHA_DATOS)
     && FECHA_DATOS.toDateString() === new Date().toDateString();
   const pct = filas.length ? Math.round(1000*comp/filas.length)/10 : 0;
+
+  const ahoraH = new Date().getHours() + new Date().getMinutes()/60;
+  /* ==== PRUEBA 08-10-2026 (cuatro ideas para la portada) ====
+     1. Efectividad de lo YA CERRADO: completadas / (completadas + no
+        realizadas). El % grande cuenta contra todo el dia, incluidas las
+        franjas que no empiezan; este dice como va lo que ya se trabajo. */
+  const cerr = comp + nore;
+  const pctCerr = cerr ? Math.round(1000*comp/cerr)/10 : null;
+
+  /* 3. Tecnicos SIN INICIAR: tienen ordenes hoy (no canceladas) y todas
+        siguen Pendiente: ni iniciadas, ni en ruta, ni cerradas. */
+  const sinIniLista = (typeof tecs !== 'undefined' ? tecs : []).map(function(t){
+    const act = (DB[t] || []).filter(p => p.e !== 'Cancelado' && okCiudad(p));
+    if(!act.length || act.some(p => String(p.e || 'Pendiente') !== 'Pendiente')) return null;
+    const fr = act.map(p => String(p.f || '')).sort()[0] || '';
+    return {t: t, n: act.length, f: fr};
+  }).filter(Boolean).sort((a, b) => a.f.localeCompare(b.f) || a.t.localeCompare(b.t));
+  const sinIni = sinIniLista.length;
+
+  /* 4. Lo que sigue EN EL BUCKET, por franja. La franja sale del Excel de
+        inicio de jornada (el bucket se publica sin franja), asi que las que
+        entraron despues del inicio van aparte, sin franja. */
+  const enB = (typeof EN_BUCKET !== 'undefined' && EN_BUCKET) ? EN_BUCKET : new Set();
+  const ini = inicioHoy();
+  let bucketHtml = '';
+  if(hoy && ini && ini.ots){
+    const bF = {}; let bTot = 0; const vistos = new Set();
+    ini.ots.forEach(function(o){
+      vistos.add(o.o);
+      if(!enB.has(o.o)) return;
+      const f = String(o.f || 's/franja'); bF[f] = (bF[f] || 0) + 1; bTot++;
+    });
+    const resto = new Set(ini.resto || []);
+    let despues = 0;
+    enB.forEach(function(o){ if(!vistos.has(o) && !resto.has(o)) despues++; });
+    const iniF = {}; ini.ots.forEach(o => { const f = String(o.f || 's/franja'); iniF[f] = (iniF[f] || 0) + 1; });
+    bucketHtml = '<div class="pv-rot" style="margin:24px 0 11px">De hoy, todav\u00eda en el bucket'
+      + ' <span class="pv-bk-tot">' + (bTot + despues) + '</span></div>'
+      + '<div class="pv-bk">'
+      + Object.keys(iniF).sort().map(function(f){
+          const v = bF[f] || 0, m = /^(\d{1,2})\s*-\s*(\d{1,2})$/.exec(f);
+          const yaEmpezo = m && ahoraH >= +m[1];
+          return '<div class="b' + (v ? (yaEmpezo ? ' mal' : '') : ' cero') + '" title="' + v + ' de las ' + iniF[f]
+            + ' que ten\u00eda esta franja al inicio de jornada siguen sin t\u00e9cnico">'
+            + '<span class="f">' + f + '</span><b>' + v + '</b><small>de ' + iniF[f] + '</small></div>';
+        }).join('')
+      + (despues ? '<div class="b nue" title="Entraron al bucket despu\u00e9s del inicio de jornada; el bucket se publica sin franja">'
+          + '<span class="f">nuevas</span><b>' + despues + '</b><small>sin franja</small></div>' : '')
+      + '</div>';
+  }
   /* 01-10-2026: solo cuentan los tecnicos con alguna orden NO cancelada
      (igual que dotacion.py). Caso Elias Armijo: una sola repa cancelada. */
   const nTec = Object.keys(DB || {}).filter(function(t){
@@ -6698,7 +6798,10 @@ function pintarPortada(){
       +   '<span class="ah' + (enCurso ? '' : !pasada ? ' prox' : pAb > FR_ROJO ? ' roj' : pAb > FR_AMBAR ? ' amb' : ' gri')
       +   '">' + Math.round(pAb) + ' % por cerrar</span></div>'
       + '<div class="pista"><span style="width:' + p + '%"></span></div>'
-      + '<div class="q"><b>' + d.ab + '</b> sin cerrar de ' + d.t + '</div>'
+      + '<div class="q"><b>' + d.ab + '</b> sin cerrar de ' + d.t
+      +   (d.ab ? '<span class="det"><span class="in"><b>' + d.ini + '</b> iniciadas</span>'
+                + '<span class="no' + (enCurso && d.ab - d.ini > 0 ? ' ojo' : '') + '"><b>' + (d.ab - d.ini) + '</b> sin iniciar</span></span>' : '')
+      + '</div>'
       + '</div>';
   }).join('');
 
@@ -6807,7 +6910,12 @@ function pintarPortada(){
        abierto pasa a decir "del dia". */
     +       '<div class="pv-pct-tit">' + (pend > 0 ? 'Efectividad hasta ahora' : 'Efectividad del d\u00eda') + '</div>'
     +       '<div class="pv-pct"><span class="v">' + pct.toFixed(1).replace('.', ',')
-    +         '</span><span class="u">%</span></div>'
+    +         '</span><span class="u">%</span>'
+    +         (pctCerr === null ? '' :
+                '<span class="pv-pct2" title="Completadas / (completadas + no realizadas). No cuenta lo que sigue abierto ni lo cancelado.">'
+              +   '<b>' + pctCerr.toFixed(1).replace('.', ',') + '%</b><span class="a">de lo ya cerrado</span>'
+              +   '<span class="d">' + comp + ' completadas de ' + cerr + ' cerradas</span></span>')
+    +       '</div>'
     +       '<div class="pv-pctl">' + filas.length + ' actividades \u00b7 '
     /* 26-09-2026 (Luis): el que esta en OTRA COMUNA tambien esta operativo,
        solo que trabajando fuera de la zona, asi que se suma aca. No hay doble
@@ -6836,6 +6944,7 @@ function pintarPortada(){
     +       barra
     +       '<div class="pv-rot" style="margin:24px 0 11px">Por comuna</div>'
     +       '<div class="pv-com">' + comunas + '</div>'
+    +       bucketHtml
     +     '</div>'
     +   '</section>'
 
@@ -6861,6 +6970,10 @@ function pintarPortada(){
     +   '<section class="pv-alertas">'
     +     alerta('toggleCaidas', caidas, 'Ca\u00eddas', 'Ca\u00eddas: se las sacaron al t\u00e9cnico sin que las tocara', '#c0392f')
     +     alerta('toggleSinCompletar', sinComp, 'Sin completar', 'T\u00e9cnicos sin completar: no han cerrado ninguna todav\u00eda hoy', '#b45309')
+    +     '<button class="pv-al ' + (sinIni > 0 ? 'viva' : 'cero') + (window.PV_SININI ? ' sel' : '')
+    +       '" style="--tono:#0f766e" title="T\u00e9cnicos sin iniciar: tienen \u00f3rdenes hoy y ninguna iniciada ni en ruta"'
+    +       ' onclick="window.PV_SININI = !window.PV_SININI; pintarPortada()">'
+    +       '<span class="n">' + sinIni + '</span><span class="tx"><span class="t">Sin iniciar</span></span></button>'
     +     alerta('toggleAtrasados', atras, 'M\u00e1s de 3 h', 'M\u00e1s de 3 horas: iniciadas hace rato y sin cerrar', '#be123c')
     +   '</section>'
     +   '<div class="pv-chips">'
@@ -6881,6 +6994,12 @@ function pintarPortada(){
     +     enlace(URL_EQUIPO, 'Por supervisor', 'Detalle por supervisor')
     +   '</nav>'
     +   '</div>'
+    +   (window.PV_SININI ? '<div class="pv-sinini"><div class="h"><b>' + sinIni + '</b> t\u00e9cnico'
+          + (sinIni === 1 ? '' : 's') + ' sin iniciar <span>con \u00f3rdenes hoy y ninguna iniciada ni en ruta \u00b7 primero los de la franja m\u00e1s temprana</span></div>'
+          + '<div class="l">' + (sinIniLista.map(x => '<span class="' + (/^10/.test(x.f) ? 'tmp' : '') + '">'
+              + x.t.toLowerCase().replace(/(^|\s)\S/g, c => c.toUpperCase())
+              + ' <small>' + x.n + (x.n === 1 ? ' orden' : ' \u00f3rdenes') + ' \u00b7 parte ' + x.f + '</small></span>').join('')
+              || '<span>Todos ya partieron.</span>') + '</div></div>' : '')
 
 
     /* ---- 2b. los ultimos dias ---- */
