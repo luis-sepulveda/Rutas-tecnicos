@@ -19429,25 +19429,45 @@
    }
   },
   "08-10-2026": {
-   "hasta": "09:24",
-   "actividades": 111,
+   "hasta": "09:34",
+   "actividades": 115,
    "tecnicos": 30,
    "estados": {
-    "Pendiente": 97,
-    "en ruta": 13,
+    "en ruta": 17,
+    "Pendiente": 96,
+    "Iniciado": 1,
     "Cancelado": 1
    },
-   "rgu": 180.0,
-   "caidas_total": 0,
-   "caidas_activas": 0,
+   "rgu": 188.5,
+   "caidas_total": 1,
+   "caidas_activas": 1,
    "caidas_resueltas": 0,
-   "nuevas": 2,
+   "nuevas": 3,
    "al_bucket": 0,
    "repetidas": 29,
-   "reagendadas": 2,
+   "reagendadas": 3,
    "detalle": {
-    "caidas": [],
+    "caidas": [
+     {
+      "o": "1-3OAC6YLD",
+      "tec": "DANIEL NAVARRETE E",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "11:11",
+      "d": "PASO HONDO 02030 EDIF. B DEPTO 501, QUILPUE",
+      "e": "Pendiente"
+     }
+    ],
     "nuevas": [
+     {
+      "o": "1-3OANYWDQ",
+      "tec": "JOSE ROJO A",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "09:26",
+      "d": "CARLOS SAAVEDRA 80 CASA 118, VILLA ALEMANA",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3OACJTDV",
       "tec": "JUAN ARRIAGADA C",
@@ -19472,7 +19492,7 @@
       "o": "1-3OA4LWO7",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "12:29",
+      "hi": "12:07",
       "d": "PJE 2 260, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -19484,7 +19504,7 @@
       "o": "1-3OAD5NF2",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "16:03",
+      "hi": "16:00",
       "d": "BILBAO 1544 DEPTO 21, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -19520,7 +19540,7 @@
       "o": "1-3O6LKK2N",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "11:25",
+      "hi": "11:00",
       "d": "LOS CHAGUALES 488, QUILPUE",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
@@ -19532,7 +19552,7 @@
       "o": "1-3OAAL6E3",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "15:47",
+      "hi": "15:22",
       "d": "MARGARITAS 1884, QUILPUE",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
@@ -19568,7 +19588,7 @@
       "o": "1-3O9BZ1J4",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:36",
       "d": "LISBOA 475, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -19652,7 +19672,7 @@
       "o": "1-3OAFT8KZ",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:08",
+      "hi": "14:00",
       "d": "SANTA ELENA 098 EDIF. 1 DEPTO 301, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JUAN ARRIAGADA C",
@@ -19748,7 +19768,7 @@
       "o": "1-3O9OEJUO",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "15:59",
       "d": "PJE CRISANTEMOS 1977, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -19829,6 +19849,16 @@
       "desde": "07-10-2026"
      },
      {
+      "o": "1-3O8BMLA5",
+      "cat": "Migración 2 Play",
+      "f": "10-13",
+      "hi": "11:24",
+      "d": "GABRIEL GONZALEZ VIDELA 1890 CASA 06, QUILPUE",
+      "e": "Pendiente",
+      "tec": "DANIEL NAVARRETE E",
+      "desde": "05-10-2026"
+     },
+     {
       "o": "1-3O9Z3I5L",
       "cat": "Alta 1 Play",
       "f": "16-19",
@@ -19842,5 +19872,5 @@
    }
   }
  },
- "generado": "08-10-2026 09:24"
+ "generado": "08-10-2026 09:34"
 }
