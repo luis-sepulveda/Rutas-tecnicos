@@ -2173,11 +2173,23 @@
   #modalDer .dv-fic-bus input { flex:1 1 260px; max-width:420px; border:1px solid #c3d2e0; border-radius:9px; padding:8px 12px;
     font:inherit; font-size:14px; color:#16232f; background:#fff; }
   #modalDer .dv-fic-bus input:focus { outline:2px solid #0f1d2e; outline-offset:-1px; }
-  #modalDer .dv-fic-lista { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 12px; }
-  #modalDer .dv-fic-lista button { border:1px solid #d3dde6; background:#fff; color:#16232f; border-radius:999px; padding:4px 11px;
-    font:inherit; font-size:12.5px; cursor:pointer; }
+  #modalDer .dv-fic-lista { display:grid; grid-template-columns:repeat(auto-fit,minmax(330px,1fr)); gap:10px 22px; margin:4px 0 6px; align-items:start; }
+  #modalDer .dv-fic-lista .col { border:1px solid #dbe4ed; border-radius:10px; overflow:hidden; background:#fff; }
+  #modalDer .dv-fic-lista .tit { display:flex; justify-content:space-between; align-items:baseline; padding:8px 12px; background:#f1f5f9;
+    font-family:'Archivo',sans-serif; font-size:13.5px; font-weight:700; color:#0f1d2e; }
+  #modalDer .dv-fic-lista .tit span { font-family:inherit; font-weight:400; font-size:12px; color:#5f7386; }
+  #modalDer .dv-fic-lista .enc, #modalDer .dv-fic-lista button { display:grid; grid-template-columns:1fr 74px 48px; gap:8px; align-items:center;
+    width:100%; padding:6px 12px; text-align:left; }
+  #modalDer .dv-fic-lista .enc { font-size:10.5px; font-weight:600; color:#8fa1b3; letter-spacing:.06em; text-transform:uppercase; border-bottom:1px solid #dbe4ed; }
+  #modalDer .dv-fic-lista .enc span:not(:first-child), #modalDer .dv-fic-lista .dd, #modalDer .dv-fic-lista .pc { text-align:right; }
+  #modalDer .dv-fic-lista button { border:0; border-bottom:1px solid #eef2f6; background:#fff; font:inherit; font-size:13px; color:#16232f;
+    cursor:pointer; font-variant-numeric:tabular-nums; }
+  #modalDer .dv-fic-lista button:last-child { border-bottom:0; }
   #modalDer .dv-fic-lista button:hover { background:#f1f5f9; }
-  #modalDer .dv-fic-lista button small { color:#8fa1b3; margin-left:5px; }
+  #modalDer .dv-fic-lista .dd { color:#5f7386; font-size:12.5px; }
+  #modalDer .dv-fic-lista .pc { font-weight:700; }
+  #modalDer .dv-fic-lista .pc.alto { color:#b91c1c; }
+  #modalDer .dv-fic-lista .nm i { font-style:normal; font-size:10.5px; font-weight:700; background:#b91c1c; color:#fff; border-radius:999px; padding:1px 7px; margin-left:7px; }
   #modalDer .dv-fic h3 { font-family:'Archivo',sans-serif; font-size:14px; margin:16px 0 6px; color:#0f1d2e; }
   #modalDer .dv-fic h3 small { font-family:inherit; font-weight:400; color:#5f7386; font-size:12.5px; margin-left:6px; }
   #modalDer .dv-fic .nom { font-family:'Archivo',sans-serif; font-size:19px; color:#0f1d2e; }
@@ -2200,6 +2212,56 @@
   #modalDer .dv-fic table.dv-vis tr.otro td:nth-child(2) { color:#1d4ed8; font-weight:600; }
   #modalDer .dv-ord.comp { border-left-color:#60a5fa; }
   #modalDer .dv-ord.prop { border-left-color:#fb923c; }
+
+  /* ---- FICHA DEL TECNICO, tarjetas por orden (08-10-2026, 19:30) ---- */
+  #modalDer .dv-sec { display:flex; align-items:center; gap:10px; margin:16px 0 8px; padding:8px 12px; border-radius:10px; background:#f1f5f9; }
+  #modalDer .dv-sec .n { font-family:'Archivo',sans-serif; font-size:20px; font-weight:700; min-width:26px; text-align:center; }
+  #modalDer .dv-sec b { display:block; font-size:14px; color:#0f1d2e; }
+  #modalDer .dv-sec span:not(.n) { font-size:12.5px; color:#41586f; }
+  #modalDer .dv-sec.sen { background:#ede9fe; } #modalDer .dv-sec.sen .n { color:#5b21b6; }
+  #modalDer .dv-sec.prop { background:#fff7ed; } #modalDer .dv-sec.prop .n { color:#c2410c; }
+  #modalDer .dv-sec.comp { background:#eff6ff; } #modalDer .dv-sec.comp .n { color:#1d4ed8; }
+  #modalDer .dv-card { background:#fff; border:1px solid #dbe4ed; border-left:4px solid #cbd5e1; border-radius:10px; padding:10px 14px 11px; margin:0 0 8px; }
+  #modalDer .dv-card.prop { border-left-color:#fb923c; }
+  #modalDer .dv-card.comp { border-left-color:#60a5fa; }
+  #modalDer .dv-card.sen { border-left-color:#8b5cf6; }
+  #modalDer .dv-card .cab { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  #modalDer .dv-card .dir { font-family:'Archivo',sans-serif; font-size:15px; font-weight:700; color:#0f1d2e; }
+  #modalDer .dv-card .meta { font-size:12px; color:#8fa1b3; margin-top:2px; }
+  #modalDer .dv-card .pas { font-size:13.5px; color:#16232f; margin-top:7px; line-height:1.5; }
+  #modalDer .dv-card .pq { font-size:13px; margin-top:7px; border-radius:8px; padding:7px 11px; line-height:1.5; }
+  #modalDer .dv-card .pq ul { margin:3px 0 0; padding-left:18px; }
+  #modalDer .dv-card .pq.sn { background:#f5f3ff; color:#3b1a8a; }
+  #modalDer .dv-card .pq.az { background:#eff6ff; color:#12357a; }
+  #modalDer .dv-card .his { font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:#8fa1b3; font-weight:600; margin-top:10px; }
+  #modalDer .dv-fic table.dv-vis th { position:static; background:transparent; text-align:left; font-size:10.5px; padding:4px 16px 3px 0; border-bottom:1px solid #dbe4ed; }
+
+  /* ---- CABECERA ORDENADA del boton Derivacion (08-10-2026, 19:45): pestanas + panel de filtros ---- */
+  #modalDer .dv-tabs { display:flex; gap:2px; flex-wrap:wrap; padding:8px 22px 0; border-bottom:1px solid #dbe4ed; }
+  #modalDer .dv-tabs button { border:0; background:none; font:inherit; font-size:14px; font-weight:600; color:#5f7386; padding:9px 16px 10px;
+    border-bottom:3px solid transparent; margin-bottom:-1px; cursor:pointer; border-radius:8px 8px 0 0; }
+  #modalDer .dv-tabs button:hover { background:#f1f5f9; color:#16232f; }
+  #modalDer .dv-tabs button.on { color:#0f1d2e; border-bottom-color:#0f1d2e; }
+  #modalDer .dv-filtros { background:#f8fafc; border-bottom:1px solid #e6edf3; padding:10px 22px; display:flex; flex-direction:column; gap:9px; }
+  #modalDer .dv-filtros .fila { display:flex; align-items:center; gap:8px 22px; flex-wrap:wrap; }
+  #modalDer .dv-filtros .grp { display:inline-flex; align-items:center; gap:8px; }
+  #modalDer .dv-filtros .rot { font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:#8fa1b3; font-weight:600; min-width:74px; }
+  #modalDer .dv-filtros .grp + .grp .rot { min-width:0; }
+  #modalDer .dv-filtros .sems { display:flex; gap:5px; flex-wrap:wrap; }
+  #modalDer .dv-filtros .sems button { border:1px solid #d3dde6; background:#fff; color:#5f7386; border-radius:8px; padding:4px 10px; font:inherit;
+    font-size:12.5px; cursor:pointer; font-variant-numeric:tabular-nums; min-width:68px; text-align:center; }
+  #modalDer .dv-filtros .sems button b { font-weight:700; color:#16232f; margin-left:5px; }
+  #modalDer .dv-filtros .sems button.alto b { color:#b91c1c; }
+  #modalDer .dv-filtros .sems button.rng { background:#e2e8f0; border-color:#94a3b8; color:#16232f; }
+  #modalDer .dv-filtros .sems button.on { background:#0f1d2e; border-color:#0f1d2e; color:#fff; }
+  #modalDer .dv-filtros .sems button.on b { color:#fff; }
+  #modalDer .dv-filtros .rango { font-size:12.5px; color:#41586f; }
+  #modalDer .dv-seg { display:inline-flex; border:1px solid #d3dde6; border-radius:8px; overflow:hidden; background:#fff; }
+  #modalDer .dv-seg button { border:0; border-left:1px solid #d3dde6; background:#fff; color:#5f7386; padding:5px 12px; font:inherit; font-size:12.5px; cursor:pointer; white-space:nowrap; }
+  #modalDer .dv-seg button:first-child { border-left:0; }
+  #modalDer .dv-seg button:hover { background:#f1f5f9; }
+  #modalDer .dv-seg button.on { background:#0f1d2e; color:#fff; }
+  #modalDer .dv-head { border-bottom:0 !important; padding-bottom:6px !important; }
 </style>
 </head>
 <body>
@@ -6581,10 +6643,7 @@ function derVistaAudHtml(todasSem){
   const f1 = function(v){ return v.toFixed(1).replace('.', ','); };
   const cel = function(v, cls){ return '<td class="' + (v ? (cls || '') : 'cero') + '">' + v + '</td>'; };
   const per = sems.length > 1 ? 'semanas ' + derNumSemana(sems[0]) + ' a ' + derNumSemana(sems[sems.length - 1]) : 'semana ' + derNumSemana(sems[0]);
-  let h = '<div class="dv-fil" style="padding:0 0 10px"><span class="rot">Período</span>'
-    + '<button class="' + (derAudPer === 4 ? 'on' : '') + '" onclick="setAudPerDeriv(4)">Últimas 4 semanas</button>'
-    + '<button class="' + (derAudPer === 1 ? 'on' : '') + '" onclick="setAudPerDeriv(1)">Solo esta semana</button></div>'
-    + '<div class="dv-rt"><div class="l1">De las <b>' + tot.d + '</b> derivadas (' + per + (derSup !== 'Todos' ? ', equipo de ' + escR(derTitulo(derSup)) : '') + '):</div><div class="kp">'
+  let h = '<div class="dv-rt" style="margin-top:0"><div class="l1">De las <b>' + tot.d + '</b> derivadas (' + per + (derSup !== 'Todos' ? ', equipo de ' + escR(derTitulo(derSup)) : '') + '):</div><div class="kp">'
     + '<span><b>' + tot.na + '</b> (' + derPct(tot.na, tot.d) + '%) por causales que no dependen del técnico</span>'
     + '<span><b>' + tot.comp + '</b> (' + derPct(tot.comp, tot.d) + '%) en direcciones donde también falló otro técnico</span>'
     + '<span class="si"><b>' + tot.prop + '</b> (' + derPct(tot.prop, tot.d) + '%) propias: solo falló este técnico</span>'
@@ -6673,13 +6732,29 @@ function derVistaFicHtml(todasSem){
   const visibles = DER_FIC_TECS.filter(function(t){ return derSup === 'Todos' || tt[t].sup === derSup; });
   let h = '<div class="dv-fic"><div class="dv-fic-bus">'
     + '<input type="text" id="dvFicBus" placeholder="Escribe el nombre del técnico…" autocomplete="off" oninput="derFicFiltra(this)" onkeyup="derFicFiltra(this, event)" onfocus="derFicFiltra(this)">'
-    + '<div class="dv-fil" style="padding:0"><span class="rot">Período</span>'
-    + '<button class="' + (derAudPer === 4 ? 'on' : '') + '" onclick="setAudPerDeriv(4)">Últimas 4 semanas</button>'
-    + '<button class="' + (derAudPer === 1 ? 'on' : '') + '" onclick="setAudPerDeriv(1)">Solo esta semana</button></div></div>'
-    + '<div class="dv-fic-lista" id="dvFicLista"' + (derFicTec ? ' style="display:none"' : '') + '>'
-    + visibles.map(function(t){ return '<button data-i="' + DER_FIC_TECS.indexOf(t) + '" data-n="' + escR(derLlano(t)) + '" onclick="setFicDeriv(' + DER_FIC_TECS.indexOf(t) + ')">'
-        + escR(derTitulo(t)) + '<small>' + tt[t].d + ' de ' + tt[t].n + '</small></button>'; }).join('') + '</div>';
-  if(!derFicTec) return h + '<div class="dv-vacio">Elige un técnico de la lista, o escribe su nombre y presiona Enter. Al lado de cada nombre: derivadas de visitadas (' + per + ').</div></div>';
+    + '</div>'
+    + '<div class="dv-fic-lista" id="dvFicLista"' + (derFicTec ? ' style="display:none"' : '') + '>';
+  /* Lista ordenada (08-10-2026, 19:30; Luis: "con los nombres se ve como
+     desordenado"): una columna por supervisor, un tecnico por renglon en
+     orden alfabetico, con sus derivadas, su % y la marca "auditar". */
+  const audT = {};
+  if(derDirOk){
+    const tA = derAudTabla(sems, 'Todos');
+    const eA = tA.reduce(function(a, o){ a.n += o.n; a.prop += o.prop; return a; }, {n:0, prop:0});
+    const cA = (eA.n ? 100 * eA.prop / eA.n : 0) * DER_AUD_FACTOR;
+    tA.forEach(function(o){ if(o.n >= minimo && o.prop >= 2 && 100 * o.prop / o.n >= cA) audT[o.tec] = 1; });
+  }
+  const supsL = Object.keys(visibles.reduce(function(a, t){ a[tt[t].sup || ''] = 1; return a; }, {})).sort();
+  supsL.forEach(function(sp){
+    const l = visibles.filter(function(t){ return (tt[t].sup || '') === sp; });
+    h += '<div class="col"><div class="tit">' + (sp ? 'Equipo de ' + escR(derTitulo(sp)) : 'Sin supervisor') + '<span>' + derPl(l.length, 'técnico', 'técnicos') + '</span></div>'
+      + '<div class="enc"><span>Técnico</span><span>Derivadas</span><span>%</span></div>'
+      + l.map(function(t){ const o = tt[t], pc = derPct(o.d, o.n), i = DER_FIC_TECS.indexOf(t);
+          return '<button data-i="' + i + '" data-n="' + escR(derLlano(t)) + '" onclick="setFicDeriv(' + i + ')"><span class="nm">' + escR(derTitulo(t))
+            + (audT[t] ? '<i>auditar</i>' : '') + '</span><span class="dd">' + o.d + ' de ' + o.n + '</span><span class="pc' + (pc > DER_UMBRAL ? ' alto' : '') + '">' + pc + '%</span></button>'; }).join('') + '</div>';
+  });
+  h += '</div>';
+  if(!derFicTec) return h + '<div class="dv-vacio">Toca un técnico, o escribe su nombre arriba y presiona Enter. Derivadas de visitadas en ' + per + '; en rojo, sobre ' + DER_UMBRAL + '%.</div></div>';
   const me = tt[derFicTec];
   if(!me) return h + '<div class="dv-vacio"><b>' + escR(derTitulo(derFicTec)) + '</b> no tiene ' + derNomTipo() + ' visitadas en ' + per + '. Prueba con otro período o con otro tipo.</div></div>';
 
@@ -6743,29 +6818,58 @@ function derVistaFicHtml(todasSem){
       : cz(k.comp) + '<td class="nm">' + (k.comp ? derPl(Object.keys(k.otros).length, 'técnico', 'técnicos') + ': ' + nomOtros(k.otros) : '') + '</td>' + cz(k.prop) + (derVisOk ? cz(k.sen, 'sn') : '')) + '</tr>'; });
   h += '<tr class="tot"><td>Total</td><td>' + me.d + '</td>' + cz(nComp) + '<td class="nm">' + (listaOtros.length ? derPl(listaOtros.length, 'técnico distinto', 'técnicos distintos') : '') + '</td>' + cz(nProp) + (derVisOk ? cz(nSen, 'sn') : '') + '</tr></tbody></table>';
 
-  /* las ordenes, en tres grupos */
+  /* las ordenes (08-10-2026, 19:30, pedido de Luis: "ordena la informacion
+     para que sea entendible"). Una tarjeta por orden, con la direccion como
+     titulo y lo que paso escrito en frases: que hizo el tecnico, por que
+     revisarla (senales) o quien mas fallo ahi, y la historia de la direccion
+     en una tabla con encabezados. Primero lo que hay que revisar (propias con
+     senal, propias sin senal), despues lo que no se le carga. */
+  const hora = function(v){ return v && v.hi >= 0 ? derHM(v.hi) : ''; };
   const orden = function(e, cls){
-    const x = e.x, hi = e.hi, yo = hi ? hi.yo : null;
-    let o = '<div class="dv-ord ' + cls + (e.sn.n ? ' sen' : '') + '"><div class="c1"><b>' + x.f + '</b> · <b>' + escR(x.ot) + '</b> · ' + escR(x.act) + ' · franja ' + escR(x.fr)
-      + (yo && yo.hi >= 0 ? ' · inició ' + derHM(yo.hi) + (yo.dur >= 0 ? ', ' + yo.dur + ' min en terreno' : '') : '') + ' · ' + escR(derTitulo(x.ciu))
-      + ' <span class="tg ' + (x.g === 'ot' ? 'na' : 'at') + '">' + escR(x.cod) + '</span>'
-      + (x.desp ? ' <span class="tg ok">la misma orden se completó el ' + x.desp + '</span>' : '') + derSenalesHtml(e.sn) + '</div>';
-    if(hi){
-      o += '<div class="c2">' + derCabDir(hi) + '</div>';
-      if(hi.v.length > 1) o += '<table class="dv-vis"><tbody>' + hi.v.map(function(v){
+    const x = e.x, hi = e.hi, yo = hi ? hi.yo : null, sn = e.sn, nom = hi ? hi.d : DER_UNI[x.ot];
+    const fr = /^(\d{1,2})\s*-\s*(\d{1,2})$/.exec(String(x.fr || ''));
+    let o = '<div class="dv-card ' + cls + (sn.n ? ' sen' : '') + '">'
+      + '<div class="cab"><span class="dir">' + (nom ? escR(derTitulo(nom)) : 'Dirección sin registro en el histórico') + '</span>'
+      + '<span class="tg ' + (x.g === 'ot' ? 'na' : 'at') + '">' + escR(x.cod) + '</span></div>'
+      + '<div class="meta">' + x.f + ' · ' + escR(x.act) + ' · orden ' + escR(x.ot) + (nom ? '' : ' · ' + escR(derTitulo(x.ciu))) + '</div>'
+      + '<div class="pas"><b>Qué pasó:</b> ' + (yo && yo.hi >= 0
+          ? 'llegó a las <b>' + hora(yo) + '</b> (franja ' + escR(x.fr) + ')' + (yo.dur >= 0 ? ', estuvo <b>' + yo.dur + ' min</b>' : '') + ' y cerró como <b>' + escR(x.cod) + '</b>.'
+          : 'franja ' + escR(x.fr) + ', cerró como <b>' + escR(x.cod) + '</b>.')
+      + (x.desp ? ' La misma orden se completó el ' + x.desp + '.' : '')
+      + (derVisOk && hi && x.g !== 'ot' && !sn.otro ? (hi.compDesp.length ? ' Después la completó él mismo el ' + hi.compDesp[0].f + '.' : ' Nadie ha vuelto a esta dirección.') : '') + '</div>';
+    const pq = [];
+    if(sn.otro) pq.push('Después <b>' + escR(derTitulo(sn.otro.tec)) + '</b> fue a la misma dirección el ' + sn.otro.f + ' y <b>la completó</b>' + (sn.otro.dur >= 0 ? ' (' + sn.otro.dur + ' min)' : '') + '.');
+    if(sn.corta) pq.push('Estuvo <b>' + yo.dur + ' minutos</b> en terreno (' + DER_MIN_CORTA + ' o menos).');
+    if(sn.fuera) pq.push(fr && yo.hi >= +fr[2] * 60 ? 'Llegó a las <b>' + hora(yo) + '</b>, con la franja ' + escR(x.fr) + ' ya terminada.' : 'Terminó la visita antes de que empezara la franja ' + escR(x.fr) + '.');
+    if(pq.length) o += '<div class="pq sn"><b>Por qué revisarla:</b><ul><li>' + pq.join('</li><li>') + '</li></ul></div>';
+    if(cls === 'comp' && hi){
+      const ot = hi.v.filter(function(v){ return !v.ok && v.tec && v.tec !== x.tec; });
+      o += '<div class="pq az"><b>También ' + (ot.length === 1 ? 'falló' : 'fallaron') + ' aquí:</b><ul><li>'
+        + ot.map(function(v){ return '<b>' + escR(derTitulo(v.tec)) + '</b> el ' + v.f + ', ' + escR(v.cie || 'no realizada') + (v.hi >= 0 && v.dur >= 0 ? ' (' + v.dur + ' min)' : '') + '.'; }).join('</li><li>') + '</li></ul></div>';
+    }
+    if(hi && hi.cond) o += '<div class="meta">En el mismo condominio fallaron otros técnicos en ' + derPl(hi.cond, 'otra unidad', 'otras unidades') + '.</div>';
+    if(hi && hi.v.length > 1) o += '<div class="his">Todas las visitas a esta dirección desde el ' + derDesde + '</div><table class="dv-vis"><thead><tr><th>Fecha</th><th>Técnico</th><th>Actividad</th><th>Resultado</th>'
+        + '<th>' + (derVisOk ? 'Inicio · duración' : '') + '</th><th>Orden</th></tr></thead><tbody>' + hi.v.map(function(v){
           const esta = v.o === x.ot && v.iso === x.iso;
           return derFilaVis(v, esta ? ' <span class="tg at">esta visita</span>' : '', esta ? 'esta' : (!v.ok && v.tec && v.tec !== x.tec ? 'otro' : ''));
         }).join('') + '</tbody></table>';
-    } else { const du = DER_UNI[x.ot];
-      o += '<div class="c2">' + (du ? '<b>' + escR(derTitulo(du)) + '</b> · ' : '') + '<span class="gr">' + (derVisOk ? 'sin dirección en el histórico (otra comuna o día sin registro)' : 'única visita fallida a esta dirección desde el ' + derDesde) + '</span></div>'; }
     return o + '</div>';
   };
   const porFecha = function(p, q){ return q.sn.n - p.sn.n || p.x.iso.localeCompare(q.x.iso) || p.x.ot.localeCompare(q.x.ot); };
-  if(nComp) h += '<h3>' + nComp + ' en direcciones donde también falló otro técnico<small>en azul, las visitas fallidas de los otros técnicos' + (listaOtros.length ? ': ' + listaOtros.map(function(t){ return escR(derTitulo(t)) + ' (' + otrosTot[t] + ')'; }).join(', ') : '') + '</small></h3>'
-    + grupos.comp.sort(porFecha).map(function(e){ return orden(e, 'comp'); }).join('');
-  if(nProp) h += '<h3>' + nProp + (nProp === 1 ? ' propia' : ' propias') + '<small>en esas direcciones no ha fallado ningún otro técnico desde el ' + derDesde + (derVisOk && nSen ? ' · las que tienen señal van primero' : '') + '</small></h3>'
-    + grupos.prop.sort(porFecha).map(function(e){ return orden(e, 'prop'); }).join('');
-  if(nNa) h += '<h3>' + nNa + ' por causales que no dependen del técnico</h3>' + grupos.na.sort(porFecha).map(function(e){ return orden(e, ''); }).join('');
+  const bloque = function(cls, n, tit, sub, lista){
+    return n ? '<div class="dv-sec ' + cls + '"><span class="n">' + n + '</span><div><b>' + tit + '</b><span>' + sub + '</span></div></div>'
+      + lista.sort(porFecha).map(function(e){ return orden(e, cls === 'sen' ? 'prop' : cls); }).join('') : '';
+  };
+  const conSen = grupos.prop.filter(function(e){ return e.sn.n; }), sinSen = grupos.prop.filter(function(e){ return !e.sn.n; });
+  h += '<h3>Orden por orden<small>primero las que hay que revisar, después las que no se le cargan</small></h3>'
+    + bloque('sen', conSen.length, conSen.length === 1 ? 'Propia con señal: revisar primero' : 'Propias con señal: revisar primero',
+        'Solo falló él en esa dirección y hay un indicio concreto.', conSen)
+    + bloque('prop', sinSen.length, (sinSen.length === 1 ? 'Propia' : 'Propias') + (derVisOk ? ' sin señal' : ''),
+        'Solo falló él en esa dirección desde el ' + derDesde + (derVisOk ? ', y la visita no tiene ninguna de las tres señales.' : '.'), sinSen)
+    + bloque('comp', nComp, nComp === 1 ? 'En una dirección donde también falló otro técnico' : 'En direcciones donde también falló otro técnico',
+        'Apuntan a la dirección o al cliente. En la tabla, en azul, las visitas fallidas de los otros técnicos.', grupos.comp)
+    + bloque('na', nNa, nNa === 1 ? 'Por una causal que no depende del técnico' : 'Por causales que no dependen del técnico',
+        'Dirección no encontrada, ductos, dotación, contingencia y similares. No se le cargan.', grupos.na);
   return h + '<p class="dv-nota">La ficha usa la misma clasificación de <b>A quién auditar</b>. <b>Dirección compartida</b>: sin moradores, cliente reagenda o cliente desiste en una dirección donde también le falló una visita a otro técnico desde el '
     + derDesde + '. <b>Propia</b>: esas mismas causales donde no ha fallado ningún otro técnico. Que una derivada sea propia, o que tenga una señal, no prueba mala gestión; indica dónde mirar primero.</p></div>';
 }
@@ -6791,23 +6895,44 @@ function pintarDeriv(){
   const semanas = Object.keys(porSem).sort().reverse().slice(0, DER_SEMANAS);
   if(!derSem || semanas.indexOf(derSem) < 0) derSem = semanas[0];
   const ultIso = DER.reduce(function(m, x){ return x.iso > m ? x.iso : m; }, '');
-  semBox.innerHTML = '<span class="rot">Semana</span>' + semanas.map(function(k){
-    const s = porSem[k], p = derPct(s.d, s.n);
-    return '<button class="' + (k === derSem ? 'on' : '') + (p > DER_UMBRAL ? ' alto' : '') + '" onclick="setSemDeriv(\'' + k + '\')" title="'
-      + s.n + ' ' + derNomTipo() + ' visitadas, ' + s.d + ' derivadas · ' + derRango(k) + '">' + derNumSemana(k) + '<b>' + p + '%</b></button>';
-  }).join('');
+  /* Cabecera ordenada (08-10-2026, 19:45; Luis: "arreglemos lo de arriba,
+     filtros, semanas"). Arriba las VISTAS como pestanas (son lo principal);
+     debajo, un panel con dos renglones: las semanas, y los filtros agrupados
+     (Supervisor, Tipo y, en A quien auditar y Ficha, el Periodo, que antes
+     estaba suelto dentro del cuerpo). El subtitulo cambia con la vista. */
+  const todasSem0 = Object.keys(porSem).sort();
+  const usaPer = derVista === 'aud' || derVista === 'fic';
+  const iS0 = todasSem0.indexOf(derSem);
+  const enRango = usaPer && derAudPer > 1 ? todasSem0.slice(Math.max(0, iS0 - derAudPer + 1), iS0 + 1) : [derSem];
+  const VISTAS = [['tec', 'Por técnico', 'Quién deriva más en la semana elegida. Toca un técnico para ver cada orden y la historia de su dirección.'],
+    ['dir', 'Por dirección', 'Qué direcciones fallan y con qué técnicos, en la semana elegida.'],
+    ['aud', 'A quién auditar', 'Cuánto de lo derivado es propio de cada técnico, descontando las causales ajenas y las direcciones donde también falló otro.'],
+    ['fic', 'Ficha del técnico', 'Todo sobre un técnico: cuánto deriva, cuánto de eso es suyo y qué órdenes revisar primero.']];
+  const sub = document.getElementById('dvSub');
+  if(sub) sub.textContent = (VISTAS.filter(function(v){ return v[0] === derVista; })[0] || VISTAS[0])[2];
+  semBox.className = 'dv-tabs';
+  semBox.innerHTML = VISTAS.map(function(v){
+    return '<button class="' + (derVista === v[0] ? 'on' : '') + '" onclick="setVistaDeriv(\'' + v[0] + '\')">' + v[1] + '</button>'; }).join('');
   const sups = ['Todos'].concat(Object.keys(DER.reduce(function(a, x){ if(x.sup) a[x.sup] = 1; return a; }, {})).sort());
   if(sups.indexOf(derSup) < 0) derSup = 'Todos';
-  supBox.innerHTML = '<span class="rot">Vista</span>'
-    + '<button class="' + (derVista === 'tec' ? 'on' : '') + '" onclick="setVistaDeriv(\'tec\')">Por técnico</button>'
-    + '<button class="' + (derVista === 'dir' ? 'on' : '') + '" onclick="setVistaDeriv(\'dir\')">Por dirección</button>'
-    + '<button class="' + (derVista === 'aud' ? 'on' : '') + '" onclick="setVistaDeriv(\'aud\')">A quién auditar</button>'
-    + '<button class="' + (derVista === 'fic' ? 'on' : '') + '" onclick="setVistaDeriv(\'fic\')">Ficha del técnico</button>'
-    + '<span class="rot" style="margin-left:14px">Supervisor</span>' + sups.map(function(s){
-    return '<button class="' + (s === derSup ? 'on' : '') + '" onclick="setSupDeriv(\'' + escR(s) + '\')">' + (s === 'Todos' ? 'Todos' : derTitulo(s)) + '</button>';
-  }).join('') + '<span class="rot" style="margin-left:14px">Tipo</span>' + DER_TIPOS.map(function(t){
-    return '<button class="' + (t[0] === derTipo ? 'on' : '') + '" onclick="setTipoDeriv(\'' + t[0] + '\')">' + t[1] + '</button>';
-  }).join('');
+  const nD0 = Object.keys(porSem[derSem].dias).length;
+  const seg = function(l){ return '<div class="dv-seg">' + l.join('') + '</div>'; };
+  supBox.className = 'dv-filtros';
+  supBox.innerHTML = '<div class="fila"><span class="rot">' + (enRango.length > 1 ? 'Semanas' : 'Semana') + '</span><div class="sems">' + semanas.map(function(k){
+      const s = porSem[k], p = derPct(s.d, s.n);
+      return '<button class="' + (k === derSem ? 'on' : (enRango.indexOf(k) >= 0 ? 'rng' : '')) + (p > DER_UMBRAL ? ' alto' : '') + '" onclick="setSemDeriv(\'' + k + '\')" title="Semana '
+        + derNumSemana(k) + ', ' + derRango(k) + ': ' + s.n + ' ' + derNomTipo() + ' visitadas, ' + s.d + ' derivadas">' + derNumSemana(k) + '<b>' + p + '%</b></button>';
+    }).join('') + '</div><span class="rango">' + (enRango.length > 1
+        ? 'Semanas ' + derNumSemana(enRango[0]) + ' a ' + derNumSemana(derSem) + ' · hasta el ' + ultIso.slice(6, 8) + '-' + ultIso.slice(4, 6)
+        : 'Semana ' + derNumSemana(derSem) + ' · ' + derRango(derSem) + (nD0 < 6 && derSem === semanas[0] ? ' · en curso' : '')) + '</span></div>'
+    + '<div class="fila"><div class="grp"><span class="rot">Supervisor</span>' + seg(sups.map(function(s){
+        return '<button class="' + (s === derSup ? 'on' : '') + '" onclick="setSupDeriv(\'' + escR(s) + '\')">' + (s === 'Todos' ? 'Todos' : derTitulo(s)) + '</button>'; })) + '</div>'
+    + '<div class="grp"><span class="rot">Tipo</span>' + seg(DER_TIPOS.map(function(t){
+        return '<button class="' + (t[0] === derTipo ? 'on' : '') + '" onclick="setTipoDeriv(\'' + t[0] + '\')" title="' + t[1] + '">' + (t[0] === 'AMBAS' ? 'Ambas' : t[1]) + '</button>'; })) + '</div>'
+    + (usaPer ? '<div class="grp"><span class="rot">Período</span>' + seg([
+        '<button class="' + (derAudPer === 4 ? 'on' : '') + '" onclick="setAudPerDeriv(4)" title="Las 4 semanas que terminan en la elegida">Últimas 4 semanas</button>',
+        '<button class="' + (derAudPer === 1 ? 'on' : '') + '" onclick="setAudPerDeriv(1)">Solo la semana ' + derNumSemana(derSem) + '</button>']) + '</div>' : '')
+    + '</div>';
 
   /* Tendencia: las DER_TEND semanas que terminan en la elegida. */
   const todasSem = Object.keys(porSem).sort();
