@@ -6608,7 +6608,14 @@ function cuadraturaHtml(nDia){
     + '<table class="cq">'
     + f('<b>Inicio de jornada</b> <span class="m">(Excel de las ' + escR(C.hora_inicio || '') + ', pendientes NFTT/FTTH)</span>', '<b>' + C.inicio + '</b>', 'tot')
     + f('↳ hoy están en bandejas' + (detEst ? ' <span class="m">(' + detEst + ')</span>' : ''), C.a_bandeja, 'sub')
-    + f('↳ siguen en el bucket', C.a_bucket, 'sub')
+    /* (08-10-2026) "siguen en el bucket" contaba tambien las ordenes que
+       tiene un tecnico de otra empresa (ATLA, TRAZ). conciliacion.py ahora
+       las manda aparte en a_otra; con un rutas.json antiguo a_otra no viene
+       y la fila simplemente no sale. */
+    + f('↳ siguen en el bucket' + (C.a_bucket_canc ? ' <span class="m">(' + C.a_bucket_canc + ' cancelada' + (C.a_bucket_canc === 1 ? '' : 's') + ')</span>' : ''),
+        C.a_bucket, 'sub', (C.a_bucket_ots || []).join(', '))
+    + (C.a_otra ? f('↳ las tiene un técnico de otra empresa <span class="m">(no están en el bucket ni en bandejas Dominion)</span>',
+        C.a_otra, 'sub', (C.a_otra_ots || []).join(', ')) : '')
     + f('↳ salieron del día <span class="m">(VTR/CLARO las sacó del export: reagendadas o anuladas)</span>', C.a_fuera, 'sub',
         (C.a_fuera_ots || []).join(', '))
     + (C.manana_fuera_inicio ? f('+ venían de la mañana, fuera del inicio <span class="m">(HFC/CHFC u otro estado a esa hora)</span>', C.manana_fuera_inicio, 'mas') : '')
