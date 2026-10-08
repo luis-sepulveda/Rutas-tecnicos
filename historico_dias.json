@@ -19429,25 +19429,25 @@
    }
   },
   "08-10-2026": {
-   "hasta": "13:24",
-   "actividades": 130,
+   "hasta": "13:29",
+   "actividades": 131,
    "tecnicos": 30,
    "estados": {
-    "Iniciado": 20,
-    "Pendiente": 61,
+    "Iniciado": 21,
+    "Pendiente": 63,
     "No Realizada": 10,
     "Completado": 29,
-    "en ruta": 5,
+    "en ruta": 3,
     "Cancelado": 4,
     "Suspendido": 1
    },
-   "rgu": 210.2,
+   "rgu": 212.2,
    "caidas_total": 3,
    "caidas_activas": 3,
    "caidas_resueltas": 0,
-   "nuevas": 9,
+   "nuevas": 10,
    "al_bucket": 10,
-   "repetidas": 30,
+   "repetidas": 31,
    "reagendadas": 3,
    "detalle": {
     "caidas": [
@@ -19480,6 +19480,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3O8IP8HD",
+      "tec": "JOSE ROJO A",
+      "cat": "Migración 2 Play",
+      "f": "16-19",
+      "hi": "18:06",
+      "d": "DEL VALLE 055, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OAU2SGI",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -19663,9 +19672,9 @@
       "o": "1-3OAAL6E3",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "13:31",
+      "hi": "13:24",
       "d": "MARGARITAS 1884, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "FELIPE SILVA R",
       "visitas": 3,
       "ult_fecha": "18-08-2026",
@@ -19675,7 +19684,7 @@
       "o": "1-3O9BZ1J4",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:09",
+      "hi": "17:02",
       "d": "LISBOA 475, QUILPUE",
       "e": "Pendiente",
       "tec": "FELIPE SILVA R",
@@ -19742,6 +19751,18 @@
       "visitas": 1,
       "ult_fecha": "06-10-2026",
       "ult_cierre": "Evento Contingencia"
+     },
+     {
+      "o": "1-3O8IP8HD",
+      "cat": "Migración 2 Play",
+      "f": "16-19",
+      "hi": "18:06",
+      "d": "DEL VALLE 055, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOSE ROJO A",
+      "visitas": 1,
+      "ult_fecha": "09-09-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OAFT8KZ",
@@ -19958,5 +19979,5 @@
    }
   }
  },
- "generado": "08-10-2026 13:24"
+ "generado": "08-10-2026 13:29"
 }
