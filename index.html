@@ -6912,9 +6912,9 @@ function pintarPortada(){
     +       '<div class="pv-pct"><span class="v">' + pct.toFixed(1).replace('.', ',')
     +         '</span><span class="u">%</span>'
     +         (pctCerr === null ? '' :
-                '<span class="pv-pct2" title="Completadas / (completadas + no realizadas). No cuenta lo que sigue abierto ni lo cancelado.">'
-              +   '<b>' + pctCerr.toFixed(1).replace('.', ',') + '%</b><span class="a">de lo ya cerrado</span>'
-              +   '<span class="d">' + comp + ' completadas de ' + cerr + ' cerradas</span></span>')
+                '<span class="pv-pct2" title="Completadas / visitadas. Visitadas = completadas + no realizadas: donde el t\u00e9cnico ya fue. No cuenta lo que sigue abierto ni lo cancelado.">'
+              +   '<b>' + pctCerr.toFixed(1).replace('.', ',') + '%</b><span class="a">de lo ya visitado</span>'
+              +   '<span class="d">' + comp + ' completadas de ' + cerr + ' visitadas</span></span>')
     +       '</div>'
     +       '<div class="pv-pctl">' + filas.length + ' actividades \u00b7 '
     /* 26-09-2026 (Luis): el que esta en OTRA COMUNA tambien esta operativo,
