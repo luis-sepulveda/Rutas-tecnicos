@@ -1942,29 +1942,45 @@
     #modalRes .rs-ef i { width:48px; } }
   /* =================================================================== */
   /* =================================================================== */
-  /* ==== BOTONES EN UNA LINEA (08-10-2026, pedido de Luis) ====
-     "Requiere atencion", los chips (Nuevas, Reingresadas, Direcciones
-     repetidas) y los Reportes van en una sola fila, debajo de "Como viene el
-     resto del dia". Los nombres largos bajan a dos renglones dentro de su
-     boton para que quepan los diez. En pantallas angostas (menos de 1180 px)
-     la fila baja sola a varias lineas. Borrando este bloque los botones
-     vuelven a su tamano grande, uno bajo el otro. */
-  .pv-linea { display:flex; flex-wrap:nowrap; align-items:stretch; gap:6px; }
+  /* ==== BOTONES EN UNA LINEA, PASTILLAS (08-10-2026, pedido de Luis) ====
+     "Requiere atencion", los chips (Nuevas, Reingresadas, Repetidas) y los
+     Reportes van en una sola fila de pastillas de un renglon, debajo de
+     "Como viene el resto del dia". La cifra va en un circulo del color de
+     cada boton (gris si esta en cero). Los nombres van acortados para que
+     quepan los diez; el nombre completo sale al dejar el mouse encima. En
+     pantallas angostas (menos de 1180 px) la fila baja sola a varias lineas.
+     Borrando este bloque los botones vuelven a su tamano grande, uno bajo
+     el otro (con los nombres cortos). */
+  .pv-linea { display:flex; flex-wrap:nowrap; align-items:stretch; gap:5px; }
   .pv-linea > .pv-alertas, .pv-linea > .pv-chips, .pv-linea > .pv-links { display:contents; }
   .pv-linea .pv-al, .pv-linea .pv-ch, .pv-linea .pv-lk {
-    flex:1 1 auto; min-width:min-content; margin:0; padding:8px 9px; border-radius:10px;
-    font-size:12px; line-height:1.25; align-items:center; text-align:left; }
-  .pv-linea .pv-al { gap:8px; }
-  .pv-linea .pv-al .n { font-size:21px; min-width:0; line-height:1; }
-  .pv-linea .pv-al .tx .t { font-size:12px; line-height:1.25; }
+    flex:1 1 auto; min-width:0; margin:0; padding:8px 8px; border-radius:999px;
+    font-size:12px; line-height:1.2; white-space:nowrap; overflow:hidden;
+    display:flex; align-items:center; justify-content:center; gap:6px;
+    border:1px solid #dbe4ed; background:#fff; color:#15293e;
+    box-shadow:0 1px 2px rgba(20,45,70,.05); }
+  /* la cifra, en su circulo */
+  .pv-linea .pv-al .n, .pv-linea .pv-ch b {
+    order:-1; flex-shrink:0; min-width:21px; height:21px; padding:0 6px;
+    border-radius:999px; background:var(--tono); color:#fff;
+    font-family:'Archivo',sans-serif; font-size:13px; font-weight:700; line-height:1;
+    display:inline-flex; align-items:center; justify-content:center; margin:0; }
+  .pv-linea .pv-al .tx .t { font-size:12px; line-height:1.2; font-weight:400; color:inherit; }
   .pv-linea .pv-al .tx .s { display:none; }
-  .pv-linea .pv-al.sel::after { content:'\2715'; right:6px; top:3px; font-size:10px; }
-  .pv-linea .pv-ch { display:flex; gap:7px; }
-  .pv-linea .pv-ch b { font-size:14px; margin-left:auto; }
-  .pv-linea .pv-ch i { flex-shrink:0; }
-  .pv-linea .pv-lk { gap:6px; }
-  .pv-linea .pv-lk .fl { font-size:15px; }
-  .pv-linea-sep { flex:0 0 1px; background:#dbe4ed; margin:4px 2px; }
+  .pv-linea .pv-al.viva { border-left:1px solid #dbe4ed; }
+  .pv-linea .pv-ch i { display:none; }
+  /* en cero: apagado */
+  .pv-linea .pv-al.cero, .pv-linea .pv-ch.cero { background:#fff; color:#9fb0c0; }
+  .pv-linea .pv-al.cero .tx .t { color:#9fb0c0; }
+  .pv-linea .pv-al.cero .n, .pv-linea .pv-ch.cero b { background:#dbe4ed; color:#7d8fa3; }
+  /* con su panel abierto: azul, igual que antes */
+  .pv-linea .pv-al.sel { border-color:#1d4ed8; background:#eff6ff; }
+  .pv-linea .pv-al.sel .n { background:#1d4ed8; color:#fff; }
+  .pv-linea .pv-al.sel::after { content:'\2715'; position:static; font-size:11px; }
+  /* reportes: mas suaves, son enlaces y no avisos */
+  .pv-linea .pv-lk { background:#f5f8fb; color:#2c4460; gap:4px; }
+  .pv-linea .pv-lk .fl { font-size:13px; color:#8fa1b3; }
+  .pv-linea-sep { flex:0 0 1px; background:#cfdae6; margin:4px 1px; }
   @media (max-width:1180px){
     .pv-linea { flex-wrap:wrap; }
     .pv-linea .pv-al, .pv-linea .pv-ch, .pv-linea .pv-lk { flex:1 1 150px; }
@@ -6701,14 +6717,17 @@ function pintarPortada(){
     + '</button>';
 
   const chip = (fn, n, nom, color) =>
-      '<button class="pv-ch' + (n > 0 ? '' : ' cero') + '" onclick="desdePortada(' + fn + ')">'
+      '<button class="pv-ch' + (n > 0 ? '' : ' cero') + '" style="--tono:' + color + '"'
+    +   ' onclick="desdePortada(' + fn + ')">'
     +   '<i style="background:' + (n > 0 ? color : '#dbe4ed') + '"></i>' + nom
     +   ' <b>' + n + '</b></button>';
 
-  const enlace = (destino, texto) => destino.indexOf('http') === 0
-    ? '<a class="pv-lk" href="' + destino + '" target="_blank">' + texto
+  /* (08-10-2026) tercer dato opcional: el nombre completo, que sale al dejar
+     el mouse encima cuando el boton lleva el nombre acortado. */
+  const enlace = (destino, texto, largo) => destino.indexOf('http') === 0
+    ? '<a class="pv-lk" href="' + destino + '" target="_blank" title="' + (largo || texto) + '">' + texto
       + '<span class="fl">\u203a</span></a>'
-    : '<button class="pv-lk" onclick="desdePortada(' + destino + ')">' + texto
+    : '<button class="pv-lk" onclick="desdePortada(' + destino + ')" title="' + (largo || texto) + '">' + texto
       + '<span class="fl">\u203a</span></button>';
 
   caja.innerHTML =
@@ -6831,16 +6850,18 @@ function pintarPortada(){
     /* (08-10-2026, pedido de Luis) Este bloque y los Reportes subieron: ahora
        van justo DEBAJO de "Como viene el resto del dia" (antes iban despues
        de "Los ultimos dias") y los diez botones van en UNA sola linea, dentro
-       de la caja pv-linea. Mismos botones, mismos onclick y mismas cifras:
-       solo cambio el lugar y el tamano. La frase que explica cada tarjeta
-       ("se las sacaron al tecnico...") ahora sale al dejar el mouse encima.
-       El CSS esta en el bloque "BOTONES EN UNA LINEA" al final del <style>. */
+       de la caja pv-linea, como pastillas de un renglon con la cifra en un
+       circulo de color (opcion B que eligio Luis). Mismos botones, mismos
+       onclick y mismas cifras: solo cambio el lugar, el tamano y que los
+       nombres van acortados. El nombre completo y la frase que explica cada
+       tarjeta salen al dejar el mouse encima (title). El CSS esta en el
+       bloque "BOTONES EN UNA LINEA, PASTILLAS" al final del <style>. */
     +   '<div class="pv-rot pv-rot-sec">Requiere atenci\u00f3n \u00b7 Reportes</div>'
     +   '<div class="pv-linea">'
     +   '<section class="pv-alertas">'
-    +     alerta('toggleCaidas', caidas, 'Ca\u00eddas', 'se las sacaron al t\u00e9cnico sin que las tocara', '#c0392f')
-    +     alerta('toggleSinCompletar', sinComp, 'T\u00e9cnicos sin completar', 'no han cerrado ninguna todav\u00eda hoy', '#b45309')
-    +     alerta('toggleAtrasados', atras, 'M\u00e1s de 3 horas', 'iniciadas hace rato y sin cerrar', '#be123c')
+    +     alerta('toggleCaidas', caidas, 'Ca\u00eddas', 'Ca\u00eddas: se las sacaron al t\u00e9cnico sin que las tocara', '#c0392f')
+    +     alerta('toggleSinCompletar', sinComp, 'Sin completar', 'T\u00e9cnicos sin completar: no han cerrado ninguna todav\u00eda hoy', '#b45309')
+    +     alerta('toggleAtrasados', atras, 'M\u00e1s de 3 h', 'M\u00e1s de 3 horas: iniciadas hace rato y sin cerrar', '#be123c')
     +   '</section>'
     +   '<div class="pv-chips">'
     +     chip('toggleNuevas', nuevas, 'Nuevas', '#2563eb')
@@ -6848,16 +6869,16 @@ function pintarPortada(){
        dato sigue en el modal de Nuevas, que marca cuales "volvieron al
        bucket"; alBucket se sigue calculando por si se quiere volver a poner. */
     +     chip('toggleReca', reca, 'Reingresadas', '#7d8fa3')
-    +     chip('toggleRepe', repe, 'Direcciones repetidas', '#7c3aed')
+    +     chip('toggleRepe', repe, '<span title="Direcciones repetidas">Repetidas</span>', '#7c3aed')
     +   '</div>'
 
     /* ---- 4. enlaces ---- */
     +   '<span class="pv-linea-sep"></span>'
     +   '<nav class="pv-links">'
-    +     enlace('toggleComp', 'Completitud al corte de las 13:00')
-    +     enlace('verReporteRepe', 'Reporte hist\u00f3rico de direcciones')
-    +     enlace(URL_SINMORADORES, 'Sin moradores semanal')
-    +     enlace(URL_EQUIPO, 'Detalle por supervisor')
+    +     enlace('toggleComp', 'Completitud 13:00', 'Completitud al corte de las 13:00')
+    +     enlace('verReporteRepe', 'Hist\u00f3rico', 'Reporte hist\u00f3rico de direcciones')
+    +     enlace(URL_SINMORADORES, 'Sin moradores', 'Sin moradores semanal')
+    +     enlace(URL_EQUIPO, 'Por supervisor', 'Detalle por supervisor')
     +   '</nav>'
     +   '</div>'
 
