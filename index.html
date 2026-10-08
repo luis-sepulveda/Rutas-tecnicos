@@ -2028,6 +2028,31 @@
   .pv-sinini .l span { font-size:12.5px; background:#f1f5f9; border-radius:8px; padding:5px 10px; color:#15293e; }
   .pv-sinini .l span.tmp { background:#fdecea; }
   .pv-sinini .l small { color:#5b7086; font-size:11.5px; margin-left:4px; }
+  /* (08-10-2026, tarde) tarjetas del bucket que se pueden tocar + su lista */
+  .pv-bk button.b { font-family:inherit; cursor:pointer; text-align:left; transition:.13s; }
+  .pv-bk button.b:hover:not(:disabled) { transform:translateY(-1px); box-shadow:0 4px 10px rgba(20,45,70,.10); }
+  .pv-bk button.b:disabled { cursor:default; }
+  .pv-bk button.b.sel { outline:2px solid #1d4ed8; outline-offset:1px; }
+  .pv-bk .b.gri { background:#f5f8fb; border-color:#dbe4ed; }
+  .pv-bk .b.gri b, .pv-bk .b.gri .f { color:#7d8fa3; }
+  .pv-bk-tot.cero { background:#cbd5e1; }
+  .pv-bk .b .f { white-space:nowrap; }
+  .pv-bk-det .ng.em { background:#dbeafe; color:#1e40af; }
+  .pv-bk-det { margin-top:10px; border:1px solid #dbe4ed; border-radius:11px; background:#fbfcfe;
+    padding:10px 12px; max-height:290px; overflow:auto; }
+  .pv-bk-det .h { font-size:13px; color:#15293e; display:flex; align-items:center; gap:6px; }
+  .pv-bk-det .h button { margin-left:auto; border:0; background:none; color:#1d4ed8; font-family:inherit;
+    font-size:12px; font-weight:600; cursor:pointer; }
+  .pv-bk-det .r { display:flex; flex-wrap:wrap; gap:5px; margin:8px 0; }
+  .pv-bk-det .r span { font-size:12px; background:#eef2f7; border-radius:999px; padding:2px 9px; color:#2c4460; }
+  .pv-bk-det table { width:100%; border-collapse:collapse; font-size:12.5px; }
+  .pv-bk-det th { text-align:left; font-size:10.5px; letter-spacing:.07em; text-transform:uppercase;
+    color:#8fa1b3; font-weight:600; padding:4px 8px 4px 0; border-bottom:1px solid #dbe4ed; }
+  .pv-bk-det td { padding:5px 8px 5px 0; border-bottom:1px solid #edf1f6; color:#15293e; vertical-align:top; }
+  .pv-bk-det td.ot { font-family:'Archivo',sans-serif; font-weight:600; white-space:nowrap; }
+  .pv-bk-det .ng { font-family:'DM Sans',sans-serif; font-weight:500; font-size:10.5px; background:#ede9fe;
+    color:#5b21b6; border-radius:999px; padding:1px 7px; }
+  .pv-bk-det .sd { color:#8fa1b3; font-size:12px; }
   /* con once pastillas, un poco mas apretadas para que quepan */
   .pv-linea { gap:4px; }
   .pv-linea .pv-al, .pv-linea .pv-ch, .pv-linea .pv-lk { padding:8px 6px; gap:5px; font-size:11.5px; }
@@ -6689,36 +6714,79 @@ function pintarPortada(){
   }).filter(Boolean).sort((a, b) => a.f.localeCompare(b.f) || a.t.localeCompare(b.t));
   const sinIni = sinIniLista.length;
 
-  /* 4. Lo que sigue EN EL BUCKET, por franja. La franja sale del Excel de
-        inicio de jornada (el bucket se publica sin franja), asi que las que
-        entraron despues del inicio van aparte, sin franja. */
-  const enB = (typeof EN_BUCKET !== 'undefined' && EN_BUCKET) ? EN_BUCKET : new Set();
-  const ini = inicioHoy();
+  /* 4. EL BUCKET, con datos propios (08-10-2026, tarde).
+        La primera version cruzaba 'fuera_domi' con el Excel de inicio y
+        contaba de mas: 'fuera_domi' es todo lo que no esta en una bandeja
+        DOMI, o sea el bucket Y las ordenes de tecnicos de otras empresas
+        (HFC de TRAZ, apoyo de ATLA). Ese dia decia 8 y en el bucket real no
+        habia ninguna pendiente (la foto de Luis). Ahora generar_rutas.py
+        publica 'bucket' con una fila por orden: recurso, si es bucket (b=1)
+        o persona (b=0), estado, actividad, franja y direccion.
+        Se muestran tres cosas:
+          - pendientes en el bucket, por franja (lo que falta asignar),
+          - canceladas que siguen en el bucket (apagado, solo informativo),
+          - ordenes NFTT/FTTH que tiene un tecnico de OTRA empresa.
+        Las HFC de otras empresas no se muestran: Dominion no hace HFC.
+        Si rutas.json todavia no trae 'bucket', el bloque no sale. */
   let bucketHtml = '';
-  if(hoy && ini && ini.ots){
-    const bF = {}; let bTot = 0; const vistos = new Set();
-    ini.ots.forEach(function(o){
-      vistos.add(o.o);
-      if(!enB.has(o.o)) return;
-      const f = String(o.f || 's/franja'); bF[f] = (bF[f] || 0) + 1; bTot++;
-    });
-    const resto = new Set(ini.resto || []);
-    let despues = 0;
-    enB.forEach(function(o){ if(!vistos.has(o) && !resto.has(o)) despues++; });
-    const iniF = {}; ini.ots.forEach(o => { const f = String(o.f || 's/franja'); iniF[f] = (iniF[f] || 0) + 1; });
-    bucketHtml = '<div class="pv-rot" style="margin:24px 0 11px">De hoy, todav\u00eda en el bucket'
-      + ' <span class="pv-bk-tot">' + (bTot + despues) + '</span></div>'
+  const BK = (typeof BUCKET !== 'undefined' && Array.isArray(BUCKET)) ? BUCKET : null;
+  if(hoy && BK){
+    const cerradaBk = o => ['Completado','No Realizada','Cancelado','Suspendido'].includes(String(o.e || ''));
+    const enBk   = BK.filter(o => o.b);
+    const pendBk = enBk.filter(o => !cerradaBk(o));
+    const cancBk = enBk.filter(o => String(o.e) === 'Cancelado');
+    const esFibra = o => /NFTT|FTTH/i.test(String(o.red || ''));
+    const otraBk = BK.filter(o => !o.b && esFibra(o) && String(o.e) !== 'Cancelado');
+    const listas = {'__CANC__': cancBk, '__OTRA__': otraBk};
+    const frs = {};
+    Object.keys(porFranja).forEach(f => { if(/^\d/.test(f)) frs[f] = 1; });
+    pendBk.forEach(o => { const f = String(o.f || 's/franja'); frs[f] = 1; (listas[f] = listas[f] || []).push(o); });
+    const abiertoBk = window.PV_BK || null;
+    const clicBk = k => ' onclick="window.PV_BK = (window.PV_BK === \'' + k + '\' ? null : \'' + k + '\'); pintarPortada()"';
+    const tituloDirBk = d => String(d || '').toLowerCase().replace(/(^|\s)\S/g, c => c.toUpperCase());
+    const nomBk = {'__CANC__': 'canceladas que siguen en el bucket',
+                   '__OTRA__': 'órdenes NFTT/FTTH con técnicos de otra empresa'};
+    let panelBk = '';
+    const listaBk = abiertoBk ? (listas[abiertoBk] || null) : null;
+    if(listaBk && listaBk.length){
+      const conRec = abiertoBk === '__OTRA__';
+      const conFr  = abiertoBk === '__CANC__' || abiertoBk === '__OTRA__';
+      const orden = listaBk.slice().sort((x, y) => String(x.f).localeCompare(String(y.f))
+        || String(x.cat).localeCompare(String(y.cat)) || String(x.o).localeCompare(String(y.o)));
+      const resumen = {};
+      orden.forEach(o => { const k = o.cat || o.t || 'Sin tipo'; resumen[k] = (resumen[k] || 0) + 1; });
+      panelBk = '<div class="pv-bk-det">'
+        + '<div class="h"><b>' + orden.length + '</b> ' + (nomBk[abiertoBk] || ('pendientes en el bucket · franja ' + abiertoBk))
+        +   '<button onclick="window.PV_BK = null; pintarPortada()">✕ cerrar</button></div>'
+        + '<div class="r">' + Object.keys(resumen).sort().map(k => '<span><b>' + resumen[k] + '</b> ' + k + '</span>').join('') + '</div>'
+        + '<table><thead><tr><th>Orden</th><th>Actividad</th>' + (conFr ? '<th>Franja</th>' : '')
+        +   (conRec ? '<th>La tiene</th><th>Estado</th>' : '') + '<th>Dirección</th></tr></thead><tbody>'
+        + orden.map(o => '<tr><td class="ot">' + o.o
+            + ((typeof NEG !== 'undefined' && NEG && NEG[o.o]) ? ' <span class="ng">Negocios</span>' : '') + '</td>'
+            + '<td>' + (o.cat || o.t || '–') + (o.red ? ' <span class="sd">' + o.red + '</span>' : '') + '</td>'
+            + (conFr ? '<td>' + (o.f || '–') + '</td>' : '')
+            + (conRec ? '<td>' + tituloDirBk(o.rec) + (o.emp ? ' <span class="ng em">' + o.emp + '</span>' : '') + '</td><td>' + (o.e || '') + '</td>' : '')
+            + '<td>' + tituloDirBk(o.d) + '</td></tr>').join('')
+        + '</tbody></table></div>';
+    }
+    bucketHtml = '<div class="pv-rot" style="margin:24px 0 11px">Pendientes en el bucket'
+      + ' <span class="pv-bk-tot' + (pendBk.length ? '' : ' cero') + '">' + pendBk.length + '</span></div>'
       + '<div class="pv-bk">'
-      + Object.keys(iniF).sort().map(function(f){
-          const v = bF[f] || 0, m = /^(\d{1,2})\s*-\s*(\d{1,2})$/.exec(f);
+      + Object.keys(frs).sort().map(function(f){
+          const v = (listas[f] || []).length, m = /^(\d{1,2})\s*-\s*(\d{1,2})$/.exec(f);
           const yaEmpezo = m && ahoraH >= +m[1];
-          return '<div class="b' + (v ? (yaEmpezo ? ' mal' : '') : ' cero') + '" title="' + v + ' de las ' + iniF[f]
-            + ' que ten\u00eda esta franja al inicio de jornada siguen sin t\u00e9cnico">'
-            + '<span class="f">' + f + '</span><b>' + v + '</b><small>de ' + iniF[f] + '</small></div>';
+          return '<button class="b' + (v ? (yaEmpezo ? ' mal' : '') : ' cero') + (abiertoBk === f ? ' sel' : '') + '"'
+            + (v ? clicBk(f) : ' disabled') + ' title="' + v + ' orden' + (v === 1 ? '' : 'es') + ' de la franja ' + f
+            + ' en el bucket, pendiente' + (v === 1 ? '' : 's') + ' y sin técnico.' + (v ? ' Toca para ver cuáles son.' : '') + '">'
+            + '<span class="f">' + f + '</span><b>' + v + '</b></button>';
         }).join('')
-      + (despues ? '<div class="b nue" title="Entraron al bucket despu\u00e9s del inicio de jornada; el bucket se publica sin franja">'
-          + '<span class="f">nuevas</span><b>' + despues + '</b><small>sin franja</small></div>' : '')
-      + '</div>';
+      + (cancBk.length ? '<button class="b gri' + (abiertoBk === '__CANC__' ? ' sel' : '') + '"' + clicBk('__CANC__')
+          + ' title="Canceladas que siguen en el bucket. No hay que asignarlas. Toca para verlas.">'
+          + '<span class="f">canceladas</span><b>' + cancBk.length + '</b></button>' : '')
+      + (otraBk.length ? '<button class="b nue' + (abiertoBk === '__OTRA__' ? ' sel' : '') + '"' + clicBk('__OTRA__')
+          + ' title="Órdenes NFTT/FTTH de la zona que tiene un técnico de otra empresa (no canceladas). No están en el bucket. Toca para verlas.">'
+          + '<span class="f">otra empresa</span><b>' + otraBk.length + '</b></button>' : '')
+      + '</div>' + panelBk;
   }
   /* 01-10-2026: solo cuentan los tecnicos con alguna orden NO cancelada
      (igual que dotacion.py). Caso Elias Armijo: una sola repa cancelada. */
@@ -7837,6 +7905,7 @@ const URL_API = 'https://api.github.com/repos/'+REPO_BASE+'/contents/rutas.json?
 let ORIGEN_DATOS = '';   // de donde salio el ultimo refresco, para diagnosticar
 let SALDO_API = null;    // llamadas que quedan en la hora, segun la API
 let RESET_API = 0;       // epoch ms en que la API repone el saldo (0 = no se sabe)
+let BUCKET = null;          // (08-10-2026) detalle del bucket y de otras empresas: rutas.json -> bucket
 let EN_BUCKET = new Set();  // OT sin tecnico asignado, en el bucket del portal
 let SELLO_ULTIMO = null; // 'actualizado' del ultimo snapshot que se pinto
 
@@ -7941,6 +8010,7 @@ async function cargarDatosVivos(auto){
     // una bandeja: sin esto solo se podia decir "no esta en Caidas", que
     // informa donde NO esta en vez de donde SI esta.
     EN_BUCKET = new Set(js.fuera_domi || []);
+    BUCKET = Array.isArray(js.bucket) ? js.bucket : null;   // (08-10-2026)
     RED = js.red || null;              // Nodos y NAP (24-09-2026)
     if(vistaRedAbierta) pintarCapaRed();  // mapa de red: las de hoy vienen de aca
     NEG = js.neg || {};                // Negocios / Reiterado (24-09-2026)
