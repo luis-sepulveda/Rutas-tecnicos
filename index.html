@@ -1941,6 +1941,36 @@
   @media (max-width:640px){ #modalRes .rs-tot { grid-template-columns:repeat(2,1fr); }
     #modalRes .rs-ef i { width:48px; } }
   /* =================================================================== */
+  /* =================================================================== */
+  /* ==== BOTONES EN UNA LINEA (08-10-2026, pedido de Luis) ====
+     "Requiere atencion", los chips (Nuevas, Reingresadas, Direcciones
+     repetidas) y los Reportes van en una sola fila, debajo de "Como viene el
+     resto del dia". Los nombres largos bajan a dos renglones dentro de su
+     boton para que quepan los diez. En pantallas angostas (menos de 1180 px)
+     la fila baja sola a varias lineas. Borrando este bloque los botones
+     vuelven a su tamano grande, uno bajo el otro. */
+  .pv-linea { display:flex; flex-wrap:nowrap; align-items:stretch; gap:6px; }
+  .pv-linea > .pv-alertas, .pv-linea > .pv-chips, .pv-linea > .pv-links { display:contents; }
+  .pv-linea .pv-al, .pv-linea .pv-ch, .pv-linea .pv-lk {
+    flex:1 1 auto; min-width:min-content; margin:0; padding:8px 9px; border-radius:10px;
+    font-size:12px; line-height:1.25; align-items:center; text-align:left; }
+  .pv-linea .pv-al { gap:8px; }
+  .pv-linea .pv-al .n { font-size:21px; min-width:0; line-height:1; }
+  .pv-linea .pv-al .tx .t { font-size:12px; line-height:1.25; }
+  .pv-linea .pv-al .tx .s { display:none; }
+  .pv-linea .pv-al.sel::after { content:'\2715'; right:6px; top:3px; font-size:10px; }
+  .pv-linea .pv-ch { display:flex; gap:7px; }
+  .pv-linea .pv-ch b { font-size:14px; margin-left:auto; }
+  .pv-linea .pv-ch i { flex-shrink:0; }
+  .pv-linea .pv-lk { gap:6px; }
+  .pv-linea .pv-lk .fl { font-size:15px; }
+  .pv-linea-sep { flex:0 0 1px; background:#dbe4ed; margin:4px 2px; }
+  @media (max-width:1180px){
+    .pv-linea { flex-wrap:wrap; }
+    .pv-linea .pv-al, .pv-linea .pv-ch, .pv-linea .pv-lk { flex:1 1 150px; }
+    .pv-linea-sep { display:none; }
+  }
+  /* =================================================================== */
 </style>
 </head>
 <body>
@@ -6663,7 +6693,7 @@ function pintarPortada(){
      abierto (Mas de 3 horas / Sin completar), ver marcarAlertasPortada(). */
   const alerta = (fn, n, titulo, sub, tono) =>
       '<button class="pv-al ' + (n > 0 ? 'viva' : 'cero') + (alertaAbierta(fn) ? ' sel' : '')
-    +   '" data-fn="' + fn + '" style="--tono:' + tono + '"'
+    +   '" data-fn="' + fn + '" style="--tono:' + tono + '" title="' + sub + '"'
     +   ' onclick="desdePortada(' + fn + ')">'
     +   '<span class="n">' + (n === null ? '\u2013' : n) + '</span>'
     +   '<span class="tx"><span class="t">' + titulo + '</span>'
@@ -6797,11 +6827,16 @@ function pintarPortada(){
     +   '</section>'
 
 
-    /* ---- 2b. los ultimos dias ---- */
-    +   '<section class="pv-tend" id="tendencia"></section>'
-
     /* ---- 3. lo que pide accion ---- */
-    +   '<div class="pv-rot pv-rot-sec">Requiere atenci\u00f3n</div>'
+    /* (08-10-2026, pedido de Luis) Este bloque y los Reportes subieron: ahora
+       van justo DEBAJO de "Como viene el resto del dia" (antes iban despues
+       de "Los ultimos dias") y los diez botones van en UNA sola linea, dentro
+       de la caja pv-linea. Mismos botones, mismos onclick y mismas cifras:
+       solo cambio el lugar y el tamano. La frase que explica cada tarjeta
+       ("se las sacaron al tecnico...") ahora sale al dejar el mouse encima.
+       El CSS esta en el bloque "BOTONES EN UNA LINEA" al final del <style>. */
+    +   '<div class="pv-rot pv-rot-sec">Requiere atenci\u00f3n \u00b7 Reportes</div>'
+    +   '<div class="pv-linea">'
     +   '<section class="pv-alertas">'
     +     alerta('toggleCaidas', caidas, 'Ca\u00eddas', 'se las sacaron al t\u00e9cnico sin que las tocara', '#c0392f')
     +     alerta('toggleSinCompletar', sinComp, 'T\u00e9cnicos sin completar', 'no han cerrado ninguna todav\u00eda hoy', '#b45309')
@@ -6817,13 +6852,18 @@ function pintarPortada(){
     +   '</div>'
 
     /* ---- 4. enlaces ---- */
-    +   '<div class="pv-rot pv-rot-sec">Reportes</div>'
+    +   '<span class="pv-linea-sep"></span>'
     +   '<nav class="pv-links">'
     +     enlace('toggleComp', 'Completitud al corte de las 13:00')
     +     enlace('verReporteRepe', 'Reporte hist\u00f3rico de direcciones')
     +     enlace(URL_SINMORADORES, 'Sin moradores semanal')
     +     enlace(URL_EQUIPO, 'Detalle por supervisor')
     +   '</nav>'
+    +   '</div>'
+
+
+    /* ---- 2b. los ultimos dias ---- */
+    +   '<section class="pv-tend" id="tendencia"></section>'
 
     + '</div>';
 
