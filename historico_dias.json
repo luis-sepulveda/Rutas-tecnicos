@@ -19429,25 +19429,25 @@
    }
   },
   "08-10-2026": {
-   "hasta": "14:19",
-   "actividades": 131,
+   "hasta": "14:24",
+   "actividades": 130,
    "tecnicos": 30,
    "estados": {
-    "Completado": 38,
+    "Completado": 39,
     "No Realizada": 15,
-    "Iniciado": 18,
-    "Pendiente": 53,
+    "Iniciado": 17,
+    "Pendiente": 50,
+    "en ruta": 3,
     "Cancelado": 5,
-    "Suspendido": 1,
-    "en ruta": 1
+    "Suspendido": 1
    },
-   "rgu": 209.8,
+   "rgu": 207.8,
    "caidas_total": 6,
    "caidas_activas": 6,
    "caidas_resueltas": 0,
    "nuevas": 12,
    "al_bucket": 10,
-   "repetidas": 29,
+   "repetidas": 28,
    "reagendadas": 3,
    "detalle": {
     "caidas": [
@@ -19514,7 +19514,7 @@
       "f": "13-16",
       "hi": "15:05",
       "d": "LOS CHAGUALES 488, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OAUYJ4T",
@@ -19532,7 +19532,7 @@
       "f": "16-19",
       "hi": "18:06",
       "d": "DEL VALLE 055, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Pendiente (ya no está)"
      },
      {
       "o": "1-3OAU2SGI",
@@ -19717,7 +19717,7 @@
       "o": "1-3O9BZ1J4",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:15",
+      "hi": "16:00",
       "d": "LISBOA 475, QUILPUE",
       "e": "Pendiente",
       "tec": "FELIPE SILVA R",
@@ -19784,18 +19784,6 @@
       "visitas": 1,
       "ult_fecha": "06-10-2026",
       "ult_cierre": "Evento Contingencia"
-     },
-     {
-      "o": "1-3O8IP8HD",
-      "cat": "Migración 2 Play",
-      "f": "16-19",
-      "hi": "16:55",
-      "d": "DEL VALLE 055, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOSE PEREZ RANGEL",
-      "visitas": 1,
-      "ult_fecha": "09-09-2026",
-      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3O9I7NYP",
@@ -20000,5 +19988,5 @@
    }
   }
  },
- "generado": "08-10-2026 14:19"
+ "generado": "08-10-2026 14:24"
 }
