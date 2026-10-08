@@ -19429,28 +19429,37 @@
    }
   },
   "08-10-2026": {
-   "hasta": "13:54",
+   "hasta": "14:14",
    "actividades": 131,
    "tecnicos": 30,
    "estados": {
-    "Completado": 34,
-    "Iniciado": 20,
-    "Pendiente": 57,
-    "No Realizada": 13,
-    "en ruta": 1,
+    "Completado": 37,
+    "No Realizada": 14,
+    "Iniciado": 19,
+    "Pendiente": 53,
     "Cancelado": 5,
-    "Suspendido": 1
+    "Suspendido": 1,
+    "en ruta": 2
    },
-   "rgu": 210.7,
-   "caidas_total": 4,
-   "caidas_activas": 4,
+   "rgu": 209.8,
+   "caidas_total": 6,
+   "caidas_activas": 6,
    "caidas_resueltas": 0,
-   "nuevas": 11,
+   "nuevas": 12,
    "al_bucket": 10,
-   "repetidas": 30,
+   "repetidas": 29,
    "reagendadas": 3,
    "detalle": {
     "caidas": [
+     {
+      "o": "1-3OA932P9",
+      "tec": "CESAR MENA OLIVEROS",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "16:57",
+      "d": "SAN MARINO 995 CASA B, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OAC6YLD",
       "tec": "DANIEL NAVARRETE E",
@@ -19467,6 +19476,15 @@
       "f": "13-16",
       "hi": "16:55",
       "d": "MANUEL RODRIGUEZ 351, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3O9XNFLT",
+      "tec": "NICOLAS MOYANO R",
+      "cat": "Migración 2 Play",
+      "f": "16-19",
+      "hi": "17:50",
+      "d": "OJOS DE AGUA 108 EDIF. A1 DEPTO 201, QUILPUE",
       "e": "Pendiente"
      },
      {
@@ -19490,6 +19508,15 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OAVM6XE",
+      "tec": "CESAR MENA OLIVEROS",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "15:05",
+      "d": "LOS CHAGUALES 488, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
       "o": "1-3OAUYJ4T",
       "tec": "LUIS GATICA DAVILA",
       "cat": "Reparación",
@@ -19500,7 +19527,7 @@
      },
      {
       "o": "1-3O8IP8HD",
-      "tec": "JOSE ROJO A",
+      "tec": "JOSE PEREZ RANGEL",
       "cat": "Migración 2 Play",
       "f": "16-19",
       "hi": "18:06",
@@ -19518,7 +19545,7 @@
      },
      {
       "o": "1-3OATO0J8",
-      "tec": "JUAN ARRIAGADA C",
+      "tec": "JEAN ROODLY ORELIEN",
       "cat": "Reparación",
       "f": "13-16",
       "hi": "17:39",
@@ -19596,7 +19623,7 @@
       "f": "10-13",
       "hi": "13:52",
       "d": "AV LOS CARRERA 01347, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "ALFREDO ALCAYAGA F",
       "visitas": 4,
       "ult_fecha": "19-08-2026",
@@ -19625,18 +19652,6 @@
       "visitas": 1,
       "ult_fecha": "02-10-2026",
       "ult_cierre": "Cliente reagenda"
-     },
-     {
-      "o": "1-3OA932P9",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "16:57",
-      "d": "SAN MARINO 995 CASA B, QUILPUE",
-      "e": "Pendiente",
-      "tec": "CESAR MENA OLIVEROS",
-      "visitas": 2,
-      "ult_fecha": "07-10-2026",
-      "ult_cierre": "Sin apoyo vivienda-Pierrack"
      },
      {
       "o": "1-3OAAXDZJ",
@@ -19750,9 +19765,9 @@
       "o": "1-3OA3KG9X",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:02",
+      "hi": "14:05",
       "d": "HAYDN 1661, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JOSE CASTRO P",
       "visitas": 1,
       "ult_fecha": "11-08-2026",
@@ -19774,10 +19789,10 @@
       "o": "1-3O8IP8HD",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "18:06",
+      "hi": "16:55",
       "d": "DEL VALLE 055, VILLA ALEMANA",
       "e": "Pendiente",
-      "tec": "JOSE ROJO A",
+      "tec": "JOSE PEREZ RANGEL",
       "visitas": 1,
       "ult_fecha": "09-09-2026",
       "ult_cierre": "Sin moradores"
@@ -19881,7 +19896,7 @@
       "o": "1-3O8KNLC2",
       "cat": "Migración 3 Play",
       "f": "16-19",
-      "hi": "17:23",
+      "hi": "17:32",
       "d": "AV VICTORIA 298, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATÍAS JAQUE AG",
@@ -19917,7 +19932,7 @@
       "o": "1-3O9OEJUO",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:53",
+      "hi": "15:15",
       "d": "PJE CRISANTEMOS 1977, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -19929,7 +19944,7 @@
       "o": "1-3OA05TAJ",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:43",
+      "hi": "17:05",
       "d": "AV JOHN KENNEDY 1550 EDIF. D DEPTO 104, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -19941,7 +19956,7 @@
       "o": "1-3OAA0GCL",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "16:05",
+      "hi": "16:27",
       "d": "IGNACIO CARRERA PINTO 1650 EDIF. 4 DEPTO 22, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SEBASTIAN DOSSOW A",
@@ -19985,5 +20000,5 @@
    }
   }
  },
- "generado": "08-10-2026 13:54"
+ "generado": "08-10-2026 14:14"
 }
