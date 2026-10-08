@@ -19429,21 +19429,21 @@
    }
   },
   "08-10-2026": {
-   "hasta": "14:24",
+   "hasta": "14:44",
    "actividades": 130,
    "tecnicos": 30,
    "estados": {
-    "Completado": 39,
+    "Completado": 43,
     "No Realizada": 15,
+    "Pendiente": 48,
     "Iniciado": 17,
-    "Pendiente": 50,
-    "en ruta": 3,
     "Cancelado": 5,
-    "Suspendido": 1
+    "Suspendido": 1,
+    "en ruta": 1
    },
    "rgu": 207.8,
-   "caidas_total": 6,
-   "caidas_activas": 6,
+   "caidas_total": 7,
+   "caidas_activas": 7,
    "caidas_resueltas": 0,
    "nuevas": 12,
    "al_bucket": 10,
@@ -19476,6 +19476,15 @@
       "f": "13-16",
       "hi": "16:55",
       "d": "MANUEL RODRIGUEZ 351, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3O8IP8HD",
+      "tec": "JOSE PEREZ RANGEL",
+      "cat": "Migración 2 Play",
+      "f": "16-19",
+      "hi": "16:55",
+      "d": "DEL VALLE 055, VILLA ALEMANA",
       "e": "Pendiente"
      },
      {
@@ -19681,7 +19690,7 @@
       "o": "1-3O9Z3I5L",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:03",
+      "hi": "16:00",
       "d": "POPAYAN (P.MENA) 850, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -19695,7 +19704,7 @@
       "f": "10-13",
       "hi": "11:33",
       "d": "PORVENIR 365, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "EDGAR VALERO C",
       "visitas": 2,
       "ult_fecha": "06-10-2026",
@@ -19762,12 +19771,24 @@
       "ult_cierre": "Zona Roja"
      },
      {
+      "o": "1-3O9I7NYP",
+      "cat": "Migración 2 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "PUELCHES 747, QUILPUE",
+      "e": "Pendiente",
+      "tec": "JORDAN ROA PEREZ",
+      "visitas": 2,
+      "ult_fecha": "06-10-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3OA3KG9X",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:05",
+      "hi": "14:35",
       "d": "HAYDN 1661, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JOSE CASTRO P",
       "visitas": 1,
       "ult_fecha": "11-08-2026",
@@ -19777,7 +19798,7 @@
       "o": "1-3OAN4AMN",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:47",
+      "hi": "16:04",
       "d": "GABRIEL DAZAROLA 711, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE PEREZ RANGEL",
@@ -19786,16 +19807,16 @@
       "ult_cierre": "Evento Contingencia"
      },
      {
-      "o": "1-3O9I7NYP",
-      "cat": "Migración 2 Play",
-      "f": "16-19",
-      "hi": "16:00",
-      "d": "PUELCHES 747, QUILPUE",
+      "o": "1-3OAA0GCL",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "17:12",
+      "d": "IGNACIO CARRERA PINTO 1650 EDIF. 4 DEPTO 22, VILLA ALEMANA",
       "e": "Pendiente",
-      "tec": "JOSE SALAS MEDINA",
+      "tec": "JOSE PEREZ RANGEL",
       "visitas": 2,
-      "ult_fecha": "06-10-2026",
-      "ult_cierre": "Cliente reagenda"
+      "ult_fecha": "07-10-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OAFT8KZ",
@@ -19939,18 +19960,6 @@
       "visitas": 1,
       "ult_fecha": "07-10-2026",
       "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OAA0GCL",
-      "cat": "Reparación",
-      "f": "13-16",
-      "hi": "16:27",
-      "d": "IGNACIO CARRERA PINTO 1650 EDIF. 4 DEPTO 22, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "SEBASTIAN DOSSOW A",
-      "visitas": 2,
-      "ult_fecha": "07-10-2026",
-      "ult_cierre": "Sin moradores"
      }
     ],
     "reagendadas": [
@@ -19970,7 +19979,7 @@
       "f": "10-13",
       "hi": "12:13",
       "d": "GABRIEL GONZALEZ VIDELA 1890 CASA 06, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "DANIEL NAVARRETE E",
       "desde": "05-10-2026"
      },
@@ -19978,7 +19987,7 @@
       "o": "1-3O9Z3I5L",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:03",
+      "hi": "16:00",
       "d": "POPAYAN (P.MENA) 850, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -19988,5 +19997,5 @@
    }
   }
  },
- "generado": "08-10-2026 14:24"
+ "generado": "08-10-2026 14:44"
 }
