@@ -6388,7 +6388,108 @@ function derVistaDirHtml(tb, tot){
     + (sinDir ? ' ' + sinDir + ' derivada' + (sinDir === 1 ? '' : 's') + ' de la semana no tiene' + (sinDir === 1 ? '' : 'n') + ' dirección en el historial (otras comunas).' : '') + '</p>';
 }
 
+/* ---- Vista "A quien auditar" (08-10-2026, 17:45) ----
+   Pedido de Luis: "a que tecnico le podriamos atribuir una mala gestion y asi
+   saber a quienes auditar, ya que hay direcciones que afectan a varios
+   tecnicos y yo pensaria que no es culpa de ellos".
+   Cada derivada se clasifica en una de tres:
+     - NO ATRIBUIBLE: la causal no depende del tecnico (ductos, direccion,
+       NAP, contingencia...).
+     - DIRECCION COMPARTIDA: la causal es sin moradores / reagenda / desiste,
+       pero en esa misma direccion tambien le fallo una visita a OTRO tecnico
+       (antes o despues, desde el 01-08). No es de este tecnico.
+     - PROPIA: sin moradores / reagenda / desiste en una direccion donde no ha
+       fallado ningun otro tecnico. Son las unicas que vale la pena auditar.
+   Derivacion propia = propias / visitadas. Se marca "Auditar" al tecnico cuya
+   derivacion propia es DER_AUD_FACTOR veces la del equipo o mas, con al menos
+   DER_AUD_MIN_SEM visitadas (una semana) o DER_AUD_MIN_4 (cuatro semanas).
+   OJO: "propia" NO prueba mala gestion. Una direccion visitada una sola vez
+   no puede tener otro tecnico. Solo dice donde mirar primero. */
+const DER_AUD_FACTOR = 1.5;    // veces la derivacion propia del equipo
+const DER_AUD_MIN_SEM = 5;     // visitadas minimas, periodo de una semana
+const DER_AUD_MIN_4 = 12;      // visitadas minimas, periodo de cuatro semanas
+let derAudPer = 4;             // 1 = solo la semana elegida | 4 = las ultimas 4
+function setAudPerDeriv(n){ derAudPer = n; derAbierto = null; pintarDeriv(); }
+function derClase(x){
+  if(x.g === 'ot') return 'na';
+  const h = DER_DIR[x.ot];
+  return (h && h.v.some(function(v){ return v.tec && v.tec !== x.tec; })) ? 'comp' : 'prop';
+}
+function derAudTabla(sems, sup){
+  const t = {};
+  (DER || []).forEach(function(x){
+    if(sems.indexOf(x.sem) < 0 || !derEntra(x)) return;
+    if(sup !== 'Todos' && x.sup !== sup) return;
+    const o = t[x.tec] || (t[x.tec] = {tec:x.tec, sup:x.sup, n:0, d:0, na:0, comp:0, prop:0, l:[]});
+    o.n++;
+    if(!x.der) return;
+    o.d++; const c = derClase(x); o[c]++;
+    if(c === 'prop') o.l.push(x);
+  });
+  return Object.keys(t).map(function(k){ return t[k]; });
+}
+function derVistaAudHtml(todasSem){
+  if(!derDirOk) return '<div class="dv-vacio">No se pudo bajar el historial de direcciones, y sin él no se puede saber qué direcciones comparten varios técnicos. Vuelve a abrir la ventana en un rato.</div>';
+  const iSem = todasSem.indexOf(derSem);
+  const sems = todasSem.slice(Math.max(0, iSem - derAudPer + 1), iSem + 1);
+  const minimo = derAudPer === 1 ? DER_AUD_MIN_SEM : DER_AUD_MIN_4;
+  const suma = function(l){ return l.reduce(function(a, o){ a.n += o.n; a.d += o.d; a.na += o.na; a.comp += o.comp; a.prop += o.prop; return a; }, {n:0,d:0,na:0,comp:0,prop:0}); };
+  const eq = suma(derAudTabla(sems, 'Todos'));           // la referencia es SIEMPRE todo el equipo
+  const pEq = eq.n ? 100 * eq.prop / eq.n : 0, corte = pEq * DER_AUD_FACTOR;
+  const tb = derAudTabla(sems, derSup);
+  const tot = suma(tb);
+  const pp = function(o){ return o.n ? 100 * o.prop / o.n : 0; };
+  const audita = function(o){ return o.n >= minimo && o.prop >= 2 && pp(o) >= corte; };
+  tb.sort(function(a, b){ return (audita(b) ? 1 : 0) - (audita(a) ? 1 : 0) || pp(b) - pp(a) || b.prop - a.prop || a.tec.localeCompare(b.tec); });
+  const nAud = tb.filter(audita).length;
+  const f1 = function(v){ return v.toFixed(1).replace('.', ','); };
+  const cel = function(v){ return '<td' + (v ? '' : ' class="cero"') + '>' + v + '</td>'; };
+  const per = sems.length > 1 ? 'semanas ' + derNumSemana(sems[0]) + ' a ' + derNumSemana(sems[sems.length - 1]) : 'semana ' + derNumSemana(sems[0]);
+  let h = '<div class="dv-fil" style="padding:0 0 10px"><span class="rot">Período</span>'
+    + '<button class="' + (derAudPer === 4 ? 'on' : '') + '" onclick="setAudPerDeriv(4)">Últimas 4 semanas</button>'
+    + '<button class="' + (derAudPer === 1 ? 'on' : '') + '" onclick="setAudPerDeriv(1)">Solo esta semana</button></div>'
+    + '<div class="dv-rt"><div class="l1">De las <b>' + tot.d + '</b> derivadas (' + per + (derSup !== 'Todos' ? ', equipo de ' + escR(derTitulo(derSup)) : '') + '):</div><div class="kp">'
+    + '<span><b>' + tot.na + '</b> (' + derPct(tot.na, tot.d) + '%) por causales que no dependen del técnico</span>'
+    + '<span><b>' + tot.comp + '</b> (' + derPct(tot.comp, tot.d) + '%) en direcciones donde también falló otro técnico</span>'
+    + '<span class="si"><b>' + tot.prop + '</b> (' + derPct(tot.prop, tot.d) + '%) propias: solo falló este técnico</span>'
+    + '<span' + (nAud ? ' class="si"' : '') + '><b>' + nAud + '</b> técnico' + (nAud === 1 ? '' : 's') + ' para auditar</span></div>'
+    + '<div class="ot">Derivación propia del equipo: <b>' + f1(pEq) + '%</b> de las visitadas. Se marca para auditar a quien llega a <b>' + f1(corte)
+    + '%</b> o más (' + String(DER_AUD_FACTOR).replace('.', ',') + ' veces el equipo), con ' + minimo + ' o más visitadas y al menos 2 propias.</div></div>';
+  if(!tb.length) return h + '<div class="dv-vacio">Sin ' + derNomTipo() + ' en ese período para ese supervisor.</div>';
+  h += '<table><thead><tr><th>Técnico</th><th>Visitadas</th><th>Derivadas</th><th>% derivación</th>'
+    + '<th title="Causales que no dependen del técnico">No atribuibles</th><th title="Sin moradores, reagenda o desiste en una dirección donde también falló otro técnico">Dirección compartida</th>'
+    + '<th title="Sin moradores, reagenda o desiste en una dirección donde no ha fallado ningún otro técnico">Propias</th><th title="Propias / visitadas">% derivación propia</th></tr></thead><tbody>';
+  tb.forEach(function(o, i){
+    const a = audita(o), pocas = o.n < minimo;
+    h += '<tr class="t' + (a ? ' sobre' : '') + '" onclick="verTecDeriv(' + i + ')" title="Toca para ver las órdenes propias, que son las que hay que auditar">'
+      + '<td>' + (derAbierto === i ? '▾ ' : '▸ ') + escR(derTitulo(o.tec)) + '<small>' + escR(derTitulo(o.sup)) + '</small>'
+      +   (a ? '<span class="marca">auditar</span>' : (pocas && pp(o) >= corte ? '<span class="marca pocas">pocas ' + derNomTipo() + '</span>' : '')) + '</td>'
+      + '<td>' + o.n + '</td>' + cel(o.d) + '<td>' + derPct(o.d, o.n) + '%</td>' + cel(o.na) + cel(o.comp) + cel(o.prop)
+      + '<td class="p">' + Math.round(pp(o)) + '%</td></tr>';
+    if(derAbierto === i){
+      h += '<tr class="det"><td colspan="8">' + (o.l.length
+        ? '<div class="dv-rt"><div class="l1"><b>' + o.l.length + '</b> ' + (o.l.length === 1 ? 'orden propia' : 'órdenes propias') + ' de ' + escR(derTitulo(o.tec)) + ', para auditar</div></div>'
+          + '<table class="dv-vis"><tbody>' + o.l.slice().sort(function(x, y){ return x.iso.localeCompare(y.iso) || x.ot.localeCompare(y.ot); }).map(function(x){
+              const hd = DER_DIR[x.ot], nom = hd ? hd.d : DER_UNI[x.ot];
+              const suyas = hd ? hd.v.length : 1;
+              return '<tr><td>' + x.f + '</td><td><b>' + escR(x.ot) + '</b></td><td>' + escR(x.act) + '</td><td>' + escR(x.fr) + '</td><td><span class="tg at">' + escR(x.cod) + '</span></td><td>'
+                + (nom ? escR(derTitulo(nom)) : '<span class="sd">sin dirección en el historial</span>') + '</td><td>'
+                + (suyas > 1 ? '<span class="tg at">' + suyas + ' visitas fallidas, todas suyas</span>' : 'única visita fallida')
+                + (x.desp ? ' <span class="tg ok">se completó el ' + x.desp + '</span>' : '') + '</td></tr>';
+            }).join('') + '</tbody></table>'
+        : 'Ninguna de sus derivadas es propia: todas fueron por causales ajenas o en direcciones donde también falló otro técnico.') + '</td></tr>';
+    }
+  });
+  return h + '</tbody></table>'
+    + '<p class="dv-nota"><b>Cómo se clasifica cada derivada.</b> <b>No atribuible</b>: la causal no depende del técnico (ductos, dirección, NAP, contingencia). '
+    + '<b>Dirección compartida</b>: sin moradores, cliente reagenda o cliente desiste en una dirección donde también le falló una visita a otro técnico desde el 01-08. '
+    + '<b>Propia</b>: esas mismas causales en una dirección donde no ha fallado ningún otro técnico.<br>'
+    + '<b>Ojo:</b> que una derivada sea "propia" no prueba mala gestión; solo indica dónde mirar primero. Una dirección visitada una sola vez no puede tener otro técnico. '
+    + 'La marca "auditar" compara a cada técnico con el equipo completo, no con su supervisor.</p>';
+}
+
 function pintarDeriv(){
+
 
   const cuerpo = document.getElementById('dvCuerpo'), semBox = document.getElementById('dvSemanas'), supBox = document.getElementById('dvSups');
   if(!cuerpo) return;
@@ -6418,6 +6519,7 @@ function pintarDeriv(){
   supBox.innerHTML = '<span class="rot">Vista</span>'
     + '<button class="' + (derVista === 'tec' ? 'on' : '') + '" onclick="setVistaDeriv(\'tec\')">Por técnico</button>'
     + '<button class="' + (derVista === 'dir' ? 'on' : '') + '" onclick="setVistaDeriv(\'dir\')">Por dirección</button>'
+    + '<button class="' + (derVista === 'aud' ? 'on' : '') + '" onclick="setVistaDeriv(\'aud\')">A quién auditar</button>'
     + '<span class="rot" style="margin-left:14px">Supervisor</span>' + sups.map(function(s){
     return '<button class="' + (s === derSup ? 'on' : '') + '" onclick="setSupDeriv(\'' + escR(s) + '\')">' + (s === 'Todos' ? 'Todos' : derTitulo(s)) + '</button>';
   }).join('') + '<span class="rot" style="margin-left:14px">Tipo</span>' + DER_TIPOS.map(function(t){
@@ -6466,6 +6568,7 @@ function pintarDeriv(){
     + '</div>';
   if(!tb.length){ cuerpo.innerHTML = h + '<div class="dv-vacio">Sin ' + derNomTipo() + ' en esta semana para ese supervisor.</div>'; return; }
   if(derVista === 'dir'){ cuerpo.innerHTML = h + derVistaDirHtml(tb, tot); return; }
+  if(derVista === 'aud'){ cuerpo.innerHTML = derVistaAudHtml(todasSem); return; }
   h += '<table><thead><tr><th>Técnico</th><th>Visitadas</th><th>Completadas</th><th>Derivadas</th><th>% derivación</th>'
     + '<th title="Su % de derivación en cada una de las ' + DER_TEND + ' semanas que terminan en esta">Últimas ' + DER_TEND + ' semanas</th><th>Sin moradores</th><th>Cliente reagenda</th><th>Cliente desiste</th><th>No atribuibles</th></tr></thead><tbody>';
   tb.forEach(function(o, i){
