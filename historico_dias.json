@@ -19429,15 +19429,15 @@
    }
   },
   "08-10-2026": {
-   "hasta": "16:09",
+   "hasta": "16:19",
    "actividades": 136,
    "tecnicos": 30,
    "estados": {
-    "Completado": 59,
-    "No Realizada": 20,
-    "Iniciado": 20,
-    "Pendiente": 22,
-    "en ruta": 5,
+    "Completado": 61,
+    "No Realizada": 23,
+    "en ruta": 8,
+    "Iniciado": 18,
+    "Pendiente": 16,
     "Suspendido": 3,
     "Cancelado": 7
    },
@@ -19541,7 +19541,7 @@
       "f": "13-16",
       "hi": "14:52",
       "d": "CERRO PIEDRA ROJA 1820, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OAVM6XE",
@@ -19599,7 +19599,7 @@
      },
      {
       "o": "1-3OAQCBAV",
-      "tec": "JOSE PEREZ RANGEL",
+      "tec": "EDGAR VALERO C",
       "cat": "Migración 1 Play",
       "f": "16-19",
       "hi": "17:25",
@@ -19738,6 +19738,18 @@
       "ult_cierre": "Falta de dotación"
      },
      {
+      "o": "1-3OA05TAJ",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "16:32",
+      "d": "AV JOHN KENNEDY 1550 EDIF. D DEPTO 104, VILLA ALEMANA",
+      "e": "en ruta",
+      "tec": "EDGAR VALERO C",
+      "visitas": 1,
+      "ult_fecha": "07-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OAAL6E3",
       "cat": "Migración 1 Play",
       "f": "13-16",
@@ -19753,7 +19765,7 @@
       "o": "1-3OAD5NF2",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "16:30",
+      "hi": "16:24",
       "d": "BILBAO 1544 DEPTO 21, QUILPUE",
       "e": "Pendiente",
       "tec": "GEEYSER PEREZ O",
@@ -19777,9 +19789,9 @@
       "o": "1-3OAN4AMN",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "17:07",
+      "hi": "16:26",
       "d": "GABRIEL DAZAROLA 711, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JOEL GUSTAVE GUSTA",
       "visitas": 1,
       "ult_fecha": "06-10-2026",
@@ -19815,7 +19827,7 @@
       "f": "16-19",
       "hi": "16:15",
       "d": "PUELCHES 747, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JORDAN ROA PEREZ",
       "visitas": 2,
       "ult_fecha": "06-10-2026",
@@ -19834,10 +19846,22 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3O8KNLC2",
+      "cat": "Migración 3 Play",
+      "f": "16-19",
+      "hi": "16:58",
+      "d": "AV VICTORIA 298, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOSE ROJO A",
+      "visitas": 1,
+      "ult_fecha": "30-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OAFT8KZ",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "16:00",
+      "hi": "16:17",
       "d": "SANTA ELENA 098 EDIF. 1 DEPTO 301, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JUAN ARRIAGADA C",
@@ -19893,18 +19917,6 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3OA05TAJ",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "16:41",
-      "d": "AV JOHN KENNEDY 1550 EDIF. D DEPTO 104, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "LUIS GATICA DAVILA",
-      "visitas": 1,
-      "ult_fecha": "07-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3O9BIDZ3",
       "cat": "Migración 1 Play",
       "f": "10-13",
@@ -19927,18 +19939,6 @@
       "visitas": 2,
       "ult_fecha": "02-10-2026",
       "ult_cierre": "No Factible"
-     },
-     {
-      "o": "1-3O8KNLC2",
-      "cat": "Migración 3 Play",
-      "f": "16-19",
-      "hi": "17:54",
-      "d": "AV VICTORIA 298, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "MATÍAS JAQUE AG",
-      "visitas": 1,
-      "ult_fecha": "30-09-2026",
-      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OA4L9O3",
@@ -20024,5 +20024,5 @@
    }
   }
  },
- "generado": "08-10-2026 16:09"
+ "generado": "08-10-2026 16:19"
 }
