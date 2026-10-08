@@ -19429,23 +19429,23 @@
    }
   },
   "08-10-2026": {
-   "hasta": "13:03",
-   "actividades": 128,
+   "hasta": "13:14",
+   "actividades": 129,
    "tecnicos": 30,
    "estados": {
     "Iniciado": 21,
-    "Pendiente": 65,
+    "Pendiente": 63,
     "No Realizada": 10,
-    "Completado": 25,
+    "Completado": 26,
+    "en ruta": 4,
     "Cancelado": 4,
-    "Suspendido": 1,
-    "en ruta": 2
+    "Suspendido": 1
    },
-   "rgu": 207.1,
-   "caidas_total": 2,
-   "caidas_activas": 2,
+   "rgu": 207.2,
+   "caidas_total": 3,
+   "caidas_activas": 3,
    "caidas_resueltas": 0,
-   "nuevas": 8,
+   "nuevas": 9,
    "al_bucket": 10,
    "repetidas": 30,
    "reagendadas": 3,
@@ -19468,9 +19468,27 @@
       "hi": "15:09",
       "d": "GABRIEL DAZAROLA 843, VILLA ALEMANA",
       "e": "Pendiente"
+     },
+     {
+      "o": "1-3OAGI7AZ",
+      "tec": "YENDER BOSCAN CADENAS",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "15:02",
+      "d": "GALLEGUILLOS 1279, QUILPUE",
+      "e": "Pendiente"
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OAU2SGI",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "13:12",
+      "d": "ALEMPARTE 277 CASA 9, QUILPUE",
+      "e": "en ruta"
+     },
      {
       "o": "1-3OATO0J8",
       "tec": "JUAN ARRIAGADA C",
@@ -19558,18 +19576,6 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3O9BZ1J4",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "18:46",
-      "d": "LISBOA 475, QUILPUE",
-      "e": "Pendiente",
-      "tec": "ALFREDO ALCAYAGA F",
-      "visitas": 1,
-      "ult_fecha": "06-10-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
       "o": "1-3O7HF8N7",
       "cat": "Migración 2 Play",
       "f": "10-13",
@@ -19621,7 +19627,7 @@
       "o": "1-3O9ME1HJ",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "15:56",
+      "hi": "16:13",
       "d": "CARMEN 1280, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
@@ -19657,13 +19663,25 @@
       "o": "1-3OAAL6E3",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "14:06",
+      "hi": "13:06",
       "d": "MARGARITAS 1884, QUILPUE",
       "e": "Pendiente",
       "tec": "FELIPE SILVA R",
       "visitas": 3,
       "ult_fecha": "18-08-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3O9BZ1J4",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "16:44",
+      "d": "LISBOA 475, QUILPUE",
+      "e": "Pendiente",
+      "tec": "FELIPE SILVA R",
+      "visitas": 1,
+      "ult_fecha": "06-10-2026",
+      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3OAFEJR4",
@@ -19800,7 +19818,7 @@
       "o": "1-3O9I7NYP",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "16:07",
+      "hi": "16:15",
       "d": "PUELCHES 747, QUILPUE",
       "e": "Pendiente",
       "tec": "MARCO PEREZ G",
@@ -19848,9 +19866,9 @@
       "o": "1-3OA4LWO7",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "12:59",
+      "hi": "13:04",
       "d": "PJE 2 260, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "NICOLAS MOYANO R",
       "visitas": 3,
       "ult_fecha": "02-10-2026",
@@ -19860,7 +19878,7 @@
       "o": "1-3O9XNFLT",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "17:37",
+      "hi": "17:50",
       "d": "OJOS DE AGUA 108 EDIF. A1 DEPTO 201, QUILPUE",
       "e": "Pendiente",
       "tec": "NICOLAS MOYANO R",
@@ -19940,5 +19958,5 @@
    }
   }
  },
- "generado": "08-10-2026 13:03"
+ "generado": "08-10-2026 13:14"
 }
