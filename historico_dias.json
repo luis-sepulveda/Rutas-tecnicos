@@ -20031,26 +20031,26 @@
    }
   },
   "09-10-2026": {
-   "hasta": "12:36",
-   "actividades": 128,
+   "hasta": "12:51",
+   "actividades": 134,
    "tecnicos": 34,
    "estados": {
-    "Iniciado": 25,
-    "Pendiente": 62,
-    "Completado": 26,
-    "No Realizada": 11,
-    "en ruta": 1,
+    "Completado": 32,
+    "en ruta": 5,
+    "Pendiente": 63,
+    "Iniciado": 18,
+    "No Realizada": 13,
     "Suspendido": 2,
     "Cancelado": 1
    },
-   "rgu": 188.6,
+   "rgu": 200.6,
    "caidas_total": 9,
    "caidas_activas": 8,
    "caidas_resueltas": 1,
    "nuevas": 13,
    "al_bucket": 7,
-   "repetidas": 19,
-   "reagendadas": 2,
+   "repetidas": 21,
+   "reagendadas": 3,
    "detalle": {
     "caidas": [
      {
@@ -20134,16 +20134,16 @@
       "f": "10-13",
       "hi": "12:11",
       "d": "SANTA MARGARITA 1177, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OBFSJPX",
-      "tec": "PABLO HERNANEZ FERNANDEZ",
+      "tec": "JEAN ROODLY ORELIEN",
       "cat": "Alta 2 Play",
       "f": "10-13",
       "hi": "11:48",
       "d": "EL CIRUELILLO 1488, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OBEO1SB",
@@ -20156,7 +20156,7 @@
      },
      {
       "o": "1-3OBEN5D2",
-      "tec": "ANTONHY MORALES MENDOZA",
+      "tec": "ALFREDO ALCAYAGA F",
       "cat": "Reparación",
       "f": "13-16",
       "hi": "14:08",
@@ -20188,7 +20188,7 @@
       "f": "13-16",
       "hi": "16:44",
       "d": "AV JOHN KENNEDY 1550 EDIF. G DEPTO 102, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OBDF9KW",
@@ -20250,7 +20250,7 @@
       "o": "1-3OBFNR5M",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:50",
+      "hi": "14:43",
       "d": "AZTECAS 225, QUILPUE",
       "e": "Pendiente",
       "tec": "ALEXIS JARA",
@@ -20307,6 +20307,18 @@
       "ult_cierre": "Clte desiste motivo comercial"
      },
      {
+      "o": "1-3OB08NWL",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "17:16",
+      "d": "LOS CORCHOS 2693, QUILPUE",
+      "e": "Pendiente",
+      "tec": "FELIPE SILVA R",
+      "visitas": 1,
+      "ult_fecha": "08-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3O9I41WT",
       "cat": "Migración 2 Play",
       "f": "13-16",
@@ -20324,7 +20336,7 @@
       "f": "10-13",
       "hi": "10:18",
       "d": "BUENOS AIRES 1124, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JORDAN ROA PEREZ",
       "visitas": 1,
       "ult_fecha": "06-10-2026",
@@ -20334,7 +20346,7 @@
       "o": "1-3OB4KMW0",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:20",
+      "hi": "15:17",
       "d": "GERONA 78, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -20348,7 +20360,7 @@
       "f": "10-13",
       "hi": "10:58",
       "d": "PJE UNO 1238, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JOSE ROJO A",
       "visitas": 2,
       "ult_fecha": "01-10-2026",
@@ -20413,6 +20425,18 @@
       "visitas": 1,
       "ult_fecha": "19-08-2026",
       "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3O8TZC6Y",
+      "cat": "Migración 2 Play",
+      "f": "16-19",
+      "hi": "17:24",
+      "d": "LOS AVELLANOS 722, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "LUIS CASTRO TORRES",
+      "visitas": 1,
+      "ult_fecha": "05-10-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OB2H2TZ",
@@ -20480,10 +20504,20 @@
       "o": "1-3OAG6JNK",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:45",
+      "hi": "16:49",
       "d": "GABRIEL DAZAROLA 843, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JEAN ROODLY ORELIEN",
+      "desde": "08-10-2026"
+     },
+     {
+      "o": "1-3OAU2IDL",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "17:34",
+      "d": "MANUEL RODRIGUEZ 351, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOSE CASTRO P",
       "desde": "08-10-2026"
      },
      {
@@ -20500,5 +20534,5 @@
    }
   }
  },
- "generado": "09-10-2026 12:36"
+ "generado": "09-10-2026 12:51"
 }
