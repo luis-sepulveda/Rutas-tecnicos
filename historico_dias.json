@@ -20031,24 +20031,34 @@
    }
   },
   "09-10-2026": {
-   "hasta": "09:15",
-   "actividades": 103,
+   "hasta": "09:20",
+   "actividades": 115,
    "tecnicos": 30,
    "estados": {
-    "Pendiente": 102,
-    "en ruta": 1
+    "en ruta": 6,
+    "Pendiente": 109
    },
-   "rgu": 161.0,
+   "rgu": 180.5,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 0,
+   "nuevas": 1,
    "al_bucket": 0,
-   "repetidas": 21,
-   "reagendadas": 1,
+   "repetidas": 23,
+   "reagendadas": 2,
    "detalle": {
     "caidas": [],
-    "nuevas": [],
+    "nuevas": [
+     {
+      "o": "1-3OBCIBHJ",
+      "tec": "LUIS GATICA DAVILA",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "15:26",
+      "d": "SANTA MARGARITA 1354 CASA B, VILLA ALEMANA",
+      "e": "Pendiente"
+     }
+    ],
     "repetidas": [
      {
       "o": "1-3OAVUH1Q",
@@ -20066,7 +20076,7 @@
       "o": "1-3O8OIBFX",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "18:51",
       "d": "LAS GARZAS 1151, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
@@ -20126,7 +20136,7 @@
       "o": "1-3O991JXX",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "10:51",
+      "hi": "10:21",
       "d": "BUENOS AIRES 1124, QUILPUE",
       "e": "Pendiente",
       "tec": "JORDAN ROA PEREZ",
@@ -20138,7 +20148,7 @@
       "o": "1-3OB0OX8G",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "14:27",
+      "hi": "14:00",
       "d": "PUELCHES 747, QUILPUE",
       "e": "Pendiente",
       "tec": "JORDAN ROA PEREZ",
@@ -20181,6 +20191,18 @@
       "visitas": 2,
       "ult_fecha": "01-10-2026",
       "ult_cierre": "No Factible"
+     },
+     {
+      "o": "1-3OAYO2JD",
+      "cat": "Migración 2 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "VALLE DEL PARAISO 2907 EDIF. A DEPTO 402, QUILPUE",
+      "e": "Pendiente",
+      "tec": "KEVIN TAPIA RETAMAL",
+      "visitas": 5,
+      "ult_fecha": "06-10-2026",
+      "ult_cierre": "NAP Problema niveles PO"
      },
      {
       "o": "1-3OA11IUW",
@@ -20241,6 +20263,18 @@
       "visitas": 1,
       "ult_fecha": "08-10-2026",
       "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3O8TZC6Y",
+      "cat": "Migración 2 Play",
+      "f": "16-19",
+      "hi": "17:32",
+      "d": "LOS AVELLANOS 722, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "MATIAS APELEO APELEO",
+      "visitas": 1,
+      "ult_fecha": "05-10-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3O9I41WT",
@@ -20305,6 +20339,16 @@
     ],
     "reagendadas": [
      {
+      "o": "1-3OAU2IDL",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "MANUEL RODRIGUEZ 351, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "ESTEBAN PIZARRO QUINTANA",
+      "desde": "08-10-2026"
+     },
+     {
       "o": "1-3O6NEFRP",
       "cat": "Alta Traslado",
       "f": "10-13",
@@ -20318,5 +20362,5 @@
    }
   }
  },
- "generado": "09-10-2026 09:15"
+ "generado": "09-10-2026 09:20"
 }
