@@ -2296,6 +2296,33 @@
   .pv-linea .pv-al .n, .pv-linea .pv-ch b { min-width:20px; height:20px; padding:0 5px; }
   /* el encabezado del cuadro "Por visitar" no se queda pegado arriba al bajar (se montaba sobre el de la tabla de tecnicos) */
   #modalDer table.dv-hoy-r th { position:static; }
+
+  /* ---- BARRA de migraciones derivadas hoy, arriba de la portada (09-10-2026, 10:45) ---- */
+  .pv-der { display:flex; align-items:center; gap:14px; background:#fff; border:1px solid #dbe4ed; border-left:5px solid #cbd5e1; border-radius:14px;
+    padding:9px 14px; margin:0 0 12px; cursor:pointer; min-width:0; }
+  .pv-der:hover { box-shadow:0 4px 12px rgba(20,45,70,.09); }
+  .pv-der.hay { border-color:#fecaca; border-left-color:#b91c1c; background:#fff8f8; }
+  .pv-der.nueva { box-shadow:0 0 0 3px rgba(185,28,28,.22); animation:pvDerPulso 1.4s ease-in-out 4; }
+  @keyframes pvDerPulso { 0%,100% { box-shadow:0 0 0 3px rgba(185,28,28,.22); } 50% { box-shadow:0 0 0 7px rgba(185,28,28,.10); } }
+  @media (prefers-reduced-motion: reduce){ .pv-der.nueva { animation:none; } }
+  .pv-der .cab { display:flex; align-items:center; gap:10px; flex-shrink:0; }
+  .pv-der .n { font-family:'Archivo',sans-serif; font-size:24px; font-weight:700; min-width:38px; height:38px; border-radius:999px; background:#e2e8f0; color:#5f7386;
+    display:inline-flex; align-items:center; justify-content:center; padding:0 8px; }
+  .pv-der.hay .n { background:#b91c1c; color:#fff; }
+  .pv-der .tt b { display:block; font-size:14px; color:#15293e; }
+  .pv-der .tt small { font-size:12px; color:#5f7386; }
+  .pv-der .nv { font-size:10.5px; font-weight:700; letter-spacing:.06em; background:#b91c1c; color:#fff; border-radius:999px; padding:2px 8px; }
+  .pv-der .lst { display:flex; gap:8px; flex:1 1 auto; min-width:0; overflow:hidden; align-items:center; }
+  .pv-der .it { flex:0 1 auto; min-width:0; font-size:12.5px; color:#15293e; background:#fff; border:1px solid #fecaca; border-radius:9px; padding:4px 10px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .pv-der .it.nu { border-color:#b91c1c; box-shadow:inset 0 0 0 1px #b91c1c; }
+  .pv-der .it small { display:block; font-size:11.5px; color:#5f7386; overflow:hidden; text-overflow:ellipsis; }
+  .pv-der .mas { font-size:12.5px; color:#b91c1c; font-weight:600; white-space:nowrap; flex-shrink:0; }
+  .pv-der .nada { font-size:13px; color:#8fa1b3; }
+  .pv-der .acc { display:flex; gap:6px; flex-shrink:0; }
+  .pv-der .acc button { border:1px solid #d3dde6; background:#fff; color:#41586f; border-radius:8px; padding:5px 10px; font:inherit; font-size:12px; cursor:pointer; white-space:nowrap; }
+  .pv-der .acc button:hover { background:#f1f5f9; }
+  .pv-der .acc .son.falta { border-color:#f59e0b; background:#fffbeb; color:#92400e; }
+  @media (max-width:900px){ .pv-der { flex-wrap:wrap; } .pv-der .lst { flex-basis:100%; flex-wrap:wrap; } }
 </style>
 </head>
 <body>
@@ -7090,21 +7117,77 @@ function derHoyMigDer(){
   const l = [];
   Object.keys(typeof DB === 'object' && DB ? DB : {}).forEach(function(k){ (DB[k] || []).forEach(function(j){
     if(String(j.t || '').trim().toUpperCase().indexOf('MIGRA') !== 0) return;
-    if(j.e === 'Completado' || j.e === 'No Realizada') l.push({ tec:k, o:String(j.o || ''), d:String(j.d || ''), cie:String(j.cie || ''), der:j.e === 'No Realizada', fr:String(j.f || '') });
+    if(j.e === 'Completado' || j.e === 'No Realizada') l.push({ tec:k, o:String(j.o || ''), d:String(j.d || ''), cie:String(j.cie || ''), der:j.e === 'No Realizada', fr:String(j.f || ''), hf:String(j.hf || '') });
   }); });
   return l;
 }
 function derHoyConteo(){ const l = derHoyMigDer(); return { v: l.length, d: l.filter(function(x){ return x.der; }).length }; }
+/* ---- Barra fija en la portada + sonido (09-10-2026, 10:45) ----
+   Luis: "que la alerta suene y que se vea dentro de la pantalla que te
+   muestro". La barra va arriba de todo en la portada (antes del cuadro del
+   dia), siempre a la vista: cuantas migraciones van derivadas hoy y las
+   ultimas tres con tecnico, quiebre y direccion. Roja si hay alguna, y con
+   la marca NUEVA mientras no se haya mirado la ultima.
+   El sonido son tres pitidos hechos con el navegador (sin archivos). Los
+   navegadores NO dejan sonar a una pagina hasta que la persona hace un clic
+   en ella: por eso el audio se "despierta" con el primer clic o tecla, y la
+   barra dice si el sonido esta listo. Se puede silenciar desde la barra. */
+let DER_AUDIO = null, DER_SONIDO = true;
+function derAudioOk(){ return !!(DER_AUDIO && DER_AUDIO.state === 'running'); }
+function derAudioListo(){
+  try {
+    if(!DER_AUDIO){ const C = window.AudioContext || window.webkitAudioContext; if(C) DER_AUDIO = new C(); }
+    if(DER_AUDIO && DER_AUDIO.state === 'suspended') DER_AUDIO.resume().then(derPintarSonido).catch(function(){});
+  } catch(e){}
+  derPintarSonido();
+}
+function derSonar(){
+  if(!DER_SONIDO) return false;
+  derAudioListo();
+  if(!derAudioOk()) return false;
+  try {
+    const t0 = DER_AUDIO.currentTime;
+    [[0, 880], [0.22, 880], [0.44, 1175]].forEach(function(n){
+      const o = DER_AUDIO.createOscillator(), g = DER_AUDIO.createGain();
+      o.type = 'sine'; o.frequency.value = n[1];
+      g.gain.setValueAtTime(0.0001, t0 + n[0]); g.gain.exponentialRampToValueAtTime(0.35, t0 + n[0] + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, t0 + n[0] + 0.18);
+      o.connect(g); g.connect(DER_AUDIO.destination); o.start(t0 + n[0]); o.stop(t0 + n[0] + 0.2);
+    });
+    return true;
+  } catch(e){ return false; }
+}
+function derSonidoTxt(){ return !DER_SONIDO ? '🔕 Sonido apagado' : derAudioOk() ? '🔔 Sonido activado' : '🔔 Sonido: haz un clic en la página para activarlo'; }
+function derPintarSonido(){ const b = document.getElementById('derSonBtn'); if(b){ b.textContent = derSonidoTxt(); b.className = 'son' + (DER_SONIDO && !derAudioOk() ? ' falta' : ''); } }
+function derToggleSonido(ev){ if(ev) ev.stopPropagation(); DER_SONIDO = !DER_SONIDO; derAudioListo(); if(DER_SONIDO) setTimeout(derSonar, 80); derPintarSonido(); }
+function derProbarSonido(ev){ if(ev) ev.stopPropagation(); derAudioListo(); setTimeout(derSonar, 80); }
+document.addEventListener('click', derAudioListo, true);
+document.addEventListener('keydown', derAudioListo, true);
+function derBarraHtml(){
+  let l; try { l = derHoyMigDer(); } catch(e){ return ''; }
+  const ders = l.filter(function(x){ return x.der; }).sort(function(a, b){ return b.hf.localeCompare(a.hf); });
+  const nuevas = {}; DER_AVISO.forEach(function(x){ nuevas[x.o] = 1; });
+  return '<section class="pv-der' + (ders.length ? ' hay' : '') + (DER_AVISO.length ? ' nueva' : '') + '" onclick="abrirDerivHoy()" title="Toca para ver el detalle en Derivación → Hoy en vivo">'
+    + '<div class="cab"><span class="n">' + ders.length + '</span><span class="tt"><b>Migraciones derivadas hoy</b><small>' + ders.length + ' de ' + l.length + ' ya visitadas</small></span>'
+    + (DER_AVISO.length ? '<span class="nv">NUEVA</span>' : '') + '</div>'
+    + '<div class="lst">' + (ders.length ? ders.slice(0, 3).map(function(x){ return '<span class="it' + (nuevas[x.o] ? ' nu' : '') + '"><b>' + escR(derTitulo(x.tec)) + '</b> · ' + escR(x.cie || 'No realizada')
+          + '<small>' + escR(derTitulo(x.d)) + (x.hf ? ' · cerró ' + escR(x.hf) : '') + '</small></span>'; }).join('')
+        + (ders.length > 3 ? '<span class="mas">y ' + (ders.length - 3) + ' más ›</span>' : '') : '<span class="nada">Ninguna todavía.</span>') + '</div>'
+    + '<div class="acc"><button id="derSonBtn" class="son' + (DER_SONIDO && !derAudioOk() ? ' falta' : '') + '" onclick="derToggleSonido(event)" title="Activa o apaga el sonido del aviso">' + derSonidoTxt() + '</button>'
+    + '<button class="pr" onclick="derProbarSonido(event)" title="Hace sonar el aviso para probar el volumen">Probar</button></div></section>';
+}
 function abrirDerivHoy(){ derVista = 'hoy'; derTipo = 'MIGRA'; derSup = 'Todos'; derAbierto = null; cerrarAvisoDer(); abrirDeriv(); }
 let DER_VISTAS_HOY = null;      // peticiones derivadas ya avisadas (null = todavia no se ha mirado)
 let DER_AVISO = [];             // las nuevas que estan en el aviso flotante
-function cerrarAvisoDer(){ DER_AVISO = []; const a = document.getElementById('avisoDer'); if(a) a.remove(); }
+function cerrarAvisoDer(){ const habia = DER_AVISO.length; DER_AVISO = []; const a = document.getElementById('avisoDer'); if(a) a.remove();
+  if(habia){ const b = document.querySelector('.pv-der'); if(b){ b.classList.remove('nueva'); b.querySelectorAll('.nv').forEach(function(e){ e.remove(); }); b.querySelectorAll('.it.nu').forEach(function(e){ e.classList.remove('nu'); }); } } }
 function revisarAvisoDer(){
   const ders = derHoyMigDer().filter(function(x){ return x.der; });
   if(DER_VISTAS_HOY === null){ DER_VISTAS_HOY = {}; ders.forEach(function(x){ DER_VISTAS_HOY[x.o] = 1; }); return; }
   const nuevas = ders.filter(function(x){ return !DER_VISTAS_HOY[x.o]; });
   if(!nuevas.length) return;
   nuevas.forEach(function(x){ DER_VISTAS_HOY[x.o] = 1; DER_AVISO.push(x); });
+  derSonar();
   let a = document.getElementById('avisoDer');
   if(!a){ a = document.createElement('div'); a.id = 'avisoDer'; document.body.appendChild(a); }
   const c = derHoyConteo();
@@ -8273,6 +8356,7 @@ function pintarPortada(){
     + '</header>'
 
     + '<div class="pv-in">'
+    +   derBarraHtml()   /* migraciones derivadas hoy, siempre a la vista (09-10-2026) */
 
     /* ---- 1. como va el dia ---- */
     +   '<section class="pv-hero">'
