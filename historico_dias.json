@@ -20031,21 +20031,22 @@
    }
   },
   "09-10-2026": {
-   "hasta": "09:50",
-   "actividades": 119,
+   "hasta": "10:00",
+   "actividades": 120,
    "tecnicos": 34,
    "estados": {
-    "Pendiente": 90,
-    "Iniciado": 18,
-    "en ruta": 11
+    "Pendiente": 89,
+    "Iniciado": 26,
+    "en ruta": 4,
+    "Completado": 1
    },
-   "rgu": 180.5,
+   "rgu": 180.0,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
-   "nuevas": 3,
+   "nuevas": 4,
    "al_bucket": 0,
-   "repetidas": 20,
+   "repetidas": 19,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
@@ -20070,13 +20071,22 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OBD3L2Z",
+      "tec": "LUIS MARTIN NUÑEZ",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "GRECIA 146, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3OBCRKKB",
       "tec": "YENDER BOSCAN CADENAS",
       "cat": "Modificación de Servicio",
       "f": "10-13",
       "hi": "09:38",
       "d": "DAVID CORTES 842, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OBCK45U",
@@ -20114,9 +20124,9 @@
       "o": "1-3OA3EE8U",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "09:31",
+      "hi": "09:51",
       "d": "HUANHUALI 456 EDIF. B3 DEPTO 31, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "ESTEBAN PIZARRO QUINTANA",
       "visitas": 1,
       "ult_fecha": "07-10-2026",
@@ -20150,9 +20160,9 @@
       "o": "1-3O9YNHRR",
       "cat": "Migración 3 Play",
       "f": "10-13",
-      "hi": "09:30",
+      "hi": "10:00",
       "d": "EL MIRADOR 738 CASA 24, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Pendiente",
       "tec": "JEAN ROODLY ORELIEN",
       "visitas": 1,
       "ult_fecha": "07-10-2026",
@@ -20231,22 +20241,10 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OB08NWL",
-      "cat": "Alta 2 Play",
-      "f": "13-16",
-      "hi": "14:00",
-      "d": "LOS CORCHOS 2693, QUILPUE",
-      "e": "Pendiente",
-      "tec": "LUIS MARTIN NUÑEZ",
-      "visitas": 1,
-      "ult_fecha": "08-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OB2H2TZ",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "11:51",
+      "hi": "12:00",
       "d": "SIRIA 449, QUILPUE",
       "e": "Pendiente",
       "tec": "MARCO PEREZ G",
@@ -20258,7 +20256,7 @@
       "o": "1-3O5VCCA3",
       "cat": "Alta Traslado",
       "f": "13-16",
-      "hi": "15:02",
+      "hi": "15:11",
       "d": "VINA DEL MAR 037, QUILPUE",
       "e": "Pendiente",
       "tec": "MARCO PEREZ G",
@@ -20294,7 +20292,7 @@
       "o": "1-3OAX70VY",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:47",
+      "hi": "14:44",
       "d": "PERU (NODO 92) 440, QUILPUE",
       "e": "Pendiente",
       "tec": "NICOLAS MOYANO R",
@@ -20330,7 +20328,7 @@
       "o": "1-3OAVJJ4S",
       "cat": "Migración 3 Play",
       "f": "10-13",
-      "hi": "11:50",
+      "hi": "11:23",
       "d": "LEUCOTON 945 CASA G, QUILPUE",
       "e": "Pendiente",
       "tec": "YENDER BOSCAN CADENAS",
@@ -20341,28 +20339,28 @@
     ],
     "reagendadas": [
      {
+      "o": "1-3O6NEFRP",
+      "cat": "Alta Traslado",
+      "f": "10-13",
+      "hi": "12:22",
+      "d": "VENECIA NORTE 1098 CASA 1, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "LUIS GATICA DAVILA",
+      "desde": "05-10-2026"
+     },
+     {
       "o": "1-3OAU2IDL",
       "cat": "Alta 2 Play",
       "f": "16-19",
       "hi": "16:00",
       "d": "MANUEL RODRIGUEZ 351, VILLA ALEMANA",
       "e": "Pendiente",
-      "tec": "ESTEBAN PIZARRO QUINTANA",
+      "tec": "YENDER BOSCAN CADENAS",
       "desde": "08-10-2026"
-     },
-     {
-      "o": "1-3O6NEFRP",
-      "cat": "Alta Traslado",
-      "f": "10-13",
-      "hi": "12:25",
-      "d": "VENECIA NORTE 1098 CASA 1, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "LUIS GATICA DAVILA",
-      "desde": "05-10-2026"
      }
     ]
    }
   }
  },
- "generado": "09-10-2026 09:50"
+ "generado": "09-10-2026 10:00"
 }
