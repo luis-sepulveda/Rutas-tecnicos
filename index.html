@@ -2378,6 +2378,12 @@
   #modalDer table.dv-cau-t td .gr { color:#8fa1b3; }
   #modalDer table.dv-cau-t tr.pri td { border-top:1px solid #cbd8e6; }
   #modalDer table.dv-cau-t .tg { margin:1px 2px 1px 0; }
+
+  /* pastilla "Migraciones derivadas" (09-10-2026): el nombre va en dos renglones para que la fila de doce siga cabiendo */
+  .pv-linea .pv-al.dosl { padding-top:3px; padding-bottom:3px; }
+  .pv-linea .pv-al.dosl .tx .t { white-space:normal; line-height:1.12; font-size:11.5px; text-align:left; }
+  .pv-linea .pv-al, .pv-linea .pv-ch, .pv-linea .pv-lk { padding-left:4px; padding-right:4px; gap:4px; }
+  .pv-linea { gap:3px; }
 </style>
 </head>
 <body>
@@ -8488,7 +8494,11 @@ function pintarPortada(){
     +     '<a class="b-inf b-qb" href="' + URL_ACTIVIDADES + '?t=' + Date.now() + '#quiebres" target="_blank">Quiebres</a>'
     /* Derivacion (08-10-2026, pedido de Luis): derivacion en migraciones por
        tecnico y semana, en una ventana (no abre otra pagina). Clase b-der. */
-    +     '<a class="b-inf b-der" onclick="abrirDeriv()">Derivaci\u00f3n</a>'
+    /* El boton "Derivacion" de esta barra se saco el 09-10-2026 a pedido de
+       Luis: abria la misma ventana que la pastilla "Derivadas" de Requiere
+       atencion, que ademas muestra la cantidad. Para reponerlo basta quitar
+       las barras de la linea de abajo. */
+    // +     '<a class="b-inf b-der" onclick="abrirDeriv()">Derivaci\u00f3n</a>'
     +   '</nav>'
     +   '<span class="pv-upd"><i></i><span class="upd"></span></span>'
     + '</header>'
@@ -8584,8 +8594,8 @@ function pintarPortada(){
        alerta"). Cuenta las migraciones de hoy cerradas No Realizada; al
        tocarla abre Derivacion en la pestana Hoy en vivo. */
     +     (function(){ const c = derHoyConteo();
-            return '<button class="pv-al ' + (c.d > 0 ? 'viva' : 'cero') + '" style="--tono:#b91c1c" title="Migraciones derivadas hoy: ' + c.d + ' de ' + c.v
-              + ' ya visitadas. Toca para ver cu\u00e1les son." onclick="abrirDerivHoy()"><span class="n">' + c.d + '</span><span class="tx"><span class="t">Derivadas</span></span></button>'; })()
+            return '<button class="pv-al dosl ' + (c.d > 0 ? 'viva' : 'cero') + '" style="--tono:#b91c1c" title="Migraciones derivadas hoy: ' + c.d + ' de ' + c.v
+              + ' ya visitadas. Toca para abrir Derivaci\u00f3n: hoy en vivo, por t\u00e9cnico, por direcci\u00f3n, a qui\u00e9n auditar y ficha del t\u00e9cnico." onclick="abrirDerivHoy()"><span class="n">' + c.d + '</span><span class="tx"><span class="t">Migraciones<br>derivadas</span></span></button>'; })()
     +     alerta('toggleAtrasados', atras, 'M\u00e1s de 3 h', 'M\u00e1s de 3 horas: iniciadas hace rato y sin cerrar', '#be123c')
     +   '</section>'
     +   '<div class="pv-chips">'
