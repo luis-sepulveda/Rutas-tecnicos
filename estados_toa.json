@@ -1,10 +1,20 @@
 {
-  "actualizado": "2026-10-09T10:16:37",
+  "actualizado": "2026-10-09T10:46:49",
   "resumen": {
-    "sin informacion": 2,
-    "reagendada": 2
+    "reagendada": 3,
+    "sin informacion": 2
   },
   "estados": {
+    "1-3OAYO9YT": {
+      "tec": "ALEXIS JARA",
+      "cat": "Alta 1 Play",
+      "franja_original": "13-16",
+      "d": "PEDRO AGUIRRE CERDA 594 DEPTO 205, QUILPUE",
+      "estado": "reagendada",
+      "color": "rgb(255, 222, 0)",
+      "detalle": "1-3OAYO9YT - 10-13-Alta-1 Play-PEDRO AGUIRRE CERDA 594 DEPTO 205Mar, 13 Oct",
+      "franja_nueva": "10-13"
+    },
     "1-3OAVUH1Q": {
       "tec": "CRISTOBAL MIRANDA VALENC",
       "cat": "Alta 1 Play",
@@ -16,6 +26,13 @@
         "buscado": "SAN MARINO 995",
         "aviso": "historial de la direccion, NO es el estado de esta orden",
         "filas": [
+          {
+            "estado": "reagendada",
+            "color": "rgb(255, 222, 0)",
+            "ot": "1-3OBCOI94",
+            "franja": "13-16",
+            "texto": "1-3OBCOI94 - 13-16-Alta-1 Play-SAN MARINO 995 CASA B"
+          },
           {
             "estado": "no realizada",
             "color": "rgb(96, 206, 206)",
