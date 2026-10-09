@@ -20031,25 +20031,25 @@
    }
   },
   "09-10-2026": {
-   "hasta": "14:02",
-   "actividades": 134,
+   "hasta": "14:12",
+   "actividades": 136,
    "tecnicos": 34,
    "estados": {
-    "Completado": 45,
-    "en ruta": 7,
-    "Pendiente": 45,
-    "No Realizada": 17,
-    "Iniciado": 17,
+    "Completado": 47,
+    "Iniciado": 18,
+    "Pendiente": 44,
+    "No Realizada": 19,
+    "en ruta": 5,
     "Suspendido": 2,
     "Cancelado": 1
    },
-   "rgu": 199.2,
+   "rgu": 201.2,
    "caidas_total": 11,
    "caidas_activas": 10,
    "caidas_resueltas": 1,
-   "nuevas": 14,
+   "nuevas": 15,
    "al_bucket": 7,
-   "repetidas": 21,
+   "repetidas": 22,
    "reagendadas": 3,
    "detalle": {
     "caidas": [
@@ -20145,6 +20145,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3O9HIYCY",
+      "tec": "PABLO HERNANEZ FERNANDEZ",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "15:51",
+      "d": "LOS TREBOLES 210 CASA 324, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OBK0IOI",
       "tec": "MATIAS APELEO APELEO",
@@ -20277,9 +20286,9 @@
       "o": "1-3OBFNR5M",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:04",
+      "hi": "14:11",
       "d": "AZTECAS 225, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "ALEXIS JARA",
       "visitas": 1,
       "ult_fecha": "24-08-2026",
@@ -20373,7 +20382,7 @@
       "o": "1-3OB4KMW0",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:20",
+      "hi": "15:28",
       "d": "GERONA 78, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -20411,7 +20420,7 @@
       "f": "10-13",
       "hi": "11:51",
       "d": "VALLE DEL PARAISO 2907 EDIF. A DEPTO 102, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "KEVIN TAPIA RETAMAL",
       "visitas": 1,
       "ult_fecha": "06-10-2026",
@@ -20421,7 +20430,7 @@
       "o": "1-3OAYO2JD",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "16:12",
+      "hi": "16:27",
       "d": "VALLE DEL PARAISO 2907 EDIF. A DEPTO 402, QUILPUE",
       "e": "Pendiente",
       "tec": "KEVIN TAPIA RETAMAL",
@@ -20435,7 +20444,7 @@
       "f": "10-13",
       "hi": "12:19",
       "d": "ESMERALDA 2633 EDIF. 1 DEPTO 14, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "LEONEL HERNÁNDEZ OJE",
       "visitas": 1,
       "ult_fecha": "07-10-2026",
@@ -20445,7 +20454,7 @@
       "o": "1-3OAX70VY",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:44",
+      "hi": "15:26",
       "d": "PERU (NODO 92) 440, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -20457,7 +20466,7 @@
       "o": "1-3O8TZC6Y",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "17:20",
+      "hi": "17:04",
       "d": "LOS AVELLANOS 722, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS CASTRO TORRES",
@@ -20500,6 +20509,18 @@
       "visitas": 1,
       "ult_fecha": "07-10-2026",
       "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3O9HIYCY",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "15:51",
+      "d": "LOS TREBOLES 210 CASA 324, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "PABLO HERNANEZ FERNANDEZ",
+      "visitas": 2,
+      "ult_fecha": "06-10-2026",
+      "ult_cierre": "NAP Problema niveles PO"
      },
      {
       "o": "1-3OB100TD",
@@ -20561,5 +20582,5 @@
    }
   }
  },
- "generado": "09-10-2026 14:02"
+ "generado": "09-10-2026 14:12"
 }
