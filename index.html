@@ -2264,9 +2264,16 @@
   #modalDer .dv-head { border-bottom:0 !important; padding-bottom:6px !important; }
 
   /* ---- HOY EN VIVO, pestana del boton Derivacion (09-10-2026) ---- */
-  #modalDer table.dv-hoy-r { font-size:12.5px; margin:0 0 6px; }
-  #modalDer table.dv-hoy-r td, #modalDer table.dv-hoy-r th { text-align:left; white-space:normal; padding:6px 10px 6px 0; }
-  #modalDer table.dv-hoy-r td:nth-child(2), #modalDer table.dv-hoy-r td:nth-child(5) { white-space:nowrap; }
+  #modalDer table.dv-hoy-r { font-size:13px; margin:0 0 6px; }
+  #modalDer table.dv-hoy-r td, #modalDer table.dv-hoy-r th { text-align:left; white-space:normal; padding:7px 12px 7px 0; }
+  #modalDer table.dv-hoy-r > tbody > tr.t > td:nth-child(2), #modalDer table.dv-hoy-r > tbody > tr.t > td:nth-child(3),
+  #modalDer table.dv-hoy-r td.pet, #modalDer table.dv-hoy-r > tbody > tr.t > td:last-child { white-space:nowrap; }
+  #modalDer table.dv-hoy-r td.pet { font-variant-numeric:tabular-nums; color:#16232f; }
+  #modalDer table.dv-hoy-r tr.sub > td { background:#f8fafc; padding:8px 12px 12px 26px; }
+  #modalDer table.dv-hoy-r .his { font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:#8fa1b3; font-weight:600; margin:0 0 2px; }
+  #modalDer table.dv-hoy-p { width:auto; font-size:12.5px; }
+  #modalDer table.dv-hoy-p th { position:static; background:transparent; font-size:10.5px; padding:4px 22px 3px 0; border-bottom:1px solid #dbe4ed; }
+  #modalDer table.dv-hoy-p td { background:transparent; padding:4px 22px 4px 0; border-bottom:1px solid #edf1f6; white-space:nowrap; color:#41586f; }
   #modalDer .dv-hoy-l { font-size:12.5px; color:#41586f; margin:8px 0 0; }
   #modalDer .dv-hoy-l b { color:#16232f; }
   #modalDer .dv-hoy-l ul { margin:3px 0 0; padding-left:18px; line-height:1.7; }
@@ -6956,6 +6963,8 @@ function derHoyPrev(x){
         return String(v.f || '').slice(0, 5) + ' · ' + (otro ? '<b>' + escR(derTitulo(v.tec)) + '</b>' : escR(derTitulo(v.tec)) + ' (él mismo)') + ' · ' + escR(v.cierre || 'no realizada'); }).join('</li><li>')
     + '</li></ul>' + (x.otros.length ? '' : '<span style="font-size:12px">Siempre con el mismo técnico: cuenta como propia.</span>') + '</div>';
 }
+let derHoyAb = null;      // peticion abierta en "Por visitar en direcciones que ya fallaron"
+function verHoyRiesgo(ot){ derHoyAb = (derHoyAb === ot ? null : ot); pintarDeriv(); }
 function derVistaHoyHtml(){
   const F = derHoyDatos();
   const hoyTxt = FECHA_DATOS ? String(FECHA_DATOS.getDate()).padStart(2, '0') + '-' + String(FECHA_DATOS.getMonth() + 1).padStart(2, '0') : 'hoy';
@@ -7004,10 +7013,17 @@ function derVistaHoyHtml(){
   const riesgo = F.filter(function(x){ return x.pend && x.prev.length; }).sort(function(a, b){ return b.prev.length - a.prev.length || a.fr.localeCompare(b.fr); });
   if(riesgo.length){
     h += '<div class="dv-sec comp"><span class="n">' + riesgo.length + '</span><div><b>Por visitar hoy en direcciones que ya fallaron antes</b>'
-      + '<span>Todavía no se cierran. Sirve para avisarle al técnico o al supervisor antes de la visita.</span></div></div>'
-      + '<table class="dv-hoy-r"><thead><tr><th>Técnico</th><th>Franja</th><th>Estado</th><th>Dirección</th><th>Ya falló</th><th>Con quién y por qué</th></tr></thead><tbody>'
-      + riesgo.map(function(x){ return '<tr><td>' + escR(derTitulo(x.tec)) + '</td><td>' + escR(x.fr) + '</td><td>' + escR(x.e) + '</td><td>' + escR(derTitulo(x.d)) + '</td><td>'
-          + derPl(x.prev.length, 'vez', 'veces') + '</td><td>' + x.prev.map(function(v){ return String(v.f || '').slice(0, 5) + ' ' + escR(derTitulo(v.tec)) + ': ' + escR(v.cierre || ''); }).join(' · ') + '</td></tr>'; }).join('')
+      + '<span>Todavía no se cierran. Todavía no se cierran. Toca una fila para ver las visitas anteriores a esa dirección.</span></div></div>'
+      + '<table class="dv-hoy-r"><thead><tr><th>Técnico</th><th>Franja</th><th>Estado</th><th>Dirección</th><th>Petición de hoy</th><th>Ya falló</th></tr></thead><tbody>'
+      + riesgo.map(function(x){
+          const ab = derHoyAb === x.ot;
+          const ord = x.prev.slice().sort(function(p, q){ const k = function(v){ const m = /^(\d{2})-(\d{2})-(\d{4})/.exec(String(v.f || '')); return m ? m[3] + m[2] + m[1] : ''; }; return k(p).localeCompare(k(q)); });
+          return '<tr class="t" onclick="verHoyRiesgo(\'' + escR(x.ot) + '\')" title="Toca para ver las visitas anteriores a esta dirección"><td>' + (ab ? '▾ ' : '▸ ') + '<b>' + escR(derTitulo(x.tec)) + '</b></td><td>' + escR(x.fr)
+            + '</td><td>' + escR(x.e) + '</td><td>' + escR(derTitulo(x.d)) + '</td><td class="pet">' + escR(x.ot) + '</td><td><span class="tg at">' + derPl(x.prev.length, 'vez', 'veces') + '</span></td></tr>'
+            + (ab ? '<tr class="sub"><td colspan="6"><div class="his">Visitas anteriores a esta dirección</div><table class="dv-hoy-p"><thead><tr><th>Fecha</th><th>Técnico</th><th>Petición</th><th>Actividad</th><th>Quiebre</th></tr></thead><tbody>'
+                + ord.map(function(v){ return '<tr><td>' + escR(String(v.f || '').slice(0, 5)) + '</td><td>' + escR(derTitulo(v.tec)) + '</td><td class="pet">' + escR(v.num || '') + '</td><td>' + escR(v.cat || '') + '</td><td><span class="tg '
+                    + (derGrupo(v.cierre) === 'ot' ? 'na' : 'at') + '">' + escR(v.cierre || 'No realizada') + '</span></td></tr>'; }).join('') + '</tbody></table></td></tr>' : '');
+        }).join('')
       + '</tbody></table>';
   }
   const cel = function(v, c){ return '<td class="' + (v ? (c || '') : 'cero') + '">' + v + '</td>'; };
