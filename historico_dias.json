@@ -20031,26 +20031,26 @@
    }
   },
   "09-10-2026": {
-   "hasta": "15:12",
-   "actividades": 145,
+   "hasta": "15:22",
+   "actividades": 136,
    "tecnicos": 34,
    "estados": {
-    "Completado": 56,
-    "Pendiente": 38,
-    "Iniciado": 20,
+    "Completado": 60,
+    "Pendiente": 23,
+    "Iniciado": 22,
     "No Realizada": 23,
     "en ruta": 5,
     "Suspendido": 2,
     "Cancelado": 1
    },
-   "rgu": 211.8,
+   "rgu": 195.8,
    "caidas_total": 11,
    "caidas_activas": 10,
    "caidas_resueltas": 1,
    "nuevas": 22,
-   "al_bucket": 8,
-   "repetidas": 23,
-   "reagendadas": 3,
+   "al_bucket": 11,
+   "repetidas": 21,
+   "reagendadas": 2,
    "detalle": {
     "caidas": [
      {
@@ -20170,7 +20170,7 @@
       "f": "10-13",
       "hi": "15:10",
       "d": "CONDELL SUR 100, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OBLL9UO",
@@ -20179,7 +20179,7 @@
       "f": "13-16",
       "hi": "16:07",
       "d": "GABRIEL GONZALEZ VIDELA 1890 CASA 06, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OBLI1V8",
@@ -20188,7 +20188,7 @@
       "f": "13-16",
       "hi": "15:15",
       "d": "PJE A (JAZMINES) 1760, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OBL9HXX",
@@ -20197,7 +20197,7 @@
       "f": "13-16",
       "hi": "14:57",
       "d": "COVADONGA 1618, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OBHBQHG",
@@ -20215,7 +20215,7 @@
       "f": "13-16",
       "hi": "15:51",
       "d": "LOS TREBOLES 210 CASA 324, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OBK0IOI",
@@ -20224,7 +20224,7 @@
       "f": "13-16",
       "hi": "13:54",
       "d": "LONDRES 540, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OBGDEBC",
@@ -20287,7 +20287,7 @@
       "f": "13-16",
       "hi": "16:44",
       "d": "AV JOHN KENNEDY 1550 EDIF. G DEPTO 102, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OBDF9KW",
@@ -20361,7 +20361,7 @@
       "o": "1-3O8OIBFX",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "16:02",
+      "hi": "16:00",
       "d": "LAS GARZAS 1151, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
@@ -20406,18 +20406,6 @@
       "ult_cierre": "Clte desiste motivo comercial"
      },
      {
-      "o": "1-3OB08NWL",
-      "cat": "Alta 2 Play",
-      "f": "16-19",
-      "hi": "17:16",
-      "d": "LOS CORCHOS 2693, QUILPUE",
-      "e": "Pendiente",
-      "tec": "FELIPE SILVA R",
-      "visitas": 1,
-      "ult_fecha": "08-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OBHBQHG",
       "cat": "Alta 1 Play",
       "f": "13-16",
@@ -20457,9 +20445,9 @@
       "o": "1-3O9HIYCY",
       "cat": "Modificación de Servicio",
       "f": "13-16",
-      "hi": "15:05",
+      "hi": "15:15",
       "d": "LOS TREBOLES 210 CASA 324, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "JOSE PEREZ RANGEL",
       "visitas": 2,
       "ult_fecha": "06-10-2026",
@@ -20481,9 +20469,9 @@
       "o": "1-3OB6K1MD",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:17",
+      "hi": "15:20",
       "d": "LOS TREBOLES 50 CASA 08, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JUAN ARRIAGADA C",
       "visitas": 3,
       "ult_fecha": "04-09-2026",
@@ -20505,7 +20493,7 @@
       "o": "1-3OAYO2JD",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "16:27",
+      "hi": "16:35",
       "d": "VALLE DEL PARAISO 2907 EDIF. A DEPTO 402, QUILPUE",
       "e": "Pendiente",
       "tec": "KEVIN TAPIA RETAMAL",
@@ -20538,15 +20526,15 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3O8TZC6Y",
+      "o": "1-3O9I41WT",
       "cat": "Migración 2 Play",
-      "f": "16-19",
-      "hi": "16:00",
-      "d": "LOS AVELLANOS 722, VILLA ALEMANA",
+      "f": "13-16",
+      "hi": "15:28",
+      "d": "FRANCISCANOS 17, VILLA ALEMANA",
       "e": "Pendiente",
-      "tec": "LUIS CASTRO TORRES",
-      "visitas": 1,
-      "ult_fecha": "05-10-2026",
+      "tec": "LUIS GATICA DAVILA",
+      "visitas": 3,
+      "ult_fecha": "06-10-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -20565,9 +20553,9 @@
       "o": "1-3OAQWS45",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:23",
+      "hi": "15:29",
       "d": "AVENIDA VALPARAISO 1539, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "MATIAS APELEO APELEO",
       "visitas": 1,
       "ult_fecha": "08-10-2026",
@@ -20598,18 +20586,6 @@
       "ult_cierre": "Falta de dotación"
      },
      {
-      "o": "1-3O9I41WT",
-      "cat": "Migración 2 Play",
-      "f": "13-16",
-      "hi": "18:10",
-      "d": "FRANCISCANOS 17, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "SAMUEL FERNANDEZ VIDAL",
-      "visitas": 3,
-      "ult_fecha": "06-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OAVJJ4S",
       "cat": "Migración 3 Play",
       "f": "10-13",
@@ -20627,20 +20603,10 @@
       "o": "1-3OAG6JNK",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:46",
+      "hi": "16:17",
       "d": "GABRIEL DAZAROLA 843, VILLA ALEMANA",
       "e": "Pendiente",
-      "tec": "JEAN ROODLY ORELIEN",
-      "desde": "08-10-2026"
-     },
-     {
-      "o": "1-3OAU2IDL",
-      "cat": "Alta 2 Play",
-      "f": "16-19",
-      "hi": "18:39",
-      "d": "MANUEL RODRIGUEZ 351, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOSE CASTRO P",
+      "tec": "JOSE GALAZ D",
       "desde": "08-10-2026"
      },
      {
@@ -20657,5 +20623,5 @@
    }
   }
  },
- "generado": "09-10-2026 15:12"
+ "generado": "09-10-2026 15:22"
 }
