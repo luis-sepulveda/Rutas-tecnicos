@@ -1,8 +1,8 @@
 {
-  "actualizado": "2026-10-09T15:49:06",
+  "actualizado": "2026-10-09T16:47:15",
   "resumen": {
     "sin informacion": 7,
-    "reagendada": 3
+    "reagendada": 4
   },
   "estados": {
     "1-3OBCOI94": {
@@ -93,6 +93,13 @@
         "aviso": "historial de la direccion, NO es el estado de esta orden",
         "filas": [
           {
+            "estado": "reagendada",
+            "color": "rgb(255, 222, 0)",
+            "ot": "1-3OBIXP4P",
+            "franja": "13-16",
+            "texto": "1-3OBIXP4P - 13-16-Alta-2 Play-REGIDOR SADY YOUI 1866Sab, 10 Oct"
+          },
+          {
             "estado": "cancelada",
             "color": "rgb(128, 255, 128)",
             "ot": "1-3O1WAG2T",
@@ -157,6 +164,16 @@
           }
         ]
       }
+    },
+    "1-3OB740JQ": {
+      "tec": "JOEL GUSTAVE GUSTA",
+      "cat": "Alta 2 Play",
+      "franja_original": "13-16",
+      "d": "LOS ALMENDROS (LEIGHTON) 16, VILLA ALEMANA",
+      "estado": "reagendada",
+      "color": "rgb(255, 222, 0)",
+      "detalle": "1-3OB740JQ - 13-16-Alta-2 Play-LOS ALMENDROS (LEIGHTON) 16Sab, 10 Oct",
+      "franja_nueva": "13-16"
     },
     "1-3OB0OX8G": {
       "tec": "JORDAN ROA PEREZ",
