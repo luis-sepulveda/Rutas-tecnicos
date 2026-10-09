@@ -1,8 +1,8 @@
 {
-  "actualizado": "2026-10-09T11:47:16",
+  "actualizado": "2026-10-09T12:17:40",
   "resumen": {
-    "sin informacion": 4,
-    "reagendada": 2
+    "sin informacion": 5,
+    "reagendada": 3
   },
   "estados": {
     "1-3OBCOI94": {
@@ -70,6 +70,16 @@
           }
         ]
       }
+    },
+    "1-3O9M3MD9": {
+      "tec": "DANIEL NAVARRETE E",
+      "cat": "Reparación",
+      "franja_original": "16-19",
+      "d": "GABRIEL GONZALEZ VIDELA 1831 CASA A, QUILPUE",
+      "estado": "reagendada",
+      "color": "rgb(255, 222, 0)",
+      "detalle": "1-3O9M3MD9 - 13-16-Reparación-2 Play Servicio Degradado-GABRIEL GONZALEZ VIDELA 1831 CASA ASab, 10 Oct",
+      "franja_nueva": "13-16"
     },
     "1-3OB0OX8G": {
       "tec": "JORDAN ROA PEREZ",
@@ -165,6 +175,27 @@
             "ot": "1-3NKRWK9M",
             "franja": "10-13",
             "texto": "1-3NKRWK9M - 10-13-Alta-1 Play-SANTA ELENA 098 EDIF. 1 DEPTO 301Vie, 4 Sep"
+          }
+        ]
+      }
+    },
+    "1-3O5VCCA3": {
+      "tec": "MARCO PEREZ G",
+      "cat": "Alta Traslado",
+      "franja_original": "13-16",
+      "d": "VINA DEL MAR 037, QUILPUE",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "VINA DEL MAR 037",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3O55WAOB",
+            "franja": "13-16",
+            "texto": "1-3O55WAOB - 13-16-Alta Traslado-Traslado-VINA DEL MAR 037Jue, 1 Oct"
           }
         ]
       }
