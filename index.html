@@ -2262,6 +2262,15 @@
   #modalDer .dv-seg button:hover { background:#f1f5f9; }
   #modalDer .dv-seg button.on { background:#0f1d2e; color:#fff; }
   #modalDer .dv-head { border-bottom:0 !important; padding-bottom:6px !important; }
+
+  /* ---- HOY EN VIVO, pestana del boton Derivacion (09-10-2026) ---- */
+  #modalDer table.dv-hoy-r { font-size:12.5px; margin:0 0 6px; }
+  #modalDer table.dv-hoy-r td, #modalDer table.dv-hoy-r th { text-align:left; white-space:normal; padding:6px 10px 6px 0; }
+  #modalDer table.dv-hoy-r td:nth-child(2), #modalDer table.dv-hoy-r td:nth-child(5) { white-space:nowrap; }
+  #modalDer .dv-hoy-l { font-size:12.5px; color:#41586f; margin:8px 0 0; }
+  #modalDer .dv-hoy-l b { color:#16232f; }
+  #modalDer .dv-hoy-l ul { margin:3px 0 0; padding-left:18px; line-height:1.7; }
+  #modalDer tr.det .dv-card td { background:transparent; }
 </style>
 </head>
 <body>
@@ -6874,6 +6883,166 @@ function derVistaFicHtml(todasSem){
     + derDesde + '. <b>Propia</b>: esas mismas causales donde no ha fallado ningún otro técnico. Que una derivada sea propia, o que tenga una señal, no prueba mala gestión; indica dónde mirar primero.</p></div>';
 }
 
+/* ---- HOY, EN VIVO (09-10-2026) ----
+   Pedido de Luis: "lo que falta es medir las migraciones del presente, las del
+   dia en curso". Las otras vistas salen del datos.json de Actividades, que
+   llega hasta AYER. Esta sale de DB (rutas.json, lo que el monitor publica
+   cada 5 minutos): las migraciones que hoy estan en las bandejas de los
+   tecnicos, con su estado, su cierre y sus horas.
+   - Visitada = Completado o No Realizada; derivada = No Realizada (igual que
+     el resto del boton). Pendiente = Pendiente, en ruta o Iniciado.
+     Canceladas y suspendidas se cuentan aparte, no entran al %.
+   - La historia de la direccion viene en el campo `prev` de cada orden
+     (historial_dir.py: visitas NO realizadas anteriores a esa direccion, con
+     tecnico y cierre). Con eso se clasifica igual que en A quien auditar:
+     no atribuible / direccion compartida (antes fallo otro tecnico) / propia.
+   - Senales en vivo: 10 minutos o menos en terreno, y visita fuera de la
+     franja. "Despues la completo otro" no existe todavia: es de hoy.
+   - "Semana con hoy" = lo de la semana en datos.json (hasta ayer) + lo de hoy.
+   Se repinta sola cuando llega un rutas.json nuevo (cargarDatosVivos). */
+function derMinH(t){ const m = /^(\d{1,2}):(\d{2})/.exec(String(t || '')); return m ? (+m[1] * 60 + +m[2]) : -1; }
+function derHoyDatos(){
+  const supDe = {}, isoDe = {};
+  (DER || []).forEach(function(x){ if(x.sup && (!isoDe[x.tec] || x.iso >= isoDe[x.tec])){ supDe[x.tec] = x.sup; isoDe[x.tec] = x.iso; } });
+  const limpia = function(t){ return String(t || '').replace(/ /g, ' ').replace(/\s+/g, ' ').trim(); };
+  const filas = [];
+  Object.keys(typeof DB === 'object' && DB ? DB : {}).forEach(function(k){
+    const tec = limpia(k), sup = supDe[tec] || '';
+    if(derSup !== 'Todos' && sup !== derSup) return;
+    (DB[k] || []).forEach(function(j){
+      const u = String(j.t || '').trim().toUpperCase();
+      const tp = u.indexOf('MIGRA') === 0 ? 'MIGRA' : u.indexOf('ALTA') === 0 ? 'ALTA' : '';
+      if(!tp || (derTipo !== 'AMBAS' && tp !== derTipo)) return;
+      const e = String(j.e || ''), cer = e === 'Completado' || e === 'No Realizada';
+      const hi = derMinH(j.hi), hf = derMinH(j.hf);
+      const x = { tec: tec, sup: sup, ot: String(j.o || ''), act: String(j.cat || j.t || ''), fr: String(j.f || ''), d: String(j.d || ''), e: e,
+        vis: cer, der: e === 'No Realizada', pend: e === 'Pendiente' || e === 'Iniciado' || e === 'en ruta', ini: e === 'Iniciado',
+        fuera0: e === 'Cancelado' || e === 'Suspendido', cod: String(j.cie || '').trim() || 'Sin código',
+        hi: hi, dur: (cer && hi >= 0 && hf >= hi) ? hf - hi : -1, hiTxt: String(j.hi || ''),
+        prev: (Array.isArray(j.prev) ? j.prev : []).filter(function(v){ return !v.gsa; }) };
+      x.g = x.der ? derGrupo(x.cod) : '';
+      x.otros = x.prev.filter(function(v){ return v.tec && limpia(v.tec) !== tec; });
+      x.cls = !x.der ? '' : x.g === 'ot' ? 'na' : x.otros.length ? 'comp' : 'prop';
+      x.corta = x.der && x.g !== 'ot' && x.dur >= 0 && x.dur <= DER_MIN_CORTA;
+      const m = /^(\d{1,2})\s*-\s*(\d{1,2})$/.exec(x.fr);
+      x.frFin = m ? +m[2] * 60 : -1;
+      x.fuera = !!(x.der && x.g !== 'ot' && m && x.hi >= 0 && x.dur >= 0 && (x.hi + x.dur <= +m[1] * 60 || x.hi >= +m[2] * 60));
+      x.sen = (x.corta ? 1 : 0) + (x.fuera ? 1 : 0);
+      filas.push(x);
+    });
+  });
+  return filas;
+}
+function derHoyCard(x){
+  const cls = x.cls === 'na' ? '' : x.cls;
+  let o = '<div class="dv-card ' + cls + (x.sen ? ' sen' : '') + '"><div class="cab"><span class="dir">' + escR(derTitulo(x.d) || 'Sin dirección') + '</span>'
+    + '<span class="tg ' + (x.g === 'ot' ? 'na' : 'at') + '">' + escR(x.cod) + '</span></div>'
+    + '<div class="meta">hoy · ' + escR(x.act) + ' · orden ' + escR(x.ot) + '</div>'
+    + '<div class="pas"><b>Qué pasó:</b> ' + (x.hi >= 0 ? 'llegó a las <b>' + derHM(x.hi) + '</b> (franja ' + escR(x.fr) + ')' + (x.dur >= 0 ? ', estuvo <b>' + x.dur + ' min</b>' : '') + ' y cerró como <b>'
+        : 'franja ' + escR(x.fr) + ', cerró como <b>') + escR(x.cod) + '</b>.</div>';
+  const pq = [];
+  if(x.corta) pq.push('Estuvo <b>' + x.dur + ' minutos</b> en terreno (' + DER_MIN_CORTA + ' o menos).');
+  if(x.fuera) pq.push(x.hi >= x.frFin ? 'Llegó a las <b>' + derHM(x.hi) + '</b>, con la franja ' + escR(x.fr) + ' ya terminada.' : 'Terminó la visita antes de que empezara la franja ' + escR(x.fr) + '.');
+  if(pq.length) o += '<div class="pq sn"><b>Por qué revisarla:</b><ul><li>' + pq.join('</li><li>') + '</li></ul></div>';
+  o += derHoyPrev(x);
+  return o + '</div>';
+}
+/* Lo que ya paso antes en esa direccion (campo prev). */
+function derHoyPrev(x){
+  if(!x.prev.length) return (x.der && x.g !== 'ot') ? '<div class="meta">Primera visita fallida a esta dirección desde el ' + derDesde + '.</div>' : '';
+  const suyas = x.prev.length - x.otros.length;
+  return '<div class="pq az"><b>Esta dirección ya había fallado ' + derPl(x.prev.length, 'vez', 'veces') + ':</b><ul><li>'
+    + x.prev.map(function(v){ const otro = x.otros.indexOf(v) >= 0;
+        return String(v.f || '').slice(0, 5) + ' · ' + (otro ? '<b>' + escR(derTitulo(v.tec)) + '</b>' : escR(derTitulo(v.tec)) + ' (él mismo)') + ' · ' + escR(v.cierre || 'no realizada'); }).join('</li><li>')
+    + '</li></ul>' + (x.otros.length ? '' : '<span style="font-size:12px">Siempre con el mismo técnico: cuenta como propia.</span>') + '</div>';
+}
+function derVistaHoyHtml(){
+  const F = derHoyDatos();
+  const hoyTxt = FECHA_DATOS ? String(FECHA_DATOS.getDate()).padStart(2, '0') + '-' + String(FECHA_DATOS.getMonth() + 1).padStart(2, '0') : 'hoy';
+  if(!F.length) return '<div class="dv-vacio">No hay ' + derNomTipo() + ' en las bandejas de hoy' + (derSup !== 'Todos' ? ' para ese supervisor' : '') + '.</div>';
+  const T = { n:0, vis:0, comp:0, der:0, pend:0, ini:0, fuera:0, sm:0, re:0, de:0, ot:0, na:0, cmp:0, prop:0, sen:0 };
+  const porTec = {};
+  F.forEach(function(x){
+    const o = porTec[x.tec] || (porTec[x.tec] = { tec:x.tec, sup:x.sup, n:0, vis:0, comp:0, der:0, pend:0, na:0, cmp:0, prop:0, sen:0, l:[] });
+    o.l.push(x);
+    if(x.fuera0){ T.fuera++; return; }
+    T.n++; o.n++;
+    if(x.pend){ T.pend++; o.pend++; if(x.ini) T.ini++; }
+    if(x.vis){ T.vis++; o.vis++; if(!x.der){ T.comp++; o.comp++; } }
+    if(x.der){ T.der++; o.der++; T[x.g]++;
+      if(x.cls === 'na'){ T.na++; o.na++; } else if(x.cls === 'comp'){ T.cmp++; o.cmp++; } else { T.prop++; o.prop++; if(x.sen){ T.sen++; o.sen++; } } }
+  });
+  /* semana con hoy: datos.json hasta ayer + lo de hoy */
+  const d0 = FECHA_DATOS || new Date(), lun = new Date(d0); lun.setDate(d0.getDate() - (d0.getDay() + 6) % 7);
+  const kSem = lun.getFullYear() + '-' + String(lun.getMonth() + 1).padStart(2, '0') + '-' + String(lun.getDate()).padStart(2, '0');
+  const isoHoy = d0.getFullYear() + String(d0.getMonth() + 1).padStart(2, '0') + String(d0.getDate()).padStart(2, '0');
+  const sem = {}, ST = { n:0, d:0 };
+  (DER || []).forEach(function(x){ if(x.sem !== kSem || x.iso >= isoHoy || !derEntra(x)) return;
+    if(derSup !== 'Todos' && x.sup !== derSup) return;
+    const o = sem[x.tec] || (sem[x.tec] = { n:0, d:0 }); o.n++; ST.n++; if(x.der){ o.d++; ST.d++; } });
+  const semCon = function(o){ const s = sem[o.tec] || { n:0, d:0 }; return { n: s.n + o.vis, d: s.d + o.der }; };
+  const tb = Object.keys(porTec).map(function(k){ return porTec[k]; }).filter(function(o){ return o.n > 0; })
+    .sort(function(a, b){ return b.der - a.der || (b.vis ? b.der / b.vis : 0) - (a.vis ? a.der / a.vis : 0) || b.pend - a.pend || a.tec.localeCompare(b.tec); });
+  const pT = T.vis ? (100 * T.der / T.vis).toFixed(1).replace('.', ',') : '–';
+  const sT = { n: ST.n + T.vis, d: ST.d + T.der };
+  let h = '<div class="dv-tot" style="grid-template-columns:repeat(5,1fr)">'
+    + '<div><b>' + T.n + '</b><span>' + derNomTipo() + ' hoy en bandejas</span></div>'
+    + '<div><b>' + T.vis + '</b><span>ya visitadas · ' + T.comp + ' completadas</span></div>'
+    + '<div class="' + (T.vis && 100 * T.der / T.vis > DER_UMBRAL ? 'mal' : '') + '"><b>' + T.der + '</b><span>derivadas (no realizadas)</span></div>'
+    + '<div class="' + (T.vis && 100 * T.der / T.vis > DER_UMBRAL ? 'mal' : '') + '"><b>' + pT + (T.vis ? '%' : '') + '</b><span>derivación de lo ya visitado</span></div>'
+    + '<div><b>' + T.pend + '</b><span>por visitar · ' + T.ini + ' iniciadas</span></div></div>';
+  if(T.der) h += '<div class="dv-cau"><span class="rot">Causales</span>'
+    + '<span class="c"><b>' + T.sm + '</b>sin moradores</span><span class="c"><b>' + T.re + '</b>cliente reagenda</span>'
+    + '<span class="c"><b>' + T.de + '</b>cliente desiste</span><span class="c no"><b>' + T.ot + '</b>no atribuibles al técnico</span></div>'
+    + '<div class="dv-rt" style="margin-top:0"><div class="l1">De las <b>' + T.der + '</b> derivadas de hoy:</div><div class="kp">'
+    + '<span><b>' + T.na + '</b> por causales que no dependen del técnico</span>'
+    + '<span><b>' + T.cmp + '</b> en direcciones donde antes ya falló otro técnico</span>'
+    + '<span class="si"><b>' + T.prop + '</b> propias</span>'
+    + '<span' + (T.sen ? ' class="sn"' : '') + '><b>' + T.sen + '</b> de las propias, con alguna señal</span>'
+    + '<span><b>' + derPct(sT.d, sT.n) + '%</b> lleva la semana con hoy (' + sT.d + ' de ' + sT.n + ')</span></div></div>';
+  /* aviso temprano: pendientes en direcciones que ya fallaron */
+  const riesgo = F.filter(function(x){ return x.pend && x.prev.length; }).sort(function(a, b){ return b.prev.length - a.prev.length || a.fr.localeCompare(b.fr); });
+  if(riesgo.length){
+    h += '<div class="dv-sec comp"><span class="n">' + riesgo.length + '</span><div><b>Por visitar hoy en direcciones que ya fallaron antes</b>'
+      + '<span>Todavía no se cierran. Sirve para avisarle al técnico o al supervisor antes de la visita.</span></div></div>'
+      + '<table class="dv-hoy-r"><thead><tr><th>Técnico</th><th>Franja</th><th>Estado</th><th>Dirección</th><th>Ya falló</th><th>Con quién y por qué</th></tr></thead><tbody>'
+      + riesgo.map(function(x){ return '<tr><td>' + escR(derTitulo(x.tec)) + '</td><td>' + escR(x.fr) + '</td><td>' + escR(x.e) + '</td><td>' + escR(derTitulo(x.d)) + '</td><td>'
+          + derPl(x.prev.length, 'vez', 'veces') + '</td><td>' + x.prev.map(function(v){ return String(v.f || '').slice(0, 5) + ' ' + escR(derTitulo(v.tec)) + ': ' + escR(v.cierre || ''); }).join(' · ') + '</td></tr>'; }).join('')
+      + '</tbody></table>';
+  }
+  const cel = function(v, c){ return '<td class="' + (v ? (c || '') : 'cero') + '">' + v + '</td>'; };
+  h += '<table style="margin-top:14px"><thead><tr><th>Técnico</th><th>Hoy en bandeja</th><th>Completadas</th><th>Derivadas</th><th>Por visitar</th><th>% de lo visitado</th>'
+    + '<th>No atribuibles</th><th>Dirección compartida</th><th>Propias</th><th>Propias con señal</th><th title="Lo de la semana hasta ayer más lo de hoy">Semana con hoy</th></tr></thead><tbody>';
+  tb.forEach(function(o, i){
+    const s = semCon(o), ps = derPct(s.d, s.n), alto = o.vis && 100 * o.der / o.vis > DER_UMBRAL;
+    h += '<tr class="t' + (o.der && alto ? ' pocas' : '') + '" onclick="verTecDeriv(' + i + ')" title="Toca para ver sus ' + derNomTipo() + ' de hoy">'
+      + '<td>' + (derAbierto === i ? '▾ ' : '▸ ') + escR(derTitulo(o.tec)) + '<small>' + escR(derTitulo(o.sup)) + '</small></td>'
+      + '<td>' + o.n + '</td>' + cel(o.comp) + cel(o.der) + cel(o.pend) + '<td class="p">' + (o.vis ? derPct(o.der, o.vis) + '%' : '–') + '</td>'
+      + cel(o.na) + cel(o.cmp) + cel(o.prop) + cel(o.sen, 'sn')
+      + '<td' + (s.n >= DER_MINIMO && ps > DER_UMBRAL ? ' style="color:#b91c1c;font-weight:700"' : '') + '>' + (s.n ? ps + '% <small style="color:#8fa1b3">' + s.d + ' de ' + s.n + '</small>' : '–') + '</td></tr>';
+    if(derAbierto === i){
+      h += '<tr class="det"><td colspan="11"><div class="dv-fic">';
+      const ders = o.l.filter(function(x){ return x.der; }).sort(function(a, b){ return b.sen - a.sen || a.hi - b.hi; });
+      const pend = o.l.filter(function(x){ return x.pend; }), comp = o.l.filter(function(x){ return x.vis && !x.der; }), fue = o.l.filter(function(x){ return x.fuera0; });
+      if(ders.length) h += ders.map(derHoyCard).join('');
+      else h += '<div class="dv-ord"><div class="c2">No ha derivado ninguna hoy.</div></div>';
+      const linea = function(x){ return '<li>' + escR(x.fr) + ' · ' + escR(derTitulo(x.d)) + ' · ' + escR(x.act) + ' · <b>' + escR(x.e) + '</b>'
+        + (x.vis && x.hi >= 0 ? ' · ' + derHM(x.hi) + (x.dur >= 0 ? ', ' + x.dur + ' min' : '') : '')
+        + (x.prev.length ? ' · <span class="tg at">ya falló ' + derPl(x.prev.length, 'vez', 'veces') + '</span>' : '') + '</li>'; };
+      if(pend.length) h += '<div class="dv-hoy-l"><b>Por visitar (' + pend.length + ')</b><ul>' + pend.map(linea).join('') + '</ul></div>';
+      if(comp.length) h += '<div class="dv-hoy-l"><b>Completadas (' + comp.length + ')</b><ul>' + comp.map(linea).join('') + '</ul></div>';
+      if(fue.length) h += '<div class="dv-hoy-l"><b>Canceladas o suspendidas (' + fue.length + ', no cuentan)</b><ul>' + fue.map(linea).join('') + '</ul></div>';
+      h += '</div></td></tr>';
+    }
+  });
+  return h + '</tbody></table><p class="dv-nota"><b>Hoy, ' + hoyTxt + ', en vivo.</b> Sale de lo que el monitor publica cada 5 minutos, igual que la portada; se actualiza sola. '
+    + 'Cuenta las ' + derNomTipo() + ' que hoy están en las bandejas de los técnicos' + (T.fuera ? ' (aparte hay ' + T.fuera + ' canceladas o suspendidas, que no cuentan)' : '') + '. '
+    + 'El porcentaje es sobre lo <b>ya visitado</b>, así que en la mañana se mueve mucho con cada cierre.<br>'
+    + '<b>Dirección compartida</b>: antes de hoy ya le falló una visita ahí a otro técnico. <b>Propia</b>: no ha fallado ningún otro. '
+    + '<b>Señales</b> en vivo: ' + DER_MIN_CORTA + ' minutos o menos en terreno, o visita fuera de la franja. '
+    + '<b>Semana con hoy</b>: lo de la semana hasta ayer más lo de hoy. Mañana estas órdenes pasan a las otras pestañas, ya con el dato cerrado del día.</p>';
+}
+
 function pintarDeriv(){
 
 
@@ -6904,7 +7073,8 @@ function pintarDeriv(){
   const usaPer = derVista === 'aud' || derVista === 'fic';
   const iS0 = todasSem0.indexOf(derSem);
   const enRango = usaPer && derAudPer > 1 ? todasSem0.slice(Math.max(0, iS0 - derAudPer + 1), iS0 + 1) : [derSem];
-  const VISTAS = [['tec', 'Por técnico', 'Quién deriva más en la semana elegida. Toca un técnico para ver cada orden y la historia de su dirección.'],
+  const VISTAS = [['hoy', 'Hoy en vivo', 'Las ' + derNomTipo() + ' del día en curso, tal como van: visitadas, derivadas y por visitar. Se actualiza sola cada 5 minutos.'],
+    ['tec', 'Por técnico', 'Quién deriva más en la semana elegida. Toca un técnico para ver cada orden y la historia de su dirección.'],
     ['dir', 'Por dirección', 'Qué direcciones fallan y con qué técnicos, en la semana elegida.'],
     ['aud', 'A quién auditar', 'Cuánto de lo derivado es propio de cada técnico, descontando las causales ajenas y las direcciones donde también falló otro.'],
     ['fic', 'Ficha del técnico', 'Todo sobre un técnico: cuánto deriva, cuánto de eso es suyo y qué órdenes revisar primero.']];
@@ -6933,6 +7103,13 @@ function pintarDeriv(){
         '<button class="' + (derAudPer === 4 ? 'on' : '') + '" onclick="setAudPerDeriv(4)" title="Las 4 semanas que terminan en la elegida">Últimas 4 semanas</button>',
         '<button class="' + (derAudPer === 1 ? 'on' : '') + '" onclick="setAudPerDeriv(1)">Solo la semana ' + derNumSemana(derSem) + '</button>']) + '</div>' : '')
     + '</div>';
+  if(derVista === 'hoy' && supBox.firstChild){
+    const dS = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+    supBox.firstChild.innerHTML = '<span class="rot">Día</span><span class="rango"><b>Hoy' + (FECHA_DATOS ? ', ' + dS[FECHA_DATOS.getDay()] + ' '
+      + String(FECHA_DATOS.getDate()).padStart(2, '0') + '-' + String(FECHA_DATOS.getMonth() + 1).padStart(2, '0') + '</b> · datos de las '
+      + String(FECHA_DATOS.getHours()).padStart(2, '0') + ':' + String(FECHA_DATOS.getMinutes()).padStart(2, '0') : '</b>') + ' · las otras pestañas llegan hasta el '
+      + ultIso.slice(6, 8) + '-' + ultIso.slice(4, 6) + '</span>';
+  }
 
   /* Tendencia: las DER_TEND semanas que terminan en la elegida. */
   const todasSem = Object.keys(porSem).sort();
@@ -6974,6 +7151,7 @@ function pintarDeriv(){
     + '<span class="c"><b>' + tot.de + '</b>cliente desiste</span><span class="c no"><b>' + tot.ot + '</b>no atribuibles al técnico</span>'
     + (tot.d ? '<span style="color:#5f7386">· las tres primeras son el ' + derPct(tot.sm + tot.re + tot.de, tot.d) + '% de las derivadas</span>' : '')
     + '</div>';
+  if(derVista === 'hoy'){ cuerpo.innerHTML = derVistaHoyHtml(); return; }
   if(derVista === 'fic'){ cuerpo.innerHTML = derVistaFicHtml(todasSem); return; }
   if(!tb.length){ cuerpo.innerHTML = h + '<div class="dv-vacio">Sin ' + derNomTipo() + ' en esta semana para ese supervisor.</div>'; return; }
   if(derVista === 'dir'){ cuerpo.innerHTML = h + derVistaDirHtml(tb, tot); return; }
@@ -9092,6 +9270,8 @@ async function cargarDatosVivos(auto){
     if(repeAbierto) renderRepe();      // si el modal esta abierto, se refresca solo
     if(caidasAbierto) renderPanelCaidas();
     if(comp) renderPanelComp();
+    /* Derivacion > Hoy en vivo (09-10-2026): si la ventana esta abierta en esa pestana, se repinta con lo nuevo */
+    try { const mD = document.getElementById('modalDer'); if(mD && mD.classList.contains('abierto') && derVista === 'hoy' && DER && DER.length) pintarDeriv(); } catch(e){}
     render(auto);          // auto = true -> no reencuadra el mapa
   } catch(e) {
     // si falla un refresco automatico se deja lo que ya estaba en pantalla
