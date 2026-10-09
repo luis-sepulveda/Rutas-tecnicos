@@ -2406,6 +2406,16 @@
   .pv-linea .pv-lk.dos button.vl:hover { filter:brightness(1.15); box-shadow:0 0 0 3px rgba(185,28,28,.18); }
   .pv-linea .pv-lk.dos a { color:inherit; text-decoration:none; display:inline-flex; align-items:center; gap:4px; }
   .pv-linea .pv-lk.dos a:hover { text-decoration:underline; }
+
+  /* ---- Sonido en el renglon de "Requiere atencion" (09-10-2026, 15:30): reemplaza a la barra roja de arriba ---- */
+  .pv-rot-son { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+  .pv-rot-son .son-caja { display:inline-flex; gap:5px; text-transform:none; letter-spacing:0; }
+  .pv-rot-son button { border:1px solid #d3dde6; background:#fff; color:#41586f; border-radius:7px; padding:2px 9px; font:inherit; font-size:11.5px; font-weight:500;
+    letter-spacing:0; text-transform:none; cursor:pointer; line-height:1.5; }
+  .pv-rot-son button:hover { background:#f1f5f9; }
+  .pv-rot-son .son.falta { border-color:#f59e0b; background:#fffbeb; color:#92400e; }
+  .pv-linea .pv-al.dosl.nueva { box-shadow:0 0 0 3px rgba(185,28,28,.25); animation:pvDerPulso 1.4s ease-in-out 6; border-color:#b91c1c; }
+  @media (prefers-reduced-motion: reduce){ .pv-linea .pv-al.dosl.nueva { animation:none; } }
 </style>
 </head>
 <body>
@@ -7309,7 +7319,7 @@ function abrirDerivHoy(){ derVista = 'hoy'; derTipo = 'MIGRA'; derSup = 'Todos';
 let DER_VISTAS_HOY = null;      // peticiones derivadas ya avisadas (null = todavia no se ha mirado)
 let DER_AVISO = [];             // las nuevas que estan en el aviso flotante
 function cerrarAvisoDer(){ const habia = DER_AVISO.length; DER_AVISO = []; const a = document.getElementById('avisoDer'); if(a) a.remove();
-  if(habia){ const b = document.querySelector('.pv-der'); if(b){ b.classList.remove('nueva'); b.querySelectorAll('.nv').forEach(function(e){ e.remove(); }); b.querySelectorAll('.it.nu').forEach(function(e){ e.classList.remove('nu'); }); } } }
+  if(habia){ document.querySelectorAll('.pv-al.dosl.nueva').forEach(function(e){ e.classList.remove('nueva'); }); const b = document.querySelector('.pv-der'); if(b){ b.classList.remove('nueva'); b.querySelectorAll('.nv').forEach(function(e){ e.remove(); }); b.querySelectorAll('.it.nu').forEach(function(e){ e.classList.remove('nu'); }); } } }
 function revisarAvisoDer(){
   const ders = derHoyMigDer().filter(function(x){ return x.der; });
   if(DER_VISTAS_HOY === null){ DER_VISTAS_HOY = {}; ders.forEach(function(x){ DER_VISTAS_HOY[x.o] = 1; }); return; }
@@ -8557,7 +8567,12 @@ function pintarPortada(){
     + '</header>'
 
     + '<div class="pv-in">'
-    +   derBarraHtml()   /* migraciones derivadas hoy, siempre a la vista (09-10-2026) */
+    /* La barra roja de arriba (derBarraHtml) se saco el 09-10-2026 a las 15:30:
+       Luis dijo que mostraba lo mismo que la pastilla "Migraciones derivadas"
+       y pidio dejar solo la parte del sonido, que ahora va en el renglon del
+       rotulo "Requiere atencion". Para reponer la barra basta quitar las
+       barras de la linea de abajo. */
+    // +   derBarraHtml()
 
     /* ---- 1. como va el dia ---- */
     +   '<section class="pv-hero">'
@@ -8634,7 +8649,9 @@ function pintarPortada(){
        nombres van acortados. El nombre completo y la frase que explica cada
        tarjeta salen al dejar el mouse encima (title). El CSS esta en el
        bloque "BOTONES EN UNA LINEA, PASTILLAS" al final del <style>. */
-    +   '<div class="pv-rot pv-rot-sec">Requiere atenci\u00f3n \u00b7 Reportes</div>'
+    +   '<div class="pv-rot pv-rot-sec pv-rot-son"><span>Requiere atenci\u00f3n \u00b7 Reportes</span>'
+    +     '<span class="son-caja"><button id="derSonBtn" class="son' + (DER_SONIDO && !derAudioOk() ? ' falta' : '') + '" onclick="derToggleSonido(event)" title="Sonido de los avisos (migraci\u00f3n derivada y monitor detenido). Toca para apagarlo o encenderlo.">' + derSonidoTxt() + '</button>'
+    +     '<button class="pr" onclick="derProbarSonido(event)" title="Hace sonar el aviso para probar el volumen">Probar</button></span></div>'
     +   '<div class="pv-linea">'
     +   '<section class="pv-alertas">'
     +     alerta('toggleCaidas', caidas, 'Ca\u00eddas', 'Ca\u00eddas: se las sacaron al t\u00e9cnico sin que las tocara', '#c0392f')
@@ -8647,7 +8664,7 @@ function pintarPortada(){
        alerta"). Cuenta las migraciones de hoy cerradas No Realizada; al
        tocarla abre Derivacion en la pestana Hoy en vivo. */
     +     (function(){ const c = derHoyConteo();
-            return '<button class="pv-al dosl ' + (c.d > 0 ? 'viva' : 'cero') + '" style="--tono:#b91c1c" title="Migraciones derivadas hoy: ' + c.d + ' de ' + c.v
+            return '<button class="pv-al dosl ' + (c.d > 0 ? 'viva' : 'cero') + (DER_AVISO.length ? ' nueva' : '') + '" style="--tono:#b91c1c" title="Migraciones derivadas hoy: ' + c.d + ' de ' + c.v
               + ' ya visitadas. Toca para abrir Derivaci\u00f3n: hoy en vivo, por t\u00e9cnico, por direcci\u00f3n, a qui\u00e9n auditar y ficha del t\u00e9cnico." onclick="abrirDerivHoy()"><span class="n">' + c.d + '</span><span class="tx"><span class="t">Migraciones<br>derivadas</span></span></button>'; })()
     +     alerta('toggleAtrasados', atras, 'M\u00e1s de 3 h', 'M\u00e1s de 3 horas: iniciadas hace rato y sin cerrar', '#be123c')
     +   '</section>'
