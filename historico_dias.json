@@ -20031,24 +20031,24 @@
    }
   },
   "09-10-2026": {
-   "hasta": "14:47",
-   "actividades": 140,
+   "hasta": "14:57",
+   "actividades": 142,
    "tecnicos": 34,
    "estados": {
-    "Completado": 50,
-    "Iniciado": 20,
+    "Completado": 54,
+    "Iniciado": 18,
     "Pendiente": 41,
-    "No Realizada": 21,
-    "en ruta": 5,
+    "No Realizada": 22,
+    "en ruta": 4,
     "Suspendido": 2,
     "Cancelado": 1
    },
-   "rgu": 205.2,
+   "rgu": 209.7,
    "caidas_total": 11,
    "caidas_activas": 10,
    "caidas_resueltas": 1,
-   "nuevas": 17,
-   "al_bucket": 7,
+   "nuevas": 20,
+   "al_bucket": 8,
    "repetidas": 23,
    "reagendadas": 3,
    "detalle": {
@@ -20146,13 +20146,40 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OBLJ33G",
+      "tec": "GEEYSER PEREZ O",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "15:10",
+      "d": "CONDELL SUR 100, QUILPUE",
+      "e": "en ruta"
+     },
+     {
+      "o": "1-3OBLL9UO",
+      "tec": "JOSE SALAS MEDINA",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "16:07",
+      "d": "GABRIEL GONZALEZ VIDELA 1890 CASA 06, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OBLI1V8",
+      "tec": "JORDAN ROA PEREZ",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "15:15",
+      "d": "PJE A (JAZMINES) 1760, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3OBL9HXX",
       "tec": "DANIEL NAVARRETE E",
       "cat": "Reparación",
       "f": "13-16",
       "hi": "14:57",
       "d": "COVADONGA 1618, QUILPUE",
-      "e": "Pendiente"
+      "e": "Pendiente (ya no está)"
      },
      {
       "o": "1-3OBHBQHG",
@@ -20161,11 +20188,11 @@
       "f": "13-16",
       "hi": "15:11",
       "d": "MARGA MARGA 1891, QUILPUE",
-      "e": "Iniciado"
+      "e": "No Realizada"
      },
      {
       "o": "1-3O9HIYCY",
-      "tec": "PABLO HERNANEZ FERNANDEZ",
+      "tec": "JOSE PEREZ RANGEL",
       "cat": "Modificación de Servicio",
       "f": "13-16",
       "hi": "15:51",
@@ -20296,7 +20323,7 @@
       "f": "13-16",
       "hi": "15:26",
       "d": "SANTA MARGARITA 1354 CASA B, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      }
     ],
     "repetidas": [
@@ -20378,22 +20405,10 @@
       "f": "13-16",
       "hi": "14:45",
       "d": "MARGA MARGA 1891, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "GEEYSER PEREZ O",
       "visitas": 1,
       "ult_fecha": "09-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3O9I41WT",
-      "cat": "Migración 2 Play",
-      "f": "13-16",
-      "hi": "16:40",
-      "d": "FRANCISCANOS 17, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOEL GUSTAVE GUSTA",
-      "visitas": 3,
-      "ult_fecha": "06-10-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -20412,13 +20427,25 @@
       "o": "1-3OB4KMW0",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:28",
+      "hi": "16:02",
       "d": "GERONA 78, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
       "visitas": 1,
       "ult_fecha": "08-10-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3O9HIYCY",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "15:05",
+      "d": "LOS TREBOLES 210 CASA 324, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOSE PEREZ RANGEL",
+      "visitas": 2,
+      "ult_fecha": "06-10-2026",
+      "ult_cierre": "NAP Problema niveles PO"
      },
      {
       "o": "1-3O5TOOUP",
@@ -20484,9 +20511,9 @@
       "o": "1-3OAX70VY",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:26",
+      "hi": "14:51",
       "d": "PERU (NODO 92) 440, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "LEONEL HERNÁNDEZ OJE",
       "visitas": 1,
       "ult_fecha": "19-08-2026",
@@ -20520,7 +20547,7 @@
       "o": "1-3OAQWS45",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:47",
+      "hi": "15:12",
       "d": "AVENIDA VALPARAISO 1539, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -20541,18 +20568,6 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3O9HIYCY",
-      "cat": "Modificación de Servicio",
-      "f": "13-16",
-      "hi": "15:51",
-      "d": "LOS TREBOLES 210 CASA 324, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "PABLO HERNANEZ FERNANDEZ",
-      "visitas": 2,
-      "ult_fecha": "06-10-2026",
-      "ult_cierre": "NAP Problema niveles PO"
-     },
-     {
       "o": "1-3OB100TD",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -20565,12 +20580,24 @@
       "ult_cierre": "Falta de dotación"
      },
      {
+      "o": "1-3O9I41WT",
+      "cat": "Migración 2 Play",
+      "f": "13-16",
+      "hi": "15:25",
+      "d": "FRANCISCANOS 17, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "visitas": 3,
+      "ult_fecha": "06-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OAVJJ4S",
       "cat": "Migración 3 Play",
       "f": "10-13",
       "hi": "11:49",
       "d": "LEUCOTON 945 CASA G, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "YENDER BOSCAN CADENAS",
       "visitas": 1,
       "ult_fecha": "11-09-2026",
@@ -20592,7 +20619,7 @@
       "o": "1-3OAU2IDL",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "17:02",
+      "hi": "18:25",
       "d": "MANUEL RODRIGUEZ 351, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE CASTRO P",
@@ -20612,5 +20639,5 @@
    }
   }
  },
- "generado": "09-10-2026 14:47"
+ "generado": "09-10-2026 14:57"
 }
