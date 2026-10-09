@@ -2399,6 +2399,13 @@
   .pv-sm td:nth-child(1), .pv-sm td:nth-child(2), .pv-sm td:nth-child(3), .pv-sm td:nth-child(6) { white-space:nowrap; }
   .pv-sm td b { color:#15293e; } .pv-sm td small { color:#8fa1b3; } .pv-sm td .gr { color:#b6c4d2; }
   .pv-sm tr.pri td { border-top:1px solid #cbd8e6; }
+
+  /* pastilla Sin moradores en dos partes: numero (lista de hoy) + nombre (reporte semanal) */
+  .pv-linea .pv-lk.dos { cursor:default; }
+  .pv-linea .pv-lk.dos button.vl { border:0; cursor:pointer; font-family:'Archivo',sans-serif; white-space:nowrap; }
+  .pv-linea .pv-lk.dos button.vl:hover { filter:brightness(1.15); box-shadow:0 0 0 3px rgba(185,28,28,.18); }
+  .pv-linea .pv-lk.dos a { color:inherit; text-decoration:none; display:inline-flex; align-items:center; gap:4px; }
+  .pv-linea .pv-lk.dos a:hover { text-decoration:underline; }
 </style>
 </head>
 <body>
@@ -8668,9 +8675,15 @@ function pintarPortada(){
             return '<button class="pv-lk dato" onclick="desdePortada(toggleComp)" title="Completitud al corte de las 13:00' + (ok ? ': ' + c.cumplen + ' de ' + c.total + ' t\u00e9cnicos con al menos un cierre. Meta ' + Math.round(COMP_META * 100) + '%' : '')
               + '"><b class="vl" style="background:' + col + '">' + (ok ? pc + '%' : '\u2013') + '</b>Completitud<span class="fl">\u203a</span></button>'; })()
     +     enlace('verReporteRepe', 'Hist\u00f3rico', 'Reporte hist\u00f3rico de direcciones')
+    /* Sin moradores, en dos partes (09-10-2026, 15:10): Luis reclamo que al
+       tocar el boton perdio el detalle de antes (el reporte semanal del
+       Historial). Ahora el NOMBRE vuelve a abrir ese reporte, igual que
+       siempre, y el NUMERO rojo de adelante abre aqui la lista de los de hoy. */
     +     (function(){ const d = pvSinMorHoy();
-            return '<button class="pv-lk dato' + (window.PV_SM ? ' sel' : '') + '" onclick="window.PV_SM = !window.PV_SM; pintarPortada()" title="Sin moradores de hoy: ' + d.l.length + ' de ' + d.vis
-              + ' visitadas. Toca para ver cu\u00e1les son."><b class="vl" style="background:' + (d.l.length ? '#b91c1c' : '#94a3b8') + '">' + d.l.length + '</b>Sin moradores<span class="fl">' + (window.PV_SM ? '\u2715' : '\u203a') + '</span></button>'; })()
+            return '<span class="pv-lk dato dos' + (window.PV_SM ? ' sel' : '') + '">'
+              + '<button class="vl" style="background:' + (d.l.length ? '#b91c1c' : '#94a3b8') + '" onclick="window.PV_SM = !window.PV_SM; pintarPortada()" title="Sin moradores de HOY: ' + d.l.length + ' de ' + d.vis
+              + ' visitadas. Toca el n\u00famero para ver cu\u00e1les son.">' + d.l.length + (window.PV_SM ? ' \u2715' : '') + '</button>'
+              + '<a href="' + URL_SINMORADORES + '" target="_blank" title="Sin moradores semanal por t\u00e9cnico (abre el Historial)">Sin moradores<span class="fl">\u203a</span></a></span>'; })()
     +     enlace(URL_EQUIPO, 'Por supervisor', 'Detalle por supervisor')
     +   '</nav>'
     +   '</div>'
