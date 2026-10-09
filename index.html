@@ -2278,6 +2278,24 @@
   #modalDer .dv-hoy-l b { color:#16232f; }
   #modalDer .dv-hoy-l ul { margin:3px 0 0; padding-left:18px; line-height:1.7; }
   #modalDer tr.det .dv-card td { background:transparent; }
+
+  /* ---- ALERTA de migraciones derivadas hoy (09-10-2026) ---- */
+  #avisoDer { position:fixed; right:18px; bottom:18px; z-index:2900; width:min(380px,calc(100vw - 36px)); background:#fff; color:#16232f;
+    border:1px solid #fecaca; border-left:5px solid #b91c1c; border-radius:12px; box-shadow:0 10px 30px rgba(2,6,23,.35); padding:12px 34px 11px 14px;
+    cursor:pointer; font-family:inherit; animation:avisoDerIn .25s ease-out; }
+  @keyframes avisoDerIn { from { transform:translateY(12px); opacity:0; } to { transform:none; opacity:1; } }
+  @media (prefers-reduced-motion: reduce){ #avisoDer { animation:none; } }
+  #avisoDer .h { font-family:'Archivo',sans-serif; font-size:14.5px; font-weight:700; color:#b91c1c; margin-bottom:6px; }
+  #avisoDer .l { font-size:13px; line-height:1.4; padding:5px 0; border-top:1px solid #f1f5f9; }
+  #avisoDer .l small { display:block; color:#5f7386; font-size:12px; }
+  #avisoDer .p { font-size:12px; color:#5f7386; margin-top:6px; }
+  #avisoDer .x { position:absolute; top:8px; right:8px; border:0; background:none; color:#8fa1b3; font-size:13px; cursor:pointer; padding:4px 6px; }
+  /* con la pastilla nueva son doce en la fila: se aprieta un poco para que sigan cabiendo sin cortar nombres */
+  .pv-linea { gap:4px; }
+  .pv-linea .pv-al, .pv-linea .pv-ch, .pv-linea .pv-lk { padding:8px 5px; gap:5px; }
+  .pv-linea .pv-al .n, .pv-linea .pv-ch b { min-width:20px; height:20px; padding:0 5px; }
+  /* el encabezado del cuadro "Por visitar" no se queda pegado arriba al bajar (se montaba sobre el de la tabla de tecnicos) */
+  #modalDer table.dv-hoy-r th { position:static; }
 </style>
 </head>
 <body>
@@ -7013,7 +7031,7 @@ function derVistaHoyHtml(){
   const riesgo = F.filter(function(x){ return x.pend && x.prev.length; }).sort(function(a, b){ return b.prev.length - a.prev.length || a.fr.localeCompare(b.fr); });
   if(riesgo.length){
     h += '<div class="dv-sec comp"><span class="n">' + riesgo.length + '</span><div><b>Por visitar hoy en direcciones que ya fallaron antes</b>'
-      + '<span>Todavía no se cierran. Todavía no se cierran. Toca una fila para ver las visitas anteriores a esa dirección.</span></div></div>'
+      + '<span>Todavía no se cierran. Toca una fila para ver las visitas anteriores a esa dirección.</span></div></div>'
       + '<table class="dv-hoy-r"><thead><tr><th>Técnico</th><th>Franja</th><th>Estado</th><th>Dirección</th><th>Petición de hoy</th><th>Ya falló</th></tr></thead><tbody>'
       + riesgo.map(function(x){
           const ab = derHoyAb === x.ot;
@@ -7057,6 +7075,46 @@ function derVistaHoyHtml(){
     + '<b>Dirección compartida</b>: antes de hoy ya le falló una visita ahí a otro técnico. <b>Propia</b>: no ha fallado ningún otro. '
     + '<b>Señales</b> en vivo: ' + DER_MIN_CORTA + ' minutos o menos en terreno, o visita fuera de la franja. '
     + '<b>Semana con hoy</b>: lo de la semana hasta ayer más lo de hoy. Mañana estas órdenes pasan a las otras pestañas, ya con el dato cerrado del día.</p>';
+}
+
+/* ---- Alerta de migraciones derivadas hoy (09-10-2026) ----
+   Luis: "necesito una alerta, ya se derivo 1". Dos avisos, los dos salen de
+   DB (rutas.json en vivo):
+   1) una pastilla en la portada, "Migr. derivadas", con cuantas van hoy;
+   2) un aviso flotante abajo a la derecha cada vez que aparece una NUEVA,
+      con tecnico, direccion y quiebre. Se queda hasta que se toca (abre la
+      pestana Hoy en vivo) o se cierra con la x. Las que ya estaban al abrir
+      la pagina no avisan: solo las que llegan despues. Nada se guarda en el
+      navegador: la lista de "ya vistas" vive en memoria. */
+function derHoyMigDer(){
+  const l = [];
+  Object.keys(typeof DB === 'object' && DB ? DB : {}).forEach(function(k){ (DB[k] || []).forEach(function(j){
+    if(String(j.t || '').trim().toUpperCase().indexOf('MIGRA') !== 0) return;
+    if(j.e === 'Completado' || j.e === 'No Realizada') l.push({ tec:k, o:String(j.o || ''), d:String(j.d || ''), cie:String(j.cie || ''), der:j.e === 'No Realizada', fr:String(j.f || '') });
+  }); });
+  return l;
+}
+function derHoyConteo(){ const l = derHoyMigDer(); return { v: l.length, d: l.filter(function(x){ return x.der; }).length }; }
+function abrirDerivHoy(){ derVista = 'hoy'; derTipo = 'MIGRA'; derSup = 'Todos'; derAbierto = null; cerrarAvisoDer(); abrirDeriv(); }
+let DER_VISTAS_HOY = null;      // peticiones derivadas ya avisadas (null = todavia no se ha mirado)
+let DER_AVISO = [];             // las nuevas que estan en el aviso flotante
+function cerrarAvisoDer(){ DER_AVISO = []; const a = document.getElementById('avisoDer'); if(a) a.remove(); }
+function revisarAvisoDer(){
+  const ders = derHoyMigDer().filter(function(x){ return x.der; });
+  if(DER_VISTAS_HOY === null){ DER_VISTAS_HOY = {}; ders.forEach(function(x){ DER_VISTAS_HOY[x.o] = 1; }); return; }
+  const nuevas = ders.filter(function(x){ return !DER_VISTAS_HOY[x.o]; });
+  if(!nuevas.length) return;
+  nuevas.forEach(function(x){ DER_VISTAS_HOY[x.o] = 1; DER_AVISO.push(x); });
+  let a = document.getElementById('avisoDer');
+  if(!a){ a = document.createElement('div'); a.id = 'avisoDer'; document.body.appendChild(a); }
+  const c = derHoyConteo();
+  a.innerHTML = '<button class="x" title="Cerrar" onclick="event.stopPropagation(); cerrarAvisoDer()">✖</button>'
+    + '<div class="h">' + (DER_AVISO.length === 1 ? 'Se derivó una migración' : 'Se derivaron ' + DER_AVISO.length + ' migraciones') + '</div>'
+    + DER_AVISO.slice(-4).map(function(x){ return '<div class="l"><b>' + escR(derTitulo(x.tec)) + '</b> · ' + escR(x.cie || 'No realizada')
+        + '<small>' + escR(derTitulo(x.d)) + ' · franja ' + escR(x.fr) + ' · ' + escR(x.o) + '</small></div>'; }).join('')
+    + (DER_AVISO.length > 4 ? '<div class="l"><small>y ' + (DER_AVISO.length - 4) + ' más</small></div>' : '')
+    + '<div class="p">Van ' + c.d + ' de ' + c.v + ' visitadas hoy · toca para ver el detalle</div>';
+  a.onclick = abrirDerivHoy;
 }
 
 function pintarDeriv(){
@@ -8300,6 +8358,12 @@ function pintarPortada(){
     +       '" style="--tono:#0f766e" title="T\u00e9cnicos sin iniciar: tienen \u00f3rdenes hoy y ninguna iniciada ni en ruta"'
     +       ' onclick="window.PV_SININI = !window.PV_SININI; pintarPortada()">'
     +       '<span class="n">' + sinIni + '</span><span class="tx"><span class="t">Sin iniciar</span></span></button>'
+    /* Migraciones derivadas hoy (09-10-2026, pedido de Luis: "necesito una
+       alerta"). Cuenta las migraciones de hoy cerradas No Realizada; al
+       tocarla abre Derivacion en la pestana Hoy en vivo. */
+    +     (function(){ const c = derHoyConteo();
+            return '<button class="pv-al ' + (c.d > 0 ? 'viva' : 'cero') + '" style="--tono:#b91c1c" title="Migraciones derivadas hoy: ' + c.d + ' de ' + c.v
+              + ' ya visitadas. Toca para ver cu\u00e1les son." onclick="abrirDerivHoy()"><span class="n">' + c.d + '</span><span class="tx"><span class="t">Derivadas</span></span></button>'; })()
     +     alerta('toggleAtrasados', atras, 'M\u00e1s de 3 h', 'M\u00e1s de 3 horas: iniciadas hace rato y sin cerrar', '#be123c')
     +   '</section>'
     +   '<div class="pv-chips">'
@@ -9286,6 +9350,7 @@ async function cargarDatosVivos(auto){
     if(repeAbierto) renderRepe();      // si el modal esta abierto, se refresca solo
     if(caidasAbierto) renderPanelCaidas();
     if(comp) renderPanelComp();
+    try { revisarAvisoDer(); } catch(e){}   /* aviso flotante de migraciones derivadas (09-10-2026) */
     /* Derivacion > Hoy en vivo (09-10-2026): si la ventana esta abierta en esa pestana, se repinta con lo nuevo */
     try { const mD = document.getElementById('modalDer'); if(mD && mD.classList.contains('abierto') && derVista === 'hoy' && DER && DER.length) pintarDeriv(); } catch(e){}
     render(auto);          // auto = true -> no reencuadra el mapa
