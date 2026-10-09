@@ -2366,6 +2366,18 @@
   #modalDer .dv-cau button.c.cero { opacity:.5; cursor:default; box-shadow:none; }
   #modalDer .dv-cau-det { border:1px solid #dbe4ed; border-radius:10px; padding:10px 12px 4px; margin:0 0 12px; background:#f8fafc; }
   #modalDer .dv-cau-det .tit { font-size:13.5px; color:#16232f; margin:0 0 8px; }
+
+  /* ---- Causales de la semana como botones: tabla del detalle (09-10-2026, 14:30) ---- */
+  #modalDer table.dv-cau-t { font-size:12.5px; margin:0 0 8px; }
+  #modalDer table.dv-cau-t th { position:static; background:transparent; text-align:left; font-size:10.5px; padding:4px 12px 4px 0; white-space:nowrap; }
+  #modalDer table.dv-cau-t td { text-align:left; white-space:normal; padding:5px 12px 5px 0; vertical-align:top; border-bottom:1px solid #edf1f6; color:#41586f; }
+  #modalDer table.dv-cau-t td:nth-child(1), #modalDer table.dv-cau-t td:nth-child(2), #modalDer table.dv-cau-t td.pet,
+  #modalDer table.dv-cau-t td:nth-child(6), #modalDer table.dv-cau-t td:nth-child(7) { white-space:nowrap; }
+  #modalDer table.dv-cau-t td b { color:#16232f; }
+  #modalDer table.dv-cau-t td small { color:#8fa1b3; }
+  #modalDer table.dv-cau-t td .gr { color:#8fa1b3; }
+  #modalDer table.dv-cau-t tr.pri td { border-top:1px solid #cbd8e6; }
+  #modalDer table.dv-cau-t .tg { margin:1px 2px 1px 0; }
 </style>
 </head>
 <body>
@@ -7289,6 +7301,47 @@ function revisarAvisoDer(){
   a.onclick = abrirDerivHoy;
 }
 
+/* ---- Causales de la semana como botones (09-10-2026, 14:30) ----
+   Luis: "activame todos estos botones donde aparezcan las causales". Son las
+   pastillas de Causales de las pestanas Por tecnico y Por direccion (las de
+   Hoy en vivo ya se tocaban). Al tocar una se abre debajo la lista de las
+   derivadas de la semana elegida con esa causal, en una tabla: fecha,
+   tecnico, direccion, peticion, actividad, franja, a que hora llego y cuanto
+   estuvo, el quiebre exacto, quien mas fallo en esa direccion y las senales.
+   Respeta los filtros de semana, supervisor y tipo. */
+let derCau = null;
+function setCauDeriv(g){ derCau = (derCau === g ? null : g); pintarDeriv(); }
+function derCausalesSemHtml(tb, tot){
+  const NOMC = { sm:'sin moradores', re:'cliente reagenda', de:'cliente desiste', ot:'no atribuibles al técnico' };
+  if(derCau && !tot[derCau]) derCau = null;
+  let h = '<div class="dv-cau"><span class="rot">Causales</span>' + ['sm', 're', 'de', 'ot'].map(function(g){
+      return '<button class="c' + (g === 'ot' ? ' no' : '') + (derCau === g ? ' on' : '') + (tot[g] ? '' : ' cero') + '"' + (tot[g] ? ' onclick="setCauDeriv(\'' + g + '\')" title="Toca para ver cuáles son"' : ' disabled')
+        + '><b>' + tot[g] + '</b>' + NOMC[g] + (derCau === g ? ' ✕' : '') + '</button>'; }).join('')
+    + (tot.d ? '<span style="color:#5f7386">· las tres primeras son el ' + derPct(tot.sm + tot.re + tot.de, tot.d) + '% de las derivadas</span>' : '') + '</div>';
+  if(!derCau) return h;
+  const l = [];
+  tb.forEach(function(o){ o.l.forEach(function(x){ if(x.g === derCau) l.push(x); }); });
+  l.sort(function(a, b){ return a.tec.localeCompare(b.tec) || a.iso.localeCompare(b.iso) || a.ot.localeCompare(b.ot); });
+  const porTec = {}; l.forEach(function(x){ porTec[x.tec] = (porTec[x.tec] || 0) + 1; });
+  const porCod = {}; l.forEach(function(x){ porCod[x.cod] = (porCod[x.cod] || 0) + 1; });
+  const cods = Object.keys(porCod).sort(function(a, b){ return porCod[b] - porCod[a] || a.localeCompare(b); });
+  h += '<div class="dv-cau-det"><div class="tit"><b>' + l.length + '</b> ' + NOMC[derCau] + ' en la semana ' + derNumSemana(derSem) + ' · ' + derPl(Object.keys(porTec).length, 'técnico', 'técnicos')
+    + (cods.length > 1 ? ' · ' + cods.map(function(c){ return porCod[c] + ' ' + escR(c); }).join(', ') : '') + '</div>'
+    + '<table class="dv-cau-t"><thead><tr><th>Fecha</th><th>Técnico</th><th>Dirección</th><th>Petición</th><th>Actividad</th><th>Franja</th><th>Llegó · estuvo</th><th>Quiebre</th><th>También falló ahí</th></tr></thead><tbody>';
+  let ant = '';
+  l.forEach(function(x){
+    const hi = derHist(x), sn = derSenales(x, hi), yo = hi ? hi.yo : null, nom = hi ? hi.d : DER_UNI[x.ot];
+    const ot = hi ? Object.keys(hi.otros).sort() : [];
+    h += '<tr' + (x.tec !== ant ? ' class="pri"' : '') + '><td>' + x.f + '</td><td>' + (x.tec !== ant ? '<b>' + escR(derTitulo(x.tec)) + '</b> <small>' + porTec[x.tec] + '</small>' : '') + '</td>'
+      + '<td>' + (nom ? escR(derTitulo(nom)) : '<span class="gr">' + escR(derTitulo(x.ciu)) + ', sin dirección en el histórico</span>') + '</td><td class="pet">' + escR(x.ot) + '</td><td>' + escR(x.act) + '</td><td>' + escR(x.fr) + '</td>'
+      + '<td>' + (yo && yo.hi >= 0 ? derHM(yo.hi) + (yo.dur >= 0 ? ' · ' + yo.dur + ' min' : '') : '') + '</td>'
+      + '<td><span class="tg ' + (x.g === 'ot' ? 'na' : 'at') + '">' + escR(x.cod) + '</span>' + (x.desp ? ' <span class="tg ok">se completó el ' + x.desp + '</span>' : '') + derSenalesHtml(sn) + '</td>'
+      + '<td>' + (ot.length ? ot.map(function(t){ return escR(derTitulo(t)); }).join(', ') : '<span class="gr">nadie más</span>') + '</td></tr>';
+    ant = x.tec;
+  });
+  return h + '</tbody></table></div>';
+}
+
 function pintarDeriv(){
 
 
@@ -7392,11 +7445,7 @@ function pintarDeriv(){
     + '<div class="' + (derPct(tot.d, tot.n) > DER_UMBRAL ? 'mal' : '') + '"><b>' + (tot.n ? (100 * tot.d / tot.n).toFixed(1).replace('.', ',') : '0') + '%</b><span>derivación</span></div>'
     + '<div class="' + (nSobre ? 'mal' : '') + '"><b>' + nSobre + '</b><span>técnicos sobre ' + DER_UMBRAL + '%</span></div>'
     + '</div>'
-    + '<div class="dv-cau"><span class="rot">Causales</span>'
-    + '<span class="c"><b>' + tot.sm + '</b>sin moradores</span><span class="c"><b>' + tot.re + '</b>cliente reagenda</span>'
-    + '<span class="c"><b>' + tot.de + '</b>cliente desiste</span><span class="c no"><b>' + tot.ot + '</b>no atribuibles al técnico</span>'
-    + (tot.d ? '<span style="color:#5f7386">· las tres primeras son el ' + derPct(tot.sm + tot.re + tot.de, tot.d) + '% de las derivadas</span>' : '')
-    + '</div>';
+    + derCausalesSemHtml(tb, tot);
   if(derVista === 'hoy'){ cuerpo.innerHTML = derVistaHoyHtml(); return; }
   if(derVista === 'fic'){ cuerpo.innerHTML = derVistaFicHtml(todasSem); return; }
   if(!tb.length){ cuerpo.innerHTML = h + '<div class="dv-vacio">Sin ' + derNomTipo() + ' en esta semana para ese supervisor.</div>'; return; }
