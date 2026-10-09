@@ -20031,22 +20031,23 @@
    }
   },
   "09-10-2026": {
-   "hasta": "11:11",
-   "actividades": 128,
+   "hasta": "11:26",
+   "actividades": 130,
    "tecnicos": 34,
    "estados": {
-    "Iniciado": 32,
+    "Iniciado": 28,
     "Pendiente": 79,
-    "Completado": 9,
-    "No Realizada": 6,
-    "en ruta": 1,
-    "Cancelado": 1
+    "Completado": 12,
+    "No Realizada": 7,
+    "en ruta": 2,
+    "Cancelado": 1,
+    "Suspendido": 1
    },
-   "rgu": 194.0,
-   "caidas_total": 6,
-   "caidas_activas": 5,
+   "rgu": 196.0,
+   "caidas_total": 7,
+   "caidas_activas": 6,
    "caidas_resueltas": 1,
-   "nuevas": 10,
+   "nuevas": 11,
    "al_bucket": 1,
    "repetidas": 21,
    "reagendadas": 2,
@@ -20089,6 +20090,15 @@
       "e": "Pendiente"
      },
      {
+      "o": "1-3OB3HR71",
+      "tec": "JOSE CASTRO P",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "SANTA ELENA 098 EDIF. 1 DEPTO 301, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3O5N8692",
       "tec": "SAMUEL FERNANDEZ VIDAL",
       "cat": "Migración 3 Play",
@@ -20099,6 +20109,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OBEO1SB",
+      "tec": "LEONEL HERNÁNDEZ OJE",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "16:46",
+      "d": "QUINTRAL 2944, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OBEN5D2",
       "tec": "ALEXIS JARA",
@@ -20411,9 +20430,9 @@
       "o": "1-3O9YNHRR",
       "cat": "Migración 3 Play",
       "f": "10-13",
-      "hi": "13:00",
+      "hi": "11:39",
       "d": "EL MIRADOR 738 CASA 24, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "PABLO HERNANEZ FERNANDEZ",
       "visitas": 1,
       "ult_fecha": "07-10-2026",
@@ -20469,5 +20488,5 @@
    }
   }
  },
- "generado": "09-10-2026 11:11"
+ "generado": "09-10-2026 11:26"
 }
