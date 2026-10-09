@@ -2343,6 +2343,18 @@
   #modalDer .dv-seg button.on { background:#dbeafe; color:#1e3a8a; font-weight:600; box-shadow:inset 0 0 0 1.5px #2563eb; }
   #modalDer .dv-seg button.on:first-child { border-radius:7px 0 0 7px; }
   #modalDer .dv-seg button.on:last-child { border-radius:0 7px 7px 0; }
+
+  /* ---- MONITOR DETENIDO: parpadeo y aviso (09-10-2026, 12:20) ---- */
+  .pv-bar .upd.mal { color:#ff6b5e; font-weight:700; animation:updParpadeo 1s steps(1,end) infinite; }
+  .pv-bar .pv-upd.mal i { background:#ef4444; box-shadow:0 0 0 3px rgba(239,68,68,.25); animation:updParpadeo 1s steps(1,end) infinite; }
+  @keyframes updParpadeo { 0% { opacity:1; } 50% { opacity:.25; } 100% { opacity:1; } }
+  @media (prefers-reduced-motion: reduce){ .pv-bar .upd.mal, .pv-bar .pv-upd.mal i { animation:none; } }
+  #avisoMon { position:fixed; left:18px; bottom:18px; z-index:2950; width:min(400px,calc(100vw - 36px)); background:#7f1d1d; color:#fff;
+    border-radius:12px; box-shadow:0 10px 30px rgba(2,6,23,.45); padding:12px 34px 12px 14px; font-family:inherit; }
+  #avisoMon .h { font-family:'Archivo',sans-serif; font-size:15px; font-weight:700; margin-bottom:5px; }
+  #avisoMon .l { font-size:13.5px; }
+  #avisoMon .p { font-size:12px; color:#fecaca; margin-top:5px; line-height:1.4; }
+  #avisoMon .x { position:absolute; top:8px; right:8px; border:0; background:none; color:#fecaca; font-size:13px; cursor:pointer; padding:4px 6px; }
 </style>
 </head>
 <body>
@@ -6116,7 +6128,7 @@ const URL_QUIEBRES = URL_ACTIVIDADES + '#quiebres';
    Desde el 23-09-2026 el texto dice SIEMPRE hace cuanto se actualizo, tambien
    fuera de horario, a pedido de Luis: asi sabe de un vistazo si el monitor
    sigue vivo. Lo unico que depende del horario es el ROJO de la alarma. */
-const MIN_SIN_AVISO = 15;
+const MIN_SIN_AVISO = 10;   // 10 desde el 09-10-2026 (era 15): Luis pidio el aviso "cuando lleve mas de 10 minutos"
 const HORA_INICIO = 8 * 60 + 45;
 const HORA_FIN = 19 * 60 + 30;
 
@@ -6145,6 +6157,35 @@ function refrescarAviso(){
   btn.classList.toggle('alarma', e.alarma);
   txt.textContent = e.texto;
   txt.className = 'upd' + (e.alarma ? ' mal' : '');
+  const caja = txt.parentNode; if(caja && caja.classList) caja.classList.toggle('mal', !!e.alarma);
+  try { avisoMonitor(e); } catch(_){}
+}
+
+/* ---- Alerta de monitor detenido (09-10-2026, 12:20) ----
+   Luis: "que parpadee el sin actualizar y que me entregue una alerta cuando
+   lleve mas de 10 minutos, no me habia dado cuenta". Cuando estadoMonitor()
+   da alarma (mas de MIN_SIN_AVISO minutos sin dato nuevo, en horario):
+   - el texto de arriba a la derecha parpadea en rojo (CSS .upd.mal);
+   - sale un aviso fijo abajo a la izquierda con hace cuanto no actualiza y
+     la hora del ultimo dato, y suena (dos tonos graves, distintos a los de
+     una migracion derivada);
+   - mientras siga detenido, vuelve a sonar y a mostrarse cada 10 minutos,
+     aunque se haya cerrado con la x.
+   Cuando el monitor vuelve a publicar, el aviso se quita solo. */
+let MON_AVISADO = 0;
+function cerrarAvisoMon(){ const a = document.getElementById('avisoMon'); if(a) a.style.display = 'none'; }
+function avisoMonitor(e){
+  let a = document.getElementById('avisoMon');
+  if(!e.alarma){ if(a) a.remove(); MON_AVISADO = 0; return; }
+  const ahora = Date.now(), toca = !MON_AVISADO || (ahora - MON_AVISADO) >= 10 * 60000;
+  if(!a){ a = document.createElement('div'); a.id = 'avisoMon'; document.body.appendChild(a); }
+  const ult = (typeof FECHA_DATOS !== 'undefined' && FECHA_DATOS)
+    ? String(FECHA_DATOS.getHours()).padStart(2, '0') + ':' + String(FECHA_DATOS.getMinutes()).padStart(2, '0') : '';
+  a.innerHTML = '<button class="x" title="Cerrar (vuelve a avisar en 10 minutos si sigue detenido)" onclick="cerrarAvisoMon()">\u2716</button>'
+    + '<div class="h">\u26a0\ufe0f El monitor no est\u00e1 actualizando</div>'
+    + '<div class="l"><b>' + escR(e.texto) + '</b>' + (ult ? ' \u00b7 \u00faltimo dato a las ' + ult : '') + '</div>'
+    + '<div class="p">Lo que ves en pantalla puede estar atrasado. Revisa la ventana negra del monitor en el computador.</div>';
+  if(toca){ MON_AVISADO = ahora; a.style.display = ''; try { derSonar([[0, 440], [0.3, 330], [0.6, 440], [0.9, 330]]); } catch(_){} }
 }
 
 /* Resumen del dia para la cabecera: el porcentaje de completadas con la barra
@@ -7161,13 +7202,13 @@ function derAudioListo(){
   } catch(e){}
   derPintarSonido();
 }
-function derSonar(){
+function derSonar(notas){
   if(!DER_SONIDO) return false;
   derAudioListo();
   if(!derAudioOk()) return false;
   try {
     const t0 = DER_AUDIO.currentTime;
-    [[0, 880], [0.22, 880], [0.44, 1175]].forEach(function(n){
+    (Array.isArray(notas) ? notas : [[0, 880], [0.22, 880], [0.44, 1175]]).forEach(function(n){
       const o = DER_AUDIO.createOscillator(), g = DER_AUDIO.createGain();
       o.type = 'sine'; o.frequency.value = n[1];
       g.gain.setValueAtTime(0.0001, t0 + n[0]); g.gain.exponentialRampToValueAtTime(0.35, t0 + n[0] + 0.02);
@@ -7179,8 +7220,8 @@ function derSonar(){
 }
 function derSonidoTxt(){ return !DER_SONIDO ? '🔕 Sin sonido' : derAudioOk() ? '🔔 Con sonido' : '🔔 Haz un clic para activar el sonido'; }
 function derPintarSonido(){ const b = document.getElementById('derSonBtn'); if(b){ b.textContent = derSonidoTxt(); b.className = 'son' + (DER_SONIDO && !derAudioOk() ? ' falta' : ''); } }
-function derToggleSonido(ev){ if(ev) ev.stopPropagation(); DER_SONIDO = !DER_SONIDO; derAudioListo(); if(DER_SONIDO) setTimeout(derSonar, 80); derPintarSonido(); }
-function derProbarSonido(ev){ if(ev) ev.stopPropagation(); derAudioListo(); setTimeout(derSonar, 80); }
+function derToggleSonido(ev){ if(ev) ev.stopPropagation(); DER_SONIDO = !DER_SONIDO; derAudioListo(); if(DER_SONIDO) setTimeout(function(){ derSonar(); }, 80); derPintarSonido(); }
+function derProbarSonido(ev){ if(ev) ev.stopPropagation(); derAudioListo(); setTimeout(function(){ derSonar(); }, 80); }
 document.addEventListener('click', derAudioListo, true);
 document.addEventListener('keydown', derAudioListo, true);
 function derBarraHtml(){
