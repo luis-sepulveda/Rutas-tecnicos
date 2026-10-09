@@ -2324,6 +2324,25 @@
   .pv-der ~ .pv-hero { padding-top:18px; padding-bottom:18px; }
   .pv-der ~ .pv-tl { margin-top:10px; padding-top:16px; padding-bottom:16px; }
   @media (max-width:900px){ .pv-der { flex-wrap:wrap; white-space:normal; margin-top:0; } .pv-der .lst { flex-basis:100%; flex-wrap:wrap; } }
+
+  /* ---- CABECERA de Derivacion: vistas como BOTONES y menos negro (09-10-2026, 10:50, pedido de Luis) ----
+     Las vistas dejan de ser pestanas subrayadas y pasan a botones; el elegido
+     va en azul lleno (el mismo azul de Rutas / Red). Los filtros de abajo
+     (semana, supervisor, tipo, periodo) marcan lo elegido en azul claro en vez
+     de negro, para que se note cual es el boton principal y cual el filtro. */
+  #modalDer .dv-tabs { gap:8px; padding:4px 22px 12px; border-bottom:0; }
+  #modalDer .dv-tabs button { border:1px solid #cbd8e6; background:#fff; color:#2c4460; font-size:13.5px; font-weight:600; padding:8px 16px;
+    border-radius:10px; margin-bottom:0; box-shadow:0 1px 2px rgba(20,45,70,.06); }
+  #modalDer .dv-tabs button:hover { background:#eff6ff; border-color:#93c5fd; color:#1d4ed8; }
+  #modalDer .dv-tabs button.on { background:#2563eb; border-color:#2563eb; color:#fff; box-shadow:0 2px 6px rgba(37,99,235,.35); }
+  #modalDer .dv-filtros { border-top:1px solid #e6edf3; }
+  #modalDer .dv-filtros .sems button.on { background:#dbeafe; border-color:#2563eb; color:#1e3a8a; box-shadow:inset 0 0 0 1px #2563eb; }
+  #modalDer .dv-filtros .sems button.on b { color:#1e3a8a; }
+  #modalDer .dv-filtros .sems button.on.alto b { color:#b91c1c; }
+  #modalDer .dv-filtros .sems button.rng { background:#eff6ff; border-color:#93c5fd; color:#1e3a8a; }
+  #modalDer .dv-seg button.on { background:#dbeafe; color:#1e3a8a; font-weight:600; box-shadow:inset 0 0 0 1.5px #2563eb; }
+  #modalDer .dv-seg button.on:first-child { border-radius:7px 0 0 7px; }
+  #modalDer .dv-seg button.on:last-child { border-radius:0 7px 7px 0; }
 </style>
 </head>
 <body>
