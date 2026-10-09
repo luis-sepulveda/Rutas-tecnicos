@@ -20031,25 +20031,25 @@
    }
   },
   "09-10-2026": {
-   "hasta": "11:26",
-   "actividades": 130,
+   "hasta": "11:41",
+   "actividades": 134,
    "tecnicos": 34,
    "estados": {
-    "Iniciado": 28,
+    "Iniciado": 23,
     "Pendiente": 79,
-    "Completado": 12,
-    "No Realizada": 7,
-    "en ruta": 2,
-    "Cancelado": 1,
-    "Suspendido": 1
+    "Completado": 16,
+    "No Realizada": 8,
+    "en ruta": 5,
+    "Suspendido": 2,
+    "Cancelado": 1
    },
-   "rgu": 196.0,
+   "rgu": 201.5,
    "caidas_total": 7,
    "caidas_activas": 6,
    "caidas_resueltas": 1,
-   "nuevas": 11,
+   "nuevas": 12,
    "al_bucket": 1,
-   "repetidas": 21,
+   "repetidas": 22,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
@@ -20110,8 +20110,17 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OBFSJPX",
+      "tec": "PABLO HERNANEZ FERNANDEZ",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "11:48",
+      "d": "EL CIRUELILLO 1488, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3OBEO1SB",
-      "tec": "LEONEL HERNÁNDEZ OJE",
+      "tec": "RAFAEL VARGAS B",
       "cat": "Modificación de Servicio",
       "f": "16-19",
       "hi": "16:46",
@@ -20134,7 +20143,7 @@
       "f": "10-13",
       "hi": "11:25",
       "d": "ALCALDE RODOLFO GALLEGUILLOS 1701 CASA C DEPTO 202, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OBCOI94",
@@ -20161,7 +20170,7 @@
       "f": "13-16",
       "hi": "15:00",
       "d": "WAGNER 1747, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "No Realizada"
      },
      {
       "o": "1-3OBD9HJP",
@@ -20240,7 +20249,7 @@
       "f": "10-13",
       "hi": "11:02",
       "d": "WAGNER 1747, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "ESTEBAN PIZARRO QUINTANA",
       "visitas": 1,
       "ult_fecha": "08-10-2026",
@@ -20250,7 +20259,7 @@
       "o": "1-3OB6K1MD",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:42",
+      "hi": "14:18",
       "d": "LOS TREBOLES 50 CASA 08, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
@@ -20262,7 +20271,7 @@
       "o": "1-3OB4KMW0",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "16:01",
+      "hi": "15:37",
       "d": "GERONA 78, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
@@ -20322,7 +20331,7 @@
       "o": "1-3O9MS6I2",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "12:10",
+      "hi": "11:54",
       "d": "VALLE DEL PARAISO 2907 EDIF. A DEPTO 102, QUILPUE",
       "e": "Pendiente",
       "tec": "KEVIN TAPIA RETAMAL",
@@ -20334,7 +20343,7 @@
       "o": "1-3OAYO2JD",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "16:38",
+      "hi": "16:22",
       "d": "VALLE DEL PARAISO 2907 EDIF. A DEPTO 402, QUILPUE",
       "e": "Pendiente",
       "tec": "KEVIN TAPIA RETAMAL",
@@ -20346,13 +20355,25 @@
       "o": "1-3OA11IUW",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "11:59",
+      "hi": "11:52",
       "d": "ESMERALDA 2633 EDIF. 1 DEPTO 14, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
       "visitas": 1,
       "ult_fecha": "07-10-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OBFNR5M",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "15:08",
+      "d": "AZTECAS 225, QUILPUE",
+      "e": "Pendiente",
+      "tec": "LUIS CASTRO TORRES",
+      "visitas": 1,
+      "ult_fecha": "24-08-2026",
+      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3OB08NWL",
@@ -20370,9 +20391,9 @@
       "o": "1-3OB2H2TZ",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "12:00",
+      "hi": "11:45",
       "d": "SIRIA 449, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "MARCO PEREZ G",
       "visitas": 1,
       "ult_fecha": "02-10-2026",
@@ -20382,7 +20403,7 @@
       "o": "1-3O5VCCA3",
       "cat": "Alta Traslado",
       "f": "13-16",
-      "hi": "15:11",
+      "hi": "14:56",
       "d": "VINA DEL MAR 037, QUILPUE",
       "e": "Pendiente",
       "tec": "MARCO PEREZ G",
@@ -20406,7 +20427,7 @@
       "o": "1-3O9I41WT",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "15:28",
       "d": "FRANCISCANOS 17, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATÍAS JAQUE AG",
@@ -20418,7 +20439,7 @@
       "o": "1-3OAX70VY",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:03",
+      "hi": "15:39",
       "d": "PERU (NODO 92) 440, QUILPUE",
       "e": "Pendiente",
       "tec": "NICOLAS MOYANO R",
@@ -20430,9 +20451,9 @@
       "o": "1-3O9YNHRR",
       "cat": "Migración 3 Play",
       "f": "10-13",
-      "hi": "11:39",
+      "hi": "14:19",
       "d": "EL MIRADOR 738 CASA 24, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNANDEZ",
       "visitas": 1,
       "ult_fecha": "07-10-2026",
@@ -20454,9 +20475,9 @@
       "o": "1-3OAVJJ4S",
       "cat": "Migración 3 Play",
       "f": "10-13",
-      "hi": "11:28",
+      "hi": "11:48",
       "d": "LEUCOTON 945 CASA G, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "YENDER BOSCAN CADENAS",
       "visitas": 1,
       "ult_fecha": "11-09-2026",
@@ -20468,10 +20489,10 @@
       "o": "1-3O6NEFRP",
       "cat": "Alta Traslado",
       "f": "10-13",
-      "hi": "12:22",
+      "hi": "11:54",
       "d": "VENECIA NORTE 1098 CASA 1, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "LUIS GATICA DAVILA",
+      "e": "en ruta",
+      "tec": "MATÍAS JAQUE AG",
       "desde": "05-10-2026"
      },
      {
@@ -20488,5 +20509,5 @@
    }
   }
  },
- "generado": "09-10-2026 11:26"
+ "generado": "09-10-2026 11:41"
 }
