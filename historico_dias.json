@@ -20031,27 +20031,36 @@
    }
   },
   "09-10-2026": {
-   "hasta": "10:56",
-   "actividades": 127,
+   "hasta": "11:11",
+   "actividades": 128,
    "tecnicos": 34,
    "estados": {
-    "Iniciado": 29,
-    "Pendiente": 80,
+    "Iniciado": 32,
+    "Pendiente": 79,
     "Completado": 9,
-    "No Realizada": 5,
-    "en ruta": 3,
+    "No Realizada": 6,
+    "en ruta": 1,
     "Cancelado": 1
    },
-   "rgu": 192.0,
-   "caidas_total": 5,
+   "rgu": 194.0,
+   "caidas_total": 6,
    "caidas_activas": 5,
-   "caidas_resueltas": 0,
-   "nuevas": 9,
+   "caidas_resueltas": 1,
+   "nuevas": 10,
    "al_bucket": 1,
-   "repetidas": 22,
+   "repetidas": 21,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
+     {
+      "o": "1-3OBCOI94",
+      "tec": "ALEXIS JARA",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "14:07",
+      "d": "SAN MARINO 995 CASA B, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OAYO9YT",
       "tec": "ALEXIS JARA",
@@ -20080,15 +20089,6 @@
       "e": "Pendiente"
      },
      {
-      "o": "1-3OB08NWL",
-      "tec": "LUIS MARTIN NUÑEZ",
-      "cat": "Alta 2 Play",
-      "f": "13-16",
-      "hi": "14:00",
-      "d": "LOS CORCHOS 2693, QUILPUE",
-      "e": "Pendiente"
-     },
-     {
       "o": "1-3O5N8692",
       "tec": "SAMUEL FERNANDEZ VIDAL",
       "cat": "Migración 3 Play",
@@ -20099,6 +20099,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OBEN5D2",
+      "tec": "ALEXIS JARA",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "14:08",
+      "d": "LOS NARANJOS 37, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OBDXIFN",
       "tec": "JOSE PEREZ RANGEL",
@@ -20115,7 +20124,7 @@
       "f": "13-16",
       "hi": "14:07",
       "d": "SAN MARINO 995 CASA B, QUILPUE",
-      "e": "Pendiente"
+      "e": "Pendiente (ya no está)"
      },
      {
       "o": "1-3OBDQQ81",
@@ -20133,7 +20142,7 @@
       "f": "13-16",
       "hi": "15:00",
       "d": "WAGNER 1747, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OBD9HJP",
@@ -20183,22 +20192,10 @@
     ],
     "repetidas": [
      {
-      "o": "1-3OBCOI94",
-      "cat": "Alta 1 Play",
-      "f": "13-16",
-      "hi": "14:07",
-      "d": "SAN MARINO 995 CASA B, QUILPUE",
-      "e": "Pendiente",
-      "tec": "ALEXIS JARA",
-      "visitas": 2,
-      "ult_fecha": "07-10-2026",
-      "ult_cierre": "Sin apoyo vivienda-Pierrack"
-     },
-     {
       "o": "1-3O8OIBFX",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "16:35",
+      "hi": "16:00",
       "d": "LAS GARZAS 1151, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
@@ -20222,9 +20219,9 @@
       "o": "1-3OBDF9KW",
       "cat": "Migración 3 Play",
       "f": "10-13",
-      "hi": "11:06",
+      "hi": "11:02",
       "d": "WAGNER 1747, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "ESTEBAN PIZARRO QUINTANA",
       "visitas": 1,
       "ult_fecha": "08-10-2026",
@@ -20234,7 +20231,7 @@
       "o": "1-3OB6K1MD",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:46",
+      "hi": "14:42",
       "d": "LOS TREBOLES 50 CASA 08, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
@@ -20246,7 +20243,7 @@
       "o": "1-3OB4KMW0",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "16:05",
+      "hi": "16:01",
       "d": "GERONA 78, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
@@ -20279,18 +20276,6 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3OB3HR71",
-      "cat": "Alta 1 Play",
-      "f": "13-16",
-      "hi": "14:00",
-      "d": "SANTA ELENA 098 EDIF. 1 DEPTO 301, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOSE CASTRO P",
-      "visitas": 7,
-      "ult_fecha": "08-10-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
       "o": "1-3O8TZC6Y",
       "cat": "Migración 2 Play",
       "f": "16-19",
@@ -20306,9 +20291,9 @@
       "o": "1-3O5TOOUP",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "10:55",
+      "hi": "10:58",
       "d": "PJE UNO 1238, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "JOSE ROJO A",
       "visitas": 2,
       "ult_fecha": "01-10-2026",
@@ -20318,7 +20303,7 @@
       "o": "1-3O9MS6I2",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "11:39",
+      "hi": "12:10",
       "d": "VALLE DEL PARAISO 2907 EDIF. A DEPTO 102, QUILPUE",
       "e": "Pendiente",
       "tec": "KEVIN TAPIA RETAMAL",
@@ -20330,7 +20315,7 @@
       "o": "1-3OAYO2JD",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "16:07",
+      "hi": "16:38",
       "d": "VALLE DEL PARAISO 2907 EDIF. A DEPTO 402, QUILPUE",
       "e": "Pendiente",
       "tec": "KEVIN TAPIA RETAMAL",
@@ -20348,6 +20333,18 @@
       "tec": "LEONEL HERNÁNDEZ OJE",
       "visitas": 1,
       "ult_fecha": "07-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OB08NWL",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "LOS CORCHOS 2693, QUILPUE",
+      "e": "Pendiente",
+      "tec": "LUIS MARTIN NUÑEZ",
+      "visitas": 1,
+      "ult_fecha": "08-10-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -20402,7 +20399,7 @@
       "o": "1-3OAX70VY",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:52",
+      "hi": "15:03",
       "d": "PERU (NODO 92) 440, QUILPUE",
       "e": "Pendiente",
       "tec": "NICOLAS MOYANO R",
@@ -20428,7 +20425,7 @@
       "f": "10-13",
       "hi": "10:31",
       "d": "HUASCO 1358, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "SAMUEL FERNANDEZ VIDAL",
       "visitas": 1,
       "ult_fecha": "08-10-2026",
@@ -20472,5 +20469,5 @@
    }
   }
  },
- "generado": "09-10-2026 10:56"
+ "generado": "09-10-2026 11:11"
 }
