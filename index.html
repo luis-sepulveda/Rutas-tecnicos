@@ -2355,6 +2355,17 @@
   #avisoMon .l { font-size:13.5px; }
   #avisoMon .p { font-size:12px; color:#fecaca; margin-top:5px; line-height:1.4; }
   #avisoMon .x { position:absolute; top:8px; right:8px; border:0; background:none; color:#fecaca; font-size:13px; cursor:pointer; padding:4px 6px; }
+
+  /* ---- Causales de Hoy en vivo como botones (09-10-2026, 12:30) ---- */
+  #modalDer .dv-cau button.c { font:inherit; font-size:12.5px; background:#fff7ed; border:1px solid #fed7aa; border-radius:999px; padding:3px 10px; color:#7c2d12; cursor:pointer; }
+  #modalDer .dv-cau button.c.no { background:#f1f5f9; border-color:#dbe4ed; color:#41586f; }
+  #modalDer .dv-cau button.c b { font-family:'Archivo',sans-serif; margin-right:4px; }
+  #modalDer .dv-cau button.c:hover { box-shadow:0 2px 6px rgba(20,45,70,.14); }
+  #modalDer .dv-cau button.c.on { background:#c2410c; border-color:#c2410c; color:#fff; }
+  #modalDer .dv-cau button.c.no.on { background:#41586f; border-color:#41586f; color:#fff; }
+  #modalDer .dv-cau button.c.cero { opacity:.5; cursor:default; box-shadow:none; }
+  #modalDer .dv-cau-det { border:1px solid #dbe4ed; border-radius:10px; padding:10px 12px 4px; margin:0 0 12px; background:#f8fafc; }
+  #modalDer .dv-cau-det .tit { font-size:13.5px; color:#16232f; margin:0 0 8px; }
 </style>
 </head>
 <body>
@@ -7046,11 +7057,13 @@ function derHoyDatos(){
   });
   return filas;
 }
-function derHoyCard(x){
+let derHoyCau = null;     // causal abierta en Hoy en vivo ('sm' | 're' | 'de' | 'ot')
+function setHoyCau(g){ derHoyCau = (derHoyCau === g ? null : g); pintarDeriv(); }
+function derHoyCard(x, conTec){
   const cls = x.cls === 'na' ? '' : x.cls;
   let o = '<div class="dv-card ' + cls + (x.sen ? ' sen' : '') + '"><div class="cab"><span class="dir">' + escR(derTitulo(x.d) || 'Sin dirección') + '</span>'
     + '<span class="tg ' + (x.g === 'ot' ? 'na' : 'at') + '">' + escR(x.cod) + '</span></div>'
-    + '<div class="meta">hoy · ' + escR(x.act) + ' · orden ' + escR(x.ot) + '</div>'
+    + '<div class="meta">' + (conTec ? '<b style="color:#16232f">' + escR(derTitulo(x.tec)) + '</b> · ' : '') + 'hoy · ' + escR(x.act) + ' · orden ' + escR(x.ot) + '</div>'
     + '<div class="pas"><b>Qué pasó:</b> ' + (x.hi >= 0 ? 'llegó a las <b>' + derHM(x.hi) + '</b> (franja ' + escR(x.fr) + ')' + (x.dur >= 0 ? ', estuvo <b>' + x.dur + ' min</b>' : '') + ' y cerró como <b>'
         : 'franja ' + escR(x.fr) + ', cerró como <b>') + escR(x.cod) + '</b>.</div>';
   const pq = [];
@@ -7106,15 +7119,26 @@ function derVistaHoyHtml(){
     + '<div class="' + (T.vis && 100 * T.der / T.vis > DER_UMBRAL ? 'mal' : '') + '"><b>' + T.der + '</b><span>derivadas (no realizadas)</span></div>'
     + '<div class="' + (T.vis && 100 * T.der / T.vis > DER_UMBRAL ? 'mal' : '') + '"><b>' + pT + (T.vis ? '%' : '') + '</b><span>derivación de lo ya visitado</span></div>'
     + '<div><b>' + T.pend + '</b><span>por visitar · ' + T.ini + ' iniciadas</span></div></div>';
-  if(T.der) h += '<div class="dv-cau"><span class="rot">Causales</span>'
-    + '<span class="c"><b>' + T.sm + '</b>sin moradores</span><span class="c"><b>' + T.re + '</b>cliente reagenda</span>'
-    + '<span class="c"><b>' + T.de + '</b>cliente desiste</span><span class="c no"><b>' + T.ot + '</b>no atribuibles al técnico</span></div>'
-    + '<div class="dv-rt" style="margin-top:0"><div class="l1">De las <b>' + T.der + '</b> derivadas de hoy:</div><div class="kp">'
+  /* Causales como botones (09-10-2026, 12:30; Luis: "activa estos botones"):
+     al tocar una se abre debajo la lista de las derivadas de hoy con esa
+     causal, cada una con su tecnico; otro toque la cierra. */
+  if(T.der){
+    const NOMC = { sm:'sin moradores', re:'cliente reagenda', de:'cliente desiste', ot:'no atribuibles al técnico' };
+    if(derHoyCau && !T[derHoyCau]) derHoyCau = null;
+    h += '<div class="dv-cau"><span class="rot">Causales</span>' + ['sm', 're', 'de', 'ot'].map(function(g){
+        return '<button class="c' + (g === 'ot' ? ' no' : '') + (derHoyCau === g ? ' on' : '') + (T[g] ? '' : ' cero') + '"' + (T[g] ? ' onclick="setHoyCau(\'' + g + '\')" title="Toca para ver cuáles son"' : ' disabled')
+          + '><b>' + T[g] + '</b>' + NOMC[g] + (derHoyCau === g ? ' ✕' : '') + '</button>'; }).join('') + '</div>';
+    if(derHoyCau){
+      const lc = F.filter(function(x){ return x.der && x.g === derHoyCau; }).sort(function(a, b){ return a.tec.localeCompare(b.tec) || a.hi - b.hi; });
+      h += '<div class="dv-cau-det"><div class="tit"><b>' + lc.length + '</b> ' + NOMC[derHoyCau] + ' hoy</div><div class="dv-fic">' + lc.map(function(x){ return derHoyCard(x, true); }).join('') + '</div></div>';
+    }
+    h += '<div class="dv-rt" style="margin-top:0"><div class="l1">De las <b>' + T.der + '</b> derivadas de hoy:</div><div class="kp">'
     + '<span><b>' + T.na + '</b> por causales que no dependen del técnico</span>'
     + '<span><b>' + T.cmp + '</b> en direcciones donde antes ya falló otro técnico</span>'
     + '<span class="si"><b>' + T.prop + '</b> propias</span>'
     + '<span' + (T.sen ? ' class="sn"' : '') + '><b>' + T.sen + '</b> de las propias, con alguna señal</span>'
     + '<span><b>' + derPct(sT.d, sT.n) + '%</b> lleva la semana con hoy (' + sT.d + ' de ' + sT.n + ')</span></div></div>';
+  }
   /* aviso temprano: pendientes en direcciones que ya fallaron */
   const riesgo = F.filter(function(x){ return x.pend && x.prev.length; }).sort(function(a, b){ return b.prev.length - a.prev.length || a.fr.localeCompare(b.fr); });
   if(riesgo.length){
