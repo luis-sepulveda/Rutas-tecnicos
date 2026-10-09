@@ -2384,6 +2384,21 @@
   .pv-linea .pv-al.dosl .tx .t { white-space:normal; line-height:1.12; font-size:11.5px; text-align:left; }
   .pv-linea .pv-al, .pv-linea .pv-ch, .pv-linea .pv-lk { padding-left:4px; padding-right:4px; gap:4px; }
   .pv-linea { gap:3px; }
+
+  /* ---- Pastillas con dato: Completitud y Sin moradores (09-10-2026, 15:00) ---- */
+  .pv-linea .pv-lk.dato { cursor:pointer; }
+  .pv-linea .pv-lk .vl { order:-1; flex-shrink:0; min-width:20px; height:20px; padding:0 6px; border-radius:999px; color:#fff;
+    font-family:'Archivo',sans-serif; font-size:12px; font-weight:700; line-height:1; display:inline-flex; align-items:center; justify-content:center; }
+  .pv-linea .pv-lk.sel { border-color:#1d4ed8; background:#eff6ff; }
+  .pv-sm { border-left-color:#b91c1c; }
+  .pv-sm .h a { float:right; font-size:12.5px; color:#1d4ed8; text-decoration:none; }
+  .pv-sm .h a:hover { text-decoration:underline; }
+  .pv-sm table { width:100%; border-collapse:collapse; font-size:12.5px; font-variant-numeric:tabular-nums; }
+  .pv-sm th { text-align:left; font-size:10.5px; font-weight:600; color:#8fa1b3; letter-spacing:.05em; text-transform:uppercase; padding:4px 12px 4px 0; border-bottom:1px solid #dbe4ed; white-space:nowrap; }
+  .pv-sm td { padding:5px 12px 5px 0; border-bottom:1px solid #edf1f6; color:#41586f; vertical-align:top; }
+  .pv-sm td:nth-child(1), .pv-sm td:nth-child(2), .pv-sm td:nth-child(3), .pv-sm td:nth-child(6) { white-space:nowrap; }
+  .pv-sm td b { color:#15293e; } .pv-sm td small { color:#8fa1b3; } .pv-sm td .gr { color:#b6c4d2; }
+  .pv-sm tr.pri td { border-top:1px solid #cbd8e6; }
 </style>
 </head>
 <body>
@@ -8151,6 +8166,37 @@ function cuadraturaHtml(nDia){
     + '</div>';
 }
 
+/* ---- Sin moradores de hoy, en la portada (09-10-2026, 15:00) ----
+   Cuenta las ordenes de hoy (de cualquier actividad) cerradas No Realizada
+   con cierre "Sin moradores", desde DB (rutas.json en vivo). */
+function pvSinMorHoy(){
+  const l = []; let vis = 0;
+  Object.keys(typeof DB === 'object' && DB ? DB : {}).forEach(function(k){ (DB[k] || []).forEach(function(j){
+    if(j.e === 'Completado' || j.e === 'No Realizada') vis++;
+    if(j.e === 'No Realizada' && String(j.cie || '').toLowerCase().indexOf('sin moradores') >= 0) l.push({ tec:k, j:j });
+  }); });
+  l.sort(function(a, b){ return a.tec.localeCompare(b.tec) || String(a.j.hi || '').localeCompare(String(b.j.hi || '')); });
+  return { l:l, vis:vis };
+}
+function pvSinMorPanel(){
+  const d = pvSinMorHoy(), n = d.l.length;
+  const tit = function(t){ return String(t || '').toLowerCase().replace(/(^|\s)\S/g, function(c){ return c.toUpperCase(); }); };
+  const mm = function(t){ const m = /^(\d{1,2}):(\d{2})/.exec(String(t || '')); return m ? +m[1] * 60 + +m[2] : -1; };
+  const porTec = {}; d.l.forEach(function(x){ porTec[x.tec] = (porTec[x.tec] || 0) + 1; });
+  let h = '<div class="pv-sinini pv-sm"><div class="h"><b>' + n + '</b> sin moradores hoy <span>' + (d.vis ? Math.round(100 * n / d.vis) + '% de las ' + d.vis + ' ya visitadas · ' : '')
+    + Object.keys(porTec).length + ' técnico' + (Object.keys(porTec).length === 1 ? '' : 's') + '</span>'
+    + '<a href="' + URL_SINMORADORES + '" target="_blank">Ver el semanal por técnico ›</a></div>';
+  if(!n) return h + '<div class="l"><span>Ninguno todavía.</span></div></div>';
+  h += '<table><thead><tr><th>Técnico</th><th>Franja</th><th>Llegó · estuvo</th><th>Actividad</th><th>Dirección</th><th>Petición</th><th>Esa dirección ya había fallado</th></tr></thead><tbody>';
+  let ant = '';
+  d.l.forEach(function(x){ const j = x.j, a = mm(j.hi), b = mm(j.hf), pv = (Array.isArray(j.prev) ? j.prev : []).filter(function(v){ return !v.gsa; });
+    h += '<tr' + (x.tec !== ant ? ' class="pri"' : '') + '><td>' + (x.tec !== ant ? '<b>' + escR(tit(x.tec)) + '</b>' + (porTec[x.tec] > 1 ? ' <small>' + porTec[x.tec] + '</small>' : '') : '') + '</td><td>' + escR(j.f || '') + '</td><td>'
+      + (a >= 0 ? escR(j.hi) + (b >= a ? ' · ' + (b - a) + ' min' : '') : '') + '</td><td>' + escR(j.cat || j.t || '') + '</td><td>' + escR(tit(j.d)) + '</td><td>' + escR(j.o || '') + '</td><td>'
+      + (pv.length ? pv.map(function(v){ return String(v.f || '').slice(0, 5) + ' ' + escR(tit(v.tec)) + ': ' + escR(v.cierre || ''); }).join(' · ') : '<span class="gr">no</span>') + '</td></tr>';
+    ant = x.tec; });
+  return h + '</tbody></table></div>';
+}
+
 function pintarPortada(){
   const caja = document.getElementById('portada');
   if(!caja || caja.style.display === 'none') return;
@@ -8610,12 +8656,25 @@ function pintarPortada(){
     /* ---- 4. enlaces ---- */
     +   '<span class="pv-linea-sep"></span>'
     +   '<nav class="pv-links">'
-    +     enlace('toggleComp', 'Completitud 13:00', 'Completitud al corte de las 13:00')
+    /* (09-10-2026, 15:00; Luis: "en los botones completitud y sin moradores me
+       podrias mostrar la informacion") Estas dos pastillas ahora llevan el
+       dato: Completitud, su % al corte de las 13:00 (verde si llega a la meta,
+       ambar desde 70, rojo bajo eso); Sin moradores, cuantos van HOY. La de
+       Sin moradores ya no salta al Historial: abre aqui mismo la lista de los
+       de hoy, y desde ahi hay un enlace al reporte semanal. */
+    +     (function(){ let c = null; try { c = calcularCompletitud(); } catch(e){}
+            const ok = c && c.total, pc = ok ? Math.round(c.pct) : null;
+            const col = !ok ? '#94a3b8' : c.pct >= COMP_META * 100 ? '#15803d' : c.pct >= 70 ? '#b45309' : '#b91c1c';
+            return '<button class="pv-lk dato" onclick="desdePortada(toggleComp)" title="Completitud al corte de las 13:00' + (ok ? ': ' + c.cumplen + ' de ' + c.total + ' t\u00e9cnicos con al menos un cierre. Meta ' + Math.round(COMP_META * 100) + '%' : '')
+              + '"><b class="vl" style="background:' + col + '">' + (ok ? pc + '%' : '\u2013') + '</b>Completitud<span class="fl">\u203a</span></button>'; })()
     +     enlace('verReporteRepe', 'Hist\u00f3rico', 'Reporte hist\u00f3rico de direcciones')
-    +     enlace(URL_SINMORADORES, 'Sin moradores', 'Sin moradores semanal')
+    +     (function(){ const d = pvSinMorHoy();
+            return '<button class="pv-lk dato' + (window.PV_SM ? ' sel' : '') + '" onclick="window.PV_SM = !window.PV_SM; pintarPortada()" title="Sin moradores de hoy: ' + d.l.length + ' de ' + d.vis
+              + ' visitadas. Toca para ver cu\u00e1les son."><b class="vl" style="background:' + (d.l.length ? '#b91c1c' : '#94a3b8') + '">' + d.l.length + '</b>Sin moradores<span class="fl">' + (window.PV_SM ? '\u2715' : '\u203a') + '</span></button>'; })()
     +     enlace(URL_EQUIPO, 'Por supervisor', 'Detalle por supervisor')
     +   '</nav>'
     +   '</div>'
+    +   (window.PV_SM ? pvSinMorPanel() : '')
     +   (window.PV_SININI ? '<div class="pv-sinini"><div class="h"><b>' + sinIni + '</b> t\u00e9cnico'
           + (sinIni === 1 ? '' : 's') + ' sin iniciar <span>con \u00f3rdenes hoy y ninguna iniciada ni en ruta \u00b7 primero los de la franja m\u00e1s temprana</span></div>'
           + '<div class="l">' + (sinIniLista.map(x => '<span class="' + (/^10/.test(x.f) ? 'tmp' : '') + '">'
