@@ -1,10 +1,38 @@
 {
-  "actualizado": "2026-10-09T10:46:49",
+  "actualizado": "2026-10-09T11:17:17",
   "resumen": {
-    "reagendada": 3,
-    "sin informacion": 2
+    "sin informacion": 4,
+    "reagendada": 2
   },
   "estados": {
+    "1-3OBCOI94": {
+      "tec": "ALEXIS JARA",
+      "cat": "Alta 1 Play",
+      "franja_original": "13-16",
+      "d": "SAN MARINO 995 CASA B, QUILPUE",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "SAN MARINO 995",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3O9KAP05",
+            "franja": "16-19",
+            "texto": "1-3O9KAP05 - 16-19-Alta-1 Play-SAN MARINO 995 CASA BMie, 7 Oct"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3O8Q4V1Y",
+            "franja": "16-19",
+            "texto": "1-3O8Q4V1Y - 16-19-Alta-1 Play-SAN MARINO 995 CASA BMar, 6 Oct"
+          }
+        ]
+      }
+    },
     "1-3OAYO9YT": {
       "tec": "ALEXIS JARA",
       "cat": "Alta 1 Play",
@@ -26,13 +54,6 @@
         "buscado": "SAN MARINO 995",
         "aviso": "historial de la direccion, NO es el estado de esta orden",
         "filas": [
-          {
-            "estado": "reagendada",
-            "color": "rgb(255, 222, 0)",
-            "ot": "1-3OBCOI94",
-            "franja": "13-16",
-            "texto": "1-3OBCOI94 - 13-16-Alta-1 Play-SAN MARINO 995 CASA B"
-          },
           {
             "estado": "no realizada",
             "color": "rgb(96, 206, 206)",
@@ -92,15 +113,61 @@
         ]
       }
     },
-    "1-3OB08NWL": {
-      "tec": "LUIS MARTIN NUÑEZ",
-      "cat": "Alta 2 Play",
+    "1-3OB3HR71": {
+      "tec": "JOSE CASTRO P",
+      "cat": "Alta 1 Play",
       "franja_original": "13-16",
-      "d": "LOS CORCHOS 2693, QUILPUE",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3OB08NWL - 16-19-Alta-2 Play-LOS CORCHOS 2693Sab, 10 Oct",
-      "franja_nueva": "16-19"
+      "d": "SANTA ELENA 098 EDIF. 1 DEPTO 301, VILLA ALEMANA",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "SANTA ELENA 098",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3OAFT8KZ",
+            "franja": "13-16",
+            "texto": "1-3OAFT8KZ - 13-16-Alta-1 Play-SANTA ELENA 098 EDIF. 1 DEPTO 301Jue, 8 Oct"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3O5XBUIS",
+            "franja": "16-19",
+            "texto": "1-3O5XBUIS - 16-19-Alta-2 Play-SANTA ELENA 098 EDIF. 1 DEPTO 503Vie, 2 Oct"
+          },
+          {
+            "estado": "completada",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3NQASPRX",
+            "franja": "10-13",
+            "texto": "1-3NQASPRX - 10-13-Alta-1 Play-SANTA ELENA 098 EDIF. 1 DEPTO 303Sab, 12 Sep"
+          },
+          {
+            "estado": "cancelada",
+            "color": "rgb(128, 255, 128)",
+            "ot": "1-3NQFNN6P",
+            "franja": "16-19",
+            "texto": "1-3NQFNN6P - 16-19-Alta-1 Play-SANTA ELENA 098 EDIF. 1 DEPTO 301Vie, 11 Sep"
+          },
+          {
+            "estado": "completada",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3NQOWX1I",
+            "franja": "10-13",
+            "texto": "1-3NQOWX1I - 10-13-Alta-1 Play-SANTA ELENA 098 EDIF. 1 DEPTO 204Mie, 9 Sep"
+          },
+          {
+            "estado": "cancelada",
+            "color": "rgb(128, 255, 128)",
+            "ot": "1-3NKRWK9M",
+            "franja": "10-13",
+            "texto": "1-3NKRWK9M - 10-13-Alta-1 Play-SANTA ELENA 098 EDIF. 1 DEPTO 301Vie, 4 Sep"
+          }
+        ]
+      }
     },
     "1-3O5N8692": {
       "tec": "SAMUEL FERNANDEZ VIDAL",
