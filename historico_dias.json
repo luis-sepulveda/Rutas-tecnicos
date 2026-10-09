@@ -20031,23 +20031,23 @@
    }
   },
   "09-10-2026": {
-   "hasta": "16:35",
-   "actividades": 150,
+   "hasta": "16:45",
+   "actividades": 151,
    "tecnicos": 34,
    "estados": {
-    "Completado": 75,
-    "Iniciado": 26,
+    "Completado": 78,
+    "Iniciado": 28,
+    "Pendiente": 4,
     "No Realizada": 32,
     "Suspendido": 3,
     "Cancelado": 2,
-    "en ruta": 4,
-    "Pendiente": 8
+    "en ruta": 4
    },
-   "rgu": 216.4,
+   "rgu": 217.4,
    "caidas_total": 12,
    "caidas_activas": 11,
    "caidas_resueltas": 1,
-   "nuevas": 26,
+   "nuevas": 27,
    "al_bucket": 11,
    "repetidas": 24,
    "reagendadas": 3,
@@ -20154,6 +20154,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OBOQJF4",
+      "tec": "LUIS GATICA DAVILA",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "16:42",
+      "d": "DINAMARCA 1385 EDIF. 13 DEPTO 203, VILLA ALEMANA",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3OBOEL1B",
       "tec": "YENDER BOSCAN CADENAS",
@@ -20403,6 +20412,18 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3O9I41WT",
+      "cat": "Migración 2 Play",
+      "f": "13-16",
+      "hi": "16:58",
+      "d": "FRANCISCANOS 17, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "ALFREDO ALCAYAGA F",
+      "visitas": 3,
+      "ult_fecha": "06-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OBDIUCS",
       "cat": "Alta 2 Play",
       "f": "13-16",
@@ -20418,9 +20439,9 @@
       "o": "1-3O8OIBFX",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "16:39",
+      "hi": "16:44",
       "d": "LAS GARZAS 1151, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "CRISTOBAL SILVA LEIVA",
       "visitas": 1,
       "ult_fecha": "05-10-2026",
@@ -20472,6 +20493,18 @@
       "tec": "GEEYSER PEREZ O",
       "visitas": 1,
       "ult_fecha": "09-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3O8TZC6Y",
+      "cat": "Migración 2 Play",
+      "f": "16-19",
+      "hi": "16:44",
+      "d": "LOS AVELLANOS 722, VILLA ALEMANA",
+      "e": "Iniciado",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "visitas": 1,
+      "ult_fecha": "05-10-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -20528,7 +20561,7 @@
       "f": "13-16",
       "hi": "15:20",
       "d": "LOS TREBOLES 50 CASA 08, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JUAN ARRIAGADA C",
       "visitas": 3,
       "ult_fecha": "04-09-2026",
@@ -20586,24 +20619,12 @@
       "o": "1-3OB08NWL",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:50",
+      "hi": "16:41",
       "d": "LOS CORCHOS 2693, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "LUIS CASTRO TORRES",
       "visitas": 1,
       "ult_fecha": "08-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3O9I41WT",
-      "cat": "Migración 2 Play",
-      "f": "13-16",
-      "hi": "17:28",
-      "d": "FRANCISCANOS 17, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "LUIS GATICA DAVILA",
-      "visitas": 3,
-      "ult_fecha": "06-10-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -20641,18 +20662,6 @@
       "visitas": 1,
       "ult_fecha": "07-10-2026",
       "ult_cierre": "Cliente reagenda"
-     },
-     {
-      "o": "1-3O8TZC6Y",
-      "cat": "Migración 2 Play",
-      "f": "16-19",
-      "hi": "17:42",
-      "d": "LOS AVELLANOS 722, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "PABLO HERNANEZ FERNANDEZ",
-      "visitas": 1,
-      "ult_fecha": "05-10-2026",
-      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OB100TD",
@@ -20714,5 +20723,5 @@
    }
   }
  },
- "generado": "09-10-2026 16:35"
+ "generado": "09-10-2026 16:45"
 }
