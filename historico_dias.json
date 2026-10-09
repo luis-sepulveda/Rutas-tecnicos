@@ -20031,24 +20031,33 @@
    }
   },
   "09-10-2026": {
-   "hasta": "09:20",
-   "actividades": 115,
+   "hasta": "09:25",
+   "actividades": 116,
    "tecnicos": 30,
    "estados": {
-    "en ruta": 6,
-    "Pendiente": 109
+    "en ruta": 11,
+    "Pendiente": 105
    },
-   "rgu": 180.5,
+   "rgu": 177.5,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 1,
+   "nuevas": 2,
    "al_bucket": 0,
-   "repetidas": 23,
+   "repetidas": 22,
    "reagendadas": 2,
    "detalle": {
     "caidas": [],
     "nuevas": [
+     {
+      "o": "1-3OBCK45U",
+      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "cat": "Migración 1 Play",
+      "f": "13-16",
+      "hi": "17:19",
+      "d": "AVENIDA TERCERA 0250, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OBCIBHJ",
       "tec": "LUIS GATICA DAVILA",
@@ -20088,9 +20097,9 @@
       "o": "1-3OA3EE8U",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:31",
       "d": "HUANHUALI 456 EDIF. B3 DEPTO 31, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "ESTEBAN PIZARRO QUINTANA",
       "visitas": 1,
       "ult_fecha": "07-10-2026",
@@ -20100,7 +20109,7 @@
       "o": "1-3OB6K1MD",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:06",
+      "hi": "14:00",
       "d": "LOS TREBOLES 50 CASA 08, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
@@ -20124,9 +20133,9 @@
       "o": "1-3O9YNHRR",
       "cat": "Migración 3 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:30",
       "d": "EL MIRADOR 738 CASA 24, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JEAN ROODLY ORELIEN",
       "visitas": 1,
       "ult_fecha": "07-10-2026",
@@ -20142,18 +20151,6 @@
       "tec": "JORDAN ROA PEREZ",
       "visitas": 1,
       "ult_fecha": "06-10-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
-      "o": "1-3OB0OX8G",
-      "cat": "Migración 2 Play",
-      "f": "13-16",
-      "hi": "14:00",
-      "d": "PUELCHES 747, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JORDAN ROA PEREZ",
-      "visitas": 3,
-      "ult_fecha": "08-10-2026",
       "ult_cierre": "Cliente reagenda"
      },
      {
@@ -20208,7 +20205,7 @@
       "o": "1-3OA11IUW",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "11:55",
+      "hi": "11:25",
       "d": "ESMERALDA 2633 EDIF. 1 DEPTO 14, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -20280,7 +20277,7 @@
       "o": "1-3O9I41WT",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "14:23",
+      "hi": "14:00",
       "d": "FRANCISCANOS 17, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATÍAS JAQUE AG",
@@ -20304,7 +20301,7 @@
       "o": "1-3OB100TD",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "12:19",
+      "hi": "11:50",
       "d": "HUASCO 1358, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -20316,7 +20313,7 @@
       "o": "1-3O5N8692",
       "cat": "Migración 3 Play",
       "f": "13-16",
-      "hi": "15:03",
+      "hi": "14:34",
       "d": "CALLE A (SAN ENRIQUE) 963 EDIF. A DEPTO 103, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -20362,5 +20359,5 @@
    }
   }
  },
- "generado": "09-10-2026 09:20"
+ "generado": "09-10-2026 09:25"
 }
