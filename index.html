@@ -7351,6 +7351,9 @@ function pintarFranjas(){
     + '<div class="grp"><span class="rot">Actividad</span>' + seg(FRA_ACTS.map(function(t){
         return '<button class="' + (t[0] === fraAct ? 'on' : '') + '" onclick="setFraAct(\'' + t[0] + '\')">' + t[1] + '</button>'; })) + '</div>'
     + (usaPer ? '<div class="grp"><span class="rot">Período</span>' + seg([
+        /* 8 semanas (10-10-2026, 10:15): con 4, las tablas por tecnico de UNA
+           actividad quedaban casi todas en gris (pocas visitas por casilla) */
+        '<button class="' + (fraPer === 8 ? 'on' : '') + '" onclick="setFraPer(8)" title="Las 8 semanas que terminan en la elegida: más visitas por casilla, sirve para comparar técnicos">Últimas 8 semanas</button>',
         '<button class="' + (fraPer === 4 ? 'on' : '') + '" onclick="setFraPer(4)" title="Las 4 semanas que terminan en la elegida">Últimas 4 semanas</button>',
         '<button class="' + (fraPer === 1 ? 'on' : '') + '" onclick="setFraPer(1)">Solo la semana ' + derNumSemana(fraSem) + '</button>']) + '</div>' : '')
     + '</div>';
