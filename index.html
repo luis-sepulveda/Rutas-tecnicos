@@ -2633,6 +2633,36 @@
   #modalDer .dv-hv-regla div.mal { background:#fef2f2; } #modalDer .dv-hv-regla div.mal b { color:#b91c1c; }
   #modalDer .dv-hv-b.solo { margin-bottom:0; } #modalDer .dv-hv-b.solo .dv-hv-t { margin:0; }
   #modalDer .dv-hv-b.solo + .dv-sec { margin-top:8px; }
+
+  /* ---- FRANJAS ORDENADA (10-10-2026, 17:20) ---- */
+  #modalDer .dv-fra .dv-hv-b { padding:16px 20px 18px; margin-bottom:14px; }
+  #modalDer .dv-fra .dv-hv-t b { font-size:17px; }
+  #modalDer .dv-fra .dv-hv-f { font-size:17px; }
+  #modalDer .dv-fra .dv-hv-b .lec { font-size:15px; margin:0 0 10px; }
+  #modalDer .dv-fra .dv-hv-b .dv-ley { font-size:13px; }
+  #modalDer .dv-fra .dv-hv-b .pie { margin-top:10px; }
+  #modalDer .dv-hv-regla.fra { grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:10px; }
+  #modalDer .dv-hv-regla.fra > div { font-size:13.5px; color:#41586f; line-height:1.4; padding:10px 14px; }
+  #modalDer .dv-hv-regla.fra > div b { font-size:20px; margin:0 0 2px; }
+  #modalDer .dv-hv-regla.fra > div.si { background:#fff7ed; color:#7c2d12; } #modalDer .dv-hv-regla.fra > div.si b { color:#c2410c; }
+  #modalDer .dv-fra table.dv-fra-r > thead > tr:last-child > th, #modalDer .dv-fra table.dv-fra-r > thead > tr > th[rowspan] { border-bottom:2px solid #e2e8f0; }
+  #modalDer .dv-fra table.dv-fra-r th.g, #modalDer .dv-fra table.dv-fra-r > thead > tr:last-child > th:nth-child(1),
+  #modalDer .dv-fra table.dv-fra-r > thead > tr:last-child > th:nth-child(5), #modalDer .dv-fra table.dv-fra-r > thead > tr:last-child > th:nth-child(6),
+  #modalDer .dv-fra table.dv-fra-r > tbody > tr > td:nth-child(2), #modalDer .dv-fra table.dv-fra-r > tbody > tr > td:nth-child(6),
+  #modalDer .dv-fra table.dv-fra-r > tbody > tr > td:nth-child(7) { border-left:2px solid #e2e8f0; }
+
+  /* ---- TITULOS CON COLOR (10-10-2026, 17:40) ----
+     Luis: "a los titulos colocar algun color para que no se vea tan plano".
+     El titulo de cada cuadro numerado (Derivacion y Franjas) pasa a ser una
+     franja celeste de lado a lado, con el numero en un circulo azul.
+     Borrando este bloque los titulos vuelven a quedar sin fondo. */
+  #modalDer .dv-hv-b > .dv-hv-t { margin:-14px -18px 13px; padding:10px 18px; background:#e8f0fe; border-bottom:1px solid #c7d7f5; border-radius:11px 11px 0 0; }
+  #modalDer .dv-hv-b > .dv-hv-t .n { background:#1d4ed8; color:#fff; }
+  #modalDer .dv-hv-b > .dv-hv-t b { color:#12357a; }
+  #modalDer .dv-hv-b > .dv-hv-t small { color:#41586f; }
+  #modalDer .dv-hv-b { border-color:#c7d7f5; }
+  #modalDer .dv-fra .dv-hv-b > .dv-hv-t { margin:-16px -20px 14px; padding:11px 20px; }
+  #modalDer .dv-hv-b.solo > .dv-hv-t { margin:-14px -18px -16px; border-bottom:0; border-radius:11px; }
 </style>
 </head>
 <body>
@@ -7336,6 +7366,22 @@ function fraColsFr(filas){
 }
 function fraFrDe(x){ return x.fr; }
 
+/* ---- FRANJAS ORDENADA (10-10-2026, 17:20) ----
+   Mismo orden que la ventana de Derivacion: cada seccion va en un cuadro
+   blanco numerado con titulo (antes eran titulos h3 con una raya arriba), la
+   leyenda de los colores va ARRIBA de cada tabla (fraLey; antes se repetia
+   como nota debajo de cada una) y el Resumen parte con una frase y recuadros.
+   Ningun calculo cambio, ni el ordenar tocando el titulo de una columna.
+   fraBloq(n, titulo, subtitulo, contenido) arma un cuadro. */
+function fraBloq(n, tit, sub, cont){
+  return '<div class="dv-hv-b"><div class="dv-hv-t"><span class="n">' + n + '</span><b>' + tit + '</b>' + (sub ? '<small>' + sub + '</small>' : '') + '</div>' + cont + '</div>';
+}
+function fraLey(porAct){
+  return '<div class="dv-ley dv-hv-col"><span><b>Cada casilla</b>: % de derivación y, al lado, derivadas de visitadas</span>'
+    + '<span><b style="color:#b91c1c">% en rojo</b>: ' + DER_FRA_PUNTOS + ' puntos o más sobre ' + (porAct ? 'el equipo en esa actividad (la fila Total)' : 'el total de su fila') + '</span>'
+    + '<span><b style="color:#8fa1b3">% en gris</b>: menos de ' + DER_FRA_MIN + ' visitas, no alcanza para leerlo</span>'
+    + '<span><b style="color:#2563eb">Título azul ↕</b>: tócalo para ordenar por esa columna</span></div>';
+}
 /* ---- Resumen: la lectura, la tabla por franja, actividad x franja y llegada ---- */
 function fraResumenHtml(sems, todasSem, per){
   const filas = fraFilas(sems);
@@ -7362,9 +7408,11 @@ function fraResumenHtml(sems, todasSem, per){
   const semVal = semT.filter(function(k){ return peorDe[k]; });
   const ctx = derTitulo(fraNomAct()).charAt(0) + fraNomAct().slice(1) + ', ' + per + (fraSup !== 'Todos' ? ', equipo de ' + escR(derTitulo(fraSup)) : '') + '.';
   const comp = tb.filter(function(o){ return o.n >= DER_FRA_MIN; });
-  let h = '<div class="dv-rt" style="margin-top:0">', peorFr = null, hayDif = false;
+  let hvN = 1;
+  const hvT = function(t, s){ return '<div class="dv-hv-t"><span class="n">' + (hvN++) + '</span><b>' + t + '</b>' + (s ? '<small>' + s + '</small>' : '') + '</div>'; };
+  let h = '<div class="dv-hv-b">' + hvT('En qué franja se deriva más', ctx.slice(0, -1)), peorFr = null, hayDif = false;
   if(comp.length < 2){
-    h += '<div class="l1">Todavía no hay visitas suficientes para comparar franjas en la ' + per + ' (hacen falta ' + DER_FRA_MIN + ' o más en al menos dos franjas).<span class="ctx">' + ctx + '</span></div></div>';
+    h += '<p class="dv-hv-f" style="margin:0">Todavía no hay visitas suficientes para comparar franjas en la ' + per + ' (hacen falta ' + DER_FRA_MIN + ' o más en al menos dos franjas).</p></div>';
   } else {
     const peor = comp.reduce(function(a, o){ return pc(o.d, o.n) > pc(a.d, a.n) ? o : a; });
     const mejor = comp.reduce(function(a, o){ return pc(o.d, o.n) < pc(a.d, a.n) ? o : a; });
@@ -7375,17 +7423,17 @@ function fraResumenHtml(sems, todasSem, per){
     const menos = Math.round(peor.d - peor.n * resto.d / resto.n);
     const masCant = tb.reduce(function(a, o){ return o.d > a.d ? o : a; });
     const masSm = comp.reduce(function(a, o){ return pc(o.sm, o.n) > pc(a.sm, a.n) ? o : a; });
-    h += '<div class="l1">' + (hayDif
+    h += '<p class="dv-hv-f">' + (hayDif
         ? 'La franja <b>' + escR(peor.fr) + '</b> es la que más deriva: <b>' + f1(pc(peor.d, peor.n)) + '%</b> (' + peor.d + ' de ' + peor.n + '), contra <b>'
           + f1(pc(resto.d, resto.n)) + '%</b> en el resto del día. Son <b>' + f1(dif) + ' puntos</b> más.'
         : 'No hay una diferencia clara entre franjas: van de <b>' + f1(pc(mejor.d, mejor.n)) + '%</b> (' + escR(mejor.fr) + ') a <b>'
           + f1(pc(peor.d, peor.n)) + '%</b> (' + escR(peor.fr) + ').')
-      + '<span class="ctx">' + ctx + '</span></div><div class="kp">'
-      + (semVal.length ? '<span' + (hayDif && nP * 2 > semVal.length ? ' class="si"' : '') + '><b>' + (semVal.length === 1 ? (nP ? 'Sí' : 'No') : 'En ' + nP + ' de las últimas ' + semVal.length) + '</b>'
-          + (semVal.length === 1 ? 'en la semana ' + derNumSemana(semVal[0]) + ',' : 'semanas,') + ' ' + escR(peor.fr) + ' fue la franja con más derivación</span>' : '')
-      + (hayDif && menos > 0 ? '<span class="si"><b>' + menos + '</b>derivada' + (menos === 1 ? '' : 's') + ' menos en el período si ' + escR(peor.fr) + ' derivara como el resto</span>' : '')
-      + '<span><b>' + masCant.d + '</b>(' + derPct(masCant.d, tot.d) + '%) de las derivadas caen en ' + escR(masCant.fr) + ', la franja que más junta en cantidad</span>'
-      + (masSm.sm ? '<span><b>' + f1(pc(masSm.sm, masSm.n)) + '%</b>de las visitas de ' + escR(masSm.fr) + ' terminan en sin moradores, la más alta</span>' : '')
+      + '</p><div class="dv-hv-regla fra">'
+      + (semVal.length ? '<div' + (hayDif && nP * 2 > semVal.length ? ' class="si"' : '') + '><b>' + (semVal.length === 1 ? (nP ? 'Sí' : 'No') : 'En ' + nP + ' de las últimas ' + semVal.length) + '</b>'
+          + (semVal.length === 1 ? 'en la semana ' + derNumSemana(semVal[0]) + ',' : 'semanas,') + ' ' + escR(peor.fr) + ' fue la franja con más derivación</div>' : '')
+      + (hayDif && menos > 0 ? '<div class="si"><b>' + menos + '</b>derivada' + (menos === 1 ? '' : 's') + ' menos en el período si ' + escR(peor.fr) + ' derivara como el resto</div>' : '')
+      + '<div><b>' + masCant.d + '</b>(' + derPct(masCant.d, tot.d) + '%) de las derivadas caen en ' + escR(masCant.fr) + ', la franja que más junta en cantidad</div>'
+      + (masSm.sm ? '<div><b>' + f1(pc(masSm.sm, masSm.n)) + '%</b>de las visitas de ' + escR(masSm.fr) + ' terminan en sin moradores, la más alta</div>' : '')
       + '</div></div>';
   }
   const cau = function(v, n){ return '<td' + (v ? '' : ' class="cero"') + '>' + v + (v ? ' <span class="pq">' + Math.round(pc(v, n)) + '%</span>' : '') + '</td>'; };
@@ -7406,22 +7454,28 @@ function fraResumenHtml(sems, todasSem, per){
             + (!esTot && s.n < DER_FRA_MIN ? ' (pocas visitas, no se compara)' : '') + '">' + Math.round(pc(s.d, s.n)) + '</i>'; }).join('') + '</span></td>'
       + cau(o.sm, o.n) + cau(o.re, o.n) + cau(o.de, o.n) + cau(o.ot, o.n) + '</tr>';
   };
-  h += '<table><thead><tr><th>Franja</th><th>Visitadas</th><th>Derivadas</th><th>% derivación</th>'
-    + '<th title="Su % de derivación menos el de las otras franjas juntas">Contra el resto</th>'
-    + '<th title="% de derivación de la franja en cada semana. En rojo, la franja con más derivación de esa semana">Semanas ' + semT.map(function(k){ return derNumSemana(k); }).join(' · ') + '</th>'
-    + '<th>Sin moradores</th><th>Cliente reagenda</th><th>Cliente desiste</th><th>No atribuibles</th></tr></thead><tbody>'
+  h += '<div class="dv-hv-b">' + hvT('Franja por franja', 'cuánto deriva cada una, cómo viene y por qué')
+    + '<div class="dv-ley dv-hv-col"><span><i style="background:#b91c1c"></i><b>"deriva más"</b>: saca ' + DER_FRA_PUNTOS + ' puntos o más al resto del día</span>'
+    + '<span><b>Contra el resto</b>: puntos que deriva de más (+) o de menos (−) que las otras franjas juntas</span>'
+    + '<span><i style="background:#fee2e2"></i><b>Semana en rojo</b>: esa semana fue la franja que más derivó</span>'
+    + '<span><i style="background:#fff;box-shadow:inset 0 0 0 1.5px #0f1d2e"></i><b>Con borde</b>: semanas del período elegido</span></div>'
+    + '<table class="dv-fra-r"><thead><tr><th rowspan="2">Franja</th><th colspan="4" class="g g1">El período</th>'
+    + '<th class="g" title="% de derivación de la franja en cada semana. En rojo, la franja con más derivación de esa semana">Semana a semana</th>'
+    + '<th colspan="4" class="g g2">Por qué se derivó</th></tr>'
+    + '<tr><th>Visitadas</th><th>Derivadas</th><th>% derivación</th><th title="Su % de derivación menos el de las otras franjas juntas">Contra el resto</th>'
+    + '<th>Semanas ' + semT.map(function(k){ return derNumSemana(k); }).join(' · ') + '</th>'
+    + '<th>Sin moradores</th><th>Cliente reagenda</th><th>Cliente desiste</th><th>No dependen del técnico</th></tr></thead><tbody>'
     + tb.map(function(o){ return fila(o, false); }).join('') + fila(tot, true) + '</tbody></table>'
-    + '<p class="pie"><b>Contra el resto</b> = cuántos puntos deriva más (+) o menos (−) que las otras franjas juntas. <b>Semanas</b>: el % de derivación de la franja en cada una; en rojo, la franja que más derivó esa semana; con borde, las del período elegido. '
-    + 'En las causales, el número chico es el % sobre las visitadas de esa franja.</p>';
+    + '<p class="pie">En las causales, el número chico es el % sobre las visitadas de esa franja.</p></div>';
   const colsFr = fraColsFr(filas);
   /* actividad x franja: solo tiene sentido con todas las actividades */
   if(fraAct === 'TODAS'){
     const ORD = { ALTA:0, TRAS:1, MIGRA:2, REP:3 };
     const ma = derFraMatriz(filas, 'Actividad', function(x){ return x.act; }, function(k){ return ORD[k]; }, function(k){ return FRA_NOM[k]; }, fraFrDe, colsFr, 'res-act');
-    h += '<h3>Por actividad y franja</h3>' + fraLec(ma, function(k){ return FRA_NOM[k]; }) + ma.html + '<p class="pie">' + FRA_PIE + '</p>';
+    h += '<div class="dv-hv-b">' + hvT('Por actividad y franja', 'qué actividad deriva más en cada franja') + fraLec(ma, function(k){ return FRA_NOM[k]; }) + fraLey() + ma.html + '</div>';
   }
   /* llegada */
-  h += '<h3>¿Llegó dentro de la franja?<small>según la hora en que el técnico inició la visita</small></h3>';
+  h += '<div class="dv-hv-b">' + hvT('¿Llegó dentro de la franja?', 'según la hora en que el técnico inició la visita');
   if(!derVisOk){
     h += '<p class="lec">No se pudo bajar el historial de visitas con horas (visitas_dir.json), así que este cuadro no se puede armar ahora. Vuelve a abrir la ventana en un rato.</p>';
   } else {
@@ -7435,12 +7489,12 @@ function fraResumenHtml(sems, todasSem, per){
       h += '<p class="lec">De las <b>' + m.T.n + '</b> visitas con hora, <b>' + ant.n + '</b> (' + derPct(ant.n, m.T.n) + '%) se iniciaron antes de su franja y <b>'
         + dsp.n + '</b> (' + derPct(dsp.n, m.T.n) + '%) después. '
         + (tr.length >= 2 ? 'Derivación: ' + tr.map(function(e){ return e[1] + ', <b>' + f1(m.pc(e[0])) + '%</b>'; }).join('; ') + '.' : 'Son muy pocas para comparar.')
-        + '</p>' + m.html;
+        + '</p>' + fraLey() + m.html;
     } else h += '<p class="lec">Ninguna visita del período trae hora de inicio.</p>';
     h += '<p class="pie">Antes = inició antes de la hora en que empieza la franja; después = inició a la hora en que termina o más tarde. '
-      + (sinHora ? 'Quedan fuera ' + derPl(sinHora, 'visita', 'visitas') + ' sin hora de inicio en el historial. ' : '') + FRA_PIE + '</p>';
+      + (sinHora ? 'Quedan fuera ' + derPl(sinHora, 'visita', 'visitas') + ' sin hora de inicio en el historial.' : '') + '</p>';
   }
-  return h;
+  return h + '</div>';
 }
 /* ---- Por semana: siempre las ultimas DER_SEMANAS, sin mirar el periodo ---- */
 function fraSemanaHtml(semanas){
@@ -7449,11 +7503,11 @@ function fraSemanaHtml(semanas){
   if(!filas.length) return '<div class="dv-vacio">Sin ' + fraNomAct() + ' para ese supervisor.</div>';
   const nom = function(k){ return 'Semana ' + derNumSemana(k) + ' <small>' + derRango(k) + '</small>'; };
   const m = derFraMatriz(filas, 'Semana', function(x){ return x.sem; }, function(k){ return -(+k.replace(/-/g, '')); }, nom, fraFrDe, fraColsFr(filas), 'sem-fr');
-  let h = '<h3 class="pri">Cada franja, semana a semana<small>' + fraNomAct() + ' · últimas ' + sems.length + ' semanas</small></h3>' + fraLec(m, function(k){ return 'semana ' + derNumSemana(k); }) + m.html + '<p class="pie">' + FRA_PIE + '</p>';
+  let h = fraBloq(1, 'Cada franja, semana a semana', fraNomAct() + ' · últimas ' + sems.length + ' semanas · la más reciente arriba', fraLec(m, function(k){ return 'semana ' + derNumSemana(k); }) + fraLey() + m.html);
   if(fraAct === 'TODAS'){
     const ma = derFraMatriz(filas, 'Semana', function(x){ return x.sem; }, function(k){ return -(+k.replace(/-/g, '')); }, nom, function(x){ return x.act; },
       FRA_ACTS.slice(1).map(function(a){ return [a[0], a[1]]; }), 'sem-act', true);
-    h += '<h3>Cada actividad, semana a semana</h3>' + fraLec(ma, function(k){ return 'semana ' + derNumSemana(k); }) + ma.html + '<p class="pie">' + FRA_PIE_ACT + '</p>';
+    h += fraBloq(2, 'Cada actividad, semana a semana', 'últimas ' + sems.length + ' semanas', fraLec(ma, function(k){ return 'semana ' + derNumSemana(k); }) + fraLey(true) + ma.html);
   }
   return h;
 }
@@ -7467,8 +7521,8 @@ function fraDiaHtml(sems, per){
   const dDe = {}; filas.forEach(function(x){ dDe[x.iso] = x.dia; });
   const nomF = function(k){ return CORTO[dDe[k]] + ' ' + k.slice(6, 8) + '-' + k.slice(4, 6); };
   const mf = derFraMatriz(filas, 'Fecha', function(x){ return x.iso; }, function(k){ return -(+k); }, nomF, fraFrDe, cols, 'dia-fecha');
-  return '<h3 class="pri">Por día de la semana<small>' + fraNomAct() + ' · ' + per + '</small></h3>' + fraLec(md, function(k){ return FRA_DIAS[+k] || k; }) + md.html
-    + '<h3>Fecha por fecha<small>la más reciente arriba</small></h3>' + fraLec(mf, nomF) + mf.html + '<p class="pie">' + FRA_PIE + ' Un solo día tiene pocas visitas por franja: sirve para ubicar un día malo, no para sacar conclusiones.</p>';
+  return fraBloq(1, 'Por día de la semana', fraNomAct() + ' · ' + per, fraLec(md, function(k){ return FRA_DIAS[+k] || k; }) + fraLey() + md.html)
+    + fraBloq(2, 'Fecha por fecha', 'la más reciente arriba', fraLec(mf, nomF) + fraLey() + mf.html + '<p class="pie">Un solo día tiene pocas visitas por franja: sirve para ubicar un día malo, no para sacar conclusiones.</p>');
 }
 /* ---- Por tecnico ---- */
 function fraTecnicoHtml(sems, per){
@@ -7479,11 +7533,11 @@ function fraTecnicoHtml(sems, per){
   const ord = function(k, o){ return (o.n >= DER_FRA_MIN ? 0 : 1000) - 100 * o.d / o.n; };
   const nom = function(k){ return escR(derTitulo(k)) + (supDe[k] ? ' <small>' + escR(derTitulo(supDe[k])) + '</small>' : ''); };
   const m = derFraMatriz(filas, 'Técnico', function(x){ return x.tec; }, ord, nom, fraFrDe, fraColsFr(filas), 'tec-fr');
-  let h = '<h3 class="pri">Cada técnico en cada franja<small>' + fraNomAct() + ' · ' + per + ' · ' + derPl(m.ks.length, 'técnico', 'técnicos') + '</small></h3>'
-    + fraLec(m, function(k){ return escR(derTitulo(k)); }) + m.html + '<p class="pie">Ordenados de más a menos derivación; al final, los que tienen menos de ' + DER_FRA_MIN + ' visitas en el período. ' + FRA_PIE + '</p>';
+  let h = fraBloq(1, 'Cada técnico en cada franja', fraNomAct() + ' · ' + per + ' · ' + derPl(m.ks.length, 'técnico', 'técnicos'),
+      fraLec(m, function(k){ return escR(derTitulo(k)); }) + fraLey() + m.html + '<p class="pie">Ordenados de más a menos derivación; al final, los que tienen menos de ' + DER_FRA_MIN + ' visitas en el período.</p>');
   if(fraAct === 'TODAS'){
     const ma = derFraMatriz(filas, 'Técnico', function(x){ return x.tec; }, ord, nom, function(x){ return x.act; }, FRA_ACTS.slice(1).map(function(a){ return [a[0], a[1]]; }), 'tec-act', true);
-    h += '<h3>Cada técnico por actividad</h3>' + fraLec(ma, function(k){ return escR(derTitulo(k)); }) + ma.html + '<p class="pie">' + FRA_PIE_ACT + '</p>';
+    h += fraBloq(2, 'Cada técnico por actividad', per, fraLec(ma, function(k){ return escR(derTitulo(k)); }) + fraLey(true) + ma.html);
   }
   return h;
 }
@@ -7498,13 +7552,14 @@ function fraComunaHtml(sems, per){
   const ord = function(k){ return k === 'OTRAS COMUNAS' ? 1 : 0; };
   const nom = function(k){ return escR(derTitulo(k)); };
   const mc = derFraMatriz(filas, 'Comuna', ciuDe, ord, nom, fraFrDe, fraColsFr(filas), 'com-fr');
-  let h = '<h3 class="pri">Por comuna y franja<small>' + fraNomAct() + ' · ' + per + '</small></h3>' + fraLec(mc, nom) + mc.html + '<p class="pie">' + FRA_PIE + '</p>';
+  let nB = 1;
+  let h = fraBloq(nB++, 'Por comuna y franja', fraNomAct() + ' · ' + per, fraLec(mc, nom) + fraLey() + mc.html);
   if(fraAct === 'TODAS'){
     const ma = derFraMatriz(filas, 'Comuna', ciuDe, ord, nom, function(x){ return x.act; }, FRA_ACTS.slice(1).map(function(a){ return [a[0], a[1]]; }), 'com-act', true);
-    h += '<h3>Por comuna y actividad</h3>' + fraLec(ma, nom) + ma.html + '<p class="pie">' + FRA_PIE_ACT + '</p>';
+    h += fraBloq(nB++, 'Por comuna y actividad', per, fraLec(ma, nom) + fraLey(true) + ma.html);
   }
   const md = derFraMatriz(filas, 'Comuna', ciuDe, ord, nom, function(x){ return String(x.dia); }, FRA_DIAS.map(function(d, i){ return [String(i), d]; }).filter(function(c){ return filas.some(function(x){ return String(x.dia) === c[0]; }); }), 'com-dia');
-  h += '<h3>Por comuna y día de la semana</h3>' + fraLec(md, nom) + md.html + '<p class="pie">' + FRA_PIE + '</p>';
+  h += fraBloq(nB++, 'Por comuna y día de la semana', per, fraLec(md, nom) + fraLey() + md.html);
   return h;
 }
 /* ---- La ventana: titulo, pestanas, filtros y cuerpo ---- */
@@ -7564,6 +7619,7 @@ function pintarFranjas(){
   cuerpo.innerHTML = '<div class="dv-fra">' + cu
     + '<p class="dv-nota"><b>Qué cuenta.</b> Altas, traslados (Alta Traslado), migraciones y reparaciones de los técnicos DOMI. <b>Visitadas</b> = completadas más no realizadas (sin canceladas ni suspendidas). '
     + '<b>Derivada</b> = no realizada. <b>Franja</b> = la agendada con el cliente, no la hora en que llegó el técnico.<br>'
+    + 'Una franja con menos de ' + DER_FRA_MIN + ' visitas en el período no lleva columna propia; sus visitas van en el Total.<br>'
     + 'En la ventana de Derivación los traslados van dentro de "Altas"; acá van aparte. Datos hasta ayer; el día de hoy entra mañana.</p></div>';
 }
 
