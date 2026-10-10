@@ -1,7 +1,8 @@
 {
-  "actualizado": "2026-10-10T09:33:21",
+  "actualizado": "2026-10-10T10:03:39",
   "resumen": {
-    "reagendada": 1
+    "reagendada": 1,
+    "sin informacion": 1
   },
   "estados": {
     "1-3O9702VJ": {
@@ -13,6 +14,62 @@
       "color": "rgb(255, 170, 170)",
       "detalle": "1-3O9702VJ - 10-13-Migración-Migración-SUIZA 252Lun, 12 Oct",
       "franja_nueva": "10-13"
+    },
+    "1-3OBHPFZV": {
+      "tec": "LUIS GATICA DAVILA",
+      "cat": "Migración 2 Play",
+      "franja_original": "10-13",
+      "d": "LOS AROMOS 1151 CASA 64, VILLA ALEMANA",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "LOS AROMOS 1151",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "?",
+            "color": "rgb(93, 190, 63)",
+            "ot": "1-3O8K96OY",
+            "franja": "10-13",
+            "texto": "1-3O8K96OY - 10-13-Migración-Migración-LOS AROMOS 1151 CASA 92"
+          },
+          {
+            "estado": "cancelada",
+            "color": "rgb(128, 255, 128)",
+            "ot": "1-3O6TCBPT",
+            "franja": "10-13",
+            "texto": "1-3O6TCBPT - 10-13-Migración-Migración-LOS AROMOS 1151 CASA 92Lun, 5 Oct"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3O5LZ7MZ",
+            "franja": "16-19",
+            "texto": "1-3O5LZ7MZ - 16-19-Migración-Migración-LOS AROMOS 1151 CASA 92Vie, 2 Oct"
+          },
+          {
+            "estado": "cancelada",
+            "color": "rgb(128, 255, 128)",
+            "ot": "1-3O0022A3",
+            "franja": "16-19",
+            "texto": "1-3O0022A3 - 16-19-Migración-Migración-LOS AROMOS 1151 CASA 84Mar, 29 Sep"
+          },
+          {
+            "estado": "completada",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3NVR1WSP",
+            "franja": "10-13",
+            "texto": "1-3NVR1WSP - 10-13-Migración-Migración-LOS AROMOS 1151 CASA 72Jue, 17 Sep"
+          },
+          {
+            "estado": "completada",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3NSS7NZR",
+            "franja": "16-19",
+            "texto": "1-3NSS7NZR - 16-19-Modificación de Servicio-Modificación-LOS AROMOS 1151 CASA 44Sab, 12 Sep"
+          }
+        ]
+      }
     }
   }
 }
