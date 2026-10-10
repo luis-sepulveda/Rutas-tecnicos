@@ -2696,6 +2696,51 @@
   #modalDer details.dv-masinfo > summary:hover { text-decoration:underline; }
   #modalDer details.dv-masinfo > .dv-nota { margin-top:4px; }
   #modalDer table.dv-hv-tab > thead > tr:last-child > th, #modalDer table.dv-aud > thead > tr:last-child > th { max-width:130px; }
+
+  /* ---- PESTANA RESUMEN (10-10-2026, 18:20) ---- */
+  #modalDer .dv-res1 { display:grid; grid-template-columns:230px minmax(0,1fr); gap:22px; align-items:end; }
+  #modalDer .dv-res1 .num { background:#f1f5f9; border-radius:12px; padding:14px 16px; }
+  #modalDer .dv-res1 .num small { display:block; font-size:12.5px; color:#5f7386; }
+  #modalDer .dv-res1 .num > b { display:block; font-family:'Archivo',sans-serif; font-size:44px; line-height:1.05; color:#0f1d2e; letter-spacing:-.02em; margin:2px 0; }
+  #modalDer .dv-res1 .num .df { font-size:13.5px; font-weight:600; margin-top:7px; }
+  #modalDer .dv-res1 .cols { display:flex; align-items:flex-end; gap:10px; height:150px; }
+  #modalDer .dv-res1 .cols div { flex:1; background:#cbd5e1; color:#1e293b; border-radius:8px 8px 0 0; display:flex; justify-content:center; padding-top:7px; cursor:help; }
+  #modalDer .dv-res1 .cols div b { font-family:'Archivo',sans-serif; font-size:16px; }
+  #modalDer .dv-res1 .cols div.alta { background:#fca5a5; color:#7f1d1d; }
+  #modalDer .dv-res1 .cols div.act { background:#0f1d2e; color:#fff; }
+  #modalDer .dv-res1 .eje { display:flex; gap:10px; margin-top:5px; }
+  #modalDer .dv-res1 .eje span { flex:1; text-align:center; font-size:12.5px; font-weight:600; color:#16232f; }
+  #modalDer .dv-res1 .eje small { display:block; font-weight:400; font-size:11.5px; color:#8fa1b3; }
+  #modalDer table.dv-res-c { width:auto; min-width:min(720px,100%); font-size:14px; margin:0; }
+  #modalDer table.dv-res-c td, #modalDer table.dv-res-c th { padding:8px 14px; }
+  #modalDer table.dv-res-c td small { color:#8fa1b3; font-size:12px; margin-left:4px; }
+  #modalDer table.dv-res-c td.sube { color:#b91c1c; font-weight:700; } #modalDer table.dv-res-c td.baja { color:#17603a; font-weight:700; }
+  #modalDer table.dv-res-c tr.tot td { font-weight:700; border-top:2px solid #dbe4ed; }
+  @media (max-width:800px){ #modalDer .dv-res1 { grid-template-columns:1fr; } }
+
+  /* Resumen: tabla "por que subio", mas clara (10-10-2026, 18:40) */
+  #modalDer .dv-res-t { font-family:'Archivo',sans-serif; font-size:16px; font-weight:700; color:#12357a; margin:18px 0 6px; padding-top:14px; border-top:1px solid #e2e8f0; }
+  #modalDer table.dv-res-c th small { display:block; font-weight:400; color:#8fa1b3; font-size:11.5px; }
+  #modalDer table.dv-res-c td small { font-size:13.5px; color:#41586f; margin-left:2px; }
+  #modalDer table.dv-res-c td b { color:#0f1d2e; }
+  #modalDer .dv-res-n { font-size:12.5px; color:#5f7386; margin:9px 0 0; line-height:1.5; max-width:900px; }
+
+  /* Resumen: causas semana a semana (10-10-2026, 18:55) */
+  #modalDer table.dv-res-c.sem { width:100%; table-layout:fixed; }
+  #modalDer table.dv-res-c.sem th:first-child { width:22%; } #modalDer table.dv-res-c.sem th.x { width:19%; }
+  #modalDer table.dv-res-c.sem td, #modalDer table.dv-res-c.sem th { text-align:center; padding:9px 8px; }
+  #modalDer table.dv-res-c.sem td:first-child, #modalDer table.dv-res-c.sem th:first-child { text-align:left; }
+  #modalDer table.dv-res-c.sem td { font-family:'Archivo',sans-serif; font-size:17px; font-weight:700; color:#16232f; }
+  #modalDer table.dv-res-c.sem td:first-child { font-family:inherit; font-size:14.5px; font-weight:500; }
+  #modalDer table.dv-res-c.sem td small { font-family:'DM Sans',inherit; font-size:12px; font-weight:400; color:#5f7386; margin-left:6px; }
+  #modalDer table.dv-res-c.sem td.alza { background:#fee2e2; color:#7f1d1d; } #modalDer table.dv-res-c.sem td.alza small { color:#b91c1c; }
+  #modalDer table.dv-res-c.sem td.baja { background:#e3f6ea; color:#14532d; font-weight:700; } #modalDer table.dv-res-c.sem td.baja small { color:#17603a; }
+  #modalDer table.dv-res-c.sem th.act, #modalDer table.dv-res-c.sem td.act { border-left:2px solid #0f1d2e; border-right:2px solid #0f1d2e; }
+  #modalDer table.dv-res-c.sem th.act { border-top:2px solid #0f1d2e; color:#0f1d2e; } #modalDer table.dv-res-c.sem tr.tot td.act { border-bottom:2px solid #0f1d2e; }
+  #modalDer table.dv-res-c.sem td.x { font-family:inherit; font-size:14px; }
+  #modalDer table.dv-res-c.sem td.x.sube { color:#b91c1c; background:transparent; } #modalDer table.dv-res-c.sem td.x.baja { color:#17603a; background:transparent; }
+
+  #modalDer .dv-res-n.fte { margin:10px 0 0; } #modalDer .dv-res-n.fte b { color:#b45309; }
 </style>
 </head>
 <body>
@@ -6810,8 +6855,24 @@ async function bajarDeriv(){
       }
     }
   } catch(e){ console.warn('derivacion, visitas por direccion:', e); }
+  /* (10-10-2026, 19:20) migraciones_semanas.json: las migraciones de cada
+     semana con los DATOS COMPLETOS (lo escribe seguimiento_autonomia.py, que
+     usa los export de completos_seguimiento). datos.json solo trae lo que se
+     ve con las credenciales de la agencia; los dias con tecnicos en otras
+     comunas le faltan ordenes. La pestana Resumen usa este archivo cuando
+     esta. Blindado: si no baja, todo sigue con datos.json. */
+  DER_SEMC = {}; DER_CORTOS = [];
+  try {
+    const r4 = await fetch(URL_ACTIVIDADES + 'migraciones_semanas.json?t=' + Date.now(), { cache:'no-store' });
+    if(r4.ok){
+      const mj = await r4.json();
+      (mj.semanas || []).forEach(function(w){ if(w && w.sem && w.n) DER_SEMC[w.sem] = w; });
+      DER_CORTOS = Array.isArray(mj.dias_cortos) ? mj.dias_cortos : [];
+    }
+  } catch(e){ console.warn('derivacion, migraciones por semana:', e); }
   return filas;
 }
+let DER_SEMC = {}, DER_CORTOS = [];
 function setTipoDeriv(t){ derTipo = t; derAbierto = null; pintarDeriv(); }
 function setVistaDeriv(v){ derVista = v; derAbierto = null; pintarDeriv(); }
 function derEntra(x){ return derTipo === 'AMBAS' || x.tp === derTipo; }
@@ -7147,6 +7208,192 @@ function derAudTabla(sems, sup){
   });
   return Object.keys(t).map(function(k){ return t[k]; });
 }
+/* La lista de "Con quien conversar", en una sola funcion: la usan el cuadro
+   2 de A quien auditar (con el Periodo elegido) y la pestana Resumen (siempre
+   4 semanas). Devuelve [{o, mot, n, x, m8}] ya ordenada. */
+function derConvCalc(todasSem, nPer){
+  const o8 = derOcho(todasSem), o4 = derOcho(todasSem, 4), o2 = derOcho(todasSem, 2);
+  const iSem = todasSem.indexOf(derSem), sems = todasSem.slice(Math.max(0, iSem - nPer + 1), iSem + 1);
+  const minimo = nPer === 1 ? DER_AUD_MIN_SEM : DER_AUD_MIN_4;
+  const f1 = function(v){ return v.toFixed(1).replace('.', ','); };
+  const eq = derAudTabla(sems, 'Todos').reduce(function(a, o){ a.n += o.n; a.prop += o.prop; return a; }, {n:0, prop:0});
+  const corte = (eq.n ? 100 * eq.prop / eq.n : 0) * DER_AUD_FACTOR;
+  const pp = function(o){ return o.n ? 100 * o.prop / o.n : 0; };
+  return derAudTabla(sems, derSup).map(function(o){
+      const m8 = o8.t[o.tec], m4 = o4.t[o.tec], t2 = derTend2(o8, o2, o.tec), mot = [];
+      if(derDirOk && o.n >= minimo && o.prop >= 2 && pp(o) >= corte) mot.push(['au', 'Deriva por su cuenta: ' + Math.round(pp(o)) + '% propia, límite ' + f1(corte) + '%']);
+      if(m8 && m8.sost) mot.push(['h8', o8.sems.length + ' semanas sobre el equipo: ' + Math.round(m8.p) + '% contra ' + Math.round(o8.pEq) + '%']);
+      if(m4 && m4.sost && o4.sems.length < o8.sems.length) mot.push(['h4', 'Últimas ' + o4.sems.length + ' semanas: ' + Math.round(m4.p) + '% contra ' + Math.round(o4.pEq) + '%']);
+      const peso = mot.length, sube = !!(t2 && t2.tipo === 'sube');
+      if(peso && sube) mot.push(['su', '▲ Empeorando en las últimas 2 semanas']);
+      if(peso && t2 && t2.tipo === 'baja') mot.push(['ba', '▼ Mejorando en las últimas 2 semanas']);
+      return { o: o, mot: mot, n: peso + (peso && sube ? 1 : 0), x: m8 ? m8.d - m8.n * o8.pEq / 100 : 0, m8: m8 };
+    }).filter(function(e){ return e.mot.length; }).sort(function(p, q){ return q.n - p.n || q.x - p.x || p.o.tec.localeCompare(q.o.tec); });
+}
+/* ---- PESTANA "RESUMEN" (10-10-2026, 18:20) ----
+   Pensada para la gerenta: una pantalla que se entiende sin tocar nada y
+   contesta tres preguntas, en este orden.
+   1 Como vamos: el % de la semana elegida, la diferencia con la anterior y
+     con la primera de las 5 que se muestran, y las 5 semanas en columnas.
+   2 De que depende: de cada 10 derivadas, cuantas no dependen del tecnico
+     (clasificacion de A quien auditar, ultimas 4 semanas), y QUE CAUSA
+     explica el cambio: cada causal por cada 100 visitadas, primera semana
+     contra la elegida (asi las cuatro filas suman el % de derivacion).
+   3 Que hacemos: los tecnicos con mas de un motivo (derConvCalc) y cuanto
+     bajaria el equipo si los de historial alto derivaran como el resto,
+     al lado de cuanto cambio el equipo.
+   Reglas de esta pantalla: todo numero con su comparacion, siempre las
+   ordenes junto al porcentaje, y palabras corrientes ("causa ajena",
+   "fallo solo con ese tecnico"). Respeta semana, supervisor y tipo. */
+function derVistaResHtml(todasSem, enCurso){
+  const f1 = function(v){ return v.toFixed(1).replace('.', ','); };
+  const W = {};
+  (DER || []).forEach(function(x){ if(!derEntra(x)) return;
+    if(derSup !== 'Todos' && x.sup !== derSup) return;
+    const o = W[x.sem] || (W[x.sem] = {n:0, d:0, sm:0, re:0, de:0, ot:0}); o.n++; if(x.der){ o.d++; o[x.g]++; } });
+  /* Datos completos del Seguimiento (ver bajarDeriv): solo para migraciones
+     de todo el equipo, que es lo que trae el archivo. Una semana se toma de
+     ahi si trae TANTAS visitadas como datos.json o mas (lo completo solo
+     puede sumar; si trae menos, el archivo esta atrasado). semMas = las
+     semanas donde el completo trae mas que datos.json. */
+  const usaComp = derTipo === 'MIGRA' && derSup === 'Todos', semMas = []; let nComp = 0;
+  if(usaComp) Object.keys(DER_SEMC).forEach(function(k){ const w = DER_SEMC[k], v = W[k];
+    if(!v || w.n < v.n) return;
+    if(w.n > v.n) semMas.push(k);
+    W[k] = { n: w.n, d: w.d, sm: w.sm || 0, re: w.re || 0, de: w.de || 0, ot: w.ot || 0 }; nComp++; });
+  const act = W[derSem];
+  if(!act || !act.n) return '<div class="dv-vacio">Sin ' + derNomTipo() + ' en esta semana para ese supervisor.</div>';
+  const iS = todasSem.indexOf(derSem), cols = todasSem.slice(Math.max(0, iS - 4), iS + 1).filter(function(k){ return W[k] && W[k].n; });
+  /* de donde salen los numeros, dicho en la pantalla */
+  const lunDe = function(f){ const q = /^(\d{2})-(\d{2})-(\d{4})$/.exec(String(f || '')); if(!q) return ''; const d = new Date(+q[3], +q[2] - 1, +q[1]); d.setDate(d.getDate() - (d.getDay() + 6) % 7);
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
+  const masAca = semMas.filter(function(k){ return cols.indexOf(k) >= 0; }).sort();
+  const cortos = (usaComp ? DER_CORTOS : []).filter(function(x){ return cols.indexOf(lunDe(x.dia)) >= 0; });
+  const fuente = '<p class="dv-res-n fte">' + (!usaComp ? 'Con filtro de supervisor o de tipo se cuentan solo las órdenes que se ven con las credenciales de la agencia (Quilpué y Villa Alemana).'
+      : !nComp ? '<b>Ojo:</b> no se encontró el archivo de migraciones del Seguimiento, así que se cuentan solo las órdenes que se ven con las credenciales de la agencia (Quilpué y Villa Alemana). Los días con técnicos en otras comunas pueden estar incompletos.'
+      : 'Mismos números que la página de Seguimiento.' + (masAca.length ? ' ' + (masAca.length === 1 ? 'La semana ' : 'Las semanas ') + masAca.map(function(k){ return derNumSemana(k); }).join(', ')
+          + (masAca.length === 1 ? ' incluye' : ' incluyen') + ' las órdenes de los técnicos que apoyaron en otras comunas.' : ''))
+    + (cortos.length ? ' <b>Ojo:</b> ' + cortos.map(function(x){ return 'el ' + String(x.dia).slice(0, 5) + ' salieron ' + x.tecnicos + ' técnicos (lo normal, ' + x.normal + ')'; }).join('; ')
+        + ' y no hay export completo de ese día: puede faltar trabajo hecho en otra comuna.' : '') + '</p>';
+  const p = function(k){ return 100 * W[k].d / W[k].n; };
+  const pri = cols[0], ant = cols.length > 1 ? cols[cols.length - 2] : null;
+  const quien = derSup === 'Todos' ? 'todo el equipo' : 'equipo de ' + escR(derTitulo(derSup));
+  /* sin la palabra "puntos" (Luis no la entendia): "subio desde 51% (semana 40)" */
+  const dif = function(a, b, k){ const v = Math.round(a) - Math.round(b);
+    return v === 0 ? '<span>Igual que la semana ' + derNumSemana(k) + ' (' + Math.round(b) + '%)</span>'
+      : '<span style="color:' + (v > 0 ? '#b91c1c' : '#17603a') + '">' + (v > 0 ? '▲ Subió' : '▼ Bajó') + ' desde ' + Math.round(b) + '% (semana ' + derNumSemana(k) + ')</span>'; };
+  let hvN = 1;
+  const hvT = function(t, s){ return '<div class="dv-hv-t"><span class="n">' + (hvN++) + '</span><b>' + t + '</b>' + (s ? '<small>' + s + '</small>' : '') + '</div>'; };
+  /* 1 · como vamos */
+  const maxP = Math.max.apply(null, cols.map(p).concat([1]));
+  let salto = null;
+  for(let j = 1; j < cols.length; j++){ const v = p(cols[j]) - p(cols[j - 1]); if(!salto || v > salto.v) salto = { v: v, a: cols[j - 1], b: cols[j] }; }
+  let h = '<div class="dv-hv-b">' + hvT('¿Cómo vamos?', quien + ' · ' + derNomTipo() + ' · semana ' + derNumSemana(derSem) + ' (' + derRango(derSem) + ')' + (enCurso ? ' · en curso' : ''))
+    + '<p class="dv-hv-f">De cada 100 ' + derNomTipo() + ' visitadas, <b>' + Math.round(p(derSem)) + '</b> se derivan (no se realizan).'
+    + (cols.length > 1 ? ' ' + (cols.length - 1 === 1 ? 'La semana anterior' : 'Hace ' + (cols.length - 1) + ' semanas') + ' eran <b>' + Math.round(p(pri)) + '</b>.' : '') + '</p>'
+    + '<div class="dv-res1"><div class="num"><small>Semana ' + derNumSemana(derSem) + '</small><b>' + f1(p(derSem)) + '%</b><small>' + act.d + ' derivadas de ' + act.n + ' visitadas</small>'
+    + (ant ? '<div class="df">' + dif(p(derSem), p(ant), ant) + '</div>' : '')
+    + (ant && pri !== ant ? '<div class="df">' + dif(p(derSem), p(pri), pri) + '</div>' : '') + '</div>'
+    + '<div class="gra"><div class="cols">' + cols.map(function(k){
+        const sube = p(k) - p(pri) >= 5;
+        return '<div class="' + (k === derSem ? 'act' : sube ? 'alta' : '') + '" style="height:' + Math.max(18, Math.round(100 * p(k) / maxP)) + '%" title="Semana ' + derNumSemana(k) + ' (' + derRango(k) + '): ' + W[k].d + ' derivadas de ' + W[k].n + ' visitadas"><b>' + Math.round(p(k)) + '%</b></div>'; }).join('') + '</div>'
+    + '<div class="eje">' + cols.map(function(k){ return '<span>sem ' + derNumSemana(k) + '<small>' + W[k].d + ' de ' + W[k].n + '</small></span>'; }).join('') + '</div></div></div>'
+    + fuente
+    + (salto && salto.v >= 5 ? '<div class="dv-hv-concl">El mayor salto fue entre la semana ' + derNumSemana(salto.a) + ' y la ' + derNumSemana(salto.b) + ': pasó de ' + Math.round(p(salto.a)) + '% a ' + Math.round(p(salto.b)) + '% de una semana a otra.</div>' : '')
+    + '</div>';
+  /* 2 · de que depende */
+  const s4 = todasSem.slice(Math.max(0, iS - 3), iS + 1);
+  const per4 = s4.length > 1 ? 'semanas ' + derNumSemana(s4[0]) + ' a ' + derNumSemana(s4[s4.length - 1]) : 'semana ' + derNumSemana(s4[0]);
+  h += '<div class="dv-hv-b">' + hvT('¿De qué depende?', quien);
+  if(derDirOk){
+    const cl = derAudTabla(s4, derSup).reduce(function(a, o){ a.d += o.d; a.na += o.na; a.comp += o.comp; a.prop += o.prop; return a; }, {d:0, na:0, comp:0, prop:0});
+    if(cl.d){
+      const hvS = function(n, cls){ return n ? '<div class="' + cls + '" style="flex:' + n + '" title="' + n + ' de ' + cl.d + '">' + n + '</div>' : ''; };
+      h += '<p class="dv-hv-f">De cada 10 derivadas, <b>' + Math.round(10 * (cl.na + cl.comp) / cl.d) + '</b> no dependen del técnico.</p>'
+        + '<div class="dv-barra">' + hvS(cl.na, 'na') + hvS(cl.comp, 'comp') + hvS(cl.prop, 'prop') + '</div>'
+        + '<div class="dv-ley"><span><i style="background:#cbd5e1"></i><b>' + cl.na + '</b> (' + derPct(cl.na, cl.d) + '%) por una causa ajena: red, dirección, contingencia</span>'
+        + '<span><i style="background:#93c5fd"></i><b>' + cl.comp + '</b> (' + derPct(cl.comp, cl.d) + '%) en direcciones donde también falló otro técnico</span>'
+        + '<span><i style="background:#fb923c"></i><b>' + cl.prop + '</b> (' + derPct(cl.prop, cl.d) + '%) fallaron solo con ese técnico</span>'
+        + '<span class="sem">' + cl.d + ' derivadas · ' + per4 + '</span></div>';
+    }
+  }
+  if(cols.length > 1){
+    const CAU = [['sm', 'Sin moradores'], ['re', 'Cliente reagenda'], ['de', 'Cliente desiste'], ['ot', 'Causa ajena al técnico']];
+    const por100 = function(k, g){ return 100 * W[k][g] / W[k].n; };
+    /* (18:55) Tercera version de esta tabla. Luis no entendia los "puntos"
+       ("aun a simple vista no lo entiendo del todo") y propuso mostrar los
+       numeros de CADA semana. Queda: una columna por semana (las mismas 5 del
+       grafico; al cambiar de semana se corre sola), en cada casilla las
+       ORDENES y al lado que parte son de las visitadas, y al final "ordenes
+       de mas". Todo se dice en ordenes; la palabra "puntos" no aparece.
+       (19:20) La comparacion es contra el PROMEDIO de las semanas anteriores
+       que se muestran, no contra una sola: una semana rara o incompleta (la
+       37, con tecnicos en otras comunas) torcia la conclusion. "De mas" = las
+       de la semana elegida menos las que habrian sido al ritmo de esas
+       semanas juntas (sus ordenes / sus visitadas x las visitadas de ahora).
+       En rojo suave, la casilla 3 puntos o mas sobre ese promedio. */
+    const prev = cols.slice(0, -1);
+    const B = prev.reduce(function(a, k){ ['n', 'd', 'sm', 're', 'de', 'ot'].forEach(function(g){ a[g] += W[k][g]; }); return a; }, {n:0, d:0, sm:0, re:0, de:0, ot:0});
+    const nomPrev = prev.length === 1 ? 'la semana ' + derNumSemana(prev[0]) : 'las ' + prev.length + ' semanas anteriores';
+    const esp = function(g){ return B[g] / B.n * act.n; };
+    const filas = CAU.map(function(c){ return { g: c[0], nom: c[1], x: act[c[0]] - esp(c[0]) }; }).sort(function(x, y){ return y.x - x.x; });
+    const xT = act.d - esp('d'), subio = Math.round(xT) > 0, igual = Math.round(xT) === 0;
+    const ord = function(n){ return n + (n === 1 ? ' orden' : ' órdenes'); };
+    const mueven = (subio ? filas.filter(function(r){ return Math.round(r.x) >= 1; }) : filas.slice().reverse().filter(function(r){ return Math.round(r.x) <= -1; })).slice(0, 2);
+    const celda = function(k, g){
+      const n = W[k][g], pc = 100 * n / W[k].n, p0 = 100 * B[g] / B.n;
+      const cls = (k === derSem ? 'act ' : '') + (pc - p0 >= 3 ? 'alza' : pc - p0 <= -3 ? 'baja' : '');
+      return '<td class="' + cls + '" title="Semana ' + derNumSemana(k) + ': ' + n + ' de ' + W[k].n + ' visitadas, ' + f1(pc) + '%. Promedio de ' + nomPrev + ': ' + f1(p0) + '%">' + n + '<small>' + Math.round(pc) + '%</small></td>'; };
+    const mas = function(x){ const v = Math.round(x); return v === 0 ? '<td class="x">igual</td>' : '<td class="x ' + (v > 0 ? 'sube' : 'baja') + '">' + ord(Math.abs(v)) + (v > 0 ? ' de más' : ' de menos') + '</td>'; };
+    h += '<div class="dv-res-t">' + (igual ? '¿Cambió algo esta semana?' : subio ? '¿Por qué subió?' : '¿Por qué bajó?') + '</div>'
+      + '<p class="dv-hv-f">Al ritmo de ' + nomPrev + ', con las ' + act.n + ' visitas de esta semana habrían sido <b>' + Math.round(esp('d')) + '</b> derivadas. Fueron <b>' + act.d + '</b>'
+      + (igual ? ': lo mismo.' : ': <b class="' + (subio ? 'mal' : '') + '">' + ord(Math.abs(Math.round(xT))) + (subio ? ' de más' : ' de menos') + '</b>.'
+          + (mueven.length ? ' Lo que más ' + (subio ? 'creció' : 'bajó') + ': ' + mueven.map(function(r){ return '<b>' + r.nom.toLowerCase() + '</b> (' + Math.abs(Math.round(r.x)) + (subio ? ' de más' : ' de menos') + ')'; }).join(' y ') + '.' : '')) + '</p>'
+      + '<table class="dv-res-c sem"><thead><tr><th>Causa de la derivada</th>' + cols.map(function(k){ return '<th class="' + (k === derSem ? 'act' : '') + '">Semana ' + derNumSemana(k) + '<small>' + W[k].n + ' visitadas</small></th>'; }).join('')
+      + '<th class="x">Esta semana<small>contra ' + (prev.length === 1 ? 'la semana ' + derNumSemana(prev[0]) : 'el promedio de las ' + prev.length + ' anteriores') + '</small></th></tr></thead><tbody>'
+      + filas.map(function(r){ return '<tr><td>' + r.nom + '</td>' + cols.map(function(k){ return celda(k, r.g); }).join('') + mas(r.x) + '</tr>'; }).join('')
+      + '<tr class="tot"><td>Total de derivadas</td>' + cols.map(function(k){ return celda(k, 'd'); }).join('') + mas(xT) + '</tr></tbody></table>'
+      + '<div class="dv-ley" style="margin-top:9px"><span><b>Cada casilla</b>: órdenes que terminaron en esa causa y, en chico, qué parte son de las visitadas de esa semana</span>'
+      + '<span><i style="background:#fee2e2"></i>Bastante más que el promedio de ' + nomPrev + '</span><span><i style="background:#e3f6ea"></i>Bastante menos</span></div>'
+      + '<p class="dv-res-n">Cómo se lee la última columna: en ' + nomPrev + ', ' + B[filas[0].g] + ' de ' + B.n + ' visitas terminaron en ' + filas[0].nom.toLowerCase() + '. A ese mismo ritmo, con las ' + act.n + ' visitas de esta semana habrían sido '
+      + Math.round(esp(filas[0].g)) + '; fueron ' + act[filas[0].g] + '. Las semanas se muestran de a ' + cols.length + ': al pasar a una semana nueva, la más antigua sale sola.</p>';
+  }
+  if(derDirOk && act.d){
+    let rep = 0;
+    (DER || []).forEach(function(x){ if(x.sem !== derSem || !x.der || !derEntra(x)) return;
+      if(derSup !== 'Todos' && x.sup !== derSup) return;
+      const hh = DER_DIR[x.ot]; if(hh && hh.v.filter(function(v){ return !v.ok; }).length >= 2) rep++; });
+    h += '<div class="dv-hv-concl">Además: ' + rep + ' de las ' + act.d + ' derivadas de esta semana (' + derPct(rep, act.d) + '%) fueron en direcciones donde ya había fallado otra visita antes (se cuenta desde el ' + derDesde + ').</div>';
+  }
+  h += '</div>';
+  /* 3 · que hacemos */
+  const conv = derConvCalc(todasSem, 4), fuertes = conv.filter(function(e){ return e.n >= 2; });
+  const lista = fuertes.length ? fuertes : conv.slice(0, 6), resto = conv.length - lista.length;
+  DER_CONV_TECS = lista.map(function(e){ return e.o.tec; });
+  const o8 = derOcho(todasSem), todos = Object.keys(o8.t), malos = todos.filter(function(k){ return o8.t[k].sost; });
+  const xMalos = Math.round(malos.reduce(function(a, k){ return a + o8.t[k].d - o8.t[k].n * o8.pEq / 100; }, 0));
+  const baja = o8.eq.n ? o8.pEq - 100 * (o8.eq.d - xMalos) / o8.eq.n : 0;
+  const cambio = cols.length > 1 ? p(derSem) - p(pri) : 0;
+  h += '<div class="dv-hv-b">' + hvT('¿Qué hacemos?', 'toca un técnico para abrir su ficha')
+    + '<p class="dv-hv-f">' + (lista.length ? '<b class="mal">' + lista.length + (lista.length === 1 ? ' técnico' : ' técnicos') + '</b> para conversar' + (fuertes.length ? ', con más de un motivo' : '') + '.'
+        + (resto > 0 ? ' Otros ' + resto + ' tienen un solo motivo y están en A quién auditar.' : '')
+      : 'Ningún técnico tiene un motivo de peso para conversar.') + '</p>'
+    + (lista.length ? '<div class="dv-conv">' + lista.map(function(e, j){
+        return '<button onclick="verFicDeConv(' + j + ')" title="Toca para abrir su ficha"><span class="pos">' + (j + 1) + '</span>'
+          + '<span class="nm"><b>' + escR(derTitulo(e.o.tec)) + '</b><small>' + escR(derTitulo(e.o.sup)) + (e.m8 ? ' · ' + o8.sems.length + ' semanas: ' + Math.round(e.m8.p) + '% (' + e.m8.d + ' de ' + e.m8.n + ')' : '') + '</small></span>'
+          + '<span class="mot">' + e.mot.map(function(m){ return '<i class="' + m[0] + '">' + m[1] + '</i>'; }).join('') + '</span><span class="ir">ver ficha ›</span></button>'; }).join('') + '</div>' : '')
+    + (malos.length && xMalos > 0 ? '<div class="dv-hv-regla dos" style="margin-top:14px"><div><small>Si los ' + malos.length + ' técnicos con historial alto derivaran como el equipo</small><b>' + xMalos + ' derivadas menos</b>'
+        + '<span>en ' + o8.sems.length + ' semanas. El equipo completo bajaría de ' + f1(o8.pEq) + '% a ' + f1(o8.pEq - baja) + '%</span></div>'
+        + (cols.length > 1 ? '<div' + (cambio >= 5 ? ' class="mal"' : '') + '><small>Lo que cambió el equipo en ' + (cols.length - 1) + (cols.length === 2 ? ' semana' : ' semanas') + '</small><b>De ' + f1(p(pri)) + '% a ' + f1(p(derSem)) + '%</b>'
+          + '<span>entre la semana ' + derNumSemana(pri) + ' y la ' + derNumSemana(derSem) + '</span></div>' : '') + '</div>' : '')
+    + '</div>';
+  return h + '<p class="dv-nota"><b>Derivada</b> = visita no realizada. <b>Visitadas</b> = completadas más no realizadas (sin canceladas ni suspendidas).<br>'
+    + '<b>De qué depende</b>: "causa ajena" son quiebres que no dependen del técnico (ductos, dirección, NAP, contingencia); "donde también falló otro técnico" y "solo con ese técnico" son sin moradores, cliente reagenda o cliente desiste, según si en esa dirección le falló una visita a alguien más desde el ' + derDesde + '.<br>'
+    + '<b>Por qué subió o bajó</b>: compara la semana elegida con el promedio de las anteriores que se muestran. Con pocas órdenes en una semana, 1 o 2 órdenes de más no dicen nada.<br>'
+    + '<b>De dónde salen los números</b>: el gráfico y la tabla de causas usan los datos completos del Seguimiento (con los export de los días en que hubo técnicos en otras comunas). La barra de tres colores y la lista de técnicos salen de lo que se ve con las credenciales de la agencia, igual que las otras pestañas.<br>'
+    + '<b>Con quién conversar</b>: el detalle de cada motivo está en A quién auditar. <b>Historial alto</b>: ' + DER_8_MIN + ' o más visitadas en ' + o8.sems.length + ' semanas, ' + DER_8_PUNTOS + ' puntos o más sobre el equipo y sobre el equipo en más de la mitad de sus semanas.<br>'
+    + 'Lo que se hizo con cada técnico (conversación, auditoría, seguimiento) no sale de los datos: hay que llevarlo aparte.</p>';
+}
 /* ---- CON QUIEN CONVERSAR (10-10-2026, 17:55) ----
    Habia cuatro maneras de decir "este tecnico anda mal" (sobre el equipo en
    la semana, auditar, marca de 8 y de 4 semanas, flecha de tendencia) y no
@@ -7195,16 +7442,7 @@ function derVistaAudHtml(todasSem){
     + '<span><i style="background:#93c5fd"></i><b>' + tot.comp + '</b> (' + derPct(tot.comp, tot.d) + '%) en direcciones donde también falló otro técnico</span>'
     + '<span><i style="background:#fb923c"></i><b>' + tot.prop + '</b> (' + derPct(tot.prop, tot.d) + '%) propias</span>'
     + (derVisOk ? '<span class="sn"><b>' + tot.sen + '</b> de las propias, con alguna señal</span>' : '') + '</div></div>';
-  const conv = tb.map(function(o){
-      const m8 = o8.t[o.tec], m4 = o4.t[o.tec], t2 = derTend2(o8, o2, o.tec), mot = [];
-      if(audita(o)) mot.push(['au', 'Deriva por su cuenta: ' + Math.round(pp(o)) + '% propia, límite ' + f1(corte) + '%']);
-      if(m8 && m8.sost) mot.push(['h8', o8.sems.length + ' semanas sobre el equipo: ' + Math.round(m8.p) + '% contra ' + Math.round(o8.pEq) + '%']);
-      if(m4 && m4.sost && o4.sems.length < o8.sems.length) mot.push(['h4', 'Últimas ' + o4.sems.length + ' semanas: ' + Math.round(m4.p) + '% contra ' + Math.round(o4.pEq) + '%']);
-      const peso = mot.length, sube = !!(t2 && t2.tipo === 'sube');
-      if(peso && sube) mot.push(['su', '▲ Empeorando en las últimas 2 semanas']);
-      if(peso && t2 && t2.tipo === 'baja') mot.push(['ba', '▼ Mejorando en las últimas 2 semanas']);
-      return { o: o, mot: mot, n: peso + (peso && sube ? 1 : 0), x: m8 ? m8.d - m8.n * o8.pEq / 100 : 0 };
-    }).filter(function(e){ return e.mot.length; }).sort(function(p, q){ return q.n - p.n || q.x - p.x || p.o.tec.localeCompare(q.o.tec); });
+  const conv = derConvCalc(todasSem, derAudPer);
   DER_CONV_TECS = conv.map(function(e){ return e.o.tec; });
   const nVar = conv.filter(function(e){ return e.n >= 2; }).length;
   h += '<div class="dv-hv-b">' + hvT('Con quién conversar esta semana', 'una sola lista con todos los motivos · toca un técnico para abrir su ficha')
@@ -8575,7 +8813,8 @@ function pintarDeriv(){
   const usaPer = derVista === 'aud' || derVista === 'fic';
   const iS0 = todasSem0.indexOf(derSem);
   const enRango = usaPer && derAudPer > 1 ? todasSem0.slice(Math.max(0, iS0 - derAudPer + 1), iS0 + 1) : [derSem];
-  const VISTAS = [['hoy', 'Hoy en vivo', 'Las ' + derNomTipo() + ' del día en curso, tal como van: visitadas, derivadas y por visitar. Se actualiza sola cada 5 minutos.'],
+  const VISTAS = [['res', 'Resumen', 'Lo principal en una pantalla: cómo vamos, de qué depende y con quién conversar.'],
+    ['hoy', 'Hoy en vivo', 'Las ' + derNomTipo() + ' del día en curso, tal como van: visitadas, derivadas y por visitar. Se actualiza sola cada 5 minutos.'],
     ['tec', 'Por técnico', 'Quién deriva más en la semana elegida. Toca un técnico para ver cada orden y la historia de su dirección.'],
     ['dir', 'Por dirección', 'Qué direcciones fallan y con qué técnicos, en la semana elegida.'],
     ['aud', 'A quién auditar', 'Cuánto de lo derivado es propio de cada técnico, descontando las causales ajenas y las direcciones donde también falló otro.'],
@@ -8650,6 +8889,7 @@ function pintarDeriv(){
     + '<div class="' + (nSobre ? 'mal' : '') + '"><b>' + nSobre + '</b><span>técnicos sobre ' + DER_UMBRAL + '%</span></div>'
     + '</div>'
     + derCausalesSemHtml(tb, tot);
+  if(derVista === 'res'){ cuerpo.innerHTML = derVistaResHtml(todasSem, enCurso); return; }
   if(derVista === 'hoy'){ cuerpo.innerHTML = derVistaHoyHtml(); return; }
   if(derVista === 'fic'){ cuerpo.innerHTML = derVistaFicHtml(todasSem); return; }
   if(derVista === 'evo'){ cuerpo.innerHTML = derVistaEvoHtml(todasSem, enCurso); return; }
