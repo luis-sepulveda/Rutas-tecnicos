@@ -20722,21 +20722,21 @@
    }
   },
   "10-10-2026": {
-   "hasta": "09:32",
+   "hasta": "09:37",
    "actividades": 138,
    "tecnicos": 34,
    "estados": {
-    "Pendiente": 115,
+    "Iniciado": 4,
+    "Pendiente": 112,
     "en ruta": 21,
-    "Cancelado": 1,
-    "Iniciado": 1
+    "Cancelado": 1
    },
    "rgu": 240.0,
    "caidas_total": 1,
    "caidas_activas": 1,
    "caidas_resueltas": 0,
-   "nuevas": 1,
-   "al_bucket": 0,
+   "nuevas": 2,
+   "al_bucket": 1,
    "repetidas": 43,
    "reagendadas": 2,
    "detalle": {
@@ -20753,6 +20753,15 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OC0XZ66",
+      "tec": "ALEXIS JARA",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "09:35",
+      "d": "BADEN POWELL 956 EDIF. P DEPTO 32, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
       "o": "1-3OBVWA85",
       "tec": "NICOLAS MOYANO R",
       "cat": "Reparación",
@@ -20767,7 +20776,7 @@
       "o": "1-3OBK91MK",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:31",
+      "hi": "10:30",
       "d": "VALLE DEL PARAISO 2907 EDIF. A DEPTO 102, QUILPUE",
       "e": "Pendiente",
       "tec": "ALEXIS JARA",
@@ -20779,7 +20788,7 @@
       "o": "1-3OBITJ5Q",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:12",
+      "hi": "15:20",
       "d": "DIEGO DE ALMAGRO 345 CASA A, QUILPUE",
       "e": "Pendiente",
       "tec": "ALEXIS JARA",
@@ -20800,13 +20809,12 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OC0U038",
+      "o": "1-3OC0KIE2",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:40",
       "d": "LOS MANZANOS 3117, QUILPUE",
-      "e": "Pendiente",
-      "tec": "ALFREDO ALCAYAGA F",
+      "e": "Cancelado",
+      "tec": "ANTONHY MORALES MENDOZA",
       "visitas": 1,
       "ult_fecha": "05-10-2026",
       "ult_cierre": "Sin moradores"
@@ -20815,7 +20823,7 @@
       "o": "1-3OBLJYCW",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:18",
+      "hi": "14:16",
       "d": "MARGA MARGA 1891, QUILPUE",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
@@ -20947,9 +20955,9 @@
       "o": "1-3OAQHQX5",
       "cat": "Migración 3 Play",
       "f": "10-13",
-      "hi": "09:32",
+      "hi": "09:33",
       "d": "EL BOSQUE 0150 CASA 2, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JEAN ROODLY ORELIEN",
       "visitas": 1,
       "ult_fecha": "08-10-2026",
@@ -20983,7 +20991,7 @@
       "o": "1-3OBCW7AF",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "15:35",
+      "hi": "15:22",
       "d": "JERUSALEN 261, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE CASTRO P",
@@ -21019,7 +21027,7 @@
       "o": "1-3OBJTRLT",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "15:17",
+      "hi": "15:00",
       "d": "PJE GRANIZO 1437, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JUAN ARRIAGADA C",
@@ -21305,5 +21313,5 @@
    }
   }
  },
- "generado": "10-10-2026 09:32"
+ "generado": "10-10-2026 09:37"
 }
