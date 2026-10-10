@@ -2535,6 +2535,104 @@
   .pv-rot-son .son.falta { border-color:#f59e0b; background:#fffbeb; color:#92400e; }
   .pv-linea .pv-al.dosl.nueva { box-shadow:0 0 0 3px rgba(185,28,28,.25); animation:pvDerPulso 1.4s ease-in-out 6; border-color:#b91c1c; }
   @media (prefers-reduced-motion: reduce){ .pv-linea .pv-al.dosl.nueva { animation:none; } }
+
+  /* ---- HOY EN VIVO ORDENADO (10-10-2026, 16:10) ----
+     Bloques numerados con titulo en la pestana Hoy en vivo de Derivacion.
+     Borrando este bloque los cuadros quedan sin marco, pero no se rompe nada. */
+  #modalDer .dv-hv-b { background:#fff; border:1px solid #dbe4ed; border-radius:12px; padding:14px 18px 16px; margin:0 0 12px; overflow-x:auto; }
+  #modalDer .dv-hv-t { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:0 0 11px; }
+  #modalDer .dv-hv-t .n { flex-shrink:0; width:24px; height:24px; border-radius:50%; background:#dbeafe; color:#1e3a8a; font-family:'Archivo',sans-serif;
+    font-size:13px; font-weight:700; display:inline-flex; align-items:center; justify-content:center; }
+  #modalDer .dv-hv-t b { font-family:'Archivo',sans-serif; font-size:16px; color:#0f1d2e; }
+  #modalDer .dv-hv-t small { font-size:12.5px; color:#5f7386; }
+  #modalDer .dv-hv-f { font-size:16px; line-height:1.5; color:#16232f; margin:0 0 11px; }
+  #modalDer .dv-hv-f b.mal { color:#b91c1c; }
+  #modalDer .dv-hv-bar { display:flex; height:34px; border-radius:9px; overflow:hidden; background:#eef2f6; margin:0 0 7px; }
+  #modalDer .dv-hv-bar div { display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; min-width:30px; white-space:nowrap; overflow:hidden; }
+  #modalDer .dv-hv-bar .ok { background:#86cfa3; color:#0f3d24; }
+  #modalDer .dv-hv-bar .der { background:#fca5a5; color:#7f1d1d; }
+  #modalDer .dv-hv-bar .pen { background:#cbd5e1; color:#1e293b; }
+  #modalDer .dv-hv-b .dv-ley b { color:#16232f; }
+  #modalDer .dv-hv-b .dv-ley .sem { margin-left:auto; background:#f1f5f9; border-radius:8px; padding:2px 10px; }
+  #modalDer .dv-hv-b .dv-ley .sn { color:#5b21b6; } #modalDer .dv-hv-b .dv-ley .sn b { color:#5b21b6; }
+  #modalDer .dv-hv-q { font-size:13.5px; color:#41586f; margin:4px 0 0; }
+  #modalDer .dv-hv-b .dv-barra { margin-top:7px; }
+  #modalDer .dv-hv-b .dv-cau { margin-bottom:12px; }
+  #modalDer .dv-hv-b th { position:static; white-space:normal; line-height:1.25; vertical-align:bottom; }
+  #modalDer .dv-hv-b > table { margin:0; }
+  #modalDer table.dv-hv-tab th.g { text-align:center; font-size:12px; color:#0f1d2e; letter-spacing:.04em; border-bottom:1px solid #dbe4ed; }
+  #modalDer table.dv-hv-tab th.g1 { background:#f1f5f9; }
+  #modalDer table.dv-hv-tab th.g2 { background:#fff7ed; color:#7c2d12; }
+  #modalDer table.dv-hv-tab th.gi, #modalDer table.dv-hv-tab th.g, #modalDer table.dv-hv-tab th.gs,
+  #modalDer table.dv-hv-tab > tbody > tr.t > td:nth-child(2), #modalDer table.dv-hv-tab > tbody > tr.t > td:nth-child(7),
+  #modalDer table.dv-hv-tab > tbody > tr.t > td:nth-child(11) { border-left:2px solid #e2e8f0; }
+  #modalDer table.dv-hv-tab > thead > tr:last-child > th { max-width:96px; border-bottom:2px solid #e2e8f0; }
+
+  /* ---- POR TECNICO ORDENADO (10-10-2026, 16:20) ---- usa los mismos cuadros de Hoy en vivo */
+  #modalDer .dv-hv-b .dv-cau .rot { display:none; }
+  #modalDer .dv-hv-b > .dv-cau:last-child { margin-bottom:0; }
+  #modalDer .dv-hv-col { margin:0 0 10px; }
+  #modalDer table.dv-hv-tab.sem > tbody > tr.t > td:nth-child(6) { border-left:2px solid #e2e8f0; }
+  #modalDer table.dv-hv-tab.sem > tbody > tr.t > td:first-child { white-space:nowrap; }
+
+  /* ---- POR DIRECCION ORDENADO (10-10-2026, 16:30) ---- */
+  #modalDer .dv-barra .uni { background:#e2e8f0; color:#334155; }
+  #modalDer .dv-hv-b th.g { text-align:center; font-size:12px; color:#0f1d2e; letter-spacing:.04em; border-bottom:1px solid #dbe4ed; background:#f1f5f9; }
+  #modalDer .dv-hv-b th.g.g2 { background:#fff7ed; color:#7c2d12; }
+  #modalDer .dv-hv-b th.bi, #modalDer .dv-hv-b td.bi { border-left:2px solid #e2e8f0; }
+  #modalDer .dv-hv-b table.dv-dir > thead > tr:last-child > th, #modalDer .dv-hv-b table.dv-dir > thead > tr > th[rowspan] { border-bottom:2px solid #e2e8f0; }
+  #modalDer .dv-hv-b table.dv-dir > tbody > tr.t > td.cau { white-space:normal; text-align:left; }
+  #modalDer .dv-hv-b table.dv-dir > tbody > tr.t > td:nth-child(5) { white-space:nowrap; }
+  #modalDer .dv-hv-b table.dv-dir th[rowspan].bi { text-align:left; }
+  #modalDer .dv-hv-b > .dv-vacio { padding:18px 0 6px; }
+  #modalDer tr.det table.dv-vis th { position:static; background:transparent; text-align:left; font-size:10.5px; padding:4px 16px 3px 0; border-bottom:1px solid #dbe4ed; }
+
+  /* ---- A QUIEN AUDITAR ORDENADO (10-10-2026, 16:40) ---- */
+  #modalDer .dv-hv-aud { display:flex; flex-wrap:wrap; gap:6px; margin:-4px 0 12px; }
+  #modalDer .dv-hv-aud span { font-size:12.5px; background:#fef2f2; border:1px solid #fecaca; border-radius:999px; padding:3px 11px; color:#7f1d1d; }
+  #modalDer .dv-hv-aud span b { color:#7f1d1d; margin-right:3px; }
+  #modalDer .dv-hv-regla { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+  #modalDer .dv-hv-regla div { background:#f1f5f9; border-radius:10px; padding:9px 13px; }
+  #modalDer .dv-hv-regla small { display:block; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:#8fa1b3; font-weight:600; }
+  #modalDer .dv-hv-regla b { display:block; font-family:'Archivo',sans-serif; font-size:19px; color:#0f1d2e; }
+  #modalDer .dv-hv-regla span { font-size:12.5px; color:#41586f; }
+  @media (max-width:700px){ #modalDer .dv-hv-regla { grid-template-columns:1fr; } }
+  #modalDer table.dv-aud > thead > tr:last-child > th { max-width:96px; }
+  #modalDer table.dv-aud > thead > tr:last-child > th, #modalDer table.dv-aud > thead > tr > th[rowspan] { border-bottom:2px solid #e2e8f0; }
+  #modalDer table.dv-aud th.g, #modalDer table.dv-aud > thead > tr:first-child > th:last-child, #modalDer table.dv-aud > thead > tr:last-child > th:nth-child(1),
+  #modalDer table.dv-aud > thead > tr:last-child > th:nth-child(4), #modalDer table.dv-aud > tbody > tr.t > td:nth-child(2),
+  #modalDer table.dv-aud > tbody > tr.t > td:nth-child(5), #modalDer table.dv-aud > tbody > tr.t > td:last-child { border-left:2px solid #e2e8f0; }
+
+  /* ---- EVOLUCION ORDENADA (10-10-2026, 16:50) ---- */
+  #modalDer .dv-hv-regla.dos { grid-template-columns:repeat(2,1fr); } #modalDer .dv-hv-regla.una { grid-template-columns:1fr; }
+  #modalDer .dv-hv-regla + .dv-hv-q { margin-top:9px; }
+  #modalDer .dv-hv-q b { color:#16232f; }
+  #modalDer .dv-hv-evo { display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin:0 0 10px; }
+  #modalDer .dv-hv-evo .t { font-size:12.5px; background:#f1f5f9; border-radius:8px; padding:4px 11px; color:#41586f; }
+  #modalDer .dv-hv-evo .t b { font-family:'Archivo',sans-serif; font-size:15px; color:#16232f; margin-right:5px; }
+  #modalDer .dv-hv-evo .t.sube { background:#fee2e2; color:#b91c1c; } #modalDer .dv-hv-evo .t.sube b { color:#b91c1c; }
+  #modalDer .dv-hv-evo .t.baja { background:#e3f6ea; color:#17603a; } #modalDer .dv-hv-evo .t.baja b { color:#17603a; }
+  #modalDer .dv-hv-evo .t.igual { background:#fef3c7; color:#92400e; } #modalDer .dv-hv-evo .t.igual b { color:#92400e; }
+  #modalDer .dv-hv-evo .ord { margin-left:auto; font-size:12px; color:#5f7386; }
+  #modalDer .dv-hv-b table.dv-evo th { text-align:center; } #modalDer .dv-hv-b table.dv-evo th:first-child { text-align:left; }
+  #modalDer .dv-hv-b table.dv-evo > thead > tr:last-child > th, #modalDer .dv-hv-b table.dv-evo > thead > tr > th[rowspan] { border-bottom:2px solid #e2e8f0; }
+  #modalDer .dv-hv-b table.dv-evo > tbody > tr.t > td:nth-child(2) { border-left:2px solid #e2e8f0; }
+  @media (max-width:700px){ #modalDer .dv-hv-regla.dos { grid-template-columns:1fr; } #modalDer .dv-hv-evo .ord { margin-left:0; } }
+
+  /* ---- FICHA ORDENADA (10-10-2026, 17:00) ---- */
+  #modalDer .dv-fic > .dv-hv-t { margin:2px 0 8px; }
+  #modalDer .dv-hv-cab { display:flex; align-items:center; gap:10px; flex-wrap:wrap; background:#0f1d2e; border-radius:12px; padding:11px 18px; margin:8px 0 12px; }
+  #modalDer .dv-hv-cab .nom { font-family:'Archivo',sans-serif; font-size:20px; font-weight:700; color:#fff; }
+  #modalDer .dv-hv-cab .dat { font-size:13px; color:#c3d2e0; }
+  #modalDer .dv-hv-cab button { margin-left:auto; border:1px solid #41586f; background:transparent; border-radius:8px; padding:4px 12px; font:inherit; font-size:12.5px; cursor:pointer; color:#fff; }
+  #modalDer .dv-hv-cab button:hover { background:#1e3248; }
+  #modalDer .dv-hv-his { margin:0; padding:9px 12px 9px 30px; background:#f1f5f9; border-radius:8px; font-size:13px; color:#41586f; line-height:1.7; }
+  #modalDer .dv-hv-his.mal { background:#fff7ed; color:#7c2d12; }
+  #modalDer .dv-hv-his i { font-style:normal; color:#5f7386; }
+  #modalDer .dv-hv-concl { font-size:14px; font-weight:600; color:#0f1d2e; background:#f1f5f9; border-radius:8px; padding:8px 12px; margin:10px 0; }
+  #modalDer .dv-hv-regla div.mal { background:#fef2f2; } #modalDer .dv-hv-regla div.mal b { color:#b91c1c; }
+  #modalDer .dv-hv-b.solo { margin-bottom:0; } #modalDer .dv-hv-b.solo .dv-hv-t { margin:0; }
+  #modalDer .dv-hv-b.solo + .dv-sec { margin-top:8px; }
 </style>
 </head>
 <body>
@@ -6852,36 +6950,58 @@ function derVistaDirHtml(tb, tot){
   const derVar = varios.reduce(function(a, d){ return a + d.sem.length; }, 0);
   const unicas = tot.d - derRep - sinDir;
   rep.sort(function(a, b){ return b.nv - a.nv || b.nt - a.nt || a.d.localeCompare(b.d); });
-  let h = '<div class="dv-rt"><div class="l1">De las <b>' + tot.d + '</b> derivadas de la semana:</div><div class="kp">'
-    + '<span' + (derRep ? ' class="si"' : '') + '><b>' + derRep + '</b> (' + derPct(derRep, tot.d) + '%) en direcciones con 2 o más visitas fallidas desde el ' + derDesde + '</span>'
-    + '<span' + (derVar ? ' class="si"' : '') + '><b>' + derVar + '</b> (' + derPct(derVar, tot.d) + '%) en direcciones donde falló más de un técnico</span>'
-    + '<span><b>' + unicas + '</b> en direcciones con esta sola visita fallida</span></div></div>';
-  if(!rep.length) return h + '<div class="dv-vacio">Ninguna dirección de esta semana tiene otra visita fallida desde el ' + derDesde + '.</div>';
-  h += '<table class="dv-dir"><thead><tr><th>Dirección</th><th title="Derivadas en esta dirección durante la semana elegida">Derivadas en la semana</th>'
-    + '<th title="Visitas no realizadas a esta dirección, de cualquier tipo">Visitas fallidas</th><th title="Técnicos distintos con visitas fallidas en esta dirección">Técnicos</th>'
-    + (derVisOk ? '<th title="Visitas completadas en esta dirección, de cualquier tipo">Visitas completadas</th>' : '')
-    + '<th>Causal más repetida</th><th title="Después de la última derivada de la semana, alguien completó un trabajo en esta dirección">¿Completada después?</th></tr></thead><tbody>';
+  /* ---- POR DIRECCION ORDENADO (10-10-2026, 16:30) ----
+     Mismo orden que Hoy en vivo y Por tecnico: bloques numerados con titulo.
+     1 donde se derivo (frase + barra: direcciones que ya habian fallado, con
+     otro tecnico o siempre con el mismo, y las de una sola visita fallida),
+     2 por que se derivaron (causales, se tocan igual) y 3 la tabla de las
+     direcciones que se repiten, con columnas agrupadas. Los numeros son los
+     mismos de antes; solo se separa derRep en "con otro tecnico" y "mismo". */
+  let hvN = 1;
+  const hvT = function(t, s){ return '<div class="dv-hv-t"><span class="n">' + (hvN++) + '</span><b>' + t + '</b>' + (s ? '<small>' + s + '</small>' : '') + '</div>'; };
+  const hvS = function(n, cls){ return n ? '<div class="' + cls + '" style="flex:' + n + '" title="' + n + ' de ' + tot.d + '">' + n + '</div>' : ''; };
+  const repVar = rep.filter(function(d){ return d.nt >= 2; }).reduce(function(a, d){ return a + d.sem.length; }, 0);
+  const repMis = derRep - repVar;
+  let h = '<div class="dv-hv-b">' + hvT('Dónde se derivó', 'semana ' + derNumSemana(derSem) + ' · ' + derRango(derSem) + ' · ' + tot.n + ' ' + derNomTipo() + ' visitadas')
+    + '<p class="dv-hv-f">De las <b>' + tot.d + '</b> derivadas de la semana, <b' + (derRep ? ' class="mal"' : '') + '>' + derRep + ' (' + derPct(derRep, tot.d) + '%)</b> '
+    + (derRep === 1 ? 'fue en una dirección que ya había' : 'fueron en direcciones que ya habían') + ' fallado otra vez desde el ' + derDesde + '.</p>'
+    + '<div class="dv-barra">' + hvS(repVar, 'comp') + hvS(repMis, 'prop') + hvS(unicas, 'uni') + hvS(sinDir, 'na') + '</div>'
+    + '<div class="dv-ley"><span><i style="background:#93c5fd"></i><b>' + repVar + '</b> en direcciones donde falló más de un técnico</span>'
+    + '<span><i style="background:#fb923c"></i><b>' + repMis + '</b> en direcciones que fallaron más de una vez, siempre con el mismo técnico</span>'
+    + '<span><i style="background:#e2e8f0"></i><b>' + unicas + '</b> en direcciones con esta sola visita fallida</span>'
+    + (sinDir ? '<span><i style="background:#cbd5e1"></i><b>' + sinDir + '</b> sin dirección en el historial (otras comunas)</span>' : '') + '</div></div>';
+  if(tot.d) h += '<div class="dv-hv-b">' + hvT('Por qué se derivaron', 'toca una causa para ver cuáles son') + derCausalesSemHtml(tb, tot) + '</div>';
+  h += '<div class="dv-hv-b">' + hvT('Direcciones que se repiten', rep.length ? derPl(rep.length, 'dirección', 'direcciones') + ' con 2 o más visitas fallidas · toca una para ver cada visita' : '');
+  if(!rep.length) return h + '<div class="dv-vacio">Ninguna dirección de esta semana tiene otra visita fallida desde el ' + derDesde + '.</div></div>';
+  const nRojas = rep.filter(function(d){ return d.nt >= 3; }).length;
+  h += '<div class="dv-ley dv-hv-col"><span><i style="background:#fecaca"></i><b>Fila roja</b>: le falló a 3 o más técnicos distintos' + (nRojas ? ' (' + nRojas + ')' : '') + '</span>'
+    + '<span>Ordenadas por la cantidad de visitas fallidas, de más a menos</span></div>'
+    + '<table class="dv-dir"><thead><tr><th rowspan="2">Dirección</th><th class="g g1 bi">En la semana</th>'
+    + '<th colspan="' + (derVisOk ? 3 : 2) + '" class="g g2 bi">Desde el ' + derDesde + ', cualquier actividad</th>'
+    + '<th rowspan="2" class="bi">Causal más repetida</th><th rowspan="2" title="Después de la última derivada de la semana, alguien completó un trabajo en esta dirección">¿Se completó después?</th></tr>'
+    + '<tr><th class="bi" title="Derivadas en esta dirección durante la semana elegida">Derivadas</th>'
+    + '<th class="bi" title="Visitas no realizadas a esta dirección, de cualquier tipo">Visitas fallidas</th><th title="Técnicos distintos con visitas fallidas en esta dirección">Técnicos distintos</th>'
+    + (derVisOk ? '<th title="Visitas completadas en esta dirección, de cualquier tipo">Visitas completadas</th>' : '') + '</tr></thead><tbody>';
   rep.forEach(function(d, i){
     const cau = {}; d.fall.forEach(function(v){ cau[v.cie] = (cau[v.cie] || 0) + 1; });
     const top = Object.keys(cau).sort(function(a, b){ return cau[b] - cau[a] || a.localeCompare(b); })[0];
     const otsSem = {}; d.sem.forEach(function(x){ otsSem[x.ot + '|' + x.iso] = x; });
     h += '<tr class="t' + (d.nt >= 3 ? ' sobre' : '') + '" onclick="verTecDeriv(' + i + ')" title="Toca para ver cada visita">'
-      + '<td>' + (derAbierto === i ? '▾ ' : '▸ ') + escR(derTitulo(d.d)) + '</td><td>' + d.sem.length + '</td><td class="p">' + d.nv + '</td><td' + (d.nt >= 2 ? ' class="p"' : '') + '>' + d.nt + '</td>'
+      + '<td>' + (derAbierto === i ? '▾ ' : '▸ ') + escR(derTitulo(d.d)) + '</td><td class="bi">' + d.sem.length + '</td><td class="p bi">' + d.nv + '</td><td' + (d.nt >= 2 ? ' class="p"' : '') + '>' + d.nt + '</td>'
       + (derVisOk ? '<td' + (d.nc ? '' : ' class="cero"') + '>' + d.nc + '</td>' : '')
-      + '<td>' + escR(top) + (cau[top] > 1 ? ' ×' + cau[top] : '') + '</td><td>'
+      + '<td class="bi cau">' + escR(top) + (cau[top] > 1 ? ' ×' + cau[top] : '') + '</td><td>'
       + (d.cd ? '<span class="tg ok">Sí, ' + escR(derTitulo(d.cd.tec)) + ' el ' + d.cd.f + '</span>' : d.compl ? '<span class="tg ok">Sí</span>' : 'No') + '</td></tr>';
     if(derAbierto === i){
-      h += '<tr class="det"><td colspan="' + (derVisOk ? 7 : 6) + '"><table class="dv-vis"><tbody>' + d.v.map(function(v){
+      h += '<tr class="det"><td colspan="' + (derVisOk ? 7 : 6) + '"><table class="dv-vis"><thead><tr><th>Fecha</th><th>Técnico</th><th>Actividad</th><th>Resultado</th><th>Llegó · estuvo</th><th>Petición</th></tr></thead><tbody>' + d.v.map(function(v){
           const x = otsSem[v.o + '|' + v.iso];
           return derFilaVis(v, x ? ' <span class="tg at">esta semana</span>' : '', x ? 'esta' : '');
         }).join('') + '</tbody></table></td></tr>';
     }
   });
-  return h + '</tbody></table>'
-    + '<p class="dv-nota">Direcciones donde hubo ' + derNomTipo() + ' derivadas en la semana ' + derNumSemana(derSem) + ' y que acumulan 2 o más visitas fallidas desde el ' + derDesde + ', '
-    + 'de cualquier tipo de actividad. En rojo, las que le fallaron a 3 o más técnicos distintos.'
-    + (derVisOk ? ' Al abrir una dirección se ven todas sus visitas, también las completadas.' : ' Cuentan solo visitas no realizadas; las completadas no están en este historial.')
-    + (sinDir ? ' ' + sinDir + ' derivada' + (sinDir === 1 ? '' : 's') + ' de la semana no tiene' + (sinDir === 1 ? '' : 'n') + ' dirección en el historial (otras comunas).' : '') + '</p>';
+  return h + '</tbody></table></div>'
+    + '<p class="dv-nota">Aparecen las direcciones donde hubo ' + derNomTipo() + ' derivadas en la semana ' + derNumSemana(derSem) + ' y que suman 2 o más visitas fallidas desde el ' + derDesde + '.<br>'
+    + '<b>Visita fallida</b> = no realizada, de cualquier tipo de actividad (no solo ' + derNomTipo() + ').'
+    + (derVisOk ? ' Al abrir una dirección se ven todas sus visitas, también las completadas.' : ' Las visitas completadas no están en este historial.') + '</p>';
 }
 
 /* ---- Vista "A quien auditar" (08-10-2026, 17:45) ----
@@ -6948,20 +7068,43 @@ function derVistaAudHtml(todasSem){
   const f1 = function(v){ return v.toFixed(1).replace('.', ','); };
   const cel = function(v, cls){ return '<td class="' + (v ? (cls || '') : 'cero') + '">' + v + '</td>'; };
   const per = sems.length > 1 ? 'semanas ' + derNumSemana(sems[0]) + ' a ' + derNumSemana(sems[sems.length - 1]) : 'semana ' + derNumSemana(sems[0]);
-  let h = '<div class="dv-rt" style="margin-top:0"><div class="l1">De las <b>' + tot.d + '</b> derivadas (' + per + (derSup !== 'Todos' ? ', equipo de ' + escR(derTitulo(derSup)) : '') + '):</div><div class="kp">'
-    + '<span><b>' + tot.na + '</b> (' + derPct(tot.na, tot.d) + '%) por causales que no dependen del técnico</span>'
-    + '<span><b>' + tot.comp + '</b> (' + derPct(tot.comp, tot.d) + '%) en direcciones donde también falló otro técnico</span>'
-    + '<span class="si"><b>' + tot.prop + '</b> (' + derPct(tot.prop, tot.d) + '%) propias: solo falló este técnico</span>'
-    + (derVisOk ? '<span' + (tot.sen ? ' class="sn"' : '') + '><b>' + tot.sen + '</b> de las propias, con alguna señal</span>' : '')
-    + '<span' + (nAud ? ' class="si"' : '') + '><b>' + nAud + '</b> técnico' + (nAud === 1 ? '' : 's') + ' para auditar</span></div>'
-    + '<div class="ot">Derivación propia del equipo: <b>' + f1(pEq) + '%</b> de las visitadas. Se marca para auditar a quien llega a <b>' + f1(corte)
-    + '%</b> o más (' + String(DER_AUD_FACTOR).replace('.', ',') + ' veces el equipo), con ' + minimo + ' o más visitadas y al menos 2 propias.</div></div>';
+  /* ---- A QUIEN AUDITAR ORDENADO (10-10-2026, 16:40) ----
+     Mismo orden que las otras pestanas: bloques numerados con titulo.
+     1 de quien son las derivadas (frase + la barra de 3 colores), 2 a quien
+     auditar (la regla en tres pasos y los nombres marcados) y 3 la tabla por
+     tecnico con columnas agrupadas y leyenda de colores. Ni la clasificacion
+     ni la regla de la marca "auditar" cambiaron. Nombres nuevos, iguales a
+     los de Hoy en vivo: "No dependen del tecnico" (antes No atribuibles) y
+     "Ahi fallo otro tecnico" (antes Direccion compartida). */
+  let hvN = 1;
+  const hvT = function(t, s){ return '<div class="dv-hv-t"><span class="n">' + (hvN++) + '</span><b>' + t + '</b>' + (s ? '<small>' + s + '</small>' : '') + '</div>'; };
+  const hvS = function(n, cls){ return n ? '<div class="' + cls + '" style="flex:' + n + '" title="' + n + ' de ' + tot.d + '">' + n + '</div>' : ''; };
+  const aAud = tb.filter(audita);
+  let h = '<div class="dv-hv-b">' + hvT('De quién son las derivadas', per + (derSup !== 'Todos' ? ' · equipo de ' + escR(derTitulo(derSup)) : '') + ' · ' + tot.n + ' ' + derNomTipo() + ' visitadas')
+    + '<p class="dv-hv-f">De las <b>' + tot.d + '</b> derivadas, <b>' + tot.prop + ' (' + derPct(tot.prop, tot.d) + '%)</b> son propias del técnico: en esa dirección no ha fallado nadie más.</p>'
+    + '<div class="dv-barra">' + hvS(tot.na, 'na') + hvS(tot.comp, 'comp') + hvS(tot.prop, 'prop') + '</div>'
+    + '<div class="dv-ley"><span><i style="background:#cbd5e1"></i><b>' + tot.na + '</b> (' + derPct(tot.na, tot.d) + '%) no dependen del técnico</span>'
+    + '<span><i style="background:#93c5fd"></i><b>' + tot.comp + '</b> (' + derPct(tot.comp, tot.d) + '%) en direcciones donde también falló otro técnico</span>'
+    + '<span><i style="background:#fb923c"></i><b>' + tot.prop + '</b> (' + derPct(tot.prop, tot.d) + '%) propias</span>'
+    + (derVisOk ? '<span class="sn"><b>' + tot.sen + '</b> de las propias, con alguna señal</span>' : '') + '</div></div>';
+  h += '<div class="dv-hv-b">' + hvT('A quién auditar', 'se marca al técnico que deriva por su cuenta bastante más que el equipo completo')
+    + '<p class="dv-hv-f">' + (nAud ? '<b class="mal">' + nAud + (nAud === 1 ? ' técnico' : ' técnicos') + '</b> para auditar.' : 'Ningún técnico queda marcado para auditar.') + '</p>'
+    + (nAud ? '<div class="dv-hv-aud">' + aAud.map(function(o){ return '<span><b>' + escR(derTitulo(o.tec)) + '</b> ' + Math.round(pp(o)) + '% propia · ' + o.prop + ' de ' + o.n + '</span>'; }).join('') + '</div>' : '')
+    + '<div class="dv-hv-regla"><div><small>1 · Lo normal en el equipo</small><b>' + f1(pEq) + '%</b><span>de cada 100 ' + derNomTipo() + ' visitadas, ' + Math.round(pEq) + ' terminan en derivada propia</span></div>'
+    + '<div><small>2 · Límite para auditar</small><b>' + f1(corte) + '%</b><span>una vez y media lo normal (' + f1(pEq) + ' × ' + String(DER_AUD_FACTOR).replace('.', ',') + ')</span></div>'
+    + '<div><small>3 · Se marca al técnico que</small><b>llega a ese límite o lo pasa</b><span>y además tiene ' + minimo + ' o más visitadas y al menos 2 propias</span></div></div></div>';
   if(!tb.length) return h + '<div class="dv-vacio">Sin ' + derNomTipo() + ' en ese período para ese supervisor.</div>';
-  h += '<table><thead><tr><th>Técnico</th><th>Visitadas</th><th>Derivadas</th><th>% derivación</th>'
-    + '<th title="Causales que no dependen del técnico">No atribuibles</th><th title="Sin moradores, reagenda o desiste en una dirección donde también falló otro técnico">Dirección compartida</th>'
+  h += '<div class="dv-hv-b">' + hvT('Técnico por técnico', 'ordenados por % de derivación propia · toca un técnico para ver sus órdenes propias')
+    + '<div class="dv-ley dv-hv-col"><span><i style="background:#fecaca"></i><b>Fila roja</b>: para auditar' + (nAud ? ' (' + nAud + ')' : '') + '</span>'
+    + '<span><i style="background:#fde9c8"></i><b>Marca ámbar</b>: llega al límite, pero con menos de ' + minimo + ' visitadas</span>'
+    + '<span><b>Marcas "' + o8.sems.length + ' sem" y "' + o4.sems.length + ' sem"</b>: viene derivando más que el equipo (pasa el cursor para ver el detalle)</span></div>'
+    + '<table class="dv-aud"><thead><tr><th rowspan="2">Técnico</th><th colspan="3" class="g g1">El período</th>'
+    + '<th colspan="' + (derVisOk ? 4 : 3) + '" class="g g2">De quién son sus derivadas</th><th rowspan="2" title="Propias / visitadas">% derivación propia</th></tr>'
+    + '<tr><th>Visitadas</th><th>Derivadas</th><th>% derivación</th>'
+    + '<th title="Causales que no dependen del técnico">No dependen del técnico</th><th title="Sin moradores, reagenda o desiste en una dirección donde también falló otro técnico">Ahí falló otro técnico</th>'
     + '<th title="Sin moradores, reagenda o desiste en una dirección donde no ha fallado ningún otro técnico">Propias</th>'
     + (derVisOk ? '<th title="Propias con alguna señal: después la completó otro técnico, 10 minutos o menos en terreno, o visita fuera de la franja">Propias con señal</th>' : '')
-    + '<th title="Propias / visitadas">% derivación propia</th></tr></thead><tbody>';
+    + '</tr></thead><tbody>';
   tb.forEach(function(o, i){
     const a = audita(o), pocas = o.n < minimo;
     h += '<tr class="t' + (a ? ' sobre' : '') + '" onclick="verTecDeriv(' + i + ')" title="Toca para ver las órdenes propias, que son las que hay que auditar">'
@@ -6989,15 +7132,15 @@ function derVistaAudHtml(todasSem){
       h += '</td></tr>';
     }
   });
-  return h + '</tbody></table>'
-    + '<p class="dv-nota"><b>Cómo se clasifica cada derivada.</b> <b>No atribuible</b>: la causal no depende del técnico (ductos, dirección, NAP, contingencia). '
-    + '<b>Dirección compartida</b>: sin moradores, cliente reagenda o cliente desiste en una dirección donde también le falló una visita a otro técnico desde el ' + derDesde + '. '
+  return h + '</tbody></table></div>'
+    + '<p class="dv-nota"><b>Ojo:</b> que una derivada sea "propia", o que tenga una señal, no prueba mala gestión; solo indica dónde mirar primero. Una dirección visitada una sola vez no puede tener otro técnico.<br>'
+    + '<b>No depende del técnico</b>: la causal es ajena (ductos, dirección, NAP, contingencia). '
+    + '<b>Ahí falló otro técnico</b>: sin moradores, cliente reagenda o cliente desiste en una dirección donde también le falló una visita a otro técnico desde el ' + derDesde + '. '
     + '<b>Propia</b>: esas mismas causales en una dirección donde no ha fallado ningún otro técnico.<br>'
-    + (derVisOk ? '<b>Señales</b> de una propia: después otro técnico fue a esa misma dirección y completó el trabajo; el técnico estuvo ' + DER_MIN_CORTA
-        + ' minutos o menos en terreno; o toda la visita quedó fuera de la franja del cliente. Las propias con señal van primero: son las que conviene auditar antes.<br>' : '')
-    + '<b>Marcas "' + o8.sems.length + ' sem: NN%" y "' + o4.sems.length + ' sem: NN%"</b>: en las últimas ' + o8.sems.length + ' semanas (' + o8.per + ') o en las últimas ' + o4.sems.length + ' (' + o4.per + ') el técnico tiene ' + DER_8_MIN + ' o más visitadas, deriva ' + DER_8_PUNTOS + ' puntos o más sobre el equipo (' + Math.round(o8.pEq) + '%) y lo superó en más de la mitad de sus semanas. Es derivación total, no solo la propia. Con las dos marcas, viene sostenido y sigue igual; solo la de ' + o8.sems.length + ', viene de antes; solo la de ' + o4.sems.length + ', es más reciente. Pasa el cursor por la marca para ver el detalle.<br>'
-    + '<b>Ojo:</b> que una derivada sea "propia", o que tenga una señal, no prueba mala gestión; solo indica dónde mirar primero. Una dirección visitada una sola vez no puede tener otro técnico. '
-    + 'La marca "auditar" compara a cada técnico con el equipo completo, no con su supervisor.</p>';
+    + (derVisOk ? '<b>Señales</b> de una propia: después otro técnico fue a esa dirección y completó el trabajo; estuvo ' + DER_MIN_CORTA
+        + ' minutos o menos en terreno; o toda la visita quedó fuera de la franja. Las propias con señal van primero al abrir un técnico.<br>' : '')
+    + '<b>Marcas "' + o8.sems.length + ' sem: NN%" y "' + o4.sems.length + ' sem: NN%"</b>: en las últimas ' + o8.sems.length + ' semanas (' + o8.per + ') o en las últimas ' + o4.sems.length + ' (' + o4.per + ') el técnico tiene ' + DER_8_MIN + ' o más visitadas, deriva ' + DER_8_PUNTOS + ' puntos o más sobre el equipo (' + Math.round(o8.pEq) + '%) y lo superó en más de la mitad de sus semanas. Es derivación total, no solo la propia. '
+    + 'Con las dos marcas, viene sostenido y sigue igual; solo la de ' + o8.sems.length + ', viene de antes; solo la de ' + o4.sems.length + ', es más reciente.</p>';
 }
 
 /* ==================== FRANJAS (10-10-2026) ====================
@@ -7589,11 +7732,11 @@ function derVistaEvoHtml(todasSem, enCurso){
     filas += '<tr class="t' + (m.sost ? ' sobre' : '') + '" onclick="verFicDesdeEvo(' + j + ')" title="Toca para abrir su ficha">'
       + '<td>▸ ' + escR(derTitulo(k)) + '<small>' + escR(derTitulo(supDe[k] || '')) + '</small>' + (audT[k] ? '<span class="marca">auditar</span>' : '') + '</td>'
       + cols.map(function(c){ return cel(m.s[c], o8.eqS[c]); }).join('')
-      + '<td class="e8' + (m.sost ? ' mal' : m.n < DER_8_MIN ? ' pocas' : '') + '" title="' + escR(derOchoTxt(o8, k)) + '"><b>' + Math.round(m.p) + '%</b> <small>' + m.d + ' de ' + m.n + '</small></td>'
+      + '<td class="e8 bi' + (m.sost ? ' mal' : m.n < DER_8_MIN ? ' pocas' : '') + '" title="' + escR(derOchoTxt(o8, k)) + '"><b>' + Math.round(m.p) + '%</b> <small>' + m.d + ' de ' + m.n + '</small></td>'
       + (function(){ const x = Math.round(exc(m));
           return '<td class="ex' + (x >= 3 ? ' mas' : x <= -3 ? ' men' : '') + '" title="Derivando como el equipo (' + Math.round(o8.pEq) + '%), en ' + m.n + ' visitas habrían sido ' + Math.round(m.n * o8.pEq / 100) + ' derivadas; tuvo ' + m.d + '">'
             + (x > 0 ? '+' + x : x < 0 ? '−' + Math.abs(x) : '0') + '</td>'; })()
-      + '<td>' + derFlecha(t2) + '</td></tr>';
+      + '<td class="bi">' + derFlecha(t2) + '</td></tr>';
   });
   /* ---- bloque de gerencia: siempre todo el equipo ---- */
   const todos = Object.keys(o8.t), malos = todos.filter(function(k){ return o8.t[k].sost; });
@@ -7603,42 +7746,73 @@ function derVistaEvoHtml(todasSem, enCurso){
   if(derDirOk) (DER || []).forEach(function(x){ if(x.der && o8.sems.indexOf(x.sem) >= 0 && derEntra(x)) cl[derClase(x)]++; });
   const eP = function(c){ const e = o8.eqS[c]; return e && e.n ? 100 * e.d / e.n : null; };
   const pIni = eP(cols[0]), pFin = eP(cols[cols.length - 1]), dEq = (pIni !== null && pFin !== null) ? pFin - pIni : null;
-  const ger = '<div class="dv-rt dv-ger" style="margin-top:0"><div class="l1"><b>El equipo</b> en ' + derNomTipo() + ': '
-    + (dEq === null ? 'sin datos en alguna de las semanas.'
-      : Math.abs(dEq) < 3 ? 'se mantiene, de <b>' + f1(pIni) + '%</b> en la semana ' + derNumSemana(cols[0]) + ' a <b>' + f1(pFin) + '%</b> en la ' + derNumSemana(cols[cols.length - 1]) + '.'
-      : 'pasó de <b>' + f1(pIni) + '%</b> en la semana ' + derNumSemana(cols[0]) + ' a <b>' + f1(pFin) + '%</b> en la ' + derNumSemana(cols[cols.length - 1])
-        + (enCurso ? ' (en curso)' : '') + ': <b style="color:' + (dEq > 0 ? '#b91c1c' : '#17603a') + '">' + f1(Math.abs(dEq)) + ' puntos ' + (dEq > 0 ? 'más' : 'menos') + '</b> de derivación.') + '</div>'
-    + '<div class="dv-sas"><b>Equipo, semana a semana</b>' + cols.map(function(c){ const e = o8.eqS[c];
-        return '<span class="c eq" title="Semana ' + derNumSemana(c) + ' (' + derRango(c) + ')"><u>' + (e && e.n ? Math.round(100 * e.d / e.n) + '%' : '–') + '</u><small>' + derNumSemana(c) + (e ? ' · ' + e.d + '/' + e.n : '') + '</small></span>'; }).join('')
-      + '<span class="c eq8"><u>' + Math.round(o8.pEq) + '%</u><small>' + o8.sems.length + ' sem · ' + o8.eq.d + '/' + o8.eq.n + '</small></span></div>'
-    + '<div class="kp">'
-    + '<span class="si"><b>' + malos.length + ' de ' + todos.length + '</b>técnicos con historial malo: suman ' + dMalos + ' de las ' + o8.eq.d + ' derivadas (' + derPct(dMalos, o8.eq.d) + '%)</span>'
-    + (xMalos > 0 ? '<span class="si"><b>' + xMalos + '</b>derivadas menos en ' + o8.sems.length + ' semanas si esos ' + malos.length + ' derivaran como el equipo: el equipo bajaría de ' + f1(o8.pEq) + '% a ' + f1(100 * (o8.eq.d - xMalos) / o8.eq.n) + '%</span>' : '')
-    + (derDirOk && o8.eq.d ? '<span><b>' + derPct(cl.na + cl.comp, o8.eq.d) + '%</b>de lo derivado NO es propio del técnico: ' + cl.na + ' por causales ajenas y ' + cl.comp + ' en direcciones donde también falló otro</span>'
-        + '<span><b>' + derPct(cl.prop, o8.eq.d) + '%</b>(' + cl.prop + ') es propio: solo falló ese técnico</span>' : '')
-    + '</div>'
-    + (pesan.length ? '<div class="ot"><b>Los que más pesan</b> (derivadas de más que el equipo, en ' + o8.sems.length + ' semanas): ' + pesan.map(function(k){
-        return escR(derTitulo(k)) + ' <b>+' + Math.round(exc(o8.t[k])) + '</b> (' + o8.t[k].d + ' de ' + o8.t[k].n + ')'; }).join(' · ') + '.</div>' : '')
-    + '<div class="ot" style="color:#5f7386">Este bloque es de todo el equipo' + (derSup !== 'Todos' ? ', aunque la tabla esté filtrada por supervisor' : '') + '. Lo que se hizo con cada técnico (conversación, auditoría, seguimiento) no sale de los datos: hay que llevarlo aparte.</div></div>';
-  const eqF = '<tr class="eq"><td>Equipo</td>' + cols.map(function(c){ const e = o8.eqS[c]; return '<td>' + (e && e.n ? '<b>' + Math.round(100 * e.d / e.n) + '%</b> <small>' + e.d + '/' + e.n + '</small>' : '–') + '</td>'; }).join('')
-    + '<td><b>' + Math.round(o8.pEq) + '%</b> <small>' + o8.eq.d + ' de ' + o8.eq.n + '</small></td><td></td><td></td></tr>';
-  const ult = cols[cols.length - 1];
-  return ger + '<div class="dv-rt"><div class="l1">Cómo viene cada técnico: ' + derPl(tecs.length, 'técnico', 'técnicos') + (derSup !== 'Todos' ? ', equipo de ' + escR(derTitulo(derSup)) : '')
-    + '. <span style="margin-left:auto;font-size:12px;color:#5f7386">Ordenar por</span><div class="dv-seg">'
-    + '<button class="' + (derEvoOrd === 'p' ? 'on' : '') + '" onclick="setEvoOrd(\'p\')">% en ' + o8.sems.length + ' semanas</button>'
-    + '<button class="' + (derEvoOrd === 'x' ? 'on' : '') + '" onclick="setEvoOrd(\'x\')">Derivadas de más</button></div></div><div class="kp">'
-    + '<span class="si"><b>' + nS.sube + '</b>▲ empeorando</span><span><b>' + nS.igual + '</b>▬ se mantienen</span><span class="ok"><b>' + nS.baja + '</b>▼ mejorando</span>'
-    + '<span><b>' + tecs.filter(function(k){ return o8.t[k].sost; }).length + '</b>con historial malo en ' + o8.sems.length + ' semanas</span></div></div>'
-    + '<table class="dv-evo"><thead><tr><th>Técnico</th>' + cols.map(function(c){
-        return '<th' + (c === ult ? ' class="cur"' : '') + '>Semana ' + derNumSemana(c) + (c === ult && enCurso ? '<br><small>en curso</small>' : '') + '</th>'; }).join('')
-    + '<th>' + o8.sems.length + ' semanas<br><small>' + derNumSemana(o8.sems[0]) + ' a ' + derNumSemana(o8.sems[o8.sems.length - 1]) + '</small></th><th title="Derivadas que tuvo sobre las que habría tenido derivando como el equipo, en ' + o8.sems.length + ' semanas">Derivadas<br>de más</th><th>Tendencia</th></tr></thead><tbody>' + filas + eqF + '</tbody></table>'
-    + '<p class="dv-nota"><b>Semanas</b>: % de derivación del técnico y, debajo, derivadas/visitadas. En <b style="color:#b91c1c">rojo</b>, derivó más que el equipo esa semana; en <b style="color:#17603a">verde</b>, menos. '
-    + (enCurso ? 'La semana ' + derNumSemana(ult) + ' está en curso: le faltan días. ' : '') + 'Las casillas <b>apagadas</b> tienen menos de ' + DER_EVO_MIN + ' órdenes esa semana: sirven de referencia, no para sacar conclusiones.<br>'
-    + '<b>' + o8.sems.length + ' semanas</b>: su derivación en las últimas ' + o8.sems.length + '. Fila en rosado y número en café = historial malo: ' + DER_8_MIN + ' o más visitadas, ' + DER_8_PUNTOS + ' puntos o más sobre el equipo y sobre el equipo en más de la mitad de sus semanas.<br>'
-    + '<b>Derivadas de más</b>: las que tuvo en ' + o8.sems.length + ' semanas menos las que habría tenido derivando como el equipo (' + Math.round(o8.pEq) + '%). Muestra el peso de cada uno, no solo su porcentaje: un técnico con muchas visitas y un % apenas alto puede pesar más que uno con % muy alto y pocas visitas.<br>'
-    + '<b>Tendencia</b>: compara la distancia del técnico al equipo en las últimas 2 semanas con la que tiene en las ' + o8.sems.length + '. <b style="color:#b91c1c">▲ empeorando</b> o <b style="color:#17603a">▼ mejorando</b> si cambió ' + DER_2_PUNTOS
-    + ' puntos o más; <b style="color:#b45309">▬ se mantiene</b> si no (ojo: en un técnico con historial malo, "se mantiene" quiere decir que sigue igual de mal). Sin flecha con menos de ' + DER_2_MIN + ' visitas en esas 2 semanas. Se compara contra el equipo para que una semana mala de todos no cuente como que el técnico empeoró.<br>'
-    + (derEvoOrd === 'x' ? 'Ordenados por derivadas de más.' : 'Ordenados de más a menos derivación en ' + o8.sems.length + ' semanas; al final, los que tienen menos de ' + DER_8_MIN + ' visitas.') + ' Toca un técnico para abrir su ficha.</p>';
+  /* ---- EVOLUCION ORDENADA (10-10-2026, 16:50) ----
+     Mismo orden que las otras pestanas: bloques numerados con titulo.
+     1 como viene el equipo (frase + semana a semana), 2 quienes pesan mas
+     (historial malo, cuanto bajaria el equipo y los nombres), 3 de quien es
+     lo derivado (barra de 3 colores, la misma de las otras pestanas) y
+     4 tecnico por tecnico (orden, cuantos suben y bajan, leyenda y la tabla
+     con columnas agrupadas). Los bloques 1 a 3 son SIEMPRE de todo el equipo,
+     aunque se filtre un supervisor. Ningun calculo cambio. */
+  let hvN = 1;
+  const hvT = function(t, s){ return '<div class="dv-hv-t"><span class="n">' + (hvN++) + '</span><b>' + t + '</b>' + (s ? '<small>' + s + '</small>' : '') + '</div>'; };
+  const nSem = o8.sems.length, uSem = cols[cols.length - 1];
+  const todoEq = 'todo el equipo' + (derSup !== 'Todos' ? ', aunque la tabla esté filtrada por supervisor' : '');
+  let h = '<div class="dv-hv-b">' + hvT('Cómo viene el equipo', derNomTipo() + ' · ' + todoEq)
+    + '<p class="dv-hv-f">'
+    + (dEq === null ? 'Sin datos en alguna de las semanas.'
+      : Math.abs(dEq) < 3 ? 'Se mantiene: de <b>' + f1(pIni) + '%</b> en la semana ' + derNumSemana(cols[0]) + ' a <b>' + f1(pFin) + '%</b> en la ' + derNumSemana(uSem) + (enCurso ? ' (en curso)' : '') + '.'
+      : 'Pasó de <b>' + f1(pIni) + '%</b> en la semana ' + derNumSemana(cols[0]) + ' a <b>' + f1(pFin) + '%</b> en la ' + derNumSemana(uSem)
+        + (enCurso ? ' (en curso)' : '') + ': <b style="color:' + (dEq > 0 ? '#b91c1c' : '#17603a') + '">' + f1(Math.abs(dEq)) + ' puntos ' + (dEq > 0 ? 'más' : 'menos') + '</b> de derivación.') + '</p>'
+    + '<div class="dv-sas" style="margin:0">' + cols.map(function(c){ const e = o8.eqS[c];
+        return '<span class="c eq" title="Semana ' + derNumSemana(c) + ' (' + derRango(c) + ')"><u>' + (e && e.n ? Math.round(100 * e.d / e.n) + '%' : '–') + '</u><small>sem ' + derNumSemana(c) + (e ? ' · ' + e.d + '/' + e.n : '') + '</small></span>'; }).join('')
+      + '<span class="c eq8"><u>' + Math.round(o8.pEq) + '%</u><small>' + nSem + ' semanas · ' + o8.eq.d + '/' + o8.eq.n + '</small></span>'
+      + '<span class="ley">Cada casilla: % de derivación y derivadas / visitadas</span></div></div>';
+  h += '<div class="dv-hv-b">' + hvT('Quiénes pesan más', 'en las últimas ' + nSem + ' semanas · ' + todoEq)
+    + '<div class="dv-hv-regla' + (xMalos > 0 ? ' dos' : ' una') + '"><div><small>Técnicos con historial malo</small><b>' + malos.length + ' de ' + todos.length + '</b>'
+    + '<span>suman ' + dMalos + ' de las ' + o8.eq.d + ' derivadas (' + derPct(dMalos, o8.eq.d) + '%)</span></div>'
+    + (xMalos > 0 ? '<div><small>Si ' + (malos.length === 1 ? 'ese técnico derivara' : 'esos ' + malos.length + ' derivaran') + ' como el equipo</small><b>' + xMalos + ' derivadas menos</b>'
+        + '<span>el equipo bajaría de ' + f1(o8.pEq) + '% a ' + f1(100 * (o8.eq.d - xMalos) / o8.eq.n) + '%</span></div>' : '') + '</div>'
+    + '<div class="dv-hv-q"><b>Historial malo</b>: ' + DER_8_MIN + ' o más visitadas, ' + DER_8_PUNTOS + ' puntos o más sobre el equipo, y sobre el equipo en más de la mitad de sus semanas.</div>'
+    + (pesan.length ? '<div class="dv-hv-q" style="margin-top:12px"><b>Los que más pesan</b>: derivadas de más que si derivaran como el equipo.</div>'
+        + '<div class="dv-hv-aud" style="margin:7px 0 0">' + pesan.map(function(k){
+          return '<span><b>' + escR(derTitulo(k)) + '</b> +' + Math.round(exc(o8.t[k])) + ' · ' + o8.t[k].d + ' de ' + o8.t[k].n + '</span>'; }).join('') + '</div>' : '')
+    + '</div>';
+  if(derDirOk && o8.eq.d){
+    const hvS = function(n, cls){ return n ? '<div class="' + cls + '" style="flex:' + n + '" title="' + n + ' de ' + o8.eq.d + '">' + n + '</div>' : ''; };
+    h += '<div class="dv-hv-b">' + hvT('De quién es lo derivado', 'en las últimas ' + nSem + ' semanas · ' + todoEq)
+      + '<p class="dv-hv-f">De las <b>' + o8.eq.d + '</b> derivadas, <b>' + derPct(cl.na + cl.comp, o8.eq.d) + '%</b> no es propio del técnico y <b>' + derPct(cl.prop, o8.eq.d) + '%</b> sí.</p>'
+      + '<div class="dv-barra">' + hvS(cl.na, 'na') + hvS(cl.comp, 'comp') + hvS(cl.prop, 'prop') + '</div>'
+      + '<div class="dv-ley"><span><i style="background:#cbd5e1"></i><b>' + cl.na + '</b> no dependen del técnico</span>'
+      + '<span><i style="background:#93c5fd"></i><b>' + cl.comp + '</b> en direcciones donde también falló otro técnico</span>'
+      + '<span><i style="background:#fb923c"></i><b>' + cl.prop + '</b> propias: solo falló ese técnico</span></div></div>';
+  }
+  const eqF = '<tr class="eq"><td>Equipo</td>' + cols.map(function(c, j){ const e = o8.eqS[c]; return '<td' + (j ? '' : ' class="bi"') + '>' + (e && e.n ? '<b>' + Math.round(100 * e.d / e.n) + '%</b> <small>' + e.d + '/' + e.n + '</small>' : '–') + '</td>'; }).join('')
+    + '<td class="bi"><b>' + Math.round(o8.pEq) + '%</b> <small>' + o8.eq.d + ' de ' + o8.eq.n + '</small></td><td></td><td class="bi"></td></tr>';
+  const nSost = tecs.filter(function(k){ return o8.t[k].sost; }).length;
+  h += '<div class="dv-hv-b">' + hvT('Técnico por técnico', derPl(tecs.length, 'técnico', 'técnicos') + (derSup !== 'Todos' ? ' · equipo de ' + escR(derTitulo(derSup)) : '') + ' · toca uno para abrir su ficha')
+    + '<div class="dv-hv-evo"><span class="t sube"><b>' + nS.sube + '</b>▲ empeorando</span><span class="t igual"><b>' + nS.igual + '</b>▬ se mantienen</span><span class="t baja"><b>' + nS.baja + '</b>▼ mejorando</span>'
+    + '<span class="t"><b>' + nSost + '</b>con historial malo</span>'
+    + '<span class="ord">Ordenar por</span><div class="dv-seg">'
+    + '<button class="' + (derEvoOrd === 'p' ? 'on' : '') + '" onclick="setEvoOrd(\'p\')">% en ' + nSem + ' semanas</button>'
+    + '<button class="' + (derEvoOrd === 'x' ? 'on' : '') + '" onclick="setEvoOrd(\'x\')">Derivadas de más</button></div></div>'
+    + '<div class="dv-ley dv-hv-col"><span><i style="background:#fca5a5"></i><b>Casilla roja</b>: esa semana derivó más que el equipo</span>'
+    + '<span><i style="background:#86cfa3"></i><b>Casilla verde</b>: derivó menos</span>'
+    + '<span><i style="background:#fff;box-shadow:inset 0 0 0 1px #cbd5e1"></i><b>Casilla apagada</b>: menos de ' + DER_EVO_MIN + ' órdenes, solo de referencia</span>'
+    + '<span><i style="background:#fecaca"></i><b>Fila rosada</b>: historial malo</span></div>'
+    + '<table class="dv-evo"><thead><tr><th rowspan="2">Técnico</th><th colspan="' + cols.length + '" class="g g1 bi">Semana a semana</th>'
+    + '<th colspan="2" class="g g2 bi">En ' + nSem + ' semanas (' + derNumSemana(o8.sems[0]) + ' a ' + derNumSemana(o8.sems[nSem - 1]) + ')</th>'
+    + '<th rowspan="2" class="bi" title="Las últimas 2 semanas contra su historial de ' + nSem + ', siempre comparado con el equipo">Tendencia</th></tr><tr>'
+    + cols.map(function(c, j){
+        return '<th class="' + (j ? '' : 'bi') + (c === uSem ? ' cur' : '') + '">Semana ' + derNumSemana(c) + (c === uSem && enCurso ? '<br><small>en curso</small>' : '') + '</th>'; }).join('')
+    + '<th class="bi">% derivación</th><th title="Derivadas que tuvo sobre las que habría tenido derivando como el equipo, en ' + nSem + ' semanas">Derivadas de más</th></tr></thead><tbody>' + filas + eqF + '</tbody></table></div>'
+    + '<p class="dv-nota"><b>Derivadas de más</b>: las que tuvo en ' + nSem + ' semanas menos las que habría tenido derivando como el equipo (' + Math.round(o8.pEq) + '%). Muestra el peso de cada uno: un técnico con muchas visitas y un % apenas alto puede pesar más que uno con % muy alto y pocas visitas.<br>'
+    + '<b>Tendencia</b>: compara qué tan lejos del equipo estuvo el técnico en las últimas 2 semanas con qué tan lejos está en las ' + nSem + '. <b style="color:#b91c1c">▲ empeorando</b> o <b style="color:#17603a">▼ mejorando</b> si cambió ' + DER_2_PUNTOS
+    + ' puntos o más; <b style="color:#b45309">▬ se mantiene</b> si no. Ojo: en un técnico con historial malo, "se mantiene" quiere decir que sigue igual de mal. Sin flecha con menos de ' + DER_2_MIN + ' visitas en esas 2 semanas.<br>'
+    + (enCurso ? 'La semana ' + derNumSemana(uSem) + ' está en curso: le faltan días. ' : '')
+    + (derEvoOrd === 'x' ? 'Ordenados por derivadas de más.' : 'Ordenados de más a menos derivación en ' + nSem + ' semanas; al final, los que tienen menos de ' + DER_8_MIN + ' visitas.')
+    + ' Lo que se hizo con cada técnico (conversación, auditoría, seguimiento) no sale de los datos: hay que llevarlo aparte.</p>';
+  return h;
 }
 function derOchoMarca(o8, tec, etq){
   const o = o8.t[tec]; if(!o || !o.sost) return '';
@@ -7658,7 +7832,7 @@ function derVistaFicHtml(todasSem){
     const o = tt[x.tec] || (tt[x.tec] = {tec:x.tec, sup:x.sup, n:0, d:0}); o.n++; if(x.der) o.d++; });
   DER_FIC_TECS = Object.keys(tt).sort(function(a, b){ return a.localeCompare(b); });
   const visibles = DER_FIC_TECS.filter(function(t){ return derSup === 'Todos' || tt[t].sup === derSup; });
-  let h = '<div class="dv-fic"><div class="dv-fic-bus">'
+  let h = '<div class="dv-fic">' + (derFicTec ? '' : '<div class="dv-hv-t"><b>Elige un técnico</b><small>toca un nombre, o escríbelo y presiona Enter · ' + per + '</small></div>') + '<div class="dv-fic-bus">'
     + '<input type="text" id="dvFicBus" placeholder="Escribe el nombre del técnico…" autocomplete="off" oninput="derFicFiltra(this)" onkeyup="derFicFiltra(this, event)" onfocus="derFicFiltra(this)">'
     + '</div>'
     + '<div class="dv-fic-lista" id="dvFicLista"' + (derFicTec ? ' style="display:none"' : '') + '>';
@@ -7682,8 +7856,11 @@ function derVistaFicHtml(todasSem){
             + (audT[t] ? '<i>auditar</i>' : '') + derOchoMarca(o8, t, 'i') + derOchoMarca(o4, t, 'i') + derTend2Marca(o8, o4, o2, t, 'i') + '</span><span class="dd">' + o.d + ' de ' + o.n + '</span><span class="pc' + (pc > DER_UMBRAL ? ' alto' : '') + '">' + pc + '%</span></button>'; }).join('') + '</div>';
   });
   h += '</div>';
-  if(!derFicTec) return h + '<div class="dv-vacio">Toca un técnico, o escribe su nombre arriba y presiona Enter. Derivadas de visitadas en ' + per + '; en rojo, sobre ' + DER_UMBRAL + '%.<br>'
-    + 'Las marcas <b>"' + o8.sems.length + ' sem: NN%"</b> y <b>"' + o4.sems.length + ' sem: NN%"</b> son su derivación en las últimas ' + o8.sems.length + ' y ' + o4.sems.length + ' semanas (' + o8.per + ' y ' + o4.per + '): cada una sale cuando tiene ' + DER_8_MIN + ' o más visitadas, está ' + DER_8_PUNTOS + ' puntos o más sobre el equipo (' + Math.round(o8.pEq) + '%) y lo superó en más de la mitad de sus semanas.</div></div>';
+  if(!derFicTec) return h + '<div class="dv-ley dv-hv-col" style="margin-top:10px"><span><b>Derivadas</b>: derivadas de visitadas en ' + per + '</span>'
+    + '<span><b style="color:#b91c1c">% en rojo</b>: sobre ' + DER_UMBRAL + '%</span>'
+    + '<span><i style="background:#b91c1c"></i><b>auditar</b>: deriva por su cuenta bastante más que el equipo</span>'
+    + '<span><i style="background:#7c2d12"></i><b>"' + o8.sems.length + ' sem" y "' + o4.sems.length + ' sem"</b>: viene derivando más que el equipo hace semanas</span></div>'
+    + '<p class="dv-nota">Las marcas <b>"' + o8.sems.length + ' sem: NN%"</b> y <b>"' + o4.sems.length + ' sem: NN%"</b> son su derivación en las últimas ' + o8.sems.length + ' y ' + o4.sems.length + ' semanas (' + o8.per + ' y ' + o4.per + '): cada una sale cuando tiene ' + DER_8_MIN + ' o más visitadas, está ' + DER_8_PUNTOS + ' puntos o más sobre el equipo (' + Math.round(o8.pEq) + '%) y lo superó en más de la mitad de sus semanas.</p></div>';
   const me = tt[derFicTec];
   if(!me) return h + '<div class="dv-vacio"><b>' + escR(derTitulo(derFicTec)) + '</b> no tiene ' + derNomTipo() + ' visitadas en ' + per + '. Prueba con otro período o con otro tipo.</div></div>';
 
@@ -7711,15 +7888,28 @@ function derVistaFicHtml(todasSem){
   const pEq = eq.n ? 100 * eq.prop / eq.n : 0, corte = pEq * DER_AUD_FACTOR, pMe = me.n ? 100 * nProp / me.n : 0;
   const audita = derDirOk && me.n >= minimo && nProp >= 2 && pMe >= corte;
 
-  h += '<div class="dv-rt"><div class="l1"><span class="nom">' + escR(derTitulo(derFicTec)) + '</span> <span style="color:#5f7386">· supervisor ' + escR(derTitulo(me.sup)) + ' · ' + per + ' · ' + derNomTipo() + '</span>'
-    + (audita ? ' <span class="tg at" style="font-weight:700">para auditar</span>' : '')
-    + ' <button onclick="setFicDeriv(null)" style="margin-left:auto;border:1px solid #d3dde6;background:#fff;border-radius:8px;padding:3px 10px;font:inherit;font-size:12px;cursor:pointer;color:#5f7386">Cambiar técnico</button></div>'
-    + '<div class="kp"><span><b>' + me.n + '</b> visitadas</span><span class="ok"><b>' + (me.n - me.d) + '</b> completadas</span>'
-    + '<span class="si"><b>' + me.d + '</b> derivadas</span><span><b>' + derPct(me.d, me.n) + '%</b> de derivación</span>'
-    + (sems.length > 1 ? '<span>por semana: ' + sems.map(function(k){ const o = porSemT[k]; return '<b style="margin:0 2px 0 6px">' + derNumSemana(k) + '</b>' + (o ? o.d + ' de ' + o.n : '–'); }).join('') + '</span>' : '') + '</div>';
-  /* historial de 8 y de 4 semanas: las frases listas para responder "por que
-     el" (10:35 y 10:40). Las dos ventanas terminan en la semana elegida y no
-     dependen del Periodo de arriba. Al final, una conclusion que las junta. */
+  /* ---- FICHA ORDENADA (10-10-2026, 17:00) ----
+     Mismo orden que las otras pestanas. Arriba, una franja con el nombre.
+     Despues, bloques numerados: 1 como le fue en el periodo (frase + barra),
+     2 como viene (la conclusion primero, semana a semana y las frases de 8,
+     4 y 2 semanas), 3 de quien son sus derivadas (frase, barra de 3 colores
+     y la regla de auditar en tres recuadros), 4 por causal y 5 orden por
+     orden. Ningun calculo cambio; son los mismos textos, repartidos. */
+  let hvN = 1;
+  const hvT = function(t, s){ return '<div class="dv-hv-t"><span class="n">' + (hvN++) + '</span><b>' + t + '</b>' + (s ? '<small>' + s + '</small>' : '') + '</div>'; };
+  const hvSeg = function(v, cls, txt){ return v ? '<div class="' + cls + '" style="flex:' + v + '" title="' + v + ' ' + txt + '">' + v + (v * 8 >= me.n ? ' ' + txt : '') + '</div>' : ''; };
+  h += '<div class="dv-hv-cab"><span class="nom">' + escR(derTitulo(derFicTec)) + '</span><span class="dat">supervisor ' + escR(derTitulo(me.sup)) + ' · ' + per + ' · ' + derNomTipo() + '</span>'
+    + (audita ? '<span class="tg at" style="font-weight:700">para auditar</span>' : '')
+    + '<button onclick="setFicDeriv(null)">Cambiar técnico</button></div>';
+  h += '<div class="dv-hv-b">' + hvT('Cómo le fue en el período', per)
+    + '<p class="dv-hv-f">De <b>' + me.n + '</b> ' + derNomTipo() + ' visitadas, <b' + (derPct(me.d, me.n) > DER_UMBRAL ? ' class="mal"' : '') + '>' + me.d + (me.d === 1 ? ' se derivó' : ' se derivaron') + ': ' + derPct(me.d, me.n) + '%</b>.</p>'
+    + '<div class="dv-hv-bar">' + hvSeg(me.n - me.d, 'ok', 'completadas') + hvSeg(me.d, 'der', 'derivadas') + '</div>'
+    + '<div class="dv-ley"><span><i style="background:#86cfa3"></i><b>' + (me.n - me.d) + '</b> completadas</span>'
+    + '<span><i style="background:#fca5a5"></i><b>' + me.d + '</b> derivadas (no realizadas)</span>'
+    + (sems.length > 1 ? '<span class="sem">Por semana:' + sems.map(function(k){ const o = porSemT[k]; return ' <b style="margin-left:8px">' + derNumSemana(k) + '</b> ' + (o ? o.d + ' de ' + o.n : '–'); }).join('') + '</span>' : '') + '</div></div>';
+  /* historial de 8, 4 y 2 semanas: las frases listas para responder "por que
+     el". Las ventanas terminan en la semana elegida y no dependen del Periodo
+     de arriba. La conclusion que las junta va primero. */
   { const m8 = o8.t[derFicTec], m4 = o4.t[derFicTec];
     const linea = function(o, m, nom){
       if(!m) return '<b>' + nom + '</b> (' + o.per + '): sin ' + derNomTipo() + ' visitadas.';
@@ -7730,61 +7920,65 @@ function derVistaFicHtml(todasSem){
           : m.p - o.pEq > 0 ? ' <i>Sobre el equipo, pero por menos de ' + DER_8_PUNTOS + ' puntos.</i>' : ' <i>No está sobre el equipo.</i>');
     };
     const s8 = !!(m8 && m8.sost), s4 = !!(m4 && m4.sost);
-    if(m8 || m4) h += '<div class="ot dv-h8' + (s8 || s4 ? ' mal' : '') + '">'
-      + (o8.sems.length > o4.sems.length ? linea(o8, m8, 'Últimas ' + o8.sems.length + ' semanas') + '<br>' : '')
-      + linea(o4, m4, o4.sems.length > 1 ? 'Últimas ' + o4.sems.length + ' semanas' : 'Última semana') + '<br>'
-      + (function(){ const m2 = o2.t[derFicTec], t2 = derTend2(o8, o2, derFicTec);
-          if(o2.sems.length < 2 || o2.sems.length >= o4.sems.length) return '';
-          if(!m2) return '<b>Últimas 2 semanas</b> (' + o2.per + '): sin ' + derNomTipo() + ' visitadas.<br>';
-          return '<b>Últimas 2 semanas</b> (' + o2.per + '): derivó <b>' + m2.d + ' de ' + m2.n + '</b> ' + derNomTipo() + ', <b>' + f1(m2.p) + '%</b>; el equipo, <b>' + f1(o2.pEq) + '%</b>. '
+    if(m8 || m4){
+      const lin = [];
+      if(o8.sems.length > o4.sems.length) lin.push(linea(o8, m8, 'Últimas ' + o8.sems.length + ' semanas'));
+      lin.push(linea(o4, m4, o4.sems.length > 1 ? 'Últimas ' + o4.sems.length + ' semanas' : 'Última semana'));
+      { const m2 = o2.t[derFicTec], t2 = derTend2(o8, o2, derFicTec);
+        if(!(o2.sems.length < 2 || o2.sems.length >= o4.sems.length)){
+          if(!m2) lin.push('<b>Últimas 2 semanas</b> (' + o2.per + '): sin ' + derNomTipo() + ' visitadas.');
+          else lin.push('<b>Últimas 2 semanas</b> (' + o2.per + '): derivó <b>' + m2.d + ' de ' + m2.n + '</b> ' + derNomTipo() + ', <b>' + f1(m2.p) + '%</b>; el equipo, <b>' + f1(o2.pEq) + '%</b>. '
             + (!t2 ? '<i>Pocas visitas (' + m2.n + ') para ver la tendencia.</i>'
               : t2.tipo === 'sube' ? '<b style="color:#dc2626">▲ Empeorando</b>: viene peor que en su historial, comparado con el equipo.'
               : t2.tipo === 'baja' ? '<b style="color:#16a34a">▼ Mejorando</b>: viene mejor que en su historial, comparado con el equipo.'
-              : '<b style="color:#d97706">▬ Se mantiene</b>: sigue parecido a su historial, comparado con el equipo.') + ' <i>Es tendencia, no marca: son pocas visitas.</i><br>'; })()
-      /* semana a semana (11:45): Luis quiere "ir viendo como va por semana,
-         mejorando o empeorando". Una casilla por semana con su % de
-         derivacion: roja si derivo mas que el equipo esa semana, verde si
-         derivo menos. Debajo, el numero de la semana. */
-      + (m8 ? '<div class="dv-sas"><b>Semana a semana</b>' + o8.sems.map(function(k){
-            const w = m8.s[k], e = o8.eqS[k], pe = e && e.n ? 100 * e.d / e.n : 0;
-            if(!w) return '<span class="c na" title="Semana ' + derNumSemana(k) + ' (' + derRango(k) + '): sin ' + derNomTipo() + ' visitadas"><u>–</u><small>' + derNumSemana(k) + '</small></span>';
-            const pw = 100 * w.d / w.n;
-            return '<span class="c ' + (pw > pe ? 'r' : 'b') + (w.n < DER_EVO_MIN ? ' p' : '') + '" title="Semana ' + derNumSemana(k) + ' (' + derRango(k) + '): derivó ' + w.d + ' de ' + w.n + ', ' + Math.round(pw) + '%; el equipo, ' + Math.round(pe) + '%' + (w.n < DER_EVO_MIN ? '. Pocas órdenes: tómalo como referencia' : '') + '"><u>'
-              + Math.round(pw) + '%</u><small>' + derNumSemana(k) + ' · ' + w.d + '/' + w.n + '</small></span>'; }).join('')
-          + '<span class="ley"><i class="r"></i>derivó más que el equipo esa semana <i class="b"></i>derivó menos · apagadas, menos de ' + DER_EVO_MIN + ' órdenes</span></div>' : '')
-      + '<b>' + (s8 && s4 ? 'Mal en las dos: viene sostenido y sigue igual. No es cosa de una semana.'
+              : '<b style="color:#d97706">▬ Se mantiene</b>: sigue parecido a su historial, comparado con el equipo.') + ' <i>Es tendencia, no marca: son pocas visitas.</i>');
+        } }
+      h += '<div class="dv-hv-b">' + hvT('Cómo viene', 'su historial, siempre comparado con el equipo · no cambia con el Período de arriba')
+        + '<p class="dv-hv-f"><b' + (s8 || s4 ? ' class="mal"' : '') + '>' + (s8 && s4 ? 'Mal en las dos: viene sostenido y sigue igual. No es cosa de una semana.'
           : s8 ? 'Viene mal en el historial largo; en las últimas ' + o4.sems.length + ' no alcanza la marca.'
           : s4 ? 'Se marca en las últimas ' + o4.sems.length + ' semanas, no en el historial largo: es algo más reciente.'
-          : 'No se marca en ninguno de los dos períodos.') + '</b></div>'; }
-  if(!me.d) return h + '<div class="dv-lect">No derivó ninguna en este período.</div></div></div>';
-  if(!derDirOk) return h + '<div class="ot">No se pudo bajar el historial de direcciones, y sin él no se puede separar lo propio de lo compartido. Vuelve a abrir la ventana en un rato.</div></div></div>';
+          : 'No se marca en ninguno de los dos períodos.') + '</b></p>'
+        + (m8 ? '<div class="dv-sas" style="margin:0 0 10px">' + o8.sems.map(function(k){
+            const w = m8.s[k], e = o8.eqS[k], pe = e && e.n ? 100 * e.d / e.n : 0;
+            if(!w) return '<span class="c na" title="Semana ' + derNumSemana(k) + ' (' + derRango(k) + '): sin ' + derNomTipo() + ' visitadas"><u>–</u><small>sem ' + derNumSemana(k) + '</small></span>';
+            const pw = 100 * w.d / w.n;
+            return '<span class="c ' + (pw > pe ? 'r' : 'b') + (w.n < DER_EVO_MIN ? ' p' : '') + '" title="Semana ' + derNumSemana(k) + ' (' + derRango(k) + '): derivó ' + w.d + ' de ' + w.n + ', ' + Math.round(pw) + '%; el equipo, ' + Math.round(pe) + '%' + (w.n < DER_EVO_MIN ? '. Pocas órdenes: tómalo como referencia' : '') + '"><u>'
+              + Math.round(pw) + '%</u><small>sem ' + derNumSemana(k) + ' · ' + w.d + '/' + w.n + '</small></span>'; }).join('')
+          + '<span class="ley"><i class="r"></i>derivó más que el equipo esa semana <i class="b"></i>derivó menos · apagadas, menos de ' + DER_EVO_MIN + ' órdenes</span></div>' : '')
+        + '<ul class="dv-hv-his' + (s8 || s4 ? ' mal' : '') + '"><li>' + lin.join('</li><li>') + '</li></ul></div>';
+    } }
+  if(!me.d) return h + '<div class="dv-hv-b"><p class="dv-hv-f" style="margin:0">No derivó ninguna en este período.</p></div></div>';
+  if(!derDirOk) return h + '<div class="dv-hv-b"><p class="dv-hv-f" style="margin:0">No se pudo bajar el historial de direcciones, y sin él no se puede separar lo propio de lo compartido. Vuelve a abrir la ventana en un rato.</p></div></div>';
   const seg = function(n, cls){ return n ? '<div class="' + cls + '" style="flex:' + n + '" title="' + n + ' de ' + me.d + '">' + n + '</div>' : ''; };
   const nAj = nNa + nComp;
-  h += '<div class="dv-barra">' + seg(nNa, 'na') + seg(nComp, 'comp') + seg(nProp, 'prop') + '</div>'
-    + '<div class="dv-ley"><span><i style="background:#cbd5e1"></i><b>' + nNa + '</b> por causales que no dependen del técnico</span>'
-    + '<span><i style="background:#93c5fd"></i><b>' + nComp + '</b> en direcciones donde también falló otro técnico</span>'
-    + '<span><i style="background:#fb923c"></i><b>' + nProp + '</b> propias: ahí solo ha fallado él</span></div>'
-    + '<div class="dv-lect">De sus <b>' + me.d + '</b> derivadas, <b>' + nAj + '</b> (' + derPct(nAj, me.d) + '%) no se le pueden cargar con seguridad'
+  h += '<div class="dv-hv-b">' + hvT('De quién son sus derivadas', per + ' · la misma clasificación de A quién auditar')
+    + '<p class="dv-hv-f">De sus <b>' + me.d + '</b> derivadas, <b>' + nAj + '</b> (' + derPct(nAj, me.d) + '%) no se le pueden cargar con seguridad'
     + (nAj ? ': ' + [nNa ? nNa + ' por causales que no dependen de él' : '', nComp ? nComp + ' en direcciones donde también '
         + (listaOtros.length === 1 ? 'falló otro técnico' : 'fallaron otros ' + listaOtros.length + ' técnicos') : ''].filter(Boolean).join(' y ') : '') + '. '
     + (nProp ? (nProp === 1 ? 'La otra' : 'Las otras ' + nProp) + ' (' + derPct(nProp, me.d) + '%) ' + (nProp === 1 ? 'es propia' : 'son propias')
-        + (derVisOk ? (nSen ? ', y ' + nSen + (nSen === 1 ? ' tiene' : ' tienen') + ' alguna señal para auditar' : ', ninguna con señal') : '') + '.' : 'No tiene ninguna propia.')
-    + '<span class="concl">' + (nAj > nProp ? 'En este período pesan más las causas ajenas al técnico (la dirección, el cliente o la red) que su propia gestión.'
+        + (derVisOk ? (nSen ? ', y ' + nSen + (nSen === 1 ? ' tiene' : ' tienen') + ' alguna señal para auditar' : ', ninguna con señal') : '') + '.' : 'No tiene ninguna propia.') + '</p>'
+    + '<div class="dv-barra">' + seg(nNa, 'na') + seg(nComp, 'comp') + seg(nProp, 'prop') + '</div>'
+    + '<div class="dv-ley"><span><i style="background:#cbd5e1"></i><b>' + nNa + '</b> no dependen del técnico</span>'
+    + '<span><i style="background:#93c5fd"></i><b>' + nComp + '</b> en direcciones donde también falló otro técnico</span>'
+    + '<span><i style="background:#fb923c"></i><b>' + nProp + '</b> propias: ahí solo ha fallado él</span></div>'
+    + '<div class="dv-hv-concl">' + (nAj > nProp ? 'En este período pesan más las causas ajenas al técnico (la dirección, el cliente o la red) que su propia gestión.'
         : nProp > nAj ? 'En este período pesan más las derivadas propias: conviene revisar su gestión' + (nSen ? ', partiendo por las que tienen señal.' : '.')
-        : 'En este período se reparte por igual entre causas ajenas y derivadas propias.') + '</span></div>'
-    + '<div class="ot">Derivación propia: <b>' + f1(pMe) + '%</b> de sus visitadas (' + nProp + ' de ' + me.n + '). El equipo tiene <b>' + f1(pEq) + '%</b> y se marca para auditar desde <b>' + f1(corte) + '%</b>'
-    + ', con ' + minimo + ' o más visitadas y al menos 2 propias: ' + (audita ? '<b>queda marcado para auditar</b>.' : (me.n < minimo ? 'tiene pocas visitadas para marcarlo.' : pMe >= corte ? 'no se marca porque tiene menos de 2 propias.' : 'queda bajo el corte.')) + '</div></div>';
+        : 'En este período se reparte por igual entre causas ajenas y derivadas propias.') + '</div>'
+    + '<div class="dv-hv-regla"><div' + (audita ? ' class="mal"' : '') + '><small>1 · Su derivación propia</small><b>' + f1(pMe) + '%</b><span>' + nProp + ' propias de ' + me.n + ' visitadas</span></div>'
+    + '<div><small>2 · Lo normal en el equipo</small><b>' + f1(pEq) + '%</b><span>de cada 100 visitadas, ' + Math.round(pEq) + ' terminan en derivada propia</span></div>'
+    + '<div><small>3 · Límite para auditar</small><b>' + f1(corte) + '%</b><span>una vez y media lo normal, con ' + minimo + ' o más visitadas y al menos 2 propias</span></div></div>'
+    + '<div class="dv-hv-q"><b>' + (audita ? 'Queda marcado para auditar: llega al límite.' : (me.n < minimo ? 'No se marca: tiene pocas visitadas (' + me.n + ') para compararlo.' : pMe >= corte ? 'No se marca: llega al límite, pero tiene menos de 2 propias.' : 'No se marca: queda bajo el límite.')) + '</b></div></div>';
 
-  /* cruce causal x clasificacion */
+
   const nomOtros = function(o){ const l = Object.keys(o).sort(); return l.length ? l.map(function(t){ return escR(derTitulo(t)); }).join(', ') : ''; };
   const cz = function(v, cls){ return '<td class="' + (v ? (cls || '') : 'cero') + '">' + v + '</td>'; };
-  h += '<h3>Por causal<small>cuántas de cada causal son en direcciones donde también falló otro técnico</small></h3>'
-    + '<table class="dv-cx"><thead><tr><th>Causal</th><th>Derivadas</th><th>Dirección compartida</th><th style="text-align:left">Otros técnicos que fallaron en esas direcciones</th><th>Propias</th>'
+  h += '<div class="dv-hv-b">' + hvT('Por causal', 'cuántas de cada causal son en direcciones donde también falló otro técnico')
+    + '<table class="dv-cx"><thead><tr><th>Causal</th><th>Derivadas</th><th>Ahí falló otro técnico</th><th style="text-align:left">Otros técnicos que fallaron en esas direcciones</th><th>Propias</th>'
     + (derVisOk ? '<th>Propias con señal</th>' : '') + '</tr></thead><tbody>';
   ['sm', 're', 'de', 'ot'].forEach(function(g){ const k = cx[g]; if(!k.d) return;
     h += '<tr><td>' + G[g] + '</td><td>' + k.d + '</td>' + (g === 'ot' ? '<td class="cero">–</td><td class="nm"></td><td class="cero">–</td>' + (derVisOk ? '<td class="cero">–</td>' : '')
       : cz(k.comp) + '<td class="nm">' + (k.comp ? derPl(Object.keys(k.otros).length, 'técnico', 'técnicos') + ': ' + nomOtros(k.otros) : '') + '</td>' + cz(k.prop) + (derVisOk ? cz(k.sen, 'sn') : '')) + '</tr>'; });
-  h += '<tr class="tot"><td>Total</td><td>' + me.d + '</td>' + cz(nComp) + '<td class="nm">' + (listaOtros.length ? derPl(listaOtros.length, 'técnico distinto', 'técnicos distintos') : '') + '</td>' + cz(nProp) + (derVisOk ? cz(nSen, 'sn') : '') + '</tr></tbody></table>';
+  h += '<tr class="tot"><td>Total</td><td>' + me.d + '</td>' + cz(nComp) + '<td class="nm">' + (listaOtros.length ? derPl(listaOtros.length, 'técnico distinto', 'técnicos distintos') : '') + '</td>' + cz(nProp) + (derVisOk ? cz(nSen, 'sn') : '') + '</tr></tbody></table></div>';
 
   /* las ordenes (08-10-2026, 19:30, pedido de Luis: "ordena la informacion
      para que sea entendible"). Una tarjeta por orden, con la direccion como
@@ -7829,7 +8023,7 @@ function derVistaFicHtml(todasSem){
       + lista.sort(porFecha).map(function(e){ return orden(e, cls === 'sen' ? 'prop' : cls); }).join('') : '';
   };
   const conSen = grupos.prop.filter(function(e){ return e.sn.n; }), sinSen = grupos.prop.filter(function(e){ return !e.sn.n; });
-  h += '<h3>Orden por orden<small>primero las que hay que revisar, después las que no se le cargan</small></h3>'
+  h += '<div class="dv-hv-b solo">' + hvT('Orden por orden', 'primero las que hay que revisar, después las que no se le cargan') + '</div>'
     + bloque('sen', conSen.length, conSen.length === 1 ? 'Propia con señal: revisar primero' : 'Propias con señal: revisar primero',
         'Solo falló él en esa dirección y hay un indicio concreto.', conSen)
     + bloque('prop', sinSen.length, (sinSen.length === 1 ? 'Propia' : 'Propias') + (derVisOk ? ' sin señal' : ''),
@@ -7838,7 +8032,7 @@ function derVistaFicHtml(todasSem){
         'Apuntan a la dirección o al cliente. En la tabla, en azul, las visitas fallidas de los otros técnicos.', grupos.comp)
     + bloque('na', nNa, nNa === 1 ? 'Por una causal que no depende del técnico' : 'Por causales que no dependen del técnico',
         'Dirección no encontrada, ductos, dotación, contingencia y similares. No se le cargan.', grupos.na);
-  return h + '<p class="dv-nota">La ficha usa la misma clasificación de <b>A quién auditar</b>. <b>Dirección compartida</b>: sin moradores, cliente reagenda o cliente desiste en una dirección donde también le falló una visita a otro técnico desde el '
+  return h + '<p class="dv-nota">La ficha usa la misma clasificación de <b>A quién auditar</b>. <b>Ahí falló otro técnico</b>: sin moradores, cliente reagenda o cliente desiste en una dirección donde también le falló una visita a otro técnico desde el '
     + derDesde + '. <b>Propia</b>: esas mismas causales donde no ha fallado ningún otro técnico. Que una derivada sea propia, o que tenga una señal, no prueba mala gestión; indica dónde mirar primero.</p></div>';
 }
 
@@ -7948,37 +8142,50 @@ function derVistaHoyHtml(){
     .sort(function(a, b){ return b.der - a.der || (b.vis ? b.der / b.vis : 0) - (a.vis ? a.der / a.vis : 0) || b.pend - a.pend || a.tec.localeCompare(b.tec); });
   const pT = T.vis ? (100 * T.der / T.vis).toFixed(1).replace('.', ',') : '–';
   const sT = { n: ST.n + T.vis, d: ST.d + T.der };
-  let h = '<div class="dv-tot" style="grid-template-columns:repeat(5,1fr)">'
-    + '<div><b>' + T.n + '</b><span>' + derNomTipo() + ' hoy en bandejas</span></div>'
-    + '<div><b>' + T.vis + '</b><span>ya visitadas · ' + T.comp + ' completadas</span></div>'
-    + '<div class="' + (T.vis && 100 * T.der / T.vis > DER_UMBRAL ? 'mal' : '') + '"><b>' + T.der + '</b><span>derivadas (no realizadas)</span></div>'
-    + '<div class="' + (T.vis && 100 * T.der / T.vis > DER_UMBRAL ? 'mal' : '') + '"><b>' + pT + (T.vis ? '%' : '') + '</b><span>derivación de lo ya visitado</span></div>'
-    + '<div><b>' + T.pend + '</b><span>por visitar · ' + T.ini + ' iniciadas</span></div></div>';
-  /* Causales como botones (09-10-2026, 12:30; Luis: "activa estos botones"):
-     al tocar una se abre debajo la lista de las derivadas de hoy con esa
-     causal, cada una con su tecnico; otro toque la cierra. */
+  /* ---- HOY EN VIVO ORDENADO (10-10-2026, 16:10) ----
+     Luis: "quiero que la visual se vea ordenada y entendible para cualquiera
+     que lo vea". Mismos numeros de antes, en bloques numerados con titulo:
+     1 como va el dia (una frase y una barra, en vez de cinco tarjetas),
+     2 por que se derivaron y de quien son (causales + barra de 3 colores,
+     la misma de la Ficha), 3 el aviso de direcciones que ya fallaron y
+     4 la tabla por tecnico con las columnas agrupadas. Ningun calculo cambio. */
+  let hvN = 1;
+  const hvT = function(t, s){ return '<div class="dv-hv-t"><span class="n">' + (hvN++) + '</span><b>' + t + '</b>' + (s ? '<small>' + s + '</small>' : '') + '</div>'; };
+  const hvSeg = function(v, cls, txt){ return v ? '<div class="' + cls + '" style="flex:' + v + '" title="' + v + ' ' + txt + '">' + v + (v * 8 >= T.n ? ' ' + txt : '') + '</div>' : ''; };
+  const hvAlto = T.vis && 100 * T.der / T.vis > DER_UMBRAL;
+  let h = '<div class="dv-hv-b">' + hvT('Cómo va el día', 'hoy ' + hoyTxt + ' · ' + T.n + ' ' + derNomTipo() + ' en las bandejas de los técnicos')
+    + '<p class="dv-hv-f">' + (T.vis
+        ? 'De <b>' + T.vis + '</b> ' + derNomTipo() + ' ya visitadas, <b' + (hvAlto ? ' class="mal"' : '') + '>' + T.der + (T.der === 1 ? ' se derivó' : ' se derivaron') + ': ' + pT + '%</b>.'
+        : 'Todavía no se cierra ninguna.')
+      + (T.pend ? ' Quedan <b>' + T.pend + '</b> por visitar' + (T.ini ? ' (' + T.ini + (T.ini === 1 ? ' ya iniciada' : ' ya iniciadas') + ')' : '') + '.' : ' No queda ninguna por visitar.') + '</p>'
+    + '<div class="dv-hv-bar">' + hvSeg(T.comp, 'ok', 'completadas') + hvSeg(T.der, 'der', 'derivadas') + hvSeg(T.pend, 'pen', 'por visitar') + '</div>'
+    + '<div class="dv-ley"><span><i style="background:#86cfa3"></i><b>' + T.comp + '</b> completadas</span>'
+    + '<span><i style="background:#fca5a5"></i><b>' + T.der + '</b> derivadas (no realizadas)</span>'
+    + '<span><i style="background:#cbd5e1"></i><b>' + T.pend + '</b> por visitar</span>'
+    + '<span class="sem">Semana con hoy: <b>' + derPct(sT.d, sT.n) + '%</b> (' + sT.d + ' de ' + sT.n + ')</span></div></div>';
   if(T.der){
-    const NOMC = { sm:'sin moradores', re:'cliente reagenda', de:'cliente desiste', ot:'no atribuibles al técnico' };
+    const NOMC = { sm:'sin moradores', re:'cliente reagenda', de:'cliente desiste', ot:'no dependen del técnico' };
     if(derHoyCau && !T[derHoyCau]) derHoyCau = null;
-    h += '<div class="dv-cau"><span class="rot">Causales</span>' + ['sm', 're', 'de', 'ot'].map(function(g){
+    h += '<div class="dv-hv-b">' + hvT('Por qué se derivaron y de quién son', 'toca una causa para ver cuáles son')
+      + '<div class="dv-cau">' + ['sm', 're', 'de', 'ot'].map(function(g){
         return '<button class="c' + (g === 'ot' ? ' no' : '') + (derHoyCau === g ? ' on' : '') + (T[g] ? '' : ' cero') + '"' + (T[g] ? ' onclick="setHoyCau(\'' + g + '\')" title="Toca para ver cuáles son"' : ' disabled')
           + '><b>' + T[g] + '</b>' + NOMC[g] + (derHoyCau === g ? ' ✕' : '') + '</button>'; }).join('') + '</div>';
     if(derHoyCau){
       const lc = F.filter(function(x){ return x.der && x.g === derHoyCau; }).sort(function(a, b){ return a.tec.localeCompare(b.tec) || a.hi - b.hi; });
       h += '<div class="dv-cau-det"><div class="tit"><b>' + lc.length + '</b> ' + NOMC[derHoyCau] + ' hoy</div><div class="dv-fic">' + lc.map(function(x){ return derHoyCard(x, true); }).join('') + '</div></div>';
     }
-    h += '<div class="dv-rt" style="margin-top:0"><div class="l1">De las <b>' + T.der + '</b> derivadas de hoy:</div><div class="kp">'
-    + '<span><b>' + T.na + '</b> por causales que no dependen del técnico</span>'
-    + '<span><b>' + T.cmp + '</b> en direcciones donde antes ya falló otro técnico</span>'
-    + '<span class="si"><b>' + T.prop + '</b> propias</span>'
-    + '<span' + (T.sen ? ' class="sn"' : '') + '><b>' + T.sen + '</b> de las propias, con alguna señal</span>'
-    + '<span><b>' + derPct(sT.d, sT.n) + '%</b> lleva la semana con hoy (' + sT.d + ' de ' + sT.n + ')</span></div></div>';
+    const hvS = function(n, cls){ return n ? '<div class="' + cls + '" style="flex:' + n + '" title="' + n + ' de ' + T.der + '">' + n + '</div>' : ''; };
+    h += '<div class="dv-hv-q">De las <b>' + T.der + '</b> derivadas de hoy, ¿cuántas son del técnico?</div>'
+      + '<div class="dv-barra">' + hvS(T.na, 'na') + hvS(T.cmp, 'comp') + hvS(T.prop, 'prop') + '</div>'
+      + '<div class="dv-ley"><span><i style="background:#cbd5e1"></i><b>' + T.na + '</b> no dependen del técnico</span>'
+      + '<span><i style="background:#93c5fd"></i><b>' + T.cmp + '</b> en direcciones donde antes ya falló otro técnico</span>'
+      + '<span><i style="background:#fb923c"></i><b>' + T.prop + '</b> propias: ahí no ha fallado nadie más</span>'
+      + (T.prop ? '<span class="sn"><b>' + T.sen + '</b> de las propias, con alguna señal</span>' : '') + '</div></div>';
   }
   /* aviso temprano: pendientes en direcciones que ya fallaron */
   const riesgo = F.filter(function(x){ return x.pend && x.prev.length; }).sort(function(a, b){ return b.prev.length - a.prev.length || a.fr.localeCompare(b.fr); });
   if(riesgo.length){
-    h += '<div class="dv-sec comp"><span class="n">' + riesgo.length + '</span><div><b>Por visitar hoy en direcciones que ya fallaron antes</b>'
-      + '<span>Todavía no se cierran. Toca una fila para ver las visitas anteriores a esa dirección.</span></div></div>'
+    h += '<div class="dv-hv-b">' + hvT('Ojo: por visitar en direcciones que ya fallaron', riesgo.length + ' todavía sin cerrar · toca una fila para ver las visitas anteriores')
       + '<table class="dv-hoy-r"><thead><tr><th>Técnico</th><th>Franja</th><th>Estado</th><th>Dirección</th><th>Petición de hoy</th><th>Ya falló</th></tr></thead><tbody>'
       + riesgo.map(function(x){
           const ab = derHoyAb === x.ot;
@@ -7989,11 +8196,14 @@ function derVistaHoyHtml(){
                 + ord.map(function(v){ return '<tr><td>' + escR(String(v.f || '').slice(0, 5)) + '</td><td>' + escR(derTitulo(v.tec)) + '</td><td class="pet">' + escR(v.num || '') + '</td><td>' + escR(v.cat || '') + '</td><td><span class="tg '
                     + (derGrupo(v.cierre) === 'ot' ? 'na' : 'at') + '">' + escR(v.cierre || 'No realizada') + '</span></td></tr>'; }).join('') + '</tbody></table></td></tr>' : '');
         }).join('')
-      + '</tbody></table>';
+      + '</tbody></table></div>';
   }
   const cel = function(v, c){ return '<td class="' + (v ? (c || '') : 'cero') + '">' + v + '</td>'; };
-  h += '<table style="margin-top:14px"><thead><tr><th>Técnico</th><th>Hoy en bandeja</th><th>Completadas</th><th>Derivadas</th><th>Por visitar</th><th>% de lo visitado</th>'
-    + '<th>No atribuibles</th><th>Dirección compartida</th><th>Propias</th><th>Propias con señal</th><th title="Lo de la semana hasta ayer más lo de hoy">Semana con hoy</th></tr></thead><tbody>';
+  h += '<div class="dv-hv-b">' + hvT('Técnico por técnico', 'toca un técnico para ver sus ' + derNomTipo() + ' de hoy')
+    + '<table class="dv-hv-tab"><thead><tr><th rowspan="2">Técnico</th><th colspan="5" class="g g1">Hoy</th><th colspan="4" class="g g2">Sus derivadas</th>'
+    + '<th rowspan="2" class="gs" title="Lo de la semana hasta ayer más lo de hoy">Semana con hoy</th></tr>'
+    + '<tr><th class="gi">En bandeja</th><th>Completadas</th><th>Derivadas</th><th>Por visitar</th><th>% de lo visitado</th>'
+    + '<th class="gi">No dependen del técnico</th><th>Ahí ya falló otro</th><th>Propias</th><th>Propias con señal</th></tr></thead><tbody>';
   tb.forEach(function(o, i){
     const s = semCon(o), ps = derPct(s.d, s.n), alto = o.vis && 100 * o.der / o.vis > DER_UMBRAL;
     h += '<tr class="t' + (o.der && alto ? ' pocas' : '') + '" onclick="verTecDeriv(' + i + ')" title="Toca para ver sus ' + derNomTipo() + ' de hoy">'
@@ -8016,12 +8226,11 @@ function derVistaHoyHtml(){
       h += '</div></td></tr>';
     }
   });
-  return h + '</tbody></table><p class="dv-nota"><b>Hoy, ' + hoyTxt + ', en vivo.</b> Sale de lo que el monitor publica cada 5 minutos, igual que la portada; se actualiza sola. '
-    + 'Cuenta las ' + derNomTipo() + ' que hoy están en las bandejas de los técnicos' + (T.fuera ? ' (aparte hay ' + T.fuera + ' canceladas o suspendidas, que no cuentan)' : '') + '. '
-    + 'El porcentaje es sobre lo <b>ya visitado</b>, así que en la mañana se mueve mucho con cada cierre.<br>'
-    + '<b>Dirección compartida</b>: antes de hoy ya le falló una visita ahí a otro técnico. <b>Propia</b>: no ha fallado ningún otro. '
-    + '<b>Señales</b> en vivo: ' + DER_MIN_CORTA + ' minutos o menos en terreno, o visita fuera de la franja. '
-    + '<b>Semana con hoy</b>: lo de la semana hasta ayer más lo de hoy. Mañana estas órdenes pasan a las otras pestañas, ya con el dato cerrado del día.</p>';
+  return h + '</tbody></table></div><p class="dv-nota">Se actualiza sola cada 5 minutos, con lo que publica el monitor. El porcentaje es sobre lo <b>ya visitado</b>, así que en la mañana se mueve mucho con cada cierre.'
+    + (T.fuera ? ' Aparte hay ' + T.fuera + ' canceladas o suspendidas, que no cuentan.' : '') + '<br>'
+    + '<b>Propia</b>: sin moradores, cliente reagenda o cliente desiste en una dirección donde no ha fallado ningún otro técnico. '
+    + '<b>Señal</b>: ' + DER_MIN_CORTA + ' minutos o menos en terreno, o visita fuera de la franja. '
+    + '<b>Semana con hoy</b>: lo de la semana hasta ayer más lo de hoy. Mañana estas órdenes pasan a las otras pestañas, con el dato cerrado del día.</p>';
 }
 
 /* ---- Alerta de migraciones derivadas hoy (09-10-2026) ----
@@ -8135,7 +8344,7 @@ function revisarAvisoDer(){
 let derCau = null;
 function setCauDeriv(g){ derCau = (derCau === g ? null : g); pintarDeriv(); }
 function derCausalesSemHtml(tb, tot){
-  const NOMC = { sm:'sin moradores', re:'cliente reagenda', de:'cliente desiste', ot:'no atribuibles al técnico' };
+  const NOMC = { sm:'sin moradores', re:'cliente reagenda', de:'cliente desiste', ot:'no dependen del técnico' };
   if(derCau && !tot[derCau]) derCau = null;
   let h = '<div class="dv-cau"><span class="rot">Causales</span>' + ['sm', 're', 'de', 'ot'].map(function(g){
       return '<button class="c' + (g === 'ot' ? ' no' : '') + (derCau === g ? ' on' : '') + (tot[g] ? '' : ' cero') + '"' + (tot[g] ? ' onclick="setCauDeriv(\'' + g + '\')" title="Toca para ver cuáles son"' : ' disabled')
@@ -8290,31 +8499,54 @@ function pintarDeriv(){
   if(derVista === 'fic'){ cuerpo.innerHTML = derVistaFicHtml(todasSem); return; }
   if(derVista === 'evo'){ cuerpo.innerHTML = derVistaEvoHtml(todasSem, enCurso); return; }
   if(!tb.length){ cuerpo.innerHTML = h + '<div class="dv-vacio">Sin ' + derNomTipo() + ' en esta semana para ese supervisor.</div>'; return; }
-  if(derVista === 'dir'){ cuerpo.innerHTML = h + derVistaDirHtml(tb, tot); return; }
+  if(derVista === 'dir'){ cuerpo.innerHTML = derVistaDirHtml(tb, tot); return; }
   if(derVista === 'aud'){ cuerpo.innerHTML = derVistaAudHtml(todasSem); return; }
-  h += '<table><thead><tr><th>Técnico</th><th>Visitadas</th><th>Completadas</th><th>Derivadas</th><th>% derivación</th>'
-    + '<th title="Su % de derivación en cada una de las ' + DER_TEND + ' semanas que terminan en esta">Últimas ' + DER_TEND + ' semanas</th><th>Sin moradores</th><th>Cliente reagenda</th><th>Cliente desiste</th><th>No atribuibles</th></tr></thead><tbody>';
+  /* ---- POR TECNICO ORDENADO (10-10-2026, 16:20) ----
+     Mismo orden que Hoy en vivo: bloques numerados con titulo. 1 como va la
+     semana (frase + barra, en vez de las cuatro tarjetas), 2 por que se
+     derivaron (las causales de siempre, se tocan igual) y 3 la tabla por
+     tecnico con las columnas agrupadas y una leyenda de los colores arriba.
+     Ningun calculo cambio. La variable h de mas arriba (tarjetas + causales)
+     la sigue usando Por direccion; aqui se arma hT aparte. */
+  let hvN = 1;
+  const hvT = function(t, s){ return '<div class="dv-hv-t"><span class="n">' + (hvN++) + '</span><b>' + t + '</b>' + (s ? '<small>' + s + '</small>' : '') + '</div>'; };
+  const hvSeg = function(v, cls, txt){ return v ? '<div class="' + cls + '" style="flex:' + v + '" title="' + v + ' ' + txt + '">' + v + (v * 8 >= tot.n ? ' ' + txt : '') + '</div>' : ''; };
+  const pTot = tot.n ? (100 * tot.d / tot.n).toFixed(1).replace('.', ',') : '0';
+  const nPocas = tb.filter(derPocas).length;
+  let hT = '<div class="dv-hv-b">' + hvT('Cómo va la semana', 'semana ' + derNumSemana(derSem) + ' · ' + derRango(derSem) + (enCurso ? ' · en curso, ' + nDias + ' día' + (nDias === 1 ? '' : 's') + ' con datos' : ''))
+    + '<p class="dv-hv-f">De <b>' + tot.n + '</b> ' + derNomTipo() + ' visitadas, <b' + (derPct(tot.d, tot.n) > DER_UMBRAL ? ' class="mal"' : '') + '>' + tot.d + (tot.d === 1 ? ' se derivó' : ' se derivaron') + ': ' + pTot + '%</b>. '
+    + (nSobre ? '<b class="mal">' + nSobre + (nSobre === 1 ? ' técnico está' : ' técnicos están') + '</b> sobre el ' + DER_UMBRAL + '%.' : 'Ningún técnico está sobre el ' + DER_UMBRAL + '%.') + '</p>'
+    + '<div class="dv-hv-bar">' + hvSeg(tot.n - tot.d, 'ok', 'completadas') + hvSeg(tot.d, 'der', 'derivadas') + '</div>'
+    + '<div class="dv-ley"><span><i style="background:#86cfa3"></i><b>' + (tot.n - tot.d) + '</b> completadas</span>'
+    + '<span><i style="background:#fca5a5"></i><b>' + tot.d + '</b> derivadas (no realizadas)</span>'
+    + '<span class="sem">Datos hasta el ' + ultIso.slice(6, 8) + '-' + ultIso.slice(4, 6) + ' · el día de hoy entra mañana</span></div></div>';
+  if(tot.d) hT += '<div class="dv-hv-b">' + hvT('Por qué se derivaron', 'toca una causa para ver cuáles son') + derCausalesSemHtml(tb, tot) + '</div>';
+  hT += '<div class="dv-hv-b">' + hvT('Técnico por técnico', 'ordenados de mayor a menor derivación · toca un técnico para ver cada orden y la historia de su dirección')
+    + '<div class="dv-ley dv-hv-col"><span><i style="background:#fecaca"></i><b>Fila roja</b>: más de ' + DER_UMBRAL + '% con ' + DER_MINIMO + ' o más ' + derNomTipo() + (nSobre ? ' (' + nSobre + ')' : '') + '</span>'
+    + '<span><i style="background:#fde9c8"></i><b>Marca ámbar</b>: más de ' + DER_UMBRAL + '% pero con menos de ' + DER_MINIMO + (nPocas ? ' (' + nPocas + ')' : '') + '</span>'
+    + '<span><b>Últimas ' + DER_TEND + ' semanas</b>: su % de cada semana, la más reciente a la derecha</span></div>'
+    + '<table class="dv-hv-tab sem"><thead><tr><th rowspan="2">Técnico</th><th colspan="4" class="g g1">La semana</th>'
+    + '<th rowspan="2" class="gs" title="Su % de derivación en cada una de las ' + DER_TEND + ' semanas que terminan en esta">Últimas ' + DER_TEND + ' semanas</th>'
+    + '<th colspan="4" class="g g2">Por qué derivó</th></tr>'
+    + '<tr><th class="gi">Visitadas</th><th>Completadas</th><th>Derivadas</th><th>% derivación</th>'
+    + '<th class="gi">Sin moradores</th><th>Cliente reagenda</th><th>Cliente desiste</th><th>No dependen del técnico</th></tr></thead><tbody>';
   tb.forEach(function(o, i){
     const sobre = derSobre(o), pocas = derPocas(o);
-    h += '<tr class="t' + (sobre ? ' sobre' : pocas ? ' pocas' : '') + '" onclick="verTecDeriv(' + i + ')" title="Toca para ver el detalle completo de sus derivadas">'
+    hT += '<tr class="t' + (sobre ? ' sobre' : pocas ? ' pocas' : '') + '" onclick="verTecDeriv(' + i + ')" title="Toca para ver el detalle completo de sus derivadas">'
       + '<td>' + (derAbierto === i ? '▾ ' : '▸ ') + escR(derTitulo(o.tec)) + '<small>' + escR(derTitulo(o.sup)) + '</small>'
-      +   (sobre ? '<span class="marca">sobre ' + DER_UMBRAL + '%</span>' : pocas ? '<span class="marca pocas">pocas migraciones</span>' : '') + '</td>'
+      +   (sobre ? '<span class="marca">sobre ' + DER_UMBRAL + '%</span>' : pocas ? '<span class="marca pocas">pocas ' + derNomTipo() + '</span>' : '') + '</td>'
       + '<td>' + o.n + '</td><td>' + (o.n - o.d) + '</td>' + cel(o.d) + '<td class="p">' + derPct(o.d, o.n) + '%</td>'
       + '<td>' + tendHtml(o.tec) + '</td>' + cel(o.sm) + cel(o.re) + cel(o.de) + cel(o.ot) + '</tr>';
-    if(derAbierto === i) h += '<tr class="det"><td colspan="10">' + derDetalleHtml(o, i) + '</td></tr>';
+    if(derAbierto === i) hT += '<tr class="det"><td colspan="10">' + derDetalleHtml(o, i) + '</td></tr>';
   });
-  h += '</tbody></table>'
-    + '<p class="dv-nota">Semana ' + derNumSemana(derSem) + ', ' + derRango(derSem) + (enCurso ? ' <b>(en curso: ' + nDias + ' día' + (nDias === 1 ? '' : 's') + ' con datos)</b>' : '')
-    + '. Datos hasta el ' + ultIso.slice(6, 8) + '-' + ultIso.slice(4, 6) + '; el día de hoy entra mañana.<br>'
-    + '<b>Historia de la dirección</b> (al abrir un técnico): ' + (derVisOk
-        ? 'todas las visitas a esa misma dirección desde el ' + derDesde + ', completadas y no realizadas, de cualquier tipo de actividad, con la hora de inicio y los minutos en terreno. '
-          + 'Las etiquetas moradas son señales para auditar: después la completó otro técnico, ' + DER_MIN_CORTA + ' minutos o menos en terreno, o visita fuera de la franja.<br>'
-        : 'visitas no realizadas a esa misma dirección desde el ' + derDesde + ', de cualquier tipo de actividad. No incluye las visitas completadas.<br>')
-    + '<b>Visitadas</b> = completadas más no realizadas (sin canceladas ni suspendidas). <b>Derivada</b> = no realizada. '
-    + 'En rojo, los técnicos con más de ' + DER_UMBRAL + '% de derivación y ' + DER_MINIMO + ' o más en la semana; en ámbar, los que superan el ' + DER_UMBRAL + '% con menos de ' + DER_MINIMO + '.<br>'
-    + 'Sin moradores, cliente reagenda y cliente desiste son las causales que se pidió auditar como posiblemente relacionadas con la gestión del técnico. '
-    + 'En Quiebres esas mismas figuran como "del cliente": que haya que auditarlas no significa que sean culpa del técnico.</p>';
-  cuerpo.innerHTML = h;
+  hT += '</tbody></table></div>'
+    + '<p class="dv-nota"><b>Visitadas</b> = completadas más no realizadas (sin canceladas ni suspendidas). <b>Derivada</b> = no realizada.<br>'
+    + '<b>Sin moradores, cliente reagenda y cliente desiste</b> son las causales que se pidió auditar. Que haya que auditarlas no significa que sean culpa del técnico: en Quiebres figuran como "del cliente".<br>'
+    + '<b>Al abrir un técnico</b> se ve la historia de cada dirección: ' + (derVisOk
+        ? 'todas las visitas desde el ' + derDesde + ', completadas y no realizadas, con la hora de inicio y los minutos en terreno. '
+          + 'Las etiquetas moradas son señales para auditar: después la completó otro técnico, ' + DER_MIN_CORTA + ' minutos o menos en terreno, o visita fuera de la franja.'
+        : 'las visitas no realizadas desde el ' + derDesde + ', de cualquier tipo de actividad. No incluye las completadas.') + '</p>';
+  cuerpo.innerHTML = hT;
 }
 /* ========================================================================== */
 
