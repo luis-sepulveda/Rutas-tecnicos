@@ -2741,6 +2741,20 @@
   #modalDer table.dv-res-c.sem td.x.sube { color:#b91c1c; background:transparent; } #modalDer table.dv-res-c.sem td.x.baja { color:#17603a; background:transparent; }
 
   #modalDer .dv-res-n.fte { margin:10px 0 0; } #modalDer .dv-res-n.fte b { color:#b45309; }
+
+  /* ---- AVISO "FALTA EXPORT COMPLETO" (10-10-2026, 19:50) ---- */
+  #modalNoop .comp-av { padding:4px 2px; font-size:14px; color:#16232f; }
+  #modalNoop .comp-av .exp { font-size:13px; color:#5f7386; line-height:1.5; margin:0 0 12px; }
+  #modalNoop .comp-av .dia { border:1px solid #fcd9a8; background:#fffaf2; border-radius:10px; padding:10px 14px; margin:0 0 8px; }
+  #modalNoop .comp-av .dia .cab { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  #modalNoop .comp-av .dia .cab b { font-family:'Archivo',sans-serif; font-size:16px; color:#7c2d12; }
+  #modalNoop .comp-av .dia .cab span { font-size:12.5px; color:#5f7386; }
+  #modalNoop .comp-av .dia .cab button { margin-left:auto; border:1px solid #d3dde6; background:#fff; border-radius:8px; padding:4px 12px; font:inherit; font-size:12.5px; cursor:pointer; color:#41586f; }
+  #modalNoop .comp-av .dia .cab button:hover { background:#f1f5f9; }
+  #modalNoop .comp-av .dia .qn { margin-top:6px; line-height:1.5; }
+  #modalNoop .comp-av .que { margin-top:14px; background:#f1f5f9; border-radius:10px; padding:10px 14px; }
+  #modalNoop .comp-av .que ol { margin:6px 0 8px; padding-left:20px; line-height:1.6; }
+  #modalNoop .comp-av code { font-family:Consolas,monospace; font-size:12.5px; background:#fff; border:1px solid #e2e8f0; border-radius:5px; padding:0 5px; color:#7a3e00; }
 </style>
 </head>
 <body>
@@ -6873,6 +6887,64 @@ async function bajarDeriv(){
   return filas;
 }
 let DER_SEMC = {}, DER_CORTOS = [];
+/* ---- AVISO "FALTA EXPORT COMPLETO" EN LA PORTADA (10-10-2026, 19:50) ----
+   Luis: "la idea es que me avise, por si se me olvida". Cuando hay tecnicos
+   apoyando en otra comuna, sus ordenes no salen con las credenciales de la
+   agencia y hay que pedirle al jefe el export completo de ese dia (va en
+   Dashboard-actividades\completos_seguimiento). seguimiento_autonomia.py deja
+   en migraciones_semanas.json la lista dias_cortos: dias SIN export completo
+   en que faltan 2 o mas tecnicos habituales (o salieron bastantes menos
+   tecnicos que lo normal), con los nombres de los que no aparecen.
+   Aca: una pastilla ambar "Falta export completo" en Requiere atencion, solo
+   si hay algun dia pendiente de los ultimos COMP_DIAS dias. Al tocarla, la
+   lista por dia con los nombres. "Ya lo revise" la saca para ese dia en ESTE
+   navegador (localStorage); en otro PC sigue saliendo hasta subir el
+   archivo. Se baja al abrir la pagina y cada 30 minutos. Blindado: si el
+   archivo no esta, no sale nada. */
+const COMP_DIAS = 14;
+let COMP_AVISO = [];
+function compVistos(){ try { return JSON.parse(localStorage.getItem('compVistos') || '[]'); } catch(e){ return []; } }
+function compPendientes(){ const v = compVistos(); return COMP_AVISO.filter(function(x){ return v.indexOf(x.dia) < 0; }); }
+async function cargarAvisoCompletos(){
+  try {
+    const r = await fetch(URL_ACTIVIDADES + 'migraciones_semanas.json?t=' + Date.now(), { cache:'no-store' });
+    if(!r.ok) return;
+    const mj = await r.json();
+    const hoy = new Date(); hoy.setHours(0, 0, 0, 0);
+    COMP_AVISO = (Array.isArray(mj.dias_cortos) ? mj.dias_cortos : []).filter(function(x){
+      const q = /^(\d{2})-(\d{2})-(\d{4})$/.exec(String(x.dia || '')); if(!q) return false;
+      return (hoy - new Date(+q[3], +q[2] - 1, +q[1])) / 86400000 <= COMP_DIAS; });
+    try { pintarPortada(); } catch(e){}
+  } catch(e){ console.warn('aviso export completos:', e); }
+}
+function compPastillaHtml(){
+  const l = compPendientes(); if(!l.length) return '';
+  return '<button class="pv-al dosl viva" style="--tono:#b45309" title="' + (l.length === 1 ? 'Hay 1 día' : 'Hay ' + l.length + ' días')
+    + ' en que no aparecen técnicos habituales y no hay export completo. Si estuvieron en otra comuna, falta pedir el archivo. Toca para ver cuáles." onclick="abrirFaltaCompleto()">'
+    + '<span class="n">' + l.length + '</span><span class="tx"><span class="t">Falta export<br>completo</span></span></button>';
+}
+function compYaRevise(dia){ try { const v = compVistos(); if(v.indexOf(dia) < 0) v.push(dia); localStorage.setItem('compVistos', JSON.stringify(v.slice(-60))); } catch(e){}
+  try { pintarPortada(); } catch(e){} if(compPendientes().length) abrirFaltaCompleto(); else cerrarNoOperativos(); }
+function abrirFaltaCompleto(){
+  const m = document.getElementById('modalNoop'), cu = document.getElementById('noopCuerpo'); if(!m || !cu) return;
+  const tit = document.querySelector('#modalNoop .mc-head h2'); if(tit) tit.textContent = 'Días que pueden estar incompletos';
+  const DS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+  const l = compPendientes().slice().reverse();
+  cu.innerHTML = '<div class="comp-av"><p class="exp">Con las credenciales de la agencia solo se ven las órdenes de Quilpué y Villa Alemana. Si un técnico trabajó ese día en otra comuna, sus órdenes no salen y el día queda incompleto en el Seguimiento y en el Resumen.</p>'
+    + (l.length ? l.map(function(x){ const q = /^(\d{2})-(\d{2})-(\d{4})$/.exec(x.dia), d = new Date(+q[3], +q[2] - 1, +q[1]), f = x.faltan || [];
+        return '<div class="dia"><div class="cab"><b>' + DS[d.getDay()].charAt(0).toUpperCase() + DS[d.getDay()].slice(1) + ' ' + x.dia.slice(0, 5) + '</b><span>salieron ' + x.tecnicos + ' técnicos; lo normal esos días, ' + x.normal + '</span>'
+          + '<button onclick="compYaRevise(\'' + x.dia + '\')" title="Úsalo si ya confirmaste que ese día nadie estuvo en otra comuna. Deja de avisar por este día en este computador.">Ya lo revisé</button></div>'
+          + (f.length ? '<div class="qn">No aparecen con ninguna orden: <b>' + f.map(escR).join('</b>, <b>') + '</b></div>' : '<div class="qn">Salieron menos técnicos que lo normal; no hay un nombre claro.</div>') + '</div>'; }).join('')
+      : '<p class="exp">No hay días pendientes.</p>')
+    + '<div class="que"><b>Qué hacer</b><ol><li>Si alguno estuvo ese día en otra comuna: pedirle al jefe el export completo de ese día.</li>'
+    + '<li>Dejarlo, sin cambiarle el nombre, en <code>Dashboard-actividades\\completos_seguimiento</code>.</li>'
+    + '<li>Correr <code>seguimiento.bat</code> y subir <code>seguimiento_autonomia.html</code> y <code>migraciones_semanas.json</code>. El aviso se va solo.</li>'
+    + '<li>Si estaban con licencia, permiso o día libre: tocar "Ya lo revisé".</li></ol>'
+    + '<p class="exp">No aparecer no prueba que estuvieron en otra comuna: es la lista de quienes trabajaron los días de alrededor y ese día no tienen órdenes.</p></div></div>';
+  m.classList.add('abierto');
+}
+setTimeout(cargarAvisoCompletos, 2500);
+setInterval(cargarAvisoCompletos, 30 * 60 * 1000);
 function setTipoDeriv(t){ derTipo = t; derAbierto = null; pintarDeriv(); }
 function setVistaDeriv(v){ derVista = v; derAbierto = null; pintarDeriv(); }
 function derEntra(x){ return derTipo === 'AMBAS' || x.tp === derTipo; }
@@ -10122,6 +10194,7 @@ function pintarPortada(){
     +     (function(){ const c = derHoyConteo();
             return '<button class="pv-al dosl ' + (c.d > 0 ? 'viva' : 'cero') + (DER_AVISO.length ? ' nueva' : '') + '" style="--tono:#b91c1c" title="Migraciones derivadas hoy: ' + c.d + ' de ' + c.v
               + ' ya visitadas. Toca para abrir Derivaci\u00f3n: hoy en vivo, por t\u00e9cnico, por direcci\u00f3n, a qui\u00e9n auditar y ficha del t\u00e9cnico." onclick="abrirDerivHoy()"><span class="n">' + c.d + '</span><span class="tx"><span class="t">Migraciones<br>derivadas</span></span></button>'; })()
+    +     compPastillaHtml()
     +     alerta('toggleAtrasados', atras, 'M\u00e1s de 3 h', 'M\u00e1s de 3 horas: iniciadas hace rato y sin cerrar', '#be123c')
     +   '</section>'
     +   '<div class="pv-chips">'
