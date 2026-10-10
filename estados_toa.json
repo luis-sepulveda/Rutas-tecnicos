@@ -1,7 +1,7 @@
 {
-  "actualizado": "2026-10-10T10:03:39",
+  "actualizado": "2026-10-10T10:33:49",
   "resumen": {
-    "reagendada": 1,
+    "reagendada": 2,
     "sin informacion": 1
   },
   "estados": {
@@ -13,6 +13,16 @@
       "estado": "reagendada",
       "color": "rgb(255, 170, 170)",
       "detalle": "1-3O9702VJ - 10-13-Migración-Migración-SUIZA 252Lun, 12 Oct",
+      "franja_nueva": "10-13"
+    },
+    "1-3OC0U038": {
+      "tec": "FELIPE SILVA R",
+      "cat": "Reparación",
+      "franja_original": "13-16",
+      "d": "LOS MANZANOS 3117, QUILPUE",
+      "estado": "reagendada",
+      "color": "rgb(255, 222, 0)",
+      "detalle": "1-3OC0U038 - 10-13-Reparación-2 Play Servicio Degradado-LOS MANZANOS 3117",
       "franja_nueva": "10-13"
     },
     "1-3OBHPFZV": {
@@ -27,8 +37,8 @@
         "aviso": "historial de la direccion, NO es el estado de esta orden",
         "filas": [
           {
-            "estado": "?",
-            "color": "rgb(93, 190, 63)",
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
             "ot": "1-3O8K96OY",
             "franja": "10-13",
             "texto": "1-3O8K96OY - 10-13-Migración-Migración-LOS AROMOS 1151 CASA 92"
