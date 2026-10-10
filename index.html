@@ -2344,6 +2344,46 @@
   #modalDer .dv-seg button.on:first-child { border-radius:7px 0 0 7px; }
   #modalDer .dv-seg button.on:last-child { border-radius:0 7px 7px 0; }
 
+  /* ---- POR FRANJA mas grande (10-10-2026, 08:45) ----
+     Luis: "se podria aprovechar los espacios de la pantalla y mostrar mas
+     grande?". Solo en la pestana Por franja: la caja se ensancha (.ancha) y
+     usa casi todo el alto, y la lectura y la tabla van con letra mas grande.
+     Las otras pestanas quedan como estaban. Borrar este bloque lo deshace. */
+  #modalDer.abierto:has(.dv-box.ancha) { padding:10px; }
+  #modalDer .dv-box.ancha { width:min(1800px,100%); max-height:calc(100vh - 20px); }
+  #modalDer .dv-fra .dv-rt { padding:14px 20px; margin-bottom:10px; }
+  #modalDer .dv-fra .dv-rt .l1 { font-size:17px; line-height:1.5; display:block; }
+  #modalDer .dv-fra .dv-rt .l1 .ctx { display:block; font-size:13.5px; color:#5f7386; margin-top:2px; }
+  #modalDer .dv-fra .dv-rt .kp { gap:10px; margin-top:14px; display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); }
+  #modalDer .dv-fra .dv-rt .kp span { font-size:13.5px; padding:9px 14px; border-radius:10px; line-height:1.4; }
+  #modalDer .dv-fra .dv-rt .kp span b { display:block; font-size:20px; margin:0 0 2px; }
+  #modalDer .dv-fra .dv-rt .ot { font-size:13.5px; margin-top:12px; }
+  #modalDer .dv-fra table { font-size:15px; }
+  #modalDer .dv-fra th { font-size:12px; padding:8px 12px; white-space:normal; line-height:1.25; vertical-align:bottom; }
+  #modalDer .dv-fra td { padding:10px 12px; }
+  #modalDer .dv-fra td:first-child { font-weight:600; font-size:15.5px; }
+  #modalDer .dv-fra td .pq { color:#8fa1b3; font-size:12.5px; margin-left:3px; }
+  #modalDer .dv-fra td .marca { font-size:12px; padding:2px 10px; }
+  #modalDer .dv-fra .dv-tend { gap:5px; }
+  #modalDer .dv-fra .dv-tend i { font-size:13.5px; min-width:38px; padding:4px 0; border-radius:6px; }
+  #modalDer .dv-fra .dv-nota { font-size:13px; line-height:1.6; }
+  /* (08:50) Luis: "lo mismo para todas las pestanas". (08:55) "dejar
+     pantalla mas ancha pero que se vea ordenado, bajando el tamano de las
+     letras". La caja ancha vale para todas. El contenido de las demas
+     pestanas se agranda con zoom SOLO lo que la pantalla permite sin
+     desordenar: --dvz lo calcula derAjustaZoom() segun el ancho de la
+     ventana (1 = tamano normal, tope DER_ZOOM_MAX), de modo que la tabla
+     Por tecnico siempre quepa con cada tecnico en UNA linea. Por franja no
+     lleva zoom: trae sus tamanos propios arriba. */
+  #modalDer .dv-box.ancha .dv-cuerpo > *:not(.dv-fra) { zoom:var(--dvz, 1); }
+  @media (max-width:900px){
+    #modalDer .dv-fra .dv-rt .l1 { font-size:16px; }
+    #modalDer .dv-fra .dv-rt .kp span b { font-size:19px; }
+    #modalDer .dv-fra table { font-size:14px; }
+    #modalDer .dv-fra td { padding:10px 8px; } #modalDer .dv-fra td:first-child { font-size:14.5px; }
+    #modalDer .dv-fra .dv-tend i { font-size:12px; min-width:30px; padding:3px 0; }
+  }
+
   /* ---- MONITOR DETENIDO: parpadeo y aviso (09-10-2026, 12:20) ---- */
   .pv-bar .upd.mal { color:#ff6b5e; font-weight:700; animation:updParpadeo 1s steps(1,end) infinite; }
   .pv-bar .pv-upd.mal i { background:#ef4444; box-shadow:0 0 0 3px rgba(239,68,68,.25); animation:updParpadeo 1s steps(1,end) infinite; }
@@ -6877,6 +6917,124 @@ function derVistaAudHtml(todasSem){
     + 'La marca "auditar" compara a cada técnico con el equipo completo, no con su supervisor.</p>';
 }
 
+/* ---- Por franja (10-10-2026) ----
+   Pedido de Luis: "saber en que franja se derivan mas", con "un numero que
+   nos diga algo". Pestana nueva "Por franja". Usa las MISMAS filas de las
+   otras pestanas (DER, del datos.json de Actividades, que trae la franja
+   agendada de cada orden), asi que respeta semana, supervisor, tipo y el
+   periodo (ultimas 4 semanas o solo la elegida) y sus totales calzan con
+   "Por tecnico".
+   Arriba, la lectura: que franja deriva mas, cuantos puntos sobre el resto
+   del dia, en cuantas de las ultimas DER_FRA_SEM semanas fue la peor (con
+   pocas visitas el % salta; lo que vale es que se repita) y cuantas
+   derivadas menos habria si derivara como el resto.
+   Abajo, la tabla por franja con las causales (cantidad y % de las
+   visitadas) y el % de cada semana; en rojo, la franja peor de esa semana.
+   Solo se dice que una franja "deriva mas" si saca DER_FRA_PUNTOS puntos o
+   mas al resto; si no, se dice que no hay diferencia clara.
+   Las franjas con menos de DER_FRA_MIN visitadas se muestran pero no entran
+   en la comparacion (ej. una orden suelta 19-21). */
+const DER_FRA_SEM = 6;       // semanas de la columna "semana a semana"
+const DER_FRA_MIN = 10;      // visitadas minimas para comparar una franja
+const DER_FRA_PUNTOS = 5;    // puntos sobre el resto para decir "deriva mas"
+function derFraOrd(f){ const m = /^(\d{1,2})/.exec(String(f)); return m ? +m[1] : 99; }
+function derFraTabla(sems, sup){
+  const t = {};
+  (DER || []).forEach(function(x){
+    if(sems.indexOf(x.sem) < 0 || !derEntra(x)) return;
+    if(sup !== 'Todos' && x.sup !== sup) return;
+    const k = String(x.fr || '').trim() || 'Sin franja';
+    const o = t[k] || (t[k] = {fr:k, n:0, d:0, sm:0, re:0, de:0, ot:0});
+    o.n++;
+    if(x.der){ o.d++; o[x.g]++; }
+  });
+  return Object.keys(t).map(function(k){ return t[k]; }).sort(function(a, b){ return derFraOrd(a.fr) - derFraOrd(b.fr) || a.fr.localeCompare(b.fr); });
+}
+function derVistaFraHtml(todasSem){
+  const iSem = todasSem.indexOf(derSem);
+  const sems = todasSem.slice(Math.max(0, iSem - derAudPer + 1), iSem + 1);
+  const semT = todasSem.slice(Math.max(0, iSem - DER_FRA_SEM + 1), iSem + 1);
+  const tb = derFraTabla(sems, derSup);
+  if(!tb.length) return '<div class="dv-vacio">Sin ' + derNomTipo() + ' en ese período para ese supervisor.</div>';
+  const suma = function(l){ return l.reduce(function(a, o){ a.n += o.n; a.d += o.d; a.sm += o.sm; a.re += o.re; a.de += o.de; a.ot += o.ot; return a; }, {n:0,d:0,sm:0,re:0,de:0,ot:0}); };
+  const tot = suma(tb);
+  const pc = function(a, b){ return b ? 100 * a / b : 0; };
+  const f1 = function(v){ return v.toFixed(1).replace('.', ','); };
+  const per = sems.length > 1 ? 'semanas ' + derNumSemana(sems[0]) + ' a ' + derNumSemana(sems[sems.length - 1]) : 'semana ' + derNumSemana(sems[0]);
+  /* semana a semana: cada franja en cada semana, y cual fue la peor */
+  const porS = {}, peorDe = {};
+  semT.forEach(function(k){
+    const m = {}; let peor = null, cand = 0;
+    derFraTabla([k], derSup).forEach(function(o){
+      m[o.fr] = o;
+      if(o.n < DER_FRA_MIN) return;
+      cand++;
+      if(!peor || pc(o.d, o.n) > pc(peor.d, peor.n)) peor = o;
+    });
+    porS[k] = m; peorDe[k] = (peor && cand >= 2) ? peor.fr : null;
+  });
+  const semVal = semT.filter(function(k){ return peorDe[k]; });
+  /* la lectura de arriba */
+  const comp = tb.filter(function(o){ return o.n >= DER_FRA_MIN; });
+  let h = '<div class="dv-fra"><div class="dv-rt" style="margin-top:0">', peorFr = null, hayDif = false;
+  if(comp.length < 2){
+    h += '<div class="l1">Todavía no hay visitas suficientes para comparar franjas en la ' + per + ' (hacen falta ' + DER_FRA_MIN + ' o más en al menos dos franjas).</div></div>';
+  } else {
+    const peor = comp.reduce(function(a, o){ return pc(o.d, o.n) > pc(a.d, a.n) ? o : a; });
+    const mejor = comp.reduce(function(a, o){ return pc(o.d, o.n) < pc(a.d, a.n) ? o : a; });
+    const resto = { n: tot.n - peor.n, d: tot.d - peor.d };
+    const dif = pc(peor.d, peor.n) - pc(resto.d, resto.n);
+    hayDif = dif >= DER_FRA_PUNTOS; peorFr = peor.fr;
+    const nP = semVal.filter(function(k){ return peorDe[k] === peor.fr; }).length;
+    const menos = Math.round(peor.d - peor.n * resto.d / resto.n);
+    const masCant = tb.reduce(function(a, o){ return o.d > a.d ? o : a; });
+    const masSm = comp.reduce(function(a, o){ return pc(o.sm, o.n) > pc(a.sm, a.n) ? o : a; });
+    h += '<div class="l1">' + (hayDif
+        ? 'La franja <b>' + escR(peor.fr) + '</b> es la que más deriva: <b>' + f1(pc(peor.d, peor.n)) + '%</b> (' + peor.d + ' de ' + peor.n + '), contra <b>'
+          + f1(pc(resto.d, resto.n)) + '%</b> en el resto del día. Son <b>' + f1(dif) + ' puntos</b> más.'
+        : 'No hay una diferencia clara entre franjas: van de <b>' + f1(pc(mejor.d, mejor.n)) + '%</b> (' + escR(mejor.fr) + ') a <b>'
+          + f1(pc(peor.d, peor.n)) + '%</b> (' + escR(peor.fr) + ').')
+      + ' <span class="ctx" style="color:#5f7386">' + derTitulo(derNomTipo()).charAt(0) + derNomTipo().slice(1) + ', ' + per + (derSup !== 'Todos' ? ', equipo de ' + escR(derTitulo(derSup)) : '') + '.</span></div><div class="kp">'
+      + (semVal.length ? '<span' + (hayDif && nP * 2 > semVal.length ? ' class="si"' : '') + '><b>' + (semVal.length === 1 ? (nP ? 'Sí' : 'No') : 'En ' + nP + ' de las últimas ' + semVal.length) + '</b>' + (semVal.length === 1 ? 'en la semana ' + derNumSemana(semVal[0]) + ',' : 'semanas,') + ' ' + escR(peor.fr) + ' fue la franja con más derivación</span>' : '')
+      + (hayDif && menos > 0 ? '<span class="si"><b>' + menos + '</b>derivada' + (menos === 1 ? '' : 's') + ' menos en el período si ' + escR(peor.fr) + ' derivara como el resto</span>' : '')
+      + '<span><b>' + masCant.d + '</b>(' + derPct(masCant.d, tot.d) + '%) de las derivadas caen en ' + escR(masCant.fr) + ', la franja que más junta en cantidad</span>'
+      + (masSm.sm ? '<span><b>' + f1(pc(masSm.sm, masSm.n)) + '%</b>de las visitas de ' + escR(masSm.fr) + ' terminan en sin moradores, la más alta</span>' : '')
+      + '</div><div class="ot">Con pocas visitas el porcentaje de una franja salta de una semana a otra. Lo que vale es que se repita: por eso se cuenta en cuántas semanas fue la peor.</div></div>';
+  }
+  /* la tabla */
+  const cau = function(v, n){ return '<td' + (v ? '' : ' class="cero"') + '>' + v + (v ? ' <span class="pq">' + Math.round(pc(v, n)) + '%</span>' : '') + '</td>'; };
+  const fila = function(o, esTot){
+    const resto = { n: tot.n - o.n, d: tot.d - o.d };
+    const dif = (!esTot && o.n >= DER_FRA_MIN && resto.n) ? pc(o.d, o.n) - pc(resto.d, resto.n) : null;
+    const rojo = !esTot && hayDif && o.fr === peorFr;
+    const w = esTot ? ' style="font-weight:700;border-top:2px solid #e2e8f0"' : '';
+    return '<tr><td' + w + '>' + (esTot ? 'Total' : escR(o.fr)) + (rojo ? '<span class="marca">deriva más</span>' : '') + '</td>'
+      + '<td' + w + '>' + o.n + '</td><td' + w + '>' + o.d + '</td>'
+      + '<td' + (esTot ? w : (rojo ? ' style="color:#b91c1c;font-weight:700"' : ' style="font-weight:600"')) + '>' + f1(pc(o.d, o.n)) + '%</td>'
+      + '<td' + (dif === null ? ' class="cero"' : dif >= DER_FRA_PUNTOS ? ' style="color:#b91c1c;font-weight:700"' : dif <= -DER_FRA_PUNTOS ? ' style="color:#17603a;font-weight:700"' : '') + '>'
+      +   (dif === null ? '–' : (dif > 0 ? '+' : dif < 0 ? '−' : '') + f1(Math.abs(dif)) + ' pts') + '</td>'
+      + '<td><span class="dv-tend">' + semT.map(function(k){
+          const s = esTot ? suma(Object.keys(porS[k]).map(function(q){ return porS[k][q]; })) : porS[k][o.fr];
+          if(!s || !s.n) return '<i class="na" title="Semana ' + derNumSemana(k) + ': sin visitas">–</i>';
+          return '<i class="' + (!esTot && peorDe[k] === o.fr ? 'r' : '') + (sems.indexOf(k) >= 0 ? ' hoy' : '') + '" title="Semana ' + derNumSemana(k) + ': derivó ' + s.d + ' de ' + s.n
+            + (!esTot && s.n < DER_FRA_MIN ? ' (pocas visitas, no se compara)' : '') + '">' + Math.round(pc(s.d, s.n)) + '</i>'; }).join('') + '</span></td>'
+      + cau(o.sm, o.n) + cau(o.re, o.n) + cau(o.de, o.n) + cau(o.ot, o.n) + '</tr>';
+  };
+  h += '<table><thead><tr><th>Franja</th><th>Visitadas</th><th>Derivadas</th><th>% derivación</th>'
+    + '<th title="Su % de derivación menos el de las otras franjas juntas">Contra el resto</th>'
+    + '<th title="% de derivación de la franja en cada semana. En rojo, la franja con más derivación de esa semana">Semanas ' + semT.map(function(k){ return derNumSemana(k); }).join(' · ') + '</th>'
+    + '<th>Sin moradores</th><th>Cliente reagenda</th><th>Cliente desiste</th><th>No atribuibles</th></tr></thead><tbody>'
+    + tb.map(function(o){ return fila(o, false); }).join('') + fila(tot, true) + '</tbody></table>'
+    + '<p class="dv-nota"><b>Franja</b> = la agendada con el cliente, no la hora en que llegó el técnico. <b>% derivación</b> = derivadas / visitadas de esa franja. '
+    + '<b>Contra el resto</b> = cuántos puntos deriva más (+) o menos (−) que las otras franjas juntas; se marca desde ' + DER_FRA_PUNTOS + ' puntos.<br>'
+    + '<b>Semanas</b>: el % de derivación de la franja en cada una de las últimas ' + semT.length + ' semanas; en rojo, la franja que más derivó esa semana; con borde, las del período elegido. '
+    + 'Pasa el cursor por un número para ver de cuántas visitas sale.<br>'
+    + 'En las causales, el número chico es el % sobre las visitadas de esa franja (así se comparan franjas con distinta carga). '
+    + 'Las franjas con menos de ' + DER_FRA_MIN + ' visitadas se muestran, pero no entran en la comparación.<br>'
+    + 'Visitadas = completadas más no realizadas; los totales calzan con la pestaña Por técnico. Datos hasta ayer; el día de hoy entra mañana.</p></div>';
+  return h;
+}
+
 /* ---- Ficha del tecnico (08-10-2026, 19:00) ----
    Pedido de Luis: "un buscador por nombre del tecnico que me entregue el
    detalle", para mostrarle los numeros a la gerenta. Se elige UN tecnico y la
@@ -7380,12 +7538,27 @@ function derCausalesSemHtml(tb, tot){
   return h + '</tbody></table></div>';
 }
 
+/* Cuanto se agranda el contenido de la ventana (10-10-2026, 08:55). La tabla
+   Por tecnico necesita DER_ZOOM_BASE px para mostrar sus 10 columnas con cada
+   tecnico en una linea; si la pantalla da mas ancho que eso, el contenido
+   crece en la misma proporcion, hasta DER_ZOOM_MAX. En pantallas angostas
+   queda en 1 (tamano normal). */
+const DER_ZOOM_BASE = 1215, DER_ZOOM_MAX = 1.2;
+function derAjustaZoom(){
+  const c = document.getElementById('dvCuerpo'); if(!c) return;
+  const caja = c.closest('.dv-box'); if(!caja) return;
+  const ancho = Math.min(window.innerWidth - 20, 1800) - 44 - 18;   /* margen, relleno del cuerpo y barra de scroll */
+  caja.style.setProperty('--dvz', Math.max(1, Math.min(DER_ZOOM_MAX, ancho / DER_ZOOM_BASE)).toFixed(3));
+}
+window.addEventListener('resize', derAjustaZoom);
+
 function pintarDeriv(){
 
 
   const cuerpo = document.getElementById('dvCuerpo'), semBox = document.getElementById('dvSemanas'), supBox = document.getElementById('dvSups');
   if(!cuerpo) return;
   semBox.innerHTML = ''; supBox.innerHTML = '';
+  { const cj = cuerpo.closest('.dv-box'); if(cj) cj.classList.add('ancha'); derAjustaZoom(); }   /* desde el 10-10-2026 todas las pestanas van anchas */
   if(derFallo){
     cuerpo.innerHTML = '<div class="dv-vacio">No se pudo bajar el <b>datos.json</b> del Dashboard de Actividades. '
       + 'Revisa que <b>' + escR(URL_ACTIVIDADES) + '</b> abra bien y vuelve a tocar el botón.</div>';
@@ -7407,12 +7580,13 @@ function pintarDeriv(){
      (Supervisor, Tipo y, en A quien auditar y Ficha, el Periodo, que antes
      estaba suelto dentro del cuerpo). El subtitulo cambia con la vista. */
   const todasSem0 = Object.keys(porSem).sort();
-  const usaPer = derVista === 'aud' || derVista === 'fic';
+  const usaPer = derVista === 'aud' || derVista === 'fic' || derVista === 'fra';
   const iS0 = todasSem0.indexOf(derSem);
   const enRango = usaPer && derAudPer > 1 ? todasSem0.slice(Math.max(0, iS0 - derAudPer + 1), iS0 + 1) : [derSem];
   const VISTAS = [['hoy', 'Hoy en vivo', 'Las ' + derNomTipo() + ' del día en curso, tal como van: visitadas, derivadas y por visitar. Se actualiza sola cada 5 minutos.'],
     ['tec', 'Por técnico', 'Quién deriva más en la semana elegida. Toca un técnico para ver cada orden y la historia de su dirección.'],
     ['dir', 'Por dirección', 'Qué direcciones fallan y con qué técnicos, en la semana elegida.'],
+    ['fra', 'Por franja', 'En qué franja horaria se deriva más, y si esa diferencia se repite semana a semana.'],
     ['aud', 'A quién auditar', 'Cuánto de lo derivado es propio de cada técnico, descontando las causales ajenas y las direcciones donde también falló otro.'],
     ['fic', 'Ficha del técnico', 'Todo sobre un técnico: cuánto deriva, cuánto de eso es suyo y qué órdenes revisar primero.']];
   const sub = document.getElementById('dvSub');
@@ -7486,6 +7660,7 @@ function pintarDeriv(){
     + derCausalesSemHtml(tb, tot);
   if(derVista === 'hoy'){ cuerpo.innerHTML = derVistaHoyHtml(); return; }
   if(derVista === 'fic'){ cuerpo.innerHTML = derVistaFicHtml(todasSem); return; }
+  if(derVista === 'fra'){ cuerpo.innerHTML = derVistaFraHtml(todasSem); return; }
   if(!tb.length){ cuerpo.innerHTML = h + '<div class="dv-vacio">Sin ' + derNomTipo() + ' en esta semana para ese supervisor.</div>'; return; }
   if(derVista === 'dir'){ cuerpo.innerHTML = h + derVistaDirHtml(tb, tot); return; }
   if(derVista === 'aud'){ cuerpo.innerHTML = derVistaAudHtml(todasSem); return; }
