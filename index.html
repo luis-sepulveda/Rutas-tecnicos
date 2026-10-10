@@ -9342,7 +9342,11 @@ function pintarPortada(){
     +     '<a class="b-inf b-neg" href="' + URL_NEGOCIOS + '" target="_blank">Negocios</a>'
     /* Metas (28-09-2026, pedido de Luis): despues de Negocios, antes de
        Historial. Abre el dashboard de metas en otra pestana. Clase b-met. */
-    +     '<a class="b-inf b-met" href="' + URL_METAS + '" target="_blank">Metas</a>'
+    /* El boton "Metas" de esta barra se saco el 10-10-2026 (13:25) a pedido de
+       Luis. El dashboard de metas sigue existiendo en su direccion (URL_METAS);
+       solo se quito el acceso desde la portada. Para reponerlo basta quitar
+       las barras de la linea de abajo. */
+    // +     '<a class="b-inf b-met" href="' + URL_METAS + '" target="_blank">Metas</a>'
     /* Resumen (29-09-2026, pedido de Luis): asignadas, completadas, no
        realizadas y efectividad por dia, en una ventana (no abre otra pagina).
        Clase b-res. */
