@@ -20722,23 +20722,24 @@
    }
   },
   "10-10-2026": {
-   "hasta": "10:33",
+   "hasta": "10:38",
    "actividades": 139,
    "tecnicos": 33,
    "estados": {
     "Completado": 4,
-    "Iniciado": 27,
+    "Iniciado": 29,
     "Pendiente": 94,
     "Cancelado": 2,
     "No Realizada": 7,
-    "en ruta": 5
+    "en ruta": 2,
+    "Suspendido": 1
    },
    "rgu": 241.0,
    "caidas_total": 3,
    "caidas_activas": 3,
    "caidas_resueltas": 0,
    "nuevas": 3,
-   "al_bucket": 2,
+   "al_bucket": 3,
    "repetidas": 43,
    "reagendadas": 2,
    "detalle": {
@@ -20912,9 +20913,9 @@
       "o": "1-3OBEGHJO",
       "cat": "Migración 3 Play",
       "f": "10-13",
-      "hi": "10:27",
+      "hi": "10:47",
       "d": "LAS AZUCENAS 2120, QUILPUE",
-      "e": "en ruta",
+      "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
       "visitas": 1,
       "ult_fecha": "09-10-2026",
@@ -20924,7 +20925,7 @@
       "o": "1-3OBNTGHC",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:20",
+      "hi": "14:40",
       "d": "PJE A (JAZMINES) 1760, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -20936,7 +20937,7 @@
       "o": "1-3OB09XKY",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "13:14",
+      "hi": "13:11",
       "d": "PAMPA DEL TAMARUGAL 2151, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "EDGAR VALERO C",
@@ -20948,7 +20949,7 @@
       "o": "1-3OBGNER3",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:38",
+      "hi": "16:35",
       "d": "FRESIA 26, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "EDGAR VALERO C",
@@ -20996,7 +20997,7 @@
       "o": "1-3O9FP1PA",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "14:08",
+      "hi": "14:10",
       "d": "MUNOZ GAMERO 787, QUILPUE",
       "e": "Pendiente",
       "tec": "JORDAN ROA PEREZ",
@@ -21032,7 +21033,7 @@
       "o": "1-3O8F63YA",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "15:31",
+      "hi": "14:19",
       "d": "HAYDN 1621, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -21046,7 +21047,7 @@
       "f": "10-13",
       "hi": "09:57",
       "d": "LOS TOPACIOS 1380 EDIF. I6 DEPTO 303, QUILPUE",
-      "e": "Iniciado",
+      "e": "Suspendido",
       "tec": "JOSE SALAS MEDINA",
       "visitas": 1,
       "ult_fecha": "09-10-2026",
@@ -21342,5 +21343,5 @@
    }
   }
  },
- "generado": "10-10-2026 10:33"
+ "generado": "10-10-2026 10:38"
 }
