@@ -2755,6 +2755,17 @@
   #modalNoop .comp-av .que { margin-top:14px; background:#f1f5f9; border-radius:10px; padding:10px 14px; }
   #modalNoop .comp-av .que ol { margin:6px 0 8px; padding-left:20px; line-height:1.6; }
   #modalNoop .comp-av code { font-family:Consolas,monospace; font-size:12.5px; background:#fff; border:1px solid #e2e8f0; border-radius:5px; padding:0 5px; color:#7a3e00; }
+
+  /* ---- ICONO DE EXCEL QUE DESTELLA (10-10-2026, 20:20) ---- */
+  .pv-xl { display:inline-flex; align-items:center; gap:6px; vertical-align:middle; margin-left:6px; cursor:pointer; text-decoration:none; opacity:.45; }
+  .pv-xl:hover { opacity:.8; }
+  .pv-xl svg { display:block; border-radius:5px; }
+  .pv-xl.falta { opacity:1; background:#e3f6ea; border:1px solid #86cfa3; border-radius:999px; padding:2px 11px 2px 3px; font-size:12.5px; font-weight:700; color:#14532d;
+    animation:pvXlDestello 1.1s ease-in-out infinite; }
+  @keyframes pvXlDestello { 0%, 100% { box-shadow:0 0 0 0 rgba(29,122,70,.55); background:#e3f6ea; } 50% { box-shadow:0 0 0 7px rgba(29,122,70,0); background:#bbf0cf; } }
+  .pv-xl.falta svg { animation:pvXlIcono 1.1s ease-in-out infinite; }
+  @keyframes pvXlIcono { 0%, 100% { transform:scale(1); } 50% { transform:scale(1.18); } }
+  @media (prefers-reduced-motion: reduce){ .pv-xl.falta, .pv-xl.falta svg { animation:none; } }
 </style>
 </head>
 <body>
@@ -9588,6 +9599,24 @@ function botonNoOperativos(){
       + 'title="Trabajan hoy en otra comuna: ' + escR(((NOOP.lista || []).filter(function(x){ return x.otra_comuna; })
           .map(function(x){ return x.tec + (x.comuna ? ' (' + x.comuna + ')' : ''); })).join(', ')) + '">'
       + '<span class="nn">' + oc + '</span> en otra comuna \u203a</a>';
+  /* ---- ICONO DE EXCEL QUE DESTELLA (10-10-2026, 20:20) ----
+     Luis: "un icono de excel que destelle para que no se me olvide
+     actualizar a diario el estado tecnicos". Va al lado de los enlaces de no
+     operativos. DESTELLA mientras haya tecnicos sin ordenes hoy y sin motivo
+     marcado (NOOP.n_sin_expl > 0): es justo cuando falta abrir
+     estado_tecnicos.xlsx, marcar y guardar. Cuando no queda nadie sin marcar,
+     el icono se queda quieto y apagado ("al dia"). Al tocarlo abre la lista
+     de no operativos (una pagina web no puede abrir el Excel del PC).
+     OJO: la pagina no sabe a que hora se guardo el Excel; se guia por si
+     queda alguien sin marcar. Solo sale si existe estado_tecnicos.xlsx. */
+  if(NOOP.archivo_estados){
+    const ico = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="4" fill="#1d7a46"/>'
+      + '<path d="M7.2 7.5h2.3l2.5 3.6 2.5-3.6h2.3l-3.6 4.5 3.6 4.5h-2.3l-2.5-3.6-2.5 3.6H7.2l3.6-4.5z" fill="#fff"/></svg>';
+    h += sx
+      ? ' <a class="pv-xl falta" onclick="abrirNoOperativos(\'no\')" title="' + (sx === 1 ? 'Hay 1 técnico' : 'Hay ' + sx + ' técnicos') + ' sin órdenes hoy y sin motivo marcado. Abre estado_tecnicos.xlsx (carpeta Rutas tecnicos), marca ESTADO y HASTA, y guarda. Toca para ver quiénes son.">'
+        + ico + '<span>Marcar estado \u00b7 ' + sx + '</span></a>'
+      : ' <a class="pv-xl" onclick="abrirNoOperativos(\'no\')" title="Estado de técnicos al día: no queda nadie sin marcar en estado_tecnicos.xlsx.">' + ico + '</a>';
+  }
   return h;
 }
 /* modo: 'no' = solo los no operativos de verdad; 'otra' = solo los que
