@@ -20722,19 +20722,20 @@
    }
   },
   "10-10-2026": {
-   "hasta": "09:58",
-   "actividades": 139,
+   "hasta": "10:13",
+   "actividades": 138,
    "tecnicos": 34,
    "estados": {
-    "Iniciado": 27,
-    "Pendiente": 105,
+    "Completado": 2,
+    "en ruta": 3,
+    "Pendiente": 102,
+    "Iniciado": 29,
     "Cancelado": 1,
-    "en ruta": 5,
     "No Realizada": 1
    },
-   "rgu": 241.0,
-   "caidas_total": 1,
-   "caidas_activas": 1,
+   "rgu": 240.0,
+   "caidas_total": 3,
+   "caidas_activas": 3,
    "caidas_resueltas": 0,
    "nuevas": 2,
    "al_bucket": 1,
@@ -20750,6 +20751,24 @@
       "hi": "10:00",
       "d": "SUIZA 252, QUILPUE",
       "e": "Pendiente"
+     },
+     {
+      "o": "1-3OC0U038",
+      "tec": "FELIPE SILVA R",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "16:00",
+      "d": "LOS MANZANOS 3117, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OBHPFZV",
+      "tec": "LUIS GATICA DAVILA",
+      "cat": "Migración 2 Play",
+      "f": "10-13",
+      "hi": "12:01",
+      "d": "LOS AROMOS 1151 CASA 64, VILLA ALEMANA",
+      "e": "Pendiente"
      }
     ],
     "nuevas": [
@@ -20760,7 +20779,7 @@
       "f": "10-13",
       "hi": "09:35",
       "d": "BADEN POWELL 956 EDIF. P DEPTO 32, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OBVWA85",
@@ -20777,9 +20796,9 @@
       "o": "1-3OBK91MK",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:30",
+      "hi": "10:20",
       "d": "VALLE DEL PARAISO 2907 EDIF. A DEPTO 102, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "ALEXIS JARA",
       "visitas": 2,
       "ult_fecha": "09-10-2026",
@@ -20789,7 +20808,7 @@
       "o": "1-3OBITJ5Q",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:20",
+      "hi": "15:10",
       "d": "DIEGO DE ALMAGRO 345 CASA A, QUILPUE",
       "e": "Pendiente",
       "tec": "ALEXIS JARA",
@@ -20872,7 +20891,7 @@
       "o": "1-3OBONCD2",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "14:03",
       "d": "SAN LUIS 1730, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
@@ -20908,7 +20927,7 @@
       "o": "1-3OB09XKY",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "12:36",
+      "hi": "13:39",
       "d": "PAMPA DEL TAMARUGAL 2151, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "EDGAR VALERO C",
@@ -20920,7 +20939,7 @@
       "o": "1-3OBGNER3",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "17:03",
       "d": "FRESIA 26, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "EDGAR VALERO C",
@@ -21232,7 +21251,7 @@
       "o": "1-3O9ICWU5",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "12:22",
+      "hi": "12:24",
       "d": "NEUQUEN 770, QUILPUE",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -21244,7 +21263,7 @@
       "o": "1-3OBL0U4J",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:54",
+      "hi": "14:56",
       "d": "PJE CHIGUAYANTE 1485, QUILPUE",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -21268,7 +21287,7 @@
       "o": "1-3OBEDT4A",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "10:40",
+      "hi": "11:01",
       "d": "EL TAMARUGO 897, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SEBASTIAN DOSSOW A",
@@ -21314,5 +21333,5 @@
    }
   }
  },
- "generado": "10-10-2026 09:58"
+ "generado": "10-10-2026 10:13"
 }
