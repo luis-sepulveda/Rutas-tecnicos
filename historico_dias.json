@@ -20722,24 +20722,25 @@
    }
   },
   "10-10-2026": {
-   "hasta": "12:34",
-   "actividades": 133,
+   "hasta": "12:49",
+   "actividades": 142,
    "tecnicos": 33,
    "estados": {
-    "Completado": 25,
-    "No Realizada": 20,
-    "Pendiente": 60,
+    "Completado": 28,
+    "No Realizada": 21,
+    "en ruta": 4,
+    "Pendiente": 63,
     "Cancelado": 4,
-    "Iniciado": 22,
+    "Iniciado": 20,
     "Suspendido": 2
    },
-   "rgu": 228.6,
+   "rgu": 244.1,
    "caidas_total": 5,
    "caidas_activas": 4,
    "caidas_resueltas": 1,
-   "nuevas": 5,
+   "nuevas": 6,
    "al_bucket": 14,
-   "repetidas": 40,
+   "repetidas": 43,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
@@ -20781,6 +20782,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OC3ZBTV",
+      "tec": "JOSE CASTRO P",
+      "cat": "Migración 3 Play",
+      "f": "10-13",
+      "hi": "12:39",
+      "d": "PJE TORREMOLINOS 0367, VILLA ALEMANA",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3OC2GNRY",
       "tec": "JOSE PEREZ RANGEL",
@@ -20853,6 +20863,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OAQZWLT",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "16:44",
+      "d": "RIO IMPERIAL 150, QUILPUE",
+      "e": "Pendiente",
+      "tec": "ALFREDO ALCAYAGA F",
+      "visitas": 2,
+      "ult_fecha": "08-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OC0KIE2",
       "cat": "Reparación",
       "f": "13-16",
@@ -20879,7 +20901,7 @@
       "o": "1-3O54J4HL",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "15:22",
+      "hi": "15:33",
       "d": "GOMEZ CARRENO 581 CASA 8, QUILPUE",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
@@ -20927,9 +20949,9 @@
       "o": "1-3OBPUUKM",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "12:50",
       "d": "LOS CORCHOS 2693, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "DANIEL NAVARRETE E",
       "visitas": 2,
       "ult_fecha": "09-10-2026",
@@ -20987,7 +21009,7 @@
       "o": "1-3O9FP1PA",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "15:43",
+      "hi": "15:53",
       "d": "MUNOZ GAMERO 787, QUILPUE",
       "e": "Pendiente",
       "tec": "GEEYSER PEREZ O",
@@ -21011,7 +21033,7 @@
       "o": "1-3OBLJYCW",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "13:53",
       "d": "MARGA MARGA 1891, QUILPUE",
       "e": "Pendiente",
       "tec": "JORDAN ROA PEREZ",
@@ -21032,10 +21054,22 @@
       "ult_cierre": "NAP Problema ubicación"
      },
      {
+      "o": "1-3OC3ZBTV",
+      "cat": "Migración 3 Play",
+      "f": "10-13",
+      "hi": "12:40",
+      "d": "PJE TORREMOLINOS 0367, VILLA ALEMANA",
+      "e": "Iniciado",
+      "tec": "JOSE CASTRO P",
+      "visitas": 1,
+      "ult_fecha": "10-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OBUTWIC",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "16:45",
       "d": "GERONA 41, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE CASTRO P",
@@ -21191,7 +21225,7 @@
       "o": "1-3OBL0U4J",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "13:00",
       "d": "PJE CHIGUAYANTE 1485, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
@@ -21217,7 +21251,7 @@
       "f": "10-13",
       "hi": "09:46",
       "d": "DAVID CORTES 1086, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "MARCO PEREZ G",
       "visitas": 4,
       "ult_fecha": "26-09-2026",
@@ -21248,10 +21282,22 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3O9ICWU5",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "12:59",
+      "d": "NEUQUEN 770, QUILPUE",
+      "e": "en ruta",
+      "tec": "MATÍAS JAQUE AG",
+      "visitas": 1,
+      "ult_fecha": "06-10-2026",
+      "ult_cierre": "Sin acceso a vivienda"
+     },
+     {
       "o": "1-3OBMOHBI",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:28",
+      "hi": "19:27",
       "d": "LOS TREBOLES 210 CASA 324, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATÍAS JAQUE AG",
@@ -21272,22 +21318,22 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3O9ICWU5",
+      "o": "1-3OB2MBGC",
       "cat": "Alta 1 Play",
-      "f": "10-13",
-      "hi": "12:26",
-      "d": "NEUQUEN 770, QUILPUE",
+      "f": "16-19",
+      "hi": "18:38",
+      "d": "CALLE HERALDO ORREGO 3201 EDIF. B DEPTO 604, QUILPUE",
       "e": "Pendiente",
-      "tec": "RAFAEL VARGAS B",
+      "tec": "NICOLAS MOYANO R",
       "visitas": 1,
-      "ult_fecha": "06-10-2026",
-      "ult_cierre": "Sin acceso a vivienda"
+      "ult_fecha": "08-10-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OBITJ5Q",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:52",
+      "hi": "14:01",
       "d": "DIEGO DE ALMAGRO 345 CASA A, QUILPUE",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -21313,7 +21359,7 @@
       "o": "1-3O9M3MD9",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:02",
+      "hi": "14:11",
       "d": "GABRIEL GONZALEZ VIDELA 1831 CASA A, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
@@ -21333,5 +21379,5 @@
    }
   }
  },
- "generado": "10-10-2026 12:34"
+ "generado": "10-10-2026 12:49"
 }
