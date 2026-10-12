@@ -21391,27 +21391,36 @@
    }
   },
   "12-10-2026": {
-   "hasta": "10:21",
-   "actividades": 54,
+   "hasta": "10:32",
+   "actividades": 55,
    "tecnicos": 22,
    "estados": {
     "Completado": 1,
-    "en ruta": 5,
-    "Pendiente": 27,
+    "Iniciado": 18,
+    "Pendiente": 28,
     "No Realizada": 5,
-    "Iniciado": 16
+    "en ruta": 3
    },
-   "rgu": 95.0,
+   "rgu": 96.0,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 6,
+   "nuevas": 7,
    "al_bucket": 1,
    "repetidas": 17,
    "reagendadas": 2,
    "detalle": {
     "caidas": [],
     "nuevas": [
+     {
+      "o": "1-3OCSP8NT",
+      "tec": "SEBASTIAN DOSSOW A",
+      "cat": "Migración 1 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "PJE 5 0353, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OCJ94RO",
       "tec": "JEAN ROODLY ORELIEN",
@@ -21432,7 +21441,7 @@
      },
      {
       "o": "1-3OC8IWSW",
-      "tec": "JOSE PEREZ RANGEL",
+      "tec": "JOSE ROJO A",
       "cat": "Migración 1 Play",
       "f": "10-13",
       "hi": "14:00",
@@ -21520,7 +21529,7 @@
       "o": "1-3OA7N9DG",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "14:03",
       "d": "BULNES 835, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -21556,7 +21565,7 @@
       "o": "1-3OAP11GA",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "12:49",
+      "hi": "12:58",
       "d": "RIQUELME 2064, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -21568,7 +21577,7 @@
       "o": "1-3OCS55X9",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:10",
+      "hi": "16:19",
       "d": "SIMPSON 246 DEPTO 106, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -21698,5 +21707,5 @@
    }
   }
  },
- "generado": "12-10-2026 10:21"
+ "generado": "12-10-2026 10:32"
 }
