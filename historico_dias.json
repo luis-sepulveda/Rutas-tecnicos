@@ -21391,24 +21391,25 @@
    }
   },
   "12-10-2026": {
-   "hasta": "16:29",
-   "actividades": 83,
+   "hasta": "16:34",
+   "actividades": 85,
    "tecnicos": 22,
    "estados": {
     "Completado": 28,
     "No Realizada": 35,
     "Iniciado": 15,
+    "Pendiente": 2,
     "Cancelado": 2,
     "en ruta": 2,
     "Suspendido": 1
    },
-   "rgu": 133.4,
+   "rgu": 138.4,
    "caidas_total": 1,
    "caidas_activas": 1,
    "caidas_resueltas": 0,
-   "nuevas": 25,
+   "nuevas": 26,
    "al_bucket": 4,
-   "repetidas": 25,
+   "repetidas": 26,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
@@ -21423,6 +21424,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OCXFRC2",
+      "tec": "RAFAEL VARGAS B",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "16:45",
+      "d": "LOS ALMENDROS (LEIGHTON) 16, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OCYEYX3",
       "tec": "JOSE PEREZ RANGEL",
@@ -21759,6 +21769,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OCYN3UJ",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "16:30",
+      "d": "PRIMERA 717, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOSE CASTRO P",
+      "visitas": 1,
+      "ult_fecha": "12-10-2026",
+      "ult_cierre": "Direccion incorrecta"
+     },
+     {
       "o": "1-3OBTX9X0",
       "cat": "Migración 2 Play",
       "f": "10-13",
@@ -21976,5 +21998,5 @@
    }
   }
  },
- "generado": "12-10-2026 16:29"
+ "generado": "12-10-2026 16:34"
 }
