@@ -21391,23 +21391,22 @@
    }
   },
   "12-10-2026": {
-   "hasta": "16:14",
-   "actividades": 82,
+   "hasta": "16:19",
+   "actividades": 83,
    "tecnicos": 22,
    "estados": {
     "Completado": 27,
-    "No Realizada": 31,
-    "Iniciado": 18,
-    "en ruta": 2,
+    "No Realizada": 33,
+    "Iniciado": 17,
     "Cancelado": 2,
-    "Suspendido": 1,
-    "Pendiente": 1
+    "en ruta": 3,
+    "Suspendido": 1
    },
-   "rgu": 131.4,
+   "rgu": 133.4,
    "caidas_total": 1,
    "caidas_activas": 1,
    "caidas_resueltas": 0,
-   "nuevas": 24,
+   "nuevas": 25,
    "al_bucket": 4,
    "repetidas": 25,
    "reagendadas": 2,
@@ -21425,13 +21424,22 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OCYEYX3",
+      "tec": "JOSE PEREZ RANGEL",
+      "cat": "Migración 2 Play",
+      "f": "16-19",
+      "hi": "16:37",
+      "d": "PROYECTADA 106, VILLA ALEMANA",
+      "e": "en ruta"
+     },
+     {
       "o": "1-3OCWLR5K",
       "tec": "NICOLAS MOYANO R",
       "cat": "Alta 1 Play",
       "f": "16-19",
       "hi": "17:27",
       "d": "CORA WARGNY 2097, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OCX0EMS",
@@ -21968,5 +21976,5 @@
    }
   }
  },
- "generado": "12-10-2026 16:14"
+ "generado": "12-10-2026 16:19"
 }
