@@ -21391,24 +21391,24 @@
    }
   },
   "12-10-2026": {
-   "hasta": "14:29",
-   "actividades": 75,
+   "hasta": "14:39",
+   "actividades": 76,
    "tecnicos": 22,
    "estados": {
     "Completado": 19,
-    "Iniciado": 14,
-    "Pendiente": 15,
-    "No Realizada": 24,
-    "Cancelado": 2,
-    "en ruta": 1
+    "No Realizada": 26,
+    "Iniciado": 13,
+    "Pendiente": 12,
+    "en ruta": 4,
+    "Cancelado": 2
    },
-   "rgu": 121.3,
+   "rgu": 124.8,
    "caidas_total": 1,
    "caidas_activas": 1,
    "caidas_resueltas": 0,
-   "nuevas": 20,
+   "nuevas": 21,
    "al_bucket": 3,
-   "repetidas": 24,
+   "repetidas": 25,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
@@ -21423,6 +21423,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OCWWDD0",
+      "tec": "ALEXIS JARA",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "14:39",
+      "d": "CALDERA 102, QUILPUE",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3OC9T3B3",
       "tec": "ESTEBAN PIZARRO QUINTANA",
@@ -21547,7 +21556,7 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "PJE 5 0353, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "No Realizada"
      },
      {
       "o": "1-3OCJ94RO",
@@ -21606,6 +21615,18 @@
     ],
     "repetidas": [
      {
+      "o": "1-3OCWWDD0",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "14:39",
+      "d": "CALDERA 102, QUILPUE",
+      "e": "Iniciado",
+      "tec": "ALEXIS JARA",
+      "visitas": 1,
+      "ult_fecha": "12-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OC5XH1W",
       "cat": "Alta 2 Play",
       "f": "10-13",
@@ -21615,18 +21636,6 @@
       "tec": "CRISTOBAL MIRANDA VALENC",
       "visitas": 1,
       "ult_fecha": "10-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OCTDCR3",
-      "cat": "Alta 2 Play",
-      "f": "13-16",
-      "hi": "15:58",
-      "d": "LOS CORCHOS 2693, QUILPUE",
-      "e": "Pendiente",
-      "tec": "CRISTOBAL SILVA LEIVA",
-      "visitas": 5,
-      "ult_fecha": "12-10-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -21640,6 +21649,18 @@
       "visitas": 4,
       "ult_fecha": "23-09-2026",
       "ult_cierre": "NAP Problema ubicación"
+     },
+     {
+      "o": "1-3OCTDCR3",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "14:52",
+      "d": "LOS CORCHOS 2693, QUILPUE",
+      "e": "en ruta",
+      "tec": "DANIEL NAVARRETE E",
+      "visitas": 5,
+      "ult_fecha": "12-10-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OC489XC",
@@ -21717,7 +21738,7 @@
       "o": "1-3OCVQS46",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "16:01",
+      "hi": "16:00",
       "d": "ANA MARIA FRESNO 151 DEPTO 402, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE PEREZ RANGEL",
@@ -21919,5 +21940,5 @@
    }
   }
  },
- "generado": "12-10-2026 14:29"
+ "generado": "12-10-2026 14:39"
 }
