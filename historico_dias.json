@@ -21391,27 +21391,36 @@
    }
   },
   "12-10-2026": {
-   "hasta": "10:32",
-   "actividades": 55,
+   "hasta": "10:57",
+   "actividades": 57,
    "tecnicos": 22,
    "estados": {
     "Completado": 1,
-    "Iniciado": 18,
-    "Pendiente": 28,
-    "No Realizada": 5,
-    "en ruta": 3
+    "Iniciado": 19,
+    "Pendiente": 27,
+    "No Realizada": 9,
+    "en ruta": 1
    },
-   "rgu": 96.0,
+   "rgu": 98.0,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 7,
+   "nuevas": 8,
    "al_bucket": 1,
-   "repetidas": 17,
+   "repetidas": 18,
    "reagendadas": 2,
    "detalle": {
     "caidas": [],
     "nuevas": [
+     {
+      "o": "1-3OC7RNLL",
+      "tec": "JOSE PEREZ RANGEL",
+      "cat": "Migración 1 Play",
+      "f": "10-13",
+      "hi": "11:49",
+      "d": "BUENOS AIRES 1054, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OCSP8NT",
       "tec": "SEBASTIAN DOSSOW A",
@@ -21423,12 +21432,12 @@
      },
      {
       "o": "1-3OCJ94RO",
-      "tec": "JEAN ROODLY ORELIEN",
+      "tec": "JUAN ARRIAGADA C",
       "cat": "Alta 2 Play",
       "f": "10-13",
       "hi": "11:52",
       "d": "REGIDOR SADY YOUI 1866, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OCS55X9",
@@ -21446,7 +21455,7 @@
       "f": "10-13",
       "hi": "14:00",
       "d": "SAN ENRIQUE 1155, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OCQ18OV",
@@ -21468,7 +21477,7 @@
      },
      {
       "o": "1-3OC8OJGU",
-      "tec": "RAFAEL VARGAS B",
+      "tec": "SEBASTIAN DOSSOW A",
       "cat": "Alta 2 Play",
       "f": "10-13",
       "hi": "10:00",
@@ -21481,9 +21490,9 @@
       "o": "1-3OC5XH1W",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "10:21",
+      "hi": "10:32",
       "d": "FIGUEROA LARRAIN 0827 CASA A, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "CRISTOBAL MIRANDA VALENC",
       "visitas": 1,
       "ult_fecha": "10-10-2026",
@@ -21493,9 +21502,9 @@
       "o": "1-3OC5L03Y",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:30",
+      "hi": "10:35",
       "d": "AV LOS CARRERA 2409, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "DANIEL NAVARRETE E",
       "visitas": 4,
       "ult_fecha": "23-09-2026",
@@ -21526,10 +21535,22 @@
       "ult_cierre": "Falta de dotación"
      },
      {
+      "o": "1-3OC7RNLL",
+      "cat": "Migración 1 Play",
+      "f": "10-13",
+      "hi": "11:49",
+      "d": "BUENOS AIRES 1054, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOSE PEREZ RANGEL",
+      "visitas": 2,
+      "ult_fecha": "10-10-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3OA7N9DG",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:03",
+      "hi": "14:01",
       "d": "BULNES 835, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -21555,7 +21576,7 @@
       "f": "10-13",
       "hi": "10:20",
       "d": "LOS ALMENDROS (LEIGHTON) 16, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JUAN ARRIAGADA C",
       "visitas": 1,
       "ult_fecha": "10-10-2026",
@@ -21591,7 +21612,7 @@
       "f": "10-13",
       "hi": "09:53",
       "d": "SUIZA 252, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "MARCO PEREZ G",
       "visitas": 1,
       "ult_fecha": "06-10-2026",
@@ -21658,28 +21679,28 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3OC8OJGU",
-      "cat": "Alta 2 Play",
-      "f": "10-13",
-      "hi": "11:49",
-      "d": "LERIDA 020 EDIF. A DEPTO 301, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "RAFAEL VARGAS B",
-      "visitas": 1,
-      "ult_fecha": "10-10-2026",
-      "ult_cierre": "Zona Roja"
-     },
-     {
       "o": "1-3OC579FA",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "11:47",
+      "hi": "10:55",
       "d": "LOS CORCHOS 2693, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "SAMUEL FERNANDEZ VIDAL",
       "visitas": 4,
       "ult_fecha": "10-10-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OC8OJGU",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "11:02",
+      "d": "LERIDA 020 EDIF. A DEPTO 301, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "SEBASTIAN DOSSOW A",
+      "visitas": 1,
+      "ult_fecha": "10-10-2026",
+      "ult_cierre": "Zona Roja"
      }
     ],
     "reagendadas": [
@@ -21699,7 +21720,7 @@
       "f": "10-13",
       "hi": "09:53",
       "d": "SUIZA 252, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "MARCO PEREZ G",
       "desde": "10-10-2026"
      }
@@ -21707,5 +21728,5 @@
    }
   }
  },
- "generado": "12-10-2026 10:32"
+ "generado": "12-10-2026 10:57"
 }
