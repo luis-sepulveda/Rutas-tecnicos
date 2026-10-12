@@ -21391,24 +21391,24 @@
    }
   },
   "12-10-2026": {
-   "hasta": "12:32",
-   "actividades": 65,
+   "hasta": "12:42",
+   "actividades": 67,
    "tecnicos": 22,
    "estados": {
-    "Completado": 4,
+    "Completado": 5,
     "Iniciado": 16,
     "Pendiente": 23,
     "No Realizada": 20,
-    "en ruta": 1,
+    "en ruta": 2,
     "Cancelado": 1
    },
-   "rgu": 103.7,
+   "rgu": 106.7,
    "caidas_total": 1,
    "caidas_activas": 1,
    "caidas_resueltas": 0,
-   "nuevas": 12,
+   "nuevas": 13,
    "al_bucket": 3,
-   "repetidas": 20,
+   "repetidas": 21,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
@@ -21424,6 +21424,15 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OCUWBX7",
+      "tec": "YENDER BOSCAN CADENAS",
+      "cat": "Migración 2 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "LOS ROBLES 501 CASA 234, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3OCUKY4B",
       "tec": "MATIAS APELEO APELEO",
       "cat": "Modificación de Servicio",
@@ -21434,12 +21443,12 @@
      },
      {
       "o": "1-3OCURL32",
-      "tec": "NICOLAS MOYANO R",
+      "tec": "LEONEL HERNÁNDEZ OJE",
       "cat": "Modificación de Servicio",
       "f": "10-13",
       "hi": "12:57",
       "d": "AV LOS CARRERA 619, QUILPUE",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OCU26CS",
@@ -21654,10 +21663,22 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3OCURL32",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "12:36",
+      "d": "AV LOS CARRERA 619, QUILPUE",
+      "e": "Iniciado",
+      "tec": "LEONEL HERNÁNDEZ OJE",
+      "visitas": 1,
+      "ult_fecha": "03-10-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3OCS55X9",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "17:00",
+      "hi": "17:07",
       "d": "SIMPSON 246 DEPTO 106, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -21707,29 +21728,17 @@
       "f": "10-13",
       "hi": "10:10",
       "d": "CALLE HERALDO ORREGO 3201 EDIF. B DEPTO 604, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "NICOLAS MOYANO R",
       "visitas": 3,
       "ult_fecha": "10-10-2026",
       "ult_cierre": "Ductos tapados"
      },
      {
-      "o": "1-3OCURL32",
-      "cat": "Modificación de Servicio",
-      "f": "10-13",
-      "hi": "12:57",
-      "d": "AV LOS CARRERA 619, QUILPUE",
-      "e": "Pendiente",
-      "tec": "NICOLAS MOYANO R",
-      "visitas": 1,
-      "ult_fecha": "03-10-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
       "o": "1-3OBM7X1T",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "14:46",
+      "hi": "12:50",
       "d": "LAS GAVIOTAS 2587, QUILPUE",
       "e": "Pendiente",
       "tec": "NICOLAS MOYANO R",
@@ -21772,6 +21781,18 @@
       "visitas": 1,
       "ult_fecha": "10-10-2026",
       "ult_cierre": "Zona Roja"
+     },
+     {
+      "o": "1-3OCUWBX7",
+      "cat": "Migración 2 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "LOS ROBLES 501 CASA 234, QUILPUE",
+      "e": "Pendiente",
+      "tec": "YENDER BOSCAN CADENAS",
+      "visitas": 1,
+      "ult_fecha": "25-09-2026",
+      "ult_cierre": "Ductos tapados"
      }
     ],
     "reagendadas": [
@@ -21799,5 +21820,5 @@
    }
   }
  },
- "generado": "12-10-2026 12:32"
+ "generado": "12-10-2026 12:42"
 }
