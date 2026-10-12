@@ -21391,23 +21391,23 @@
    }
   },
   "12-10-2026": {
-   "hasta": "12:12",
-   "actividades": 60,
+   "hasta": "12:17",
+   "actividades": 63,
    "tecnicos": 22,
    "estados": {
     "Completado": 3,
-    "Iniciado": 14,
-    "Pendiente": 22,
+    "Iniciado": 16,
+    "Pendiente": 23,
     "No Realizada": 20,
     "Cancelado": 1
    },
-   "rgu": 100.5,
+   "rgu": 102.6,
    "caidas_total": 1,
    "caidas_activas": 1,
    "caidas_resueltas": 0,
-   "nuevas": 9,
+   "nuevas": 10,
    "al_bucket": 3,
-   "repetidas": 18,
+   "repetidas": 19,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
@@ -21422,6 +21422,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OCU26CS",
+      "tec": "LUIS GATICA DAVILA",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "12:16",
+      "d": "SANTA MACARENA 1910, VILLA ALEMANA",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3OC8YB7J",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -21576,6 +21585,18 @@
       "visitas": 4,
       "ult_fecha": "09-10-2026",
       "ult_cierre": "Falta de dotación"
+     },
+     {
+      "o": "1-3OCUEJ0A",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "12:13",
+      "d": "HAYDN 1621, VILLA ALEMANA",
+      "e": "Iniciado",
+      "tec": "JOSE ROJO A",
+      "visitas": 2,
+      "ult_fecha": "15-08-2026",
+      "ult_cierre": "Cliente Desiste"
      },
      {
       "o": "1-3OC1EB37",
@@ -21747,5 +21768,5 @@
    }
   }
  },
- "generado": "12-10-2026 12:12"
+ "generado": "12-10-2026 12:17"
 }
