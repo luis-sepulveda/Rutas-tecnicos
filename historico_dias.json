@@ -21391,24 +21391,24 @@
    }
   },
   "12-10-2026": {
-   "hasta": "15:09",
-   "actividades": 79,
+   "hasta": "15:24",
+   "actividades": 78,
    "tecnicos": 22,
    "estados": {
-    "Completado": 26,
+    "Completado": 27,
     "No Realizada": 28,
-    "Iniciado": 6,
-    "Pendiente": 11,
+    "Iniciado": 8,
+    "Pendiente": 7,
     "en ruta": 5,
     "Cancelado": 2,
     "Suspendido": 1
    },
-   "rgu": 129.3,
+   "rgu": 125.4,
    "caidas_total": 1,
    "caidas_activas": 1,
    "caidas_resueltas": 0,
    "nuevas": 23,
-   "al_bucket": 3,
+   "al_bucket": 4,
    "repetidas": 25,
    "reagendadas": 2,
    "detalle": {
@@ -21435,7 +21435,7 @@
      },
      {
       "o": "1-3OCX1IGA",
-      "tec": "JOSE SALAS MEDINA",
+      "tec": "ALEXIS JARA",
       "cat": "Alta 1 Play",
       "f": "16-19",
       "hi": "16:37",
@@ -21453,12 +21453,12 @@
      },
      {
       "o": "1-3OC9T3B3",
-      "tec": "ESTEBAN PIZARRO QUINTANA",
+      "tec": "JOSE ROJO A",
       "cat": "Alta 2 Play",
       "f": "16-19",
       "hi": "16:00",
       "d": "PJE MARTIN GALAN 1395, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OCVOBNS",
@@ -21476,7 +21476,7 @@
       "f": "13-16",
       "hi": "14:09",
       "d": "BUENOS AIRES 1054, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OC489XC",
@@ -21721,25 +21721,13 @@
       "o": "1-3OCTTA8O",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "15:01",
+      "hi": "15:13",
       "d": "BUENOS AIRES 1054, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "ESTEBAN PIZARRO QUINTANA",
       "visitas": 3,
       "ult_fecha": "12-10-2026",
       "ult_cierre": "Cliente reagenda"
-     },
-     {
-      "o": "1-3OC9T3B3",
-      "cat": "Alta 2 Play",
-      "f": "16-19",
-      "hi": "17:34",
-      "d": "PJE MARTIN GALAN 1395, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "ESTEBAN PIZARRO QUINTANA",
-      "visitas": 1,
-      "ult_fecha": "10-10-2026",
-      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OCSOAH8",
@@ -21788,6 +21776,18 @@
       "visitas": 2,
       "ult_fecha": "15-08-2026",
       "ult_cierre": "Cliente Desiste"
+     },
+     {
+      "o": "1-3OC9T3B3",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "15:24",
+      "d": "PJE MARTIN GALAN 1395, VILLA ALEMANA",
+      "e": "en ruta",
+      "tec": "JOSE ROJO A",
+      "visitas": 1,
+      "ult_fecha": "10-10-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OC1EB37",
@@ -21853,9 +21853,9 @@
       "o": "1-3OBHH43Q",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "15:21",
       "d": "AVENIDA VALPARAISO 2121 CASA B, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "MATÍAS JAQUE AG",
       "visitas": 1,
       "ult_fecha": "15-09-2026",
@@ -21879,7 +21879,7 @@
       "f": "10-13",
       "hi": "12:49",
       "d": "LAS GAVIOTAS 2587, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "NICOLAS MOYANO R",
       "visitas": 2,
       "ult_fecha": "08-10-2026",
@@ -21925,7 +21925,7 @@
       "o": "1-3OCUWBX7",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "15:13",
+      "hi": "15:39",
       "d": "LOS ROBLES 501 CASA 234, QUILPUE",
       "e": "en ruta",
       "tec": "YENDER BOSCAN CADENAS",
@@ -21959,5 +21959,5 @@
    }
   }
  },
- "generado": "12-10-2026 15:09"
+ "generado": "12-10-2026 15:24"
 }
