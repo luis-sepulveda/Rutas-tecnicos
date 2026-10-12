@@ -21391,21 +21391,22 @@
    }
   },
   "12-10-2026": {
-   "hasta": "17:08",
-   "actividades": 87,
+   "hasta": "17:13",
+   "actividades": 88,
    "tecnicos": 22,
    "estados": {
-    "Completado": 30,
+    "Completado": 32,
     "No Realizada": 38,
-    "Iniciado": 14,
+    "Iniciado": 12,
     "Suspendido": 2,
+    "Pendiente": 1,
     "Cancelado": 3
    },
-   "rgu": 143.4,
+   "rgu": 145.4,
    "caidas_total": 1,
    "caidas_activas": 1,
    "caidas_resueltas": 0,
-   "nuevas": 27,
+   "nuevas": 28,
    "al_bucket": 4,
    "repetidas": 27,
    "reagendadas": 2,
@@ -21422,6 +21423,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OCZ6PLU",
+      "tec": "CRISTOBAL SILVA LEIVA",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "17:28",
+      "d": "MUNOZ GAMERO 605, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OCW0AE8",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -21721,7 +21731,7 @@
       "f": "13-16",
       "hi": "14:47",
       "d": "LOS CORCHOS 2693, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "DANIEL NAVARRETE E",
       "visitas": 5,
       "ult_fecha": "12-10-2026",
@@ -21783,15 +21793,15 @@
       "d": "LOS ALMENDROS (LEIGHTON) 16, VILLA ALEMANA",
       "e": "No Realizada",
       "tec": "JEAN ROODLY ORELIEN",
-      "visitas": 2,
+      "visitas": 3,
       "ult_fecha": "12-10-2026",
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OCYN3UJ",
+      "o": "1-3OCU2BJV",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:51",
+      "hi": "16:00",
       "d": "PRIMERA 717, VILLA ALEMANA",
       "e": "No Realizada",
       "tec": "JOSE CASTRO P",
@@ -22017,5 +22027,5 @@
    }
   }
  },
- "generado": "12-10-2026 17:08"
+ "generado": "12-10-2026 17:13"
 }
