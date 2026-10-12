@@ -21391,24 +21391,34 @@
    }
   },
   "12-10-2026": {
-   "hasta": "09:26",
-   "actividades": 48,
+   "hasta": "09:31",
+   "actividades": 49,
    "tecnicos": 24,
    "estados": {
     "Pendiente": 37,
-    "en ruta": 11
+    "en ruta": 12
    },
-   "rgu": 83.0,
+   "rgu": 85.0,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 0,
+   "nuevas": 1,
    "al_bucket": 0,
-   "repetidas": 13,
+   "repetidas": 14,
    "reagendadas": 2,
    "detalle": {
     "caidas": [],
-    "nuevas": [],
+    "nuevas": [
+     {
+      "o": "1-3OC8OJGU",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "10:00",
+      "d": "LERIDA 020 EDIF. A DEPTO 301, VILLA ALEMANA",
+      "e": "Pendiente"
+     }
+    ],
     "repetidas": [
      {
       "o": "1-3OC5XH1W",
@@ -21447,10 +21457,22 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OC977RP",
+      "o": "1-3OC8OJGU",
       "cat": "Alta 2 Play",
       "f": "10-13",
       "hi": "10:00",
+      "d": "LERIDA 020 EDIF. A DEPTO 301, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "visitas": 1,
+      "ult_fecha": "10-10-2026",
+      "ult_cierre": "Zona Roja"
+     },
+     {
+      "o": "1-3OC977RP",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "12:25",
       "d": "LOS ALMENDROS (LEIGHTON) 16, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOEL GUSTAVE GUSTA",
@@ -21592,5 +21614,5 @@
    }
   }
  },
- "generado": "12-10-2026 09:26"
+ "generado": "12-10-2026 09:31"
 }
