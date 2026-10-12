@@ -21391,24 +21391,43 @@
    }
   },
   "12-10-2026": {
-   "hasta": "09:31",
-   "actividades": 49,
+   "hasta": "09:36",
+   "actividades": 52,
    "tecnicos": 24,
    "estados": {
-    "Pendiente": 37,
-    "en ruta": 12
+    "Iniciado": 2,
+    "Pendiente": 36,
+    "en ruta": 14
    },
-   "rgu": 85.0,
+   "rgu": 90.5,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 1,
+   "nuevas": 3,
    "al_bucket": 0,
-   "repetidas": 14,
+   "repetidas": 16,
    "reagendadas": 2,
    "detalle": {
     "caidas": [],
     "nuevas": [
+     {
+      "o": "1-3OCQ18OV",
+      "tec": "ALEXIS JARA",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "09:35",
+      "d": "DEL ALHELI 2390 CASA 14, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
+      "o": "1-3OAP11GA",
+      "tec": "LEONEL HERNÁNDEZ OJE",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "15:20",
+      "d": "RIQUELME 2064, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OC8OJGU",
       "tec": "JOEL GUSTAVE GUSTA",
@@ -21517,6 +21536,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OAP11GA",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "15:20",
+      "d": "RIQUELME 2064, QUILPUE",
+      "e": "Pendiente",
+      "tec": "LEONEL HERNÁNDEZ OJE",
+      "visitas": 2,
+      "ult_fecha": "08-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3O9702VJ",
       "cat": "Migración 1 Play",
       "f": "10-13",
@@ -21587,6 +21618,18 @@
       "visitas": 8,
       "ult_fecha": "08-10-2026",
       "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3OC579FA",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "11:32",
+      "d": "LOS CORCHOS 2693, QUILPUE",
+      "e": "Pendiente",
+      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "visitas": 4,
+      "ult_fecha": "10-10-2026",
+      "ult_cierre": "Sin moradores"
      }
     ],
     "reagendadas": [
@@ -21614,5 +21657,5 @@
    }
   }
  },
- "generado": "12-10-2026 09:31"
+ "generado": "12-10-2026 09:36"
 }
