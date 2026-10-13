@@ -22043,27 +22043,37 @@
    }
   },
   "13-10-2026": {
-   "hasta": "10:15",
-   "actividades": 120,
+   "hasta": "10:20",
+   "actividades": 121,
    "tecnicos": 34,
    "estados": {
-    "Iniciado": 25,
-    "Pendiente": 85,
+    "Iniciado": 24,
+    "Pendiente": 86,
     "No Realizada": 4,
     "en ruta": 5,
-    "Completado": 1
+    "Completado": 1,
+    "Suspendido": 1
    },
-   "rgu": 157.5,
+   "rgu": 159.0,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 16,
+   "nuevas": 17,
    "al_bucket": 0,
-   "repetidas": 33,
+   "repetidas": 32,
    "reagendadas": 2,
    "detalle": {
     "caidas": [],
     "nuevas": [
+     {
+      "o": "1-3ODBDNGY",
+      "tec": "MARCO PEREZ G",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "15:14",
+      "d": "AVELINO PARRA 3144, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OD3BCPO",
       "tec": "ALFREDO ALCAYAGA F",
@@ -22210,18 +22220,6 @@
      }
     ],
     "repetidas": [
-     {
-      "o": "1-3O1NO9PK",
-      "cat": "Migración 2 Play",
-      "f": "13-16",
-      "hi": "14:00",
-      "d": "CALLE TRES 980, QUILPUE",
-      "e": "Pendiente",
-      "tec": "ALEXIS JARA",
-      "visitas": 2,
-      "ult_fecha": "25-09-2026",
-      "ult_cierre": "Direccion no encontrada"
-     },
      {
       "o": "1-3OC17NK0",
       "cat": "Migración 3 Play",
@@ -22550,7 +22548,7 @@
       "o": "1-3OCS7LUT",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "14:08",
       "d": "MENA 1983 CASA B, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -22632,5 +22630,5 @@
    }
   }
  },
- "generado": "13-10-2026 10:15"
+ "generado": "13-10-2026 10:20"
 }
