@@ -22043,15 +22043,15 @@
    }
   },
   "13-10-2026": {
-   "hasta": "13:56",
+   "hasta": "14:07",
    "actividades": 148,
    "tecnicos": 34,
    "estados": {
-    "Completado": 48,
+    "Completado": 50,
     "No Realizada": 24,
-    "Iniciado": 13,
-    "Pendiente": 47,
-    "en ruta": 9,
+    "Iniciado": 15,
+    "Pendiente": 46,
+    "en ruta": 6,
     "Cancelado": 5,
     "Suspendido": 2
    },
@@ -22110,7 +22110,7 @@
       "f": "13-16",
       "hi": "13:15",
       "d": "ANA MARIA FRESNO 125 EDIF. 5 DEPTO 73, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3ODGP2AM",
@@ -22209,7 +22209,7 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "CLAUDIO VICUNA 807, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OC2LQQO",
@@ -22466,7 +22466,7 @@
       "o": "1-3OCB1Z0F",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:21",
+      "hi": "15:48",
       "d": "LAS MERCEDES 1677, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
@@ -22478,25 +22478,13 @@
       "o": "1-3OBKGN1E",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "14:10",
+      "hi": "14:12",
       "d": "CLAUDIO VICUNA 807, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "DANIEL NAVARRETE E",
       "visitas": 1,
       "ult_fecha": "09-10-2026",
       "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3ODGBJPO",
-      "cat": "Alta 2 Play",
-      "f": "10-13",
-      "hi": "14:33",
-      "d": "LAS LILAS 1932, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "EDGAR VALERO C",
-      "visitas": 1,
-      "ult_fecha": "10-10-2026",
-      "ult_cierre": "Orden mal generada"
      },
      {
       "o": "1-3OAYH5F7",
@@ -22540,7 +22528,7 @@
       "f": "10-13",
       "hi": "12:32",
       "d": "PJE DON VITORIO 2195 EDIF. B DEPTO 301, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JEAN ROODLY ORELIEN",
       "visitas": 1,
       "ult_fecha": "21-08-2026",
@@ -22550,7 +22538,7 @@
       "o": "1-3ODBYZHV",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:03",
+      "hi": "15:18",
       "d": "IGNACIO CARRERA PINTO 1650 EDIF. 4 DEPTO 22, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JEAN ROODLY ORELIEN",
@@ -22562,7 +22550,7 @@
       "o": "1-3OB44COC",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "16:12",
+      "hi": "16:27",
       "d": "AV VICEPRESIDENTE BDO LEIGHTON 92 CASA B, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JEAN ROODLY ORELIEN",
@@ -22826,19 +22814,31 @@
       "o": "1-3OCWBMLY",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "13:56",
+      "hi": "14:00",
       "d": "CAUPOLICAN 633, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "NICOLAS MOYANO R",
       "visitas": 1,
       "ult_fecha": "12-10-2026",
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3ODECDSV",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "13:29",
+      "d": "LAS LILAS 1932, VILLA ALEMANA",
+      "e": "Iniciado",
+      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "visitas": 1,
+      "ult_fecha": "10-10-2026",
+      "ult_cierre": "Orden mal generada"
+     },
+     {
       "o": "1-3OBK9EGB",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "17:00",
+      "hi": "19:19",
       "d": "RIVADAVIA 820, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -22895,5 +22895,5 @@
    }
   }
  },
- "generado": "13-10-2026 13:56"
+ "generado": "13-10-2026 14:07"
 }
