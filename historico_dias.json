@@ -22043,23 +22043,23 @@
    }
   },
   "13-10-2026": {
-   "hasta": "18:02",
-   "actividades": 159,
+   "hasta": "18:07",
+   "actividades": 160,
    "tecnicos": 35,
    "estados": {
     "Completado": 100,
-    "No Realizada": 41,
+    "No Realizada": 42,
+    "Iniciado": 5,
     "Suspendido": 5,
-    "Cancelado": 8,
-    "Iniciado": 5
+    "Cancelado": 8
    },
-   "rgu": 203.7,
+   "rgu": 204.7,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
-   "nuevas": 42,
+   "nuevas": 43,
    "al_bucket": 4,
-   "repetidas": 38,
+   "repetidas": 39,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
@@ -22083,6 +22083,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3ODRTWHF",
+      "tec": "ALEXIS JARA",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "18:03",
+      "d": "CALDERA 102, QUILPUE",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3ODQI66W",
       "tec": "FELIPE SILVA R",
@@ -22474,6 +22483,18 @@
       "visitas": 2,
       "ult_fecha": "08-10-2026",
       "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3ODRTWHF",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "18:03",
+      "d": "CALDERA 102, QUILPUE",
+      "e": "Iniciado",
+      "tec": "ALEXIS JARA",
+      "visitas": 1,
+      "ult_fecha": "12-10-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OC9R6HG",
@@ -22901,7 +22922,7 @@
       "f": "16-19",
       "hi": "16:04",
       "d": "PJE EL HUERTO 221, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "SEBASTIAN DOSSOW A",
       "visitas": 1,
       "ult_fecha": "07-10-2026",
@@ -22944,5 +22965,5 @@
    }
   }
  },
- "generado": "13-10-2026 18:02"
+ "generado": "13-10-2026 18:07"
 }
