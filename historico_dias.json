@@ -22043,22 +22043,22 @@
    }
   },
   "13-10-2026": {
-   "hasta": "17:12",
-   "actividades": 156,
+   "hasta": "17:17",
+   "actividades": 157,
    "tecnicos": 35,
    "estados": {
-    "Completado": 83,
-    "No Realizada": 38,
-    "Iniciado": 21,
+    "Completado": 85,
+    "No Realizada": 39,
+    "Iniciado": 18,
     "Suspendido": 5,
     "Cancelado": 8,
-    "en ruta": 1
+    "en ruta": 2
    },
-   "rgu": 202.5,
+   "rgu": 202.6,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
-   "nuevas": 39,
+   "nuevas": 40,
    "al_bucket": 4,
    "repetidas": 38,
    "reagendadas": 2,
@@ -22085,6 +22085,15 @@
     ],
     "nuevas": [
      {
+      "o": "1-3ODPW4R2",
+      "tec": "JEAN ROODLY ORELIEN",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:26",
+      "d": "AV VICEPRESIDENTE BDO LEIGHTON 1431 EDIF. 8 DEPTO 11, VILLA ALEMANA",
+      "e": "en ruta"
+     },
+     {
       "o": "1-3ODNXDAE",
       "tec": "LUIS CASTRO TORRES",
       "cat": "Modificación de Servicio",
@@ -22100,7 +22109,7 @@
       "f": "16-19",
       "hi": "16:36",
       "d": "GOMEZ CARRENO 581 CASA 21, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3ODM11AM",
@@ -22582,6 +22591,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3ODPW4R2",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:26",
+      "d": "AV VICEPRESIDENTE BDO LEIGHTON 1431 EDIF. 8 DEPTO 11, VILLA ALEMANA",
+      "e": "en ruta",
+      "tec": "JEAN ROODLY ORELIEN",
+      "visitas": 1,
+      "ult_fecha": "12-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OCJW4VB",
       "cat": "Reparación",
       "f": "13-16",
@@ -22592,18 +22613,6 @@
       "visitas": 1,
       "ult_fecha": "25-08-2026",
       "ult_cierre": "Falla Aprovisionamiento"
-     },
-     {
-      "o": "1-3OCSX01S",
-      "cat": "Alta 2 Play",
-      "f": "13-16",
-      "hi": "14:55",
-      "d": "AV VICEPRESIDENTE BDO LEIGHTON 1431 EDIF. 8 DEPTO 11, VILLA ALEMANA",
-      "e": "Completado",
-      "tec": "JOEL GUSTAVE GUSTA",
-      "visitas": 1,
-      "ult_fecha": "12-10-2026",
-      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OCZQPCU",
@@ -22803,7 +22812,7 @@
       "f": "13-16",
       "hi": "16:36",
       "d": "PRIMERA 717, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "MATÍAS JAQUE AG",
       "visitas": 2,
       "ult_fecha": "12-10-2026",
@@ -22918,5 +22927,5 @@
    }
   }
  },
- "generado": "13-10-2026 17:12"
+ "generado": "13-10-2026 17:17"
 }
