@@ -22043,25 +22043,25 @@
    }
   },
   "13-10-2026": {
-   "hasta": "10:40",
-   "actividades": 127,
+   "hasta": "10:45",
+   "actividades": 129,
    "tecnicos": 34,
    "estados": {
-    "Iniciado": 22,
-    "Pendiente": 80,
-    "Completado": 6,
-    "en ruta": 8,
+    "Iniciado": 23,
+    "Pendiente": 81,
+    "Completado": 7,
+    "en ruta": 7,
     "No Realizada": 8,
     "Cancelado": 2,
     "Suspendido": 1
    },
-   "rgu": 168.0,
+   "rgu": 170.0,
    "caidas_total": 1,
    "caidas_activas": 1,
    "caidas_resueltas": 0,
-   "nuevas": 21,
+   "nuevas": 23,
    "al_bucket": 0,
-   "repetidas": 33,
+   "repetidas": 35,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
@@ -22076,6 +22076,24 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3ODBWRNZ",
+      "tec": "CRISTOBAL SILVA LEIVA",
+      "cat": "Migración 1 Play",
+      "f": "13-16",
+      "hi": "10:45",
+      "d": "ERRAZURIZ 838, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
+      "o": "1-3OBKGN1E",
+      "tec": "NICOLAS MOYANO R",
+      "cat": "Migración 1 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "CLAUDIO VICUNA 807, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OC2LQQO",
       "tec": "ALEXIS JARA",
@@ -22137,7 +22155,7 @@
       "f": "10-13",
       "hi": "10:10",
       "d": "PJE HUANHUALI 126, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OCYP95S",
@@ -22328,10 +22346,22 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3ODBWRNZ",
+      "cat": "Migración 1 Play",
+      "f": "13-16",
+      "hi": "10:45",
+      "d": "ERRAZURIZ 838, QUILPUE",
+      "e": "Iniciado",
+      "tec": "CRISTOBAL SILVA LEIVA",
+      "visitas": 1,
+      "ult_fecha": "13-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OCB1Z0F",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "15:36",
       "d": "LAS MERCEDES 1677, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
@@ -22616,6 +22646,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OBKGN1E",
+      "cat": "Migración 1 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "CLAUDIO VICUNA 807, QUILPUE",
+      "e": "Pendiente",
+      "tec": "NICOLAS MOYANO R",
+      "visitas": 1,
+      "ult_fecha": "09-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OCS7LUT",
       "cat": "Alta 1 Play",
       "f": "13-16",
@@ -22689,5 +22731,5 @@
    }
   }
  },
- "generado": "13-10-2026 10:40"
+ "generado": "13-10-2026 10:45"
 }
