@@ -22043,23 +22043,23 @@
    }
   },
   "13-10-2026": {
-   "hasta": "14:32",
-   "actividades": 150,
+   "hasta": "14:42",
+   "actividades": 151,
    "tecnicos": 34,
    "estados": {
-    "Completado": 54,
-    "No Realizada": 27,
-    "Iniciado": 15,
-    "Pendiente": 35,
+    "Completado": 56,
+    "No Realizada": 28,
+    "Iniciado": 17,
+    "Pendiente": 34,
+    "en ruta": 5,
     "Cancelado": 7,
-    "Suspendido": 4,
-    "en ruta": 8
+    "Suspendido": 4
    },
-   "rgu": 197.4,
+   "rgu": 198.4,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
-   "nuevas": 35,
+   "nuevas": 36,
    "al_bucket": 0,
    "repetidas": 39,
    "reagendadas": 2,
@@ -22085,6 +22085,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3ODKAP7T",
+      "tec": "CRISTOBAL SILVA LEIVA",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "14:33",
+      "d": "SAMUEL VALENCIA 1549, QUILPUE",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3ODHSPTI",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -22408,7 +22417,7 @@
       "f": "10-13",
       "hi": "13:43",
       "d": "LA PAZ 562 CASA GALPON, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "ALEXIS JARA",
       "visitas": 2,
       "ult_fecha": "08-10-2026",
@@ -22564,7 +22573,7 @@
       "f": "13-16",
       "hi": "13:49",
       "d": "LAS ACACIAS 1575 CASA 30, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JOEL GUSTAVE GUSTA",
       "visitas": 1,
       "ult_fecha": "25-08-2026",
@@ -22574,7 +22583,7 @@
       "o": "1-3OCSX01S",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "16:04",
+      "hi": "15:53",
       "d": "AV VICEPRESIDENTE BDO LEIGHTON 1431 EDIF. 8 DEPTO 11, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOEL GUSTAVE GUSTA",
@@ -22598,9 +22607,9 @@
       "o": "1-3OA7HNEB",
       "cat": "Migración 3 Play",
       "f": "16-19",
-      "hi": "14:34",
+      "hi": "16:00",
       "d": "PJE EL HUERTO 221, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Pendiente",
       "tec": "JOSE CASTRO P",
       "visitas": 1,
       "ult_fecha": "07-10-2026",
@@ -22682,7 +22691,7 @@
       "o": "1-3OCZ8HPZ",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "16:10",
+      "hi": "16:18",
       "d": "PRIMERA 717, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -22730,7 +22739,7 @@
       "o": "1-3OC2J87D",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:43",
+      "hi": "16:40",
       "d": "SAN ENRIQUE 1165, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JUAN ARRIAGADA C",
@@ -22895,5 +22904,5 @@
    }
   }
  },
- "generado": "13-10-2026 14:32"
+ "generado": "13-10-2026 14:42"
 }
