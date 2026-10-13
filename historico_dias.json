@@ -22043,19 +22043,19 @@
    }
   },
   "13-10-2026": {
-   "hasta": "11:11",
-   "actividades": 132,
+   "hasta": "11:21",
+   "actividades": 133,
    "tecnicos": 34,
    "estados": {
-    "Completado": 12,
-    "Iniciado": 21,
+    "Completado": 13,
+    "Iniciado": 23,
     "Pendiente": 76,
-    "No Realizada": 9,
+    "No Realizada": 11,
     "Cancelado": 5,
-    "en ruta": 7,
+    "en ruta": 3,
     "Suspendido": 2
    },
-   "rgu": 175.0,
+   "rgu": 177.0,
    "caidas_total": 1,
    "caidas_activas": 1,
    "caidas_resueltas": 0,
@@ -22119,7 +22119,7 @@
       "f": "13-16",
       "hi": "13:00",
       "d": "AVENIDA VALPARAISO 2194, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "No Realizada"
      },
      {
       "o": "1-3ODBYZHV",
@@ -22204,12 +22204,12 @@
      },
      {
       "o": "1-3OCUTQY7",
-      "tec": "GEEYSER PEREZ O",
+      "tec": "JOSE SALAS MEDINA",
       "cat": "Alta 1 Play",
       "f": "10-13",
       "hi": "12:28",
       "d": "SANTA ROSA 16 CASA MK, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OCZQPCU",
@@ -22218,7 +22218,7 @@
       "f": "10-13",
       "hi": "12:35",
       "d": "MUNOZ GAMERO 605, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3ODAN0XD",
@@ -22276,7 +22276,7 @@
      },
      {
       "o": "1-3OC18U49",
-      "tec": "DANIEL NAVARRETE E",
+      "tec": "LUIS MARTIN NUÑEZ",
       "cat": "Reparación",
       "f": "13-16",
       "hi": "15:45",
@@ -22322,7 +22322,7 @@
       "o": "1-3O8NOEDU",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:42",
       "d": "LAS AMAPOLAS 593 CASA 8G, QUILPUE",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
@@ -22403,18 +22403,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OCUTQY7",
-      "cat": "Alta 1 Play",
-      "f": "10-13",
-      "hi": "13:10",
-      "d": "SANTA ROSA 16 CASA MK, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "GEEYSER PEREZ O",
-      "visitas": 1,
-      "ult_fecha": "12-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OCJW4VB",
       "cat": "Reparación",
       "f": "13-16",
@@ -22442,33 +22430,21 @@
       "o": "1-3OCZQPCU",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "11:11",
+      "hi": "11:13",
       "d": "MUNOZ GAMERO 605, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JOSE CASTRO P",
       "visitas": 1,
       "ult_fecha": "12-10-2026",
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3OC9RJZW",
-      "cat": "Reparación",
-      "f": "13-16",
-      "hi": "18:57",
-      "d": "GERONA 41, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOSE CASTRO P",
-      "visitas": 6,
-      "ult_fecha": "10-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3O9BATER",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "11:11",
+      "hi": "11:15",
       "d": "PJE B 0836 CASA 5 DEPTO 22, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JOSE GALAZ D",
       "visitas": 2,
       "ult_fecha": "29-08-2026",
@@ -22478,7 +22454,7 @@
       "o": "1-3OCZVCYD",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:06",
+      "hi": "15:10",
       "d": "CARTAGENA 1342, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -22490,7 +22466,7 @@
       "o": "1-3OBNW9XO",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:21",
+      "hi": "16:25",
       "d": "GOMEZ CARRENO 581 CASA 21, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -22502,7 +22478,7 @@
       "o": "1-3OC9R6HG",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:32",
+      "hi": "17:36",
       "d": "PJE TRINQUETE 2816, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -22523,10 +22499,22 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OCUTQY7",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "11:29",
+      "d": "SANTA ROSA 16 CASA MK, VILLA ALEMANA",
+      "e": "en ruta",
+      "tec": "JOSE SALAS MEDINA",
+      "visitas": 1,
+      "ult_fecha": "12-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OCN1ZEK",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:49",
+      "hi": "17:47",
       "d": "AVENIDA SEGUNDA 182, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE SALAS MEDINA",
@@ -22691,6 +22679,18 @@
       "ult_cierre": "Direccion incorrecta"
      },
      {
+      "o": "1-3OC9RJZW",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "16:55",
+      "d": "GERONA 41, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "RAFAEL VARGAS B",
+      "visitas": 6,
+      "ult_fecha": "10-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OCWBMLY",
       "cat": "Alta 1 Play",
       "f": "13-16",
@@ -22706,7 +22706,7 @@
       "o": "1-3OB44COC",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "15:07",
       "d": "AV VICEPRESIDENTE BDO LEIGHTON 92 CASA B, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SEBASTIAN DOSSOW A",
@@ -22729,9 +22729,9 @@
       "o": "1-3O9BATER",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "11:11",
+      "hi": "11:15",
       "d": "PJE B 0836 CASA 5 DEPTO 22, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JOSE GALAZ D",
       "desde": "06-10-2026"
      }
@@ -22739,5 +22739,5 @@
    }
   }
  },
- "generado": "13-10-2026 11:11"
+ "generado": "13-10-2026 11:21"
 }
