@@ -22043,23 +22043,23 @@
    }
   },
   "13-10-2026": {
-   "hasta": "11:21",
-   "actividades": 133,
+   "hasta": "11:31",
+   "actividades": 134,
    "tecnicos": 34,
    "estados": {
-    "Completado": 13,
-    "Iniciado": 23,
-    "Pendiente": 76,
-    "No Realizada": 11,
+    "Completado": 14,
+    "Iniciado": 24,
+    "Pendiente": 74,
+    "No Realizada": 12,
     "Cancelado": 5,
-    "en ruta": 3,
-    "Suspendido": 2
+    "Suspendido": 2,
+    "en ruta": 3
    },
-   "rgu": 177.0,
+   "rgu": 177.1,
    "caidas_total": 1,
    "caidas_activas": 1,
    "caidas_resueltas": 0,
-   "nuevas": 24,
+   "nuevas": 25,
    "al_bucket": 0,
    "repetidas": 35,
    "reagendadas": 2,
@@ -22076,6 +22076,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3ODDTFPS",
+      "tec": "JOSE PEREZ RANGEL",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "11:30",
+      "d": "PJE MURTILLA 81, VILLA ALEMANA",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3ODCUHMZ",
       "tec": "GEEYSER PEREZ O",
@@ -22334,7 +22343,7 @@
       "o": "1-3OCZG5HA",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "15:08",
+      "hi": "15:16",
       "d": "LEUCOTON 9994 CASA FIC, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -22514,7 +22523,7 @@
       "o": "1-3OCN1ZEK",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "17:47",
+      "hi": "16:24",
       "d": "AVENIDA SEGUNDA 182, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE SALAS MEDINA",
@@ -22576,7 +22585,7 @@
       "f": "10-13",
       "hi": "10:03",
       "d": "PERU (NODO 92) 440, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "LEONEL HERNÁNDEZ OJE",
       "visitas": 2,
       "ult_fecha": "09-10-2026",
@@ -22694,7 +22703,7 @@
       "o": "1-3OCWBMLY",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "15:19",
       "d": "CAUPOLICAN 633, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -22706,7 +22715,7 @@
       "o": "1-3OB44COC",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "15:07",
+      "hi": "14:00",
       "d": "AV VICEPRESIDENTE BDO LEIGHTON 92 CASA B, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SEBASTIAN DOSSOW A",
@@ -22739,5 +22748,5 @@
    }
   }
  },
- "generado": "13-10-2026 11:21"
+ "generado": "13-10-2026 11:31"
 }
