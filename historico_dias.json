@@ -22043,17 +22043,17 @@
    }
   },
   "13-10-2026": {
-   "hasta": "12:56",
+   "hasta": "13:06",
    "actividades": 145,
    "tecnicos": 34,
    "estados": {
-    "Completado": 34,
+    "Completado": 37,
     "No Realizada": 18,
     "Iniciado": 13,
-    "Pendiente": 68,
+    "Pendiente": 63,
     "Cancelado": 5,
     "Suspendido": 2,
-    "en ruta": 5
+    "en ruta": 7
    },
    "rgu": 192.7,
    "caidas_total": 2,
@@ -22137,7 +22137,7 @@
       "f": "10-13",
       "hi": "12:02",
       "d": "ANA MARIA FRESNO 125 EDIF. 5 DEPTO 73, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3ODDM6IH",
@@ -22227,7 +22227,7 @@
       "f": "13-16",
       "hi": "15:14",
       "d": "AVELINO PARRA 3144, QUILPUE",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OD3BCPO",
@@ -22308,7 +22308,7 @@
       "f": "13-16",
       "hi": "13:08",
       "d": "PJE 7 (LAS PALMAS) 385, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3ODA739E",
@@ -22362,7 +22362,7 @@
       "f": "13-16",
       "hi": "15:45",
       "d": "RIQUELME 1730 CASA C, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OCZG5HA",
@@ -22451,7 +22451,7 @@
       "o": "1-3OBKGN1E",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "14:05",
+      "hi": "14:10",
       "d": "CLAUDIO VICUNA 807, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -22463,25 +22463,13 @@
       "o": "1-3ODGBJPO",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "13:04",
+      "hi": "13:05",
       "d": "LAS LILAS 1932, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "EDGAR VALERO C",
       "visitas": 1,
       "ult_fecha": "10-10-2026",
       "ult_cierre": "Orden mal generada"
-     },
-     {
-      "o": "1-3OCWBMLY",
-      "cat": "Alta 1 Play",
-      "f": "13-16",
-      "hi": "18:15",
-      "d": "CAUPOLICAN 633, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "EDGAR VALERO C",
-      "visitas": 1,
-      "ult_fecha": "12-10-2026",
-      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OAYH5F7",
@@ -22619,7 +22607,7 @@
       "o": "1-3O8NOEDU",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:20",
       "d": "LAS AMAPOLAS 593 CASA 8G, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -22655,9 +22643,9 @@
       "o": "1-3OCTZVPU",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "13:05",
+      "hi": "13:14",
       "d": "LERIDA 020 EDIF. A DEPTO 301, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JOSE ROJO A",
       "visitas": 2,
       "ult_fecha": "12-10-2026",
@@ -22667,7 +22655,7 @@
       "o": "1-3OCZ8HPZ",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "17:51",
+      "hi": "18:00",
       "d": "PRIMERA 717, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -22715,7 +22703,7 @@
       "o": "1-3OC2J87D",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:54",
+      "hi": "17:14",
       "d": "SAN ENRIQUE 1165, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JUAN ARRIAGADA C",
@@ -22808,10 +22796,22 @@
       "ult_cierre": "Direccion no encontrada"
      },
      {
+      "o": "1-3OCWBMLY",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "15:58",
+      "d": "CAUPOLICAN 633, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "NICOLAS MOYANO R",
+      "visitas": 1,
+      "ult_fecha": "12-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OBK9EGB",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "15:09",
+      "hi": "17:36",
       "d": "RIVADAVIA 820, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -22823,9 +22823,9 @@
       "o": "1-3OC9RJZW",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "12:51",
+      "hi": "12:58",
       "d": "GERONA 41, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "SEBASTIAN DOSSOW A",
       "visitas": 6,
       "ult_fecha": "10-10-2026",
@@ -22835,7 +22835,7 @@
       "o": "1-3OCS7LUT",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:55",
+      "hi": "15:00",
       "d": "MENA 1983 CASA B, QUILPUE",
       "e": "Pendiente",
       "tec": "YENDER BOSCAN CADENAS",
@@ -22868,5 +22868,5 @@
    }
   }
  },
- "generado": "13-10-2026 12:56"
+ "generado": "13-10-2026 13:06"
 }
