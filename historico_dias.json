@@ -22043,23 +22043,23 @@
    }
   },
   "13-10-2026": {
-   "hasta": "13:16",
-   "actividades": 146,
+   "hasta": "13:21",
+   "actividades": 148,
    "tecnicos": 34,
    "estados": {
     "Completado": 39,
     "No Realizada": 20,
-    "Iniciado": 13,
+    "Iniciado": 17,
     "Pendiente": 63,
     "Cancelado": 5,
     "Suspendido": 2,
-    "en ruta": 4
+    "en ruta": 2
    },
-   "rgu": 193.7,
+   "rgu": 193.9,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
-   "nuevas": 33,
+   "nuevas": 35,
    "al_bucket": 0,
    "repetidas": 39,
    "reagendadas": 2,
@@ -22086,6 +22086,24 @@
     ],
     "nuevas": [
      {
+      "o": "1-3ODHSPTI",
+      "tec": "PABLO HERNANEZ FERNANDEZ",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "13:19",
+      "d": "RENE RODRIGUEZ 1176 EDIF. B-12 DEPTO 104, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
+      "o": "1-3ODHTYU8",
+      "tec": "KEVIN TAPIA RETAMAL",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "13:20",
+      "d": "CONDELL SUR 100, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
       "o": "1-3ODHJOHR",
       "tec": "LUIS GATICA DAVILA",
       "cat": "Modificación de Servicio",
@@ -22101,7 +22119,7 @@
       "f": "10-13",
       "hi": "13:03",
       "d": "PJE ANA MARIA LAREDO 1970, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3ODGKZ6C",
@@ -22317,7 +22335,7 @@
       "f": "13-16",
       "hi": "13:08",
       "d": "PJE 7 (LAS PALMAS) 385, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3ODA739E",
@@ -22472,7 +22490,7 @@
       "o": "1-3ODGBJPO",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "13:05",
+      "hi": "14:33",
       "d": "LAS LILAS 1932, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "EDGAR VALERO C",
@@ -22877,5 +22895,5 @@
    }
   }
  },
- "generado": "13-10-2026 13:16"
+ "generado": "13-10-2026 13:21"
 }
