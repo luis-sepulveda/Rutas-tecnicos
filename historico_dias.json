@@ -1,25 +1,25 @@
 {
  "dias": {
   "14-10-2026": {
-   "hasta": "12:15",
-   "actividades": 141,
+   "hasta": "12:40",
+   "actividades": 153,
    "tecnicos": 34,
    "estados": {
-    "Completado": 25,
+    "Completado": 33,
     "en ruta": 1,
-    "Pendiente": 71,
-    "Iniciado": 26,
+    "Pendiente": 82,
+    "Iniciado": 18,
     "No Realizada": 11,
     "Cancelado": 5,
-    "Suspendido": 2
+    "Suspendido": 3
    },
-   "rgu": 198.7,
+   "rgu": 222.7,
    "caidas_total": 5,
    "caidas_activas": 5,
    "caidas_resueltas": 0,
    "nuevas": 4,
    "al_bucket": 14,
-   "repetidas": 21,
+   "repetidas": 23,
    "reagendadas": 0,
    "detalle": {
     "caidas": [
@@ -77,7 +77,7 @@
       "f": "16-19",
       "hi": "12:09",
       "d": "SAN ESTEBAN 317, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OE4Y0CM",
@@ -99,12 +99,12 @@
      },
      {
       "o": "1-3OE8031E",
-      "tec": "MATÍAS JAQUE AG",
+      "tec": "JUAN ARRIAGADA C",
       "cat": "Alta 1 Play",
       "f": "16-19",
       "hi": "16:32",
       "d": "HIPODROMO 155, VILLA ALEMANA",
-      "e": "Pendiente (ya no está)"
+      "e": "Pendiente"
      }
     ],
     "repetidas": [
@@ -154,6 +154,18 @@
       "visitas": 3,
       "ult_fecha": "07-10-2026",
       "ult_cierre": "Sin acceso a vivienda"
+     },
+     {
+      "o": "1-3ODRQAC9",
+      "cat": "Migración 3 Play",
+      "f": "16-19",
+      "hi": "17:59",
+      "d": "PJE EL HUERTO 221, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JEAN ROODLY ORELIEN",
+      "visitas": 2,
+      "ult_fecha": "13-10-2026",
+      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3OD0UBIJ",
@@ -233,7 +245,7 @@
       "f": "10-13",
       "hi": "10:58",
       "d": "SANTA MARIA 307, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "LUIS GATICA DAVILA",
       "visitas": 1,
       "ult_fecha": "13-10-2026",
@@ -312,6 +324,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3ODPN8N6",
+      "cat": "Migración 1 Play",
+      "f": "16-19",
+      "hi": "17:57",
+      "d": "PJE SANTA MARIA 25, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "MATIAS APELEO APELEO",
+      "visitas": 1,
+      "ult_fecha": "13-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3ODS25JT",
       "cat": "Migración 1 Play",
       "f": "10-13",
@@ -327,7 +351,7 @@
       "o": "1-3ODQNST4",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:08",
+      "hi": "14:00",
       "d": "YUNGAY 827, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -341,7 +365,7 @@
       "f": "10-13",
       "hi": "12:17",
       "d": "COPIHUE 34, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "RAFAEL VARGAS B",
       "visitas": 1,
       "ult_fecha": "13-10-2026",
@@ -364,5 +388,5 @@
    }
   }
  },
- "generado": "14-10-2026 12:15"
+ "generado": "14-10-2026 12:40"
 }
