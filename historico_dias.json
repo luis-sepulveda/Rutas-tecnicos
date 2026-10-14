@@ -1,19 +1,19 @@
 {
  "dias": {
   "14-10-2026": {
-   "hasta": "15:41",
-   "actividades": 163,
+   "hasta": "15:56",
+   "actividades": 164,
    "tecnicos": 34,
    "estados": {
-    "Completado": 70,
-    "en ruta": 8,
-    "Iniciado": 21,
-    "Pendiente": 31,
+    "Completado": 75,
+    "en ruta": 7,
+    "Pendiente": 24,
     "No Realizada": 21,
     "Cancelado": 8,
-    "Suspendido": 4
+    "Suspendido": 5,
+    "Iniciado": 24
    },
-   "rgu": 231.7,
+   "rgu": 234.2,
    "caidas_total": 5,
    "caidas_activas": 5,
    "caidas_resueltas": 0,
@@ -77,7 +77,7 @@
       "f": "13-16",
       "hi": "15:15",
       "d": "BUENOS AIRES 1360 CASA 2, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OEG3S6K",
@@ -86,7 +86,7 @@
       "f": "16-19",
       "hi": "16:00",
       "d": "LAS AZALEAS 593 CASA 16E, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OED6Q3X",
@@ -167,7 +167,7 @@
       "f": "16-19",
       "hi": "16:23",
       "d": "WENCESLAO VIDAL 1620, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OE8031E",
@@ -180,6 +180,18 @@
      }
     ],
     "repetidas": [
+     {
+      "o": "1-3ODVFTZO",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "16:09",
+      "d": "CARLOS GRHUNNE 937 EDIF. K DEPTO 41, QUILPUE",
+      "e": "Pendiente",
+      "tec": "CESAR MENA OLIVEROS",
+      "visitas": 1,
+      "ult_fecha": "28-08-2026",
+      "ult_cierre": "Clte desiste motivo comercial"
+     },
      {
       "o": "1-3OC2NNKY",
       "cat": "Alta 1 Play",
@@ -207,7 +219,7 @@
       "o": "1-3ODC3GIG",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "17:14",
+      "hi": "17:09",
       "d": "LOS ALMENDROS 2915 EDIF. D DEPTO 51, QUILPUE",
       "e": "Pendiente",
       "tec": "FELIPE SILVA R",
@@ -250,18 +262,6 @@
       "visitas": 1,
       "ult_fecha": "12-10-2026",
       "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3ODRQAC9",
-      "cat": "Migración 3 Play",
-      "f": "16-19",
-      "hi": "17:54",
-      "d": "PJE EL HUERTO 221, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JORGE PEZOA VICUÑA",
-      "visitas": 2,
-      "ult_fecha": "13-10-2026",
-      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3ODMDJ24",
@@ -339,9 +339,9 @@
       "o": "1-3OCYE79W",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "15:28",
+      "hi": "15:53",
       "d": "PARINACOTA 2690 EDIF. F DEPTO 403, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "LUIS MARTIN NUÑEZ",
       "visitas": 2,
       "ult_fecha": "12-10-2026",
@@ -370,18 +370,6 @@
       "visitas": 1,
       "ult_fecha": "13-10-2026",
       "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3ODVFTZO",
-      "cat": "Alta 2 Play",
-      "f": "13-16",
-      "hi": "14:17",
-      "d": "CARLOS GRHUNNE 937 EDIF. K DEPTO 41, QUILPUE",
-      "e": "Iniciado",
-      "tec": "MARCO PEREZ G",
-      "visitas": 1,
-      "ult_fecha": "28-08-2026",
-      "ult_cierre": "Clte desiste motivo comercial"
      },
      {
       "o": "1-3ODEHT85",
@@ -454,11 +442,23 @@
       "visitas": 1,
       "ult_fecha": "13-10-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3ODRQAC9",
+      "cat": "Migración 3 Play",
+      "f": "16-19",
+      "hi": "15:51",
+      "d": "PJE EL HUERTO 221, VILLA ALEMANA",
+      "e": "Iniciado",
+      "tec": "SEBASTIAN DOSSOW A",
+      "visitas": 2,
+      "ult_fecha": "13-10-2026",
+      "ult_cierre": "Cliente reagenda"
      }
     ],
     "reagendadas": []
    }
   }
  },
- "generado": "14-10-2026 15:41"
+ "generado": "14-10-2026 15:56"
 }
