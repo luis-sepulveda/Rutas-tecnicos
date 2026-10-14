@@ -1,17 +1,17 @@
 {
  "dias": {
   "14-10-2026": {
-   "hasta": "17:15",
+   "hasta": "17:25",
    "actividades": 165,
    "tecnicos": 34,
    "estados": {
-    "Completado": 91,
-    "No Realizada": 26,
-    "Iniciado": 23,
-    "Pendiente": 7,
+    "Completado": 92,
+    "No Realizada": 28,
+    "Iniciado": 24,
     "en ruta": 5,
     "Cancelado": 8,
-    "Suspendido": 5
+    "Suspendido": 5,
+    "Pendiente": 3
    },
    "rgu": 234.3,
    "caidas_total": 5,
@@ -77,7 +77,7 @@
       "f": "16-19",
       "hi": "17:11",
       "d": "PASAJE PETEN 961, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OEHX9WI",
@@ -185,7 +185,7 @@
       "f": "16-19",
       "hi": "16:23",
       "d": "WENCESLAO VIDAL 1620, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OE8031E",
@@ -194,17 +194,29 @@
       "f": "16-19",
       "hi": "16:32",
       "d": "HIPODROMO 155, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      }
     ],
     "repetidas": [
      {
+      "o": "1-3ODPN8N6",
+      "cat": "Migración 1 Play",
+      "f": "16-19",
+      "hi": "17:35",
+      "d": "PJE SANTA MARIA 25, VILLA ALEMANA",
+      "e": "en ruta",
+      "tec": "ALFREDO ALCAYAGA F",
+      "visitas": 1,
+      "ult_fecha": "13-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3ODVFTZO",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "17:02",
+      "hi": "17:22",
       "d": "CARLOS GRHUNNE 937 EDIF. K DEPTO 41, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "CESAR MENA OLIVEROS",
       "visitas": 1,
       "ult_fecha": "28-08-2026",
@@ -402,18 +414,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3ODPN8N6",
-      "cat": "Migración 1 Play",
-      "f": "16-19",
-      "hi": "17:10",
-      "d": "PJE SANTA MARIA 25, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "MARCO PEREZ G",
-      "visitas": 1,
-      "ult_fecha": "13-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3ODEHT85",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -490,5 +490,5 @@
    }
   }
  },
- "generado": "14-10-2026 17:15"
+ "generado": "14-10-2026 17:25"
 }
