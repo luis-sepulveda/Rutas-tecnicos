@@ -1,17 +1,17 @@
 {
  "dias": {
   "14-10-2026": {
-   "hasta": "14:10",
+   "hasta": "14:25",
    "actividades": 158,
    "tecnicos": 34,
    "estados": {
     "Completado": 55,
-    "en ruta": 11,
-    "Pendiente": 55,
-    "Iniciado": 15,
-    "No Realizada": 13,
+    "Iniciado": 24,
+    "Pendiente": 51,
+    "No Realizada": 14,
     "Cancelado": 6,
-    "Suspendido": 3
+    "Suspendido": 3,
+    "en ruta": 5
    },
    "rgu": 228.5,
    "caidas_total": 5,
@@ -104,7 +104,7 @@
       "f": "13-16",
       "hi": "17:11",
       "d": "EL LINGUE 2152, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OECUQ8B",
@@ -166,7 +166,7 @@
       "o": "1-3OCYE79W",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:07",
+      "hi": "16:19",
       "d": "PARINACOTA 2690 EDIF. F DEPTO 403, QUILPUE",
       "e": "Pendiente",
       "tec": "ANTONHY MORALES MENDOZA",
@@ -189,9 +189,9 @@
       "o": "1-3ODO57UO",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "14:02",
+      "hi": "14:20",
       "d": "ALMIRANTE NEFF 653 EDIF. 3 DEPTO 53, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "EDGAR VALERO C",
       "visitas": 1,
       "ult_fecha": "06-08-2026",
@@ -213,25 +213,13 @@
       "o": "1-3ODGEARQ",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:32",
+      "hi": "15:33",
       "d": "CALLE 5 0525, QUILPUE",
       "e": "Pendiente",
       "tec": "GEEYSER PEREZ O",
       "visitas": 1,
       "ult_fecha": "13-08-2026",
       "ult_cierre": "Clte desiste motivo comercial"
-     },
-     {
-      "o": "1-3ODRQAC9",
-      "cat": "Migración 3 Play",
-      "f": "16-19",
-      "hi": "22:30",
-      "d": "PJE EL HUERTO 221, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JEAN ROODLY ORELIEN",
-      "visitas": 2,
-      "ult_fecha": "13-10-2026",
-      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3OD0UBIJ",
@@ -273,9 +261,9 @@
       "o": "1-3ODI4ESM",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:13",
+      "hi": "14:16",
       "d": "CALLE HERALDO ORREGO 3011 DEPTO 106, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "LEONEL HERNÁNDEZ OJE",
       "visitas": 1,
       "ult_fecha": "26-09-2026",
@@ -309,7 +297,7 @@
       "o": "1-3OCYK3KM",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "15:05",
+      "hi": "15:15",
       "d": "LAUTARO 477 CASA 6, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
@@ -345,9 +333,9 @@
       "o": "1-3ODVFTZO",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:04",
+      "hi": "14:17",
       "d": "CARLOS GRHUNNE 937 EDIF. K DEPTO 41, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "MARCO PEREZ G",
       "visitas": 1,
       "ult_fecha": "28-08-2026",
@@ -369,7 +357,7 @@
       "o": "1-3ODPN8N6",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "18:53",
+      "hi": "18:13",
       "d": "PJE SANTA MARIA 25, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -414,6 +402,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3ODRQAC9",
+      "cat": "Migración 3 Play",
+      "f": "16-19",
+      "hi": "18:25",
+      "d": "PJE EL HUERTO 221, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "RAFAEL VARGAS B",
+      "visitas": 2,
+      "ult_fecha": "13-10-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3ODIYC77",
       "cat": "Reparación",
       "f": "10-13",
@@ -430,5 +430,5 @@
    }
   }
  },
- "generado": "14-10-2026 14:10"
+ "generado": "14-10-2026 14:25"
 }
