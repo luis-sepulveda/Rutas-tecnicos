@@ -1,23 +1,24 @@
 {
  "dias": {
   "14-10-2026": {
-   "hasta": "10:14",
-   "actividades": 139,
+   "hasta": "10:19",
+   "actividades": 144,
    "tecnicos": 34,
    "estados": {
-    "Iniciado": 27,
-    "Pendiente": 103,
-    "No Realizada": 2,
+    "Iniciado": 26,
+    "Pendiente": 106,
+    "No Realizada": 3,
+    "en ruta": 6,
     "Cancelado": 2,
-    "en ruta": 5
+    "Suspendido": 1
    },
-   "rgu": 197.0,
+   "rgu": 208.0,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
    "nuevas": 0,
    "al_bucket": 4,
-   "repetidas": 25,
+   "repetidas": 26,
    "reagendadas": 0,
    "detalle": {
     "caidas": [],
@@ -27,7 +28,7 @@
       "o": "1-3OA3INJG",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "14:23",
       "d": "CONDELL SUR 01565 CASA G, QUILPUE",
       "e": "Pendiente",
       "tec": "ANTONHY MORALES MENDOZA",
@@ -112,7 +113,7 @@
       "f": "10-13",
       "hi": "09:44",
       "d": "2 SUR 1529, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JORGE PEZOA VICUÑA",
       "visitas": 1,
       "ult_fecha": "12-10-2026",
@@ -206,7 +207,7 @@
       "o": "1-3ODI4ESM",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:50",
+      "hi": "14:31",
       "d": "CALLE HERALDO ORREGO 3011 DEPTO 106, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -311,6 +312,18 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3ODDU3D6",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "16:26",
+      "d": "PERU (NODO 92) 440, QUILPUE",
+      "e": "Pendiente",
+      "tec": "PABLO HERNANEZ FERNANDEZ",
+      "visitas": 3,
+      "ult_fecha": "13-10-2026",
+      "ult_cierre": "NAP Problema acceso"
+     },
+     {
       "o": "1-3ODIYC77",
       "cat": "Reparación",
       "f": "10-13",
@@ -327,5 +340,5 @@
    }
   }
  },
- "generado": "14-10-2026 10:14"
+ "generado": "14-10-2026 10:19"
 }
