@@ -1,23 +1,23 @@
 {
  "dias": {
   "14-10-2026": {
-   "hasta": "13:35",
-   "actividades": 157,
+   "hasta": "13:40",
+   "actividades": 158,
    "tecnicos": 34,
    "estados": {
-    "Completado": 45,
+    "Completado": 46,
     "Iniciado": 14,
-    "Pendiente": 74,
+    "Pendiente": 72,
     "No Realizada": 12,
     "Cancelado": 6,
     "Suspendido": 3,
-    "en ruta": 3
+    "en ruta": 5
    },
-   "rgu": 228.4,
+   "rgu": 229.4,
    "caidas_total": 5,
    "caidas_activas": 5,
    "caidas_resueltas": 0,
-   "nuevas": 8,
+   "nuevas": 9,
    "al_bucket": 14,
    "repetidas": 23,
    "reagendadas": 0,
@@ -71,13 +71,22 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OECTNRM",
+      "tec": "JOSE CASTRO P",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "13:39",
+      "d": "PJE NVA.VICTORIA 83 CASA 15, VILLA ALEMANA",
+      "e": "en ruta"
+     },
+     {
       "o": "1-3OED31FD",
       "tec": "JUAN ARRIAGADA C",
       "cat": "Modificación de Servicio",
       "f": "13-16",
       "hi": "13:35",
       "d": "EL BOSQUE 1356 CASA B, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OECHBO4",
@@ -148,7 +157,7 @@
       "o": "1-3OCYE79W",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:50",
+      "hi": "17:01",
       "d": "PARINACOTA 2690 EDIF. F DEPTO 403, QUILPUE",
       "e": "Pendiente",
       "tec": "ANTONHY MORALES MENDOZA",
@@ -363,7 +372,7 @@
       "o": "1-3ODPN8N6",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "18:23",
+      "hi": "18:34",
       "d": "PJE SANTA MARIA 25, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -424,5 +433,5 @@
    }
   }
  },
- "generado": "14-10-2026 13:35"
+ "generado": "14-10-2026 13:40"
 }
