@@ -2783,6 +2783,50 @@
     border-radius:0; box-shadow:0 2px 8px rgba(15,29,46,.08); }
   #modalDer .dv-hv-b.dv-max > .dv-hv-t b { font-size:20px; }
   #modalDer .dv-hv-b.dv-max > .dv-hv-t .dv-maxbtn { font-size:14px; padding:6px 16px; background:#0f1d2e; border-color:#0f1d2e; color:#fff; }
+  /* ---- VENTANA MAS CHICA (14-10-2026, 14:50) ----
+     Luis: "achica el tamano de todo, se ve muy grande". Toda la ventana de
+     Derivacion y Franjas (titulos, pestanas, filtros y cuadros) se ve al 85%.
+     Para cambiarlo, cambiar el .85 de las DOS lineas (90% = .9, como antes = 1).
+     El alto se corrige para que la ventana siga llegando abajo. */
+  #modalDer .dv-box { zoom:.85; max-height:calc(94vh / .85); }
+  #modalDer .dv-box.ancha { max-height:calc((100vh - 20px) / .85); }
+  /* ---- MAPA DE CALOR EN FRANJAS (14-10-2026, 15:20) ----
+     Luis: "mejorar la visual de lo que muestra el boton Franjas". Las tablas
+     cruzadas (dv-fra-m) pasan a casillas de color, angostas y centradas: rojo
+     = deriva mas que su referencia (3 tonos: 5, 10 y 15 puntos o mas), verde =
+     deriva menos (5 y 10), gris = menos de 10 visitas. Los numeros son los
+     mismos de antes. Lo arman cel() de derFraMatriz y fraLey().
+     Borrando este bloque las tablas se ven casi como antes. */
+  #modalDer .dv-fra table.dv-fra-m { width:calc(100% + 8px); border-collapse:separate; border-spacing:4px 4px; margin:2px -4px 0; }
+  #modalDer .dv-fra table.dv-fra-m td:first-child, #modalDer .dv-fra table.dv-fra-m th:first-child { width:1%; }
+  /* en Pantalla completa: casillas mas altas y numeros mas grandes */
+  #modalDer .dv-hv-b.dv-max table.dv-fra-m td.hc, #modalDer .dv-hv-b.dv-max table.dv-fra-m td.cero { padding:10px 10px; }
+  #modalDer .dv-hv-b.dv-max table.dv-fra-m td.hc b { font-size:22px; }
+  #modalDer .dv-hv-b.dv-max table.dv-fra-m td.hc .pq { font-size:13px; margin-top:2px; }
+  #modalDer .dv-hv-b.dv-max table.dv-fra-m td:first-child { font-size:16px; padding-right:22px; }
+  #modalDer .dv-hv-b.dv-max table.dv-fra-m th { font-size:14px; }
+  #modalDer .dv-fra table.dv-fra-m th { text-align:center; padding:4px 6px; border:0; }
+  #modalDer .dv-fra table.dv-fra-m th:first-child { text-align:left; }
+  #modalDer .dv-fra table.dv-fra-m td { border:0 !important; }
+  #modalDer .dv-fra table.dv-fra-m td:first-child { padding:6px 14px 6px 2px; white-space:nowrap; vertical-align:middle; border-bottom:1px solid #eef2f6 !important; }
+  #modalDer .dv-fra table.dv-fra-m td.hc, #modalDer .dv-fra table.dv-fra-m td.cero { min-width:92px; text-align:center; border-radius:8px; padding:6px 10px; line-height:1.15; }
+  #modalDer .dv-fra table.dv-fra-m td.hc b { display:block; font-size:16px; }
+  #modalDer .dv-fra table.dv-fra-m td.hc .pq { display:block; margin:1px 0 0; font-size:12.5px; }
+  #modalDer .dv-fra table.dv-fra-m td.cero { color:#cbd5e1; }
+  #modalDer .dv-fra table.dv-fra-m td.hc.h0 { background:#f1f5f9; }
+  #modalDer .dv-fra table.dv-fra-m td.hc.h1 { background:#fde2e2; } #modalDer .dv-fra table.dv-fra-m td.hc.h1 b { color:#b91c1c; }
+  #modalDer .dv-fra table.dv-fra-m td.hc.h2 { background:#f8a5a5; } #modalDer .dv-fra table.dv-fra-m td.hc.h2 b { color:#7f1d1d; } #modalDer .dv-fra table.dv-fra-m td.hc.h2 .pq { color:#7f1d1d; }
+  #modalDer .dv-fra table.dv-fra-m td.hc.h3 { background:#dc2626; } #modalDer .dv-fra table.dv-fra-m td.hc.h3 b, #modalDer .dv-fra table.dv-fra-m td.hc.h3 .pq { color:#fff; }
+  #modalDer .dv-fra table.dv-fra-m td.hc.v1 { background:#dcfce7; } #modalDer .dv-fra table.dv-fra-m td.hc.v1 b { color:#166534; }
+  #modalDer .dv-fra table.dv-fra-m td.hc.v2 { background:#86efac; } #modalDer .dv-fra table.dv-fra-m td.hc.v2 b, #modalDer .dv-fra table.dv-fra-m td.hc.v2 .pq { color:#14532d; }
+  #modalDer .dv-fra table.dv-fra-m td.hc.hp { background:#fff; box-shadow:inset 0 0 0 1px #e2e8f0; } #modalDer .dv-fra table.dv-fra-m td.hc.hp b { color:#a3b1bf; font-weight:500; }
+  #modalDer .dv-fra table.dv-fra-m td.hc.ht { background:#e2e8f0; } #modalDer .dv-fra table.dv-fra-m td.hc.ht b { color:#0f1d2e; }
+  #modalDer .dv-fra table.dv-fra-m tr:last-child td.hc { box-shadow:inset 0 2px 0 #94a3b8; }
+  #modalDer .dv-fra table.dv-fra-m tr:last-child td:first-child { border-bottom:0 !important; }
+  #modalDer .dv-cal-ley .esc { display:inline-flex; align-items:center; gap:3px; }
+  #modalDer .dv-cal-ley .esc i.hc { display:inline-block; width:16px; height:12px; border-radius:3px; margin-right:1px; }
+  #modalDer .dv-cal-ley i.hc.h1 { background:#fde2e2; } #modalDer .dv-cal-ley i.hc.h2 { background:#f8a5a5; } #modalDer .dv-cal-ley i.hc.h3 { background:#dc2626; }
+  #modalDer .dv-cal-ley i.hc.v1 { background:#dcfce7; } #modalDer .dv-cal-ley i.hc.v2 { background:#86efac; } #modalDer .dv-cal-ley i.hc.hp { background:#fff; box-shadow:inset 0 0 0 1px #cbd5e1; }
 </style>
 </head>
 <body>
@@ -7732,6 +7776,7 @@ function fraOrdenar(id, col){
    altas y migraciones salian SIEMPRE rojas, porque el total del tecnico
    incluye las reparaciones, que derivan mucho menos. Asi el rojo dice "este
    tecnico deriva mas que el equipo en esa actividad". */
+const DER_FRA_FUERTE = 30;   /* MAPA DE CALOR: visitas minimas para rojo o verde fuerte */
 function derFraMatriz(filas, tit, filaDe, ordenFilas, nomFila, colDe, cols, id, refCol){
   const t = {}, totC = {}, T = {n:0, d:0};
   const mas = function(o, x){ o.n++; if(x.der) o.d++; };
@@ -7746,7 +7791,17 @@ function derFraMatriz(filas, tit, filaDe, ordenFilas, nomFila, colDe, cols, id, 
   const cel = function(o, ref, neg){
     if(!o || !o.n) return '<td class="cero"' + (neg ? ' style="border-top:2px solid #e2e8f0"' : '') + '>–</td>';
     const pocas = o.n < DER_FRA_MIN, alto = !pocas && ref && pc(o) - pc(ref) >= DER_FRA_PUNTOS;
-    return '<td' + (neg ? ' style="border-top:2px solid #e2e8f0"' : '') + '><b class="' + (pocas ? 'gr' : alto ? 'ro' : '') + '">' + Math.round(pc(o)) + '%</b> <span class="pq">' + o.d + ' de ' + o.n + '</span></td>';
+    /* MAPA DE CALOR (14-10-2026): el fondo dice cuanto se aleja de su referencia
+       (rojo = deriva mas, verde = deriva menos; mas oscuro = mas diferencia) */
+    const dif = (!pocas && ref && ref.n) ? pc(o) - pc(ref) : null;
+    /* los tonos fuertes piden DER_FRA_FUERTE visitas: con pocas visitas una
+       diferencia grande puede ser casualidad y no debe gritar mas que el resto */
+    const fuerte = o.n >= DER_FRA_FUERTE;
+    const cal = pocas ? 'hp' : dif === null ? 'ht' : (fuerte && dif >= 3 * DER_FRA_PUNTOS) ? 'h3' : (fuerte && dif >= 2 * DER_FRA_PUNTOS) ? 'h2' : dif >= DER_FRA_PUNTOS ? 'h1'
+      : (fuerte && dif <= -2 * DER_FRA_PUNTOS) ? 'v2' : dif <= -DER_FRA_PUNTOS ? 'v1' : 'h0';
+    return '<td class="hc ' + cal + '"' + (neg ? ' style="border-top:2px solid #e2e8f0"' : '') + ' title="' + o.d + ' derivadas de ' + o.n + ' visitadas'
+      + (dif !== null ? ' · ' + (dif >= 0 ? '+' : '') + fraF1(dif) + ' puntos contra ' + (refCol ? 'el equipo' : 'su fila') : '') + (pocas ? ' · pocas visitas para leerlo' : '') + '">'
+      + '<b class="' + (pocas ? 'gr' : alto ? 'ro' : '') + '">' + Math.round(pc(o)) + '%</b> <span class="pq">' + o.d + ' de ' + o.n + '</span></td>';
   };
   const ks = Object.keys(t).sort(function(a, b){ return ordenFilas(a, t[a]) - ordenFilas(b, t[b]) || String(a).localeCompare(String(b)); });
   /* orden elegido tocando un titulo de columna */
@@ -7768,10 +7823,11 @@ function derFraMatriz(filas, tit, filaDe, ordenFilas, nomFila, colDe, cols, id, 
         + ' <small>Entre los ' + val.length + ' con ' + DER_FRA_MIN + ' o más visitas ahí.</small></p>';
     } else extremos = '<p class="lec ext">Ordenado por esa columna, pero no hay dos filas con ' + DER_FRA_MIN + ' o más visitas ahí para comparar.</p>';
   }
+  const anchoCol = ' style="width:' + (100 / (cols.length + 1)).toFixed(2) + '%"';   /* columnas del mismo ancho */
   const thOrd = function(col, txt){
-    if(!id) return '<th>' + txt + '</th>';
+    if(!id) return '<th' + anchoCol + '>' + txt + '</th>';
     const on = od && od.col === col;
-    return '<th class="ord' + (on ? ' on' : '') + '" onclick="fraOrdenar(\'' + id + '\',\'' + col + '\')" title="'
+    return '<th' + anchoCol + ' class="ord' + (on ? ' on' : '') + '" onclick="fraOrdenar(\'' + id + '\',\'' + col + '\')" title="'
       + (!on ? 'Toca para ordenar: el que más deriva arriba' : od.dir === -1 ? 'Ordenado de más a menos derivación. Toca para ver primero el que menos deriva' : 'Ordenado de menos a más derivación. Toca para volver al orden normal')
       + '">' + txt + (on ? (od.dir === -1 ? ' ▼' : ' ▲') : ' <i>↕</i>') + '</th>';
   };
@@ -7811,10 +7867,13 @@ function fraBloq(n, tit, sub, cont){
   return '<div class="dv-hv-b"><div class="dv-hv-t"><span class="n">' + n + '</span><b>' + tit + '</b>' + (sub ? '<small>' + sub + '</small>' : '') + '</div>' + cont + '</div>';
 }
 function fraLey(porAct){
-  return '<div class="dv-ley dv-hv-col"><span><b>Cada casilla</b>: % de derivación y, al lado, derivadas de visitadas</span>'
-    + '<span><b style="color:#b91c1c">% en rojo</b>: ' + DER_FRA_PUNTOS + ' puntos o más sobre ' + (porAct ? 'el equipo en esa actividad (la fila Total)' : 'el total de su fila') + '</span>'
-    + '<span><b style="color:#8fa1b3">% en gris</b>: menos de ' + DER_FRA_MIN + ' visitas, no alcanza para leerlo</span>'
-    + '<span><b style="color:#2563eb">Título azul ↕</b>: tócalo para ordenar por esa columna</span></div>';
+  /* MAPA DE CALOR (14-10-2026): leyenda con muestras de color */
+  const ref = porAct ? 'el equipo en esa actividad' : 'el total de su fila';
+  return '<div class="dv-ley dv-hv-col dv-cal-ley"><span><b>Cada casilla</b>: % de derivación y, abajo, derivadas de visitadas</span>'
+    + '<span class="esc"><i class="hc h3"></i><i class="hc h2"></i><i class="hc h1"></i> deriva más que ' + ref + ' (' + DER_FRA_PUNTOS + ', ' + (2 * DER_FRA_PUNTOS) + ' y ' + (3 * DER_FRA_PUNTOS) + ' puntos o más; los tonos fuertes solo con ' + DER_FRA_FUERTE + ' visitas o más)</span>'
+    + '<span class="esc"><i class="hc v1"></i><i class="hc v2"></i> deriva menos</span>'
+    + '<span class="esc"><i class="hc hp"></i> menos de ' + DER_FRA_MIN + ' visitas, no alcanza para leerlo</span>'
+    + '<span><b style="color:#2563eb">Título azul ↕</b>: ordenar</span></div>';
 }
 /* ---- Resumen: la lectura, la tabla por franja, actividad x franja y llegada ---- */
 function fraResumenHtml(sems, todasSem, per){
