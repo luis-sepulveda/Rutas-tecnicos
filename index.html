@@ -10271,13 +10271,14 @@ function pintarPortada(){
               || '<span>Todos ya partieron.</span>') + '</div></div>' : '')
 
 
-    /* ---- 2b. los ultimos dias ---- */
-    +   '<section class="pv-tend" id="tendencia"></section>'
+    /* ---- 2b. los ultimos dias: QUITADO el 14-10-2026 a pedido de Luis.
+       Para volver a mostrarlo, agregar de nuevo aqui la linea:
+       +   '<section class="pv-tend" id="tendencia"></section>'
+       Las funciones (pintarTendencia, asegurarDias...) siguen en el archivo. ---- */
 
     + '</div>';
 
-  pintarTendencia();   // con lo que ya haya en memoria
-  asegurarDias();      // y lo pide una sola vez si todavia no esta
+  /* 14-10-2026: "Los ultimos dias" quitado; ya no se pinta ni se baja historico_dias.json */
   refrescarAviso();
 }
 
