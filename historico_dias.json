@@ -1,28 +1,37 @@
 {
  "dias": {
   "14-10-2026": {
-   "hasta": "11:09",
+   "hasta": "11:25",
    "actividades": 146,
    "tecnicos": 34,
    "estados": {
-    "Iniciado": 29,
-    "Pendiente": 89,
-    "Completado": 11,
-    "No Realizada": 7,
+    "Iniciado": 24,
+    "Pendiente": 84,
+    "Completado": 16,
+    "No Realizada": 9,
     "Cancelado": 5,
     "Suspendido": 2,
-    "en ruta": 3
+    "en ruta": 6
    },
-   "rgu": 210.6,
-   "caidas_total": 1,
-   "caidas_activas": 1,
+   "rgu": 206.6,
+   "caidas_total": 2,
+   "caidas_activas": 2,
    "caidas_resueltas": 0,
-   "nuevas": 0,
-   "al_bucket": 4,
+   "nuevas": 3,
+   "al_bucket": 5,
    "repetidas": 26,
    "reagendadas": 0,
    "detalle": {
     "caidas": [
+     {
+      "o": "1-3OC1ZOTH",
+      "tec": "RAFAEL VARGAS B",
+      "cat": "Migración 3 Play",
+      "f": "13-16",
+      "hi": "14:27",
+      "d": "EL ORVALLO 1447, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OE5RF2J",
       "tec": "YENDER BOSCAN CADENAS",
@@ -33,7 +42,35 @@
       "e": "Pendiente"
      }
     ],
-    "nuevas": [],
+    "nuevas": [
+     {
+      "o": "1-3OE4Y0CM",
+      "tec": "SEBASTIAN DOSSOW A",
+      "cat": "Migración 1 Play",
+      "f": "13-16",
+      "hi": "16:33",
+      "d": "AV JOHN KENNEDY 1550 EDIF. D DEPTO 303, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OE80ULW",
+      "tec": "CESAR MENA OLIVEROS",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "16:23",
+      "d": "WENCESLAO VIDAL 1620, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OE8031E",
+      "tec": "MATÍAS JAQUE AG",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "16:32",
+      "d": "HIPODROMO 155, VILLA ALEMANA",
+      "e": "Pendiente"
+     }
+    ],
     "repetidas": [
      {
       "o": "1-3OA3INJG",
@@ -107,18 +144,6 @@
       "ult_cierre": "Clte desiste motivo comercial"
      },
      {
-      "o": "1-3ODAYW71",
-      "cat": "Alta 2 Play",
-      "f": "10-13",
-      "hi": "11:26",
-      "d": "AZURITA 2548, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JORDAN ROA PEREZ",
-      "visitas": 1,
-      "ult_fecha": "13-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OD0UBIJ",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -134,7 +159,7 @@
       "o": "1-3ODRQAC9",
       "cat": "Migración 3 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:27",
       "d": "PJE EL HUERTO 221, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JORGE PEZOA VICUÑA",
@@ -146,7 +171,7 @@
       "o": "1-3OCYE79W",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:27",
+      "hi": "16:37",
       "d": "PARINACOTA 2690 EDIF. F DEPTO 403, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -158,9 +183,9 @@
       "o": "1-3ODMDJ24",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "12:03",
+      "hi": "11:32",
       "d": "SAN ENRIQUE 1155, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JOSE PEREZ RANGEL",
       "visitas": 2,
       "ult_fecha": "13-10-2026",
@@ -170,7 +195,7 @@
       "o": "1-3ODPN8N6",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "17:07",
+      "hi": "16:36",
       "d": "PJE SANTA MARIA 25, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE PEREZ RANGEL",
@@ -287,12 +312,24 @@
       "ult_cierre": "Direccion incorrecta"
      },
      {
+      "o": "1-3ODAYW71",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "11:30",
+      "d": "AZURITA 2548, QUILPUE",
+      "e": "Pendiente",
+      "tec": "MARCO PEREZ G",
+      "visitas": 1,
+      "ult_fecha": "13-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3ODEHT85",
       "cat": "Alta 1 Play",
       "f": "10-13",
       "hi": "09:56",
       "d": "SANTA ROSA 16 CASA MK, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "MATIAS APELEO APELEO",
       "visitas": 2,
       "ult_fecha": "13-10-2026",
@@ -304,7 +341,7 @@
       "f": "10-13",
       "hi": "09:50",
       "d": "AV VICEPRESIDENTE BDO LEIGHTON 92 CASA B, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "MATÍAS JAQUE AG",
       "visitas": 2,
       "ult_fecha": "13-10-2026",
@@ -338,7 +375,7 @@
       "o": "1-3ODIYC77",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "11:06",
+      "hi": "11:22",
       "d": "OJOS DE AGUA 1688 EDIF. 4 DEPTO 203, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -351,5 +388,5 @@
    }
   }
  },
- "generado": "14-10-2026 11:09"
+ "generado": "14-10-2026 11:25"
 }
