@@ -1,22 +1,23 @@
 {
  "dias": {
   "14-10-2026": {
-   "hasta": "10:04",
-   "actividades": 142,
-   "tecnicos": 35,
+   "hasta": "10:14",
+   "actividades": 139,
+   "tecnicos": 34,
    "estados": {
-    "Iniciado": 25,
-    "Pendiente": 111,
-    "en ruta": 4,
-    "Cancelado": 2
+    "Iniciado": 27,
+    "Pendiente": 103,
+    "No Realizada": 2,
+    "Cancelado": 2,
+    "en ruta": 5
    },
-   "rgu": 204.5,
+   "rgu": 197.0,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
    "nuevas": 0,
-   "al_bucket": 0,
-   "repetidas": 26,
+   "al_bucket": 4,
+   "repetidas": 25,
    "reagendadas": 0,
    "detalle": {
     "caidas": [],
@@ -38,7 +39,7 @@
       "o": "1-3OCYK3KM",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "15:31",
+      "hi": "16:03",
       "d": "LAUTARO 477 CASA 6, QUILPUE",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
@@ -85,7 +86,7 @@
       "o": "1-3ODAYW71",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "12:07",
       "d": "AZURITA 2548, QUILPUE",
       "e": "Pendiente",
       "tec": "GEEYSER PEREZ O",
@@ -97,7 +98,7 @@
       "o": "1-3ODVFTZO",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "15:00",
+      "hi": "17:07",
       "d": "CARLOS GRHUNNE 937 EDIF. K DEPTO 41, QUILPUE",
       "e": "Pendiente",
       "tec": "GEEYSER PEREZ O",
@@ -169,7 +170,7 @@
       "o": "1-3ODO57UO",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "14:44",
+      "hi": "15:18",
       "d": "ALMIRANTE NEFF 653 EDIF. 3 DEPTO 53, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -205,7 +206,7 @@
       "o": "1-3ODI4ESM",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "14:50",
       "d": "CALLE HERALDO ORREGO 3011 DEPTO 106, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -241,9 +242,9 @@
       "o": "1-3OC4YQFP",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "10:23",
       "d": "PJE CHIGUAYANTE 1485, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "LUIS MARTIN NUÑEZ",
       "visitas": 2,
       "ult_fecha": "10-10-2026",
@@ -253,7 +254,7 @@
       "o": "1-3OC2M49C",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:45",
+      "hi": "15:49",
       "d": "ALICANTE 1377, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
@@ -298,18 +299,6 @@
       "ult_cierre": "Zona Roja"
      },
      {
-      "o": "1-3ODDU3D6",
-      "cat": "Reparación",
-      "f": "13-16",
-      "hi": "14:00",
-      "d": "PERU (NODO 92) 440, QUILPUE",
-      "e": "Pendiente",
-      "tec": "NICOLAS MOYANO R",
-      "visitas": 3,
-      "ult_fecha": "13-10-2026",
-      "ult_cierre": "NAP Problema acceso"
-     },
-     {
       "o": "1-3ODQNST4",
       "cat": "Alta 2 Play",
       "f": "13-16",
@@ -338,5 +327,5 @@
    }
   }
  },
- "generado": "14-10-2026 10:04"
+ "generado": "14-10-2026 10:14"
 }
