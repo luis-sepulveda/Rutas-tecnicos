@@ -1,23 +1,23 @@
 {
  "dias": {
   "14-10-2026": {
-   "hasta": "16:21",
-   "actividades": 164,
+   "hasta": "17:15",
+   "actividades": 165,
    "tecnicos": 34,
    "estados": {
-    "Completado": 78,
-    "Iniciado": 28,
-    "Pendiente": 18,
-    "No Realizada": 22,
+    "Completado": 91,
+    "No Realizada": 26,
+    "Iniciado": 23,
+    "Pendiente": 7,
+    "en ruta": 5,
     "Cancelado": 8,
-    "Suspendido": 5,
-    "en ruta": 5
+    "Suspendido": 5
    },
-   "rgu": 233.3,
+   "rgu": 234.3,
    "caidas_total": 5,
    "caidas_activas": 5,
    "caidas_resueltas": 0,
-   "nuevas": 13,
+   "nuevas": 14,
    "al_bucket": 17,
    "repetidas": 24,
    "reagendadas": 0,
@@ -71,13 +71,22 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OEJF798",
+      "tec": "DANIEL NAVARRETE E",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "17:11",
+      "d": "PASAJE PETEN 961, QUILPUE",
+      "e": "en ruta"
+     },
+     {
       "o": "1-3OEHX9WI",
       "tec": "CESAR MENA OLIVEROS",
       "cat": "Modificación de Servicio",
       "f": "16-19",
       "hi": "16:05",
       "d": "CONDELL SUR 01557, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OEGC0VM",
@@ -185,7 +194,7 @@
       "f": "16-19",
       "hi": "16:32",
       "d": "HIPODROMO 155, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      }
     ],
     "repetidas": [
@@ -193,9 +202,9 @@
       "o": "1-3ODVFTZO",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "16:57",
+      "hi": "17:02",
       "d": "CARLOS GRHUNNE 937 EDIF. K DEPTO 41, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "CESAR MENA OLIVEROS",
       "visitas": 1,
       "ult_fecha": "28-08-2026",
@@ -218,7 +227,7 @@
       "f": "13-16",
       "hi": "14:20",
       "d": "ALMIRANTE NEFF 653 EDIF. 3 DEPTO 53, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "EDGAR VALERO C",
       "visitas": 1,
       "ult_fecha": "06-08-2026",
@@ -228,9 +237,9 @@
       "o": "1-3ODC3GIG",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "17:12",
+      "hi": "16:56",
       "d": "LOS ALMENDROS 2915 EDIF. D DEPTO 51, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "FELIPE SILVA R",
       "visitas": 1,
       "ult_fecha": "13-10-2026",
@@ -362,7 +371,7 @@
       "f": "16-19",
       "hi": "15:53",
       "d": "PARINACOTA 2690 EDIF. F DEPTO 403, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "LUIS MARTIN NUÑEZ",
       "visitas": 2,
       "ult_fecha": "12-10-2026",
@@ -387,6 +396,18 @@
       "hi": "11:31",
       "d": "AZURITA 2548, QUILPUE",
       "e": "Completado",
+      "tec": "MARCO PEREZ G",
+      "visitas": 1,
+      "ult_fecha": "13-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3ODPN8N6",
+      "cat": "Migración 1 Play",
+      "f": "16-19",
+      "hi": "17:10",
+      "d": "PJE SANTA MARIA 25, VILLA ALEMANA",
+      "e": "Pendiente",
       "tec": "MARCO PEREZ G",
       "visitas": 1,
       "ult_fecha": "13-10-2026",
@@ -453,18 +474,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3ODPN8N6",
-      "cat": "Migración 1 Play",
-      "f": "16-19",
-      "hi": "17:38",
-      "d": "PJE SANTA MARIA 25, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "SAMUEL FERNANDEZ VIDAL",
-      "visitas": 1,
-      "ult_fecha": "13-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3ODRQAC9",
       "cat": "Migración 3 Play",
       "f": "16-19",
@@ -481,5 +490,5 @@
    }
   }
  },
- "generado": "14-10-2026 16:21"
+ "generado": "14-10-2026 17:15"
 }
