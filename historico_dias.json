@@ -1,23 +1,23 @@
 {
  "dias": {
   "14-10-2026": {
-   "hasta": "13:25",
-   "actividades": 156,
+   "hasta": "13:35",
+   "actividades": 157,
    "tecnicos": 34,
    "estados": {
-    "Completado": 43,
-    "Iniciado": 13,
-    "Pendiente": 76,
-    "en ruta": 3,
+    "Completado": 45,
+    "Iniciado": 14,
+    "Pendiente": 74,
     "No Realizada": 12,
     "Cancelado": 6,
-    "Suspendido": 3
+    "Suspendido": 3,
+    "en ruta": 3
    },
-   "rgu": 228.3,
+   "rgu": 228.4,
    "caidas_total": 5,
    "caidas_activas": 5,
    "caidas_resueltas": 0,
-   "nuevas": 7,
+   "nuevas": 8,
    "al_bucket": 14,
    "repetidas": 23,
    "reagendadas": 0,
@@ -71,8 +71,17 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OED31FD",
+      "tec": "JUAN ARRIAGADA C",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "13:35",
+      "d": "EL BOSQUE 1356 CASA B, VILLA ALEMANA",
+      "e": "en ruta"
+     },
+     {
       "o": "1-3OECHBO4",
-      "tec": "MATIAS APELEO APELEO",
+      "tec": "SAMUEL FERNANDEZ VIDAL",
       "cat": "Migración 2 Play",
       "f": "13-16",
       "hi": "17:11",
@@ -86,7 +95,7 @@
       "f": "16-19",
       "hi": "20:12",
       "d": "MARIA MERCEDES 1482 EDIF. 1 DEPTO 302, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OEB5KVJ",
@@ -174,9 +183,9 @@
       "o": "1-3OA3INJG",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "14:01",
+      "hi": "13:26",
       "d": "CONDELL SUR 01565 CASA G, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "GEEYSER PEREZ O",
       "visitas": 3,
       "ult_fecha": "07-10-2026",
@@ -210,7 +219,7 @@
       "o": "1-3ODGEARQ",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:31",
+      "hi": "15:31",
       "d": "CALLE 5 0525, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -354,7 +363,7 @@
       "o": "1-3ODPN8N6",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "20:44",
+      "hi": "18:23",
       "d": "PJE SANTA MARIA 25, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -415,5 +424,5 @@
    }
   }
  },
- "generado": "14-10-2026 13:25"
+ "generado": "14-10-2026 13:35"
 }
