@@ -2766,6 +2766,23 @@
   .pv-xl.falta svg { animation:pvXlIcono 1.1s ease-in-out infinite; }
   @keyframes pvXlIcono { 0%, 100% { transform:scale(1); } 50% { transform:scale(1.18); } }
   @media (prefers-reduced-motion: reduce){ .pv-xl.falta, .pv-xl.falta svg { animation:none; } }
+  /* ---- CUADRO EN PANTALLA COMPLETA (14-10-2026) ----
+     Luis: "al presionar un boton me muestre la informacion en pantalla
+     completa para que los titulos y otras opciones no me quiten espacio".
+     Cada cuadro numerado de Derivacion y Franjas lleva un boton "Pantalla
+     completa" en su titulo; el cuadro pasa a ocupar toda la pantalla y su
+     titulo queda fijo arriba al bajar. "Volver" o Esc lo deja como estaba.
+     Lo arma el script "CUADRO EN PANTALLA COMPLETA" al final del archivo.
+     Borrando este bloque y ese script, todo queda como antes. */
+  #modalDer .dv-hv-b > .dv-hv-t .dv-maxbtn { margin-left:auto; border:1px solid #b6c8ee; background:#fff; color:#1d4ed8;
+    border-radius:999px; padding:4px 12px; font-family:inherit; font-size:12.5px; font-weight:600; cursor:pointer; white-space:nowrap; }
+  #modalDer .dv-hv-b > .dv-hv-t .dv-maxbtn:hover { background:#1d4ed8; border-color:#1d4ed8; color:#fff; }
+  #modalDer .dv-hv-b.dv-max { position:fixed; inset:0; z-index:3500; margin:0; border-radius:0; border:0;
+    overflow:auto; padding:0 32px 32px; }
+  #modalDer .dv-hv-b.dv-max > .dv-hv-t { position:sticky; top:0; z-index:2; margin:0 -32px 18px; padding:14px 32px;
+    border-radius:0; box-shadow:0 2px 8px rgba(15,29,46,.08); }
+  #modalDer .dv-hv-b.dv-max > .dv-hv-t b { font-size:20px; }
+  #modalDer .dv-hv-b.dv-max > .dv-hv-t .dv-maxbtn { font-size:14px; padding:6px 16px; background:#0f1d2e; border-color:#0f1d2e; color:#fff; }
 </style>
 </head>
 <body>
@@ -11345,6 +11362,63 @@ if(_inExcel) _inExcel.addEventListener('change', function(ev){
   ev.target.value = '';
 });
 
+</script>
+<script>
+/* ==================== CUADRO EN PANTALLA COMPLETA (14-10-2026) ====================
+   Agrega a cada cuadro numerado (los de titulo con numero en Derivacion y
+   Franjas) un boton "Pantalla completa". El cuadro elegido se recuerda por su
+   titulo, asi que sigue en grande aunque la ventana se refresque sola cada
+   5 minutos. Si se cambia de pestana y ese cuadro ya no esta, vuelve a lo
+   normal. Esc o "Volver" lo achican; al cerrar la ventana se olvida. */
+(function(){
+  let maxTit = null;
+  function titulo(box){ const b = box.querySelector(':scope > .dv-hv-t > b'); return b ? b.textContent.trim() : ''; }
+  function cuadros(){
+    const c = document.getElementById('dvCuerpo'); if(!c) return [];
+    return Array.prototype.filter.call(c.querySelectorAll('.dv-hv-b'), function(b){
+      return b.querySelector(':scope > .dv-hv-t') && !(b.parentElement && b.parentElement.closest('.dv-hv-b'));
+    });
+  }
+  function pintar(){
+    let hay = false;
+    cuadros().forEach(function(box){
+      const t = box.querySelector(':scope > .dv-hv-t');
+      let btn = t.querySelector(':scope > .dv-maxbtn');
+      if(!btn){
+        btn = document.createElement('button'); btn.type = 'button'; btn.className = 'dv-maxbtn';
+        btn.addEventListener('click', function(ev){ ev.stopPropagation();
+          maxTit = box.classList.contains('dv-max') ? null : titulo(box); pintar(); });
+        t.appendChild(btn);
+      }
+      const esta = maxTit !== null && titulo(box) === maxTit && !hay;
+      if(esta) hay = true;
+      if(box.classList.contains('dv-max') !== esta) box.classList.toggle('dv-max', esta);
+      const txt = esta ? '\u2715 Volver' : '\u26F6 Pantalla completa';
+      if(btn.textContent !== txt){ btn.textContent = txt; btn.title = esta ? 'Volver a la ventana (Esc)' : 'Ver este cuadro en toda la pantalla'; }
+    });
+    if(maxTit !== null && !hay) maxTit = null;
+    const box = document.querySelector('#modalDer .dv-hv-b.dv-max');
+    if(box && box.dataset.maxIni !== '1'){ box.dataset.maxIni = '1'; box.scrollTop = 0; }
+  }
+  function iniciar(){
+    const c = document.getElementById('dvCuerpo'); if(!c) return;
+    let pend = false;
+    new MutationObserver(function(){ if(pend) return; pend = true;
+      requestAnimationFrame(function(){ pend = false; pintar(); }); }).observe(c, { childList:true, subtree:true });
+    pintar();
+  }
+  /* Esc: primero achica el cuadro; recien con otro Esc se cierra la ventana */
+  window.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && maxTit !== null && document.querySelector('#modalDer .dv-hv-b.dv-max')){
+      maxTit = null; pintar(); e.stopImmediatePropagation(); e.preventDefault();
+    }
+  }, true);
+  if(typeof window.cerrarDeriv === 'function'){
+    const cerrarOrig = window.cerrarDeriv;
+    window.cerrarDeriv = function(){ maxTit = null; pintar(); return cerrarOrig.apply(this, arguments); };
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', iniciar); else iniciar();
+})();
 </script>
 </body>
 </html>
