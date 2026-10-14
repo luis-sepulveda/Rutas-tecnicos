@@ -1,23 +1,23 @@
 {
  "dias": {
   "14-10-2026": {
-   "hasta": "13:40",
-   "actividades": 158,
+   "hasta": "13:45",
+   "actividades": 159,
    "tecnicos": 34,
    "estados": {
     "Completado": 46,
-    "Iniciado": 14,
-    "Pendiente": 72,
-    "No Realizada": 12,
+    "Iniciado": 16,
+    "Pendiente": 69,
+    "No Realizada": 13,
     "Cancelado": 6,
     "Suspendido": 3,
-    "en ruta": 5
+    "en ruta": 6
    },
-   "rgu": 229.4,
+   "rgu": 229.5,
    "caidas_total": 5,
    "caidas_activas": 5,
    "caidas_resueltas": 0,
-   "nuevas": 9,
+   "nuevas": 10,
    "al_bucket": 14,
    "repetidas": 23,
    "reagendadas": 0,
@@ -71,13 +71,22 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OED6Q3X",
+      "tec": "JOSE GALAZ D",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "14:30",
+      "d": "KRIPTON 2526 CASA C, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3OECTNRM",
       "tec": "JOSE CASTRO P",
       "cat": "Modificación de Servicio",
       "f": "13-16",
       "hi": "13:39",
       "d": "PJE NVA.VICTORIA 83 CASA 15, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OED31FD",
@@ -140,7 +149,7 @@
       "f": "16-19",
       "hi": "16:23",
       "d": "WENCESLAO VIDAL 1620, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OE8031E",
@@ -194,7 +203,7 @@
       "f": "13-16",
       "hi": "13:26",
       "d": "CONDELL SUR 01565 CASA G, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "GEEYSER PEREZ O",
       "visitas": 3,
       "ult_fecha": "07-10-2026",
@@ -204,7 +213,7 @@
       "o": "1-3ODRQAC9",
       "cat": "Migración 3 Play",
       "f": "16-19",
-      "hi": "18:44",
+      "hi": "19:01",
       "d": "PJE EL HUERTO 221, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JEAN ROODLY ORELIEN",
@@ -228,7 +237,7 @@
       "o": "1-3ODGEARQ",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:31",
+      "hi": "16:26",
       "d": "CALLE 5 0525, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -433,5 +442,5 @@
    }
   }
  },
- "generado": "14-10-2026 13:40"
+ "generado": "14-10-2026 13:45"
 }
