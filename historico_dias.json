@@ -1,34 +1,45 @@
 {
  "dias": {
   "14-10-2026": {
-   "hasta": "10:29",
-   "actividades": 144,
+   "hasta": "10:44",
+   "actividades": 145,
    "tecnicos": 34,
    "estados": {
-    "Iniciado": 28,
-    "Pendiente": 100,
+    "Iniciado": 26,
+    "Pendiente": 96,
+    "Completado": 6,
+    "en ruta": 5,
     "No Realizada": 5,
-    "en ruta": 4,
     "Cancelado": 5,
     "Suspendido": 2
    },
-   "rgu": 208.0,
-   "caidas_total": 0,
-   "caidas_activas": 0,
+   "rgu": 210.5,
+   "caidas_total": 1,
+   "caidas_activas": 1,
    "caidas_resueltas": 0,
    "nuevas": 0,
    "al_bucket": 4,
    "repetidas": 26,
    "reagendadas": 0,
    "detalle": {
-    "caidas": [],
+    "caidas": [
+     {
+      "o": "1-3OE5RF2J",
+      "tec": "YENDER BOSCAN CADENAS",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "RAMON ANGEL JARA 545 CASA 27, QUILPUE",
+      "e": "Pendiente"
+     }
+    ],
     "nuevas": [],
     "repetidas": [
      {
       "o": "1-3OA3INJG",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "14:23",
+      "hi": "14:25",
       "d": "CONDELL SUR 01565 CASA G, QUILPUE",
       "e": "Pendiente",
       "tec": "ANTONHY MORALES MENDOZA",
@@ -52,7 +63,7 @@
       "o": "1-3ODC3GIG",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "17:20",
+      "hi": "17:46",
       "d": "LOS ALMENDROS 2915 EDIF. D DEPTO 51, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
@@ -87,7 +98,7 @@
       "o": "1-3ODVFTZO",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "15:08",
+      "hi": "14:59",
       "d": "CARLOS GRHUNNE 937 EDIF. K DEPTO 41, QUILPUE",
       "e": "Pendiente",
       "tec": "GEEYSER PEREZ O",
@@ -135,7 +146,7 @@
       "o": "1-3OCYE79W",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:40",
+      "hi": "16:21",
       "d": "PARINACOTA 2690 EDIF. F DEPTO 403, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -183,7 +194,7 @@
       "o": "1-3ODDXYPN",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "14:32",
       "d": "PJE B 0836 CASA 5 DEPTO 22, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE SALAS MEDINA",
@@ -207,7 +218,7 @@
       "o": "1-3ODI4ESM",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "14:18",
       "d": "CALLE HERALDO ORREGO 3011 DEPTO 106, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -340,5 +351,5 @@
    }
   }
  },
- "generado": "14-10-2026 10:29"
+ "generado": "14-10-2026 10:44"
 }
