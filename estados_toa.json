@@ -1,7 +1,8 @@
 {
-  "actualizado": "2026-10-15T15:29:00",
+  "actualizado": "2026-10-15T15:59:16",
   "resumen": {
-    "reagendada": 2
+    "reagendada": 2,
+    "sin informacion": 1
   },
   "estados": {
     "1-3ODORH68": {
@@ -23,6 +24,55 @@
       "color": "rgb(255, 222, 0)",
       "detalle": "1-3O7MGX9J - 16-19-Reparación-2 Play Servicio Degradado-GABRIEL PARRA 2378Sab, 17 Oct",
       "franja_nueva": "16-19"
+    },
+    "1-3OEN7ZDO": {
+      "tec": "LEONEL HERNÁNDEZ OJE",
+      "cat": "Reparación",
+      "franja_original": "13-16",
+      "d": "PERU (NODO 92) 440, QUILPUE",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "PERU (NODO 92) 440",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3OBN9OXV",
+            "franja": "10-13",
+            "texto": "1-3OBN9OXV - 10-13-Reparación-2 Play Servicio Degradado-PERU (NODO 92) 440Mar, 13 Oct"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3OAX70VY",
+            "franja": "13-16",
+            "texto": "1-3OAX70VY - 13-16-Reparación-2 Play Servicio Degradado-PERU (NODO 92) 440Vie, 9 Oct"
+          },
+          {
+            "estado": "completada",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3NY9EKS2",
+            "franja": "13-16",
+            "texto": "1-3NY9EKS2 - 13-16-Reparación-2 Play Servicio Degradado-PERU (NODO 92) 440Lun, 21 Sep"
+          },
+          {
+            "estado": "completada",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3NAY64CR",
+            "franja": "13-16",
+            "texto": "1-3NAY64CR - 13-16-Alta-2 Play-PERU (NODO 92) 440Jue, 20 Ago"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3NAA2VEJ",
+            "franja": "10-13",
+            "texto": "1-3NAA2VEJ - 10-13-Alta-2 Play-PERU (NODO 92) 440Mie, 19 Ago"
+          }
+        ]
+      }
     }
   }
 }
