@@ -507,29 +507,39 @@
    }
   },
   "15-10-2026": {
-   "hasta": "11:17",
-   "actividades": 143,
+   "hasta": "11:32",
+   "actividades": 145,
    "tecnicos": 34,
    "estados": {
-    "No Realizada": 8,
+    "No Realizada": 10,
     "Iniciado": 28,
-    "Pendiente": 87,
-    "Completado": 13,
-    "en ruta": 3,
+    "Pendiente": 85,
+    "Completado": 15,
     "Cancelado": 3,
-    "Suspendido": 1
+    "Suspendido": 2,
+    "en ruta": 2
    },
-   "rgu": 211.0,
+   "rgu": 213.0,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 0,
+   "nuevas": 1,
    "al_bucket": 0,
-   "repetidas": 30,
+   "repetidas": 31,
    "reagendadas": 2,
    "detalle": {
     "caidas": [],
-    "nuevas": [],
+    "nuevas": [
+     {
+      "o": "1-3OEZIILL",
+      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "17:17",
+      "d": "LOS ESPINOS 425, VILLA ALEMANA",
+      "e": "Pendiente"
+     }
+    ],
     "repetidas": [
      {
       "o": "1-3OE8F8GN",
@@ -571,7 +581,7 @@
       "o": "1-3OEEU69V",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:46",
+      "hi": "14:12",
       "d": "JAIME ATRIA 475, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -583,9 +593,9 @@
       "o": "1-3OEGC3M3",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "11:27",
+      "hi": "11:22",
       "d": "PJE 1 1627, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "DANIEL NAVARRETE E",
       "visitas": 1,
       "ult_fecha": "14-10-2026",
@@ -595,7 +605,7 @@
       "o": "1-3OEZ7ILS",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:52",
+      "hi": "16:07",
       "d": "PROYECTADA (CARRERA) 349, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
@@ -643,7 +653,7 @@
       "o": "1-3ODJ15YA",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "14:01",
       "d": "GERONA 41, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JEAN ROODLY ORELIEN",
@@ -655,24 +665,12 @@
       "o": "1-3ODCEMPP",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:04",
+      "hi": "17:05",
       "d": "AV VICEPRESIDENTE BDO LEIGHTON 1431 EDIF. 5 DEPTO 24, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JEAN ROODLY ORELIEN",
       "visitas": 1,
       "ult_fecha": "28-09-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OEPWGIV",
-      "cat": "Reparación",
-      "f": "13-16",
-      "hi": "16:57",
-      "d": "IRENE FREI 9993 CASA FIC, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOEL GUSTAVE GUSTA",
-      "visitas": 1,
-      "ult_fecha": "03-10-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -698,6 +696,18 @@
       "visitas": 1,
       "ult_fecha": "14-10-2026",
       "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3OEZOXNX",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "17:27",
+      "d": "AVENIDA VALPARAISO 2194, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOSE CASTRO P",
+      "visitas": 1,
+      "ult_fecha": "13-10-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OEJ3MXT",
@@ -729,7 +739,7 @@
       "f": "10-13",
       "hi": "11:01",
       "d": "CALLE A (SAN ENRIQUE) 963 EDIF. A DEPTO 103, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JOSE PEREZ RANGEL",
       "visitas": 1,
       "ult_fecha": "28-09-2026",
@@ -739,24 +749,12 @@
       "o": "1-3OE60DOX",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "16:04",
       "d": "2 SUR 1529, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE PEREZ RANGEL",
       "visitas": 2,
       "ult_fecha": "14-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OEZOXNX",
-      "cat": "Reparación",
-      "f": "13-16",
-      "hi": "16:42",
-      "d": "AVENIDA VALPARAISO 2194, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOSE PEREZ RANGEL",
-      "visitas": 1,
-      "ult_fecha": "13-10-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -775,7 +773,7 @@
       "o": "1-3OCZ6BZO",
       "cat": "Migración 3 Play",
       "f": "16-19",
-      "hi": "16:43",
+      "hi": "16:39",
       "d": "SAN IGNACIO 1831, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -799,7 +797,7 @@
       "o": "1-3OEE6ZRL",
       "cat": "Upgrade promoción",
       "f": "10-13",
-      "hi": "12:32",
+      "hi": "12:49",
       "d": "LEUCOTON 1100 EDIF. 1 DEPTO 108, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -811,7 +809,7 @@
       "o": "1-3OEN7ZDO",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:40",
+      "hi": "14:57",
       "d": "PERU (NODO 92) 440, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -823,7 +821,7 @@
       "o": "1-3ODP14IM",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "15:52",
+      "hi": "16:09",
       "d": "LAS BARRANCAS 2491 CASA 5-E, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -890,6 +888,30 @@
       "visitas": 1,
       "ult_fecha": "14-10-2026",
       "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3OEPWGIV",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "15:53",
+      "d": "IRENE FREI 9993 CASA FIC, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "visitas": 1,
+      "ult_fecha": "03-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OEZIILL",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "17:17",
+      "d": "LOS ESPINOS 425, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "visitas": 1,
+      "ult_fecha": "15-10-2026",
+      "ult_cierre": "Sin moradores"
      }
     ],
     "reagendadas": [
@@ -917,5 +939,5 @@
    }
   }
  },
- "generado": "15-10-2026 11:17"
+ "generado": "15-10-2026 11:32"
 }
