@@ -507,29 +507,38 @@
    }
   },
   "15-10-2026": {
-   "hasta": "11:32",
-   "actividades": 145,
+   "hasta": "11:37",
+   "actividades": 146,
    "tecnicos": 34,
    "estados": {
     "No Realizada": 10,
-    "Iniciado": 28,
+    "Iniciado": 27,
     "Pendiente": 85,
-    "Completado": 15,
+    "Completado": 16,
     "Cancelado": 3,
     "Suspendido": 2,
-    "en ruta": 2
+    "en ruta": 3
    },
-   "rgu": 213.0,
+   "rgu": 214.0,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 1,
+   "nuevas": 2,
    "al_bucket": 0,
    "repetidas": 31,
    "reagendadas": 2,
    "detalle": {
     "caidas": [],
     "nuevas": [
+     {
+      "o": "1-3OF0Z7W3",
+      "tec": "MATÍAS JAQUE AG",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "15:30",
+      "d": "LOS NARCISOS 2050 DEPTO 501, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OEZIILL",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -715,7 +724,7 @@
       "f": "10-13",
       "hi": "10:26",
       "d": "PASO HONDO 02030 EDIF. C DEPTO 204, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JOSE GALAZ D",
       "visitas": 1,
       "ult_fecha": "14-10-2026",
@@ -797,7 +806,7 @@
       "o": "1-3OEE6ZRL",
       "cat": "Upgrade promoción",
       "f": "10-13",
-      "hi": "12:49",
+      "hi": "12:59",
       "d": "LEUCOTON 1100 EDIF. 1 DEPTO 108, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -809,7 +818,7 @@
       "o": "1-3OEN7ZDO",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:57",
+      "hi": "15:07",
       "d": "PERU (NODO 92) 440, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -821,7 +830,7 @@
       "o": "1-3ODP14IM",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "16:09",
+      "hi": "16:19",
       "d": "LAS BARRANCAS 2491 CASA 5-E, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -939,5 +948,5 @@
    }
   }
  },
- "generado": "15-10-2026 11:32"
+ "generado": "15-10-2026 11:37"
 }
