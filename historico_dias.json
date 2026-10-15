@@ -507,29 +507,38 @@
    }
   },
   "15-10-2026": {
-   "hasta": "12:17",
-   "actividades": 137,
+   "hasta": "12:22",
+   "actividades": 138,
    "tecnicos": 34,
    "estados": {
     "No Realizada": 14,
     "Iniciado": 20,
-    "Pendiente": 73,
-    "Completado": 24,
-    "Cancelado": 3,
-    "Suspendido": 2,
-    "en ruta": 1
+    "Pendiente": 72,
+    "Completado": 25,
+    "Cancelado": 4,
+    "en ruta": 1,
+    "Suspendido": 2
    },
-   "rgu": 199.0,
+   "rgu": 199.1,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 3,
+   "nuevas": 4,
    "al_bucket": 10,
    "repetidas": 27,
    "reagendadas": 2,
    "detalle": {
     "caidas": [],
     "nuevas": [
+     {
+      "o": "1-3OF2ELEK",
+      "tec": "MATIAS APELEO APELEO",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "13:10",
+      "d": "EL MIRADOR 0110 EDIF. C DEPTO 24, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OF1U271",
       "tec": "JOSE PEREZ RANGEL",
@@ -611,7 +620,7 @@
       "o": "1-3OEEPIEH",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "14:22",
       "d": "AV LOS CARRERA (BTO 2000) 1410 DEPTO 11, QUILPUE",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
@@ -851,7 +860,7 @@
       "o": "1-3OEZIILL",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:10",
+      "hi": "15:06",
       "d": "LOS ESPINOS 425, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -875,9 +884,8 @@
       "o": "1-3OE60DOX",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:00",
       "d": "2 SUR 1529, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Cancelado",
       "tec": "RAFAEL VARGAS B",
       "visitas": 2,
       "ult_fecha": "14-10-2026",
@@ -909,5 +917,5 @@
    }
   }
  },
- "generado": "15-10-2026 12:17"
+ "generado": "15-10-2026 12:22"
 }
