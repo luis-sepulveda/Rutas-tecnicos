@@ -507,19 +507,19 @@
    }
   },
   "15-10-2026": {
-   "hasta": "15:58",
-   "actividades": 165,
+   "hasta": "16:08",
+   "actividades": 164,
    "tecnicos": 34,
    "estados": {
     "No Realizada": 28,
-    "Completado": 69,
-    "en ruta": 4,
+    "Completado": 71,
+    "en ruta": 6,
     "Iniciado": 24,
-    "Pendiente": 31,
+    "Pendiente": 26,
     "Cancelado": 6,
     "Suspendido": 3
    },
-   "rgu": 228.5,
+   "rgu": 226.5,
    "caidas_total": 3,
    "caidas_activas": 3,
    "caidas_resueltas": 0,
@@ -679,18 +679,6 @@
       "visitas": 1,
       "ult_fecha": "10-10-2026",
       "ult_cierre": "Direccion incorrecta"
-     },
-     {
-      "o": "1-3ODSTLIY",
-      "cat": "Alta 2 Play",
-      "f": "16-19",
-      "hi": "17:03",
-      "d": "CALLE 1 850 EDIF. O DEPTO 44, QUILPUE",
-      "e": "Pendiente",
-      "tec": "ALFREDO ALCAYAGA F",
-      "visitas": 1,
-      "ult_fecha": "13-10-2026",
-      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3OEEU69V",
@@ -888,9 +876,9 @@
       "o": "1-3OF2E9GR",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "16:00",
+      "hi": "16:19",
       "d": "LOS MAITENES 117, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JOSE PEREZ RANGEL",
       "visitas": 1,
       "ult_fecha": "08-08-2026",
@@ -900,7 +888,7 @@
       "o": "1-3ODCEMPP",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "18:01",
+      "hi": "18:20",
       "d": "AV VICEPRESIDENTE BDO LEIGHTON 1431 EDIF. 5 DEPTO 24, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE PEREZ RANGEL",
@@ -972,9 +960,9 @@
       "o": "1-3ODMR0JW",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:31",
+      "hi": "16:07",
       "d": "CARTAGENA 1342, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "KEVIN TAPIA RETAMAL",
       "visitas": 2,
       "ult_fecha": "13-10-2026",
@@ -991,6 +979,18 @@
       "visitas": 1,
       "ult_fecha": "10-10-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3ODSTLIY",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "16:23",
+      "d": "CALLE 1 850 EDIF. O DEPTO 44, QUILPUE",
+      "e": "en ruta",
+      "tec": "LEONEL HERNÁNDEZ OJE",
+      "visitas": 1,
+      "ult_fecha": "13-10-2026",
+      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3OAVJOXG",
@@ -1043,7 +1043,7 @@
       "o": "1-3OCZ6BZO",
       "cat": "Migración 3 Play",
       "f": "16-19",
-      "hi": "18:20",
+      "hi": "18:16",
       "d": "SAN IGNACIO 1831, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -1100,5 +1100,5 @@
    }
   }
  },
- "generado": "15-10-2026 15:58"
+ "generado": "15-10-2026 16:08"
 }
