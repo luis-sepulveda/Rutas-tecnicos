@@ -507,15 +507,15 @@
    }
   },
   "15-10-2026": {
-   "hasta": "15:08",
+   "hasta": "15:13",
    "actividades": 164,
    "tecnicos": 34,
    "estados": {
     "No Realizada": 28,
-    "Completado": 58,
-    "en ruta": 6,
+    "Completado": 59,
+    "Iniciado": 24,
     "Pendiente": 40,
-    "Iniciado": 23,
+    "en ruta": 4,
     "Cancelado": 6,
     "Suspendido": 3
    },
@@ -723,9 +723,9 @@
       "o": "1-3ODP14IM",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "15:09",
+      "hi": "15:12",
       "d": "LAS BARRANCAS 2491 CASA 5-E, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "CESAR MENA OLIVEROS",
       "visitas": 1,
       "ult_fecha": "13-10-2026",
@@ -953,7 +953,7 @@
       "f": "10-13",
       "hi": "14:07",
       "d": "LEUCOTON 1100 EDIF. 1 DEPTO 108, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "LEONEL HERNÁNDEZ OJE",
       "visitas": 1,
       "ult_fecha": "10-10-2026",
@@ -963,7 +963,7 @@
       "o": "1-3OEN7ZDO",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "16:15",
+      "hi": "16:29",
       "d": "PERU (NODO 92) 440, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -1091,5 +1091,5 @@
    }
   }
  },
- "generado": "15-10-2026 15:08"
+ "generado": "15-10-2026 15:13"
 }
