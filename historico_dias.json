@@ -507,28 +507,38 @@
    }
   },
   "15-10-2026": {
-   "hasta": "14:38",
-   "actividades": 165,
+   "hasta": "14:58",
+   "actividades": 164,
    "tecnicos": 34,
    "estados": {
-    "No Realizada": 25,
-    "Completado": 53,
-    "Pendiente": 52,
-    "Iniciado": 21,
-    "Cancelado": 6,
+    "No Realizada": 28,
+    "Completado": 58,
     "en ruta": 5,
+    "Pendiente": 42,
+    "Iniciado": 22,
+    "Cancelado": 6,
     "Suspendido": 3
    },
-   "rgu": 228.5,
-   "caidas_total": 0,
-   "caidas_activas": 0,
+   "rgu": 227.5,
+   "caidas_total": 1,
+   "caidas_activas": 1,
    "caidas_resueltas": 0,
    "nuevas": 12,
    "al_bucket": 10,
-   "repetidas": 35,
+   "repetidas": 34,
    "reagendadas": 2,
    "detalle": {
-    "caidas": [],
+    "caidas": [
+     {
+      "o": "1-3ODORH68",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "18:11",
+      "d": "HAITI 1952 DEPTO 13, QUILPUE",
+      "e": "Pendiente"
+     }
+    ],
     "nuevas": [
      {
       "o": "1-3OF6JS52",
@@ -546,7 +556,7 @@
       "f": "13-16",
       "hi": "14:52",
       "d": "AV BLANCO ENCALADA 1412, QUILPUE",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OF2Y3H5",
@@ -653,27 +663,15 @@
       "ult_cierre": "Direccion incorrecta"
      },
      {
-      "o": "1-3ODP14IM",
-      "cat": "Migración 1 Play",
-      "f": "13-16",
-      "hi": "15:14",
-      "d": "LAS BARRANCAS 2491 CASA 5-E, QUILPUE",
-      "e": "Pendiente",
-      "tec": "ALEXIS JARA",
-      "visitas": 1,
-      "ult_fecha": "13-10-2026",
-      "ult_cierre": "Sin acceso a vivienda"
-     },
-     {
-      "o": "1-3OEOD2VB",
-      "cat": "Migración 2 Play",
-      "f": "13-16",
-      "hi": "15:16",
-      "d": "PJE VIDAL 129, QUILPUE",
+      "o": "1-3ODSTLIY",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "17:08",
+      "d": "CALLE 1 850 EDIF. O DEPTO 44, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
       "visitas": 1,
-      "ult_fecha": "14-10-2026",
+      "ult_fecha": "13-10-2026",
       "ult_cierre": "Cliente reagenda"
      },
      {
@@ -689,6 +687,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OEOD2VB",
+      "cat": "Migración 2 Play",
+      "f": "13-16",
+      "hi": "15:07",
+      "d": "PJE VIDAL 129, QUILPUE",
+      "e": "en ruta",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "visitas": 1,
+      "ult_fecha": "14-10-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3OEEPIEH",
       "cat": "Alta 1 Play",
       "f": "13-16",
@@ -701,16 +711,16 @@
       "ult_cierre": "Direccion incorrecta"
      },
      {
-      "o": "1-3ODSTLIY",
-      "cat": "Alta 2 Play",
-      "f": "16-19",
-      "hi": "16:38",
-      "d": "CALLE 1 850 EDIF. O DEPTO 44, QUILPUE",
-      "e": "Pendiente",
+      "o": "1-3ODP14IM",
+      "cat": "Migración 1 Play",
+      "f": "13-16",
+      "hi": "15:09",
+      "d": "LAS BARRANCAS 2491 CASA 5-E, QUILPUE",
+      "e": "en ruta",
       "tec": "CESAR MENA OLIVEROS",
       "visitas": 1,
       "ult_fecha": "13-10-2026",
-      "ult_cierre": "Cliente reagenda"
+      "ult_cierre": "Sin acceso a vivienda"
      },
      {
       "o": "1-3OEGC3M3",
@@ -728,9 +738,9 @@
       "o": "1-3OEM82Q0",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:40",
+      "hi": "14:38",
       "d": "AV BLANCO ENCALADA 1412, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "DANIEL NAVARRETE E",
       "visitas": 1,
       "ult_fecha": "14-10-2026",
@@ -752,7 +762,7 @@
       "o": "1-3ODJTUZ4",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:04",
+      "hi": "16:12",
       "d": "LAS AMERICAS 1015 EDIF. 18 DEPTO 5, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "EDGAR VALERO C",
@@ -797,18 +807,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OEMDN7O",
-      "cat": "Alta 1 Play",
-      "f": "13-16",
-      "hi": "17:48",
-      "d": "CONDELL 88 CASA 1, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JEAN ROODLY ORELIEN",
-      "visitas": 1,
-      "ult_fecha": "14-10-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
       "o": "1-3ODJ15YA",
       "cat": "Reparación",
       "f": "13-16",
@@ -826,34 +824,34 @@
       "f": "13-16",
       "hi": "14:02",
       "d": "AVENIDA VALPARAISO 2194, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JOSE CASTRO P",
       "visitas": 1,
       "ult_fecha": "13-10-2026",
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OEMDN7O",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "14:59",
+      "d": "CONDELL 88 CASA 1, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOSE CASTRO P",
+      "visitas": 1,
+      "ult_fecha": "14-10-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3OEHD7F5",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:17",
+      "hi": "18:18",
       "d": "PJE CHIGUAYANTE 1485, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE CASTRO P",
       "visitas": 3,
       "ult_fecha": "14-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3O7MGX9J",
-      "cat": "Reparación",
-      "f": "16-19",
-      "hi": "17:32",
-      "d": "GABRIEL PARRA 2378, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOSE CASTRO P",
-      "visitas": 4,
-      "ult_fecha": "15-09-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -910,7 +908,7 @@
       "f": "13-16",
       "hi": "14:34",
       "d": "HIPODROMO 155, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JOSE ROJO A",
       "visitas": 1,
       "ult_fecha": "14-10-2026",
@@ -922,7 +920,7 @@
       "f": "13-16",
       "hi": "14:03",
       "d": "CALLE 1 851 CASA E, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JOSE SALAS MEDINA",
       "visitas": 3,
       "ult_fecha": "21-09-2026",
@@ -1084,5 +1082,5 @@
    }
   }
  },
- "generado": "15-10-2026 14:38"
+ "generado": "15-10-2026 14:58"
 }
