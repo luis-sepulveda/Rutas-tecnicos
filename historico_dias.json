@@ -507,16 +507,16 @@
    }
   },
   "15-10-2026": {
-   "hasta": "11:07",
+   "hasta": "11:17",
    "actividades": 143,
    "tecnicos": 34,
    "estados": {
     "No Realizada": 8,
-    "Iniciado": 26,
-    "Pendiente": 91,
+    "Iniciado": 28,
+    "Pendiente": 87,
     "Completado": 13,
+    "en ruta": 3,
     "Cancelado": 3,
-    "en ruta": 1,
     "Suspendido": 1
    },
    "rgu": 211.0,
@@ -580,10 +580,22 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OEGC3M3",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "11:27",
+      "d": "PJE 1 1627, QUILPUE",
+      "e": "en ruta",
+      "tec": "DANIEL NAVARRETE E",
+      "visitas": 1,
+      "ult_fecha": "14-10-2026",
+      "ult_cierre": "Direccion incorrecta"
+     },
+     {
       "o": "1-3OEZ7ILS",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "17:52",
       "d": "PROYECTADA (CARRERA) 349, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
@@ -604,22 +616,10 @@
       "ult_cierre": "Sin apoyo vivienda-Pierrack"
      },
      {
-      "o": "1-3OEGC3M3",
-      "cat": "Alta 2 Play",
-      "f": "10-13",
-      "hi": "11:58",
-      "d": "PJE 1 1627, QUILPUE",
-      "e": "Pendiente",
-      "tec": "FELIPE SILVA R",
-      "visitas": 1,
-      "ult_fecha": "14-10-2026",
-      "ult_cierre": "Direccion incorrecta"
-     },
-     {
       "o": "1-3ODSTLIY",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "19:11",
+      "hi": "17:36",
       "d": "CALLE 1 850 EDIF. O DEPTO 44, QUILPUE",
       "e": "Pendiente",
       "tec": "FELIPE SILVA R",
@@ -775,7 +775,7 @@
       "o": "1-3OCZ6BZO",
       "cat": "Migración 3 Play",
       "f": "16-19",
-      "hi": "16:03",
+      "hi": "16:43",
       "d": "SAN IGNACIO 1831, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -799,7 +799,7 @@
       "o": "1-3OEE6ZRL",
       "cat": "Upgrade promoción",
       "f": "10-13",
-      "hi": "12:19",
+      "hi": "12:32",
       "d": "LEUCOTON 1100 EDIF. 1 DEPTO 108, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -811,7 +811,7 @@
       "o": "1-3OEN7ZDO",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:27",
+      "hi": "14:40",
       "d": "PERU (NODO 92) 440, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -823,7 +823,7 @@
       "o": "1-3ODP14IM",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "15:39",
+      "hi": "15:52",
       "d": "LAS BARRANCAS 2491 CASA 5-E, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -917,5 +917,5 @@
    }
   }
  },
- "generado": "15-10-2026 11:07"
+ "generado": "15-10-2026 11:17"
 }
