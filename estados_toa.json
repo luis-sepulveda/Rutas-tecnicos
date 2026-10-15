@@ -1,76 +1,18 @@
 {
-  "actualizado": "2026-10-14T17:36:28",
+  "actualizado": "2026-10-15T14:58:52",
   "resumen": {
-    "cancelada": 1,
-    "reagendada": 2,
-    "sin informacion": 2
+    "reagendada": 1
   },
   "estados": {
-    "1-3ODHP51S": {
-      "tec": "EDGAR VALERO C",
-      "cat": "Migración 3 Play",
-      "franja_original": "10-13",
-      "d": "PADRE CRISTOBAL KENNEDY 047, VILLA ALEMANA",
-      "estado": "cancelada",
-      "color": "rgb(128, 255, 128)",
-      "detalle": "1-3ODHP51S - 13-16-Migración-Migración-PADRE CRISTOBAL KENNEDY 047Jue, 15 Oct",
-      "franja_nueva": "13-16"
-    },
-    "1-3OE4Y0CM": {
-      "tec": "JOEL GUSTAVE GUSTA",
-      "cat": "Migración 1 Play",
-      "franja_original": "13-16",
-      "d": "AV JOHN KENNEDY 1550 EDIF. D DEPTO 303, VILLA ALEMANA",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3OE4Y0CM - 10-13-Migración-Migración-AV JOHN KENNEDY 1550 EDIF. D DEPTO 303Jue, 15 Oct",
-      "franja_nueva": "10-13"
-    },
-    "1-3OC2M49C": {
-      "tec": "LUIS MARTIN NUÑEZ",
-      "cat": "Alta 1 Play",
-      "franja_original": "13-16",
-      "d": "ALICANTE 1377, QUILPUE",
-      "estado": "sin informacion",
-      "nota": "la OT ya no existe en TOA",
-      "contexto": {
-        "buscado": "ALICANTE 1377",
-        "aviso": "historial de la direccion, NO es el estado de esta orden",
-        "filas": [
-          {
-            "estado": "reagendada",
-            "color": "rgb(255, 222, 0)",
-            "ot": "1-3OE8F8GN",
-            "franja": "10-13",
-            "texto": "1-3OE8F8GN - 10-13-Alta-1 Play-ALICANTE 1377Jue, 15 Oct"
-          },
-          {
-            "estado": "no realizada",
-            "color": "rgb(96, 206, 206)",
-            "ot": "1-3OBIVD2E",
-            "franja": "10-13",
-            "texto": "1-3OBIVD2E - 10-13-Alta-1 Play-ALICANTE 1377Sab, 10 Oct"
-          }
-        ]
-      }
-    },
-    "1-3OC1ZOTH": {
-      "tec": "RAFAEL VARGAS B",
-      "cat": "Migración 3 Play",
-      "franja_original": "13-16",
-      "d": "EL ORVALLO 1447, VILLA ALEMANA",
-      "estado": "sin informacion",
-      "nota": "la OT ya no existe en TOA"
-    },
-    "1-3OE5RF2J": {
-      "tec": "YENDER BOSCAN CADENAS",
-      "cat": "Modificación de Servicio",
+    "1-3ODORH68": {
+      "tec": "ANTONHY MORALES MENDOZA",
+      "cat": "Alta 2 Play",
       "franja_original": "16-19",
-      "d": "RAMON ANGEL JARA 545 CASA 27, QUILPUE",
+      "d": "HAITI 1952 DEPTO 13, QUILPUE",
       "estado": "reagendada",
       "color": "rgb(255, 222, 0)",
-      "detalle": "1-3OE5RF2J - 16-19-Modificación de Servicio-Mod Peticion-RAMON ANGEL JARA 545 CASA 27Jue, 15 Oct",
-      "franja_nueva": "16-19"
+      "detalle": "1-3ODORH68 - 10-13-Alta-2 Play-HAITI 1952 DEPTO 13Vie, 16 Oct",
+      "franja_nueva": "10-13"
     }
   }
 }
