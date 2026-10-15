@@ -507,21 +507,21 @@
    }
   },
   "15-10-2026": {
-   "hasta": "16:08",
-   "actividades": 164,
+   "hasta": "16:23",
+   "actividades": 163,
    "tecnicos": 34,
    "estados": {
     "No Realizada": 28,
-    "Completado": 71,
-    "en ruta": 6,
-    "Iniciado": 24,
-    "Pendiente": 26,
+    "Completado": 72,
+    "en ruta": 5,
+    "Iniciado": 27,
+    "Pendiente": 22,
     "Cancelado": 6,
     "Suspendido": 3
    },
-   "rgu": 226.5,
-   "caidas_total": 3,
-   "caidas_activas": 3,
+   "rgu": 225.5,
+   "caidas_total": 5,
+   "caidas_activas": 5,
    "caidas_resueltas": 0,
    "nuevas": 12,
    "al_bucket": 15,
@@ -539,12 +539,30 @@
       "e": "Pendiente"
      },
      {
+      "o": "1-3OEIM54M",
+      "tec": "DANIEL NAVARRETE E",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "16:09",
+      "d": "FUENTE CLARA NORTE 806 DEPTO 33, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3O7MGX9J",
       "tec": "JEAN ROODLY ORELIEN",
       "cat": "Reparación",
       "f": "16-19",
       "hi": "17:59",
       "d": "GABRIEL PARRA 2378, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OEM5FOG",
+      "tec": "JOSE CASTRO P",
+      "cat": "Migración 1 Play",
+      "f": "13-16",
+      "hi": "18:30",
+      "d": "PJE INTERIOR 2 630, VILLA ALEMANA",
       "e": "Pendiente"
      },
      {
@@ -583,7 +601,7 @@
       "f": "13-16",
       "hi": "17:40",
       "d": "SANTA TERESA 0435, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OF5H1W3",
@@ -780,7 +798,7 @@
       "o": "1-3ODFUAQ4",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "16:05",
+      "hi": "16:55",
       "d": "CONDELL SUR 266 DEPTO 22, QUILPUE",
       "e": "Pendiente",
       "tec": "GEEYSER PEREZ O",
@@ -876,9 +894,9 @@
       "o": "1-3OF2E9GR",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "16:19",
+      "hi": "16:11",
       "d": "LOS MAITENES 117, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JOSE PEREZ RANGEL",
       "visitas": 1,
       "ult_fecha": "08-08-2026",
@@ -888,7 +906,7 @@
       "o": "1-3ODCEMPP",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "18:20",
+      "hi": "18:12",
       "d": "AV VICEPRESIDENTE BDO LEIGHTON 1431 EDIF. 5 DEPTO 24, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE PEREZ RANGEL",
@@ -943,18 +961,6 @@
       "visitas": 3,
       "ult_fecha": "14-10-2026",
       "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OEZ7ILS",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "17:02",
-      "d": "PROYECTADA (CARRERA) 349, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JUAN ARRIAGADA C",
-      "visitas": 1,
-      "ult_fecha": "19-08-2026",
-      "ult_cierre": "Clte desiste motivo comercial"
      },
      {
       "o": "1-3ODMR0JW",
@@ -1043,7 +1049,7 @@
       "o": "1-3OCZ6BZO",
       "cat": "Migración 3 Play",
       "f": "16-19",
-      "hi": "18:16",
+      "hi": "18:26",
       "d": "SAN IGNACIO 1831, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -1073,6 +1079,18 @@
       "visitas": 1,
       "ult_fecha": "15-10-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OEZ7ILS",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "17:49",
+      "d": "PROYECTADA (CARRERA) 349, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "SEBASTIAN DOSSOW A",
+      "visitas": 1,
+      "ult_fecha": "19-08-2026",
+      "ult_cierre": "Clte desiste motivo comercial"
      }
     ],
     "reagendadas": [
@@ -1080,7 +1098,7 @@
       "o": "1-3OE5RF2J",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "16:22",
+      "hi": "16:33",
       "d": "RAMON ANGEL JARA 545 CASA 27, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
@@ -1100,5 +1118,5 @@
    }
   }
  },
- "generado": "15-10-2026 16:08"
+ "generado": "15-10-2026 16:23"
 }
