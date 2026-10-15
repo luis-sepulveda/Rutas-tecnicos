@@ -507,23 +507,23 @@
    }
   },
   "15-10-2026": {
-   "hasta": "12:22",
-   "actividades": 138,
+   "hasta": "12:27",
+   "actividades": 139,
    "tecnicos": 34,
    "estados": {
     "No Realizada": 14,
-    "Iniciado": 20,
-    "Pendiente": 72,
+    "Iniciado": 22,
+    "Pendiente": 70,
     "Completado": 25,
+    "en ruta": 2,
     "Cancelado": 4,
-    "en ruta": 1,
     "Suspendido": 2
    },
-   "rgu": 199.1,
+   "rgu": 199.2,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 4,
+   "nuevas": 5,
    "al_bucket": 10,
    "repetidas": 27,
    "reagendadas": 2,
@@ -531,13 +531,22 @@
     "caidas": [],
     "nuevas": [
      {
+      "o": "1-3OF2SVWC",
+      "tec": "CESAR MENA OLIVEROS",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "12:26",
+      "d": "LOS ZORZALES 642, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
       "o": "1-3OF2ELEK",
       "tec": "MATIAS APELEO APELEO",
       "cat": "Modificación de Servicio",
       "f": "10-13",
       "hi": "13:10",
       "d": "EL MIRADOR 0110 EDIF. C DEPTO 24, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OF1U271",
@@ -620,7 +629,7 @@
       "o": "1-3OEEPIEH",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:22",
+      "hi": "14:10",
       "d": "AV LOS CARRERA (BTO 2000) 1410 DEPTO 11, QUILPUE",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
@@ -860,7 +869,7 @@
       "o": "1-3OEZIILL",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:06",
+      "hi": "14:19",
       "d": "LOS ESPINOS 425, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -917,5 +926,5 @@
    }
   }
  },
- "generado": "15-10-2026 12:22"
+ "generado": "15-10-2026 12:27"
 }
