@@ -507,13 +507,13 @@
    }
   },
   "16-10-2026": {
-   "hasta": "14:29",
+   "hasta": "14:34",
    "actividades": 159,
    "tecnicos": 34,
    "estados": {
-    "No Realizada": 17,
+    "No Realizada": 18,
     "Completado": 59,
-    "Pendiente": 51,
+    "Pendiente": 50,
     "Iniciado": 22,
     "Cancelado": 5,
     "en ruta": 4,
@@ -525,7 +525,7 @@
    "caidas_resueltas": 0,
    "nuevas": 3,
    "al_bucket": 0,
-   "repetidas": 31,
+   "repetidas": 32,
    "reagendadas": 0,
    "detalle": {
     "caidas": [
@@ -657,13 +657,25 @@
       "o": "1-3OFCMD5H",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:50",
+      "hi": "16:38",
       "d": "AVENIDA CUARTA 850, QUILPUE",
       "e": "Pendiente",
       "tec": "GEEYSER PEREZ O",
       "visitas": 1,
       "ult_fecha": "15-10-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OEEXVKR",
+      "cat": "Migración 2 Play",
+      "f": "10-13",
+      "hi": "09:57",
+      "d": "EL MIRADOR 741 CASA 66, VILLA ALEMANA",
+      "e": "Completado",
+      "tec": "JEAN ROODLY ORELIEN",
+      "visitas": 1,
+      "ult_fecha": "16-10-2026",
+      "ult_cierre": "Falla Aprovisionamiento"
      },
      {
       "o": "1-3OF8S3G4",
@@ -945,5 +957,5 @@
    }
   }
  },
- "generado": "16-10-2026 14:29"
+ "generado": "16-10-2026 14:34"
 }
