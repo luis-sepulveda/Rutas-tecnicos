@@ -22279,23 +22279,23 @@
    }
   },
   "16-10-2026": {
-   "hasta": "16:15",
-   "actividades": 160,
+   "hasta": "17:02",
+   "actividades": 162,
    "tecnicos": 34,
    "estados": {
-    "No Realizada": 28,
-    "Completado": 78,
+    "No Realizada": 36,
+    "Completado": 86,
     "Iniciado": 25,
-    "Pendiente": 17,
+    "en ruta": 4,
     "Cancelado": 5,
-    "en ruta": 6,
+    "Pendiente": 5,
     "Suspendido": 1
    },
-   "rgu": 257.8,
+   "rgu": 260.8,
    "caidas_total": 1,
    "caidas_activas": 1,
    "caidas_resueltas": 0,
-   "nuevas": 5,
+   "nuevas": 6,
    "al_bucket": 15,
    "repetidas": 32,
    "reagendadas": 0,
@@ -22312,6 +22312,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OG8VCSE",
+      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "17:05",
+      "d": "QUILLAYES 126, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OG5FWHM",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -22355,7 +22364,7 @@
       "f": "13-16",
       "hi": "17:00",
       "d": "PJE D 0812 EDIF. 13 DEPTO 22, QUILPUE",
-      "e": "Iniciado"
+      "e": "No Realizada"
      }
     ],
     "repetidas": [
@@ -22372,12 +22381,24 @@
       "ult_cierre": "Direccion incorrecta"
      },
      {
+      "o": "1-3OF3HCK6",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "13:14",
+      "d": "PJE D 0812 EDIF. 13 DEPTO 22, QUILPUE",
+      "e": "No Realizada",
+      "tec": "ALEXIS JARA",
+      "visitas": 1,
+      "ult_fecha": "16-10-2026",
+      "ult_cierre": "Direccion incorrecta"
+     },
+     {
       "o": "1-3OFEBXM6",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "16:11",
+      "hi": "16:35",
       "d": "FUENTE CLARA NORTE 806 DEPTO 33, QUILPUE",
-      "e": "Pendiente",
+      "e": "No Realizada",
       "tec": "ANTONHY MORALES MENDOZA",
       "visitas": 1,
       "ult_fecha": "15-10-2026",
@@ -22396,13 +22417,13 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OG2EAY2",
-      "cat": "Alta 1 Play",
-      "f": "13-16",
-      "hi": "16:06",
-      "d": "PJE D 0812 EDIF. 13 DEPTO 22, QUILPUE",
-      "e": "Iniciado",
-      "tec": "DANIEL NAVARRETE E",
+      "o": "1-3OF9L899",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "10:57",
+      "d": "LOS DANIELES 1220 DEPTO 103, VILLA ALEMANA",
+      "e": "No Realizada",
+      "tec": "EDGAR VALERO C",
       "visitas": 1,
       "ult_fecha": "16-10-2026",
       "ult_cierre": "Sin moradores"
@@ -22449,7 +22470,7 @@
       "f": "16-19",
       "hi": "16:02",
       "d": "LAS GARZAS 1151, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "FELIPE SILVA R",
       "visitas": 1,
       "ult_fecha": "05-10-2026",
@@ -22466,18 +22487,6 @@
       "visitas": 1,
       "ult_fecha": "16-10-2026",
       "ult_cierre": "Falla Aprovisionamiento"
-     },
-     {
-      "o": "1-3OFXN1A6",
-      "cat": "Alta 2 Play",
-      "f": "13-16",
-      "hi": "16:14",
-      "d": "LOS DANIELES 1220 DEPTO 103, VILLA ALEMANA",
-      "e": "Iniciado",
-      "tec": "JORGE PEZOA VICUÑA",
-      "visitas": 1,
-      "ult_fecha": "16-10-2026",
-      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OFLIRX3",
@@ -22564,18 +22573,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OF61JB6",
-      "cat": "Migración 3 Play",
-      "f": "16-19",
-      "hi": "17:13",
-      "d": "MARGA MARGA 1515, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JOSE SALAS MEDINA",
-      "visitas": 1,
-      "ult_fecha": "15-10-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
       "o": "1-3OF4F7NY",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -22640,7 +22637,7 @@
       "f": "13-16",
       "hi": "14:07",
       "d": "PROYECTADA (CARRERA) 349, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "LUIS GATICA DAVILA",
       "visitas": 2,
       "ult_fecha": "15-10-2026",
@@ -22650,9 +22647,9 @@
       "o": "1-3OF8S3G4",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:22",
+      "hi": "16:43",
       "d": "REGIDOR SADY YOUI 1866, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "LUIS GATICA DAVILA",
       "visitas": 1,
       "ult_fecha": "12-10-2026",
@@ -22700,11 +22697,23 @@
       "f": "16-19",
       "hi": "15:56",
       "d": "VERTIENTES 1250, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "LUIS MARTIN NUÑEZ",
       "visitas": 1,
       "ult_fecha": "14-10-2026",
       "ult_cierre": "Clte desiste motivo comercial"
+     },
+     {
+      "o": "1-3OF61JB6",
+      "cat": "Migración 3 Play",
+      "f": "16-19",
+      "hi": "16:58",
+      "d": "MARGA MARGA 1515, QUILPUE",
+      "e": "Iniciado",
+      "tec": "LUIS MARTIN NUÑEZ",
+      "visitas": 1,
+      "ult_fecha": "15-10-2026",
+      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3OF1DRA6",
@@ -22734,9 +22743,9 @@
       "o": "1-3OFCMD5H",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:29",
+      "hi": "16:36",
       "d": "AVENIDA CUARTA 850, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "SEBASTIAN DOSSOW A",
       "visitas": 1,
       "ult_fecha": "15-10-2026",
@@ -22747,5 +22756,5 @@
    }
   }
  },
- "generado": "16-10-2026 16:15"
+ "generado": "16-10-2026 17:02"
 }
