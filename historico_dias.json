@@ -22279,21 +22279,22 @@
    }
   },
   "16-10-2026": {
-   "hasta": "20:07",
-   "actividades": 166,
+   "hasta": "20:12",
+   "actividades": 167,
    "tecnicos": 34,
    "estados": {
     "No Realizada": 43,
     "Completado": 111,
     "Suspendido": 3,
     "Cancelado": 6,
-    "Iniciado": 3
+    "Iniciado": 3,
+    "Pendiente": 1
    },
-   "rgu": 265.9,
+   "rgu": 266.0,
    "caidas_total": 1,
    "caidas_activas": 1,
    "caidas_resueltas": 0,
-   "nuevas": 8,
+   "nuevas": 9,
    "al_bucket": 15,
    "repetidas": 32,
    "reagendadas": 0,
@@ -22310,6 +22311,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OGEWOKM",
+      "tec": "JOSE CASTRO P",
+      "cat": "Modificación de Servicio",
+      "f": "19-21",
+      "hi": "21:06",
+      "d": "MOZART 1642, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OGA919V",
       "tec": "FELIPE SILVA R",
@@ -22772,5 +22782,5 @@
    }
   }
  },
- "generado": "16-10-2026 20:07"
+ "generado": "16-10-2026 20:12"
 }
