@@ -22212,22 +22212,22 @@
    }
   },
   "17-10-2026": {
-   "hasta": "12:16",
-   "actividades": 131,
+   "hasta": "12:21",
+   "actividades": 132,
    "tecnicos": 34,
    "estados": {
-    "Iniciado": 24,
+    "Completado": 21,
     "Pendiente": 65,
     "No Realizada": 17,
-    "Completado": 18,
+    "Iniciado": 22,
     "Cancelado": 2,
     "en ruta": 5
    },
-   "rgu": 203.6,
+   "rgu": 204.6,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
-   "nuevas": 4,
+   "nuevas": 5,
    "al_bucket": 0,
    "repetidas": 32,
    "reagendadas": 1,
@@ -22253,6 +22253,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OGPE27Y",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "12:20",
+      "d": "EL LUCUMILLO 354, VILLA ALEMANA",
+      "e": "en ruta"
+     },
      {
       "o": "1-3OGOXKLY",
       "tec": "JOSE PEREZ RANGEL",
@@ -22295,7 +22304,7 @@
       "o": "1-3OGCX142",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:56",
+      "hi": "16:13",
       "d": "MARGA MARGA 1544 CASA B, QUILPUE",
       "e": "Pendiente",
       "tec": "ALEXIS JARA",
@@ -22439,7 +22448,7 @@
       "o": "1-3OG8NYIO",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:06",
+      "hi": "14:16",
       "d": "LOS DANIELES 1220 DEPTO 103, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOEL GUSTAVE GUSTA",
@@ -22525,7 +22534,7 @@
       "f": "10-13",
       "hi": "10:39",
       "d": "MADRID 620 CASA D, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JOSE GALAZ D",
       "visitas": 5,
       "ult_fecha": "22-09-2026",
@@ -22597,7 +22606,7 @@
       "f": "10-13",
       "hi": "12:17",
       "d": "FIGUEROA LARRAIN 0872, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JOSE SALAS MEDINA",
       "visitas": 1,
       "ult_fecha": "15-10-2026",
@@ -22691,5 +22700,5 @@
    }
   }
  },
- "generado": "17-10-2026 12:16"
+ "generado": "17-10-2026 12:21"
 }
