@@ -3860,6 +3860,18 @@ function nwFranjasTxt(ls){
   }).join(' · ');
 }
 
+/* 12:57, version CORTA (Luis: "encontraron que es mucha info"): solo cuantas
+   por actividad y el total. En Caidas va ademas, abajo, "Que paso" segun TOA.
+   El resumen detallado por tipo (nwBloquesTipo y el armado de caidas) queda
+   en el codigo, sin usarse, por si se quiere volver.                       */
+function nwConteoCorto(lista, sinTotal){
+  const orden = ['Altas','Migraciones','Reparaciones','Otras'];
+  const c = nwCuenta(lista, function(x){ return familiaCat(x.cat); });
+  return orden.filter(function(f){ return c[f]; }).map(function(f){
+    return (NW_ICONO_TIPO[f] || '•') + ' ' + f + ': ' + c[f];
+  }).join('\n') + (sinTotal ? '' : '\nTotal: *' + lista.length + '*');
+}
+
 function nwCuenta(lista, fn){
   const c = {};
   lista.forEach(function(x){ const k = fn(x); c[k] = (c[k]||0) + 1; });
@@ -3916,55 +3928,17 @@ function textoWspNuevas(){
      renglon de resumen por tipo y por franja antes del detalle, para que se
      entienda sin leer cada ficha. */
   const l = ['📋 *Órdenes que entraron durante el día*' + filtro,
-             'Quilpué y Villa Alemana · ' + fecha + ' · ' + hora];
+             'Quilpué y Villa Alemana · ' + String(fecha).replace(/-\d{4}$/, '') + ' · ' + hora];
   if(!lista.length){
     l.push('', 'Hasta ahora no han entrado órdenes nuevas.');
     return l.join('\n');
   }
-  const nTxt = nuevas.length + (nuevas.length === 1 ? ' nueva' : ' nuevas');
-  const rTxt = rein.length + (rein.length === 1 ? ' reingreso' : ' reingresos');
-  l.push('Total *' + lista.length + '*'
-    + (rein.length && nuevas.length ? ': ' + nTxt + ' y ' + rTxt
-       : (rein.length ? (rein.length === 1 ? ' reingreso' : ' reingresos')
-                      : (nuevas.length === 1 ? ' orden' : ' órdenes'))));
-  const modo = (nuevasWspModo === 'auto')
-    ? (lista.length <= NW_MAX_FICHAS ? 'fichas' : 'tipo') : nuevasWspModo;
-  if(modo === 'tipo'){
-    l.push(SEP, nwBloquesTipo(lista));
-    return l.join('\n');
-  }
-  if(lista.length >= 3 || modo === 'num'){
-    const porTipo = {}, porFr = {};
-    lista.forEach(function(x){
-      const t = familiaCat(x.cat).toLowerCase(); porTipo[t] = (porTipo[t]||0) + 1;
-      const f = x.f || 'sin franja';            porFr[f]  = (porFr[f]||0) + 1;
-    });
-    l.push('', '📊 Por tipo: ' + Object.keys(porTipo)
-        .sort(function(a,b){ return porTipo[b] - porTipo[a] || a.localeCompare(b); })
-        .map(function(t){ return porTipo[t] + ' ' + t; }).join(', '),
-      '🕐 Por franja: ' + Object.keys(porFr).sort()
-        .map(function(f){ return porFr[f] + ' en ' + f; }).join(', '));
-  }
-  if(modo === 'num'){
-    if(rein.length) l.push('↩️ ' + rTxt + ' en direcciones donde ya se fue y no se pudo hacer.');
-    return l.join('\n');
-  }
-  if(modo === 'corto'){
-    if(nuevas.length) l.push(SEP, '🆕 *Nuevas (' + nuevas.length + ')*',
-      nuevas.map(function(x){ return nwLinea(x, false); }).join('\n'));
-    if(rein.length) l.push(SEP, '↩️ *Reingresos (' + rein.length + ')* · ya se fue y no se pudo hacer',
-      rein.map(function(x){ return nwLinea(x, true); }).join('\n'));
-    l.push('', '⏳ pendiente · 🔧 iniciada · ✅ completada · ❌ no realizada');
-    return l.join('\n');
-  }
-  if(nuevas.length){
-    l.push(SEP, nuevas.map(function(x){ return nwFicha(x, false); }).join('\n\n'));
-  }
-  if(rein.length){
-    l.push(SEP, '↩️ *' + (rein.length === 1 ? 'REINGRESO' : 'REINGRESOS (' + rein.length + ')') + '*',
-           'Dirección donde ya se fue y no se pudo hacer.', '',
-           rein.map(function(x){ return nwFicha(x, true); }).join('\n\n'));
-  }
+  /* 12:59, Luis: "separalas por reingresadas y nuevas". Dos grupos, cada
+     uno con cuantas por actividad, y el total al final. */
+  if(nuevas.length) l.push('', '🆕 *Nuevas: ' + nuevas.length + '*', nwConteoCorto(nuevas, true));
+  if(rein.length)   l.push('', '↩️ *Reingresadas: ' + rein.length + '*',
+                           '_(ya se fue antes y no se pudo hacer)_', nwConteoCorto(rein, true));
+  l.push('', 'Total: *' + lista.length + '*');
   return l.join('\n');
 }
 
@@ -4065,7 +4039,7 @@ function cwDesenlace(c){
 }
 
 // "📅 3 reagendadas · 🚫 1 cancelada", en orden fijo
-function cwDesTxt(lista){
+function cwDesTxt(lista, sep){
   const c = {};
   lista.forEach(function(x){
     const d = cwDesenlace(x); const k = d[0] + '|' + d[1] + '|' + d[2];
@@ -4076,7 +4050,7 @@ function cwDesTxt(lista){
   }).map(function(k){
     const p = k.split('|'), n = c[k];
     return p[0] + ' ' + n + ' ' + (n === 1 ? p[1] : p[2]);
-  }).join(' · ');
+  }).join(sep || ' · ');
 }
 
 function textoWspCaidas(){
@@ -4085,30 +4059,12 @@ function textoWspCaidas(){
   const hora = String(ahora.getHours()).padStart(2,'0') + ':' + String(ahora.getMinutes()).padStart(2,'0');
   const fecha = (ALERTAS && ALERTAS.fecha) ? ALERTAS.fecha : ahora.toLocaleDateString('es-CL');
   const l = ['🚨 *Órdenes que le sacaron al técnico*',
-             'Quilpué y Villa Alemana · ' + fecha + ' · ' + hora];
+             'Quilpué y Villa Alemana · ' + String(fecha).replace(/-\d{4}$/, '') + ' · ' + hora];
   if(!lista.length){
     l.push('', 'Hasta ahora ninguna orden se ha caído de la bandeja.');
     return l.join('\n');
   }
-  l.push('Total *' + lista.length + '* ' + (lista.length === 1 ? 'orden' : 'órdenes')
-         + ', sin que el técnico ' + (lista.length === 1 ? 'la' : 'las') + ' tocara',
-         'Qué pasó: ' + cwDesTxt(lista));
-
-  const orden = ['Altas','Migraciones','Reparaciones','Otras'];
-  const porFam = {};
-  lista.forEach(function(x){ const f = familiaCat(x.cat); (porFam[f] = porFam[f] || []).push(x); });
-  l.push('━━━━━━━━━━━━');
-  l.push(orden.filter(function(f){ return porFam[f]; }).map(function(f){
-    const ls = porFam[f];
-    const b = [(NW_ICONO_TIPO[f] || '•') + ' *' + f.toUpperCase() + ' · ' + ls.length + '*'];
-    if(f !== 'Reparaciones') b.push(nwDetalleTipo(ls));
-    b.push(nwFranjasTxt(ls));
-    const co = nwCuenta(ls, function(x){ return nwComuna(x.d); });
-    b.push(Object.keys(co).sort().map(function(k){ return k + ': ' + co[k]; }).join(' · '));
-    b.push(cwDesTxt(ls));
-    return b.join('\n');
-  }).join('\n\n'));
-
+  l.push('', nwConteoCorto(lista), '', '*Qué pasó:*', cwDesTxt(lista, '\n'));
   const buck = (ALERTAS && ALERTAS.al_bucket) ? ALERTAS.al_bucket : 0;
   if(buck) l.push('', '↩️ Además, ' + buck + (buck === 1 ? ' volvió' : ' volvieron')
                 + ' al bucket: no se ' + (buck === 1 ? 'perdió' : 'perdieron') + ', esperan técnico.');
