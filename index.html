@@ -2953,9 +2953,12 @@
         <h2 id="mcTitulo">🚨 Se cayeron de la bandeja</h2>
         <div id="mcContadores" class="mc-cont"></div>
       </div>
+      <button class="mc-wsp" id="btnWspCaidas" onclick="toggleWspCaidas()" title="Resumen listo para pegar en WhatsApp">💬 WhatsApp</button>
       <button class="mc-close" onclick="cerrarCaidas()" title="Cerrar (Esc)">✖</button>
     </div>
     <div id="mcIntro" class="mc-intro"></div>
+    <!-- Resumen para WhatsApp de las caidas (17-10-2026) -->
+    <div id="caidasWsp" class="nw-box" style="display:none"></div>
     <div id="listaCaidas" class="mc-body"></div>
     <div id="mcResnota" class="mc-resnota" style="display:none;"></div>
   </div>
@@ -4018,6 +4021,139 @@ function abrirWspNuevas(){
   const ta = document.getElementById('nwTxt');
   if(!ta) return;
   window.open('https://wa.me/?text=' + encodeURIComponent(ta.value), '_blank');
+}
+
+/* ---------------- CAIDAS: RESUMEN PARA WHATSAPP (17-10-2026) ----------------
+   Luis, 12:33: "se me ocurrio lo mismo pero las caidas". Mismo formato que
+   el de Nuevas (un bloque por tipo de actividad, sin listar ordenes), pero
+   en vez de "como van" dice QUE PASO con cada una segun TOA (reagendada,
+   cancelada...), que es lo que se pregunta de una caida. Arriba, una linea
+   con el total de lo que dijo TOA; abajo, cuantas pasaron al bucket.
+   Usa ALERTAS.activas (las mismas del modal) y toaVigente().              */
+let caidasWspAbierto = false;
+let caidasWspEditado = false;
+
+const CW_DES = {   // estado de TOA -> icono y nombre (singular / plural)
+  'reagendada':      ['📅', 'reagendada', 'reagendadas'],
+  'cancelada':       ['🚫', 'cancelada', 'canceladas'],
+  'suspendida':      ['⏸️', 'suspendida', 'suspendidas'],
+  'no realizada':    ['❌', 'no realizada', 'no realizadas'],
+  'gestionada':      ['❌', 'no realizada', 'no realizadas'],
+  'completada':      ['✅', 'la completó otro', 'las completó otro'],
+  'sin informacion': ['❓', 'ya no está en TOA', 'ya no están en TOA'],
+  'sin respuesta':   ['⏳', 'sin consultar en TOA', 'sin consultar en TOA'],
+  '':                ['⏳', 'sin consultar en TOA', 'sin consultar en TOA']
+};
+const CW_ORDEN = ['📅','🚫','⏸️','❌','✅','❓','⏳'];
+
+function cwDesenlace(c){
+  const T = toaVigente();
+  const reg = (T && T.estados) ? T.estados[c.o] : null;
+  const est = (reg && reg.estado) ? String(reg.estado) : '';
+  return CW_DES[est] || CW_DES[''];
+}
+
+// "📅 3 reagendadas · 🚫 1 cancelada", en orden fijo
+function cwDesTxt(lista){
+  const c = {};
+  lista.forEach(function(x){
+    const d = cwDesenlace(x); const k = d[0] + '|' + d[1] + '|' + d[2];
+    c[k] = (c[k]||0) + 1;
+  });
+  return Object.keys(c).sort(function(a,b){
+    return CW_ORDEN.indexOf(a.split('|')[0]) - CW_ORDEN.indexOf(b.split('|')[0]);
+  }).map(function(k){
+    const p = k.split('|'), n = c[k];
+    return p[0] + ' ' + n + ' ' + (n === 1 ? p[1] : p[2]);
+  }).join(' · ');
+}
+
+function textoWspCaidas(){
+  const lista = (ALERTAS && ALERTAS.activas) ? ALERTAS.activas.slice() : [];
+  const ahora = new Date();
+  const hora = String(ahora.getHours()).padStart(2,'0') + ':' + String(ahora.getMinutes()).padStart(2,'0');
+  const fecha = (ALERTAS && ALERTAS.fecha) ? ALERTAS.fecha : ahora.toLocaleDateString('es-CL');
+  const l = ['🚨 *Órdenes que le sacaron al técnico*',
+             'Quilpué y Villa Alemana · ' + fecha + ' · ' + hora];
+  if(!lista.length){
+    l.push('', 'Hasta ahora ninguna orden se ha caído de la bandeja.');
+    return l.join('\n');
+  }
+  l.push('Total *' + lista.length + '* ' + (lista.length === 1 ? 'orden' : 'órdenes')
+         + ', sin que el técnico ' + (lista.length === 1 ? 'la' : 'las') + ' tocara',
+         'Qué pasó: ' + cwDesTxt(lista));
+
+  const orden = ['Altas','Migraciones','Reparaciones','Otras'];
+  const porFam = {};
+  lista.forEach(function(x){ const f = familiaCat(x.cat); (porFam[f] = porFam[f] || []).push(x); });
+  l.push('━━━━━━━━━━━━');
+  l.push(orden.filter(function(f){ return porFam[f]; }).map(function(f){
+    const ls = porFam[f];
+    const b = [(NW_ICONO_TIPO[f] || '•') + ' *' + f.toUpperCase() + ' · ' + ls.length + '*'];
+    if(f !== 'Reparaciones'){
+      const pl = nwCuenta(ls, function(x){ return nwCatCorta(x.cat).replace(/^(Alta|Migración)\s*/i, '') || nwCatCorta(x.cat); });
+      const ks = Object.keys(pl).sort();
+      if(ks.length > 1 || (ks[0] && /\dP/.test(ks[0])))
+        b.push(ks.map(function(k){ return k + ': ' + pl[k]; }).join(' · '));
+    }
+    const fr = nwCuenta(ls, function(x){ return x.f || franjaDeHora(x.hi) || 's/f'; });
+    b.push('Franja ' + Object.keys(fr).sort().map(function(k){ return k + ' (' + fr[k] + ')'; }).join(' · '));
+    const co = nwCuenta(ls, function(x){ return nwComuna(x.d); });
+    b.push(Object.keys(co).sort().map(function(k){ return k + ' ' + co[k]; }).join(' · '));
+    b.push(cwDesTxt(ls));
+    return b.join('\n');
+  }).join('\n\n'));
+
+  const buck = (ALERTAS && ALERTAS.al_bucket) ? ALERTAS.al_bucket : 0;
+  if(buck) l.push('', '↩️ Además, ' + buck + (buck === 1 ? ' volvió' : ' volvieron')
+                + ' al bucket: no se ' + (buck === 1 ? 'perdió' : 'perdieron') + ', esperan técnico.');
+  return l.join('\n');
+}
+
+function pintarWspCaidas(forzar){
+  const box = document.getElementById('caidasWsp');
+  const btn = document.getElementById('btnWspCaidas');
+  if(!box) return;
+  box.style.display = caidasWspAbierto ? 'block' : 'none';
+  if(btn) btn.classList.toggle('act', caidasWspAbierto);
+  if(!caidasWspAbierto) return;
+  let ta = document.getElementById('cwTxt');
+  if(!ta){
+    box.innerHTML = '<div class="nw-top"><b>💬 Resumen para WhatsApp</b>'
+      + '<span>Puedes corregirlo antes de copiar.</span><span class="sp"></span>'
+      + '<span id="cwOk" class="ok"></span>'
+      + '<button class="sec" onclick="pintarWspCaidas(true)" title="Volver a armarlo con lo último">↻ Actualizar</button>'
+      + '<button onclick="copiarWspCaidas()">📋 Copiar</button></div>'
+      + '<textarea id="cwTxt" class="nw-txt" oninput="caidasWspEditado = true"></textarea>';
+    ta = document.getElementById('cwTxt');
+  }
+  if(forzar || !caidasWspEditado){
+    ta.value = textoWspCaidas();
+    caidasWspEditado = false;
+    const ok = document.getElementById('cwOk'); if(ok) ok.textContent = '';
+  }
+}
+
+function toggleWspCaidas(){
+  caidasWspAbierto = !caidasWspAbierto;
+  pintarWspCaidas(true);
+}
+
+function copiarWspCaidas(){
+  const ta = document.getElementById('cwTxt');
+  if(!ta) return;
+  const ok = document.getElementById('cwOk');
+  function listo(){ if(ok) ok.textContent = '✓ Copiado, pégalo en WhatsApp'; }
+  function aMano(){
+    ta.focus(); ta.select();
+    try { document.execCommand('copy'); listo(); }
+    catch(e){ if(ok) ok.textContent = 'Selecciona el texto y copia con Ctrl+C'; }
+  }
+  try {
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(ta.value).then(listo, aMano);
+    } else { aMano(); }
+  } catch(e){ aMano(); }
 }
 
 /* ---------------------- DESCARGA A EXCEL ----------------------
@@ -5191,6 +5327,7 @@ function renderPanelCaidas(){
   partes.push('La más reciente va primero. Toca el nombre del técnico para verlo en el mapa.');
   nota.innerHTML = (activas.length ? ley : '') + escR(partes.join(' '));
   nota.style.display = 'block';
+  pintarWspCaidas(false);
 }
 
 function renderPanelSC(){
