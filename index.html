@@ -2827,6 +2827,26 @@
   #modalDer .dv-cal-ley .esc i.hc { display:inline-block; width:16px; height:12px; border-radius:3px; margin-right:1px; }
   #modalDer .dv-cal-ley i.hc.h1 { background:#fde2e2; } #modalDer .dv-cal-ley i.hc.h2 { background:#f8a5a5; } #modalDer .dv-cal-ley i.hc.h3 { background:#dc2626; }
   #modalDer .dv-cal-ley i.hc.v1 { background:#dcfce7; } #modalDer .dv-cal-ley i.hc.v2 { background:#86efac; } #modalDer .dv-cal-ley i.hc.hp { background:#fff; box-shadow:inset 0 0 0 1px #cbd5e1; }
+
+  /* ==== NUEVAS: RESUMEN PARA WHATSAPP (17-10-2026) ====
+     Boton verde WhatsApp en la cabecera del modal Nuevas y el recuadro que
+     abre debajo de la explicacion. Borrando este bloque el boton queda con el
+     estilo por defecto del navegador. */
+  .mc-wsp { background:#16a34a; border:1px solid #16a34a; color:#fff; cursor:pointer;
+            border-radius:8px; padding:6px 12px; font-size:13px; font-weight:600; margin-right:6px; white-space:nowrap; }
+  .mc-wsp:hover { background:#15803d; }
+  .mc-wsp.act { background:#fff; color:#15803d; }
+  .nw-box { margin:0 0 12px; border:1px solid #bbf7d0; background:#f0fdf4; border-radius:10px; padding:10px 12px; }
+  .nw-top { display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:8px; color:#14532d; font-size:13px; }
+  .nw-top b { font-size:14px; }
+  .nw-top .sp { flex:1; }
+  .nw-top button { border-radius:8px; padding:6px 12px; font-size:13px; font-weight:600; cursor:pointer;
+                   border:1px solid #16a34a; background:#16a34a; color:#fff; }
+  .nw-top button.sec { background:#fff; color:#15803d; }
+  .nw-top .ok { color:#15803d; font-weight:600; }
+  .nw-txt { width:100%; box-sizing:border-box; min-height:220px; max-height:45vh; resize:vertical;
+            font:13px/1.45 ui-monospace, Consolas, monospace; color:#0f172a; background:#fff;
+            border:1px solid #d1d5db; border-radius:8px; padding:10px; white-space:pre-wrap; }
 </style>
 </head>
 <body>
@@ -2945,10 +2965,13 @@
         <h2 id="nuevasTitulo">🆕 Órdenes que entraron hoy</h2>
         <div id="nuevasChips" class="mc-cont"></div>
       </div>
+      <button class="mc-wsp" id="btnWspNuevas" onclick="toggleWspNuevas()" title="Resumen listo para pegar en WhatsApp">💬 WhatsApp</button>
       <button class="mc-xls" onclick="bajarNuevasXlsx()" title="Descargar en Excel lo que se está mostrando">⬇️ Excel</button>
       <button class="mc-close" onclick="cerrarNuevas()" title="Cerrar (Esc)">✖</button>
     </div>
     <div id="nuevasIntro" class="mc-intro"></div>
+    <!-- Resumen para WhatsApp (17-10-2026): se abre con el boton de arriba -->
+    <div id="nuevasWsp" class="nw-box" style="display:none"></div>
     <div id="listaNuevas" class="mc-body"></div>
     <div id="nuevasNota" class="mc-resnota"></div>
   </div>
@@ -3537,7 +3560,7 @@ function toggleNuevas(){
   renderBotonNuevas();
 }
 
-function setNuevasFiltro(f){ nuevasFiltro = f; renderNuevas(); }
+function setNuevasFiltro(f){ nuevasFiltro = f; nuevasWspEditado = false; renderNuevas(); }
 
 function renderNuevas(){
   const cont = document.getElementById('listaNuevas');
@@ -3705,7 +3728,158 @@ function renderNuevas(){
     + escR('Jornada ' + (ALERTAS && ALERTAS.fecha ? ALERTAS.fecha : '')
       + '. La más reciente va primero. Toca el nombre del técnico para verlo en el mapa. '
       + 'El botón Excel baja lo que se está mostrando con el filtro elegido.');
+  // resumen para WhatsApp: si esta abierto, se rearma con lo nuevo (salvo que
+  // se haya editado a mano; ver pintarWspNuevas)
+  pintarWspNuevas(false);
 }
+/* ---------------- RESUMEN PARA WHATSAPP (17-10-2026) ----------------
+   Pedido de Luis: "un boton dentro del boton nuevas que muestre un resumen
+   para enviar por WhatsApp, detalle de las ordenes nuevas y reingresadas, lo
+   mas sencillo y claro posible".
+
+   Usa la MISMA lista del modal (nuevasDelDia, sin Modificaciones de Servicio)
+   y respeta el chip elegido, igual que el Excel: con "Altas" elegido, resume
+   solo las altas. Dos grupos, cada uno por franja:
+     Nuevas     -> primera vez (y las reagendadas, que hoy no ocurren)
+     Reingresos -> otra orden a una direccion donde ya se fue y no se pudo;
+                   lleva una linea "Antes:" con la ultima visita fallida.
+   Cada orden en dos renglones (tipo y tecnico / direccion y peticion), que en
+   el telefono se lee mejor que una linea larga. Las pendientes no llevan
+   marca; las cerradas o las que salieron del tecnico si.
+
+   El texto sale en un cuadro EDITABLE: se puede corregir antes de copiar. Si
+   se edito, el refresco de cada 5 minutos no lo pisa; el boton "Actualizar"
+   lo vuelve a armar con lo ultimo.
+   Negritas con *asterisco* y cursiva con _guion bajo_, que es como WhatsApp
+   las entiende.                                                            */
+let nuevasWspAbierto = false;
+let nuevasWspEditado = false;
+
+/* Formato "fichas" (opcion C, elegida por Luis el 17-10-2026): un bloque por
+   orden, un dato por renglon con su icono. WhatsApp borra los espacios del
+   comienzo de cada linea, por eso no se usa sangria: cada renglon parte con
+   su icono y asi se entiende de que orden es.                              */
+function nwEstado(x){
+  const est = String(x.e||'').replace(/\s*\(ya no está\)\s*/, '').trim();
+  const fue = String(x.e||'').indexOf('ya no está') >= 0;
+  if(est === 'Completado')   return '✅ Completada';
+  if(est === 'No Realizada') return '❌ No realizada';
+  if(est === 'Cancelado')    return '🚫 Cancelada';
+  if(est === 'Suspendido')   return '⏸️ Suspendida';
+  if(fue)                    return '⚠️ Ya no la tiene el técnico';
+  if(/inici/i.test(est))     return '🔧 Iniciada';
+  if(/ruta/i.test(est))      return '🚗 En ruta';
+  return '⏳ Pendiente';
+}
+
+function nwFicha(x, esRein){
+  const l = [];
+  l.push((esRein ? '↩️ ' : '🆕 ') + '*' + (x.cat || 'Orden') + '* · ' + (x.f || 'sin franja'));
+  l.push('👷 ' + (x.tec ? tituloDir(x.tec) : 'Sin técnico'));
+  l.push('📍 ' + tituloDir(x.d || 'sin dirección'));
+  l.push('🔢 ' + (x.pet || x.o || '') + ' · ' + nwEstado(x));
+  if(x.reag) l.push('🔁 Reagendada, estaba el ' + x.reag);
+  if(esRein && x.prev && x.prev.length){
+    const p = x.prev[x.prev.length - 1];
+    const n = x.prev.length;
+    l.push('⚠️ Ya falló ' + (n === 1 ? '1 vez' : n + ' veces') + ' · última '
+      + String(p.f || '?').replace(/-\d{4}$/, '') + ' ' + (p.cierre || 'sin código de cierre')
+      + (p.tec ? ' (' + tituloDir(p.tec) + ')' : ''));
+  }
+  return l.join('\n');
+}
+
+function nwOrdenar(lista){
+  return lista.slice().sort(function(a,b){
+    return String(a.f||'').localeCompare(String(b.f||''))
+        || String(a.hi||'').localeCompare(String(b.hi||''));
+  });
+}
+
+function textoWspNuevas(){
+  const lista = nuevasDelDia().filter(pasaFiltro);
+  const nuevas = nwOrdenar(lista.filter(function(x){ return clase(x) !== 'reingreso'; }));
+  const rein   = nwOrdenar(lista.filter(function(x){ return clase(x) === 'reingreso'; }));
+  const ahora = new Date();
+  const hora = String(ahora.getHours()).padStart(2,'0') + ':' + String(ahora.getMinutes()).padStart(2,'0');
+  const fecha = (ALERTAS && ALERTAS.fecha) ? ALERTAS.fecha : ahora.toLocaleDateString('es-CL');
+  const filtro = (nuevasFiltro === 'todas') ? ''
+    : ' (' + ({nuevitas:'solo primera vez', reingresos:'solo reingresos', reagendadas:'solo reagendadas'}[nuevasFiltro]
+              || ('solo ' + nuevasFiltro.toLowerCase())) + ')';
+  const SEP = '━━━━━━━━━━━━';
+
+  const l = ['📋 *ÓRDENES NUEVAS*' + filtro];
+  if(!lista.length){
+    l.push(fecha + ' · ' + hora, '', 'Hasta ahora no han entrado órdenes nuevas.');
+    return l.join('\n');
+  }
+  l.push(fecha + ' · ' + hora + ' · Total *' + lista.length + '*'
+    + ' (' + nuevas.length + (nuevas.length === 1 ? ' nueva' : ' nuevas')
+    + ', ' + rein.length + (rein.length === 1 ? ' reingreso' : ' reingresos') + ')');
+  if(nuevas.length){
+    l.push(SEP, nuevas.map(function(x){ return nwFicha(x, false); }).join('\n\n'));
+  }
+  if(rein.length){
+    l.push(SEP, '↩️ *' + (rein.length === 1 ? 'REINGRESO' : 'REINGRESOS (' + rein.length + ')') + '*',
+           'Dirección donde ya se fue y no se pudo hacer.', '',
+           rein.map(function(x){ return nwFicha(x, true); }).join('\n\n'));
+  }
+  return l.join('\n');
+}
+
+function pintarWspNuevas(forzar){
+  const box = document.getElementById('nuevasWsp');
+  const btn = document.getElementById('btnWspNuevas');
+  if(!box) return;
+  box.style.display = nuevasWspAbierto ? 'block' : 'none';
+  if(btn) btn.classList.toggle('act', nuevasWspAbierto);
+  if(!nuevasWspAbierto) return;
+  let ta = document.getElementById('nwTxt');
+  if(!ta){
+    box.innerHTML = '<div class="nw-top"><b>💬 Resumen para WhatsApp</b>'
+      + '<span>Puedes corregirlo antes de copiar.</span><span class="sp"></span>'
+      + '<span id="nwOk" class="ok"></span>'
+      + '<button class="sec" onclick="pintarWspNuevas(true)" title="Volver a armarlo con lo último">↻ Actualizar</button>'
+      + '<button class="sec" onclick="abrirWspNuevas()" title="Abrir WhatsApp con el texto">Abrir WhatsApp</button>'
+      + '<button onclick="copiarWspNuevas()">📋 Copiar</button></div>'
+      + '<textarea id="nwTxt" class="nw-txt" oninput="nuevasWspEditado = true"></textarea>';
+    ta = document.getElementById('nwTxt');
+  }
+  if(forzar || !nuevasWspEditado){
+    ta.value = textoWspNuevas();
+    nuevasWspEditado = false;
+    const ok = document.getElementById('nwOk'); if(ok) ok.textContent = '';
+  }
+}
+
+function toggleWspNuevas(){
+  nuevasWspAbierto = !nuevasWspAbierto;
+  pintarWspNuevas(true);
+}
+
+function copiarWspNuevas(){
+  const ta = document.getElementById('nwTxt');
+  if(!ta) return;
+  const ok = document.getElementById('nwOk');
+  function listo(){ if(ok) ok.textContent = '✓ Copiado, pégalo en WhatsApp'; }
+  function aMano(){
+    ta.focus(); ta.select();
+    try { document.execCommand('copy'); listo(); }
+    catch(e){ if(ok) ok.textContent = 'Selecciona el texto y copia con Ctrl+C'; }
+  }
+  try {
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(ta.value).then(listo, aMano);
+    } else { aMano(); }
+  } catch(e){ aMano(); }
+}
+
+function abrirWspNuevas(){
+  const ta = document.getElementById('nwTxt');
+  if(!ta) return;
+  window.open('https://wa.me/?text=' + encodeURIComponent(ta.value), '_blank');
+}
+
 /* ---------------------- DESCARGA A EXCEL ----------------------
    Exporta lo que se esta MOSTRANDO, respetando el chip activo: si tienes
    filtrado "reingresos", baja esos 13 y no los 66. Es lo que uno espera de un
