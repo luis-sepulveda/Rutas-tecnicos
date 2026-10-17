@@ -22212,23 +22212,23 @@
    }
   },
   "17-10-2026": {
-   "hasta": "14:47",
-   "actividades": 149,
+   "hasta": "14:52",
+   "actividades": 150,
    "tecnicos": 33,
    "estados": {
-    "Completado": 42,
-    "en ruta": 4,
-    "Pendiente": 57,
-    "No Realizada": 23,
+    "Completado": 46,
+    "Iniciado": 16,
+    "Pendiente": 53,
+    "No Realizada": 24,
     "Cancelado": 3,
-    "Iniciado": 19,
+    "en ruta": 7,
     "Suspendido": 1
    },
-   "rgu": 235.6,
+   "rgu": 235.7,
    "caidas_total": 3,
    "caidas_activas": 3,
    "caidas_resueltas": 0,
-   "nuevas": 9,
+   "nuevas": 10,
    "al_bucket": 3,
    "repetidas": 37,
    "reagendadas": 1,
@@ -22263,6 +22263,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OGSV2BK",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "15:54",
+      "d": "RENE RODRIGUEZ 589 EDIF. B-37 DEPTO 201, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OGQJINP",
       "tec": "RAFAEL VARGAS B",
@@ -22350,9 +22359,9 @@
       "o": "1-3OGCX142",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:46",
+      "hi": "14:50",
       "d": "MARGA MARGA 1544 CASA B, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "ALEXIS JARA",
       "visitas": 3,
       "ult_fecha": "03-10-2026",
@@ -22400,7 +22409,7 @@
       "f": "13-16",
       "hi": "13:58",
       "d": "AVENIDA CUARTA 850, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "ANTONHY MORALES MENDOZA",
       "visitas": 2,
       "ult_fecha": "16-10-2026",
@@ -22652,7 +22661,7 @@
       "f": "13-16",
       "hi": "13:26",
       "d": "2 SUR 1529, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JOSE PEREZ RANGEL",
       "visitas": 2,
       "ult_fecha": "14-10-2026",
@@ -22734,9 +22743,9 @@
       "o": "1-3O13GMFZ",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "16:56",
+      "hi": "15:06",
       "d": "FRESIA 30, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "LUIS GATICA DAVILA",
       "visitas": 1,
       "ult_fecha": "24-09-2026",
@@ -22746,7 +22755,7 @@
       "o": "1-3OF2OPTD",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "16:15",
+      "hi": "16:02",
       "d": "PASO DEL AGUA 2538, QUILPUE",
       "e": "Pendiente",
       "tec": "MARCO PEREZ G",
@@ -22806,5 +22815,5 @@
    }
   }
  },
- "generado": "17-10-2026 14:47"
+ "generado": "17-10-2026 14:52"
 }
