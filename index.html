@@ -3839,10 +3839,27 @@ function nwLinea(x, esRein){
 const NW_ICONO_TIPO = { Altas:'🏠', Migraciones:'🔄', Reparaciones:'🛠️', Otras:'📦' };
 function nwComuna(d){
   const c = String(d||'').split(',').pop().trim().toUpperCase();
-  if(/VILLA ALEMANA/.test(c)) return 'V. Alemana';
+  if(/VILLA ALEMANA/.test(c)) return 'Villa Alemana';
   if(/QUILPU/.test(c)) return 'Quilpué';
   return c ? tituloDir(c) : 'sin comuna';
 }
+/* 12:46, Luis: "yo entiendo que dice, pero el resto no se". Todo con
+   palabras completas: "Alta 1 Play: 2", "Villa Alemana", "en la franja de
+   13 a 16". Nada de 1P, Repa ni V. Alemana en el resumen por tipo.       */
+function nwDetalleTipo(ls){
+  const c = nwCuenta(ls, function(x){
+    return String(x.cat || 'Sin tipo').replace(/\s+/g, ' ').trim();
+  });
+  return Object.keys(c).sort().map(function(k){ return k + ': ' + c[k]; }).join(' · ');
+}
+function nwFranjasTxt(ls){
+  const fr = nwCuenta(ls, function(x){ return x.f || franjaDeHora(x.hi) || 'sin franja'; });
+  return 'Franja ' + Object.keys(fr).sort().map(function(k){
+    const h = franjaHablada(k);
+    return (h ? h.replace(/^de /, '') + ' hrs' : k) + ': ' + fr[k];
+  }).join(' · ');
+}
+
 function nwCuenta(lista, fn){
   const c = {};
   lista.forEach(function(x){ const k = fn(x); c[k] = (c[k]||0) + 1; });
@@ -3855,16 +3872,10 @@ function nwBloquesTipo(lista){
   return orden.filter(function(f){ return porFam[f]; }).map(function(f){
     const ls = porFam[f];
     const l = [(NW_ICONO_TIPO[f] || '•') + ' *' + f.toUpperCase() + ' · ' + ls.length + '*'];
-    if(f !== 'Reparaciones'){
-      const pl = nwCuenta(ls, function(x){ return nwCatCorta(x.cat).replace(/^(Alta|Migración)\s*/i, '') || nwCatCorta(x.cat); });
-      const ks = Object.keys(pl).sort();
-      if(ks.length > 1 || (ks[0] && /\dP/.test(ks[0])))
-        l.push(ks.map(function(k){ return k + ': ' + pl[k]; }).join(' · '));
-    }
-    const fr = nwCuenta(ls, function(x){ return x.f || 's/f'; });
-    l.push('Franja ' + Object.keys(fr).sort().map(function(k){ return k + ' (' + fr[k] + ')'; }).join(' · '));
+    if(f !== 'Reparaciones') l.push(nwDetalleTipo(ls));
+    l.push(nwFranjasTxt(ls));
     const co = nwCuenta(ls, function(x){ return nwComuna(x.d); });
-    l.push(Object.keys(co).sort().map(function(k){ return k + ' ' + co[k]; }).join(' · '));
+    l.push(Object.keys(co).sort().map(function(k){ return k + ': ' + co[k]; }).join(' · '));
     const es = nwCuenta(ls, function(x){ return nwEstado(x); });
     const nomEst = {'⏳':'pendiente','🔧':'iniciada','🚗':'en ruta','✅':'completada','❌':'no realizada',
                     '🚫':'cancelada','⏸️':'suspendida','⚠️':'se la quitaron al técnico'};
@@ -4090,16 +4101,10 @@ function textoWspCaidas(){
   l.push(orden.filter(function(f){ return porFam[f]; }).map(function(f){
     const ls = porFam[f];
     const b = [(NW_ICONO_TIPO[f] || '•') + ' *' + f.toUpperCase() + ' · ' + ls.length + '*'];
-    if(f !== 'Reparaciones'){
-      const pl = nwCuenta(ls, function(x){ return nwCatCorta(x.cat).replace(/^(Alta|Migración)\s*/i, '') || nwCatCorta(x.cat); });
-      const ks = Object.keys(pl).sort();
-      if(ks.length > 1 || (ks[0] && /\dP/.test(ks[0])))
-        b.push(ks.map(function(k){ return k + ': ' + pl[k]; }).join(' · '));
-    }
-    const fr = nwCuenta(ls, function(x){ return x.f || franjaDeHora(x.hi) || 's/f'; });
-    b.push('Franja ' + Object.keys(fr).sort().map(function(k){ return k + ' (' + fr[k] + ')'; }).join(' · '));
+    if(f !== 'Reparaciones') b.push(nwDetalleTipo(ls));
+    b.push(nwFranjasTxt(ls));
     const co = nwCuenta(ls, function(x){ return nwComuna(x.d); });
-    b.push(Object.keys(co).sort().map(function(k){ return k + ' ' + co[k]; }).join(' · '));
+    b.push(Object.keys(co).sort().map(function(k){ return k + ': ' + co[k]; }).join(' · '));
     b.push(cwDesTxt(ls));
     return b.join('\n');
   }).join('\n\n'));
