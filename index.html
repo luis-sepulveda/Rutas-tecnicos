@@ -3808,14 +3808,35 @@ function textoWspNuevas(){
               || ('solo ' + nuevasFiltro.toLowerCase())) + ')';
   const SEP = '━━━━━━━━━━━━';
 
-  const l = ['📋 *ÓRDENES NUEVAS*' + filtro];
+  /* Ajustes del 17-10-2026 (11:45), pensando en el grupo donde esta la
+     gerenta: el titulo dice que es y de donde; el total no muestra ceros
+     ("1 nueva", no "1 nueva, 0 reingresos"); y con 3 o mas ordenes va un
+     renglon de resumen por tipo y por franja antes del detalle, para que se
+     entienda sin leer cada ficha. */
+  const l = ['📋 *Órdenes que entraron durante el día*' + filtro,
+             'Quilpué y Villa Alemana · ' + fecha + ' · ' + hora];
   if(!lista.length){
-    l.push(fecha + ' · ' + hora, '', 'Hasta ahora no han entrado órdenes nuevas.');
+    l.push('', 'Hasta ahora no han entrado órdenes nuevas.');
     return l.join('\n');
   }
-  l.push(fecha + ' · ' + hora + ' · Total *' + lista.length + '*'
-    + ' (' + nuevas.length + (nuevas.length === 1 ? ' nueva' : ' nuevas')
-    + ', ' + rein.length + (rein.length === 1 ? ' reingreso' : ' reingresos') + ')');
+  const nTxt = nuevas.length + (nuevas.length === 1 ? ' nueva' : ' nuevas');
+  const rTxt = rein.length + (rein.length === 1 ? ' reingreso' : ' reingresos');
+  l.push('Total *' + lista.length + '*'
+    + (rein.length && nuevas.length ? ': ' + nTxt + ' y ' + rTxt
+       : (rein.length ? (rein.length === 1 ? ' reingreso' : ' reingresos')
+                      : (nuevas.length === 1 ? ' orden' : ' órdenes'))));
+  if(lista.length >= 3){
+    const porTipo = {}, porFr = {};
+    lista.forEach(function(x){
+      const t = familiaCat(x.cat).toLowerCase(); porTipo[t] = (porTipo[t]||0) + 1;
+      const f = x.f || 'sin franja';            porFr[f]  = (porFr[f]||0) + 1;
+    });
+    l.push('', '📊 Por tipo: ' + Object.keys(porTipo)
+        .sort(function(a,b){ return porTipo[b] - porTipo[a] || a.localeCompare(b); })
+        .map(function(t){ return porTipo[t] + ' ' + t; }).join(', '),
+      '🕐 Por franja: ' + Object.keys(porFr).sort()
+        .map(function(f){ return porFr[f] + ' en ' + f; }).join(', '));
+  }
   if(nuevas.length){
     l.push(SEP, nuevas.map(function(x){ return nwFicha(x, false); }).join('\n\n'));
   }
