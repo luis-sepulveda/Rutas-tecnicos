@@ -2853,6 +2853,15 @@
   .nw-txt { width:100%; box-sizing:border-box; min-height:220px; max-height:45vh; resize:vertical;
             font:13px/1.45 ui-monospace, Consolas, monospace; color:#0f172a; background:#fff;
             border:1px solid #d1d5db; border-radius:8px; padding:10px; white-space:pre-wrap; }
+
+  /* ==== ARCHIVO DANADO (17-10-2026) ====
+     Pastilla roja que late en Requiere atencion cuando salud_archivos.py
+     encuentra un archivo con falla, y su ventana (reusa #modalNoop). */
+  .pv-linea .pv-al.salud-al { border-color:#b91c1c; background:#fef2f2; color:#7f1d1d;
+    animation:pvDerPulso 1.4s ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce){ .pv-linea .pv-al.salud-al { animation:none; } }
+  #modalNoop .salud-av .dia { border-color:#fecaca; background:#fef2f2; }
+  #modalNoop .salud-av .dia .cab b { color:#991b1b; }
 </style>
 </head>
 <body>
@@ -7701,6 +7710,48 @@ function compPastillaHtml(){
 }
 function compYaRevise(dia){ try { const v = compVistos(); if(v.indexOf(dia) < 0) v.push(dia); localStorage.setItem('compVistos', JSON.stringify(v.slice(-60))); } catch(e){}
   try { pintarPortada(); } catch(e){} if(compPendientes().length) abrirFaltaCompleto(); else cerrarNoOperativos(); }
+/* ---- ARCHIVO DANADO (17-10-2026) ----
+   Luis: "para saber cuando un archivo esta con falla". El 14-10 dos archivos
+   quedaron llenos de ceros en un cuelgue del PC y nadie lo noto por dos dias:
+   el monitor solo lo escribia en la ventana negra. Ahora salud_archivos.py
+   (lo llama generar_rutas.py en cada ciclo) revisa los archivos que el
+   sistema lee y escribe, y lo que encuentra viene en rutas.json -> salud.
+   Aca: pastilla roja "Archivo danado" en Requiere atencion, SOLO si hay
+   alguno. Al tocarla, la lista con que archivo es, que le pasa, que se rompe
+   en pantalla y que hacer. Suena una vez cuando aparece una falla nueva.
+   Si rutas.json no trae 'salud' (generar_rutas.py antiguo), no sale nada. */
+let SALUD = null, SALUD_SONADOS = {};
+function saludProblemas(){ return (SALUD && Array.isArray(SALUD.problemas)) ? SALUD.problemas : []; }
+function saludRevisarSonido(){
+  const l = saludProblemas(); let nueva = false;
+  l.forEach(function(p){ const k = p.a + '|' + p.m; if(!SALUD_SONADOS[k]){ SALUD_SONADOS[k] = 1; nueva = true; } });
+  if(nueva){ try { derSonar([[0, 523], [0.25, 392], [0.5, 523], [0.75, 392]]); } catch(e){} }
+}
+function saludPastillaHtml(){
+  const l = saludProblemas(); if(!l.length) return '';
+  return '<button class="pv-al dosl viva salud-al" style="--tono:#b91c1c" title="' + (l.length === 1 ? 'Hay 1 archivo' : 'Hay ' + l.length + ' archivos')
+    + ' del sistema con falla: ' + escR(l.map(function(p){ return p.a; }).join(', ')) + '. Toca para ver qué hacer." onclick="abrirSalud()">'
+    + '<span class="n">' + l.length + '</span><span class="tx"><span class="t">Archivo<br>dañado</span></span></button>';
+}
+function abrirSalud(){
+  const m = document.getElementById('modalNoop'), cu = document.getElementById('noopCuerpo'); if(!m || !cu) return;
+  const tit = document.querySelector('#modalNoop .mc-head h2'); if(tit) tit.textContent = 'Archivos del sistema con falla';
+  const l = saludProblemas();
+  cu.innerHTML = '<div class="comp-av salud-av"><p class="exp">El monitor sigue funcionando, pero estos archivos están mal. '
+    + 'Mientras no se arreglen, lo que se muestra en esos botones puede salir vacío o incompleto. Revisado a las ' + escR((SALUD && SALUD.hora) || '') + '.</p>'
+    + (l.length ? l.map(function(p){
+        return '<div class="dia"><div class="cab"><b>' + escR(p.a) + '</b><span>carpeta ' + escR(p.carpeta || '') + '</span></div>'
+          + '<div class="qn"><b>Qué tiene:</b> ' + escR(p.m) + '</div>'
+          + '<div class="qn"><b>Qué se ve afectado:</b> ' + escR(p.que || '') + '</div></div>'; }).join('')
+      : '<p class="exp">Ningún archivo con falla.</p>')
+    + '<div class="que"><b>Qué hacer</b><ol>'
+    + '<li>Correr <code>diagnostico.py</code> (doble clic, o <code>python diagnostico.py</code> en la carpeta <code>C:\\Users\\luis sepulveda\\</code>) para confirmarlo.</li>'
+    + '<li>No abrir el archivo con Excel para arreglarlo: Excel lo guarda en otro formato.</li>'
+    + '<li>Si hay que reemplazarlo: esperar a que la ventana negra diga "ciclo listo" y copiarlo con <code>copy /Y</code>.</li>'
+    + '<li>Los que se publican en GitHub (rama data) se pueden recuperar de su historial: pedírselo a Claude con esta pantalla.</li></ol>'
+    + '<p class="exp">El aviso se quita solo cuando el archivo vuelve a estar bien (en el ciclo siguiente). Una falla se avisa recién cuando se ve dos revisiones seguidas, para no alarmar si justo se estaba guardando.</p></div></div>';
+  m.classList.add('abierto');
+}
 function abrirFaltaCompleto(){
   const m = document.getElementById('modalNoop'), cu = document.getElementById('noopCuerpo'); if(!m || !cu) return;
   const tit = document.querySelector('#modalNoop .mc-head h2'); if(tit) tit.textContent = 'Días que pueden estar incompletos';
@@ -11004,6 +11055,7 @@ function pintarPortada(){
             return '<button class="pv-al dosl ' + (c.d > 0 ? 'viva' : 'cero') + (DER_AVISO.length ? ' nueva' : '') + '" style="--tono:#b91c1c" title="Migraciones derivadas hoy: ' + c.d + ' de ' + c.v
               + ' ya visitadas. Toca para abrir Derivaci\u00f3n: hoy en vivo, por t\u00e9cnico, por direcci\u00f3n, a qui\u00e9n auditar y ficha del t\u00e9cnico." onclick="abrirDerivHoy()"><span class="n">' + c.d + '</span><span class="tx"><span class="t">Migraciones<br>derivadas</span></span></button>'; })()
     +     compPastillaHtml()
+    +     saludPastillaHtml()
     +     alerta('toggleAtrasados', atras, 'M\u00e1s de 3 h', 'M\u00e1s de 3 horas: iniciadas hace rato y sin cerrar', '#be123c')
     +   '</section>'
     +   '<div class="pv-chips">'
@@ -11999,6 +12051,8 @@ async function cargarDatosVivos(auto){
     REIT = js.reit || null;            // Reiterados (24-09-2026)
     CONC = js.conc || null;            // Cuadratura del dia (24-09-2026)
     NOOP = js.noop || null;            // Tecnicos no operativos (24-09-2026)
+    SALUD = js.salud || null;          // Archivos danados (17-10-2026)
+    try { saludRevisarSonido(); } catch(e){}
     renderBotonReit();
     if(reitAbierto) renderReit();
     renderBotonRed();
