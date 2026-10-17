@@ -2844,6 +2844,10 @@
                    border:1px solid #16a34a; background:#16a34a; color:#fff; }
   .nw-top button.sec { background:#fff; color:#15803d; }
   .nw-top .ok { color:#15803d; font-weight:600; }
+  .nw-modos { display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin:0 0 8px; font-size:12.5px; color:#14532d; }
+  .nw-modos button { border:1px solid #86efac; background:#fff; color:#166534; border-radius:999px;
+                     padding:4px 10px; font-size:12.5px; cursor:pointer; }
+  .nw-modos button.act { background:#166534; border-color:#166534; color:#fff; font-weight:600; }
   .nw-txt { width:100%; box-sizing:border-box; min-height:220px; max-height:45vh; resize:vertical;
             font:13px/1.45 ui-monospace, Consolas, monospace; color:#0f172a; background:#fff;
             border:1px solid #d1d5db; border-radius:8px; padding:10px; white-space:pre-wrap; }
@@ -3754,6 +3758,19 @@ function renderNuevas(){
    las entiende.                                                            */
 let nuevasWspAbierto = false;
 let nuevasWspEditado = false;
+/* Formato del resumen (17-10-2026, 11:56; Luis: "que pasara cuando entren 20
+   ordenes, sera una larga lista"). Tres formatos:
+     num    -> solo los numeros (total, por tipo, por franja): para la gerenta
+     corto  -> los numeros + una linea por orden
+     fichas -> los numeros + un bloque por orden (el de las 11:32)
+     tipo   -> un bloque por tipo de actividad, sin listar ordenes (12:01)
+   'auto' elige fichas hasta NW_MAX_FICHAS ordenes y "por tipo" desde ahi. */
+let nuevasWspModo = 'auto';
+const NW_MAX_FICHAS = 6;
+/* 12:07, Luis: "dejame solo la vista del automatico". El selector de formato
+   no se muestra y siempre se usa el automatico (fichas hasta 6, por tipo
+   desde 7). Con true vuelve a aparecer el selector con los 5 formatos.    */
+const NW_MOSTRAR_FORMATOS = false;
 
 /* Formato "fichas" (opcion C, elegida por Luis el 17-10-2026): un bloque por
    orden, un dato por renglon con su icono. WhatsApp borra los espacios del
@@ -3787,6 +3804,74 @@ function nwFicha(x, esRein){
       + (p.tec ? ' (' + tituloDir(p.tec) + ')' : ''));
   }
   return l.join('\n');
+}
+
+function nwCatCorta(c){
+  return String(c||'Orden').replace(/\s*(\d)\s*Play/i, ' $1P')
+    .replace(/^Reparaci[oó]n$/i, 'Repa').replace(/^Modificaci[oó]n de Servicio$/i, 'Modif.');
+}
+function nwTecCorto(t){
+  const p = tituloDir(t || '').split(/\s+/).filter(Boolean);
+  return p.length ? p.slice(0, 2).join(' ') : 'Sin técnico';
+}
+function nwLinea(x, esRein){
+  const ic = nwEstado(x).split(' ')[0];
+  let t = ic + ' ' + (x.f || 's/f') + ' · ' + nwCatCorta(x.cat) + ' · ' + nwTecCorto(x.tec)
+        + ' · ' + tituloDir(x.d || 'sin dirección').replace(/,\s*Villa Alemana$/i, ', V. Alemana');
+  if(esRein && x.prev && x.prev.length){
+    const p = x.prev[x.prev.length - 1];
+    t += '\n↳ ya falló ' + (x.prev.length === 1 ? '1 vez' : x.prev.length + ' veces')
+       + ', última ' + String(p.f || '?').replace(/-\d{4}$/, '') + ' ' + (p.cierre || 'sin código');
+  }
+  return t;
+}
+
+/* Formato "Por tipo" (17-10-2026, 12:01; Luis: "y si lo hacemos por tipo de
+   actividad para que sea corto"). Un bloque por familia (altas, migraciones,
+   reparaciones, otras) con: cuantas, el desglose por Play, por franja, por
+   comuna y como van. No lista ordenes: con 20 o 40 sale igual de corto.  */
+const NW_ICONO_TIPO = { Altas:'🏠', Migraciones:'🔄', Reparaciones:'🛠️', Otras:'📦' };
+function nwComuna(d){
+  const c = String(d||'').split(',').pop().trim().toUpperCase();
+  if(/VILLA ALEMANA/.test(c)) return 'V. Alemana';
+  if(/QUILPU/.test(c)) return 'Quilpué';
+  return c ? tituloDir(c) : 'sin comuna';
+}
+function nwCuenta(lista, fn){
+  const c = {};
+  lista.forEach(function(x){ const k = fn(x); c[k] = (c[k]||0) + 1; });
+  return c;
+}
+function nwBloquesTipo(lista){
+  const orden = ['Altas','Migraciones','Reparaciones','Otras'];
+  const porFam = {};
+  lista.forEach(function(x){ const f = familiaCat(x.cat); (porFam[f] = porFam[f] || []).push(x); });
+  return orden.filter(function(f){ return porFam[f]; }).map(function(f){
+    const ls = porFam[f];
+    const l = [(NW_ICONO_TIPO[f] || '•') + ' *' + f.toUpperCase() + ' · ' + ls.length + '*'];
+    if(f !== 'Reparaciones'){
+      const pl = nwCuenta(ls, function(x){ return nwCatCorta(x.cat).replace(/^(Alta|Migración)\s*/i, '') || nwCatCorta(x.cat); });
+      const ks = Object.keys(pl).sort();
+      if(ks.length > 1 || (ks[0] && /\dP/.test(ks[0])))
+        l.push(ks.map(function(k){ return k + ': ' + pl[k]; }).join(' · '));
+    }
+    const fr = nwCuenta(ls, function(x){ return x.f || 's/f'; });
+    l.push('Franja ' + Object.keys(fr).sort().map(function(k){ return k + ' (' + fr[k] + ')'; }).join(' · '));
+    const co = nwCuenta(ls, function(x){ return nwComuna(x.d); });
+    l.push(Object.keys(co).sort().map(function(k){ return k + ' ' + co[k]; }).join(' · '));
+    const es = nwCuenta(ls, function(x){ return nwEstado(x); });
+    const nomEst = {'⏳':'pendiente','🔧':'iniciada','🚗':'en ruta','✅':'completada','❌':'no realizada',
+                    '🚫':'cancelada','⏸️':'suspendida','⚠️':'se la quitaron al técnico'};
+    const ordEst = ['✅','❌','🔧','🚗','⏳','⏸️','🚫','⚠️'];
+    l.push(Object.keys(es).sort(function(a,b){
+      return ordEst.indexOf(a.split(' ')[0]) - ordEst.indexOf(b.split(' ')[0]); }).map(function(k){
+      const ic = k.split(' ')[0], n = es[k], nom = nomEst[ic] || k;
+      return ic + ' ' + n + ' ' + nom + (n > 1 && !/técnico$/.test(nom) ? 's' : '');
+    }).join(' · '));
+    const re = ls.filter(function(x){ return clase(x) === 'reingreso'; }).length;
+    if(re) l.push('↩️ ' + re + (re === 1 ? ' es reingreso' : ' son reingresos') + ' (ya se fue y no se pudo)');
+    return l.join('\n');
+  }).join('\n\n');
 }
 
 function nwOrdenar(lista){
@@ -3825,7 +3910,13 @@ function textoWspNuevas(){
     + (rein.length && nuevas.length ? ': ' + nTxt + ' y ' + rTxt
        : (rein.length ? (rein.length === 1 ? ' reingreso' : ' reingresos')
                       : (nuevas.length === 1 ? ' orden' : ' órdenes'))));
-  if(lista.length >= 3){
+  const modo = (nuevasWspModo === 'auto')
+    ? (lista.length <= NW_MAX_FICHAS ? 'fichas' : 'tipo') : nuevasWspModo;
+  if(modo === 'tipo'){
+    l.push(SEP, nwBloquesTipo(lista));
+    return l.join('\n');
+  }
+  if(lista.length >= 3 || modo === 'num'){
     const porTipo = {}, porFr = {};
     lista.forEach(function(x){
       const t = familiaCat(x.cat).toLowerCase(); porTipo[t] = (porTipo[t]||0) + 1;
@@ -3836,6 +3927,18 @@ function textoWspNuevas(){
         .map(function(t){ return porTipo[t] + ' ' + t; }).join(', '),
       '🕐 Por franja: ' + Object.keys(porFr).sort()
         .map(function(f){ return porFr[f] + ' en ' + f; }).join(', '));
+  }
+  if(modo === 'num'){
+    if(rein.length) l.push('↩️ ' + rTxt + ' en direcciones donde ya se fue y no se pudo hacer.');
+    return l.join('\n');
+  }
+  if(modo === 'corto'){
+    if(nuevas.length) l.push(SEP, '🆕 *Nuevas (' + nuevas.length + ')*',
+      nuevas.map(function(x){ return nwLinea(x, false); }).join('\n'));
+    if(rein.length) l.push(SEP, '↩️ *Reingresos (' + rein.length + ')* · ya se fue y no se pudo hacer',
+      rein.map(function(x){ return nwLinea(x, true); }).join('\n'));
+    l.push('', '⏳ pendiente · 🔧 iniciada · ✅ completada · ❌ no realizada');
+    return l.join('\n');
   }
   if(nuevas.length){
     l.push(SEP, nuevas.map(function(x){ return nwFicha(x, false); }).join('\n\n'));
@@ -3863,15 +3966,29 @@ function pintarWspNuevas(forzar){
       + '<button class="sec" onclick="pintarWspNuevas(true)" title="Volver a armarlo con lo último">↻ Actualizar</button>'
       + '<button class="sec" onclick="abrirWspNuevas()" title="Abrir WhatsApp con el texto">Abrir WhatsApp</button>'
       + '<button onclick="copiarWspNuevas()">📋 Copiar</button></div>'
+      + '<div id="nwModos" class="nw-modos"></div>'
       + '<textarea id="nwTxt" class="nw-txt" oninput="nuevasWspEditado = true"></textarea>';
     ta = document.getElementById('nwTxt');
   }
+  const n = nuevasDelDia().filter(pasaFiltro).length;
+  const auto = n <= NW_MAX_FICHAS ? 'fichas' : 'por tipo';
+  if(!NW_MOSTRAR_FORMATOS) nuevasWspModo = 'auto';
+  document.getElementById('nwModos').style.display = NW_MOSTRAR_FORMATOS ? '' : 'none';
+  document.getElementById('nwModos').innerHTML = '<span>Formato:</span>'
+    + [['auto','Automático (' + auto + ')'], ['tipo','Por tipo'],
+       ['num','Solo números'],['corto','Una línea por orden'],['fichas','Fichas']]
+      .map(function(m){
+        return '<button class="' + (nuevasWspModo === m[0] ? 'act' : '') + '" '
+          + 'onclick="setWspModo(\'' + m[0] + '\')">' + m[1] + '</button>';
+      }).join('');
   if(forzar || !nuevasWspEditado){
     ta.value = textoWspNuevas();
     nuevasWspEditado = false;
     const ok = document.getElementById('nwOk'); if(ok) ok.textContent = '';
   }
 }
+
+function setWspModo(m){ nuevasWspModo = m; pintarWspNuevas(true); }
 
 function toggleWspNuevas(){
   nuevasWspAbierto = !nuevasWspAbierto;
