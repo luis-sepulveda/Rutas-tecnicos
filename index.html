@@ -3089,8 +3089,11 @@
         <h2 id="estTitulo">Detalle</h2>
         <div id="estChips" class="mc-cont"></div>
       </div>
+      <button class="mc-wsp" id="btnWspNR" style="display:none" onclick="toggleWspNR()" title="Resumen en imagen para WhatsApp">💬 WhatsApp</button>
       <button class="mc-close" onclick="cerrarEst()" title="Cerrar (Esc)">✖</button>
     </div>
+    <!-- Tarjeta para WhatsApp de las No Realizadas (17-10-2026) -->
+    <div id="nrWsp" class="nw-box" style="display:none"></div>
     <div id="listaEst" class="mc-body"></div>
     <div id="estNota" class="mc-resnota"></div>
   </div>
@@ -4050,7 +4053,12 @@ function tjDibujar(spec){
 
 // cuadros por actividad: Altas, Migraciones, Reparaciones siempre; Otras si hay
 function tjCuadros(lista, bg, fg){
-  const c = nwCuenta(lista, function(x){ return familiaCat(x.cat); });
+  // las Modificaciones (y cualquier otro tipo) van juntas en "Otras", para
+  // que la suma de los cuadros siempre de el total
+  const c = nwCuenta(lista, function(x){
+    const f = familiaCat(x.cat);
+    return (f === 'Altas' || f === 'Migraciones' || f === 'Reparaciones') ? f : 'Otras';
+  });
   const fams = ['Altas', 'Migraciones', 'Reparaciones'].concat(c.Otras ? ['Otras'] : []);
   return { tipo:'cuadros', items: fams.map(function(f){
     const n = c[f] || 0;
@@ -4138,7 +4146,9 @@ function tjPintar(caja, pref, cv, fnTexto){
 const TJ_ACTUAL = {};
 
 function tjActualizar(pref){
-  if(pref === 'nw') pintarWspNuevas(true); else pintarWspCaidas(true);
+  if(pref === 'nw') pintarWspNuevas(true);
+  else if(pref === 'nr') pintarWspNR();
+  else pintarWspCaidas(true);
 }
 function tjAviso(pref, txt){ const ok = document.getElementById(pref + 'Ok'); if(ok) ok.textContent = txt; }
 
@@ -4179,6 +4189,88 @@ function tjCopiarTexto(pref){
     else aMano();
   } catch(e){ aMano(); }
 }
+
+/* ---------------- NO REALIZADAS: TARJETA PARA WHATSAPP (17-10-2026, 15:08) ----------------
+   Luis: "creame un resumen tal cual los otros para las no realizadas" y
+   "necesito que se vean todas las causales". Va en la ventana que abre la
+   cifra "No realizadas" (modalEst con estActual = 'No Realizada'); el boton
+   solo aparece ahi. Usa la MISMA lista de esa ventana (actividadesDeEstado),
+   asi que respeta los filtros de ciudad, franja y tecnico; si hay alguno,
+   el subtitulo lo dice.
+   Arriba: cuantas por actividad y "de N visitadas · %" (visitadas =
+   completadas + no realizadas con los mismos filtros). Abajo, "Por qué": UNA
+   barra por cada codigo de cierre, tal cual viene, de la mas repetida a la
+   menos, con el color de su familia (azul reagenda, ambar sin moradores,
+   rojo direccion, morado desiste, gris el resto).                         */
+let nrWspAbierto = false;
+const NR_FAM = {
+  re: ['#E6F1FB', '#0C447C'], sm: ['#FAEEDA', '#633806'], di: ['#FCEBEB', '#791F1F'],
+  de: ['#EEEDFE', '#3C3489'], ot: ['#F1EFE8', '#444441']
+};
+function nrFamilia(cod){
+  const c = String(cod || '').toLowerCase();
+  if(c.indexOf('sin moradores') >= 0) return 'sm';
+  if(c.indexOf('reagenda') >= 0) return 're';
+  if(c.indexOf('desiste') >= 0) return 'de';
+  if(c.indexOf('direcci') >= 0) return 'di';
+  return 'ot';
+}
+function nrFiltrosTxt(){
+  const p = [];
+  try {
+    const ft = document.getElementById('selTec').value;
+    if(ft && ft !== '__ALL__') p.push(tituloDir(ft));
+  } catch(e){}
+  return p.length ? ' · solo ' + p.join(', ') : '';
+}
+function tarjetaNoRealizadas(){
+  const lista = actividadesDeEstado('No Realizada').map(function(x){ return x.p; });
+  const comp = actividadesDeEstado('Completado').length;
+  const vis = lista.length + comp;
+  const b = [];
+  if(!lista.length){
+    b.push({ tipo:'vacio', txt:'Hasta ahora no hay órdenes no realizadas.' });
+  } else {
+    const pct = vis ? String(Math.round(lista.length * 1000 / vis) / 10).replace('.', ',') : '0';
+    b.push({ tipo:'sec', txt:'No se pudieron hacer', color:'#993C1D',
+             nota:'(de ' + vis + ' visitadas · ' + pct + '%)' });
+    b.push(tjCuadros(lista, '#FAECE7', '#712B13'));
+    b.push({ tipo:'sec', txt:'Por qué', color:'#444441' });
+    const c = nwCuenta(lista, function(x){ return String(x.cie || 'Sin código de cierre').trim(); });
+    Object.keys(c).sort(function(a, z){ return c[z] - c[a] || a.localeCompare(z); }).forEach(function(k){
+      const f = NR_FAM[nrFamilia(k)];
+      b.push({ tipo:'chip', n: c[k], txt: k.charAt(0).toUpperCase() + k.slice(1), bg: f[0], fg: f[1] });
+    });
+  }
+  return tjDibujar({ color:'#993C1D', titulo:'Órdenes no realizadas del día',
+                     sub: tjFechaHora() + nrFiltrosTxt(), bloques: b,
+                     total: lista.length ? ['Total', lista.length] : null });
+}
+function textoWspNR(){
+  const lista = actividadesDeEstado('No Realizada').map(function(x){ return x.p; });
+  const c = nwCuenta(lista, function(x){ return String(x.cie || 'Sin código de cierre').trim(); });
+  return ['*Órdenes no realizadas del día*', tjFechaHora(), '', nwConteoCorto(lista), '', '*Por qué:*']
+    .concat(Object.keys(c).sort(function(a, z){ return c[z] - c[a]; }).map(function(k){ return c[k] + ' ' + k; }))
+    .join('\n');
+}
+function pintarWspNR(){
+  const btn = document.getElementById('btnWspNR');
+  const box = document.getElementById('nrWsp');
+  if(!btn || !box) return;
+  const es = (estActual === 'No Realizada');
+  btn.style.display = es ? '' : 'none';
+  box.style.display = (es && nrWspAbierto) ? 'block' : 'none';
+  btn.classList.toggle('act', es && nrWspAbierto);
+  if(!es || !nrWspAbierto) return;
+  tjPintar(box, 'nr', tarjetaNoRealizadas(), textoWspNR);
+}
+function toggleWspNR(){ nrWspAbierto = !nrWspAbierto; pintarWspNR(); }
+// se engancha a renderEst: cada vez que la ventana se repinta (al abrirla y
+// en cada actualizacion), la tarjeta se rehace con lo ultimo
+(function(){
+  const orig = renderEst;
+  renderEst = function(){ orig.apply(this, arguments); try { pintarWspNR(); } catch(e){ console.warn('tarjeta NR:', e); } };
+})();
 
 function pintarWspNuevas(forzar){
   const box = document.getElementById('nuevasWsp');
