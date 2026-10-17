@@ -1,18 +1,29 @@
 {
-  "actualizado": "2026-10-16T21:27:48",
+  "actualizado": "2026-10-17T11:21:33",
   "resumen": {
-    "reagendada": 1
+    "sin informacion": 1
   },
   "estados": {
-    "1-3O42YDPZ": {
-      "tec": "SEBASTIAN DOSSOW A",
+    "1-3O7D7ROK": {
+      "tec": "JEAN ROODLY ORELIEN",
       "cat": "Migración 2 Play",
       "franja_original": "13-16",
-      "d": "CALLE 1 837 CASA G, QUILPUE",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3O42YDPZ - 13-16-Migración-Migración-CALLE 1 837 CASA GJue, 29 Oct",
-      "franja_nueva": "13-16"
+      "d": "4 SUR 1458, VILLA ALEMANA",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "4 SUR 1458",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3O4SH61M",
+            "franja": "10-13",
+            "texto": "1-3O4SH61M - 10-13-Migración-Migración-4 SUR 1458Sab, 3 Oct"
+          }
+        ]
+      }
     }
   }
 }
