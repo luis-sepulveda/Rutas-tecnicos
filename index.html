@@ -3766,7 +3766,10 @@ let nuevasWspEditado = false;
      tipo   -> un bloque por tipo de actividad, sin listar ordenes (12:01)
    'auto' elige fichas hasta NW_MAX_FICHAS ordenes y "por tipo" desde ahi. */
 let nuevasWspModo = 'auto';
-const NW_MAX_FICHAS = 6;
+/* 12:24, Luis quiere siempre la vista por tipo ("por que no se ve asi, es
+   porque solo hay 1 orden?"). Con 0 el automatico usa "por tipo" siempre;
+   con 6 vuelven las fichas hasta 6 ordenes. */
+const NW_MAX_FICHAS = 0;
 /* 12:07, Luis: "dejame solo la vista del automatico". El selector de formato
    no se muestra y siempre se usa el automatico (fichas hasta 6, por tipo
    desde 7). Con true vuelve a aparecer el selector con los 5 formatos.    */
