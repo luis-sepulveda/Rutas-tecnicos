@@ -2848,6 +2848,8 @@
   .nw-modos button { border:1px solid #86efac; background:#fff; color:#166534; border-radius:999px;
                      padding:4px 10px; font-size:12.5px; cursor:pointer; }
   .nw-modos button.act { background:#166534; border-color:#166534; color:#fff; font-weight:600; }
+  .tj-prev { display:flex; justify-content:center; background:#e9efe9; border-radius:8px; padding:12px; }
+  .tj-prev img { width:100%; max-width:420px; height:auto; border-radius:14px; border:1px solid #e5e7eb; background:#fff; }
   .nw-txt { width:100%; box-sizing:border-box; min-height:220px; max-height:45vh; resize:vertical;
             font:13px/1.45 ui-monospace, Consolas, monospace; color:#0f172a; background:#fff;
             border:1px solid #d1d5db; border-radius:8px; padding:10px; white-space:pre-wrap; }
@@ -3942,6 +3944,242 @@ function textoWspNuevas(){
   return l.join('\n');
 }
 
+/* ================= TARJETA EN IMAGEN PARA WHATSAPP (17-10-2026, 13:16) =================
+   Luis: "lo podemos mejorar visualmente, en otro formato?" y, al ver la
+   maqueta, "me gusta mas, es como mas profesional". Los resumenes de Nuevas
+   y Caidas se dibujan como una tarjeta (PNG) en un <canvas>: franja de color
+   con el titulo, cuadros con el numero grande por actividad (en gris los que
+   estan en 0), los desenlaces de TOA en las caidas y el total abajo.
+   Botones: Copiar imagen (se pega con Ctrl+V en WhatsApp Web), Descargar
+   (para mandarla desde el telefono) y Copiar texto (el resumen escrito de
+   antes, por si se quiere mandar asi). No usa librerias.                 */
+const TJ = {
+  ancho: 640, esc: 2, pad: 26,
+  font: '"Segoe UI", "DM Sans", Arial, sans-serif',
+  gris: ['#F1EFE8', '#888780'],
+  borde: '#e5e7eb', texto: '#0f172a', suave: '#5F5E5A'
+};
+
+function tjRect(ctx, x, y, w, h, r, color){
+  ctx.beginPath();
+  ctx.moveTo(x + r, y); ctx.lineTo(x + w - r, y); ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r); ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h); ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r); ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath(); ctx.fillStyle = color; ctx.fill();
+}
+
+/* spec = { color, titulo, sub, bloques:[...], total:[etiqueta, n] }
+   bloque: {tipo:'sec', txt, color, nota} | {tipo:'cuadros', items:[{n, txt, bg, fg}]}
+         | {tipo:'chip', n, txt, bg, fg} | {tipo:'nota', txt} | {tipo:'vacio', txt}  */
+function tjDibujar(spec){
+  const W = TJ.ancho, P = TJ.pad, E = TJ.esc;
+  const cv = document.createElement('canvas');
+  cv.width = W * E; cv.height = 1600 * E;
+  const ctx = cv.getContext('2d');
+  ctx.scale(E, E);
+  const F = function(px, peso){ return (peso || 400) + ' ' + px + 'px ' + TJ.font; };
+  ctx.textBaseline = 'alphabetic';
+
+  // cabecera
+  const hH = 86;
+  ctx.fillStyle = spec.color; ctx.fillRect(0, 0, W, hH);
+  ctx.fillStyle = '#fff';
+  ctx.font = F(24, 600); ctx.fillText(spec.titulo, P, 40);
+  ctx.globalAlpha = .9; ctx.font = F(16); ctx.fillText(spec.sub, P, 68); ctx.globalAlpha = 1;
+
+  let y = hH + 26;
+  spec.bloques.forEach(function(b){
+    if(b.tipo === 'sec'){
+      ctx.font = F(14, 600); ctx.fillStyle = b.color || TJ.suave;
+      const t = String(b.txt).toUpperCase();
+      ctx.fillText(t, P, y + 12);
+      if(b.nota){
+        const w = ctx.measureText(t + '  ').width;
+        ctx.font = F(14); ctx.fillText(b.nota, P + w, y + 12);
+      }
+      y += 26;
+    } else if(b.tipo === 'cuadros'){
+      const n = b.items.length, gap = 12, w = (W - 2 * P - gap * (n - 1)) / n, h = 84;
+      b.items.forEach(function(it, i){
+        const x = P + i * (w + gap);
+        tjRect(ctx, x, y, w, h, 12, it.bg);
+        ctx.fillStyle = it.fg; ctx.textAlign = 'center';
+        ctx.font = F(36, 600); ctx.fillText(String(it.n), x + w / 2, y + 46);
+        ctx.font = F(15); ctx.fillText(it.txt, x + w / 2, y + 70);
+        ctx.textAlign = 'left';
+      });
+      y += h + 22;
+    } else if(b.tipo === 'chip'){
+      const h = 40;
+      tjRect(ctx, P, y, W - 2 * P, h, 10, b.bg);
+      ctx.fillStyle = b.fg;
+      ctx.font = F(20, 600); ctx.fillText(String(b.n), P + 16, y + 27);
+      const wn = ctx.measureText(String(b.n)).width;
+      ctx.font = F(16); ctx.fillText(b.txt, P + 16 + wn + 12, y + 26);
+      y += h + 8;
+    } else if(b.tipo === 'nota'){
+      ctx.font = F(15); ctx.fillStyle = TJ.suave;
+      ctx.fillText(b.txt, P, y + 16); y += 30;
+    } else if(b.tipo === 'vacio'){
+      ctx.font = F(18); ctx.fillStyle = TJ.suave;
+      ctx.fillText(b.txt, P, y + 20); y += 40;
+    }
+  });
+
+  // total
+  if(spec.total){
+    y += 4;
+    ctx.fillStyle = TJ.borde; ctx.fillRect(P, y, W - 2 * P, 1.5);
+    y += 36;
+    ctx.fillStyle = TJ.texto; ctx.font = F(17); ctx.fillText(spec.total[0], P, y);
+    ctx.font = F(30, 600); ctx.textAlign = 'right'; ctx.fillText(String(spec.total[1]), W - P, y + 2);
+    ctx.textAlign = 'left';
+    y += 24;
+  }
+  const H = Math.ceil(y + 6);
+
+  // recorte al alto usado, con fondo blanco y borde redondeado
+  const out = document.createElement('canvas');
+  out.width = W * E; out.height = H * E;
+  const o = out.getContext('2d');
+  o.fillStyle = '#ffffff'; o.fillRect(0, 0, out.width, out.height);
+  o.drawImage(cv, 0, 0, W * E, H * E, 0, 0, W * E, H * E);
+  return out;
+}
+
+// cuadros por actividad: Altas, Migraciones, Reparaciones siempre; Otras si hay
+function tjCuadros(lista, bg, fg){
+  const c = nwCuenta(lista, function(x){ return familiaCat(x.cat); });
+  const fams = ['Altas', 'Migraciones', 'Reparaciones'].concat(c.Otras ? ['Otras'] : []);
+  return { tipo:'cuadros', items: fams.map(function(f){
+    const n = c[f] || 0;
+    return { n: n, txt: f, bg: n ? bg : TJ.gris[0], fg: n ? fg : TJ.gris[1] };
+  }) };
+}
+
+function tjFechaHora(){
+  const ahora = new Date();
+  const hora = String(ahora.getHours()).padStart(2,'0') + ':' + String(ahora.getMinutes()).padStart(2,'0');
+  const fecha = (ALERTAS && ALERTAS.fecha) ? String(ALERTAS.fecha).replace(/-\d{4}$/, '')
+              : ahora.toLocaleDateString('es-CL');
+  return 'Quilpué y Villa Alemana · ' + fecha + ' · ' + hora;
+}
+
+function tarjetaNuevas(){
+  const lista = nuevasDelDia().filter(pasaFiltro);
+  const nuevas = lista.filter(function(x){ return clase(x) !== 'reingreso'; });
+  const rein   = lista.filter(function(x){ return clase(x) === 'reingreso'; });
+  const b = [];
+  if(!lista.length){
+    b.push({ tipo:'vacio', txt:'Hasta ahora no han entrado órdenes nuevas.' });
+  } else {
+    b.push({ tipo:'sec', txt:'Nuevas · ' + nuevas.length, color:'#0F6E56' });
+    b.push(tjCuadros(nuevas, '#E1F5EE', '#085041'));
+    b.push({ tipo:'sec', txt:'Reingresadas · ' + rein.length, color:'#854F0B',
+             nota:'(ya se fue antes y no se pudo)' });
+    b.push(tjCuadros(rein, '#FAEEDA', '#633806'));
+  }
+  return tjDibujar({ color:'#0F6E56', titulo:'Órdenes que entraron durante el día',
+                     sub: tjFechaHora(), bloques: b,
+                     total: lista.length ? ['Total del día', lista.length] : null });
+}
+
+// desenlace de TOA -> chip de color (singular / plural)
+const TJ_DES = {
+  '📅': ['#E6F1FB','#0C447C','reagendada · vuelve otro día','reagendadas · vuelven otro día'],
+  '🚫': ['#FCEBEB','#791F1F','cancelada · no vuelve','canceladas · no vuelven'],
+  '⏸️': ['#EEEDFE','#3C3489','suspendida · en espera','suspendidas · en espera'],
+  '❌': ['#FAECE7','#712B13','no realizada · se cerró sin hacerla','no realizadas · se cerraron sin hacerlas'],
+  '✅': ['#EAF3DE','#27500A','la completó otro técnico','las completó otro técnico'],
+  '❓': ['#F1EFE8','#444441','ya no está en TOA','ya no están en TOA'],
+  '⏳': ['#FAEEDA','#633806','aún sin consultar en TOA','aún sin consultar en TOA']
+};
+
+function tarjetaCaidas(){
+  const lista = (ALERTAS && ALERTAS.activas) ? ALERTAS.activas.slice() : [];
+  const b = [];
+  if(!lista.length){
+    b.push({ tipo:'vacio', txt:'Hasta ahora ninguna orden se ha caído de la bandeja.' });
+  } else {
+    b.push({ tipo:'sec', txt:'Sin que el técnico las tocara', color:'#A32D2D' });
+    b.push(tjCuadros(lista, '#FCEBEB', '#791F1F'));
+    b.push({ tipo:'sec', txt:'Qué pasó', color:'#444441' });
+    const c = {};
+    lista.forEach(function(x){ const ic = cwDesenlace(x)[0]; c[ic] = (c[ic]||0) + 1; });
+    CW_ORDEN.forEach(function(ic){
+      if(!c[ic]) return;
+      const d = TJ_DES[ic] || TJ_DES['⏳'];
+      b.push({ tipo:'chip', n: c[ic], txt: c[ic] === 1 ? d[2] : d[3], bg: d[0], fg: d[1] });
+    });
+    const buck = (ALERTAS && ALERTAS.al_bucket) ? ALERTAS.al_bucket : 0;
+    if(buck) b.push({ tipo:'nota', txt:'Además, ' + buck + (buck === 1 ? ' volvió' : ' volvieron')
+                      + ' al bucket: ' + (buck === 1 ? 'espera' : 'esperan') + ' técnico.' });
+  }
+  return tjDibujar({ color:'#A32D2D', titulo:'Órdenes que le sacaron al técnico',
+                     sub: tjFechaHora(), bloques: b,
+                     total: lista.length ? ['Total', lista.length] : null });
+}
+
+// arma el cuadro (vista previa + botones) dentro de la caja del modal
+function tjPintar(caja, pref, cv, fnTexto){
+  let img = document.getElementById(pref + 'Img');
+  if(!img){
+    caja.innerHTML = '<div class="nw-top"><b>💬 Resumen para WhatsApp</b><span class="sp"></span>'
+      + '<span id="' + pref + 'Ok" class="ok"></span>'
+      + '<button class="sec" onclick="tjActualizar(\'' + pref + '\')" title="Volver a armarla con lo último">↻ Actualizar</button>'
+      + '<button onclick="tjCopiar(\'' + pref + '\')">📋 Copiar imagen</button></div>'
+      + '<div class="tj-prev"><img id="' + pref + 'Img" alt="Vista previa de la tarjeta"></div>';
+    img = document.getElementById(pref + 'Img');
+  }
+  TJ_ACTUAL[pref] = { cv: cv, texto: fnTexto };
+  img.src = cv.toDataURL('image/png');
+}
+const TJ_ACTUAL = {};
+
+function tjActualizar(pref){
+  if(pref === 'nw') pintarWspNuevas(true); else pintarWspCaidas(true);
+}
+function tjAviso(pref, txt){ const ok = document.getElementById(pref + 'Ok'); if(ok) ok.textContent = txt; }
+
+function tjCopiar(pref){
+  const a = TJ_ACTUAL[pref]; if(!a) return;
+  try {
+    if(!(navigator.clipboard && window.ClipboardItem)) throw new Error('sin portapapeles');
+    a.cv.toBlob(function(blob){
+      navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })])
+        .then(function(){ tjAviso(pref, '✓ Imagen copiada: pégala en WhatsApp con Ctrl+V'); },
+              function(){ tjAviso(pref, 'No se pudo copiar la imagen'); });
+    }, 'image/png');
+  } catch(e){ tjAviso(pref, 'Este navegador no copia imágenes'); }
+}
+
+function tjDescargar(pref){
+  const a = TJ_ACTUAL[pref]; if(!a) return;
+  const nom = (pref === 'nw' ? 'nuevas_' : 'caidas_')
+    + String((ALERTAS && ALERTAS.fecha) || 'hoy') + '_'
+    + new Date().toTimeString().slice(0,5).replace(':','') + '.png';
+  const l = document.createElement('a');
+  l.href = a.cv.toDataURL('image/png'); l.download = nom;
+  document.body.appendChild(l); l.click(); l.remove();
+  tjAviso(pref, '✓ Descargada: ' + nom);
+}
+
+function tjCopiarTexto(pref){
+  const a = TJ_ACTUAL[pref]; if(!a) return;
+  const txt = a.texto();
+  function listo(){ tjAviso(pref, '✓ Texto copiado'); }
+  function aMano(){
+    const ta = document.createElement('textarea'); ta.value = txt; document.body.appendChild(ta);
+    ta.select(); try { document.execCommand('copy'); listo(); } catch(e){ tjAviso(pref, 'No se pudo copiar'); }
+    ta.remove();
+  }
+  try {
+    if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(listo, aMano);
+    else aMano();
+  } catch(e){ aMano(); }
+}
+
 function pintarWspNuevas(forzar){
   const box = document.getElementById('nuevasWsp');
   const btn = document.getElementById('btnWspNuevas');
@@ -3949,33 +4187,9 @@ function pintarWspNuevas(forzar){
   box.style.display = nuevasWspAbierto ? 'block' : 'none';
   if(btn) btn.classList.toggle('act', nuevasWspAbierto);
   if(!nuevasWspAbierto) return;
-  let ta = document.getElementById('nwTxt');
-  if(!ta){
-    box.innerHTML = '<div class="nw-top"><b>💬 Resumen para WhatsApp</b>'
-      + '<span>Puedes corregirlo antes de copiar.</span><span class="sp"></span>'
-      + '<span id="nwOk" class="ok"></span>'
-      + '<button class="sec" onclick="pintarWspNuevas(true)" title="Volver a armarlo con lo último">↻ Actualizar</button>'
-      + '<button onclick="copiarWspNuevas()">📋 Copiar</button></div>'
-      + '<div id="nwModos" class="nw-modos"></div>'
-      + '<textarea id="nwTxt" class="nw-txt" oninput="nuevasWspEditado = true"></textarea>';
-    ta = document.getElementById('nwTxt');
-  }
-  const n = nuevasDelDia().filter(pasaFiltro).length;
-  const auto = n <= NW_MAX_FICHAS ? 'fichas' : 'por tipo';
-  if(!NW_MOSTRAR_FORMATOS) nuevasWspModo = 'auto';
-  document.getElementById('nwModos').style.display = NW_MOSTRAR_FORMATOS ? '' : 'none';
-  document.getElementById('nwModos').innerHTML = '<span>Formato:</span>'
-    + [['auto','Automático (' + auto + ')'], ['tipo','Por tipo'],
-       ['num','Solo números'],['corto','Una línea por orden'],['fichas','Fichas']]
-      .map(function(m){
-        return '<button class="' + (nuevasWspModo === m[0] ? 'act' : '') + '" '
-          + 'onclick="setWspModo(\'' + m[0] + '\')">' + m[1] + '</button>';
-      }).join('');
-  if(forzar || !nuevasWspEditado){
-    ta.value = textoWspNuevas();
-    nuevasWspEditado = false;
-    const ok = document.getElementById('nwOk'); if(ok) ok.textContent = '';
-  }
+  // desde el 17-10-2026 (13:16) es una tarjeta en imagen; el texto sigue
+  // disponible con "Copiar texto"
+  tjPintar(box, 'nw', tarjetaNuevas(), textoWspNuevas);
 }
 
 function setWspModo(m){ nuevasWspModo = m; pintarWspNuevas(true); }
@@ -4078,21 +4292,7 @@ function pintarWspCaidas(forzar){
   box.style.display = caidasWspAbierto ? 'block' : 'none';
   if(btn) btn.classList.toggle('act', caidasWspAbierto);
   if(!caidasWspAbierto) return;
-  let ta = document.getElementById('cwTxt');
-  if(!ta){
-    box.innerHTML = '<div class="nw-top"><b>💬 Resumen para WhatsApp</b>'
-      + '<span>Puedes corregirlo antes de copiar.</span><span class="sp"></span>'
-      + '<span id="cwOk" class="ok"></span>'
-      + '<button class="sec" onclick="pintarWspCaidas(true)" title="Volver a armarlo con lo último">↻ Actualizar</button>'
-      + '<button onclick="copiarWspCaidas()">📋 Copiar</button></div>'
-      + '<textarea id="cwTxt" class="nw-txt" oninput="caidasWspEditado = true"></textarea>';
-    ta = document.getElementById('cwTxt');
-  }
-  if(forzar || !caidasWspEditado){
-    ta.value = textoWspCaidas();
-    caidasWspEditado = false;
-    const ok = document.getElementById('cwOk'); if(ok) ok.textContent = '';
-  }
+  tjPintar(box, 'cw', tarjetaCaidas(), textoWspCaidas);
 }
 
 function toggleWspCaidas(){
