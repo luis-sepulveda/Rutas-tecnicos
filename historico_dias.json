@@ -22065,25 +22065,25 @@
    }
   },
   "19-10-2026": {
-   "hasta": "11:04",
-   "actividades": 104,
+   "hasta": "11:29",
+   "actividades": 111,
    "tecnicos": 33,
    "estados": {
-    "Iniciado": 25,
-    "Pendiente": 58,
-    "No Realizada": 7,
+    "Iniciado": 22,
+    "Pendiente": 60,
+    "No Realizada": 11,
+    "Completado": 13,
     "en ruta": 3,
-    "Completado": 9,
     "Suspendido": 1,
     "Cancelado": 1
    },
-   "rgu": 168.5,
+   "rgu": 180.5,
    "caidas_total": 3,
    "caidas_activas": 3,
    "caidas_resueltas": 0,
-   "nuevas": 9,
-   "al_bucket": 7,
-   "repetidas": 27,
+   "nuevas": 16,
+   "al_bucket": 8,
+   "repetidas": 30,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
@@ -22117,6 +22117,69 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OHIXTCM",
+      "tec": "MATÍAS JAQUE AG",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "16:27",
+      "d": "SANTA SARA 1540 EDIF. 1A DEPTO 307, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OFD4QWY",
+      "tec": "LUIS MARTIN NUÑEZ",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "15:05",
+      "d": "FRODDEN 01640, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OEP57F8",
+      "tec": "EDGAR VALERO C",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "CARLOS GRHUNNE 937 EDIF. K DEPTO 41, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OHKEEGH",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "EL RINCON 568 CASA 49, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OHKJ7QZ",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "cat": "Migración 3 Play",
+      "f": "13-16",
+      "hi": "15:13",
+      "d": "VOLCAN SOCOMPA 2687, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OHK6ST7",
+      "tec": "YENDER BOSCAN CADENAS",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "15:08",
+      "d": "BELGRANO 846, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OHK84PG",
+      "tec": "LUIS GATICA DAVILA",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "16:27",
+      "d": "CHAMPAGNAT 495 CASA A, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3OHJFMQ2",
       "tec": "MARCO PEREZ G",
       "cat": "Reparación",
@@ -22145,21 +22208,21 @@
      },
      {
       "o": "1-3OHJ4EGD",
-      "tec": "CRISTOBAL MIRANDA VALENC",
+      "tec": "GEEYSER PEREZ O",
       "cat": "Reparación",
       "f": "10-13",
       "hi": "11:00",
       "d": "PJE 1 (VENTISCA) 573, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OGDITPZ",
-      "tec": "GEEYSER PEREZ O",
+      "tec": "PABLO HERNANEZ FERNANDEZ",
       "cat": "Alta 1 Play",
       "f": "10-13",
       "hi": "11:06",
       "d": "HEVIA 0176, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OHIJ1CR",
@@ -22203,7 +22266,7 @@
       "o": "1-3OGYPHGE",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "15:01",
+      "hi": "14:00",
       "d": "PENUELAS 944 DEPTO 42, QUILPUE",
       "e": "Pendiente",
       "tec": "ALEXIS JARA",
@@ -22227,7 +22290,7 @@
       "o": "1-3OG76GJP",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "15:18",
       "d": "LOS ESTANQUES 1134, QUILPUE",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
@@ -22263,13 +22326,25 @@
       "o": "1-3OG6WFKE",
       "cat": "Alta 3 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:27",
       "d": "OCTAVA 0747, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
       "visitas": 1,
       "ult_fecha": "16-10-2026",
       "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3OEP57F8",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "CARLOS GRHUNNE 937 EDIF. K DEPTO 41, QUILPUE",
+      "e": "Pendiente",
+      "tec": "EDGAR VALERO C",
+      "visitas": 2,
+      "ult_fecha": "14-10-2026",
+      "ult_cierre": "NAP Problema niveles PO"
      },
      {
       "o": "1-3OH25TYV",
@@ -22332,30 +22407,6 @@
       "ult_cierre": "Casa sin medidor-remarcador"
      },
      {
-      "o": "1-3OGB8UBN",
-      "cat": "Migración 2 Play",
-      "f": "10-13",
-      "hi": "14:00",
-      "d": "TERESIANAS 0128, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOEL GUSTAVE GUSTA",
-      "visitas": 2,
-      "ult_fecha": "16-10-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
-      "o": "1-3OGPN8A1",
-      "cat": "Reparación",
-      "f": "10-13",
-      "hi": "12:17",
-      "d": "G TELLEZ 2670 EDIF. N DEPTO 401, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JORDAN ROA PEREZ",
-      "visitas": 2,
-      "ult_fecha": "16-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OED03H7",
       "cat": "Migración 1 Play",
       "f": "16-19",
@@ -22378,6 +22429,18 @@
       "visitas": 1,
       "ult_fecha": "06-10-2026",
       "ult_cierre": "Evento Contingencia"
+     },
+     {
+      "o": "1-3OGPN8A1",
+      "cat": "Reparación",
+      "f": "10-13",
+      "hi": "11:31",
+      "d": "G TELLEZ 2670 EDIF. N DEPTO 401, QUILPUE",
+      "e": "en ruta",
+      "tec": "JOSE ROJO A",
+      "visitas": 2,
+      "ult_fecha": "16-10-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OFBCKRV",
@@ -22428,6 +22491,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OFD4QWY",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "15:05",
+      "d": "FRODDEN 01640, QUILPUE",
+      "e": "Pendiente",
+      "tec": "LUIS MARTIN NUÑEZ",
+      "visitas": 1,
+      "ult_fecha": "15-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OG9TQMQ",
       "cat": "Migración 3 Play",
       "f": "16-19",
@@ -22464,10 +22539,22 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OHIXTCM",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "16:27",
+      "d": "SANTA SARA 1540 EDIF. 1A DEPTO 307, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "MATÍAS JAQUE AG",
+      "visitas": 1,
+      "ult_fecha": "19-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OG1C9MF",
       "cat": "Migración 3 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "14:47",
       "d": "27 DE ABRIL 659 CASA A, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -22476,10 +22563,22 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3OGB8UBN",
+      "cat": "Migración 2 Play",
+      "f": "10-13",
+      "hi": "11:24",
+      "d": "TERESIANAS 0128, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "RAFAEL VARGAS B",
+      "visitas": 2,
+      "ult_fecha": "16-10-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3OGF67TV",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "14:36",
       "d": "DEL VILLAR 1159 CASA 18, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -22491,7 +22590,7 @@
       "o": "1-3OFCZ5HA",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:09",
+      "hi": "16:45",
       "d": "SANTA ELENA 098 EDIF. 1 DEPTO 503, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -22505,7 +22604,7 @@
       "f": "10-13",
       "hi": "10:59",
       "d": "HAYDN 1661, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "SAMUEL FERNANDEZ VIDAL",
       "visitas": 2,
       "ult_fecha": "13-10-2026",
@@ -22526,16 +22625,6 @@
     ],
     "reagendadas": [
      {
-      "o": "1-3OGDITPZ",
-      "cat": "Alta 1 Play",
-      "f": "10-13",
-      "hi": "10:52",
-      "d": "HEVIA 0176, QUILPUE",
-      "e": "Pendiente",
-      "tec": "GEEYSER PEREZ O",
-      "desde": "17-10-2026"
-     },
-     {
       "o": "1-3OEZE1UG",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -22544,10 +22633,20 @@
       "e": "Iniciado",
       "tec": "JOSE GALAZ D",
       "desde": "16-10-2026"
+     },
+     {
+      "o": "1-3OGDITPZ",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "11:44",
+      "d": "HEVIA 0176, QUILPUE",
+      "e": "en ruta",
+      "tec": "PABLO HERNANEZ FERNANDEZ",
+      "desde": "17-10-2026"
      }
     ]
    }
   }
  },
- "generado": "19-10-2026 11:04"
+ "generado": "19-10-2026 11:29"
 }
