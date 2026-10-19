@@ -22065,27 +22065,36 @@
    }
   },
   "19-10-2026": {
-   "hasta": "10:34",
-   "actividades": 101,
-   "tecnicos": 34,
+   "hasta": "10:44",
+   "actividades": 99,
+   "tecnicos": 33,
    "estados": {
-    "Iniciado": 25,
-    "Pendiente": 57,
+    "Iniciado": 26,
+    "Pendiente": 53,
     "No Realizada": 6,
+    "en ruta": 7,
     "Completado": 6,
-    "en ruta": 6,
     "Cancelado": 1
    },
-   "rgu": 164.5,
-   "caidas_total": 1,
-   "caidas_activas": 1,
+   "rgu": 160.0,
+   "caidas_total": 2,
+   "caidas_activas": 2,
    "caidas_resueltas": 0,
-   "nuevas": 7,
-   "al_bucket": 2,
-   "repetidas": 28,
+   "nuevas": 9,
+   "al_bucket": 6,
+   "repetidas": 27,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
+     {
+      "o": "1-3OH60207",
+      "tec": "EDGAR VALERO C",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "AZAPA 1190, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OEM6ZIL",
       "tec": "JORGE PEZOA VICUÑA",
@@ -22097,6 +22106,24 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OHJFMQ2",
+      "tec": "EDGAR VALERO C",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "JAVIERA CARRERA 1054 DEPTO 23, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OHJFQH4",
+      "tec": "JOSE CASTRO P",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "ARRIETA 417, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OHJ5VSX",
       "tec": "JOSE GALAZ D",
@@ -22283,18 +22310,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OGB8UBN",
-      "cat": "Migración 2 Play",
-      "f": "10-13",
-      "hi": "10:31",
-      "d": "TERESIANAS 0128, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JEAN ROODLY ORELIEN",
-      "visitas": 2,
-      "ult_fecha": "16-10-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
       "o": "1-3OGTB7DQ",
       "cat": "Alta 2 Play",
       "f": "10-13",
@@ -22327,18 +22342,6 @@
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
       "visitas": 3,
-      "ult_fecha": "13-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OG56TRI",
-      "cat": "Reparación",
-      "f": "10-13",
-      "hi": "11:27",
-      "d": "HAYDN 1661, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOSE PEREZ RANGEL",
-      "visitas": 2,
       "ult_fecha": "13-10-2026",
       "ult_cierre": "Sin moradores"
      },
@@ -22487,6 +22490,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OG56TRI",
+      "cat": "Reparación",
+      "f": "10-13",
+      "hi": "10:55",
+      "d": "HAYDN 1661, VILLA ALEMANA",
+      "e": "en ruta",
+      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "visitas": 2,
+      "ult_fecha": "13-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OH58PHQ",
       "cat": "Alta 1 Play",
       "f": "16-19",
@@ -22524,5 +22539,5 @@
    }
   }
  },
- "generado": "19-10-2026 10:34"
+ "generado": "19-10-2026 10:44"
 }
