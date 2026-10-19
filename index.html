@@ -3104,6 +3104,13 @@
   .rm-tab .tg.na { background:#eef2f6; color:#475569; } .rm-tab .tg.comp { background:#dbeafe; color:#1d4ed8; } .rm-tab .tg.prop { background:#ffedd5; color:#c2410c; }
   .pa-rep .pv-lk.rm-btn { background:#1d4ed8 !important; color:#fff !important; border-color:#1d4ed8 !important; font-weight:700; }
   @media (max-width:860px){ .rm-kpis { grid-template-columns:repeat(2,1fr); } .rm-dos { grid-template-columns:1fr; } .rm-tab th:nth-child(n+6), .rm-tab td:nth-child(n+6) { display:none; } }
+
+  /* (12:30) guia arriba de la tabla del Resumen de migraciones */
+  .rm-guia { display:flex; flex-wrap:wrap; gap:8px 18px; align-items:center; margin:-2px 0 10px; font-size:13px; color:#41586f; }
+  .rm-guia .eq { background:#eef2f6; border-radius:999px; padding:4px 12px; }
+  .rm-guia .eq b { color:#14213a; }
+  .rm-guia .ro i { display:inline-block; width:12px; height:12px; border-radius:3px; background:#fdecec; border:1px solid #f5b5ae; margin-right:6px; vertical-align:-1px; }
+  .rm-guia .ro b { color:#b91c1c; }
 </style>
 </head>
 <body>
@@ -10260,6 +10267,9 @@ function pintarResMig(){
   const P = rmFilas(RM_PER);
   const supF = function(l){ return RM_SUP === 'Todos' ? l : l.filter(function(x){ return x.sup === RM_SUP; }); };
   const A = supF(P.a), B = supF(P.b), ca = rmCuenta(A), cb = rmCuenta(B);
+  /* (12:30) el rojo se compara contra TODO el equipo del periodo, aunque se
+     filtre un supervisor (igual que la marca 'sobre el equipo' de Derivacion) */
+  const eqPct = rmCuenta(P.a).pct, RM_PUNTOS = 10, lim = eqPct + RM_PUNTOS;
   const sups = []; (DER || []).forEach(function(x){ if(x.sup && sups.indexOf(x.sup) < 0) sups.push(x.sup); }); sups.sort();
   const btn = function(k, v, txt, on){ return '<button class="' + (on ? 'on' : '') + '" onclick="setRM(\'' + k + '\',\'' + String(v).replace(/'/g, "\\'") + '\')">' + txt + '</button>'; };
   fi.innerHTML = '<div class="rm-f"><span>Período</span>' + [['hoy','Hoy'],['sem','Esta semana'],['ant','Semana anterior'],['4s','Últimas 4 semanas completas']]
@@ -10315,10 +10325,12 @@ function pintarResMig(){
     .sort(function(a, b){ return b.der - a.der || b.pct - a.pct || a.tec.localeCompare(b.tec); });
   const minV = RM_PER === 'hoy' ? 2 : 5;
   h += '<div class="rm-card"><h3>Técnico por técnico <small>de más a menos derivadas · toca un técnico para ver sus órdenes</small></h3>'
+    + '<div class="rm-guia"><span class="eq">El equipo deriva <b>' + rmPct(eqPct) + '</b></span>'
+    + '<span class="ro"><i></i>En rojo: deriva <b>' + rmPct(lim) + ' o más</b> (' + RM_PUNTOS + ' puntos sobre el equipo), con ' + minV + ' o más visitadas. Son los que hay que conversar.</span></div>'
     + '<table class="rm-tab"><thead><tr><th class="iz">Técnico</th><th class="iz">Supervisor</th><th>Visitadas</th><th>Derivadas</th><th>%</th>'
     + '<th>Sin moradores</th><th>Reagenda</th><th>Desiste</th><th>Otros</th><th title="Sin moradores, reagenda o desiste en una dirección donde no falló otro técnico">Solo suyas</th></tr></thead><tbody>'
     + tl.map(function(o, i){
-        const alto = o.vis >= minV && o.pct >= 50;
+        const alto = o.vis >= minV && o.pct >= lim;
         let r = '<tr class="fila' + (alto ? ' alto' : '') + (RM_TEC === i ? ' abierta' : '') + '" onclick="verRMTec(' + i + ')"><td class="iz"><b>' + escR(rmTitulo(o.tec)) + '</b></td>'
           + '<td class="iz">' + escR(rmTitulo(o.sup) || '–') + '</td><td>' + o.vis + '</td><td><b>' + o.der + '</b></td>'
           + '<td class="pc">' + rmPct(o.pct) + '</td><td>' + (o.sm || '·') + '</td><td>' + (o.re || '·') + '</td><td>' + (o.de || '·') + '</td><td>' + (o.ot || '·') + '</td><td>' + (o.prop || '·') + '</td></tr>';
@@ -10333,7 +10345,7 @@ function pintarResMig(){
         return r;
       }).join('')
     + '<tr class="tot"><td class="iz">Equipo</td><td></td><td>' + ca.vis + '</td><td>' + ca.der + '</td><td class="pc">' + rmPct(ca.pct) + '</td><td>' + mot.sm + '</td><td>' + mot.re + '</td><td>' + mot.de + '</td><td>' + mot.ot + '</td><td>' + cl.prop + '</td></tr>'
-    + '</tbody></table><div class="rm-nota">En rojo: ' + minV + ' o más migraciones visitadas y 50% o más derivadas. '
+    + '</tbody></table><div class="rm-nota">"Solo suyas": sin moradores, reagenda o desiste en una dirección donde no le falló a ningún otro técnico. '
     + (RM_PER === 'hoy' || RM_PER === 'sem' ? 'Lo de hoy viene en vivo del monitor; los días anteriores, del Dashboard de Actividades (hasta ayer). ' : '')
     + 'Cuenta lo que se ve con las credenciales de la agencia (Quilpué y Villa Alemana).</div></div>';
   cu.innerHTML = h;
