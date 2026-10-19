@@ -22065,27 +22065,36 @@
    }
   },
   "19-10-2026": {
-   "hasta": "09:54",
-   "actividades": 96,
+   "hasta": "09:59",
+   "actividades": 97,
    "tecnicos": 34,
    "estados": {
-    "en ruta": 6,
-    "Pendiente": 62,
-    "Iniciado": 26,
+    "Iniciado": 29,
+    "Pendiente": 64,
     "Cancelado": 1,
-    "Completado": 1
+    "Completado": 1,
+    "en ruta": 2
    },
-   "rgu": 158.5,
+   "rgu": 161.5,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 1,
-   "al_bucket": 0,
+   "nuevas": 2,
+   "al_bucket": 1,
    "repetidas": 28,
    "reagendadas": 1,
    "detalle": {
     "caidas": [],
     "nuevas": [
+     {
+      "o": "1-3OH7X5KU",
+      "tec": "LUIS GATICA DAVILA",
+      "cat": "Reparación",
+      "f": "10-13",
+      "hi": "11:04",
+      "d": "CALLE 5 80 EDIF. 3 DEPTO 234, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OHHLR8P",
       "tec": "KEVIN TAPIA RETAMAL",
@@ -22101,7 +22110,7 @@
       "o": "1-3OGYPHGE",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "14:37",
+      "hi": "15:01",
       "d": "PENUELAS 944 DEPTO 42, QUILPUE",
       "e": "Pendiente",
       "tec": "ALEXIS JARA",
@@ -22149,9 +22158,9 @@
       "o": "1-3OG8KU3U",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "09:31",
+      "hi": "10:00",
       "d": "CLAUDIO VICUNA 807, QUILPUE",
-      "e": "en ruta",
+      "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
       "visitas": 2,
       "ult_fecha": "13-10-2026",
@@ -22449,5 +22458,5 @@
    }
   }
  },
- "generado": "19-10-2026 09:54"
+ "generado": "19-10-2026 09:59"
 }
