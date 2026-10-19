@@ -22065,25 +22065,25 @@
    }
   },
   "19-10-2026": {
-   "hasta": "15:25",
-   "actividades": 141,
+   "hasta": "15:35",
+   "actividades": 152,
    "tecnicos": 33,
    "estados": {
-    "Completado": 66,
-    "Iniciado": 20,
-    "Pendiente": 17,
+    "Completado": 68,
+    "Pendiente": 27,
     "No Realizada": 27,
-    "en ruta": 7,
+    "Iniciado": 23,
     "Suspendido": 2,
+    "en ruta": 3,
     "Cancelado": 2
    },
-   "rgu": 206.2,
+   "rgu": 227.2,
    "caidas_total": 5,
    "caidas_activas": 5,
    "caidas_resueltas": 0,
    "nuevas": 31,
    "al_bucket": 20,
-   "repetidas": 29,
+   "repetidas": 34,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
@@ -22163,12 +22163,12 @@
      },
      {
       "o": "1-3OHQFKOV",
-      "tec": "JUAN ARRIAGADA C",
+      "tec": "ESTEBAN PIZARRO QUINTANA",
       "cat": "Alta 2 Play",
       "f": "16-19",
       "hi": "17:30",
       "d": "SANTA RITA 950 EDIF. A DEPTO 102, VILLA ALEMANA",
-      "e": "Pendiente (ya no está)"
+      "e": "Pendiente"
      },
      {
       "o": "1-3OHQ25FF",
@@ -22312,7 +22312,7 @@
       "f": "13-16",
       "hi": "15:13",
       "d": "VOLCAN SOCOMPA 2687, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OHK6ST7",
@@ -22500,6 +22500,18 @@
       "ult_cierre": "Sin apoyo vivienda-Pierrack"
      },
      {
+      "o": "1-3OH58PHQ",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "15:28",
+      "d": "MARGA MARGA 1544 CASA B, QUILPUE",
+      "e": "Iniciado",
+      "tec": "FELIPE SILVA R",
+      "visitas": 4,
+      "ult_fecha": "17-10-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3OGTB7DQ",
       "cat": "Alta 2 Play",
       "f": "10-13",
@@ -22545,6 +22557,42 @@
       "tec": "JORDAN ROA PEREZ",
       "visitas": 3,
       "ult_fecha": "13-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OFCZ5HA",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "16:54",
+      "d": "SANTA ELENA 098 EDIF. 1 DEPTO 503, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOSE CASTRO P",
+      "visitas": 1,
+      "ult_fecha": "02-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OFIZIQU",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "17:08",
+      "d": "PIEDRA LANCETA 1832, QUILPUE",
+      "e": "Pendiente",
+      "tec": "JOSE GALAZ D",
+      "visitas": 1,
+      "ult_fecha": "06-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OHM27G7",
+      "cat": "Migración 1 Play",
+      "f": "16-19",
+      "hi": "18:05",
+      "d": "LATORRE 396, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOSE PEREZ RANGEL",
+      "visitas": 1,
+      "ult_fecha": "13-08-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -22620,6 +22668,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OG6WFKE",
+      "cat": "Alta 3 Play",
+      "f": "16-19",
+      "hi": "16:51",
+      "d": "OCTAVA 0747, QUILPUE",
+      "e": "Pendiente",
+      "tec": "KEVIN TAPIA RETAMAL",
+      "visitas": 1,
+      "ult_fecha": "16-10-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3OEP57F8",
       "cat": "Alta 2 Play",
       "f": "13-16",
@@ -22642,6 +22702,18 @@
       "visitas": 2,
       "ult_fecha": "21-08-2026",
       "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3OHP1QTF",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "17:36",
+      "d": "PJE LOS GRANADOS 18, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "LUIS GATICA DAVILA",
+      "visitas": 4,
+      "ult_fecha": "17-10-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OHLPYB0",
@@ -22698,9 +22770,9 @@
       "d": "MADRID 1686, VILLA ALEMANA",
       "e": "Completado",
       "tec": "MATIAS APELEO APELEO",
-      "visitas": 1,
-      "ult_fecha": "17-10-2026",
-      "ult_cierre": "Direccion no encontrada"
+      "visitas": 2,
+      "ult_fecha": "19-10-2026",
+      "ult_cierre": "Falla Aprovisionamiento"
      },
      {
       "o": "1-3OH6QOON",
@@ -22749,18 +22821,6 @@
       "visitas": 2,
       "ult_fecha": "13-10-2026",
       "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OH58PHQ",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "16:00",
-      "d": "MARGA MARGA 1544 CASA B, QUILPUE",
-      "e": "Pendiente",
-      "tec": "SEBASTIAN DOSSOW A",
-      "visitas": 4,
-      "ult_fecha": "17-10-2026",
-      "ult_cierre": "Cliente reagenda"
      }
     ],
     "reagendadas": [
@@ -22788,5 +22848,5 @@
    }
   }
  },
- "generado": "19-10-2026 15:25"
+ "generado": "19-10-2026 15:35"
 }
