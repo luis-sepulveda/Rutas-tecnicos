@@ -2978,6 +2978,7 @@
     .pa-fr { grid-template-columns:70px minmax(0,1fr); }
     .pa-fr .d { grid-column:1 / -1; text-align:left; }
   }
+  .pa-rep.pa-rep-fr { margin-top:18px; padding-top:14px; border-top:1px solid #edf1f5; flex-wrap:wrap; }
 </style>
 </head>
 <body>
@@ -11187,6 +11188,21 @@ function pintarPortada(){
     +         '<span><i class="a"></i>en bandeja sin iniciar</span><span><i class="b"></i>todavía en el bucket</span></div>'
     +       '<div class="pv-rot" style="margin:20px 0 10px">Por comuna</div>'
     +       '<div class="pv-com">' + comunas + '</div>'
+    +   '<div class="pa-rep pa-rep-fr pv-linea"><span class="pv-rot">Reportes</span>'
+    +   '<nav class="pv-links">'
+    +     (function(){ let c = null; try { c = calcularCompletitud(); } catch(e){}
+            const ok = c && c.total, pc = ok ? Math.round(c.pct) : null;
+            const col = !ok ? '#94a3b8' : c.pct >= COMP_META * 100 ? '#15803d' : c.pct >= 70 ? '#b45309' : '#b91c1c';
+            return '<button class="pv-lk dato" onclick="desdePortada(toggleComp)" title="Completitud al corte de las 13:00' + (ok ? ': ' + c.cumplen + ' de ' + c.total + ' técnicos con al menos un cierre. Meta ' + Math.round(COMP_META * 100) + '%' : '')
+              + '"><b class="vl" style="background:' + col + '">' + (ok ? pc + '%' : '–') + '</b>Completitud<span class="fl">›</span></button>'; })()
+    +     enlace('verReporteRepe', 'Histórico', 'Reporte histórico de direcciones')
+    +     (function(){ const d = pvSinMorHoy();
+            return '<span class="pv-lk dato dos' + (window.PV_SM ? ' sel' : '') + '">'
+              + '<button class="vl" style="background:' + (d.l.length ? '#b91c1c' : '#94a3b8') + '" onclick="window.PV_SM = !window.PV_SM; pintarPortada()" title="Sin moradores de HOY: ' + d.l.length + ' de ' + d.vis
+              + ' visitadas. Toca el número para ver cuáles son.">' + d.l.length + (window.PV_SM ? ' ✕' : '') + '</button>'
+              + '<a href="' + URL_SINMORADORES + '" target="_blank" title="Sin moradores semanal por técnico (abre el Historial)">Sin moradores<span class="fl">›</span></a></span>'; })()
+    +     enlace(URL_EQUIPO, 'Por supervisor', 'Detalle por supervisor')
+    +   '</nav></div>'
     +     '</div>'
 
     +     '<div class="pa-card pa-at">'
@@ -11220,21 +11236,6 @@ function pintarPortada(){
               || '<span>Todos ya partieron.</span>') + '</div></div>' : '')
 
     /* ---- 3. reportes: los mismos enlaces de antes ---- */
-    +   '<div class="pa-rep pv-linea"><span class="pv-rot">Reportes</span>'
-    +   '<nav class="pv-links">'
-    +     (function(){ let c = null; try { c = calcularCompletitud(); } catch(e){}
-            const ok = c && c.total, pc = ok ? Math.round(c.pct) : null;
-            const col = !ok ? '#94a3b8' : c.pct >= COMP_META * 100 ? '#15803d' : c.pct >= 70 ? '#b45309' : '#b91c1c';
-            return '<button class="pv-lk dato" onclick="desdePortada(toggleComp)" title="Completitud al corte de las 13:00' + (ok ? ': ' + c.cumplen + ' de ' + c.total + ' técnicos con al menos un cierre. Meta ' + Math.round(COMP_META * 100) + '%' : '')
-              + '"><b class="vl" style="background:' + col + '">' + (ok ? pc + '%' : '–') + '</b>Completitud<span class="fl">›</span></button>'; })()
-    +     enlace('verReporteRepe', 'Histórico', 'Reporte histórico de direcciones')
-    +     (function(){ const d = pvSinMorHoy();
-            return '<span class="pv-lk dato dos' + (window.PV_SM ? ' sel' : '') + '">'
-              + '<button class="vl" style="background:' + (d.l.length ? '#b91c1c' : '#94a3b8') + '" onclick="window.PV_SM = !window.PV_SM; pintarPortada()" title="Sin moradores de HOY: ' + d.l.length + ' de ' + d.vis
-              + ' visitadas. Toca el número para ver cuáles son.">' + d.l.length + (window.PV_SM ? ' ✕' : '') + '</button>'
-              + '<a href="' + URL_SINMORADORES + '" target="_blank" title="Sin moradores semanal por técnico (abre el Historial)">Sin moradores<span class="fl">›</span></a></span>'; })()
-    +     enlace(URL_EQUIPO, 'Por supervisor', 'Detalle por supervisor')
-    +   '</nav></div>'
 
     + '</div>';
 
