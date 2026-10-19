@@ -22065,28 +22065,74 @@
    }
   },
   "19-10-2026": {
-   "hasta": "10:19",
-   "actividades": 98,
+   "hasta": "10:34",
+   "actividades": 101,
    "tecnicos": 34,
    "estados": {
-    "Iniciado": 27,
-    "Pendiente": 62,
-    "Completado": 4,
-    "Cancelado": 1,
-    "No Realizada": 2,
-    "en ruta": 2
+    "Iniciado": 25,
+    "Pendiente": 57,
+    "No Realizada": 6,
+    "Completado": 6,
+    "en ruta": 6,
+    "Cancelado": 1
    },
-   "rgu": 162.5,
-   "caidas_total": 0,
-   "caidas_activas": 0,
+   "rgu": 164.5,
+   "caidas_total": 1,
+   "caidas_activas": 1,
    "caidas_resueltas": 0,
-   "nuevas": 3,
+   "nuevas": 7,
    "al_bucket": 2,
    "repetidas": 28,
-   "reagendadas": 1,
+   "reagendadas": 2,
    "detalle": {
-    "caidas": [],
+    "caidas": [
+     {
+      "o": "1-3OEM6ZIL",
+      "tec": "JORGE PEZOA VICUÑA",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "LAS ACACIAS 730 DEPTO 824, VILLA ALEMANA",
+      "e": "Pendiente"
+     }
+    ],
     "nuevas": [
+     {
+      "o": "1-3OHJ5VSX",
+      "tec": "JOSE GALAZ D",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "14:21",
+      "d": "9 DE JUNIO 1834, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OHJ4EGD",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "cat": "Reparación",
+      "f": "10-13",
+      "hi": "11:00",
+      "d": "PJE 1 (VENTISCA) 573, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OGDITPZ",
+      "tec": "GEEYSER PEREZ O",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "11:06",
+      "d": "HEVIA 0176, QUILPUE",
+      "e": "en ruta"
+     },
+     {
+      "o": "1-3OHIJ1CR",
+      "tec": "JORGE PEZOA VICUÑA",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "VALDIVIA 368 EDIF. F DEPTO 403, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OHIKHWE",
       "tec": "EDGAR VALERO C",
@@ -22094,7 +22140,7 @@
       "f": "10-13",
       "hi": "10:23",
       "d": "AV VICTORIA 555, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OH7X5KU",
@@ -22103,7 +22149,7 @@
       "f": "10-13",
       "hi": "11:04",
       "d": "CALLE 5 80 EDIF. 3 DEPTO 234, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OHHLR8P",
@@ -22194,7 +22240,7 @@
       "f": "10-13",
       "hi": "09:51",
       "d": "AV VICEPRESIDENTE BDO LEIGHTON 1431 EDIF. 8 DEPTO 24, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "ESTEBAN PIZARRO QUINTANA",
       "visitas": 1,
       "ult_fecha": "17-10-2026",
@@ -22254,7 +22300,7 @@
       "f": "10-13",
       "hi": "09:53",
       "d": "ROSENQUIST 16 CASA CASA, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JOEL GUSTAVE GUSTA",
       "visitas": 2,
       "ult_fecha": "17-10-2026",
@@ -22455,6 +22501,16 @@
     ],
     "reagendadas": [
      {
+      "o": "1-3OGDITPZ",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "10:52",
+      "d": "HEVIA 0176, QUILPUE",
+      "e": "en ruta",
+      "tec": "GEEYSER PEREZ O",
+      "desde": "17-10-2026"
+     },
+     {
       "o": "1-3OEZE1UG",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -22468,5 +22524,5 @@
    }
   }
  },
- "generado": "19-10-2026 10:19"
+ "generado": "19-10-2026 10:34"
 }
