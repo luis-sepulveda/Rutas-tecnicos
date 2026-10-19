@@ -22065,25 +22065,25 @@
    }
   },
   "19-10-2026": {
-   "hasta": "12:34",
-   "actividades": 124,
+   "hasta": "12:44",
+   "actividades": 134,
    "tecnicos": 33,
    "estados": {
-    "Completado": 26,
-    "en ruta": 2,
-    "Pendiente": 61,
+    "Completado": 29,
+    "en ruta": 3,
+    "Pendiente": 67,
     "No Realizada": 18,
     "Iniciado": 14,
     "Suspendido": 2,
     "Cancelado": 1
    },
-   "rgu": 187.8,
+   "rgu": 208.4,
    "caidas_total": 3,
    "caidas_activas": 3,
    "caidas_resueltas": 0,
-   "nuevas": 19,
+   "nuevas": 21,
    "al_bucket": 12,
-   "repetidas": 30,
+   "repetidas": 32,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
@@ -22117,13 +22117,31 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OHNZB9O",
+      "tec": "JORDAN ROA PEREZ",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "12:42",
+      "d": "AV LOS CARRERA 1476 DEPTO 32, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
+      "o": "1-3OHNPZ77",
+      "tec": "KEVIN TAPIA RETAMAL",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "12:38",
+      "d": "ALEMPARTE 277 CASA 9, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
       "o": "1-3OHN936T",
       "tec": "MARCO PEREZ G",
       "cat": "Modificación de Servicio",
       "f": "10-13",
       "hi": "12:22",
       "d": "VALLE DEL PARAISO 2840, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OHL9F08",
@@ -22231,7 +22249,7 @@
       "f": "13-16",
       "hi": "14:21",
       "d": "9 DE JUNIO 1834, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OHJ4EGD",
@@ -22341,7 +22359,7 @@
       "o": "1-3OG1C9MF",
       "cat": "Migración 3 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "15:54",
       "d": "27 DE ABRIL 659 CASA A, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -22386,10 +22404,22 @@
       "ult_cierre": "Sin apoyo vivienda-Pierrack"
      },
      {
+      "o": "1-3OG9TQMQ",
+      "cat": "Migración 3 Play",
+      "f": "16-19",
+      "hi": "16:58",
+      "d": "ALMIRANTE VARGAS 2433, QUILPUE",
+      "e": "Pendiente",
+      "tec": "FELIPE SILVA R",
+      "visitas": 1,
+      "ult_fecha": "16-10-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3OGMHINU",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "16:46",
+      "hi": "16:00",
       "d": "CONDELL SUR 01565 CASA D, QUILPUE",
       "e": "Pendiente",
       "tec": "GEEYSER PEREZ O",
@@ -22437,12 +22467,24 @@
       "o": "1-3OED03H7",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "16:01",
+      "hi": "16:23",
       "d": "PJE B 0836 CASA 5 DEPTO 22, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
       "visitas": 3,
       "ult_fecha": "13-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OHM27G7",
+      "cat": "Migración 1 Play",
+      "f": "16-19",
+      "hi": "16:52",
+      "d": "LATORRE 396, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOSE PEREZ RANGEL",
+      "visitas": 1,
+      "ult_fecha": "13-08-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -22557,7 +22599,7 @@
       "o": "1-3OFD4QWY",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:25",
+      "hi": "14:00",
       "d": "FRODDEN 01640, QUILPUE",
       "e": "Pendiente",
       "tec": "MARCO PEREZ G",
@@ -22641,7 +22683,7 @@
       "o": "1-3OH58PHQ",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:18",
       "d": "MARGA MARGA 1544 CASA B, QUILPUE",
       "e": "Pendiente",
       "tec": "SEBASTIAN DOSSOW A",
@@ -22675,5 +22717,5 @@
    }
   }
  },
- "generado": "19-10-2026 12:34"
+ "generado": "19-10-2026 12:44"
 }
