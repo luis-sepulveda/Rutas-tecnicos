@@ -3040,6 +3040,70 @@
   .pa-lineas { flex:1; justify-content:space-between; }
   .pa-lin { flex:1; max-height:64px; }
   .pa-medio { align-items:stretch; }   /* los dos cuadros blancos de abajo, del mismo alto */
+
+  /* ==== FRANJAS POR COLOR (19-10-2026, 09:45) ====
+     Antes "cerradas" iba todo en verde y una cancelada parecia completada
+     (caso 16-19 de las 09:40). Ahora: verde completadas, rojo no realizadas,
+     gris canc/susp; mismos colores de "Por comuna". */
+  .pa-fr .pista .c { background:#0e7c6b; }
+  .pa-fr .pista .n { background:#d04a46; }
+  .pa-fr .pista .x { background:#c3d2e0; color:#41586f; }
+  .pa-ley i.n { background:#d04a46; } .pa-ley i.x { background:#c3d2e0; }
+
+  /* ==== RESUMEN DE MIGRACIONES (19-10-2026) ====
+     Ventana corta para supervisores (#modalRM). Boton "Resumen migraciones"
+     en Reportes de la portada. */
+  #modalRM { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); }
+  #modalRM.abierto { display:flex; align-items:flex-start; justify-content:center; padding:3vh 2vw; }
+  #modalRM .rm-box { background:#f4f7fa; color:#16232f; border-radius:14px; width:min(1180px,100%); max-height:94vh; overflow:auto; box-shadow:0 20px 60px rgba(0,0,0,.35); }
+  #modalRM .rm-head { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; padding:18px 22px 10px; background:#0f1b2d; color:#fff; border-radius:14px 14px 0 0; }
+  #modalRM h2 { margin:0; font-family:'Archivo',sans-serif; font-size:19px; }
+  #modalRM .rm-sub { margin:3px 0 0; font-size:12.5px; color:#a9b8cf; }
+  #modalRM .rm-x { border:1px solid #33475f; background:transparent; color:#fff; border-radius:8px; padding:5px 11px; cursor:pointer; }
+  #rmFiltros { display:flex; flex-wrap:wrap; gap:8px 22px; padding:12px 22px 6px; background:#0f1b2d; }
+  .rm-f { display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+  .rm-f span { font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:#8fa3bf; font-weight:700; margin-right:2px; }
+  .rm-f button { border:1px solid #33475f; background:#16263d; color:#dbe4f0; border-radius:999px; padding:5px 13px; font:inherit; font-size:13px; cursor:pointer; }
+  .rm-f button.on { background:#2563eb; border-color:#2563eb; color:#fff; font-weight:700; }
+  #rmCuerpo { padding:16px 22px 22px; display:flex; flex-direction:column; gap:14px; }
+  .rm-vacio { padding:30px; text-align:center; color:#64748b; background:#fff; border-radius:12px; }
+  .rm-kpis { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+  .rm-kpis .k { background:#fff; border:1px solid #dbe4ed; border-radius:12px; padding:14px 16px; display:flex; flex-direction:column; gap:2px; }
+  .rm-kpis .k b { font-family:'Archivo',sans-serif; font-size:34px; line-height:1.05; color:#14213a; }
+  .rm-kpis .k span { font-size:12.5px; color:#64748b; }
+  .rm-kpis .k.ok b { color:#0e7c6b; } .rm-kpis .k.mal b { color:#c0392f; } .rm-kpis .k.pct b { color:#14213a; }
+  .rm-kpis .k.pct.alto b { color:#b91c1c; }
+  .rm-kpis .cmp { font-size:12px; font-weight:700; margin-top:4px; }
+  .rm-kpis .cmp.peor { color:#b91c1c; } .rm-kpis .cmp.mejor { color:#15803d; } .rm-kpis .cmp.igual { color:#64748b; }
+  .rm-dos { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .rm-card { background:#fff; border:1px solid #dbe4ed; border-radius:12px; padding:14px 16px; }
+  .rm-card h3 { margin:0 0 10px; font-family:'Archivo',sans-serif; font-size:15px; color:#14213a; }
+  .rm-card h3 small { font-family:'DM Sans',sans-serif; font-weight:400; font-size:12px; color:#8fa1b3; margin-left:6px; }
+  .rm-bar { display:grid; grid-template-columns:130px 1fr 92px; gap:10px; align-items:center; padding:5px 0; font-size:13.5px; }
+  .rm-bar .p { height:14px; background:#eef2f6; border-radius:7px; overflow:hidden; }
+  .rm-bar .p i { display:block; height:100%; border-radius:7px; }
+  .rm-bar .v { text-align:right; color:#64748b; } .rm-bar .v b { color:#14213a; font-size:15px; }
+  .rm-seg { display:flex; height:26px; border-radius:7px; overflow:hidden; gap:2px; }
+  .rm-seg i { flex-basis:0; min-width:24px; display:flex; align-items:center; justify-content:center; color:#fff; font-style:normal; font-weight:700; font-size:12.5px; }
+  .rm-ley { display:flex; flex-direction:column; gap:5px; margin-top:10px; font-size:13px; color:#41586f; }
+  .rm-ley i { display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:7px; }
+  .rm-ley b { color:#14213a; margin-left:4px; }
+  .rm-nota { font-size:12px; color:#7d8fa3; margin-top:10px; line-height:1.45; }
+  .rm-tab { width:100%; border-collapse:collapse; font-size:13px; font-variant-numeric:tabular-nums; }
+  .rm-tab th { text-align:right; font-weight:600; color:#5d7389; padding:7px 8px; border-bottom:2px solid #dbe4ed; font-size:12px; }
+  .rm-tab td { text-align:right; padding:7px 8px; border-bottom:1px solid #edf1f5; }
+  .rm-tab .iz { text-align:left; }
+  .rm-tab tr.fila { cursor:pointer; } .rm-tab tr.fila:hover td { background:#f5f8fb; }
+  .rm-tab tr.alto td { background:#fdecec; } .rm-tab tr.alto .pc { color:#b91c1c; font-weight:700; }
+  .rm-tab tr.abierta td { background:#eff6ff; }
+  .rm-tab tr.det > td { background:#f8fafc; padding:8px 12px 12px; }
+  .rm-tab tr.det table { width:100%; border-collapse:collapse; font-size:12.5px; }
+  .rm-tab tr.det th, .rm-tab tr.det td { text-align:left; padding:5px 8px; border-bottom:1px solid #e3e9f0; }
+  .rm-tab tr.tot td { font-weight:700; background:#eef2f6; border-top:2px solid #dbe4ed; }
+  .rm-tab .tg { font-size:11.5px; padding:2px 8px; border-radius:999px; white-space:nowrap; }
+  .rm-tab .tg.na { background:#eef2f6; color:#475569; } .rm-tab .tg.comp { background:#dbeafe; color:#1d4ed8; } .rm-tab .tg.prop { background:#ffedd5; color:#c2410c; }
+  .pa-rep .pv-lk.rm-btn { background:#1d4ed8 !important; color:#fff !important; border-color:#1d4ed8 !important; font-weight:700; }
+  @media (max-width:860px){ .rm-kpis { grid-template-columns:repeat(2,1fr); } .rm-dos { grid-template-columns:1fr; } .rm-tab th:nth-child(n+6), .rm-tab td:nth-child(n+6) { display:none; } }
 </style>
 </head>
 <body>
@@ -3295,6 +3359,18 @@
     </div>
     <div class="rs-rangos" id="rsRangos"></div>
     <div class="rs-cuerpo" id="rsCuerpo"></div>
+  </div>
+</div>
+<!-- RESUMEN DE MIGRACIONES PARA SUPERVISORES (19-10-2026) -->
+<div id="modalRM" onclick="if(event.target===this) cerrarResMig()">
+  <div class="rm-box" role="dialog" aria-labelledby="rmTitulo">
+    <div class="rm-head">
+      <div><h2 id="rmTitulo">Resumen de migraciones</h2>
+        <p class="rm-sub">Cuántas se derivaron, por qué y quién · para supervisores</p></div>
+      <button class="rm-x" onclick="cerrarResMig()" title="Cerrar (Esc)">✖</button>
+    </div>
+    <div id="rmFiltros"></div>
+    <div id="rmCuerpo"></div>
   </div>
 </div>
 <!-- DERIVACION EN MIGRACIONES (08-10-2026): ventana del boton Derivacion de la barra -->
@@ -10093,6 +10169,177 @@ async function bajarResumen(){
   return ordenarDias(Object.keys(por)).map(function(k){ return por[k]; });
 }
 
+/* ==== RESUMEN DE MIGRACIONES PARA SUPERVISORES (19-10-2026) ====
+   Luis: "un boton para los supervisores que les muestre la informacion
+   resumida de todo lo que tenemos referente a las migraciones: cuantas se
+   derivaron, motivo, tecnicos". La ventana de Derivacion tiene mucha
+   informacion; esta es la version corta, en una sola pantalla.
+   - Periodo: Hoy (en vivo, DB) / Esta semana (lunes a hoy) / Semana anterior /
+     Ultimas 4 semanas. Los dias anteriores salen de datos.json (bajarDeriv,
+     el mismo de Derivacion); hoy, de rutas.json.
+   - Filtro por supervisor dentro de la ventana.
+   - Mismas reglas de Derivacion: visitada = Completado o No Realizada;
+     derivada = No Realizada; motivos con derGrupo(); de quien es, con
+     derClase() (dias anteriores) o con prev (hoy).
+   No cambia ningun calculo de las otras ventanas. CSS: bloque "RESUMEN DE
+   MIGRACIONES" al final del <style>. */
+let RM_PER = 'sem', RM_SUP = 'Todos', RM_TEC = null;
+function rmLunes(d){ const x = new Date(d); x.setHours(0,0,0,0); x.setDate(x.getDate() - (x.getDay() + 6) % 7);
+  return x.getFullYear() + '-' + String(x.getMonth() + 1).padStart(2, '0') + '-' + String(x.getDate()).padStart(2, '0'); }
+function rmMasDias(s, n){ const p = s.split('-'); const d = new Date(+p[0], +p[1] - 1, +p[2] + n);
+  return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+function rmLimpia(t){ return String(t || '').replace(/[   ]/g, ' ').replace(/\s+/g, ' ').trim(); }
+function rmTitulo(t){ return rmLimpia(t).toLowerCase().replace(/(^|\s)\S/g, function(c){ return c.toUpperCase(); }); }
+/* Migraciones de HOY, desde DB, con el mismo formato que las filas de DER */
+function rmHoy(){
+  const supDe = {}, isoDe = {};
+  (DER || []).forEach(function(x){ if(x.sup && (!isoDe[x.tec] || x.iso >= isoDe[x.tec])){ supDe[x.tec] = x.sup; isoDe[x.tec] = x.iso; } });
+  const f = (typeof FECHA_DATOS !== 'undefined' && FECHA_DATOS) ? FECHA_DATOS : new Date();
+  const iso = f.getFullYear() + String(f.getMonth() + 1).padStart(2, '0') + String(f.getDate()).padStart(2, '0');
+  const out = [];
+  Object.keys(typeof DB === 'object' && DB ? DB : {}).forEach(function(k){
+    const tec = rmLimpia(k);
+    (DB[k] || []).forEach(function(j){
+      if(String(j.t || '').trim().toUpperCase().indexOf('MIGRA') !== 0) return;
+      const e = String(j.e || '');
+      if(e !== 'Completado' && e !== 'No Realizada') return;
+      const cod = String(j.cie || '').trim() || 'Sin código', der = e === 'No Realizada';
+      const prev = (Array.isArray(j.prev) ? j.prev : []).filter(function(v){ return !v.gsa; });
+      const g = der ? derGrupo(cod) : '';
+      out.push({ iso: iso, f: String(f.getDate()).padStart(2, '0') + '-' + String(f.getMonth() + 1).padStart(2, '0'), ot: String(j.o || ''),
+        tec: tec, sup: supDe[tec] || '', act: String(j.cat || j.t || ''), fr: String(j.f || ''), der: der, cod: cod, g: g, hoy: true,
+        cls: !der ? '' : g === 'ot' ? 'na' : (prev.some(function(v){ return v.tec && rmLimpia(v.tec) !== tec; }) ? 'comp' : 'prop') });
+    });
+  });
+  return out;
+}
+/* Filas del periodo elegido y del periodo con que se compara */
+function rmFilas(per){
+  const hoy = (typeof FECHA_DATOS !== 'undefined' && FECHA_DATOS) ? FECHA_DATOS : new Date();
+  const lun = rmLunes(hoy);
+  const isoHoy = hoy.getFullYear() + String(hoy.getMonth() + 1).padStart(2, '0') + String(hoy.getDate()).padStart(2, '0');
+  const migra = (DER || []).filter(function(x){ return x.tp === 'MIGRA' && x.iso < isoHoy; });
+  const deSems = function(l){ return migra.filter(function(x){ return l.indexOf(x.sem) >= 0; }); };
+  const yaHoy = (DER || []).some(function(x){ return x.iso === isoHoy; });
+  const hoyL = yaHoy ? [] : rmHoy();
+  const s = function(n){ return rmMasDias(lun, -7 * n); };
+  if(per === 'hoy') return { a: hoyL, b: deSems([s(1)]), nb: 'la semana anterior', tit: 'Hoy, en vivo' };
+  if(per === 'sem') return { a: deSems([lun]).concat(hoyL), b: deSems([s(1)]), nb: 'la semana anterior', tit: 'Esta semana (lunes a hoy)' };
+  if(per === 'ant') return { a: deSems([s(1)]), b: deSems([s(2)]), nb: 'la semana antes de esa', tit: 'Semana anterior' };
+  /* las 4 semanas COMPLETAS antes de la actual (la en curso tiene su boton) */
+  return { a: deSems([s(4), s(3), s(2), s(1)]), b: deSems([s(8), s(7), s(6), s(5)]), nb: 'las 4 semanas antes', tit: 'Últimas 4 semanas' };
+}
+/* de quien es una derivada: hoy viene calculado; los dias anteriores, con
+   derClase() (la misma de A quien auditar). No se escribe nada en DER. */
+function rmCls(x){ return x.hoy ? x.cls : (x.der ? derClase(x) : ''); }
+function rmCuenta(l){
+  const vis = l.length, d = l.filter(function(x){ return x.der; });
+  return { vis: vis, comp: vis - d.length, der: d.length, pct: vis ? 100 * d.length / vis : 0, l: d };
+}
+function rmPct(v){ return (Math.round(v * 10) / 10).toFixed(1).replace('.', ',') + '%'; }
+function abrirResMig(){
+  const m = document.getElementById('modalRM'); if(!m) return;
+  m.classList.add('abierto'); RM_TEC = null; pintarResMig();
+  if(DER !== null || derBajando) return;
+  derBajando = true; derFallo = false;
+  bajarDeriv().then(function(d){ DER = d; derBajando = false; pintarResMig(); })
+              .catch(function(e){ console.warn('resumen migraciones:', e); derFallo = true; derBajando = false; pintarResMig(); });
+}
+function cerrarResMig(){ const m = document.getElementById('modalRM'); if(m) m.classList.remove('abierto'); }
+function setRM(k, v){ if(k === 'per') RM_PER = v; else RM_SUP = v; RM_TEC = null; pintarResMig(); }
+function verRMTec(i){ RM_TEC = (RM_TEC === i ? null : i); pintarResMig(); }
+function pintarResMig(){
+  const cu = document.getElementById('rmCuerpo'), fi = document.getElementById('rmFiltros');
+  if(!cu || !fi) return;
+  const m = document.getElementById('modalRM'); if(!m || !m.classList.contains('abierto')) return;
+  if(DER === null){
+    fi.innerHTML = '';
+    cu.innerHTML = '<div class="rm-vacio">' + (derFallo ? 'No se pudieron bajar los datos de las semanas. Revisa la conexión y vuelve a abrir.' : 'Cargando las migraciones…') + '</div>';
+    return;
+  }
+  const P = rmFilas(RM_PER);
+  const supF = function(l){ return RM_SUP === 'Todos' ? l : l.filter(function(x){ return x.sup === RM_SUP; }); };
+  const A = supF(P.a), B = supF(P.b), ca = rmCuenta(A), cb = rmCuenta(B);
+  const sups = []; (DER || []).forEach(function(x){ if(x.sup && sups.indexOf(x.sup) < 0) sups.push(x.sup); }); sups.sort();
+  const btn = function(k, v, txt, on){ return '<button class="' + (on ? 'on' : '') + '" onclick="setRM(\'' + k + '\',\'' + String(v).replace(/'/g, "\\'") + '\')">' + txt + '</button>'; };
+  fi.innerHTML = '<div class="rm-f"><span>Período</span>' + [['hoy','Hoy'],['sem','Esta semana'],['ant','Semana anterior'],['4s','Últimas 4 semanas completas']]
+      .map(function(p){ return btn('per', p[0], p[1], RM_PER === p[0]); }).join('') + '</div>'
+    + '<div class="rm-f"><span>Supervisor</span>' + btn('sup', 'Todos', 'Todos', RM_SUP === 'Todos')
+      + sups.map(function(s){ return btn('sup', s, rmTitulo(s), RM_SUP === s); }).join('') + '</div>';
+
+  let h = '';
+  /* 1. Cifras */
+  const dif = ca.vis && cb.vis ? ca.pct - cb.pct : null;
+  const flecha = dif === null ? '' : Math.abs(dif) < 1 ? '<span class="cmp igual">igual que ' + P.nb + ' (' + rmPct(cb.pct) + ')</span>'
+    : dif > 0 ? '<span class="cmp peor">▲ subió desde ' + rmPct(cb.pct) + ' (' + P.nb + ')</span>'
+              : '<span class="cmp mejor">▼ bajó desde ' + rmPct(cb.pct) + ' (' + P.nb + ')</span>';
+  h += '<div class="rm-kpis">'
+    + '<div class="k"><b>' + ca.vis + '</b><span>migraciones visitadas</span></div>'
+    + '<div class="k ok"><b>' + ca.comp + '</b><span>completadas</span></div>'
+    + '<div class="k mal"><b>' + ca.der + '</b><span>derivadas</span></div>'
+    + '<div class="k pct' + (ca.pct >= 50 ? ' alto' : '') + '"><b>' + (ca.vis ? rmPct(ca.pct) : '–') + '</b><span>de derivación</span>' + flecha + '</div></div>';
+  if(!ca.vis){
+    cu.innerHTML = h + '<div class="rm-vacio">Todavía no hay migraciones visitadas en este período.</div>';
+    return;
+  }
+  /* 2. Motivos */
+  const mot = { sm: 0, re: 0, de: 0, ot: 0 }, otros = {};
+  ca.l.forEach(function(x){ mot[x.g || 'ot']++; if((x.g || 'ot') === 'ot') otros[x.cod] = (otros[x.cod] || 0) + 1; });
+  const NOM = { sm: 'Sin moradores', re: 'Cliente reagenda', de: 'Cliente desiste', ot: 'Otros motivos' };
+  const COL = { sm: '#b45309', re: '#2563eb', de: '#7c3aed', ot: '#94a3b8' };
+  const mx = Math.max(1, mot.sm, mot.re, mot.de, mot.ot);
+  const otrosTxt = Object.keys(otros).sort(function(a, b){ return otros[b] - otros[a]; }).map(function(k){ return escR(k) + ' ' + otros[k]; }).join(' · ');
+  h += '<div class="rm-dos"><div class="rm-card"><h3>¿Por qué se derivaron?</h3>'
+    + ['sm','re','de','ot'].map(function(g){
+        return '<div class="rm-bar"><span class="n">' + NOM[g] + '</span><span class="p"><i style="width:' + (100 * mot[g] / mx) + '%;background:' + COL[g] + '"></i></span>'
+          + '<span class="v"><b>' + mot[g] + '</b> · ' + rmPct(ca.der ? 100 * mot[g] / ca.der : 0) + '</span></div>'; }).join('')
+    + (otrosTxt ? '<div class="rm-nota">Otros motivos: ' + otrosTxt + '</div>' : '') + '</div>';
+  /* 3. De quien es */
+  const cl = { na: 0, comp: 0, prop: 0 };
+  ca.l.forEach(function(x){ const c = rmCls(x); cl[c || 'na']++; });
+  const seg = function(v, c){ return v ? '<i style="flex-grow:' + v + ';background:' + c + '">' + v + '</i>' : ''; };
+  h += '<div class="rm-card"><h3>¿De quién depende?</h3>'
+    + '<div class="rm-seg">' + seg(cl.na, '#94a3b8') + seg(cl.comp, '#2563eb') + seg(cl.prop, '#ea580c') + '</div>'
+    + '<div class="rm-ley"><span><i style="background:#94a3b8"></i>No depende del técnico <b>' + cl.na + '</b></span>'
+    + '<span><i style="background:#2563eb"></i>Ahí ya falló otro técnico <b>' + cl.comp + '</b></span>'
+    + '<span><i style="background:#ea580c"></i>Solo con ese técnico <b>' + cl.prop + '</b></span></div>'
+    + '<div class="rm-nota">"No depende del técnico" son los otros motivos (ductos, dotación, NAP, dirección…). Las de sin moradores, reagenda y desiste se separan según si en esa dirección también le falló una visita a otro técnico.</div></div></div>';
+  /* 4. Tecnicos */
+  const t = {};
+  A.forEach(function(x){
+    const o = t[x.tec] || (t[x.tec] = { tec: x.tec, sup: x.sup, vis: 0, der: 0, sm: 0, re: 0, de: 0, ot: 0, prop: 0, l: [] });
+    o.vis++; if(!x.der) return;
+    o.der++; o[x.g || 'ot']++; if(rmCls(x) === 'prop') o.prop++; o.l.push(x);
+  });
+  const tl = Object.keys(t).map(function(k){ const o = t[k]; o.pct = o.vis ? 100 * o.der / o.vis : 0; return o; })
+    .sort(function(a, b){ return b.der - a.der || b.pct - a.pct || a.tec.localeCompare(b.tec); });
+  const minV = RM_PER === 'hoy' ? 2 : 5;
+  h += '<div class="rm-card"><h3>Técnico por técnico <small>de más a menos derivadas · toca un técnico para ver sus órdenes</small></h3>'
+    + '<table class="rm-tab"><thead><tr><th class="iz">Técnico</th><th class="iz">Supervisor</th><th>Visitadas</th><th>Derivadas</th><th>%</th>'
+    + '<th>Sin moradores</th><th>Reagenda</th><th>Desiste</th><th>Otros</th><th title="Sin moradores, reagenda o desiste en una dirección donde no falló otro técnico">Solo suyas</th></tr></thead><tbody>'
+    + tl.map(function(o, i){
+        const alto = o.vis >= minV && o.pct >= 50;
+        let r = '<tr class="fila' + (alto ? ' alto' : '') + (RM_TEC === i ? ' abierta' : '') + '" onclick="verRMTec(' + i + ')"><td class="iz"><b>' + escR(rmTitulo(o.tec)) + '</b></td>'
+          + '<td class="iz">' + escR(rmTitulo(o.sup) || '–') + '</td><td>' + o.vis + '</td><td><b>' + o.der + '</b></td>'
+          + '<td class="pc">' + rmPct(o.pct) + '</td><td>' + (o.sm || '·') + '</td><td>' + (o.re || '·') + '</td><td>' + (o.de || '·') + '</td><td>' + (o.ot || '·') + '</td><td>' + (o.prop || '·') + '</td></tr>';
+        if(RM_TEC === i){
+          r += '<tr class="det"><td colspan="10">' + (o.l.length ? '<table><thead><tr><th>Día</th><th>Orden</th><th>Actividad</th><th>Franja</th><th>Quiebre</th><th>De quién</th></tr></thead><tbody>'
+            + o.l.slice().sort(function(a, b){ return a.iso.localeCompare(b.iso); }).map(function(x){
+                const c = rmCls(x);
+                return '<tr><td>' + (x.hoy ? 'hoy' : escR(x.f)) + '</td><td>' + escR(x.ot) + '</td><td>' + escR(x.act) + '</td><td>' + escR(x.fr) + '</td><td><b>' + escR(x.cod) + '</b></td>'
+                  + '<td><span class="tg ' + c + '">' + (c === 'na' ? 'no depende del técnico' : c === 'comp' ? 'ahí falló otro' : 'solo con él') + '</span></td></tr>'; }).join('')
+            + '</tbody></table>' : '<div class="rm-nota">Ninguna derivada en el período.</div>') + '</td></tr>';
+        }
+        return r;
+      }).join('')
+    + '<tr class="tot"><td class="iz">Equipo</td><td></td><td>' + ca.vis + '</td><td>' + ca.der + '</td><td class="pc">' + rmPct(ca.pct) + '</td><td>' + mot.sm + '</td><td>' + mot.re + '</td><td>' + mot.de + '</td><td>' + mot.ot + '</td><td>' + cl.prop + '</td></tr>'
+    + '</tbody></table><div class="rm-nota">En rojo: ' + minV + ' o más migraciones visitadas y 50% o más derivadas. '
+    + (RM_PER === 'hoy' || RM_PER === 'sem' ? 'Lo de hoy viene en vivo del monitor; los días anteriores, del Dashboard de Actividades (hasta ayer). ' : '')
+    + 'Cuenta lo que se ve con las credenciales de la agencia (Quilpué y Villa Alemana).</div></div>';
+  cu.innerHTML = h;
+}
+document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarResMig(); });
+
 function abrirResumen(){
   document.getElementById('modalRes').classList.add('abierto');
   pintarResumen();
@@ -10814,7 +11061,10 @@ function pintarPortada(){
   const porFranja = {};
   filas.forEach(o => {
     const f = String(o.f || 's/franja');
-    porFranja[f] = porFranja[f] || {t:0, ab:0, ini:0};
+    porFranja[f] = porFranja[f] || {t:0, ab:0, ini:0, co:0, nr:0};
+    /* 19-10-2026: completadas y no realizadas aparte, para pintar la barra de cada franja por color */
+    if(String(o.e) === 'Completado') porFranja[f].co++;
+    else if(String(o.e) === 'No Realizada') porFranja[f].nr++;
     porFranja[f].t++;
     if(abierta(o)) porFranja[f].ab++;
     /* PRUEBA 08-10-2026 (idea 2): de las sin cerrar, cuantas ya estan
@@ -11249,7 +11499,7 @@ function pintarPortada(){
               if(!lista.length) return '<div class="pa-vacio">Todavía no hay órdenes del día.</div>';
               const FR_AMBAR = 10, FR_ROJO = 25;
               return lista.map(function(f){
-                const d = porFranja[f] || {t:0, ab:0, ini:0}, b = bkF[f] || 0;
+                const d = porFranja[f] || {t:0, ab:0, ini:0, co:0, nr:0}, b = bkF[f] || 0;
                 const m = /^(\d{1,2})\s*-\s*(\d{1,2})$/.exec(f);
                 const enCurso = hoy && m && ahora >= +m[1] && ahora < +m[2];
                 const pasada = !hoy || (m && ahora >= +m[2]);
@@ -11263,7 +11513,8 @@ function pintarPortada(){
                 const tono = enCurso ? ' ahora' : !pasada ? '' : pAb > FR_ROJO ? ' roj' : pAb > FR_AMBAR ? ' amb' : '';
                 return '<div class="pa-fr' + tono + '">'
                   + '<div class="h">' + f + estTx + '</div>'
-                  + '<div class="pista">' + (tot ? tramo(cerradas, 'c', 'cerradas (completadas, no realizadas, canc/susp)')
+                  + '<div class="pista">' + (tot ? tramo(d.co || 0, 'c', 'completadas') + tramo(d.nr || 0, 'n', 'no realizadas')
+                      + tramo(cerradas - (d.co || 0) - (d.nr || 0), 'x', 'canceladas o suspendidas')
                       + tramo(d.ini, 'i', 'iniciadas o en ruta') + tramo(sinIniF, 'a', 'en bandeja sin iniciar')
                       + tramo(b, 'b', 'todavía en el bucket') : '<span class="v">sin órdenes</span>') + '</div>'
                   + '<div class="d"><b>' + d.ab + '</b> sin cerrar de ' + d.t
@@ -11272,12 +11523,14 @@ function pintarPortada(){
                   + '</div>';
               }).join('');
             })()
-    +       '<div class="pa-ley"><span><i class="c"></i>cerradas</span><span><i class="i"></i>iniciadas</span>'
+    +       '<div class="pa-ley"><span><i class="c"></i>completadas</span><span><i class="n"></i>no realizadas</span><span><i class="x"></i>canc/susp</span><span><i class="i"></i>iniciadas</span>'
     +         '<span><i class="a"></i>en bandeja sin iniciar</span><span><i class="b"></i>todavía en el bucket</span></div>'
     +       '<div class="pv-rot" style="margin:20px 0 10px">Por comuna</div>'
     +       '<div class="pv-com">' + comunas + '</div>'
     +   '<div class="pa-rep pa-rep-fr pv-linea"><span class="pv-rot">Reportes</span>'
     +   '<nav class="pv-links">'
+    /* 19-10-2026: Resumen de migraciones para supervisores (abrirResMig) */
+    +     '<button class="pv-lk rm-btn" onclick="abrirResMig()" title="Cuántas migraciones se derivaron, por qué y quién, con filtro por supervisor">Resumen migraciones<span class="fl">\u203a</span></button>'
     +     (function(){ let c = null; try { c = calcularCompletitud(); } catch(e){}
             const ok = c && c.total, pc = ok ? Math.round(c.pct) : null;
             const col = !ok ? '#94a3b8' : c.pct >= COMP_META * 100 ? '#15803d' : c.pct >= 70 ? '#b45309' : '#b91c1c';
@@ -11330,6 +11583,7 @@ function pintarPortada(){
 
   /* 14-10-2026: "Los ultimos dias" quitado; ya no se pinta ni se baja historico_dias.json */
   refrescarAviso();
+  try { pintarResMig(); } catch(e){}
 }
 
 function render(mantenerVista){
