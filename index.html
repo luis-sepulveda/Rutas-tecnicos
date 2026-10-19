@@ -2994,6 +2994,42 @@
   .pa-at .pv-al.cero::after{display:none}
   .pa-at .pv-al.viva .n{min-width:44px;height:40px;line-height:40px;font-size:20px}
   .pa-at .pv-al.viva .t{font-size:15.5px}
+
+  /* ==== COLUMNA OSCURA (19-10-2026, 09:30) ====
+     Columna a la izquierda con la fecha, el anillo del inicio de jornada y
+     las cifras del dia, en el azul noche de la barra de arriba. Reemplaza la
+     linea de la fecha y el cuadro "Inicio de jornada". */
+  .pa-grid { display:grid; grid-template-columns:300px minmax(0,1fr); gap:14px; align-items:start; }
+  .pa-der { min-width:0; }
+  .pa-kpis { grid-template-columns:1.45fr 1.5fr 1.15fr; }
+  .pa-lado { position:sticky; top:12px; background:#0f1b2d; color:#e6edf6; border-radius:14px; padding:20px;
+    display:flex; flex-direction:column; gap:18px; }
+  .pa-fe { font-family:'Archivo',sans-serif; font-size:19px; font-weight:700; color:#fff; }
+  .pa-sub { display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-top:4px; color:#9fb0c8; font-size:12.5px; }
+  .pa-sub .pv-cq { position:static; transform:none; }
+  .pa-tecl { margin-top:8px; color:#9fb0c8; font-size:12.5px; display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+  .pa-ani { display:flex; align-items:center; gap:16px; background:none; border:0; padding:0; cursor:pointer; text-align:left; color:inherit; font-family:inherit; }
+  .pa-ani svg { flex:none; }
+  .pa-ani .tx { display:flex; flex-direction:column; }
+  .pa-ani .tx b { font-family:'Archivo',sans-serif; font-size:36px; line-height:1; color:#fff; }
+  .pa-ani .tx span { font-size:13px; color:#c9d5e6; margin-top:3px; }
+  .pa-ani .tx small { font-size:12px; color:#9fb0c8; margin-top:2px; }
+  .pa-ani:hover .tx span { text-decoration:underline; text-underline-offset:3px; }
+  .pa-lineas { display:flex; flex-direction:column; }
+  .pa-lin { display:flex; justify-content:space-between; align-items:center; padding:9px 2px; background:none; border:0;
+    border-top:1px solid #24364f; color:#e6edf6; font-family:inherit; font-size:14px; cursor:pointer; text-align:left; }
+  .pa-lin.fija { cursor:default; }
+  .pa-lin:not(.fija):hover { background:#16263d; }
+  .pa-lin b { font-family:'Archivo',sans-serif; font-size:17px; color:#fff; }
+  .pa-lin b.vd { color:#6ee7b7; } .pa-lin b.rj { color:#fca5a5; } .pa-lin b.az { color:#93c5fd; }
+  @media (max-width:1180px){
+    .pa-grid { grid-template-columns:1fr; }
+    .pa-lado { position:static; }
+    .pa-kpis { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  }
+  .pv-in.pa { max-width:1780px; }
+  .pa-grid { grid-template-columns:320px minmax(0,1fr); }
+  .pa-ani .tx small { white-space:nowrap; }
 </style>
 </head>
 <body>
@@ -10907,7 +10943,7 @@ function pintarPortada(){
     const bkPorFr = {};
     Object.keys(listas).forEach(k => { if(k.indexOf('__') !== 0) bkPorFr[k] = listas[k].length; });
     const iB = bucketHtml.indexOf('<div class="pv-bk">');
-    bkTile = { n: pendBk.length, porFr: bkPorFr,
+    bkTile = { n: pendBk.length, porFr: bkPorFr, hfc: hfcBk.length, canc: cancBk.length,
                botones: bucketHtml.substring(iB, bucketHtml.length - panelBk.length), panel: panelBk };
   }
   /* 01-10-2026: solo cuentan los tecnicos con alguna orden NO cancelada
@@ -11107,22 +11143,49 @@ function pintarPortada(){
        DE MANANA" al final del <style>. */
     + '<div class="pv-in pa">'
 
-    /* ---- cabecera: fecha, estado y tecnicos ---- */
-    +   '<div class="pa-cab">'
-    +     '<div class="pv-fecha">' + (fecha || 'Jornada') + (hoy ? '<span class="pv-curso">en curso</span>' : '') + '</div>'
-    +     '<div class="pa-tec"><span title="' + nTec + ' con órdenes en Quilpué y Villa Alemana'
-    +       (nOtraCom() ? ' + ' + nOtraCom() + ' en otra comuna' : '') + '">'
-    +       (nTec + nOtraCom()) + ' técnicos operativos</span>' + botonNoOperativos() + '</div>'
-    +   '</div>'
+    /* ---- COLUMNA OSCURA A LA IZQUIERDA (19-10-2026, 09:30) ----
+       Luis la pidio de la propuesta C ("agregale esto al actual"). Reemplaza
+       la linea de la fecha y el cuadro "Inicio de jornada" (todo su
+       contenido esta aca). El anillo: naranjo = pendientes en el bucket,
+       verde = ya cerradas en bandeja (completadas + no realizadas), azul =
+       en bandeja sin cerrar; las canceladas no entran. Cada renglon abre lo
+       mismo que su cifra de siempre. CSS: bloque "COLUMNA OSCURA". */
+    +   '<div class="pa-grid">'
+    +   (function(){
+          const bkN = bkTile ? bkTile.n : 0;
+          const cerrB = comp + nore, abB = pend;
+          const tot = bkN + cerrB + abB, C = 2 * Math.PI * 40;
+          let off = 0;
+          const seg = (v, col) => { if(!v || !tot) return ''; const l = C * v / tot;
+            const r = '<circle cx="48" cy="48" r="40" fill="none" stroke="' + col + '" stroke-width="10" stroke-dasharray="' + l.toFixed(2) + ' ' + C.toFixed(2)
+              + '" stroke-dashoffset="' + (-off).toFixed(2) + '" transform="rotate(-90 48 48)"/>'; off += l; return r; };
+          const fila = (txt, v, cls, onc, tit) => '<button class="pa-lin' + (onc ? '' : ' fija') + '"' + (onc ? ' onclick="' + onc + '"' : ' disabled')
+            + (tit ? ' title="' + tit + '"' : '') + '><span>' + txt + '</span><b class="' + (cls || '') + '">' + v + '</b></button>';
+          const clicBkL = k => 'window.PV_BK = (window.PV_BK === \'' + k + '\' ? null : \'' + k + '\'); pintarPortada()';
+          return '<aside class="pa-lado">'
+            + '<div><div class="pa-fe">' + (fecha || 'Jornada') + '</div>'
+            +   '<div class="pa-sub">' + (hoy ? 'en curso' : '') + botonCuadratura(filas.length) + '</div>'
+            +   '<div class="pa-tecl"><span title="' + nTec + ' con órdenes en Quilpué y Villa Alemana'
+            +     (nOtraCom() ? ' + ' + nOtraCom() + ' en otra comuna' : '') + '">' + (nTec + nOtraCom()) + ' técnicos operativos</span>'
+            +     botonNoOperativos() + '</div></div>'
+            + '<button class="pa-ani" onclick="desdePortada(abrirInicio)" title="Con cuántas actividades partió el día (Excel de la mañana). Toca para ver el detalle.">'
+            +   '<svg width="96" height="96" viewBox="0 0 96 96" aria-hidden="true"><circle cx="48" cy="48" r="40" fill="none" stroke="#24364f" stroke-width="10"/>'
+            +     seg(bkN, '#fdba74') + seg(cerrB, '#34d399') + seg(abB, '#60a5fa') + '</svg>'
+            +   '<span class="tx"><b>' + (nInicio || '–') + '</b><span>inicio de jornada ›</span>'
+            +   '<small>' + bkN + ' en bucket · ' + (cerrB + abB) + ' en bandeja</small></span></button>'
+            + '<div class="pa-lineas">'
+            +   fila('Efectividad', pct.toFixed(1).replace('.', ',') + '%', '', '', 'Completadas / todas las actividades del día')
+            +   fila('Completadas', comp, 'vd', 'desdePortada(function(){abrirEst(\'Completado\')})')
+            +   fila('No realizadas', nore, 'rj', 'desdePortada(function(){abrirEst(\'No Realizada\')})')
+            +   fila('Sin cerrar', pend, 'az', 'desdePortada(function(){abrirEst(\'__ABIERTAS__\')})')
+            +   (bkTile ? fila('HFC en bucket', bkTile.hfc, '', bkTile.hfc ? clicBkL('__HFC__') : '', 'No son de Dominion; no cuentan arriba') : '')
+            +   (bkTile ? fila('Canceladas en bucket', bkTile.canc, '', bkTile.canc ? clicBkL('__CANC__') : '') : '')
+            + '</div></aside>';
+        })()
+    +   '<div class="pa-der">'
 
-    /* ---- 1. los cuatro cuadros ---- */
+    /* ---- 1. los cuadros (Inicio de jornada paso a la columna oscura) ---- */
     +   '<section class="pa-kpis">'
-    /* Inicio de jornada: abre el mismo panel de siempre */
-    +     '<button class="pa-kpi k-ini" onclick="desdePortada(abrirInicio)" title="Con cuántas actividades partió el día (Excel de la mañana)">'
-    +       '<span class="l">Inicio de jornada <span class="fl">›</span></span>'
-    +       '<span class="n">' + (nInicio || '–') + '</span>'
-    +       '<span class="s">' + (nInicio ? 'pendientes NFTT/FTTH de la mañana' : 'todavía no está el Excel de hoy') + '</span>'
-    +     '</button>'
     /* En el bucket: las tarjetas por franja, HFC, canceladas y otra empresa
        son los MISMOS botones de antes (PV_BK) */
     +     (bkTile
@@ -11138,7 +11201,7 @@ function pintarPortada(){
     +       '<span class="l">Actividades del día en bandejas</span>'
     +       '<div class="pa-dia-top">'
     +         '<button class="pa-n" onclick="desdePortada(function(){abrirEst(\'__TODAS__\')})" title="Ver todas las actividades del día">' + filas.length + '</button>'
-    +         botonCuadratura(filas.length)
+    /* el ✓ cuadra paso a la columna oscura (19-10-2026, 09:35) */
     +       '</div>'
     +       '<div class="pa-mini">'
     +         cif(comp, 'completadas', 'comp', 'Completado')
@@ -11250,6 +11313,7 @@ function pintarPortada(){
               + ' <small>' + x.n + (x.n === 1 ? ' orden' : ' órdenes') + ' · parte ' + x.f + '</small></span>').join('')
               || '<span>Todos ya partieron.</span>') + '</div></div>' : '')
 
+    +   '</div></div>'
     /* ---- 3. reportes: los mismos enlaces de antes ---- */
 
     + '</div>';
