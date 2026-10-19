@@ -22065,22 +22065,22 @@
    }
   },
   "19-10-2026": {
-   "hasta": "18:06",
-   "actividades": 160,
+   "hasta": "18:11",
+   "actividades": 162,
    "tecnicos": 33,
    "estados": {
-    "Completado": 90,
-    "Iniciado": 12,
+    "Completado": 93,
+    "Iniciado": 10,
     "No Realizada": 45,
     "Suspendido": 7,
     "Cancelado": 5,
-    "en ruta": 1
+    "Pendiente": 2
    },
-   "rgu": 237.8,
+   "rgu": 239.8,
    "caidas_total": 6,
    "caidas_activas": 6,
    "caidas_resueltas": 0,
-   "nuevas": 34,
+   "nuevas": 36,
    "al_bucket": 20,
    "repetidas": 37,
    "reagendadas": 2,
@@ -22143,13 +22143,31 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OHZJ08K",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "18:10",
+      "d": "VOLCAN YELCHO 2879, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
+      "o": "1-3OHZGGUB",
+      "tec": "DANIEL NAVARRETE E",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "18:20",
+      "d": "CALLE 2 01542 EDIF. E2 DEPTO 33, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3OHZDORA",
       "tec": "JORDAN ROA PEREZ",
       "cat": "Modificación de Servicio",
       "f": "16-19",
       "hi": "17:58",
       "d": "LOS NARANJOS 511 CASA 14A, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OHYP4V6",
@@ -22158,7 +22176,7 @@
       "f": "16-19",
       "hi": "17:51",
       "d": "VOLCAN SOCOMPA 2687, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OHX0HGN",
@@ -22598,9 +22616,9 @@
       "o": "1-3OHP1QTF",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "17:43",
+      "hi": "17:41",
       "d": "PJE LOS GRANADOS 18, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Pendiente",
       "tec": "JOEL GUSTAVE GUSTA",
       "visitas": 4,
       "ult_fecha": "17-10-2026",
@@ -22624,7 +22642,7 @@
       "f": "16-19",
       "hi": "17:58",
       "d": "LOS NARANJOS 511 CASA 14A, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JORDAN ROA PEREZ",
       "visitas": 1,
       "ult_fecha": "12-10-2026",
@@ -22919,5 +22937,5 @@
    }
   }
  },
- "generado": "19-10-2026 18:06"
+ "generado": "19-10-2026 18:11"
 }
