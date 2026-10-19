@@ -22065,25 +22065,25 @@
    }
   },
   "19-10-2026": {
-   "hasta": "13:05",
-   "actividades": 145,
+   "hasta": "13:10",
+   "actividades": 146,
    "tecnicos": 33,
    "estados": {
     "Completado": 33,
-    "Iniciado": 16,
-    "Pendiente": 72,
+    "Iniciado": 17,
+    "Pendiente": 71,
     "No Realizada": 18,
+    "en ruta": 3,
     "Suspendido": 2,
-    "Cancelado": 2,
-    "en ruta": 2
+    "Cancelado": 2
    },
-   "rgu": 220.6,
+   "rgu": 221.6,
    "caidas_total": 3,
    "caidas_activas": 3,
    "caidas_resueltas": 0,
-   "nuevas": 24,
+   "nuevas": 25,
    "al_bucket": 12,
-   "repetidas": 33,
+   "repetidas": 34,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
@@ -22116,6 +22116,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OHONMWU",
+      "tec": "MARCO PEREZ G",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "13:07",
+      "d": "PASO DEL AGUA 2538, QUILPUE",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3OHOTZK8",
       "tec": "MATIAS APELEO APELEO",
@@ -22350,7 +22359,7 @@
       "o": "1-3OFCZ5HA",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "17:34",
+      "hi": "17:28",
       "d": "SANTA ELENA 098 EDIF. 1 DEPTO 503, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ANTONHY MORALES MENDOZA",
@@ -22634,10 +22643,22 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OHONMWU",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "13:07",
+      "d": "PASO DEL AGUA 2538, QUILPUE",
+      "e": "Iniciado",
+      "tec": "MARCO PEREZ G",
+      "visitas": 1,
+      "ult_fecha": "01-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OFD4QWY",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:58",
+      "hi": "15:09",
       "d": "FRODDEN 01640, QUILPUE",
       "e": "Pendiente",
       "tec": "MARCO PEREZ G",
@@ -22649,7 +22670,7 @@
       "o": "1-3OG6WFKE",
       "cat": "Alta 3 Play",
       "f": "16-19",
-      "hi": "16:29",
+      "hi": "16:40",
       "d": "OCTAVA 0747, QUILPUE",
       "e": "Pendiente",
       "tec": "MARCO PEREZ G",
@@ -22755,5 +22776,5 @@
    }
   }
  },
- "generado": "19-10-2026 13:05"
+ "generado": "19-10-2026 13:10"
 }
