@@ -22065,25 +22065,25 @@
    }
   },
   "19-10-2026": {
-   "hasta": "15:10",
-   "actividades": 154,
+   "hasta": "15:25",
+   "actividades": 141,
    "tecnicos": 33,
    "estados": {
-    "Completado": 61,
-    "Iniciado": 22,
-    "Pendiente": 35,
+    "Completado": 66,
+    "Iniciado": 20,
+    "Pendiente": 17,
     "No Realizada": 27,
-    "en ruta": 5,
+    "en ruta": 7,
     "Suspendido": 2,
     "Cancelado": 2
    },
-   "rgu": 231.2,
-   "caidas_total": 4,
-   "caidas_activas": 4,
+   "rgu": 206.2,
+   "caidas_total": 5,
+   "caidas_activas": 5,
    "caidas_resueltas": 0,
    "nuevas": 31,
-   "al_bucket": 12,
-   "repetidas": 36,
+   "al_bucket": 20,
+   "repetidas": 29,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
@@ -22094,6 +22094,15 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "AZAPA 1190, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OGMHINU",
+      "tec": "GEEYSER PEREZ O",
+      "cat": "Migración 1 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "CONDELL SUR 01565 CASA D, QUILPUE",
       "e": "Pendiente"
      },
      {
@@ -22159,7 +22168,7 @@
       "f": "16-19",
       "hi": "17:30",
       "d": "SANTA RITA 950 EDIF. A DEPTO 102, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Pendiente (ya no está)"
      },
      {
       "o": "1-3OHQ25FF",
@@ -22195,11 +22204,11 @@
       "f": "13-16",
       "hi": "13:03",
       "d": "MADRID 1686, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OHOX4N1",
-      "tec": "FELIPE SILVA R",
+      "tec": "CESAR MENA OLIVEROS",
       "cat": "Reparación",
       "f": "16-19",
       "hi": "17:19",
@@ -22258,7 +22267,7 @@
       "f": "13-16",
       "hi": "16:31",
       "d": "PORVENIR SUR 1652, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OHIXTCM",
@@ -22316,12 +22325,12 @@
      },
      {
       "o": "1-3OHK84PG",
-      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "tec": "LUIS GATICA DAVILA",
       "cat": "Alta 1 Play",
       "f": "13-16",
       "hi": "16:27",
       "d": "CHAMPAGNAT 495 CASA A, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OHJFMQ2",
@@ -22339,7 +22348,7 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "ARRIETA 417, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OHJ5VSX",
@@ -22370,7 +22379,7 @@
      },
      {
       "o": "1-3OHIJ1CR",
-      "tec": "MATÍAS JAQUE AG",
+      "tec": "MATIAS APELEO APELEO",
       "cat": "Alta 1 Play",
       "f": "16-19",
       "hi": "16:00",
@@ -22406,30 +22415,6 @@
      }
     ],
     "repetidas": [
-     {
-      "o": "1-3OFIZIQU",
-      "cat": "Alta 2 Play",
-      "f": "16-19",
-      "hi": "16:43",
-      "d": "PIEDRA LANCETA 1832, QUILPUE",
-      "e": "Pendiente",
-      "tec": "ALFREDO ALCAYAGA F",
-      "visitas": 1,
-      "ult_fecha": "06-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OFCZ5HA",
-      "cat": "Alta 2 Play",
-      "f": "16-19",
-      "hi": "17:28",
-      "d": "SANTA ELENA 098 EDIF. 1 DEPTO 503, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "ANTONHY MORALES MENDOZA",
-      "visitas": 1,
-      "ult_fecha": "02-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
      {
       "o": "1-3OG76GJP",
       "cat": "Migración 2 Play",
@@ -22470,7 +22455,7 @@
       "o": "1-3OFBCKRV",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "16:18",
+      "hi": "16:11",
       "d": "MONTEVIDEO 205 CASA A, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -22513,30 +22498,6 @@
       "visitas": 2,
       "ult_fecha": "16-10-2026",
       "ult_cierre": "Sin apoyo vivienda-Pierrack"
-     },
-     {
-      "o": "1-3OG9TQMQ",
-      "cat": "Migración 3 Play",
-      "f": "16-19",
-      "hi": "14:42",
-      "d": "ALMIRANTE VARGAS 2433, QUILPUE",
-      "e": "en ruta",
-      "tec": "FELIPE SILVA R",
-      "visitas": 1,
-      "ult_fecha": "16-10-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
-      "o": "1-3OGMHINU",
-      "cat": "Migración 1 Play",
-      "f": "16-19",
-      "hi": "16:00",
-      "d": "CONDELL SUR 01565 CASA D, QUILPUE",
-      "e": "Pendiente",
-      "tec": "GEEYSER PEREZ O",
-      "visitas": 1,
-      "ult_fecha": "17-10-2026",
-      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OGTB7DQ",
@@ -22587,18 +22548,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OHM27G7",
-      "cat": "Migración 1 Play",
-      "f": "16-19",
-      "hi": "17:11",
-      "d": "LATORRE 396, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOSE PEREZ RANGEL",
-      "visitas": 1,
-      "ult_fecha": "13-08-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OGPN8A1",
       "cat": "Reparación",
       "f": "10-13",
@@ -22621,18 +22570,6 @@
       "visitas": 1,
       "ult_fecha": "15-10-2026",
       "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OG6WFKE",
-      "cat": "Alta 3 Play",
-      "f": "16-19",
-      "hi": "16:14",
-      "d": "OCTAVA 0747, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JOSE SALAS MEDINA",
-      "visitas": 1,
-      "ult_fecha": "16-10-2026",
-      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3OGF67TV",
@@ -22674,9 +22611,9 @@
       "o": "1-3OG8DB6I",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "15:30",
       "d": "PJE 1 01299 EDIF. 7 DEPTO 22, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "KEVIN TAPIA RETAMAL",
       "visitas": 1,
       "ult_fecha": "23-09-2026",
@@ -22698,9 +22635,9 @@
       "o": "1-3OG1C9MF",
       "cat": "Migración 3 Play",
       "f": "13-16",
-      "hi": "15:18",
+      "hi": "15:19",
       "d": "27 DE ABRIL 659 CASA A, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "LUIS CASTRO TORRES",
       "visitas": 2,
       "ult_fecha": "21-08-2026",
@@ -22793,7 +22730,7 @@
       "o": "1-3OGWTA34",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:56",
+      "hi": "16:58",
       "d": "BUENOS AIRES 2091, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -22811,18 +22748,6 @@
       "tec": "SAMUEL FERNANDEZ VIDAL",
       "visitas": 2,
       "ult_fecha": "13-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OHP1QTF",
-      "cat": "Alta 2 Play",
-      "f": "16-19",
-      "hi": "18:15",
-      "d": "PJE LOS GRANADOS 18, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "SAMUEL FERNANDEZ VIDAL",
-      "visitas": 4,
-      "ult_fecha": "17-10-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -22863,5 +22788,5 @@
    }
   }
  },
- "generado": "19-10-2026 15:10"
+ "generado": "19-10-2026 15:25"
 }
