@@ -1,82 +1,28 @@
 {
-  "actualizado": "2026-10-17T20:24:25",
+  "actualizado": "2026-10-19T10:49:52",
   "resumen": {
-    "sin informacion": 3,
     "reagendada": 2
   },
   "estados": {
-    "1-3OGDITPZ": {
-      "tec": "CRISTOBAL MIRANDA VALENC",
-      "cat": "Alta 1 Play",
-      "franja_original": "13-16",
-      "d": "HEVIA 0176, QUILPUE",
-      "estado": "sin informacion",
-      "nota": "la OT ya no existe en TOA"
-    },
-    "1-3OGMQSCJ": {
-      "tec": "CRISTOBAL SILVA LEIVA",
-      "cat": "Alta 2 Play",
-      "franja_original": "13-16",
-      "d": "LOS CEREZOS 3138, QUILPUE",
-      "estado": "sin informacion",
-      "nota": "la OT ya no existe en TOA"
-    },
-    "1-3O7D7ROK": {
-      "tec": "JEAN ROODLY ORELIEN",
-      "cat": "Migración 2 Play",
-      "franja_original": "13-16",
-      "d": "4 SUR 1458, VILLA ALEMANA",
-      "estado": "sin informacion",
-      "nota": "la OT ya no existe en TOA",
-      "contexto": {
-        "buscado": "4 SUR 1458",
-        "aviso": "historial de la direccion, NO es el estado de esta orden",
-        "filas": [
-          {
-            "estado": "no realizada",
-            "color": "rgb(96, 206, 206)",
-            "ot": "1-3O4SH61M",
-            "franja": "10-13",
-            "texto": "1-3O4SH61M - 10-13-Migración-Migración-4 SUR 1458Sab, 3 Oct"
-          }
-        ]
-      }
-    },
-    "1-3OEZE1UG": {
-      "tec": "JORDAN ROA PEREZ",
-      "cat": "Alta 1 Play",
-      "franja_original": "13-16",
-      "d": "SAN PEDRO 65 CASA B, QUILPUE",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3OEZE1UG - 10-13-Alta-1 Play-SAN PEDRO 65 CASA BLun, 19 Oct",
-      "franja_nueva": "10-13",
-      "previas": [
-        {
-          "estado": "cancelada",
-          "color": "rgb(128, 255, 128)",
-          "ot": "1-3OEZE1UG",
-          "franja": "10-13",
-          "texto": "1-3OEZE1UG - 10-13-Alta-1 Play-SAN PEDRO 65 CASA BVie, 16 Oct"
-        },
-        {
-          "estado": "suspendida",
-          "color": "rgb(153, 255, 255)",
-          "ot": "1-3OEZE1UG",
-          "franja": "10-13",
-          "texto": "1-3OEZE1UG - 10-13-Alta-1 Play-SAN PEDRO 65 CASA BVie, 16 Oct"
-        }
-      ]
-    },
-    "1-3O7MGX9J": {
-      "tec": "JOSE ROJO A",
+    "1-3OH60207": {
+      "tec": "EDGAR VALERO C",
       "cat": "Reparación",
-      "franja_original": "16-19",
-      "d": "GABRIEL PARRA 2378, VILLA ALEMANA",
+      "franja_original": "13-16",
+      "d": "AZAPA 1190, QUILPUE",
       "estado": "reagendada",
       "color": "rgb(255, 222, 0)",
-      "detalle": "1-3O7MGX9J - 16-19-Reparación-2 Play Servicio Degradado-GABRIEL PARRA 2378Mie, 21 Oct",
-      "franja_nueva": "16-19"
+      "detalle": "1-3OH60207 - 10-13-Reparación-2 Play Servicio Degradado-AZAPA 1190Mar, 20 Oct",
+      "franja_nueva": "10-13"
+    },
+    "1-3OEM6ZIL": {
+      "tec": "JORGE PEZOA VICUÑA",
+      "cat": "Alta 2 Play",
+      "franja_original": "16-19",
+      "d": "LAS ACACIAS 730 DEPTO 824, VILLA ALEMANA",
+      "estado": "reagendada",
+      "color": "rgb(255, 222, 0)",
+      "detalle": "1-3OEM6ZIL - 10-13-Alta-2 Play-LAS ACACIAS 730 DEPTO 824Mie, 21 Oct",
+      "franja_nueva": "10-13"
     }
   }
 }
