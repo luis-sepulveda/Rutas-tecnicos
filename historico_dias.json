@@ -22065,23 +22065,23 @@
    }
   },
   "19-10-2026": {
-   "hasta": "14:05",
-   "actividades": 151,
+   "hasta": "14:10",
+   "actividades": 152,
    "tecnicos": 33,
    "estados": {
     "Completado": 49,
     "Iniciado": 13,
-    "Pendiente": 59,
+    "Pendiente": 58,
     "No Realizada": 19,
-    "en ruta": 7,
+    "en ruta": 9,
     "Suspendido": 2,
     "Cancelado": 2
    },
-   "rgu": 229.1,
+   "rgu": 229.2,
    "caidas_total": 3,
    "caidas_activas": 3,
    "caidas_resueltas": 0,
-   "nuevas": 29,
+   "nuevas": 30,
    "al_bucket": 12,
    "repetidas": 35,
    "reagendadas": 2,
@@ -22116,6 +22116,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OHR8RZM",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "17:28",
+      "d": "TERESIANAS 0128, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OHR65CP",
       "tec": "MARCO PEREZ G",
@@ -22419,7 +22428,7 @@
       "o": "1-3ODN4J20",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "13:36",
+      "hi": "14:21",
       "d": "SAN ENRIQUE 1780 EDIF. 4 DEPTO 304, VILLA ALEMANA",
       "e": "en ruta",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -22548,6 +22557,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OHR8RZM",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "17:28",
+      "d": "TERESIANAS 0128, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "visitas": 2,
+      "ult_fecha": "16-10-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3OED03H7",
       "cat": "Migración 1 Play",
       "f": "16-19",
@@ -22563,7 +22584,7 @@
       "o": "1-3OHM27G7",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "17:43",
+      "hi": "17:22",
       "d": "LATORRE 396, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE PEREZ RANGEL",
@@ -22751,18 +22772,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OGB8UBN",
-      "cat": "Migración 2 Play",
-      "f": "10-13",
-      "hi": "11:34",
-      "d": "TERESIANAS 0128, VILLA ALEMANA",
-      "e": "Completado",
-      "tec": "RAFAEL VARGAS B",
-      "visitas": 2,
-      "ult_fecha": "16-10-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
       "o": "1-3OG56TRI",
       "cat": "Reparación",
       "f": "10-13",
@@ -22824,5 +22833,5 @@
    }
   }
  },
- "generado": "19-10-2026 14:05"
+ "generado": "19-10-2026 14:10"
 }
