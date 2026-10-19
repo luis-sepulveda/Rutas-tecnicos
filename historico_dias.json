@@ -22065,23 +22065,23 @@
    }
   },
   "19-10-2026": {
-   "hasta": "10:44",
-   "actividades": 99,
+   "hasta": "10:49",
+   "actividades": 101,
    "tecnicos": 33,
    "estados": {
     "Iniciado": 26,
-    "Pendiente": 53,
-    "No Realizada": 6,
-    "en ruta": 7,
-    "Completado": 6,
+    "Pendiente": 55,
+    "No Realizada": 7,
+    "en ruta": 5,
+    "Completado": 7,
     "Cancelado": 1
    },
-   "rgu": 160.0,
+   "rgu": 164.5,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
    "nuevas": 9,
-   "al_bucket": 6,
+   "al_bucket": 7,
    "repetidas": 27,
    "reagendadas": 2,
    "detalle": {
@@ -22113,7 +22113,7 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "JAVIERA CARRERA 1054 DEPTO 23, QUILPUE",
-      "e": "Pendiente"
+      "e": "Pendiente (ya no está)"
      },
      {
       "o": "1-3OHJFQH4",
@@ -22176,7 +22176,7 @@
       "f": "10-13",
       "hi": "11:04",
       "d": "CALLE 5 80 EDIF. 3 DEPTO 234, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OHHLR8P",
@@ -22322,6 +22322,18 @@
       "ult_cierre": "Casa sin medidor-remarcador"
      },
      {
+      "o": "1-3OGB8UBN",
+      "cat": "Migración 2 Play",
+      "f": "10-13",
+      "hi": "14:00",
+      "d": "TERESIANAS 0128, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "visitas": 2,
+      "ult_fecha": "16-10-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3OGPN8A1",
       "cat": "Reparación",
       "f": "10-13",
@@ -22401,18 +22413,6 @@
       "d": "LAGO LAS TORRES 60 EDIF. B DEPTO 205, QUILPUE",
       "e": "Iniciado",
       "tec": "LUIS MARTIN NUÑEZ",
-      "visitas": 1,
-      "ult_fecha": "16-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OG8BKOE",
-      "cat": "Alta 1 Play",
-      "f": "13-16",
-      "hi": "14:00",
-      "d": "EL AGUILUCHO 2461, QUILPUE",
-      "e": "Pendiente",
-      "tec": "MARCO PEREZ G",
       "visitas": 1,
       "ult_fecha": "16-10-2026",
       "ult_cierre": "Sin moradores"
@@ -22539,5 +22539,5 @@
    }
   }
  },
- "generado": "19-10-2026 10:44"
+ "generado": "19-10-2026 10:49"
 }
