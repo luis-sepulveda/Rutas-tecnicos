@@ -22065,27 +22065,37 @@
    }
   },
   "19-10-2026": {
-   "hasta": "10:04",
+   "hasta": "10:19",
    "actividades": 98,
    "tecnicos": 34,
    "estados": {
-    "Iniciado": 30,
-    "Pendiente": 64,
+    "Iniciado": 27,
+    "Pendiente": 62,
+    "Completado": 4,
     "Cancelado": 1,
-    "Completado": 1,
+    "No Realizada": 2,
     "en ruta": 2
    },
    "rgu": 162.5,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 2,
-   "al_bucket": 1,
+   "nuevas": 3,
+   "al_bucket": 2,
    "repetidas": 28,
    "reagendadas": 1,
    "detalle": {
     "caidas": [],
     "nuevas": [
+     {
+      "o": "1-3OHIKHWE",
+      "tec": "EDGAR VALERO C",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "10:23",
+      "d": "AV VICTORIA 555, VILLA ALEMANA",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3OH7X5KU",
       "tec": "LUIS GATICA DAVILA",
@@ -22093,7 +22103,7 @@
       "f": "10-13",
       "hi": "11:04",
       "d": "CALLE 5 80 EDIF. 3 DEPTO 234, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OHHLR8P",
@@ -22230,7 +22240,7 @@
       "o": "1-3OGB8UBN",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "10:31",
       "d": "TERESIANAS 0128, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JEAN ROODLY ORELIEN",
@@ -22314,9 +22324,9 @@
       "o": "1-3OGSWD1O",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "10:01",
+      "hi": "10:18",
       "d": "ALEMPARTE 277 CASA 9, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "KEVIN TAPIA RETAMAL",
       "visitas": 1,
       "ult_fecha": "15-09-2026",
@@ -22458,5 +22468,5 @@
    }
   }
  },
- "generado": "19-10-2026 10:04"
+ "generado": "19-10-2026 10:19"
 }
