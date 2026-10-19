@@ -3030,6 +3030,16 @@
   .pv-in.pa { max-width:1780px; }
   .pa-grid { grid-template-columns:320px minmax(0,1fr); }
   .pa-ani .tx small { white-space:nowrap; }
+
+  /* ==== COLUMNA OSCURA PAREJA (19-10-2026, 09:40) ====
+     Luis: "emparejar la ficha negra para que se vea pareja con el largo".
+     La columna se estira hasta el final de los cuadros de la derecha y los
+     renglones se reparten en el alto que sobra. */
+  .pa-grid { align-items:stretch; }
+  .pa-lado { position:static; }
+  .pa-lineas { flex:1; justify-content:space-between; }
+  .pa-lin { flex:1; max-height:64px; }
+  .pa-medio { align-items:stretch; }   /* los dos cuadros blancos de abajo, del mismo alto */
 </style>
 </head>
 <body>
