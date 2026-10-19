@@ -2862,6 +2862,122 @@
   @media (prefers-reduced-motion: reduce){ .pv-linea .pv-al.salud-al { animation:none; } }
   #modalNoop .salud-av .dia { border-color:#fecaca; background:#fef2f2; }
   #modalNoop .salud-av .dia .cab b { color:#991b1b; }
+
+  /* ==== PORTADA TABLERO DE MANANA (19-10-2026) ====
+     Opcion A que eligio Luis. Cuatro cuadros arriba, franjas y Requiere
+     atencion lado a lado, Reportes al final. Todo dentro de .pa, asi que no
+     toca ninguna otra pantalla. Borrando este bloque y volviendo al cuerpo
+     de index_OLD.html, queda como estaba. */
+  .pv-in.pa { max-width:1500px; }
+  .pa-cab { display:flex; justify-content:space-between; align-items:center; gap:10px 18px; flex-wrap:wrap; margin-bottom:14px; }
+  .pa-cab .pv-fecha { font-size:20px; color:#15293e; }
+  .pa-tec { font-size:13.5px; color:#5d7389; display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+
+  .pa-kpis { display:grid; grid-template-columns:1fr 1.45fr 1.5fr 1.25fr; gap:14px; }
+  .pa-kpi { position:relative; overflow:hidden; background:#fff; border:1px solid #dbe4ed; border-radius:14px;
+    padding:16px 18px 16px 22px; text-align:left; font-family:inherit; color:#15293e;
+    display:flex; flex-direction:column; gap:4px; box-shadow:0 1px 3px rgba(20,45,70,.05); }
+  .pa-kpi::before { content:''; position:absolute; left:0; top:0; bottom:0; width:5px; background:var(--k, #cbd5e1); }
+  .pa-kpi .l { font-size:13px; font-weight:600; color:#5d7389; display:flex; align-items:center; gap:6px; }
+  .pa-kpi .n { font-family:'Archivo',sans-serif; font-size:44px; font-weight:700; line-height:1.05;
+    color:var(--k, #15293e); font-variant-numeric:tabular-nums; }
+  .pa-kpi .n small { font-size:22px; margin-left:2px; opacity:.6; }
+  .pa-kpi .s { font-size:12.5px; color:#7d8fa3; line-height:1.4; }
+  .pa-kpi .s b { color:#0e7c6b; font-family:'Archivo',sans-serif; font-size:14px; }
+
+  .pa-kpi.k-ini { --k:#14213a; cursor:pointer; transition:.13s; }
+  .pa-kpi.k-ini:hover { border-color:#9fb4c8; transform:translateY(-1px); box-shadow:0 4px 12px rgba(20,45,70,.09); }
+  .pa-kpi.k-ini .fl { color:#9fb0c0; font-size:17px; line-height:1; }
+  .pa-kpi.k-bk { --k:#c2410c; }
+  .pa-kpi.k-bk.cero { --k:#9fb0c0; }
+  .pa-kpi.k-bk .pv-bk { margin-top:6px; gap:6px; }
+  .pa-kpi.k-bk .pv-bk .b { padding:6px 8px; border-radius:9px; }
+  .pa-kpi.k-bk .pv-bk .b b { font-size:16px; }
+  .pa-kpi.k-dia { --k:#2563eb; }
+  .pa-dia-top { display:flex; align-items:center; gap:12px; }
+  .pa-n { background:none; border:0; padding:0; cursor:pointer; font-family:'Archivo',sans-serif; font-size:44px;
+    font-weight:700; line-height:1.05; color:#2563eb; font-variant-numeric:tabular-nums; }
+  .pa-n:hover { text-decoration:underline; text-underline-offset:4px; }
+  .pa-mini { display:grid; grid-template-columns:repeat(4,1fr); margin-top:8px; border-top:1px solid #edf1f5; padding-top:8px; }
+  .pa-mini .pv-cif { padding:2px 6px 2px 0; text-align:left; }
+  .pa-mini .pv-cif + .pv-cif { padding-left:10px; }
+  .pa-mini .pv-cif .n { font-size:22px; }
+  .pa-mini .pv-cif .l { font-size:11px; white-space:nowrap; }
+  .pa-kpi.k-ef { --k:#0e7c6b; }
+  .pa-kpi.k-ef.espera { --k:#9fb0c0; }
+  .pa-kpi.k-ef .pv-barra { height:10px; margin-top:8px; }
+  .pa-kpi.k-ef .pv-ley { display:none; }
+
+  .pa-medio { display:grid; grid-template-columns:minmax(0,1.5fr) minmax(0,1fr); gap:14px; margin-top:14px; align-items:start; }
+  .pa-card { background:#fff; border:1px solid #dbe4ed; border-radius:14px; padding:18px 20px; box-shadow:0 1px 3px rgba(20,45,70,.05); }
+  .pa-vacio { color:#8fa1b3; font-size:13px; padding:8px 0; }
+
+  .pa-fr { display:grid; grid-template-columns:96px minmax(0,1fr) 250px; gap:14px; align-items:center;
+    padding:11px 10px; margin:0 -10px; border-radius:10px; }
+  .pa-fr + .pa-fr { border-top:1px solid #edf1f5; }
+  .pa-fr.ahora { background:#eff6ff; }
+  .pa-fr .h { font-family:'Archivo',sans-serif; font-weight:700; font-size:17px; color:#15293e; line-height:1.15; }
+  .pa-fr .h small { display:block; font-family:'DM Sans',sans-serif; font-size:11px; font-weight:700; margin-top:2px; }
+  .pa-fr .h .ec { color:#1d4ed8; } .pa-fr .h .px { color:#60a5fa; }
+  .pa-fr .h .ok { color:#15803d; } .pa-fr .h .ps { color:#8fa1b3; }
+  .pa-fr.amb .h .ps { color:#b45309; } .pa-fr.roj .h .ps { color:#b91c1c; }
+  .pa-fr .pista { display:flex; height:24px; border-radius:6px; overflow:hidden; background:#f1f5f9; gap:2px; }
+  .pa-fr .pista span { flex-basis:0; min-width:24px; display:flex; align-items:center; justify-content:center;
+    font-size:11.5px; font-weight:700; color:#fff; }
+  .pa-fr .pista .c { background:#0e7c6b; }
+  .pa-fr .pista .i { background:#1d4ed8; }
+  .pa-fr .pista .a { background:#60a5fa; }
+  .pa-fr .pista .b { background:repeating-linear-gradient(45deg,#fdba74 0 6px,#fed7aa 6px 12px); color:#7c2d12; }
+  .pa-fr .pista .v { flex-grow:1; color:#9fb0c0; font-weight:500; }
+  .pa-fr .d { font-size:13px; color:#41586f; text-align:right; line-height:1.4; }
+  .pa-fr .d b { font-family:'Archivo',sans-serif; font-size:15px; color:#15293e; }
+  .pa-fr .d .dd { display:block; font-size:12px; color:#7d8fa3; }
+  .pa-fr .d .ojo { color:#b91c1c; font-weight:700; }
+  .pa-fr .d .bk { color:#c2410c; font-weight:600; }
+  .pa-ley { display:flex; gap:6px 16px; flex-wrap:wrap; font-size:12px; color:#7d8fa3; margin-top:10px; }
+  .pa-ley i { display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:5px; vertical-align:-1px; }
+  .pa-ley i.c { background:#0e7c6b; } .pa-ley i.i { background:#1d4ed8; } .pa-ley i.a { background:#60a5fa; }
+  .pa-ley i.b { background:repeating-linear-gradient(45deg,#fdba74 0 3px,#fed7aa 3px 6px); }
+
+  /* Requiere atencion: una fila por aviso, todas se pueden tocar */
+  .pa-at { display:flex; flex-direction:column; gap:6px; }
+  .pa-at .pv-rot { margin-bottom:6px; }
+  .pa-at .pv-al { display:flex; align-items:center; gap:12px; width:100%; padding:8px 12px; border-radius:10px;
+    border:1px solid #e3e9f0; background:#fff; box-shadow:none; transform:none; }
+  .pa-at .pv-al:hover { border-color:#9fb4c8; transform:none; box-shadow:0 2px 8px rgba(20,45,70,.07); }
+  .pa-at .pv-al::after { content:'\203a'; margin-left:auto; color:#c3d2e0; font-size:18px; line-height:1; }
+  .pa-at .pv-al .n { min-width:34px; height:30px; border-radius:8px; font-size:16px; line-height:30px; text-align:center;
+    background:#eef2f6; color:#9fb0c0; font-weight:700; }
+  .pa-at .pv-al .tx .t { font-size:14px; font-weight:600; }
+  .pa-at .pv-al .tx .s { margin-top:1px; font-size:12px; }
+  .pa-at .pv-al.viva { border-left:1px solid transparent; background:color-mix(in srgb, var(--tono) 9%, #fff);
+    border-color:color-mix(in srgb, var(--tono) 25%, #fff); }
+  .pa-at .pv-al.viva .n { background:var(--tono); color:#fff; }
+  .pa-at .pv-al.cero { background:#fff; }
+  .pa-at .pv-al.cero .tx .t { color:#8fa1b3; font-weight:500; }
+  .pa-at .pv-al.cero .tx .s { color:#b6c3d0; }
+  .pa-at .pv-al.sel { border-color:#1d4ed8; background:#eff6ff; }
+  .pa-at .pv-al.sel .n { background:#1d4ed8; color:#fff; }
+  .pa-at .pv-al.sel::after { content:'\2715'; font-size:13px; color:#1d4ed8; }
+  .pa-at .pv-al.nueva { animation:pvDerPulso 1.4s ease-in-out 6; border-color:#b91c1c; }
+  .pa-at .pv-al.salud-al { animation:pvDerPulso 1.4s ease-in-out infinite; border-color:#b91c1c; }
+  @media (prefers-reduced-motion: reduce){ .pa-at .pv-al.nueva, .pa-at .pv-al.salud-al { animation:none; } }
+
+  /* Reportes: las mismas pastillas, en una linea al final */
+  .pa-rep.pv-linea { margin-top:16px; align-items:center; gap:8px; }
+  .pa-rep .pv-rot { margin:0 6px 0 0; }
+  .pa-rep.pv-linea .pv-lk { flex:0 0 auto; padding:8px 14px; }
+  .pa .pv-sinini, .pa .pv-bk-det { margin-top:14px; }
+
+  @media (max-width:1180px){
+    .pa-kpis { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .pa-medio { grid-template-columns:1fr; }
+  }
+  @media (max-width:640px){
+    .pa-kpis { grid-template-columns:1fr; }
+    .pa-fr { grid-template-columns:70px minmax(0,1fr); }
+    .pa-fr .d { grid-column:1 / -1; text-align:left; }
+  }
 </style>
 </head>
 <body>
@@ -10700,6 +10816,7 @@ function pintarPortada(){
         Las HFC de otras empresas no se muestran: Dominion no hace HFC.
         Si rutas.json todavia no trae 'bucket', el bloque no sale. */
   let bucketHtml = '';
+  let bkTile = null;   /* 19-10-2026: piezas del bucket para la portada nueva */
   const BK = (typeof BUCKET !== 'undefined' && Array.isArray(BUCKET)) ? BUCKET : null;
   if(hoy && BK){
     const cerradaBk = o => ['Completado','No Realizada','Cancelado','Suspendido'].includes(String(o.e || ''));
@@ -10770,6 +10887,12 @@ function pintarPortada(){
           + ' title="Órdenes NFTT/FTTH de la zona que tiene un técnico de otra empresa (no canceladas). No están en el bucket. Toca para verlas.">'
           + '<span class="f">otra empresa</span><b>' + otraBk.length + '</b></button>' : '')
       + '</div>' + panelBk;
+
+    const bkPorFr = {};
+    Object.keys(listas).forEach(k => { if(k.indexOf('__') !== 0) bkPorFr[k] = listas[k].length; });
+    const iB = bucketHtml.indexOf('<div class="pv-bk">');
+    bkTile = { n: pendBk.length, porFr: bkPorFr,
+               botones: bucketHtml.substring(iB, bucketHtml.length - panelBk.length), panel: panelBk };
   }
   /* 01-10-2026: solo cuentan los tecnicos con alguna orden NO cancelada
      (igual que dotacion.py). Caso Elias Armijo: una sola repa cancelada. */
@@ -10954,159 +11077,164 @@ function pintarPortada(){
     +   '<span class="pv-upd"><i></i><span class="upd"></span></span>'
     + '</header>'
 
-    + '<div class="pv-in">'
-    /* La barra roja de arriba (derBarraHtml) se saco el 09-10-2026 a las 15:30:
-       Luis dijo que mostraba lo mismo que la pastilla "Migraciones derivadas"
-       y pidio dejar solo la parte del sonido, que ahora va en el renglon del
-       rotulo "Requiere atencion". Para reponer la barra basta quitar las
-       barras de la linea de abajo. */
-    // +   derBarraHtml()
+    /* ==== PORTADA "TABLERO DE MANANA" (19-10-2026, opcion A que eligio Luis) ====
+       Luis: "se podra mejorar la visual de esto, otro diseno?". En la manana el
+       0,0% grande no decia nada y lo importante (inicio de jornada y bucket)
+       quedaba chico. Ahora arriba van cuatro cuadros: Inicio de jornada, En el
+       bucket, Actividades del dia y Efectividad. Abajo, las franjas (con lo que
+       sigue en el bucket) y Requiere atencion como lista.
+       NINGUN CALCULO CAMBIO y cada boton llama a la MISMA funcion de antes
+       (desdePortada, abrirEst, abrirInicio, abrirCuadratura, PV_BK, PV_SININI,
+       abrirDerivHoy, toggleComp, etc.). Lo unico nuevo es que cada franja
+       muestra tambien cuantas siguen en el bucket (de rutas.json -> bucket).
+       El cuerpo anterior quedo en index_OLD.html. CSS: bloque "PORTADA TABLERO
+       DE MANANA" al final del <style>. */
+    + '<div class="pv-in pa">'
 
-    /* ---- 1. como va el dia ---- */
-    +   '<section class="pv-hero">'
-    +     '<div>'
-    +       '<div class="pv-fecha">' + (fecha || 'Jornada')
-    +         (hoy ? '<span class="pv-curso">en curso</span>' : '')
-    /* Inicio de jornada va aca, al lado de la fecha, a pedido de Luis: es
-       "como partio este dia", asi que se lee junto al dia. Antes era un chip
-       mas en la fila de Nuevas / Al bucket. */
-    +         '<button class="pv-ini" onclick="desdePortada(abrirInicio)" title="Con cu\u00e1ntas '
-    +           'actividades parti\u00f3 el d\u00eda (Excel de la ma\u00f1ana)">Inicio de jornada'
-    +           (nInicio ? ' <b>' + nInicio + '</b>' : '') + '<span class="fl">\u203a</span></button>'
+    /* ---- cabecera: fecha, estado y tecnicos ---- */
+    +   '<div class="pa-cab">'
+    +     '<div class="pv-fecha">' + (fecha || 'Jornada') + (hoy ? '<span class="pv-curso">en curso</span>' : '') + '</div>'
+    +     '<div class="pa-tec"><span title="' + nTec + ' con órdenes en Quilpué y Villa Alemana'
+    +       (nOtraCom() ? ' + ' + nOtraCom() + ' en otra comuna' : '') + '">'
+    +       (nTec + nOtraCom()) + ' técnicos operativos</span>' + botonNoOperativos() + '</div>'
+    +   '</div>'
 
-    +         '</div>'
-    /* Titulo del porcentaje (23-09-2026): sin el, no se sabia que numero era.
-       Mismo calculo que la efectividad oficial (completadas / todas las
-       actividades, canceladas incluidas), pero mientras hay ordenes abiertas
-       es el avance del momento; por eso "hasta ahora", y cuando no queda nada
-       abierto pasa a decir "del dia". */
-    +       '<div class="pv-pct-tit">' + (pend > 0 ? 'Efectividad hasta ahora' : 'Efectividad del d\u00eda') + '</div>'
-    +       '<div class="pv-pct"><span class="v">' + pct.toFixed(1).replace('.', ',')
-    +         '</span><span class="u">%</span>'
-    +         (pctCerr === null ? '' :
-                '<span class="pv-pct2" title="Completadas / visitadas. Visitadas = completadas + no realizadas: donde el t\u00e9cnico ya fue. No cuenta lo que sigue abierto ni lo cancelado.">'
-              +   '<b>' + pctCerr.toFixed(1).replace('.', ',') + '%</b><span class="a">de lo ya visitado</span>'
-              +   '<span class="d">' + comp + ' completadas de ' + cerr + ' visitadas</span></span>')
+    /* ---- 1. los cuatro cuadros ---- */
+    +   '<section class="pa-kpis">'
+    /* Inicio de jornada: abre el mismo panel de siempre */
+    +     '<button class="pa-kpi k-ini" onclick="desdePortada(abrirInicio)" title="Con cuántas actividades partió el día (Excel de la mañana)">'
+    +       '<span class="l">Inicio de jornada <span class="fl">›</span></span>'
+    +       '<span class="n">' + (nInicio || '–') + '</span>'
+    +       '<span class="s">' + (nInicio ? 'pendientes NFTT/FTTH de la mañana' : 'todavía no está el Excel de hoy') + '</span>'
+    +     '</button>'
+    /* En el bucket: las tarjetas por franja, HFC, canceladas y otra empresa
+       son los MISMOS botones de antes (PV_BK) */
+    +     (bkTile
+          ? '<div class="pa-kpi k-bk' + (bkTile.n ? '' : ' cero') + '" title="Solo NFTT y FTTH. Las HFC van aparte.">'
+          +   '<span class="l">Pendientes en el bucket</span>'
+          +   '<span class="n">' + bkTile.n + '</span>'
+          +   bkTile.botones
+          + '</div>'
+          : '<div class="pa-kpi k-bk cero"><span class="l">Pendientes en el bucket</span><span class="n">–</span>'
+          +   '<span class="s">sin datos del bucket</span></div>')
+    /* Actividades del dia: la cifra y las cuatro de siempre, cada una abre su detalle */
+    +     '<div class="pa-kpi k-dia">'
+    +       '<span class="l">Actividades del día en bandejas</span>'
+    +       '<div class="pa-dia-top">'
+    +         '<button class="pa-n" onclick="desdePortada(function(){abrirEst(\'__TODAS__\')})" title="Ver todas las actividades del día">' + filas.length + '</button>'
+    +         botonCuadratura(filas.length)
     +       '</div>'
-    +       '<div class="pv-pctl">' + filas.length + ' actividades \u00b7 '
-    /* 26-09-2026 (Luis): el que esta en OTRA COMUNA tambien esta operativo,
-       solo que trabajando fuera de la zona, asi que se suma aca. No hay doble
-       conteo: dotacion.py solo lo marca si no tiene ninguna orden en nuestras
-       bandejas. nTec (los con ordenes en la zona) no se toca. */
-    +         '<span title="' + nTec + ' con \u00f3rdenes en Quilpu\u00e9 y Villa Alemana'
-    +           (nOtraCom() ? ' + ' + nOtraCom() + ' en otra comuna' : '') + '">'
-    +         (nTec + nOtraCom()) + ' t\u00e9cnicos operativos</span>'
-    /* No operativos (24-09-2026): del equipo, sin ordenes hoy. Ver dotacion.py */
-    +         botonNoOperativos()
-    +         '</div>'
-    +       '<div class="pv-cifras">'
-    /* Cuadratura del dia (24-09-2026): boton chico DEBAJO de "del dia", la
-       cifra que explica (a pedido de Luis, para que no se mezcle con los
-       tecnicos operativos). La tabla se abre en una ventana. */
-    +         '<div class="pv-cif-caja">' + cif(filas.length, 'del d\u00eda', 'tot', '__TODAS__')
-    +           botonCuadratura(filas.length) + '</div>'
+    +       '<div class="pa-mini">'
     +         cif(comp, 'completadas', 'comp', 'Completado')
     +         cif(nore, 'no realizadas', 'nore', 'No Realizada')
     +         cif(pend, 'sin cerrar', 'abie', '__ABIERTAS__')
     +         cif(canc, 'canc/susp', 'canc', '__CANCSUSP__')
     +       '</div>'
     +     '</div>'
-    +     '<div>'
-    +       '<div class="pv-rot">Reparto del d\u00eda</div>'
+    /* Efectividad: mismo calculo de siempre (completadas / todas) y la de lo
+       ya visitado debajo; la barra es el "Reparto del dia" de antes */
+    +     '<div class="pa-kpi k-ef' + (cerr ? '' : ' espera') + '">'
+    +       '<span class="l">' + (pend > 0 ? 'Efectividad hasta ahora' : 'Efectividad del día') + '</span>'
+    +       '<span class="n">' + pct.toFixed(1).replace('.', ',') + '<small>%</small></span>'
+    +       '<span class="s" title="Completadas / visitadas. Visitadas = completadas + no realizadas: donde el técnico ya fue.">'
+    +         (pctCerr === null ? 'todavía nadie ha cerrado una visita'
+              : '<b>' + pctCerr.toFixed(1).replace('.', ',') + '%</b> de lo ya visitado · ' + comp + ' de ' + cerr)
+    +       '</span>'
     +       barra
-    +       '<div class="pv-rot" style="margin:24px 0 11px">Por comuna</div>'
+    +     '</div>'
+    +   '</section>'
+    +   (bkTile ? bkTile.panel : '')
+
+    /* ---- 2. franjas y requiere atencion ---- */
+    +   '<section class="pa-medio">'
+    +     '<div class="pa-card">'
+    +       '<div class="pv-rot">Cómo viene el día, por franja</div>'
+    +       (function(){
+              /* Mismas cuentas de la seccion "Como viene el resto del dia" de
+                 antes (porFranja), mas lo que sigue en el bucket en esa franja. */
+              const bkF = (bkTile && bkTile.porFr) || {};
+              const keys = {};
+              Object.keys(porFranja).forEach(f => keys[f] = 1);
+              Object.keys(bkF).forEach(f => { if(bkF[f]) keys[f] = 1; });
+              const lista = Object.keys(keys).sort();
+              if(!lista.length) return '<div class="pa-vacio">Todavía no hay órdenes del día.</div>';
+              const FR_AMBAR = 10, FR_ROJO = 25;
+              return lista.map(function(f){
+                const d = porFranja[f] || {t:0, ab:0, ini:0}, b = bkF[f] || 0;
+                const m = /^(\d{1,2})\s*-\s*(\d{1,2})$/.exec(f);
+                const enCurso = hoy && m && ahora >= +m[1] && ahora < +m[2];
+                const pasada = !hoy || (m && ahora >= +m[2]);
+                const pAb = d.t ? 100 * d.ab / d.t : 0;
+                const cerradas = d.t - d.ab, sinIniF = d.ab - d.ini;
+                const tot = d.t + b;
+                const tramo = (v, cls, txt) => v ? '<span class="' + cls + '" style="flex-grow:' + v + '" title="' + v + ' ' + txt + '">' + v + '</span>' : '';
+                const estTx = enCurso ? '<small class="ec">en curso</small>'
+                  : !pasada ? '<small class="px">próxima</small>'
+                  : (!d.ab && !b) ? '<small class="ok">✓ cerrada</small>' : '<small class="ps">pasada</small>';
+                const tono = enCurso ? ' ahora' : !pasada ? '' : pAb > FR_ROJO ? ' roj' : pAb > FR_AMBAR ? ' amb' : '';
+                return '<div class="pa-fr' + tono + '">'
+                  + '<div class="h">' + f + estTx + '</div>'
+                  + '<div class="pista">' + (tot ? tramo(cerradas, 'c', 'cerradas (completadas, no realizadas, canc/susp)')
+                      + tramo(d.ini, 'i', 'iniciadas o en ruta') + tramo(sinIniF, 'a', 'en bandeja sin iniciar')
+                      + tramo(b, 'b', 'todavía en el bucket') : '<span class="v">sin órdenes</span>') + '</div>'
+                  + '<div class="d"><b>' + d.ab + '</b> sin cerrar de ' + d.t
+                  +   '<span class="dd">' + d.ini + ' iniciadas · <span class="' + (enCurso && sinIniF > 0 ? 'ojo' : '') + '">' + sinIniF + ' sin iniciar</span>'
+                  +   (b ? ' · <span class="bk">' + b + ' en bucket</span>' : '') + '</span></div>'
+                  + '</div>';
+              }).join('');
+            })()
+    +       '<div class="pa-ley"><span><i class="c"></i>cerradas</span><span><i class="i"></i>iniciadas</span>'
+    +         '<span><i class="a"></i>en bandeja sin iniciar</span><span><i class="b"></i>todavía en el bucket</span></div>'
+    +       '<div class="pv-rot" style="margin:20px 0 10px">Por comuna</div>'
     +       '<div class="pv-com">' + comunas + '</div>'
-    +       bucketHtml
+    +     '</div>'
+
+    +     '<div class="pa-card pa-at">'
+    +       '<div class="pv-rot pv-rot-son"><span>Requiere atención</span>'
+    +         '<span class="son-caja"><button id="derSonBtn" class="son' + (DER_SONIDO && !derAudioOk() ? ' falta' : '') + '" onclick="derToggleSonido(event)" title="Sonido de los avisos (migración derivada y monitor detenido). Toca para apagarlo o encenderlo.">' + derSonidoTxt() + '</button>'
+    +         '<button class="pr" onclick="derProbarSonido(event)" title="Hace sonar el aviso para probar el volumen">Probar</button></span></div>'
+    /* avisos que solo salen cuando hace falta, arriba de todo */
+    +       (compPastillaHtml() + saludPastillaHtml()).replace(/<br>/g, ' ')
+    +       alerta('toggleCaidas', caidas, 'Caídas', 'se las sacaron al técnico sin que las tocara', '#c0392f')
+    +       (function(){ const c = derHoyConteo();
+              return '<button class="pv-al ' + (c.d > 0 ? 'viva' : 'cero') + (DER_AVISO.length ? ' nueva' : '') + '" style="--tono:#b91c1c" title="Toca para abrir Derivación: hoy en vivo, por técnico, por dirección, a quién auditar y ficha del técnico." onclick="abrirDerivHoy()">'
+                + '<span class="n">' + c.d + '</span><span class="tx"><span class="t">Migraciones derivadas</span><span class="s">' + c.d + ' de ' + c.v + ' migraciones ya visitadas</span></span></button>'; })()
+    +       alerta('toggleSinCompletar', sinComp, 'Sin completar', 'no han cerrado ninguna todavía hoy', '#b45309')
+    +       '<button class="pv-al ' + (sinIni > 0 ? 'viva' : 'cero') + (window.PV_SININI ? ' sel' : '')
+    +         '" style="--tono:#0f766e" title="Toca para ver quiénes son" onclick="window.PV_SININI = !window.PV_SININI; pintarPortada()">'
+    +         '<span class="n">' + sinIni + '</span><span class="tx"><span class="t">Sin iniciar</span><span class="s">tienen órdenes y ninguna iniciada ni en ruta</span></span></button>'
+    +       alerta('toggleAtrasados', atras, 'Más de 3 h', 'iniciadas hace más de 3 horas y sin cerrar', '#be123c')
+    +       alerta('toggleNuevas', nuevas, 'Nuevas', 'entraron después de la primera vuelta del monitor', '#2563eb')
+    +       alerta('toggleReca', reca, 'Reingresadas', 'volvieron a caer hoy', '#64748b')
+    +       alerta('toggleRepe', repe, 'Repetidas', 'dirección que ya falló antes', '#7c3aed')
     +     '</div>'
     +   '</section>'
 
-    /* ---- 2. como viene el resto del dia ---- */
-    +   '<section class="pv-tl">'
-    +     '<div class="pv-rot">C\u00f3mo viene el resto del d\u00eda</div>'
-    +     '<div class="pv-tlf">' + franjas + '</div>'
-    +   '</section>'
+    /* paneles que se abren debajo (los mismos de antes) */
+    +   (window.PV_SM ? pvSinMorPanel() : '')
+    +   (window.PV_SININI ? '<div class="pv-sinini"><div class="h"><b>' + sinIni + '</b> técnico'
+          + (sinIni === 1 ? '' : 's') + ' sin iniciar <span>con órdenes hoy y ninguna iniciada ni en ruta · primero los de la franja más temprana</span></div>'
+          + '<div class="l">' + (sinIniLista.map(x => '<span class="' + (/^10/.test(x.f) ? 'tmp' : '') + '">'
+              + x.t.toLowerCase().replace(/(^|\s)\S/g, c => c.toUpperCase())
+              + ' <small>' + x.n + (x.n === 1 ? ' orden' : ' órdenes') + ' · parte ' + x.f + '</small></span>').join('')
+              || '<span>Todos ya partieron.</span>') + '</div></div>' : '')
 
-
-    /* ---- 3. lo que pide accion ---- */
-    /* (08-10-2026, pedido de Luis) Este bloque y los Reportes subieron: ahora
-       van justo DEBAJO de "Como viene el resto del dia" (antes iban despues
-       de "Los ultimos dias") y los diez botones van en UNA sola linea, dentro
-       de la caja pv-linea, como pastillas de un renglon con la cifra en un
-       circulo de color (opcion B que eligio Luis). Mismos botones, mismos
-       onclick y mismas cifras: solo cambio el lugar, el tamano y que los
-       nombres van acortados. El nombre completo y la frase que explica cada
-       tarjeta salen al dejar el mouse encima (title). El CSS esta en el
-       bloque "BOTONES EN UNA LINEA, PASTILLAS" al final del <style>. */
-    +   '<div class="pv-rot pv-rot-sec pv-rot-son"><span>Requiere atenci\u00f3n \u00b7 Reportes</span>'
-    +     '<span class="son-caja"><button id="derSonBtn" class="son' + (DER_SONIDO && !derAudioOk() ? ' falta' : '') + '" onclick="derToggleSonido(event)" title="Sonido de los avisos (migraci\u00f3n derivada y monitor detenido). Toca para apagarlo o encenderlo.">' + derSonidoTxt() + '</button>'
-    +     '<button class="pr" onclick="derProbarSonido(event)" title="Hace sonar el aviso para probar el volumen">Probar</button></span></div>'
-    +   '<div class="pv-linea">'
-    +   '<section class="pv-alertas">'
-    +     alerta('toggleCaidas', caidas, 'Ca\u00eddas', 'Ca\u00eddas: se las sacaron al t\u00e9cnico sin que las tocara', '#c0392f')
-    +     alerta('toggleSinCompletar', sinComp, 'Sin completar', 'T\u00e9cnicos sin completar: no han cerrado ninguna todav\u00eda hoy', '#b45309')
-    +     '<button class="pv-al ' + (sinIni > 0 ? 'viva' : 'cero') + (window.PV_SININI ? ' sel' : '')
-    +       '" style="--tono:#0f766e" title="T\u00e9cnicos sin iniciar: tienen \u00f3rdenes hoy y ninguna iniciada ni en ruta"'
-    +       ' onclick="window.PV_SININI = !window.PV_SININI; pintarPortada()">'
-    +       '<span class="n">' + sinIni + '</span><span class="tx"><span class="t">Sin iniciar</span></span></button>'
-    /* Migraciones derivadas hoy (09-10-2026, pedido de Luis: "necesito una
-       alerta"). Cuenta las migraciones de hoy cerradas No Realizada; al
-       tocarla abre Derivacion en la pestana Hoy en vivo. */
-    +     (function(){ const c = derHoyConteo();
-            return '<button class="pv-al dosl ' + (c.d > 0 ? 'viva' : 'cero') + (DER_AVISO.length ? ' nueva' : '') + '" style="--tono:#b91c1c" title="Migraciones derivadas hoy: ' + c.d + ' de ' + c.v
-              + ' ya visitadas. Toca para abrir Derivaci\u00f3n: hoy en vivo, por t\u00e9cnico, por direcci\u00f3n, a qui\u00e9n auditar y ficha del t\u00e9cnico." onclick="abrirDerivHoy()"><span class="n">' + c.d + '</span><span class="tx"><span class="t">Migraciones<br>derivadas</span></span></button>'; })()
-    +     compPastillaHtml()
-    +     saludPastillaHtml()
-    +     alerta('toggleAtrasados', atras, 'M\u00e1s de 3 h', 'M\u00e1s de 3 horas: iniciadas hace rato y sin cerrar', '#be123c')
-    +   '</section>'
-    +   '<div class="pv-chips">'
-    +     chip('toggleNuevas', nuevas, 'Nuevas', '#2563eb')
-    /* "Al bucket" se saco de la portada el 24-09-2026 a pedido de Luis. El
-       dato sigue en el modal de Nuevas, que marca cuales "volvieron al
-       bucket"; alBucket se sigue calculando por si se quiere volver a poner. */
-    +     chip('toggleReca', reca, 'Reingresadas', '#7d8fa3')
-    +     chip('toggleRepe', repe, '<span title="Direcciones repetidas">Repetidas</span>', '#7c3aed')
-    +   '</div>'
-
-    /* ---- 4. enlaces ---- */
-    +   '<span class="pv-linea-sep"></span>'
+    /* ---- 3. reportes: los mismos enlaces de antes ---- */
+    +   '<div class="pa-rep pv-linea"><span class="pv-rot">Reportes</span>'
     +   '<nav class="pv-links">'
-    /* (09-10-2026, 15:00; Luis: "en los botones completitud y sin moradores me
-       podrias mostrar la informacion") Estas dos pastillas ahora llevan el
-       dato: Completitud, su % al corte de las 13:00 (verde si llega a la meta,
-       ambar desde 70, rojo bajo eso); Sin moradores, cuantos van HOY. La de
-       Sin moradores ya no salta al Historial: abre aqui mismo la lista de los
-       de hoy, y desde ahi hay un enlace al reporte semanal. */
     +     (function(){ let c = null; try { c = calcularCompletitud(); } catch(e){}
             const ok = c && c.total, pc = ok ? Math.round(c.pct) : null;
             const col = !ok ? '#94a3b8' : c.pct >= COMP_META * 100 ? '#15803d' : c.pct >= 70 ? '#b45309' : '#b91c1c';
-            return '<button class="pv-lk dato" onclick="desdePortada(toggleComp)" title="Completitud al corte de las 13:00' + (ok ? ': ' + c.cumplen + ' de ' + c.total + ' t\u00e9cnicos con al menos un cierre. Meta ' + Math.round(COMP_META * 100) + '%' : '')
-              + '"><b class="vl" style="background:' + col + '">' + (ok ? pc + '%' : '\u2013') + '</b>Completitud<span class="fl">\u203a</span></button>'; })()
-    +     enlace('verReporteRepe', 'Hist\u00f3rico', 'Reporte hist\u00f3rico de direcciones')
-    /* Sin moradores, en dos partes (09-10-2026, 15:10): Luis reclamo que al
-       tocar el boton perdio el detalle de antes (el reporte semanal del
-       Historial). Ahora el NOMBRE vuelve a abrir ese reporte, igual que
-       siempre, y el NUMERO rojo de adelante abre aqui la lista de los de hoy. */
+            return '<button class="pv-lk dato" onclick="desdePortada(toggleComp)" title="Completitud al corte de las 13:00' + (ok ? ': ' + c.cumplen + ' de ' + c.total + ' técnicos con al menos un cierre. Meta ' + Math.round(COMP_META * 100) + '%' : '')
+              + '"><b class="vl" style="background:' + col + '">' + (ok ? pc + '%' : '–') + '</b>Completitud<span class="fl">›</span></button>'; })()
+    +     enlace('verReporteRepe', 'Histórico', 'Reporte histórico de direcciones')
     +     (function(){ const d = pvSinMorHoy();
             return '<span class="pv-lk dato dos' + (window.PV_SM ? ' sel' : '') + '">'
               + '<button class="vl" style="background:' + (d.l.length ? '#b91c1c' : '#94a3b8') + '" onclick="window.PV_SM = !window.PV_SM; pintarPortada()" title="Sin moradores de HOY: ' + d.l.length + ' de ' + d.vis
-              + ' visitadas. Toca el n\u00famero para ver cu\u00e1les son.">' + d.l.length + (window.PV_SM ? ' \u2715' : '') + '</button>'
-              + '<a href="' + URL_SINMORADORES + '" target="_blank" title="Sin moradores semanal por t\u00e9cnico (abre el Historial)">Sin moradores<span class="fl">\u203a</span></a></span>'; })()
+              + ' visitadas. Toca el número para ver cuáles son.">' + d.l.length + (window.PV_SM ? ' ✕' : '') + '</button>'
+              + '<a href="' + URL_SINMORADORES + '" target="_blank" title="Sin moradores semanal por técnico (abre el Historial)">Sin moradores<span class="fl">›</span></a></span>'; })()
     +     enlace(URL_EQUIPO, 'Por supervisor', 'Detalle por supervisor')
-    +   '</nav>'
-    +   '</div>'
-    +   (window.PV_SM ? pvSinMorPanel() : '')
-    +   (window.PV_SININI ? '<div class="pv-sinini"><div class="h"><b>' + sinIni + '</b> t\u00e9cnico'
-          + (sinIni === 1 ? '' : 's') + ' sin iniciar <span>con \u00f3rdenes hoy y ninguna iniciada ni en ruta \u00b7 primero los de la franja m\u00e1s temprana</span></div>'
-          + '<div class="l">' + (sinIniLista.map(x => '<span class="' + (/^10/.test(x.f) ? 'tmp' : '') + '">'
-              + x.t.toLowerCase().replace(/(^|\s)\S/g, c => c.toUpperCase())
-              + ' <small>' + x.n + (x.n === 1 ? ' orden' : ' \u00f3rdenes') + ' \u00b7 parte ' + x.f + '</small></span>').join('')
-              || '<span>Todos ya partieron.</span>') + '</div></div>' : '')
-
-
-    /* ---- 2b. los ultimos dias: QUITADO el 14-10-2026 a pedido de Luis.
-       Para volver a mostrarlo, agregar de nuevo aqui la linea:
-       +   '<section class="pv-tend" id="tendencia"></section>'
-       Las funciones (pintarTendencia, asegurarDias...) siguen en el archivo. ---- */
+    +   '</nav></div>'
 
     + '</div>';
 
