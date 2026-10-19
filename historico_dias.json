@@ -22065,25 +22065,25 @@
    }
   },
   "19-10-2026": {
-   "hasta": "13:20",
-   "actividades": 147,
+   "hasta": "13:30",
+   "actividades": 148,
    "tecnicos": 33,
    "estados": {
-    "Completado": 37,
+    "Completado": 40,
     "Iniciado": 15,
-    "Pendiente": 70,
+    "Pendiente": 68,
     "No Realizada": 18,
-    "Suspendido": 2,
     "en ruta": 3,
+    "Suspendido": 2,
     "Cancelado": 2
    },
-   "rgu": 222.6,
+   "rgu": 225.1,
    "caidas_total": 3,
    "caidas_activas": 3,
    "caidas_resueltas": 0,
    "nuevas": 26,
    "al_bucket": 12,
-   "repetidas": 34,
+   "repetidas": 35,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
@@ -22123,7 +22123,7 @@
       "f": "13-16",
       "hi": "13:49",
       "d": "FRODDEN 01749, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OHONMWU",
@@ -22132,7 +22132,7 @@
       "f": "13-16",
       "hi": "13:07",
       "d": "PASO DEL AGUA 2538, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OHOTZK8",
@@ -22177,7 +22177,7 @@
       "f": "10-13",
       "hi": "12:38",
       "d": "ALEMPARTE 277 CASA 9, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OHN936T",
@@ -22380,7 +22380,7 @@
       "o": "1-3OG76GJP",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "14:33",
+      "hi": "14:35",
       "d": "LOS ESTANQUES 1134, QUILPUE",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
@@ -22392,9 +22392,9 @@
       "o": "1-3ODN4J20",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "13:21",
+      "hi": "13:36",
       "d": "SAN ENRIQUE 1780 EDIF. 4 DEPTO 304, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "CRISTOBAL MIRANDA VALENC",
       "visitas": 3,
       "ult_fecha": "26-09-2026",
@@ -22452,7 +22452,7 @@
       "o": "1-3OGA994I",
       "cat": "Migración 3 Play",
       "f": "13-16",
-      "hi": "14:35",
+      "hi": "14:47",
       "d": "MARGA MARGA 1515, QUILPUE",
       "e": "Pendiente",
       "tec": "FELIPE SILVA R",
@@ -22464,7 +22464,7 @@
       "o": "1-3OG9TQMQ",
       "cat": "Migración 3 Play",
       "f": "16-19",
-      "hi": "17:19",
+      "hi": "17:31",
       "d": "ALMIRANTE VARGAS 2433, QUILPUE",
       "e": "Pendiente",
       "tec": "FELIPE SILVA R",
@@ -22524,7 +22524,7 @@
       "o": "1-3OED03H7",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "16:32",
+      "hi": "16:05",
       "d": "PJE B 0836 CASA 5 DEPTO 22, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -22536,7 +22536,7 @@
       "o": "1-3OHM27G7",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "17:55",
+      "hi": "17:43",
       "d": "LATORRE 396, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE PEREZ RANGEL",
@@ -22657,7 +22657,7 @@
       "f": "13-16",
       "hi": "13:07",
       "d": "PASO DEL AGUA 2538, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "MARCO PEREZ G",
       "visitas": 1,
       "ult_fecha": "01-10-2026",
@@ -22667,7 +22667,7 @@
       "o": "1-3OFD4QWY",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:09",
+      "hi": "14:40",
       "d": "FRODDEN 01640, QUILPUE",
       "e": "Pendiente",
       "tec": "MARCO PEREZ G",
@@ -22679,7 +22679,7 @@
       "o": "1-3OG6WFKE",
       "cat": "Alta 3 Play",
       "f": "16-19",
-      "hi": "16:40",
+      "hi": "16:11",
       "d": "OCTAVA 0747, QUILPUE",
       "e": "Pendiente",
       "tec": "MARCO PEREZ G",
@@ -22715,9 +22715,9 @@
       "o": "1-3OH6QOON",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "13:15",
+      "hi": "13:22",
       "d": "EUGENIO GRANDI 834, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "MATÍAS JAQUE AG",
       "visitas": 1,
       "ult_fecha": "12-10-2026",
@@ -22745,6 +22745,18 @@
       "tec": "SAMUEL FERNANDEZ VIDAL",
       "visitas": 2,
       "ult_fecha": "13-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OHP1QTF",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "17:44",
+      "d": "PJE LOS GRANADOS 18, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "visitas": 4,
+      "ult_fecha": "17-10-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -22785,5 +22797,5 @@
    }
   }
  },
- "generado": "19-10-2026 13:20"
+ "generado": "19-10-2026 13:30"
 }
