@@ -22065,20 +22065,21 @@
    }
   },
   "19-10-2026": {
-   "hasta": "10:49",
-   "actividades": 101,
+   "hasta": "10:59",
+   "actividades": 104,
    "tecnicos": 33,
    "estados": {
     "Iniciado": 26,
-    "Pendiente": 55,
+    "Pendiente": 58,
     "No Realizada": 7,
-    "en ruta": 5,
-    "Completado": 7,
+    "en ruta": 3,
+    "Completado": 8,
+    "Suspendido": 1,
     "Cancelado": 1
    },
-   "rgu": 164.5,
-   "caidas_total": 2,
-   "caidas_activas": 2,
+   "rgu": 168.5,
+   "caidas_total": 3,
+   "caidas_activas": 3,
    "caidas_resueltas": 0,
    "nuevas": 9,
    "al_bucket": 7,
@@ -22103,17 +22104,26 @@
       "hi": "16:00",
       "d": "LAS ACACIAS 730 DEPTO 824, VILLA ALEMANA",
       "e": "Pendiente"
+     },
+     {
+      "o": "1-3OG8BKOE",
+      "tec": "MARCO PEREZ G",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "EL AGUILUCHO 2461, QUILPUE",
+      "e": "Pendiente"
      }
     ],
     "nuevas": [
      {
       "o": "1-3OHJFMQ2",
-      "tec": "EDGAR VALERO C",
+      "tec": "MARCO PEREZ G",
       "cat": "Reparación",
       "f": "13-16",
       "hi": "14:00",
       "d": "JAVIERA CARRERA 1054 DEPTO 23, QUILPUE",
-      "e": "Pendiente (ya no está)"
+      "e": "Pendiente"
      },
      {
       "o": "1-3OHJFQH4",
@@ -22149,7 +22159,7 @@
       "f": "10-13",
       "hi": "11:06",
       "d": "HEVIA 0176, QUILPUE",
-      "e": "en ruta"
+      "e": "Pendiente"
      },
      {
       "o": "1-3OHIJ1CR",
@@ -22493,9 +22503,9 @@
       "o": "1-3OG56TRI",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "10:55",
+      "hi": "10:59",
       "d": "HAYDN 1661, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "SAMUEL FERNANDEZ VIDAL",
       "visitas": 2,
       "ult_fecha": "13-10-2026",
@@ -22521,7 +22531,7 @@
       "f": "10-13",
       "hi": "10:52",
       "d": "HEVIA 0176, QUILPUE",
-      "e": "en ruta",
+      "e": "Pendiente",
       "tec": "GEEYSER PEREZ O",
       "desde": "17-10-2026"
      },
@@ -22539,5 +22549,5 @@
    }
   }
  },
- "generado": "19-10-2026 10:49"
+ "generado": "19-10-2026 10:59"
 }
