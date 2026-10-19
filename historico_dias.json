@@ -22065,23 +22065,23 @@
    }
   },
   "19-10-2026": {
-   "hasta": "13:15",
-   "actividades": 146,
+   "hasta": "13:20",
+   "actividades": 147,
    "tecnicos": 33,
    "estados": {
-    "Completado": 36,
+    "Completado": 37,
     "Iniciado": 15,
     "Pendiente": 70,
     "No Realizada": 18,
     "Suspendido": 2,
-    "Cancelado": 2,
-    "en ruta": 3
+    "en ruta": 3,
+    "Cancelado": 2
    },
-   "rgu": 221.6,
+   "rgu": 222.6,
    "caidas_total": 3,
    "caidas_activas": 3,
    "caidas_resueltas": 0,
-   "nuevas": 25,
+   "nuevas": 26,
    "al_bucket": 12,
    "repetidas": 34,
    "reagendadas": 2,
@@ -22116,6 +22116,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OHPHQBA",
+      "tec": "JOSE CASTRO P",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "13:49",
+      "d": "FRODDEN 01749, QUILPUE",
+      "e": "en ruta"
+     },
      {
       "o": "1-3OHONMWU",
       "tec": "MARCO PEREZ G",
@@ -22159,7 +22168,7 @@
       "f": "10-13",
       "hi": "12:42",
       "d": "AV LOS CARRERA 1476 DEPTO 32, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OHNPZ77",
@@ -22371,7 +22380,7 @@
       "o": "1-3OG76GJP",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "15:15",
+      "hi": "14:33",
       "d": "LOS ESTANQUES 1134, QUILPUE",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
@@ -22776,5 +22785,5 @@
    }
   }
  },
- "generado": "19-10-2026 13:15"
+ "generado": "19-10-2026 13:20"
 }
