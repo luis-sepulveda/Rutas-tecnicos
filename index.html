@@ -3019,6 +3019,12 @@
   .pa-lin { display:flex; justify-content:space-between; align-items:center; padding:9px 2px; background:none; border:0;
     border-top:1px solid #24364f; color:#e6edf6; font-family:inherit; font-size:14px; cursor:pointer; text-align:left; }
   .pa-lin.fija { cursor:default; }
+  .pa-inf-t { font-size:10.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#7f93ad; margin:10px 2px 2px; }
+  a.pa-lin.pa-inf { text-decoration:none; color:#e2e8f0; cursor:pointer; }
+  a.pa-lin.pa-inf i { font-style:normal; color:#7f93ad; font-size:18px; line-height:1; }
+  a.pa-lin.pa-inf:hover i { color:#fff; }
+  .pa-lin-s { font-size:11.5px; color:#8ea3bd; margin:-6px 2px 4px; line-height:1.4; }
+  .pa-lin-s b.rj { color:#fca5a5; }
   .pa-lin:not(.fija):hover { background:#16263d; }
   .pa-lin b { font-family:'Archivo',sans-serif; font-size:17px; color:#fff; }
   .pa-lin b.vd { color:#6ee7b7; } .pa-lin b.rj { color:#fca5a5; } .pa-lin b.az { color:#93c5fd; }
@@ -11031,6 +11037,45 @@ function pvSinMorPanel(){
   return h + '</tbody></table></div>';
 }
 
+/* ==== DATOS DE LA COLUMNA OSCURA (19-10-2026, 14:25) ====
+   Cuatro cifras que no se repiten con los cuadros de al lado:
+   - Ritmo: ordenes cerradas (completadas + no realizadas) con hora de cierre
+     en los ultimos 60 minutos, y la hora del ultimo cierre. Solo si los datos
+     son de hoy; con datos viejos sale "–".
+   - RGU del dia: suma del campo rgu de las completadas.
+   - Completadas por tecnico: completadas / tecnicos operativos (nTec).
+   - Tiempo en terreno: promedio hi -> hf de las completadas, y debajo cuanto
+     llevan en promedio las iniciadas ahora. */
+function colDatos(filas, hoy, nTec){
+  const mm = s => { const q = /^(\d{1,2}):(\d{2})/.exec(String(s || '')); return q ? +q[1] * 60 + +q[2] : null; };
+  const now = new Date(), ahora = now.getHours() * 60 + now.getMinutes();
+  const comp = filas.filter(o => String(o.e) === 'Completado');
+  const cerr = filas.filter(o => String(o.e) === 'Completado' || String(o.e) === 'No Realizada');
+  const r = { ritmo: '–', ritmoS: '', ritmoT: '', rgu: '–', porTec: '–', min: '–', minS: '' };
+  if(hoy){
+    const ult = cerr.filter(o => { const f = mm(o.hf); return f !== null && f <= ahora && ahora - f <= 60; });
+    const uc = ult.filter(o => String(o.e) === 'Completado').length;
+    const fin = cerr.map(o => mm(o.hf)).filter(v => v !== null && v <= ahora);
+    const u = fin.length ? Math.max.apply(null, fin) : null;
+    r.ritmo = ult.length;
+    r.ritmoS = uc + ' comp. · ' + (ult.length - uc) + ' no realiz.'
+      + (u !== null ? ' · último ' + String(Math.floor(u / 60)).padStart(2, '0') + ':' + String(u % 60).padStart(2, '0')
+        + (ahora - u >= 30 ? ' <b class="rj">(hace ' + (ahora - u) + ' min)</b>' : '') : '');
+    r.ritmoT = 'Órdenes cerradas en los últimos 60 minutos';
+  }
+  const rgu = comp.reduce((a, o) => a + (parseFloat(o.rgu) || 0), 0);
+  r.rgu = comp.length ? (Math.round(rgu * 10) / 10).toString().replace('.', ',') : '0';
+  r.porTec = nTec ? (Math.round(10 * comp.length / nTec) / 10).toFixed(1).replace('.', ',') : '–';
+  const d = comp.map(o => { const a = mm(o.hi), b = mm(o.hf); return a !== null && b !== null && b >= a ? b - a : null; })
+                .filter(v => v !== null);
+  if(d.length) r.min = Math.round(d.reduce((a, b) => a + b, 0) / d.length) + ' min';
+  const enCurso = hoy ? filas.filter(o => String(o.e) === 'Iniciado').map(o => mm(o.hi))
+                       .filter(v => v !== null && v <= ahora).map(v => ahora - v) : [];
+  r.minS = 'por completada' + (enCurso.length ? ' · ' + enCurso.length + ' en curso llevan '
+    + Math.round(enCurso.reduce((a, b) => a + b, 0) / enCurso.length) + ' min' : '');
+  return r;
+}
+
 function pintarPortada(){
   const caja = document.getElementById('portada');
   if(!caja || caja.style.display === 'none') return;
@@ -11359,11 +11404,13 @@ function pintarPortada(){
     /* Tiempos (26-09-2026): a la derecha de Reiterados, a pedido de Luis (antes
        estuvo un rato en "Reportes"). Abre el boton Tiempos en terreno del
        historial en otra pestana, como Historial y Seguimiento. */
-    +     '<a class="b-inf b-tie" href="' + URL_TIEMPOS + '" target="_blank">Tiempos</a>'
+    // (19-10-2026, 14:30) a la columna oscura de la portada
+    //+     '<a class="b-inf b-tie" href="' + URL_TIEMPOS + '" target="_blank">Tiempos</a>'
     /* Negocios (28-09-2026, pedido de Luis): entre Tiempos e Historial, mismo
        estilo que Tiempos. Abre el boton Negocios del historial en otra
        pestana, con "Volver al panel". Clase b-neg por si se quiere colorear. */
-    +     '<a class="b-inf b-neg" href="' + URL_NEGOCIOS + '" target="_blank">Negocios</a>'
+    // (19-10-2026, 14:30) a la columna oscura de la portada
+    //+     '<a class="b-inf b-neg" href="' + URL_NEGOCIOS + '" target="_blank">Negocios</a>'
     /* Metas (28-09-2026, pedido de Luis): despues de Negocios, antes de
        Historial. Abre el dashboard de metas en otra pestana. Clase b-met. */
     /* El boton "Metas" de esta barra se saco el 10-10-2026 (13:25) a pedido de
@@ -11374,18 +11421,21 @@ function pintarPortada(){
     /* Resumen (29-09-2026, pedido de Luis): asignadas, completadas, no
        realizadas y efectividad por dia, en una ventana (no abre otra pagina).
        Clase b-res. */
-    +     '<a class="b-inf b-res" onclick="abrirResumen()">Resumen</a>'
+    // (19-10-2026, 14:30) a la columna oscura de la portada
+    //+     '<a class="b-inf b-res" onclick="abrirResumen()">Resumen</a>'
     /* Historial (26-09-2026, pedido de Luis): se movio a la derecha de Tiempos
        y abre DIRECTO la tabla completa del historial (#tabla), sin pasar por
        la pantalla de consulta. */
-    +     '<a class="b-inf b-hist" href="' + URL_TABLA_HIST + '" target="_blank">Historial</a>'
+    // (19-10-2026, 14:30) a la columna oscura de la portada
+    //+     '<a class="b-inf b-hist" href="' + URL_TABLA_HIST + '" target="_blank">Historial</a>'
     /* Quiebres (30-09-2026, pedido de Luis): al lado de Historial, al final.
        Abre directo "Quiebres por tecnico" (altas y migraciones por semana)
        en otra pestana. Clase b-qb por si se quiere colorear. */
     /* (30-09-2026, tarde) el link lleva ?t=<hora> para que el navegador NO
        use una copia guardada de Actividades: con la copia vieja no entendia
        el #quiebres y abria la portada de meses (le paso a Luis). */
-    +     '<a class="b-inf b-qb" href="' + URL_ACTIVIDADES + '?t=' + Date.now() + '#quiebres" target="_blank">Quiebres</a>'
+    // (19-10-2026, 14:30) a la columna oscura de la portada
+    //+     '<a class="b-inf b-qb" href="' + URL_ACTIVIDADES + '?t=' + Date.now() + '#quiebres" target="_blank">Quiebres</a>'
     /* Derivacion (08-10-2026, pedido de Luis): derivacion en migraciones por
        tecnico y semana, en una ventana (no abre otra pagina). Clase b-der. */
     /* El boton "Derivacion" de esta barra se saco el 09-10-2026 a pedido de
@@ -11396,7 +11446,8 @@ function pintarPortada(){
     /* Franjas (10-10-2026, pedido de Luis: "con un boton en la portada"):
        abre la ventana Franjas (altas, traslados, migraciones y reparaciones
        por franja, semana, dia, tecnico y comuna). Ver abrirFranjas(). */
-    +     '<a class="b-inf b-fra" onclick="abrirFranjas()" title="En qu\u00e9 franja se deriva m\u00e1s: por actividad, semana, d\u00eda, t\u00e9cnico y comuna">Franjas</a>'
+    // (19-10-2026, 14:30) a la columna oscura de la portada
+    //+     '<a class="b-inf b-fra" onclick="abrirFranjas()" title="En qu\u00e9 franja se deriva m\u00e1s: por actividad, semana, d\u00eda, t\u00e9cnico y comuna">Franjas</a>'
     +   '</nav>'
     +   '<span class="pv-upd"><i></i><span class="upd"></span></span>'
     + '</header>'
@@ -11446,10 +11497,23 @@ function pintarPortada(){
             +   '<span class="tx"><b>' + (nInicio || '–') + '</b><span>inicio de jornada ›</span>'
             +   '<small>' + bkN + ' en bucket · ' + (cerrB + abB) + ' en bandeja</small></span></button>'
             + '<div class="pa-lineas">'
-            +   fila('Efectividad', pct.toFixed(1).replace('.', ',') + '%', '', '', 'Completadas / todas las actividades del día')
-            +   fila('Completadas', comp, 'vd', 'desdePortada(function(){abrirEst(\'Completado\')})')
-            +   fila('No realizadas', nore, 'rj', 'desdePortada(function(){abrirEst(\'No Realizada\')})')
-            +   fila('Sin cerrar', pend, 'az', 'desdePortada(function(){abrirEst(\'__ABIERTAS__\')})')
+            /* (19-10-2026, 14:25) Luis: "se muestran los mismos numeros del estado
+               de las actividades". Efectividad, Completadas, No realizadas y Sin
+               cerrar ya estan en los cuadros de al lado; aca van cuatro datos que
+               no salen en ninguna otra parte de la portada. Ver colDatos(). */
+            /* (19-10-2026, 14:30) Luis: "mejor deja estos botones ahi". Los seis
+               informes de la barra de arriba (Tiempos, Negocios, Resumen,
+               Historial, Quiebres, Franjas) pasan a la columna, con el mismo
+               enlace o funcion de siempre. En la barra quedaron comentados.
+               colDatos() (ritmo, RGU...) queda escrita por si se quiere volver. */
+            +   '<div class="pa-inf-t">Informes</div>'
+            +   '<a class="pa-lin pa-inf" href="' + URL_TIEMPOS + '" target="_blank"><span>Tiempos</span><i>›</i></a>'
+            +   '<a class="pa-lin pa-inf" href="' + URL_NEGOCIOS + '" target="_blank"><span>Negocios</span><i>›</i></a>'
+            +   '<a class="pa-lin pa-inf" onclick="abrirResumen()"><span>Resumen</span><i>›</i></a>'
+            +   '<a class="pa-lin pa-inf" href="' + URL_TABLA_HIST + '" target="_blank"><span>Historial</span><i>›</i></a>'
+            +   '<a class="pa-lin pa-inf" href="' + URL_ACTIVIDADES + '?t=' + Date.now() + '#quiebres" target="_blank"><span>Quiebres</span><i>›</i></a>'
+            +   '<a class="pa-lin pa-inf" onclick="abrirFranjas()" title="En qué franja se deriva más: por actividad, semana, día, técnico y comuna"><span>Franjas</span><i>›</i></a>'
+            +   '<div class="pa-inf-t">Bucket</div>'
             +   (bkTile ? fila('HFC en bucket', bkTile.hfc, '', bkTile.hfc ? clicBkL('__HFC__') : '', 'No son de Dominion; no cuentan arriba') : '')
             +   (bkTile ? fila('Canceladas en bucket', bkTile.canc, '', bkTile.canc ? clicBkL('__CANC__') : '') : '')
             + '</div></aside>';
