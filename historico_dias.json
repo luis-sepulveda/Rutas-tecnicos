@@ -22065,23 +22065,23 @@
    }
   },
   "19-10-2026": {
-   "hasta": "11:39",
-   "actividades": 115,
+   "hasta": "11:54",
+   "actividades": 118,
    "tecnicos": 33,
    "estados": {
-    "Iniciado": 22,
-    "Pendiente": 63,
-    "No Realizada": 12,
-    "Completado": 14,
+    "Iniciado": 19,
+    "Pendiente": 62,
+    "No Realizada": 15,
+    "en ruta": 3,
+    "Completado": 16,
     "Suspendido": 2,
-    "Cancelado": 1,
-    "en ruta": 1
+    "Cancelado": 1
    },
-   "rgu": 184.5,
+   "rgu": 186.6,
    "caidas_total": 3,
    "caidas_activas": 3,
    "caidas_resueltas": 0,
-   "nuevas": 16,
+   "nuevas": 18,
    "al_bucket": 8,
    "repetidas": 30,
    "reagendadas": 2,
@@ -22116,6 +22116,24 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OHL9F08",
+      "tec": "CESAR MENA OLIVEROS",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "11:58",
+      "d": "ESTRELLA POLAR 2285, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
+      "o": "1-3OHLS1SD",
+      "tec": "JUAN ARRIAGADA C",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "16:31",
+      "d": "PORVENIR SUR 1652, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OHIXTCM",
       "tec": "MATÍAS JAQUE AG",
@@ -22278,7 +22296,7 @@
       "o": "1-3OFIZIQU",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "17:55",
+      "hi": "18:00",
       "d": "PIEDRA LANCETA 1832, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -22290,7 +22308,7 @@
       "o": "1-3OG76GJP",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "15:18",
+      "hi": "15:22",
       "d": "LOS ESTANQUES 1134, QUILPUE",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
@@ -22316,7 +22334,7 @@
       "f": "10-13",
       "hi": "10:02",
       "d": "CLAUDIO VICUNA 807, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "CRISTOBAL SILVA LEIVA",
       "visitas": 2,
       "ult_fecha": "13-10-2026",
@@ -22364,7 +22382,7 @@
       "f": "10-13",
       "hi": "09:44",
       "d": "CLAUDIO VICUNA 951, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "FELIPE SILVA R",
       "visitas": 3,
       "ult_fecha": "16-10-2026",
@@ -22460,7 +22478,7 @@
       "f": "10-13",
       "hi": "10:18",
       "d": "ALEMPARTE 277 CASA 9, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "KEVIN TAPIA RETAMAL",
       "visitas": 1,
       "ult_fecha": "15-09-2026",
@@ -22484,7 +22502,7 @@
       "f": "10-13",
       "hi": "09:52",
       "d": "LAGO LAS TORRES 60 EDIF. B DEPTO 205, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "LUIS MARTIN NUÑEZ",
       "visitas": 1,
       "ult_fecha": "16-10-2026",
@@ -22630,7 +22648,7 @@
       "f": "10-13",
       "hi": "09:45",
       "d": "SAN PEDRO 65 CASA B, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JOSE GALAZ D",
       "desde": "16-10-2026"
      },
@@ -22648,5 +22666,5 @@
    }
   }
  },
- "generado": "19-10-2026 11:39"
+ "generado": "19-10-2026 11:54"
 }
