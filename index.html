@@ -2979,6 +2979,21 @@
     .pa-fr .d { grid-column:1 / -1; text-align:left; }
   }
   .pa-rep.pa-rep-fr { margin-top:18px; padding-top:14px; border-top:1px solid #edf1f5; flex-wrap:wrap; }
+
+  /* ==== REQUIERE ATENCION COMPACTO (19-10-2026, 09:10) ====
+     Ejemplo 1 que eligio Luis. Lo que esta en cero se achica a pastillas de
+     a dos por fila, sin frase; lo que tiene algo queda grande, con su frase.
+     Mismos botones y mismos onclick: solo CSS. Borrando este bloque vuelve
+     la lista de filas iguales. */
+  .pa-at{display:flex;flex-direction:row;flex-wrap:wrap;gap:6px}
+  .pa-at .pv-rot{flex:1 1 100%}
+  .pa-at .pv-al.viva,.pa-at .pv-al.sel,.pa-at .salud-al{flex:1 1 100%}
+  .pa-at .pv-al.cero{flex:1 1 calc(50% - 6px);padding:6px 10px}
+  .pa-at .pv-al.cero .s{display:none}
+  .pa-at .pv-al.cero .n{height:24px;line-height:24px;min-width:28px;font-size:13px}
+  .pa-at .pv-al.cero::after{display:none}
+  .pa-at .pv-al.viva .n{min-width:44px;height:40px;line-height:40px;font-size:20px}
+  .pa-at .pv-al.viva .t{font-size:15.5px}
 </style>
 </head>
 <body>
