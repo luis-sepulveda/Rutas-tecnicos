@@ -1,9 +1,9 @@
 {
-  "actualizado": "2026-10-19T14:51:08",
+  "actualizado": "2026-10-19T15:21:22",
   "resumen": {
     "cancelada": 1,
-    "reagendada": 2,
-    "sin informacion": 1
+    "sin informacion": 2,
+    "reagendada": 2
   },
   "estados": {
     "1-3OH60207": {
@@ -15,6 +15,62 @@
       "color": "rgb(128, 255, 128)",
       "detalle": "1-3OH60207 - 10-13-Reparación-2 Play Servicio Degradado-AZAPA 1190Mar, 20 Oct",
       "franja_nueva": "10-13"
+    },
+    "1-3OGMHINU": {
+      "tec": "GEEYSER PEREZ O",
+      "cat": "Migración 1 Play",
+      "franja_original": "16-19",
+      "d": "CONDELL SUR 01565 CASA D, QUILPUE",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "CONDELL SUR 01565",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "cancelada",
+            "color": "rgb(128, 255, 128)",
+            "ot": "1-3OED8JRC",
+            "franja": "16-19",
+            "texto": "1-3OED8JRC - 16-19-Migración-Migración-CONDELL SUR 01565 CASA GMie, 21 Oct"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3OEJ3LWJ",
+            "franja": "10-13",
+            "texto": "1-3OEJ3LWJ - 10-13-Migración-Migración-CONDELL SUR 01565 CASA DSab, 17 Oct"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3OA0A0W5",
+            "franja": "16-19",
+            "texto": "1-3OA0A0W5 - 16-19-Migración-Migración-CONDELL SUR 01565 CASA DMie, 14 Oct"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3OA3INJG",
+            "franja": "13-16",
+            "texto": "1-3OA3INJG - 13-16-Migración-Migración-CONDELL SUR 01565 CASA GMie, 14 Oct"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3O98L2KO",
+            "franja": "13-16",
+            "texto": "1-3O98L2KO - 13-16-Migración-Migración-CONDELL SUR 01565 CASA GMie, 7 Oct"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3NUWXYHV",
+            "franja": "16-19",
+            "texto": "1-3NUWXYHV - 16-19-Migración-Migración-CONDELL SUR 01565 CASA GJue, 1 Oct"
+          }
+        ]
+      }
     },
     "1-3OHQ25FF": {
       "tec": "JORDAN ROA PEREZ",
