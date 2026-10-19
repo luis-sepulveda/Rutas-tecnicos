@@ -22065,24 +22065,36 @@
    }
   },
   "19-10-2026": {
-   "hasta": "09:29",
-   "actividades": 94,
+   "hasta": "09:39",
+   "actividades": 96,
    "tecnicos": 34,
    "estados": {
-    "en ruta": 21,
-    "Pendiente": 73
+    "en ruta": 25,
+    "Pendiente": 68,
+    "Iniciado": 2,
+    "Cancelado": 1
    },
-   "rgu": 156.5,
+   "rgu": 158.5,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 0,
+   "nuevas": 1,
    "al_bucket": 0,
    "repetidas": 28,
    "reagendadas": 1,
    "detalle": {
     "caidas": [],
-    "nuevas": [],
+    "nuevas": [
+     {
+      "o": "1-3OHHLR8P",
+      "tec": "KEVIN TAPIA RETAMAL",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "09:32",
+      "d": "BILBAO 1546 DEPTO 33, QUILPUE",
+      "e": "Iniciado"
+     }
+    ],
     "repetidas": [
      {
       "o": "1-3OGYPHGE",
@@ -22157,6 +22169,18 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3OH25TYV",
+      "cat": "Reparación",
+      "f": "10-13",
+      "hi": "09:44",
+      "d": "AV VICEPRESIDENTE BDO LEIGHTON 1431 EDIF. 8 DEPTO 24, VILLA ALEMANA",
+      "e": "en ruta",
+      "tec": "ESTEBAN PIZARRO QUINTANA",
+      "visitas": 1,
+      "ult_fecha": "17-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OG5AKAC",
       "cat": "Migración 1 Play",
       "f": "10-13",
@@ -22229,18 +22253,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OH25TYV",
-      "cat": "Reparación",
-      "f": "13-16",
-      "hi": "14:00",
-      "d": "AV VICEPRESIDENTE BDO LEIGHTON 1431 EDIF. 8 DEPTO 24, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOSE CASTRO P",
-      "visitas": 1,
-      "ult_fecha": "17-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OED03H7",
       "cat": "Migración 1 Play",
       "f": "16-19",
@@ -22292,7 +22304,7 @@
       "o": "1-3OGSWD1O",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "10:36",
       "d": "ALEMPARTE 277 CASA 9, QUILPUE",
       "e": "Pendiente",
       "tec": "KEVIN TAPIA RETAMAL",
@@ -22436,5 +22448,5 @@
    }
   }
  },
- "generado": "19-10-2026 09:29"
+ "generado": "19-10-2026 09:39"
 }
