@@ -1,7 +1,9 @@
 {
-  "actualizado": "2026-10-19T10:49:52",
+  "actualizado": "2026-10-19T11:20:18",
   "resumen": {
-    "reagendada": 2
+    "cancelada": 1,
+    "reagendada": 1,
+    "sin informacion": 1
   },
   "estados": {
     "1-3OH60207": {
@@ -9,8 +11,8 @@
       "cat": "Reparación",
       "franja_original": "13-16",
       "d": "AZAPA 1190, QUILPUE",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
+      "estado": "cancelada",
+      "color": "rgb(128, 255, 128)",
       "detalle": "1-3OH60207 - 10-13-Reparación-2 Play Servicio Degradado-AZAPA 1190Mar, 20 Oct",
       "franja_nueva": "10-13"
     },
@@ -23,6 +25,27 @@
       "color": "rgb(255, 222, 0)",
       "detalle": "1-3OEM6ZIL - 10-13-Alta-2 Play-LAS ACACIAS 730 DEPTO 824Mie, 21 Oct",
       "franja_nueva": "10-13"
+    },
+    "1-3OG8BKOE": {
+      "tec": "MARCO PEREZ G",
+      "cat": "Alta 1 Play",
+      "franja_original": "13-16",
+      "d": "EL AGUILUCHO 2461, QUILPUE",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "EL AGUILUCHO 2461",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3OCZ6RGZ",
+            "franja": "13-16",
+            "texto": "1-3OCZ6RGZ - 13-16-Alta-1 Play-EL AGUILUCHO 2461Vie, 16 Oct"
+          }
+        ]
+      }
     }
   }
 }
