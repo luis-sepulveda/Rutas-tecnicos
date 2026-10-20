@@ -3117,6 +3117,27 @@
   .rm-guia .eq b { color:#14213a; }
   .rm-guia .ro i { display:inline-block; width:12px; height:12px; border-radius:3px; background:#fdecec; border:1px solid #f5b5ae; margin-right:6px; vertical-align:-1px; }
   .rm-guia .ro b { color:#b91c1c; }
+
+  /* ==== INICIO DE JORNADA POR FRANJA (20-10-2026) ====
+     Opcion B que eligio Luis: una tarjeta por franja arriba de las tablas
+     del panel Inicio de jornada (tablasInicio). Borrando este bloque las
+     tarjetas quedan sin formato, pero no se rompe nada. */
+  .ifr { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:10px; margin-bottom:10px; }
+  .ifr-c { background:#fff; border-radius:12px; overflow:hidden; color:#15293e; }
+  .ifr-cab { display:flex; justify-content:space-between; align-items:baseline; padding:12px 16px; background:#f0fdfa; border-bottom:1px solid #ccfbf1; }
+  .ifr-cab b { font-family:'Archivo',sans-serif; font-size:19px; color:#134e4a; }
+  .ifr-cab span { font-family:'Archivo',sans-serif; font-size:34px; font-weight:700; color:#0f766e; line-height:1; }
+  .ifr-cab small { font-family:'DM Sans',sans-serif; font-size:12px; font-weight:400; color:#5d7389; margin-left:6px; }
+  .ifr-in { padding:12px 16px 14px; }
+  .ifr-rt { font-size:10.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:#8fa1b3; margin:12px 0 5px; }
+  .ifr-rt:first-child { margin-top:0; }
+  .ifr-seg { display:flex; height:22px; border-radius:6px; overflow:hidden; gap:2px; }
+  .ifr-seg span { flex-basis:0; display:flex; align-items:center; justify-content:center; font-size:11.5px; font-weight:700; min-width:24px; }
+  .ifr-ley { display:flex; flex-wrap:wrap; gap:4px 12px; font-size:11.5px; color:#5d7389; margin-top:5px; }
+  .ifr-ley i { display:inline-block; width:9px; height:9px; border-radius:3px; margin-right:4px; }
+  .ifr-ln { display:flex; justify-content:space-between; font-size:13px; padding:4px 0; border-bottom:1px solid #f1f5f9; }
+  .ifr-ln:last-child { border-bottom:0; }
+  .ifr-ln b { font-family:'Archivo',sans-serif; }
 </style>
 </head>
 <body>
@@ -7163,7 +7184,49 @@ function tablasInicio(lista, pal, grad, porTipo, total){
      Play x franja va al lado de la de tipo. */
   const PIE_PLAY = 'Solo Altas y Migraciones se abren por Play. Otras = traslados, '
                  + 'modificaciones y upgrades.';
-  return '<div class="ini-par">'
+  /* ==== UNA TARJETA POR FRANJA (20-10-2026, opcion B que eligio Luis) ====
+     Arriba de las tablas, una tarjeta por franja: cuantas trae y su % del
+     dia, una barra por comuna, una barra por Play (misma agrupacion de
+     grupoPlay) y la lista por tipo de actividad, de mas a menos. Son los
+     MISMOS numeros de las tablas de abajo, que quedan igual. CSS: bloque
+     "INICIO DE JORNADA POR FRANJA" al final del <style>. */
+  const COL_COM = { 'Quilpue':'#185FA5', 'Villa Alemana':'#1D9E75' };
+  const colCom = function(c){
+    const k = c.normalize('NFD').replace(/[̀-ͯ]/g, '');
+    return COL_COM[k] || '#888780'; };
+  const COL_PLAY = { '1 Play':['#9FE1CB','#085041'], '2 Play':['#1D9E75','#fff'], '3 Play':['#085041','#fff'],
+                     'Reparaciones':['#BA7517','#fff'], 'Otras (sin Play)':['#B4B2A9','#444441'] };
+  const NOM_PLAY = { '1 Play':'1P', '2 Play':'2P', '3 Play':'3P', 'Reparaciones':'Repa', 'Otras (sin Play)':'Otras' };
+  const cuentaPor = function(l, fn){ const o = {}; l.forEach(function(x){ const k = fn(x); o[k] = (o[k] || 0) + 1; }); return o; };
+  const seg = function(o, orden, color){
+    return '<div class="ifr-seg">' + orden.filter(function(k){ return o[k]; }).map(function(k){
+      const c = color(k);
+      return '<span style="flex:' + o[k] + ';background:' + c[0] + ';color:' + c[1] + '" title="' + escR(k) + ': ' + o[k] + '">' + o[k] + '</span>';
+    }).join('') + '</div>';
+  };
+  const ley = function(orden, color, nom){
+    return '<div class="ifr-ley">' + orden.map(function(k){
+      return '<span><i style="background:' + color(k)[0] + '"></i>' + escR(nom ? nom(k) : k) + '</span>'; }).join('') + '</div>';
+  };
+  const comunas = Object.keys(cuentaPor(lista, comuna)).sort();
+  const tarjetas = '<div class="ifr">' + franjas.map(function(f){
+    const lf = lista.filter(function(x){ return x.p.f === f; });
+    const pc = cuentaPor(lf, comuna), pp = cuentaPor(lf, grupoPlay), pt = cuentaPor(lf, function(x){ return x.p.t || 'Sin tipo'; });
+    return '<div class="ifr-c"><div class="ifr-cab"><b>' + escR(f) + (/^\d/.test(f) ? ' hrs' : '') + '</b>'
+      + '<span>' + lf.length + '<small>' + Math.round(100 * lf.length / (lista.length || 1)) + '%</small></span></div>'
+      + '<div class="ifr-in"><div class="ifr-rt">Por comuna</div>'
+      + seg(pc, comunas, function(k){ return [colCom(k), '#fff']; })
+      + ley(comunas, function(k){ return [colCom(k)]; })
+      + '<div class="ifr-rt">Por Play</div>'
+      + seg(pp, ORDEN_PLAY, function(k){ return COL_PLAY[k]; })
+      + ley(ORDEN_PLAY.filter(function(k){ return pp[k]; }), function(k){ return COL_PLAY[k]; }, function(k){ return NOM_PLAY[k]; })
+      + '<div class="ifr-rt">Por tipo</div>'
+      + Object.keys(pt).sort(function(a, b){ return pt[b] - pt[a] || a.localeCompare(b); }).map(function(k){
+          return '<div class="ifr-ln"><span>' + escR(k) + '</span><b>' + pt[k] + '</b></div>'; }).join('')
+      + '</div></div>';
+  }).join('') + '</div>';
+  return tarjetas
+       + '<div class="ini-par">'
        + tabla('POR COMUNA Y FRANJA', comuna)
        + tabla('POR PLAY Y COMUNA', grupoPlay, ORDEN_PLAY, PIE_PLAY, comuna)
        + '</div>'
