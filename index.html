@@ -3224,6 +3224,23 @@
   .pa-fl .pista .i, .pa-ley i.i { background:#0e7c6b; }
   .pa-fl .pista .a { background:#86d9b9; color:#064e3b; }
   .pa-ley i.a { background:#86d9b9; }
+
+  /* ==== PORTADA ANTES DE QUE PARTA EL DIA (20-10-2026, 08:55) ====
+     - Sin completar / Sin iniciar en una linea gris "Parten a las 10:00"
+       hasta que parte la primera franja (paEspera, paAgrupar).
+     - Completitud en gris hasta las 13:00 (en el JS).
+     - Barra de Efectividad en gris mientras nadie cierra una visita. */
+  .pa-at .pa-ceros .pv-al.espera { flex:0 0 auto; width:auto; padding:3px 10px 3px 4px; gap:6px; border-radius:999px;
+    background:#fff; border:1px solid #e2e8f0; }
+  .pa-at .pa-ceros .pv-al.espera::after, .pa-at .pa-ceros .pv-al.espera .s { display:none; }
+  .pa-at .pa-ceros .pv-al.espera .n { min-width:24px; height:20px; line-height:20px; font-size:11.5px; border-radius:999px;
+    background:#e2e8f0; color:#475569; padding:0 6px; }
+  .pa-at .pa-ceros .pv-al.espera .tx .t { font-size:12.5px; font-weight:500; color:#64748b; }
+  .pa-at .pa-espera { background:#f1f5f9; border-style:solid; }
+  .pa-kpi.k-ef.espera .pv-barra span { background:#dbe4ed !important; }
+  /* la linea bajo el 120 puede ocupar dos renglones; y Requiere atencion no estira sus filas */
+  .pa-ani .tx small { white-space:normal; line-height:1.35; }
+  .pa-at { align-content:flex-start; }
 </style>
 </head>
 <body>
@@ -10595,13 +10612,36 @@ function desdePortada(fn){
    abiertas) se juntan en una sola linea "Sin novedades", para que no ocupen
    media columna. Siguen siendo botones: se pueden tocar igual. */
 function paAgrupar(lista){
-  const vivas = [], ceros = [];
+  const vivas = [], ceros = [], esperas = [];
   lista.forEach(function(h){
     const m = /class="(pv-al [^"]*)"/.exec(h), c = m ? m[1] : '';
-    (/\bcero\b/.test(c) && !/\bsel\b/.test(c) ? ceros : vivas).push(h);
+    if(/\bsel\b/.test(c)) vivas.push(h);
+    else if(/\bespera\b/.test(c)) esperas.push(h);
+    else if(/\bcero\b/.test(c)) ceros.push(h);
+    else vivas.push(h);
   });
-  return vivas.join('') + (ceros.length
-    ? '<div class="pa-ceros"><span class="l">Sin novedades</span>' + ceros.join('') + '</div>' : '');
+  return vivas.join('')
+    + (esperas.length ? '<div class="pa-ceros pa-espera"><span class="l">Parten a las ' + window.PA_ANTES + ':00</span>' + esperas.join('') + '</div>' : '')
+    + (ceros.length ? '<div class="pa-ceros"><span class="l">Sin novedades</span>' + ceros.join('') + '</div>' : '');
+}
+/* (20-10-2026, 08:55) antes de la primera franja una alerta viva pasa a "espera" */
+function paEspera(h){
+  return window.PA_ANTES ? h.replace('class="pv-al viva', 'class="pv-al espera') : h;
+}
+/* (20-10-2026, 08:55) Luis: la linea bajo el "120 inicio de jornada" decia
+   "17 en bucket · 102 en bandeja" = 119, porque contaba el bucket de AHORA
+   (con una orden que entro despues) y no mostraba las de otra empresa.
+   Ahora, si hay cuadratura del mismo dia, dice a donde fueron las ordenes del
+   inicio y suma exacto: 102 en bandeja · 16 en bucket · 2 otra empresa.
+   Sin cuadratura queda el texto de antes. */
+function inicioDestinoTxt(bkN, enBandeja){
+  const C = (typeof CONC !== 'undefined') ? CONC : null;
+  if(!C || !C.inicio) return bkN + ' en bucket · ' + enBandeja + ' en bandeja';
+  const p = [(C.a_bandeja || 0) + ' en bandeja'];
+  if(C.a_bucket) p.push(C.a_bucket + ' en bucket');
+  if(C.a_otra) p.push(C.a_otra + ' otra empresa');
+  if(C.a_fuera) p.push(C.a_fuera + ' fuera');
+  return p.join(' · ');
 }
 function alertaAbierta(fn){
   return (fn === 'toggleAtrasados' && typeof atr !== 'undefined' && atr)
@@ -11658,7 +11698,7 @@ function pintarPortada(){
             +   '<svg width="96" height="96" viewBox="0 0 96 96" aria-hidden="true"><circle cx="48" cy="48" r="40" fill="none" stroke="#24364f" stroke-width="10"/>'
             +     seg(bkN, '#fdba74') + seg(cerrB, '#34d399') + seg(abB, '#60a5fa') + '</svg>'
             +   '<span class="tx"><b>' + (nInicio || '–') + '</b><span>inicio de jornada ›</span>'
-            +   '<small>' + bkN + ' en bucket · ' + (cerrB + abB) + ' en bandeja</small></span></button>'
+            +   '<small>' + inicioDestinoTxt(bkN, cerrB + abB) + '</small></span></button>'
             + '<div class="pa-lineas">'
             /* (19-10-2026, 14:25) Luis: "se muestran los mismos numeros del estado
                de las actividades". Efectividad, Completadas, No realizadas y Sin
@@ -11804,7 +11844,9 @@ function pintarPortada(){
     +     '<button class="pv-lk rm-btn" onclick="abrirResMig()" title="Cuántas migraciones se derivaron, por qué y quién, con filtro por supervisor">Resumen migraciones<span class="fl">\u203a</span></button>'
     +     (function(){ let c = null; try { c = calcularCompletitud(); } catch(e){}
             const ok = c && c.total, pc = ok ? Math.round(c.pct) : null;
-            const col = !ok ? '#94a3b8' : c.pct >= COMP_META * 100 ? '#15803d' : c.pct >= 70 ? '#b45309' : '#b91c1c';
+            /* (20-10-2026, 08:55) antes del corte de las 13:00 de hoy va en gris: todavia no se mide */
+            const antes13 = hoy && ahoraH < 13;
+            const col = !ok || antes13 ? '#94a3b8' : c.pct >= COMP_META * 100 ? '#15803d' : c.pct >= 70 ? '#b45309' : '#b91c1c';
             return '<button class="pv-lk dato" onclick="desdePortada(toggleComp)" title="Completitud al corte de las 13:00' + (ok ? ': ' + c.cumplen + ' de ' + c.total + ' técnicos con al menos un cierre. Meta ' + Math.round(COMP_META * 100) + '%' : '')
               + '"><b class="vl" style="background:' + col + '">' + (ok ? pc + '%' : '–') + '</b>Completitud<span class="fl">›</span></button>'; })()
     +     enlace('verReporteRepe', 'Histórico', 'Reporte histórico de direcciones')
@@ -11823,15 +11865,27 @@ function pintarPortada(){
     +         '<button class="pr" onclick="derProbarSonido(event)" title="Hace sonar el aviso para probar el volumen">Probar</button></span></div>'
     /* avisos que solo salen cuando hace falta, arriba de todo */
     +       (compPastillaHtml() + saludPastillaHtml()).replace(/<br>/g, ' ')
+    +       (function(){
+              /* (20-10-2026, 08:55) Antes de que parta la primera franja, "Sin
+                 completar" y "Sin iniciar" no son alerta: nadie tiene por que
+                 haber partido. Se juntan en una linea gris "Parten a las 10:00"
+                 (siguen siendo botones). Desde la hora de la primera franja
+                 vuelven a ser tarjetas normales. */
+              let ini0 = 24;
+              Object.keys(porFranja).forEach(f => { const m = /^(\d{1,2})\s*-/.exec(f); if(m) ini0 = Math.min(ini0, +m[1]); });
+              if(ini0 === 24) ini0 = 10;
+              window.PA_ANTES = hoy && ahoraH < ini0 ? ini0 : 0;
+              return '';
+            })()
     +       paAgrupar([
               alerta('toggleCaidas', caidas, 'Caídas', 'se las sacaron al técnico sin que las tocara', '#c0392f'),
               (function(){ const c = derHoyConteo();
                 return '<button class="pv-al ' + (c.d > 0 ? 'viva' : 'cero') + (DER_AVISO.length ? ' nueva' : '') + '" style="--tono:#b45309" title="Toca para abrir Derivación: hoy en vivo, por técnico, por dirección, a quién auditar y ficha del técnico." onclick="abrirDerivHoy()">'
                   + '<span class="n">' + c.d + '</span><span class="tx"><span class="t">Migraciones derivadas</span><span class="s">' + c.d + ' de ' + c.v + ' migraciones ya visitadas</span></span></button>'; })(),
-              alerta('toggleSinCompletar', sinComp, 'Sin completar', 'no han cerrado ninguna todavía hoy', '#b45309'),
-              '<button class="pv-al ' + (sinIni > 0 ? 'viva' : 'cero') + (window.PV_SININI ? ' sel' : '')
+              paEspera(alerta('toggleSinCompletar', sinComp, 'Sin completar', 'no han cerrado ninguna todavía hoy', '#b45309')),
+              paEspera('<button class="pv-al ' + (sinIni > 0 ? 'viva' : 'cero') + (window.PV_SININI ? ' sel' : '')
                 + '" style="--tono:#0f766e" title="Toca para ver quiénes son" onclick="window.PV_SININI = !window.PV_SININI; pintarPortada()">'
-                + '<span class="n">' + sinIni + '</span><span class="tx"><span class="t">Sin iniciar</span><span class="s">tienen órdenes y ninguna iniciada ni en ruta</span></span></button>',
+                + '<span class="n">' + sinIni + '</span><span class="tx"><span class="t">Sin iniciar</span><span class="s">tienen órdenes y ninguna iniciada ni en ruta</span></span></button>'),
               alerta('toggleAtrasados', atras, 'Más de 3 h', 'iniciadas hace más de 3 horas y sin cerrar', '#c2410c'),
               alerta('toggleNuevas', nuevas, 'Nuevas', 'entraron después de la primera vuelta del monitor', '#2563eb'),
               alerta('toggleReca', reca, 'Reingresadas', 'volvieron a caer hoy', '#64748b'),
