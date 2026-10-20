@@ -4569,7 +4569,8 @@ function tarjetaCaidas(){
       b.push({ tipo:'chip', n: c[ic], txt: c[ic] === 1 ? d[2] : d[3], bg: d[0], fg: d[1] });
     });
     const buck = (ALERTAS && ALERTAS.al_bucket) ? ALERTAS.al_bucket : 0;
-    if(buck) b.push({ tipo:'nota', txt:'Además, ' + buck + (buck === 1 ? ' volvió' : ' volvieron')
+    /* (20-10-2026, 14:45) Luis pidio borrar la nota "Ademas, N volvieron al bucket" */
+    if(false && buck) b.push({ tipo:'nota', txt:'Además, ' + buck + (buck === 1 ? ' volvió' : ' volvieron')
                       + ' al bucket: ' + (buck === 1 ? 'espera' : 'esperan') + ' técnico.' });
   }
   return tjDibujar({ color:'#A32D2D', titulo:'Órdenes que le sacaron al técnico',
@@ -4820,7 +4821,7 @@ function textoWspCaidas(){
   }
   l.push('', nwConteoCorto(lista), '', '*Qué pasó:*', cwDesTxt(lista, '\n'));
   const buck = (ALERTAS && ALERTAS.al_bucket) ? ALERTAS.al_bucket : 0;
-  if(buck) l.push('', '↩️ Además, ' + buck + (buck === 1 ? ' volvió' : ' volvieron')
+  if(false && buck) l.push('', '↩️ Además, ' + buck + (buck === 1 ? ' volvió' : ' volvieron')
                 + ' al bucket: no se ' + (buck === 1 ? 'perdió' : 'perdieron') + ', esperan técnico.');
   return l.join('\n');
 }
