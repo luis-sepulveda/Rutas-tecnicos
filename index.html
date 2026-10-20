@@ -3180,6 +3180,40 @@
   .pa-at .pa-ceros .pv-al.cero .s { display:none; }
   .pa-at .pa-ceros .pv-al.cero .n { min-width:20px; height:20px; line-height:20px; font-size:11px; border-radius:999px; background:#eef2f6; color:#94a3b8; }
   .pa-at .pa-ceros .pv-al.cero .tx .t { font-size:12.5px; font-weight:500; color:#64748b; }
+
+  /* ==== FRANJAS Y COMUNAS EN UNA SOLA TABLA (20-10-2026, 08:45) ==== */
+  .pa-cab, .pa-fl { display:grid; grid-template-columns:150px minmax(0,1fr) 62px 80px; gap:14px; }
+  .pa-cab { align-items:end; margin:0 0 4px; }
+  .pa-cab .pv-rot { grid-column:1 / 3; margin:0; }
+  .pa-cab > span:not(.pv-rot) { font-size:10.5px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:#a3b2c2; text-align:right; }
+  .pa-cab.dos { margin-top:16px; padding-top:14px; border-top:1px solid #edf1f5; }
+  .pa-fl { align-items:center; padding:9px 10px; margin:0 -10px; border-radius:10px; }
+  .pa-fl + .pa-fl { border-top:1px solid #f1f5f9; }
+  .pa-fl.ahora { background:#eff6ff; }
+  .pa-fl .h { font-family:'Archivo',sans-serif; font-weight:700; font-size:16px; color:#15293e; line-height:1.15; }
+  .pa-fl.com .h { font-family:'DM Sans',sans-serif; font-weight:600; font-size:14.5px; }
+  .pa-fl .h small { display:block; font-family:'DM Sans',sans-serif; font-size:11.5px; font-weight:500; color:#8fa1b3; margin-top:2px; }
+  .pa-fl .h .ec { color:#1d4ed8; font-weight:700; } .pa-fl .h .px { color:#60a5fa; font-weight:700; }
+  .pa-fl .h .ok { color:#15803d; font-weight:700; }
+  .pa-fl .h .ab { color:#5d7389; font-weight:700; }
+  .pa-fl.amb .h .ab { color:#b45309; } .pa-fl.roj .h .ab { color:#c2410c; }
+  .pa-fl .h .ojo { color:#b45309; font-weight:700; }
+  .pa-fl .pc { background:#f5f8fb; border-radius:6px; }
+  .pa-fl .pista { display:flex; height:22px; border-radius:6px; overflow:hidden; gap:2px; min-width:min-content; }
+  .pa-fl .pista span { flex-basis:0; min-width:24px; display:flex; align-items:center; justify-content:center;
+    font-size:11.5px; font-weight:700; color:#fff; }
+  .pa-fl .pista .c { background:#0e7c6b; } .pa-fl .pista .n { background:#d04a46; }
+  .pa-fl .pista .x { background:#c3d2e0; color:#41586f; } .pa-fl .pista .i { background:#1d4ed8; }
+  .pa-fl .pista .a { background:#60a5fa; }
+  .pa-fl .pista .b { background:repeating-linear-gradient(45deg,#fdba74 0 6px,#fed7aa 6px 12px); color:#7c2d12; }
+  .pa-fl .tt { text-align:right; font-family:'Archivo',sans-serif; font-weight:600; font-size:15px; color:#5d7389; }
+  .pa-fl .tt small { display:block; font-family:'DM Sans',sans-serif; font-size:10.5px; font-weight:600; color:#c2410c; }
+  .pa-fl .ef { text-align:right; font-family:'Archivo',sans-serif; font-weight:700; font-size:17px; color:#15293e; }
+  .pa-fl .ef.sd { color:#c3d2e0; }
+  @media (max-width:640px){
+    .pa-cab, .pa-fl { grid-template-columns:96px minmax(0,1fr) 34px 46px; gap:8px; }
+    .pa-cab > span:not(.pv-rot) { font-size:9px; letter-spacing:0; }
+  }
 </style>
 </head>
 <body>
@@ -11251,7 +11285,7 @@ function pintarPortada(){
   const porComuna = {};
   filas.forEach(o => {
     const c = String(o.d || '').split(',').pop().trim().toUpperCase() || 'SIN CIUDAD';
-    porComuna[c] = porComuna[c] || {t:0, c:0, nr:0, ab:0, cs:0};
+    porComuna[c] = porComuna[c] || {t:0, c:0, nr:0, ab:0, cs:0, ini:0};
     porComuna[c].t++;
     if(String(o.e) === 'Completado') porComuna[c].c++;
     /* 26-09-2026: el resto del reparto por comuna, con las mismas reglas que
@@ -11259,6 +11293,8 @@ function pintarPortada(){
     else if(String(o.e) === 'No Realizada') porComuna[c].nr++;
     else if(abierta(o)) porComuna[c].ab++;
     else porComuna[c].cs++;
+    /* 20-10-2026: de las abiertas, cuantas ya estan iniciadas o en ruta (igual que por franja) */
+    if(String(o.e) === 'Iniciado' || String(o.e) === 'en ruta') porComuna[c].ini++;
   });
 
   let fecha = (typeof FECHA_DATOS !== 'undefined' && FECHA_DATOS)
@@ -11680,46 +11716,78 @@ function pintarPortada(){
     /* ---- 2. franjas y requiere atencion ---- */
     +   '<section class="pa-medio">'
     +     '<div class="pa-card">'
-    +       '<div class="pv-rot">Cómo viene el día, por franja</div>'
+    /* ==== FRANJAS Y COMUNAS EN UNA SOLA TABLA (20-10-2026, 08:45) ====
+       Luis: "mejoremos esto". Antes las franjas y las comunas tenian barras de
+       distinto largo, la comuna usaba otro azul para "sin cerrar" y solo las
+       comunas decian el %. Ahora:
+         - las dos partes usan las mismas columnas: nombre | barra | ordenes | efectividad
+         - el largo de cada barra es proporcional a sus ordenes (misma escala
+           para franjas y comunas), asi se ve de un vistazo cual pesa mas
+         - mismos colores y mismo orden de tramos en las dos (la comuna
+           ahora separa iniciadas de sin iniciar)
+         - lo que queda abierto va bajo el nombre ("pasada · 10 abiertas")
+         - efectividad = completadas / ordenes, igual que el cuadro de arriba;
+           "–" si nadie ha cerrado una visita todavia en esa fila
+         - la leyenda muestra solo los colores que aparecen
+       Mismas cuentas de antes (porFranja, porComuna, bucket por franja).
+       Para volver: ver la ficha (20-10-2026, 08:45) y el respaldo. */
     +       (function(){
-              /* Mismas cuentas de la seccion "Como viene el resto del dia" de
-                 antes (porFranja), mas lo que sigue en el bucket en esa franja. */
               const bkF = (bkTile && bkTile.porFr) || {};
               const keys = {};
               Object.keys(porFranja).forEach(f => keys[f] = 1);
               Object.keys(bkF).forEach(f => { if(bkF[f]) keys[f] = 1; });
               const lista = Object.keys(keys).sort();
-              if(!lista.length) return '<div class="pa-vacio">Todavía no hay órdenes del día.</div>';
+              const coms = Object.keys(porComuna).sort();
               const FR_AMBAR = 10, FR_ROJO = 25;
-              return lista.map(function(f){
+              let max = 1;
+              lista.forEach(f => { const d = porFranja[f] || {t:0}; max = Math.max(max, d.t + (bkF[f] || 0)); });
+              coms.forEach(c => { max = Math.max(max, porComuna[c].t); });
+              const usados = {};
+              const tramo = (v, cls, txt) => { if(!v || v < 0) return ''; usados[cls] = 1;
+                return '<span class="' + cls + '" style="flex-grow:' + v + '" title="' + v + ' ' + txt + '">' + v + '</span>'; };
+              const efec = (co, nr, t) => (co + nr) ? '<div class="ef">' + Math.round(100 * co / t) + '%</div>' : '<div class="ef sd" title="Todavía nadie cierra una visita">–</div>';
+              const fila = (cls, h, largo, pista, tt, ef) => '<div class="pa-fl' + cls + '"><div class="h">' + h + '</div>'
+                + '<div class="pc"><div class="pista" style="width:' + (100 * largo / max).toFixed(1) + '%">' + pista + '</div></div>'
+                + '<div class="tt">' + tt + '</div>' + ef + '</div>';
+              const cab = (t, dos) => '<div class="pa-cab' + (dos ? ' dos' : '') + '"><span class="pv-rot">' + t + '</span><span>órdenes</span><span>efectividad</span></div>';
+              let h = cab('Cómo viene el día, por franja');
+              if(!lista.length) h += '<div class="pa-vacio">Todavía no hay órdenes del día.</div>';
+              h += lista.map(function(f){
                 const d = porFranja[f] || {t:0, ab:0, ini:0, co:0, nr:0}, b = bkF[f] || 0;
                 const m = /^(\d{1,2})\s*-\s*(\d{1,2})$/.exec(f);
                 const enCurso = hoy && m && ahora >= +m[1] && ahora < +m[2];
                 const pasada = !hoy || (m && ahora >= +m[2]);
                 const pAb = d.t ? 100 * d.ab / d.t : 0;
                 const cerradas = d.t - d.ab, sinIniF = d.ab - d.ini;
-                const tot = d.t + b;
-                const tramo = (v, cls, txt) => v ? '<span class="' + cls + '" style="flex-grow:' + v + '" title="' + v + ' ' + txt + '">' + v + '</span>' : '';
-                const estTx = enCurso ? '<small class="ec">en curso</small>'
-                  : !pasada ? '<small class="px">próxima</small>'
-                  : (!d.ab && !b) ? '<small class="ok">✓ cerrada</small>' : '<small class="ps">pasada</small>';
+                const abTx = d.ab ? '<span class="ab">' + d.ab + (d.ab === 1 ? ' abierta' : ' abiertas') + '</span>' : '';
+                const est = enCurso ? '<small><span class="ec">en curso</span>' + (sinIniF > 0 ? ' · <span class="ojo">' + sinIniF + ' sin iniciar</span>' : '') + '</small>'
+                  : !pasada ? '<small><span class="px">próxima</span></small>'
+                  : (!d.ab && !b) ? '<small><span class="ok">✓ cerrada</span></small>'
+                  : '<small>pasada' + (abTx ? ' · ' + abTx : '') + '</small>';
                 const tono = enCurso ? ' ahora' : !pasada ? '' : pAb > FR_ROJO ? ' roj' : pAb > FR_AMBAR ? ' amb' : '';
-                return '<div class="pa-fr' + tono + '">'
-                  + '<div class="h">' + f + estTx + '</div>'
-                  + '<div class="pista">' + (tot ? tramo(d.co || 0, 'c', 'completadas') + tramo(d.nr || 0, 'n', 'no realizadas')
-                      + tramo(cerradas - (d.co || 0) - (d.nr || 0), 'x', 'canceladas o suspendidas')
-                      + tramo(d.ini, 'i', 'iniciadas o en ruta') + tramo(sinIniF, 'a', 'en bandeja sin iniciar')
-                      + tramo(b, 'b', 'todavía en el bucket') : '<span class="v">sin órdenes</span>') + '</div>'
-                  + '<div class="d"><b>' + d.ab + '</b> sin cerrar de ' + d.t
-                  +   '<span class="dd">' + d.ini + ' iniciadas · <span class="' + (enCurso && sinIniF > 0 ? 'ojo' : '') + '">' + sinIniF + ' sin iniciar</span>'
-                  +   (b ? ' · <span class="bk">' + b + ' en bucket</span>' : '') + '</span></div>'
-                  + '</div>';
+                return fila(tono, f + est, d.t + b,
+                  tramo(d.co || 0, 'c', 'completadas') + tramo(d.nr || 0, 'n', 'no realizadas')
+                  + tramo(cerradas - (d.co || 0) - (d.nr || 0), 'x', 'canceladas o suspendidas')
+                  + tramo(d.ini, 'i', 'iniciadas o en ruta') + tramo(sinIniF, 'a', 'en bandeja sin iniciar')
+                  + tramo(b, 'b', 'todavía en el bucket'),
+                  d.t + (b ? '<small>+' + b + ' bucket</small>' : ''), efec(d.co || 0, d.nr || 0, d.t));
               }).join('');
+              if(coms.length){
+                h += cab('Por comuna', true);
+                h += coms.map(function(c){
+                  const d = porComuna[c];
+                  const nom = c.toLowerCase().replace(/(^|\s)\S/g, t => t.toUpperCase());
+                  const est = '<small>' + (d.ab ? '<span class="ab">' + d.ab + (d.ab === 1 ? ' abierta' : ' abiertas') + '</span>' : '<span class="ok">✓ todo cerrado</span>') + '</small>';
+                  return fila(' com', nom + est, d.t,
+                    tramo(d.c, 'c', 'completadas') + tramo(d.nr, 'n', 'no realizadas') + tramo(d.cs, 'x', 'canceladas o suspendidas')
+                    + tramo(d.ini, 'i', 'iniciadas o en ruta') + tramo(d.ab - d.ini, 'a', 'en bandeja sin iniciar'),
+                    d.t, efec(d.c, d.nr, d.t));
+                }).join('');
+              }
+              const LEY = [['c','completadas'],['n','no realizadas'],['x','canc/susp'],['i','iniciadas'],['a','en bandeja sin iniciar'],['b','todavía en el bucket']];
+              h += '<div class="pa-ley">' + LEY.filter(x => usados[x[0]]).map(x => '<span><i class="' + x[0] + '"></i>' + x[1] + '</span>').join('') + '</div>';
+              return h;
             })()
-    +       '<div class="pa-ley"><span><i class="c"></i>completadas</span><span><i class="n"></i>no realizadas</span><span><i class="x"></i>canc/susp</span><span><i class="i"></i>iniciadas</span>'
-    +         '<span><i class="a"></i>en bandeja sin iniciar</span><span><i class="b"></i>todavía en el bucket</span></div>'
-    +       '<div class="pv-rot pa-rot-com" style="margin:20px 0 10px">Por comuna<span>efectividad</span></div>'
-    +       '<div class="pv-com">' + comunas + '</div>'
     +   '<div class="pa-rep pa-rep-fr pv-linea"><span class="pv-rot">Reportes</span>'
     +   '<nav class="pv-links">'
     /* 19-10-2026: Resumen de migraciones para supervisores (abrirResMig) */
