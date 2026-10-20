@@ -22236,25 +22236,25 @@
    }
   },
   "20-10-2026": {
-   "hasta": "14:30",
-   "actividades": 152,
+   "hasta": "14:35",
+   "actividades": 154,
    "tecnicos": 34,
    "estados": {
-    "Completado": 42,
-    "Iniciado": 22,
-    "Pendiente": 49,
+    "Completado": 46,
+    "Pendiente": 50,
     "No Realizada": 28,
-    "Suspendido": 2,
+    "Iniciado": 19,
+    "Suspendido": 3,
     "Cancelado": 4,
-    "en ruta": 5
+    "en ruta": 4
    },
-   "rgu": 216.0,
+   "rgu": 222.0,
    "caidas_total": 8,
    "caidas_activas": 8,
    "caidas_resueltas": 0,
-   "nuevas": 20,
+   "nuevas": 21,
    "al_bucket": 9,
-   "repetidas": 35,
+   "repetidas": 36,
    "reagendadas": 4,
    "detalle": {
     "caidas": [
@@ -22332,6 +22332,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OIK7BGK",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "cat": "Migración 2 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "PJE 1 431, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OIHNIES",
       "tec": "MATÍAS JAQUE AG",
@@ -22556,11 +22565,23 @@
       "f": "13-16",
       "hi": "14:17",
       "d": "MARGA MARGA 1515, QUILPUE",
-      "e": "Iniciado",
+      "e": "Suspendido",
       "tec": "CRISTOBAL MIRANDA VALENC",
       "visitas": 3,
       "ult_fecha": "19-10-2026",
       "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3OIK7BGK",
+      "cat": "Migración 2 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "PJE 1 431, QUILPUE",
+      "e": "Pendiente",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "visitas": 1,
+      "ult_fecha": "12-08-2026",
+      "ult_cierre": "Cliente Desiste"
      },
      {
       "o": "1-3OG8BKOE",
@@ -22578,7 +22599,7 @@
       "o": "1-3OG9WJ3A",
       "cat": "Migración 3 Play",
       "f": "13-16",
-      "hi": "15:41",
+      "hi": "18:36",
       "d": "MATEO DE TORO Y ZAMBRANO 915 CASA 46, QUILPUE",
       "e": "Pendiente",
       "tec": "FELIPE SILVA R",
@@ -22852,7 +22873,7 @@
       "o": "1-3OGTAB9P",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "15:23",
+      "hi": "15:31",
       "d": "LOS AROMOS 1179, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -22866,7 +22887,7 @@
       "f": "10-13",
       "hi": "12:08",
       "d": "BUENOS AIRES 2091, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "SAMUEL FERNANDEZ VIDAL",
       "visitas": 2,
       "ult_fecha": "19-10-2026",
@@ -22876,7 +22897,7 @@
       "o": "1-3OHVHR8T",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:49",
+      "hi": "15:45",
       "d": "CONDELL 88 CASA 1, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -22888,7 +22909,7 @@
       "o": "1-3OHWK9AU",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:21",
+      "hi": "17:17",
       "d": "VALDIVIA 368 EDIF. F DEPTO 403, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -22978,5 +22999,5 @@
    }
   }
  },
- "generado": "20-10-2026 14:30"
+ "generado": "20-10-2026 14:35"
 }
