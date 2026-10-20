@@ -22236,23 +22236,23 @@
    }
   },
   "20-10-2026": {
-   "hasta": "12:29",
-   "actividades": 131,
+   "hasta": "12:34",
+   "actividades": 132,
    "tecnicos": 34,
    "estados": {
-    "Completado": 23,
-    "Pendiente": 61,
+    "Completado": 27,
+    "Iniciado": 20,
+    "Pendiente": 60,
     "No Realizada": 19,
-    "Iniciado": 23,
     "Suspendido": 2,
     "Cancelado": 2,
-    "en ruta": 1
+    "en ruta": 2
    },
-   "rgu": 189.8,
+   "rgu": 189.9,
    "caidas_total": 5,
    "caidas_activas": 5,
    "caidas_resueltas": 0,
-   "nuevas": 13,
+   "nuevas": 14,
    "al_bucket": 8,
    "repetidas": 32,
    "reagendadas": 4,
@@ -22306,13 +22306,22 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OIG9N0C",
+      "tec": "ALEXIS JARA",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "12:33",
+      "d": "DAGOBERTO GODOY 2385, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
       "o": "1-3OIG74LF",
       "tec": "CESAR MENA OLIVEROS",
       "cat": "Modificación de Servicio",
       "f": "10-13",
       "hi": "12:21",
       "d": "INGENIERO HYATT 2555, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OIFGHRN",
@@ -22321,7 +22330,7 @@
       "f": "10-13",
       "hi": "12:14",
       "d": "LAS CAMELIAS 2650 EDIF. A DEPTO 202, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OIF232I",
@@ -22330,7 +22339,7 @@
       "f": "10-13",
       "hi": "12:07",
       "d": "JOSE BOHR 1405, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OIE68ZG",
@@ -22536,7 +22545,7 @@
       "o": "1-3OH4OC6X",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:25",
+      "hi": "16:13",
       "d": "LAUTARO 477 CASA 2, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -22853,5 +22862,5 @@
    }
   }
  },
- "generado": "20-10-2026 12:29"
+ "generado": "20-10-2026 12:34"
 }
