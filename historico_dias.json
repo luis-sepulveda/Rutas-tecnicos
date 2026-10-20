@@ -22236,14 +22236,15 @@
    }
   },
   "20-10-2026": {
-   "hasta": "10:54",
+   "hasta": "11:04",
    "actividades": 123,
    "tecnicos": 34,
    "estados": {
-    "Iniciado": 30,
-    "Pendiente": 77,
-    "No Realizada": 6,
-    "Completado": 9,
+    "Iniciado": 26,
+    "Pendiente": 74,
+    "No Realizada": 9,
+    "Completado": 11,
+    "en ruta": 2,
     "Cancelado": 1
    },
    "rgu": 187.0,
@@ -22372,18 +22373,6 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3OHVOCPO",
-      "cat": "Alta 2 Play",
-      "f": "10-13",
-      "hi": "11:47",
-      "d": "EL RINCON 568 CASA 64, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "ESTEBAN PIZARRO QUINTANA",
-      "visitas": 1,
-      "ult_fecha": "19-10-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
       "o": "1-3OHRYKQC",
       "cat": "Migración 3 Play",
       "f": "13-16",
@@ -22399,7 +22388,7 @@
       "o": "1-3OF7CQUZ",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "10:47",
+      "hi": "10:58",
       "d": "FRODDEN 0277, QUILPUE",
       "e": "Pendiente",
       "tec": "GEEYSER PEREZ O",
@@ -22411,7 +22400,7 @@
       "o": "1-3OI2N109",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "14:13",
       "d": "AV LA PALMA 426 EDIF. C DEPTO 301, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOEL GUSTAVE GUSTA",
@@ -22423,7 +22412,7 @@
       "o": "1-3OHL0DSS",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "10:36",
+      "hi": "11:12",
       "d": "FRODDEN 01760, QUILPUE",
       "e": "Pendiente",
       "tec": "JORDAN ROA PEREZ",
@@ -22497,7 +22486,7 @@
       "f": "10-13",
       "hi": "09:45",
       "d": "RAFAEL SOTOMAYOR 0382, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "KEVIN TAPIA RETAMAL",
       "visitas": 1,
       "ult_fecha": "19-10-2026",
@@ -22521,7 +22510,7 @@
       "f": "10-13",
       "hi": "09:50",
       "d": "OCEANO ATLANTICO 317, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "LUIS CASTRO TORRES",
       "visitas": 1,
       "ult_fecha": "03-10-2026",
@@ -22578,10 +22567,10 @@
       "o": "1-3OI2VMII",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "12:13",
+      "hi": "11:09",
       "d": "HALCON 616, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "MATÍAS JAQUE AG",
+      "e": "en ruta",
+      "tec": "MATIAS APELEO APELEO",
       "visitas": 1,
       "ult_fecha": "07-10-2026",
       "ult_cierre": "Direccion no encontrada"
@@ -22614,7 +22603,7 @@
       "o": "1-3OHX78FS",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:39",
+      "hi": "11:14",
       "d": "BUENOS AIRES 2091, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -22626,7 +22615,7 @@
       "o": "1-3OHVHR8T",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "14:09",
       "d": "CONDELL 88 CASA 1, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -22645,6 +22634,18 @@
       "visitas": 1,
       "ult_fecha": "19-10-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OHVOCPO",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "11:18",
+      "d": "EL RINCON 568 CASA 64, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "SEBASTIAN DOSSOW A",
+      "visitas": 1,
+      "ult_fecha": "19-10-2026",
+      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3OI0YE6M",
@@ -22704,5 +22705,5 @@
    }
   }
  },
- "generado": "20-10-2026 10:54"
+ "generado": "20-10-2026 11:04"
 }
