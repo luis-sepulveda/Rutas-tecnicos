@@ -1,124 +1,40 @@
 {
-  "actualizado": "2026-10-20T08:39:24",
+  "actualizado": "2026-10-20T09:39:27",
   "resumen": {
-    "cancelada": 1,
-    "sin informacion": 2,
-    "reagendada": 3
+    "sin informacion": 1
   },
   "estados": {
-    "1-3OH60207": {
-      "tec": "EDGAR VALERO C",
-      "cat": "Reparación",
-      "franja_original": "13-16",
-      "d": "AZAPA 1190, QUILPUE",
-      "estado": "cancelada",
-      "color": "rgb(128, 255, 128)",
-      "detalle": "1-3OH60207 - 10-13-Reparación-2 Play Servicio Degradado-AZAPA 1190",
-      "franja_nueva": "10-13"
-    },
-    "1-3OGMHINU": {
-      "tec": "GEEYSER PEREZ O",
-      "cat": "Migración 1 Play",
-      "franja_original": "16-19",
-      "d": "CONDELL SUR 01565 CASA D, QUILPUE",
-      "estado": "sin informacion",
-      "nota": "la OT ya no existe en TOA",
-      "contexto": {
-        "buscado": "CONDELL SUR 01565",
-        "aviso": "historial de la direccion, NO es el estado de esta orden",
-        "filas": [
-          {
-            "estado": "cancelada",
-            "color": "rgb(128, 255, 128)",
-            "ot": "1-3OED8JRC",
-            "franja": "16-19",
-            "texto": "1-3OED8JRC - 16-19-Migración-Migración-CONDELL SUR 01565 CASA GMie, 21 Oct"
-          },
-          {
-            "estado": "no realizada",
-            "color": "rgb(96, 206, 206)",
-            "ot": "1-3OEJ3LWJ",
-            "franja": "10-13",
-            "texto": "1-3OEJ3LWJ - 10-13-Migración-Migración-CONDELL SUR 01565 CASA DSab, 17 Oct"
-          },
-          {
-            "estado": "no realizada",
-            "color": "rgb(96, 206, 206)",
-            "ot": "1-3OA0A0W5",
-            "franja": "16-19",
-            "texto": "1-3OA0A0W5 - 16-19-Migración-Migración-CONDELL SUR 01565 CASA DMie, 14 Oct"
-          },
-          {
-            "estado": "no realizada",
-            "color": "rgb(96, 206, 206)",
-            "ot": "1-3OA3INJG",
-            "franja": "13-16",
-            "texto": "1-3OA3INJG - 13-16-Migración-Migración-CONDELL SUR 01565 CASA GMie, 14 Oct"
-          },
-          {
-            "estado": "no realizada",
-            "color": "rgb(96, 206, 206)",
-            "ot": "1-3O98L2KO",
-            "franja": "13-16",
-            "texto": "1-3O98L2KO - 13-16-Migración-Migración-CONDELL SUR 01565 CASA GMie, 7 Oct"
-          },
-          {
-            "estado": "no realizada",
-            "color": "rgb(96, 206, 206)",
-            "ot": "1-3NUWXYHV",
-            "franja": "16-19",
-            "texto": "1-3NUWXYHV - 16-19-Migración-Migración-CONDELL SUR 01565 CASA GJue, 1 Oct"
-          }
-        ]
-      }
-    },
-    "1-3OHQ25FF": {
-      "tec": "JORDAN ROA PEREZ",
-      "cat": "Migración 1 Play",
-      "franja_original": "16-19",
-      "d": "RILEN 742, QUILPUE",
-      "estado": "reagendada",
-      "color": "rgb(255, 170, 170)",
-      "detalle": "1-3OHQ25FF - 10-13-Migración-Migración-RILEN 742Jue, 22 Oct",
-      "franja_nueva": "10-13"
-    },
-    "1-3OEM6ZIL": {
-      "tec": "JORGE PEZOA VICUÑA",
-      "cat": "Alta 2 Play",
-      "franja_original": "16-19",
-      "d": "LAS ACACIAS 730 DEPTO 824, VILLA ALEMANA",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3OEM6ZIL - 10-13-Alta-2 Play-LAS ACACIAS 730 DEPTO 824Mie, 21 Oct",
-      "franja_nueva": "10-13"
-    },
-    "1-3OHNTZXK": {
-      "tec": "JOSE PEREZ RANGEL",
-      "cat": "Alta 2 Play",
-      "franja_original": "13-16",
-      "d": "EL BOSQUE 145 CASA 8, VILLA ALEMANA",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3OHNTZXK - 10-13-Alta-2 Play-EL BOSQUE 145 CASA 8",
-      "franja_nueva": "10-13"
-    },
-    "1-3OG8BKOE": {
-      "tec": "MARCO PEREZ G",
+    "1-3OHSL2Q4": {
+      "tec": "CESAR MENA OLIVEROS",
       "cat": "Alta 1 Play",
-      "franja_original": "13-16",
-      "d": "EL AGUILUCHO 2461, QUILPUE",
+      "franja_original": "10-13",
+      "d": "FRODDEN 01640, QUILPUE",
       "estado": "sin informacion",
       "nota": "la OT ya no existe en TOA",
       "contexto": {
-        "buscado": "EL AGUILUCHO 2461",
+        "buscado": "FRODDEN 01640",
         "aviso": "historial de la direccion, NO es el estado de esta orden",
         "filas": [
           {
             "estado": "no realizada",
             "color": "rgb(96, 206, 206)",
-            "ot": "1-3OCZ6RGZ",
+            "ot": "1-3OFD4QWY",
             "franja": "13-16",
-            "texto": "1-3OCZ6RGZ - 13-16-Alta-1 Play-EL AGUILUCHO 2461Vie, 16 Oct"
+            "texto": "1-3OFD4QWY - 13-16-Alta-1 Play-FRODDEN 01640Lun, 19 Oct"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3OENOX54",
+            "franja": "16-19",
+            "texto": "1-3OENOX54 - 16-19-Alta-1 Play-FRODDEN 01640Jue, 15 Oct"
+          },
+          {
+            "estado": "completada",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3NGSEXBC",
+            "franja": "10-13",
+            "texto": "1-3NGSEXBC - 10-13-Alta-2 Play-FRODDEN 01640Mie, 26 Ago"
           }
         ]
       }
