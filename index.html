@@ -3214,6 +3214,16 @@
     .pa-cab, .pa-fl { grid-template-columns:96px minmax(0,1fr) 34px 46px; gap:8px; }
     .pa-cab > span:not(.pv-rot) { font-size:9px; letter-spacing:0; }
   }
+
+  /* ==== COLORES INVERTIDOS EN FRANJAS Y COMUNAS (20-10-2026, 08:50) ====
+     Luis: "completadas azul, iniciadas verde". Solo en la tabla de franjas y
+     comunas. Sin iniciar pasa a verde claro para que siga siendo de la
+     familia de las abiertas (antes celeste, que se confundia con el azul).
+     Para volver, borrar este bloque. */
+  .pa-fl .pista .c, .pa-ley i.c { background:#1d4ed8; }
+  .pa-fl .pista .i, .pa-ley i.i { background:#0e7c6b; }
+  .pa-fl .pista .a { background:#86d9b9; color:#064e3b; }
+  .pa-ley i.a { background:#86d9b9; }
 </style>
 </head>
 <body>
