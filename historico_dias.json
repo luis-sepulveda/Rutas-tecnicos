@@ -22236,19 +22236,20 @@
    }
   },
   "20-10-2026": {
-   "hasta": "09:49",
-   "actividades": 118,
-   "tecnicos": 33,
+   "hasta": "09:59",
+   "actividades": 120,
+   "tecnicos": 34,
    "estados": {
-    "Pendiente": 91,
-    "Iniciado": 15,
-    "en ruta": 12
+    "Pendiente": 89,
+    "Iniciado": 27,
+    "en ruta": 3,
+    "Cancelado": 1
    },
-   "rgu": 180.0,
+   "rgu": 182.0,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
-   "nuevas": 0,
+   "nuevas": 1,
    "al_bucket": 0,
    "repetidas": 29,
    "reagendadas": 2,
@@ -22273,7 +22274,17 @@
       "e": "Pendiente"
      }
     ],
-    "nuevas": [],
+    "nuevas": [
+     {
+      "o": "1-3OIBJ7VT",
+      "tec": "GEEYSER PEREZ O",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "LAS ELENAS 2015 EDIF. A DEPTO 202, QUILPUE",
+      "e": "Iniciado"
+     }
+    ],
     "repetidas": [
      {
       "o": "1-3ODK5HZ3",
@@ -22363,7 +22374,7 @@
       "o": "1-3OF7CQUZ",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "10:48",
       "d": "FRODDEN 0277, QUILPUE",
       "e": "Pendiente",
       "tec": "GEEYSER PEREZ O",
@@ -22471,31 +22482,19 @@
       "o": "1-3OHV5SXW",
       "cat": "Migración 3 Play",
       "f": "10-13",
-      "hi": "09:45",
+      "hi": "09:50",
       "d": "OCEANO ATLANTICO 317, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "LUIS CASTRO TORRES",
       "visitas": 1,
       "ult_fecha": "03-10-2026",
       "ult_cierre": "Cliente Desiste"
      },
      {
-      "o": "1-3OG5WW2Y",
-      "cat": "Alta 2 Play",
-      "f": "10-13",
-      "hi": "12:08",
-      "d": "LOS ALMENDROS (LEIGHTON) 16, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "LUIS GATICA DAVILA",
-      "visitas": 6,
-      "ult_fecha": "16-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OHIJJMB",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:18",
+      "hi": "14:00",
       "d": "AV VICEPRESIDENTE BDO LEIGHTON 1550 CASA 28, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
@@ -22507,7 +22506,7 @@
       "o": "1-3OI28REC",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "12:03",
+      "hi": "12:01",
       "d": "PJE 2  (B.SUR) 62, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
@@ -22528,10 +22527,21 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3OG5WW2Y",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "d": "LOS ALMENDROS (LEIGHTON) 16, VILLA ALEMANA",
+      "e": "Cancelado",
+      "tec": "MARCELO GÓMEZ GÓME",
+      "visitas": 6,
+      "ult_fecha": "16-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OHSVINH",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "11:36",
+      "hi": "11:29",
       "d": "SERENA 890 DEPTO 14, QUILPUE",
       "e": "Pendiente",
       "tec": "MARCO PEREZ G",
@@ -22543,7 +22553,7 @@
       "o": "1-3OI2VMII",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "11:55",
+      "hi": "12:13",
       "d": "HALCON 616, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATÍAS JAQUE AG",
@@ -22555,7 +22565,7 @@
       "o": "1-3OEYCHDM",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "11:01",
+      "hi": "11:11",
       "d": "IRMA JOHNSON MOLINA 201 EDIF. B DEPTO 223, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -22567,9 +22577,9 @@
       "o": "1-3OHT7BBM",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "09:34",
+      "hi": "09:49",
       "d": "SANTA SARA 1540 EDIF. 1A DEPTO 307, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "RAFAEL VARGAS B",
       "visitas": 2,
       "ult_fecha": "19-10-2026",
@@ -22579,7 +22589,7 @@
       "o": "1-3OHVHR8T",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:54",
+      "hi": "14:57",
       "d": "CONDELL 88 CASA 1, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -22639,9 +22649,9 @@
       "o": "1-3OHNTZXK",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "09:35",
+      "hi": "09:52",
       "d": "EL BOSQUE 145 CASA 8, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JOEL GUSTAVE GUSTA",
       "desde": "19-10-2026"
      }
@@ -22649,5 +22659,5 @@
    }
   }
  },
- "generado": "20-10-2026 09:49"
+ "generado": "20-10-2026 09:59"
 }
