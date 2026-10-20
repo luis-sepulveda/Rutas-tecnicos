@@ -3275,8 +3275,8 @@
 <!-- Los botones que antes iban en las filas ACCIONES y PANELES de la cabecera.
      Mismos id y mismos onclick: lo unico que cambio es donde estan parados. -->
 <div id="barraAvisos" class="nb-flota izq">
-  <button class="btn" id="btnCaidas" onclick="toggleCaidas()">Caídas</button>
-  <button class="btn" id="btnReca" onclick="toggleReca()">Recaídas</button>
+  <button class="btn" id="btnCaidas" onclick="toggleCaidas()">Salieron de bandeja</button>
+  <button class="btn" id="btnReca" onclick="toggleReca()">Devueltas</button>
   <button class="btn" id="btnNuevas" onclick="toggleNuevas()">Nuevas</button>
   <button class="btn" id="btnRepe" onclick="toggleRepe()">Ya visitadas</button>
   <button class="btn" id="btnRed" onclick="toggleRed()">Nodos y NAP</button>
@@ -3328,7 +3328,7 @@
   <button class="btn" id="btnJornada" onclick="toggleJornada()">Jornada</button>
   <button class="btn" id="btnComp" onclick="toggleComp()">Completitud</button>
   <button class="btn" id="btnSC" onclick="toggleSinCompletar()">Sin completar</button>
-  <button class="btn" id="btnAtr" onclick="toggleAtrasados()">Más de 3 horas</button>
+  <button class="btn" id="btnAtr" onclick="toggleAtrasados()">Iniciadas +3 h</button>
   <button class="btn" id="btnLibre" onclick="toggleLibre()">Técnico libre</button>
 </div>
 <!-- Colores del modal de caidas: los dan las dos clases de aca abajo.
@@ -3359,7 +3359,7 @@
   <div class="mc-box">
     <div class="mc-head">
       <div class="mc-head-left">
-        <h2 id="nuevasTitulo">🆕 Órdenes que entraron hoy</h2>
+        <h2 id="nuevasTitulo">🆕 Actividades nuevas</h2>
         <div id="nuevasChips" class="mc-cont"></div>
       </div>
       <button class="mc-wsp" id="btnWspNuevas" onclick="toggleWspNuevas()" title="Resumen listo para pegar en WhatsApp">💬 WhatsApp</button>
@@ -3386,7 +3386,7 @@
 <div id="modalReca" class="t-claro" onclick="if(event.target===this) cerrarReca()">
   <div class="mc-box">
     <div class="mc-head">
-      <div class="mc-head-left"><h2>🔄 Recaídas del mismo día</h2></div>
+      <div class="mc-head-left"><h2>🔄 Actividades devueltas a las bandejas</h2></div>
       <button class="mc-close" onclick="cerrarReca()" title="Cerrar (Esc)">✖</button>
     </div>
     <div id="listaReca" class="mc-body"></div>
@@ -3825,7 +3825,7 @@ function renderBannerCaidas(){
   // una franja del mapa. El conteo vive solo en el boton.
   const n = nCaidas();
   const btn = document.getElementById('btnCaidas');
-  btn.innerHTML = 'Caídas' + (n>0 ? ' <span class="badge">'+n+'</span>' : '');
+  btn.innerHTML = 'Salieron de bandeja' + (n>0 ? ' <span class="badge">'+n+'</span>' : '');
   btn.classList.toggle('on-caidas', n>0 && !caidasAbierto);
   renderBotonNuevas();
   if(nuevasAbierto) renderNuevas();   // el modal abierto se refresca solo
@@ -3981,7 +3981,7 @@ function renderNuevas(){
   const todas = nuevasDelDia();
   const c = contar(todas);
   document.getElementById('nuevasTitulo').textContent =
-    '🆕 Órdenes que entraron hoy (' + todas.length + ')';
+    '🆕 Actividades nuevas (' + todas.length + ')';
   /* La explicacion va arriba, igual que en Caidas: que es esta lista, que no
      cuenta, y que el estado es el de AHORA (una que entro a las 10 y ya esta
      cerrada sale Completado, y sin este aviso parece un error). */
@@ -6098,7 +6098,7 @@ function renderBotonReca(){
   const btn = document.getElementById('btnReca');
   if(!btn) return;
   const n = nRecaidasVivas();
-  btn.innerHTML = 'Recaídas' + (n > 0 ? ' <span class="badge">'+n+'</span>' : '');
+  btn.innerHTML = 'Devueltas' + (n > 0 ? ' <span class="badge">'+n+'</span>' : '');
   btn.classList.toggle('on-reca', n > 0 && !recaAbierto);
 }
 
@@ -11341,7 +11341,7 @@ function cuadraturaHtml(nDia){
     + (C.repetidas ? f('+ filas repetidas <span class="m">(la misma orden dos veces en el export)</span>', C.repetidas, 'mas') : '')
     + f('<b>= actividades del día</b>' + (calza ? '' : ' <span class="m">(la portada muestra ' + nDia + ': son de otra hora)</span>'), '<b>' + C.filas + '</b>', 'tot fin')
     + '</table>'
-    + '<div class="cq-nota">"Entraron durante el día" se parece a <b>Nuevas</b>, pero no es igual: Nuevas cuenta desde la primera vuelta del monitor. '
+    + '<div class="cq-nota">"Entraron durante el día" se parece a <b>Actividades nuevas</b>, pero no es igual: esa cuenta desde la primera vuelta del monitor. '
     + 'La carga de bandejas es el primer ciclo en que la mitad o más del inicio ya estaba asignada.</div>'
     + '</div>';
 }
@@ -12018,7 +12018,7 @@ function pintarPortada(){
               return '';
             })()
     +       paAgrupar([
-              alerta('toggleCaidas', caidas, 'Caídas', 'se las sacaron al técnico sin que las tocara', '#c0392f'),
+              alerta('toggleCaidas', caidas, 'Actividades que salieron de la bandeja del técnico', 'se las sacaron sin que alcanzara a tocarlas', '#c0392f'),
               (function(){ const c = derHoyConteo();
                 return '<button class="pv-al ' + (c.d > 0 ? 'viva' : 'cero') + (DER_AVISO.length ? ' nueva' : '') + '" style="--tono:#b45309" title="Toca para abrir Derivación: hoy en vivo, por técnico, por dirección, a quién auditar y ficha del técnico." onclick="abrirDerivHoy()">'
                   + '<span class="n">' + c.d + '</span><span class="tx"><span class="t">Migraciones derivadas</span><span class="s">' + c.d + ' de ' + c.v + ' migraciones ya visitadas</span></span></button>'; })(),
@@ -12026,9 +12026,9 @@ function pintarPortada(){
               paEspera('<button class="pv-al ' + (sinIni > 0 ? 'viva' : 'cero') + (window.PV_SININI ? ' sel' : '')
                 + '" style="--tono:#0f766e" title="Toca para ver quiénes son" onclick="window.PV_SININI = !window.PV_SININI; pintarPortada()">'
                 + '<span class="n">' + sinIni + '</span><span class="tx"><span class="t">Sin iniciar</span><span class="s">tienen órdenes y ninguna iniciada ni en ruta</span></span></button>'),
-              alerta('toggleAtrasados', atras, 'Más de 3 h', 'iniciadas hace más de 3 horas y sin cerrar', '#c2410c'),
-              alerta('toggleNuevas', nuevas, 'Nuevas', 'entraron después de la primera vuelta del monitor', '#2563eb'),
-              alerta('toggleReca', reca, 'Reingresadas', 'volvieron a caer hoy', '#64748b'),
+              alerta('toggleAtrasados', atras, 'Actividades iniciadas por más de 3 horas', 'iniciadas hace más de 3 horas y todavía sin cerrar', '#c2410c'),
+              alerta('toggleNuevas', nuevas, 'Actividades nuevas', 'entraron a las bandejas después de la primera vuelta del monitor', '#2563eb'),
+              alerta('toggleReca', reca, 'Actividades devueltas a las bandejas', 'se las sacaron a un técnico y hoy volvieron a entrar', '#64748b'),
               alerta('toggleRepe', repe, 'Direcciones ya visitadas', 'hoy volvemos a una casa donde ya fallamos antes', '#7c3aed')
             ])
     +     '</div>'
