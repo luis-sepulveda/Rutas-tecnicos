@@ -3284,6 +3284,11 @@
   .ib-leer { background:#fff; border-radius:12px; padding:12px 16px; margin-top:12px; color:#41586f; font-size:13px; line-height:1.55; }
   .ib-leer b { color:#15293e; }
   .ib-h b .ib-hs { display:block; margin:2px 0 0; font-family:'DM Sans',sans-serif; font-weight:500; font-size:12px; color:#5d7389; }
+
+  /* (20-10-2026, 12:35) Reparaciones repetidas: orden original resaltada */
+  .rd-tabla tr.rd-orig td { background:#eff6ff; }
+  .rd-tag-orig { display:inline-block; margin-left:4px; padding:1px 7px; border-radius:999px; background:#1d4ed8; color:#fff; font-size:10.5px; font-weight:700; }
+  .rd-tabla tr.rd-otro td { color:#64748b; }
 </style>
 </head>
 <body>
@@ -6621,9 +6626,13 @@ function renderReitDir(){
     const k = claveDir(x.w.d);
     if(!k || vistas[x.w.o]) return;
     vistas[x.w.o] = 1;
-    let v = (RDIR[k] || []).slice();
+    /* (12:35) Luis: "muéstrame la orden original dentro del historial". La
+       direccion entra por sus reparaciones (como antes), pero la tabla trae
+       TODAS las visitas: asi se ve la alta, migracion o traslado original. */
+    const todas = (RDIR[k] || []).slice();
+    let v = todas;
     if(rdirSoloRep) v = v.filter(function(a){ return /^Reparaci/.test(a.cat); });
-    if(v.length >= rdirMin) lista.push({ x: x, v: v });
+    if(v.length >= rdirMin) lista.push({ x: x, v: v, todas: todas });
   });
   lista.sort(function(a, b){ return b.v.length - a.v.length || b.v[0].iso.localeCompare(a.v[0].iso); });
   const conHist = hoyRep.filter(function(x){ return (RDIR[claveDir(x.w.d)] || []).some(function(a){ return /^Reparaci/.test(a.cat); }); }).length;
@@ -6643,12 +6652,16 @@ function renderReitDir(){
       const nRep = v.filter(function(a){ return /^Reparaci/.test(a.cat); }).length;
       const nFal = v.filter(function(a){ return !a.ok; }).length;
       const dU = rdirHace(u.iso);
-      const filas = v.map(function(a){
+      /* orden original: el trabajo completado que NO es reparacion ni
+         modificacion/upgrade (alta, migracion, traslado) mas reciente */
+      const orig = it.todas.filter(function(a){ return a.ok && !/^(Reparaci|Modif|Upgrade|Downgrade)/.test(a.cat); })[0] || null;
+      const filas = it.todas.map(function(a){
         const dd = rdirHace(a.iso);
-        return '<tr>'
+        const esRep = /^Reparaci/.test(a.cat), esOrig = orig && a === orig;
+        return '<tr class="' + (esOrig ? 'rd-orig' : (esRep ? '' : 'rd-otro')) + '">'
           + '<td style="white-space:nowrap">' + escR(a.f) + '</td>'
           + '<td style="white-space:nowrap"><b>' + haceReit(dd) + '</b></td>'
-          + '<td>' + escR(a.cat) + '</td>'
+          + '<td>' + (esOrig ? '<b>' + escR(a.cat) + '</b> <span class="rd-tag-orig">orden original</span>' : escR(a.cat)) + '</td>'
           + '<td><span class="rd-ot">' + escR(a.o) + '</span>' + (a.o === w.o ? ' <small>(misma orden)</small>' : '') + '</td>'
           + '<td class="rd-tec">' + escR(a.tec) + '</td>'
           + '<td><span class="bes ' + (a.ok ? 'ok' : 'nr') + '">' + (a.ok ? 'Completada' : 'No realizada') + '</span></td>'
@@ -6667,7 +6680,10 @@ function renderReitDir(){
         + ' · <span class="bes ' + besRed(w.e) + '">' + escR(w.e || 'Pendiente') + '</span>'
         + (w.cie ? ' · cerró: ' + escR(w.cie) : '')
         + '</div>'
-        + '<div class="rd-sub">Reparaciones anteriores en esta dirección, de la más reciente a la más antigua:</div>'
+        + '<div class="rd-sub">' + (orig
+            ? 'Orden original: <b>' + escR(orig.cat) + '</b> del ' + escR(orig.f) + ' (hace ' + haceReit(rdirHace(orig.iso)) + '), técnico <b>' + escR(orig.tec) + '</b>. Todo el historial de la dirección, de lo más reciente a lo más antiguo:'
+            : 'No hay alta, migración ni traslado en el historial (empieza el ' + (rdirDesde || '01-07') + '): la orden original es anterior. Historial de la dirección, de lo más reciente a lo más antiguo:')
+        + '</div>'
         + '<div class="rd-scroll"><table class="rd-tabla">'
         + '<tr><th>Fecha</th><th>Hace</th><th>Trabajo</th><th>Orden</th><th>Técnico</th><th>Resultado</th><th>Cierre / quiebre</th></tr>'
         + filas + '</table></div>'
