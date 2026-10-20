@@ -6499,6 +6499,143 @@ const MESES_REIT = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Ag
 let reitTecAb = null;      // nombre del tecnico con el detalle abierto
 let REIT_TECS = [];        // lo que esta pintado, para abrir por indice
 
+/* ==== REPARACIONES EN DIRECCIONES REPETIDAS (20-10-2026, 10:20) ====
+   Luis: "dentro de boton reiterados agregar boton que muestre el mismo
+   detalle ... solo necesito ver las direcciones repetidas de las reparaciones
+   con detalle de quien ha ido, quiebre etc".
+   Pestana "Direcciones repetidas" del boton Reiterados: cada reparacion de
+   HOY (bandejas + bucket de Dominion, sin canceladas) cuya direccion exacta
+   (con casa y depto) ya tuvo visitas antes, con TODAS esas visitas: fecha,
+   hace cuanto, trabajo, orden, tecnico, resultado y cierre (quiebre).
+   A diferencia de "Hoy" (reiterados), no tiene limite de 30 dias y entran
+   tambien las visitas fallidas (no realizadas).
+   De donde sale: visitas_dir.json (todas las visitas desde el 01-07, hasta
+   ayer), que se baja una sola vez al abrir la pestana. La direccion se
+   compara con claveDir() (mayusculas, sin tildes ni espacios dobles). */
+let RDIR = null;          // { k: [visitas] } por direccion, o 'error'
+let rdirDesde = '';
+let rdirSoloRep = true;   // (10:25) Luis: "que muestre solo reparaciones": fijo, sin chip
+let rdirMin = 1;          // chip: 1+, 2+, 3+ visitas antes
+async function bajarRdir(){
+  try {
+    const r = await fetch(URL_VIS_RAW + '?t=' + Date.now(), { cache:'no-store' });
+    if(!r.ok) throw new Error('HTTP ' + r.status);
+    const vj = await r.json();
+    const m = {};
+    (vj.v || []).forEach(function(v){
+      const d = (vj.dirs || [])[v[0]]; if(!d) return;
+      const s = String(v[1]);
+      const k = claveDir(d[0]);
+      (m[k] = m[k] || []).push({ iso: s, f: s.slice(6, 8) + '-' + s.slice(4, 6) + '-' + s.slice(0, 4), o: String(v[2] || ''),
+        tec: String((vj.tecs || [])[v[3]] || '').replace(/ /g, ' ').replace(/\s+/g, ' ').trim(),
+        cat: String((vj.cats || [])[v[4]] || ''), ok: v[5] ? 1 : 0, cie: String((vj.cies || [])[v[6]] || '') });
+    });
+    Object.keys(m).forEach(function(k){ m[k].sort(function(a, b){ return b.iso.localeCompare(a.iso); }); });
+    RDIR = m;
+    const de = String(vj.desde || '');
+    rdirDesde = de.length === 8 ? de.slice(6, 8) + '-' + de.slice(4, 6) : '';
+  } catch(e){ console.warn('direcciones repetidas:', e); RDIR = 'error'; }
+}
+function rdirSet(campo, v){ if(campo === 'rep') rdirSoloRep = !rdirSoloRep; else rdirMin = v; renderReit(); }
+function rdirHace(iso){
+  const hoy = (typeof FECHA_DATOS !== 'undefined' && FECHA_DATOS) ? new Date(FECHA_DATOS) : new Date();
+  hoy.setHours(0, 0, 0, 0);
+  const d = new Date(+iso.slice(0, 4), +iso.slice(4, 6) - 1, +iso.slice(6, 8));
+  return Math.round((hoy - d) / 86400000);
+}
+function renderReitDir(){
+  const cont = document.getElementById('listaReit');
+  const chips = document.getElementById('reitChips');
+  const intro = document.getElementById('reitIntro');
+  const nota = document.getElementById('reitNota');
+  if(!RDIR){
+    chips.innerHTML = ''; nota.textContent = ''; intro.innerHTML = '';
+    cont.innerHTML = '<div class="vacio">Bajando el historial de visitas…</div>';
+    bajarRdir().then(function(){ if(reitAbierto && reitVista === 'dir') renderReit(); });
+    return;
+  }
+  if(RDIR === 'error'){
+    chips.innerHTML = ''; nota.textContent = ''; intro.innerHTML = '';
+    cont.innerHTML = '<div class="vacio">No se pudo bajar el historial de visitas (visitas_dir.json). '
+      + 'Cierra y vuelve a abrir en un rato.</div>';
+    RDIR = null;
+    return;
+  }
+  // reparaciones de hoy: bandejas + bucket de Dominion (b=1), sin canceladas
+  const hoyRep = [];
+  Object.keys(DB || {}).forEach(function(t){
+    (DB[t] || []).forEach(function(w){
+      if(String(w.t) === 'Reparación' && String(w.e) !== 'Cancelado') hoyRep.push({ w: w, tec: t, buck: false });
+    });
+  });
+  if(typeof BUCKET !== 'undefined' && Array.isArray(BUCKET)) BUCKET.forEach(function(w){
+    if(w.b === 1 && /^Reparaci/.test(String(w.cat || w.t || '')) && String(w.e) !== 'Cancelado')
+      hoyRep.push({ w: w, tec: 'En bucket', buck: true });
+  });
+  const vistas = {};
+  const lista = [];
+  hoyRep.forEach(function(x){
+    const k = claveDir(x.w.d);
+    if(!k || vistas[x.w.o]) return;
+    vistas[x.w.o] = 1;
+    let v = (RDIR[k] || []).slice();
+    if(rdirSoloRep) v = v.filter(function(a){ return /^Reparaci/.test(a.cat); });
+    if(v.length >= rdirMin) lista.push({ x: x, v: v });
+  });
+  lista.sort(function(a, b){ return b.v.length - a.v.length || b.v[0].iso.localeCompare(a.v[0].iso); });
+  const conHist = hoyRep.filter(function(x){ return (RDIR[claveDir(x.w.d)] || []).some(function(a){ return /^Reparaci/.test(a.cat); }); }).length;
+  const chip = function(on, txt, onc){ return '<span class="pchip' + (on ? ' act' : '') + '" onclick="' + onc + '">' + txt + '</span>'; };
+  chips.innerHTML = '<span class="fchip"><b>' + hoyRep.length + '</b> reparaciones hoy</span>'
+    + '<span class="fchip"><b>' + conHist + '</b> en direcciones con reparaciones antes</span>'
+    + '<span class="rsep"></span>'
+    + [1, 2, 3].map(function(n){ return chip(rdirMin === n, n + '+ reparaci' + (n > 1 ? 'ones' : 'ón') + ' antes', 'rdirSet(\'min\',' + n + ')'); }).join('');
+  intro.innerHTML = 'Reparaciones de hoy en una dirección (con casa y depto) donde ya hubo <b>reparaciones</b>'
+    + (rdirDesde ? ' desde el ' + rdirDesde : '') + ', completadas o no realizadas, sin límite de días. '
+    + 'La lista empieza por las direcciones con más reparaciones.';
+  if(!lista.length){
+    cont.innerHTML = '<div class="vacio">Ninguna reparación de hoy cumple el filtro.</div>';
+  } else {
+    cont.innerHTML = lista.map(function(it){
+      const w = it.x.w, v = it.v, u = v[0];
+      const nRep = v.filter(function(a){ return /^Reparaci/.test(a.cat); }).length;
+      const nFal = v.filter(function(a){ return !a.ok; }).length;
+      const dU = rdirHace(u.iso);
+      const filas = v.map(function(a){
+        const dd = rdirHace(a.iso);
+        return '<tr>'
+          + '<td style="white-space:nowrap">' + escR(a.f) + '</td>'
+          + '<td style="white-space:nowrap"><b>' + haceReit(dd) + '</b></td>'
+          + '<td>' + escR(a.cat) + '</td>'
+          + '<td><span class="rd-ot">' + escR(a.o) + '</span>' + (a.o === w.o ? ' <small>(misma orden)</small>' : '') + '</td>'
+          + '<td class="rd-tec">' + escR(a.tec) + '</td>'
+          + '<td><span class="bes ' + (a.ok ? 'ok' : 'nr') + '">' + (a.ok ? 'Completada' : 'No realizada') + '</span></td>'
+          + '<td>' + escR(a.cie || '—') + '</td>'
+          + '</tr>';
+      }).join('');
+      return '<div class="rd-card reit' + (v.length >= 3 || dU <= 7 ? ' cerca' : '') + '">'
+        + '<div class="rd-top"><span class="rd-tit">' + escR(w.d) + '</span>'
+        + '<span class="rd-sello">' + v.length + ' reparaci' + (v.length === 1 ? 'ón' : 'ones') + ' antes'
+        + (nFal ? ' · ' + nFal + ' no realizada' + (nFal === 1 ? '' : 's') : '')
+        + ' · última hace ' + haceReit(dU) + '</span></div>'
+        + '<div class="rd-hoy"><b>Hoy:</b> <span class="rd-ot">' + escR(w.o) + '</span>'
+        + ' · ' + escR(w.cat || w.t || 'Reparación')
+        + ' · franja ' + escR(w.f || 's/franja')
+        + ' · <span class="rd-tec' + (it.x.buck ? ' buck' : '') + '">' + escR(it.x.tec) + '</span>'
+        + ' · <span class="bes ' + besRed(w.e) + '">' + escR(w.e || 'Pendiente') + '</span>'
+        + (w.cie ? ' · cerró: ' + escR(w.cie) : '')
+        + '</div>'
+        + '<div class="rd-sub">Reparaciones anteriores en esta dirección, de la más reciente a la más antigua:</div>'
+        + '<div class="rd-scroll"><table class="rd-tabla">'
+        + '<tr><th>Fecha</th><th>Hace</th><th>Trabajo</th><th>Orden</th><th>Técnico</th><th>Resultado</th><th>Cierre / quiebre</th></tr>'
+        + filas + '</table></div>'
+        + (w.lat && w.lng ? '<span class="rd-mapa" onclick="cerrarReit(); if(document.getElementById(\'portada\').style.display !== \'none\') verMapa(); setTimeout(function(){ map.setView([' + w.lat + ',' + w.lng + '], 17); }, 150)">📍 ver en el mapa</span>' : '')
+        + '</div>';
+    }).join('');
+  }
+  nota.textContent = 'Las reparaciones anteriores salen de visitas_dir.json (hasta ayer): visitas de técnicos de Dominion, '
+    + 'completadas y no realizadas. Se compara la dirección exacta, con casa y depto. En rojo, las direcciones con 3 o más '
+    + 'reparaciones o con una en la última semana.';
+}
 function verReitVista(v){ reitVista = v; renderReit(); }
 function verReitPer(p){ reitPer = p; renderReit(); }
 function abrirReitTec(i){
@@ -6512,7 +6649,8 @@ function pintarTabsReit(){
   const el = document.getElementById('reitTabs');
   if(!el) return;
   let h = '<button class="rt-tab' + (reitVista === 'hoy' ? ' act' : '') + '" onclick="verReitVista(\'hoy\')">Hoy</button>'
-        + '<button class="rt-tab' + (reitVista === 'tec' ? ' act' : '') + '" onclick="verReitVista(\'tec\')">Por técnico</button>';
+        + '<button class="rt-tab' + (reitVista === 'tec' ? ' act' : '') + '" onclick="verReitVista(\'tec\')">Por técnico</button>'
+        + '<button class="rt-tab' + (reitVista === 'dir' ? ' act' : '') + '" onclick="verReitVista(\'dir\')">Direcciones repetidas</button>';
   if(reitVista === 'tec'){
     h += '<span class="rt-sep"></span>';
     // (05-10-2026) un boton por cada MES con datos, pedido de Luis
@@ -6779,6 +6917,7 @@ function renderReit(){
   }
   pintarTabsReit();
   if(reitVista === 'tec'){ renderReitTec(); return; }
+  if(reitVista === 'dir'){ renderReitDir(); return; }
   if(REIT.aviso === 'sin_direccion'){
     chips.innerHTML = ''; intro.innerHTML = ''; nota.textContent = '';
     cont.innerHTML = '<div class="vacio">El histórico de completadas todavía no trae la dirección. '
