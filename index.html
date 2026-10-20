@@ -3138,6 +3138,48 @@
   .ifr-ln { display:flex; justify-content:space-between; font-size:13px; padding:4px 0; border-bottom:1px solid #f1f5f9; }
   .ifr-ln:last-child { border-bottom:0; }
   .ifr-ln b { font-family:'Archivo',sans-serif; }
+
+  /* ==== PORTADA: MENOS ROJO Y MAPAS DISTINTOS (20-10-2026, 08:40) ====
+     Luis pidio mejorar tres cosas de la portada:
+       - Menos rojo: el rojo queda solo para Caidas y para el monitor detenido.
+         Nodos y NAP y Reiterados en la barra ya no se pintan enteros: queda
+         el boton normal con la cifra en rojo. Migraciones derivadas y Mas de
+         3 h pasan a ambar (el tono va en el HTML de cada alerta).
+       - Rutas y Red: se ven como "mapas" (fondo azul suave, borde y un
+         icono), separados del resto por una rayita. Antes estaban en azul
+         lleno y parecia que los dos estaban seleccionados.
+       - Las alertas en 0 se juntan en una sola linea "Sin novedades".
+     Para volver atras, borrar este bloque y ver la ficha (20-10-2026). */
+  .pv-bar a.alarma.b-al { background:transparent; color:#fecaca; }
+  .pv-bar a.alarma.b-al:hover { background:#3a1c26; color:#fff; box-shadow:0 0 12px rgba(248,113,113,.35); }
+  .pv-bar a.aqui, .pv-bar a.b-map { background:rgba(37,99,235,.18); color:#dbeafe; font-weight:600;
+    box-shadow:inset 0 0 0 1px rgba(96,165,250,.45); display:inline-flex; align-items:center; gap:6px; }
+  .pv-bar a.aqui::before, .pv-bar a.b-map::before { content:''; width:13px; height:13px; flex-shrink:0;
+    background:#93c5fd; -webkit-mask:var(--ico-mapa) center/contain no-repeat; mask:var(--ico-mapa) center/contain no-repeat; }
+  .pv-bar { --ico-mapa:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linejoin='round'%3E%3Cpath d='M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z'/%3E%3Cpath d='M9 4v14M15 6v14'/%3E%3C/svg%3E"); }
+  .pv-bar a.aqui:hover, .pv-bar a.b-map:hover { background:rgba(59,130,246,.35); color:#fff;
+    box-shadow:inset 0 0 0 1px #60a5fa, 0 0 12px rgba(96,165,250,.45); }
+  .pv-bar a.b-red { position:relative; margin-right:12px; }
+  .pv-bar a.b-red::after { content:''; position:absolute; right:-9px; top:7px; bottom:7px; width:1px; background:#2c4668; }
+  /* monitor detenido: Rutas sigue poniendose rojo entero (refrescarAviso) */
+  .pv-bar a.aqui.alarma { background:#7f1d1d; color:#ffd9d5; box-shadow:none; }
+  .pv-bar a.aqui.alarma::before { background:#fecaca; }
+  /* "pasada" siempre en gris; lo que avisa es la cifra sin cerrar de la derecha */
+  .pa-fr.amb .h .ps, .pa-fr.roj .h .ps { color:#8fa1b3; }
+  .pa-fr.amb .d > b { color:#b45309; } .pa-fr.roj .d > b { color:#c2410c; }
+  /* Por comuna: rotulo con "efectividad" sobre la columna del % */
+  .pv-rot.pa-rot-com { display:flex; justify-content:space-between; align-items:baseline; }
+  .pv-rot.pa-rot-com span { text-transform:none; letter-spacing:0; font-weight:500; }
+  /* alertas en 0: una sola linea */
+  .pa-at .pa-ceros { flex:1 1 100%; display:flex; flex-wrap:wrap; align-items:center; gap:6px;
+    padding:8px 10px; border:1px dashed #dbe4ed; border-radius:10px; background:#f8fafc; }
+  .pa-at .pa-ceros .l { font-size:10.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:#8fa1b3; margin-right:4px; }
+  .pa-at .pa-ceros .pv-al.cero { flex:0 0 auto; width:auto; padding:3px 10px 3px 4px; gap:6px; border-radius:999px;
+    background:#fff; border:1px solid #e2e8f0; }
+  .pa-at .pa-ceros .pv-al.cero::after { display:none; }
+  .pa-at .pa-ceros .pv-al.cero .s { display:none; }
+  .pa-at .pa-ceros .pv-al.cero .n { min-width:20px; height:20px; line-height:20px; font-size:11px; border-radius:999px; background:#eef2f6; color:#94a3b8; }
+  .pa-at .pa-ceros .pv-al.cero .tx .t { font-size:12.5px; font-weight:500; color:#64748b; }
 </style>
 </head>
 <body>
@@ -10505,6 +10547,18 @@ function desdePortada(fn){
    principales no cambian de color"). Mas de 3 horas y Sin completar abren un
    panel al costado; mientras esta abierto, su tarjeta se pone azul con un
    "✓ abierto · ✕ cerrar", igual que los botones del mapa. */
+/* (20-10-2026, 08:40) Requiere atencion: las alertas que estan en 0 (y no
+   abiertas) se juntan en una sola linea "Sin novedades", para que no ocupen
+   media columna. Siguen siendo botones: se pueden tocar igual. */
+function paAgrupar(lista){
+  const vivas = [], ceros = [];
+  lista.forEach(function(h){
+    const m = /class="(pv-al [^"]*)"/.exec(h), c = m ? m[1] : '';
+    (/\bcero\b/.test(c) && !/\bsel\b/.test(c) ? ceros : vivas).push(h);
+  });
+  return vivas.join('') + (ceros.length
+    ? '<div class="pa-ceros"><span class="l">Sin novedades</span>' + ceros.join('') + '</div>' : '');
+}
 function alertaAbierta(fn){
   return (fn === 'toggleAtrasados' && typeof atr !== 'undefined' && atr)
       || (fn === 'toggleSinCompletar' && typeof sinComp !== 'undefined' && sinComp);
@@ -11457,12 +11511,12 @@ function pintarPortada(){
     /* Nodos y NAP al lado de Seguimiento, a pedido de Luis (24-09-2026). Abre
        el mismo modal que el boton del mapa. Se pone en rojo (.alarma, que ya
        existia) cuando hay algun grupo en rojo, con la cifra al lado. */
-    +     '<a' + (gruposRojos() ? ' class="alarma"' : '') + ' onclick="desdePortada(toggleRed)">Nodos y NAP'
+    +     '<a' + (gruposRojos() ? ' class="alarma b-al"' : '') + ' onclick="desdePortada(toggleRed)">Nodos y NAP'
     +       (gruposRojos() ? '<span class="pv-nred">' + gruposRojos() + '</span>' : '') + '</a>'
     /* Reiterados al lado, 24-09-2026. Desde el 26-09-2026 se pinta en rojo
        (.alarma) cuando hay reiterados, igual que Nodos y NAP, a pedido de
        Luis (antes llevaba solo la cifra, en lila). */
-    +     '<a' + (nReit() ? ' class="alarma"' : '') + ' onclick="desdePortada(toggleReit)">Reiterados'
+    +     '<a' + (nReit() ? ' class="alarma b-al"' : '') + ' onclick="desdePortada(toggleReit)">Reiterados'
     +       (nReit() ? '<span class="pv-nred">' + nReit() + '</span>' : '') + '</a>'
     /* Tiempos (26-09-2026): a la derecha de Reiterados, a pedido de Luis (antes
        estuvo un rato en "Reportes"). Abre el boton Tiempos en terreno del
@@ -11576,7 +11630,7 @@ function pintarPortada(){
             +   '<a class="pa-lin pa-inf" href="' + URL_TABLA_HIST + '" target="_blank"><span>Historial</span><i>›</i></a>'
             +   '<a class="pa-lin pa-inf" href="' + URL_ACTIVIDADES + '?t=' + Date.now() + '#quiebres" target="_blank"><span>Quiebres</span><i>›</i></a>'
             +   '<a class="pa-lin pa-inf" onclick="abrirFranjas()" title="En qué franja se deriva más: por actividad, semana, día, técnico y comuna"><span>Franjas</span><i>›</i></a>'
-            +   '<div class="pa-inf-t">Bucket</div>'
+            +   (bkTile ? '<div class="pa-inf-t">Bucket</div>' : '')
             +   (bkTile ? fila('HFC en bucket', bkTile.hfc, '', bkTile.hfc ? clicBkL('__HFC__') : '', 'No son de Dominion; no cuentan arriba') : '')
             +   (bkTile ? fila('Canceladas en bucket', bkTile.canc, '', bkTile.canc ? clicBkL('__CANC__') : '') : '')
             + '</div></aside>';
@@ -11664,7 +11718,7 @@ function pintarPortada(){
             })()
     +       '<div class="pa-ley"><span><i class="c"></i>completadas</span><span><i class="n"></i>no realizadas</span><span><i class="x"></i>canc/susp</span><span><i class="i"></i>iniciadas</span>'
     +         '<span><i class="a"></i>en bandeja sin iniciar</span><span><i class="b"></i>todavía en el bucket</span></div>'
-    +       '<div class="pv-rot" style="margin:20px 0 10px">Por comuna</div>'
+    +       '<div class="pv-rot pa-rot-com" style="margin:20px 0 10px">Por comuna<span>efectividad</span></div>'
     +       '<div class="pv-com">' + comunas + '</div>'
     +   '<div class="pa-rep pa-rep-fr pv-linea"><span class="pv-rot">Reportes</span>'
     +   '<nav class="pv-links">'
@@ -11691,18 +11745,20 @@ function pintarPortada(){
     +         '<button class="pr" onclick="derProbarSonido(event)" title="Hace sonar el aviso para probar el volumen">Probar</button></span></div>'
     /* avisos que solo salen cuando hace falta, arriba de todo */
     +       (compPastillaHtml() + saludPastillaHtml()).replace(/<br>/g, ' ')
-    +       alerta('toggleCaidas', caidas, 'Caídas', 'se las sacaron al técnico sin que las tocara', '#c0392f')
-    +       (function(){ const c = derHoyConteo();
-              return '<button class="pv-al ' + (c.d > 0 ? 'viva' : 'cero') + (DER_AVISO.length ? ' nueva' : '') + '" style="--tono:#b91c1c" title="Toca para abrir Derivación: hoy en vivo, por técnico, por dirección, a quién auditar y ficha del técnico." onclick="abrirDerivHoy()">'
-                + '<span class="n">' + c.d + '</span><span class="tx"><span class="t">Migraciones derivadas</span><span class="s">' + c.d + ' de ' + c.v + ' migraciones ya visitadas</span></span></button>'; })()
-    +       alerta('toggleSinCompletar', sinComp, 'Sin completar', 'no han cerrado ninguna todavía hoy', '#b45309')
-    +       '<button class="pv-al ' + (sinIni > 0 ? 'viva' : 'cero') + (window.PV_SININI ? ' sel' : '')
-    +         '" style="--tono:#0f766e" title="Toca para ver quiénes son" onclick="window.PV_SININI = !window.PV_SININI; pintarPortada()">'
-    +         '<span class="n">' + sinIni + '</span><span class="tx"><span class="t">Sin iniciar</span><span class="s">tienen órdenes y ninguna iniciada ni en ruta</span></span></button>'
-    +       alerta('toggleAtrasados', atras, 'Más de 3 h', 'iniciadas hace más de 3 horas y sin cerrar', '#be123c')
-    +       alerta('toggleNuevas', nuevas, 'Nuevas', 'entraron después de la primera vuelta del monitor', '#2563eb')
-    +       alerta('toggleReca', reca, 'Reingresadas', 'volvieron a caer hoy', '#64748b')
-    +       alerta('toggleRepe', repe, 'Repetidas', 'dirección que ya falló antes', '#7c3aed')
+    +       paAgrupar([
+              alerta('toggleCaidas', caidas, 'Caídas', 'se las sacaron al técnico sin que las tocara', '#c0392f'),
+              (function(){ const c = derHoyConteo();
+                return '<button class="pv-al ' + (c.d > 0 ? 'viva' : 'cero') + (DER_AVISO.length ? ' nueva' : '') + '" style="--tono:#b45309" title="Toca para abrir Derivación: hoy en vivo, por técnico, por dirección, a quién auditar y ficha del técnico." onclick="abrirDerivHoy()">'
+                  + '<span class="n">' + c.d + '</span><span class="tx"><span class="t">Migraciones derivadas</span><span class="s">' + c.d + ' de ' + c.v + ' migraciones ya visitadas</span></span></button>'; })(),
+              alerta('toggleSinCompletar', sinComp, 'Sin completar', 'no han cerrado ninguna todavía hoy', '#b45309'),
+              '<button class="pv-al ' + (sinIni > 0 ? 'viva' : 'cero') + (window.PV_SININI ? ' sel' : '')
+                + '" style="--tono:#0f766e" title="Toca para ver quiénes son" onclick="window.PV_SININI = !window.PV_SININI; pintarPortada()">'
+                + '<span class="n">' + sinIni + '</span><span class="tx"><span class="t">Sin iniciar</span><span class="s">tienen órdenes y ninguna iniciada ni en ruta</span></span></button>',
+              alerta('toggleAtrasados', atras, 'Más de 3 h', 'iniciadas hace más de 3 horas y sin cerrar', '#c2410c'),
+              alerta('toggleNuevas', nuevas, 'Nuevas', 'entraron después de la primera vuelta del monitor', '#2563eb'),
+              alerta('toggleReca', reca, 'Reingresadas', 'volvieron a caer hoy', '#64748b'),
+              alerta('toggleRepe', repe, 'Repetidas', 'dirección que ya falló antes', '#7c3aed')
+            ])
     +     '</div>'
     +   '</section>'
 
