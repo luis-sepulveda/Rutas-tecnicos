@@ -22236,23 +22236,24 @@
    }
   },
   "20-10-2026": {
-   "hasta": "10:04",
-   "actividades": 117,
+   "hasta": "10:14",
+   "actividades": 119,
    "tecnicos": 34,
    "estados": {
-    "Iniciado": 28,
-    "Pendiente": 85,
-    "en ruta": 3,
+    "Iniciado": 29,
+    "Pendiente": 86,
+    "No Realizada": 1,
+    "en ruta": 2,
     "Cancelado": 1
    },
-   "rgu": 178.5,
-   "caidas_total": 2,
-   "caidas_activas": 2,
+   "rgu": 182.0,
+   "caidas_total": 4,
+   "caidas_activas": 4,
    "caidas_resueltas": 0,
-   "nuevas": 1,
+   "nuevas": 2,
    "al_bucket": 1,
    "repetidas": 27,
-   "reagendadas": 2,
+   "reagendadas": 3,
    "detalle": {
     "caidas": [
      {
@@ -22265,6 +22266,15 @@
       "e": "Pendiente"
      },
      {
+      "o": "1-3OFY1IRI",
+      "tec": "CESAR MENA OLIVEROS",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "15:08",
+      "d": "AV LOS CARRERA 2409, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3OHXPFC7",
       "tec": "JOEL GUSTAVE GUSTA",
       "cat": "Alta 2 Play",
@@ -22272,9 +22282,27 @@
       "hi": "11:47",
       "d": "AVENIDA VALPARAISO 598, VILLA ALEMANA",
       "e": "Pendiente"
+     },
+     {
+      "o": "1-3OHSVINH",
+      "tec": "MARCO PEREZ G",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "11:29",
+      "d": "SERENA 890 DEPTO 14, QUILPUE",
+      "e": "Pendiente"
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OGABHRX",
+      "tec": "CESAR MENA OLIVEROS",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "15:15",
+      "d": "PIEDRA LUNA 1, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OIBJ7VT",
       "tec": "GEEYSER PEREZ O",
@@ -22314,7 +22342,7 @@
       "o": "1-3OHVTAGF",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "11:13",
+      "hi": "11:42",
       "d": "RIQUELME 2063, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -22481,7 +22509,7 @@
      {
       "o": "1-3OHIJJMB",
       "cat": "Reparación",
-      "f": "13-16",
+      "f": "10-13",
       "hi": "14:00",
       "d": "AV VICEPRESIDENTE BDO LEIGHTON 1550 CASA 28, VILLA ALEMANA",
       "e": "Pendiente",
@@ -22612,12 +22640,22 @@
     ],
     "reagendadas": [
      {
+      "o": "1-3OGABHRX",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "15:15",
+      "d": "PIEDRA LUNA 1, QUILPUE",
+      "e": "Pendiente",
+      "tec": "CESAR MENA OLIVEROS",
+      "desde": "17-10-2026"
+     },
+     {
       "o": "1-3OGLSRPT",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "09:47",
+      "hi": "10:06",
       "d": "AFRICA 1108, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "EDGAR VALERO C",
       "desde": "17-10-2026"
      },
@@ -22635,5 +22673,5 @@
    }
   }
  },
- "generado": "20-10-2026 10:04"
+ "generado": "20-10-2026 10:14"
 }
