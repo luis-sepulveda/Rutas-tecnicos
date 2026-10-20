@@ -3538,10 +3538,12 @@
         <div id="estChips" class="mc-cont"></div>
       </div>
       <button class="mc-wsp" id="btnWspNR" style="display:none" onclick="toggleWspNR()" title="Resumen en imagen para WhatsApp">💬 WhatsApp</button>
+      <button class="mc-wsp" id="btnWspIJ" style="display:none" onclick="toggleWspInicio()" title="Tarjeta del inicio de jornada para el grupo de gerencia">💬 WhatsApp</button>
       <button class="mc-close" onclick="cerrarEst()" title="Cerrar (Esc)">✖</button>
     </div>
     <!-- Tarjeta para WhatsApp de las No Realizadas (17-10-2026) -->
     <div id="nrWsp" class="nw-box" style="display:none"></div>
+    <div id="ijWsp" class="nw-box" style="display:none"></div>
     <div id="listaEst" class="mc-body"></div>
     <div id="estNota" class="mc-resnota"></div>
   </div>
@@ -4481,6 +4483,55 @@ function tjDibujar(spec){
       const wn = ctx.measureText(String(b.n)).width;
       ctx.font = F(16); ctx.fillText(b.txt, P + 16 + wn + 12, y + 26);
       y += h + 8;
+    } else if(b.tipo === 'cuadros2'){
+      /* (20-10-2026, 15:10) cuadro con numero, nombre y una linea chica debajo (Inicio de jornada) */
+      const n = b.items.length, gap = 12, w = (W - 2 * P - gap * (n - 1)) / n, h = 104;
+      b.items.forEach(function(it, i){
+        const x = P + i * (w + gap);
+        tjRect(ctx, x, y, w, h, 12, it.bg);
+        ctx.fillStyle = it.fg; ctx.textAlign = 'center';
+        ctx.font = F(15, 600); ctx.fillText(it.txt, x + w / 2, y + 24);
+        ctx.font = F(38, 700); ctx.fillText(String(it.n), x + w / 2, y + 66);
+        ctx.globalAlpha = .85; ctx.font = F(13.5); ctx.fillText(it.sub || '', x + w / 2, y + 90); ctx.globalAlpha = 1;
+        ctx.textAlign = 'left';
+      });
+      y += h + 22;
+    } else if(b.tipo === 'franjas'){
+      /* (20-10-2026, 15:15) Luis: "tuve que preguntar qué era". Cada franja dice
+         todo con palabras: "59 actividades", "49% del día" y una línea por comuna. */
+      const n = b.items.length, gap = 12, w = (W - 2 * P - gap * (n - 1)) / n;
+      const nc = (b.items[0] && b.items[0].com) ? b.items[0].com.length : 0, h = 128 + nc * 26;
+      b.items.forEach(function(it, i){
+        const x = P + i * (w + gap);
+        tjRect(ctx, x, y, w, h, 12, '#F6F8FA');
+        ctx.textAlign = 'center'; ctx.fillStyle = TJ.texto;
+        ctx.font = F(16, 600); ctx.fillText(it.txt, x + w / 2, y + 26);
+        ctx.font = F(38, 700); ctx.fillText(String(it.n), x + w / 2, y + 70);
+        ctx.fillStyle = TJ.suave; ctx.font = F(14); ctx.fillText('actividades · ' + it.pct + ' del día', x + w / 2, y + 94);
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#E2E8F0'; ctx.fillRect(x + 14, y + 110, w - 28, 1);
+        (it.com || []).forEach(function(c, j){
+          const yy = y + 134 + j * 26;
+          tjRect(ctx, x + 16, yy - 11, 10, 10, 3, c.col);
+          ctx.fillStyle = TJ.texto; ctx.font = F(14.5); ctx.fillText(c.nom, x + 32, yy);
+          ctx.textAlign = 'right'; ctx.font = F(16, 700); ctx.fillText(String(c.n), x + w - 16, yy); ctx.textAlign = 'left';
+        });
+      });
+      y += h + 22;
+    } else if(b.tipo === 'filas'){
+      /* (20-10-2026, 15:10) una linea por tipo: cuadradito de color, nombre, % y cifra */
+      b.items.forEach(function(it, i){
+        const h = 38;
+        if(i % 2 === 0) tjRect(ctx, P, y, W - 2 * P, h, 8, '#F6F8FA');
+        tjRect(ctx, P + 12, y + 11, 16, 16, 4, it.color);
+        ctx.fillStyle = TJ.texto; ctx.font = F(17); ctx.fillText(it.txt, P + 40, y + 25);
+        ctx.textAlign = 'right';
+        ctx.fillStyle = TJ.suave; ctx.font = F(15, 600); ctx.fillText(it.pct, W - P - 70, y + 25);
+        ctx.fillStyle = TJ.texto; ctx.font = F(21, 700); ctx.fillText(String(it.n), W - P - 14, y + 26);
+        ctx.textAlign = 'left';
+        y += h;
+      });
+      y += 18;
     } else if(b.tipo === 'nota'){
       ctx.font = F(15); ctx.fillStyle = TJ.suave;
       ctx.fillText(b.txt, P, y + 16); y += 30;
@@ -4609,6 +4660,7 @@ const TJ_ACTUAL = {};
 function tjActualizar(pref){
   if(pref === 'nw') pintarWspNuevas(true);
   else if(pref === 'nr') pintarWspNR();
+  else if(pref === 'ij') pintarWspInicio();
   else pintarWspCaidas(true);
 }
 function tjAviso(pref, txt){ const ok = document.getElementById(pref + 'Ok'); if(ok) ok.textContent = txt; }
@@ -4627,7 +4679,7 @@ function tjCopiar(pref){
 
 function tjDescargar(pref){
   const a = TJ_ACTUAL[pref]; if(!a) return;
-  const nom = (pref === 'nw' ? 'nuevas_' : 'caidas_')
+  const nom = (pref === 'nw' ? 'nuevas_' : pref === 'ij' ? 'inicio_jornada_' : 'caidas_')
     + String((ALERTAS && ALERTAS.fecha) || 'hoy') + '_'
     + new Date().toTimeString().slice(0,5).replace(':','') + '.png';
   const l = document.createElement('a');
@@ -4731,6 +4783,96 @@ function toggleWspNR(){ nrWspAbierto = !nrWspAbierto; pintarWspNR(); }
 (function(){
   const orig = renderEst;
   renderEst = function(){ orig.apply(this, arguments); try { pintarWspNR(); } catch(e){ console.warn('tarjeta NR:', e); } };
+})();
+
+/* ==== INICIO DE JORNADA: TARJETA PARA EL GRUPO DE LA GERENCIA (20-10-2026, 15:10) ====
+   Luis manda cada manana el inicio de jornada al grupo donde esta la gerenta:
+   "modificalo para que se lea bien, presentable, visualmente bien". Boton
+   "💬 WhatsApp" en la ventana Inicio de jornada (solo ahi): arma una imagen
+   con tres bloques: el total y las dos comunas, las tres franjas (con su % y
+   cuantas por comuna) y una linea por tipo (1, 2, 3 Play, Reparacion, Otras)
+   con su % del dia. Mismos numeros de la ventana (actividadesInicio, que
+   respeta los filtros) y misma agrupacion por Play. Copiar imagen / Copiar
+   texto, igual que las tarjetas de Caidas y Nuevas. */
+let ijWspAbierto = false;
+function ijGrupo(x){
+  const T = String(x.p.cat || x.p.t || '').toUpperCase();
+  if(T.indexOf('REPARAC') === 0) return 'Reparación';
+  const m = T.match(/(\d)\s*PLAY/);
+  const esAlta = T.indexOf('ALTA') === 0 && T.indexOf('ALTA TRASLADO') !== 0;
+  if(m && (esAlta || T.indexOf('MIGRAC') === 0)) return m[1] + ' Play';
+  return 'Otras';
+}
+function ijComuna(x){
+  const c = String(x.p.d || '').split(',').pop().trim().toUpperCase();
+  return c === 'QUILPUE' ? 'Quilpué' : c === 'VILLA ALEMANA' ? 'Villa Alemana'
+    : c.toLowerCase().replace(/(^|\s)\S/g, function(t){ return t.toUpperCase(); }) || 'Sin comuna';
+}
+function ijDatos(){
+  const l = actividadesInicio(), foto = inicioHoy();
+  const cnt = function(a, fn){ const o = {}; a.forEach(function(x){ const k = fn(x); o[k] = (o[k] || 0) + 1; }); return o; };
+  const fr = Object.keys(cnt(l, function(x){ return x.p.f; })).sort();
+  const com = Object.keys(cnt(l, ijComuna)).sort(function(a, b){ return a === 'Quilpué' ? -1 : b === 'Quilpué' ? 1 : a.localeCompare(b); });
+  return { l: l, n: l.length, fr: fr, com: com, cnt: cnt, hora: foto ? foto.hora : '',
+           pc: function(v, t){ return Math.round(100 * v / (t || 1)) + '%'; } };
+}
+const IJ_ORD = ['1 Play', '2 Play', '3 Play', 'Reparación', 'Otras'];
+const IJ_COL = { '1 Play':'#9FE1CB', '2 Play':'#1D9E75', '3 Play':'#085041', 'Reparación':'#BA7517', 'Otras':'#B4B2A9' };
+const IJ_COM = { 'Quilpué':['#E6F0FA','#185FA5'], 'Villa Alemana':['#F1EAFE','#6D28D9'] };
+function ijFecha(){
+  const f = (ALERTAS && ALERTAS.fecha) ? String(ALERTAS.fecha).replace(/-\d{4}$/, '') : new Date().toLocaleDateString('es-CL');
+  return f;
+}
+function tarjetaInicio(){
+  const D = ijDatos(), b = [];
+  if(!D.n){
+    b.push({ tipo:'vacio', txt:'Todavía no llega el Excel de la mañana.' });
+  } else {
+    const pcom = D.cnt(D.l, ijComuna);
+    b.push({ tipo:'sec', txt:'Actividades del día', color:'#0F766E' });
+    b.push({ tipo:'cuadros2', items: [{ n: D.n, txt:'Total', sub:'100%', bg:'#E1F5EE', fg:'#085041' }]
+      .concat(D.com.map(function(c){ const k = IJ_COM[c] || ['#F1EFE8','#444441'];
+        return { n: pcom[c] || 0, txt: c, sub: D.pc(pcom[c] || 0, D.n) + ' del día', bg: k[0], fg: k[1] }; })) });
+    b.push({ tipo:'sec', txt:'Por franja horaria', color:'#0F766E', nota:'(horario de atención al cliente)' });
+    b.push({ tipo:'franjas', items: D.fr.map(function(f){
+      const lf = D.l.filter(function(x){ return x.p.f === f; }), cc = D.cnt(lf, ijComuna);
+      return { n: lf.length, txt: f + ' hrs', pct: D.pc(lf.length, D.n),
+               com: D.com.map(function(c){ return { nom: c, n: cc[c] || 0, col: (IJ_COM[c] || ['', '#888780'])[1] }; }) }; }) });
+    const pp = D.cnt(D.l, ijGrupo);
+    b.push({ tipo:'sec', txt:'Por tipo de actividad', color:'#0F766E' });
+    b.push({ tipo:'filas', items: IJ_ORD.map(function(k){ return { color: IJ_COL[k], txt: k, n: pp[k] || 0, pct: D.pc(pp[k] || 0, D.n) }; }) });
+  }
+  return tjDibujar({ color:'#0F766E', titulo:'Inicio de jornada',
+                     sub:'Quilpué y Villa Alemana · ' + ijFecha() + (D.hora ? ' · Excel de las ' + D.hora : ''),
+                     bloques: b, total: null });
+}
+function textoWspInicio(){
+  const D = ijDatos();
+  if(!D.n) return 'Inicio de jornada: todavía no llega el Excel de la mañana.';
+  const pcom = D.cnt(D.l, ijComuna), pp = D.cnt(D.l, ijGrupo);
+  const l = ['📊 *Inicio de jornada ' + ijFecha() + '*' + (D.hora ? ' (Excel ' + D.hora + ')' : ''),
+             '*' + D.n + ' actividades* · ' + D.com.map(function(c){ return c + ' ' + (pcom[c] || 0) + ' (' + D.pc(pcom[c] || 0, D.n) + ')'; }).join(' · '), ''];
+  D.fr.forEach(function(f){ const n = D.l.filter(function(x){ return x.p.f === f; }).length;
+    l.push('🕒 ' + f + ' hrs: *' + n + '* (' + D.pc(n, D.n) + ')'); });
+  l.push('', '*Por tipo:*');
+  IJ_ORD.forEach(function(k){ if(pp[k]) l.push('• ' + k + ': ' + pp[k] + ' (' + D.pc(pp[k], D.n) + ')'); });
+  return l.join('\n');
+}
+function pintarWspInicio(){
+  const btn = document.getElementById('btnWspIJ');
+  const box = document.getElementById('ijWsp');
+  if(!btn || !box) return;
+  const es = (estActual === '__INICIO__');
+  btn.style.display = es ? '' : 'none';
+  box.style.display = (es && ijWspAbierto) ? 'block' : 'none';
+  btn.classList.toggle('act', es && ijWspAbierto);
+  if(!es || !ijWspAbierto) return;
+  tjPintar(box, 'ij', tarjetaInicio(), textoWspInicio);
+}
+function toggleWspInicio(){ ijWspAbierto = !ijWspAbierto; pintarWspInicio(); }
+(function(){
+  const orig = renderEst;
+  renderEst = function(){ orig.apply(this, arguments); try { pintarWspInicio(); } catch(e){ console.warn('tarjeta inicio:', e); } };
 })();
 
 function pintarWspNuevas(forzar){
