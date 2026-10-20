@@ -22236,28 +22236,37 @@
    }
   },
   "20-10-2026": {
-   "hasta": "13:25",
-   "actividades": 149,
+   "hasta": "14:00",
+   "actividades": 151,
    "tecnicos": 34,
    "estados": {
-    "Completado": 36,
-    "en ruta": 2,
-    "Pendiente": 68,
-    "No Realizada": 26,
+    "Completado": 39,
     "Iniciado": 12,
+    "Pendiente": 58,
+    "No Realizada": 27,
+    "en ruta": 9,
     "Suspendido": 2,
-    "Cancelado": 3
+    "Cancelado": 4
    },
-   "rgu": 210.5,
-   "caidas_total": 7,
-   "caidas_activas": 7,
+   "rgu": 215.0,
+   "caidas_total": 8,
+   "caidas_activas": 8,
    "caidas_resueltas": 0,
    "nuevas": 20,
    "al_bucket": 9,
-   "repetidas": 33,
+   "repetidas": 35,
    "reagendadas": 4,
    "detalle": {
     "caidas": [
+     {
+      "o": "1-3OIGIFP9",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "15:36",
+      "d": "LA INVERNADA 3152, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OHSL2Q4",
       "tec": "CESAR MENA OLIVEROS",
@@ -22343,7 +22352,7 @@
      },
      {
       "o": "1-3OIHNI94",
-      "tec": "CRISTOBAL SILVA LEIVA",
+      "tec": "FELIPE SILVA R",
       "cat": "Alta 1 Play",
       "f": "16-19",
       "hi": "17:07",
@@ -22424,7 +22433,7 @@
      },
      {
       "o": "1-3OIEYT50",
-      "tec": "CRISTOBAL MIRANDA VALENC",
+      "tec": "CRISTOBAL SILVA LEIVA",
       "cat": "Alta 1 Play",
       "f": "13-16",
       "hi": "11:44",
@@ -22447,7 +22456,7 @@
       "f": "13-16",
       "hi": "15:37",
       "d": "LEUCOTON 9997 CASA FIC, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OHWQ141",
@@ -22492,7 +22501,7 @@
       "f": "10-13",
       "hi": "15:15",
       "d": "PIEDRA LUNA 1, QUILPUE",
-      "e": "en ruta"
+      "e": "No Realizada"
      },
      {
       "o": "1-3OIBJ7VT",
@@ -22530,12 +22539,24 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OHU5A0K",
+      "cat": "Migración 3 Play",
+      "f": "13-16",
+      "hi": "15:32",
+      "d": "SERENA 820, QUILPUE",
+      "e": "Pendiente",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "visitas": 1,
+      "ult_fecha": "19-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OHRYKQC",
       "cat": "Migración 3 Play",
       "f": "13-16",
-      "hi": "15:09",
+      "hi": "14:01",
       "d": "MARGA MARGA 1515, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "CRISTOBAL MIRANDA VALENC",
       "visitas": 3,
       "ult_fecha": "19-10-2026",
@@ -22557,7 +22578,7 @@
       "o": "1-3OG9WJ3A",
       "cat": "Migración 3 Play",
       "f": "13-16",
-      "hi": "14:31",
+      "hi": "15:03",
       "d": "MATEO DE TORO Y ZAMBRANO 915 CASA 46, QUILPUE",
       "e": "Pendiente",
       "tec": "FELIPE SILVA R",
@@ -22566,28 +22587,16 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3OHU5A0K",
-      "cat": "Migración 3 Play",
+      "o": "1-3OIIXDXQ",
+      "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "14:20",
-      "d": "SERENA 820, QUILPUE",
+      "hi": "14:36",
+      "d": "FREIRE 1065, QUILPUE",
       "e": "Pendiente",
       "tec": "GEEYSER PEREZ O",
-      "visitas": 1,
-      "ult_fecha": "19-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OHLJ51R",
-      "cat": "Alta 1 Play",
-      "f": "13-16",
-      "hi": "16:43",
-      "d": "SAN PEDRO 65 CASA B, QUILPUE",
-      "e": "Pendiente",
-      "tec": "GEEYSER PEREZ O",
-      "visitas": 1,
-      "ult_fecha": "19-10-2026",
-      "ult_cierre": "Sin Apoyo de Poste"
+      "visitas": 2,
+      "ult_fecha": "07-10-2026",
+      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3OHVTAGF",
@@ -22629,7 +22638,7 @@
       "o": "1-3OH4OC6X",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:21",
+      "hi": "16:00",
       "d": "LAUTARO 477 CASA 2, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -22689,7 +22698,7 @@
       "o": "1-3OIE68ZG",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "15:25",
+      "hi": "15:00",
       "d": "FELIU HURTADO 01496 CASA B, QUILPUE",
       "e": "Pendiente",
       "tec": "KEVIN TAPIA RETAMAL",
@@ -22703,7 +22712,7 @@
       "f": "10-13",
       "hi": "10:44",
       "d": "IRMA JOHNSON MOLINA 201 EDIF. B DEPTO 223, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "LEONEL HERNÁNDEZ OJE",
       "visitas": 2,
       "ult_fecha": "15-10-2026",
@@ -22725,9 +22734,8 @@
       "o": "1-3OI0YE6M",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:00",
       "d": "LOS CASTANOS 1022, QUILPUE",
-      "e": "Pendiente",
+      "e": "Cancelado",
       "tec": "LUIS CASTRO TORRES",
       "visitas": 1,
       "ult_fecha": "25-08-2026",
@@ -22737,7 +22745,7 @@
       "o": "1-3OI2LZOY",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "13:57",
       "d": "HIPODROMO(NODO 77) 53 EDIF. 5 DEPTO 532, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
@@ -22784,9 +22792,9 @@
       "o": "1-3OGMAF2I",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "13:57",
+      "hi": "14:16",
       "d": "LEUCOTON 9997 CASA FIC, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "MARCO PEREZ G",
       "visitas": 2,
       "ult_fecha": "17-10-2026",
@@ -22820,9 +22828,9 @@
       "o": "1-3OI2N109",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "13:54",
+      "hi": "14:01",
       "d": "AV LA PALMA 426 EDIF. C DEPTO 301, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "MATIAS APELEO APELEO",
       "visitas": 2,
       "ult_fecha": "16-10-2026",
@@ -22839,6 +22847,18 @@
       "visitas": 2,
       "ult_fecha": "19-10-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OGTAB9P",
+      "cat": "Migración 2 Play",
+      "f": "13-16",
+      "hi": "17:31",
+      "d": "LOS AROMOS 1179, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "RAFAEL VARGAS B",
+      "visitas": 1,
+      "ult_fecha": "17-10-2026",
+      "ult_cierre": "Falta de dotación"
      },
      {
       "o": "1-3OHX78FS",
@@ -22889,6 +22909,18 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3OHLJ51R",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "14:16",
+      "d": "SAN PEDRO 65 CASA B, QUILPUE",
+      "e": "en ruta",
+      "tec": "SEBASTIAN DOSSOW A",
+      "visitas": 1,
+      "ult_fecha": "19-10-2026",
+      "ult_cierre": "Sin Apoyo de Poste"
+     },
+     {
       "o": "1-3OHWQ141",
       "cat": "Alta 1 Play",
       "f": "13-16",
@@ -22906,9 +22938,9 @@
       "o": "1-3OGABHRX",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "13:15",
+      "hi": "13:28",
       "d": "PIEDRA LUNA 1, QUILPUE",
-      "e": "en ruta",
+      "e": "No Realizada",
       "tec": "CESAR MENA OLIVEROS",
       "desde": "17-10-2026"
      },
@@ -22946,5 +22978,5 @@
    }
   }
  },
- "generado": "20-10-2026 13:25"
+ "generado": "20-10-2026 14:00"
 }
