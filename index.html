@@ -11731,8 +11731,8 @@ function pintarPortada(){
     +     '<a class="b-map b-red" onclick="abrirVistaRed()">Red</a>'
     /* Clases por boton (26-09-2026): b-inf = informe (abre otra pagina),
        b-map = mapa, y una propia por boton, para poder darles color. */
-    +     '<a class="b-inf b-act" href="' + URL_ACTIVIDADES + '" target="_blank">Actividades</a>'
-    +     '<a class="b-inf b-seg" href="' + URL_SEGUIMIENTO + '" target="_blank">Seguimiento</a>'
+    +     '<a class="b-inf b-act" href="' + URL_ACTIVIDADES + '" target="_blank">Histórico diario</a>'
+    +     '<a class="b-inf b-seg" href="' + URL_SEGUIMIENTO + '" target="_blank">Autonomía despacho</a>'
     /* Nodos y NAP al lado de Seguimiento, a pedido de Luis (24-09-2026). Abre
        el mismo modal que el boton del mapa. Se pone en rojo (.alarma, que ya
        existia) cuando hay algun grupo en rojo, con la cifra al lado. */
@@ -11849,12 +11849,12 @@ function pintarPortada(){
                enlace o funcion de siempre. En la barra quedaron comentados.
                colDatos() (ritmo, RGU...) queda escrita por si se quiere volver. */
             +   '<div class="pa-inf-t">Informes</div>'
-            +   '<a class="pa-lin pa-inf" href="' + URL_TIEMPOS + '" target="_blank"><span>Tiempos</span><i>›</i></a>'
-            +   '<a class="pa-lin pa-inf" href="' + URL_NEGOCIOS + '" target="_blank"><span>Negocios</span><i>›</i></a>'
-            +   '<a class="pa-lin pa-inf" onclick="abrirResumen()"><span>Resumen</span><i>›</i></a>'
-            +   '<a class="pa-lin pa-inf" href="' + URL_TABLA_HIST + '" target="_blank"><span>Historial</span><i>›</i></a>'
-            +   '<a class="pa-lin pa-inf" href="' + URL_ACTIVIDADES + '?t=' + Date.now() + '#quiebres" target="_blank"><span>Quiebres</span><i>›</i></a>'
-            +   '<a class="pa-lin pa-inf" onclick="abrirFranjas()" title="En qué franja se deriva más: por actividad, semana, día, técnico y comuna"><span>Franjas</span><i>›</i></a>'
+            +   '<a class="pa-lin pa-inf" href="' + URL_TIEMPOS + '" target="_blank"><span>Tiempos en terreno por técnico</span><i>›</i></a>'
+            +   '<a class="pa-lin pa-inf" href="' + URL_NEGOCIOS + '" target="_blank"><span>Órdenes y tiempos por tipo de negocio</span><i>›</i></a>'
+            +   '<a class="pa-lin pa-inf" onclick="abrirResumen()"><span>Resumen día por día</span><i>›</i></a>'
+            +   '<a class="pa-lin pa-inf" href="' + URL_TABLA_HIST + '" target="_blank"><span>Tabla del mes por técnico</span><i>›</i></a>'
+            +   '<a class="pa-lin pa-inf" href="' + URL_ACTIVIDADES + '?t=' + Date.now() + '#quiebres" target="_blank"><span>Quiebres por técnico</span><i>›</i></a>'
+            +   '<a class="pa-lin pa-inf" onclick="abrirFranjas()" title="En qué franja se deriva más: por actividad, semana, día, técnico y comuna"><span>Derivaciones por franja</span><i>›</i></a>'
             +   (bkTile ? '<div class="pa-inf-t">Bucket</div>' : '')
             +   (bkTile ? fila('HFC en bucket', bkTile.hfc, '', bkTile.hfc ? clicBkL('__HFC__') : '', 'No son de Dominion; no cuentan arriba') : '')
             +   (bkTile ? fila('Canceladas en bucket', bkTile.canc, '', bkTile.canc ? clicBkL('__CANC__') : '') : '')
@@ -11980,21 +11980,22 @@ function pintarPortada(){
     +   '<div class="pa-rep pa-rep-fr pv-linea"><span class="pv-rot">Reportes</span>'
     +   '<nav class="pv-links">'
     /* 19-10-2026: Resumen de migraciones para supervisores (abrirResMig) */
-    +     '<button class="pv-lk rm-btn" onclick="abrirResMig()" title="Cuántas migraciones se derivaron, por qué y quién, con filtro por supervisor">Resumen migraciones<span class="fl">\u203a</span></button>'
+    +     '<button class="pv-lk rm-btn" onclick="abrirResMig()" title="Cuántas migraciones se derivaron, por qué y quién, con filtro por supervisor">Migraciones derivadas por técnico<span class="fl">\u203a</span></button>'
     +     (function(){ let c = null; try { c = calcularCompletitud(); } catch(e){}
             const ok = c && c.total, pc = ok ? Math.round(c.pct) : null;
             /* (20-10-2026, 08:55) antes del corte de las 13:00 de hoy va en gris: todavia no se mide */
             const antes13 = hoy && ahoraH < 13;
             const col = !ok || antes13 ? '#94a3b8' : c.pct >= COMP_META * 100 ? '#15803d' : c.pct >= 70 ? '#b45309' : '#b91c1c';
             return '<button class="pv-lk dato" onclick="desdePortada(toggleComp)" title="Completitud al corte de las 13:00' + (ok ? ': ' + c.cumplen + ' de ' + c.total + ' técnicos con al menos un cierre. Meta ' + Math.round(COMP_META * 100) + '%' : '')
-              + '"><b class="vl" style="background:' + col + '">' + (ok ? pc + '%' : '–') + '</b>Completitud<span class="fl">›</span></button>'; })()
-    +     enlace('verReporteRepe', 'Histórico', 'Reporte histórico de direcciones')
+              + '"><b class="vl" style="background:' + col + '">' + (ok ? pc + '%' : '–') + '</b>Cierres al corte de las 13:00<span class="fl">›</span></button>'; })()
+    +     enlace('verReporteRepe', 'Direcciones ya visitadas · histórico', 'Reporte histórico de direcciones ya visitadas')
     +     (function(){ const d = pvSinMorHoy();
             return '<span class="pv-lk dato dos' + (window.PV_SM ? ' sel' : '') + '">'
               + '<button class="vl" style="background:' + (d.l.length ? '#b91c1c' : '#94a3b8') + '" onclick="window.PV_SM = !window.PV_SM; pintarPortada()" title="Sin moradores de HOY: ' + d.l.length + ' de ' + d.vis
               + ' visitadas. Toca el número para ver cuáles son.">' + d.l.length + (window.PV_SM ? ' ✕' : '') + '</button>'
-              + '<a href="' + URL_SINMORADORES + '" target="_blank" title="Sin moradores semanal por técnico (abre el Historial)">Sin moradores<span class="fl">›</span></a></span>'; })()
-    +     enlace(URL_EQUIPO, 'Por supervisor', 'Detalle por supervisor')
+              + '<a href="' + URL_SINMORADORES + '" target="_blank" title="Sin moradores semanal por técnico (abre el Historial)">Sin moradores por técnico (semana)<span class="fl">›</span></a></span>'; })()
+    /* (20-10-2026, 11:10) nombres nuevos de los botones, a pedido de Luis: que el nombre diga que se ve. Ver la ficha. */
+    +     enlace(URL_EQUIPO, 'Carga de Play por técnico', 'Si a un técnico le cargan más de un Play que al resto (por supervisor)')
     +   '</nav></div>'
     +     '</div>'
 
