@@ -7605,7 +7605,8 @@ function tablasInicio(lista, pal, grad, porTipo, total){
     + '</div>';
   const leer = '<div class="ib-leer"><b>Cómo leer:</b> cada tarjeta es una franja horaria; la última, <b>Todo el día</b>, suma las tres. Arriba, cuántas actividades trae y cuánto pesa en el día; '
     + 'al medio, cuántas son de cada comuna; abajo, de qué tipo son. Las de <b>3 Play</b> son las que más tiempo toman.</div>';
-  return kpis + cartas + leer;
+  /* (14:55) sin la fila de 3 cajas (kpis): ahora repetia la tarjeta "Todo el dia". kpis queda escrita, sin usar. */
+  return cartas + leer;
 }
 
 function actividadesDeEstado(est){
