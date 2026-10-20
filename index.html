@@ -3241,6 +3241,47 @@
   /* la linea bajo el 120 puede ocupar dos renglones; y Requiere atencion no estira sus filas */
   .pa-ani .tx small { white-space:normal; line-height:1.35; }
   .pa-at { align-content:flex-start; }
+
+  /* ==== INICIO DE JORNADA: TOTAL POR PLAY (20-10-2026, 11:35) ==== */
+  .ifr-dia { background:#fff; border:1px solid #dbe4ed; border-radius:14px; padding:14px 18px; margin-bottom:14px; color:#15293e; }
+  .ifr-dia-t { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px; }
+  .ifr-dia-t b { font-family:'Archivo',sans-serif; font-size:16px; }
+  .ifr-dia-t span { font-size:13px; color:#5d7389; }
+  .ifr-dia .ifr-seg { height:26px; }
+  .ifr-dia-q { display:flex; flex-direction:column; gap:3px; margin-top:10px; padding:9px 12px; background:#f5f8fb; border-radius:9px;
+    font-size:12.5px; color:#41586f; line-height:1.4; }
+  .ifr-dia-q b { color:#15293e; }
+  .ifr-dia-c { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:10px 18px; margin-top:12px; }
+  .ifr-dia-c .nm { display:block; font-size:12.5px; color:#41586f; margin-bottom:4px; }
+  .ifr-dia-c .nm i { display:inline-block; width:9px; height:9px; border-radius:3px; margin-right:5px; }
+  .ifr-dia-c .nm b { font-family:'Archivo',sans-serif; color:#15293e; margin-left:3px; }
+  .ifr-ley b { font-family:'Archivo',sans-serif; color:#15293e; margin-left:2px; }
+
+  /* ==== INICIO DE JORNADA OPCION B (20-10-2026, 11:40) ==== */
+  .ib-kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px; margin-bottom:14px; }
+  .ib-kpi { background:#fff; border-radius:14px; padding:14px 18px; color:#15293e; border-top:4px solid #fff; }
+  .ib-kpi .l { font-size:12.5px; color:#5d7389; }
+  .ib-kpi .n { font-family:'Archivo',sans-serif; font-weight:700; font-size:34px; line-height:1.1; }
+  .ib-kpi .s { font-size:12.5px; color:#5d7389; }
+  .ib-g { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:12px; }
+  .ib-c { background:#fff; border-radius:14px; overflow:hidden; color:#15293e; }
+  .ib-h { padding:12px 18px; background:#effaf6; display:flex; justify-content:space-between; align-items:baseline; }
+  .ib-h b { font-family:'Archivo',sans-serif; font-size:20px; }
+  .ib-h span { font-family:'Archivo',sans-serif; font-weight:700; font-size:36px; color:#0e7c6b; line-height:1; }
+  .ib-h small { font-family:'DM Sans',sans-serif; font-weight:500; font-size:13px; color:#5d7389; margin-left:5px; }
+  .ib-cm { display:flex; gap:8px; padding:12px 18px 4px; }
+  .ib-cm div { flex:1; border-radius:10px; padding:8px 10px; color:#fff; }
+  .ib-cm div span { font-size:12px; opacity:.92; }
+  .ib-cm div b { display:block; font-family:'Archivo',sans-serif; font-size:22px; }
+  .ib-pl { padding:8px 18px 14px; }
+  .ib-pl .r { display:grid; grid-template-columns:22px 1fr 40px; gap:8px; align-items:center; padding:6px 0; border-bottom:1px solid #eef2f6; }
+  .ib-pl .r:last-child { border-bottom:0; }
+  .ib-pl .r i { width:16px; height:16px; border-radius:5px; }
+  .ib-pl .r .t { font-size:14.5px; } .ib-pl .r .t small { display:block; font-size:11.5px; color:#5d7389; }
+  .ib-pl .r b { font-family:'Archivo',sans-serif; font-size:18px; text-align:right; }
+  .ib-pl .r.cero { opacity:.35; }
+  .ib-leer { background:#fff; border-radius:12px; padding:12px 16px; margin-top:12px; color:#41586f; font-size:13px; line-height:1.55; }
+  .ib-leer b { color:#15293e; }
 </style>
 </head>
 <body>
@@ -7438,7 +7479,9 @@ function tablasInicio(lista, pal, grad, porTipo, total){
     return COL_COM[k] || '#888780'; };
   const COL_PLAY = { '1 Play':['#9FE1CB','#085041'], '2 Play':['#1D9E75','#fff'], '3 Play':['#085041','#fff'],
                      'Reparaciones':['#BA7517','#fff'], 'Otras (sin Play)':['#B4B2A9','#444441'] };
-  const NOM_PLAY = { '1 Play':'1P', '2 Play':'2P', '3 Play':'3P', 'Reparaciones':'Repa', 'Otras (sin Play)':'Otras' };
+  /* (20-10-2026, 11:35) Luis: "dejemos mas claro lo que identifica por play":
+     nombres completos y la cifra al lado de cada color (antes 1P, 2P, Repa). */
+  const NOM_PLAY = { '1 Play':'1 Play', '2 Play':'2 Play', '3 Play':'3 Play', 'Reparaciones':'Reparación', 'Otras (sin Play)':'Otras' };
   const cuentaPor = function(l, fn){ const o = {}; l.forEach(function(x){ const k = fn(x); o[k] = (o[k] || 0) + 1; }); return o; };
   const seg = function(o, orden, color){
     return '<div class="ifr-seg">' + orden.filter(function(k){ return o[k]; }).map(function(k){
@@ -7446,9 +7489,10 @@ function tablasInicio(lista, pal, grad, porTipo, total){
       return '<span style="flex:' + o[k] + ';background:' + c[0] + ';color:' + c[1] + '" title="' + escR(k) + ': ' + o[k] + '">' + o[k] + '</span>';
     }).join('') + '</div>';
   };
-  const ley = function(orden, color, nom){
+  const ley = function(orden, color, nom, cuenta){
     return '<div class="ifr-ley">' + orden.map(function(k){
-      return '<span><i style="background:' + color(k)[0] + '"></i>' + escR(nom ? nom(k) : k) + '</span>'; }).join('') + '</div>';
+      return '<span><i style="background:' + color(k)[0] + '"></i>' + escR(nom ? nom(k) : k)
+        + (cuenta ? ' <b>' + (cuenta[k] || 0) + '</b>' : '') + '</span>'; }).join('') + '</div>';
   };
   const comunas = Object.keys(cuentaPor(lista, comuna)).sort();
   const tarjetas = '<div class="ifr">' + franjas.map(function(f){
@@ -7458,28 +7502,56 @@ function tablasInicio(lista, pal, grad, porTipo, total){
       + '<span>' + lf.length + '<small>' + Math.round(100 * lf.length / (lista.length || 1)) + '%</small></span></div>'
       + '<div class="ifr-in"><div class="ifr-rt">Por comuna</div>'
       + seg(pc, comunas, function(k){ return [colCom(k), '#fff']; })
-      + ley(comunas, function(k){ return [colCom(k)]; })
+      + ley(comunas, function(k){ return [colCom(k)]; }, null, pc)
       + '<div class="ifr-rt">Por Play</div>'
       + seg(pp, ORDEN_PLAY, function(k){ return COL_PLAY[k]; })
-      + ley(ORDEN_PLAY.filter(function(k){ return pp[k]; }), function(k){ return COL_PLAY[k]; }, function(k){ return NOM_PLAY[k]; })
+      + ley(ORDEN_PLAY.filter(function(k){ return pp[k]; }), function(k){ return COL_PLAY[k]; }, function(k){ return NOM_PLAY[k]; }, pp)
       + '<div class="ifr-rt">Por tipo</div>'
       + Object.keys(pt).sort(function(a, b){ return pt[b] - pt[a] || a.localeCompare(b); }).map(function(k){
           return '<div class="ifr-ln"><span>' + escR(k) + '</span><b>' + pt[k] + '</b></div>'; }).join('')
       + '</div></div>';
   }).join('') + '</div>';
-  return tarjetas
-       + '<div class="ini-par">'
-       + tabla('POR COMUNA Y FRANJA', comuna)
-       + tabla('POR PLAY Y COMUNA', grupoPlay, ORDEN_PLAY, PIE_PLAY, comuna)
-       + '</div>'
-       + '<div class="ini-par">'
-       + tabla('POR TIPO DE ACTIVIDAD Y FRANJA', function(x){ return x.p.t || 'Sin tipo'; })
-       + tabla('POR PLAY Y FRANJA', grupoPlay, ORDEN_PLAY, PIE_PLAY)
-       + '</div>'
-       + '<div class="bcaja"><div class="btit" style="color:'+pal[0]+'">TIPO DE ACTIVIDAD CON SU PLAY</div>'
-       + barrasFijas(resumenPlay(porTipo), total, grad, 'bres')
-       + '<div class="bsep"></div><div class="bcap">DETALLE</div>'
-       + barras(porTipo, total, grad, ordenPlay) + '</div>';
+  /* (20-10-2026, 11:35) Luis: "borra las tarjetas antiguas". Se quitaron las
+     cuatro tablas (comuna x franja, Play x comuna, tipo x franja, Play x
+     franja) y las barras "Tipo de actividad con su Play". Quedan las tarjetas
+     por franja y, arriba, una franja con el total del dia por Play y que
+     significa cada grupo. Las funciones tabla(), barrasFijas() y barras()
+     siguen escritas por si se quieren volver a usar. Respaldo:
+     index_antes_inicio_play.html */
+  /* ==== INICIO DE JORNADA, OPCION B DEFINITIVA (20-10-2026, 11:40) ====
+     Luis: "deja la B, me gustó, es simple y entendible". Sin barras: arriba
+     tres cifras grandes (total y una por comuna); despues una tarjeta por
+     franja con su total y % del dia, una caja por comuna y una lista de 5
+     lineas por Play, cada una con lo que significa. Abajo, "Como leer".
+     Misma agrupacion de siempre (grupoPlay, comuna); respeta los filtros.
+     Las tarjetas anteriores (tarjetas, ppDia...) quedaron fuera; respaldo:
+     index_antes_inicio_b2.html. CSS: bloque "INICIO DE JORNADA OPCION B". */
+  const SUB_PLAY = { '1 Play':'alta o migración con 1 servicio', '2 Play':'alta o migración con 2 servicios',
+    '3 Play':'alta o migración con 3 servicios', 'Reparaciones':'visita por falla',
+    'Otras (sin Play)':'traslados, modificaciones, upgrades' };
+  const NOM_B = { '1 Play':'1 Play', '2 Play':'2 Play', '3 Play':'3 Play', 'Reparaciones':'Reparación', 'Otras (sin Play)':'Otras' };
+  const totCom = cuentaPor(lista, comuna), N = lista.length || 1;
+  const kpis = '<div class="ib-kpis"><div class="ib-kpi"><div class="l">Actividades para hoy</div><div class="n">' + lista.length + '</div>'
+    + '<div class="s">según el Excel de la mañana</div></div>'
+    + comunas.map(function(c){
+        return '<div class="ib-kpi" style="border-top-color:' + colCom(c) + '"><div class="l">' + escR(c) + '</div><div class="n">' + (totCom[c] || 0) + '</div>'
+          + '<div class="s">' + Math.round(100 * (totCom[c] || 0) / N) + '% del día</div></div>'; }).join('')
+    + '</div>';
+  const cartas = '<div class="ib-g">' + franjas.map(function(f){
+    const lf = lista.filter(function(x){ return x.p.f === f; });
+    const pc = cuentaPor(lf, comuna), pp = cuentaPor(lf, grupoPlay);
+    return '<div class="ib-c"><div class="ib-h"><b>' + escR(f) + (/^\d/.test(f) ? ' hrs' : '') + '</b>'
+      + '<span>' + lf.length + '<small>' + Math.round(100 * lf.length / N) + '% del día</small></span></div>'
+      + '<div class="ib-cm">' + comunas.map(function(c){
+          return '<div style="background:' + colCom(c) + '"><span>' + escR(c) + '</span><b>' + (pc[c] || 0) + '</b></div>'; }).join('') + '</div>'
+      + '<div class="ib-pl">' + ORDEN_PLAY.map(function(k){
+          return '<div class="r' + (pp[k] ? '' : ' cero') + '"><i style="background:' + COL_PLAY[k][0] + '"></i>'
+            + '<span class="t">' + NOM_B[k] + '<small>' + SUB_PLAY[k] + '</small></span><b>' + (pp[k] || 0) + '</b></div>'; }).join('')
+      + '</div></div>';
+  }).join('') + '</div>';
+  const leer = '<div class="ib-leer"><b>Cómo leer:</b> cada tarjeta es una franja horaria. Arriba, cuántas actividades trae y cuánto pesa en el día; '
+    + 'al medio, cuántas son de cada comuna; abajo, de qué tipo son. Las de <b>3 Play</b> son las que más tiempo toman.</div>';
+  return kpis + cartas + leer;
 }
 
 function actividadesDeEstado(est){
