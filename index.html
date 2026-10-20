@@ -10877,7 +10877,7 @@ function inicioDestinoTxt(bkN, enBandeja){
   const p = [(C.a_bandeja || 0) + ' en bandeja'];
   if(C.a_bucket) p.push(C.a_bucket + ' en bucket');
   if(C.a_otra) p.push(C.a_otra + ' otra empresa');
-  if(C.a_fuera) p.push(C.a_fuera + ' fuera');
+  if(C.a_fuera) p.push(C.a_fuera + ' salieron del día');   /* (12:55) antes "fuera": VTR/CLARO las saco del export (reagendadas o anuladas) */
   return p.join(' · ');
 }
 function alertaAbierta(fn){
@@ -12063,7 +12063,7 @@ function pintarPortada(){
                 h += cab('Por comuna', true);
                 h += coms.map(function(c){
                   const d = porComuna[c];
-                  const nom = c.toLowerCase().replace(/(^|\s)\S/g, t => t.toUpperCase());
+                  const nom = c.toLowerCase().replace(/(^|\s)\S/g, t => t.toUpperCase()).replace(/^Quilpue$/, 'Quilpué');   /* (12:55) con tilde */
                   const est = '<small>' + (d.ab ? '<span class="ab">' + d.ab + (d.ab === 1 ? ' abierta' : ' abiertas') + '</span>' : '<span class="ok">✓ todo cerrado</span>') + '</small>';
                   return fila(' com', nom + est, d.t,
                     tramo(d.c, 'c', 'completadas') + tramo(d.nr, 'n', 'no realizadas') + tramo(d.cs, 'x', 'canceladas o suspendidas')
