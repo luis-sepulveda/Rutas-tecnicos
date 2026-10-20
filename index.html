@@ -3301,6 +3301,13 @@
   .rd-tabla tr.rd-orig td { background:#eff6ff; }
   .rd-tag-orig { display:inline-block; margin-left:4px; padding:1px 7px; border-radius:999px; background:#1d4ed8; color:#fff; font-size:10.5px; font-weight:700; }
   .rd-tabla tr.rd-otro td { color:#64748b; }
+
+  /* (20-10-2026, 15:30) Resumen WhatsApp: boton verde en la barra y su ventana */
+  .pv-bar a.b-wsp { background:#15803d; color:#fff; font-weight:600; margin-left:6px; }
+  .pv-bar a.b-wsp:hover { background:#16a34a; color:#fff; box-shadow:0 0 12px rgba(74,222,128,.45); transform:translateY(-1px); }
+  #modalRJ { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); }
+  #modalRJ.abierto { display:flex; align-items:flex-start; justify-content:center; padding:4vh 2vw; overflow:auto; }
+  #modalRJ .mc-box { width:100%; }
 </style>
 </head>
 <body>
@@ -3482,6 +3489,17 @@
   </div>
 </div>
 <!-- Reiterados (24-09-2026). Mismo tema claro que los demas. -->
+<!-- RESUMEN PARA WHATSAPP (20-10-2026, 15:30): boton al lado de Reiterados -->
+<div id="modalRJ" class="t-claro" onclick="if(event.target===this) cerrarResumenWsp()">
+  <div class="mc-box" style="max-width:640px">
+    <div class="mc-head">
+      <div class="mc-head-left"><h2>💬 Resumen de la jornada para WhatsApp</h2></div>
+      <button class="mc-close" onclick="cerrarResumenWsp()" title="Cerrar (Esc)">✖</button>
+    </div>
+    <div id="rjWsp" class="nw-box"></div>
+    <div class="mc-resnota">Una sola imagen con el inicio de jornada, el avance, las actividades nuevas, las que salieron de la bandeja y las no realizadas. Toca «Copiar imagen» y pégala en WhatsApp Web con Ctrl+V. «Actualizar» la rehace con lo último.</div>
+  </div>
+</div>
 <div id="modalReit" class="t-claro" onclick="if(event.target===this) cerrarReit()">
   <div class="mc-box">
     <div class="mc-head">
@@ -4447,23 +4465,24 @@ function tjDibujar(spec){
   ctx.textBaseline = 'alphabetic';
 
   // cabecera
-  const hH = 86;
+  const G = !!spec.grande;   /* (20-10-2026, 15:20) letra mas grande: tarjeta de gerencia */
+  const hH = G ? 98 : 86;
   ctx.fillStyle = spec.color; ctx.fillRect(0, 0, W, hH);
   ctx.fillStyle = '#fff';
-  ctx.font = F(24, 600); ctx.fillText(spec.titulo, P, 40);
-  ctx.globalAlpha = .9; ctx.font = F(16); ctx.fillText(spec.sub, P, 68); ctx.globalAlpha = 1;
+  ctx.font = F(G ? 30 : 24, G ? 700 : 600); ctx.fillText(spec.titulo, P, G ? 46 : 40);
+  ctx.globalAlpha = .9; ctx.font = F(G ? 18 : 16); ctx.fillText(spec.sub, P, G ? 78 : 68); ctx.globalAlpha = 1;
 
   let y = hH + 26;
   spec.bloques.forEach(function(b){
     if(b.tipo === 'sec'){
-      ctx.font = F(14, 600); ctx.fillStyle = b.color || TJ.suave;
+      ctx.font = F(G ? 17 : 14, G ? 700 : 600); ctx.fillStyle = b.color || TJ.suave;
       const t = String(b.txt).toUpperCase();
-      ctx.fillText(t, P, y + 12);
+      ctx.fillText(t, P, y + (G ? 14 : 12));
       if(b.nota){
         const w = ctx.measureText(t + '  ').width;
-        ctx.font = F(14); ctx.fillText(b.nota, P + w, y + 12);
+        ctx.font = F(G ? 16 : 14); ctx.fillText(b.nota, P + w, y + (G ? 14 : 12));
       }
-      y += 26;
+      y += G ? 30 : 26;
     } else if(b.tipo === 'cuadros'){
       const n = b.items.length, gap = 12, w = (W - 2 * P - gap * (n - 1)) / n, h = 84;
       b.items.forEach(function(it, i){
@@ -4485,14 +4504,14 @@ function tjDibujar(spec){
       y += h + 8;
     } else if(b.tipo === 'cuadros2'){
       /* (20-10-2026, 15:10) cuadro con numero, nombre y una linea chica debajo (Inicio de jornada) */
-      const n = b.items.length, gap = 12, w = (W - 2 * P - gap * (n - 1)) / n, h = 104;
+      const n = b.items.length, gap = 12, w = (W - 2 * P - gap * (n - 1)) / n, h = 128;
       b.items.forEach(function(it, i){
         const x = P + i * (w + gap);
         tjRect(ctx, x, y, w, h, 12, it.bg);
         ctx.fillStyle = it.fg; ctx.textAlign = 'center';
-        ctx.font = F(15, 600); ctx.fillText(it.txt, x + w / 2, y + 24);
-        ctx.font = F(38, 700); ctx.fillText(String(it.n), x + w / 2, y + 66);
-        ctx.globalAlpha = .85; ctx.font = F(13.5); ctx.fillText(it.sub || '', x + w / 2, y + 90); ctx.globalAlpha = 1;
+        ctx.font = F(19, 700); ctx.fillText(it.txt, x + w / 2, y + 28);
+        ctx.font = F(52, 800); ctx.fillText(String(it.n), x + w / 2, y + 82);
+        ctx.globalAlpha = .9; ctx.font = F(17, 600); ctx.fillText(it.sub || '', x + w / 2, y + 110); ctx.globalAlpha = 1;
         ctx.textAlign = 'left';
       });
       y += h + 22;
@@ -4500,34 +4519,55 @@ function tjDibujar(spec){
       /* (20-10-2026, 15:15) Luis: "tuve que preguntar qué era". Cada franja dice
          todo con palabras: "59 actividades", "49% del día" y una línea por comuna. */
       const n = b.items.length, gap = 12, w = (W - 2 * P - gap * (n - 1)) / n;
-      const nc = (b.items[0] && b.items[0].com) ? b.items[0].com.length : 0, h = 128 + nc * 26;
+      const nc = (b.items[0] && b.items[0].com) ? b.items[0].com.length : 0, h = 150 + nc * 32;
       b.items.forEach(function(it, i){
         const x = P + i * (w + gap);
         tjRect(ctx, x, y, w, h, 12, '#F6F8FA');
         ctx.textAlign = 'center'; ctx.fillStyle = TJ.texto;
-        ctx.font = F(16, 600); ctx.fillText(it.txt, x + w / 2, y + 26);
-        ctx.font = F(38, 700); ctx.fillText(String(it.n), x + w / 2, y + 70);
-        ctx.fillStyle = TJ.suave; ctx.font = F(14); ctx.fillText('actividades · ' + it.pct + ' del día', x + w / 2, y + 94);
+        ctx.font = F(20, 700); ctx.fillText(it.txt, x + w / 2, y + 30);
+        ctx.font = F(52, 800); ctx.fillText(String(it.n), x + w / 2, y + 86);
+        ctx.fillStyle = TJ.suave; ctx.font = F(16, 600); ctx.fillText('actividades · ' + it.pct, x + w / 2, y + 114);
         ctx.textAlign = 'left';
-        ctx.fillStyle = '#E2E8F0'; ctx.fillRect(x + 14, y + 110, w - 28, 1);
+        ctx.fillStyle = '#E2E8F0'; ctx.fillRect(x + 14, y + 130, w - 28, 1.5);
         (it.com || []).forEach(function(c, j){
-          const yy = y + 134 + j * 26;
-          tjRect(ctx, x + 16, yy - 11, 10, 10, 3, c.col);
-          ctx.fillStyle = TJ.texto; ctx.font = F(14.5); ctx.fillText(c.nom, x + 32, yy);
-          ctx.textAlign = 'right'; ctx.font = F(16, 700); ctx.fillText(String(c.n), x + w - 16, yy); ctx.textAlign = 'left';
+          const yy = y + 160 + j * 32;
+          tjRect(ctx, x + 14, yy - 13, 12, 12, 3, c.col);
+          ctx.fillStyle = TJ.texto; ctx.font = F(15.5, 600); ctx.fillText(c.nom, x + 31, yy);
+          ctx.textAlign = 'right'; ctx.font = F(22, 800); ctx.fillText(String(c.n), x + w - 14, yy + 1); ctx.textAlign = 'left';
         });
       });
       y += h + 22;
+    } else if(b.tipo === 'grupo'){
+      /* (20-10-2026, 15:30) resumen: barra de color, titulo con su cifra a la derecha y lineas cortas */
+      /* las lineas largas se parten en dos para que no se salgan de la tarjeta */
+      ctx.font = F(17);
+      const lin = [], maxW = W - 2 * P - 40;
+      (b.lineas || []).forEach(function(t){
+        let cur = '';
+        String(t).split(' ').forEach(function(w){
+          const prueba = cur ? cur + ' ' + w : w;
+          if(ctx.measureText(prueba).width > maxW && cur){ lin.push(cur); cur = w; } else cur = prueba;
+        });
+        if(cur) lin.push(cur);
+      });
+      const h = 58 + lin.length * 27;
+      tjRect(ctx, P, y, W - 2 * P, h, 12, b.bg);
+      tjRect(ctx, P, y, 7, h, 3, b.color);
+      ctx.fillStyle = b.color; ctx.font = F(20, 700); ctx.fillText(b.titulo, P + 22, y + 34);
+      ctx.textAlign = 'right'; ctx.font = F(34, 800); ctx.fillText(String(b.n), W - P - 18, y + 40); ctx.textAlign = 'left';
+      ctx.fillStyle = TJ.texto; ctx.font = F(17);
+      lin.forEach(function(t, i){ ctx.fillText(t, P + 22, y + 66 + i * 27); });
+      y += h + 12;
     } else if(b.tipo === 'filas'){
       /* (20-10-2026, 15:10) una linea por tipo: cuadradito de color, nombre, % y cifra */
       b.items.forEach(function(it, i){
-        const h = 38;
+        const h = 48;
         if(i % 2 === 0) tjRect(ctx, P, y, W - 2 * P, h, 8, '#F6F8FA');
-        tjRect(ctx, P + 12, y + 11, 16, 16, 4, it.color);
-        ctx.fillStyle = TJ.texto; ctx.font = F(17); ctx.fillText(it.txt, P + 40, y + 25);
+        tjRect(ctx, P + 12, y + 14, 20, 20, 5, it.color);
+        ctx.fillStyle = TJ.texto; ctx.font = F(21, 600); ctx.fillText(it.txt, P + 46, y + 32);
         ctx.textAlign = 'right';
-        ctx.fillStyle = TJ.suave; ctx.font = F(15, 600); ctx.fillText(it.pct, W - P - 70, y + 25);
-        ctx.fillStyle = TJ.texto; ctx.font = F(21, 700); ctx.fillText(String(it.n), W - P - 14, y + 26);
+        ctx.fillStyle = TJ.suave; ctx.font = F(19, 600); ctx.fillText(it.pct, W - P - 84, y + 32);
+        ctx.fillStyle = TJ.texto; ctx.font = F(28, 800); ctx.fillText(String(it.n), W - P - 14, y + 34);
         ctx.textAlign = 'left';
         y += h;
       });
@@ -4661,6 +4701,7 @@ function tjActualizar(pref){
   if(pref === 'nw') pintarWspNuevas(true);
   else if(pref === 'nr') pintarWspNR();
   else if(pref === 'ij') pintarWspInicio();
+  else if(pref === 'rj') abrirResumenWsp();
   else pintarWspCaidas(true);
 }
 function tjAviso(pref, txt){ const ok = document.getElementById(pref + 'Ok'); if(ok) ok.textContent = txt; }
@@ -4679,7 +4720,7 @@ function tjCopiar(pref){
 
 function tjDescargar(pref){
   const a = TJ_ACTUAL[pref]; if(!a) return;
-  const nom = (pref === 'nw' ? 'nuevas_' : pref === 'ij' ? 'inicio_jornada_' : 'caidas_')
+  const nom = (pref === 'nw' ? 'nuevas_' : pref === 'ij' ? 'inicio_jornada_' : pref === 'rj' ? 'resumen_jornada_' : 'caidas_')
     + String((ALERTAS && ALERTAS.fecha) || 'hoy') + '_'
     + new Date().toTimeString().slice(0,5).replace(':','') + '.png';
   const l = document.createElement('a');
@@ -4844,7 +4885,7 @@ function tarjetaInicio(){
   }
   return tjDibujar({ color:'#0F766E', titulo:'Inicio de jornada',
                      sub:'Quilpué y Villa Alemana · ' + ijFecha() + (D.hora ? ' · Excel de las ' + D.hora : ''),
-                     bloques: b, total: null });
+                     bloques: b, total: null, grande: true });
 }
 function textoWspInicio(){
   const D = ijDatos();
@@ -4875,6 +4916,85 @@ function toggleWspInicio(){ ijWspAbierto = !ijWspAbierto; pintarWspInicio(); }
   renderEst = function(){ orig.apply(this, arguments); try { pintarWspInicio(); } catch(e){ console.warn('tarjeta inicio:', e); } };
 })();
 
+/* ==== RESUMEN DE LA JORNADA EN UNA SOLA TARJETA (20-10-2026, 15:30) ====
+   Luis: "cómo quedaría un resumen con todas las tarjetas de WhatsApp que
+   envío (inicio de jornada, actividades que salieron, nuevas, no
+   realizadas)... las envío cada 1 hora aprox por separado, y si las
+   juntamos". Una imagen con: el inicio (total y comunas), el avance
+   (completadas, no realizadas, efectividad de lo visitado) y un bloque por
+   tema con lo principal: nuevas y devueltas, las que salieron y que paso
+   con ellas, y las 3 causas principales de no realizadas. Mismos numeros
+   de las tarjetas sueltas. */
+function tarjetaResumen(){
+  const b = [];
+  const D = ijDatos();
+  const fam = function(l){ const c = nwCuenta(l, function(x){ const f = familiaCat(x.cat);
+      return (f === 'Altas' || f === 'Migraciones' || f === 'Reparaciones') ? f : 'Otras'; });
+    return ['Altas','Migraciones','Reparaciones','Otras'].filter(function(k){ return c[k]; })
+      .map(function(k){ const sg = { Altas:'alta', Migraciones:'migración', Reparaciones:'reparación', Otras:'otra' };
+        return c[k] + ' ' + (c[k] === 1 ? sg[k] : k.toLowerCase()); }).join(' · '); };
+  // inicio
+  if(D.n){
+    const pcom = D.cnt(D.l, ijComuna);
+    b.push({ tipo:'sec', txt:'Inicio de jornada', color:'#0F766E', nota: D.hora ? '(Excel de las ' + D.hora + ')' : '' });
+    b.push({ tipo:'cuadros2', items: [{ n: D.n, txt:'Total', sub:'actividades', bg:'#E1F5EE', fg:'#085041' }]
+      .concat(D.com.map(function(c){ const k = IJ_COM[c] || ['#F1EFE8','#444441'];
+        return { n: pcom[c] || 0, txt: c, sub: D.pc(pcom[c] || 0, D.n) + ' del día', bg: k[0], fg: k[1] }; })) });
+  }
+  // avance
+  const comp = actividadesDeEstado('Completado').length;
+  const nrL = actividadesDeEstado('No Realizada').map(function(x){ return x.p; });
+  const vis = comp + nrL.length;
+  b.push({ tipo:'sec', txt:'Avance hasta ahora', color:'#1D4ED8' });
+  b.push({ tipo:'cuadros2', items: [
+    { n: comp, txt:'Completadas', sub:'órdenes', bg:'#E8F0FE', fg:'#1E40AF' },
+    { n: nrL.length, txt:'No realizadas', sub:'órdenes', bg:'#FAECE7', fg:'#712B13' },
+    { n: vis ? Math.round(100 * comp / vis) + '%' : '–', txt:'Efectividad', sub:'de lo visitado (' + vis + ')', bg:'#F6F8FA', fg:'#0f172a' } ] });
+  b.push({ tipo:'sec', txt:'Durante el día', color:'#444441' });
+  // nuevas
+  const nl = nuevasDelDia().filter(pasaFiltro);
+  const nue = nl.filter(function(x){ return clase(x) !== 'reingreso'; }), rei = nl.filter(function(x){ return clase(x) === 'reingreso'; });
+  b.push({ tipo:'grupo', color:'#0F6E56', bg:'#EEF8F4', titulo:'Actividades nuevas', n: nl.length,
+    lineas: nl.length ? [nue.length + ' nuevas' + (nue.length ? ': ' + fam(nue) : ''), rei.length + ' reingresadas (ya se fue antes y no se pudo)' + (rei.length ? ': ' + fam(rei) : '')]
+                      : ['Ninguna hasta ahora.'] });
+  // salieron
+  const cl = (ALERTAS && ALERTAS.activas) ? ALERTAS.activas.slice() : [];
+  const cc = {}; cl.forEach(function(x){ const ic = cwDesenlace(x)[0]; cc[ic] = (cc[ic] || 0) + 1; });
+  const qp = CW_ORDEN.filter(function(ic){ return cc[ic]; }).map(function(ic){ const d = TJ_DES[ic] || TJ_DES['⏳'];
+    return cc[ic] + ' ' + (cc[ic] === 1 ? d[2] : d[3]).split(' · ')[0]; }).join(' · ');
+  b.push({ tipo:'grupo', color:'#A32D2D', bg:'#FCF1F1', titulo:'Salieron de la bandeja del técnico', n: cl.length,
+    lineas: cl.length ? [fam(cl), 'Qué pasó: ' + qp] : ['Ninguna hasta ahora.'] });
+  // no realizadas: 3 causas principales
+  const ca = nwCuenta(nrL, function(x){ return String(x.cie || 'Sin código de cierre').trim(); });
+  const top = Object.keys(ca).sort(function(a, z){ return ca[z] - ca[a] || a.localeCompare(z); });
+  b.push({ tipo:'grupo', color:'#993C1D', bg:'#FBF2EE', titulo:'No realizadas', n: nrL.length,
+    lineas: nrL.length ? [fam(nrL), 'Causas: ' + top.slice(0, 3).map(function(k){ return ca[k] + ' ' + k.toLowerCase(); }).join(' · ')
+                           + (top.length > 3 ? ' · ' + top.slice(3).reduce(function(s, k){ return s + ca[k]; }, 0) + ' otras' : '')]
+                       : ['Ninguna hasta ahora.'] });
+  return tjDibujar({ color:'#0f172a', titulo:'Resumen de la jornada', sub: tjFechaHora(), bloques: b, total: null, grande: true });
+}
+
+function abrirResumenWsp(){
+  const m = document.getElementById('modalRJ'); if(!m) return;
+  m.classList.add('abierto');
+  const pinta = function(){ try { tjPintar(document.getElementById('rjWsp'), 'rj', tarjetaResumen(), textoWspResumen); }
+                            catch(e){ console.warn('resumen whatsapp:', e); } };
+  pinta();
+  // el inicio de jornada se baja aparte: si todavia no estaba, se rehace al llegar
+  try { asegurarInicio(function(){ if(m.classList.contains('abierto')) pinta(); }); } catch(e){}
+}
+function cerrarResumenWsp(){ const m = document.getElementById('modalRJ'); if(m) m.classList.remove('abierto'); }
+document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarResumenWsp(); });
+function textoWspResumen(){
+  const D = ijDatos(), l = ['📊 *Resumen de la jornada*', tjFechaHora(), ''];
+  if(D.n){ const pc = D.cnt(D.l, ijComuna);
+    l.push('*Inicio:* ' + D.n + ' actividades · ' + D.com.map(function(c){ return c + ' ' + (pc[c] || 0); }).join(' · ')); }
+  const comp = actividadesDeEstado('Completado').length, nr = actividadesDeEstado('No Realizada').length, vis = comp + nr;
+  l.push('*Avance:* ' + comp + ' completadas · ' + nr + ' no realizadas · ' + (vis ? Math.round(100 * comp / vis) + '%' : '–') + ' de efectividad (de ' + vis + ' visitadas)');
+  const nl = nuevasDelDia().filter(pasaFiltro), cl = (ALERTAS && ALERTAS.activas) ? ALERTAS.activas.length : 0;
+  l.push('', '🆕 Actividades nuevas: *' + nl.length + '*', '🚨 Salieron de la bandeja: *' + cl + '*', '❌ No realizadas: *' + nr + '*');
+  return l.join('\n');
+}
 function pintarWspNuevas(forzar){
   const box = document.getElementById('nuevasWsp');
   const btn = document.getElementById('btnWspNuevas');
@@ -12012,6 +12132,8 @@ function pintarPortada(){
        Luis (antes llevaba solo la cifra, en lila). */
     +     '<a' + (nReit() ? ' class="alarma b-al"' : '') + ' onclick="desdePortada(toggleReit)">Reiterados'
     +       (nReit() ? '<span class="pv-nred">' + nReit() + '</span>' : '') + '</a>'
+    /* (20-10-2026, 15:30) Resumen para WhatsApp, al lado de Reiterados (pedido de Luis) */
+    +     '<a class="b-wsp" onclick="abrirResumenWsp()" title="Una sola imagen con inicio, avance, nuevas, salieron y no realizadas, para el grupo">💬 Resumen WhatsApp</a>'
     /* Tiempos (26-09-2026): a la derecha de Reiterados, a pedido de Luis (antes
        estuvo un rato en "Reportes"). Abre el boton Tiempos en terreno del
        historial en otra pestana, como Historial y Seguimiento. */
