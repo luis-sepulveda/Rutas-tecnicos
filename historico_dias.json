@@ -22236,23 +22236,23 @@
    }
   },
   "20-10-2026": {
-   "hasta": "12:39",
-   "actividades": 139,
+   "hasta": "12:54",
+   "actividades": 145,
    "tecnicos": 34,
    "estados": {
-    "Completado": 29,
-    "Iniciado": 15,
-    "Pendiente": 67,
-    "No Realizada": 22,
+    "Completado": 32,
+    "Iniciado": 14,
+    "Pendiente": 69,
+    "No Realizada": 23,
     "Suspendido": 2,
-    "Cancelado": 2,
-    "en ruta": 2
+    "en ruta": 2,
+    "Cancelado": 3
    },
-   "rgu": 200.4,
-   "caidas_total": 5,
-   "caidas_activas": 5,
+   "rgu": 206.4,
+   "caidas_total": 6,
+   "caidas_activas": 6,
    "caidas_resueltas": 0,
-   "nuevas": 15,
+   "nuevas": 17,
    "al_bucket": 8,
    "repetidas": 32,
    "reagendadas": 4,
@@ -22274,6 +22274,15 @@
       "f": "13-16",
       "hi": "15:08",
       "d": "AV LOS CARRERA 2409, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OIGLQBV",
+      "tec": "EDGAR VALERO C",
+      "cat": "Migración 1 Play",
+      "f": "13-16",
+      "hi": "15:00",
+      "d": "PJE 4 865 CASA, QUILPUE",
       "e": "Pendiente"
      },
      {
@@ -22306,13 +22315,31 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OIG8WJB",
+      "tec": "JORDAN ROA PEREZ",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "16:07",
+      "d": "RIQUELME 2063, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OIGU7DC",
+      "tec": "FELIPE SILVA R",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "16:47",
+      "d": "SANTA ROSA 32 CASA 9, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3OIGLQBV",
       "tec": "EDGAR VALERO C",
       "cat": "Migración 1 Play",
       "f": "13-16",
       "hi": "15:00",
       "d": "PJE 4 865 CASA, QUILPUE",
-      "e": "Pendiente"
+      "e": "Pendiente (ya no está)"
      },
      {
       "o": "1-3OIG9N0C",
@@ -22424,7 +22451,7 @@
      },
      {
       "o": "1-3OGABHRX",
-      "tec": "JOSE ROJO A",
+      "tec": "CESAR MENA OLIVEROS",
       "cat": "Alta 2 Play",
       "f": "10-13",
       "hi": "15:15",
@@ -22458,7 +22485,7 @@
       "o": "1-3OIET9H4",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:04",
+      "hi": "16:11",
       "d": "FRODDEN 01760, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -22470,7 +22497,7 @@
       "o": "1-3OHRYKQC",
       "cat": "Migración 3 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "15:09",
       "d": "MARGA MARGA 1515, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -22494,7 +22521,7 @@
       "o": "1-3OG9WJ3A",
       "cat": "Migración 3 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "14:10",
       "d": "MATEO DE TORO Y ZAMBRANO 915 CASA 46, QUILPUE",
       "e": "Pendiente",
       "tec": "FELIPE SILVA R",
@@ -22506,7 +22533,7 @@
       "o": "1-3OHU5A0K",
       "cat": "Migración 3 Play",
       "f": "13-16",
-      "hi": "14:56",
+      "hi": "14:00",
       "d": "SERENA 820, QUILPUE",
       "e": "Pendiente",
       "tec": "GEEYSER PEREZ O",
@@ -22614,7 +22641,7 @@
       "o": "1-3OIE68ZG",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "15:20",
       "d": "FELIU HURTADO 01496 CASA B, QUILPUE",
       "e": "Pendiente",
       "tec": "KEVIN TAPIA RETAMAL",
@@ -22662,7 +22689,7 @@
       "o": "1-3OI2LZOY",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "14:48",
       "d": "HIPODROMO(NODO 77) 53 EDIF. 5 DEPTO 532, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
@@ -22733,9 +22760,9 @@
       "o": "1-3OHIJJMB",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "12:27",
+      "hi": "12:42",
       "d": "AV VICEPRESIDENTE BDO LEIGHTON 1550 CASA 28, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Completado",
       "tec": "MATIAS APELEO APELEO",
       "visitas": 1,
       "ult_fecha": "19-10-2026",
@@ -22745,7 +22772,7 @@
       "o": "1-3OI2N109",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:36",
+      "hi": "14:00",
       "d": "AV LA PALMA 426 EDIF. C DEPTO 301, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -22807,7 +22834,7 @@
       "f": "10-13",
       "hi": "11:48",
       "d": "EL RINCON 568 CASA 64, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "SEBASTIAN DOSSOW A",
       "visitas": 1,
       "ult_fecha": "19-10-2026",
@@ -22817,7 +22844,7 @@
       "o": "1-3OHWQ141",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:07",
+      "hi": "15:10",
       "d": "MARGA MARGA 1544 CASA B, QUILPUE",
       "e": "Pendiente",
       "tec": "YENDER BOSCAN CADENAS",
@@ -22827,6 +22854,16 @@
      }
     ],
     "reagendadas": [
+     {
+      "o": "1-3OGABHRX",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "12:59",
+      "d": "PIEDRA LUNA 1, QUILPUE",
+      "e": "Pendiente",
+      "tec": "CESAR MENA OLIVEROS",
+      "desde": "17-10-2026"
+     },
      {
       "o": "1-3OGLSRPT",
       "cat": "Reparación",
@@ -22856,20 +22893,10 @@
       "e": "No Realizada",
       "tec": "JOEL GUSTAVE GUSTA",
       "desde": "19-10-2026"
-     },
-     {
-      "o": "1-3OGABHRX",
-      "cat": "Alta 2 Play",
-      "f": "10-13",
-      "hi": "12:43",
-      "d": "PIEDRA LUNA 1, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JOSE ROJO A",
-      "desde": "17-10-2026"
      }
     ]
    }
   }
  },
- "generado": "20-10-2026 12:39"
+ "generado": "20-10-2026 12:54"
 }
