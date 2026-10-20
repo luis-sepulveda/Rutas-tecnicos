@@ -3278,7 +3278,7 @@
   <button class="btn" id="btnCaidas" onclick="toggleCaidas()">Caídas</button>
   <button class="btn" id="btnReca" onclick="toggleReca()">Recaídas</button>
   <button class="btn" id="btnNuevas" onclick="toggleNuevas()">Nuevas</button>
-  <button class="btn" id="btnRepe" onclick="toggleRepe()">Repetidas</button>
+  <button class="btn" id="btnRepe" onclick="toggleRepe()">Ya visitadas</button>
   <button class="btn" id="btnRed" onclick="toggleRed()">Nodos y NAP</button>
   <button class="btn" id="btnReit" onclick="toggleReit()">Reiterados</button>
 </div>
@@ -3397,7 +3397,7 @@
   <div class="mc-box">
     <div class="mc-head">
       <div class="mc-head-left">
-        <h2>🔁 Direcciones repetidas hoy</h2>
+        <h2>🔁 Direcciones ya visitadas · hoy volvemos a casas donde ya fallamos</h2>
         <div id="repeChips" class="mc-cont"></div>
       </div>
       <button class="mc-close" onclick="cerrarRepe()" title="Cerrar (Esc)">✖</button>
@@ -5153,7 +5153,7 @@ function renderBotonRepe(){
   const btn = document.getElementById('btnRepe');
   if(!btn) return;
   const n = nRepe();
-  btn.innerHTML = 'Repetidas'
+  btn.innerHTML = 'Ya visitadas'
     + (n > 0 ? ' <span class="badge">'+n+'</span>' : '');
   btn.classList.toggle('on-repe', n > 0 && !repeAbierto);
 }
@@ -6650,7 +6650,7 @@ function pintarTabsReit(){
   if(!el) return;
   let h = '<button class="rt-tab' + (reitVista === 'hoy' ? ' act' : '') + '" onclick="verReitVista(\'hoy\')">Hoy</button>'
         + '<button class="rt-tab' + (reitVista === 'tec' ? ' act' : '') + '" onclick="verReitVista(\'tec\')">Por técnico</button>'
-        + '<button class="rt-tab' + (reitVista === 'dir' ? ' act' : '') + '" onclick="verReitVista(\'dir\')">Direcciones repetidas</button>';
+        + '<button class="rt-tab' + (reitVista === 'dir' ? ' act' : '') + '" onclick="verReitVista(\'dir\')">Reparaciones repetidas</button>';
   if(reitVista === 'tec'){
     h += '<span class="rt-sep"></span>';
     // (05-10-2026) un boton por cada MES con datos, pedido de Luis
@@ -10964,7 +10964,7 @@ function pintarReporteRepe(){
     +   '<span class="sep"></span>'
     +   '<span class="upd">' + escR(H.desde||'') + ' al ' + escR(H.hasta||'')
     +   ' · ' + (H.dias||0) + ' días</span></div>'
-    + '<div class="pz-cab"><h2>Direcciones repetidas</h2></div>'
+    + '<div class="pz-cab"><h2>Direcciones ya visitadas · histórico</h2></div>'
     + chips
     + '<div class="rp-cif">'
     +   c(viajes, 'viajes repetidos')
@@ -12028,7 +12028,7 @@ function pintarPortada(){
               alerta('toggleAtrasados', atras, 'Más de 3 h', 'iniciadas hace más de 3 horas y sin cerrar', '#c2410c'),
               alerta('toggleNuevas', nuevas, 'Nuevas', 'entraron después de la primera vuelta del monitor', '#2563eb'),
               alerta('toggleReca', reca, 'Reingresadas', 'volvieron a caer hoy', '#64748b'),
-              alerta('toggleRepe', repe, 'Repetidas', 'dirección que ya falló antes', '#7c3aed')
+              alerta('toggleRepe', repe, 'Direcciones ya visitadas', 'hoy volvemos a una casa donde ya fallamos antes', '#7c3aed')
             ])
     +     '</div>'
     +   '</section>'
