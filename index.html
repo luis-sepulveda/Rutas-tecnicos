@@ -13843,7 +13843,29 @@ function mgMeta(p){ const d = p - MG_META_DER;
 const MG_COLOR = { sm:'#d97706', re:'#2563eb', de:'#dc2626', di:'#7c3aed', ot:'#64748b' };
 const MG_FNOM = { sm:'Sin moradores', re:'Cliente reagenda', de:'Cliente desiste', di:'Dirección', ot:'Otras causas' };
 
+/* (21-10-2026) respaldos con foto de la app respaldo-terreno: el receptor
+   (Apps Script de la cuenta respaldosdominion) entrega con ?lista=1 solo
+   OT, fecha, hora, tecnico, causa y link de la foto. Ver CONTEXTO. */
+const URL_RESPALDO_LISTA = 'https://script.google.com/macros/s/AKfycbyRceaPgxD-dQsuH7CSl9SsJXcq-s2ELrczVdZtGykH2Cu-MfiEAvT0lWlQCnLuW68z/exec?lista=1&clave=dominion-zc-2026';
+function mgBajarRespaldos(){
+  const tope = new Promise(function(res){ setTimeout(function(){ res(null); }, 20000); });
+  const pide = fetch(URL_RESPALDO_LISTA + '&t=' + Date.now()).then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(j){
+      if(!j || !j.ok || !Array.isArray(j.filas)) return null;
+      const c = {}; (j.cols || []).forEach(function(k, i){ c[k] = i; });
+      const porOT = {}; let desde = null;
+      j.filas.forEach(function(r){
+        const ot = String(r[c.ot] || '').toUpperCase().replace(/[^0-9A-Z-]/g, ''); if(!ot) return;
+        const q = /(\d{2})-(\d{2})-(\d{4})/.exec(String(r[c.fecha] || '')), iso = q ? q[3] + q[2] + q[1] : '';
+        if(iso && (!desde || iso < desde)) desde = iso;
+        (porOT[ot] = porOT[ot] || []).push({ iso: iso, hora: String(r[c.hora] || ''), causa: String(r[c.causa] || ''), foto: String(r[c.foto] || ''), vieja: /s/i.test(String(r[c.vieja] || '')) });
+      });
+      return { porOT: porOT, desde: desde, n: j.filas.length };
+    }).catch(function(e){ console.warn('respaldos:', e); return null; });
+  return Promise.race([pide, tope]);
+}
 async function bajarMigGer(){
+  const pResp = mgBajarRespaldos();
   const r = await fetch(URL_DATOS_ACT + '?t=' + Date.now(), { cache:'no-store' });
   if(!r.ok) throw new Error(r.status);
   const js = await r.json();
@@ -13910,7 +13932,8 @@ async function bajarMigGer(){
       vis = { otDir: otDir, porDir: porDir, hasta: String(vj.hasta || ''), dirs: vj.dirs || [] };
     }
   } catch(e){ console.warn('migger visitas:', e); }
-  return { filas: filas, porOT: porOT, completo: completo, vis: vis };
+  const resp = await pResp;
+  return { filas: filas, porOT: porOT, completo: completo, vis: vis, resp: resp };
 }
 function abrirMigGer(){
   let m = document.getElementById('modalMG');
@@ -14121,18 +14144,34 @@ function mgGrupo(x, c, r){
   if(desp && r !== 'vtr' && MG_FAM(x.cod) !== 're') por.push('el ' + mgDdmm(desp.f) + ' la completó ' + mgCap(mgCorto(desp.tec)));
   return { g: por.length ? 'rev' : 'cli', otros:otros, por:por };
 }
+/* respaldo con foto de esta no realizada (sin moradores, reagenda o desiste) */
+function mgFotoDe(ot, iso, cod){
+  const R = MG && MG.resp; if(!R || !R.desde) return { aplica:false };
+  const f = MG_FAM(cod); if(f !== 'sm' && f !== 're' && f !== 'de') return { aplica:false };
+  if(String(iso) < R.desde) return { aplica:false };                   // antes de que partiera la app
+  const l = R.porOT[String(ot || '').toUpperCase().replace(/[^0-9A-Z-]/g, '')] || [];
+  const m = l.filter(function(x){ return x.iso === String(iso); })[0] || l[0] || null;
+  return { aplica:true, r:m };
+}
+function mgFotoTag(ot, iso, cod){
+  const F = mgFotoDe(ot, iso, cod); if(!F.aplica) return '';
+  if(!F.r) return ' <span class="mg-sinfoto" title="El técnico no mandó respaldo con la app">sin respaldo</span>';
+  return ' <a class="mg-foto' + (F.r.vieja ? ' vieja' : '') + '" href="' + escR(F.r.foto) + '" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="Respaldo ' + escR(F.r.causa) + ' a las ' + escR(F.r.hora)
+    + (F.r.vieja ? ' · OJO: foto antigua (no sacada en el momento)' : '') + '">📷 ' + (F.r.vieja ? 'foto antigua' : 'foto') + '</a>';
+}
 function mgTecCalc(k){
   const T = {}, fuera = {};
   (MG ? MG.filas : []).forEach(function(x){
     if(mgClave(x.iso) !== k || !x.tec) return;
     if(x.e !== 'Completado' && x.e !== 'No Realizada') return;
     if(!derActivo(x.tec)){ fuera[x.tec] = 1; return; }
-    const o = T[x.tec] || (T[x.tec] = { tec:x.tec, co:0, nr:0, g:{dif:0,cli:0,rev:0}, sinDir:0, smN:0, smMin:0, fr:0, frOk:0, fF:0, fFnr:0, fD:0, fDnr:0, desp:0, lista:[] });
+    const o = T[x.tec] || (T[x.tec] = { tec:x.tec, co:0, nr:0, g:{dif:0,cli:0,rev:0}, sinDir:0, smN:0, smMin:0, fr:0, frOk:0, fF:0, fFnr:0, fD:0, fDnr:0, desp:0, fotN:0, fotOk:0, lista:[] });
     const c = mgCasa(x), ef = c && c.yo ? mgEnFranja(x.fr, c.yo.hi) : null, esNr = x.e === 'No Realizada';
     if(ef !== null){ o.fr++; if(ef){ o.frOk++; o.fD++; if(esNr) o.fDnr++; } else { o.fF++; if(esNr) o.fFnr++; } }
     if(!esNr){ o.co++; return; }
     o.nr++;
-    const r = mgResp(x.cod);
+    const r = mgResp(x.cod), FT = mgFotoDe(x.ot, x.iso, x.cod);
+    if(FT.aplica){ o.fotN++; if(FT.r) o.fotOk++; }
     if(!c){ o.sinDir++; o.lista.push({ x:x, c:null, r:r, g:'cli', otros:[], por:[] }); o.g.cli++; return; }
     const G = mgGrupo(x, c, r); o.g[G.g]++;
     if(c.yo && MG_FAM(x.cod) === 'sm' && c.yo.dur > 0){ o.smN++; o.smMin += c.yo.dur; }
@@ -14153,9 +14192,9 @@ function mgTecHtml(k, kPrev){
   const ORD = { der:function(a, b){ return der(b) - der(a) || b.nr - a.nr; }, rev:function(a, b){ return b.g.rev - a.g.rev || der(b) - der(a); },
     nr:function(a, b){ return b.nr - a.nr || der(b) - der(a); }, nom:function(a, b){ return a.tec.localeCompare(b.tec); } };
   L.sort(ORD[mgTecOrd] || ORD.der);
-  const S = { nr:0, co:0, g:{dif:0,cli:0,rev:0}, sobre:0, fF:0, fFnr:0, fD:0, fDnr:0 };
+  const S = { nr:0, co:0, g:{dif:0,cli:0,rev:0}, sobre:0, fF:0, fFnr:0, fD:0, fDnr:0, fotN:0, fotOk:0 };
   L.forEach(function(o){ S.nr += o.nr; S.co += o.co; ['dif','cli','rev'].forEach(function(q){ S.g[q] += o.g[q]; });
-    S.fF += o.fF; S.fFnr += o.fFnr; S.fD += o.fD; S.fDnr += o.fDnr; if(der(o) > MG_META_DER) S.sobre++; });
+    S.fF += o.fF; S.fFnr += o.fFnr; S.fD += o.fD; S.fDnr += o.fDnr; S.fotN += o.fotN; S.fotOk += o.fotOk; if(der(o) > MG_META_DER) S.sobre++; });
   const conRev = L.filter(function(o){ return o.g.rev; }).length;
   let h = '<div class="mg-b"><div class="mg-t"><b>' + mgNomPer(k) + ' · por técnico</b><small>' + L.length + ' técnicos del plantel'
     + (R.fuera ? ' · no se muestran ' + R.fuera + ' que ya no están' : '') + ' · ' + S.sobre + ' sobre la meta de ' + MG_META_DER + '%</small></div>'
@@ -14166,6 +14205,8 @@ function mgTecHtml(k, kPrev){
           + '<span><b>' + MG_G[q].l + '</b>: ' + MG_G[q].d + '.</span></div>'; }).join('') + '</div>'
     + (S.fF ? '<p class="mg-nota">⏰ ' + S.fF + ' visitas llegaron fuera de la franja (' + mgF1(mgPct(S.fF, S.fF + S.fD)) + '%). Ahí la derivación fue '
         + Math.round(mgPct(S.fFnr, S.fF)) + '%, contra ' + Math.round(mgPct(S.fDnr, S.fD)) + '% a tiempo. Esas no realizadas están en "para revisar".</p>' : '')
+    + (MG.resp && MG.resp.desde ? (S.fotN ? '<p class="mg-nota">📷 Respaldo con foto (app de respaldo, desde el ' + mgDdmm(MG.resp.desde) + '): <b>' + S.fotOk + ' de ' + S.fotN + '</b> sin moradores, reagendas y desistes del período (' + Math.round(mgPct(S.fotOk, S.fotN)) + '%). En la ficha de cada técnico se ve cuál tiene foto.</p>' : '')
+        : '<p class="mg-nota">📷 No se pudieron leer los respaldos con foto de la app (falta actualizar el receptor en Google o no hay conexión).</p>')
     + '</div>';
   const ob = function(v, t){ return '<button class="' + (mgTecOrd === v ? 'on' : '') + '" onclick="setMgTecOrd(\'' + v + '\')">' + t + '</button>'; };
   h += '<div class="mg-b"><div class="mg-t"><b>Cada técnico</b><small>toca un nombre para ver sus casas · ' + conRev + ' técnicos tienen algo para revisar</small>'
@@ -14195,14 +14236,15 @@ function mgFichaHtml(o){
     else if(it.g === 'rev') det = '<b class="r">' + it.por.map(escR).join(' · ') + '</b>';
     else if(!c) det = '<small>sin dirección en el historial</small>';
     else det = c.otras.some(function(v){ return v.ok; }) ? 'Después se completó (' + escR(MG_FAM(x.cod) === 're' ? 'el cliente cambió el día' : mgResp(x.cod) === 'vtr' ? 'VTR/CLARO solucionó' : 'se completó') + ')' : 'Solo fue él';
-    return '<tr><td>' + mgDdmm(x.iso) + '</td><td>' + escR(c ? mgCap(c.dir) : '—') + '</td><td>' + escR(x.cod || 'Sin código') + '</td>'
+    return '<tr><td>' + mgDdmm(x.iso) + '</td><td>' + escR(c ? mgCap(c.dir) : '—') + '</td><td>' + escR(x.cod || 'Sin código') + mgFotoTag(x.ot, x.iso, x.cod) + '</td>'
       + '<td>' + (yo ? mgHora(yo.hi) + (yo.dur > 0 ? ' · ' + yo.dur + ' min' : '') : '—') + '</td><td>' + det + '</td></tr>';
   };
   const ord = function(a, b){ return a.x.iso < b.x.iso ? -1 : 1; };
   let h = '<div class="mg-fi"><p class="mg-frase">' + escR(mgCap(o.tec)) + ' visitó <b>' + (o.co + o.nr) + '</b> migraciones y dejó <b>' + o.nr + '</b> no realizadas: '
     + ['dif','cli','rev'].map(function(q){ return '<b style="color:' + MG_G[q].c + '">' + o.g[q] + ' ' + MG_G[q].n.toLowerCase() + '</b>'; }).join(', ') + '.</p>'
     + '<p class="mg-nota" style="margin:0 0 10px">' + (o.fr ? 'Llegó dentro de la franja en el ' + Math.round(mgPct(o.frOk, o.fr)) + '% de sus visitas. ' : '')
-    + (o.smN ? 'En sus sin moradores esperó en promedio ' + Math.round(o.smMin / o.smN) + ' min.' : '') + '</p>';
+    + (o.smN ? 'En sus sin moradores esperó en promedio ' + Math.round(o.smMin / o.smN) + ' min. ' : '')
+    + (o.fotN ? 'Mandó respaldo con foto en <b>' + o.fotOk + ' de ' + o.fotN + '</b> sin moradores, reagendas y desistes.' : '') + '</p>';
   ['rev','dif','cli'].forEach(function(q){
     const l = o.lista.filter(function(it){ return it.g === q; }).sort(ord);
     if(!l.length) return;
@@ -14287,13 +14329,14 @@ function mgDirExcel(){
   const vis = [];
   rep.forEach(function(o){ o.vs.forEach(function(v){
     vis.push({ 'Dirección': calle(o.dir), 'Comuna': comuna(o.dir), 'Fecha': ff(v.f), 'Llegó': v.hi > 0 ? mgHora(v.hi) : '',
-      'Técnico': mgCap(v.tec), 'Resultado': v.ok ? 'Completada' : 'No realizada', 'Causa': v.ok ? '' : (v.cie || '') }); }); });   // sin minutos: hay visitas que quedan abiertas horas en TOA y confunden
+      'Técnico': mgCap(v.tec), 'Resultado': v.ok ? 'Completada' : 'No realizada', 'Causa': v.ok ? '' : (v.cie || ''),
+      'Respaldo con foto': (function(){ if(v.ok) return ''; const F = mgFotoDe(v.ot, v.f, v.cie); return !F.aplica ? '' : F.r ? (F.r.vieja ? 'Sí (foto antigua)' : 'Sí') : 'No'; })() }); }); });   // sin minutos: hay visitas que quedan abiertas horas en TOA y confunden
   const wb = XLSX.utils.book_new();
   const h1 = XLSX.utils.aoa_to_sheet(leeme); h1['!cols'] = [{ wch:32 }, { wch:110 }];
   const h2 = XLSX.utils.json_to_sheet(casas); h2['!cols'] = [{ wch:44 }, { wch:14 }, { wch:10 }, { wch:10 }, { wch:70 }, { wch:13 }, { wch:18 }];
   h2['!autofilter'] = { ref: XLSX.utils.encode_range({ s:{r:0,c:0}, e:{r:casas.length, c:6} }) };
-  const h3 = XLSX.utils.json_to_sheet(vis); h3['!cols'] = [{ wch:44 }, { wch:14 }, { wch:11 }, { wch:7 }, { wch:30 }, { wch:13 }, { wch:34 }];
-  h3['!autofilter'] = { ref: XLSX.utils.encode_range({ s:{r:0,c:0}, e:{r:vis.length, c:6} }) };
+  const h3 = XLSX.utils.json_to_sheet(vis); h3['!cols'] = [{ wch:44 }, { wch:14 }, { wch:11 }, { wch:7 }, { wch:30 }, { wch:13 }, { wch:34 }, { wch:16 }];
+  h3['!autofilter'] = { ref: XLSX.utils.encode_range({ s:{r:0,c:0}, e:{r:vis.length, c:7} }) };
   XLSX.utils.book_append_sheet(wb, h1, 'Léeme');
   XLSX.utils.book_append_sheet(wb, h2, 'Casas');
   XLSX.utils.book_append_sheet(wb, h3, 'Visitas');
@@ -14318,7 +14361,7 @@ function mgDirPintarLista(){
       + '<td>' + (o.ok ? '<span class="mg-si">Sí, ' + mgDdmm(o.ok.f) + ' · ' + escR(mgCap(mgCorto(o.ok.tec))) + '</span>' : '<span class="mg-no">No</span>') + '</td></tr>';
     if(ab) h += '<tr class="mg-ficha"><td colspan="5"><div><table class="mg-q mg-fi-t mg-vt"><thead><tr><th>Fecha</th><th>Llegó</th><th>Técnico</th><th>Resultado</th><th>Min en la casa</th></tr></thead><tbody>'
       + o.vs.map(function(v){ return '<tr><td>' + mgDdmm(v.f) + '</td><td>' + (v.hi > 0 ? mgHora(v.hi) : '—') + '</td><td>' + escR(mgCap(v.tec)) + '</td>'
-        + '<td>' + (v.ok ? '<span class="mg-si">✓ Completó</span>' : '<span class="mg-no">✗ ' + escR(v.cie || 'No realizada') + '</span>') + '</td><td>' + (v.dur > 0 ? v.dur : '—') + '</td></tr>'; }).join('')
+        + '<td>' + (v.ok ? '<span class="mg-si">✓ Completó</span>' : '<span class="mg-no">✗ ' + escR(v.cie || 'No realizada') + '</span>' + mgFotoTag(v.ot, v.f, v.cie)) + '</td><td>' + (v.dur > 0 ? v.dur : '—') + '</td></tr>'; }).join('')
       + '</tbody></table></div></td></tr>';
   });
   h += '</tbody></table></div>' + (tot > 200 ? '<p class="mg-nota">Se muestran 200 de ' + tot + '. Usa el buscador.</p>' : '')
@@ -14815,6 +14858,8 @@ function mgHoyHtml(){
   .mg-vp { font-size:16px; color:#b45309; }
   .mg-si { color:#15803d; font-weight:600; } .mg-no { color:#b91c1c; font-weight:600; }
   .mg-vt { max-width:760px; background:#fff; }
+  .mg-foto { display:inline-block; margin-left:4px; font-size:11.5px; font-weight:700; color:#0e7490; background:#ecfeff; border:1px solid #67e8f9; border-radius:5px; padding:0 6px; text-decoration:none; white-space:nowrap; }
+  .mg-foto.vieja { color:#b45309; background:#fffbeb; border-color:#fcd34d; } .mg-sinfoto { margin-left:4px; font-size:11px; color:#94a3b8; border:1px dashed #cbd5e1; border-radius:5px; padding:0 5px; white-space:nowrap; }
   .mg-xls { border:0; background:#15803d; color:#fff; border-radius:7px; padding:7px 13px; font:600 13px 'DM Sans',system-ui,sans-serif; cursor:pointer; } .mg-xls:hover { background:#166534; }
 </style>
 
