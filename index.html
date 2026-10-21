@@ -8824,6 +8824,31 @@ setTimeout(cargarAvisoCompletos, 2500);
 setInterval(cargarAvisoCompletos, 30 * 60 * 1000);
 function setTipoDeriv(t){ derTipo = t; derAbierto = null; pintarDeriv(); }
 function setVistaDeriv(v){ derVista = v; derAbierto = null; pintarDeriv(); }
+/* ---- SOLO TECNICOS VIGENTES (21-10-2026, regla de Luis) ----
+   El que no esta en estado_tecnicos.xlsx ya no esta en la empresa y no se
+   muestra en las LISTAS por tecnico de los reportes (Derivacion, Franjas,
+   Resumen Supervisores). Los totales del equipo y la historia de cada
+   direccion SI los siguen contando: lo que hicieron, paso. Reiterados no
+   se toca. La lista llega en rutas.json -> plantel (nombres cortos).
+   Se compara por nombre: mismo primer nombre y algun apellido que parta
+   igual (5 letras, o el largo del mas corto), sin tildes. Asi "ALEXIS JARA"
+   del export es "ALEXIS JARAMILLO" del listado y "PABLO HERNANEZ" es
+   "PABLO HERNANDEZ". Sin plantel (rutas.json viejo), se muestran todos. */
+let PLANTEL = null;
+const _ACT = {};
+function derNomNorm(t){ return String(t || '').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/ /g, ' ').toUpperCase().replace(/[^A-Z ]/g, ' ').trim().split(/\s+/).filter(Boolean); }
+function derActivo(tec){
+  if(!PLANTEL || !PLANTEL.length) return true;
+  if(tec in _ACT) return _ACT[tec];
+  const a = derNomNorm(tec);
+  const ok = PLANTEL.some(function(p){
+    const b = derNomNorm(p);
+    if(!a.length || !b.length || a[0] !== b[0]) return false;
+    return a.slice(1).some(function(x){ return b.slice(1).some(function(y){
+      const n = Math.min(5, x.length, y.length); return n >= 3 && x.slice(0, n) === y.slice(0, n); }); });
+  });
+  return (_ACT[tec] = ok);
+}
 function derEntra(x){ return derTipo === 'AMBAS' || x.tp === derTipo; }
 function derNomTipo(){ return derTipo === 'MIGRA' ? 'migraciones' : derTipo === 'ALTA' ? 'altas' : 'altas y migraciones'; }
 function derNumSemana(k){
@@ -8856,7 +8881,7 @@ function setSupDeriv(s){ derSup = s; derAbierto = null; pintarDeriv(); }
 function verTecDeriv(i){ derAbierto = (derAbierto === i ? null : i); pintarDeriv(); }
 
 /* La tabla de una semana: un objeto por tecnico, ya ordenada. */
-function derTabla(sem, sup){
+function derTabla(sem, sup, todos){
   const t = {};
   (DER || []).forEach(function(x){
     if(x.sem !== sem || !derEntra(x)) return;
@@ -8865,7 +8890,7 @@ function derTabla(sem, sup){
     o.n++;
     if(x.der){ o.d++; o[x.g]++; o.l.push(x); }
   });
-  return Object.keys(t).map(function(k){ return t[k]; }).sort(function(a, b){
+  return Object.keys(t).map(function(k){ return t[k]; }).filter(function(o){ return todos || derActivo(o.tec); }).sort(function(a, b){
     const sa = derSobre(a, sem) ? 1 : 0;
     const sb = derSobre(b, sem) ? 1 : 0;
     return sb - sa || (b.d / b.n) - (a.d / a.n) || b.n - a.n || a.tec.localeCompare(b.tec);
@@ -9144,7 +9169,7 @@ function derClase(x){
   const h = DER_DIR[x.ot];
   return (h && h.v.some(function(v){ return !v.ok && v.tec && v.tec !== x.tec; })) ? 'comp' : 'prop';
 }
-function derAudTabla(sems, sup){
+function derAudTabla(sems, sup, todos){
   const t = {};
   (DER || []).forEach(function(x){
     if(sems.indexOf(x.sem) < 0 || !derEntra(x)) return;
@@ -9155,7 +9180,7 @@ function derAudTabla(sems, sup){
     o.d++; const c = derClase(x); o[c]++;
     if(c === 'prop'){ const hi = derHist(x), sn = derSenales(x, hi); if(sn.n) o.sen++; o.l.push({x:x, hi:hi, sn:sn}); }
   });
-  return Object.keys(t).map(function(k){ return t[k]; });
+  return Object.keys(t).map(function(k){ return t[k]; }).filter(function(o){ return todos || derActivo(o.tec); });
 }
 /* La lista de "Con quien conversar", en una sola funcion: la usan el cuadro
    2 de A quien auditar (con el Periodo elegido) y la pestana Resumen (siempre
@@ -9165,7 +9190,7 @@ function derConvCalc(todasSem, nPer){
   const iSem = todasSem.indexOf(derSem), sems = todasSem.slice(Math.max(0, iSem - nPer + 1), iSem + 1);
   const minimo = nPer === 1 ? DER_AUD_MIN_SEM : DER_AUD_MIN_4;
   const f1 = function(v){ return v.toFixed(1).replace('.', ','); };
-  const eq = derAudTabla(sems, 'Todos').reduce(function(a, o){ a.n += o.n; a.prop += o.prop; return a; }, {n:0, prop:0});
+  const eq = derAudTabla(sems, 'Todos', true).reduce(function(a, o){ a.n += o.n; a.prop += o.prop; return a; }, {n:0, prop:0});
   const corte = (eq.n ? 100 * eq.prop / eq.n : 0) * DER_AUD_FACTOR;
   const pp = function(o){ return o.n ? 100 * o.prop / o.n : 0; };
   return derAudTabla(sems, derSup).map(function(o){
@@ -9255,7 +9280,7 @@ function derVistaResHtml(todasSem, enCurso){
   const per4 = s4.length > 1 ? 'semanas ' + derNumSemana(s4[0]) + ' a ' + derNumSemana(s4[s4.length - 1]) : 'semana ' + derNumSemana(s4[0]);
   h += '<div class="dv-hv-b">' + hvT('¿De qué depende?', quien);
   if(derDirOk){
-    const cl = derAudTabla(s4, derSup).reduce(function(a, o){ a.d += o.d; a.na += o.na; a.comp += o.comp; a.prop += o.prop; return a; }, {d:0, na:0, comp:0, prop:0});
+    const cl = derAudTabla(s4, derSup, true).reduce(function(a, o){ a.d += o.d; a.na += o.na; a.comp += o.comp; a.prop += o.prop; return a; }, {d:0, na:0, comp:0, prop:0});
     if(cl.d){
       const hvS = function(n, cls){ return n ? '<div class="' + cls + '" style="flex:' + n + '" title="' + n + ' de ' + cl.d + '">' + n + '</div>' : ''; };
       h += '<p class="dv-hv-f">De cada 10 derivadas, <b>' + Math.round(10 * (cl.na + cl.comp) / cl.d) + '</b> no dependen del técnico.</p>'
@@ -9361,10 +9386,10 @@ function derVistaAudHtml(todasSem){
   const sems = todasSem.slice(Math.max(0, iSem - derAudPer + 1), iSem + 1);
   const minimo = derAudPer === 1 ? DER_AUD_MIN_SEM : DER_AUD_MIN_4;
   const suma = function(l){ return l.reduce(function(a, o){ a.n += o.n; a.d += o.d; a.na += o.na; a.comp += o.comp; a.prop += o.prop; a.sen += o.sen; return a; }, {n:0,d:0,na:0,comp:0,prop:0,sen:0}); };
-  const eq = suma(derAudTabla(sems, 'Todos'));           // la referencia es SIEMPRE todo el equipo
+  const eq = suma(derAudTabla(sems, 'Todos', true));           // la referencia es SIEMPRE todo el equipo
   const pEq = eq.n ? 100 * eq.prop / eq.n : 0, corte = pEq * DER_AUD_FACTOR;
   const tb = derAudTabla(sems, derSup);
-  const tot = suma(tb);
+  const tot = suma(derAudTabla(sems, derSup, true));
   const pp = function(o){ return o.n ? 100 * o.prop / o.n : 0; };
   const audita = function(o){ return o.n >= minimo && o.prop >= 2 && pp(o) >= corte; };
   tb.sort(function(a, b){ return (audita(b) ? 1 : 0) - (audita(a) ? 1 : 0) || pp(b) - pp(a) || b.prop - a.prop || a.tec.localeCompare(b.tec); });
@@ -9824,7 +9849,7 @@ function fraDiaHtml(sems, per){
 }
 /* ---- Por tecnico ---- */
 function fraTecnicoHtml(sems, per){
-  const filas = fraFilas(sems);
+  const filas = fraFilas(sems).filter(function(x){ return derActivo(x.tec); });
   if(!filas.length) return '<div class="dv-vacio">Sin ' + fraNomAct() + ' en ese período para ese supervisor.</div>';
   const supDe = {}; filas.forEach(function(x){ supDe[x.tec] = x.sup; });
   /* primero los que tienen visitas suficientes, de mas a menos derivacion */
@@ -10067,6 +10092,10 @@ function derFlecha(t){
 let derEvoPer = 'sem';
 function setEvoPer(v){ derEvoPer = v; pintarDeriv(); }
 const MESES_EVO = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+function derEvoPerBtns(){
+  return '<button class="' + (derEvoPer === 'sem' ? 'on' : '') + '" onclick="setEvoPer(\'sem\')">Semanas</button>'
+    + '<button class="' + (derEvoPer === 'mes' ? 'on' : '') + '" onclick="setEvoPer(\'mes\')">Meses</button>';
+}
 function derEvoPerBar(){
   return '<div class="dv-evo-per"><span>Ver por</span><div class="dv-seg">'
     + '<button class="' + (derEvoPer === 'sem' ? 'on' : '') + '" onclick="setEvoPer(\'sem\')">Semanas</button>'
@@ -10100,7 +10129,7 @@ function derVistaEvoMesHtml(){
     return { tipo: dif >= DER_2_PUNTOS ? 'sube' : dif <= -DER_2_PUNTOS ? 'baja' : 'igual' };
   };
   const exc = function(o){ return o.d - o.n * pEq / 100; };
-  const tecs = Object.keys(t).filter(function(k){ return derSup === 'Todos' || supDe[k] === derSup; })
+  const tecs = Object.keys(t).filter(function(k){ return (derSup === 'Todos' || supDe[k] === derSup) && derActivo(k); })
     .sort(function(a, b){ const A = t[a], B = t[b];
       if(derEvoOrd === 'x') return exc(B) - exc(A) || a.localeCompare(b);
       return (A.n >= DER_8_MIN ? 0 : 1) - (B.n >= DER_8_MIN ? 0 : 1) || pc(B) - pc(A) || a.localeCompare(b); });
@@ -10135,6 +10164,7 @@ function derVistaEvoMesHtml(){
     + '<span class="ley">Cada casilla: % de derivación y derivadas / visitadas</span></div></div>';
   h += '<div class="dv-hv-b"><div class="dv-hv-t"><span class="n">2</span><b>Técnico por técnico</b><small>' + derPl(tecs.length, 'técnico', 'técnicos') + (derSup !== 'Todos' ? ' · equipo de ' + escR(derTitulo(derSup)) : '') + ' · toca uno para abrir su ficha</small></div>'
     + '<div class="dv-hv-evo"><span class="t sube"><b>' + nS.sube + '</b>▲ empeorando</span><span class="t igual"><b>' + nS.igual + '</b>▬ se mantienen</span><span class="t baja"><b>' + nS.baja + '</b>▼ mejorando</span>'
+    + '<span class="ord">Ver por</span><div class="dv-seg">' + derEvoPerBtns() + '</div>'
     + '<span class="ord">Ordenar por</span><div class="dv-seg">'
     + '<button class="' + (derEvoOrd === 'p' ? 'on' : '') + '" onclick="setEvoOrd(\'p\')">% en los ' + meses.length + ' meses</button>'
     + '<button class="' + (derEvoOrd === 'x' ? 'on' : '') + '" onclick="setEvoOrd(\'x\')">Derivadas de más</button></div></div>'
@@ -10157,13 +10187,13 @@ function derVistaEvoHtml(todasSem, enCurso){
   const i = todasSem.indexOf(derSem), cols = todasSem.slice(Math.max(0, i - 4), i + 1);
   const audT = {};
   if(derDirOk){
-    const s4 = todasSem.slice(Math.max(0, i - 3), i + 1), tA = derAudTabla(s4, 'Todos');
+    const s4 = todasSem.slice(Math.max(0, i - 3), i + 1), tA = derAudTabla(s4, 'Todos', true);
     const eA = tA.reduce(function(a, o){ a.n += o.n; a.prop += o.prop; return a; }, {n:0, prop:0});
     const cA = (eA.n ? 100 * eA.prop / eA.n : 0) * DER_AUD_FACTOR;
     tA.forEach(function(o){ if(o.n >= DER_AUD_MIN_4 && o.prop >= 2 && 100 * o.prop / o.n >= cA) audT[o.tec] = 1; });
   }
   const supDe = {}; (DER || []).forEach(function(x){ if(o8.sems.indexOf(x.sem) >= 0) supDe[x.tec] = x.sup; });
-  const tecs = Object.keys(o8.t).filter(function(k){ return derSup === 'Todos' || supDe[k] === derSup; })
+  const tecs = Object.keys(o8.t).filter(function(k){ return (derSup === 'Todos' || supDe[k] === derSup) && derActivo(k); })
     .sort(function(a, b){ const A = o8.t[a], B = o8.t[b];
       if(derEvoOrd === 'x') return (B.d - B.n * o8.pEq / 100) - (A.d - A.n * o8.pEq / 100) || a.localeCompare(b);
       return (A.n >= DER_8_MIN ? 0 : 1) - (B.n >= DER_8_MIN ? 0 : 1) || B.p - A.p || a.localeCompare(b); });
@@ -10244,6 +10274,7 @@ function derVistaEvoHtml(todasSem, enCurso){
   h += '<div class="dv-hv-b">' + hvT('Técnico por técnico', derPl(tecs.length, 'técnico', 'técnicos') + (derSup !== 'Todos' ? ' · equipo de ' + escR(derTitulo(derSup)) : '') + ' · toca uno para abrir su ficha')
     + '<div class="dv-hv-evo"><span class="t sube"><b>' + nS.sube + '</b>▲ empeorando</span><span class="t igual"><b>' + nS.igual + '</b>▬ se mantienen</span><span class="t baja"><b>' + nS.baja + '</b>▼ mejorando</span>'
     + '<span class="t"><b>' + nSost + '</b>con historial malo</span>'
+    + '<span class="ord">Ver por</span><div class="dv-seg">' + derEvoPerBtns() + '</div>'
     + '<span class="ord">Ordenar por</span><div class="dv-seg">'
     + '<button class="' + (derEvoOrd === 'p' ? 'on' : '') + '" onclick="setEvoOrd(\'p\')">% en ' + nSem + ' semanas</button>'
     + '<button class="' + (derEvoOrd === 'x' ? 'on' : '') + '" onclick="setEvoOrd(\'x\')">Derivadas de más</button></div></div>'
@@ -10281,7 +10312,7 @@ function derVistaFicHtml(todasSem){
   (DER || []).forEach(function(x){
     if(sems.indexOf(x.sem) < 0 || !derEntra(x)) return;
     const o = tt[x.tec] || (tt[x.tec] = {tec:x.tec, sup:x.sup, n:0, d:0}); o.n++; if(x.der) o.d++; });
-  DER_FIC_TECS = Object.keys(tt).sort(function(a, b){ return a.localeCompare(b); });
+  DER_FIC_TECS = Object.keys(tt).filter(derActivo).sort(function(a, b){ return a.localeCompare(b); });
   const visibles = DER_FIC_TECS.filter(function(t){ return derSup === 'Todos' || tt[t].sup === derSup; });
   const eqP = DER_FIC_TECS.reduce(function(a, t){ a.n += tt[t].n; a.d += tt[t].d; return a; }, {n:0, d:0}), pEqP = eqP.n ? 100 * eqP.d / eqP.n : 0;
   let h = '<div class="dv-fic">' + (derFicTec ? '' : '<div class="dv-hv-t"><b>Elige un técnico</b><small>toca un nombre, o escríbelo y presiona Enter · ' + per + '</small></div>') + '<div class="dv-fic-bus">'
@@ -10293,7 +10324,7 @@ function derVistaFicHtml(todasSem){
      orden alfabetico, con sus derivadas, su % y la marca "auditar". */
   const audT = {};
   if(derDirOk){
-    const tA = derAudTabla(sems, 'Todos');
+    const tA = derAudTabla(sems, 'Todos', true);
     const eA = tA.reduce(function(a, o){ a.n += o.n; a.prop += o.prop; return a; }, {n:0, prop:0});
     const cA = (eA.n ? 100 * eA.prop / eA.n : 0) * DER_AUD_FACTOR;
     tA.forEach(function(o){ if(o.n >= minimo && o.prop >= 2 && 100 * o.prop / o.n >= cA) audT[o.tec] = 1; });
@@ -10336,7 +10367,7 @@ function derVistaFicHtml(todasSem){
   const nNa = grupos.na.length, nComp = grupos.comp.length, nProp = grupos.prop.length, nSen = grupos.prop.filter(function(e){ return e.sn.n; }).length;
   const listaOtros = Object.keys(otrosTot).sort(function(a, b){ return otrosTot[b] - otrosTot[a] || a.localeCompare(b); });
   /* referencia del equipo: la misma de "A quien auditar" */
-  const eq = derAudTabla(sems, 'Todos').reduce(function(a, o){ a.n += o.n; a.prop += o.prop; return a; }, {n:0, prop:0});
+  const eq = derAudTabla(sems, 'Todos', true).reduce(function(a, o){ a.n += o.n; a.prop += o.prop; return a; }, {n:0, prop:0});
   const pEq = eq.n ? 100 * eq.prop / eq.n : 0, corte = pEq * DER_AUD_FACTOR, pMe = me.n ? 100 * nProp / me.n : 0;
   const audita = derDirOk && me.n >= minimo && nProp >= 2 && pMe >= corte;
 
@@ -10905,6 +10936,10 @@ function pintarDeriv(){
     + (usaPer ? '<div class="grp"><span class="rot">Período</span>' + seg([
         '<button class="' + (derAudPer === 4 ? 'on' : '') + '" onclick="setAudPerDeriv(4)" title="Las 4 semanas que terminan en la elegida">Últimas 4 semanas</button>',
         '<button class="' + (derAudPer === 1 ? 'on' : '') + '" onclick="setAudPerDeriv(1)">Solo la semana ' + derNumSemana(derSem) + '</button>']) + '</div>' : '')
+    /* (21-10-2026) Evolucion: Semanas o Meses, en la franja fija de filtros */
+    + (derVista === 'evo' ? '<div class="grp"><span class="rot">Ver por</span>' + seg([
+        '<button class="' + (derEvoPer === 'sem' ? 'on' : '') + '" onclick="setEvoPer(\'sem\')">Semanas</button>',
+        '<button class="' + (derEvoPer === 'mes' ? 'on' : '') + '" onclick="setEvoPer(\'mes\')">Meses (ago · sep · oct)</button>']) + '</div>' : '')
     + '</div>';
   if(derVista === 'hoy' && supBox.firstChild){
     const dS = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
@@ -10937,7 +10972,7 @@ function pintarDeriv(){
   };
 
   const tb = derTabla(derSem, derSup);
-  const tot = tb.reduce(function(a, o){ a.n += o.n; a.d += o.d; a.sm += o.sm; a.re += o.re; a.de += o.de; a.ot += o.ot; return a; }, {n:0,d:0,sm:0,re:0,de:0,ot:0});
+  const tot = derTabla(derSem, derSup, true).reduce(function(a, o){ a.n += o.n; a.d += o.d; a.sm += o.sm; a.re += o.re; a.de += o.de; a.ot += o.ot; return a; }, {n:0,d:0,sm:0,re:0,de:0,ot:0});
   const nSobre = tb.filter(function(o){ return derSobre(o); }).length;
   const nDias = Object.keys(porSem[derSem].dias).length;
   const enCurso = nDias < 6 && derSem === semanas[0];
@@ -10953,7 +10988,7 @@ function pintarDeriv(){
   if(derVista === 'res'){ cuerpo.innerHTML = derVistaResHtml(todasSem, enCurso); return; }
   if(derVista === 'hoy'){ cuerpo.innerHTML = derVistaHoyHtml(); return; }
   if(derVista === 'fic'){ cuerpo.innerHTML = derVistaFicHtml(todasSem); return; }
-  if(derVista === 'evo'){ cuerpo.innerHTML = derEvoPerBar() + (derEvoPer === 'mes' ? derVistaEvoMesHtml() : derVistaEvoHtml(todasSem, enCurso)); return; }
+  if(derVista === 'evo'){ cuerpo.innerHTML = (derEvoPer === 'mes' ? derVistaEvoMesHtml() : derVistaEvoHtml(todasSem, enCurso)); return; }
   if(!tb.length){ cuerpo.innerHTML = h + '<div class="dv-vacio">Sin ' + derNomTipo() + ' en esta semana para ese supervisor.</div>'; return; }
   if(derVista === 'dir'){ cuerpo.innerHTML = derVistaDirHtml(tb, tot); return; }
   if(derVista === 'aud'){ cuerpo.innerHTML = derVistaAudHtml(todasSem); return; }
@@ -11208,7 +11243,7 @@ function pintarResMig(){
     o.der++; o[x.g || 'ot']++; if(rmCls(x) === 'prop') o.prop++; o.l.push(x);
   });
   const tl = Object.keys(t).map(function(k){ const o = t[k]; o.pct = o.vis ? 100 * o.der / o.vis : 0; return o; })
-    .sort(function(a, b){ return b.der - a.der || b.pct - a.pct || a.tec.localeCompare(b.tec); });
+    .filter(function(o){ return derActivo(o.tec); }).sort(function(a, b){ return b.der - a.der || b.pct - a.pct || a.tec.localeCompare(b.tec); });
   const minV = RM_PER === 'hoy' ? 2 : 5;
   h += '<div class="rm-card"><h3>Técnico por técnico <small>de más a menos derivadas · toca un técnico para ver sus órdenes</small></h3>'
     + '<div class="rm-guia"><span class="eq">El equipo deriva <b>' + rmPct(eqPct) + '</b></span>'
@@ -13525,6 +13560,7 @@ async function cargarDatosVivos(auto){
   try {
     const js = await bajarRutasJson();
     if(!js.tecnicos) throw new Error('formato');
+    if(Array.isArray(js.plantel) && js.plantel.length){ PLANTEL = js.plantel; for(const k in _ACT) delete _ACT[k]; }
 
     // El monitor publica cada 5 min y el tablero pregunta cada minuto, asi que
     // cuatro de cada cinco respuestas traen exactamente lo mismo. Si el sello
