@@ -1,10 +1,45 @@
 {
-  "actualizado": "2026-10-21T10:43:01",
+  "actualizado": "2026-10-21T11:13:12",
   "resumen": {
-    "sin informacion": 3,
+    "sin informacion": 4,
     "reagendada": 2
   },
   "estados": {
+    "1-3OC84DF9": {
+      "tec": "ALFREDO ALCAYAGA F",
+      "cat": "Migración 1 Play",
+      "franja_original": "10-13",
+      "d": "SAN LUIS 1730, QUILPUE",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "SAN LUIS 1730",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3OBONCD2",
+            "franja": "13-16",
+            "texto": "1-3OBONCD2 - 13-16-Migración-Migración-SAN LUIS 1730Sab, 10 Oct"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3O793840",
+            "franja": "10-13",
+            "texto": "1-3O793840 - 10-13-Migración-Migración-SAN LUIS 1730Lun, 5 Oct"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3NPHSHKE",
+            "franja": "10-13",
+            "texto": "1-3NPHSHKE - 10-13-Migración-Migración-SAN LUIS 1730Lun, 7 Sep"
+          }
+        ]
+      }
+    },
     "1-3OIPRARY": {
       "tec": "CRISTOBAL MIRANDA VALENC",
       "cat": "Alta 1 Play",
