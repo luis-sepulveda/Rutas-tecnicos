@@ -1,10 +1,132 @@
 {
-  "actualizado": "2026-10-21T10:12:30",
+  "actualizado": "2026-10-21T10:43:01",
   "resumen": {
-    "sin informacion": 1,
-    "reagendada": 1
+    "sin informacion": 3,
+    "reagendada": 2
   },
   "estados": {
+    "1-3OIPRARY": {
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "cat": "Alta 1 Play",
+      "franja_original": "13-16",
+      "d": "SERENA 890 DEPTO 14, QUILPUE",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "SERENA 890",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "cancelada",
+            "color": "rgb(128, 255, 128)",
+            "ot": "1-3O8CNV21",
+            "franja": "13-16",
+            "texto": "1-3O8CNV21 - 13-16-Alta-1 Play-SERENA 890 DEPTO 14Mar, 6 Oct"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3O7EJZ28",
+            "franja": "10-13",
+            "texto": "1-3O7EJZ28 - 10-13-Alta-1 Play-SERENA 890 DEPTO 14Lun, 5 Oct"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3O6NFE7H",
+            "franja": "10-13",
+            "texto": "1-3O6NFE7H - 10-13-Alta-1 Play-SERENA 890 DEPTO 14Sab, 3 Oct"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3O65P6X7",
+            "franja": "13-16",
+            "texto": "1-3O65P6X7 - 13-16-Alta-1 Play-SERENA 890 DEPTO 14Vie, 2 Oct"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3MSD2JQW",
+            "franja": "10-13",
+            "texto": "1-3MSD2JQW - 10-13-Reparación-1 Play Servicio Degradado-SERENA 890 DEPTO 13Jue, 30 Jul"
+          },
+          {
+            "estado": "cancelada",
+            "color": "rgb(128, 255, 128)",
+            "ot": "1-3MPTNHZH",
+            "franja": "16-19",
+            "texto": "1-3MPTNHZH - 16-19-Reparación-1 Play Servicio Degradado-SERENA 890 DEPTO 13Jue, 23 Jul"
+          }
+        ]
+      }
+    },
+    "1-3OG8JJV0": {
+      "tec": "MARCO PEREZ G",
+      "cat": "Alta 1 Play",
+      "franja_original": "13-16",
+      "d": "PJE D 0812 EDIF. 13 DEPTO 22, QUILPUE",
+      "estado": "reagendada",
+      "color": "rgb(255, 222, 0)",
+      "detalle": "1-3OG8JJV0 - 16-19-Alta-1 Play-PJE D 0812 EDIF. 13 DEPTO 22Jue, 22 Oct",
+      "franja_nueva": "16-19"
+    },
+    "1-3OICLRP1": {
+      "tec": "MATIAS APELEO APELEO",
+      "cat": "Alta 1 Play",
+      "franja_original": "10-13",
+      "d": "SANTA SARA 1540 EDIF. 1A DEPTO 307, VILLA ALEMANA",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "SANTA SARA 1540",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3OHT7BBM",
+            "franja": "10-13",
+            "texto": "1-3OHT7BBM - 10-13-Alta-1 Play-SANTA SARA 1540 EDIF. 1A DEPTO 307Mar, 20 Oct"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3OGUYAM8",
+            "franja": "10-13",
+            "texto": "1-3OGUYAM8 - 10-13-Alta-1 Play-SANTA SARA 1540 EDIF. 1A DEPTO 307Lun, 19 Oct"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3OHIXTCM",
+            "franja": "13-16",
+            "texto": "1-3OHIXTCM - 13-16-Alta-1 Play-SANTA SARA 1540 EDIF. 1A DEPTO 307Lun, 19 Oct"
+          },
+          {
+            "estado": "completada",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3ODCSUK7",
+            "franja": "10-13",
+            "texto": "1-3ODCSUK7 - 10-13-Alta-2 Play-SANTA SARA 1540 EDIF. 1B DEPTO 102Mar, 13 Oct"
+          },
+          {
+            "estado": "completada",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3NQQZ046",
+            "franja": "10-13",
+            "texto": "1-3NQQZ046 - 10-13-Alta-1 Play-SANTA SARA 1540 EDIF. 1A DEPTO 108Sab, 12 Sep"
+          },
+          {
+            "estado": "cancelada",
+            "color": "rgb(128, 255, 128)",
+            "ot": "1-3NQQT9RI",
+            "franja": "13-16",
+            "texto": "1-3NQQT9RI - 13-16-Reparación-2 Play Servicio Degradado-SANTA SARA 1540 EDIF. 1B DEPTO 301Mie, 9 Sep"
+          }
+        ]
+      }
+    },
     "1-3OIGZTWI": {
       "tec": "MATIAS APELEO APELEO",
       "cat": "Alta 2 Play",
