@@ -13876,7 +13876,7 @@ function abrirMigGer(){
     m = document.createElement('div'); m.id = 'modalMG';
     m.onclick = function(e){ if(e.target === m) cerrarMigGer(); };
     m.innerHTML = '<div class="mg-box" role="dialog"><div class="mg-head"><div><h2>Migraciones · vista gerencia</h2>'
-      + '<p>Todo el equipo · solo migraciones · con los export completos de los días con técnicos en otras comunas</p></div>'
+      + '<p id="mgSub">Todo el equipo · solo migraciones</p></div>'
       + '<button class="mg-x" onclick="cerrarMigGer()" title="Cerrar (Esc)">✖</button></div>'
       + '<div class="mg-sel" id="mgSel"></div><div class="mg-cuerpo" id="mgCuerpo"></div></div>';
     document.body.appendChild(m);
@@ -13938,6 +13938,14 @@ function mgAgrupar(){
     if(Array.isArray(det.reagendadas)){ o.reagOk = true;
       det.reagendadas.forEach(function(c){ if(String(c.cat || '').indexOf('Migr') === 0) o.reag++; }); }
   });
+  /* (21-10-2026, Luis: "todo lo que se asigno a nuestras bandejas,
+     independiente de que paso"). Universo = las que terminaron el dia en una
+     bandeja de Dominion (o.a) + las que nos sacaron y NO estan en el cierre
+     de ese mismo dia (si volvieron otro dia, ese dia cuentan otra vez: es
+     otra asignacion). Las que volvieron el mismo dia ya estan en o.a. */
+  Object.keys(P).forEach(function(k){ const o = P[k];
+    o.fuera = o.des.filter(function(d){ const t = mgDestino(d); return t !== 'otro' && t !== 'canc' && t !== 'mismo'; }).length;
+    o.u = o.a + o.fuera; });
   return P;
 }
 function mgHoyIso(){ const d = new Date(); return d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0'); }
@@ -13958,6 +13966,11 @@ const MG_DEST = { vc:['Volvió otro día y se completó','#15803d'], vnr:['Volvi
 function pintarMigGer(){
   const sel = document.getElementById('mgSel'), cu = document.getElementById('mgCuerpo');
   if(!sel || !cu) return;
+  /* el subtitulo dice de verdad de donde salen los numeros */
+  const sub = document.getElementById('mgSub');
+  if(sub) sub.innerHTML = 'Todo el equipo · solo migraciones · ' + (!MG ? 'cargando…'
+    : MG.completo ? '<b style="color:#86efac">con los export completos</b> de los días con técnicos en otras comunas (datos hasta el ' + escR(MG.completo.hasta) + ')'
+    : '<b style="color:#fcd34d">sin los export completos</b>: falta subir migraciones_semanas.json nuevo al repo Actividades-diario');
   const segV = '<span class="rot">Ver por</span><div class="mg-seg">'
     + [['mes','Meses'],['sem','Semanas'],['hoy','Hoy en vivo']].map(function(v){
         return '<button class="' + (mgVer === v[0] ? 'on' : '') + '" onclick="setMgVer(\'' + v[0] + '\')">' + v[1] + '</button>'; }).join('') + '</div>';
@@ -14005,34 +14018,38 @@ function mgPeriodoHtml(o, a, k, kA, cur){
   const vis = o.co + o.nr, visA = a ? a.co + a.nr : 0;
   const nomA = kA ? mgNomCorto(kA) : '';
   const pDer = mgPct(o.nr, vis), pDerA = a && visA ? mgPct(a.nr, visA) : null;
-  const pCo = mgPct(o.co, o.a), pCoA = a ? mgPct(a.co, a.a) : null;
-  const pCa = mgPct(o.ca, o.a), pCaA = a ? mgPct(a.ca, a.a) : null;
-  const prom = nd ? o.a / nd : 0, promA = ndA ? a.a / ndA : null;
+  const U = o.u, UA = a ? a.u : 0;
+  const pCo = mgPct(o.co, U), pCoA = a ? mgPct(a.co, UA) : null;
+  const pCa = mgPct(o.ca, U), pCaA = a ? mgPct(a.ca, UA) : null;
+  const prom = nd ? U / nd : 0, promA = ndA ? UA / ndA : null;
   const reCli = o.fam.re, reCliA = a ? a.fam.re : 0;
   const sm = o.fam.sm, smA = a ? a.fam.sm : 0;
   let h = '<div class="mg-b"><div class="mg-t"><b>' + mgNomPer(k) + '</b>'
     + '<small>' + (mgRango(k) ? mgRango(k) + ' · ' : '') + nd + ' día' + (nd === 1 ? '' : 's') + ' con datos' + (cur ? ' · en curso, hasta ayer' : '') + (a ? ' · comparado con ' + nomA : '') + '</small></div>'
-    + '<p class="mg-frase">De cada <b>100 migraciones asignadas</b>: <b class="v">' + Math.round(pCo) + '</b> se completaron, '
-    + '<b class="r">' + Math.round(mgPct(o.nr, o.a)) + '</b> quedaron no realizadas'
-    + (function(){ const c = Math.round(pCa), su = Math.round(mgPct(o.su, o.a)), t = [];
+    + '<p class="mg-frase">De cada <b>100 migraciones que llegaron a nuestras bandejas</b>: <b class="v">' + Math.round(pCo) + '</b> se completaron, '
+    + '<b class="r">' + Math.round(mgPct(o.nr, U)) + '</b> quedaron no realizadas'
+    + (function(){ const c = Math.round(pCa), su = Math.round(mgPct(o.su, U)), fu = Math.round(mgPct(o.fuera, U)), t = [];
         if(c) t.push('<b>' + c + '</b> ' + (c === 1 ? 'se canceló' : 'se cancelaron'));
         if(su) t.push('<b>' + su + '</b> ' + (su === 1 ? 'quedó suspendida' : 'quedaron suspendidas'));
-        return t.length ? (t.length === 1 ? ' y ' : ', ') + t.join(' y ') : ''; })() + '.</p>'
+        if(fu) t.push('<b class="am">' + fu + '</b> nos las sacaron');
+        return t.length ? ', ' + t.slice(0, -1).join(', ') + (t.length > 1 ? ' y ' : '') + t[t.length - 1] : ''; })() + '.'
+    + (o.desOk ? '' : ' <small class="mg-sr">(antes del 15-09 no hay registro de las que nos sacaron)</small>') + '</p>'
     + '<div class="mg-cards">'
-    + mgCard('Asignadas', o.a, mgF1(prom) + ' por día', promA !== null ? mgCmpN(prom, promA, nomA) : '', 'az', 'Todas las migraciones del período, en cualquier estado')
-    + mgCard('Completadas', o.co, mgF1(pCo) + '% de las asignadas', mgCmp(pCo, pCoA, false, nomA), 've')
+    + mgCard('Llegaron a nuestras bandejas', U, mgF1(prom) + ' por día · ' + o.a + ' terminaron el día con nosotros' + (o.fuera ? ' y ' + o.fuera + ' nos las sacaron' : ''),
+        promA !== null ? mgCmpN(prom, promA, nomA) : '', 'az', 'Todo lo que llegó a una bandeja de un técnico de Dominion, pasara lo que pasara: también las que nos sacaron y no volvieron ese día')
+    + mgCard('Completadas', o.co, mgF1(pCo) + '% de las que llegaron', mgCmp(pCo, pCoA, false, nomA), 've')
     + mgCard('No realizadas (derivadas)', o.nr, '<b>' + mgF1(pDer) + '%</b> de las visitadas', mgCmp(pDer, pDerA, true, nomA), 'ro',
         'Derivación = no realizadas ÷ visitadas (completadas + no realizadas). Mismo cálculo de la ventana de Derivación')
-    + mgCard('Canceladas', o.ca, mgF1(pCa) + '% de las asignadas', mgCmp(pCa, pCaA, true, nomA), 'gr')
-    + mgCard('Suspendidas', o.su, mgF1(mgPct(o.su, o.a)) + '% de las asignadas', '', 'gr')
-    + mgCard('Desaparecieron de la bandeja', o.desOk ? o.des.length : '–', o.desOk ? 'se las sacaron al técnico sin tocarlas' : 'sin registro (empieza el 15-09)',
+    + mgCard('Canceladas', o.ca, mgF1(pCa) + '% de las que llegaron', mgCmp(pCa, pCaA, true, nomA), 'gr')
+    + mgCard('Suspendidas', o.su, mgF1(mgPct(o.su, U)) + '% de las que llegaron', '', 'gr')
+    + mgCard('Nos las sacaron', o.desOk ? o.des.length : '–', o.desOk ? 'se las sacaron al técnico sin tocarlas · ' + o.fuera + ' no volvieron ese día (' + mgF1(mgPct(o.fuera, U)) + '% de las que llegaron)' : 'sin registro (empieza el 15-09)',
         o.desOk && a && a.desOk ? mgCmpN(o.des.length / (nd || 1), a.des.length / (ndA || 1), nomA, true) : '', 'am')
     + mgCard('Cliente reagenda', reCli, mgF1(mgPct(reCli, vis)) + '% de las visitadas', a ? mgCmp(mgPct(reCli, vis), mgPct(reCliA, visA), true, nomA) : '', 'az2',
         'Quiebre "Cliente reagenda" (y "sin contacto"): el técnico fue y el cliente pidió otro día')
     + mgCard('Sin moradores', sm, mgF1(mgPct(sm, vis)) + '% de las visitadas', a ? mgCmp(mgPct(sm, vis), mgPct(smA, visA), true, nomA) : '', 'na')
     + mgCard('Vienen reagendadas de otro día', o.reagOk ? o.reag : '–', o.reagOk ? 'la plataforma las movió a otro día' : 'sin registro (empieza el 15-09)', '', 'gr',
         'Misma orden que el monitor ya había visto en un día anterior')
-    + (MG && MG.completo ? mgCard('Hechas en otras comunas', o.otra, mgF1(mgPct(o.otra, o.a)) + '% de las asignadas · apoyo fuera de Quilpué y V. Alemana', '', 'gr',
+    + (MG && MG.completo ? mgCard('Hechas en otras comunas', o.otra, mgF1(mgPct(o.otra, U)) + '% de las que llegaron · apoyo fuera de Quilpué y V. Alemana', '', 'gr',
         'Migraciones de técnicos de Dominion en Viña, Valparaíso, Quillota u otra comuna. Salen de los export completos del jefe') : '')
     + '</div></div>';
   /* todos los quiebres */
@@ -14083,10 +14100,12 @@ function mgPeriodoHtml(o, a, k, kA, cur){
 function mgTablaHtml(P, ks, enCurso){
   const pv = function(n, o){ return n + ' <small>' + Math.round(mgPct(n, o.co + o.nr)) + '%</small>'; };
   const filas = [
-    ['Asignadas', function(o){ return o.a; }],
+    ['Llegaron a nuestras bandejas', function(o){ return '<b>' + o.u + '</b>'; }, 'uni'],
+    ['· terminaron el día con nosotros', function(o){ return o.a; }],
+    ['· nos las sacaron y no volvieron ese día', function(o){ return o.desOk ? o.fuera : '–'; }],
     ['· en otras comunas', function(o){ return MG && MG.completo ? o.otra : '–'; }],
-    ['Por día', function(o){ const n = Object.keys(o.dias).length; return n ? mgF1(o.a / n) : '–'; }],
-    ['Completadas', function(o){ return o.co + ' <small>' + Math.round(mgPct(o.co, o.a)) + '%</small>'; }],
+    ['Llegaron por día', function(o){ const n = Object.keys(o.dias).length; return n ? mgF1(o.u / n) : '–'; }],
+    ['Completadas', function(o){ return o.co + ' <small>' + Math.round(mgPct(o.co, o.u)) + '%</small>'; }],
     ['No realizadas', function(o){ return o.nr; }],
     ['% derivación (de las visitadas)', function(o){ return '<b>' + mgF1(mgPct(o.nr, o.co + o.nr)) + '%</b>'; }, 'der'],
     ['· Sin moradores', function(o){ return pv(o.fam.sm, o); }],
@@ -14096,7 +14115,7 @@ function mgTablaHtml(P, ks, enCurso){
     ['· Otras causas', function(o){ return pv(o.fam.ot, o); }],
     ['Canceladas', function(o){ return o.ca; }],
     ['Suspendidas', function(o){ return o.su; }],
-    ['Desaparecieron de la bandeja', function(o){ return o.desOk ? o.des.length : '–'; }],
+    ['Nos las sacaron (todas)', function(o){ return o.desOk ? o.des.length : '–'; }],
     ['Vienen reagendadas de otro día', function(o){ return o.reagOk ? o.reag : '–'; }]
   ];
   return '<div class="mg-b"><div class="mg-t"><b>' + (mgVer === 'mes' ? 'Mes a mes' : 'Semana a semana') + '</b><small>toca un período arriba para ver su detalle · el % de cada quiebre es sobre las visitadas</small></div>'
@@ -14125,15 +14144,17 @@ function mgHoyHtml(){
   const Tv = (typeof toaVigente === 'function') ? toaVigente() : null;
   const des = {}; caid.forEach(function(c){ const s = Tv && Tv.estados && Tv.estados[c.o]; const k = s && s.estado ? s.estado : 'aún sin consultar en TOA'; des[k] = (des[k] || 0) + 1; });
   const reag = l.filter(function(x){ return x.reag; }).length;
+  const enBand = {}; l.forEach(function(x){ enBand[x.o] = 1; });
+  const fueraHoy = caid.filter(function(c){ return !enBand[c.o]; }).length, Uh = l.length + fueraHoy;
   let bk = null;
   try { if(Array.isArray(BUCKET)) bk = BUCKET.filter(function(x){ return x.b === 1 && String(x.cat || x.t || '').indexOf('Migr') === 0 && x.e !== 'Cancelado' && x.e !== 'Completado'; }).length; } catch(e){}
   let hora = '';
   try { if(FECHA_DATOS) hora = 'datos de las ' + String(FECHA_DATOS.getHours()).padStart(2, '0') + ':' + String(FECHA_DATOS.getMinutes()).padStart(2, '0') + ' · '; } catch(e){}
   let h = '<div class="mg-b"><div class="mg-t"><b>Hoy, en vivo</b><small>' + hora + 'migraciones en las bandejas de Dominion</small></div>'
-    + '<p class="mg-frase">De <b>' + l.length + '</b> migraciones en bandejas: <b class="v">' + co + '</b> completadas, <b class="r">' + nr + '</b> no realizadas'
+    + '<p class="mg-frase">Hoy llegaron <b>' + Uh + '</b> migraciones a nuestras bandejas' + (fueraHoy ? ' (<b class="am">' + fueraHoy + '</b> nos las sacaron)' : '') + ': <b class="v">' + co + '</b> completadas, <b class="r">' + nr + '</b> no realizadas'
     + (vis ? ' (<b class="r">' + mgF1(mgPct(nr, vis)) + '%</b> de derivación de lo ya visitado)' : '') + ' y <b>' + ab + '</b> todavía sin cerrar.</p>'
     + '<div class="mg-cards">'
-    + mgCard('Asignadas hoy', l.length, 'en bandejas', '', 'az')
+    + mgCard('Llegaron hoy a nuestras bandejas', Uh, l.length + ' siguen en bandejas' + (fueraHoy ? ' y ' + fueraHoy + ' nos las sacaron' : ''), '', 'az')
     + mgCard('Completadas', co, mgF1(mgPct(co, l.length)) + '% de las asignadas', '', 've')
     + mgCard('No realizadas (derivadas)', nr, '<b>' + mgF1(mgPct(nr, vis)) + '%</b> de las visitadas (' + vis + ')', '', 'ro')
     + mgCard('Sin cerrar', ab, 'pendientes, en ruta o iniciadas', '', 'gr')
@@ -14178,7 +14199,8 @@ function mgHoyHtml(){
   .mg-b { background:#fff; border:1px solid #dbe4f0; border-radius:12px; padding:14px 18px; margin-bottom:14px; }
   .mg-t { display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
   .mg-t b { font:700 17px 'Archivo',system-ui,sans-serif; color:#1e3a8a; } .mg-t small { color:#64748b; font-size:13px; }
-  .mg-frase { font-size:15px; margin:0 0 12px; } .mg-frase .v { color:#15803d; } .mg-frase .r { color:#b91c1c; }
+  .mg-frase { font-size:15px; margin:0 0 12px; } .mg-frase .v { color:#15803d; } .mg-frase .r { color:#b91c1c; } .mg-frase .am { color:#b45309; }
+  .mg-sr { color:#64748b; font-size:12.5px; } .mg-tab tr.uni td { background:#eff6ff; font-weight:600; }
   .mg-cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(205px,1fr)); gap:10px; }
   .mg-card { border-radius:10px; padding:11px 13px; background:#f8fafc; border:1px solid #e2e8f0; border-left:5px solid #94a3b8; display:flex; flex-direction:column; gap:2px; }
   .mg-card small { font-size:12px; color:#475569; font-weight:600; } .mg-card > b { font:700 30px 'Archivo',system-ui,sans-serif; line-height:1.1; }
