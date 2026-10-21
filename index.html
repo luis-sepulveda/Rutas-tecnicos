@@ -14096,10 +14096,13 @@ function mgTecCalc(k){
     if(mgClave(x.iso) !== k || !x.tec) return;
     if(x.e !== 'Completado' && x.e !== 'No Realizada') return;
     if(!derActivo(x.tec)){ fuera[x.tec] = 1; return; }
-    const o = T[x.tec] || (T[x.tec] = { tec:x.tec, co:0, nr:0, resp:{cli:0,vtr:0,dom:0}, casas:{}, rep:{}, repCon:{}, otro:0, el:0, pend:0, sinDir:0, smN:0, smMin:0, fr:0, frOk:0, lista:[] });
-    if(x.e === 'Completado'){ o.co++; return; }
+    const o = T[x.tec] || (T[x.tec] = { tec:x.tec, co:0, nr:0, resp:{cli:0,vtr:0,dom:0}, casas:{}, rep:{}, repCon:{}, otro:0, el:0, pend:0, sinDir:0, smN:0, smMin:0, fr:0, frOk:0, fF:0, fFnr:0, fD:0, fDnr:0, lista:[] });
+    /* (21-10-2026) llegada contra la franja, en TODAS sus visitas (completadas y no realizadas) */
+    const c = mgCasa(x), ef = c && c.yo ? mgEnFranja(x.fr, c.yo.hi) : null, esNr = x.e === 'No Realizada';
+    if(ef !== null){ o.fr++; if(ef){ o.frOk++; o.fD++; if(esNr) o.fDnr++; } else { o.fF++; if(esNr) o.fFnr++; } }
+    if(!esNr){ o.co++; return; }
     o.nr++; const r = mgResp(x.cod); o.resp[r]++;
-    const c = mgCasa(x), it = { x:x, c:c, r:r, rep:false, desp:null };
+    const it = { x:x, c:c, r:r, rep:false, desp:null };
     if(!c){ o.sinDir++; o.lista.push(it); return; }
     o.casas[c.d] = 1;
     c.otras.forEach(function(v){ if(!v.ok && v.tec && v.tec !== x.tec){ it.rep = true; o.repCon[mgCorto(v.tec)] = 1; } });
@@ -14108,7 +14111,6 @@ function mgTecCalc(k){
     if(desp){ it.desp = desp; if(desp.tec === x.tec) o.el++; else o.otro++; } else o.pend++;
     if(c.yo){
       if(MG_FAM(x.cod) === 'sm' && c.yo.dur > 0){ o.smN++; o.smMin += c.yo.dur; }
-      const ef = mgEnFranja(x.fr, c.yo.hi); if(ef !== null){ o.fr++; if(ef) o.frOk++; }
     }
     o.lista.push(it);
   });
@@ -14123,9 +14125,9 @@ function mgTecHtml(k, kPrev){
     vis:function(a, b){ return (b.co + b.nr) - (a.co + a.nr); }, nom:function(a, b){ return a.tec.localeCompare(b.tec); } };
   L.sort(ORD[mgTecOrd] || ORD.der);
   /* totales del equipo (solo plantel) */
-  const S = { nr:0, co:0, casas:0, rep:0, otro:0, el:0, pend:0, cli:0, vtr:0, dom:0, sinDir:0, sobre:0 };
+  const S = { nr:0, co:0, casas:0, rep:0, otro:0, el:0, pend:0, cli:0, vtr:0, dom:0, sinDir:0, sobre:0, fF:0, fFnr:0, fD:0, fDnr:0 };
   const casasAll = {}, repAll = {};
-  L.forEach(function(o){ S.nr += o.nr; S.co += o.co; S.otro += o.otro; S.el += o.el; S.pend += o.pend; S.sinDir += o.sinDir;
+  L.forEach(function(o){ S.nr += o.nr; S.co += o.co; S.otro += o.otro; S.el += o.el; S.pend += o.pend; S.sinDir += o.sinDir; S.fF += o.fF; S.fFnr += o.fFnr; S.fD += o.fD; S.fDnr += o.fDnr;
     S.cli += o.resp.cli; S.vtr += o.resp.vtr; S.dom += o.resp.dom; if(der(o) > MG_META_DER) S.sobre++;
     Object.keys(o.casas).forEach(function(d){ casasAll[d] = 1; }); Object.keys(o.rep).forEach(function(d){ repAll[d] = 1; }); });
   const nCasas = Object.keys(casasAll).length, nRep = Object.keys(repAll).length;
@@ -14146,6 +14148,10 @@ function mgTecHtml(k, kPrev){
     + mgCard('Causa del cliente', mgF1(mgPct(S.cli, S.nr)) + '%', 'VTR/CLARO ' + mgF1(mgPct(S.vtr, S.nr)) + '% · Dominion ' + mgF1(mgPct(S.dom, S.nr)) + '%',
         'Incluso en los 5 con más derivación: <b>' + mgF1(mgPct(t5.cli, t5.nr)) + '%</b> del cliente', 'az')
     + '</div>'
+    + (S.fF ? (function(){ const dF = mgPct(S.fFnr, S.fF), dD = mgPct(S.fDnr, S.fD), conF = L.filter(function(o){ return o.fF; }).length;
+        return '<p class="mg-frase mg-franja">⏰ <b>' + S.fF + '</b> visitas (' + mgF1(mgPct(S.fF, S.fF + S.fD)) + '%) llegaron <b>fuera de la franja</b>, de ' + conF + ' técnicos. '
+          + 'Ahí la derivación fue <b class="' + (dF > dD ? 'r' : 'v') + '">' + Math.round(dF) + '%</b>, contra <b>' + Math.round(dD) + '%</b> cuando llegaron a tiempo'
+          + (dF - dD >= 3 ? ': <b class="r">es un punto débil, revisa la columna "Fuera de franja"</b>.' : '.') + '</p>'; })() : '')
     + (S.sinDir ? '<p class="mg-nota">' + S.sinDir + ' no realizadas no tienen dirección en el historial de visitas (no se cuentan en casas).</p>' : '')
     + '</div>';
   /* tabla */
@@ -14155,7 +14161,8 @@ function mgTecHtml(k, kPrev){
     + '<div class="mg-scroll"><table class="mg-q mg-tt"><thead><tr><th>Técnico</th><th>Visitadas</th><th>Compl.</th><th>No real.</th><th>% deriv.</th>'
     + '<th>De quién es la causa</th><th>Casas</th><th title="Casas donde la migración también falló con otro técnico de Dominion">Falló también<br>con otro técnico</th>'
     + '<th title="No realizadas que después completó otro técnico de Dominion">La terminó<br>otro después</th><th title="Promedio de minutos en la casa en sus sin moradores">Sin moradores<br>min en la casa</th>'
-    + '<th title="Llegó dentro de la franja comprometida (15 min de holgura)">Llegó en<br>la franja</th></tr></thead><tbody>';
+    + '<th title="De todas sus visitas, cuántas llegaron dentro de la franja comprometida (15 min de holgura)">Llegó en<br>la franja</th>'
+    + '<th title="Visitas que llegaron fuera de la franja y cuántas de esas quedaron no realizadas">Fuera de franja<br>visitas · deriv.</th></tr></thead><tbody>';
   L.forEach(function(o, i){
     const d = der(o), a = A[o.tec], dA = a && (a.co + a.nr) ? der(a) : null;
     const cmp = dA === null ? '' : Math.abs(d - dA) < 0.5 ? ' <small class="eq">=</small>' : d > dA ? ' <small class="peor">▲' + Math.round(d - dA) + '</small>' : ' <small class="mejor">▼' + Math.round(dA - d) + '</small>';
@@ -14169,11 +14176,14 @@ function mgTecHtml(k, kPrev){
       + '<td>' + (nc ? '<b>' + nr + '</b> <small>(' + Math.round(mgPct(nr, nc)) + '%)</small>' : '—') + '</td>'
       + '<td>' + (o.nr ? o.otro : '—') + '</td>'
       + '<td>' + (o.smN ? Math.round(o.smMin / o.smN) + ' min' : '—') + '</td>'
-      + '<td>' + (o.fr ? Math.round(mgPct(o.frOk, o.fr)) + '%' : '—') + '</td></tr>';
-    if(mgTecAbre === i) h += '<tr class="mg-ficha"><td colspan="11">' + mgFichaHtml(o) + '</td></tr>';
+      + '<td>' + (o.fr ? Math.round(mgPct(o.frOk, o.fr)) + '%' : '—') + '</td>'
+      + '<td>' + (o.fF ? (function(){ const dF = mgPct(o.fFnr, o.fF), dD = o.fD ? mgPct(o.fDnr, o.fD) : null, mal = o.fFnr && dD !== null && dF > dD;
+          return '<b>' + o.fF + '</b> · <span class="' + (mal ? 'mg-fuera' : '') + '" title="' + o.fFnr + ' de ' + o.fF + ' fuera de franja quedaron no realizadas' + (dD !== null ? ' · a tiempo: ' + Math.round(dD) + '%' : '') + '">' + Math.round(dF) + '%</span>'; })() : '<small>—</small>') + '</td></tr>';
+    if(mgTecAbre === i) h += '<tr class="mg-ficha"><td colspan="12">' + mgFichaHtml(o) + '</td></tr>';
   });
   h += '</tbody></table></div><p class="mg-nota">% deriv. = no realizadas ÷ visitadas (▲▼ contra ' + (kPrev ? mgNomCorto(kPrev) : 'el período anterior') + '). '
     + '"Falló también con otro técnico" = en esa casa hubo otra migración no realizada con un técnico distinto de Dominion, antes o después (historial desde el 01-07). '
+    + '"Fuera de franja" = llegó después del término de la franja, o más de 15 min antes de que empezara; el % es cuántas de esas quedaron no realizadas (en rojo si es peor que cuando llega a tiempo). '
     + 'Llegada y minutos salen de la hora de inicio y duración de la visita en TOA.</p></div>';
   return h;
 }
@@ -14183,7 +14193,9 @@ function mgFichaHtml(o){
     + '<li><b>' + o.nr + '</b> no realizadas en <b>' + nc + '</b> casas · causa del cliente <b>' + Math.round(mgPct(o.resp.cli, o.nr)) + '%</b>, VTR/CLARO ' + Math.round(mgPct(o.resp.vtr, o.nr)) + '%, Dominion ' + Math.round(mgPct(o.resp.dom, o.nr)) + '%.</li>'
     + '<li>En <b>' + nr + '</b> de esas casas la migración <b>también falló con otro técnico</b>' + (con.length ? ': ' + con.slice(0, 8).map(function(t){ return escR(mgCap(t)); }).join(', ') + (con.length > 8 ? ' y ' + (con.length - 8) + ' más' : '') : '') + '.</li>'
     + '<li>Después <b>' + o.otro + '</b> la terminó otro técnico, <b>' + o.el + '</b> la terminó él mismo y <b>' + o.pend + '</b> siguen sin hacerse.</li>'
-    + (o.smN ? '<li>En sus sin moradores estuvo en promedio <b>' + Math.round(o.smMin / o.smN) + ' min</b> en la casa' + (o.fr ? ' · llegó dentro de la franja en el <b>' + Math.round(mgPct(o.frOk, o.fr)) + '%</b>' : '') + '.</li>' : '')
+    + (o.smN ? '<li>En sus sin moradores estuvo en promedio <b>' + Math.round(o.smMin / o.smN) + ' min</b> en la casa' + '.</li>' : '')
+    + (o.fr ? '<li>Llegó dentro de la franja en el <b>' + Math.round(mgPct(o.frOk, o.fr)) + '%</b> de sus visitas'
+        + (o.fF ? ' · <b>' + o.fF + '</b> fuera de franja, de esas <b>' + o.fFnr + '</b> quedaron no realizadas (' + Math.round(mgPct(o.fFnr, o.fF)) + '%' + (o.fD ? ', contra ' + Math.round(mgPct(o.fDnr, o.fD)) + '% a tiempo' : '') + ')' : ' · nunca llegó fuera de franja') + '.</li>' : '')
     + '</ul><table class="mg-q mg-fi-t"><thead><tr><th>Fecha</th><th>Dirección</th><th>Su causa</th><th>Llegó · min</th><th>Qué pasó en esa casa (otras visitas de migración)</th></tr></thead><tbody>';
   o.lista.slice().sort(function(a, b){ return a.x.iso < b.x.iso ? -1 : 1; }).forEach(function(it){
     const x = it.x, c = it.c, yo = c && c.yo, ef = yo ? mgEnFranja(x.fr, yo.hi) : null;
@@ -14736,6 +14748,7 @@ function mgHoyHtml(){
   .mg-chip { display:inline-block; border-radius:6px; padding:1px 7px; font-size:12px; white-space:nowrap; border:1px solid; }
   .mg-chip.ok { background:#f0fdf4; border-color:#86efac; color:#166534; } .mg-chip.nr { background:#fef2f2; border-color:#fca5a5; color:#991b1b; }
   .mg-chip.yo { border-style:dashed; }
+  .mg-tt span.mg-fuera { color:#b91c1c; font-weight:700; } .mg-franja { font-size:15px !important; background:#fff7ed; border:1px solid #fed7aa; border-radius:8px; padding:8px 12px; margin-top:12px; }
   .mg-fi-t .mg-chip { white-space:normal; } .mg-fi-t td:nth-child(2) { min-width:160px; } .mg-fi-t td:nth-child(3) { min-width:130px; }
   .mg-q small.peor { color:#b91c1c; font-weight:600; } .mg-q small.mejor { color:#15803d; font-weight:600; } .mg-q small.eq { color:#64748b; }
   .mg-bus { margin-left:auto; border:1px solid #cbd5e1; border-radius:7px; padding:6px 10px; font:13px 'DM Sans',system-ui,sans-serif; min-width:240px; }
