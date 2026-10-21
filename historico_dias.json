@@ -22128,27 +22128,36 @@
    }
   },
   "21-10-2026": {
-   "hasta": "10:27",
-   "actividades": 121,
+   "hasta": "10:37",
+   "actividades": 122,
    "tecnicos": 34,
    "estados": {
     "Completado": 2,
-    "en ruta": 4,
+    "Iniciado": 31,
     "Pendiente": 80,
-    "No Realizada": 4,
-    "Iniciado": 30,
-    "Cancelado": 1
+    "No Realizada": 6,
+    "Cancelado": 1,
+    "en ruta": 2
    },
-   "rgu": 194.0,
-   "caidas_total": 3,
-   "caidas_activas": 3,
+   "rgu": 195.0,
+   "caidas_total": 5,
+   "caidas_activas": 5,
    "caidas_resueltas": 0,
    "nuevas": 5,
    "al_bucket": 1,
-   "repetidas": 33,
+   "repetidas": 34,
    "reagendadas": 7,
    "detalle": {
     "caidas": [
+     {
+      "o": "1-3OIPRARY",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "14:45",
+      "d": "SERENA 890 DEPTO 14, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OG8JJV0",
       "tec": "MARCO PEREZ G",
@@ -22156,6 +22165,15 @@
       "f": "13-16",
       "hi": "14:40",
       "d": "PJE D 0812 EDIF. 13 DEPTO 22, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OICLRP1",
+      "tec": "MATIAS APELEO APELEO",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "12:20",
+      "d": "SANTA SARA 1540 EDIF. 1A DEPTO 307, VILLA ALEMANA",
       "e": "Pendiente"
      },
      {
@@ -22229,7 +22247,7 @@
       "o": "1-3OC84DF9",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "12:26",
+      "hi": "12:43",
       "d": "SAN LUIS 1730, QUILPUE",
       "e": "Pendiente",
       "tec": "ALEXIS JARA",
@@ -22313,7 +22331,7 @@
       "o": "1-3OIG9OWC",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "10:35",
+      "hi": "10:53",
       "d": "BENJAMIN VICUNA MACKENNA 645, QUILPUE",
       "e": "Pendiente",
       "tec": "FELIPE SILVA R",
@@ -22368,6 +22386,18 @@
       "visitas": 1,
       "ult_fecha": "20-10-2026",
       "ult_cierre": "Evento Contingencia"
+     },
+     {
+      "o": "1-3OJ2WO66",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "14:22",
+      "d": "AV LOS CARRERA 220, QUILPUE",
+      "e": "Pendiente",
+      "tec": "JORDAN ROA PEREZ",
+      "visitas": 1,
+      "ult_fecha": "28-09-2026",
+      "ult_cierre": "Falta de dotación"
      },
      {
       "o": "1-3OIIDDOV",
@@ -22567,7 +22597,7 @@
       "f": "10-13",
       "hi": "09:34",
       "d": "LA LOMA 2649, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "SEBASTIAN DOSSOW A",
       "visitas": 1,
       "ult_fecha": "19-10-2026",
@@ -22697,5 +22727,5 @@
    }
   }
  },
- "generado": "21-10-2026 10:27"
+ "generado": "21-10-2026 10:37"
 }
