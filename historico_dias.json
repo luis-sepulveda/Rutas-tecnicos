@@ -22128,22 +22128,22 @@
    }
   },
   "21-10-2026": {
-   "hasta": "09:46",
-   "actividades": 117,
+   "hasta": "10:02",
+   "actividades": 118,
    "tecnicos": 34,
    "estados": {
-    "Iniciado": 17,
-    "Pendiente": 86,
+    "Iniciado": 29,
+    "Pendiente": 85,
     "Cancelado": 1,
-    "en ruta": 13
+    "en ruta": 3
    },
-   "rgu": 187.5,
+   "rgu": 189.0,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
    "nuevas": 5,
-   "al_bucket": 0,
-   "repetidas": 35,
+   "al_bucket": 1,
+   "repetidas": 36,
    "reagendadas": 7,
    "detalle": {
     "caidas": [
@@ -22215,6 +22215,18 @@
     ],
     "repetidas": [
      {
+      "o": "1-3OC84DF9",
+      "cat": "Migración 1 Play",
+      "f": "10-13",
+      "hi": "12:46",
+      "d": "SAN LUIS 1730, QUILPUE",
+      "e": "Pendiente",
+      "tec": "ALEXIS JARA",
+      "visitas": 3,
+      "ult_fecha": "10-10-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3OHRQLI2",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -22242,7 +22254,7 @@
       "o": "1-3OITI5OZ",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:17",
+      "hi": "14:26",
       "d": "EDUARDO ALQUINTA 1260 CASA 173, QUILPUE",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
@@ -22266,9 +22278,9 @@
       "o": "1-3OILADNZ",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "09:30",
+      "hi": "09:56",
       "d": "RAFAEL FABRES 3149, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "CRISTOBAL SILVA LEIVA",
       "visitas": 1,
       "ult_fecha": "20-10-2026",
@@ -22278,7 +22290,7 @@
       "o": "1-3OHM766L",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "10:27",
+      "hi": "10:53",
       "d": "ARAUS 172, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
@@ -22290,7 +22302,7 @@
       "o": "1-3OIPWPSC",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "17:16",
       "d": "AV LOS CARRERA 480, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -22482,7 +22494,7 @@
       "o": "1-3OISEZC7",
       "cat": "Migración 3 Play",
       "f": "10-13",
-      "hi": "12:05",
+      "hi": "12:08",
       "d": "DIEGO DE ALMAGRO 270, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS CASTRO TORRES",
@@ -22542,7 +22554,7 @@
       "o": "1-3OICLRP1",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "12:26",
+      "hi": "12:20",
       "d": "SANTA SARA 1540 EDIF. 1A DEPTO 307, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -22614,7 +22626,7 @@
       "o": "1-3OIMKBVI",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "14:04",
       "d": "EL AGUILUCHO 2461, QUILPUE",
       "e": "Pendiente",
       "tec": "YENDER BOSCAN CADENAS",
@@ -22626,7 +22638,7 @@
       "o": "1-3OI0QZGI",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:23",
+      "hi": "16:27",
       "d": "HORNOPIREN 2921, QUILPUE",
       "e": "Pendiente",
       "tec": "YENDER BOSCAN CADENAS",
@@ -22680,29 +22692,29 @@
       "o": "1-3OI2H1MC",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:46",
       "d": "RIMAC 866, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "LEONEL HERNÁNDEZ OJE",
-      "desde": "20-10-2026"
-     },
-     {
-      "o": "1-3OHT8TEF",
-      "cat": "Alta 2 Play",
-      "f": "16-19",
-      "hi": "17:28",
-      "d": "JUAN EGENAU 965, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "LUIS GATICA DAVILA",
       "desde": "20-10-2026"
      },
      {
       "o": "1-3OG52AQM",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "09:55",
+      "hi": "09:49",
       "d": "BEATA LAURITA VICUNA 108, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
+      "tec": "MATIAS APELEO APELEO",
+      "desde": "20-10-2026"
+     },
+     {
+      "o": "1-3OHT8TEF",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "JUAN EGENAU 965, VILLA ALEMANA",
+      "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
       "desde": "20-10-2026"
      }
@@ -22710,5 +22722,5 @@
    }
   }
  },
- "generado": "21-10-2026 09:46"
+ "generado": "21-10-2026 10:02"
 }
