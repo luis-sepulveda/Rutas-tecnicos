@@ -8345,6 +8345,7 @@ const URL_QUIEBRES = URL_ACTIVIDADES + '#quiebres';
    Desde el 23-09-2026 el texto dice SIEMPRE hace cuanto se actualizo, tambien
    fuera de horario, a pedido de Luis: asi sabe de un vistazo si el monitor
    sigue vivo. Lo unico que depende del horario es el ROJO de la alarma. */
+const MIN_SIN_AVISO_RAW = 13; // 21-10-2026: cuando el dato viene por raw (llega hasta 5 min tarde)
 const MIN_SIN_AVISO = 10;   // 10 desde el 09-10-2026 (era 15): Luis pidio el aviso "cuando lleve mas de 10 minutos"
 const HORA_INICIO = 8 * 60 + 45;
 const HORA_FIN = 19 * 60 + 30;
@@ -8359,7 +8360,11 @@ function estadoMonitor(){
     ? Math.round((ahora - FECHA_DATOS) / 60000) : null;
 
   if(edad === null) return {alarma:enHorario, texto:'Sin datos del monitor'};
-  if(edad > MIN_SIN_AVISO)
+  /* (21-10-2026) por raw.githubusercontent el dato llega hasta 5 min tarde
+     aunque el monitor este bien: ahi el aviso espera MIN_SIN_AVISO_RAW. */
+  let limAviso = MIN_SIN_AVISO;
+  try{ if(ORIGEN_DATOS === 'raw') limAviso = MIN_SIN_AVISO_RAW; }catch(e){}
+  if(edad > limAviso)
     return {alarma:enHorario, texto:'Sin actualizar hace ' + fmtDur(edad)};
   return {alarma:false, texto:'Actualizado hace ' + fmtDur(edad)};
 }
