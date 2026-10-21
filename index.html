@@ -14248,10 +14248,56 @@ function mgDirHtml(k){
     + 'En total, ' + L.length + ' casas quedaron con alguna migración no realizada en ' + mgNomCorto(k) + '.</p></div>'
     + '<div class="mg-b"><div class="mg-t"><b>Las casas, de la que más visitas perdió a la que menos</b><small>toca una para ver cada visita</small>'
     + '<input class="mg-bus" type="search" placeholder="Buscar dirección o técnico…" value="' + escR(mgDirQ) + '" oninput="mgDirSetQ(this.value)">'
-    + '<label class="mg-chk"><input type="checkbox"' + (mgDirTodas ? ' checked' : '') + ' onchange="mgDirSetTodas(this.checked)"> incluir las que fueron un solo técnico</label></div>'
+    + '<label class="mg-chk"><input type="checkbox"' + (mgDirTodas ? ' checked' : '') + ' onchange="mgDirSetTodas(this.checked)"> incluir las que fueron un solo técnico</label>'
+    + '<button class="mg-xls" onclick="mgDirExcel()" title="Lista de las casas que fallaron con 2 o más técnicos, para mandarla a VTR/CLARO">⬇ Excel para VTR/CLARO</button></div>'
     + '<div id="mgDirLista"></div></div>';
   setTimeout(mgDirPintarLista, 0);
   return h;
+}
+/* (21-10-2026) Excel para VTR/CLARO: casas que fallaron con 2 o mas
+   tecnicos distintos en el periodo elegido, para que las filtren antes de
+   volver a agendarlas. Hojas: Leeme, Casas, Visitas. */
+function mgDirExcel(){
+  if(typeof XLSX === 'undefined'){ alert('No cargó la librería de Excel. Recarga la página.'); return; }
+  const rep = MG_DIR_L.filter(function(o){ return o.tecs.length >= 2; });
+  if(!rep.length){ alert('No hay casas con 2 o más técnicos en este período.'); return; }
+  const per = mgNomPer(mgSel), ff = function(f){ f = String(f); return f.slice(6, 8) + '-' + f.slice(4, 6) + '-' + f.slice(0, 4); };
+  const comuna = function(d){ const i = d.lastIndexOf(','); return i >= 0 ? mgCap(d.slice(i + 1).trim()) : ''; };
+  const calle = function(d){ const i = d.lastIndexOf(','); return mgCap(i >= 0 ? d.slice(0, i) : d); };
+  const visPerd = rep.reduce(function(s, o){ return s + o.fall; }, 0), pend = rep.filter(function(o){ return !o.ok; }).length;
+  const leeme = [
+    ['Migraciones no realizadas en casas que fallaron con 2 o más técnicos distintos'],
+    ['Período', per],
+    ['Generado', new Date().toLocaleString('es-CL')],
+    ['Fuente', 'TOA: visitas de técnicos Dominion desde el 01-07 (hasta ayer)'],
+    [],
+    ['Casas', rep.length],
+    ['Visitas perdidas en esas casas', visPerd],
+    ['Todavía sin hacer', pend],
+    [],
+    ['Qué es esta lista', 'Casas donde fueron técnicos distintos, en días distintos, y la migración no se pudo hacer. El problema está en la casa (cliente, dirección o red), no en un técnico.'],
+    ['Propuesta', 'Antes de volver a agendar estas casas: confirmar con el cliente (contacto, horario, dirección) o revisar la red. Así no se pierden más visitas.']
+  ];
+  const casas = rep.map(function(o){
+    const ult = o.vs.filter(function(v){ return !v.ok; }).pop();
+    const cs = Object.keys(o.causas).sort(function(a, b){ return o.causas[b] - o.causas[a]; }).map(function(c){ return c + (o.causas[c] > 1 ? ' (' + o.causas[c] + ')' : ''); }).join(', ');
+    return { 'Dirección': calle(o.dir), 'Comuna': comuna(o.dir), 'Visitas perdidas': o.fall, 'Técnicos distintos': o.tecs.length,
+      'Causas': cs, 'Último intento': ult ? ff(ult.f) : '', '¿Se hizo después?': o.ok ? 'Sí, el ' + ff(o.ok.f) : 'No' };
+  });
+  const vis = [];
+  rep.forEach(function(o){ o.vs.forEach(function(v){
+    vis.push({ 'Dirección': calle(o.dir), 'Comuna': comuna(o.dir), 'Fecha': ff(v.f), 'Llegó': v.hi > 0 ? mgHora(v.hi) : '',
+      'Técnico': mgCap(v.tec), 'Resultado': v.ok ? 'Completada' : 'No realizada', 'Causa': v.ok ? '' : (v.cie || '') }); }); });   // sin minutos: hay visitas que quedan abiertas horas en TOA y confunden
+  const wb = XLSX.utils.book_new();
+  const h1 = XLSX.utils.aoa_to_sheet(leeme); h1['!cols'] = [{ wch:32 }, { wch:110 }];
+  const h2 = XLSX.utils.json_to_sheet(casas); h2['!cols'] = [{ wch:44 }, { wch:14 }, { wch:10 }, { wch:10 }, { wch:70 }, { wch:13 }, { wch:18 }];
+  h2['!autofilter'] = { ref: XLSX.utils.encode_range({ s:{r:0,c:0}, e:{r:casas.length, c:6} }) };
+  const h3 = XLSX.utils.json_to_sheet(vis); h3['!cols'] = [{ wch:44 }, { wch:14 }, { wch:11 }, { wch:7 }, { wch:30 }, { wch:13 }, { wch:34 }];
+  h3['!autofilter'] = { ref: XLSX.utils.encode_range({ s:{r:0,c:0}, e:{r:vis.length, c:6} }) };
+  XLSX.utils.book_append_sheet(wb, h1, 'Léeme');
+  XLSX.utils.book_append_sheet(wb, h2, 'Casas');
+  XLSX.utils.book_append_sheet(wb, h3, 'Visitas');
+  XLSX.writeFile(wb, 'casas-dificiles_' + per.replace(/\s+/g, '-').toLowerCase() + '.xlsx');
 }
 function mgDirPintarLista(){
   const box = document.getElementById('mgDirLista'); if(!box) return;
@@ -14769,6 +14815,7 @@ function mgHoyHtml(){
   .mg-vp { font-size:16px; color:#b45309; }
   .mg-si { color:#15803d; font-weight:600; } .mg-no { color:#b91c1c; font-weight:600; }
   .mg-vt { max-width:760px; background:#fff; }
+  .mg-xls { border:0; background:#15803d; color:#fff; border-radius:7px; padding:7px 13px; font:600 13px 'DM Sans',system-ui,sans-serif; cursor:pointer; } .mg-xls:hover { background:#166534; }
 </style>
 
 </body>
