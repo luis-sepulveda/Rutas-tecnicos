@@ -6228,9 +6228,19 @@ function renderPanelCaidas(){
        quedaron reagendadas, canceladas o sin informacion. Es la lectura de
        una pasada; el detalle por orden va en el chip de cada fila. */
     const Tv = toaVigente();
+    /* (21-10-2026) Se cuenta SOLO sobre las ordenes de esta lista. Antes se
+       mostraba Tv.resumen tal cual, y la consulta de las 08:12 era de las
+       caidas de AYER (salia "reagendada 3 · sin informacion 5" con 1 caida). */
+    const resLista = {};
+    if(Tv && Tv.estados){
+      items.forEach(function(x){
+        const st = Tv.estados[x.c.o];
+        if(st && st.estado) resLista[st.estado] = (resLista[st.estado]||0) + 1;
+      });
+    }
     if(Tv && Tv.resumen){
-      cont2.innerHTML += Object.keys(Tv.resumen).sort().map(function(k){
-        return '<span class="fchip toa">Según TOA · '+escR(k)+' <b>'+Tv.resumen[k]+'</b></span>';
+      cont2.innerHTML += Object.keys(resLista).sort().map(function(k){
+        return '<span class="fchip toa">Según TOA · '+escR(k)+' <b>'+resLista[k]+'</b></span>';
       }).join('');
     } else if(TOA){
       // hay archivo, pero es de otra jornada: se dice, en vez de mostrar
@@ -11855,7 +11865,8 @@ function pintarPortada(){
     if(abierta(o)) porFranja[f].ab++;
     /* PRUEBA 08-10-2026 (idea 2): de las sin cerrar, cuantas ya estan
        iniciadas o en ruta; el resto nadie las ha tocado. */
-    if(String(o.e) === 'Iniciado' || String(o.e) === 'en ruta') porFranja[f].ini++;
+    /* 21-10-2026 (Luis): 'en ruta' NO es iniciada; solo cuenta Iniciado. */
+    if(String(o.e) === 'Iniciado') porFranja[f].ini++;
   });
 
   /* Como va cada comuna por separado: el promedio de las dos puede esconder
@@ -11872,7 +11883,7 @@ function pintarPortada(){
     else if(abierta(o)) porComuna[c].ab++;
     else porComuna[c].cs++;
     /* 20-10-2026: de las abiertas, cuantas ya estan iniciadas o en ruta (igual que por franja) */
-    if(String(o.e) === 'Iniciado' || String(o.e) === 'en ruta') porComuna[c].ini++;
+    if(String(o.e) === 'Iniciado') porComuna[c].ini++;
   });
 
   let fecha = (typeof FECHA_DATOS !== 'undefined' && FECHA_DATOS)
@@ -12348,7 +12359,7 @@ function pintarPortada(){
                 return fila(tono, f + est, d.t + b,
                   tramo(d.co || 0, 'c', 'completadas') + tramo(d.nr || 0, 'n', 'no realizadas')
                   + tramo(cerradas - (d.co || 0) - (d.nr || 0), 'x', 'canceladas o suspendidas')
-                  + tramo(d.ini, 'i', 'iniciadas o en ruta') + tramo(sinIniF, 'a', 'en bandeja sin iniciar')
+                  + tramo(d.ini, 'i', 'iniciadas') + tramo(sinIniF, 'a', 'en bandeja sin iniciar')
                   + tramo(b, 'b', 'todavía en el bucket'),
                   d.t + (b ? '<small>+' + b + ' bucket</small>' : ''), efec(d.co || 0, d.nr || 0, d.t));
               }).join('');
@@ -12360,7 +12371,7 @@ function pintarPortada(){
                   const est = '<small>' + (d.ab ? '<span class="ab">' + d.ab + (d.ab === 1 ? ' abierta' : ' abiertas') + '</span>' : '<span class="ok">✓ todo cerrado</span>') + '</small>';
                   return fila(' com', nom + est, d.t,
                     tramo(d.c, 'c', 'completadas') + tramo(d.nr, 'n', 'no realizadas') + tramo(d.cs, 'x', 'canceladas o suspendidas')
-                    + tramo(d.ini, 'i', 'iniciadas o en ruta') + tramo(d.ab - d.ini, 'a', 'en bandeja sin iniciar'),
+                    + tramo(d.ini, 'i', 'iniciadas') + tramo(d.ab - d.ini, 'a', 'en bandeja sin iniciar'),
                     d.t, efec(d.c, d.nr, d.t));
                 }).join('');
               }
