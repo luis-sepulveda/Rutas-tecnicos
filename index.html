@@ -3319,6 +3319,15 @@
   .pv-bar a.b-red.red-falla::before { filter:brightness(4); }
   .pv-bar a.b-red.red-conf, #btnCapaRed.red-conf { background:#7f1d1d !important;
     animation-duration:.8s; }
+
+  /* REITERADOS: LA ORDEN DE HOY MARCADA (21-10-2026, pedido de Luis).
+     La linea de hoy va en un recuadro amarillo con la etiqueta HOY, para
+     separarla a simple vista del historial de abajo. Borrar para volver. */
+  .rd-hoy { background:#fef9c3; border:1px solid #fde047; border-left:5px solid #eab308;
+    border-radius:8px; padding:7px 10px; margin:6px 0 10px; font-size:13.5px; }
+  .rd-hoy-tag { display:inline-block; background:#ca8a04; color:#fff; font-weight:800;
+    font-size:11.5px; letter-spacing:.06em; padding:2px 8px; border-radius:5px;
+    margin-right:4px; vertical-align:1px; }
 </style>
 </head>
 <body>
@@ -7019,7 +7028,7 @@ function renderReitDir(){
         + '<span class="rd-sello">' + v.length + ' reparaci' + (v.length === 1 ? 'ón' : 'ones') + ' antes'
         + (nFal ? ' · ' + nFal + ' no realizada' + (nFal === 1 ? '' : 's') : '')
         + ' · última hace ' + haceReit(dU) + '</span></div>'
-        + '<div class="rd-hoy"><b>Hoy:</b> <span class="rd-ot">' + escR(w.o) + '</span>'
+        + '<div class="rd-hoy"><span class="rd-hoy-tag">HOY</span> <span class="rd-ot">' + escR(w.o) + '</span>'
         + ' · ' + escR(w.cat || w.t || 'Reparación')
         + ' · franja ' + escR(w.f || 's/franja')
         + ' · <span class="rd-tec' + (it.x.buck ? ' buck' : '') + '">' + escR(it.x.tec) + '</span>'
@@ -7364,7 +7373,7 @@ function renderReit(){
         + '<div class="rd-top"><span class="rd-tit">' + escR(w.d) + tagFort(w.fort) + '</span>'
         + '<span class="rd-sello">' + escR(p0.cat || p0.tipo) + (p0.dias === 0 ? ' hoy mismo' : ' hace ' + haceReit(p0.dias))
         + ' · ' + escR(p0.tec) + '</span></div>'
-        + '<div class="rd-hoy"><b>Hoy:</b> <span class="rd-ot">' + escR(w.pet || w.o) + '</span>' + tagNeg(w.o)
+        + '<div class="rd-hoy"><span class="rd-hoy-tag">HOY</span> <span class="rd-ot">' + escR(w.pet || w.o) + '</span>' + tagNeg(w.o)
         + ' · ' + escR(w.cat || 'Reparación') + (w.sub ? ' · ' + escR(w.sub) : '')
         + ' · franja ' + escR(w.f || 's/franja')
         + ' · <span class="rd-tec' + (buck ? ' buck' : '') + '">' + escR(w.tec) + '</span>'
