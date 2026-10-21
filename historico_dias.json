@@ -22128,16 +22128,16 @@
    }
   },
   "21-10-2026": {
-   "hasta": "15:08",
+   "hasta": "15:33",
    "actividades": 147,
    "tecnicos": 35,
    "estados": {
-    "Completado": 49,
-    "No Realizada": 33,
-    "Iniciado": 21,
-    "Pendiente": 33,
+    "Completado": 55,
+    "No Realizada": 36,
+    "Iniciado": 19,
+    "Pendiente": 24,
+    "en ruta": 8,
     "Cancelado": 4,
-    "en ruta": 6,
     "Suspendido": 1
    },
    "rgu": 230.1,
@@ -22375,7 +22375,7 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "VINA DEL MAR 0305, QUILPUE",
-      "e": "Iniciado"
+      "e": "No Realizada"
      },
      {
       "o": "1-3OJ4LA0I",
@@ -22447,7 +22447,7 @@
       "f": "16-19",
       "hi": "16:20",
       "d": "EDWIN GUAJARDO 733, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      }
     ],
     "repetidas": [
@@ -22462,18 +22462,6 @@
       "visitas": 2,
       "ult_fecha": "16-10-2026",
       "ult_cierre": "Direccion incorrecta"
-     },
-     {
-      "o": "1-3OINVLHK",
-      "cat": "Alta 2 Play",
-      "f": "16-19",
-      "hi": "16:00",
-      "d": "CASTELLON 28, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "ALFREDO ALCAYAGA F",
-      "visitas": 1,
-      "ult_fecha": "20-10-2026",
-      "ult_cierre": "Evento Contingencia"
      },
      {
       "o": "1-3OHRQLI2",
@@ -22491,7 +22479,7 @@
       "o": "1-3OHVT4J8",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "16:20",
+      "hi": "16:25",
       "d": "PJE B 0836 CASA 5 DEPTO 22, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -22539,7 +22527,7 @@
       "o": "1-3OI0QZGI",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "17:31",
+      "hi": "16:11",
       "d": "HORNOPIREN 2921, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -22649,7 +22637,7 @@
       "f": "13-16",
       "hi": "13:51",
       "d": "EDUARDO ALQUINTA 1260 CASA 173, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JOSE GALAZ D",
       "visitas": 1,
       "ult_fecha": "29-08-2026",
@@ -22683,9 +22671,9 @@
       "o": "1-3OJ7K0SK",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "15:26",
       "d": "PJE PERSEO 0671 EDIF. 5 DEPTO 37, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "JOSE SALAS MEDINA",
       "visitas": 1,
       "ult_fecha": "05-09-2026",
@@ -22719,7 +22707,7 @@
       "o": "1-3OIO77UI",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "17:14",
+      "hi": "17:42",
       "d": "SANTA FE 742, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JUAN ARRIAGADA C",
@@ -22835,12 +22823,24 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3OINVLHK",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "CASTELLON 28, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "MATÍAS JAQUE AG",
+      "visitas": 1,
+      "ult_fecha": "20-10-2026",
+      "ult_cierre": "Evento Contingencia"
+     },
+     {
       "o": "1-3OILT6E1",
       "cat": "Alta 1 Play",
       "f": "13-16",
       "hi": "14:58",
       "d": "SAN PEDRO 65 CASA B, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "NICOLAS MOYANO R",
       "visitas": 2,
       "ult_fecha": "20-10-2026",
@@ -22934,9 +22934,9 @@
       "o": "1-3OINC1R6",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "15:12",
+      "hi": "15:13",
       "d": "AV LOS CARRERA 311 DEPTO 71, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "YENDER BOSCAN CADENAS",
       "visitas": 1,
       "ult_fecha": "20-10-2026",
@@ -23009,9 +23009,9 @@
       "o": "1-3OHT8TEF",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "15:36",
       "d": "JUAN EGENAU 965, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "MATIAS APELEO APELEO",
       "desde": "20-10-2026"
      },
@@ -23029,5 +23029,5 @@
    }
   }
  },
- "generado": "21-10-2026 15:08"
+ "generado": "21-10-2026 15:33"
 }
