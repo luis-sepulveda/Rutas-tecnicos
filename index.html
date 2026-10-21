@@ -3328,6 +3328,10 @@
   .rd-hoy-tag { display:inline-block; background:#ca8a04; color:#fff; font-weight:800;
     font-size:11.5px; letter-spacing:.06em; padding:2px 8px; border-radius:5px;
     margin-right:4px; vertical-align:1px; }
+
+  /* EVOLUCION POR MES (21-10-2026): selector Semanas | Meses */
+  .dv-evo-per { display:flex; align-items:center; gap:10px; margin:0 0 12px; }
+  .dv-evo-per > span { font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#64748b; }
 </style>
 </head>
 <body>
@@ -10051,6 +10055,103 @@ function derFlecha(t){
     : t.tipo === 'baja' ? '<span class="dv-fl baja" title="Comparado con el equipo, viene mejor que en su historial de 8 semanas">▼ <small>mejorando</small></span>'
     : '<span class="dv-fl igual" title="Comparado con el equipo, sigue parecido a su historial de 8 semanas">▬ <small>se mantiene</small></span>';
 }
+/* ---- EVOLUCION POR MES (21-10-2026, pedido de Luis) ----
+   "Ver por: Semanas | Meses". En Meses: agosto, septiembre y lo que va de
+   octubre (los ultimos 3 meses con datos; datos.json va hasta ayer).
+   Mismas reglas de siempre: visitada = Completado o No Realizada, derivada
+   = No Realizada, respeta Supervisor y Tipo (no usa la semana elegida).
+   Casilla roja/verde contra el EQUIPO ese mes; apagada con menos de
+   DER_EVO_MIN ordenes. Tendencia: cuanto se alejo del equipo en el ultimo
+   mes comparado con los dos anteriores juntos (DER_2_PUNTOS puntos o mas =
+   empeorando o mejorando; necesita DER_2_MIN visitas en el ultimo mes). */
+let derEvoPer = 'sem';
+function setEvoPer(v){ derEvoPer = v; pintarDeriv(); }
+const MESES_EVO = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+function derEvoPerBar(){
+  return '<div class="dv-evo-per"><span>Ver por</span><div class="dv-seg">'
+    + '<button class="' + (derEvoPer === 'sem' ? 'on' : '') + '" onclick="setEvoPer(\'sem\')">Semanas</button>'
+    + '<button class="' + (derEvoPer === 'mes' ? 'on' : '') + '" onclick="setEvoPer(\'mes\')">Meses</button></div></div>';
+}
+function derVistaEvoMesHtml(){
+  const todosM = {};
+  (DER || []).forEach(function(x){ if(x.iso) todosM[x.iso.slice(0, 6)] = 1; });
+  const meses = Object.keys(todosM).sort().slice(-3);
+  if(!meses.length) return '<div class="dv-vacio">Sin datos.</div>';
+  const hoyM = (function(){ const d = new Date(); return d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0'); })();
+  const nomM = function(m){ return MESES_EVO[+m.slice(4) - 1]; };
+  const t = {}, eq = {n:0, d:0}, eqM = {}, supDe = {};
+  (DER || []).forEach(function(x){
+    const m = (x.iso || '').slice(0, 6);
+    if(meses.indexOf(m) < 0 || !derEntra(x)) return;
+    supDe[x.tec] = x.sup;
+    const o = t[x.tec] || (t[x.tec] = {n:0, d:0, m:{}}); o.n++; if(x.der) o.d++;
+    const w = o.m[m] || (o.m[m] = {n:0, d:0}); w.n++; if(x.der) w.d++;
+    eq.n++; if(x.der) eq.d++;
+    const e = eqM[m] || (eqM[m] = {n:0, d:0}); e.n++; if(x.der) e.d++;
+  });
+  const pc = function(w){ return w && w.n ? 100 * w.d / w.n : null; };
+  const pEq = pc(eq), uM = meses[meses.length - 1], prevM = meses.slice(0, -1);
+  const suma = function(o, ms){ return ms.reduce(function(a, m){ const w = o.m ? o.m[m] : o[m]; if(w){ a.n += w.n; a.d += w.d; } return a; }, {n:0, d:0}); };
+  const eqPrev = suma(eqM, prevM);
+  const tend = function(o){
+    const u = o.m[uM], pr = suma(o, prevM);
+    if(!u || u.n < DER_2_MIN || !pr.n) return null;
+    const dif = (pc(u) - pc(eqM[uM])) - (pc(pr) - pc(eqPrev));
+    return { tipo: dif >= DER_2_PUNTOS ? 'sube' : dif <= -DER_2_PUNTOS ? 'baja' : 'igual' };
+  };
+  const exc = function(o){ return o.d - o.n * pEq / 100; };
+  const tecs = Object.keys(t).filter(function(k){ return derSup === 'Todos' || supDe[k] === derSup; })
+    .sort(function(a, b){ const A = t[a], B = t[b];
+      if(derEvoOrd === 'x') return exc(B) - exc(A) || a.localeCompare(b);
+      return (A.n >= DER_8_MIN ? 0 : 1) - (B.n >= DER_8_MIN ? 0 : 1) || pc(B) - pc(A) || a.localeCompare(b); });
+  DER_EVO_TECS = tecs;
+  if(!tecs.length) return '<div class="dv-vacio">Sin ' + derNomTipo() + ' en esos meses para ese supervisor.</div>';
+  const cel = function(w, e){
+    if(!w || !w.n) return '<td class="cero">–</td>';
+    const pw = pc(w), pe = pc(e) || 0;
+    return '<td><span class="dv-ev ' + (pw > pe ? 'r' : 'b') + (w.n < DER_EVO_MIN ? ' p' : '') + '" title="Derivó ' + w.d + ' de ' + w.n + ', ' + Math.round(pw) + '%; el equipo, ' + Math.round(pe) + '%"><b>' + Math.round(pw) + '%</b><small>' + w.d + '/' + w.n + '</small></span></td>';
+  };
+  const nS = {sube:0, baja:0, igual:0};
+  let filas = '';
+  tecs.forEach(function(k, j){
+    const o = t[k], tt = tend(o); if(tt) nS[tt.tipo]++;
+    const x = Math.round(exc(o)), p = pc(o), malo = o.n >= DER_8_MIN && p - pEq >= DER_8_PUNTOS;
+    filas += '<tr class="t' + (malo ? ' sobre' : '') + '" onclick="verFicDesdeEvo(' + j + ')" title="Toca para abrir su ficha">'
+      + '<td>▸ ' + escR(derTitulo(k)) + '<small>' + escR(derTitulo(supDe[k] || '')) + '</small></td>'
+      + meses.map(function(m){ return cel(o.m[m], eqM[m]); }).join('')
+      + '<td class="e8 bi' + (malo ? ' mal' : o.n < DER_8_MIN ? ' pocas' : '') + '"><b>' + Math.round(p) + '%</b> <small>' + o.d + ' de ' + o.n + '</small></td>'
+      + '<td class="ex' + (x >= 3 ? ' mas' : x <= -3 ? ' men' : '') + '">' + (x > 0 ? '+' + x : x < 0 ? '−' + Math.abs(x) : '0') + '</td>'
+      + '<td class="bi">' + derFlecha(tt) + '</td></tr>';
+  });
+  const eqF = '<tr class="eq"><td>Equipo</td>' + meses.map(function(m, j){ const e = eqM[m];
+      return '<td' + (j ? '' : ' class="bi"') + '>' + (e ? '<b>' + Math.round(pc(e)) + '%</b> <small>' + e.d + '/' + e.n + '</small>' : '–') + '</td>'; }).join('')
+    + '<td class="bi"><b>' + Math.round(pEq) + '%</b> <small>' + eq.d + ' de ' + eq.n + '</small></td><td></td><td class="bi"></td></tr>';
+  const f1 = function(v){ return v.toFixed(1).replace('.', ','); };
+  const per = nomM(meses[0]) + (meses.length > 1 ? ' a ' + nomM(uM) : '');
+  let h = '<div class="dv-hv-b"><div class="dv-hv-t"><span class="n">1</span><b>Cómo viene el equipo, mes a mes</b><small>' + derNomTipo() + ' · todo el equipo</small></div>'
+    + '<div class="dv-sas" style="margin:0">' + meses.map(function(m){ const e = eqM[m];
+        return '<span class="c eq"><u>' + (e ? f1(pc(e)) + '%' : '–') + '</u><small>' + nomM(m) + (m === hoyM ? ' (en curso)' : '') + (e ? ' · ' + e.d + '/' + e.n : '') + '</small></span>'; }).join('')
+    + '<span class="c eq8"><u>' + f1(pEq) + '%</u><small>' + per + ' · ' + eq.d + '/' + eq.n + '</small></span>'
+    + '<span class="ley">Cada casilla: % de derivación y derivadas / visitadas</span></div></div>';
+  h += '<div class="dv-hv-b"><div class="dv-hv-t"><span class="n">2</span><b>Técnico por técnico</b><small>' + derPl(tecs.length, 'técnico', 'técnicos') + (derSup !== 'Todos' ? ' · equipo de ' + escR(derTitulo(derSup)) : '') + ' · toca uno para abrir su ficha</small></div>'
+    + '<div class="dv-hv-evo"><span class="t sube"><b>' + nS.sube + '</b>▲ empeorando</span><span class="t igual"><b>' + nS.igual + '</b>▬ se mantienen</span><span class="t baja"><b>' + nS.baja + '</b>▼ mejorando</span>'
+    + '<span class="ord">Ordenar por</span><div class="dv-seg">'
+    + '<button class="' + (derEvoOrd === 'p' ? 'on' : '') + '" onclick="setEvoOrd(\'p\')">% en los ' + meses.length + ' meses</button>'
+    + '<button class="' + (derEvoOrd === 'x' ? 'on' : '') + '" onclick="setEvoOrd(\'x\')">Derivadas de más</button></div></div>'
+    + '<div class="dv-ley dv-hv-col"><span><i style="background:#fca5a5"></i><b>Casilla roja</b>: ese mes derivó más que el equipo</span>'
+    + '<span><i style="background:#86cfa3"></i><b>Casilla verde</b>: derivó menos</span>'
+    + '<span><i style="background:#fff;box-shadow:inset 0 0 0 1px #cbd5e1"></i><b>Casilla apagada</b>: menos de ' + DER_EVO_MIN + ' órdenes</span>'
+    + '<span><i style="background:#fecaca"></i><b>Fila rosada</b>: ' + DER_8_PUNTOS + ' puntos o más sobre el equipo en los ' + meses.length + ' meses</span></div>'
+    + '<table class="dv-evo"><thead><tr><th rowspan="2">Técnico</th><th colspan="' + meses.length + '" class="g g1 bi">Mes a mes</th>'
+    + '<th colspan="2" class="g g2 bi">' + per + '</th><th rowspan="2" class="bi">Tendencia</th></tr><tr>'
+    + meses.map(function(m, j){ return '<th class="' + (j ? '' : 'bi') + (m === uM ? ' cur' : '') + '">' + nomM(m) + (m === hoyM ? '<br><small>en curso</small>' : '') + '</th>'; }).join('')
+    + '<th class="bi">% derivación</th><th>Derivadas de más</th></tr></thead><tbody>' + filas + eqF + '</tbody></table></div>'
+    + '<p class="dv-nota"><b>Tendencia</b>: compara qué tan lejos del equipo estuvo el técnico en ' + nomM(uM) + ' con qué tan lejos estuvo en ' + prevM.map(nomM).join(' y ') + ' juntos. '
+    + DER_2_PUNTOS + ' puntos o más = ▲ empeorando o ▼ mejorando. Sin flecha con menos de ' + DER_2_MIN + ' visitas en ' + nomM(uM) + '.<br>'
+    + (uM === hoyM ? nomM(uM) + ' está en curso y llega hasta ayer. ' : '')
+    + 'Esta vista no usa la semana elegida arriba; sí respeta Supervisor y Tipo.</p>';
+  return h;
+}
 function derVistaEvoHtml(todasSem, enCurso){
   const o8 = derOcho(todasSem), o2 = derOcho(todasSem, 2);
   const i = todasSem.indexOf(derSem), cols = todasSem.slice(Math.max(0, i - 4), i + 1);
@@ -10852,7 +10953,7 @@ function pintarDeriv(){
   if(derVista === 'res'){ cuerpo.innerHTML = derVistaResHtml(todasSem, enCurso); return; }
   if(derVista === 'hoy'){ cuerpo.innerHTML = derVistaHoyHtml(); return; }
   if(derVista === 'fic'){ cuerpo.innerHTML = derVistaFicHtml(todasSem); return; }
-  if(derVista === 'evo'){ cuerpo.innerHTML = derVistaEvoHtml(todasSem, enCurso); return; }
+  if(derVista === 'evo'){ cuerpo.innerHTML = derEvoPerBar() + (derEvoPer === 'mes' ? derVistaEvoMesHtml() : derVistaEvoHtml(todasSem, enCurso)); return; }
   if(!tb.length){ cuerpo.innerHTML = h + '<div class="dv-vacio">Sin ' + derNomTipo() + ' en esta semana para ese supervisor.</div>'; return; }
   if(derVista === 'dir'){ cuerpo.innerHTML = derVistaDirHtml(tb, tot); return; }
   if(derVista === 'aud'){ cuerpo.innerHTML = derVistaAudHtml(todasSem); return; }
