@@ -13904,7 +13904,8 @@ async function bajarMigGer(){
       (vj.v || []).forEach(function(r){
         const cat = String((vj.cats || [])[r[4]] || '');
         otDir[r[2]] = r[0];
-        (porDir[r[0]] = porDir[r[0]] || []).push({ f: String(r[1]), ok: r[5] === 1, mig: cat.indexOf('Migr') === 0, ot: r[2] });
+        (porDir[r[0]] = porDir[r[0]] || []).push({ f: String(r[1]), ok: r[5] === 1, mig: cat.indexOf('Migr') === 0, ot: r[2],
+          tec: String((vj.tecs || [])[r[3]] || ''), cie: String((vj.cies || [])[r[6]] || ''), hi: r[7], dur: r[8] });
       });
       vis = { otDir: otDir, porDir: porDir, hasta: String(vj.hasta || ''), dirs: vj.dirs || [] };
     }
@@ -13919,7 +13920,7 @@ function abrirMigGer(){
     m.innerHTML = '<div class="mg-box" role="dialog"><div class="mg-head"><div><h2>Migraciones · vista gerencia</h2>'
       + '<p id="mgSub">Todo el equipo · solo migraciones</p></div>'
       + '<button class="mg-x" onclick="cerrarMigGer()" title="Cerrar (Esc)">✖</button></div>'
-      + '<div class="mg-sel" id="mgSel"></div><div class="mg-cuerpo" id="mgCuerpo"></div></div>';
+      + '<div class="mg-tabs" id="mgTabs"></div><div class="mg-sel" id="mgSel"></div><div class="mg-cuerpo" id="mgCuerpo"></div></div>';
     document.body.appendChild(m);
   }
   m.classList.add('abierto');
@@ -14017,8 +14018,9 @@ function pintarMigGer(){
     : MG.completo ? '<b style="color:#86efac">con los export completos</b> de los días con técnicos en otras comunas (datos hasta el ' + escR(MG.completo.hasta) + ')'
     : '<b style="color:#fcd34d">sin los export completos</b>: falta subir migraciones_semanas.json nuevo al repo Actividades-diario');
   const segV = '<span class="rot">Ver por</span><div class="mg-seg">'
-    + [['mes','Meses'],['sem','Semanas'],['hoy','Hoy en vivo']].map(function(v){
+    + [['mes','Meses'],['sem','Semanas'],['hoy','Hoy en vivo']].filter(function(v){ return mgTab === 'ger' || v[0] !== 'hoy'; }).map(function(v){
         return '<button class="' + (mgVer === v[0] ? 'on' : '') + '" onclick="setMgVer(\'' + v[0] + '\')">' + v[1] + '</button>'; }).join('') + '</div>';
+  const tabs = document.getElementById('mgTabs'); if(tabs) tabs.innerHTML = mgTabsHtml();
   if(mgVer === 'hoy'){ sel.innerHTML = segV; cu.innerHTML = mgHoyHtml(); return; }
   if(mgFallo){ sel.innerHTML = segV; cu.innerHTML = '<div class="mg-vacio">No se pudo bajar el histórico de Actividades. Revisa la conexión y vuelve a abrir.</div>'; return; }
   if(!MG){ sel.innerHTML = segV; cu.innerHTML = '<div class="mg-vacio">Cargando el histórico…</div>'; return; }
@@ -14035,7 +14037,236 @@ function pintarMigGer(){
         + '<b class="' + (d > MG_META_DER ? 'sobre' : 'ok') + '">' + Math.round(d) + '%</b></button>'; }).join('') + '</div>'
     + '<span class="mg-meta">Meta interna de derivación: <b>' + MG_META_DER + '% o menos</b></span>';
   const i = ks.indexOf(mgSel), o = P[mgSel], a = i > 0 ? P[ks[i - 1]] : null;
+  if(mgTab === 'tec'){ cu.innerHTML = (enCurso(mgSel) ? '<p class="mg-nota" style="margin:0 0 10px">Período en curso: datos hasta ayer.</p>' : '') + mgTecHtml(mgSel, i > 0 ? ks[i - 1] : null); return; }
+  if(mgTab === 'dir'){ cu.innerHTML = mgDirHtml(mgSel); return; }
   cu.innerHTML = mgPeriodoHtml(o, a, mgSel, i > 0 ? ks[i - 1] : null, enCurso(mgSel)) + mgGraficoHtml() + mgTablaHtml(P, ks, enCurso);
+}
+
+/* =====================================================================
+   (21-10-2026, noche) MIGRACIONES · POR TECNICO Y DIRECCIONES
+   Para contestarle al jefe de operaciones de VTR/CLARO cuando dice que
+   la culpa es de los tecnicos. Por cada tecnico: sus no realizadas, en
+   cuantas casas, en cuantas de esas casas TAMBIEN fallo otro tecnico de
+   Dominion (antes o despues), cuantas termino despues otro tecnico y de
+   quien es la causa (misma regla mgResp). Al tocar un tecnico se abre
+   su ficha con cada casa y el historial de esa casa.
+   Historial de visitas = visitas_dir.json (desde el 01-07, hasta ayer).
+   Solo tecnicos que siguen en el plantel (derActivo), igual que los
+   demas reportes. Usa el mismo selector de periodo de la vista gerencia.
+   ===================================================================== */
+let mgTab = 'ger', mgTecAbre = null, mgDirQ = '', mgDirTodas = false, mgDirAbre = {}, mgTecOrd = 'der';
+function setMgTab(t){ mgTab = t; if(t !== 'ger' && mgVer === 'hoy') mgVer = 'mes'; mgTecAbre = null; mgDirAbre = {}; pintarMigGer(); }
+function setMgTecOrd(o){ mgTecOrd = o; pintarMigGer(); }
+function mgTecToggle(i){ mgTecAbre = mgTecAbre === i ? null : i; pintarMigGer(); }
+function mgDirToggle(i){ mgDirAbre[i] = !mgDirAbre[i]; mgDirPintarLista(); }
+function mgDirSetQ(v){ mgDirQ = v; mgDirPintarLista(); }
+function mgDirSetTodas(v){ mgDirTodas = v; mgDirPintarLista(); }
+function mgTabsHtml(){
+  return [['ger','📊 Gerencia'],['tec','👷 Por técnico'],['dir','🏠 Direcciones']].map(function(t){
+    return '<button class="' + (mgTab === t[0] ? 'on' : '') + '" onclick="setMgTab(\'' + t[0] + '\')">' + t[1] + '</button>'; }).join('')
+    + '<span>' + (mgTab === 'ger' ? 'Los números del equipo completo'
+      : mgTab === 'tec' ? 'Cada técnico: sus no realizadas, en qué casas y qué pasó en esas casas con otros técnicos'
+      : 'Las casas que no se pudieron migrar: cuántas veces se fue y con qué técnicos') + '</span>';
+}
+function mgDdmm(f){ f = String(f); return f.slice(6, 8) + '-' + f.slice(4, 6); }
+function mgHora(m){ if(m == null || m < 0) return ''; return String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0'); }
+function mgCorto(t){ const p = String(t || '').trim().split(/\s+/); return p.length > 1 ? p[0] + ' ' + p[1] : p[0] || ''; }
+function mgCap(t){ return String(t || '').toLowerCase().replace(/(^|[\s,.-])([a-záéíóúñ])/g, function(a, b, c){ return b + c.toUpperCase(); }); }
+function mgEnFranja(fr, hi){
+  const p = /^(\d{1,2})-(\d{1,2})$/.exec(String(fr || '')); if(!p || hi == null || hi < 0) return null;
+  return hi >= +p[1] * 60 - 15 && hi <= +p[2] * 60;       // 15 min de holgura antes de la franja
+}
+/* la visita de esta orden (para hora de llegada y minutos en la casa) y las
+   otras visitas de migracion en la misma direccion */
+function mgCasa(x){
+  const V = MG && MG.vis; if(!V) return null;
+  const d = V.otDir[x.ot]; if(d === undefined) return null;
+  const todas = V.porDir[d] || [];
+  let yo = null; const otras = [];
+  todas.forEach(function(v){ if(v.ot === x.ot && +v.f === +x.iso){ if(!yo) yo = v; } else if(v.mig) otras.push(v); });
+  otras.sort(function(a, b){ return a.f - b.f || (a.hi || 0) - (b.hi || 0); });
+  const dir = V.dirs[d], txt = Array.isArray(dir) ? dir[0] : dir;
+  return { d: d, dir: String(txt || ''), yo: yo, otras: otras };
+}
+
+/* ---------------- POR TECNICO ---------------- */
+function mgTecCalc(k){
+  const T = {}, fuera = {};
+  (MG ? MG.filas : []).forEach(function(x){
+    if(mgClave(x.iso) !== k || !x.tec) return;
+    if(x.e !== 'Completado' && x.e !== 'No Realizada') return;
+    if(!derActivo(x.tec)){ fuera[x.tec] = 1; return; }
+    const o = T[x.tec] || (T[x.tec] = { tec:x.tec, co:0, nr:0, resp:{cli:0,vtr:0,dom:0}, casas:{}, rep:{}, repCon:{}, otro:0, el:0, pend:0, sinDir:0, smN:0, smMin:0, fr:0, frOk:0, lista:[] });
+    if(x.e === 'Completado'){ o.co++; return; }
+    o.nr++; const r = mgResp(x.cod); o.resp[r]++;
+    const c = mgCasa(x), it = { x:x, c:c, r:r, rep:false, desp:null };
+    if(!c){ o.sinDir++; o.lista.push(it); return; }
+    o.casas[c.d] = 1;
+    c.otras.forEach(function(v){ if(!v.ok && v.tec && v.tec !== x.tec){ it.rep = true; o.repCon[mgCorto(v.tec)] = 1; } });
+    if(it.rep) o.rep[c.d] = 1;
+    const desp = c.otras.filter(function(v){ return v.ok && +v.f >= +x.iso; })[0];
+    if(desp){ it.desp = desp; if(desp.tec === x.tec) o.el++; else o.otro++; } else o.pend++;
+    if(c.yo){
+      if(MG_FAM(x.cod) === 'sm' && c.yo.dur > 0){ o.smN++; o.smMin += c.yo.dur; }
+      const ef = mgEnFranja(x.fr, c.yo.hi); if(ef !== null){ o.fr++; if(ef) o.frOk++; }
+    }
+    o.lista.push(it);
+  });
+  return { T: T, fuera: Object.keys(fuera).length };
+}
+function mgTecHtml(k, kPrev){
+  const R = mgTecCalc(k), A = kPrev ? mgTecCalc(kPrev).T : {};
+  let L = Object.keys(R.T).map(function(t){ return R.T[t]; }).filter(function(o){ return o.co + o.nr > 0; });
+  if(!L.length) return '<div class="mg-vacio">No hay migraciones de técnicos del plantel en este período.</div>';
+  const der = function(o){ return mgPct(o.nr, o.co + o.nr); };
+  const ORD = { der:function(a, b){ return der(b) - der(a) || b.nr - a.nr; }, nr:function(a, b){ return b.nr - a.nr || der(b) - der(a); },
+    vis:function(a, b){ return (b.co + b.nr) - (a.co + a.nr); }, nom:function(a, b){ return a.tec.localeCompare(b.tec); } };
+  L.sort(ORD[mgTecOrd] || ORD.der);
+  /* totales del equipo (solo plantel) */
+  const S = { nr:0, co:0, casas:0, rep:0, otro:0, el:0, pend:0, cli:0, vtr:0, dom:0, sinDir:0, sobre:0 };
+  const casasAll = {}, repAll = {};
+  L.forEach(function(o){ S.nr += o.nr; S.co += o.co; S.otro += o.otro; S.el += o.el; S.pend += o.pend; S.sinDir += o.sinDir;
+    S.cli += o.resp.cli; S.vtr += o.resp.vtr; S.dom += o.resp.dom; if(der(o) > MG_META_DER) S.sobre++;
+    Object.keys(o.casas).forEach(function(d){ casasAll[d] = 1; }); Object.keys(o.rep).forEach(function(d){ repAll[d] = 1; }); });
+  const nCasas = Object.keys(casasAll).length, nRep = Object.keys(repAll).length;
+  const nrConDir = S.nr - S.sinDir;
+  const top5 = L.slice().sort(ORD.der).slice(0, 5), t5 = { nr:0, cli:0 };
+  top5.forEach(function(o){ t5.nr += o.nr; t5.cli += o.resp.cli; });
+  const nRepNr = L.reduce(function(s, o){ return s + o.lista.filter(function(i){ return i.rep; }).length; }, 0);
+  let h = '<div class="mg-b"><div class="mg-t"><b>' + mgNomPer(k) + ' · por técnico</b><small>' + L.length + ' técnicos del plantel con migraciones visitadas'
+    + (R.fuera ? ' · no se muestran ' + R.fuera + ' que ya no están' : '') + '</small></div>'
+    + '<p class="mg-frase"><b>' + S.sobre + ' de ' + L.length + '</b> técnicos quedaron sobre la meta de ' + MG_META_DER + '%. '
+    + 'Entre todos dejaron <b>' + S.nr + '</b> no realizadas en <b>' + nCasas + '</b> casas.</p>'
+    + '<div class="mg-cards mg-big">'
+    + mgCard('Casas que fallaron con más de un técnico', nRep, '<b>' + mgF1(mgPct(nRep, nCasas)) + '%</b> de las ' + nCasas + ' casas · ' + nRepNr + ' de las ' + nrConDir + ' no realizadas',
+        'En esa casa la migración también falló con otro técnico de Dominion (antes o después): no depende de quién vaya', 'am')
+    + mgCard('Después la terminó otro técnico', S.otro, '<b>' + mgF1(mgPct(S.otro, nrConDir)) + '%</b> de las no realizadas · ' + S.el + ' las terminó el mismo técnico',
+        'Si el problema fuera el técnico, otro técnico las terminaría: pasa en pocas', 've')
+    + mgCard('Siguen sin hacerse', S.pend, '<b>' + mgF1(mgPct(S.pend, nrConDir)) + '%</b> · no hay una visita completada después (no se pudo con nadie o VTR/CLARO no la volvió a agendar)', '', 'ro')
+    + mgCard('Causa del cliente', mgF1(mgPct(S.cli, S.nr)) + '%', 'VTR/CLARO ' + mgF1(mgPct(S.vtr, S.nr)) + '% · Dominion ' + mgF1(mgPct(S.dom, S.nr)) + '%',
+        'Incluso en los 5 con más derivación: <b>' + mgF1(mgPct(t5.cli, t5.nr)) + '%</b> del cliente', 'az')
+    + '</div>'
+    + (S.sinDir ? '<p class="mg-nota">' + S.sinDir + ' no realizadas no tienen dirección en el historial de visitas (no se cuentan en casas).</p>' : '')
+    + '</div>';
+  /* tabla */
+  const ob = function(v, t){ return '<button class="' + (mgTecOrd === v ? 'on' : '') + '" onclick="setMgTecOrd(\'' + v + '\')">' + t + '</button>'; };
+  h += '<div class="mg-b"><div class="mg-t"><b>Detalle por técnico</b><small>toca un técnico para ver sus casas y qué pasó en cada una</small>'
+    + '<div class="mg-seg mg-ord"><span class="rot">Ordenar</span>' + ob('der', '% derivación') + ob('nr', 'No realizadas') + ob('vis', 'Visitadas') + ob('nom', 'Nombre') + '</div></div>'
+    + '<div class="mg-scroll"><table class="mg-q mg-tt"><thead><tr><th>Técnico</th><th>Visitadas</th><th>Compl.</th><th>No real.</th><th>% deriv.</th>'
+    + '<th>De quién es la causa</th><th>Casas</th><th title="Casas donde la migración también falló con otro técnico de Dominion">Falló también<br>con otro técnico</th>'
+    + '<th title="No realizadas que después completó otro técnico de Dominion">La terminó<br>otro después</th><th title="Promedio de minutos en la casa en sus sin moradores">Sin moradores<br>min en la casa</th>'
+    + '<th title="Llegó dentro de la franja comprometida (15 min de holgura)">Llegó en<br>la franja</th></tr></thead><tbody>';
+  L.forEach(function(o, i){
+    const d = der(o), a = A[o.tec], dA = a && (a.co + a.nr) ? der(a) : null;
+    const cmp = dA === null ? '' : Math.abs(d - dA) < 0.5 ? ' <small class="eq">=</small>' : d > dA ? ' <small class="peor">▲' + Math.round(d - dA) + '</small>' : ' <small class="mejor">▼' + Math.round(dA - d) + '</small>';
+    const nc = Object.keys(o.casas).length, nr = Object.keys(o.rep).length;
+    const barra = o.nr ? '<div class="mg-mini">' + ['cli','vtr','dom'].map(function(r){ const p = mgPct(o.resp[r], o.nr);
+        return p ? '<span style="width:' + p + '%;background:' + MG_RCOL[r] + '" title="' + MG_RNOM[r] + ': ' + o.resp[r] + '">' + (p >= 18 ? Math.round(p) + '%' : '') + '</span>' : ''; }).join('') + '</div>' : '<small>—</small>';
+    h += '<tr class="mg-trow' + (mgTecAbre === i ? ' abierta' : '') + '" onclick="mgTecToggle(' + i + ')"><td><b>' + (mgTecAbre === i ? '▾ ' : '▸ ') + escR(mgCap(o.tec)) + '</b></td>'
+      + '<td>' + (o.co + o.nr) + '</td><td>' + o.co + '</td><td>' + o.nr + '</td>'
+      + '<td><b class="' + (d > MG_META_DER ? 'mg-sobre' : 'mg-ok') + '">' + Math.round(d) + '%</b>' + cmp + '</td>'
+      + '<td class="bar">' + barra + '</td><td>' + nc + '</td>'
+      + '<td>' + (nc ? '<b>' + nr + '</b> <small>(' + Math.round(mgPct(nr, nc)) + '%)</small>' : '—') + '</td>'
+      + '<td>' + (o.nr ? o.otro : '—') + '</td>'
+      + '<td>' + (o.smN ? Math.round(o.smMin / o.smN) + ' min' : '—') + '</td>'
+      + '<td>' + (o.fr ? Math.round(mgPct(o.frOk, o.fr)) + '%' : '—') + '</td></tr>';
+    if(mgTecAbre === i) h += '<tr class="mg-ficha"><td colspan="11">' + mgFichaHtml(o) + '</td></tr>';
+  });
+  h += '</tbody></table></div><p class="mg-nota">% deriv. = no realizadas ÷ visitadas (▲▼ contra ' + (kPrev ? mgNomCorto(kPrev) : 'el período anterior') + '). '
+    + '"Falló también con otro técnico" = en esa casa hubo otra migración no realizada con un técnico distinto de Dominion, antes o después (historial desde el 01-07). '
+    + 'Llegada y minutos salen de la hora de inicio y duración de la visita en TOA.</p></div>';
+  return h;
+}
+function mgFichaHtml(o){
+  const nc = Object.keys(o.casas).length, nr = Object.keys(o.rep).length, con = Object.keys(o.repCon);
+  let h = '<div class="mg-fi"><ul class="mg-fi-res">'
+    + '<li><b>' + o.nr + '</b> no realizadas en <b>' + nc + '</b> casas · causa del cliente <b>' + Math.round(mgPct(o.resp.cli, o.nr)) + '%</b>, VTR/CLARO ' + Math.round(mgPct(o.resp.vtr, o.nr)) + '%, Dominion ' + Math.round(mgPct(o.resp.dom, o.nr)) + '%.</li>'
+    + '<li>En <b>' + nr + '</b> de esas casas la migración <b>también falló con otro técnico</b>' + (con.length ? ': ' + con.slice(0, 8).map(function(t){ return escR(mgCap(t)); }).join(', ') + (con.length > 8 ? ' y ' + (con.length - 8) + ' más' : '') : '') + '.</li>'
+    + '<li>Después <b>' + o.otro + '</b> la terminó otro técnico, <b>' + o.el + '</b> la terminó él mismo y <b>' + o.pend + '</b> siguen sin hacerse.</li>'
+    + (o.smN ? '<li>En sus sin moradores estuvo en promedio <b>' + Math.round(o.smMin / o.smN) + ' min</b> en la casa' + (o.fr ? ' · llegó dentro de la franja en el <b>' + Math.round(mgPct(o.frOk, o.fr)) + '%</b>' : '') + '.</li>' : '')
+    + '</ul><table class="mg-q mg-fi-t"><thead><tr><th>Fecha</th><th>Dirección</th><th>Su causa</th><th>Llegó · min</th><th>Qué pasó en esa casa (otras visitas de migración)</th></tr></thead><tbody>';
+  o.lista.slice().sort(function(a, b){ return a.x.iso < b.x.iso ? -1 : 1; }).forEach(function(it){
+    const x = it.x, c = it.c, yo = c && c.yo, ef = yo ? mgEnFranja(x.fr, yo.hi) : null;
+    const hist = !c ? '<small>sin dirección en el historial</small>' : !c.otras.length ? '<small>solo fue él</small>'
+      : c.otras.map(function(v){ const otro = v.tec !== x.tec;
+          return '<span class="mg-chip ' + (v.ok ? 'ok' : 'nr') + (otro ? '' : ' yo') + '" title="' + escR(v.cie || '') + '">' + mgDdmm(v.f) + ' ' + escR(otro ? mgCap(mgCorto(v.tec)) : 'él') + ' ' + (v.ok ? '✓ completó' : '✗ ' + escR(v.cie || 'no realizada')) + '</span>'; }).join(' ');
+    h += '<tr' + (it.rep ? ' class="rep"' : '') + '><td>' + mgDdmm(x.iso) + (x.otra ? ' <small title="Ese día estaba en otra comuna">otra comuna</small>' : '') + '</td>'
+      + '<td>' + escR(c ? mgCap(c.dir) : '—') + '</td>'
+      + '<td><i style="background:' + MG_RCOL[it.r] + '"></i>' + escR(x.cod || 'Sin código') + '</td>'
+      + '<td>' + (yo ? mgHora(yo.hi) + (ef === false ? ' <small class="peor" title="Fuera de la franja ' + escR(x.fr) + '">fuera de franja</small>' : '') + (yo.dur > 0 ? ' · ' + yo.dur + ' min' : '') : '—') + '</td>'
+      + '<td class="mg-hist">' + hist + '</td></tr>';
+  });
+  return h + '</tbody></table><p class="mg-nota">Fila amarilla = en esa casa la migración también falló con otro técnico. Color de la causa: <i style="background:' + MG_RCOL.cli + '"></i>cliente <i style="background:' + MG_RCOL.vtr + '"></i>VTR/CLARO <i style="background:' + MG_RCOL.dom + '"></i>Dominion.</p></div>';
+}
+
+/* ---------------- DIRECCIONES ---------------- */
+let MG_DIR_L = [];
+function mgDirCalc(k){
+  const D = {};
+  (MG ? MG.filas : []).forEach(function(x){
+    if(mgClave(x.iso) !== k || x.e !== 'No Realizada') return;
+    const c = mgCasa(x); if(!c) return;
+    const o = D[c.d] || (D[c.d] = { d:c.d, dir:c.dir, nrPer:0, v:{} });
+    o.nrPer++;
+    o.v[x.ot + '|' + x.iso] = c.yo ? Object.assign({}, c.yo, { ok:false, cie:c.yo.cie || x.cod }) : { f:+x.iso, tec:x.tec, ok:false, cie:x.cod, hi:null };
+    c.otras.forEach(function(v){ o.v[v.ot + '|' + v.f] = v; });
+  });
+  return Object.keys(D).map(function(d){
+    const o = D[d], vs = Object.keys(o.v).map(function(q){ return o.v[q]; }).sort(function(a, b){ return a.f - b.f || (a.hi || 0) - (b.hi || 0); });
+    const fall = vs.filter(function(v){ return !v.ok; }), tecs = {};
+    fall.forEach(function(v){ if(v.tec) tecs[v.tec] = 1; });
+    const ok = vs.filter(function(v){ return v.ok; }).pop() || null, causas = {};
+    fall.forEach(function(v){ const c = v.cie || 'Sin código'; causas[c] = (causas[c] || 0) + 1; });
+    return { d:o.d, dir:o.dir, nrPer:o.nrPer, vs:vs, fall:fall.length, tecs:Object.keys(tecs), ok:ok, causas:causas };
+  }).sort(function(a, b){ return b.fall - a.fall || b.tecs.length - a.tecs.length || a.dir.localeCompare(b.dir); });
+}
+function mgDirHtml(k){
+  const L = MG_DIR_L = mgDirCalc(k);
+  if(!L.length) return '<div class="mg-vacio">No hay migraciones no realizadas con dirección en este período.</div>';
+  const rep = L.filter(function(o){ return o.tecs.length >= 2; }), dos = L.filter(function(o){ return o.fall >= 2; });
+  const nrRep = rep.reduce(function(s, o){ return s + o.nrPer; }, 0), nrTot = L.reduce(function(s, o){ return s + o.nrPer; }, 0);
+  const visRep = rep.reduce(function(s, o){ return s + o.fall; }, 0);
+  const okDesp = L.filter(function(o){ return o.ok; }).length, tres = L.filter(function(o){ return o.fall >= 3; }).length;
+  const tecsRep = {}; rep.forEach(function(o){ o.tecs.forEach(function(t){ tecsRep[t] = 1; }); });
+  let h = '<div class="mg-b"><div class="mg-t"><b>' + mgNomPer(k) + ' · casas no migradas</b><small>casas con al menos una migración no realizada en el período · el historial de cada casa es desde el 01-07</small></div>'
+    + '<p class="mg-frase"><b>' + L.length + '</b> casas quedaron con la migración no realizada. <b class="am">' + rep.length + '</b> de ellas (' + mgF1(mgPct(rep.length, L.length)) + '%) '
+    + 'fallaron con <b>2 o más técnicos distintos</b>: entre todas suman ' + visRep + ' visitas perdidas y pasaron por ' + Object.keys(tecsRep).length + ' técnicos.</p>'
+    + '<div class="mg-cards mg-big">'
+    + mgCard('Casas que fallaron con 2+ técnicos', rep.length, nrRep + ' de las ' + nrTot + ' no realizadas del período (' + mgF1(mgPct(nrRep, nrTot)) + '%)', 'Distintos técnicos, misma casa, mismo resultado', 'am')
+    + mgCard('Casas con 3 o más intentos fallidos', tres, dos.length + ' casas con 2 o más intentos fallidos', '', 'ro')
+    + mgCard('Después se completaron', okDesp, mgF1(mgPct(okDesp, L.length)) + '% de las casas · ' + (L.length - okDesp) + ' siguen sin hacerse', '', 've')
+    + '</div></div>'
+    + '<div class="mg-b"><div class="mg-t"><b>Lista de casas</b><small>toca una casa para ver cada visita</small>'
+    + '<input class="mg-bus" type="search" placeholder="Buscar dirección o técnico…" value="' + escR(mgDirQ) + '" oninput="mgDirSetQ(this.value)">'
+    + '<label class="mg-chk"><input type="checkbox"' + (mgDirTodas ? ' checked' : '') + ' onchange="mgDirSetTodas(this.checked)"> ver también las que fallaron una sola vez</label></div>'
+    + '<div id="mgDirLista"></div></div>';
+  setTimeout(mgDirPintarLista, 0);
+  return h;
+}
+function mgDirPintarLista(){
+  const box = document.getElementById('mgDirLista'); if(!box) return;
+  const q = String(mgDirQ || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
+  const norm = function(t){ return String(t || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); };
+  let L = MG_DIR_L.map(function(o, i){ o.i = i; return o; }).filter(function(o){
+    if(!mgDirTodas && o.fall < 2) return false;
+    if(!q) return true;
+    return norm(o.dir).indexOf(q) >= 0 || o.vs.some(function(v){ return norm(v.tec).indexOf(q) >= 0; });
+  });
+  const tot = L.length; L = L.slice(0, 200);
+  let h = '<div class="mg-scroll"><table class="mg-q mg-dt"><thead><tr><th>Dirección</th><th>Intentos<br>fallidos</th><th>Técnicos<br>distintos</th><th>Causas</th><th>¿Se completó?</th></tr></thead><tbody>';
+  L.forEach(function(o){
+    const ab = !!mgDirAbre[o.i];
+    const cs = Object.keys(o.causas).sort(function(a, b){ return o.causas[b] - o.causas[a]; }).map(function(c){ return escR(c) + (o.causas[c] > 1 ? ' ×' + o.causas[c] : ''); }).join(' · ');
+    h += '<tr class="mg-trow' + (ab ? ' abierta' : '') + (o.tecs.length >= 2 ? ' rep' : '') + '" onclick="mgDirToggle(' + o.i + ')"><td><b>' + (ab ? '▾ ' : '▸ ') + escR(mgCap(o.dir)) + '</b></td>'
+      + '<td><b>' + o.fall + '</b></td><td>' + o.tecs.length + '</td><td class="inc">' + cs + '</td>'
+      + '<td>' + (o.ok ? '<span class="mg-chip ok">✓ ' + mgDdmm(o.ok.f) + ' ' + escR(mgCap(mgCorto(o.ok.tec))) + '</span>' : '<small class="peor">no</small>') + '</td></tr>';
+    if(ab) h += '<tr class="mg-ficha"><td colspan="5"><div class="mg-hist">' + o.vs.map(function(v){
+        return '<span class="mg-chip ' + (v.ok ? 'ok' : 'nr') + '">' + mgDdmm(v.f) + (v.hi > 0 ? ' ' + mgHora(v.hi) : '') + ' · ' + escR(mgCap(v.tec)) + ' · ' + (v.ok ? '✓ completó' : '✗ ' + escR(v.cie || 'no realizada')) + (v.dur > 0 ? ' · ' + v.dur + ' min' : '') + '</span>'; }).join(' ')
+      + '</div></td></tr>';
+  });
+  h += '</tbody></table></div>' + (tot > 200 ? '<p class="mg-nota">Se muestran 200 de ' + tot + '. Usa el buscador para encontrar una casa.</p>' : '')
+    + (!tot ? '<p class="mg-nota">Nada que mostrar con ese filtro.</p>' : '');
+  box.innerHTML = h;
 }
 
 /* tarjeta: titulo, valor grande, % y comparacion */
@@ -14482,6 +14713,33 @@ function mgHoyHtml(){
   .mg-graf .xa2 { font-size:10px; fill:#94a3b8; text-anchor:middle; }
   .mg-rec { border-left:5px solid #15803d; }
   .mg-calc ul { margin:0; padding-left:18px; font-size:13.5px; line-height:1.55; color:#334155; } .mg-calc li { margin-bottom:3px; }
+  /* (21-10-2026 noche) pestañas Por técnico / Direcciones */
+  .mg-tabs { display:flex; flex-wrap:wrap; align-items:center; gap:6px; padding:10px 22px 0; background:#0f1e35; }
+  .mg-tabs button { border:0; background:#1e3a5f; color:#cbd5e1; border-radius:9px 9px 0 0; padding:9px 16px; font:600 14px 'DM Sans',system-ui,sans-serif; cursor:pointer; }
+  .mg-tabs button.on { background:#fff; color:#1e3a8a; }
+  .mg-tabs span { color:#94a3b8; font-size:12.5px; margin-left:10px; padding-bottom:4px; }
+  .mg-ord { margin-left:auto; align-items:center; } .mg-ord .rot { margin-right:4px; }
+  .mg-ord button { padding:4px 9px; font-size:12px; }
+  .mg-tt td, .mg-tt th, .mg-dt td, .mg-dt th { text-align:center; } .mg-tt td:first-child, .mg-tt th:first-child, .mg-dt td:first-child, .mg-dt th:first-child { text-align:left; white-space:nowrap; }
+  .mg-dt td.inc { text-align:left; font-size:12.5px; color:#475569; }
+  .mg-trow { cursor:pointer; } .mg-trow:hover td { background:#f8fafc; } .mg-trow.abierta td { background:#eff6ff; }
+  .mg-dt tr.rep td:first-child { box-shadow:inset 4px 0 0 #d97706; }
+  .mg-mini { display:flex; height:16px; border-radius:5px; overflow:hidden; min-width:120px; background:#f1f5f9; }
+  .mg-mini span { display:flex !important; align-items:center; justify-content:center; color:#fff; font-size:10.5px; font-weight:700; height:16px !important; border-radius:0 !important; }
+  .mg-ficha > td { background:#f8fafc; padding:12px 14px !important; white-space:normal !important; text-align:left !important; }
+  .mg-ficha > td > div { width:0; min-width:100%; }   /* que la ficha no ensanche la tabla */
+  .mg-fi-res { margin:0 0 10px; padding-left:18px; font-size:14px; line-height:1.6; }
+  .mg-fi-t { background:#fff; } .mg-fi-t td { vertical-align:top; } .mg-fi-t tr.rep td { background:#fffbeb; }
+  .mg-fi-t td i, .mg-ficha .mg-nota i { display:inline-block; width:10px; height:10px; border-radius:3px; margin:0 5px 0 0; }
+  .mg-hist { line-height:1.9; }
+  .mg-fi-t td, .mg-fi-t th { text-align:left !important; white-space:normal !important; } .mg-fi-t td:first-child, .mg-fi-t td:nth-child(4) { white-space:nowrap !important; }
+  .mg-chip { display:inline-block; border-radius:6px; padding:1px 7px; font-size:12px; white-space:nowrap; border:1px solid; }
+  .mg-chip.ok { background:#f0fdf4; border-color:#86efac; color:#166534; } .mg-chip.nr { background:#fef2f2; border-color:#fca5a5; color:#991b1b; }
+  .mg-chip.yo { border-style:dashed; }
+  .mg-fi-t .mg-chip { white-space:normal; } .mg-fi-t td:nth-child(2) { min-width:160px; } .mg-fi-t td:nth-child(3) { min-width:130px; }
+  .mg-q small.peor { color:#b91c1c; font-weight:600; } .mg-q small.mejor { color:#15803d; font-weight:600; } .mg-q small.eq { color:#64748b; }
+  .mg-bus { margin-left:auto; border:1px solid #cbd5e1; border-radius:7px; padding:6px 10px; font:13px 'DM Sans',system-ui,sans-serif; min-width:240px; }
+  .mg-chk { font-size:12.5px; color:#475569; display:flex; align-items:center; gap:5px; }
 </style>
 
 </body>
