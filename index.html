@@ -3308,6 +3308,17 @@
   #modalRJ { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); }
   #modalRJ.abierto { display:flex; align-items:flex-start; justify-content:center; padding:4vh 2vw; overflow:auto; }
   #modalRJ .mc-box { width:100%; }
+
+  /* BOTON RED QUE LATE (21-10-2026): posible falla masiva en NAP o nodo.
+     Para quitarlo: borrar este bloque. */
+  @keyframes redLate { 0%,100%{ box-shadow:0 0 0 0 rgba(239,68,68,.75); }
+                       50%{ box-shadow:0 0 0 7px rgba(239,68,68,0); } }
+  .pv-bar a.b-red.red-falla, #btnCapaRed.red-falla {
+    background:#dc2626 !important; color:#fff !important; border-color:#fca5a5 !important;
+    animation: redLate 1.2s ease-in-out infinite; }
+  .pv-bar a.b-red.red-falla::before { filter:brightness(4); }
+  .pv-bar a.b-red.red-conf, #btnCapaRed.red-conf { background:#7f1d1d !important;
+    animation-duration:.8s; }
 </style>
 </head>
 <body>
@@ -6577,7 +6588,57 @@ function gruposRojos(){
   return RED && RED.grupos ? RED.grupos.filter(function(g){ return g.nivel === 'rojo' || g.confirmada; }).length : 0;
 }
 
+/* BOTON RED QUE LATE (21-10-2026, pedido de Luis). Avisa posible falla
+   masiva con la MISMA regla del mapa de red:
+   - confirmada: una reparacion de hoy cerro "Falla Masiva";
+   - NAP: 2 o mas casas con reparacion hoy en la misma NAP (o mismo
+     nodo+subnodo en HFC) = grupo rojo de Nodos y NAP;
+   - nodo: 3 o mas casas distintas con reparacion hoy en el mismo nodo.
+   Devuelve {n, txt}. Lo pinta pintarAlertaRed() en los dos botones Red. */
+function alertaRedMasiva(){
+  const out = { n:0, conf:0, txt:[] };
+  if(!RED) return out;
+  const nodo = {}, nodoConf = {};
+  (RED.todas || []).forEach(function(w){
+    if(!w.kd) return;
+    (nodo[w.kd] = nodo[w.kd] || {})[claveDir(w.d || w.o)] = 1;
+    if(/falla masiva/i.test(w.cie || '')) nodoConf[w.kd] = 1;
+  });
+  const vistos = {};
+  (RED.grupos || []).forEach(function(g){
+    if(!(g.confirmada || g.nivel === 'rojo')) return;
+    const k = g.tipo + '|' + (g.ciudad||'') + '|' + (g.nodo||'') + '|' + (g.nap||g.n_nap||'');
+    if(vistos[k]) return; vistos[k] = 1;
+    out.n++; if(g.confirmada) out.conf++;
+    const donde = g.nap ? 'NAP ' + g.nap : ((g.tipo === 'hfc' ? 'Nodo HFC ' : 'Nodo ') + (g.nodo || '?'));
+    out.txt.push((g.confirmada ? 'FALLA MASIVA confirmada · ' : '') + donde + ' (' + (g.ciudad || '') + '): ' + selloGrupoRed(g));
+  });
+  Object.keys(nodo).forEach(function(k){
+    const casas = Object.keys(nodo[k]).length;
+    if(casas < 3 && !nodoConf[k]) return;
+    const p = k.split('|');            // CIUDAD|RED|NODO
+    const ya = (RED.grupos || []).some(function(g){
+      return (g.confirmada || g.nivel === 'rojo') && g.tipo === 'nodo'
+          && g.nodo === p[2] && String(g.ciudad||'').toUpperCase() === String(p[0]).toUpperCase();
+    });
+    if(ya) return;
+    out.n++; if(nodoConf[k]) out.conf++;
+    out.txt.push((nodoConf[k] ? 'FALLA MASIVA confirmada · ' : '') + 'Nodo ' + p[2] + ' ' + p[1] + ' (' + p[0] + '): ' + casas + ' casas hoy');
+  });
+  return out;
+}
+function pintarAlertaRed(){
+  const A = alertaRedMasiva();
+  const tit = A.n ? 'Posible falla masiva:\n' + A.txt.join('\n') + '\nToca para ver el mapa de red' : 'Mapa de red';
+  document.querySelectorAll('.pv-bar a.b-red, #btnCapaRed').forEach(function(el){
+    el.classList.toggle('red-falla', A.n > 0);
+    el.classList.toggle('red-conf', A.conf > 0);
+    el.title = tit;
+  });
+}
+
 function renderBotonRed(){
+  try{ pintarAlertaRed(); }catch(e){}
   const btn = document.getElementById('btnRed');
   if(!btn) return;
   const n = gruposRojos();
@@ -12128,7 +12189,7 @@ function pintarPortada(){
     /* Red (24-09-2026): abre el mapa de red, pantalla aparte con su propio mapa.
        Desde el 26-09-2026 va al lado de Rutas y en su mismo azul, a pedido de
        Luis: los dos son mapas. */
-    +     '<a class="b-map b-red" onclick="abrirVistaRed()">Red</a>'
+    +     '<a class="b-map b-red' + (alertaRedMasiva().n ? ' red-falla' : '') + (alertaRedMasiva().conf ? ' red-conf' : '') + '" onclick="abrirVistaRed()">Red</a>'
     /* Clases por boton (26-09-2026): b-inf = informe (abre otra pagina),
        b-map = mapa, y una propia por boton, para poder darles color. */
     +     '<a class="b-inf b-act" href="' + URL_ACTIVIDADES + '" target="_blank">Histórico diario</a>'
