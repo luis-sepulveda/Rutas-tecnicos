@@ -13828,7 +13828,7 @@ async function bajarMigGer(){
   const dic = js.dic || {};
   const val = function(row, c){ const i = ci[c]; if(i === undefined) return ''; const v = row[i];
     return (dic[c] && typeof v === 'number') ? dic[c][v] : v; };
-  const filas = [], porOT = {};
+  let filas = [], porOT = {}, completo = null;
   (js.rows || []).forEach(function(row){
     const p = /^(\d{2})-(\d{2})-(\d{4})$/.exec(String(val(row, 'Fecha') || ''));
     if(!p) return;
@@ -13844,7 +13844,31 @@ async function bajarMigGer(){
       ot: ot, e: est, cod: String(val(row, 'Código de Cierre') || '').trim(),
       tec: nom.slice(nom.indexOf('_DOMI_') + 6).replace(/ /g, ' ').trim() });
   });
-  return { filas: filas, porOT: porOT };
+  /* (21-10-2026) Con los export completos: migraciones_semanas.json (lo
+     escribe seguimiento.bat) trae el detalle de cada migracion YA JUNTADO con
+     los export completos del jefe (dias con tecnicos en otras comunas). Si
+     esta, manda sobre datos.json. Si no, se sigue con datos.json. */
+  try {
+    const r2 = await fetch(URL_ACTIVIDADES + 'migraciones_semanas.json?t=' + Date.now(), { cache:'no-store' });
+    if(r2.ok){
+      const mj = await r2.json(), d = mj && mj.detalle;
+      if(d && Array.isArray(d.filas) && d.filas.length){
+        const fx = [];
+        d.filas.forEach(function(r){
+          const iso = String(r[0]), dd = new Date(+iso.slice(0, 4), +iso.slice(4, 6) - 1, +iso.slice(6, 8));
+          const lun = new Date(dd); lun.setDate(dd.getDate() - (dd.getDay() + 6) % 7);
+          const ot = String(r[3] || ''), e = String(r[1] || '');
+          fx.push({ iso: iso, mes: iso.slice(0, 6),
+            sem: lun.getFullYear() + '-' + String(lun.getMonth() + 1).padStart(2, '0') + '-' + String(lun.getDate()).padStart(2, '0'),
+            ot: ot, e: e, cod: d.cods[r[2]] || '', otra: !!r[4], tec: d.tecs[r[5]] || '' });
+          if(ot && !(ot in porOT && porOT[ot].iso >= iso)) porOT[ot] = { iso: iso, e: e, tec: d.tecs[r[5]] || '' };
+        });
+        filas = fx;
+        completo = { dias: mj.dias_completos || [], generado: mj.generado || '', hasta: mj.hasta || '' };
+      }
+    }
+  } catch(e){ console.warn('migger completos:', e); }
+  return { filas: filas, porOT: porOT, completo: completo };
 }
 function abrirMigGer(){
   let m = document.getElementById('modalMG');
@@ -13852,7 +13876,7 @@ function abrirMigGer(){
     m = document.createElement('div'); m.id = 'modalMG';
     m.onclick = function(e){ if(e.target === m) cerrarMigGer(); };
     m.innerHTML = '<div class="mg-box" role="dialog"><div class="mg-head"><div><h2>Migraciones · vista gerencia</h2>'
-      + '<p>Todo el equipo · Quilpué y Villa Alemana · solo migraciones</p></div>'
+      + '<p>Todo el equipo · solo migraciones · con los export completos de los días con técnicos en otras comunas</p></div>'
       + '<button class="mg-x" onclick="cerrarMigGer()" title="Cerrar (Esc)">✖</button></div>'
       + '<div class="mg-sel" id="mgSel"></div><div class="mg-cuerpo" id="mgCuerpo"></div></div>';
     document.body.appendChild(m);
@@ -13893,10 +13917,10 @@ function mgRango(k){
 /* Junta todo por periodo (mes o semana) */
 function mgAgrupar(){
   const P = {};
-  const nuevo = function(){ return { a:0, co:0, nr:0, ca:0, su:0, cod:{}, fam:{sm:0,re:0,de:0,di:0,ot:0}, dias:{}, des:[], desOk:false, reag:0, reagOk:false, codCa:{} }; };
+  const nuevo = function(){ return { otra:0, a:0, co:0, nr:0, ca:0, su:0, cod:{}, fam:{sm:0,re:0,de:0,di:0,ot:0}, dias:{}, des:[], desOk:false, reag:0, reagOk:false, codCa:{} }; };
   (MG ? MG.filas : []).forEach(function(x){
     const k = mgVer === 'mes' ? x.mes : x.sem, o = P[k] || (P[k] = nuevo());
-    o.a++; o.dias[x.iso] = 1;
+    o.a++; o.dias[x.iso] = 1; if(x.otra) o.otra++;
     if(x.e === 'Completado') o.co++;
     else if(x.e === 'No Realizada'){ o.nr++; const c = x.cod || 'Sin código'; o.cod[c] = (o.cod[c] || 0) + 1; o.fam[MG_FAM(c)]++; }
     else if(x.e === 'Cancelado'){ o.ca++; const c = x.cod || 'sin motivo'; o.codCa[c] = (o.codCa[c] || 0) + 1; }
@@ -14008,6 +14032,8 @@ function mgPeriodoHtml(o, a, k, kA, cur){
     + mgCard('Sin moradores', sm, mgF1(mgPct(sm, vis)) + '% de las visitadas', a ? mgCmp(mgPct(sm, vis), mgPct(smA, visA), true, nomA) : '', 'na')
     + mgCard('Vienen reagendadas de otro día', o.reagOk ? o.reag : '–', o.reagOk ? 'la plataforma las movió a otro día' : 'sin registro (empieza el 15-09)', '', 'gr',
         'Misma orden que el monitor ya había visto en un día anterior')
+    + (MG && MG.completo ? mgCard('Hechas en otras comunas', o.otra, mgF1(mgPct(o.otra, o.a)) + '% de las asignadas · apoyo fuera de Quilpué y V. Alemana', '', 'gr',
+        'Migraciones de técnicos de Dominion en Viña, Valparaíso, Quillota u otra comuna. Salen de los export completos del jefe') : '')
     + '</div></div>';
   /* todos los quiebres */
   const cods = Object.keys(o.cod).sort(function(x, y){ return o.cod[y] - o.cod[x] || x.localeCompare(y); });
@@ -14058,6 +14084,7 @@ function mgTablaHtml(P, ks, enCurso){
   const pv = function(n, o){ return n + ' <small>' + Math.round(mgPct(n, o.co + o.nr)) + '%</small>'; };
   const filas = [
     ['Asignadas', function(o){ return o.a; }],
+    ['· en otras comunas', function(o){ return MG && MG.completo ? o.otra : '–'; }],
     ['Por día', function(o){ const n = Object.keys(o.dias).length; return n ? mgF1(o.a / n) : '–'; }],
     ['Completadas', function(o){ return o.co + ' <small>' + Math.round(mgPct(o.co, o.a)) + '%</small>'; }],
     ['No realizadas', function(o){ return o.nr; }],
@@ -14078,7 +14105,10 @@ function mgTablaHtml(P, ks, enCurso){
     + '</tr></thead><tbody>' + filas.map(function(f){
         return '<tr class="' + (f[2] || '') + '"><td>' + f[0] + '</td>' + ks.map(function(k){ return '<td class="' + (k === mgSel ? 'sel' : '') + '">' + f[1](P[k]) + '</td>'; }).join('') + '</tr>'; }).join('')
     + '</tbody></table></div>'
-    + '<p class="mg-nota">Fuente: el histórico de Actividades (desde el 01-08, hasta ayer), lo que se ve con las credenciales de la agencia. Desaparecidas y reagendadas de otro día salen del registro del monitor, desde el 15-09. El % de derivación es el mismo de la ventana de Derivación; puede diferir un poco de la página de Seguimiento, que suma los export completos del jefe.</p></div>';
+    + '<p class="mg-nota">' + (MG && MG.completo
+        ? 'Fuente: los mismos datos de la página de Seguimiento: el histórico de Actividades más los export completos del jefe en los días con técnicos en otras comunas (' + MG.completo.dias.length + ' días), hasta el ' + escR(MG.completo.hasta) + '. Por eso estos números pueden ser algo mayores que los de la ventana de Derivación, que usa solo lo que se ve con las credenciales de la agencia.'
+        : 'Fuente: el histórico de Actividades (desde el 01-08, hasta ayer), lo que se ve con las credenciales de la agencia. No se encontró migraciones_semanas.json con el detalle: faltan los días con técnicos en otras comunas.')
+    + ' Desaparecidas y reagendadas de otro día salen del registro del monitor, desde el 15-09.</p></div>';
 }
 
 /* ---- HOY EN VIVO ---- */
