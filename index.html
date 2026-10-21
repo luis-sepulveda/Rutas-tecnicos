@@ -13817,6 +13817,7 @@ const MG_FAM = function(c){
   if(/direcci|no encontrad/.test(t)) return 'di';
   return 'ot';
 };
+const MG_TOP_Q = 6;
 const MG_COLOR = { sm:'#d97706', re:'#2563eb', de:'#dc2626', di:'#7c3aed', ot:'#64748b' };
 const MG_FNOM = { sm:'Sin moradores', re:'Cliente reagenda', de:'Cliente desiste', di:'Dirección', ot:'Otras causas' };
 
@@ -14034,39 +14035,46 @@ function mgPeriodoHtml(o, a, k, kA, cur){
         if(fu) t.push('<b class="am">' + fu + '</b> nos las sacaron');
         return t.length ? ', ' + t.slice(0, -1).join(', ') + (t.length > 1 ? ' y ' : '') + t[t.length - 1] : ''; })() + '.'
     + (o.desOk ? '' : ' <small class="mg-sr">(antes del 15-09 no hay registro de las que nos sacaron)</small>') + '</p>'
-    + '<div class="mg-cards">'
-    + mgCard('Llegaron a nuestras bandejas', U, mgF1(prom) + ' por día · ' + o.a + ' terminaron el día con nosotros' + (o.fuera ? ' y ' + o.fuera + ' nos las sacaron' : ''),
+    /* (21-10-2026, 19:00) Para proyectar: arriba solo 4 tarjetas grandes
+       que cuentan la historia; el resto en una segunda fila mas chica. */
+    + '<div class="mg-cards mg-big">'
+    + mgCard('Llegaron a nuestras bandejas', U, mgF1(prom) + ' por día<br>' + o.a + ' con nosotros' + (o.fuera ? ' · ' + o.fuera + ' nos las sacaron' : ''),
         promA !== null ? mgCmpN(prom, promA, nomA) : '', 'az', 'Todo lo que llegó a una bandeja de un técnico de Dominion, pasara lo que pasara: también las que nos sacaron y no volvieron ese día')
     + mgCard('Completadas', o.co, mgF1(pCo) + '% de las que llegaron', mgCmp(pCo, pCoA, false, nomA), 've')
-    + mgCard('No realizadas (derivadas)', o.nr, '<b>' + mgF1(pDer) + '%</b> de las visitadas', mgCmp(pDer, pDerA, true, nomA), 'ro',
-        'Derivación = no realizadas ÷ visitadas (completadas + no realizadas). Mismo cálculo de la ventana de Derivación')
-    + mgCard('Canceladas', o.ca, mgF1(pCa) + '% de las que llegaron', mgCmp(pCa, pCaA, true, nomA), 'gr')
-    + mgCard('Suspendidas', o.su, mgF1(mgPct(o.su, U)) + '% de las que llegaron', '', 'gr')
-    + mgCard('Nos las sacaron', o.desOk ? o.des.length : '–', o.desOk ? 'se las sacaron al técnico sin tocarlas · ' + o.fuera + ' no volvieron ese día (' + mgF1(mgPct(o.fuera, U)) + '% de las que llegaron)' : 'sin registro (empieza el 15-09)',
+    + mgCard('No realizadas', o.nr, '<b>' + mgF1(pDer) + '%</b> de las visitadas<br>' + mgF1(mgPct(o.nr, U)) + '% de las que llegaron', mgCmp(pDer, pDerA, true, nomA), 'ro',
+        'Derivación = no realizadas ÷ visitadas (completadas + no realizadas). Mismo cálculo de la ventana de Derivación. Abajo, el mismo número sobre todas las que llegaron')
+    + mgCard('Nos las sacaron', o.desOk ? o.des.length : '–', o.desOk ? 'sin que el técnico las tocara<br>' + o.fuera + ' no volvieron ese día' : 'sin registro (empieza el 15-09)',
         o.desOk && a && a.desOk ? mgCmpN(o.des.length / (nd || 1), a.des.length / (ndA || 1), nomA, true) : '', 'am')
+    + '</div><div class="mg-cards mg-small">'
     + mgCard('Cliente reagenda', reCli, mgF1(mgPct(reCli, vis)) + '% de las visitadas', a ? mgCmp(mgPct(reCli, vis), mgPct(reCliA, visA), true, nomA) : '', 'az2',
         'Quiebre "Cliente reagenda" (y "sin contacto"): el técnico fue y el cliente pidió otro día')
     + mgCard('Sin moradores', sm, mgF1(mgPct(sm, vis)) + '% de las visitadas', a ? mgCmp(mgPct(sm, vis), mgPct(smA, visA), true, nomA) : '', 'na')
-    + mgCard('Vienen reagendadas de otro día', o.reagOk ? o.reag : '–', o.reagOk ? 'la plataforma las movió a otro día' : 'sin registro (empieza el 15-09)', '', 'gr',
+    + mgCard('Canceladas', o.ca, mgF1(pCa) + '% de las que llegaron', mgCmp(pCa, pCaA, true, nomA), 'gr')
+    + mgCard('Suspendidas', o.su, mgF1(mgPct(o.su, U)) + '% de las que llegaron', '', 'gr')
+    + mgCard('Vienen de otro día', o.reagOk ? o.reag : '–', o.reagOk ? 'la plataforma las reagendó' : 'sin registro antes del 15-09', '', 'gr',
         'Misma orden que el monitor ya había visto en un día anterior')
-    + (MG && MG.completo ? mgCard('Hechas en otras comunas', o.otra, mgF1(mgPct(o.otra, U)) + '% de las que llegaron · apoyo fuera de Quilpué y V. Alemana', '', 'gr',
+    + (MG && MG.completo ? mgCard('En otras comunas', o.otra, mgF1(mgPct(o.otra, U)) + '% de las que llegaron', '', 'gr',
         'Migraciones de técnicos de Dominion en Viña, Valparaíso, Quillota u otra comuna. Salen de los export completos del jefe') : '')
     + '</div></div>';
   /* todos los quiebres */
   const cods = Object.keys(o.cod).sort(function(x, y){ return o.cod[y] - o.cod[x] || x.localeCompare(y); });
   const max = cods.length ? o.cod[cods[0]] : 1;
-  h += '<div class="mg-b"><div class="mg-t"><b>Por qué no se hicieron · todos los quiebres</b><small>' + o.nr + ' no realizadas de ' + vis + ' visitadas</small></div>'
+  h += '<div class="mg-b"><div class="mg-t"><b>Por qué no se hicieron</b><small>' + o.nr + ' no realizadas de ' + vis + ' visitadas</small></div>'
     + '<div class="mg-fam">' + Object.keys(MG_FNOM).map(function(f){
         return o.fam[f] ? '<span><i style="background:' + MG_COLOR[f] + '"></i>' + MG_FNOM[f] + ' <b>' + o.fam[f] + '</b> · ' + Math.round(mgPct(o.fam[f], o.nr)) + '% de las no realizadas</span>' : ''; }).join('') + '</div>'
     + '<table class="mg-q"><thead><tr><th>Quiebre</th><th></th><th>Cantidad</th><th>% de las no realizadas</th><th>% de las visitadas</th>'
     + (a ? '<th>En ' + nomA + '</th><th>Cambio</th>' : '') + '</tr></thead><tbody>'
-    + cods.map(function(c){
+    + (mgAbre.q ? cods : cods.slice(0, MG_TOP_Q)).map(function(c){
         const n = o.cod[c], nA = a ? (a.cod[c] || 0) : 0, pv = mgPct(n, vis), pvA = a ? mgPct(nA, visA) : 0, f = MG_FAM(c);
         return '<tr><td><i style="background:' + MG_COLOR[f] + '"></i>' + escR(c) + '</td>'
           + '<td class="bar"><span style="width:' + Math.max(2, 100 * n / max) + '%;background:' + MG_COLOR[f] + '"></span></td>'
           + '<td><b>' + n + '</b></td><td>' + mgF1(mgPct(n, o.nr)) + '%</td><td>' + mgF1(pv) + '%</td>'
           + (a ? '<td>' + nA + ' <small>(' + mgF1(pvA) + '%)</small></td><td>' + mgCmp(pv, pvA, true, '') + '</td>' : '') + '</tr>';
       }).join('') + '</tbody></table>'
+    + (cods.length > MG_TOP_Q ? (function(){
+        const resto = cods.slice(MG_TOP_Q).reduce(function(s2, c){ return s2 + o.cod[c]; }, 0);
+        return '<button class="mg-ver" style="margin-top:8px" onclick="mgToggle(\'q\')">' + (mgAbre.q ? 'Ver solo los ' + MG_TOP_Q + ' principales'
+          : 'Ver los ' + cods.length + ' quiebres (otros ' + (cods.length - MG_TOP_Q) + ' suman ' + resto + ')') + '</button>'; })() : '')
     + '<p class="mg-nota">"% de las visitadas" se puede comparar entre períodos aunque tengan distinta cantidad de órdenes. El cambio se mide en puntos.</p></div>';
   /* desaparecidas */
   if(o.desOk){
@@ -14118,7 +14126,12 @@ function mgTablaHtml(P, ks, enCurso){
     ['Nos las sacaron (todas)', function(o){ return o.desOk ? o.des.length : '–'; }],
     ['Vienen reagendadas de otro día', function(o){ return o.reagOk ? o.reag : '–'; }]
   ];
-  return '<div class="mg-b"><div class="mg-t"><b>' + (mgVer === 'mes' ? 'Mes a mes' : 'Semana a semana') + '</b><small>toca un período arriba para ver su detalle · el % de cada quiebre es sobre las visitadas</small></div>'
+  return '<div class="mg-b mg-calc"><div class="mg-t"><b>Cómo se calcula</b><small>para que todos hablemos del mismo número</small></div><ul>'
+    + '<li><b>Llegaron a nuestras bandejas</b>: toda migración que estuvo en la bandeja de un técnico de Dominion ese día, pasara lo que pasara. Incluye las que nos sacaron y no volvieron ese día (registro desde el 15-09).</li>'
+    + '<li><b>No realizadas (derivación)</b>: no realizadas ÷ visitadas, y visitadas = completadas + no realizadas. Las canceladas, suspendidas y las que nos sacaron no entran. Abajo de la tarjeta va también el % sobre todas las que llegaron.</li>'
+    + '<li><b>Nos las sacaron</b>: estaban asignadas y sin empezar, y salieron de la bandeja del técnico sin que él las tocara (las movió o anuló la plataforma).</li>'
+    + '<li>Solo migraciones de técnicos de Dominion. Hasta ayer. Incluye los días con técnicos en otras comunas (export completos).</li></ul></div>'
+    + '<div class="mg-b"><div class="mg-t"><b>' + (mgVer === 'mes' ? 'Mes a mes' : 'Semana a semana') + '</b><small>toca un período arriba para ver su detalle · el % de cada quiebre es sobre las visitadas</small></div>'
     + '<div class="mg-scroll"><table class="mg-q mg-tab"><thead><tr><th></th>' + ks.map(function(k){
         return '<th class="' + (k === mgSel ? 'sel' : '') + '">' + (mgVer === 'mes' ? MG_MESES[+k.slice(4) - 1] : 'Sem ' + derNumSemana(k) + '<br><small>' + mgRango(k) + '</small>') + (enCurso(k) ? '<br><small>en curso</small>' : '') + '</th>'; }).join('')
     + '</tr></thead><tbody>' + filas.map(function(f){
@@ -14223,6 +14236,15 @@ function mgHoyHtml(){
   .mg-ver { border:1px solid #1d4ed8; color:#1d4ed8; background:#fff; border-radius:7px; padding:5px 12px; cursor:pointer; font:600 13px 'DM Sans',system-ui,sans-serif; margin-bottom:8px; }
   .mg-l { font-size:12.5px; } .mg-nota { font-size:12px; color:#64748b; margin:10px 0 0; }
   .mg-vacio { padding:40px; text-align:center; color:#64748b; }
+  /* (21-10-2026, 19:00) para proyectar: 4 tarjetas grandes y una fila chica */
+  .mg-big { grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); }
+  .mg-big .mg-card { padding:14px 16px; } .mg-big .mg-card > b { font-size:40px; } .mg-big .mg-card small { font-size:13.5px; }
+  .mg-big .mg-card span { font-size:13.5px; line-height:1.45; } .mg-big .mg-card em { font-size:13px; margin-top:2px; }
+  .mg-small { margin-top:10px; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); }
+  .mg-small .mg-card { padding:8px 11px; border-left-width:4px; } .mg-small .mg-card > b { font-size:22px; }
+  .mg-small .mg-card small { font-size:11.5px; } .mg-small .mg-card span, .mg-small .mg-card em { font-size:11.5px; }
+  .mg-frase { font-size:17px; }
+  .mg-calc ul { margin:0; padding-left:18px; font-size:13.5px; line-height:1.55; color:#334155; } .mg-calc li { margin-bottom:3px; }
 </style>
 
 </body>
