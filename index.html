@@ -12356,6 +12356,8 @@ function pintarPortada(){
     +       (nReit() ? '<span class="pv-nred">' + nReit() + '</span>' : '') + '</a>'
     /* (20-10-2026, 15:30) Resumen para WhatsApp, al lado de Reiterados (pedido de Luis) */
     +     '<a class="b-wsp" onclick="abrirResumenWsp()" title="Una sola imagen con inicio, avance, nuevas, salieron y no realizadas, para el grupo">💬 Resumen WhatsApp</a>'
+    /* (21-10-2026) Migraciones · vista gerencia */
+    +     '<a class="b-mg" onclick="abrirMigGer()" title="Todo lo de migraciones del equipo: por mes, por semana y hoy">📊 Migraciones · Gerencia</a>'
     /* Tiempos (26-09-2026): a la derecha de Reiterados, a pedido de Luis (antes
        estuvo un rato en "Reportes"). Abre el boton Tiempos en terreno del
        historial en otra pestana, como Historial y Seguimiento. */
@@ -13790,5 +13792,386 @@ if(_inExcel) _inExcel.addEventListener('change', function(ev){
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', iniciar); else iniciar();
 })();
 </script>
+<script>
+/* =====================================================================
+   MIGRACIONES · VISTA GERENCIA (21-10-2026, pedido de Luis para su jefe)
+   Boton en la barra de arriba. Una ventana con TODO lo de migraciones de
+   todo el equipo, por mes, por semana o de hoy:
+   asignadas, completadas, no realizadas (con todos los quiebres),
+   canceladas, suspendidas, las que desaparecieron de la bandeja del
+   tecnico (y que paso despues), las reagendadas por el cliente y las que
+   vienen reagendadas de otro dia.
+   Fuentes: datos.json del Dashboard de Actividades (hasta ayer, desde el
+   01-08), historico_dias.json del monitor (desaparecidas y reagendadas de
+   otro dia, desde el 15-09) y, para Hoy, rutas.json en vivo.
+   Solo migraciones (Tipo de Actividad que empieza con "Migra"), solo
+   tecnicos _DOMI_, Quilpue y Villa Alemana (lo que ve la agencia).
+   ===================================================================== */
+let MG = null, mgBajando = false, mgFallo = false, mgVer = 'mes', mgSel = null, mgAbre = {};
+const MG_MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+const MG_FAM = function(c){
+  const t = String(c || '').toLowerCase();
+  if(/sin morador/.test(t)) return 'sm';
+  if(/reagend/.test(t)) return 're';
+  if(/desist/.test(t)) return 'de';
+  if(/direcci|no encontrad/.test(t)) return 'di';
+  return 'ot';
+};
+const MG_COLOR = { sm:'#d97706', re:'#2563eb', de:'#dc2626', di:'#7c3aed', ot:'#64748b' };
+const MG_FNOM = { sm:'Sin moradores', re:'Cliente reagenda', de:'Cliente desiste', di:'Dirección', ot:'Otras causas' };
+
+async function bajarMigGer(){
+  const r = await fetch(URL_DATOS_ACT + '?t=' + Date.now(), { cache:'no-store' });
+  if(!r.ok) throw new Error(r.status);
+  const js = await r.json();
+  const ci = {}; (js.cols || []).forEach(function(c, i){ ci[c] = i; });
+  const dic = js.dic || {};
+  const val = function(row, c){ const i = ci[c]; if(i === undefined) return ''; const v = row[i];
+    return (dic[c] && typeof v === 'number') ? dic[c][v] : v; };
+  const filas = [], porOT = {};
+  (js.rows || []).forEach(function(row){
+    const p = /^(\d{2})-(\d{2})-(\d{4})$/.exec(String(val(row, 'Fecha') || ''));
+    if(!p) return;
+    const iso = p[3] + p[2] + p[1], ot = String(val(row, 'Orden de Trabajo') || '');
+    const est = String(val(row, 'Estado') || '').trim(), nom = String(val(row, 'Nombre') || '');
+    if(ot) porOT[ot] = { iso: iso, e: est, tec: nom };      // para saber que paso con las que desaparecieron
+    if(nom.indexOf('_DOMI_') < 0) return;
+    if(String(val(row, 'Tipo de Actividad') || '').trim().toUpperCase().indexOf('MIGRA') !== 0) return;
+    const d = new Date(+p[3], +p[2] - 1, +p[1]);
+    const lun = new Date(d); lun.setDate(d.getDate() - (d.getDay() + 6) % 7);
+    filas.push({ iso: iso, mes: iso.slice(0, 6),
+      sem: lun.getFullYear() + '-' + String(lun.getMonth() + 1).padStart(2, '0') + '-' + String(lun.getDate()).padStart(2, '0'),
+      ot: ot, e: est, cod: String(val(row, 'Código de Cierre') || '').trim(),
+      tec: nom.slice(nom.indexOf('_DOMI_') + 6).replace(/ /g, ' ').trim() });
+  });
+  return { filas: filas, porOT: porOT };
+}
+function abrirMigGer(){
+  let m = document.getElementById('modalMG');
+  if(!m){
+    m = document.createElement('div'); m.id = 'modalMG';
+    m.onclick = function(e){ if(e.target === m) cerrarMigGer(); };
+    m.innerHTML = '<div class="mg-box" role="dialog"><div class="mg-head"><div><h2>Migraciones · vista gerencia</h2>'
+      + '<p>Todo el equipo · Quilpué y Villa Alemana · solo migraciones</p></div>'
+      + '<button class="mg-x" onclick="cerrarMigGer()" title="Cerrar (Esc)">✖</button></div>'
+      + '<div class="mg-sel" id="mgSel"></div><div class="mg-cuerpo" id="mgCuerpo"></div></div>';
+    document.body.appendChild(m);
+  }
+  m.classList.add('abierto');
+  try { asegurarDias(); } catch(e){}
+  pintarMigGer();
+  if(MG || mgBajando) return;
+  mgBajando = true; mgFallo = false;
+  bajarMigGer().then(function(d){ MG = d; mgBajando = false; pintarMigGer(); })
+    .catch(function(e){ console.warn('migger:', e); mgFallo = true; mgBajando = false; pintarMigGer(); });
+  /* el historico del monitor puede llegar despues: se repinta cuando llega */
+  let n = 0; const t = setInterval(function(){ n++; if(DIAS || n > 40){ clearInterval(t); pintarMigGer(); } }, 500);
+}
+function cerrarMigGer(){ const m = document.getElementById('modalMG'); if(m) m.classList.remove('abierto'); }
+document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarMigGer(); });
+function setMgVer(v){ mgVer = v; mgSel = null; pintarMigGer(); }
+function setMgSel(k){ mgSel = k; pintarMigGer(); }
+function mgToggle(k){ mgAbre[k] = !mgAbre[k]; pintarMigGer(); }
+
+/* ---- helpers ---- */
+function mgF1(v){ return (Math.round(v * 10) / 10).toFixed(1).replace('.', ','); }
+function mgPct(a, b){ return b ? 100 * a / b : 0; }
+function mgIsoDia(k){ const p = k.split('-'); return p[2] + p[1] + p[0]; }        // dd-mm-aaaa -> aaaammdd
+function mgLunes(iso){ const d = new Date(+iso.slice(0, 4), +iso.slice(4, 6) - 1, +iso.slice(6, 8));
+  d.setDate(d.getDate() - (d.getDay() + 6) % 7);
+  return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+function mgClave(iso){ return mgVer === 'mes' ? iso.slice(0, 6) : mgLunes(iso); }
+function mgNomCorto(k){ return mgVer === 'mes' ? MG_MESES[+k.slice(4) - 1] : 'sem ' + derNumSemana(k); }
+function mgNomPer(k){ return mgVer === 'mes' ? MG_MESES[+k.slice(4) - 1] + ' ' + k.slice(0, 4) : 'Semana ' + derNumSemana(k); }
+function mgRango(k){
+  if(mgVer === 'mes') return '';
+  const p = k.split('-'), d = new Date(+p[0], +p[1] - 1, +p[2]), f = new Date(d); f.setDate(d.getDate() + 5);
+  const dd = function(x){ return String(x.getDate()).padStart(2, '0') + '-' + String(x.getMonth() + 1).padStart(2, '0'); };
+  return dd(d) + ' al ' + dd(f);
+}
+
+/* Junta todo por periodo (mes o semana) */
+function mgAgrupar(){
+  const P = {};
+  const nuevo = function(){ return { a:0, co:0, nr:0, ca:0, su:0, cod:{}, fam:{sm:0,re:0,de:0,di:0,ot:0}, dias:{}, des:[], desOk:false, reag:0, reagOk:false, codCa:{} }; };
+  (MG ? MG.filas : []).forEach(function(x){
+    const k = mgVer === 'mes' ? x.mes : x.sem, o = P[k] || (P[k] = nuevo());
+    o.a++; o.dias[x.iso] = 1;
+    if(x.e === 'Completado') o.co++;
+    else if(x.e === 'No Realizada'){ o.nr++; const c = x.cod || 'Sin código'; o.cod[c] = (o.cod[c] || 0) + 1; o.fam[MG_FAM(c)]++; }
+    else if(x.e === 'Cancelado'){ o.ca++; const c = x.cod || 'sin motivo'; o.codCa[c] = (o.codCa[c] || 0) + 1; }
+    else if(x.e === 'Suspendido') o.su++;
+  });
+  /* desaparecidas y reagendadas de otro dia: historico del monitor (hasta
+     ayer, igual que datos.json, para que el dia de hoy no quede a medias) */
+  const hoyIso = mgHoyIso();
+  if(DIAS) Object.keys(DIAS).forEach(function(f){
+    const det = DIAS[f] && DIAS[f].detalle; if(!det) return;
+    const iso = mgIsoDia(f); if(iso >= hoyIso) return;
+    const k = mgClave(iso), o = P[k] || (P[k] = nuevo());
+    if(Array.isArray(det.caidas)){ o.desOk = true;
+      det.caidas.forEach(function(c){ if(String(c.cat || '').indexOf('Migr') === 0) o.des.push({ c: c, iso: iso }); }); }
+    if(Array.isArray(det.reagendadas)){ o.reagOk = true;
+      det.reagendadas.forEach(function(c){ if(String(c.cat || '').indexOf('Migr') === 0) o.reag++; }); }
+  });
+  return P;
+}
+function mgHoyIso(){ const d = new Date(); return d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0'); }
+/* que paso con una migracion que desaparecio: se busca su OT en datos.json */
+function mgDestino(d){
+  const r = MG && MG.porOT[d.c.o];
+  if(!r) return 'nv';
+  if(r.iso === d.iso) return r.e === 'Completado' ? 'otro' : r.e === 'Cancelado' ? 'canc' : 'mismo';
+  if(r.iso > d.iso) return r.e === 'Completado' ? 'vc' : r.e === 'No Realizada' ? 'vnr' : r.e === 'Cancelado' ? 'vca' : 'vot';
+  return 'nv';
+}
+const MG_DEST = { vc:['Volvió otro día y se completó','#15803d'], vnr:['Volvió otro día y quedó no realizada','#dc2626'],
+  vca:['Volvió otro día y se canceló','#64748b'], vot:['Volvió otro día (otro estado)','#94a3b8'],
+  otro:['La completó otro técnico ese mismo día','#0e7c6b'], canc:['Se canceló ese mismo día','#64748b'],
+  mismo:['Quedó ese mismo día con otro estado','#94a3b8'], nv:['No volvió a aparecer (anulada, otra empresa o sin agendar)','#b45309'] };
+
+/* ---- la ventana ---- */
+function pintarMigGer(){
+  const sel = document.getElementById('mgSel'), cu = document.getElementById('mgCuerpo');
+  if(!sel || !cu) return;
+  const segV = '<span class="rot">Ver por</span><div class="mg-seg">'
+    + [['mes','Meses'],['sem','Semanas'],['hoy','Hoy en vivo']].map(function(v){
+        return '<button class="' + (mgVer === v[0] ? 'on' : '') + '" onclick="setMgVer(\'' + v[0] + '\')">' + v[1] + '</button>'; }).join('') + '</div>';
+  if(mgVer === 'hoy'){ sel.innerHTML = segV; cu.innerHTML = mgHoyHtml(); return; }
+  if(mgFallo){ sel.innerHTML = segV; cu.innerHTML = '<div class="mg-vacio">No se pudo bajar el histórico de Actividades. Revisa la conexión y vuelve a abrir.</div>'; return; }
+  if(!MG){ sel.innerHTML = segV; cu.innerHTML = '<div class="mg-vacio">Cargando el histórico…</div>'; return; }
+  const P = mgAgrupar();
+  let ks = Object.keys(P).filter(function(k){ return P[k].a; }).sort();
+  if(mgVer === 'sem') ks = ks.slice(-10);
+  if(!mgSel || ks.indexOf(mgSel) < 0) mgSel = ks[ks.length - 1];
+  const hoyIso = mgHoyIso();
+  const enCurso = function(k){ return mgClave(hoyIso) === k; };
+  sel.innerHTML = segV + '<span class="rot">Período</span><div class="mg-seg per">' + ks.map(function(k){
+      const o = P[k], d = mgPct(o.nr, o.co + o.nr);
+      return '<button class="' + (k === mgSel ? 'on' : '') + '" onclick="setMgSel(\'' + k + '\')" title="% de derivación">'
+        + (mgVer === 'mes' ? MG_MESES[+k.slice(4) - 1] : 'Sem ' + derNumSemana(k))
+        + '<b>' + Math.round(d) + '%</b></button>'; }).join('') + '</div>';
+  const i = ks.indexOf(mgSel), o = P[mgSel], a = i > 0 ? P[ks[i - 1]] : null;
+  cu.innerHTML = mgPeriodoHtml(o, a, mgSel, i > 0 ? ks[i - 1] : null, enCurso(mgSel)) + mgTablaHtml(P, ks, enCurso);
+}
+
+/* tarjeta: titulo, valor grande, % y comparacion */
+function mgCard(tit, n, sub, cmp, cls, info){
+  return '<div class="mg-card ' + (cls || '') + '"' + (info ? ' title="' + info + '"' : '') + '><small>' + tit + '</small><b>' + n + '</b>'
+    + (sub ? '<span>' + sub + '</span>' : '') + (cmp ? '<em>' + cmp + '</em>' : '') + '</div>';
+}
+/* comparacion de un % contra el periodo anterior. malo = subir es malo */
+function mgCmp(v, va, malo, nomA){
+  if(va === null || va === undefined || isNaN(va)) return '';
+  const d = v - va, vs = nomA ? ' vs ' + nomA : '';
+  if(Math.abs(d) < 0.5) return '<i class="eq">= igual' + (nomA ? ' que ' + nomA : '') + '</i>';
+  const peor = malo ? d > 0 : d < 0;
+  return '<i class="' + (peor ? 'peor' : 'mejor') + '">' + (d > 0 ? '▲' : '▼') + ' ' + mgF1(Math.abs(d)) + ' pts' + vs + '</i>';
+}
+/* comparacion de una cantidad por dia */
+function mgCmpN(v, va, nomA, malo){
+  if(!va) return '';
+  const d = 100 * (v - va) / va;
+  if(Math.abs(d) < 3) return '<i class="eq">= igual que ' + nomA + '</i>';
+  return '<i class="' + (malo ? (d > 0 ? 'peor' : 'mejor') : 'eq') + '">' + (d > 0 ? '▲' : '▼') + ' ' + Math.round(Math.abs(d)) + '% por día vs ' + nomA + '</i>';
+}
+
+function mgPeriodoHtml(o, a, k, kA, cur){
+  const nd = Object.keys(o.dias).length, ndA = a ? Object.keys(a.dias).length : 0;
+  const vis = o.co + o.nr, visA = a ? a.co + a.nr : 0;
+  const nomA = kA ? mgNomCorto(kA) : '';
+  const pDer = mgPct(o.nr, vis), pDerA = a && visA ? mgPct(a.nr, visA) : null;
+  const pCo = mgPct(o.co, o.a), pCoA = a ? mgPct(a.co, a.a) : null;
+  const pCa = mgPct(o.ca, o.a), pCaA = a ? mgPct(a.ca, a.a) : null;
+  const prom = nd ? o.a / nd : 0, promA = ndA ? a.a / ndA : null;
+  const reCli = o.fam.re, reCliA = a ? a.fam.re : 0;
+  const sm = o.fam.sm, smA = a ? a.fam.sm : 0;
+  let h = '<div class="mg-b"><div class="mg-t"><b>' + mgNomPer(k) + '</b>'
+    + '<small>' + (mgRango(k) ? mgRango(k) + ' · ' : '') + nd + ' día' + (nd === 1 ? '' : 's') + ' con datos' + (cur ? ' · en curso, hasta ayer' : '') + (a ? ' · comparado con ' + nomA : '') + '</small></div>'
+    + '<p class="mg-frase">De cada <b>100 migraciones asignadas</b>: <b class="v">' + Math.round(pCo) + '</b> se completaron, '
+    + '<b class="r">' + Math.round(mgPct(o.nr, o.a)) + '</b> quedaron no realizadas'
+    + (function(){ const c = Math.round(pCa), su = Math.round(mgPct(o.su, o.a)), t = [];
+        if(c) t.push('<b>' + c + '</b> ' + (c === 1 ? 'se canceló' : 'se cancelaron'));
+        if(su) t.push('<b>' + su + '</b> ' + (su === 1 ? 'quedó suspendida' : 'quedaron suspendidas'));
+        return t.length ? (t.length === 1 ? ' y ' : ', ') + t.join(' y ') : ''; })() + '.</p>'
+    + '<div class="mg-cards">'
+    + mgCard('Asignadas', o.a, mgF1(prom) + ' por día', promA !== null ? mgCmpN(prom, promA, nomA) : '', 'az', 'Todas las migraciones del período, en cualquier estado')
+    + mgCard('Completadas', o.co, mgF1(pCo) + '% de las asignadas', mgCmp(pCo, pCoA, false, nomA), 've')
+    + mgCard('No realizadas (derivadas)', o.nr, '<b>' + mgF1(pDer) + '%</b> de las visitadas', mgCmp(pDer, pDerA, true, nomA), 'ro',
+        'Derivación = no realizadas ÷ visitadas (completadas + no realizadas). Mismo cálculo de la ventana de Derivación')
+    + mgCard('Canceladas', o.ca, mgF1(pCa) + '% de las asignadas', mgCmp(pCa, pCaA, true, nomA), 'gr')
+    + mgCard('Suspendidas', o.su, mgF1(mgPct(o.su, o.a)) + '% de las asignadas', '', 'gr')
+    + mgCard('Desaparecieron de la bandeja', o.desOk ? o.des.length : '–', o.desOk ? 'se las sacaron al técnico sin tocarlas' : 'sin registro (empieza el 15-09)',
+        o.desOk && a && a.desOk ? mgCmpN(o.des.length / (nd || 1), a.des.length / (ndA || 1), nomA, true) : '', 'am')
+    + mgCard('Cliente reagenda', reCli, mgF1(mgPct(reCli, vis)) + '% de las visitadas', a ? mgCmp(mgPct(reCli, vis), mgPct(reCliA, visA), true, nomA) : '', 'az2',
+        'Quiebre "Cliente reagenda" (y "sin contacto"): el técnico fue y el cliente pidió otro día')
+    + mgCard('Sin moradores', sm, mgF1(mgPct(sm, vis)) + '% de las visitadas', a ? mgCmp(mgPct(sm, vis), mgPct(smA, visA), true, nomA) : '', 'na')
+    + mgCard('Vienen reagendadas de otro día', o.reagOk ? o.reag : '–', o.reagOk ? 'la plataforma las movió a otro día' : 'sin registro (empieza el 15-09)', '', 'gr',
+        'Misma orden que el monitor ya había visto en un día anterior')
+    + '</div></div>';
+  /* todos los quiebres */
+  const cods = Object.keys(o.cod).sort(function(x, y){ return o.cod[y] - o.cod[x] || x.localeCompare(y); });
+  const max = cods.length ? o.cod[cods[0]] : 1;
+  h += '<div class="mg-b"><div class="mg-t"><b>Por qué no se hicieron · todos los quiebres</b><small>' + o.nr + ' no realizadas de ' + vis + ' visitadas</small></div>'
+    + '<div class="mg-fam">' + Object.keys(MG_FNOM).map(function(f){
+        return o.fam[f] ? '<span><i style="background:' + MG_COLOR[f] + '"></i>' + MG_FNOM[f] + ' <b>' + o.fam[f] + '</b> · ' + Math.round(mgPct(o.fam[f], o.nr)) + '% de las no realizadas</span>' : ''; }).join('') + '</div>'
+    + '<table class="mg-q"><thead><tr><th>Quiebre</th><th></th><th>Cantidad</th><th>% de las no realizadas</th><th>% de las visitadas</th>'
+    + (a ? '<th>En ' + nomA + '</th><th>Cambio</th>' : '') + '</tr></thead><tbody>'
+    + cods.map(function(c){
+        const n = o.cod[c], nA = a ? (a.cod[c] || 0) : 0, pv = mgPct(n, vis), pvA = a ? mgPct(nA, visA) : 0, f = MG_FAM(c);
+        return '<tr><td><i style="background:' + MG_COLOR[f] + '"></i>' + escR(c) + '</td>'
+          + '<td class="bar"><span style="width:' + Math.max(2, 100 * n / max) + '%;background:' + MG_COLOR[f] + '"></span></td>'
+          + '<td><b>' + n + '</b></td><td>' + mgF1(mgPct(n, o.nr)) + '%</td><td>' + mgF1(pv) + '%</td>'
+          + (a ? '<td>' + nA + ' <small>(' + mgF1(pvA) + '%)</small></td><td>' + mgCmp(pv, pvA, true, '') + '</td>' : '') + '</tr>';
+      }).join('') + '</tbody></table>'
+    + '<p class="mg-nota">"% de las visitadas" se puede comparar entre períodos aunque tengan distinta cantidad de órdenes. El cambio se mide en puntos.</p></div>';
+  /* desaparecidas */
+  if(o.desOk){
+    const cnt = {}; o.des.forEach(function(d){ const t = mgDestino(d); cnt[t] = (cnt[t] || 0) + 1; });
+    h += '<div class="mg-b"><div class="mg-t"><b>Las que desaparecieron de la bandeja · qué pasó después</b><small>' + o.des.length + ' migraciones</small></div>';
+    if(!o.des.length) h += '<p class="mg-frase">Ninguna migración desapareció de la bandeja en este período.</p>';
+    else {
+      h += '<div class="mg-dest">' + Object.keys(MG_DEST).filter(function(t){ return cnt[t]; }).map(function(t){
+          return '<div><b style="color:' + MG_DEST[t][1] + '">' + cnt[t] + '</b><span>' + MG_DEST[t][0] + '</span></div>'; }).join('') + '</div>'
+        + '<button class="mg-ver" onclick="mgToggle(\'des\')">' + (mgAbre.des ? 'Ocultar' : 'Ver') + ' las ' + o.des.length + ' órdenes</button>';
+      if(mgAbre.des) h += '<table class="mg-q mg-l"><thead><tr><th>Día</th><th>Orden</th><th>Tipo</th><th>Técnico</th><th>Franja</th><th>Dirección</th><th>Qué pasó</th></tr></thead><tbody>'
+        + o.des.slice().sort(function(x, y){ return y.iso.localeCompare(x.iso); }).map(function(d){
+            const t = mgDestino(d), r = MG.porOT[d.c.o];
+            return '<tr><td>' + d.iso.slice(6, 8) + '-' + d.iso.slice(4, 6) + '</td><td>' + escR(d.c.o) + '</td><td>' + escR(d.c.cat || '') + '</td><td>' + escR(derTitulo(d.c.tec || '')) + '</td>'
+              + '<td>' + escR(d.c.f || '') + '</td><td>' + escR(d.c.d || '') + '</td><td style="color:' + MG_DEST[t][1] + '">' + MG_DEST[t][0]
+              + (r && r.iso !== d.iso ? ' <small>(' + r.iso.slice(6, 8) + '-' + r.iso.slice(4, 6) + ')</small>' : '') + '</td></tr>'; }).join('') + '</tbody></table>';
+      h += '<p class="mg-nota">Qué pasó se averigua buscando la misma orden en el histórico de Actividades. "No volvió a aparecer" = la orden no está en ningún día posterior con un técnico de Dominion: la anularon, la tomó otra empresa o sigue sin agendar.</p>';
+    }
+    h += '</div>';
+  }
+  /* canceladas */
+  if(o.ca){
+    const cc = Object.keys(o.codCa).sort(function(x, y){ return o.codCa[y] - o.codCa[x]; });
+    h += '<div class="mg-b"><div class="mg-t"><b>Canceladas</b><small>' + o.ca + ' · ' + mgF1(pCa) + '% de las asignadas</small></div><p class="mg-frase">'
+      + cc.map(function(c){ return escR(c === 'sin motivo' ? 'Sin motivo informado' : c) + ': <b>' + o.codCa[c] + '</b>'; }).join(' · ') + '</p></div>';
+  }
+  return h;
+}
+
+/* todos los periodos lado a lado */
+function mgTablaHtml(P, ks, enCurso){
+  const pv = function(n, o){ return n + ' <small>' + Math.round(mgPct(n, o.co + o.nr)) + '%</small>'; };
+  const filas = [
+    ['Asignadas', function(o){ return o.a; }],
+    ['Por día', function(o){ const n = Object.keys(o.dias).length; return n ? mgF1(o.a / n) : '–'; }],
+    ['Completadas', function(o){ return o.co + ' <small>' + Math.round(mgPct(o.co, o.a)) + '%</small>'; }],
+    ['No realizadas', function(o){ return o.nr; }],
+    ['% derivación (de las visitadas)', function(o){ return '<b>' + mgF1(mgPct(o.nr, o.co + o.nr)) + '%</b>'; }, 'der'],
+    ['· Sin moradores', function(o){ return pv(o.fam.sm, o); }],
+    ['· Cliente reagenda', function(o){ return pv(o.fam.re, o); }],
+    ['· Cliente desiste', function(o){ return pv(o.fam.de, o); }],
+    ['· Dirección', function(o){ return pv(o.fam.di, o); }],
+    ['· Otras causas', function(o){ return pv(o.fam.ot, o); }],
+    ['Canceladas', function(o){ return o.ca; }],
+    ['Suspendidas', function(o){ return o.su; }],
+    ['Desaparecieron de la bandeja', function(o){ return o.desOk ? o.des.length : '–'; }],
+    ['Vienen reagendadas de otro día', function(o){ return o.reagOk ? o.reag : '–'; }]
+  ];
+  return '<div class="mg-b"><div class="mg-t"><b>' + (mgVer === 'mes' ? 'Mes a mes' : 'Semana a semana') + '</b><small>toca un período arriba para ver su detalle · el % de cada quiebre es sobre las visitadas</small></div>'
+    + '<div class="mg-scroll"><table class="mg-q mg-tab"><thead><tr><th></th>' + ks.map(function(k){
+        return '<th class="' + (k === mgSel ? 'sel' : '') + '">' + (mgVer === 'mes' ? MG_MESES[+k.slice(4) - 1] : 'Sem ' + derNumSemana(k) + '<br><small>' + mgRango(k) + '</small>') + (enCurso(k) ? '<br><small>en curso</small>' : '') + '</th>'; }).join('')
+    + '</tr></thead><tbody>' + filas.map(function(f){
+        return '<tr class="' + (f[2] || '') + '"><td>' + f[0] + '</td>' + ks.map(function(k){ return '<td class="' + (k === mgSel ? 'sel' : '') + '">' + f[1](P[k]) + '</td>'; }).join('') + '</tr>'; }).join('')
+    + '</tbody></table></div>'
+    + '<p class="mg-nota">Fuente: el histórico de Actividades (desde el 01-08, hasta ayer), lo que se ve con las credenciales de la agencia. Desaparecidas y reagendadas de otro día salen del registro del monitor, desde el 15-09. El % de derivación es el mismo de la ventana de Derivación; puede diferir un poco de la página de Seguimiento, que suma los export completos del jefe.</p></div>';
+}
+
+/* ---- HOY EN VIVO ---- */
+function mgHoyHtml(){
+  const l = [];
+  Object.keys(DB || {}).forEach(function(t){ (DB[t] || []).forEach(function(x){
+    if(String(x.t || '').toUpperCase().indexOf('MIGRA') === 0) l.push(Object.assign({ tec: t }, x)); }); });
+  const n = function(e){ return l.filter(function(x){ return x.e === e; }).length; };
+  const co = n('Completado'), nr = n('No Realizada'), ca = n('Cancelado'), su = n('Suspendido');
+  const ab = l.length - co - nr - ca - su, vis = co + nr;
+  const cod = {};
+  l.forEach(function(x){ if(x.e !== 'No Realizada') return; const c = x.cie || 'Sin código'; cod[c] = (cod[c] || 0) + 1; });
+  const caid = ((typeof ALERTAS !== 'undefined' && ALERTAS && ALERTAS.activas) || []).filter(function(c){ return String(c.cat || '').indexOf('Migr') === 0; });
+  const Tv = (typeof toaVigente === 'function') ? toaVigente() : null;
+  const des = {}; caid.forEach(function(c){ const s = Tv && Tv.estados && Tv.estados[c.o]; const k = s && s.estado ? s.estado : 'aún sin consultar en TOA'; des[k] = (des[k] || 0) + 1; });
+  const reag = l.filter(function(x){ return x.reag; }).length;
+  let bk = null;
+  try { if(Array.isArray(BUCKET)) bk = BUCKET.filter(function(x){ return x.b === 1 && String(x.cat || x.t || '').indexOf('Migr') === 0 && x.e !== 'Cancelado' && x.e !== 'Completado'; }).length; } catch(e){}
+  let hora = '';
+  try { if(FECHA_DATOS) hora = 'datos de las ' + String(FECHA_DATOS.getHours()).padStart(2, '0') + ':' + String(FECHA_DATOS.getMinutes()).padStart(2, '0') + ' · '; } catch(e){}
+  let h = '<div class="mg-b"><div class="mg-t"><b>Hoy, en vivo</b><small>' + hora + 'migraciones en las bandejas de Dominion</small></div>'
+    + '<p class="mg-frase">De <b>' + l.length + '</b> migraciones en bandejas: <b class="v">' + co + '</b> completadas, <b class="r">' + nr + '</b> no realizadas'
+    + (vis ? ' (<b class="r">' + mgF1(mgPct(nr, vis)) + '%</b> de derivación de lo ya visitado)' : '') + ' y <b>' + ab + '</b> todavía sin cerrar.</p>'
+    + '<div class="mg-cards">'
+    + mgCard('Asignadas hoy', l.length, 'en bandejas', '', 'az')
+    + mgCard('Completadas', co, mgF1(mgPct(co, l.length)) + '% de las asignadas', '', 've')
+    + mgCard('No realizadas (derivadas)', nr, '<b>' + mgF1(mgPct(nr, vis)) + '%</b> de las visitadas (' + vis + ')', '', 'ro')
+    + mgCard('Sin cerrar', ab, 'pendientes, en ruta o iniciadas', '', 'gr')
+    + mgCard('Canceladas', ca, '', '', 'gr')
+    + mgCard('Suspendidas', su, '', '', 'gr')
+    + mgCard('Desaparecieron de la bandeja', caid.length, 'se las sacaron al técnico sin tocarlas', '', 'am')
+    + mgCard('Vienen reagendadas de otro día', reag, 'misma orden vista otro día', '', 'gr')
+    + (bk !== null ? mgCard('Pendientes en el bucket', bk, 'todavía sin técnico', '', 'gr') : '')
+    + '</div></div>';
+  const cods = Object.keys(cod).sort(function(x, y){ return cod[y] - cod[x]; });
+  h += '<div class="mg-b"><div class="mg-t"><b>Por qué no se hicieron hoy</b><small>' + nr + ' no realizadas</small></div>'
+    + (cods.length ? '<table class="mg-q"><thead><tr><th>Quiebre</th><th>Cantidad</th><th>% de las no realizadas</th><th>% de las visitadas</th></tr></thead><tbody>'
+      + cods.map(function(c){ return '<tr><td><i style="background:' + MG_COLOR[MG_FAM(c)] + '"></i>' + escR(c) + '</td><td><b>' + cod[c] + '</b></td><td>' + mgF1(mgPct(cod[c], nr)) + '%</td><td>' + mgF1(mgPct(cod[c], vis)) + '%</td></tr>'; }).join('') + '</tbody></table>'
+      : '<p class="mg-frase">Todavía no hay migraciones no realizadas hoy.</p>') + '</div>';
+  h += '<div class="mg-b"><div class="mg-t"><b>Las que desaparecieron hoy · qué dice TOA</b><small>' + caid.length + ' migraciones</small></div>'
+    + (caid.length ? '<div class="mg-dest">' + Object.keys(des).map(function(k){ return '<div><b>' + des[k] + '</b><span>' + escR(k) + '</span></div>'; }).join('') + '</div>'
+      + '<table class="mg-q mg-l"><thead><tr><th>Orden</th><th>Tipo</th><th>Técnico</th><th>Franja</th><th>Dirección</th><th>Desapareció</th><th>TOA</th></tr></thead><tbody>'
+      + caid.map(function(c){ const s = Tv && Tv.estados && Tv.estados[c.o];
+          return '<tr><td>' + escR(c.o) + '</td><td>' + escR(c.cat || '') + '</td><td>' + escR(derTitulo(c.tec || '')) + '</td><td>' + escR(c.f || '') + '</td><td>' + escR(c.d || '') + '</td><td>' + escR(String(c.visto || '').slice(-5)) + '</td><td>' + escR(s && s.estado ? s.estado : 'aún sin consultar') + '</td></tr>'; }).join('') + '</tbody></table>'
+      : '<p class="mg-frase">Ninguna migración ha desaparecido hoy.</p>') + '</div>';
+  return h;
+}
+</script>
+<style>
+  /* MIGRACIONES · VISTA GERENCIA (21-10-2026). Para quitarlo: borrar este
+     bloque, el <script> de arriba y la linea del boton b-mg de la barra. */
+  .pv-bar a.b-mg { background:#1e3a8a; color:#fff; font-weight:600; margin-left:6px; }
+  .pv-bar a.b-mg:hover { background:#1d4ed8; color:#fff; }
+  #modalMG { position:fixed; inset:0; z-index:3000; background:rgba(15,23,42,.55); display:none; align-items:flex-start; justify-content:center; padding:18px; overflow:auto; }
+  #modalMG.abierto { display:flex; }
+  .mg-box { background:#f1f5f9; width:min(1500px,100%); border-radius:14px; box-shadow:0 20px 60px rgba(0,0,0,.35); font-family:'DM Sans',system-ui,sans-serif; color:#0f172a; }
+  .mg-head { display:flex; justify-content:space-between; align-items:flex-start; background:#0f1e35; color:#fff; padding:16px 22px; border-radius:14px 14px 0 0; }
+  .mg-head h2 { margin:0; font:700 20px 'Archivo',system-ui,sans-serif; } .mg-head p { margin:3px 0 0; font-size:13px; color:#cbd5e1; }
+  .mg-x { background:#fff; border:0; border-radius:8px; width:34px; height:34px; cursor:pointer; font-size:15px; }
+  .mg-sel { display:flex; flex-wrap:wrap; align-items:center; gap:8px 12px; padding:12px 22px; background:#fff; border-bottom:1px solid #e2e8f0; position:sticky; top:0; z-index:2; }
+  .mg-sel .rot { font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#64748b; }
+  .mg-seg { display:flex; flex-wrap:wrap; gap:4px; }
+  .mg-seg button { border:1px solid #cbd5e1; background:#fff; border-radius:7px; padding:6px 11px; font:500 13px 'DM Sans',system-ui,sans-serif; cursor:pointer; color:#334155; }
+  .mg-seg button b { margin-left:6px; color:#b91c1c; font-size:12px; }
+  .mg-seg button.on { background:#1d4ed8; border-color:#1d4ed8; color:#fff; } .mg-seg button.on b { color:#fecaca; }
+  .mg-cuerpo { padding:16px 22px 22px; }
+  .mg-b { background:#fff; border:1px solid #dbe4f0; border-radius:12px; padding:14px 18px; margin-bottom:14px; }
+  .mg-t { display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
+  .mg-t b { font:700 17px 'Archivo',system-ui,sans-serif; color:#1e3a8a; } .mg-t small { color:#64748b; font-size:13px; }
+  .mg-frase { font-size:15px; margin:0 0 12px; } .mg-frase .v { color:#15803d; } .mg-frase .r { color:#b91c1c; }
+  .mg-cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(205px,1fr)); gap:10px; }
+  .mg-card { border-radius:10px; padding:11px 13px; background:#f8fafc; border:1px solid #e2e8f0; border-left:5px solid #94a3b8; display:flex; flex-direction:column; gap:2px; }
+  .mg-card small { font-size:12px; color:#475569; font-weight:600; } .mg-card > b { font:700 30px 'Archivo',system-ui,sans-serif; line-height:1.1; }
+  .mg-card span { font-size:12.5px; color:#475569; } .mg-card em { font-style:normal; font-size:12px; }
+  .mg-card.az { border-left-color:#1d4ed8; } .mg-card.ve { border-left-color:#15803d; } .mg-card.ro { border-left-color:#dc2626; background:#fef2f2; }
+  .mg-card.gr { border-left-color:#94a3b8; } .mg-card.am { border-left-color:#d97706; } .mg-card.az2 { border-left-color:#2563eb; } .mg-card.na { border-left-color:#d97706; }
+  .mg-box i.peor { font-style:normal; color:#b91c1c; font-weight:600; } .mg-box i.mejor { font-style:normal; color:#15803d; font-weight:600; } .mg-box i.eq { font-style:normal; color:#64748b; }
+  .mg-fam { display:flex; flex-wrap:wrap; gap:6px 16px; margin-bottom:10px; font-size:13px; }
+  .mg-fam i, .mg-q td i:not(.peor):not(.mejor):not(.eq) { display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:6px; vertical-align:0; }
+  .mg-q { width:100%; border-collapse:collapse; font-size:13.5px; }
+  .mg-q th { text-align:left; font-size:11.5px; color:#64748b; font-weight:700; padding:6px 8px; border-bottom:1px solid #e2e8f0; text-transform:uppercase; letter-spacing:.03em; }
+  .mg-q td { padding:6px 8px; border-bottom:1px solid #f1f5f9; } .mg-q td small { color:#64748b; }
+  .mg-q td.bar { width:26%; } .mg-q td.bar span { display:block; height:10px; border-radius:5px; }
+  .mg-tab td, .mg-tab th { text-align:center; } .mg-tab td:first-child, .mg-tab th:first-child { text-align:left; font-weight:600; white-space:nowrap; }
+  .mg-tab .sel { background:#eff6ff; } .mg-tab tr.der td { background:#fef2f2; } .mg-tab tr.der td.sel { background:#fee2e2; }
+  .mg-scroll { overflow-x:auto; }
+  .mg-dest { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:10px; }
+  .mg-dest div { background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:8px 12px; min-width:170px; max-width:260px; }
+  .mg-dest b { display:block; font:700 24px 'Archivo',system-ui,sans-serif; } .mg-dest span { font-size:12.5px; color:#475569; }
+  .mg-ver { border:1px solid #1d4ed8; color:#1d4ed8; background:#fff; border-radius:7px; padding:5px 12px; cursor:pointer; font:600 13px 'DM Sans',system-ui,sans-serif; margin-bottom:8px; }
+  .mg-l { font-size:12.5px; } .mg-nota { font-size:12px; color:#64748b; margin:10px 0 0; }
+  .mg-vacio { padding:40px; text-align:center; color:#64748b; }
+</style>
+
 </body>
 </html>
