@@ -1,8 +1,8 @@
 {
-  "actualizado": "2026-10-21T12:14:08",
+  "actualizado": "2026-10-21T12:44:37",
   "resumen": {
-    "sin informacion": 8,
-    "reagendada": 4
+    "sin informacion": 12,
+    "reagendada": 3
   },
   "estados": {
     "1-3OF00GY2": {
@@ -103,6 +103,35 @@
           }
         ]
       }
+    },
+    "1-3OJ29OIT": {
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "cat": "Reparación",
+      "franja_original": "16-19",
+      "d": "HUMBOLD 0166, QUILPUE",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "HUMBOLD 0166",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "cancelada",
+            "color": "rgb(128, 255, 128)",
+            "ot": "1-3NAVMU32",
+            "franja": "16-19",
+            "texto": "1-3NAVMU32 - 16-19-Modificación de Servicio-Modificación-HUMBOLD 0166Jue, 20 Ago"
+          }
+        ]
+      }
+    },
+    "1-3OJ2DJK0": {
+      "tec": "JORDAN ROA PEREZ",
+      "cat": "Reparación",
+      "franja_original": "13-16",
+      "d": "PASTEUR 0439, QUILPUE",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA"
     },
     "1-3O7MGX9J": {
       "tec": "JOSE PEREZ RANGEL",
@@ -289,15 +318,41 @@
         ]
       }
     },
-    "1-3OIKP7XR": {
-      "tec": "YENDER BOSCAN CADENAS",
-      "cat": "Alta 2 Play",
-      "franja_original": "10-13",
-      "d": "SANTA MATILDE 1701 CASA 30, QUILPUE",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3OIKP7XR - 13-16-Alta-2 Play-SANTA MATILDE 1701 CASA 30",
-      "franja_nueva": "13-16"
+    "1-3OJ0ZARM": {
+      "tec": "PABLO HERNANEZ FERNANDEZ",
+      "cat": "Reparación",
+      "franja_original": "16-19",
+      "d": "CONDELL SUR 33, QUILPUE",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA"
+    },
+    "1-3OIUNOHL": {
+      "tec": "SEBASTIAN DOSSOW A",
+      "cat": "Reparación",
+      "franja_original": "16-19",
+      "d": "PJE LA PLACE 0358, QUILPUE",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "PJE LA PLACE 0358",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "cancelada",
+            "color": "rgb(128, 255, 128)",
+            "ot": "1-3NZ4O1PA",
+            "franja": "13-16",
+            "texto": "1-3NZ4O1PA - 13-16-Reparación-2 Play Servicio Degradado-PJE LA PLACE 0358Mar, 22 Sep"
+          },
+          {
+            "estado": "completada",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3NZ74TA0",
+            "franja": "13-16",
+            "texto": "1-3NZ74TA0 - 13-16-Migración-Migración-PJE LA PLACE 0358Mar, 22 Sep"
+          }
+        ]
+      }
     }
   }
 }
