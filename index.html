@@ -1704,6 +1704,18 @@
   #modalReit { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); }
   #modalReit.abierto { display:flex; align-items:flex-start; justify-content:center; padding:4vh 2vw; }
   #modalReit .mc-body { display:block; }
+  /* (22-10-2026) clave de Reiterados */
+  #reitClave { position:fixed; inset:0; z-index:3200; background:rgba(2,6,23,.72); display:none; align-items:center; justify-content:center; padding:16px; }
+  #reitClave.on { display:flex; }
+  #reitClave .rk-box { background:#fff; color:#0f172a; border-radius:14px; padding:22px 22px 18px; width:min(360px,100%); box-shadow:0 20px 60px rgba(0,0,0,.4); font-family:'DM Sans',system-ui,sans-serif; }
+  #reitClave h3 { margin:0 0 4px; font:700 20px 'Archivo',sans-serif; } #reitClave p { margin:0 0 12px; color:#475569; font-size:14px; }
+  #reitClave input[type=password] { width:100%; box-sizing:border-box; padding:10px 12px; border:1px solid #cbd5e1; border-radius:9px; font-size:16px; }
+  #reitClave .rk-rec { display:flex; gap:8px; align-items:center; margin:10px 0 0; font-size:13.5px; color:#334155; }
+  #reitClave .rk-err { margin-top:8px; color:#b91c1c; font-weight:600; font-size:13.5px; }
+  #reitClave .rk-bot { display:flex; justify-content:flex-end; gap:8px; margin-top:16px; }
+  #reitClave .rk-bot button { border:1px solid #cbd5e1; background:#fff; border-radius:8px; padding:8px 16px; font:600 14px 'DM Sans',sans-serif; cursor:pointer; }
+  #reitClave .rk-bot button.ok { background:#1d4ed8; border-color:#1d4ed8; color:#fff; }
+  .rk-olv { margin-left:auto; margin-right:8px; border:1px solid #cbd5e1; background:transparent; color:#64748b; border-radius:8px; padding:5px 10px; font-size:12.5px; cursor:pointer; align-self:center; }
   #modalReit .vacio { color:#86efac; text-align:center; padding:28px 6px; font-size:14px; line-height:1.6; }
   .rd-card.reit { border-left-color:#7c3aed; }
   .rd-card.reit .rd-sello { background:#ede9fe; color:#5b21b6; }
@@ -3531,6 +3543,7 @@
         <h2>Reiterados · reparaciones en casas trabajadas hace poco</h2>
         <div id="reitChips" class="mc-cont"></div>
       </div>
+      <button class="rk-olv" onclick="reitOlvidar()" title="Este computador vuelve a pedir la clave la próxima vez">🔒 Olvidar clave aquí</button>
       <button class="mc-close" onclick="cerrarReit()" title="Cerrar (Esc)">✖</button>
     </div>
     <div id="reitTabs" class="rt-tabs"></div>
@@ -6864,7 +6877,59 @@ function cerrarReit(){
   document.getElementById('modalReit').classList.remove('abierto');
 }
 
+/* (22-10-2026) CLAVE PARA REITERADOS. Luis: "solo la necesito para que solo
+   yo acceda a ese boton". La clave NO esta escrita en la pagina: se guarda su
+   huella SHA-256 (con una sal). Si se marca "Recordar en este computador",
+   queda guardada en el navegador y no se vuelve a pedir ahi; el boton
+   "Olvidar clave aqui" la borra. OJO: protege la pantalla, no los datos (que
+   viajan en rutas.json, publico en GitHub).
+   Para CAMBIAR la clave: calcular SHA-256 de 'dominion-reit|' + clave nueva y
+   reemplazar REIT_CLAVE_H (Claude lo hace). */
+const REIT_CLAVE_H = '36fa1631cf2a6e076ac1b1a879b0e87b4f37ed8e2d4afbcf5ddc4545cee39843';
+const REIT_LS = 'reitLlave';
+let reitOkSesion = false;
+function reitAutorizado(){
+  if(reitOkSesion) return true;
+  try { return localStorage.getItem(REIT_LS) === REIT_CLAVE_H; } catch(e){ return false; }
+}
+async function reitHuella(txt){
+  const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode('dominion-reit|' + txt));
+  return Array.prototype.map.call(new Uint8Array(b), function(x){ return x.toString(16).padStart(2, '0'); }).join('');
+}
+function reitPedirClave(){
+  let d = document.getElementById('reitClave');
+  if(!d){
+    d = document.createElement('div'); d.id = 'reitClave';
+    d.innerHTML = '<form class="rk-box" onsubmit="event.preventDefault(); reitProbar()">'
+      + '<h3>🔒 Reiterados</h3><p>Ingresa la clave para ver Reiterados.</p>'
+      + '<input id="rkIn" type="password" autocomplete="current-password" placeholder="Clave">'
+      + '<label class="rk-rec"><input id="rkRec" type="checkbox" checked> Recordar en este computador</label>'
+      + '<div id="rkErr" class="rk-err" hidden>Clave incorrecta.</div>'
+      + '<div class="rk-bot"><button type="button" onclick="reitCerrarClave()">Cancelar</button><button type="submit" class="ok">Entrar</button></div></form>';
+    d.addEventListener('click', function(e){ if(e.target === d) reitCerrarClave(); });
+    document.body.appendChild(d);
+  }
+  document.getElementById('rkIn').value = ''; document.getElementById('rkErr').hidden = true;
+  d.classList.add('on'); setTimeout(function(){ document.getElementById('rkIn').focus(); }, 30);
+}
+function reitCerrarClave(){ const d = document.getElementById('reitClave'); if(d) d.classList.remove('on'); }
+async function reitProbar(){
+  const v = document.getElementById('rkIn').value;
+  let h = '';
+  try { h = await reitHuella(v); } catch(e){}
+  if(h !== REIT_CLAVE_H){ document.getElementById('rkErr').hidden = false; document.getElementById('rkIn').select(); return; }
+  reitOkSesion = true;
+  if(document.getElementById('rkRec').checked){ try { localStorage.setItem(REIT_LS, REIT_CLAVE_H); } catch(e){} }
+  reitCerrarClave();
+  toggleReit();
+}
+function reitOlvidar(){
+  try { localStorage.removeItem(REIT_LS); } catch(e){}
+  reitOkSesion = false; cerrarReit();
+}
+document.addEventListener('keydown', function(e){ if(e.key === 'Escape') reitCerrarClave(); });
 function toggleReit(){
+  if(!reitAbierto && !reitAutorizado()){ reitPedirClave(); return; }     // (22-10-2026) clave
   cerrarPaneles('reit');
   reitAbierto = !reitAbierto;
   document.getElementById('modalReit').classList.toggle('abierto', reitAbierto);
