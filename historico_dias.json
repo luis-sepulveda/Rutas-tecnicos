@@ -22305,25 +22305,25 @@
    }
   },
   "22-10-2026": {
-   "hasta": "15:15",
-   "actividades": 168,
+   "hasta": "15:30",
+   "actividades": 159,
    "tecnicos": 34,
    "estados": {
-    "Completado": 67,
+    "Completado": 72,
     "No Realizada": 26,
-    "Iniciado": 21,
+    "Pendiente": 22,
     "Cancelado": 10,
-    "Pendiente": 37,
+    "Iniciado": 22,
     "en ruta": 5,
     "Suspendido": 2
    },
-   "rgu": 231.1,
+   "rgu": 213.1,
    "caidas_total": 4,
    "caidas_activas": 4,
    "caidas_resueltas": 0,
-   "nuevas": 18,
-   "al_bucket": 14,
-   "repetidas": 30,
+   "nuevas": 19,
+   "al_bucket": 19,
+   "repetidas": 24,
    "reagendadas": 5,
    "detalle": {
     "caidas": [
@@ -22366,13 +22366,22 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OK5MHT9",
+      "tec": "LEONEL HERNÁNDEZ OJE",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "15:19",
+      "d": "VALLE DEL PARAISO 2907 EDIF. A DEPTO 101, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
       "o": "1-3OK48E1A",
       "tec": "ALEXIS JARA",
       "cat": "Modificación de Servicio",
       "f": "13-16",
       "hi": "14:29",
       "d": "FLORIDA 2361, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OK3HNJ6",
@@ -22381,7 +22390,7 @@
       "f": "16-19",
       "hi": "16:40",
       "d": "ESMERALDA 1458 DEPTO 40, QUILPUE",
-      "e": "Pendiente"
+      "e": "Pendiente (ya no está)"
      },
      {
       "o": "1-3OK2H354",
@@ -22399,7 +22408,7 @@
       "f": "13-16",
       "hi": "13:44",
       "d": "AGUADA 783, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OK1Q89L",
@@ -22412,7 +22421,7 @@
      },
      {
       "o": "1-3OK1NOUL",
-      "tec": "JOSE GALAZ D",
+      "tec": "NICOLAS MOYANO R",
       "cat": "Reparación",
       "f": "16-19",
       "hi": "16:00",
@@ -22435,7 +22444,7 @@
       "f": "16-19",
       "hi": "16:32",
       "d": "PROYECTADA (C. SEPULVEDA) 2120, QUILPUE",
-      "e": "Pendiente"
+      "e": "Pendiente (ya no está)"
      },
      {
       "o": "1-3OJXXGWU",
@@ -22457,12 +22466,12 @@
      },
      {
       "o": "1-3OJW3A8Z",
-      "tec": "NICOLAS MOYANO R",
+      "tec": "ANTONHY MORALES MENDOZA",
       "cat": "Alta 1 Play",
       "f": "13-16",
       "hi": "15:08",
       "d": "FLORENCIA 2207 CASA A, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OJVWJGX",
@@ -22471,7 +22480,7 @@
       "f": "13-16",
       "hi": "15:16",
       "d": "NUEVA 1509, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OJW7AQH",
@@ -22516,7 +22525,7 @@
       "f": "13-16",
       "hi": "14:44",
       "d": "LONQUIMAY 418, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OJURRAZ",
@@ -22566,16 +22575,16 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OJ2K26L",
-      "cat": "Migración 1 Play",
-      "f": "16-19",
-      "hi": "16:00",
-      "d": "EPSILON 2030 EDIF. A DEPTO 22, QUILPUE",
+      "o": "1-3OJFYS7P",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "15:32",
+      "d": "EDWIN GUAJARDO 733, QUILPUE",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
-      "visitas": 2,
-      "ult_fecha": "24-09-2026",
-      "ult_cierre": "Sin moradores"
+      "visitas": 1,
+      "ult_fecha": "21-10-2026",
+      "ult_cierre": "Falla Masiva"
      },
      {
       "o": "1-3OJADS4R",
@@ -22602,18 +22611,6 @@
       "ult_cierre": "Falla Masiva"
      },
      {
-      "o": "1-3OJDJENM",
-      "cat": "Alta 2 Play",
-      "f": "16-19",
-      "hi": "16:56",
-      "d": "LAS SIETE TAZAS 2178, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "ESTEBAN PIZARRO QUINTANA",
-      "visitas": 1,
-      "ult_fecha": "21-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OJGJBY2",
       "cat": "Reparación",
       "f": "13-16",
@@ -22626,18 +22623,6 @@
       "ult_cierre": "Falla Masiva"
      },
      {
-      "o": "1-3OIDHJ64",
-      "cat": "Alta 2 Play",
-      "f": "16-19",
-      "hi": "18:13",
-      "d": "RAFAEL SOTOMAYOR 0382, QUILPUE",
-      "e": "Pendiente",
-      "tec": "GEEYSER PEREZ O",
-      "visitas": 2,
-      "ult_fecha": "20-10-2026",
-      "ult_cierre": "Casa sin medidor-remarcador"
-     },
-     {
       "o": "1-3OFFI10N",
       "cat": "Migración 1 Play",
       "f": "13-16",
@@ -22648,30 +22633,6 @@
       "visitas": 2,
       "ult_fecha": "15-10-2026",
       "ult_cierre": "Cliente reagenda"
-     },
-     {
-      "o": "1-3OIS6916",
-      "cat": "Alta 2 Play",
-      "f": "16-19",
-      "hi": "16:17",
-      "d": "FRODDEN 01760, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JORDAN ROA PEREZ",
-      "visitas": 3,
-      "ult_fecha": "20-10-2026",
-      "ult_cierre": "Evento Contingencia"
-     },
-     {
-      "o": "1-3OJENGKU",
-      "cat": "Alta 2 Play",
-      "f": "16-19",
-      "hi": "16:00",
-      "d": "LONGITUDINAL 18 CASA MG, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOSE CASTRO P",
-      "visitas": 1,
-      "ult_fecha": "21-10-2026",
-      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OHU43AU",
@@ -22722,18 +22683,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OJY1WB6",
-      "cat": "Alta 2 Play",
-      "f": "16-19",
-      "hi": "18:37",
-      "d": "PROYECTADA (C. SEPULVEDA) 2120, QUILPUE",
-      "e": "Pendiente",
-      "tec": "LEONEL HERNÁNDEZ OJE",
-      "visitas": 1,
-      "ult_fecha": "22-10-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
       "o": "1-3OJHMNUB",
       "cat": "Migración 3 Play",
       "f": "10-13",
@@ -22755,18 +22704,6 @@
       "tec": "LUIS GATICA DAVILA",
       "visitas": 3,
       "ult_fecha": "18-08-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
-      "o": "1-3OHVL0GI",
-      "cat": "Migración 2 Play",
-      "f": "16-19",
-      "hi": "16:30",
-      "d": "AV PRESIDENTE MONTT 21, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "LUIS GATICA DAVILA",
-      "visitas": 1,
-      "ult_fecha": "19-10-2026",
       "ult_cierre": "Cliente reagenda"
      },
      {
@@ -22806,10 +22743,22 @@
       "ult_cierre": "Evento Contingencia"
      },
      {
+      "o": "1-3OHVL0GI",
+      "cat": "Migración 2 Play",
+      "f": "16-19",
+      "hi": "15:35",
+      "d": "AV PRESIDENTE MONTT 21, VILLA ALEMANA",
+      "e": "en ruta",
+      "tec": "RAFAEL VARGAS B",
+      "visitas": 1,
+      "ult_fecha": "19-10-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3OIP86C2",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "17:08",
+      "hi": "17:02",
       "d": "ARAYA 1570, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -22835,7 +22784,7 @@
       "f": "13-16",
       "hi": "13:57",
       "d": "NEWTON 0762, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "SEBASTIAN DOSSOW A",
       "visitas": 1,
       "ult_fecha": "21-10-2026",
@@ -22845,7 +22794,7 @@
       "o": "1-3OJF791B",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:35",
+      "hi": "16:00",
       "d": "EL TINEO 2110, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SEBASTIAN DOSSOW A",
@@ -22876,18 +22825,6 @@
       "visitas": 2,
       "ult_fecha": "28-08-2026",
       "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OJFYS7P",
-      "cat": "Alta 2 Play",
-      "f": "13-16",
-      "hi": "16:06",
-      "d": "EDWIN GUAJARDO 733, QUILPUE",
-      "e": "Pendiente",
-      "tec": "YENDER BOSCAN CADENAS",
-      "visitas": 1,
-      "ult_fecha": "21-10-2026",
-      "ult_cierre": "Falla Masiva"
      }
     ],
     "reagendadas": [
@@ -22915,9 +22852,9 @@
       "o": "1-3OIGLQBV",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "15:38",
       "d": "PJE 4 865 CASA, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JOSE ROJO A",
       "desde": "20-10-2026"
      },
@@ -22944,5 +22881,5 @@
    }
   }
  },
- "generado": "22-10-2026 15:15"
+ "generado": "22-10-2026 15:30"
 }
