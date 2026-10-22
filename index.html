@@ -11168,10 +11168,21 @@ function rmCuenta(l){
   return { vis: vis, comp: vis - d.length, der: d.length, pct: vis ? 100 * d.length / vis : 0, l: d };
 }
 function rmPct(v){ return (Math.round(v * 10) / 10).toFixed(1).replace('.', ',') + '%'; }
-function rmBajarResp(){
-  if(RM_RESP_BAJANDO || (RM_RESP && Date.now() - RM_RESP_T < 300000)) return;
+/* (22-10-2026, 10:55) si Google no responde a la primera, reintenta sola
+   una vez (Apps Script a veces tarda en "despertar"); si igual falla, el
+   aviso trae un boton Reintentar. Si ya habia fotos de antes, se conservan. */
+function rmBajarResp(forzar, intento){
+  if(RM_RESP_BAJANDO) return;
+  if(!forzar && RM_RESP && !RM_RESP.falla && Date.now() - RM_RESP_T < 300000) return;
   RM_RESP_BAJANDO = true;
-  mgBajarRespaldos().then(function(r){ RM_RESP_BAJANDO = false; if(r){ RM_RESP = r; RM_RESP_T = Date.now(); } else if(!RM_RESP) RM_RESP = { falla:true }; pintarResMig(); });
+  if(RM_RESP && RM_RESP.falla) { RM_RESP = null; pintarResMig(); }
+  mgBajarRespaldos().then(function(r){
+    RM_RESP_BAJANDO = false;
+    if(r){ RM_RESP = r; RM_RESP_T = Date.now(); pintarResMig(); return; }
+    if(!intento){ setTimeout(function(){ rmBajarResp(true, 1); }, 2000); return; }
+    if(!RM_RESP || RM_RESP.falla) RM_RESP = { falla:true };
+    pintarResMig();
+  });
 }
 function abrirResMig(){
   const m = document.getElementById('modalRM'); if(!m) return;
@@ -11263,8 +11274,8 @@ function pintarResMig(){
   const fotCel = function(o){ if(!RR || !RR.desde) return '·'; if(!o.fotN) return o.md ? '<span class="rm-md">🛠 ' + o.md + '</span>' : '·';
     const p = 100 * o.fotOk / o.fotN;
     return '<span class="rm-fot ' + (p >= 80 ? 'bien' : p >= 50 ? 'medio' : 'mal') + '">' + o.fotOk + ' de ' + o.fotN + '</span>' + (o.md ? ' <span class="rm-md" title="avisó mal derivada con foto">🛠 ' + o.md + '</span>' : ''); };
-  const fotGuia = !RR ? '<div class="rm-nota">📷 Cargando los respaldos con foto…</div>'
-    : RR.falla ? '<div class="rm-nota">📷 No se pudieron leer los respaldos con foto de la app (sin conexión o falta actualizar el receptor).</div>'
+  const fotGuia = !RR ? '<div class="rm-nota">📷 Cargando los respaldos con foto… (Google puede tardar unos segundos)</div>'
+    : RR.falla ? '<div class="rm-nota">📷 No se pudieron leer los respaldos con foto de la app (Google no respondió). <button class="rm-reint" onclick="rmBajarResp(true, 1)">↻ Reintentar</button></div>'
     : '<div class="rm-fotg">📷 <b>Respaldo con foto</b> (app de respaldo, se empezó a usar el ' + mgDdmm(RR.desde) + '): '
       + (fT.n ? '<b>' + fT.ok + ' de ' + fT.n + '</b> sin moradores, reagendas y desistes del período (' + Math.round(100 * fT.ok / fT.n) + '%).' : 'en este período no hay sin moradores, reagendas ni desistes desde que partió la app.')
       + (fT.md ? ' <span class="rm-md">🛠 ' + fT.md + ' mal derivada' + (fT.md === 1 ? '' : 's') + ' con foto</span>.' : '')
@@ -13874,7 +13885,7 @@ const MG_FNOM = { sm:'Sin moradores', re:'Cliente reagenda', de:'Cliente desiste
    OT, fecha, hora, tecnico, causa y link de la foto. Ver CONTEXTO. */
 const URL_RESPALDO_LISTA = 'https://script.google.com/macros/s/AKfycbyRceaPgxD-dQsuH7CSl9SsJXcq-s2ELrczVdZtGykH2Cu-MfiEAvT0lWlQCnLuW68z/exec?lista=1&clave=dominion-zc-2026';
 function mgBajarRespaldos(){
-  const tope = new Promise(function(res){ setTimeout(function(){ res(null); }, 20000); });
+  const tope = new Promise(function(res){ setTimeout(function(){ res(null); }, 30000); });       // (22-10) 20 -> 30 s
   const pide = fetch(URL_RESPALDO_LISTA + '&t=' + Date.now()).then(function(r){ return r.ok ? r.json() : null; })
     .then(function(j){
       if(!j || !j.ok || !Array.isArray(j.filas)) return null;
@@ -15361,6 +15372,7 @@ function mgHoyHtml(){
   .rm-fot { font-weight:700; border-radius:6px; padding:1px 7px; white-space:nowrap; } .rm-fot.bien { color:#15803d; background:#f0fdf4; }
   .rm-fot.medio { color:#b45309; background:#fffbeb; } .rm-fot.mal { color:#b91c1c; background:#fef2f2; }
   .rm-md { color:#6d28d9; font-weight:700; white-space:nowrap; }
+  .rm-reint { margin-left:8px; border:1px solid #0e7490; color:#0e7490; background:#fff; border-radius:6px; padding:2px 9px; font:600 12.5px 'DM Sans',sans-serif; cursor:pointer; }
   /* (22-10-2026) REDISENO GERENCIA: saltos, resumen, laminas, plegables, modo reunion */
   .mg-sel { top:-18px; z-index:5; }          /* tapa los 18 px de margen del modal: antes se colaba una fila de la tabla encima */
   .mg-saltos { display:flex; flex-wrap:wrap; gap:6px; width:100%; padding-top:8px; border-top:1px dashed #e2e8f0; align-items:center; }
