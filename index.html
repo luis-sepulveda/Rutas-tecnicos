@@ -14176,8 +14176,22 @@ function mgTecCalc(k){
     if(mgClave(x.iso) !== k || !x.tec) return;
     if(x.e !== 'Completado' && x.e !== 'No Realizada') return;
     if(!derActivo(x.tec)){ fuera[x.tec] = 1; return; }
-    const o = T[x.tec] || (T[x.tec] = { tec:x.tec, co:0, nr:0, g:{dif:0,cli:0,rev:0}, sinDir:0, smN:0, smMin:0, fr:0, frOk:0, fF:0, fFnr:0, fD:0, fDnr:0, desp:0, fotN:0, fotOk:0, lista:[] });
+    const o = T[x.tec] || (T[x.tec] = { tec:x.tec, co:0, nr:0, g:{dif:0,cli:0,rev:0}, sinDir:0, smN:0, smMin:0, fr:0, frOk:0, fF:0, fFnr:0, fD:0, fDnr:0, desp:0, fotN:0, fotOk:0, lista:[],
+      prevN:0, prevOk:0, resc:[], prevMal:[], leResc:[], com:{} });
     const c = mgCasa(x), ef = c && c.yo ? mgEnFranja(x.fr, c.yo.hi) : null, esNr = x.e === 'No Realizada';
+    /* (22-10-2026) CASAS DONDE OTRO YA HABIA FALLADO: llego a una casa donde
+       antes (otro dia) otro tecnico de Dominion dejo la migracion no
+       realizada. Si la completo = "rescate". Y al reves: sus no realizadas
+       que despues completo otro tecnico. Para comparar tecnicos en las
+       mismas condiciones (pedido de Luis). */
+    if(c){
+      const cm = mgComuna(c.dir); o.com[cm] = (o.com[cm] || 0) + 1;
+      const antes = c.otras.filter(function(v){ return !v.ok && v.tec && v.tec !== x.tec && +v.f < +x.iso; });
+      if(antes.length){ o.prevN++;
+        if(!esNr){ o.prevOk++; o.resc.push({ x:x, c:c, antes:antes }); } else o.prevMal.push({ x:x, c:c, antes:antes }); }
+      if(esNr){ const dsp = c.otras.filter(function(v){ return v.ok && v.tec && v.tec !== x.tec && +v.f >= +x.iso; });
+        if(dsp.length) o.leResc.push({ x:x, c:c, desp:dsp }); }
+    }
     if(ef !== null){ o.fr++; if(ef){ o.frOk++; o.fD++; if(esNr) o.fDnr++; } else { o.fF++; if(esNr) o.fFnr++; } }
     if(!esNr){ o.co++; return; }
     o.nr++;
@@ -14190,6 +14204,12 @@ function mgTecCalc(k){
     o.lista.push({ x:x, c:c, r:r, g:G.g, otros:G.otros, por:G.por });
   });
   return { T: T, fuera: Object.keys(fuera).length };
+}
+function mgComuna(d){ const i = String(d || '').lastIndexOf(','); return i >= 0 ? mgCap(d.slice(i + 1).trim()) : 'Sin comuna'; }
+/* una visita de otro tecnico, en una linea: fecha, tecnico, peticion, resultado */
+function mgVisTxt(v){
+  return mgDdmm(v.f) + ' · <b>' + escR(mgCap(mgCorto(v.tec))) + '</b> · <span class="mg-pet">' + escR(v.ot || '') + '</span> · '
+    + (v.ok ? '<span class="mg-si">completó</span>' : '<span class="mg-no">' + escR(v.cie || 'no realizada') + '</span>') + (v.dur > 0 ? ' <small>(' + v.dur + ' min)</small>' : '');
 }
 function mgBarra3(g, tot, alto){
   return '<div class="mg-b3"' + (alto ? ' style="height:' + alto + 'px"' : '') + '>' + ['dif','cli','rev'].map(function(q){ const p = mgPct(g[q], tot);
@@ -14213,9 +14233,9 @@ function mgMalDerHtml(k){
   return '<div class="mg-b mg-md"><div class="mg-t"><b>🛠 Mal derivadas, con foto</b><small>el técnico avisó con la app que la causa real no era la que quedó en TOA</small></div>'
     + '<p class="mg-frase">En <b>' + L.length + '</b> ' + (L.length === 1 ? 'no realizada' : 'no realizadas') + ' el técnico mandó respaldo de <b>mal derivada</b>' + (tk ? ', ' + tk + ' con número de ticket' : '') + '. '
     + (cli ? 'TOA cuenta <b class="r">' + cli + '</b> de ellas como causa del cliente.' : '') + '</p>'
-    + '<div class="mg-scroll"><table class="mg-q mg-mdt"><thead><tr><th>Fecha</th><th>Técnico</th><th>Dirección</th><th>Quedó en TOA como</th><th>Lo que encontró el técnico</th><th>Ticket</th><th>Foto</th></tr></thead><tbody>'
+    + '<div class="mg-scroll"><table class="mg-q mg-mdt"><thead><tr><th>Fecha</th><th>Petición</th><th>Técnico</th><th>Dirección</th><th>Quedó en TOA como</th><th>Lo que encontró el técnico</th><th>Ticket</th><th>Foto</th></tr></thead><tbody>'
     + L.map(function(it){ const x = it.x, r = it.r;
-        return '<tr><td>' + mgDdmm(x.iso) + '</td><td>' + escR(mgCap(mgCorto(x.tec))) + '</td><td>' + escR(it.c ? mgCap(it.c.dir) : '—') + '</td>'
+        return '<tr><td>' + mgDdmm(x.iso) + '</td><td class="mg-pet">' + escR(x.ot) + '</td><td>' + escR(mgCap(mgCorto(x.tec))) + '</td><td>' + escR(it.c ? mgCap(it.c.dir) : '—') + '</td>'
           + '<td>' + escR(x.cod || 'Sin código') + '</td><td>' + escR(r.real || '—') + (r.det ? '<br><small>' + escR(r.det) + '</small>' : '') + (r.plat && r.plat !== x.cod ? ' <small>(plataforma: ' + escR(r.plat) + ')</small>' : '') + '</td>'
           + '<td>' + escR(r.ticket || '—') + '</td><td><a class="mg-foto md" href="' + escR(r.foto) + '" target="_blank" rel="noopener">📷 ver</a></td></tr>'; }).join('')
     + '</tbody></table></div>'
@@ -14229,10 +14249,11 @@ function mgTecHtml(k, kPrev){
   if(!L.length) return '<div class="mg-vacio">No hay migraciones de técnicos del plantel en este período.</div>';
   const der = function(o){ return mgPct(o.nr, o.co + o.nr); };
   const ORD = { der:function(a, b){ return der(b) - der(a) || b.nr - a.nr; }, rev:function(a, b){ return b.g.rev - a.g.rev || der(b) - der(a); },
-    nr:function(a, b){ return b.nr - a.nr || der(b) - der(a); }, nom:function(a, b){ return a.tec.localeCompare(b.tec); } };
+    nr:function(a, b){ return b.nr - a.nr || der(b) - der(a); }, nom:function(a, b){ return a.tec.localeCompare(b.tec); },
+    resc:function(a, b){ return b.prevOk - a.prevOk || mgPct(b.prevOk, b.prevN) - mgPct(a.prevOk, a.prevN); } };
   L.sort(ORD[mgTecOrd] || ORD.der);
-  const S = { nr:0, co:0, g:{dif:0,cli:0,rev:0}, sobre:0, fF:0, fFnr:0, fD:0, fDnr:0, fotN:0, fotOk:0 };
-  L.forEach(function(o){ S.nr += o.nr; S.co += o.co; ['dif','cli','rev'].forEach(function(q){ S.g[q] += o.g[q]; });
+  const S = { nr:0, co:0, g:{dif:0,cli:0,rev:0}, sobre:0, fF:0, fFnr:0, fD:0, fDnr:0, fotN:0, fotOk:0, prevN:0, prevOk:0 };
+  L.forEach(function(o){ S.nr += o.nr; S.co += o.co; S.prevN += o.prevN; S.prevOk += o.prevOk; ['dif','cli','rev'].forEach(function(q){ S.g[q] += o.g[q]; });
     S.fF += o.fF; S.fFnr += o.fFnr; S.fD += o.fD; S.fDnr += o.fDnr; S.fotN += o.fotN; S.fotOk += o.fotOk; if(der(o) > MG_META_DER) S.sobre++; });
   const conRev = L.filter(function(o){ return o.g.rev; }).length;
   let h = '<div class="mg-b"><div class="mg-t"><b>' + mgNomPer(k) + ' · por técnico</b><small>' + L.length + ' técnicos del plantel'
@@ -14249,12 +14270,14 @@ function mgTecHtml(k, kPrev){
         : '<p class="mg-nota">📷 No se pudieron leer los respaldos con foto de la app (falta actualizar el receptor en Google o no hay conexión).</p>')
     + '</div>';
   const ob = function(v, t){ return '<button class="' + (mgTecOrd === v ? 'on' : '') + '" onclick="setMgTecOrd(\'' + v + '\')">' + t + '</button>'; };
+  h += mgRescHtml(L, S);
   h += mgMalDerHtml(k);
   h += '<div class="mg-b"><div class="mg-t"><b>Cada técnico</b><small>toca un nombre para ver sus casas · ' + conRev + ' técnicos tienen algo para revisar</small>'
-    + '<div class="mg-seg mg-ord"><span class="rot">Ordenar</span>' + ob('der', '% derivación') + ob('rev', 'Para revisar') + ob('nr', 'No realizadas') + ob('nom', 'Nombre') + '</div></div>'
+    + '<div class="mg-seg mg-ord"><span class="rot">Ordenar</span>' + ob('der', '% derivación') + ob('rev', 'Para revisar') + ob('resc', 'Rescates') + ob('nr', 'No realizadas') + ob('nom', 'Nombre') + '</div></div>'
     + '<div class="mg-scroll"><table class="mg-q mg-tt"><thead><tr><th>Técnico</th><th>Visitó</th><th>No realizadas</th><th>% derivación</th>'
     + '<th class="izq">Sus no realizadas: <i style="background:' + MG_G.dif.c + '"></i>casa difícil <i style="background:' + MG_G.cli.c + '"></i>cliente o VTR <i style="background:' + MG_G.rev.c + '"></i>para revisar</th>'
-    + '<th>Para revisar</th></tr></thead><tbody>';
+    + '<th>Para revisar</th><th title="Casas donde OTRO técnico de Dominion ya había dejado la migración no realizada">Casas donde otro ya falló<br><small>completó / fue</small></th></tr></thead><tbody>';
+  const pEq = mgPct(S.prevOk, S.prevN);
   L.forEach(function(o, i){
     const d = der(o), a = A[o.tec], dA = a && (a.co + a.nr) ? der(a) : null;
     const cmp = dA === null ? '' : Math.abs(d - dA) < 0.5 ? '' : d > dA ? ' <small class="peor" title="contra ' + mgNomCorto(kPrev) + '">▲' + Math.round(d - dA) + '</small>' : ' <small class="mejor" title="contra ' + mgNomCorto(kPrev) + '">▼' + Math.round(dA - d) + '</small>';
@@ -14262,22 +14285,43 @@ function mgTecHtml(k, kPrev){
       + '<td>' + (o.co + o.nr) + '</td><td>' + o.nr + '</td>'
       + '<td><b class="' + (d > MG_META_DER ? 'mg-sobre' : 'mg-ok') + '">' + Math.round(d) + '%</b>' + cmp + '</td>'
       + '<td class="bar">' + (o.nr ? mgBarra3(o.g, o.nr) : '<small>sin no realizadas</small>') + '</td>'
-      + '<td>' + (o.g.rev ? '<b class="mg-rev">' + o.g.rev + '</b>' : '<small class="mejor">0</small>') + '</td></tr>';
-    if(mgTecAbre === i) h += '<tr class="mg-ficha"><td colspan="6">' + mgFichaHtml(o) + '</td></tr>';
+      + '<td>' + (o.g.rev ? '<b class="mg-rev">' + o.g.rev + '</b>' : '<small class="mejor">0</small>') + '</td>'
+      + '<td>' + (o.prevN ? '<b class="' + (o.prevN >= 3 ? (mgPct(o.prevOk, o.prevN) > pEq + 10 ? 'mejor' : mgPct(o.prevOk, o.prevN) < pEq - 10 ? 'peor' : '') : '') + '">' + o.prevOk + '</b> de ' + o.prevN
+          + ' <small>(' + Math.round(mgPct(o.prevOk, o.prevN)) + '%)</small>' : '<small>—</small>') + '</td></tr>';
+    if(mgTecAbre === i) h += '<tr class="mg-ficha"><td colspan="7">' + mgFichaHtml(o) + '</td></tr>';
   });
   h += '</tbody></table></div><p class="mg-nota">% derivación = no realizadas ÷ visitadas (▲▼ contra ' + (kPrev ? mgNomCorto(kPrev) : 'el período anterior') + '). '
     + 'El historial de cada casa es desde el 01-07, solo técnicos de Dominion. Un "cliente reagenda" que después completó otro no cuenta para revisar: el cliente cambió el día.</p></div>';
   return h;
 }
+/* (22-10-2026) cuadro del equipo: en casas donde otro ya habia fallado,
+   quien las saca y quien no. Solo tecnicos con 3 o mas de esas casas. */
+function mgRescHtml(L, S){
+  if(!S.prevN) return '';
+  const pEq = mgPct(S.prevOk, S.prevN);
+  const C = L.filter(function(o){ return o.prevN >= 3; }).sort(function(a, b){ return mgPct(b.prevOk, b.prevN) - mgPct(a.prevOk, a.prevN) || b.prevN - a.prevN; });
+  const fila = function(o){ const p = mgPct(o.prevOk, o.prevN), d = mgPct(o.nr, o.co + o.nr);
+    const cm = Object.keys(o.com).sort(function(a, b){ return o.com[b] - o.com[a]; }).map(function(k){ return k + ' ' + o.com[k]; }).join(' · ');
+    return '<tr><td><b>' + escR(mgCap(o.tec)) + '</b></td><td><b class="' + (d > MG_META_DER ? 'mg-sobre' : 'mg-ok') + '">' + Math.round(d) + '%</b></td>'
+      + '<td>' + o.prevN + '</td><td><b>' + o.prevOk + '</b></td><td class="bar"><span style="width:' + Math.max(2, p) + '%;background:' + (p >= pEq ? '#15803d' : '#dc2626') + '"></span></td>'
+      + '<td><b>' + Math.round(p) + '%</b></td><td class="izq inc"><small>' + escR(cm) + '</small></td></tr>'; };
+  return '<div class="mg-b mg-resc"><div class="mg-t"><b>🏠 Casas donde otro técnico ya había fallado</b><small>misma casa, otro día · para comparar técnicos en las mismas condiciones</small></div>'
+    + '<p class="mg-frase">El equipo llegó <b>' + S.prevN + '</b> veces a una casa donde otro técnico de Dominion ya había dejado la migración no realizada, y la completó en <b class="v">' + S.prevOk + ' (' + Math.round(pEq) + '%)</b>. '
+    + 'Si un técnico la sacó donde otro no pudo, la casa no era imposible: hay que mirar qué pasó con el primero.</p>'
+    + '<div class="mg-scroll"><table class="mg-q"><thead><tr><th>Técnico</th><th>% derivación</th><th>Casas donde otro ya falló</th><th>Las completó</th><th></th><th>%</th><th class="izq">Dónde trabajó (visitas)</th></tr></thead><tbody>'
+    + C.map(fila).join('') + '</tbody></table></div>'
+    + '<p class="mg-nota">Solo técnicos con 3 o más de esas casas en el período. Barra verde: completa más que el equipo (' + Math.round(pEq) + '%). '
+    + 'Ojo con la comuna: compara técnicos que trabajan en la misma. Toca un técnico en la tabla de abajo para ver cada casa, con la petición y quién falló antes.</p></div>';
+}
 function mgFichaHtml(o){
   const linea = function(it){
     const x = it.x, c = it.c, yo = c && c.yo;
     let det = '';
-    if(it.g === 'dif') det = 'También fallaron: <b>' + it.otros.map(escR).join(', ') + '</b>';
+    if(it.g === 'dif') det = 'También fallaron:<br>' + (c ? c.otras.filter(function(v){ return !v.ok && v.tec !== x.tec; }).map(mgVisTxt).join('<br>') : '<b>' + it.otros.map(escR).join(', ') + '</b>');
     else if(it.g === 'rev') det = '<b class="r">' + it.por.map(escR).join(' · ') + '</b>';
     else if(!c) det = '<small>sin dirección en el historial</small>';
     else det = c.otras.some(function(v){ return v.ok; }) ? 'Después se completó (' + escR(MG_FAM(x.cod) === 're' ? 'el cliente cambió el día' : mgResp(x.cod) === 'vtr' ? 'VTR/CLARO solucionó' : 'se completó') + ')' : 'Solo fue él';
-    return '<tr><td>' + mgDdmm(x.iso) + '</td><td>' + escR(c ? mgCap(c.dir) : '—') + '</td><td>' + escR(x.cod || 'Sin código') + mgFotoTag(x.ot, x.iso, x.cod) + '</td>'
+    return '<tr><td>' + mgDdmm(x.iso) + '</td><td class="mg-pet">' + escR(x.ot) + '</td><td>' + escR(c ? mgCap(c.dir) : '—') + '</td><td>' + escR(x.cod || 'Sin código') + mgFotoTag(x.ot, x.iso, x.cod) + '</td>'
       + '<td>' + (yo ? mgHora(yo.hi) + (yo.dur > 0 ? ' · ' + yo.dur + ' min' : '') : '—') + '</td><td>' + det + '</td></tr>';
   };
   const ord = function(a, b){ return a.x.iso < b.x.iso ? -1 : 1; };
@@ -14285,12 +14329,26 @@ function mgFichaHtml(o){
     + ['dif','cli','rev'].map(function(q){ return '<b style="color:' + MG_G[q].c + '">' + o.g[q] + ' ' + MG_G[q].n.toLowerCase() + '</b>'; }).join(', ') + '.</p>'
     + '<p class="mg-nota" style="margin:0 0 10px">' + (o.fr ? 'Llegó dentro de la franja en el ' + Math.round(mgPct(o.frOk, o.fr)) + '% de sus visitas. ' : '')
     + (o.smN ? 'En sus sin moradores esperó en promedio ' + Math.round(o.smMin / o.smN) + ' min. ' : '')
-    + (o.fotN ? 'Mandó respaldo con foto en <b>' + o.fotOk + ' de ' + o.fotN + '</b> sin moradores, reagendas y desistes.' : '') + '</p>';
+    + (o.fotN ? 'Mandó respaldo con foto en <b>' + o.fotOk + ' de ' + o.fotN + '</b> sin moradores, reagendas y desistes. ' : '')
+    + (Object.keys(o.com).length ? 'Trabajó en: ' + Object.keys(o.com).sort(function(a, b){ return o.com[b] - o.com[a]; }).map(function(k){ return k + ' (' + o.com[k] + ')'; }).join(', ') + '.' : '') + '</p>';
+  /* (22-10-2026) casas donde otro ya habia fallado, y las suyas que completo otro */
+  const tRes = function(l, tit, col, sub, conDesp){
+    if(!l.length) return '';
+    return '<div class="mg-fg" style="border-left-color:' + col + '"><b style="color:' + col + '">' + tit + ' (' + l.length + ')</b> <small>' + sub + '</small>'
+      + '<table class="mg-q mg-fi-t"><thead><tr><th>Fecha</th><th>Petición</th><th>Dirección</th><th>' + (conDesp ? 'Su causa' : 'Resultado') + '</th><th>Llegó · min</th><th>' + (conDesp ? 'Después la completó' : 'Antes fallaron (fecha · técnico · petición · causa)') + '</th></tr></thead><tbody>'
+      + l.slice().sort(function(a, b){ return a.x.iso < b.x.iso ? -1 : 1; }).map(function(it){ const x = it.x, yo = it.c && it.c.yo;
+          return '<tr><td>' + mgDdmm(x.iso) + '</td><td class="mg-pet">' + escR(x.ot) + '</td><td>' + escR(mgCap(it.c.dir)) + '</td>'
+            + '<td>' + (x.e === 'Completado' ? '<span class="mg-si">✓ Completó</span>' : '<span class="mg-no">' + escR(x.cod || 'No realizada') + '</span>' + mgFotoTag(x.ot, x.iso, x.cod)) + '</td>'
+            + '<td>' + (yo ? mgHora(yo.hi) + (yo.dur > 0 ? ' · ' + yo.dur + ' min' : '') : '—') + '</td>'
+            + '<td>' + (conDesp ? it.desp : it.antes).map(mgVisTxt).join('<br>') + '</td></tr>'; }).join('') + '</tbody></table></div>';
+  };
+  h += tRes(o.resc, '🟢 Completó donde otro ya había fallado', '#15803d', 'antes otro técnico la dejó no realizada; él la sacó', false)
+    + tRes(o.leResc, '🔴 Sus no realizadas que después completó otro', '#dc2626', 'él no pudo y otro técnico sí: conversar qué pasó', true);
   ['rev','dif','cli'].forEach(function(q){
     const l = o.lista.filter(function(it){ return it.g === q; }).sort(ord);
     if(!l.length) return;
     h += '<div class="mg-fg" style="border-left-color:' + MG_G[q].c + '"><b style="color:' + MG_G[q].c + '">' + MG_G[q].l + ' (' + l.length + ')</b> <small>' + MG_G[q].d + '</small>'
-      + '<table class="mg-q mg-fi-t"><thead><tr><th>Fecha</th><th>Dirección</th><th>Causa</th><th>Llegó · min</th><th>' + (q === 'dif' ? 'Otros técnicos que fallaron ahí' : q === 'rev' ? 'Por qué revisar' : 'Qué pasó después') + '</th></tr></thead><tbody>'
+      + '<table class="mg-q mg-fi-t"><thead><tr><th>Fecha</th><th>Petición</th><th>Dirección</th><th>Causa</th><th>Llegó · min</th><th>' + (q === 'dif' ? 'Otros técnicos que fallaron ahí' : q === 'rev' ? 'Por qué revisar' : 'Qué pasó después') + '</th></tr></thead><tbody>'
       + l.map(linea).join('') + '</tbody></table></div>';
   });
   return h + '</div>';
@@ -14370,15 +14428,15 @@ function mgDirExcel(){
   });
   const vis = [];
   rep.forEach(function(o){ o.vs.forEach(function(v){
-    vis.push({ 'Dirección': calle(o.dir), 'Comuna': comuna(o.dir), 'Fecha': ff(v.f), 'Llegó': v.hi > 0 ? mgHora(v.hi) : '',
+    vis.push({ 'Dirección': calle(o.dir), 'Comuna': comuna(o.dir), 'Fecha': ff(v.f), 'Petición': v.ot || '', 'Llegó': v.hi > 0 ? mgHora(v.hi) : '',
       'Técnico': mgCap(v.tec), 'Resultado': v.ok ? 'Completada' : 'No realizada', 'Causa': v.ok ? '' : (v.cie || ''),
       'Respaldo con foto': (function(){ if(v.ok) return ''; const F = mgFotoDe(v.ot, v.f, v.cie); return !F.aplica ? '' : F.r ? (F.r.md ? 'Sí: mal derivada' + (F.r.ticket ? ' (ticket ' + F.r.ticket + ')' : '') : F.r.vieja ? 'Sí (foto antigua)' : 'Sí') : 'No'; })() }); }); });   // sin minutos: hay visitas que quedan abiertas horas en TOA y confunden
   const wb = XLSX.utils.book_new();
   const h1 = XLSX.utils.aoa_to_sheet(leeme); h1['!cols'] = [{ wch:32 }, { wch:110 }];
   const h2 = XLSX.utils.json_to_sheet(casas); h2['!cols'] = [{ wch:44 }, { wch:14 }, { wch:10 }, { wch:10 }, { wch:70 }, { wch:13 }, { wch:18 }];
   h2['!autofilter'] = { ref: XLSX.utils.encode_range({ s:{r:0,c:0}, e:{r:casas.length, c:6} }) };
-  const h3 = XLSX.utils.json_to_sheet(vis); h3['!cols'] = [{ wch:44 }, { wch:14 }, { wch:11 }, { wch:7 }, { wch:30 }, { wch:13 }, { wch:34 }, { wch:30 }];
-  h3['!autofilter'] = { ref: XLSX.utils.encode_range({ s:{r:0,c:0}, e:{r:vis.length, c:7} }) };
+  const h3 = XLSX.utils.json_to_sheet(vis); h3['!cols'] = [{ wch:44 }, { wch:14 }, { wch:11 }, { wch:14 }, { wch:7 }, { wch:30 }, { wch:13 }, { wch:34 }, { wch:30 }];
+  h3['!autofilter'] = { ref: XLSX.utils.encode_range({ s:{r:0,c:0}, e:{r:vis.length, c:8} }) };
   XLSX.utils.book_append_sheet(wb, h1, 'Léeme');
   XLSX.utils.book_append_sheet(wb, h2, 'Casas');
   XLSX.utils.book_append_sheet(wb, h3, 'Visitas');
@@ -14401,8 +14459,8 @@ function mgDirPintarLista(){
     h += '<tr class="mg-trow' + (ab ? ' abierta' : '') + '" onclick="mgDirToggle(' + o.i + ')"><td><b>' + (ab ? '▾ ' : '▸ ') + escR(mgCap(o.dir)) + '</b></td>'
       + '<td><b class="mg-vp">' + o.fall + '</b></td><td class="izq">' + o.tecs.map(escR).join(', ') + '</td><td class="izq inc">' + cs + '</td>'
       + '<td>' + (o.ok ? '<span class="mg-si">Sí, ' + mgDdmm(o.ok.f) + ' · ' + escR(mgCap(mgCorto(o.ok.tec))) + '</span>' : '<span class="mg-no">No</span>') + '</td></tr>';
-    if(ab) h += '<tr class="mg-ficha"><td colspan="5"><div><table class="mg-q mg-fi-t mg-vt"><thead><tr><th>Fecha</th><th>Llegó</th><th>Técnico</th><th>Resultado</th><th>Min en la casa</th></tr></thead><tbody>'
-      + o.vs.map(function(v){ return '<tr><td>' + mgDdmm(v.f) + '</td><td>' + (v.hi > 0 ? mgHora(v.hi) : '—') + '</td><td>' + escR(mgCap(v.tec)) + '</td>'
+    if(ab) h += '<tr class="mg-ficha"><td colspan="5"><div><table class="mg-q mg-fi-t mg-vt"><thead><tr><th>Fecha</th><th>Petición</th><th>Llegó</th><th>Técnico</th><th>Resultado</th><th>Min en la casa</th></tr></thead><tbody>'
+      + o.vs.map(function(v){ return '<tr><td>' + mgDdmm(v.f) + '</td><td class="mg-pet">' + escR(v.ot || '') + '</td><td>' + (v.hi > 0 ? mgHora(v.hi) : '—') + '</td><td>' + escR(mgCap(v.tec)) + '</td>'
         + '<td>' + (v.ok ? '<span class="mg-si">✓ Completó</span>' : '<span class="mg-no">✗ ' + escR(v.cie || 'No realizada') + '</span>' + mgFotoTag(v.ot, v.f, v.cie)) + '</td><td>' + (v.dur > 0 ? v.dur : '—') + '</td></tr>'; }).join('')
       + '</tbody></table></div></td></tr>';
   });
@@ -14502,7 +14560,7 @@ function mgPeriodoHtml(o, a, k, kA, cur){
       h += '<div class="mg-dest">' + Object.keys(MG_DEST).filter(function(t){ return cnt[t]; }).map(function(t){
           return '<div><b style="color:' + MG_DEST[t][1] + '">' + cnt[t] + '</b><span>' + MG_DEST[t][0] + '</span></div>'; }).join('') + '</div>'
         + '<button class="mg-ver" onclick="mgToggle(\'des\')">' + (mgAbre.des ? 'Ocultar' : 'Ver') + ' las ' + o.des.length + ' órdenes</button>';
-      if(mgAbre.des) h += '<table class="mg-q mg-l"><thead><tr><th>Día</th><th>Orden</th><th>Tipo</th><th>Técnico</th><th>Franja</th><th>Dirección</th><th>Qué pasó</th></tr></thead><tbody>'
+      if(mgAbre.des) h += '<table class="mg-q mg-l"><thead><tr><th>Día</th><th>Petición</th><th>Tipo</th><th>Técnico</th><th>Franja</th><th>Dirección</th><th>Qué pasó</th></tr></thead><tbody>'
         + o.des.slice().sort(function(x, y){ return y.iso.localeCompare(x.iso); }).map(function(d){
             const t = mgDestino(d), r = MG.porOT[d.c.o];
             return '<tr><td>' + d.iso.slice(6, 8) + '-' + d.iso.slice(4, 6) + '</td><td>' + escR(d.c.o) + '</td><td>' + escR(d.c.cat || '') + '</td><td>' + escR(derTitulo(d.c.tec || '')) + '</td>'
@@ -14522,7 +14580,7 @@ function mgPeriodoHtml(o, a, k, kA, cur){
       + '<button class="mg-xls" onclick="mgCancExcel()" title="Lista de las canceladas con OT y fecha, para pedirle el motivo a VTR/CLARO">⬇ Excel para VTR/CLARO</button></div>'
       + '<p class="mg-frase">' + cc.map(function(c){ return escR(c === 'sin motivo' ? 'Sin motivo informado' : c) + ': <b>' + o.codCa[c] + '</b>'; }).join(' · ')
       + (sinM ? '. <b class="am">' + sinM + ' de ' + o.ca + '</b> vienen sin motivo en el export: el motivo lo tiene que informar VTR/CLARO.' : '') + '</p>'
-      + '<div class="mg-scroll"><table class="mg-q mg-l"><thead><tr><th>Fecha</th><th>Orden</th><th>Técnico</th><th>Franja</th><th>Dirección</th><th>Motivo en el export</th></tr></thead><tbody>'
+      + '<div class="mg-scroll"><table class="mg-q mg-l"><thead><tr><th>Fecha</th><th>Petición</th><th>Técnico</th><th>Franja</th><th>Dirección</th><th>Motivo en el export</th></tr></thead><tbody>'
       + mgCancFilas(o).map(function(f){ return '<tr><td>' + f.fecha.slice(0, 5) + '</td><td>' + escR(f.ot) + '</td><td>' + escR(f.tec) + '</td><td>' + escR(f.fr) + '</td><td>' + escR(f.dir || '—') + '</td>'
           + '<td>' + (f.mot ? escR(f.mot) : '<span class="mg-sinfoto">sin motivo</span>') + '</td></tr>'; }).join('') + '</tbody></table></div>'
       + '<p class="mg-nota">La dirección sale de los export del portal. Si una no tiene, es de un día en otra comuna o de un export que no está en la carpeta.</p></div>';
@@ -14551,7 +14609,7 @@ function mgCancExcel(){
     [],
     ['Qué pedimos', 'Que VTR/CLARO informe el motivo de cada cancelación (columna "Motivo VTR/CLARO"). Sin motivo no podemos saber si se pudo evitar.']
   ];
-  const filas = F.map(function(f){ return { 'Fecha': f.fecha, 'Orden de Trabajo': f.ot, 'Técnico': f.tec, 'Franja': f.fr, 'Dirección': f.dir,
+  const filas = F.map(function(f){ return { 'Fecha': f.fecha, 'Petición': f.ot, 'Técnico': f.tec, 'Franja': f.fr, 'Dirección': f.dir,
     'Motivo en el export': f.mot || 'Sin motivo', 'Motivo VTR/CLARO': '' }; });
   const wb = XLSX.utils.book_new();
   const h1 = XLSX.utils.aoa_to_sheet(leeme); h1['!cols'] = [{ wch:26 }, { wch:100 }];
@@ -14649,9 +14707,9 @@ function mgQuien(x){
     const q = F.quien[e[1]] || ['', '']; return { iso:String(e[0]), emp:q[0], nom:q[1], e:e[2], cod:F.cods[e[3]] || '', ot:e[4] }; });
   const emp = ev.filter(function(e){ return e.emp; });
   if(emp.length){ const ok = emp.filter(function(e){ return e.e === 'Completado'; })[0], u = ok || emp[emp.length - 1];
-    return { k:'otra', ev:ev, u:u, txt: u.emp + ' (' + mgCap(u.nom) + ') · ' + (u.e === 'Completado' ? 'la completó' : u.e === 'No Realizada' ? 'no realizada' + (u.cod ? ': ' + u.cod : '') : u.e.toLowerCase()) + ' el ' + mgDdmm(u.iso) }; }
+    return { k:'otra', ev:ev, u:u, txt: u.emp + ' (' + mgCap(u.nom) + ', petición ' + u.ot + ') · ' + (u.e === 'Completado' ? 'la completó' : u.e === 'No Realizada' ? 'no realizada' + (u.cod ? ': ' + u.cod : '') : u.e.toLowerCase()) + ' el ' + mgDdmm(u.iso) }; }
   const ca = ev.filter(function(e){ return e.e === 'Cancelado'; });
-  if(ca.length){ const u = ca[ca.length - 1]; return { k:'canc', ev:ev, u:u, txt:'cancelada en el bucket el ' + mgDdmm(u.iso) + (u.ot !== x.ot ? ' (orden ' + u.ot + ')' : '') }; }
+  if(ca.length){ const u = ca[ca.length - 1]; return { k:'canc', ev:ev, u:u, txt:'cancelada en el bucket el ' + mgDdmm(u.iso) + (u.ot !== x.ot ? ' (petición ' + u.ot + ')' : '') }; }
   if(ev.length){ const u = ev[ev.length - 1]; return { k:'buck', ev:ev, u:u, txt:'en el bucket (' + u.e.toLowerCase() + ') el ' + mgDdmm(u.iso) }; }
   return { k:'sin', ev:[], u:null, txt:'no aparece en ningún export después del ' + mgDdmm(x.iso) };
 }
@@ -14662,7 +14720,7 @@ function mgQuienExcel(){
   const per = mgNomPer(mgSel), ff = function(f){ f = String(f); return f.slice(6, 8) + '-' + f.slice(4, 6) + '-' + f.slice(0, 4); };
   const L = R.nadaL.slice().sort(function(a, b){ return a.iso < b.iso ? -1 : 1; });
   const filas = L.map(function(x){ const q = mgQuien(x), c = mgCasa(x);
-    return { 'Fecha no realizada': ff(x.iso), 'Orden de Trabajo': x.ot, 'Dirección': c ? mgCap(c.dir) : '', 'Técnico Dominion': mgCap(x.tec), 'Causa': x.cod || '',
+    return { 'Fecha no realizada': ff(x.iso), 'Petición': x.ot, 'Dirección': c ? mgCap(c.dir) : '', 'Técnico Dominion': mgCap(x.tec), 'Causa': x.cod || '',
       'Qué pasó después': q ? MG_QUIEN[q.k].t : '', 'Detalle': q ? q.txt : '', '¿La reagendan? (VTR/CLARO)': '' }; });
   const cnt = {}; L.forEach(function(x){ const q = mgQuien(x); if(q) cnt[q.k] = (cnt[q.k] || 0) + 1; });
   const leeme = [
@@ -14693,7 +14751,7 @@ function mgQuienHtml(R){
         return '<div><b style="color:' + MG_QUIEN[k].c + '">' + cnt[k] + '</b><span>' + MG_QUIEN[k].t + '</span></div>'; }).join('') + '</div>'
     + '<button class="mg-ver" onclick="mgToggle(\'quien\')">' + (ab ? 'Ocultar' : 'Ver') + ' las ' + R.nada + ' órdenes</button> '
     + '<button class="mg-xls" style="margin-left:6px" onclick="mgQuienExcel()" title="Lista para preguntarle a VTR/CLARO si las va a reagendar">⬇ Excel para VTR/CLARO</button>'
-    + (ab ? '<div class="mg-scroll"><table class="mg-q mg-l"><thead><tr><th>Día</th><th>Orden</th><th>Técnico</th><th>Causa</th><th>Dirección</th><th>Qué pasó después</th></tr></thead><tbody>'
+    + (ab ? '<div class="mg-scroll"><table class="mg-q mg-l"><thead><tr><th>Día</th><th>Petición</th><th>Técnico</th><th>Causa</th><th>Dirección</th><th>Qué pasó después</th></tr></thead><tbody>'
       + L.sort(function(a, b){ return a.x.iso < b.x.iso ? -1 : 1; }).map(function(it){
           return '<tr><td>' + mgDdmm(it.x.iso) + '</td><td>' + escR(it.x.ot) + '</td><td>' + escR(mgCap(mgCorto(it.x.tec))) + '</td><td>' + escR(it.x.cod || '') + '</td>'
             + '<td>' + escR(it.c ? mgCap(it.c.dir) : '—') + '</td><td style="color:' + MG_QUIEN[it.q.k].c + '">' + escR(it.q.txt) + '</td></tr>'; }).join('') + '</tbody></table></div>' : '')
@@ -14948,7 +15006,7 @@ function mgHoyHtml(){
       : '<p class="mg-frase">Todavía no hay migraciones no realizadas hoy.</p>') + '</div>';
   h += '<div class="mg-b"><div class="mg-t"><b>Las que desaparecieron hoy · qué dice TOA</b><small>' + caid.length + ' migraciones</small></div>'
     + (caid.length ? '<div class="mg-dest">' + Object.keys(des).map(function(k){ return '<div><b>' + des[k] + '</b><span>' + escR(k) + '</span></div>'; }).join('') + '</div>'
-      + '<table class="mg-q mg-l"><thead><tr><th>Orden</th><th>Tipo</th><th>Técnico</th><th>Franja</th><th>Dirección</th><th>Desapareció</th><th>TOA</th></tr></thead><tbody>'
+      + '<table class="mg-q mg-l"><thead><tr><th>Petición</th><th>Tipo</th><th>Técnico</th><th>Franja</th><th>Dirección</th><th>Desapareció</th><th>TOA</th></tr></thead><tbody>'
       + caid.map(function(c){ const s = Tv && Tv.estados && Tv.estados[c.o];
           return '<tr><td>' + escR(c.o) + '</td><td>' + escR(c.cat || '') + '</td><td>' + escR(derTitulo(c.tec || '')) + '</td><td>' + escR(c.f || '') + '</td><td>' + escR(c.d || '') + '</td><td>' + escR(String(c.visto || '').slice(-5)) + '</td><td>' + escR(s && s.estado ? s.estado : 'aún sin consultar') + '</td></tr>'; }).join('') + '</tbody></table>'
       : '<p class="mg-frase">Ninguna migración ha desaparecido hoy.</p>') + '</div>';
@@ -15079,6 +15137,10 @@ function mgHoyHtml(){
   /* (22-10-2026) quien tiene las no revisitadas; boton Excel de canceladas a la derecha */
   .mg-quien { margin-top:12px; padding-top:10px; border-top:1px dashed #cbd5e1; }
   .mg-t .mg-xls { margin-left:auto; }
+  /* (22-10-2026) peticion (numero de orden) seleccionable; cuadro de rescates */
+  .mg-pet { font-variant-numeric:tabular-nums; white-space:nowrap; user-select:all; }
+  td.mg-pet { color:#334155; font-size:12.5px; }
+  .mg-resc { border-left:5px solid #15803d; }
 </style>
 
 </body>
