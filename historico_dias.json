@@ -22305,22 +22305,23 @@
    }
   },
   "22-10-2026": {
-   "hasta": "17:56",
-   "actividades": 180,
+   "hasta": "18:01",
+   "actividades": 183,
    "tecnicos": 34,
    "estados": {
-    "Completado": 105,
-    "No Realizada": 37,
+    "Completado": 106,
+    "No Realizada": 38,
     "Iniciado": 20,
     "Cancelado": 12,
+    "en ruta": 1,
     "Suspendido": 4,
     "Pendiente": 2
    },
-   "rgu": 246.7,
+   "rgu": 247.9,
    "caidas_total": 4,
    "caidas_activas": 4,
    "caidas_resueltas": 0,
-   "nuevas": 27,
+   "nuevas": 29,
    "al_bucket": 19,
    "repetidas": 33,
    "reagendadas": 5,
@@ -22364,6 +22365,24 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OKBFHMI",
+      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:59",
+      "d": "SAN ENRIQUE 1950 EDIF. 9 DEPTO 203, VILLA ALEMANA",
+      "e": "Iniciado"
+     },
+     {
+      "o": "1-3OKBP0ZZ",
+      "tec": "ALFREDO ALCAYAGA F",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "18:01",
+      "d": "LOS LIRIOS 2533, QUILPUE",
+      "e": "en ruta"
+     },
      {
       "o": "1-3OKA1PJV",
       "tec": "YENDER BOSCAN CADENAS",
@@ -22721,7 +22740,7 @@
       "o": "1-3OJDJENM",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "17:31",
+      "hi": "18:15",
       "d": "LAS SIETE TAZAS 2178, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
@@ -23060,5 +23079,5 @@
    }
   }
  },
- "generado": "22-10-2026 17:56"
+ "generado": "22-10-2026 18:01"
 }
