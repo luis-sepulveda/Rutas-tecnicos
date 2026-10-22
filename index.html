@@ -11165,9 +11165,15 @@ function rmCuenta(l){
   return { vis: vis, comp: vis - d.length, der: d.length, pct: vis ? 100 * d.length / vis : 0, l: d };
 }
 function rmPct(v){ return (Math.round(v * 10) / 10).toFixed(1).replace('.', ',') + '%'; }
+function rmBajarResp(){
+  if(RM_RESP_BAJANDO || (RM_RESP && Date.now() - RM_RESP_T < 300000)) return;
+  RM_RESP_BAJANDO = true;
+  mgBajarRespaldos().then(function(r){ RM_RESP_BAJANDO = false; if(r){ RM_RESP = r; RM_RESP_T = Date.now(); } else if(!RM_RESP) RM_RESP = { falla:true }; pintarResMig(); });
+}
 function abrirResMig(){
   const m = document.getElementById('modalRM'); if(!m) return;
   m.classList.add('abierto'); RM_TEC = null; pintarResMig();
+  rmBajarResp();          /* (22-10-2026) respaldos con foto de la app */
   if(DER !== null || derBajando) return;
   derBajando = true; derFallo = false;
   bajarDeriv().then(function(d){ DER = d; derBajando = false; pintarResMig(); })
@@ -11238,34 +11244,51 @@ function pintarResMig(){
   /* 4. Tecnicos */
   const t = {};
   A.forEach(function(x){
-    const o = t[x.tec] || (t[x.tec] = { tec: x.tec, sup: x.sup, vis: 0, der: 0, sm: 0, re: 0, de: 0, ot: 0, prop: 0, l: [] });
+    const o = t[x.tec] || (t[x.tec] = { tec: x.tec, sup: x.sup, vis: 0, der: 0, sm: 0, re: 0, de: 0, ot: 0, prop: 0, l: [], fotN: 0, fotOk: 0, md: 0 });
     o.vis++; if(!x.der) return;
     o.der++; o[x.g || 'ot']++; if(rmCls(x) === 'prop') o.prop++; o.l.push(x);
+    /* (22-10-2026) respaldo con foto: cuenta solo sin moradores, reagenda y desiste (igual que Gerencia) */
+    const F = mgFotoDe(x.ot, x.iso, x.cod);
+    if(F.aplica && F.cuenta){ o.fotN++; if(F.r) o.fotOk++; }
+    if(F.aplica && F.r && F.r.md) o.md++;
   });
   const tl = Object.keys(t).map(function(k){ const o = t[k]; o.pct = o.vis ? 100 * o.der / o.vis : 0; return o; })
     .filter(function(o){ return derActivo(o.tec); }).sort(function(a, b){ return b.der - a.der || b.pct - a.pct || a.tec.localeCompare(b.tec); });
   const minV = RM_PER === 'hoy' ? 2 : 5;
+  const RR = mgRespDatos(), fT = { n:0, ok:0, md:0 };
+  tl.forEach(function(o){ fT.n += o.fotN; fT.ok += o.fotOk; fT.md += o.md; });
+  const fotCel = function(o){ if(!RR || !RR.desde) return '·'; if(!o.fotN) return o.md ? '<span class="rm-md">🛠 ' + o.md + '</span>' : '·';
+    const p = 100 * o.fotOk / o.fotN;
+    return '<span class="rm-fot ' + (p >= 80 ? 'bien' : p >= 50 ? 'medio' : 'mal') + '">' + o.fotOk + ' de ' + o.fotN + '</span>' + (o.md ? ' <span class="rm-md" title="avisó mal derivada con foto">🛠 ' + o.md + '</span>' : ''); };
+  const fotGuia = !RR ? '<div class="rm-nota">📷 Cargando los respaldos con foto…</div>'
+    : RR.falla ? '<div class="rm-nota">📷 No se pudieron leer los respaldos con foto de la app (sin conexión o falta actualizar el receptor).</div>'
+    : '<div class="rm-fotg">📷 <b>Respaldo con foto</b> (app de respaldo, se empezó a usar el ' + mgDdmm(RR.desde) + '): '
+      + (fT.n ? '<b>' + fT.ok + ' de ' + fT.n + '</b> sin moradores, reagendas y desistes del período (' + Math.round(100 * fT.ok / fT.n) + '%).' : 'en este período no hay sin moradores, reagendas ni desistes desde que partió la app.')
+      + (fT.md ? ' <span class="rm-md">🛠 ' + fT.md + ' mal derivada' + (fT.md === 1 ? '' : 's') + ' con foto</span>.' : '')
+      + ' Toca un técnico para ver cuál tiene foto.</div>';
   h += '<div class="rm-card"><h3>Técnico por técnico <small>de más a menos derivadas · toca un técnico para ver sus órdenes</small></h3>'
     + '<div class="rm-guia"><span class="eq">El equipo deriva <b>' + rmPct(eqPct) + '</b></span>'
     + '<span class="ro"><i></i>En rojo: deriva <b>' + rmPct(lim) + ' o más</b> (' + RM_PUNTOS + ' puntos sobre el equipo), con ' + minV + ' o más visitadas. Son los que hay que conversar.</span></div>'
+    + fotGuia
     + '<table class="rm-tab"><thead><tr><th class="iz">Técnico</th><th class="iz">Supervisor</th><th>Visitadas</th><th>Derivadas</th><th>%</th>'
-    + '<th>Sin moradores</th><th>Reagenda</th><th>Desiste</th><th>Otros</th><th title="Sin moradores, reagenda o desiste en una dirección donde no falló otro técnico">Solo suyas</th></tr></thead><tbody>'
+    + '<th>Sin moradores</th><th>Reagenda</th><th>Desiste</th><th>Otros</th><th title="Sin moradores, reagenda o desiste en una dirección donde no falló otro técnico">Solo suyas</th><th title="Sin moradores, reagendas y desistes con respaldo de foto en la app (desde que partió)">Con foto</th></tr></thead><tbody>'
     + tl.map(function(o, i){
         const alto = o.vis >= minV && o.pct >= lim;
         let r = '<tr class="fila' + (alto ? ' alto' : '') + (RM_TEC === i ? ' abierta' : '') + '" onclick="verRMTec(' + i + ')"><td class="iz"><b>' + escR(rmTitulo(o.tec)) + '</b></td>'
           + '<td class="iz">' + escR(rmTitulo(o.sup) || '–') + '</td><td>' + o.vis + '</td><td><b>' + o.der + '</b></td>'
-          + '<td class="pc">' + rmPct(o.pct) + '</td><td>' + (o.sm || '·') + '</td><td>' + (o.re || '·') + '</td><td>' + (o.de || '·') + '</td><td>' + (o.ot || '·') + '</td><td>' + (o.prop || '·') + '</td></tr>';
+          + '<td class="pc">' + rmPct(o.pct) + '</td><td>' + (o.sm || '·') + '</td><td>' + (o.re || '·') + '</td><td>' + (o.de || '·') + '</td><td>' + (o.ot || '·') + '</td><td>' + (o.prop || '·') + '</td><td>' + fotCel(o) + '</td></tr>';
         if(RM_TEC === i){
-          r += '<tr class="det"><td colspan="10">' + (o.l.length ? '<table><thead><tr><th>Día</th><th>Orden</th><th>Actividad</th><th>Franja</th><th>Quiebre</th><th>De quién</th></tr></thead><tbody>'
+          r += '<tr class="det"><td colspan="11">' + (o.l.length ? '<table><thead><tr><th>Día</th><th>Petición</th><th>Actividad</th><th>Franja</th><th>Quiebre</th><th>De quién</th><th>Respaldo</th></tr></thead><tbody>'
             + o.l.slice().sort(function(a, b){ return a.iso.localeCompare(b.iso); }).map(function(x){
                 const c = rmCls(x);
                 return '<tr><td>' + (x.hoy ? 'hoy' : escR(x.f)) + '</td><td>' + escR(x.ot) + '</td><td>' + escR(x.act) + '</td><td>' + escR(x.fr) + '</td><td><b>' + escR(x.cod) + '</b></td>'
-                  + '<td><span class="tg ' + c + '">' + (c === 'na' ? 'no depende del técnico' : c === 'comp' ? 'ahí falló otro' : 'solo con él') + '</span></td></tr>'; }).join('')
+                  + '<td><span class="tg ' + c + '">' + (c === 'na' ? 'no depende del técnico' : c === 'comp' ? 'ahí falló otro' : 'solo con él') + '</span></td>'
+                  + '<td>' + (mgFotoTag(x.ot, x.iso, x.cod) || '<small style="color:#94a3b8">—</small>') + '</td></tr>'; }).join('')
             + '</tbody></table>' : '<div class="rm-nota">Ninguna derivada en el período.</div>') + '</td></tr>';
         }
         return r;
       }).join('')
-    + '<tr class="tot"><td class="iz">Equipo</td><td></td><td>' + ca.vis + '</td><td>' + ca.der + '</td><td class="pc">' + rmPct(ca.pct) + '</td><td>' + mot.sm + '</td><td>' + mot.re + '</td><td>' + mot.de + '</td><td>' + mot.ot + '</td><td>' + cl.prop + '</td></tr>'
+    + '<tr class="tot"><td class="iz">Equipo</td><td></td><td>' + ca.vis + '</td><td>' + ca.der + '</td><td class="pc">' + rmPct(ca.pct) + '</td><td>' + mot.sm + '</td><td>' + mot.re + '</td><td>' + mot.de + '</td><td>' + mot.ot + '</td><td>' + cl.prop + '</td><td>' + (RR && RR.desde && fT.n ? fT.ok + ' de ' + fT.n : '·') + '</td></tr>'
     + '</tbody></table><div class="rm-nota">"Solo suyas": sin moradores, reagenda o desiste en una dirección donde no le falló a ningún otro técnico. '
     + (RM_PER === 'hoy' || RM_PER === 'sem' ? 'Lo de hoy viene en vivo del monitor; los días anteriores, del Dashboard de Actividades (hasta ayer). ' : '')
     + 'Cuenta lo que se ve con las credenciales de la agencia (Quilpué y Villa Alemana).</div></div>';
@@ -14155,8 +14178,12 @@ function mgGrupo(x, c, r){
   return { g: por.length ? 'rev' : 'cli', otros:otros, por:por };
 }
 /* respaldo con foto de esta no realizada (sin moradores, reagenda o desiste) */
+/* (22-10-2026) los respaldos pueden venir de la vista Gerencia (MG.resp) o
+   del Resumen de migraciones para supervisores (RM_RESP): se usa el que haya */
+let RM_RESP = null, RM_RESP_T = 0, RM_RESP_BAJANDO = false;
+function mgRespDatos(){ return (MG && MG.resp) || RM_RESP; }
 function mgFotoDe(ot, iso, cod){
-  const R = MG && MG.resp; if(!R || !R.desde) return { aplica:false };
+  const R = mgRespDatos(); if(!R || !R.desde) return { aplica:false };
   if(String(iso) < R.desde) return { aplica:false };                   // antes de que partiera la app
   const l = R.porOT[String(ot || '').toUpperCase().replace(/[^0-9A-Z-]/g, '')] || [];
   const m = l.filter(function(x){ return x.iso === String(iso); })[0] || l[0] || null;
@@ -15326,6 +15353,11 @@ function mgHoyHtml(){
   .mg-pet { font-variant-numeric:tabular-nums; white-space:nowrap; user-select:all; }
   td.mg-pet { color:#334155; font-size:12.5px; }
   .mg-resc { border-left:5px solid #15803d; }
+  /* (22-10-2026) respaldos con foto en el Resumen de migraciones para supervisores */
+  .rm-fotg { background:#ecfeff; border:1px solid #a5f3fc; color:#155e75; border-radius:8px; padding:7px 11px; font-size:13.5px; margin:0 0 10px; }
+  .rm-fot { font-weight:700; border-radius:6px; padding:1px 7px; white-space:nowrap; } .rm-fot.bien { color:#15803d; background:#f0fdf4; }
+  .rm-fot.medio { color:#b45309; background:#fffbeb; } .rm-fot.mal { color:#b91c1c; background:#fef2f2; }
+  .rm-md { color:#6d28d9; font-weight:700; white-space:nowrap; }
   /* (22-10-2026) REDISENO GERENCIA: saltos, resumen, laminas, plegables, modo reunion */
   .mg-sel { top:-18px; z-index:5; }          /* tapa los 18 px de margen del modal: antes se colaba una fila de la tabla encima */
   .mg-saltos { display:flex; flex-wrap:wrap; gap:6px; width:100%; padding-top:8px; border-top:1px dashed #e2e8f0; align-items:center; }
