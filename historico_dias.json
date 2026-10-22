@@ -22305,26 +22305,35 @@
    }
   },
   "22-10-2026": {
-   "hasta": "09:38",
+   "hasta": "09:43",
    "actividades": 125,
    "tecnicos": 34,
    "estados": {
-    "en ruta": 24,
-    "Pendiente": 96,
-    "Iniciado": 3,
+    "en ruta": 23,
+    "Pendiente": 94,
+    "Iniciado": 6,
     "Cancelado": 2
    },
    "rgu": 176.0,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 3,
+   "nuevas": 4,
    "al_bucket": 0,
    "repetidas": 25,
    "reagendadas": 5,
    "detalle": {
     "caidas": [],
     "nuevas": [
+     {
+      "o": "1-3OJUQNC8",
+      "tec": "YENDER BOSCAN CADENAS",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "09:40",
+      "d": "DIEGO DE ALMAGRO 270, QUILPUE",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3OJUVL8Z",
       "tec": "JOSE ROJO A",
@@ -22473,18 +22482,6 @@
       "visitas": 1,
       "ult_fecha": "21-10-2026",
       "ult_cierre": "Falla Aprovisionamiento"
-     },
-     {
-      "o": "1-3OJ5L7N7",
-      "cat": "Alta 1 Play",
-      "f": "10-13",
-      "hi": "11:23",
-      "d": "PJE NIEMEYER 119, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JOSE GALAZ D",
-      "visitas": 1,
-      "ult_fecha": "21-10-2026",
-      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OHU43AU",
@@ -22643,6 +22640,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OJUQNC8",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "09:40",
+      "d": "DIEGO DE ALMAGRO 270, QUILPUE",
+      "e": "Iniciado",
+      "tec": "YENDER BOSCAN CADENAS",
+      "visitas": 1,
+      "ult_fecha": "17-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OHV1Q7Q",
       "cat": "Reparación",
       "f": "16-19",
@@ -22710,5 +22719,5 @@
    }
   }
  },
- "generado": "22-10-2026 09:38"
+ "generado": "22-10-2026 09:43"
 }
