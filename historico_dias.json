@@ -22305,25 +22305,25 @@
    }
   },
   "22-10-2026": {
-   "hasta": "11:44",
-   "actividades": 141,
+   "hasta": "12:04",
+   "actividades": 146,
    "tecnicos": 35,
    "estados": {
-    "Completado": 24,
-    "No Realizada": 10,
-    "Pendiente": 74,
-    "Cancelado": 4,
-    "Iniciado": 24,
-    "Suspendido": 1,
-    "en ruta": 4
+    "Completado": 28,
+    "No Realizada": 11,
+    "Pendiente": 69,
+    "Cancelado": 8,
+    "Iniciado": 25,
+    "en ruta": 4,
+    "Suspendido": 1
    },
-   "rgu": 200.0,
+   "rgu": 209.6,
    "caidas_total": 3,
    "caidas_activas": 3,
    "caidas_resueltas": 0,
-   "nuevas": 10,
+   "nuevas": 12,
    "al_bucket": 1,
-   "repetidas": 24,
+   "repetidas": 26,
    "reagendadas": 5,
    "detalle": {
     "caidas": [
@@ -22356,6 +22356,24 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OJZAQ4R",
+      "tec": "CESAR MENA OLIVEROS",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "12:02",
+      "d": "PIEDRA LANCETA 1968, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
+      "o": "1-3OJY1WB6",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "16:32",
+      "d": "PROYECTADA (C. SEPULVEDA) 2120, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OJXXGWU",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -22500,13 +22518,25 @@
       "o": "1-3OJADS4R",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:11",
+      "hi": "14:00",
       "d": "SANTA MATILDE 1701 CASA 30, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL MIRANDA VALENC",
       "visitas": 1,
       "ult_fecha": "21-10-2026",
       "ult_cierre": "Direccion incorrecta"
+     },
+     {
+      "o": "1-3OJY1WB6",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "16:32",
+      "d": "PROYECTADA (C. SEPULVEDA) 2120, QUILPUE",
+      "e": "Pendiente",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "visitas": 1,
+      "ult_fecha": "22-10-2026",
+      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3OJA781Z",
@@ -22521,27 +22551,27 @@
       "ult_cierre": "Falla Masiva"
      },
      {
+      "o": "1-3OJYHSEM",
+      "cat": "Migración 2 Play",
+      "f": "13-16",
+      "hi": "15:15",
+      "d": "LOS AROMOS 1179, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "ESTEBAN PIZARRO QUINTANA",
+      "visitas": 2,
+      "ult_fecha": "20-10-2026",
+      "ult_cierre": "Evento Contingencia"
+     },
+     {
       "o": "1-3OJDJENM",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "17:45",
       "d": "LAS SIETE TAZAS 2178, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
       "visitas": 1,
       "ult_fecha": "21-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OJO5ILI",
-      "cat": "Reparación",
-      "f": "10-13",
-      "hi": "12:22",
-      "d": "FELIU HURTADO 0657, QUILPUE",
-      "e": "Pendiente",
-      "tec": "FELIPE SILVA R",
-      "visitas": 2,
-      "ult_fecha": "28-08-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -22620,7 +22650,7 @@
       "o": "1-3OJBJQEH",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "15:21",
+      "hi": "16:32",
       "d": "ALMIRANTE NEFF 653 EDIF. 3 DEPTO 23, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
@@ -22639,18 +22669,6 @@
       "visitas": 2,
       "ult_fecha": "21-10-2026",
       "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OIP86C2",
-      "cat": "Migración 2 Play",
-      "f": "16-19",
-      "hi": "16:00",
-      "d": "ARAYA 1570, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "MARCELO GÓMEZ GÓME",
-      "visitas": 1,
-      "ult_fecha": "20-10-2026",
-      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3OFF677S",
@@ -22675,6 +22693,18 @@
       "visitas": 2,
       "ult_fecha": "24-09-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OIP86C2",
+      "cat": "Migración 2 Play",
+      "f": "16-19",
+      "hi": "17:12",
+      "d": "ARAYA 1570, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "RAFAEL VARGAS B",
+      "visitas": 1,
+      "ult_fecha": "20-10-2026",
+      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3OJENGKU",
@@ -22725,6 +22755,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OJO5ILI",
+      "cat": "Reparación",
+      "f": "10-13",
+      "hi": "12:03",
+      "d": "FELIU HURTADO 0657, QUILPUE",
+      "e": "Iniciado",
+      "tec": "YENDER BOSCAN CADENAS",
+      "visitas": 2,
+      "ult_fecha": "28-08-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OHV1Q7Q",
       "cat": "Reparación",
       "f": "16-19",
@@ -22759,38 +22801,37 @@
       "desde": "20-10-2026"
      },
      {
+      "o": "1-3OIGLQBV",
+      "cat": "Migración 1 Play",
+      "f": "16-19",
+      "hi": "16:59",
+      "d": "PJE 4 865 CASA, QUILPUE",
+      "e": "Pendiente",
+      "tec": "JOSE ROJO A",
+      "desde": "20-10-2026"
+     },
+     {
       "o": "1-3OJ4OZL6",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "11:39",
+      "hi": "12:17",
       "d": "JUAN JOSE LATORRE 1803, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JORDAN ROA PEREZ",
+      "e": "en ruta",
+      "tec": "MARCO PEREZ G",
       "desde": "21-10-2026"
      },
      {
       "o": "1-3OJ0ZARM",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "16:05",
       "d": "CONDELL SUR 33, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JORDAN ROA PEREZ",
+      "e": "Cancelado",
+      "tec": "YENDER BOSCAN CADENAS",
       "desde": "21-10-2026"
-     },
-     {
-      "o": "1-3OIGLQBV",
-      "cat": "Migración 1 Play",
-      "f": "16-19",
-      "hi": "16:00",
-      "d": "PJE 4 865 CASA, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JOSE ROJO A",
-      "desde": "20-10-2026"
      }
     ]
    }
   }
  },
- "generado": "22-10-2026 11:44"
+ "generado": "22-10-2026 12:04"
 }
