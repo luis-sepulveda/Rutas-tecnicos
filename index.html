@@ -13875,7 +13875,7 @@ async function bajarMigGer(){
   const dic = js.dic || {};
   const val = function(row, c){ const i = ci[c]; if(i === undefined) return ''; const v = row[i];
     return (dic[c] && typeof v === 'number') ? dic[c][v] : v; };
-  let filas = [], porOT = {}, completo = null;
+  let filas = [], porOT = {}, completo = null, fuera = null, dirCa = {};
   (js.rows || []).forEach(function(row){
     const p = /^(\d{2})-(\d{2})-(\d{4})$/.exec(String(val(row, 'Fecha') || ''));
     if(!p) return;
@@ -13913,6 +13913,11 @@ async function bajarMigGer(){
         });
         filas = fx;
         completo = { dias: mj.dias_completos || [], generado: mj.generado || '', hasta: mj.hasta || '' };
+        /* (22-10-2026) que paso AFUERA de Dominion con cada no realizada
+           (bucket, otra empresa) y direccion de las canceladas: lo arma
+           seguimiento_autonomia.py leyendo los export crudos del portal */
+        if(mj.fuera && mj.fuera.ots) fuera = mj.fuera;
+        if(mj.dir_canc) dirCa = mj.dir_canc;
       }
     }
   } catch(e){ console.warn('migger completos:', e); }
@@ -13929,13 +13934,14 @@ async function bajarMigGer(){
         const cat = String((vj.cats || [])[r[4]] || '');
         otDir[r[2]] = r[0];
         (porDir[r[0]] = porDir[r[0]] || []).push({ f: String(r[1]), ok: r[5] === 1, mig: cat.indexOf('Migr') === 0, ot: r[2],
-          tec: String((vj.tecs || [])[r[3]] || ''), cie: String((vj.cies || [])[r[6]] || ''), hi: r[7], dur: r[8] });
+          tec: String((vj.tecs || [])[r[3]] || ''), cie: String((vj.cies || [])[r[6]] || ''), hi: r[7], dur: r[8],
+          via: r[9] === undefined ? null : r[9] });          // (22-10-2026) minutos de viaje: visitas_dir.json version 2
       });
       vis = { otDir: otDir, porDir: porDir, hasta: String(vj.hasta || ''), dirs: vj.dirs || [] };
     }
   } catch(e){ console.warn('migger visitas:', e); }
   const resp = await pResp;
-  return { filas: filas, porOT: porOT, completo: completo, vis: vis, resp: resp };
+  return { filas: filas, porOT: porOT, completo: completo, vis: vis, resp: resp, fuera: fuera, dirCa: dirCa };
 }
 function abrirMigGer(){
   let m = document.getElementById('modalMG');
@@ -13984,7 +13990,7 @@ function mgRango(k){
 /* Junta todo por periodo (mes o semana) */
 function mgAgrupar(){
   const P = {};
-  const nuevo = function(){ return { tecs:{}, td:{}, oco:0, onr:0, nrl:[], resp:{cli:0,vtr:0,dom:0}, rcod:{cli:{},vtr:{},dom:{}}, fr:{}, otra:0, a:0, co:0, nr:0, ca:0, su:0, cod:{}, fam:{sm:0,re:0,de:0,di:0,ot:0}, dias:{}, des:[], desOk:false, reag:0, reagOk:false, codCa:{} }; };
+  const nuevo = function(){ return { tecs:{}, td:{}, oco:0, onr:0, nrl:[], cal:[], resp:{cli:0,vtr:0,dom:0}, rcod:{cli:{},vtr:{},dom:{}}, fr:{}, otra:0, a:0, co:0, nr:0, ca:0, su:0, cod:{}, fam:{sm:0,re:0,de:0,di:0,ot:0}, dias:{}, des:[], desOk:false, reag:0, reagOk:false, codCa:{} }; };
   (MG ? MG.filas : []).forEach(function(x){
     const k = mgVer === 'mes' ? x.mes : x.sem, o = P[k] || (P[k] = nuevo());
     o.a++; o.dias[x.iso] = 1; if(x.otra) o.otra++;
@@ -13994,7 +14000,7 @@ function mgAgrupar(){
     else if(x.e === 'No Realizada'){ o.nr++; const c = x.cod || 'Sin código'; o.cod[c] = (o.cod[c] || 0) + 1; o.fam[MG_FAM(c)]++;
       const r = mgResp(c); o.resp[r]++; o.rcod[r][c] = (o.rcod[r][c] || 0) + 1; o.nrl.push(x); }
     if((x.e === 'Completado' || x.e === 'No Realizada') && x.fr){ const f = o.fr[x.fr] || (o.fr[x.fr] = {n:0, d:0}); f.n++; if(x.e === 'No Realizada') f.d++; }
-    else if(x.e === 'Cancelado'){ o.ca++; const c = x.cod || 'sin motivo'; o.codCa[c] = (o.codCa[c] || 0) + 1; }
+    else if(x.e === 'Cancelado'){ o.ca++; o.cal.push(x); const c = x.cod || 'sin motivo'; o.codCa[c] = (o.codCa[c] || 0) + 1; }
     else if(x.e === 'Suspendido') o.su++;
   });
   /* desaparecidas y reagendadas de otro dia: historico del monitor (hasta
@@ -14016,7 +14022,7 @@ function mgAgrupar(){
      otra asignacion). Las que volvieron el mismo dia ya estan en o.a. */
   Object.keys(P).forEach(function(k){ const o = P[k];
     o.fuera = o.des.filter(function(d){ const t = mgDestino(d); return t !== 'otro' && t !== 'canc' && t !== 'mismo'; }).length;
-    o.u = o.a + o.fuera; });
+    o.u = o.a + o.fuera; o.k = k; });
   return P;
 }
 function mgHoyIso(){ const d = new Date(); return d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0'); }
@@ -14213,6 +14219,7 @@ function mgMalDerHtml(k){
           + '<td>' + escR(x.cod || 'Sin código') + '</td><td>' + escR(r.real || '—') + (r.det ? '<br><small>' + escR(r.det) + '</small>' : '') + (r.plat && r.plat !== x.cod ? ' <small>(plataforma: ' + escR(r.plat) + ')</small>' : '') + '</td>'
           + '<td>' + escR(r.ticket || '—') + '</td><td><a class="mg-foto md" href="' + escR(r.foto) + '" target="_blank" rel="noopener">📷 ver</a></td></tr>'; }).join('')
     + '</tbody></table></div>'
+    + '<p class="mg-nota">📷 La app de respaldo con foto se empezó a usar el ' + mgDdmm(R.desde) + ': antes de esa fecha no hay respaldos.</p>'
     + (hayExtra ? '' : '<p class="mg-nota">Para ver el ticket y lo que encontró el técnico hay que actualizar el receptor en Google (receptor_doGet_lista_v2.txt, en la carpeta respaldo-terreno). Mientras, el detalle está escrito en la foto.</p>')
     + '</div>';
 }
@@ -14237,7 +14244,8 @@ function mgTecHtml(k, kPrev){
           + '<span><b>' + MG_G[q].l + '</b>: ' + MG_G[q].d + '.</span></div>'; }).join('') + '</div>'
     + (S.fF ? '<p class="mg-nota">⏰ ' + S.fF + ' visitas llegaron fuera de la franja (' + mgF1(mgPct(S.fF, S.fF + S.fD)) + '%). Ahí la derivación fue '
         + Math.round(mgPct(S.fFnr, S.fF)) + '%, contra ' + Math.round(mgPct(S.fDnr, S.fD)) + '% a tiempo. Esas no realizadas están en "para revisar".</p>' : '')
-    + (MG.resp && MG.resp.desde ? (S.fotN ? '<p class="mg-nota">📷 Respaldo con foto (app de respaldo, desde el ' + mgDdmm(MG.resp.desde) + '): <b>' + S.fotOk + ' de ' + S.fotN + '</b> sin moradores, reagendas y desistes del período (' + Math.round(mgPct(S.fotOk, S.fotN)) + '%). En la ficha de cada técnico se ve cuál tiene foto.</p>' : '')
+    + (MG.resp && MG.resp.desde ? (S.fotN ? '<p class="mg-nota">📷 Respaldo con foto (app de respaldo, desde el ' + mgDdmm(MG.resp.desde) + '): <b>' + S.fotOk + ' de ' + S.fotN + '</b> sin moradores, reagendas y desistes del período (' + Math.round(mgPct(S.fotOk, S.fotN)) + '%). En la ficha de cada técnico se ve cuál tiene foto.</p>'
+          : '<p class="mg-nota">📷 La app de respaldo con foto se empezó a usar el ' + mgDdmm(MG.resp.desde) + ': en este período no hay respaldos.</p>')
         : '<p class="mg-nota">📷 No se pudieron leer los respaldos con foto de la app (falta actualizar el receptor en Google o no hay conexión).</p>')
     + '</div>';
   const ob = function(v, t){ return '<button class="' + (mgTecOrd === v ? 'on' : '') + '" onclick="setMgTecOrd(\'' + v + '\')">' + t + '</button>'; };
@@ -14351,7 +14359,8 @@ function mgDirExcel(){
     ['Todavía sin hacer', pend],
     [],
     ['Qué es esta lista', 'Casas donde fueron técnicos distintos, en días distintos, y la migración no se pudo hacer. El problema está en la casa (cliente, dirección o red), no en un técnico.'],
-    ['Propuesta', 'Antes de volver a agendar estas casas: confirmar con el cliente (contacto, horario, dirección) o revisar la red. Así no se pierden más visitas.']
+    ['Propuesta', 'Antes de volver a agendar estas casas: confirmar con el cliente (contacto, horario, dirección) o revisar la red. Así no se pierden más visitas.'],
+    ['Respaldo con foto', MG.resp && MG.resp.desde ? 'La app de respaldo se empezó a usar el ' + ff(MG.resp.desde) + '. Las visitas anteriores no tienen respaldo y esa columna queda vacía.' : 'No se pudieron leer los respaldos.']
   ];
   const casas = rep.map(function(o){
     const ult = o.vs.filter(function(v){ return !v.ok; }).pop();
@@ -14504,12 +14513,52 @@ function mgPeriodoHtml(o, a, k, kA, cur){
     h += '</div>';
   }
   /* canceladas */
+  /* (22-10-2026) canceladas orden por orden, con OT, fecha y direccion, y un
+     Excel para pedirle el motivo a VTR/CLARO (la mayoria viene sin motivo) */
   if(o.ca){
     const cc = Object.keys(o.codCa).sort(function(x, y){ return o.codCa[y] - o.codCa[x]; });
-    h += '<div class="mg-b"><div class="mg-t"><b>Canceladas</b><small>' + o.ca + ' · ' + mgF1(pCa) + '% de las que llegaron</small></div><p class="mg-frase">'
-      + cc.map(function(c){ return escR(c === 'sin motivo' ? 'Sin motivo informado' : c) + ': <b>' + o.codCa[c] + '</b>'; }).join(' · ') + '</p></div>';
+    const sinM = o.codCa['sin motivo'] || 0;
+    h += '<div class="mg-b"><div class="mg-t"><b>Canceladas</b><small>' + o.ca + ' · ' + mgF1(pCa) + '% de las que llegaron</small>'
+      + '<button class="mg-xls" onclick="mgCancExcel()" title="Lista de las canceladas con OT y fecha, para pedirle el motivo a VTR/CLARO">⬇ Excel para VTR/CLARO</button></div>'
+      + '<p class="mg-frase">' + cc.map(function(c){ return escR(c === 'sin motivo' ? 'Sin motivo informado' : c) + ': <b>' + o.codCa[c] + '</b>'; }).join(' · ')
+      + (sinM ? '. <b class="am">' + sinM + ' de ' + o.ca + '</b> vienen sin motivo en el export: el motivo lo tiene que informar VTR/CLARO.' : '') + '</p>'
+      + '<div class="mg-scroll"><table class="mg-q mg-l"><thead><tr><th>Fecha</th><th>Orden</th><th>Técnico</th><th>Franja</th><th>Dirección</th><th>Motivo en el export</th></tr></thead><tbody>'
+      + mgCancFilas(o).map(function(f){ return '<tr><td>' + f.fecha.slice(0, 5) + '</td><td>' + escR(f.ot) + '</td><td>' + escR(f.tec) + '</td><td>' + escR(f.fr) + '</td><td>' + escR(f.dir || '—') + '</td>'
+          + '<td>' + (f.mot ? escR(f.mot) : '<span class="mg-sinfoto">sin motivo</span>') + '</td></tr>'; }).join('') + '</tbody></table></div>'
+      + '<p class="mg-nota">La dirección sale de los export del portal. Si una no tiene, es de un día en otra comuna o de un export que no está en la carpeta.</p></div>';
   }
   return h;
+}
+
+/* (22-10-2026) canceladas del periodo, orden por orden */
+function mgCancFilas(o){
+  const ff = function(f){ f = String(f); return f.slice(6, 8) + '-' + f.slice(4, 6) + '-' + f.slice(0, 4); };
+  return (o.cal || []).slice().sort(function(a, b){ return a.iso < b.iso ? -1 : a.iso > b.iso ? 1 : 0; }).map(function(x){
+    return { fecha: ff(x.iso), ot: x.ot, tec: mgCap(x.tec), fr: x.fr || '', dir: mgCap((MG && MG.dirCa && MG.dirCa[x.ot]) || ''), mot: x.cod || '' }; });
+}
+function mgCancExcel(){
+  if(typeof XLSX === 'undefined'){ alert('No cargó la librería de Excel. Recarga la página.'); return; }
+  const o = mgAgrupar()[mgSel]; if(!o || !o.ca){ alert('No hay canceladas en este período.'); return; }
+  const per = mgNomPer(mgSel), F = mgCancFilas(o), sinM = F.filter(function(f){ return !f.mot; }).length;
+  const leeme = [
+    ['Migraciones canceladas en bandejas de Dominion'],
+    ['Período', per],
+    ['Generado', new Date().toLocaleString('es-CL')],
+    ['Fuente', 'Export de actividades del portal (técnicos Dominion, hasta ayer)'],
+    [],
+    ['Canceladas', F.length],
+    ['Sin motivo en el export', sinM],
+    [],
+    ['Qué pedimos', 'Que VTR/CLARO informe el motivo de cada cancelación (columna "Motivo VTR/CLARO"). Sin motivo no podemos saber si se pudo evitar.']
+  ];
+  const filas = F.map(function(f){ return { 'Fecha': f.fecha, 'Orden de Trabajo': f.ot, 'Técnico': f.tec, 'Franja': f.fr, 'Dirección': f.dir,
+    'Motivo en el export': f.mot || 'Sin motivo', 'Motivo VTR/CLARO': '' }; });
+  const wb = XLSX.utils.book_new();
+  const h1 = XLSX.utils.aoa_to_sheet(leeme); h1['!cols'] = [{ wch:26 }, { wch:100 }];
+  const h2 = XLSX.utils.json_to_sheet(filas); h2['!cols'] = [{ wch:11 }, { wch:14 }, { wch:28 }, { wch:7 }, { wch:44 }, { wch:22 }, { wch:40 }];
+  XLSX.utils.book_append_sheet(wb, h1, 'Léeme');
+  XLSX.utils.book_append_sheet(wb, h2, 'Canceladas');
+  XLSX.writeFile(wb, 'canceladas_' + per.replace(/\s+/g, '-').toLowerCase() + '.xlsx');
 }
 
 /* ---- DE QUIEN DEPENDE (21-10-2026) ----
@@ -14558,7 +14607,7 @@ function mgRecCalc(l){
   const V = MG && MG.vis; if(!V) return null;
   const hasta = V.hasta || mgHoyIso(), lim = (function(){ const d = new Date(+hasta.slice(0, 4), +hasta.slice(4, 6) - 1, +hasta.slice(6, 8)); d.setDate(d.getDate() - 7);
     return d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0'); })();
-  const R = { n:0, ok:0, falla:0, nada:0, rec:0, sindir:0, dias:[], porFam:{} };
+  const R = { n:0, ok:0, falla:0, nada:0, nadaL:[], rec:0, sindir:0, dias:[], porFam:{} };
   l.forEach(function(x){
     const di = V.otDir[x.ot];
     if(di === undefined){ R.sindir++; return; }
@@ -14572,11 +14621,84 @@ function mgRecCalc(l){
       const a = new Date(+x.iso.slice(0, 4), +x.iso.slice(4, 6) - 1, +x.iso.slice(6, 8)), b = new Date(+ok.f.slice(0, 4), +ok.f.slice(4, 6) - 1, +ok.f.slice(6, 8));
       R.dias.push(Math.round((b - a) / 86400000)); }
     else if(desp.length) R.falla++;
-    else R.nada++;
+    else { R.nada++; R.nadaL.push(x); }
   });
   R.dias.sort(function(p, q){ return p - q; });
   R.med = R.dias.length ? R.dias[Math.floor(R.dias.length / 2)] : null;
   return R;
+}
+/* (22-10-2026) Las que ningun tecnico de Dominion volvio a visitar: quien las
+   tiene. Se mira en los export del portal (MG.fuera, lo arma
+   seguimiento_autonomia.py) si despues aparecio una migracion en esa misma
+   direccion (o con la misma OT) fuera de Dominion:
+   - 'otra': la tomo un tecnico de otra empresa (ATLA, EMCO, TRAZ...)
+   - 'canc': VTR/CLARO la volvio a generar y la cancelo en el bucket
+   - 'buck': esta en el bucket, sin tecnico
+   - 'sin' : no aparece en ningun export: VTR/CLARO no la ha vuelto a agendar
+             en la zona (o la tiene alguien que no se ve con las credenciales
+             de la agencia) */
+const MG_QUIEN = {
+  otra:{ t:'la tomó otra empresa', c:'#7c3aed' },
+  canc:{ t:'VTR/CLARO la volvió a generar y la canceló', c:'#64748b' },
+  buck:{ t:'está en el bucket, sin técnico', c:'#0e7c6b' },
+  sin: { t:'no aparece en ningún export: VTR/CLARO no la ha vuelto a agendar', c:'#b45309' }
+};
+function mgQuien(x){
+  const F = MG && MG.fuera; if(!F) return null;
+  const ev = (F.ots[x.ot] || []).filter(function(e){ return String(e[0]) >= String(x.iso); }).map(function(e){
+    const q = F.quien[e[1]] || ['', '']; return { iso:String(e[0]), emp:q[0], nom:q[1], e:e[2], cod:F.cods[e[3]] || '', ot:e[4] }; });
+  const emp = ev.filter(function(e){ return e.emp; });
+  if(emp.length){ const ok = emp.filter(function(e){ return e.e === 'Completado'; })[0], u = ok || emp[emp.length - 1];
+    return { k:'otra', ev:ev, u:u, txt: u.emp + ' (' + mgCap(u.nom) + ') · ' + (u.e === 'Completado' ? 'la completó' : u.e === 'No Realizada' ? 'no realizada' + (u.cod ? ': ' + u.cod : '') : u.e.toLowerCase()) + ' el ' + mgDdmm(u.iso) }; }
+  const ca = ev.filter(function(e){ return e.e === 'Cancelado'; });
+  if(ca.length){ const u = ca[ca.length - 1]; return { k:'canc', ev:ev, u:u, txt:'cancelada en el bucket el ' + mgDdmm(u.iso) + (u.ot !== x.ot ? ' (orden ' + u.ot + ')' : '') }; }
+  if(ev.length){ const u = ev[ev.length - 1]; return { k:'buck', ev:ev, u:u, txt:'en el bucket (' + u.e.toLowerCase() + ') el ' + mgDdmm(u.iso) }; }
+  return { k:'sin', ev:[], u:null, txt:'no aparece en ningún export después del ' + mgDdmm(x.iso) };
+}
+function mgQuienExcel(){
+  if(typeof XLSX === 'undefined'){ alert('No cargó la librería de Excel. Recarga la página.'); return; }
+  const o = mgAgrupar()[mgSel]; const R = o && mgRecCalc(o.nrl);
+  if(!R || !R.nadaL.length){ alert('No hay no realizadas sin volver a visitar en este período.'); return; }
+  const per = mgNomPer(mgSel), ff = function(f){ f = String(f); return f.slice(6, 8) + '-' + f.slice(4, 6) + '-' + f.slice(0, 4); };
+  const L = R.nadaL.slice().sort(function(a, b){ return a.iso < b.iso ? -1 : 1; });
+  const filas = L.map(function(x){ const q = mgQuien(x), c = mgCasa(x);
+    return { 'Fecha no realizada': ff(x.iso), 'Orden de Trabajo': x.ot, 'Dirección': c ? mgCap(c.dir) : '', 'Técnico Dominion': mgCap(x.tec), 'Causa': x.cod || '',
+      'Qué pasó después': q ? MG_QUIEN[q.k].t : '', 'Detalle': q ? q.txt : '', '¿La reagendan? (VTR/CLARO)': '' }; });
+  const cnt = {}; L.forEach(function(x){ const q = mgQuien(x); if(q) cnt[q.k] = (cnt[q.k] || 0) + 1; });
+  const leeme = [
+    ['Migraciones no realizadas que ningún técnico de Dominion volvió a visitar'],
+    ['Período', per],
+    ['Generado', new Date().toLocaleString('es-CL')],
+    ['Fuente', 'TOA (visitas de Dominion) y export del portal hasta el ' + (MG.fuera ? ff(MG.fuera.hasta) : '—') + ' (bucket y otras empresas de la zona)'],
+    [],
+    ['Total', L.length]
+  ].concat(Object.keys(MG_QUIEN).filter(function(k){ return cnt[k]; }).map(function(k){ const t = MG_QUIEN[k].t; return [t.charAt(0).toUpperCase() + t.slice(1), cnt[k]]; }))
+   .concat([[], ['Qué pedimos', 'Para las que no aparecen en ningún export: que VTR/CLARO confirme si se van a volver a agendar o si se anularon.']]);
+  const wb = XLSX.utils.book_new();
+  const h1 = XLSX.utils.aoa_to_sheet(leeme); h1['!cols'] = [{ wch:60 }, { wch:90 }];
+  const h2 = XLSX.utils.json_to_sheet(filas); h2['!cols'] = [{ wch:11 }, { wch:14 }, { wch:42 }, { wch:26 }, { wch:26 }, { wch:44 }, { wch:44 }, { wch:26 }];
+  h2['!autofilter'] = { ref: XLSX.utils.encode_range({ s:{r:0,c:0}, e:{r:filas.length, c:7} }) };
+  XLSX.utils.book_append_sheet(wb, h1, 'Léeme');
+  XLSX.utils.book_append_sheet(wb, h2, 'Sin volver a visitar');
+  XLSX.writeFile(wb, 'no-revisitadas_' + per.replace(/\s+/g, '-').toLowerCase() + '.xlsx');
+}
+function mgQuienHtml(R){
+  if(!R.nadaL.length) return '';
+  if(!MG.fuera) return '<p class="mg-nota">Para saber quién tiene las ' + R.nada + ' que no se volvieron a visitar falta subir el migraciones_semanas.json nuevo (correr seguimiento.bat).</p>';
+  const L = R.nadaL.map(function(x){ return { x:x, q:mgQuien(x), c:mgCasa(x) }; }), cnt = { otra:0, canc:0, buck:0, sin:0 };
+  L.forEach(function(it){ cnt[it.q.k]++; });
+  const ab = !!mgAbre.quien;
+  return '<div class="mg-quien"><p class="mg-frase" style="margin-bottom:6px">¿Quién tiene las <b>' + R.nada + '</b> que ningún técnico de Dominion volvió a visitar?</p>'
+    + '<div class="mg-dest">' + Object.keys(MG_QUIEN).filter(function(k){ return cnt[k]; }).map(function(k){
+        return '<div><b style="color:' + MG_QUIEN[k].c + '">' + cnt[k] + '</b><span>' + MG_QUIEN[k].t + '</span></div>'; }).join('') + '</div>'
+    + '<button class="mg-ver" onclick="mgToggle(\'quien\')">' + (ab ? 'Ocultar' : 'Ver') + ' las ' + R.nada + ' órdenes</button> '
+    + '<button class="mg-xls" style="margin-left:6px" onclick="mgQuienExcel()" title="Lista para preguntarle a VTR/CLARO si las va a reagendar">⬇ Excel para VTR/CLARO</button>'
+    + (ab ? '<div class="mg-scroll"><table class="mg-q mg-l"><thead><tr><th>Día</th><th>Orden</th><th>Técnico</th><th>Causa</th><th>Dirección</th><th>Qué pasó después</th></tr></thead><tbody>'
+      + L.sort(function(a, b){ return a.x.iso < b.x.iso ? -1 : 1; }).map(function(it){
+          return '<tr><td>' + mgDdmm(it.x.iso) + '</td><td>' + escR(it.x.ot) + '</td><td>' + escR(mgCap(mgCorto(it.x.tec))) + '</td><td>' + escR(it.x.cod || '') + '</td>'
+            + '<td>' + escR(it.c ? mgCap(it.c.dir) : '—') + '</td><td style="color:' + MG_QUIEN[it.q.k].c + '">' + escR(it.q.txt) + '</td></tr>'; }).join('') + '</tbody></table></div>' : '')
+    + '<p class="mg-nota">Se busca en los export del portal (hasta el ' + mgDdmm(MG.fuera.hasta) + ') si después apareció una migración en la misma dirección, o con la misma orden, en el bucket o con un técnico de otra empresa. '
+    + '"No aparece en ningún export" quiere decir que no se ve en la zona con las credenciales de la agencia: lo más probable es que VTR/CLARO no la haya vuelto a agendar.</p></div>';
 }
 function mgRecHtml(o){
   if(!MG || !MG.vis) return '';
@@ -14589,14 +14711,15 @@ function mgRecHtml(o){
     + '<div class="mg-dest">'
     + '<div><b style="color:#15803d">' + R.ok + '</b><span>se completaron después en la misma dirección</span></div>'
     + '<div><b style="color:#dc2626">' + R.falla + '</b><span>se volvió a ir y tampoco se pudo</span></div>'
-    + '<div><b style="color:#b45309">' + R.nada + '</b><span>no se ha vuelto a visitar (o la hizo otra empresa)</span></div>'
+    + '<div><b style="color:#b45309">' + R.nada + '</b><span>' + (MG.fuera ? 'ningún técnico de Dominion la volvió a visitar' : 'no se ha vuelto a visitar (o la hizo otra empresa)') + '</span></div>'
     + (R.rec ? '<div><b style="color:#94a3b8">' + R.rec + '</b><span>son de los últimos 7 días: todavía no se sabe</span></div>' : '')
     + '</div>'
     + (fams.length ? '<table class="mg-q"><thead><tr><th>Quiebre</th><th>No realizadas</th><th>Se completaron después</th><th></th></tr></thead><tbody>'
       + fams.map(function(f){ const w = R.porFam[f], p = mgPct(w.ok, w.n);
           return '<tr><td><i style="background:' + MG_COLOR[f] + '"></i>' + MG_FNOM[f] + '</td><td>' + w.n + '</td><td><b>' + w.ok + '</b> <small>(' + Math.round(p) + '%)</small></td>'
             + '<td class="bar"><span style="width:' + Math.max(2, p) + '%;background:#15803d"></span></td></tr>'; }).join('') + '</tbody></table>' : '')
-    + '<p class="mg-nota">Se busca la dirección de cada no realizada en el historial de visitas de los técnicos de Dominion (hasta ayer) y se mira si después alguien completó una migración ahí. La orden nueva tiene otro número: por eso se cruza por dirección (con casa y depto). Lo que hizo otra empresa no se ve.'
+    + mgQuienHtml(R)
+    + '<p class="mg-nota">Se busca la dirección de cada no realizada en el historial de visitas de los técnicos de Dominion (hasta ayer) y se mira si después alguien completó una migración ahí. La orden nueva tiene otro número: por eso se cruza por dirección (con casa y depto).' + (MG.fuera ? '' : ' Lo que hizo otra empresa no se ve.')
     + (R.sindir ? ' ' + R.sindir + ' no realizadas no tienen dirección en el historial (por ejemplo, días en otras comunas) y no se cuentan.' : '') + '</p></div>';
 }
 /* ---- GRAFICO: derivacion semana a semana con la meta (21-10-2026) ---- */
@@ -14639,6 +14762,45 @@ function mgGraficoHtml(){
 function mgRangoSem(k){ const p = k.split('-'), d = new Date(+p[0], +p[1] - 1, +p[2]);
   return String(d.getDate()).padStart(2, '0') + '-' + String(d.getMonth() + 1).padStart(2, '0'); }
 
+/* ---- HORAS-TECNICO PERDIDAS (22-10-2026, pedido de Luis: "cuanto nos
+   cuesta esto") ----
+   Por cada migracion no realizada: minutos de viaje hasta la casa + minutos
+   en la casa (los dos los guarda TOA y llegan en visitas_dir.json). Los
+   minutos en la casa se topan en MG_TOPE_CASA, porque en TOA hay visitas que
+   quedan abiertas horas. Las no realizadas sin tiempo registrado (por
+   ejemplo, dias en otras comunas) se estiman con el promedio de las que si
+   lo tienen. Para comparar: una migracion COMPLETADA toma, en mediana, su
+   viaje + su tiempo en la casa (mismo periodo). */
+const MG_TOPE_CASA = 120, MG_TOPE_VIAJE = 90;
+function mgHorasCalc(o){
+  if(!MG || !MG.vis) return null;
+  const H = { n:0, con:0, casa:0, via:0, conVia:0, comp:[] };
+  o.nrl.forEach(function(x){
+    H.n++;
+    const c = mgCasa(x), yo = c && c.yo;
+    if(!yo || yo.dur == null || yo.dur < 0) return;
+    H.con++; H.casa += Math.min(yo.dur, MG_TOPE_CASA);
+    if(yo.via != null && yo.via >= 0){ H.conVia++; H.via += Math.min(yo.via, MG_TOPE_VIAJE); }
+  });
+  if(!H.con) return null;
+  /* migraciones completadas del mismo periodo, para el "equivale a" */
+  (MG.filas || []).forEach(function(x){
+    if(x.e !== 'Completado' || mgClave(x.iso) !== o.k) return;
+    const c = mgCasa(x), yo = c && c.yo; if(!yo || yo.dur == null || yo.dur <= 0) return;
+    H.comp.push(Math.min(yo.dur, 300) + (yo.via != null && yo.via >= 0 ? Math.min(yo.via, MG_TOPE_VIAJE) : 0));
+  });
+  H.comp.sort(function(a, b){ return a - b; });
+  H.medComp = H.comp.length ? H.comp[Math.floor(H.comp.length / 2)] : null;
+  H.hayVia = H.conVia >= 0.5 * H.con;                  // visitas_dir.json nuevo (con viaje)
+  H.minCasa = H.casa / H.con;
+  H.minVia = H.conVia ? H.via / H.conVia : 0;
+  H.minVisita = H.minCasa + (H.hayVia ? H.minVia : 0);
+  H.total = H.minVisita * H.n / 60;                  // horas, con las sin tiempo estimadas
+  H.equiv = H.medComp ? H.total * 60 / H.medComp : null;
+  return H;
+}
+function mgHorasTxt(h){ return h >= 100 ? String(Math.round(h)) : mgF1(h); }
+
 /* ---- EQUIPO Y RENDIMIENTO (21-10-2026, mirada del gerente de Dominion) ----
    Cuantos tecnicos hicieron migraciones, cuantos "dias-tecnico" (un tecnico
    en un dia con al menos una migracion), cuantas completa cada uno al dia,
@@ -14649,16 +14811,25 @@ function mgEquipoHtml(o, a, nomA){
   const rend = o.co / nTD, rendA = a && Object.keys(a.td).length ? a.co / Object.keys(a.td).length : null;
   const perd = nd ? o.nr / nd : 0, perdA = a && Object.keys(a.dias).length ? a.nr / Object.keys(a.dias).length : null;
   const zco = o.co - o.oco, znr = o.nr - o.onr, dz = mgPct(znr, zco + znr), dO = mgPct(o.onr, o.oco + o.onr);
+  const Hh = mgHorasCalc(o), HhA = a ? mgHorasCalc(a) : null, ndA = a ? Object.keys(a.dias).length : 0;
   const cmpV = function(v, va, malo){ if(va === null) return ''; const d = 100 * (v - va) / va;
     if(Math.abs(d) < 3) return '<i class="eq">= igual que ' + nomA + '</i>';
     return '<i class="' + ((malo ? d > 0 : d < 0) ? 'peor' : 'mejor') + '">' + (d > 0 ? '▲' : '▼') + ' ' + Math.round(Math.abs(d)) + '% vs ' + nomA + '</i>'; };
   return '<div class="mg-b"><div class="mg-t"><b>Equipo y rendimiento</b><small>técnicos de Dominion con migraciones en el período</small></div>'
     + '<p class="mg-frase">Por cada 10 migraciones completadas hubo <b class="r">' + (o.co ? Math.round(10 * o.nr / o.co) : '–') + '</b> visitas que no sirvieron: '
-    + '<b>' + mgF1(perd) + '</b> visitas perdidas por día contra <b>' + mgF1(nd ? o.co / nd : 0) + '</b> completadas por día.</p>'
+    + '<b>' + mgF1(perd) + '</b> visitas perdidas por día contra <b>' + mgF1(nd ? o.co / nd : 0) + '</b> completadas por día.'
+    + (Hh ? ' Esas visitas costaron <b class="r">≈ ' + mgHorasTxt(Hh.total) + ' horas-técnico</b>'
+        + (Hh.equiv ? ': el tiempo de unas <b>' + Math.round(Hh.equiv) + ' migraciones completas</b>' : '') + '.' : '') + '</p>'
     + '<div class="mg-cards mg-small">'
     + mgCard('Técnicos con migraciones', nT, nTD + ' días-técnico', '', 'az', 'Un día-técnico = un técnico en un día con al menos una migración')
     + mgCard('Completadas por técnico al día', mgF1(rend), 'en los días que tuvo migraciones', cmpV(rend, rendA, false), 've')
     + mgCard('Visitas perdidas por día', mgF1(perd), 'migraciones no realizadas', cmpV(perd, perdA, true), 'ro', 'Viajes en que el técnico fue y la migración no se pudo hacer')
+    + (Hh ? mgCard('Horas-técnico perdidas', '≈ ' + mgHorasTxt(Hh.total) + ' h', mgF1(nd ? Hh.total / nd : 0) + ' h por día<br>'
+        + Math.round(Hh.minVisita) + ' min por visita' + (Hh.hayVia ? ' (' + Math.round(Hh.minVia) + ' de viaje + ' + Math.round(Hh.minCasa) + ' en la casa)' : ' en la casa (falta el viaje)'),
+        HhA && ndA ? cmpV(Hh.total / nd, HhA.total / ndA, true) : '', 'ro',
+        'Viaje hasta la casa + minutos en la casa de cada migración no realizada, según TOA. Los minutos en la casa se topan en ' + MG_TOPE_CASA + ' (hay visitas que quedan abiertas horas en TOA).'
+        + (Hh.n > Hh.con ? ' ' + (Hh.n - Hh.con) + ' no realizadas sin tiempo registrado se estimaron con el promedio.' : '')
+        + (Hh.medComp ? ' Una migración completada toma, en mediana, ' + Math.round(Hh.medComp) + ' min con el viaje.' : '')) : '')
     + (MG && MG.completo && (o.oco + o.onr) ? mgCard('En otras comunas', o.otra, 'derivación allá <b>' + mgF1(dO) + '%</b><br>en Quilpué y V. Alemana ' + mgF1(dz) + '%', '', dO > dz + 3 ? 'ro' : 'gr',
         'Migraciones de técnicos de Dominion en Viña, Valparaíso, Quillota u otra comuna (export completos del jefe)') : '')
     + '</div></div>';
@@ -14688,6 +14859,7 @@ function mgTablaHtml(P, ks, enCurso){
     ['Completadas', function(o){ return o.co + ' <small>' + Math.round(mgPct(o.co, o.u)) + '%</small>'; }],
     ['No realizadas', function(o){ return o.nr; }],
     ['Visitas perdidas por día', function(o){ const n = Object.keys(o.dias).length; return n ? mgF1(o.nr / n) : '–'; }],
+    ['Horas-técnico perdidas', function(o){ const H = mgHorasCalc(o), n = Object.keys(o.dias).length; return H ? '≈ ' + mgHorasTxt(H.total) + ' <small>' + mgF1(n ? H.total / n : 0) + '/día</small>' : '–'; }],
     ['Técnicos con migraciones', function(o){ return Object.keys(o.tecs).length; }],
     ['Completadas por técnico al día', function(o){ const n = Object.keys(o.td).length; return n ? mgF1(o.co / n) : '–'; }],
     ['% derivación (meta ' + MG_META_DER + '% o menos)', function(o){ const p = mgPct(o.nr, o.co + o.nr); return '<b class="' + (p > MG_META_DER ? 'mg-sobre' : 'mg-ok') + '">' + mgF1(p) + '%</b>'; }, 'der'],
@@ -14700,6 +14872,10 @@ function mgTablaHtml(P, ks, enCurso){
     ['No completadas · de VTR/CLARO', function(o){ const R = mgRespArm(o); return R.vtr + ' <small>' + Math.round(mgPct(R.vtr, o.u)) + '%</small>'; }],
     ['No completadas · de Dominion', function(o){ const R = mgRespArm(o); return R.dom + ' <small>' + Math.round(mgPct(R.dom, o.u)) + '%</small>'; }],
     ['No realizadas que se hicieron después', function(o){ const R = mgRecCalc(o.nrl); return R && R.n ? R.ok + ' <small>' + Math.round(mgPct(R.ok, R.n)) + '%</small>' : '–'; }],
+    ['· Dominion no volvió: no aparece en ningún export', function(o){ if(!MG || !MG.fuera) return '–'; const R = mgRecCalc(o.nrl); if(!R || !R.n) return '–';
+        return R.nadaL.filter(function(x){ const q = mgQuien(x); return q && q.k === 'sin'; }).length; }],
+    ['· Dominion no volvió: la tomó otra empresa', function(o){ if(!MG || !MG.fuera) return '–'; const R = mgRecCalc(o.nrl); if(!R || !R.n) return '–';
+        return R.nadaL.filter(function(x){ const q = mgQuien(x); return q && q.k === 'otra'; }).length; }],
     ['Derivación franja 16-19', function(o){ const w = o.fr['16-19']; return w && w.n ? mgF1(mgPct(w.d, w.n)) + '%' : '–'; }],
     ['Canceladas', function(o){ return o.ca; }],
     ['Suspendidas', function(o){ return o.su; }],
@@ -14713,6 +14889,10 @@ function mgTablaHtml(P, ks, enCurso){
     + '<li><b>De quién depende</b>: misma regla de "Quiebres por técnico". Cliente: sin moradores, reagenda, desiste, sin acceso, ductos, sin apoyo. VTR/CLARO: dirección, NAP, red, contingencia, falla masiva, factibilidad, más las canceladas y las que nos sacaron. Dominion: lo demás (falta de dotación, por ejemplo).</li>'
     + '<li><b>¿Se hicieron después?</b>: por cada no realizada se busca su dirección en el historial de visitas de Dominion y se mira si otro día se completó una migración ahí. Las de los últimos 7 días no se cuentan todavía.</li>'
     + '<li><b>Completadas por técnico al día</b>: completadas ÷ días-técnico (un técnico en un día con al menos una migración). <b>Visitas perdidas por día</b>: no realizadas ÷ días con datos.</li>'
+    + '<li><b>Horas-técnico perdidas</b>: por cada no realizada, el viaje hasta la casa más los minutos en la casa, según TOA (los minutos en la casa se topan en ' + MG_TOPE_CASA + ', porque hay visitas que quedan abiertas horas). Las que no tienen tiempo registrado se estiman con el promedio. "El tiempo de N migraciones" = esas horas ÷ lo que toma en mediana una migración completada (viaje + casa).</li>'
+    + '<li><b>¿Quién tiene las que Dominion no volvió a visitar?</b>: se buscan en los export del portal (bucket y técnicos de otras empresas de la zona), por dirección o por orden. Si no aparece en ningún export, VTR/CLARO no la ha vuelto a agendar en la zona.</li>'
+    + '<li><b>"SM+OM" de VTR/CLARO</b>: es sin moradores + <b>otros motivos</b>. Es un indicador de ellos, con su propio universo (en la semana 41 contó 303 de 837 para el equipo V Quilpué): no se compara directo con la derivación ni con el sin moradores de esta vista.</li>'
+    + '<li><b>Respaldo con foto</b>: la app de respaldo se empezó a usar el ' + (MG && MG.resp && MG.resp.desde ? mgDdmm(MG.resp.desde) : '15-10') + '. Antes de esa fecha no hay respaldos: no es que el técnico no lo mandara.</li>'
     + '<li><b>Nos las sacaron</b>: estaban asignadas y sin empezar, y salieron de la bandeja del técnico sin que él las tocara (las movió o anuló la plataforma).</li>'
     + '<li>Solo migraciones de técnicos de Dominion. Hasta ayer. Incluye los días con técnicos en otras comunas (export completos).</li></ul></div>'
     + '<div class="mg-b"><div class="mg-t"><b>' + (mgVer === 'mes' ? 'Mes a mes' : 'Semana a semana') + '</b><small>toca un período arriba para ver su detalle · el % de cada quiebre es sobre las visitadas</small></div>'
@@ -14896,6 +15076,9 @@ function mgHoyHtml(){
   .mg-md { border-left:5px solid #7c3aed; } .mg-md .mg-frase b.r { color:#b91c1c; } .mg-mdt td small { color:#64748b; }
   .mg-foto.vieja { color:#b45309; background:#fffbeb; border-color:#fcd34d; } .mg-sinfoto { margin-left:4px; font-size:11px; color:#94a3b8; border:1px dashed #cbd5e1; border-radius:5px; padding:0 5px; white-space:nowrap; }
   .mg-xls { border:0; background:#15803d; color:#fff; border-radius:7px; padding:7px 13px; font:600 13px 'DM Sans',system-ui,sans-serif; cursor:pointer; } .mg-xls:hover { background:#166534; }
+  /* (22-10-2026) quien tiene las no revisitadas; boton Excel de canceladas a la derecha */
+  .mg-quien { margin-top:12px; padding-top:10px; border-top:1px dashed #cbd5e1; }
+  .mg-t .mg-xls { margin-left:auto; }
 </style>
 
 </body>
