@@ -22305,24 +22305,25 @@
    }
   },
   "22-10-2026": {
-   "hasta": "12:44",
-   "actividades": 137,
+   "hasta": "12:49",
+   "actividades": 148,
    "tecnicos": 35,
    "estados": {
     "Completado": 37,
     "No Realizada": 16,
     "Iniciado": 17,
-    "Pendiente": 58,
+    "Pendiente": 67,
     "Cancelado": 8,
+    "en ruta": 2,
     "Suspendido": 1
    },
-   "rgu": 188.7,
+   "rgu": 210.7,
    "caidas_total": 4,
    "caidas_activas": 4,
    "caidas_resueltas": 0,
    "nuevas": 12,
    "al_bucket": 11,
-   "repetidas": 19,
+   "repetidas": 25,
    "reagendadas": 5,
    "detalle": {
     "caidas": [
@@ -22375,12 +22376,12 @@
      },
      {
       "o": "1-3OJY1WB6",
-      "tec": "CRISTOBAL MIRANDA VALENC",
+      "tec": "LEONEL HERNÁNDEZ OJE",
       "cat": "Alta 2 Play",
       "f": "16-19",
       "hi": "16:32",
       "d": "PROYECTADA (C. SEPULVEDA) 2120, QUILPUE",
-      "e": "Pendiente (ya no está)"
+      "e": "Pendiente"
      },
      {
       "o": "1-3OJXXGWU",
@@ -22470,7 +22471,7 @@
       "f": "13-16",
       "hi": "16:50",
       "d": "PJE MARTIN GALAN 1450, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      }
     ],
     "repetidas": [
@@ -22559,6 +22560,18 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3OJF791B",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "17:30",
+      "d": "EL TINEO 2110, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "visitas": 1,
+      "ult_fecha": "21-10-2026",
+      "ult_cierre": "Falla Aprovisionamiento"
+     },
+     {
       "o": "1-3OIS6916",
       "cat": "Alta 2 Play",
       "f": "16-19",
@@ -22571,10 +22584,22 @@
       "ult_cierre": "Evento Contingencia"
      },
      {
+      "o": "1-3OJENGKU",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "17:01",
+      "d": "LONGITUDINAL 18 CASA MG, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOSE CASTRO P",
+      "visitas": 1,
+      "ult_fecha": "21-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OHU43AU",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "16:10",
+      "hi": "16:17",
       "d": "PJE DEL VERGEL 66, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE PEREZ RANGEL",
@@ -22595,6 +22620,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OJDJENM",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "18:23",
+      "d": "LAS SIETE TAZAS 2178, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JUAN ARRIAGADA C",
+      "visitas": 1,
+      "ult_fecha": "21-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OJK4KM0",
       "cat": "Reparación",
       "f": "13-16",
@@ -22605,6 +22642,18 @@
       "visitas": 1,
       "ult_fecha": "01-08-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OJY1WB6",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "16:13",
+      "d": "PROYECTADA (C. SEPULVEDA) 2120, QUILPUE",
+      "e": "Pendiente",
+      "tec": "LEONEL HERNÁNDEZ OJE",
+      "visitas": 1,
+      "ult_fecha": "22-10-2026",
+      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3OJHMNUB",
@@ -22622,12 +22671,24 @@
       "o": "1-3OJBJQEH",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "13:49",
       "d": "ALMIRANTE NEFF 653 EDIF. 3 DEPTO 23, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
       "visitas": 3,
       "ult_fecha": "18-08-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3OHVL0GI",
+      "cat": "Migración 2 Play",
+      "f": "16-19",
+      "hi": "16:18",
+      "d": "AV PRESIDENTE MONTT 21, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "LUIS GATICA DAVILA",
+      "visitas": 1,
+      "ult_fecha": "19-10-2026",
       "ult_cierre": "Cliente reagenda"
      },
      {
@@ -22653,6 +22714,18 @@
       "visitas": 1,
       "ult_fecha": "08-10-2026",
       "ult_cierre": "Ductos tapados"
+     },
+     {
+      "o": "1-3OJYHSEM",
+      "cat": "Migración 2 Play",
+      "f": "13-16",
+      "hi": "16:25",
+      "d": "LOS AROMOS 1179, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "MATÍAS JAQUE AG",
+      "visitas": 2,
+      "ult_fecha": "20-10-2026",
+      "ult_cierre": "Evento Contingencia"
      },
      {
       "o": "1-3OIP86C2",
@@ -22757,5 +22830,5 @@
    }
   }
  },
- "generado": "22-10-2026 12:44"
+ "generado": "22-10-2026 12:49"
 }
