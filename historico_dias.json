@@ -22305,21 +22305,20 @@
    }
   },
   "22-10-2026": {
-   "hasta": "12:14",
+   "hasta": "12:24",
    "actividades": 137,
    "tecnicos": 35,
    "estados": {
     "Completado": 28,
-    "No Realizada": 13,
-    "Iniciado": 27,
+    "No Realizada": 14,
+    "Iniciado": 28,
     "Pendiente": 58,
     "Cancelado": 8,
-    "en ruta": 2,
     "Suspendido": 1
    },
    "rgu": 188.7,
-   "caidas_total": 3,
-   "caidas_activas": 3,
+   "caidas_total": 4,
+   "caidas_activas": 4,
    "caidas_resueltas": 0,
    "nuevas": 12,
    "al_bucket": 11,
@@ -22352,6 +22351,15 @@
       "f": "13-16",
       "hi": "13:00",
       "d": "PJE 1 431, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OHV1Q7Q",
+      "tec": "YENDER BOSCAN CADENAS",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "16:58",
+      "d": "PJE 1 01299 EDIF. 7 DEPTO 22, QUILPUE",
       "e": "Pendiente"
      }
     ],
@@ -22403,7 +22411,7 @@
      },
      {
       "o": "1-3OJVWJGX",
-      "tec": "MATÍAS JAQUE AG",
+      "tec": "JUAN ARRIAGADA C",
       "cat": "Reparación",
       "f": "13-16",
       "hi": "15:16",
@@ -22587,6 +22595,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OJK4KM0",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "14:12",
+      "d": "PJE 3 (LAGO RAHUE) 3040, QUILPUE",
+      "e": "Pendiente",
+      "tec": "KEVIN TAPIA RETAMAL",
+      "visitas": 1,
+      "ult_fecha": "01-08-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OJHMNUB",
       "cat": "Migración 3 Play",
       "f": "10-13",
@@ -22597,18 +22617,6 @@
       "visitas": 2,
       "ult_fecha": "21-10-2026",
       "ult_cierre": "Cliente reagenda"
-     },
-     {
-      "o": "1-3OJK4KM0",
-      "cat": "Reparación",
-      "f": "13-16",
-      "hi": "14:00",
-      "d": "PJE 3 (LAGO RAHUE) 3040, QUILPUE",
-      "e": "Pendiente",
-      "tec": "LUIS CASTRO TORRES",
-      "visitas": 1,
-      "ult_fecha": "01-08-2026",
-      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OJBJQEH",
@@ -22664,7 +22672,7 @@
       "f": "10-13",
       "hi": "11:28",
       "d": "PJE PERSEO 0671 EDIF. 5 DEPTO 37, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "SEBASTIAN DOSSOW A",
       "visitas": 2,
       "ult_fecha": "21-10-2026",
@@ -22749,5 +22757,5 @@
    }
   }
  },
- "generado": "22-10-2026 12:14"
+ "generado": "22-10-2026 12:24"
 }
