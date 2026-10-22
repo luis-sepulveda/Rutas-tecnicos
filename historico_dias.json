@@ -22305,25 +22305,25 @@
    }
   },
   "22-10-2026": {
-   "hasta": "13:14",
-   "actividades": 151,
+   "hasta": "13:29",
+   "actividades": 156,
    "tecnicos": 35,
    "estados": {
-    "Completado": 44,
+    "Completado": 48,
     "No Realizada": 17,
-    "Iniciado": 13,
-    "Pendiente": 61,
-    "Cancelado": 9,
-    "en ruta": 5,
+    "en ruta": 3,
+    "Pendiente": 60,
+    "Cancelado": 10,
+    "Iniciado": 16,
     "Suspendido": 2
    },
-   "rgu": 213.7,
+   "rgu": 216.9,
    "caidas_total": 4,
    "caidas_activas": 4,
    "caidas_resueltas": 0,
-   "nuevas": 12,
+   "nuevas": 14,
    "al_bucket": 11,
-   "repetidas": 25,
+   "repetidas": 27,
    "reagendadas": 5,
    "detalle": {
     "caidas": [
@@ -22366,6 +22366,24 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OK1Q89L",
+      "tec": "JOSE SALAS MEDINA",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "13:20",
+      "d": "EL TEPU 3176, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
+      "o": "1-3OK1NOUL",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "TRONCOS VIEJOS 755 EDIF. B3 DEPTO 103, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3OJZAQ4R",
       "tec": "CESAR MENA OLIVEROS",
       "cat": "Modificación de Servicio",
@@ -22399,7 +22417,7 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "FLORIDA 2361, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OJW3A8Z",
@@ -22471,7 +22489,7 @@
       "f": "13-16",
       "hi": "16:50",
       "d": "PJE MARTIN GALAN 1450, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      }
     ],
     "repetidas": [
@@ -22560,22 +22578,22 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OFFI10N",
-      "cat": "Migración 1 Play",
+      "o": "1-3OJGJBY2",
+      "cat": "Reparación",
       "f": "13-16",
-      "hi": "13:58",
-      "d": "LAS BARRANCAS 2491 CASA 5-E, QUILPUE",
+      "hi": "14:23",
+      "d": "DARWIN 0190, QUILPUE",
       "e": "Pendiente",
       "tec": "GEEYSER PEREZ O",
-      "visitas": 2,
-      "ult_fecha": "15-10-2026",
-      "ult_cierre": "Cliente reagenda"
+      "visitas": 1,
+      "ult_fecha": "21-10-2026",
+      "ult_cierre": "Falla Masiva"
      },
      {
       "o": "1-3OJF791B",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "18:09",
+      "hi": "18:03",
       "d": "EL TINEO 2110, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOEL GUSTAVE GUSTA",
@@ -22584,10 +22602,22 @@
       "ult_cierre": "Falla Aprovisionamiento"
      },
      {
+      "o": "1-3OFFI10N",
+      "cat": "Migración 1 Play",
+      "f": "13-16",
+      "hi": "14:03",
+      "d": "LAS BARRANCAS 2491 CASA 5-E, QUILPUE",
+      "e": "Pendiente",
+      "tec": "JORDAN ROA PEREZ",
+      "visitas": 2,
+      "ult_fecha": "15-10-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3OIS6916",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:52",
       "d": "FRODDEN 01760, QUILPUE",
       "e": "Pendiente",
       "tec": "JORDAN ROA PEREZ",
@@ -22611,7 +22641,7 @@
       "o": "1-3OHU43AU",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "16:17",
+      "hi": "16:31",
       "d": "PJE DEL VERGEL 66, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE PEREZ RANGEL",
@@ -22635,9 +22665,9 @@
       "o": "1-3OJK4KM0",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:06",
+      "hi": "13:43",
       "d": "PJE 3 (LAGO RAHUE) 3040, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "KEVIN TAPIA RETAMAL",
       "visitas": 1,
       "ult_fecha": "01-08-2026",
@@ -22719,7 +22749,7 @@
       "o": "1-3OJYHSEM",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "16:28",
+      "hi": "15:58",
       "d": "LOS AROMOS 1179, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATÍAS JAQUE AG",
@@ -22731,7 +22761,7 @@
       "o": "1-3OIP86C2",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "16:18",
+      "hi": "17:29",
       "d": "ARAYA 1570, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -22750,6 +22780,18 @@
       "visitas": 2,
       "ult_fecha": "21-10-2026",
       "ult_cierre": "Direccion no encontrada"
+     },
+     {
+      "o": "1-3OJ3GO5S",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "13:57",
+      "d": "NEWTON 0762, QUILPUE",
+      "e": "Pendiente",
+      "tec": "SEBASTIAN DOSSOW A",
+      "visitas": 1,
+      "ult_fecha": "21-10-2026",
+      "ult_cierre": "Falla Masiva"
      },
      {
       "o": "1-3OJUQNC8",
@@ -22791,10 +22833,10 @@
       "o": "1-3OFFI10N",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "13:58",
+      "hi": "14:03",
       "d": "LAS BARRANCAS 2491 CASA 5-E, QUILPUE",
       "e": "Pendiente",
-      "tec": "GEEYSER PEREZ O",
+      "tec": "JORDAN ROA PEREZ",
       "desde": "20-10-2026"
      },
      {
@@ -22830,5 +22872,5 @@
    }
   }
  },
- "generado": "22-10-2026 13:14"
+ "generado": "22-10-2026 13:29"
 }
