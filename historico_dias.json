@@ -22305,25 +22305,45 @@
    }
   },
   "22-10-2026": {
-   "hasta": "09:28",
-   "actividades": 122,
+   "hasta": "09:33",
+   "actividades": 124,
    "tecnicos": 34,
    "estados": {
-    "en ruta": 19,
-    "Pendiente": 102,
+    "en ruta": 20,
+    "Pendiente": 101,
+    "Iniciado": 2,
     "Cancelado": 1
    },
-   "rgu": 173.0,
+   "rgu": 175.0,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 0,
+   "nuevas": 2,
    "al_bucket": 0,
    "repetidas": 25,
    "reagendadas": 5,
    "detalle": {
     "caidas": [],
-    "nuevas": [],
+    "nuevas": [
+     {
+      "o": "1-3OJUP6EV",
+      "tec": "MATIAS APELEO APELEO",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "14:44",
+      "d": "LONQUIMAY 418, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OJURRAZ",
+      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "16:50",
+      "d": "PJE MARTIN GALAN 1450, VILLA ALEMANA",
+      "e": "Pendiente"
+     }
+    ],
     "repetidas": [
      {
       "o": "1-3OJ2WO66",
@@ -22353,9 +22373,9 @@
       "o": "1-3OJEJ464",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "09:30",
+      "hi": "09:33",
       "d": "LAGO LAS TORRES 207 DEPTO 208, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "ALFREDO ALCAYAGA F",
       "visitas": 1,
       "ult_fecha": "05-09-2026",
@@ -22449,7 +22469,7 @@
       "o": "1-3OJ5L7N7",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "11:43",
+      "hi": "11:23",
       "d": "PJE NIEMEYER 119, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -22545,9 +22565,9 @@
       "o": "1-3OJ2P0JY",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "09:30",
+      "hi": "09:31",
       "d": "LA LOMA 2649, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "LUIS MARTIN NUÑEZ",
       "visitas": 2,
       "ult_fecha": "21-10-2026",
@@ -22593,7 +22613,7 @@
       "o": "1-3OJH2H82",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "11:17",
+      "hi": "10:59",
       "d": "PJE PERSEO 0671 EDIF. 5 DEPTO 37, QUILPUE",
       "e": "Pendiente",
       "tec": "SEBASTIAN DOSSOW A",
@@ -22605,7 +22625,7 @@
       "o": "1-3OJK4KM0",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:01",
+      "hi": "14:43",
       "d": "PJE 3 (LAGO RAHUE) 3040, QUILPUE",
       "e": "Pendiente",
       "tec": "SEBASTIAN DOSSOW A",
@@ -22681,5 +22701,5 @@
    }
   }
  },
- "generado": "22-10-2026 09:28"
+ "generado": "22-10-2026 09:33"
 }
