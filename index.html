@@ -8392,6 +8392,9 @@ function refrescarAviso(){
   btn.classList.toggle('alarma', e.alarma);
   txt.textContent = e.texto;
   txt.className = 'upd' + (e.alarma ? ' mal' : '');
+  /* (22-10-2026) al pasar el mouse: de donde vino el dato (API o raw) y el
+     saldo de consultas, igual que el sello antiguo (#lastUpd) */
+  try { const lu = document.getElementById('lastUpd'); txt.title = (lu && lu.title) || ''; txt.style.cursor = 'help'; } catch(_){}
   const caja = txt.parentNode; if(caja && caja.classList) caja.classList.toggle('mal', !!e.alarma);
   try { avisoMonitor(e); } catch(_){}
 }
