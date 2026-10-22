@@ -13858,7 +13858,9 @@ function mgBajarRespaldos(){
         const ot = String(r[c.ot] || '').toUpperCase().replace(/[^0-9A-Z-]/g, ''); if(!ot) return;
         const q = /(\d{2})-(\d{2})-(\d{4})/.exec(String(r[c.fecha] || '')), iso = q ? q[3] + q[2] + q[1] : '';
         if(iso && (!desde || iso < desde)) desde = iso;
-        (porOT[ot] = porOT[ot] || []).push({ iso: iso, hora: String(r[c.hora] || ''), causa: String(r[c.causa] || ''), foto: String(r[c.foto] || ''), vieja: /s/i.test(String(r[c.vieja] || '')) });
+        const g = function(k){ return c[k] === undefined ? '' : String(r[c[k]] || '').replace(/^'/, '').trim(); };
+        (porOT[ot] = porOT[ot] || []).push({ iso: iso, hora: g('hora'), tec: g('tec'), causa: g('causa'), foto: g('foto'), vieja: /s/i.test(g('vieja')),
+          ticket: g('ticket'), real: g('real'), plat: g('plat'), det: g('det'), md: /mal deriv/i.test(g('causa')) });
       });
       return { porOT: porOT, desde: desde, n: j.filas.length };
     }).catch(function(e){ console.warn('respaldos:', e); return null; });
@@ -14147,15 +14149,18 @@ function mgGrupo(x, c, r){
 /* respaldo con foto de esta no realizada (sin moradores, reagenda o desiste) */
 function mgFotoDe(ot, iso, cod){
   const R = MG && MG.resp; if(!R || !R.desde) return { aplica:false };
-  const f = MG_FAM(cod); if(f !== 'sm' && f !== 're' && f !== 'de') return { aplica:false };
   if(String(iso) < R.desde) return { aplica:false };                   // antes de que partiera la app
   const l = R.porOT[String(ot || '').toUpperCase().replace(/[^0-9A-Z-]/g, '')] || [];
   const m = l.filter(function(x){ return x.iso === String(iso); })[0] || l[0] || null;
-  return { aplica:true, r:m };
+  const f = MG_FAM(cod), cuenta = f === 'sm' || f === 're' || f === 'de';     // donde se espera respaldo
+  if(m) return { aplica:true, r:m, cuenta:cuenta };                   // cualquier causa con respaldo (ej. mal derivada)
+  return cuenta ? { aplica:true, r:null, cuenta:true } : { aplica:false };
 }
 function mgFotoTag(ot, iso, cod){
   const F = mgFotoDe(ot, iso, cod); if(!F.aplica) return '';
   if(!F.r) return ' <span class="mg-sinfoto" title="El técnico no mandó respaldo con la app">sin respaldo</span>';
+  if(F.r.md) return ' <a class="mg-foto md" href="' + escR(F.r.foto) + '" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="El técnico avisó con foto que estaba MAL DERIVADA'
+    + (F.r.real ? ' · encontró: ' + escR(F.r.real) : '') + (F.r.ticket ? ' · ticket ' + escR(F.r.ticket) : '') + '">🛠 mal derivada' + (F.r.ticket ? ' · ticket' : '') + '</a>';
   return ' <a class="mg-foto' + (F.r.vieja ? ' vieja' : '') + '" href="' + escR(F.r.foto) + '" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="Respaldo ' + escR(F.r.causa) + ' a las ' + escR(F.r.hora)
     + (F.r.vieja ? ' · OJO: foto antigua (no sacada en el momento)' : '') + '">📷 ' + (F.r.vieja ? 'foto antigua' : 'foto') + '</a>';
 }
@@ -14171,7 +14176,7 @@ function mgTecCalc(k){
     if(!esNr){ o.co++; return; }
     o.nr++;
     const r = mgResp(x.cod), FT = mgFotoDe(x.ot, x.iso, x.cod);
-    if(FT.aplica){ o.fotN++; if(FT.r) o.fotOk++; }
+    if(FT.aplica && FT.cuenta){ o.fotN++; if(FT.r) o.fotOk++; }
     if(!c){ o.sinDir++; o.lista.push({ x:x, c:null, r:r, g:'cli', otros:[], por:[] }); o.g.cli++; return; }
     const G = mgGrupo(x, c, r); o.g[G.g]++;
     if(c.yo && MG_FAM(x.cod) === 'sm' && c.yo.dur > 0){ o.smN++; o.smMin += c.yo.dur; }
@@ -14183,6 +14188,33 @@ function mgTecCalc(k){
 function mgBarra3(g, tot, alto){
   return '<div class="mg-b3"' + (alto ? ' style="height:' + alto + 'px"' : '') + '>' + ['dif','cli','rev'].map(function(q){ const p = mgPct(g[q], tot);
     return p ? '<span style="width:' + p + '%;background:' + MG_G[q].c + '" title="' + MG_G[q].n + ': ' + g[q] + '">' + (p >= 12 ? g[q] : '') + '</span>' : ''; }).join('') + '</div>';
+}
+/* (21-10-2026) MAL DERIVADAS: no realizadas de migracion donde el tecnico
+   mando respaldo "Mal derivada" con la app (foto, GPS, ticket): la causa
+   real no es la que quedo en TOA. Evidencia para VTR/CLARO. */
+function mgMalDerHtml(k){
+  const R = MG && MG.resp; if(!R || !R.desde) return '';
+  const L = [];
+  (MG.filas || []).forEach(function(x){
+    if(mgClave(x.iso) !== k || x.e !== 'No Realizada' || !x.tec || !derActivo(x.tec)) return;
+    const F = mgFotoDe(x.ot, x.iso, x.cod); if(!F.aplica || !F.r || !F.r.md) return;
+    L.push({ x:x, r:F.r, c:mgCasa(x) });
+  });
+  if(!L.length) return '';
+  L.sort(function(a, b){ return a.x.iso < b.x.iso ? -1 : 1; });
+  const cli = L.filter(function(it){ return mgResp(it.x.cod) === 'cli'; }).length, tk = L.filter(function(it){ return it.r.ticket; }).length;
+  const hayExtra = L.some(function(it){ return it.r.real || it.r.ticket; });
+  return '<div class="mg-b mg-md"><div class="mg-t"><b>🛠 Mal derivadas, con foto</b><small>el técnico avisó con la app que la causa real no era la que quedó en TOA</small></div>'
+    + '<p class="mg-frase">En <b>' + L.length + '</b> ' + (L.length === 1 ? 'no realizada' : 'no realizadas') + ' el técnico mandó respaldo de <b>mal derivada</b>' + (tk ? ', ' + tk + ' con número de ticket' : '') + '. '
+    + (cli ? 'TOA cuenta <b class="r">' + cli + '</b> de ellas como causa del cliente.' : '') + '</p>'
+    + '<div class="mg-scroll"><table class="mg-q mg-mdt"><thead><tr><th>Fecha</th><th>Técnico</th><th>Dirección</th><th>Quedó en TOA como</th><th>Lo que encontró el técnico</th><th>Ticket</th><th>Foto</th></tr></thead><tbody>'
+    + L.map(function(it){ const x = it.x, r = it.r;
+        return '<tr><td>' + mgDdmm(x.iso) + '</td><td>' + escR(mgCap(mgCorto(x.tec))) + '</td><td>' + escR(it.c ? mgCap(it.c.dir) : '—') + '</td>'
+          + '<td>' + escR(x.cod || 'Sin código') + '</td><td>' + escR(r.real || '—') + (r.det ? '<br><small>' + escR(r.det) + '</small>' : '') + (r.plat && r.plat !== x.cod ? ' <small>(plataforma: ' + escR(r.plat) + ')</small>' : '') + '</td>'
+          + '<td>' + escR(r.ticket || '—') + '</td><td><a class="mg-foto md" href="' + escR(r.foto) + '" target="_blank" rel="noopener">📷 ver</a></td></tr>'; }).join('')
+    + '</tbody></table></div>'
+    + (hayExtra ? '' : '<p class="mg-nota">Para ver el ticket y lo que encontró el técnico hay que actualizar el receptor en Google (receptor_doGet_lista_v2.txt, en la carpeta respaldo-terreno). Mientras, el detalle está escrito en la foto.</p>')
+    + '</div>';
 }
 function mgTecHtml(k, kPrev){
   const R = mgTecCalc(k), A = kPrev ? mgTecCalc(kPrev).T : {};
@@ -14209,6 +14241,7 @@ function mgTecHtml(k, kPrev){
         : '<p class="mg-nota">📷 No se pudieron leer los respaldos con foto de la app (falta actualizar el receptor en Google o no hay conexión).</p>')
     + '</div>';
   const ob = function(v, t){ return '<button class="' + (mgTecOrd === v ? 'on' : '') + '" onclick="setMgTecOrd(\'' + v + '\')">' + t + '</button>'; };
+  h += mgMalDerHtml(k);
   h += '<div class="mg-b"><div class="mg-t"><b>Cada técnico</b><small>toca un nombre para ver sus casas · ' + conRev + ' técnicos tienen algo para revisar</small>'
     + '<div class="mg-seg mg-ord"><span class="rot">Ordenar</span>' + ob('der', '% derivación') + ob('rev', 'Para revisar') + ob('nr', 'No realizadas') + ob('nom', 'Nombre') + '</div></div>'
     + '<div class="mg-scroll"><table class="mg-q mg-tt"><thead><tr><th>Técnico</th><th>Visitó</th><th>No realizadas</th><th>% derivación</th>'
@@ -14330,12 +14363,12 @@ function mgDirExcel(){
   rep.forEach(function(o){ o.vs.forEach(function(v){
     vis.push({ 'Dirección': calle(o.dir), 'Comuna': comuna(o.dir), 'Fecha': ff(v.f), 'Llegó': v.hi > 0 ? mgHora(v.hi) : '',
       'Técnico': mgCap(v.tec), 'Resultado': v.ok ? 'Completada' : 'No realizada', 'Causa': v.ok ? '' : (v.cie || ''),
-      'Respaldo con foto': (function(){ if(v.ok) return ''; const F = mgFotoDe(v.ot, v.f, v.cie); return !F.aplica ? '' : F.r ? (F.r.vieja ? 'Sí (foto antigua)' : 'Sí') : 'No'; })() }); }); });   // sin minutos: hay visitas que quedan abiertas horas en TOA y confunden
+      'Respaldo con foto': (function(){ if(v.ok) return ''; const F = mgFotoDe(v.ot, v.f, v.cie); return !F.aplica ? '' : F.r ? (F.r.md ? 'Sí: mal derivada' + (F.r.ticket ? ' (ticket ' + F.r.ticket + ')' : '') : F.r.vieja ? 'Sí (foto antigua)' : 'Sí') : 'No'; })() }); }); });   // sin minutos: hay visitas que quedan abiertas horas en TOA y confunden
   const wb = XLSX.utils.book_new();
   const h1 = XLSX.utils.aoa_to_sheet(leeme); h1['!cols'] = [{ wch:32 }, { wch:110 }];
   const h2 = XLSX.utils.json_to_sheet(casas); h2['!cols'] = [{ wch:44 }, { wch:14 }, { wch:10 }, { wch:10 }, { wch:70 }, { wch:13 }, { wch:18 }];
   h2['!autofilter'] = { ref: XLSX.utils.encode_range({ s:{r:0,c:0}, e:{r:casas.length, c:6} }) };
-  const h3 = XLSX.utils.json_to_sheet(vis); h3['!cols'] = [{ wch:44 }, { wch:14 }, { wch:11 }, { wch:7 }, { wch:30 }, { wch:13 }, { wch:34 }, { wch:16 }];
+  const h3 = XLSX.utils.json_to_sheet(vis); h3['!cols'] = [{ wch:44 }, { wch:14 }, { wch:11 }, { wch:7 }, { wch:30 }, { wch:13 }, { wch:34 }, { wch:30 }];
   h3['!autofilter'] = { ref: XLSX.utils.encode_range({ s:{r:0,c:0}, e:{r:vis.length, c:7} }) };
   XLSX.utils.book_append_sheet(wb, h1, 'Léeme');
   XLSX.utils.book_append_sheet(wb, h2, 'Casas');
@@ -14859,6 +14892,8 @@ function mgHoyHtml(){
   .mg-si { color:#15803d; font-weight:600; } .mg-no { color:#b91c1c; font-weight:600; }
   .mg-vt { max-width:760px; background:#fff; }
   .mg-foto { display:inline-block; margin-left:4px; font-size:11.5px; font-weight:700; color:#0e7490; background:#ecfeff; border:1px solid #67e8f9; border-radius:5px; padding:0 6px; text-decoration:none; white-space:nowrap; }
+  .mg-foto.md { color:#6d28d9; background:#f5f3ff; border-color:#c4b5fd; }
+  .mg-md { border-left:5px solid #7c3aed; } .mg-md .mg-frase b.r { color:#b91c1c; } .mg-mdt td small { color:#64748b; }
   .mg-foto.vieja { color:#b45309; background:#fffbeb; border-color:#fcd34d; } .mg-sinfoto { margin-left:4px; font-size:11px; color:#94a3b8; border:1px dashed #cbd5e1; border-radius:5px; padding:0 5px; white-space:nowrap; }
   .mg-xls { border:0; background:#15803d; color:#fff; border-radius:7px; padding:7px 13px; font:600 13px 'DM Sans',system-ui,sans-serif; cursor:pointer; } .mg-xls:hover { background:#166534; }
 </style>
