@@ -11175,12 +11175,13 @@ function rmBajarResp(forzar, intento){
   if(RM_RESP_BAJANDO) return;
   if(!forzar && RM_RESP && !RM_RESP.falla && Date.now() - RM_RESP_T < 300000) return;
   RM_RESP_BAJANDO = true;
-  if(RM_RESP && RM_RESP.falla) { RM_RESP = null; pintarResMig(); }
+  if(!RM_RESP || RM_RESP.falla){ RM_RESP = mgRespLeer(); pintarResMig(); }     // la copia guardada, mientras llega la nueva
   mgBajarRespaldos().then(function(r){
     RM_RESP_BAJANDO = false;
     if(r){ RM_RESP = r; RM_RESP_T = Date.now(); pintarResMig(); return; }
     if(!intento){ setTimeout(function(){ rmBajarResp(true, 1); }, 2000); return; }
-    if(!RM_RESP || RM_RESP.falla) RM_RESP = { falla:true };
+    if(!RM_RESP) RM_RESP = { falla:true };
+    else if(RM_RESP.cache) RM_RESP.sinGoogle = true;          // se queda con la copia, avisando
     pintarResMig();
   });
 }
@@ -11276,7 +11277,9 @@ function pintarResMig(){
     return '<span class="rm-fot ' + (p >= 80 ? 'bien' : p >= 50 ? 'medio' : 'mal') + '">' + o.fotOk + ' de ' + o.fotN + '</span>' + (o.md ? ' <span class="rm-md" title="avisó mal derivada con foto">🛠 ' + o.md + '</span>' : ''); };
   const fotGuia = !RR ? '<div class="rm-nota">📷 Cargando los respaldos con foto… (Google puede tardar unos segundos)</div>'
     : RR.falla ? '<div class="rm-nota">📷 No se pudieron leer los respaldos con foto de la app (Google no respondió). <button class="rm-reint" onclick="rmBajarResp(true, 1)">↻ Reintentar</button></div>'
-    : '<div class="rm-fotg">📷 <b>Respaldo con foto</b> (app de respaldo, se empezó a usar el ' + mgDdmm(RR.desde) + '): '
+    : '<div class="rm-fotg">📷 <b>Respaldo con foto</b> (app de respaldo, se empezó a usar el ' + mgDdmm(RR.desde) + ')'
+      + (RR.cache ? ' <span class="rm-cache">' + (RR.sinGoogle ? 'Google no respondió: fotos guardadas ' + mgRespEdad(RR) + ' <button class="rm-reint" onclick="rmBajarResp(true, 1)">↻ Reintentar</button>'
+          : 'fotos guardadas ' + mgRespEdad(RR) + ', actualizando…') + '</span>' : '') + ': '
       + (fT.n ? '<b>' + fT.ok + ' de ' + fT.n + '</b> sin moradores, reagendas y desistes del período (' + Math.round(100 * fT.ok / fT.n) + '%).' : 'en este período no hay sin moradores, reagendas ni desistes desde que partió la app.')
       + (fT.md ? ' <span class="rm-md">🛠 ' + fT.md + ' mal derivada' + (fT.md === 1 ? '' : 's') + ' con foto</span>.' : '')
       + ' Toca un técnico para ver cuál tiene foto.</div>';
@@ -13884,6 +13887,18 @@ const MG_FNOM = { sm:'Sin moradores', re:'Cliente reagenda', de:'Cliente desiste
    (Apps Script de la cuenta respaldosdominion) entrega con ?lista=1 solo
    OT, fecha, hora, tecnico, causa y link de la foto. Ver CONTEXTO. */
 const URL_RESPALDO_LISTA = 'https://script.google.com/macros/s/AKfycbyRceaPgxD-dQsuH7CSl9SsJXcq-s2ELrczVdZtGykH2Cu-MfiEAvT0lWlQCnLuW68z/exec?lista=1&clave=dominion-zc-2026';
+/* (22-10-2026, 11:00) COPIA LOCAL DE LOS RESPALDOS: cada lectura buena se
+   guarda en el navegador. Si Google tarda o falla, se muestran las ultimas
+   fotos leidas, con la hora ("guardadas hace N min"), en vez de nada. */
+const MG_RESP_LS = 'mgRespaldosCopia';
+function mgRespGuardar(r){ try { localStorage.setItem(MG_RESP_LS, JSON.stringify({ t: Date.now(), r: r })); } catch(e){} }
+function mgRespLeer(){
+  try { const j = JSON.parse(localStorage.getItem(MG_RESP_LS) || 'null');
+    if(j && j.r && j.r.porOT && j.r.desde) return Object.assign({}, j.r, { cache: j.t }); } catch(e){}
+  return null;
+}
+function mgRespEdad(r){ if(!r || !r.cache) return ''; const m = Math.max(0, Math.round((Date.now() - r.cache) / 60000));
+  return m < 60 ? 'hace ' + m + ' min' : m < 1440 ? 'hace ' + Math.round(m / 60) + ' h' : 'hace ' + Math.round(m / 1440) + ' día(s)'; }
 function mgBajarRespaldos(){
   const tope = new Promise(function(res){ setTimeout(function(){ res(null); }, 30000); });       // (22-10) 20 -> 30 s
   const pide = fetch(URL_RESPALDO_LISTA + '&t=' + Date.now()).then(function(r){ return r.ok ? r.json() : null; })
@@ -13899,7 +13914,9 @@ function mgBajarRespaldos(){
         (porOT[ot] = porOT[ot] || []).push({ iso: iso, hora: g('hora'), tec: g('tec'), causa: g('causa'), foto: g('foto'), vieja: /s/i.test(g('vieja')),
           ticket: g('ticket'), real: g('real'), plat: g('plat'), det: g('det'), md: /mal deriv/i.test(g('causa')) });
       });
-      return { porOT: porOT, desde: desde, n: j.filas.length };
+      const out = { porOT: porOT, desde: desde, n: j.filas.length };
+      mgRespGuardar(out);
+      return out;
     }).catch(function(e){ console.warn('respaldos:', e); return null; });
   return Promise.race([pide, tope]);
 }
@@ -13977,7 +13994,7 @@ async function bajarMigGer(){
       vis = { otDir: otDir, porDir: porDir, hasta: String(vj.hasta || ''), dirs: vj.dirs || [] };
     }
   } catch(e){ console.warn('migger visitas:', e); }
-  const resp = await pResp;
+  const resp = (await pResp) || mgRespLeer();      // (22-10) si Google no respondio, la ultima copia guardada
   return { filas: filas, porOT: porOT, completo: completo, vis: vis, resp: resp, fuera: fuera, dirCa: dirCa };
 }
 function abrirMigGer(){
@@ -14308,7 +14325,7 @@ function mgTecHtml(k, kPrev){
           + '<span><b>' + MG_G[q].l + '</b>: ' + MG_G[q].d + '.</span></div>'; }).join('') + '</div>'
     + (S.fF ? '<p class="mg-nota">⏰ ' + S.fF + ' visitas llegaron fuera de la franja (' + mgF1(mgPct(S.fF, S.fF + S.fD)) + '%). Ahí la derivación fue '
         + Math.round(mgPct(S.fFnr, S.fF)) + '%, contra ' + Math.round(mgPct(S.fDnr, S.fD)) + '% a tiempo. Esas no realizadas están en "para revisar".</p>' : '')
-    + (MG.resp && MG.resp.desde ? (S.fotN ? '<p class="mg-nota">📷 Respaldo con foto (app de respaldo, desde el ' + mgDdmm(MG.resp.desde) + '): <b>' + S.fotOk + ' de ' + S.fotN + '</b> sin moradores, reagendas y desistes del período (' + Math.round(mgPct(S.fotOk, S.fotN)) + '%). En la ficha de cada técnico se ve cuál tiene foto.</p>'
+    + (MG.resp && MG.resp.desde ? (S.fotN ? '<p class="mg-nota">📷 Respaldo con foto (app de respaldo, desde el ' + mgDdmm(MG.resp.desde) + (MG.resp.cache ? '; Google no respondió, fotos guardadas ' + mgRespEdad(MG.resp) : '') + '): <b>' + S.fotOk + ' de ' + S.fotN + '</b> sin moradores, reagendas y desistes del período (' + Math.round(mgPct(S.fotOk, S.fotN)) + '%). En la ficha de cada técnico se ve cuál tiene foto.</p>'
           : '<p class="mg-nota">📷 La app de respaldo con foto se empezó a usar el ' + mgDdmm(MG.resp.desde) + ': en este período no hay respaldos.</p>')
         : '<p class="mg-nota">📷 No se pudieron leer los respaldos con foto de la app (falta actualizar el receptor en Google o no hay conexión).</p>')
     + '</div>';
@@ -15372,6 +15389,7 @@ function mgHoyHtml(){
   .rm-fot { font-weight:700; border-radius:6px; padding:1px 7px; white-space:nowrap; } .rm-fot.bien { color:#15803d; background:#f0fdf4; }
   .rm-fot.medio { color:#b45309; background:#fffbeb; } .rm-fot.mal { color:#b91c1c; background:#fef2f2; }
   .rm-md { color:#6d28d9; font-weight:700; white-space:nowrap; }
+  .rm-cache { color:#92400e; background:#fffbeb; border:1px solid #fcd34d; border-radius:6px; padding:0 6px; font-size:12.5px; }
   .rm-reint { margin-left:8px; border:1px solid #0e7490; color:#0e7490; background:#fff; border-radius:6px; padding:2px 9px; font:600 12.5px 'DM Sans',sans-serif; cursor:pointer; }
   /* (22-10-2026) REDISENO GERENCIA: saltos, resumen, laminas, plegables, modo reunion */
   .mg-sel { top:-18px; z-index:5; }          /* tapa los 18 px de margen del modal: antes se colaba una fila de la tabla encima */
