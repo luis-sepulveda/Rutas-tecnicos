@@ -14296,21 +14296,64 @@ function mgTecHtml(k, kPrev){
 }
 /* (22-10-2026) cuadro del equipo: en casas donde otro ya habia fallado,
    quien las saca y quien no. Solo tecnicos con 3 o mas de esas casas. */
+let mgRescAbre = null, MG_RESC_L = [];
+function mgRescToggle(i){ mgRescAbre = mgRescAbre === i ? null : i; pintarMigGer(); }
+/* detalle: cada visita del tecnico a una casa donde otro ya habia fallado,
+   con la peticion y las visitas fallidas anteriores de los otros tecnicos */
+function mgRescDetalle(o){
+  const l = o.resc.concat(o.prevMal).sort(function(a, b){ return a.x.iso < b.x.iso ? -1 : a.x.iso > b.x.iso ? 1 : 0; });
+  return '<div class="mg-fi"><p class="mg-frase" style="font-size:15px">' + escR(mgCap(o.tec)) + ' llegó <b>' + o.prevN + '</b> veces a una casa donde otro técnico ya había fallado: '
+    + '<b class="v">completó ' + o.prevOk + '</b> y <b class="r">no pudo en ' + (o.prevN - o.prevOk) + '</b>.</p>'
+    + '<table class="mg-q mg-fi-t"><thead><tr><th>Fecha</th><th>Petición</th><th>Dirección</th><th>Resultado de ' + escR(mgCap(mgCorto(o.tec))) + '</th><th>Llegó · min</th><th>Antes fallaron (fecha · técnico · petición · causa)</th></tr></thead><tbody>'
+    + l.map(function(it){ const x = it.x, yo = it.c && it.c.yo;
+        return '<tr><td>' + mgDdmm(x.iso) + '</td><td class="mg-pet">' + escR(x.ot) + '</td><td>' + escR(mgCap(it.c.dir)) + '</td>'
+          + '<td>' + (x.e === 'Completado' ? '<span class="mg-si">✓ Completó</span>' : '<span class="mg-no">✗ ' + escR(x.cod || 'No realizada') + '</span>' + mgFotoTag(x.ot, x.iso, x.cod)) + '</td>'
+          + '<td>' + (yo ? mgHora(yo.hi) + (yo.dur > 0 ? ' · ' + yo.dur + ' min' : '') : '—') + '</td>'
+          + '<td>' + it.antes.map(mgVisTxt).join('<br>') + '</td></tr>'; }).join('')
+    + '</tbody></table></div>';
+}
+function mgRescExcel(){
+  if(typeof XLSX === 'undefined'){ alert('No cargó la librería de Excel. Recarga la página.'); return; }
+  const ff = function(f){ f = String(f); return f.slice(6, 8) + '-' + f.slice(4, 6) + '-' + f.slice(0, 4); }, per = mgNomPer(mgSel), filas = [];
+  MG_RESC_L.forEach(function(o){
+    o.resc.concat(o.prevMal).sort(function(a, b){ return a.x.iso < b.x.iso ? -1 : 1; }).forEach(function(it){
+      it.antes.forEach(function(v){
+        filas.push({ 'Técnico': mgCap(o.tec), 'Fecha': ff(it.x.iso), 'Petición': it.x.ot, 'Dirección': mgCap(it.c.dir), 'Comuna': mgComuna(it.c.dir),
+          'Resultado': it.x.e === 'Completado' ? 'Completó' : 'No realizada: ' + (it.x.cod || ''),
+          'Antes falló: técnico': mgCap(v.tec), 'Antes falló: fecha': ff(v.f), 'Antes falló: petición': v.ot || '', 'Antes falló: causa': v.cie || '', 'Antes falló: min en la casa': v.dur > 0 ? v.dur : '' });
+      });
+    });
+  });
+  if(!filas.length){ alert('No hay casas de este tipo en el período.'); return; }
+  const wb = XLSX.utils.book_new();
+  const h1 = XLSX.utils.aoa_to_sheet([['Casas donde otro técnico de Dominion ya había fallado'], ['Período', per], ['Generado', new Date().toLocaleString('es-CL')],
+    ['Fuente', 'TOA: visitas de migración de técnicos Dominion desde el 01-07 (hasta ayer)'], [],
+    ['Cómo leerlo', 'Cada fila es una visita del técnico a una casa donde ANTES otro técnico dejó la migración no realizada (una fila por cada fallo anterior). Si el técnico la completó, la casa no era imposible: conviene revisar qué pasó con el que falló antes.']]);
+  h1['!cols'] = [{ wch:16 }, { wch:110 }];
+  const h2 = XLSX.utils.json_to_sheet(filas);
+  h2['!cols'] = [{ wch:28 }, { wch:11 }, { wch:14 }, { wch:42 }, { wch:14 }, { wch:30 }, { wch:28 }, { wch:12 }, { wch:14 }, { wch:30 }, { wch:12 }];
+  h2['!autofilter'] = { ref: XLSX.utils.encode_range({ s:{r:0,c:0}, e:{r:filas.length, c:10} }) };
+  XLSX.utils.book_append_sheet(wb, h1, 'Léeme');
+  XLSX.utils.book_append_sheet(wb, h2, 'Detalle');
+  XLSX.writeFile(wb, 'casas-donde-otro-fallo_' + per.replace(/\s+/g, '-').toLowerCase() + '.xlsx');
+}
 function mgRescHtml(L, S){
   if(!S.prevN) return '';
   const pEq = mgPct(S.prevOk, S.prevN);
-  const C = L.filter(function(o){ return o.prevN >= 3; }).sort(function(a, b){ return mgPct(b.prevOk, b.prevN) - mgPct(a.prevOk, a.prevN) || b.prevN - a.prevN; });
-  const fila = function(o){ const p = mgPct(o.prevOk, o.prevN), d = mgPct(o.nr, o.co + o.nr);
+  const C = MG_RESC_L = L.filter(function(o){ return o.prevN >= 1; }).sort(function(a, b){ return (b.prevN >= 3) - (a.prevN >= 3) || mgPct(b.prevOk, b.prevN) - mgPct(a.prevOk, a.prevN) || b.prevN - a.prevN; });
+  const fila = function(o, i){ const p = mgPct(o.prevOk, o.prevN), d = mgPct(o.nr, o.co + o.nr), ab = mgRescAbre === o.tec;
     const cm = Object.keys(o.com).sort(function(a, b){ return o.com[b] - o.com[a]; }).map(function(k){ return k + ' ' + o.com[k]; }).join(' · ');
-    return '<tr><td><b>' + escR(mgCap(o.tec)) + '</b></td><td><b class="' + (d > MG_META_DER ? 'mg-sobre' : 'mg-ok') + '">' + Math.round(d) + '%</b></td>'
+    return '<tr class="mg-trow' + (ab ? ' abierta' : '') + (o.prevN < 3 ? ' mg-pocas' : '') + '" onclick="mgRescToggle(MG_RESC_L[' + i + '].tec)" title="Toca para ver cada casa"><td><b>' + (ab ? '▾ ' : '▸ ') + escR(mgCap(o.tec)) + '</b></td><td><b class="' + (d > MG_META_DER ? 'mg-sobre' : 'mg-ok') + '">' + Math.round(d) + '%</b></td>'
       + '<td>' + o.prevN + '</td><td><b>' + o.prevOk + '</b></td><td class="bar"><span style="width:' + Math.max(2, p) + '%;background:' + (p >= pEq ? '#15803d' : '#dc2626') + '"></span></td>'
-      + '<td><b>' + Math.round(p) + '%</b></td><td class="izq inc"><small>' + escR(cm) + '</small></td></tr>'; };
-  return '<div class="mg-b mg-resc"><div class="mg-t"><b>🏠 Casas donde otro técnico ya había fallado</b><small>misma casa, otro día · para comparar técnicos en las mismas condiciones</small></div>'
+      + '<td><b>' + Math.round(p) + '%</b></td><td class="izq inc"><small>' + escR(cm) + '</small></td></tr>'
+      + (ab ? '<tr class="mg-ficha"><td colspan="7">' + mgRescDetalle(o) + '</td></tr>' : ''); };
+  return '<div class="mg-b mg-resc"><div class="mg-t"><b>🏠 Casas donde otro técnico ya había fallado</b><small>misma casa, otro día · toca un técnico para ver cada casa</small>'
+    + '<button class="mg-xls" onclick="mgRescExcel()" title="Todas las casas, con la petición del técnico y la de los que fallaron antes">⬇ Excel con el detalle</button></div>'
     + '<p class="mg-frase">El equipo llegó <b>' + S.prevN + '</b> veces a una casa donde otro técnico de Dominion ya había dejado la migración no realizada, y la completó en <b class="v">' + S.prevOk + ' (' + Math.round(pEq) + '%)</b>. '
     + 'Si un técnico la sacó donde otro no pudo, la casa no era imposible: hay que mirar qué pasó con el primero.</p>'
     + '<div class="mg-scroll"><table class="mg-q"><thead><tr><th>Técnico</th><th>% derivación</th><th>Casas donde otro ya falló</th><th>Las completó</th><th></th><th>%</th><th class="izq">Dónde trabajó (visitas)</th></tr></thead><tbody>'
     + C.map(fila).join('') + '</tbody></table></div>'
-    + '<p class="mg-nota">Solo técnicos con 3 o más de esas casas en el período. Barra verde: completa más que el equipo (' + Math.round(pEq) + '%). '
+    + '<p class="mg-nota">Primero los técnicos con 3 o más de esas casas; después, en gris, los que tuvieron 1 o 2 (muy pocas para comparar). Barra verde: completa más que el equipo (' + Math.round(pEq) + '%). '
     + 'Ojo con la comuna: compara técnicos que trabajan en la misma. Toca un técnico en la tabla de abajo para ver cada casa, con la petición y quién falló antes.</p></div>';
 }
 function mgFichaHtml(o){
@@ -15141,6 +15184,7 @@ function mgHoyHtml(){
   .mg-pet { font-variant-numeric:tabular-nums; white-space:nowrap; user-select:all; }
   td.mg-pet { color:#334155; font-size:12.5px; }
   .mg-resc { border-left:5px solid #15803d; }
+  .mg-resc tr.mg-pocas td { color:#94a3b8; } .mg-resc tr.mg-pocas td b { color:#64748b; }
 </style>
 
 </body>
