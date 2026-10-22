@@ -11175,7 +11175,8 @@ function rmBajarResp(forzar, intento){
   if(RM_RESP_BAJANDO) return;
   if(!forzar && RM_RESP && Date.now() - RM_RESP_T < 300000) return;          // como maximo cada 5 min (tambien despues de una falla)
   RM_RESP_BAJANDO = true;
-  if(!RM_RESP || RM_RESP.falla){ RM_RESP = mgRespLeer(); pintarResMig(); }     // la copia guardada, mientras llega la nueva
+  if(!RM_RESP || RM_RESP.falla){ RM_RESP = mgRespLeer(); }
+  pintarResMig();     // la copia guardada, mientras llega la nueva
   mgBajarRespaldos().then(function(r){
     RM_RESP_BAJANDO = false;
     if(r){ RM_RESP = r; RM_RESP_T = Date.now(); pintarResMig(); return; }
@@ -11263,7 +11264,7 @@ function pintarResMig(){
     const o = t[x.tec] || (t[x.tec] = { tec: x.tec, sup: x.sup, vis: 0, der: 0, sm: 0, re: 0, de: 0, ot: 0, prop: 0, l: [], fotN: 0, fotOk: 0, md: 0 });
     o.vis++; if(!x.der) return;
     o.der++; o[x.g || 'ot']++; if(rmCls(x) === 'prop') o.prop++; o.l.push(x);
-    /* (22-10-2026) respaldo con foto: cuenta solo sin moradores, reagenda y desiste (igual que Gerencia) */
+    /* (22-10-2026) respaldo con foto: misma regla que Gerencia (mgFotoEspera) */
     const F = mgFotoDe(x.ot, x.iso, x.cod);
     if(F.aplica && F.cuenta){ o.fotN++; if(F.r) o.fotOk++; }
     if(F.aplica && F.r && F.r.md) o.md++;
@@ -11281,15 +11282,18 @@ function pintarResMig(){
     : '<div class="rm-fotg">📷 <b>Respaldo con foto</b> (app de respaldo, se empezó a usar el ' + mgDdmm(RR.desde) + ')'
       + (RR.cache ? ' <span class="rm-cache">' + (RR.sinGoogle ? 'Google no respondió: fotos guardadas ' + mgRespEdad(RR) + ' <button class="rm-reint" onclick="rmBajarResp(true, 1)">↻ Reintentar</button>'
           : 'fotos guardadas ' + mgRespEdad(RR) + ', actualizando…') + '</span>' : '') + ': '
-      + (fT.n ? '<b>' + fT.ok + ' de ' + fT.n + '</b> sin moradores, reagendas y desistes del período (' + Math.round(100 * fT.ok / fT.n) + '%).' : 'en este período no hay sin moradores, reagendas ni desistes desde que partió la app.')
+      + (fT.n ? '<b>' + fT.ok + ' de ' + fT.n + '</b> ' + mgFotoTxt() + ' del período (' + Math.round(100 * fT.ok / fT.n) + '%).' : 'en este período no hay ' + mgFotoTxt() + ' desde que partió la app.')
       + (fT.md ? ' <span class="rm-md">🛠 ' + fT.md + ' mal derivada' + (fT.md === 1 ? '' : 's') + ' con foto</span>.' : '')
-      + ' Toca un técnico para ver cuál tiene foto.</div>';
+      + ' Toca un técnico para ver cuál tiene foto.'
+      /* (22-10-2026, 12:15) hora de la lectura + boton para pedirlas de nuevo al tiro */
+      + (!RR.cache && RM_RESP_T ? ' <span class="rm-leida">Leídas a las ' + new Date(RM_RESP_T).toTimeString().slice(0, 5) + '</span>' : '')
+      + ' <button class="rm-reint" onclick="rmBajarResp(true, 1)"' + (RM_RESP_BAJANDO ? ' disabled' : '') + '>' + (RM_RESP_BAJANDO ? 'Actualizando…' : '↻ Actualizar fotos') + '</button></div>';
   h += '<div class="rm-card"><h3>Técnico por técnico <small>de más a menos derivadas · toca un técnico para ver sus órdenes</small></h3>'
     + '<div class="rm-guia"><span class="eq">El equipo deriva <b>' + rmPct(eqPct) + '</b></span>'
     + '<span class="ro"><i></i>En rojo: deriva <b>' + rmPct(lim) + ' o más</b> (' + RM_PUNTOS + ' puntos sobre el equipo), con ' + minV + ' o más visitadas. Son los que hay que conversar.</span></div>'
     + fotGuia
     + '<table class="rm-tab"><thead><tr><th class="iz">Técnico</th><th class="iz">Supervisor</th><th>Visitadas</th><th>Derivadas</th><th>%</th>'
-    + '<th>Sin moradores</th><th>Reagenda</th><th>Desiste</th><th>Otros</th><th title="Sin moradores, reagenda o desiste en una dirección donde no falló otro técnico">Solo suyas</th><th title="Sin moradores, reagendas y desistes con respaldo de foto en la app (desde que partió)">Con foto</th></tr></thead><tbody>'
+    + '<th>Sin moradores</th><th>Reagenda</th><th>Desiste</th><th>Otros</th><th title="Sin moradores, reagenda o desiste en una dirección donde no falló otro técnico">Solo suyas</th><th title="No realizadas con respaldo de foto en la app (desde que partió; no cuenta falta de dotación)">Con foto</th></tr></thead><tbody>'
     + tl.map(function(o, i){
         const alto = o.vis >= minV && o.pct >= lim;
         let r = '<tr class="fila' + (alto ? ' alto' : '') + (RM_TEC === i ? ' abierta' : '') + '" onclick="verRMTec(' + i + ')"><td class="iz"><b>' + escR(rmTitulo(o.tec)) + '</b></td>'
@@ -14217,12 +14221,23 @@ function mgGrupo(x, c, r){
    del Resumen de migraciones para supervisores (RM_RESP): se usa el que haya */
 let RM_RESP = null, RM_RESP_T = 0, RM_RESP_BAJANDO = false;
 function mgRespDatos(){ return (MG && MG.resp) || RM_RESP; }
+/* (22-10-2026, 11:35) Luis: "si él está registrando todo, esa sería la idea
+   para todos, así tenemos respaldo de todo". Desde ahora se espera foto en
+   TODA no realizada, sea cual sea la causa (antes solo sin moradores,
+   reagenda y desiste). Se excluye "Falta de dotación": ahí no fue ningún
+   técnico. Para volver a lo de antes: MG_FOTO_TODAS = false. */
+const MG_FOTO_TODAS = false;   // (22-10, 11:40) Luis prefiere seguir midiendo solo sin moradores, reagenda y desiste
+function mgFotoEspera(cod){
+  if(!MG_FOTO_TODAS){ const f = MG_FAM(cod); return f === 'sm' || f === 're' || f === 'de'; }
+  return !/dotaci/i.test(String(cod || ''));
+}
+function mgFotoTxt(){ return MG_FOTO_TODAS ? 'no realizadas' : 'sin moradores, reagendas y desistes'; }
 function mgFotoDe(ot, iso, cod){
   const R = mgRespDatos(); if(!R || !R.desde) return { aplica:false };
   if(String(iso) < R.desde) return { aplica:false };                   // antes de que partiera la app
   const l = R.porOT[String(ot || '').toUpperCase().replace(/[^0-9A-Z-]/g, '')] || [];
   const m = l.filter(function(x){ return x.iso === String(iso); })[0] || l[0] || null;
-  const f = MG_FAM(cod), cuenta = f === 'sm' || f === 're' || f === 'de';     // donde se espera respaldo
+  const f = MG_FAM(cod), cuenta = mgFotoEspera(cod);     // donde se espera respaldo
   if(m) return { aplica:true, r:m, cuenta:cuenta };                   // cualquier causa con respaldo (ej. mal derivada)
   return cuenta ? { aplica:true, r:null, cuenta:true } : { aplica:false };
 }
@@ -14329,7 +14344,7 @@ function mgTecHtml(k, kPrev){
           + '<span><b>' + MG_G[q].l + '</b>: ' + MG_G[q].d + '.</span></div>'; }).join('') + '</div>'
     + (S.fF ? '<p class="mg-nota">⏰ ' + S.fF + ' visitas llegaron fuera de la franja (' + mgF1(mgPct(S.fF, S.fF + S.fD)) + '%). Ahí la derivación fue '
         + Math.round(mgPct(S.fFnr, S.fF)) + '%, contra ' + Math.round(mgPct(S.fDnr, S.fD)) + '% a tiempo. Esas no realizadas están en "para revisar".</p>' : '')
-    + (MG.resp && MG.resp.desde ? (S.fotN ? '<p class="mg-nota">📷 Respaldo con foto (app de respaldo, desde el ' + mgDdmm(MG.resp.desde) + (MG.resp.cache ? '; Google no respondió, fotos guardadas ' + mgRespEdad(MG.resp) : '') + '): <b>' + S.fotOk + ' de ' + S.fotN + '</b> sin moradores, reagendas y desistes del período (' + Math.round(mgPct(S.fotOk, S.fotN)) + '%). En la ficha de cada técnico se ve cuál tiene foto.</p>'
+    + (MG.resp && MG.resp.desde ? (S.fotN ? '<p class="mg-nota">📷 Respaldo con foto (app de respaldo, desde el ' + mgDdmm(MG.resp.desde) + (MG.resp.cache ? '; Google no respondió, fotos guardadas ' + mgRespEdad(MG.resp) : '') + '): <b>' + S.fotOk + ' de ' + S.fotN + '</b> ' + mgFotoTxt() + ' del período (' + Math.round(mgPct(S.fotOk, S.fotN)) + '%). En la ficha de cada técnico se ve cuál tiene foto.</p>'
           : '<p class="mg-nota">📷 La app de respaldo con foto se empezó a usar el ' + mgDdmm(MG.resp.desde) + ': en este período no hay respaldos.</p>')
         : '<p class="mg-nota">📷 No se pudieron leer los respaldos con foto de la app (falta actualizar el receptor en Google o no hay conexión).</p>')
     + '</div>';
@@ -14436,7 +14451,7 @@ function mgFichaHtml(o){
     + ['dif','cli','rev'].map(function(q){ return '<b style="color:' + MG_G[q].c + '">' + o.g[q] + ' ' + MG_G[q].n.toLowerCase() + '</b>'; }).join(', ') + '.</p>'
     + '<p class="mg-nota" style="margin:0 0 10px">' + (o.fr ? 'Llegó dentro de la franja en el ' + Math.round(mgPct(o.frOk, o.fr)) + '% de sus visitas. ' : '')
     + (o.smN ? 'En sus sin moradores esperó en promedio ' + Math.round(o.smMin / o.smN) + ' min. ' : '')
-    + (o.fotN ? 'Mandó respaldo con foto en <b>' + o.fotOk + ' de ' + o.fotN + '</b> sin moradores, reagendas y desistes. ' : '')
+    + (o.fotN ? 'Mandó respaldo con foto en <b>' + o.fotOk + ' de ' + o.fotN + '</b> ' + mgFotoTxt() + '. ' : '')
     + (Object.keys(o.com).length ? 'Trabajó en: ' + Object.keys(o.com).sort(function(a, b){ return o.com[b] - o.com[a]; }).map(function(k){ return k + ' (' + o.com[k] + ')'; }).join(', ') + '.' : '') + '</p>';
   /* (22-10-2026) casas donde otro ya habia fallado, y las suyas que completo otro */
   const tRes = function(l, tit, col, sub, conDesp){
@@ -15393,6 +15408,8 @@ function mgHoyHtml(){
   .rm-fot { font-weight:700; border-radius:6px; padding:1px 7px; white-space:nowrap; } .rm-fot.bien { color:#15803d; background:#f0fdf4; }
   .rm-fot.medio { color:#b45309; background:#fffbeb; } .rm-fot.mal { color:#b91c1c; background:#fef2f2; }
   .rm-md { color:#6d28d9; font-weight:700; white-space:nowrap; }
+  .rm-leida { color:#64748b; font-size:12.5px; }
+  .rm-reint:disabled { opacity:.6; cursor:default; }
   .rm-cache { color:#92400e; background:#fffbeb; border:1px solid #fcd34d; border-radius:6px; padding:0 6px; font-size:12.5px; }
   .rm-reint { margin-left:8px; border:1px solid #0e7490; color:#0e7490; background:#fff; border-radius:6px; padding:2px 9px; font:600 12.5px 'DM Sans',sans-serif; cursor:pointer; }
   /* (22-10-2026) REDISENO GERENCIA: saltos, resumen, laminas, plegables, modo reunion */
