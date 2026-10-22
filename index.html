@@ -11173,7 +11173,7 @@ function rmPct(v){ return (Math.round(v * 10) / 10).toFixed(1).replace('.', ',')
    aviso trae un boton Reintentar. Si ya habia fotos de antes, se conservan. */
 function rmBajarResp(forzar, intento){
   if(RM_RESP_BAJANDO) return;
-  if(!forzar && RM_RESP && !RM_RESP.falla && Date.now() - RM_RESP_T < 300000) return;
+  if(!forzar && RM_RESP && Date.now() - RM_RESP_T < 300000) return;          // como maximo cada 5 min (tambien despues de una falla)
   RM_RESP_BAJANDO = true;
   if(!RM_RESP || RM_RESP.falla){ RM_RESP = mgRespLeer(); pintarResMig(); }     // la copia guardada, mientras llega la nueva
   mgBajarRespaldos().then(function(r){
@@ -11182,13 +11182,14 @@ function rmBajarResp(forzar, intento){
     if(!intento){ setTimeout(function(){ rmBajarResp(true, 1); }, 2000); return; }
     if(!RM_RESP) RM_RESP = { falla:true };
     else if(RM_RESP.cache) RM_RESP.sinGoogle = true;          // se queda con la copia, avisando
+    RM_RESP_T = Date.now();                                    // no insistir hasta dentro de 5 min (o con el boton)
     pintarResMig();
   });
 }
 function abrirResMig(){
   const m = document.getElementById('modalRM'); if(!m) return;
   m.classList.add('abierto'); RM_TEC = null; pintarResMig();
-  rmBajarResp();          /* (22-10-2026) respaldos con foto de la app */
+  rmBajarResp(!!(RM_RESP && (RM_RESP.falla || RM_RESP.sinGoogle)));          /* (22-10-2026) respaldos con foto de la app */
   if(DER !== null || derBajando) return;
   derBajando = true; derFallo = false;
   bajarDeriv().then(function(d){ DER = d; derBajando = false; pintarResMig(); })
@@ -12705,6 +12706,9 @@ function pintarPortada(){
 
   /* 14-10-2026: "Los ultimos dias" quitado; ya no se pinta ni se baja historico_dias.json */
   refrescarAviso();
+  /* (22-10-2026) con la ventana abierta, las fotos nuevas de hoy tambien
+     llegan solas: se vuelven a pedir a Google cada 5 min como maximo */
+  try { const mr = document.getElementById('modalRM'); if(mr && mr.classList.contains('abierto')) rmBajarResp(); } catch(e){}
   try { pintarResMig(); } catch(e){}
 }
 
