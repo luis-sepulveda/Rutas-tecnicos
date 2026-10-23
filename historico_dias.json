@@ -22165,22 +22165,23 @@
    }
   },
   "23-10-2026": {
-   "hasta": "19:01",
-   "actividades": 160,
+   "hasta": "19:06",
+   "actividades": 162,
    "tecnicos": 34,
    "estados": {
     "Completado": 108,
     "No Realizada": 41,
-    "en ruta": 2,
-    "Iniciado": 2,
+    "en ruta": 1,
+    "Iniciado": 4,
     "Suspendido": 3,
-    "Cancelado": 4
+    "Cancelado": 4,
+    "Pendiente": 1
    },
-   "rgu": 248.7,
+   "rgu": 248.9,
    "caidas_total": 8,
    "caidas_activas": 8,
    "caidas_resueltas": 0,
-   "nuevas": 19,
+   "nuevas": 21,
    "al_bucket": 34,
    "repetidas": 53,
    "reagendadas": 2,
@@ -22261,13 +22262,31 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OL88G39",
+      "tec": "NICOLAS MOYANO R",
+      "cat": "Modificación de Servicio",
+      "f": "19-21",
+      "hi": "19:04",
+      "d": "PINTO 235, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
+      "o": "1-3OL8U6RA",
+      "tec": "MATÍAS JAQUE AG",
+      "cat": "Modificación de Servicio",
+      "f": "19-21",
+      "hi": "19:58",
+      "d": "LOS QUELTEHUES 2569, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3OL8CNBU",
       "tec": "LEONEL HERNÁNDEZ OJE",
       "cat": "Modificación de Servicio",
       "f": "19-21",
       "hi": "19:00",
       "d": "PJE 3 1206 CASA C1, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OL560F5",
@@ -23094,5 +23113,5 @@
    }
   }
  },
- "generado": "23-10-2026 19:01"
+ "generado": "23-10-2026 19:06"
 }
