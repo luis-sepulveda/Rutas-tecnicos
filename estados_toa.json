@@ -1,7 +1,7 @@
 {
-  "actualizado": "2026-10-23T15:51:35",
+  "actualizado": "2026-10-23T16:52:08",
   "resumen": {
-    "reagendada": 3,
+    "reagendada": 6,
     "sin informacion": 2
   },
   "estados": {
@@ -23,6 +23,26 @@
       "estado": "sin informacion",
       "nota": "la OT ya no existe en TOA"
     },
+    "1-3OK6M1GW": {
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "cat": "Reparación",
+      "franja_original": "13-16",
+      "d": "DIEGO DE ALMAGRO 845, QUILPUE",
+      "estado": "reagendada",
+      "color": "rgb(255, 222, 0)",
+      "detalle": "1-3OK6M1GW - 10-13-Reparación-2 Play Servicio Degradado-DIEGO DE ALMAGRO 845Lun, 26 Oct",
+      "franja_nueva": "10-13"
+    },
+    "1-3OKGIPQD": {
+      "tec": "CRISTOBAL SILVA LEIVA",
+      "cat": "Reparación",
+      "franja_original": "13-16",
+      "d": "BARROS ARANA 1619, QUILPUE",
+      "estado": "reagendada",
+      "color": "rgb(255, 222, 0)",
+      "detalle": "1-3OKGIPQD - 16-19-Reparación-3 Play Servicio Degradado-BARROS ARANA 1619Sab, 24 Oct",
+      "franja_nueva": "16-19"
+    },
     "1-3OHN9F4J": {
       "tec": "DANIEL NAVARRETE E",
       "cat": "Alta 1 Play",
@@ -35,8 +55,8 @@
         "aviso": "historial de la direccion, NO es el estado de esta orden",
         "filas": [
           {
-            "estado": "?",
-            "color": "rgb(93, 190, 63)",
+            "estado": "completada",
+            "color": "rgb(121, 182, 235)",
             "ot": "1-3OKS0BJ5",
             "franja": "13-16",
             "texto": "1-3OKS0BJ5 - 13-16-Alta-1 Play-HEVIA 0176"
@@ -60,6 +80,16 @@
       "color": "rgb(255, 222, 0)",
       "detalle": "1-3OHMNZ9F - 16-19-Migración-Migración-CACIQUE 1111 CASA 3Mie, 28 Oct",
       "franja_nueva": "16-19"
+    },
+    "1-3OIICOQ4": {
+      "tec": "JOSE SALAS MEDINA",
+      "cat": "Alta 2 Play",
+      "franja_original": "13-16",
+      "d": "PASO HONDO 02030 EDIF. A DEPTO 303, QUILPUE",
+      "estado": "reagendada",
+      "color": "rgb(255, 222, 0)",
+      "detalle": "1-3OIICOQ4 - 10-13-Alta-2 Play-PASO HONDO 02030 EDIF. A DEPTO 303Sab, 24 Oct",
+      "franja_nueva": "10-13"
     },
     "1-3OHTSMW3": {
       "tec": "LUIS MARTIN NUÑEZ",
