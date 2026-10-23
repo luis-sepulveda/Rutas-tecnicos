@@ -9230,8 +9230,30 @@ function derVistaDirHtml(tb, tot){
 const DER_AUD_FACTOR = 1.5;    // veces la derivacion propia del equipo
 const DER_AUD_MIN_SEM = 5;     // visitadas minimas, periodo de una semana
 const DER_AUD_MIN_4 = 12;      // visitadas minimas, periodo de cuatro semanas
-let derAudPer = 4;             // 1 = solo la semana elegida | 4 = las ultimas 4
+let derAudPer = 4;             // 1 = solo la semana elegida | 4 = las ultimas 4 | 'AAAAMM' = un mes (23-10-2026)
 function setAudPerDeriv(n){ derAudPer = n; derAbierto = null; pintarDeriv(); }
+/* (23-10-2026) Luis: "botones con meses para tener esta mirada" en A quien
+   auditar (y Ficha del tecnico, que usa el mismo Periodo). Con un mes
+   elegido, derAudPer = 'AAAAMM' y el periodo son las migraciones de ese mes
+   (por fecha, no por semana). derPerSems devuelve las semanas que tocan el
+   mes, con .mes marcado; derEnPer decide si una fila entra. */
+const DER_MESES_NOM = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+function derMesesDisp(){ const m = {}; (DER || []).forEach(function(x){ if(x.iso) m[String(x.iso).slice(0, 6)] = 1; }); return Object.keys(m).sort().slice(-3); }
+function derPerSems(todasSem, nPer){
+  const per = nPer === undefined ? derAudPer : nPer;
+  if(typeof per === 'string'){
+    const w = {}; (DER || []).forEach(function(x){ if(String(x.iso).slice(0, 6) === per) w[x.sem] = 1; });
+    const l = todasSem.filter(function(k){ return w[k]; }); l.mes = per; return l;
+  }
+  const iSem = todasSem.indexOf(derSem); return todasSem.slice(Math.max(0, iSem - per + 1), iSem + 1);
+}
+function derEnPer(x, sems){ return sems.mes ? String(x.iso).slice(0, 6) === sems.mes : sems.indexOf(x.sem) >= 0; }
+function derPerMin(nPer){ const p = nPer === undefined ? derAudPer : nPer; return p === 1 ? DER_AUD_MIN_SEM : DER_AUD_MIN_4; }
+function derPerTxt(sems){
+  if(sems.mes){ const ult = (DER || []).reduce(function(m, x){ return x.iso > m ? x.iso : m; }, '');
+    return DER_MESES_NOM[+sems.mes.slice(4) - 1] + ' ' + sems.mes.slice(0, 4) + (ult.slice(0, 6) === sems.mes ? ' (hasta el ' + ult.slice(6, 8) + '-' + ult.slice(4, 6) + ')' : ''); }
+  return sems.length > 1 ? 'semanas ' + derNumSemana(sems[0]) + ' a ' + derNumSemana(sems[sems.length - 1]) : 'semana ' + derNumSemana(sems[0]);
+}
 function derClase(x){
   if(x.g === 'ot') return 'na';
   const h = DER_DIR[x.ot];
@@ -9240,7 +9262,7 @@ function derClase(x){
 function derAudTabla(sems, sup, todos){
   const t = {};
   (DER || []).forEach(function(x){
-    if(sems.indexOf(x.sem) < 0 || !derEntra(x)) return;
+    if(!derEnPer(x, sems) || !derEntra(x)) return;
     if(sup !== 'Todos' && x.sup !== sup) return;
     const o = t[x.tec] || (t[x.tec] = {tec:x.tec, sup:x.sup, n:0, d:0, na:0, comp:0, prop:0, sen:0, l:[]});
     o.n++;
@@ -9255,8 +9277,8 @@ function derAudTabla(sems, sup, todos){
    4 semanas). Devuelve [{o, mot, n, x, m8}] ya ordenada. */
 function derConvCalc(todasSem, nPer){
   const o8 = derOcho(todasSem), o4 = derOcho(todasSem, 4), o2 = derOcho(todasSem, 2);
-  const iSem = todasSem.indexOf(derSem), sems = todasSem.slice(Math.max(0, iSem - nPer + 1), iSem + 1);
-  const minimo = nPer === 1 ? DER_AUD_MIN_SEM : DER_AUD_MIN_4;
+  const sems = derPerSems(todasSem, nPer);
+  const minimo = derPerMin(nPer);
   const f1 = function(v){ return v.toFixed(1).replace('.', ','); };
   const eq = derAudTabla(sems, 'Todos', true).reduce(function(a, o){ a.n += o.n; a.prop += o.prop; return a; }, {n:0, prop:0});
   const corte = (eq.n ? 100 * eq.prop / eq.n : 0) * DER_AUD_FACTOR;
@@ -9450,9 +9472,8 @@ function verFicDeConv(i){ derFicTec = DER_CONV_TECS[i] || null; derVista = 'fic'
 function derVistaAudHtml(todasSem){
   const o8 = derOcho(todasSem), o4 = derOcho(todasSem, 4), o2 = derOcho(todasSem, 2);
   if(!derDirOk) return '<div class="dv-vacio">No se pudo bajar el historial de direcciones, y sin él no se puede saber qué direcciones comparten varios técnicos. Vuelve a abrir la ventana en un rato.</div>';
-  const iSem = todasSem.indexOf(derSem);
-  const sems = todasSem.slice(Math.max(0, iSem - derAudPer + 1), iSem + 1);
-  const minimo = derAudPer === 1 ? DER_AUD_MIN_SEM : DER_AUD_MIN_4;
+  const sems = derPerSems(todasSem);
+  const minimo = derPerMin();
   const suma = function(l){ return l.reduce(function(a, o){ a.n += o.n; a.d += o.d; a.na += o.na; a.comp += o.comp; a.prop += o.prop; a.sen += o.sen; return a; }, {n:0,d:0,na:0,comp:0,prop:0,sen:0}); };
   const eq = suma(derAudTabla(sems, 'Todos', true));           // la referencia es SIEMPRE todo el equipo
   const pEq = eq.n ? 100 * eq.prop / eq.n : 0, corte = pEq * DER_AUD_FACTOR;
@@ -9464,7 +9485,7 @@ function derVistaAudHtml(todasSem){
   const nAud = tb.filter(audita).length;
   const f1 = function(v){ return v.toFixed(1).replace('.', ','); };
   const cel = function(v, cls){ return '<td class="' + (v ? (cls || '') : 'cero') + '">' + v + '</td>'; };
-  const per = sems.length > 1 ? 'semanas ' + derNumSemana(sems[0]) + ' a ' + derNumSemana(sems[sems.length - 1]) : 'semana ' + derNumSemana(sems[0]);
+  const per = derPerTxt(sems);
   /* ---- A QUIEN AUDITAR ORDENADO (10-10-2026, 16:40) ----
      Mismo orden que las otras pestanas: bloques numerados con titulo.
      1 de quien son las derivadas (frase + la barra de 3 colores), 2 a quien
@@ -9487,7 +9508,7 @@ function derVistaAudHtml(todasSem){
   const conv = derConvCalc(todasSem, derAudPer);
   DER_CONV_TECS = conv.map(function(e){ return e.o.tec; });
   const nVar = conv.filter(function(e){ return e.n >= 2; }).length;
-  h += '<div class="dv-hv-b">' + hvT('Con quién conversar esta semana', 'una sola lista con todos los motivos · toca un técnico para abrir su ficha')
+  h += '<div class="dv-hv-b">' + hvT(typeof derAudPer === 'string' ? 'Con quién conversar · ' + derPerTxt(sems) : 'Con quién conversar esta semana', 'una sola lista con todos los motivos · toca un técnico para abrir su ficha')
     + '<p class="dv-hv-f">' + (conv.length ? '<b class="mal">' + conv.length + (conv.length === 1 ? ' técnico' : ' técnicos') + '</b> para conversar'
         + (nVar ? '; <b>' + nVar + '</b> ' + (nVar === 1 ? 'tiene' : 'tienen') + ' más de un motivo y ' + (nVar === 1 ? 'va' : 'van') + ' primero.' : '.')
       : 'Ningún técnico tiene un motivo de peso para conversar.') + '</p>'
@@ -10370,15 +10391,14 @@ function derOchoMarca(o8, tec, etq){
 }
 function derVistaFicHtml(todasSem){
   const o8 = derOcho(todasSem), o4 = derOcho(todasSem, 4), o2 = derOcho(todasSem, 2);
-  const iSem = todasSem.indexOf(derSem);
-  const sems = todasSem.slice(Math.max(0, iSem - derAudPer + 1), iSem + 1);
-  const minimo = derAudPer === 1 ? DER_AUD_MIN_SEM : DER_AUD_MIN_4;
-  const per = sems.length > 1 ? 'semanas ' + derNumSemana(sems[0]) + ' a ' + derNumSemana(sems[sems.length - 1]) : 'semana ' + derNumSemana(sems[0]);
+  const sems = derPerSems(todasSem);
+  const minimo = derPerMin();
+  const per = derPerTxt(sems);
   const f1 = function(v){ return v.toFixed(1).replace('.', ','); };
   /* lista de tecnicos del periodo (respeta supervisor y tipo) */
   const tt = {};
   (DER || []).forEach(function(x){
-    if(sems.indexOf(x.sem) < 0 || !derEntra(x)) return;
+    if(!derEnPer(x, sems) || !derEntra(x)) return;
     const o = tt[x.tec] || (tt[x.tec] = {tec:x.tec, sup:x.sup, n:0, d:0}); o.n++; if(x.der) o.d++; });
   DER_FIC_TECS = Object.keys(tt).filter(derActivo).sort(function(a, b){ return a.localeCompare(b); });
   const visibles = DER_FIC_TECS.filter(function(t){ return derSup === 'Todos' || tt[t].sup === derSup; });
@@ -10420,7 +10440,7 @@ function derVistaFicHtml(todasSem){
   const cx = {}; Object.keys(G).forEach(function(g){ cx[g] = {d:0, comp:0, prop:0, sen:0, otros:{}}; });
   const grupos = { comp:[], prop:[], na:[] }, otrosTot = {}, porSemT = {};
   (DER || []).forEach(function(x){
-    if(x.tec !== derFicTec || sems.indexOf(x.sem) < 0 || !derEntra(x)) return;
+    if(x.tec !== derFicTec || !derEnPer(x, sems) || !derEntra(x)) return;
     const ps = porSemT[x.sem] || (porSemT[x.sem] = {n:0, d:0}); ps.n++;
     if(!x.der) return;
     ps.d++;
@@ -10972,7 +10992,7 @@ function pintarDeriv(){
   const todasSem0 = Object.keys(porSem).sort();
   const usaPer = derVista === 'aud' || derVista === 'fic';
   const iS0 = todasSem0.indexOf(derSem);
-  const enRango = usaPer && derAudPer > 1 ? todasSem0.slice(Math.max(0, iS0 - derAudPer + 1), iS0 + 1) : [derSem];
+  const enRango = !usaPer ? [derSem] : typeof derAudPer === 'string' ? derPerSems(todasSem0) : derAudPer > 1 ? todasSem0.slice(Math.max(0, iS0 - derAudPer + 1), iS0 + 1) : [derSem];
   const VISTAS = [['res', 'Resumen', 'Lo principal en una pantalla: cómo vamos, de qué depende y con quién conversar.'],
     ['hoy', 'Hoy en vivo', 'Las ' + derNomTipo() + ' del día en curso, tal como van: visitadas, derivadas y por visitar. Se actualiza sola cada 5 minutos.'],
     ['tec', 'Por técnico', 'Quién deriva más en la semana elegida. Toca un técnico para ver cada orden y la historia de su dirección.'],
@@ -10994,7 +11014,8 @@ function pintarDeriv(){
       const s = porSem[k], p = derPct(s.d, s.n);
       return '<button class="' + (k === derSem ? 'on' : (enRango.indexOf(k) >= 0 ? 'rng' : '')) + (p > DER_UMBRAL ? ' alto' : '') + '" onclick="setSemDeriv(\'' + k + '\')" title="Semana '
         + derNumSemana(k) + ', ' + derRango(k) + ': ' + s.n + ' ' + derNomTipo() + ' visitadas, ' + s.d + ' derivadas">' + derNumSemana(k) + '<b>' + p + '%</b></button>';
-    }).join('') + '</div><span class="rango">' + (enRango.length > 1
+    }).join('') + '</div><span class="rango">' + (usaPer && typeof derAudPer === 'string' ? 'Mes de ' + derPerTxt(enRango)
+        : enRango.length > 1
         ? 'Semanas ' + derNumSemana(enRango[0]) + ' a ' + derNumSemana(derSem) + ' · hasta el ' + ultIso.slice(6, 8) + '-' + ultIso.slice(4, 6)
         : 'Semana ' + derNumSemana(derSem) + ' · ' + derRango(derSem) + (nD0 < 6 && derSem === semanas[0] ? ' · en curso' : '')) + '</span></div>'
     + '<div class="fila"><div class="grp"><span class="rot">Supervisor</span>' + seg(sups.map(function(s){
@@ -11003,7 +11024,9 @@ function pintarDeriv(){
         return '<button class="' + (t[0] === derTipo ? 'on' : '') + '" onclick="setTipoDeriv(\'' + t[0] + '\')" title="' + t[1] + '">' + (t[0] === 'AMBAS' ? 'Ambas' : t[1]) + '</button>'; })) + '</div>'
     + (usaPer ? '<div class="grp"><span class="rot">Período</span>' + seg([
         '<button class="' + (derAudPer === 4 ? 'on' : '') + '" onclick="setAudPerDeriv(4)" title="Las 4 semanas que terminan en la elegida">Últimas 4 semanas</button>',
-        '<button class="' + (derAudPer === 1 ? 'on' : '') + '" onclick="setAudPerDeriv(1)">Solo la semana ' + derNumSemana(derSem) + '</button>']) + '</div>' : '')
+        '<button class="' + (derAudPer === 1 ? 'on' : '') + '" onclick="setAudPerDeriv(1)">Solo la semana ' + derNumSemana(derSem) + '</button>']
+        .concat(derMesesDisp().map(function(m){ return '<button class="' + (derAudPer === m ? 'on' : '') + '" onclick="setAudPerDeriv(\'' + m + '\')" title="Todas las migraciones del mes">'
+          + DER_MESES_NOM[+m.slice(4) - 1].replace(/^./, function(c){ return c.toUpperCase(); }) + '</button>'; }))) + '</div>' : '')
     /* (21-10-2026) Evolucion: Semanas o Meses, en la franja fija de filtros */
     + (derVista === 'evo' ? '<div class="grp"><span class="rot">Ver por</span>' + seg([
         '<button class="' + (derEvoPer === 'sem' ? 'on' : '') + '" onclick="setEvoPer(\'sem\')">Semanas</button>',
