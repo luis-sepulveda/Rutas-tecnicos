@@ -22165,14 +22165,14 @@
    }
   },
   "23-10-2026": {
-   "hasta": "13:55",
+   "hasta": "14:05",
    "actividades": 148,
    "tecnicos": 34,
    "estados": {
-    "Completado": 43,
-    "No Realizada": 21,
-    "en ruta": 4,
-    "Pendiente": 58,
+    "Completado": 45,
+    "No Realizada": 22,
+    "Pendiente": 53,
+    "en ruta": 6,
     "Iniciado": 15,
     "Suspendido": 3,
     "Cancelado": 4
@@ -22259,7 +22259,7 @@
       "f": "10-13",
       "hi": "12:31",
       "d": "LOS PERALES 1614 CASA B, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OKTYQCR",
@@ -22286,7 +22286,7 @@
       "f": "13-16",
       "hi": "15:59",
       "d": "AV LOS CARRERA 480, QUILPUE",
-      "e": "en ruta"
+      "e": "Pendiente"
      },
      {
       "o": "1-3OKDGJXE",
@@ -22323,7 +22323,7 @@
       "f": "13-16",
       "hi": "13:47",
       "d": "AV LOS CARRERA 480, QUILPUE",
-      "e": "en ruta",
+      "e": "Pendiente",
       "tec": "ALEXIS JARA",
       "visitas": 2,
       "ult_fecha": "21-10-2026",
@@ -22407,7 +22407,7 @@
       "f": "10-13",
       "hi": "11:56",
       "d": "LOS CASTANOS 1022, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "CESAR MENA OLIVEROS",
       "visitas": 1,
       "ult_fecha": "25-08-2026",
@@ -22417,7 +22417,7 @@
       "o": "1-3OK8L20W",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "17:11",
+      "hi": "17:23",
       "d": "LOS ALMENDROS 2915 EDIF. B DEPTO 23, QUILPUE",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
@@ -22570,24 +22570,12 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OHMHNM6",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "16:43",
-      "d": "LONGITUDINAL 15 CASA MG, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JORGE PEZOA VICUÑA",
-      "visitas": 1,
-      "ult_fecha": "19-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OK7OTXJ",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:18",
+      "hi": "14:14",
       "d": "EL TINEO 2110, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JOSE CASTRO P",
       "visitas": 2,
       "ult_fecha": "22-10-2026",
@@ -22597,7 +22585,7 @@
       "o": "1-3OKCGX88",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:52",
+      "hi": "16:48",
       "d": "LONGITUDINAL 24, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE CASTRO P",
@@ -22645,7 +22633,7 @@
       "o": "1-3OJL2WFX",
       "cat": "Migración 3 Play",
       "f": "16-19",
-      "hi": "16:26",
+      "hi": "16:39",
       "d": "SUIZA 252, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -22681,12 +22669,24 @@
       "o": "1-3OJG5JZY",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:00",
+      "hi": "15:10",
       "d": "LOS TREBOLES 210 CASA 163, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JUAN ARRIAGADA C",
       "visitas": 1,
       "ult_fecha": "21-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OHMHNM6",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "16:16",
+      "d": "LONGITUDINAL 15 CASA MG, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JUAN ARRIAGADA C",
+      "visitas": 1,
+      "ult_fecha": "19-10-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -22705,7 +22705,7 @@
       "o": "1-3OJ5G6DG",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "17:34",
+      "hi": "17:42",
       "d": "CALLE HERALDO ORREGO 3011 DEPTO 106, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -22719,7 +22719,7 @@
       "f": "13-16",
       "hi": "13:29",
       "d": "PJE MILANO 918 EDIF. Q DEPTO 22, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "LUIS CASTRO TORRES",
       "visitas": 1,
       "ult_fecha": "20-08-2026",
@@ -22753,9 +22753,9 @@
       "o": "1-3OJZKPCR",
       "cat": "Migración 3 Play",
       "f": "13-16",
-      "hi": "13:59",
+      "hi": "14:03",
       "d": "LOS ALGARROBOS 888, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "LUIS GATICA DAVILA",
       "visitas": 1,
       "ult_fecha": "22-10-2026",
@@ -22777,7 +22777,7 @@
       "o": "1-3OKBNX74",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:55",
+      "hi": "15:04",
       "d": "SERENA 846, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
@@ -22813,7 +22813,7 @@
       "o": "1-3OIQBKG2",
       "cat": "Migración 3 Play",
       "f": "16-19",
-      "hi": "16:33",
+      "hi": "16:46",
       "d": "BUENOS AIRES 1585, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -22954,5 +22954,5 @@
    }
   }
  },
- "generado": "23-10-2026 13:55"
+ "generado": "23-10-2026 14:05"
 }
