@@ -22165,25 +22165,25 @@
    }
   },
   "23-10-2026": {
-   "hasta": "12:09",
-   "actividades": 142,
-   "tecnicos": 33,
+   "hasta": "12:24",
+   "actividades": 143,
+   "tecnicos": 34,
    "estados": {
-    "Iniciado": 24,
-    "Pendiente": 78,
-    "Completado": 16,
-    "No Realizada": 18,
+    "Completado": 19,
+    "Pendiente": 75,
+    "en ruta": 4,
+    "Iniciado": 21,
+    "No Realizada": 19,
     "Suspendido": 2,
-    "Cancelado": 2,
-    "en ruta": 2
+    "Cancelado": 3
    },
-   "rgu": 235.1,
+   "rgu": 236.1,
    "caidas_total": 5,
    "caidas_activas": 5,
    "caidas_resueltas": 0,
    "nuevas": 6,
    "al_bucket": 4,
-   "repetidas": 49,
+   "repetidas": 50,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
@@ -22241,7 +22241,7 @@
       "f": "10-13",
       "hi": "12:09",
       "d": "PJE RORCUAL 1576, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OJFOZSP",
@@ -22315,10 +22315,22 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OJH1QA5",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "12:41",
+      "d": "COOPERACION 140 EDIF. 6 DEPTO 33, QUILPUE",
+      "e": "en ruta",
+      "tec": "ALFREDO ALCAYAGA F",
+      "visitas": 1,
+      "ult_fecha": "21-10-2026",
+      "ult_cierre": "Falla Masiva"
+     },
+     {
       "o": "1-3OK3ZMRN",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:40",
+      "hi": "17:18",
       "d": "MANUEL PLAZA 054, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -22426,7 +22438,7 @@
       "o": "1-3OIDTXLH",
       "cat": "Upgrade promoción",
       "f": "13-16",
-      "hi": "14:47",
+      "hi": "15:14",
       "d": "CALLE 1 850 EDIF. G DEPTO 21, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -22438,7 +22450,7 @@
       "o": "1-3OK881PN",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "17:47",
+      "hi": "18:14",
       "d": "AV LOS CARRERA 01074 EDIF. 2 DEPTO 102, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -22522,7 +22534,7 @@
       "o": "1-3OJFOZSP",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:48",
+      "hi": "14:59",
       "d": "CALLE 1 850 EDIF. D DEPTO 43, QUILPUE",
       "e": "Pendiente",
       "tec": "JORDAN ROA PEREZ",
@@ -22582,7 +22594,7 @@
       "o": "1-3OK2YBZJ",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "14:45",
       "d": "PJE MILANO 918 EDIF. Q DEPTO 22, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -22606,7 +22618,7 @@
       "o": "1-3OIDFHBM",
       "cat": "Migración 3 Play",
       "f": "16-19",
-      "hi": "17:33",
+      "hi": "16:20",
       "d": "OCEANO ATLANTICO 317, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -22666,7 +22678,7 @@
       "o": "1-3OHMHNM6",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:25",
+      "hi": "16:00",
       "d": "LONGITUDINAL 15 CASA MG, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "KEVIN TAPIA RETAMAL",
@@ -22714,7 +22726,7 @@
       "o": "1-3OKA7S42",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "16:46",
+      "hi": "16:47",
       "d": "EPSILON 2030 EDIF. A DEPTO 22, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS CASTRO TORRES",
@@ -22774,7 +22786,7 @@
       "o": "1-3OJW047T",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "17:25",
+      "hi": "16:00",
       "d": "VALDIVIA 368 EDIF. D DEPTO 303, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -22819,18 +22831,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OHU9E3M",
-      "cat": "Migración 2 Play",
-      "f": "16-19",
-      "hi": "16:37",
-      "d": "PJE.LA CAMANCHACA 1434, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "RAFAEL VARGAS B",
-      "visitas": 1,
-      "ult_fecha": "02-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OJVR6XJ",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -22864,6 +22864,18 @@
       "tec": "SEBASTIAN DOSSOW A",
       "visitas": 1,
       "ult_fecha": "22-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OHU9E3M",
+      "cat": "Migración 2 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "PJE.LA CAMANCHACA 1434, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "SEBASTIAN DOSSOW A",
+      "visitas": 1,
+      "ult_fecha": "02-10-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -22903,5 +22915,5 @@
    }
   }
  },
- "generado": "23-10-2026 12:09"
+ "generado": "23-10-2026 12:24"
 }
