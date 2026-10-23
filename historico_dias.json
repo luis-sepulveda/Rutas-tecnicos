@@ -22165,23 +22165,23 @@
    }
   },
   "23-10-2026": {
-   "hasta": "12:49",
-   "actividades": 145,
+   "hasta": "12:54",
+   "actividades": 146,
    "tecnicos": 34,
    "estados": {
-    "Completado": 24,
-    "Pendiente": 75,
-    "Iniciado": 21,
+    "Completado": 28,
+    "Pendiente": 74,
+    "Iniciado": 18,
     "No Realizada": 19,
+    "en ruta": 2,
     "Suspendido": 2,
-    "Cancelado": 3,
-    "en ruta": 1
+    "Cancelado": 3
    },
-   "rgu": 237.2,
+   "rgu": 237.3,
    "caidas_total": 5,
    "caidas_activas": 5,
    "caidas_resueltas": 0,
-   "nuevas": 7,
+   "nuevas": 8,
    "al_bucket": 15,
    "repetidas": 50,
    "reagendadas": 2,
@@ -22235,6 +22235,15 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OKVJ656",
+      "tec": "JOSE SALAS MEDINA",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "12:54",
+      "d": "HAITI 790 DEPTO 12, QUILPUE",
+      "e": "en ruta"
+     },
+     {
       "o": "1-3OKUPCUM",
       "tec": "MATÍAS JAQUE AG",
       "cat": "Modificación de Servicio",
@@ -22250,7 +22259,7 @@
       "f": "10-13",
       "hi": "12:09",
       "d": "PJE RORCUAL 1576, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OJFOZSP",
@@ -22437,7 +22446,7 @@
       "f": "10-13",
       "hi": "09:45",
       "d": "PJE NIEMEYER 119, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "DANIEL NAVARRETE E",
       "visitas": 2,
       "ult_fecha": "22-10-2026",
@@ -22447,7 +22456,7 @@
       "o": "1-3OIDTXLH",
       "cat": "Upgrade promoción",
       "f": "13-16",
-      "hi": "15:04",
+      "hi": "15:35",
       "d": "CALLE 1 850 EDIF. G DEPTO 21, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -22519,7 +22528,7 @@
       "o": "1-3OK7OTXJ",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "14:01",
       "d": "EL TINEO 2110, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOEL GUSTAVE GUSTA",
@@ -22531,7 +22540,7 @@
       "o": "1-3OIQBKG2",
       "cat": "Migración 3 Play",
       "f": "16-19",
-      "hi": "16:14",
+      "hi": "16:15",
       "d": "BUENOS AIRES 1585, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOEL GUSTAVE GUSTA",
@@ -22567,7 +22576,7 @@
       "o": "1-3OHMHNM6",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:30",
+      "hi": "16:41",
       "d": "LONGITUDINAL 15 CASA MG, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JORGE PEZOA VICUÑA",
@@ -22603,7 +22612,7 @@
       "o": "1-3OKS0BJ5",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:33",
+      "hi": "14:54",
       "d": "HEVIA 0176, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -22639,7 +22648,7 @@
       "o": "1-3OK3ZMRN",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:56",
+      "hi": "17:00",
       "d": "MANUEL PLAZA 054, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE SALAS MEDINA",
@@ -22699,7 +22708,7 @@
       "o": "1-3OJ5G6DG",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:29",
+      "hi": "16:42",
       "d": "CALLE HERALDO ORREGO 3011 DEPTO 106, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -22711,7 +22720,7 @@
       "o": "1-3OK2YBZJ",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "14:05",
+      "hi": "14:04",
       "d": "PJE MILANO 918 EDIF. Q DEPTO 22, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS CASTRO TORRES",
@@ -22891,7 +22900,7 @@
       "o": "1-3OIO5X42",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "18:13",
+      "hi": "18:08",
       "d": "LAUTARO 477 CASA 2, QUILPUE",
       "e": "Pendiente",
       "tec": "YENDER BOSCAN CADENAS",
@@ -22924,5 +22933,5 @@
    }
   }
  },
- "generado": "23-10-2026 12:49"
+ "generado": "23-10-2026 12:54"
 }
