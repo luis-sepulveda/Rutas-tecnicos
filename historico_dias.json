@@ -22165,18 +22165,19 @@
    }
   },
   "23-10-2026": {
-   "hasta": "17:46",
-   "actividades": 158,
+   "hasta": "18:11",
+   "actividades": 159,
    "tecnicos": 34,
    "estados": {
-    "Completado": 90,
-    "No Realizada": 38,
-    "Iniciado": 19,
-    "Pendiente": 4,
+    "Completado": 95,
+    "No Realizada": 40,
+    "en ruta": 2,
+    "Iniciado": 14,
     "Suspendido": 3,
-    "Cancelado": 4
+    "Cancelado": 4,
+    "Pendiente": 1
    },
-   "rgu": 248.5,
+   "rgu": 248.6,
    "caidas_total": 8,
    "caidas_activas": 8,
    "caidas_resueltas": 0,
@@ -22267,16 +22268,16 @@
       "f": "16-19",
       "hi": "17:25",
       "d": "ACHERNAR 1013, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OL40E5G",
-      "tec": "MARCO PEREZ G",
+      "tec": "ALFREDO ALCAYAGA F",
       "cat": "Migración 1 Play",
       "f": "16-19",
       "hi": "17:30",
       "d": "CLAUDIO VICUNA 807, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OL4D9J5",
@@ -22303,7 +22304,7 @@
       "f": "16-19",
       "hi": "16:58",
       "d": "SANTA ROSA 4 CASA MK, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OKZBWR0",
@@ -22454,11 +22455,23 @@
       "f": "16-19",
       "hi": "17:42",
       "d": "EL COBRE 215 CASA C, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "ALFREDO ALCAYAGA F",
       "visitas": 2,
       "ult_fecha": "17-10-2026",
       "ult_cierre": "Falta de dotación"
+     },
+     {
+      "o": "1-3OL40E5G",
+      "cat": "Migración 1 Play",
+      "f": "16-19",
+      "hi": "18:25",
+      "d": "CLAUDIO VICUNA 807, QUILPUE",
+      "e": "en ruta",
+      "tec": "ALFREDO ALCAYAGA F",
+      "visitas": 3,
+      "ult_fecha": "19-10-2026",
+      "ult_cierre": "NAP Problema ubicación"
      },
      {
       "o": "1-3OG03J9Q",
@@ -22533,14 +22546,14 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3OK881PN",
-      "cat": "Reparación",
+      "o": "1-3OKA7S42",
+      "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "18:28",
-      "d": "AV LOS CARRERA 01074 EDIF. 2 DEPTO 102, QUILPUE",
-      "e": "Pendiente",
+      "hi": "18:20",
+      "d": "EPSILON 2030 EDIF. A DEPTO 22, QUILPUE",
+      "e": "en ruta",
       "tec": "CRISTOBAL MIRANDA VALENC",
-      "visitas": 1,
+      "visitas": 3,
       "ult_fecha": "22-10-2026",
       "ult_cierre": "Cliente reagenda"
      },
@@ -22567,6 +22580,18 @@
       "visitas": 1,
       "ult_fecha": "20-10-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OK881PN",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "17:53",
+      "d": "AV LOS CARRERA 01074 EDIF. 2 DEPTO 102, QUILPUE",
+      "e": "Iniciado",
+      "tec": "DANIEL NAVARRETE E",
+      "visitas": 1,
+      "ult_fecha": "22-10-2026",
+      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3OK3HNJ6",
@@ -22706,7 +22731,7 @@
       "f": "16-19",
       "hi": "17:13",
       "d": "PJE.LA CAMANCHACA 1434, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JOSE CASTRO P",
       "visitas": 1,
       "ult_fecha": "02-10-2026",
@@ -22754,23 +22779,11 @@
       "f": "16-19",
       "hi": "17:11",
       "d": "INGLATERRA 322, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JOSE ROJO A",
       "visitas": 1,
       "ult_fecha": "22-10-2026",
       "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OKA7S42",
-      "cat": "Migración 1 Play",
-      "f": "16-19",
-      "hi": "17:57",
-      "d": "EPSILON 2030 EDIF. A DEPTO 22, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JOSE SALAS MEDINA",
-      "visitas": 3,
-      "ult_fecha": "22-10-2026",
-      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3OK5AJ9E",
@@ -22934,7 +22947,7 @@
       "f": "16-19",
       "hi": "16:37",
       "d": "VALDIVIA 368 EDIF. D DEPTO 303, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "MARCELO GÓMEZ GÓME",
       "visitas": 1,
       "ult_fecha": "22-10-2026",
@@ -22951,18 +22964,6 @@
       "visitas": 1,
       "ult_fecha": "21-10-2026",
       "ult_cierre": "Falla Masiva"
-     },
-     {
-      "o": "1-3OL40E5G",
-      "cat": "Migración 1 Play",
-      "f": "16-19",
-      "hi": "17:30",
-      "d": "CLAUDIO VICUNA 807, QUILPUE",
-      "e": "Pendiente",
-      "tec": "MARCO PEREZ G",
-      "visitas": 3,
-      "ult_fecha": "19-10-2026",
-      "ult_cierre": "NAP Problema ubicación"
      },
      {
       "o": "1-3OKZF8ZU",
@@ -23085,5 +23086,5 @@
    }
   }
  },
- "generado": "23-10-2026 17:46"
+ "generado": "23-10-2026 18:11"
 }
