@@ -13949,10 +13949,15 @@ const MG_RCOL = { cli:'#d97706', vtr:'#2563eb', dom:'#dc2626', sc:'#94a3b8' };
 /* (21-10-2026) Meta INTERNA de derivacion (Luis: "es mas real"). VTR/CLARO
    no ha dado una meta. 45% = un poco mejor que septiembre (46%). Para
    cambiarla, cambiar este numero. */
-const MG_META_DER = 45;
-function mgMeta(p){ const d = p - MG_META_DER;
-  return d > 0 ? '<i class="peor">' + mgF1(d) + ' pts sobre la meta (' + MG_META_DER + '%)</i>'
-               : '<i class="mejor">✓ dentro de la meta (' + MG_META_DER + '% o menos)</i>'; }
+/* (23-10-2026) VTR/CLARO dio su meta en la reunion: 40 % de derivacion o
+   menos. Es la que manda los colores. La interna de 45 % se sigue mostrando
+   como referencia (MG_META_INT). Para volver a la de antes: MG_META_DER = 45. */
+const MG_META_DER = 40;
+const MG_META_INT = 45;
+function mgMeta(p){ const d = p - MG_META_DER, di = p - MG_META_INT;
+  return (d > 0 ? '<i class="peor">' + mgF1(d) + ' pts sobre la meta VTR/CLARO (' + MG_META_DER + '%)</i>'
+                : '<i class="mejor">✓ dentro de la meta VTR/CLARO (' + MG_META_DER + '% o menos)</i>')
+    + '<br><span style="font:500 11.5px/1.3 inherit;color:#64748b;text-transform:none;letter-spacing:0">Meta interna (' + MG_META_INT + '%): ' + (di > 0 ? mgF1(di) + ' pts sobre' : '✓ dentro') + '</span>'; }
 const MG_COLOR = { sm:'#d97706', re:'#2563eb', de:'#dc2626', di:'#7c3aed', ot:'#64748b' };
 const MG_FNOM = { sm:'Sin moradores', re:'Cliente reagenda', de:'Cliente desiste', di:'Dirección', ot:'Otras causas' };
 
@@ -13987,7 +13992,7 @@ function mgBajarRespaldos(){
         (porOT[ot] = porOT[ot] || []).push({ iso: iso, hora: g('hora'), tec: g('tec'), causa: g('causa'), foto: g('foto'), vieja: /s/i.test(g('vieja')),
           ticket: g('ticket'), real: g('real'), plat: g('plat'), det: g('det'), md: /mal deriv/i.test(g('causa')) });
       });
-      const out = { porOT: porOT, desde: desde, n: j.filas.length };
+      const out = { porOT: porOT, desde: desde, n: j.filas.length, t: Date.now() };
       mgRespGuardar(out);
       return out;
     }).catch(function(e){ console.warn('respaldos:', e); return null; });
@@ -14193,7 +14198,7 @@ function pintarMigGer(){
       return '<button class="' + (k === mgSel ? 'on' : '') + '" onclick="setMgSel(\'' + k + '\')" title="% de derivación">'
         + (mgVer === 'mes' ? MG_MESES[+k.slice(4) - 1] : 'Sem ' + derNumSemana(k))
         + '<b class="' + (d > MG_META_DER ? 'sobre' : 'ok') + '">' + Math.round(d) + '%</b></button>'; }).join('') + '</div>'
-    + '<span class="mg-meta">Meta interna de derivación: <b>' + MG_META_DER + '% o menos</b></span>'
+    + '<span class="mg-meta">Meta VTR/CLARO de derivación: <b>' + MG_META_DER + '% o menos</b> · interna ' + MG_META_INT + '%</span>'
     + (mgTab === 'ger' ? mgSaltosHtml() : '');
   const i = ks.indexOf(mgSel), o = P[mgSel], a = i > 0 ? P[ks[i - 1]] : null;
   if(mgTab === 'tec'){ cu.innerHTML = (enCurso(mgSel) ? '<p class="mg-nota" style="margin:0 0 10px">Período en curso: datos hasta ayer.</p>' : '') + mgTecHtml(mgSel, i > 0 ? ks[i - 1] : null); return; }
@@ -14285,7 +14290,17 @@ function mgGrupo(x, c, r){
 /* (22-10-2026) los respaldos pueden venir de la vista Gerencia (MG.resp) o
    del Resumen de migraciones para supervisores (RM_RESP): se usa el que haya */
 let RM_RESP = null, RM_RESP_T = 0, RM_RESP_BAJANDO = false;
-function mgRespDatos(){ return (MG && MG.resp) || RM_RESP; }
+/* (23-10-2026) ARREGLO: antes, si se habia abierto la vista Gerencia, se usaban
+   SIEMPRE sus respaldos (MG.resp), bajados al abrirla, aunque el Resumen
+   hubiera traido otros mas nuevos con "Actualizar fotos". Asi las fotos de
+   hoy salian "0 de 7" aunque estaban en la planilla. Ahora se usa la copia
+   MAS NUEVA de las dos (t = cuando llego de Google; cache = copia guardada). */
+function mgRespDatos(){
+  const a = (MG && MG.resp) || null, b = RM_RESP && RM_RESP.porOT ? RM_RESP : null;
+  if(!a) return b || RM_RESP; if(!b) return a;
+  const ta = a.t || a.cache || 0, tb = b.t || b.cache || 0;
+  return tb > ta ? b : a;
+}
 /* (22-10-2026, 11:35) Luis: "si él está registrando todo, esa sería la idea
    para todos, así tenemos respaldo de todo". Desde ahora se espera foto en
    TODA no realizada, sea cual sea la causa (antes solo sin moradores,
@@ -14730,7 +14745,7 @@ function mgResumenHtml(o, a, k, kA, cur){
     + '<div class="mg-res">'
     + t('graf', '#1d4ed8', 'Llegaron', U, 'migraciones a nuestras bandejas: <b class="v">' + Math.round(pCo) + '</b> de cada 100 se completaron.',
         mgF1(prom) + ' por día' + (promA !== null ? ' · ' + mgCmpN(prom, promA, nomA) : ''), 'Ver semana a semana')
-    + t('graf', pDer > MG_META_DER ? '#dc2626' : '#15803d', 'Derivación', mgF1(pDer) + '%', 'de lo visitado no se pudo hacer. Meta interna: ' + MG_META_DER + '% o menos.',
+    + t('graf', pDer > MG_META_DER ? '#dc2626' : '#15803d', 'Derivación', mgF1(pDer) + '%', 'de lo visitado no se pudo hacer. Meta VTR/CLARO: ' + MG_META_DER + '% o menos (interna ' + MG_META_INT + '%).',
         mgMeta(pDer) + (pDerA !== null ? '<br>' + mgCmp(pDer, pDerA, true, nomA) : ''), 'Ver semana a semana')
     + (nc ? t('quien', '#d97706', 'De quién depende', Math.round(mgPct(Rr.cli, nc)) + '%',
         'de lo que no se completó fue por el <b>cliente</b>; ' + Math.round(mgPct(Rr.vtr, nc)) + '% VTR/CLARO y <b class="r">' + Math.round(mgPct(Rr.dom, nc)) + '%</b> Dominion.',
@@ -15111,15 +15126,17 @@ function mgGraficoHtml(){
   if(ks.length < 2) return '';
   const pts = ks.map(function(k){ return { k: k, p: mgPct(W[k].d, W[k].n), n: W[k].n, cur: k === hoyK }; });
   const Wd = 1100, H = 260, ml = 78, mr = 40, mt = 26, mb = 46;
-  const lo = Math.max(0, Math.floor((Math.min.apply(null, pts.map(function(q){ return q.p; }).concat([MG_META_DER])) - 5) / 5) * 5);
-  const hi = Math.min(100, Math.ceil((Math.max.apply(null, pts.map(function(q){ return q.p; }).concat([MG_META_DER])) + 5) / 5) * 5);
+  const lo = Math.max(0, Math.floor((Math.min.apply(null, pts.map(function(q){ return q.p; }).concat([MG_META_DER, MG_META_INT])) - 5) / 5) * 5);
+  const hi = Math.min(100, Math.ceil((Math.max.apply(null, pts.map(function(q){ return q.p; }).concat([MG_META_DER, MG_META_INT])) + 5) / 5) * 5);
   const X = function(i){ return ml + (Wd - ml - mr) * (pts.length === 1 ? 0.5 : i / (pts.length - 1)); };
   const Y = function(v){ return mt + (H - mt - mb) * (1 - (v - lo) / (hi - lo)); };
   let g = '';
-  for(let v = lo; v <= hi; v += 5) if(v !== MG_META_DER) g += '<line x1="' + ml + '" x2="' + (Wd - mr) + '" y1="' + Y(v) + '" y2="' + Y(v) + '" class="gl"/><text x="' + (ml - 6) + '" y="' + (Y(v) + 4) + '" class="ya">' + v + '%</text>';
+  for(let v = lo; v <= hi; v += 5) if(v !== MG_META_DER && v !== MG_META_INT) g += '<line x1="' + ml + '" x2="' + (Wd - mr) + '" y1="' + Y(v) + '" y2="' + Y(v) + '" class="gl"/><text x="' + (ml - 6) + '" y="' + (Y(v) + 4) + '" class="ya">' + v + '%</text>';
   g += '<rect x="' + ml + '" y="' + Y(hi) + '" width="' + (Wd - ml - mr) + '" height="' + (Y(MG_META_DER) - Y(hi)) + '" fill="#fef2f2"/>';      // zona sobre la meta
   g += '<line x1="' + ml + '" x2="' + (Wd - mr) + '" y1="' + Y(MG_META_DER) + '" y2="' + Y(MG_META_DER) + '" class="meta"/>'
-     + '<text x="' + (ml - 6) + '" y="' + (Y(MG_META_DER) + 4) + '" class="metat">Meta ' + MG_META_DER + '%</text>';
+     + '<text x="' + (ml - 6) + '" y="' + (Y(MG_META_DER) + 4) + '" class="metat">VTR ' + MG_META_DER + '%</text>'
+     + '<line x1="' + ml + '" x2="' + (Wd - mr) + '" y1="' + Y(MG_META_INT) + '" y2="' + Y(MG_META_INT) + '" class="metai"/>'
+     + '<text x="' + (ml - 6) + '" y="' + (Y(MG_META_INT) + 4) + '" class="metait">Interna ' + MG_META_INT + '%</text>';
   const linea = pts.filter(function(q){ return !q.cur; });
   g += '<polyline class="ln" points="' + linea.map(function(q){ return X(pts.indexOf(q)) + ',' + Y(q.p); }).join(' ') + '"/>';
   if(pts[pts.length - 1].cur && pts.length > 1) g += '<line class="ln cur" x1="' + X(pts.length - 2) + '" y1="' + Y(pts[pts.length - 2].p) + '" x2="' + X(pts.length - 1) + '" y2="' + Y(pts[pts.length - 1].p) + '"/>';
@@ -15131,8 +15148,8 @@ function mgGraficoHtml(){
       + '<text x="' + X(i) + '" y="' + (H - mb + 32) + '" class="xa2">' + mgRangoSem(q.k) + (q.cur ? ' · en curso' : '') + '</text>';
   });
   const sob = pts.filter(function(q){ return !q.cur && q.p > MG_META_DER; }).length, tot = pts.filter(function(q){ return !q.cur; }).length;
-  return '<div class="mg-b"><div class="mg-t"><b>Derivación semana a semana</b><small>migraciones · sobre las visitadas · la línea punteada es la meta interna</small></div>'
-    + '<p class="mg-frase">' + sob + ' de ' + tot + ' semanas completas quedaron sobre la meta de ' + MG_META_DER + '%.</p>'
+  return '<div class="mg-b"><div class="mg-t"><b>Derivación semana a semana</b><small>migraciones · sobre las visitadas · línea negra: meta VTR/CLARO (' + MG_META_DER + '%) · línea gris: meta interna (' + MG_META_INT + '%)</small></div>'
+    + '<p class="mg-frase">' + sob + ' de ' + tot + ' semanas completas quedaron sobre la meta VTR/CLARO de ' + MG_META_DER + '% (' + pts.filter(function(q){ return !q.cur && q.p > MG_META_INT; }).length + ' sobre la interna de ' + MG_META_INT + '%).</p>'
     + '<div class="mg-scroll"><svg class="mg-graf" viewBox="0 0 ' + Wd + ' ' + H + '" preserveAspectRatio="xMidYMid meet">' + g + '</svg></div>'
     + '<p class="mg-nota">Punto rojo: sobre la meta (zona roja). Punto verde: dentro de la meta. Punto hueco: semana en curso (le faltan días). Si una semana queda a menos de 1 punto de la meta, se muestra con decimal (45,3%) para que no parezca que cumple. Pasa el mouse por un punto para ver cuántas visitas tiene.</p></div>';
 }
@@ -15269,7 +15286,7 @@ function mgTablaHtml(P, ks, enCurso){
   return '<details class="mg-b mg-calc mg-plega"' + (mgAbre.calc ? ' open' : '') + ' ontoggle="mgAbre.calc = this.open"><summary><div class="mg-t"><b>Cómo se calcula</b><small>para que todos hablemos del mismo número · toca para abrir</small></div></summary><ul>'
     + '<li><b>Llegaron a nuestras bandejas</b>: toda migración que estuvo en la bandeja de un técnico de Dominion ese día, pasara lo que pasara. Incluye las que nos sacaron y no volvieron ese día (registro desde el 15-09).</li>'
     + '<li><b>No realizadas (derivación)</b>: no realizadas ÷ visitadas, y visitadas = completadas + no realizadas. Las canceladas, suspendidas y las que nos sacaron no entran. Abajo de la tarjeta va también el % sobre todas las que llegaron.</li>'
-    + '<li><b>Meta interna</b>: derivación de ' + MG_META_DER + '% o menos (efectividad de ' + (100 - MG_META_DER) + '% o más sobre lo visitado). La pone Dominion: VTR/CLARO no ha dado una meta.</li>'
+    + '<li><b>Meta VTR/CLARO</b>: derivación de ' + MG_META_DER + '% o menos (efectividad de ' + (100 - MG_META_DER) + '% o más sobre lo visitado), la que dio VTR/CLARO el 23-10. Manda los colores rojo y verde. <b>Meta interna</b> de Dominion: ' + MG_META_INT + '% o menos, como referencia.</li>'
     + '<li><b>De quién depende</b>: misma regla de "Quiebres por técnico". Cliente: sin moradores, reagenda, desiste, sin acceso, ductos, sin apoyo. VTR/CLARO: dirección, NAP, red, contingencia, falla masiva, factibilidad, más las canceladas y las que nos sacaron. Dominion: lo demás (falta de dotación, por ejemplo).</li>'
     + '<li><b>¿Se hicieron después?</b>: por cada no realizada se busca su dirección en el historial de visitas de Dominion y se mira si otro día se completó una migración ahí. Las de los últimos 7 días no se cuentan todavía.</li>'
     + '<li><b>Completadas por técnico al día</b>: completadas ÷ días-técnico (un técnico en un día con al menos una migración). <b>Visitas perdidas por día</b>: no realizadas ÷ días con datos.</li>'
@@ -15405,7 +15422,7 @@ function mgHoyHtml(){
   .mg-frs small { font-weight:600; color:#475569; } .mg-frs b { font:700 28px 'Archivo',system-ui,sans-serif; } .mg-frs span, .mg-frs em { font-size:12.5px; color:#475569; font-style:normal; }
   .mg-graf { width:100%; min-width:760px; height:auto; display:block; }
   .mg-graf .gl { stroke:#e2e8f0; stroke-width:1; } .mg-graf .ya { font-size:11px; fill:#64748b; text-anchor:end; }
-  .mg-graf .meta { stroke:#0f172a; stroke-width:1.5; stroke-dasharray:6 5; } .mg-graf .metat { font-size:12px; fill:#0f172a; font-weight:700; text-anchor:end; }
+  .mg-graf .meta { stroke:#0f172a; stroke-width:1.5; stroke-dasharray:6 5; } .mg-graf .metai { stroke:#94a3b8; stroke-width:1.2; stroke-dasharray:3 4; } .mg-graf .metait { font-size:11px; fill:#64748b; font-weight:600; text-anchor:end; } .mg-graf .metat { font-size:12px; fill:#0f172a; font-weight:700; text-anchor:end; }
   .mg-graf .ln { fill:none; stroke:#1e3a8a; stroke-width:2.5; } .mg-graf .ln.cur { stroke-dasharray:4 4; stroke-width:2; }
   .mg-graf .pv { font-size:12px; font-weight:700; text-anchor:middle; } .mg-graf .xa { font-size:11.5px; fill:#334155; text-anchor:middle; font-weight:600; }
   .mg-graf .xa2 { font-size:10px; fill:#94a3b8; text-anchor:middle; }
