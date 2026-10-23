@@ -15636,12 +15636,16 @@ function mgHoyHtml(){
 <div id="modalSV" onclick="if(event.target===this) cerrarSegVtr()">
   <div class="sv-box" role="dialog">
     <div class="sv-head"><div><h2>🎯 Seguimiento de técnicos marcados por VTR/CLARO</h2>
-      <p>Migraciones · completitud = completadas ÷ visitadas · meta <span id="svMeta"></span> o más · toca un técnico para abrir su ficha</p></div>
+      <p>Migraciones · las dos miradas en cada casilla: <b>completitud</b> (VTR/CLARO, meta <span id="svMeta"></span> o más) y <b>quiebres</b> (Dominion, meta <span id="svMetaQ"></span> o menos) · toca un técnico para abrir su ficha</p></div>
       <button class="sv-x" onclick="cerrarSegVtr()" title="Cerrar (Esc)">✖</button></div>
     <div id="svCuerpo"></div>
   </div>
 </div>
 <script>
+/* (23-10-2026, 15:55) Luis: "elimina el kpi de vtr, y midamoslo como ambas":
+   ya no se muestra el KPI que mando VTR (queda en la lista solo como
+   referencia). Cada casilla trae completitud (como VTR, meta 60 %) y
+   quiebres (como Dominion, meta 40 %). */
 const SV_TECS = [
   ['D. Navarrete', 25.0, 'DANIEL NAVARRETE'], ['J. Castro', 27.3, 'JOSE CASTRO'], ['J. Arriagada', 38.9, 'JUAN ARRIAGADA'],
   ['P. Hernández', 40.0, 'PABLO HERNANEZ'], ['A. Alcayaga', 43.5, 'ALFREDO ALCAYAGA'], ['L. Martín', 44.0, 'LUIS MARTIN'],
@@ -15665,7 +15669,7 @@ function svFicha(i){
 }
 function pintarSegVtr(){
   const cu = document.getElementById('svCuerpo'); if(!cu) return;
-  const meta = 100 - MG_META_DER; document.getElementById('svMeta').textContent = meta + ' %';
+  const meta = 100 - MG_META_DER; document.getElementById('svMeta').textContent = meta + ' %'; document.getElementById('svMetaQ').textContent = MG_META_DER + ' %';
   if(DER === null){ cu.innerHTML = '<div class="sv-vacio">' + (derFallo ? 'No se pudieron bajar los datos. Vuelve a abrir en un rato.' : 'Cargando…') + '</div>'; return; }
   const hoy = (typeof FECHA_DATOS !== 'undefined' && FECHA_DATOS) ? FECHA_DATOS : new Date();
   const lun = rmLunes(hoy), ant = rmMasDias(lun, -7);
@@ -15688,19 +15692,24 @@ function pintarSegVtr(){
     const p = pc(o); if(p === null) return '<td class="sv-n">—</td>';
     const cls = p >= meta ? 'ok' : p >= meta - 10 ? 'medio' : 'mal';
     const fl = base === undefined || base === null ? '' : p > base + 0.05 ? ' <i class="up">▲</i>' : p < base - 0.05 ? ' <i class="dn">▼</i>' : '';
-    return '<td><b class="sv-p ' + cls + '">' + f1(p) + '%</b>' + fl + '<small>' + o.c + ' de ' + o.v + '</small></td>'; };
+    return '<td><b class="sv-p ' + cls + '" title="Completitud (VTR/CLARO): completó ' + o.c + ' de ' + o.v + '"><i class="sv-et">compl.</i> ' + f1(p) + '%</b>' + fl
+      + '<span class="sv-q ' + cls + '" title="Quiebres (Dominion): ' + (o.v - o.c) + ' de ' + o.v + ' no se hicieron"><i class="sv-et">quiebres</i> ' + f1(100 - p) + '%</span>'
+      + '<small>' + o.c + ' de ' + o.v + ' completadas</small></td>'; };
   const nomMes = DER_MESES_NOM[+mes.slice(4) - 1];
-  let h = '<table class="sv-t"><thead><tr><th class="iz">Técnico</th><th class="iz">Supervisor</th><th>KPI VTR</th>'
+  let h = '<div class="sv-ley"><span><b class="sv-p ok"><i class="sv-et">compl.</i> 60%</b> arriba: <b>completitud</b>, como mide VTR/CLARO (meta ' + meta + ' % o más)</span>'
+    + '<span><span class="sv-q ok"><i class="sv-et">quiebres</i> 40%</span> abajo: <b>quiebres</b>, como medimos nosotros (meta ' + MG_META_DER + ' % o menos)</span>'
+    + '<span class="g">Son la misma cosa vista al revés: siempre suman 100.</span></div>'
+    + '<table class="sv-t"><thead><tr><th class="iz">Técnico</th><th class="iz">Supervisor</th>'
     + '<th>' + nomMes.replace(/^./, function(c){ return c.toUpperCase(); }) + '</th><th>Semana anterior<small>sem ' + derNumSemana(ant) + '</small></th>'
     + '<th>Esta semana<small>sem ' + derNumSemana(lun) + ', con hoy</small></th><th>Hoy</th></tr></thead><tbody>';
   SV_TECS.forEach(function(t, i){
     const o = C[i], pA = pc(o.ant);
     h += '<tr onclick="svFicha(' + i + ')" title="Abrir su ficha"><td class="iz"><b>' + escR(t[0]) + '</b></td><td class="iz sv-sup">' + escR(o.sup ? derTitulo(o.sup) : '') + '</td>'
-      + '<td><b class="sv-vtr">' + f1(t[1]) + '%</b></td>' + cel(o.mes, t[1]) + cel(o.ant) + cel(o.sem, pA) + cel(o.hoy) + '</tr>';
+      + cel(o.mes) + cel(o.ant) + cel(o.sem, pA) + cel(o.hoy) + '</tr>';
   });
-  h += '<tr class="sv-tot"><td class="iz"><b>Los ' + SV_TECS.length + ' juntos</b></td><td></td><td></td>' + cel(T.mes) + cel(T.ant) + cel(T.sem, pc(T.ant)) + cel(T.hoy) + '</tr></tbody></table>'
+  h += '<tr class="sv-tot"><td class="iz"><b>Los ' + SV_TECS.length + ' juntos</b></td><td></td>' + cel(T.mes) + cel(T.ant) + cel(T.sem, pc(T.ant)) + cel(T.hoy) + '</tr></tbody></table>'
     + '<p class="sv-nota">Verde: ' + meta + ' % o más (meta VTR/CLARO de ' + MG_META_DER + ' % de derivación) · ámbar: hasta 10 puntos bajo la meta · rojo: más abajo. '
-    + '▲▼ en el mes: contra el KPI que informó VTR; en esta semana: contra la semana anterior. Días anteriores: lo que se ve con las credenciales de la agencia (datos.json, hasta ayer); hoy, en vivo.</p>';
+    + '▲▼ en esta semana: contra la semana anterior. Días anteriores: lo que se ve con las credenciales de la agencia (datos.json, hasta ayer); hoy, en vivo.</p>';
   cu.innerHTML = h;
 }
 document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarSegVtr(); });
@@ -15729,6 +15738,10 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarS
   .sv-p { padding:1px 6px; border-radius:6px; } .sv-p.ok { color:#15803d; background:#f0fdf4; } .sv-p.medio { color:#b45309; background:#fffbeb; } .sv-p.mal { color:#b91c1c; background:#fef2f2; }
   .sv-t i.up { color:#15803d; font-style:normal; } .sv-t i.dn { color:#b91c1c; font-style:normal; }
   .sv-n { color:#94a3b8; }
+  .sv-q { display:block; font-size:12.5px; font-weight:600; margin-top:2px; } .sv-q.ok { color:#15803d; } .sv-q.medio { color:#b45309; } .sv-q.mal { color:#b91c1c; }
+  .sv-ley { display:flex; flex-wrap:wrap; gap:8px 18px; align-items:center; background:#fff; border:1px solid #e2e8f0; border-radius:10px; padding:9px 12px; margin:0 0 10px; font-size:13px; }
+  .sv-ley .sv-q { display:inline; font-size:13px; } .sv-ley .g { color:#64748b; }
+  .sv-et { font-style:normal; font-weight:500; font-size:10.5px; opacity:.75; text-transform:uppercase; letter-spacing:.02em; }
   .sv-tot td { background:#f1f5f9; font-weight:600; }
   .sv-nota { font-size:12px; color:#64748b; margin:10px 2px 0; }
 </style>
