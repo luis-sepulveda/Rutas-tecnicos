@@ -22165,25 +22165,25 @@
    }
   },
   "23-10-2026": {
-   "hasta": "14:15",
-   "actividades": 149,
+   "hasta": "14:25",
+   "actividades": 150,
    "tecnicos": 34,
    "estados": {
     "Completado": 46,
     "No Realizada": 23,
     "Pendiente": 52,
-    "en ruta": 7,
-    "Iniciado": 14,
+    "Iniciado": 20,
     "Suspendido": 3,
-    "Cancelado": 4
+    "Cancelado": 4,
+    "en ruta": 2
    },
-   "rgu": 240.3,
+   "rgu": 241.3,
    "caidas_total": 5,
    "caidas_activas": 5,
    "caidas_resueltas": 0,
-   "nuevas": 10,
+   "nuevas": 11,
    "al_bucket": 15,
-   "repetidas": 51,
+   "repetidas": 52,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
@@ -22235,6 +22235,15 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OKYE598",
+      "tec": "ALEXIS JARA",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "15:26",
+      "d": "LOS PEUCOS 2473, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3OKY11P9",
       "tec": "KEVIN TAPIA RETAMAL",
       "cat": "Modificación de Servicio",
@@ -22281,7 +22290,7 @@
      },
      {
       "o": "1-3OJFOZSP",
-      "tec": "ALFREDO ALCAYAGA F",
+      "tec": "CESAR MENA OLIVEROS",
       "cat": "Alta 1 Play",
       "f": "13-16",
       "hi": "15:48",
@@ -22327,10 +22336,22 @@
     ],
     "repetidas": [
      {
+      "o": "1-3OKYE598",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "15:26",
+      "d": "LOS PEUCOS 2473, QUILPUE",
+      "e": "Pendiente",
+      "tec": "ALEXIS JARA",
+      "visitas": 1,
+      "ult_fecha": "14-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OJG4F2C",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:08",
+      "hi": "16:19",
       "d": "AV LOS CARRERA 480, QUILPUE",
       "e": "Pendiente",
       "tec": "ALEXIS JARA",
@@ -22351,22 +22372,10 @@
       "ult_cierre": "Falla Masiva"
      },
      {
-      "o": "1-3OJFOZSP",
-      "cat": "Alta 1 Play",
-      "f": "13-16",
-      "hi": "14:33",
-      "d": "CALLE 1 850 EDIF. D DEPTO 43, QUILPUE",
-      "e": "Pendiente",
-      "tec": "ALFREDO ALCAYAGA F",
-      "visitas": 1,
-      "ult_fecha": "21-10-2026",
-      "ult_cierre": "Falla Masiva"
-     },
-     {
       "o": "1-3OJYDEXK",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:25",
+      "hi": "17:45",
       "d": "INGLATERRA 322, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -22390,9 +22399,9 @@
       "o": "1-3OJHJFAV",
       "cat": "Migración 3 Play",
       "f": "13-16",
-      "hi": "14:06",
+      "hi": "14:18",
       "d": "GOMEZ CARRENO 1071, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "ANTONHY MORALES MENDOZA",
       "visitas": 1,
       "ult_fecha": "21-10-2026",
@@ -22423,10 +22432,22 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OJFOZSP",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "15:23",
+      "d": "CALLE 1 850 EDIF. D DEPTO 43, QUILPUE",
+      "e": "Pendiente",
+      "tec": "CESAR MENA OLIVEROS",
+      "visitas": 1,
+      "ult_fecha": "21-10-2026",
+      "ult_cierre": "Falla Masiva"
+     },
+     {
       "o": "1-3OK8L20W",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "17:23",
+      "hi": "17:06",
       "d": "LOS ALMENDROS 2915 EDIF. B DEPTO 23, QUILPUE",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
@@ -22582,9 +22603,9 @@
       "o": "1-3OK7OTXJ",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:14",
+      "hi": "14:23",
       "d": "EL TINEO 2110, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JOSE CASTRO P",
       "visitas": 2,
       "ult_fecha": "22-10-2026",
@@ -22594,7 +22615,7 @@
       "o": "1-3OKCGX88",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:48",
+      "hi": "16:57",
       "d": "LONGITUDINAL 24, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE CASTRO P",
@@ -22678,7 +22699,7 @@
       "o": "1-3OJG5JZY",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:10",
+      "hi": "15:16",
       "d": "LOS TREBOLES 210 CASA 163, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JUAN ARRIAGADA C",
@@ -22690,7 +22711,7 @@
       "o": "1-3OHMHNM6",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:16",
+      "hi": "16:22",
       "d": "LONGITUDINAL 15 CASA MG, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JUAN ARRIAGADA C",
@@ -22714,7 +22735,7 @@
       "o": "1-3OJ5G6DG",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "18:00",
+      "hi": "16:00",
       "d": "CALLE HERALDO ORREGO 3011 DEPTO 106, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -22798,7 +22819,7 @@
       "o": "1-3OJW047T",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:10",
+      "hi": "16:00",
       "d": "VALDIVIA 368 EDIF. D DEPTO 303, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MARCELO GÓMEZ GÓME",
@@ -22822,7 +22843,7 @@
       "o": "1-3OIQBKG2",
       "cat": "Migración 3 Play",
       "f": "16-19",
-      "hi": "16:46",
+      "hi": "16:54",
       "d": "BUENOS AIRES 1585, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -22831,10 +22852,22 @@
       "ult_cierre": "Evento Contingencia"
      },
      {
+      "o": "1-3OK91INB",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "15:19",
+      "d": "SANTA SARA 1540 EDIF. 1A DEPTO 307, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "MATÍAS JAQUE AG",
+      "visitas": 3,
+      "ult_fecha": "20-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OKP7DV7",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "17:22",
       "d": "EL MIRADOR 738 CASA 13, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATÍAS JAQUE AG",
@@ -22877,18 +22910,6 @@
       "visitas": 3,
       "ult_fecha": "22-10-2026",
       "ult_cierre": "Cliente reagenda"
-     },
-     {
-      "o": "1-3OK91INB",
-      "cat": "Alta 1 Play",
-      "f": "13-16",
-      "hi": "14:48",
-      "d": "SANTA SARA 1540 EDIF. 1A DEPTO 307, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "RAFAEL VARGAS B",
-      "visitas": 3,
-      "ult_fecha": "20-10-2026",
-      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OJVR6XJ",
@@ -22963,5 +22984,5 @@
    }
   }
  },
- "generado": "23-10-2026 14:15"
+ "generado": "23-10-2026 14:25"
 }
