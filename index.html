@@ -15694,7 +15694,7 @@ function pintarSegVtr(){
     const fl = base === undefined || base === null ? '' : p > base + 0.05 ? ' <i class="up">▲</i>' : p < base - 0.05 ? ' <i class="dn">▼</i>' : '';
     return '<td><b class="sv-p ' + cls + '" title="Completitud (VTR/CLARO): completó ' + o.c + ' de ' + o.v + '"><i class="sv-et">compl.</i> ' + f1(p) + '%</b>' + fl
       + '<span class="sv-q ' + cls + '" title="Quiebres (Dominion): ' + (o.v - o.c) + ' de ' + o.v + ' no se hicieron"><i class="sv-et">quiebres</i> ' + f1(100 - p) + '%</span>'
-      + '<small>' + o.c + ' de ' + o.v + ' completadas</small></td>'; };
+      + '<small>' + o.v + ' visitadas: ' + o.c + ' completas · ' + (o.v - o.c) + ' quiebres</small></td>'; };
   const nomMes = DER_MESES_NOM[+mes.slice(4) - 1];
   let h = '<div class="sv-ley"><span><b class="sv-p ok"><i class="sv-et">compl.</i> 60%</b> arriba: <b>completitud</b>, como mide VTR/CLARO (meta ' + meta + ' % o más)</span>'
     + '<span><span class="sv-q ok"><i class="sv-et">quiebres</i> 40%</span> abajo: <b>quiebres</b>, como medimos nosotros (meta ' + MG_META_DER + ' % o menos)</span>'
