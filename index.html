@@ -12545,6 +12545,8 @@ function pintarPortada(){
     +     '<a class="b-wsp" onclick="abrirResumenWsp()" title="Una sola imagen con inicio, avance, nuevas, salieron y no realizadas, para el grupo">💬 Resumen WhatsApp</a>'
     /* (21-10-2026) Migraciones · vista gerencia */
     +     '<a class="b-mg" onclick="abrirMigGer()" title="Todo lo de migraciones del equipo: por mes, por semana y hoy">📊 Migraciones · Gerencia</a>'
+    /* (23-10-2026) seguimiento de los tecnicos que VTR/CLARO marco por completitud */
+    +     '<a class="b-sv" onclick="abrirSegVtr()" title="Solo los técnicos que VTR/CLARO marcó con baja completitud">🎯 Seguimiento VTR</a>'
     /* Tiempos (26-09-2026): a la derecha de Reiterados, a pedido de Luis (antes
        estuvo un rato en "Reportes"). Abre el boton Tiempos en terreno del
        historial en otra pestana, como Historial y Seguimiento. */
@@ -15619,5 +15621,116 @@ function mgHoyHtml(){
   .mg-resc tr.mg-pocas td { color:#94a3b8; } .mg-resc tr.mg-pocas td b { color:#64748b; }
 </style>
 
+
+<!-- ===== SEGUIMIENTO VTR (23-10-2026) =====
+     Luis: VTR/CLARO mando la lista de los tecnicos con peor "KPI de
+     completitud" y pidio seguimiento solo a ellos, "lo mas simple". Boton
+     "Seguimiento VTR" en la barra, al lado de Migraciones · Gerencia.
+     Muestra solo MIGRACIONES (como Derivacion): completitud = completadas /
+     visitadas (completadas + no realizadas), para el mes, la semana anterior,
+     esta semana (con hoy en vivo) y hoy. Al lado, el KPI que informo VTR.
+     Meta: 60 % de completitud (= meta VTR de 40 % de derivacion, MG_META_DER).
+     Para cambiar la lista: SV_TECS (nombre a mostrar, KPI VTR, como empieza
+     el nombre en TOA). Para quitarlo: borrar este bloque, su <style> y la
+     linea del boton b-sv. -->
+<div id="modalSV" onclick="if(event.target===this) cerrarSegVtr()">
+  <div class="sv-box" role="dialog">
+    <div class="sv-head"><div><h2>🎯 Seguimiento de técnicos marcados por VTR/CLARO</h2>
+      <p>Migraciones · completitud = completadas ÷ visitadas · meta <span id="svMeta"></span> o más · toca un técnico para abrir su ficha</p></div>
+      <button class="sv-x" onclick="cerrarSegVtr()" title="Cerrar (Esc)">✖</button></div>
+    <div id="svCuerpo"></div>
+  </div>
+</div>
+<script>
+const SV_TECS = [
+  ['D. Navarrete', 25.0, 'DANIEL NAVARRETE'], ['J. Castro', 27.3, 'JOSE CASTRO'], ['J. Arriagada', 38.9, 'JUAN ARRIAGADA'],
+  ['P. Hernández', 40.0, 'PABLO HERNANEZ'], ['A. Alcayaga', 43.5, 'ALFREDO ALCAYAGA'], ['L. Martín', 44.0, 'LUIS MARTIN'],
+  ['A. Jara', 44.4, 'ALEXIS JARA'], ['F. Silva', 45.2, 'FELIPE SILVA'], ['José Salas', 39, 'JOSE SALAS'],
+  ['Jordan Roa', 39, 'JORDAN ROA'], ['José Galaz', 42, 'JOSE GALAZ']];
+function svNorm(t){ return rmLimpia(t).toUpperCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); }
+function svDe(tec){ const n = svNorm(tec); for(let i = 0; i < SV_TECS.length; i++){ if(n.indexOf(SV_TECS[i][2]) === 0) return i; } return -1; }
+function abrirSegVtr(){
+  document.getElementById('modalSV').classList.add('abierto'); pintarSegVtr();
+  if(DER !== null || derBajando) return;
+  derBajando = true; derFallo = false;
+  bajarDeriv().then(function(d){ DER = d; derBajando = false; pintarSegVtr(); })
+              .catch(function(e){ console.warn('seguimiento vtr:', e); derFallo = true; derBajando = false; pintarSegVtr(); });
+}
+function cerrarSegVtr(){ const m = document.getElementById('modalSV'); if(m) m.classList.remove('abierto'); }
+function svFicha(i){
+  const nom = SV_TECS[i][2], x = (DER || []).filter(function(r){ return svDe(r.tec) === i; }).pop();
+  if(!x) return;
+  cerrarSegVtr(); derModo = 'der'; derTipo = 'MIGRA'; derSup = 'Todos'; derAbierto = null;
+  derVista = 'fic'; derFicTec = x.tec; abrirDeriv();
+}
+function pintarSegVtr(){
+  const cu = document.getElementById('svCuerpo'); if(!cu) return;
+  const meta = 100 - MG_META_DER; document.getElementById('svMeta').textContent = meta + ' %';
+  if(DER === null){ cu.innerHTML = '<div class="sv-vacio">' + (derFallo ? 'No se pudieron bajar los datos. Vuelve a abrir en un rato.' : 'Cargando…') + '</div>'; return; }
+  const hoy = (typeof FECHA_DATOS !== 'undefined' && FECHA_DATOS) ? FECHA_DATOS : new Date();
+  const lun = rmLunes(hoy), ant = rmMasDias(lun, -7);
+  const isoHoy = hoy.getFullYear() + String(hoy.getMonth() + 1).padStart(2, '0') + String(hoy.getDate()).padStart(2, '0'), mes = isoHoy.slice(0, 6);
+  const hoyL = (DER || []).some(function(x){ return x.iso === isoHoy; }) ? [] : rmHoy();
+  const filas = (DER || []).filter(function(x){ return x.tp === 'MIGRA' && x.iso < isoHoy; }).concat(hoyL);
+  const C = SV_TECS.map(function(){ return { mes:{c:0,v:0}, ant:{c:0,v:0}, sem:{c:0,v:0}, hoy:{c:0,v:0}, sup:'' }; });
+  const T = { mes:{c:0,v:0}, ant:{c:0,v:0}, sem:{c:0,v:0}, hoy:{c:0,v:0} };
+  const suma = function(o, x){ o.v++; if(!x.der) o.c++; };
+  filas.forEach(function(x){
+    const i = svDe(x.tec); if(i < 0) return; const o = C[i]; if(x.sup) o.sup = x.sup;
+    const k = [];
+    if(String(x.iso).slice(0, 6) === mes) k.push('mes');
+    if(x.hoy) k.push('hoy', 'sem'); else if(x.sem === lun) k.push('sem'); else if(x.sem === ant) k.push('ant');
+    k.forEach(function(q){ suma(o[q], x); suma(T[q], x); });
+  });
+  const pc = function(o){ return o.v ? 100 * o.c / o.v : null; };
+  const f1 = function(v){ return v.toFixed(1).replace('.', ','); };
+  const cel = function(o, base){
+    const p = pc(o); if(p === null) return '<td class="sv-n">—</td>';
+    const cls = p >= meta ? 'ok' : p >= meta - 10 ? 'medio' : 'mal';
+    const fl = base === undefined || base === null ? '' : p > base + 0.05 ? ' <i class="up">▲</i>' : p < base - 0.05 ? ' <i class="dn">▼</i>' : '';
+    return '<td><b class="sv-p ' + cls + '">' + f1(p) + '%</b>' + fl + '<small>' + o.c + ' de ' + o.v + '</small></td>'; };
+  const nomMes = DER_MESES_NOM[+mes.slice(4) - 1];
+  let h = '<table class="sv-t"><thead><tr><th class="iz">Técnico</th><th class="iz">Supervisor</th><th>KPI VTR</th>'
+    + '<th>' + nomMes.replace(/^./, function(c){ return c.toUpperCase(); }) + '</th><th>Semana anterior<small>sem ' + derNumSemana(ant) + '</small></th>'
+    + '<th>Esta semana<small>sem ' + derNumSemana(lun) + ', con hoy</small></th><th>Hoy</th></tr></thead><tbody>';
+  SV_TECS.forEach(function(t, i){
+    const o = C[i], pA = pc(o.ant);
+    h += '<tr onclick="svFicha(' + i + ')" title="Abrir su ficha"><td class="iz"><b>' + escR(t[0]) + '</b></td><td class="iz sv-sup">' + escR(o.sup ? derTitulo(o.sup) : '') + '</td>'
+      + '<td><b class="sv-vtr">' + f1(t[1]) + '%</b></td>' + cel(o.mes, t[1]) + cel(o.ant) + cel(o.sem, pA) + cel(o.hoy) + '</tr>';
+  });
+  h += '<tr class="sv-tot"><td class="iz"><b>Los ' + SV_TECS.length + ' juntos</b></td><td></td><td></td>' + cel(T.mes) + cel(T.ant) + cel(T.sem, pc(T.ant)) + cel(T.hoy) + '</tr></tbody></table>'
+    + '<p class="sv-nota">Verde: ' + meta + ' % o más (meta VTR/CLARO de ' + MG_META_DER + ' % de derivación) · ámbar: hasta 10 puntos bajo la meta · rojo: más abajo. '
+    + '▲▼ en el mes: contra el KPI que informó VTR; en esta semana: contra la semana anterior. Días anteriores: lo que se ve con las credenciales de la agencia (datos.json, hasta ayer); hoy, en vivo.</p>';
+  cu.innerHTML = h;
+}
+document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarSegVtr(); });
+</script>
+<style>
+  .pv-bar a.b-sv { background:#7c2d12; color:#fff; font-weight:600; margin-left:6px; }
+  .pv-bar a.b-sv:hover { background:#9a3412; color:#fff; }
+  #modalSV { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); }
+  #modalSV.abierto { display:flex; align-items:flex-start; justify-content:center; padding:3vh 2vw; }
+  #modalSV .sv-box { background:#f4f7fa; color:#16232f; border-radius:14px; width:min(1100px,100%); max-height:94vh; overflow:auto; box-shadow:0 20px 60px rgba(0,0,0,.35); }
+  #modalSV .sv-head { display:flex; justify-content:space-between; gap:12px; padding:18px 22px 12px; background:#0f1b2d; color:#fff; border-radius:14px 14px 0 0; }
+  #modalSV h2 { margin:0; font-family:'Archivo',sans-serif; font-size:19px; }
+  #modalSV .sv-head p { margin:4px 0 0; font-size:12.5px; color:#a9b8cf; }
+  #modalSV .sv-x { border:1px solid #33475f; background:transparent; color:#fff; border-radius:8px; padding:5px 11px; cursor:pointer; align-self:flex-start; }
+  #svCuerpo { padding:16px 22px 20px; }
+  .sv-vacio { padding:30px; text-align:center; color:#64748b; }
+  .sv-t { width:100%; border-collapse:collapse; background:#fff; border-radius:10px; overflow:hidden; font-size:14px; }
+  .sv-t th { background:#e8f0fe; color:#1e3a8a; font-size:12px; text-transform:uppercase; letter-spacing:.03em; padding:9px 10px; text-align:right; }
+  .sv-t th small { display:block; text-transform:none; letter-spacing:0; font-weight:500; color:#64748b; }
+  .sv-t td { padding:8px 10px; border-top:1px solid #e2e8f0; text-align:right; white-space:nowrap; }
+  .sv-t .iz { text-align:left; }
+  .sv-t td small { display:block; font-size:11.5px; color:#64748b; }
+  .sv-t tbody tr:not(.sv-tot) { cursor:pointer; } .sv-t tbody tr:not(.sv-tot):hover td { background:#f8fafc; }
+  .sv-sup { color:#64748b; font-size:13px; }
+  .sv-vtr { color:#7c2d12; }
+  .sv-p { padding:1px 6px; border-radius:6px; } .sv-p.ok { color:#15803d; background:#f0fdf4; } .sv-p.medio { color:#b45309; background:#fffbeb; } .sv-p.mal { color:#b91c1c; background:#fef2f2; }
+  .sv-t i.up { color:#15803d; font-style:normal; } .sv-t i.dn { color:#b91c1c; font-style:normal; }
+  .sv-n { color:#94a3b8; }
+  .sv-tot td { background:#f1f5f9; font-weight:600; }
+  .sv-nota { font-size:12px; color:#64748b; margin:10px 2px 0; }
+</style>
 </body>
 </html>
