@@ -22165,25 +22165,25 @@
    }
   },
   "23-10-2026": {
-   "hasta": "10:59",
-   "actividades": 135,
+   "hasta": "11:09",
+   "actividades": 138,
    "tecnicos": 33,
    "estados": {
     "Iniciado": 29,
-    "Pendiente": 85,
-    "No Realizada": 10,
-    "en ruta": 4,
+    "Pendiente": 88,
+    "No Realizada": 12,
     "Completado": 5,
     "Suspendido": 1,
+    "en ruta": 2,
     "Cancelado": 1
    },
-   "rgu": 230.0,
-   "caidas_total": 2,
-   "caidas_activas": 2,
+   "rgu": 233.0,
+   "caidas_total": 3,
+   "caidas_activas": 3,
    "caidas_resueltas": 0,
    "nuevas": 3,
    "al_bucket": 4,
-   "repetidas": 46,
+   "repetidas": 47,
    "reagendadas": 1,
    "detalle": {
     "caidas": [
@@ -22203,6 +22203,15 @@
       "f": "10-13",
       "hi": "11:14",
       "d": "HEVIA 0176, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OHTSMW3",
+      "tec": "LUIS MARTIN NUÑEZ",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "16:06",
+      "d": "GRUMETE TELLER 2829 EDIF. D DEPTO 103, QUILPUE",
       "e": "Pendiente"
      }
     ],
@@ -22465,10 +22474,22 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OJ2ZBWD",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "15:25",
+      "d": "CALLE 1 850 EDIF. F DEPTO 21, QUILPUE",
+      "e": "Pendiente",
+      "tec": "JOSE CASTRO P",
+      "visitas": 1,
+      "ult_fecha": "21-10-2026",
+      "ult_cierre": "Falla Masiva"
+     },
+     {
       "o": "1-3OKCGX88",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:44",
       "d": "LONGITUDINAL 24, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE CASTRO P",
@@ -22480,7 +22501,7 @@
       "o": "1-3OK2YBZJ",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "14:05",
+      "hi": "14:00",
       "d": "PJE MILANO 918 EDIF. Q DEPTO 22, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -22732,7 +22753,7 @@
       "o": "1-3OHU9E3M",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:37",
       "d": "PJE.LA CAMANCHACA 1434, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -22804,5 +22825,5 @@
    }
   }
  },
- "generado": "23-10-2026 10:59"
+ "generado": "23-10-2026 11:09"
 }
