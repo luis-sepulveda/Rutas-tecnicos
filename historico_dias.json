@@ -22165,26 +22165,26 @@
    }
   },
   "23-10-2026": {
-   "hasta": "11:09",
-   "actividades": 138,
+   "hasta": "11:24",
+   "actividades": 139,
    "tecnicos": 33,
    "estados": {
-    "Iniciado": 29,
-    "Pendiente": 88,
-    "No Realizada": 12,
-    "Completado": 5,
-    "Suspendido": 1,
-    "en ruta": 2,
-    "Cancelado": 1
+    "Iniciado": 26,
+    "Pendiente": 86,
+    "No Realizada": 13,
+    "Completado": 7,
+    "Suspendido": 2,
+    "Cancelado": 2,
+    "en ruta": 3
    },
-   "rgu": 233.0,
+   "rgu": 236.5,
    "caidas_total": 3,
    "caidas_activas": 3,
    "caidas_resueltas": 0,
    "nuevas": 3,
    "al_bucket": 4,
-   "repetidas": 47,
-   "reagendadas": 1,
+   "repetidas": 46,
+   "reagendadas": 2,
    "detalle": {
     "caidas": [
      {
@@ -22246,22 +22246,10 @@
     ],
     "repetidas": [
      {
-      "o": "1-3OK5M91Y",
-      "cat": "Migración 1 Play",
-      "f": "10-13",
-      "hi": "11:56",
-      "d": "SAN FRANCISCO ORIENTE 1975 CASA 7, QUILPUE",
-      "e": "Pendiente",
-      "tec": "ALEXIS JARA",
-      "visitas": 1,
-      "ult_fecha": "25-09-2026",
-      "ult_cierre": "Ductos tapados"
-     },
-     {
       "o": "1-3OK7GPCJ",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:27",
+      "hi": "16:00",
       "d": "GLACIAR GREY 2000 EDIF. D DEPTO 703, QUILPUE",
       "e": "Pendiente",
       "tec": "ALEXIS JARA",
@@ -22383,7 +22371,7 @@
       "f": "10-13",
       "hi": "10:37",
       "d": "ESMERALDA 1458 DEPTO 40, QUILPUE",
-      "e": "Iniciado",
+      "e": "Suspendido",
       "tec": "EDGAR VALERO C",
       "visitas": 1,
       "ult_fecha": "22-10-2026",
@@ -22393,9 +22381,9 @@
       "o": "1-3OJVYYZE",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "11:35",
+      "hi": "11:11",
       "d": "CALLE 1 2073, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "ESTEBAN PIZARRO QUINTANA",
       "visitas": 2,
       "ult_fecha": "22-10-2026",
@@ -22405,7 +22393,7 @@
       "o": "1-3OKD46WS",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "15:18",
+      "hi": "15:11",
       "d": "LAS SIETE TAZAS 2178, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
@@ -22498,10 +22486,22 @@
       "ult_cierre": "Direccion incorrecta"
      },
      {
+      "o": "1-3OJAQ26X",
+      "cat": "Migración 2 Play",
+      "f": "10-13",
+      "hi": "11:27",
+      "d": "AGUAS CRISTALINAS 1347, QUILPUE",
+      "e": "Pendiente",
+      "tec": "JOSE GALAZ D",
+      "visitas": 1,
+      "ult_fecha": "17-10-2026",
+      "ult_cierre": "Cliente Desiste"
+     },
+     {
       "o": "1-3OK2YBZJ",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "14:50",
       "d": "PJE MILANO 918 EDIF. Q DEPTO 22, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -22510,10 +22510,22 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OIONTSQ",
+      "cat": "Migración 3 Play",
+      "f": "10-13",
+      "hi": "11:39",
+      "d": "MATEO DE TORO Y ZAMBRANO 915 CASA 46, QUILPUE",
+      "e": "Pendiente",
+      "tec": "JOSE ROJO A",
+      "visitas": 2,
+      "ult_fecha": "20-10-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3OIDFHBM",
       "cat": "Migración 3 Play",
       "f": "16-19",
-      "hi": "16:30",
+      "hi": "17:38",
       "d": "OCEANO ATLANTICO 317, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -22654,18 +22666,6 @@
       "ult_cierre": "Falla Aprovisionamiento"
      },
      {
-      "o": "1-3OIONTSQ",
-      "cat": "Migración 3 Play",
-      "f": "10-13",
-      "hi": "11:38",
-      "d": "MATEO DE TORO Y ZAMBRANO 915 CASA 46, QUILPUE",
-      "e": "Pendiente",
-      "tec": "LUIS GATICA DAVILA",
-      "visitas": 2,
-      "ult_fecha": "20-10-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
       "o": "1-3OHUJOQ9",
       "cat": "Migración 3 Play",
       "f": "10-13",
@@ -22678,16 +22678,16 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3OJAQ26X",
+      "o": "1-3OGVSG2O",
       "cat": "Migración 2 Play",
-      "f": "10-13",
-      "hi": "11:38",
-      "d": "AGUAS CRISTALINAS 1347, QUILPUE",
+      "f": "16-19",
+      "hi": "16:14",
+      "d": "EL COBRE 215 CASA C, QUILPUE",
       "e": "Pendiente",
-      "tec": "MARCO PEREZ G",
-      "visitas": 1,
+      "tec": "LUIS MARTIN NUÑEZ",
+      "visitas": 2,
       "ult_fecha": "17-10-2026",
-      "ult_cierre": "Cliente Desiste"
+      "ult_cierre": "Falta de dotación"
      },
      {
       "o": "1-3OJW047T",
@@ -22717,7 +22717,7 @@
       "o": "1-3OJHJFAV",
       "cat": "Migración 3 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "14:30",
       "d": "GOMEZ CARRENO 1071, QUILPUE",
       "e": "Pendiente",
       "tec": "NICOLAS MOYANO R",
@@ -22796,18 +22796,6 @@
       "visitas": 3,
       "ult_fecha": "20-10-2026",
       "ult_cierre": "Evento Contingencia"
-     },
-     {
-      "o": "1-3OGVSG2O",
-      "cat": "Migración 2 Play",
-      "f": "16-19",
-      "hi": "17:06",
-      "d": "EL COBRE 215 CASA C, QUILPUE",
-      "e": "Pendiente",
-      "tec": "YENDER BOSCAN CADENAS",
-      "visitas": 2,
-      "ult_fecha": "17-10-2026",
-      "ult_cierre": "Falta de dotación"
      }
     ],
     "reagendadas": [
@@ -22817,7 +22805,16 @@
       "f": "10-13",
       "hi": "10:37",
       "d": "ESMERALDA 1458 DEPTO 40, QUILPUE",
-      "e": "Iniciado",
+      "e": "Suspendido",
+      "tec": "EDGAR VALERO C",
+      "desde": "22-10-2026"
+     },
+     {
+      "o": "1-3OK3HNJ6",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "d": "ESMERALDA 1458 DEPTO 40, QUILPUE",
+      "e": "Cancelado",
       "tec": "EDGAR VALERO C",
       "desde": "22-10-2026"
      }
@@ -22825,5 +22822,5 @@
    }
   }
  },
- "generado": "23-10-2026 11:09"
+ "generado": "23-10-2026 11:24"
 }
