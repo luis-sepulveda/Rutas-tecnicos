@@ -22165,23 +22165,23 @@
    }
   },
   "23-10-2026": {
-   "hasta": "12:04",
-   "actividades": 141,
+   "hasta": "12:09",
+   "actividades": 142,
    "tecnicos": 33,
    "estados": {
-    "Iniciado": 26,
-    "Pendiente": 79,
-    "Completado": 15,
-    "No Realizada": 16,
+    "Iniciado": 24,
+    "Pendiente": 78,
+    "Completado": 16,
+    "No Realizada": 18,
     "Suspendido": 2,
     "Cancelado": 2,
-    "en ruta": 1
+    "en ruta": 2
    },
-   "rgu": 235.0,
+   "rgu": 235.1,
    "caidas_total": 5,
    "caidas_activas": 5,
    "caidas_resueltas": 0,
-   "nuevas": 5,
+   "nuevas": 6,
    "al_bucket": 4,
    "repetidas": 49,
    "reagendadas": 2,
@@ -22234,6 +22234,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OKTYQCR",
+      "tec": "LUIS CASTRO TORRES",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "12:09",
+      "d": "PJE RORCUAL 1576, QUILPUE",
+      "e": "en ruta"
+     },
      {
       "o": "1-3OJFOZSP",
       "tec": "JORDAN ROA PEREZ",
@@ -22465,9 +22474,9 @@
       "o": "1-3OK3VZ5O",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "12:08",
+      "hi": "12:20",
       "d": "PJE SANTA BEATRIZ 69, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "ESTEBAN PIZARRO QUINTANA",
       "visitas": 1,
       "ult_fecha": "22-10-2026",
@@ -22477,7 +22486,7 @@
       "o": "1-3OKD46WS",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "15:34",
+      "hi": "15:46",
       "d": "LAS SIETE TAZAS 2178, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
@@ -22705,7 +22714,7 @@
       "o": "1-3OKA7S42",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "16:42",
+      "hi": "16:46",
       "d": "EPSILON 2030 EDIF. A DEPTO 22, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS CASTRO TORRES",
@@ -22851,7 +22860,7 @@
       "f": "10-13",
       "hi": "12:08",
       "d": "LOS PERALES 3109, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "SEBASTIAN DOSSOW A",
       "visitas": 1,
       "ult_fecha": "22-10-2026",
@@ -22894,5 +22903,5 @@
    }
   }
  },
- "generado": "23-10-2026 12:04"
+ "generado": "23-10-2026 12:09"
 }
