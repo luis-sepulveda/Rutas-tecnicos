@@ -22165,23 +22165,23 @@
    }
   },
   "23-10-2026": {
-   "hasta": "17:21",
-   "actividades": 156,
+   "hasta": "17:26",
+   "actividades": 158,
    "tecnicos": 34,
    "estados": {
-    "Completado": 82,
+    "Completado": 83,
     "No Realizada": 36,
     "Iniciado": 25,
-    "Pendiente": 5,
+    "en ruta": 3,
+    "Pendiente": 4,
     "Suspendido": 3,
-    "Cancelado": 4,
-    "en ruta": 1
+    "Cancelado": 4
    },
-   "rgu": 247.4,
+   "rgu": 248.5,
    "caidas_total": 8,
    "caidas_activas": 8,
    "caidas_resueltas": 0,
-   "nuevas": 17,
+   "nuevas": 18,
    "al_bucket": 34,
    "repetidas": 53,
    "reagendadas": 2,
@@ -22262,6 +22262,15 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OL560F5",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:25",
+      "d": "ACHERNAR 1013, QUILPUE",
+      "e": "en ruta"
+     },
+     {
       "o": "1-3OL40E5G",
       "tec": "MARCO PEREZ G",
       "cat": "Migración 1 Play",
@@ -22277,7 +22286,7 @@
       "f": "16-19",
       "hi": "17:11",
       "d": "ISLA MOCHA 1073 CASA B, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OL3A2CP",
@@ -22444,9 +22453,9 @@
       "o": "1-3OGVSG2O",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "18:07",
+      "hi": "17:41",
       "d": "EL COBRE 215 CASA C, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "ALFREDO ALCAYAGA F",
       "visitas": 2,
       "ult_fecha": "17-10-2026",
@@ -23077,5 +23086,5 @@
    }
   }
  },
- "generado": "23-10-2026 17:21"
+ "generado": "23-10-2026 17:26"
 }
