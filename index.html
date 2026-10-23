@@ -11203,11 +11203,62 @@ function rmHoy(){
       const prev = (Array.isArray(j.prev) ? j.prev : []).filter(function(v){ return !v.gsa; });
       const g = der ? derGrupo(cod) : '';
       out.push({ iso: iso, f: String(f.getDate()).padStart(2, '0') + '-' + String(f.getMonth() + 1).padStart(2, '0'), ot: String(j.o || ''),
-        tec: tec, sup: supDe[tec] || '', act: String(j.cat || j.t || ''), fr: String(j.f || ''), der: der, cod: cod, g: g, hoy: true,
+        tec: tec, sup: supDe[tec] || '', act: String(j.cat || j.t || ''), fr: String(j.f || ''), der: der, cod: cod, g: g, hoy: true, hf: String(j.hf || ''),
         cls: !der ? '' : g === 'ot' ? 'na' : (prev.some(function(v){ return v.tec && rmLimpia(v.tec) !== tec; }) ? 'comp' : 'prop') });
     });
   });
   return out;
+}
+/* (23-10-2026) Luis: "que algo me de la alerta de algun error y saber que no
+   es culpa de los tecnicos". Una derivada de HOY sin foto se marca
+   "esperando foto" (gris, no cuenta como sin respaldo) mientras la lista de
+   fotos que tiene la pagina sea de ANTES de su cierre + RM_FOTO_MARGEN
+   minutos. Solo cuando la lista es mas nueva que eso, y no esta, es "sin
+   respaldo" de verdad. 15 min: el 23-10 los tecnicos mandaron la foto entre
+   0 y 13 min despues de cerrar (Cesar Mena, el mas lento, 13). */
+const RM_FOTO_MARGEN = 15;
+function rmMinHHMM(h){ const q = /^(\d{1,2}):(\d{2})/.exec(String(h || '')); return q ? +q[1] * 60 + +q[2] : null; }
+function rmFotoPend(x){
+  if(!x.hoy) return false;
+  const m = rmMinHHMM(x.hf); if(m === null) return false;
+  const R = mgRespDatos(), tl = R ? (R.t || R.cache || 0) : 0;
+  const f = (typeof FECHA_DATOS !== 'undefined' && FECHA_DATOS) ? FECHA_DATOS : new Date();
+  const lim = new Date(f.getFullYear(), f.getMonth(), f.getDate(), 0, m + RM_FOTO_MARGEN).getTime();
+  return tl < lim;
+}
+/* Avisos para saber si una falta de foto es del sistema y no del tecnico:
+   1) la lista de fotos que usa la pagina tiene mas de 10 min;
+   2) hay derivadas de hoy "sin respaldo" y ninguna foto de nadie llego
+      despues de que se cerro la primera de ellas (si los demas tecnicos si
+      mandan, el sistema funciona). */
+function rmFotoAlerta(A){
+  const R = mgRespDatos(); if(!R || !R.porOT || R.falla) return '';
+  const tl = R.t || R.cache || 0, edad = tl ? Math.round((Date.now() - tl) / 60000) : null;
+  const hoyL = (A || []).filter(function(x){ return x.hoy && x.der; });
+  if(!hoyL.length && !(R.cache)) return '';
+  const u = rmUltimaFotoHoy();
+  let h = '<div class="rm-fot-est">' + (u ? 'Última foto recibida hoy: <b>' + escR(u.hora) + '</b> (' + escR(rmTitulo(u.tec || '')) + ')' : 'Hoy todavía no llega ninguna foto')
+    + (edad !== null ? ' · lista leída hace ' + edad + ' min' : '') + '.</div>';
+  if(edad !== null && edad > 10)
+    h += '<div class="rm-fot-alerta">⚠ Las fotos que se ven son de hace ' + edad + ' min. Toca <b>↻ Actualizar fotos</b>: si un técnico sale sin foto, puede ser que la página no la haya leído todavía.</div>';
+  const sinF = hoyL.filter(function(x){ const F = mgFotoDe(x.ot, x.iso, x.cod); return F.aplica && F.cuenta && !F.r && !rmFotoPend(x); });
+  if(sinF.length){
+    const pri = Math.min.apply(null, sinF.map(function(x){ const m = rmMinHHMM(x.hf); return m === null ? 9999 : m; }));
+    if(pri < 9999 && (!u || rmMinHHMM(u.hora) < pri))
+      h += '<div class="rm-fot-alerta fuerte">⚠ Hay ' + sinF.length + ' derivada' + (sinF.length === 1 ? '' : 's') + ' de hoy sin foto y <b>ninguna foto de nadie llegó a la página después de las ' + String(Math.floor(pri / 60)).padStart(2, '0') + ':' + String(pri % 60).padStart(2, '0') + '</b>. Puede ser una falla del sistema y no de los técnicos: toca Actualizar fotos y, si sigue igual, revisa la planilla o avísale a Claude.</div>';
+  }
+  return h;
+}
+/* la ultima foto de HOY que trae la lista (para saber si las fotos estan llegando) */
+function rmUltimaFotoHoy(){
+  const R = mgRespDatos(); if(!R || !R.porOT) return null;
+  const f = (typeof FECHA_DATOS !== 'undefined' && FECHA_DATOS) ? FECHA_DATOS : new Date();
+  const iso = f.getFullYear() + String(f.getMonth() + 1).padStart(2, '0') + String(f.getDate()).padStart(2, '0');
+  let u = null;
+  Object.keys(R.porOT).forEach(function(k){ R.porOT[k].forEach(function(r){
+    const m = rmMinHHMM(r.hora); if(r.iso !== iso || m === null) return;
+    if(!u || m > u.m) u = { m: m, hora: r.hora, tec: r.tec }; }); });
+  return u;
 }
 /* Filas del periodo elegido y del periodo con que se compara */
 function rmFilas(per){
@@ -11326,22 +11377,23 @@ function pintarResMig(){
   /* 4. Tecnicos */
   const t = {};
   A.forEach(function(x){
-    const o = t[x.tec] || (t[x.tec] = { tec: x.tec, sup: x.sup, vis: 0, der: 0, sm: 0, re: 0, de: 0, ot: 0, prop: 0, l: [], fotN: 0, fotOk: 0, md: 0 });
+    const o = t[x.tec] || (t[x.tec] = { tec: x.tec, sup: x.sup, vis: 0, der: 0, sm: 0, re: 0, de: 0, ot: 0, prop: 0, l: [], fotN: 0, fotOk: 0, md: 0, fotPend: 0 });
     o.vis++; if(!x.der) return;
     o.der++; o[x.g || 'ot']++; if(rmCls(x) === 'prop') o.prop++; o.l.push(x);
     /* (22-10-2026) respaldo con foto: misma regla que Gerencia (mgFotoEspera) */
     const F = mgFotoDe(x.ot, x.iso, x.cod);
-    if(F.aplica && F.cuenta){ o.fotN++; if(F.r) o.fotOk++; }
+    if(F.aplica && F.cuenta){ if(!F.r && rmFotoPend(x)) o.fotPend++; else { o.fotN++; if(F.r) o.fotOk++; } }
     if(F.aplica && F.r && F.r.md) o.md++;
   });
   const tl = Object.keys(t).map(function(k){ const o = t[k]; o.pct = o.vis ? 100 * o.der / o.vis : 0; return o; })
     .filter(function(o){ return derActivo(o.tec); }).sort(function(a, b){ return b.der - a.der || b.pct - a.pct || a.tec.localeCompare(b.tec); });
   const minV = RM_PER === 'hoy' ? 2 : 5;
   const RR = mgRespDatos(), fT = { n:0, ok:0, md:0 };
-  tl.forEach(function(o){ fT.n += o.fotN; fT.ok += o.fotOk; fT.md += o.md; });
-  const fotCel = function(o){ if(!RR || !RR.desde) return '·'; if(!o.fotN) return o.md ? '<span class="rm-md">🛠 ' + o.md + '</span>' : '·';
+  fT.pend = 0; tl.forEach(function(o){ fT.n += o.fotN; fT.ok += o.fotOk; fT.md += o.md; fT.pend += o.fotPend; });
+  const pendTag = function(n){ return n ? ' <span class="rm-fot pend" title="Cerrada hace menos de ' + RM_FOTO_MARGEN + ' min o la lista de fotos es anterior: todavía no se sabe">⏳ ' + n + '</span>' : ''; };
+  const fotCel = function(o){ if(!RR || !RR.desde) return '·'; if(!o.fotN) return o.fotPend ? pendTag(o.fotPend) : (o.md ? '<span class="rm-md">🛠 ' + o.md + '</span>' : '·');
     const p = 100 * o.fotOk / o.fotN;
-    return '<span class="rm-fot ' + (p >= 80 ? 'bien' : p >= 50 ? 'medio' : 'mal') + '">' + o.fotOk + ' de ' + o.fotN + '</span>' + (o.md ? ' <span class="rm-md" title="avisó mal derivada con foto">🛠 ' + o.md + '</span>' : ''); };
+    return '<span class="rm-fot ' + (p >= 80 ? 'bien' : p >= 50 ? 'medio' : 'mal') + '">' + o.fotOk + ' de ' + o.fotN + '</span>' + pendTag(o.fotPend) + (o.md ? ' <span class="rm-md" title="avisó mal derivada con foto">🛠 ' + o.md + '</span>' : ''); };
   const fotGuia = !RR ? '<div class="rm-nota">📷 Cargando los respaldos con foto… (Google puede tardar unos segundos)</div>'
     : RR.falla ? '<div class="rm-nota">📷 No se pudieron leer los respaldos con foto de la app (Google no respondió). <button class="rm-reint" onclick="rmBajarResp(true, 1)">↻ Reintentar</button></div>'
     : '<div class="rm-fotg">📷 <b>Respaldo con foto</b> (app de respaldo, se empezó a usar el ' + mgDdmm(RR.desde) + ')'
@@ -11349,7 +11401,9 @@ function pintarResMig(){
           : 'fotos guardadas ' + mgRespEdad(RR) + ', actualizando…') + '</span>' : '') + ': '
       + (fT.n ? '<b>' + fT.ok + ' de ' + fT.n + '</b> ' + mgFotoTxt() + ' del período (' + Math.round(100 * fT.ok / fT.n) + '%).' : 'en este período no hay ' + mgFotoTxt() + ' desde que partió la app.')
       + (fT.md ? ' <span class="rm-md">🛠 ' + fT.md + ' mal derivada' + (fT.md === 1 ? '' : 's') + ' con foto</span>.' : '')
+      + (fT.pend ? ' <span class="rm-fot pend">⏳ ' + fT.pend + ' esperando foto</span> (cerradas hace menos de ' + RM_FOTO_MARGEN + ' min, todavía no cuentan).' : '')
       + ' Toca un técnico para ver cuál tiene foto.'
+      + rmFotoAlerta(A)
       /* (22-10-2026, 12:15) hora de la lectura + boton para pedirlas de nuevo al tiro */
       + (!RR.cache && RM_RESP_T ? ' <span class="rm-leida">Leídas a las ' + new Date(RM_RESP_T).toTimeString().slice(0, 5) + '</span>' : '')
       + ' <button class="rm-reint" onclick="rmBajarResp(true, 1)"' + (RM_RESP_BAJANDO ? ' disabled' : '') + '>' + (RM_RESP_BAJANDO ? 'Actualizando…' : '↻ Actualizar fotos') + '</button></div>';
@@ -11370,7 +11424,7 @@ function pintarResMig(){
                 const c = rmCls(x);
                 return '<tr><td>' + (x.hoy ? 'hoy' : escR(x.f)) + '</td><td>' + escR(x.ot) + '</td><td>' + escR(x.act) + '</td><td>' + escR(x.fr) + '</td><td><b>' + escR(x.cod) + '</b></td>'
                   + '<td><span class="tg ' + c + '">' + (c === 'na' ? 'no depende del técnico' : c === 'comp' ? 'ahí falló otro' : 'solo con él') + '</span></td>'
-                  + '<td>' + (mgFotoTag(x.ot, x.iso, x.cod) || '<small style="color:#94a3b8">—</small>') + '</td></tr>'; }).join('')
+                  + '<td>' + (function(){ const F = mgFotoDe(x.ot, x.iso, x.cod); if(F.aplica && F.cuenta && !F.r && rmFotoPend(x)) return ' <span class="rm-fot pend" title="Todavía no se sabe: cerró hace menos de ' + RM_FOTO_MARGEN + ' min o la lista de fotos es anterior">⏳ esperando foto' + (x.hf ? ' (cerró ' + escR(x.hf) + ')' : '') + '</span>'; return mgFotoTag(x.ot, x.iso, x.cod) || '<small style="color:#94a3b8">—</small>'; })() + '</td></tr>'; }).join('')
             + '</tbody></table>' : '<div class="rm-nota">Ninguna derivada en el período.</div>') + '</td></tr>';
         }
         return r;
@@ -15487,6 +15541,11 @@ function mgHoyHtml(){
   .mg-resc { border-left:5px solid #15803d; }
   /* (22-10-2026) respaldos con foto en el Resumen de migraciones para supervisores */
   .rm-fotg { background:#ecfeff; border:1px solid #a5f3fc; color:#155e75; border-radius:8px; padding:7px 11px; font-size:13.5px; margin:0 0 10px; }
+  /* (23-10-2026) fotos: esperando y avisos de falla */
+  .rm-fot.pend { background:#f1f5f9 !important; color:#475569 !important; border:1px dashed #94a3b8; }
+  .rm-fot-est { margin-top:5px; font-size:12.5px; color:#0e7490; }
+  .rm-fot-alerta { margin-top:6px; padding:6px 9px; border-radius:6px; background:#fffbeb; border:1px solid #fcd34d; color:#92400e; font-size:12.5px; }
+  .rm-fot-alerta.fuerte { background:#fff7ed; border-color:#fb923c; color:#9a3412; }
   .rm-fot { font-weight:700; border-radius:6px; padding:1px 7px; white-space:nowrap; } .rm-fot.bien { color:#15803d; background:#f0fdf4; }
   .rm-fot.medio { color:#b45309; background:#fffbeb; } .rm-fot.mal { color:#b91c1c; background:#fef2f2; }
   .rm-md { color:#6d28d9; font-weight:700; white-space:nowrap; }
