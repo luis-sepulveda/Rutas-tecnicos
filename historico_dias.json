@@ -22165,23 +22165,23 @@
    }
   },
   "23-10-2026": {
-   "hasta": "10:29",
-   "actividades": 131,
+   "hasta": "10:34",
+   "actividades": 132,
    "tecnicos": 33,
    "estados": {
-    "Iniciado": 27,
-    "Pendiente": 88,
-    "No Realizada": 7,
-    "en ruta": 5,
+    "Iniciado": 29,
+    "Pendiente": 87,
+    "No Realizada": 8,
+    "Completado": 3,
+    "en ruta": 3,
     "Suspendido": 1,
-    "Cancelado": 1,
-    "Completado": 2
+    "Cancelado": 1
    },
-   "rgu": 222.5,
+   "rgu": 223.5,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
-   "nuevas": 2,
+   "nuevas": 3,
    "al_bucket": 4,
    "repetidas": 45,
    "reagendadas": 1,
@@ -22207,6 +22207,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OKDGJXE",
+      "tec": "MARCO PEREZ G",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "17:22",
+      "d": "FRODDEN 1667, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OKEN3CE",
       "tec": "SEBASTIAN DOSSOW A",
@@ -22363,9 +22372,9 @@
       "o": "1-3OK3HNJ6",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "10:54",
+      "hi": "10:33",
       "d": "ESMERALDA 1458 DEPTO 40, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "EDGAR VALERO C",
       "visitas": 1,
       "ult_fecha": "22-10-2026",
@@ -22447,7 +22456,7 @@
       "o": "1-3OK7OTXJ",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:32",
+      "hi": "14:34",
       "d": "EL TINEO 2110, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JORGE PEZOA VICUÑA",
@@ -22615,9 +22624,9 @@
       "o": "1-3OJYLYX1",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "10:26",
+      "hi": "10:29",
       "d": "DIAZ 950, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "LUIS GATICA DAVILA",
       "visitas": 3,
       "ult_fecha": "17-10-2026",
@@ -22627,9 +22636,9 @@
       "o": "1-3OHUJOQ9",
       "cat": "Migración 3 Play",
       "f": "10-13",
-      "hi": "10:24",
+      "hi": "10:34",
       "d": "27 DE ABRIL 659 CASA A, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "LUIS MARTIN NUÑEZ",
       "visitas": 3,
       "ult_fecha": "19-10-2026",
@@ -22773,9 +22782,9 @@
       "o": "1-3OK3HNJ6",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "10:54",
+      "hi": "10:33",
       "d": "ESMERALDA 1458 DEPTO 40, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "EDGAR VALERO C",
       "desde": "22-10-2026"
      }
@@ -22783,5 +22792,5 @@
    }
   }
  },
- "generado": "23-10-2026 10:29"
+ "generado": "23-10-2026 10:34"
 }
