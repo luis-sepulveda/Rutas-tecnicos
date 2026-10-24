@@ -3383,7 +3383,10 @@
   <button class="btn" id="btnNuevas" onclick="toggleNuevas()">Nuevas</button>
   <button class="btn" id="btnRepe" onclick="toggleRepe()">Ya visitadas</button>
   <button class="btn" id="btnRed" onclick="toggleRed()">Nodos y NAP</button>
-  <button class="btn" id="btnReit" onclick="toggleReit()">Reiterados</button>
+  <!-- (24-10-2026) Reiterados en modo FANTASMA: el boton sigue aqui pero no se ve.
+       Entrada: Ctrl + Alt + R, o 3 toques seguidos en el titulo "Modulo de Actividades".
+       Para volver a mostrarlo: borrar style="display:none" y poner REIT_VISIBLE = true. -->
+  <button class="btn" id="btnReit" onclick="toggleReit()" style="display:none">Reiterados</button>
 </div>
 <!-- Mapa de red (24-09-2026): pantalla aparte, con su propio mapa. Solo NAP y
      zonas de nodo, sin los pines de los tecnicos. Se abre con el boton Red del
@@ -6939,6 +6942,32 @@ function toggleReit(){
     if(!REDMAPA) asegurarRedMapa().then(function(){ if(reitAbierto && REDMAPA) renderReit(); });
   }
 }
+
+/* (24-10-2026) REITERADOS FANTASMA. Luis: "que no se vea en pantalla pero tu
+   y yo sabremos donde esta". Los botones no se pintan (portada y mapa), pero
+   todo lo demas sigue igual, incluida la CLAVE. Entradas secretas:
+   - Ctrl + Alt + R (portada o mapa)
+   - 3 toques/clics seguidos en el titulo "Modulo de Actividades" (portada)
+   Para volver a mostrar el boton: REIT_VISIBLE = true y quitar el
+   style="display:none" del btnReit del mapa. */
+var REIT_VISIBLE = false;
+function reitEntradaSecreta(){
+  try { toggleReit(); } catch(e){ console.warn('reit:', e); }
+  try { marcarAlertasPortada(); } catch(e){}
+}
+document.addEventListener('keydown', function(e){
+  if(e.ctrlKey && e.altKey && !e.shiftKey && (e.code === 'KeyR' || (e.key || '').toLowerCase() === 'r')){
+    e.preventDefault(); reitEntradaSecreta();
+  }
+});
+let reitToques = 0, reitToqueT = 0;
+document.addEventListener('click', function(e){
+  if(!e.target || !e.target.closest || !e.target.closest('.pv-nom')) return;
+  const ahora = Date.now();
+  reitToques = (ahora - reitToqueT < 600) ? reitToques + 1 : 1;
+  reitToqueT = ahora;
+  if(reitToques >= 3){ reitToques = 0; reitEntradaSecreta(); }
+});
 
 /* ---- Reiterados POR TECNICO (05-10-2026) -----------------------------
    Pedido de Luis: en el mismo boton, la cantidad de reiterados por tecnico
@@ -12539,8 +12568,9 @@ function pintarPortada(){
     /* Reiterados al lado, 24-09-2026. Desde el 26-09-2026 se pinta en rojo
        (.alarma) cuando hay reiterados, igual que Nodos y NAP, a pedido de
        Luis (antes llevaba solo la cifra, en lila). */
-    +     '<a' + (nReit() ? ' class="alarma b-al"' : '') + ' onclick="desdePortada(toggleReit)">Reiterados'
-    +       (nReit() ? '<span class="pv-nred">' + nReit() + '</span>' : '') + '</a>'
+    /* (24-10-2026) modo FANTASMA: no se pinta mientras REIT_VISIBLE sea false */
+    +     ((typeof REIT_VISIBLE !== 'undefined' && REIT_VISIBLE) ? ('<a' + (nReit() ? ' class="alarma b-al"' : '') + ' onclick="desdePortada(toggleReit)">Reiterados'
+    +       (nReit() ? '<span class="pv-nred">' + nReit() + '</span>' : '') + '</a>') : '')
     /* (20-10-2026, 15:30) Resumen para WhatsApp, al lado de Reiterados (pedido de Luis) */
     +     '<a class="b-wsp" onclick="abrirResumenWsp()" title="Una sola imagen con inicio, avance, nuevas, salieron y no realizadas, para el grupo">💬 Resumen WhatsApp</a>'
     /* (21-10-2026) Migraciones · vista gerencia */
