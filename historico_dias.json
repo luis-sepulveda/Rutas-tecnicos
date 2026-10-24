@@ -22530,22 +22530,22 @@
    }
   },
   "24-10-2026": {
-   "hasta": "15:35",
-   "actividades": 128,
+   "hasta": "15:55",
+   "actividades": 131,
    "tecnicos": 31,
    "estados": {
-    "Completado": 59,
-    "en ruta": 2,
-    "No Realizada": 20,
+    "Completado": 61,
     "Iniciado": 22,
-    "Pendiente": 17,
+    "No Realizada": 24,
+    "en ruta": 6,
+    "Pendiente": 10,
     "Suspendido": 3,
     "Cancelado": 5
    },
-   "rgu": 185.0,
+   "rgu": 190.0,
    "caidas_total": 12,
-   "caidas_activas": 12,
-   "caidas_resueltas": 0,
+   "caidas_activas": 11,
+   "caidas_resueltas": 1,
    "nuevas": 7,
    "al_bucket": 20,
    "repetidas": 31,
@@ -22595,15 +22595,6 @@
       "f": "13-16",
       "hi": "15:17",
       "d": "SANTA MARIA 816, VILLA ALEMANA",
-      "e": "Pendiente"
-     },
-     {
-      "o": "1-3OLA5Q9C",
-      "tec": "JOSE PEREZ RANGEL",
-      "cat": "Reparación",
-      "f": "16-19",
-      "hi": "16:00",
-      "d": "IGNACIO CARRERA PINTO 936, VILLA ALEMANA",
       "e": "Pendiente"
      },
      {
@@ -22669,7 +22660,7 @@
       "f": "13-16",
       "hi": "15:42",
       "d": "CARLOS GRHUNNE 937 EDIF. K DEPTO 41, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OLOU8KP",
@@ -22839,9 +22830,9 @@
       "o": "1-3OK85KH0",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "15:22",
+      "hi": "15:35",
       "d": "CARLOS SAAVEDRA 350 EDIF. 6 DEPTO 363, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "No Realizada",
       "tec": "FELIPE SILVA R",
       "visitas": 1,
       "ult_fecha": "28-09-2026",
@@ -22863,7 +22854,7 @@
       "o": "1-3OL5ET5C",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:13",
       "d": "LONGITUDINAL 24, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JORGE PEZOA VICUÑA",
@@ -22947,9 +22938,9 @@
       "o": "1-3OFEZHGM",
       "cat": "Migración 3 Play",
       "f": "13-16",
-      "hi": "15:35",
+      "hi": "15:45",
       "d": "SAN IGNACIO 1831, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "KEVIN TAPIA RETAMAL",
       "visitas": 2,
       "ult_fecha": "15-10-2026",
@@ -22961,7 +22952,7 @@
       "f": "13-16",
       "hi": "15:29",
       "d": "CARLOS GRHUNNE 937 EDIF. K DEPTO 41, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "LEONEL HERNÁNDEZ OJE",
       "visitas": 3,
       "ult_fecha": "19-10-2026",
@@ -23115,5 +23106,5 @@
    }
   }
  },
- "generado": "24-10-2026 15:35"
+ "generado": "24-10-2026 15:55"
 }
