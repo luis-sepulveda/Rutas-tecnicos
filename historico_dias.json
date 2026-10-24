@@ -22530,20 +22530,21 @@
    }
   },
   "24-10-2026": {
-   "hasta": "19:11",
-   "actividades": 144,
+   "hasta": "19:16",
+   "actividades": 145,
    "tecnicos": 31,
    "estados": {
     "Completado": 98,
     "No Realizada": 38,
     "Suspendido": 3,
-    "Cancelado": 5
+    "Cancelado": 5,
+    "Pendiente": 1
    },
-   "rgu": 203.8,
+   "rgu": 203.9,
    "caidas_total": 12,
    "caidas_activas": 11,
    "caidas_resueltas": 1,
-   "nuevas": 14,
+   "nuevas": 15,
    "al_bucket": 20,
    "repetidas": 33,
    "reagendadas": 1,
@@ -22650,6 +22651,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OLTPM11",
+      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "cat": "Modificación de Servicio",
+      "f": "19-21",
+      "hi": "20:05",
+      "d": "CERRO LAS MARITATAS 2285, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OLSNMM1",
       "tec": "FELIPE SILVA R",
@@ -23190,5 +23200,5 @@
    }
   }
  },
- "generado": "24-10-2026 19:11"
+ "generado": "24-10-2026 19:16"
 }
