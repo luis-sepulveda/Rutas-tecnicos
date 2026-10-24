@@ -22530,23 +22530,23 @@
    }
   },
   "24-10-2026": {
-   "hasta": "17:05",
-   "actividades": 140,
+   "hasta": "17:10",
+   "actividades": 141,
    "tecnicos": 31,
    "estados": {
     "Completado": 75,
     "Iniciado": 21,
-    "No Realizada": 31,
+    "No Realizada": 33,
     "Suspendido": 3,
-    "Pendiente": 1,
+    "Pendiente": 2,
     "Cancelado": 5,
-    "en ruta": 4
+    "en ruta": 2
    },
-   "rgu": 200.7,
+   "rgu": 200.8,
    "caidas_total": 12,
    "caidas_activas": 11,
    "caidas_resueltas": 1,
-   "nuevas": 11,
+   "nuevas": 12,
    "al_bucket": 20,
    "repetidas": 32,
    "reagendadas": 1,
@@ -22653,6 +22653,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OLRI2NC",
+      "tec": "MATÍAS JAQUE AG",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "18:06",
+      "d": "LOS PENSAMIENTOS 1650 CASA 44, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OLQYY6V",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -22796,7 +22805,7 @@
       "f": "16-19",
       "hi": "16:50",
       "d": "PJE MILANO 918 EDIF. Q DEPTO 22, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "CESAR MENA OLIVEROS",
       "visitas": 2,
       "ult_fecha": "23-10-2026",
@@ -23010,9 +23019,9 @@
       "o": "1-3OGXEBJS",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:11",
+      "hi": "17:06",
       "d": "BELGRANO 1187 DEPTO 21, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "LEONEL HERNÁNDEZ OJE",
       "visitas": 1,
       "ult_fecha": "10-08-2026",
@@ -23154,5 +23163,5 @@
    }
   }
  },
- "generado": "24-10-2026 17:05"
+ "generado": "24-10-2026 17:10"
 }
