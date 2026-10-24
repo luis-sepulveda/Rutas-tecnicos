@@ -22530,21 +22530,21 @@
    }
   },
   "24-10-2026": {
-   "hasta": "10:18",
+   "hasta": "10:28",
    "actividades": 148,
    "tecnicos": 35,
    "estados": {
-    "Completado": 2,
-    "Iniciado": 31,
-    "Pendiente": 107,
-    "No Realizada": 3,
-    "en ruta": 2,
+    "Completado": 3,
+    "Iniciado": 29,
+    "Pendiente": 106,
+    "No Realizada": 5,
     "Suspendido": 1,
-    "Cancelado": 2
+    "Cancelado": 2,
+    "en ruta": 2
    },
    "rgu": 220.5,
-   "caidas_total": 1,
-   "caidas_activas": 1,
+   "caidas_total": 3,
+   "caidas_activas": 3,
    "caidas_resueltas": 0,
    "nuevas": 3,
    "al_bucket": 0,
@@ -22553,12 +22553,30 @@
    "detalle": {
     "caidas": [
      {
+      "o": "1-3OF7MTNS",
+      "tec": "JORDAN ROA PEREZ",
+      "cat": "Migración 2 Play",
+      "f": "13-16",
+      "hi": "14:09",
+      "d": "CALLE 1 851 CASA E, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3OKY4TGN",
       "tec": "JORDAN ROA PEREZ",
       "cat": "Reparación",
       "f": "16-19",
       "hi": "17:39",
       "d": "LAUTARO 1085 DEPTO 21, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OKPKB58",
+      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "12:25",
+      "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
       "e": "Pendiente"
      }
     ],
@@ -22922,7 +22940,7 @@
       "f": "10-13",
       "hi": "09:46",
       "d": "4 SUR 1458, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "LUIS GATICA DAVILA",
       "visitas": 1,
       "ult_fecha": "03-10-2026",
@@ -22932,7 +22950,7 @@
       "o": "1-3OL2MPC4",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "17:44",
+      "hi": "17:08",
       "d": "SANTA MARIA 816, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
@@ -23114,7 +23132,7 @@
       "o": "1-3OKGIPQD",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "17:02",
+      "hi": "16:41",
       "d": "BARROS ARANA 1619, QUILPUE",
       "e": "Pendiente",
       "tec": "ANTONHY MORALES MENDOZA",
@@ -23154,5 +23172,5 @@
    }
   }
  },
- "generado": "24-10-2026 10:18"
+ "generado": "24-10-2026 10:28"
 }
