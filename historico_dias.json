@@ -22530,26 +22530,44 @@
    }
   },
   "24-10-2026": {
-   "hasta": "09:28",
-   "actividades": 146,
+   "hasta": "09:33",
+   "actividades": 148,
    "tecnicos": 35,
    "estados": {
-    "en ruta": 21,
-    "Pendiente": 123,
-    "Iniciado": 1,
+    "Iniciado": 3,
+    "Pendiente": 124,
+    "en ruta": 20,
     "Cancelado": 1
    },
-   "rgu": 218.0,
+   "rgu": 220.0,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 1,
+   "nuevas": 3,
    "al_bucket": 0,
    "repetidas": 44,
    "reagendadas": 4,
    "detalle": {
     "caidas": [],
     "nuevas": [
+     {
+      "o": "1-3OLIQFJ8",
+      "tec": "YENDER BOSCAN CADENAS",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "09:33",
+      "d": "FRUTILLAR 595, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
+      "o": "1-3OLIN4O2",
+      "tec": "ALEXIS JARA",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "09:33",
+      "d": "SEXTA 837, QUILPUE",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3OLI93OR",
       "tec": "JOSE ROJO A",
@@ -22565,7 +22583,7 @@
       "o": "1-3OIKPLNL",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:18",
+      "hi": "11:32",
       "d": "LEUCOTON 9997 CASA FIC, QUILPUE",
       "e": "Pendiente",
       "tec": "ALEXIS JARA",
@@ -22577,7 +22595,7 @@
       "o": "1-3OK457R9",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "15:07",
+      "hi": "16:21",
       "d": "PJE PERSEO 0671 EDIF. 5 DEPTO 37, QUILPUE",
       "e": "Pendiente",
       "tec": "ALEXIS JARA",
@@ -22805,9 +22823,9 @@
       "o": "1-3OIQBJOY",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:42",
       "d": "PJE LOMAS ORIENTE 0161, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JUAN ARRIAGADA C",
       "visitas": 1,
       "ult_fecha": "20-10-2026",
@@ -22817,7 +22835,7 @@
       "o": "1-3OIJ8JON",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "14:56",
+      "hi": "14:38",
       "d": "AV LA PALMA 151 EDIF. 4 DEPTO 113, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JUAN ARRIAGADA C",
@@ -22829,7 +22847,7 @@
       "o": "1-3OLIAI21",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "17:23",
+      "hi": "17:05",
       "d": "LAS SIETE TAZAS 2178, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JUAN ARRIAGADA C",
@@ -23081,7 +23099,7 @@
       "o": "1-3OKRMEC3",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:26",
+      "hi": "15:31",
       "d": "SAN PEDRO 1423 CASA B, QUILPUE",
       "e": "Pendiente",
       "tec": "YENDER BOSCAN CADENAS",
@@ -23135,5 +23153,5 @@
    }
   }
  },
- "generado": "24-10-2026 09:28"
+ "generado": "24-10-2026 09:33"
 }
