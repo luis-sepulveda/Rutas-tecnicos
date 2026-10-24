@@ -22530,25 +22530,36 @@
    }
   },
   "24-10-2026": {
-   "hasta": "09:23",
-   "actividades": 145,
+   "hasta": "09:28",
+   "actividades": 146,
    "tecnicos": 35,
    "estados": {
-    "en ruta": 18,
-    "Pendiente": 126,
+    "en ruta": 21,
+    "Pendiente": 123,
+    "Iniciado": 1,
     "Cancelado": 1
    },
-   "rgu": 217.0,
+   "rgu": 218.0,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 0,
+   "nuevas": 1,
    "al_bucket": 0,
-   "repetidas": 43,
+   "repetidas": 44,
    "reagendadas": 4,
    "detalle": {
     "caidas": [],
-    "nuevas": [],
+    "nuevas": [
+     {
+      "o": "1-3OLI93OR",
+      "tec": "JOSE ROJO A",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "09:25",
+      "d": "MATEO DE TORO Y ZAMBRANO 915 CASA 46, QUILPUE",
+      "e": "Iniciado"
+     }
+    ],
     "repetidas": [
      {
       "o": "1-3OIKPLNL",
@@ -22614,9 +22625,9 @@
       "o": "1-3OKQBV2U",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:36",
       "d": "BAQUEDANO 1718, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "CRISTOBAL MIRANDA VALENC",
       "visitas": 1,
       "ult_fecha": "23-10-2026",
@@ -22650,7 +22661,7 @@
       "o": "1-3OK4MBTM",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "15:11",
+      "hi": "14:47",
       "d": "SANTA MATILDE 1701 CASA 30, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -22755,10 +22766,22 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OLI93OR",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "09:25",
+      "d": "MATEO DE TORO Y ZAMBRANO 915 CASA 46, QUILPUE",
+      "e": "Iniciado",
+      "tec": "JOSE ROJO A",
+      "visitas": 2,
+      "ult_fecha": "20-10-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3OIEFFAI",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "11:45",
+      "hi": "12:10",
       "d": "MADRID 620 CASA F, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -22770,7 +22793,7 @@
       "o": "1-3OJ5L7N7",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "16:13",
+      "hi": "16:38",
       "d": "PJE NIEMEYER 119, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -23022,7 +23045,7 @@
       "o": "1-3OKPKB58",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "12:39",
+      "hi": "12:13",
       "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -23092,7 +23115,7 @@
       "o": "1-3OJ5L7N7",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "16:13",
+      "hi": "16:38",
       "d": "PJE NIEMEYER 119, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -23112,5 +23135,5 @@
    }
   }
  },
- "generado": "24-10-2026 09:23"
+ "generado": "24-10-2026 09:28"
 }
