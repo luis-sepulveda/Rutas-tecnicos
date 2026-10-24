@@ -1,7 +1,7 @@
 {
-  "actualizado": "2026-10-24T10:49:20",
+  "actualizado": "2026-10-24T11:19:53",
   "resumen": {
-    "sin informacion": 4
+    "sin informacion": 6
   },
   "estados": {
     "1-3OK4MBTM": {
@@ -133,6 +133,97 @@
             "ot": "1-3MYBQ4GR",
             "franja": "10-13",
             "texto": "1-3MYBQ4GR - 10-13-Reparación-3 Play Servicio Degradado-LAUTARO 1085 DEPTO 33Sab, 1 Ago"
+          }
+        ]
+      }
+    },
+    "1-3OJ5L7N7": {
+      "tec": "JOSE ROJO A",
+      "cat": "Alta 1 Play",
+      "franja_original": "13-16",
+      "d": "PJE NIEMEYER 119, QUILPUE",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "PJE NIEMEYER 119",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "completada",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3OKBXBQH",
+            "franja": "10-13",
+            "texto": "1-3OKBXBQH - 10-13-Alta-1 Play-PJE NIEMEYER 119Vie, 23 Oct"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3OK9BN1T",
+            "franja": "16-19",
+            "texto": "1-3OK9BN1T - 16-19-Alta-1 Play-PJE NIEMEYER 119Jue, 22 Oct"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3OIJF0O5",
+            "franja": "10-13",
+            "texto": "1-3OIJF0O5 - 10-13-Alta-1 Play-PJE NIEMEYER 119Mie, 21 Oct"
+          }
+        ]
+      }
+    },
+    "1-3OL761GN": {
+      "tec": "MARCO PEREZ G",
+      "cat": "Upgrade promoción",
+      "franja_original": "13-16",
+      "d": "PJE 15 861 DEPTO 11, QUILPUE",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "PJE 15 861",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3OG6B7OU",
+            "franja": "10-13",
+            "texto": "1-3OG6B7OU - 10-13-Upgrade promoción-Upgrade promoción-PJE 15 861 DEPTO 11Vie, 23 Oct"
+          },
+          {
+            "estado": "completada",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3O1R1D8S",
+            "franja": "10-13",
+            "texto": "1-3O1R1D8S - 10-13-Reparación-3 Play Servicio Degradado-PJE 15 861 DEPTO 12Sab, 26 Sep"
+          },
+          {
+            "estado": "completada",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3NYB80KM",
+            "franja": "13-16",
+            "texto": "1-3NYB80KM - 13-16-Reparación-3 Play Servicio Degradado-PJE 15 861 DEPTO 12Lun, 21 Sep"
+          },
+          {
+            "estado": "cancelada",
+            "color": "rgb(128, 255, 128)",
+            "ot": "1-3NW7KL9K",
+            "franja": "13-16",
+            "texto": "1-3NW7KL9K - 13-16-Reparación-3 Play Servicio Degradado-PJE 15 861 DEPTO 12Jue, 17 Sep"
+          },
+          {
+            "estado": "completada",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3NWMEWZV",
+            "franja": "13-16",
+            "texto": "1-3NWMEWZV - 13-16-Reparación-3 Play Servicio Degradado-PJE 15 861 DEPTO 12Jue, 17 Sep"
+          },
+          {
+            "estado": "completada",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3NTH3U06",
+            "franja": "10-13",
+            "texto": "1-3NTH3U06 - 10-13-Reparación-3 Play Servicio Degradado-PJE 15 861 DEPTO 12Lun, 14 Sep"
           }
         ]
       }
