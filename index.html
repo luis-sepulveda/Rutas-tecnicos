@@ -15904,6 +15904,10 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarS
    incognito: el navegador no lo permite. */
 var URL_PLANILLA_RESP = 'https://docs.google.com/spreadsheets/d/15Nc9YKFc8E-kbKBVkYtWMovzGIrWPhLmGr9ahWMl7O8/edit?authuser=respaldosdominion@gmail.com';   // planilla RESPALDOS EN TERRENO (Luis, 26-10-2026)
 var URL_APP_RESP = 'https://luis-sepulveda.github.io/respaldo-terreno/';
+/* (26-10-2026, 18:10) Plan de accion de la semana: un PDF en la misma carpeta
+   (repo Rutas-tecnicos). Para cambiarlo cada semana basta reemplazar el
+   archivo plan_accion_semana.pdf con el mismo nombre. ?t= evita la copia vieja. */
+var URL_PLAN_SEMANA = 'plan_accion_semana.pdf';
 function abrirMigras(){ document.getElementById('modalMIG').classList.add('abierto'); pintarMigras(); }
 function cerrarMigras(){ const m = document.getElementById('modalMIG'); if(m) m.classList.remove('abierto'); }
 /* abre una vista de Derivacion (solo migraciones, todos los supervisores) */
@@ -15948,8 +15952,9 @@ function pintarMigras(){
     + '</div><div class="mi-col">'
     + g('3', 'Direcciones', '¿Dónde fallamos una y otra vez?',
         b("migDer('dir')", '🏠', 'Por dirección', 'Qué direcciones fallan y con qué técnicos, en la semana.'))
-    + g('5', 'Respaldos', '¿Tenemos con qué defendernos?',
-        a(URL_PLANILLA_RESP, '📋', 'Planilla de respaldos', 'RESPALDOS EN TERRENO: lo que mandan los técnicos desde la app.')
+    + g('5', 'Respaldos y plan', '¿Tenemos con qué defendernos? ¿Qué hacemos esta semana?',
+        a(URL_PLAN_SEMANA + '?t=' + Date.now(), '🗓️', 'Plan de acción de esta semana', 'A quién se fiscaliza, en qué nivel y cómo se mide (PDF).')
+      + a(URL_PLANILLA_RESP, '📋', 'Planilla de respaldos', 'RESPALDOS EN TERRENO: lo que mandan los técnicos desde la app.')
       + a(URL_APP_RESP, '📷', 'App Respaldo en terreno', 'La misma app que usan los técnicos en el celular.'))
     + '</div></div>';
 }
