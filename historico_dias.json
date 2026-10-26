@@ -22234,28 +22234,47 @@
    }
   },
   "26-10-2026": {
-   "hasta": "10:53",
-   "actividades": 139,
+   "hasta": "10:58",
+   "actividades": 142,
    "tecnicos": 34,
    "estados": {
     "Iniciado": 28,
-    "Pendiente": 92,
+    "Pendiente": 93,
     "Completado": 8,
-    "No Realizada": 6,
-    "en ruta": 4,
-    "Cancelado": 1
+    "No Realizada": 7,
+    "en ruta": 3,
+    "Cancelado": 2,
+    "Suspendido": 1
    },
-   "rgu": 211.5,
+   "rgu": 214.5,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 1,
+   "nuevas": 3,
    "al_bucket": 0,
-   "repetidas": 33,
+   "repetidas": 34,
    "reagendadas": 3,
    "detalle": {
     "caidas": [],
     "nuevas": [
+     {
+      "o": "1-3OMEVNU1",
+      "tec": "YENDER BOSCAN CADENAS",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "15:51",
+      "d": "SANTA FE 2362, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OMDQUXR",
+      "tec": "NICOLAS MOYANO R",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "16:55",
+      "d": "AVENIDA BELLOTO 1343, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OMEXT5X",
       "tec": "JOSE PEREZ RANGEL",
@@ -22263,7 +22282,7 @@
       "f": "10-13",
       "hi": "10:51",
       "d": "ECHAURREN 545, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Suspendido"
      }
     ],
     "repetidas": [
@@ -22439,7 +22458,7 @@
       "o": "1-3OG51L7S",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "11:39",
+      "hi": "12:08",
       "d": "PJE LA SIEMBRA 81, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE PEREZ RANGEL",
@@ -22451,7 +22470,7 @@
       "o": "1-3OG5CCVC",
       "cat": "Migración 3 Play",
       "f": "13-16",
-      "hi": "16:04",
+      "hi": "16:33",
       "d": "PADRE CRISTOBAL KENNEDY 047, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE PEREZ RANGEL",
@@ -22597,7 +22616,7 @@
       "f": "10-13",
       "hi": "09:52",
       "d": "NUEVA HIPODROMO 43 CASA A, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "MATÍAS JAQUE AG",
       "visitas": 3,
       "ult_fecha": "07-10-2026",
@@ -22607,9 +22626,9 @@
       "o": "1-3OLQOOE4",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "11:39",
+      "hi": "10:59",
       "d": "LOS LENGA 0154, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "MATÍAS JAQUE AG",
       "visitas": 1,
       "ult_fecha": "24-10-2026",
@@ -22619,12 +22638,24 @@
       "o": "1-3OK54ATB",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "17:31",
+      "hi": "16:51",
       "d": "LAS ROSAS 131, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATÍAS JAQUE AG",
       "visitas": 1,
       "ult_fecha": "22-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OMDQUXR",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "16:55",
+      "d": "AVENIDA BELLOTO 1343, QUILPUE",
+      "e": "Pendiente",
+      "tec": "NICOLAS MOYANO R",
+      "visitas": 1,
+      "ult_fecha": "26-10-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -22655,9 +22686,9 @@
       "o": "1-3OJC2HSM",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "10:46",
+      "hi": "10:57",
       "d": "MEXICO 1951 DEPTO 13, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "YENDER BOSCAN CADENAS",
       "visitas": 2,
       "ult_fecha": "21-10-2026",
@@ -22699,5 +22730,5 @@
    }
   }
  },
- "generado": "26-10-2026 10:53"
+ "generado": "26-10-2026 10:58"
 }
