@@ -22234,27 +22234,38 @@
    }
   },
   "26-10-2026": {
-   "hasta": "10:38",
-   "actividades": 137,
+   "hasta": "10:53",
+   "actividades": 139,
    "tecnicos": 34,
    "estados": {
-    "Iniciado": 26,
-    "Pendiente": 96,
-    "Completado": 6,
-    "No Realizada": 5,
-    "en ruta": 4
+    "Iniciado": 28,
+    "Pendiente": 92,
+    "Completado": 8,
+    "No Realizada": 6,
+    "en ruta": 4,
+    "Cancelado": 1
    },
-   "rgu": 208.5,
+   "rgu": 211.5,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 0,
+   "nuevas": 1,
    "al_bucket": 0,
    "repetidas": 33,
    "reagendadas": 3,
    "detalle": {
     "caidas": [],
-    "nuevas": [],
+    "nuevas": [
+     {
+      "o": "1-3OMEXT5X",
+      "tec": "JOSE PEREZ RANGEL",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "10:51",
+      "d": "ECHAURREN 545, VILLA ALEMANA",
+      "e": "Iniciado"
+     }
+    ],
     "repetidas": [
      {
       "o": "1-3OK6ZL3P",
@@ -22284,7 +22295,7 @@
       "o": "1-3OLQLKVB",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "14:01",
       "d": "EL COIGUE 915, QUILPUE",
       "e": "Pendiente",
       "tec": "ANTONHY MORALES MENDOZA",
@@ -22310,7 +22321,7 @@
       "f": "10-13",
       "hi": "10:31",
       "d": "PATRICIO LYNCH 201, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "CRISTOBAL MIRANDA VALENC",
       "visitas": 1,
       "ult_fecha": "23-10-2026",
@@ -22332,9 +22343,9 @@
       "o": "1-3OLLCG29",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:43",
+      "hi": "10:46",
       "d": "LATORRE 15, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "EDGAR VALERO C",
       "visitas": 2,
       "ult_fecha": "15-09-2026",
@@ -22416,7 +22427,7 @@
       "o": "1-3OLMA9NE",
       "cat": "Migración 3 Play",
       "f": "16-19",
-      "hi": "16:49",
+      "hi": "16:00",
       "d": "LAS ORQUIDEAS 1650 CASA 78, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE CASTRO P",
@@ -22428,7 +22439,7 @@
       "o": "1-3OG51L7S",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "11:29",
+      "hi": "11:39",
       "d": "PJE LA SIEMBRA 81, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE PEREZ RANGEL",
@@ -22440,7 +22451,7 @@
       "o": "1-3OG5CCVC",
       "cat": "Migración 3 Play",
       "f": "13-16",
-      "hi": "15:54",
+      "hi": "16:04",
       "d": "PADRE CRISTOBAL KENNEDY 047, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE PEREZ RANGEL",
@@ -22500,7 +22511,7 @@
       "o": "1-3OLMV11D",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:04",
+      "hi": "14:05",
       "d": "LOS ALGARROBOS 605, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JUAN ARRIAGADA C",
@@ -22512,7 +22523,7 @@
       "o": "1-3OM2YOOA",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:03",
+      "hi": "14:15",
       "d": "SANTA FE 1466, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
@@ -22688,5 +22699,5 @@
    }
   }
  },
- "generado": "26-10-2026 10:38"
+ "generado": "26-10-2026 10:53"
 }
