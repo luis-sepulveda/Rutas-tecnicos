@@ -15785,14 +15785,37 @@ function pintarSegVtr(){
     let s = cel(o.mesA, null, svOrd.col === 'mesA') + cel(o.mes, pc(o.mesA), svOrd.col === 'mes');
     VIS.forEach(function(w, j){ s += cel(o[w], pc(o[SEMS[j]]), svOrd.col === w); });
     return s + cel(o.hoy, null, svOrd.col === 'hoy'); };
+  /* (26-10-2026, 16:20) META DE LA SEMANA. Luis: "dale" a la idea de que cada
+     tecnico vea en vivo cuanto le falta. Bajo el nombre:
+       - "✓ En meta esta semana" si su completitud de la semana en curso ya es
+         la meta (60 %) o mas.
+       - "Le faltan N completadas": cuantas visitas SEGUIDAS tiene que
+         completar para llegar al 60 % (cada visita nueva tambien suma a las
+         visitadas): N = techo((0,6 x visitadas - completadas) / 0,4).
+       - "Sin visitas esta semana" si todavia no visita ninguna.
+     Debajo, como pide el plan del PDF (cada tecnico contra si mismo): su
+     promedio de las 4 semanas anteriores y como va esta semana (▲▼). */
+  const prev4 = SEMS.slice(-5, -1);
+  const metaSem = function(o){
+    const w = o[lun] || {c:0, v:0}, m = meta / 100;
+    let b4 = {c:0, v:0}; prev4.forEach(function(s){ if(o[s]){ b4.c += o[s].c; b4.v += o[s].v; } });
+    const p4 = pc(b4), pw = pc(w);
+    let top;
+    if(!w.v) top = '<span class="sv-mt nada">Sin visitas esta semana</span>';
+    else if(pw >= meta) top = '<span class="sv-mt ok">✓ En meta esta semana</span>';
+    else { const k = Math.max(1, Math.ceil((m * w.v - w.c) / (1 - m) - 1e-9));
+      top = '<span class="sv-mt falta" title="Si completa sus próximas ' + k + ' visitas seguidas, llega al ' + meta + ' % esta semana">🎯 Le falta' + (k === 1 ? ' 1 completada' : 'n ' + k + ' completadas') + '</span>'; }
+    const fl = p4 === null || pw === null ? '' : pw > p4 + 0.05 ? ' <i class="up">▲</i>' : pw < p4 - 0.05 ? ' <i class="dn">▼</i>' : '';
+    return top + '<small class="sv-mb" title="Su promedio de las 4 semanas anteriores (' + b4.c + ' de ' + b4.v + ') contra esta semana (' + w.c + ' de ' + w.v + ')">4 sem: '
+      + (p4 === null ? '—' : f1(p4) + ' %') + ' · semana: ' + (pw === null ? '—' : f1(pw) + ' %') + fl + '</small>'; };
   idx.forEach(function(i){
     const t = SV_TECS[i], o = C[i];
-    h += '<tr onclick="svFicha(' + i + ')" title="Abrir su ficha"><td class="iz"><b>' + escR(t[0]) + '</b></td><td class="iz sv-sup">' + escR(o.sup ? derTitulo(o.sup) : '') + '</td>'
+    h += '<tr onclick="svFicha(' + i + ')" title="Abrir su ficha"><td class="iz"><b>' + escR(t[0]) + '</b>' + metaSem(o) + '</td><td class="iz sv-sup">' + escR(o.sup ? derTitulo(o.sup) : '') + '</td>'
       + filaCeldas(o) + '</tr>';
   });
-  h += '<tr class="sv-tot"><td class="iz"><b>Los ' + SV_TECS.length + ' juntos</b></td><td></td>' + filaCeldas(T) + '</tr></tbody></table>'
+  h += '<tr class="sv-tot"><td class="iz"><b>Los ' + SV_TECS.length + ' juntos</b>' + metaSem(T) + '</td><td></td>' + filaCeldas(T) + '</tr></tbody></table>'
     + '<p class="sv-nota">Verde: ' + meta + ' % o más (meta VTR/CLARO de ' + MG_META_DER + ' % de derivación) · ámbar: hasta 10 puntos bajo la meta · rojo: más abajo. '
-    + '▲▼ en el mes en curso: contra el mes anterior; en cada semana: contra la semana anterior. "6 de 22" = completadas de visitadas. Días anteriores: lo que se ve con las credenciales de la agencia (datos.json, hasta ayer); hoy, en vivo.</p>';
+    + '🎯 Meta de la semana (bajo cada nombre): cuántas visitas seguidas tiene que completar para llegar al ' + meta + ' % esta semana; abajo, su promedio de las 4 semanas anteriores contra esta semana. ▲▼ en el mes en curso: contra el mes anterior; en cada semana: contra la semana anterior. "6 de 22" = completadas de visitadas. Días anteriores: lo que se ve con las credenciales de la agencia (datos.json, hasta ayer); hoy, en vivo.</p>';
   cu.innerHTML = h;
 }
 document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarSegVtr(); });
@@ -15827,6 +15850,11 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarS
   .sv-et { font-style:normal; font-weight:500; font-size:10.5px; opacity:.75; text-transform:uppercase; letter-spacing:.02em; }
   .sv-tot td { background:#f1f5f9; font-weight:600; }
   .sv-nota { font-size:12px; color:#64748b; margin:10px 2px 0; }
+  /* (26-10-2026, 16:20) meta de la semana bajo el nombre */
+  .sv-mt { display:block; margin-top:3px; font-size:12px; font-weight:600; white-space:nowrap; }
+  .sv-mt.ok { color:#15803d; } .sv-mt.falta { color:#b91c1c; } .sv-mt.nada { color:#94a3b8; font-weight:500; }
+  .sv-t td.iz small.sv-mb { display:block; font-size:11px; color:#64748b; white-space:nowrap; }
+  .sv-t td.iz small.sv-mb i.up { color:#15803d; font-style:normal; } .sv-t td.iz small.sv-mb i.dn { color:#b91c1c; font-style:normal; }
   /* (26-10-2026) columnas por semana, titulos para ordenar */
   .sv-t th.sv-ord { cursor:pointer; user-select:none; } .sv-t th.sv-ord:hover { background:#dbe7fd; }
   .sv-t th.sv-ord.act { background:#1e3a8a; color:#fff; } .sv-t th.sv-ord.act small { color:#c7d2fe; }
