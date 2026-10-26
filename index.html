@@ -10914,7 +10914,7 @@ function abrirDerivHoy(){ derModo = 'der'; derVista = 'hoy'; derTipo = 'MIGRA'; 
 let DER_VISTAS_HOY = null;      // peticiones derivadas ya avisadas (null = todavia no se ha mirado)
 let DER_AVISO = [];             // las nuevas que estan en el aviso flotante
 function cerrarAvisoDer(){ const habia = DER_AVISO.length; DER_AVISO = []; const a = document.getElementById('avisoDer'); if(a) a.remove();
-  if(habia){ document.querySelectorAll('.pv-al.dosl.nueva').forEach(function(e){ e.classList.remove('nueva'); }); const b = document.querySelector('.pv-der'); if(b){ b.classList.remove('nueva'); b.querySelectorAll('.nv').forEach(function(e){ e.remove(); }); b.querySelectorAll('.it.nu').forEach(function(e){ e.classList.remove('nu'); }); } } }
+  if(habia){ document.querySelectorAll('.pv-al.dosl.nueva, .b-migr.nueva').forEach(function(e){ e.classList.remove('nueva'); }); const b = document.querySelector('.pv-der'); if(b){ b.classList.remove('nueva'); b.querySelectorAll('.nv').forEach(function(e){ e.remove(); }); b.querySelectorAll('.it.nu').forEach(function(e){ e.classList.remove('nu'); }); } } }
 function revisarAvisoDer(){
   const ders = derHoyMigDer().filter(function(x){ return x.der; });
   if(DER_VISTAS_HOY === null){ DER_VISTAS_HOY = {}; ders.forEach(function(x){ DER_VISTAS_HOY[x.o] = 1; }); return; }
@@ -12574,9 +12574,18 @@ function pintarPortada(){
     /* (20-10-2026, 15:30) Resumen para WhatsApp, al lado de Reiterados (pedido de Luis) */
     +     '<a class="b-wsp" onclick="abrirResumenWsp()" title="Una sola imagen con inicio, avance, nuevas, salieron y no realizadas, para el grupo">💬 Resumen WhatsApp</a>'
     /* (21-10-2026) Migraciones · vista gerencia */
-    +     '<a class="b-mg" onclick="abrirMigGer()" title="Todo lo de migraciones del equipo: por mes, por semana y hoy">📊 Migraciones · Gerencia</a>'
+    // (26-10-2026) al panel Migraciones
+    //     '<a class="b-mg" onclick="abrirMigGer()" title="Todo lo de migraciones del equipo: por mes, por semana y hoy">📊 Migraciones · Gerencia</a>'
     /* (23-10-2026) seguimiento de los tecnicos que VTR/CLARO marco por completitud */
-    +     '<a class="b-sv" onclick="abrirSegVtr()" title="Solo los técnicos que VTR/CLARO marcó con baja completitud">🎯 Seguimiento VTR</a>'
+    // (26-10-2026) al panel Migraciones
+    //     '<a class="b-sv" onclick="abrirSegVtr()" title="Solo los técnicos que VTR/CLARO marcó con baja completitud">🎯 Seguimiento VTR</a>'
+    /* (26-10-2026) Luis: todo lo de migraciones en UN boton. Gerencia y
+       Seguimiento VTR pasaron al panel Migraciones (ver BOTON MIGRACIONES). */
+    +     (function(){ let c = null; try { c = derHoyConteo(); } catch(e){}
+            const nv = typeof DER_AVISO !== 'undefined' && DER_AVISO.length;
+            return '<a class="b-migr' + (nv ? ' nueva' : '') + '" onclick="abrirMigras()" title="Todo lo de migraciones: hoy en vivo, técnicos, direcciones, gerencia y respaldos'
+              + (c ? ' · hoy ' + c.d + ' derivadas de ' + c.v + ' visitadas' : '') + '">🔁 Migraciones'
+              + (c && c.d ? '<span class="pv-nred">' + c.d + '</span>' : '') + '</a>'; })()
     /* Tiempos (26-09-2026): a la derecha de Reiterados, a pedido de Luis (antes
        estuvo un rato en "Reportes"). Abre el boton Tiempos en terreno del
        historial en otra pestana, como Historial y Seguimiento. */
@@ -12814,7 +12823,8 @@ function pintarPortada(){
     +   '<div class="pa-rep pa-rep-fr pv-linea"><span class="pv-rot">Reportes</span>'
     +   '<nav class="pv-links">'
     /* 19-10-2026: Resumen de migraciones para supervisores (abrirResMig) */
-    +     '<button class="pv-lk rm-btn" onclick="abrirResMig()" title="Cuántas migraciones se derivaron, por qué y quién, con filtro por supervisor">Resumen Supervisores (Migraciones)<span class="fl">\u203a</span></button>'
+    // (26-10-2026) al panel Migraciones
+    //     '<button class="pv-lk rm-btn" onclick="abrirResMig()" title="Cuántas migraciones se derivaron, por qué y quién, con filtro por supervisor">Resumen Supervisores (Migraciones)<span class="fl">\u203a</span></button>'
     +     (function(){ let c = null; try { c = calcularCompletitud(); } catch(e){}
             const ok = c && c.total, pc = ok ? Math.round(c.pct) : null;
             /* (20-10-2026, 08:55) antes del corte de las 13:00 de hoy va en gris: todavia no se mide */
@@ -12853,9 +12863,11 @@ function pintarPortada(){
             })()
     +       paAgrupar([
               alerta('toggleCaidas', caidas, 'Actividades que salieron de la bandeja del técnico', 'se las sacaron sin que alcanzara a tocarlas', '#c0392f'),
+              /* (26-10-2026) la pastilla "Migraciones derivadas" paso al boton Migraciones de la barra (con el numero). Era:
               (function(){ const c = derHoyConteo();
                 return '<button class="pv-al ' + (c.d > 0 ? 'viva' : 'cero') + (DER_AVISO.length ? ' nueva' : '') + '" style="--tono:#b45309" title="Toca para abrir Derivación: hoy en vivo, por técnico, por dirección, a quién auditar y ficha del técnico." onclick="abrirDerivHoy()">'
                   + '<span class="n">' + c.d + '</span><span class="tx"><span class="t">Migraciones derivadas</span><span class="s">' + c.d + ' de ' + c.v + ' migraciones ya visitadas</span></span></button>'; })(),
+              */
               paEspera(alerta('toggleSinCompletar', sinComp, 'Sin completar', 'no han cerrado ninguna todavía hoy', '#b45309')),
               paEspera('<button class="pv-al ' + (sinIni > 0 ? 'viva' : 'cero') + (window.PV_SININI ? ' sel' : '')
                 + '" style="--tono:#0f766e" title="Toca para ver quiénes son" onclick="window.PV_SININI = !window.PV_SININI; pintarPortada()">'
@@ -15824,6 +15836,103 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarS
   .sv-t td .sv-p { position:relative; display:inline-block; }
   .sv-t td .sv-p i.up, .sv-t td .sv-p i.dn { position:absolute; left:100%; margin-left:4px; top:2px; font-size:12px; }
   .sv-t td, .sv-t td.iz { vertical-align:middle; }
+</style>
+<!-- ===== BOTON MIGRACIONES (26-10-2026) =====
+     Luis: "la idea es tener toda la informacion que tenemos repartida en
+     distintos botones en uno solo, que nos muestre botones dependiendo de lo
+     que queramos mirar". Un boton "🔁 Migraciones" en la barra de arriba (con
+     el numero de derivadas de hoy, rojo y latiendo si hay una NUEVA) abre este
+     panel. Cada boton del panel abre la MISMA ventana de siempre (Derivacion
+     en la vista que corresponde, Resumen Supervisores, Gerencia, Seguimiento
+     VTR); ningun calculo cambio. De la portada se sacaron (comentados):
+     los botones Migraciones · Gerencia y Seguimiento VTR de la barra, el
+     Resumen Supervisores (Migraciones) de Reportes y la pastilla "Migraciones
+     derivadas" de Requiere atencion. Reiterados NO va aca (sigue oculto).
+     Para agregar el enlace de la planilla de respaldos: URL_PLANILLA_RESP. -->
+<div id="modalMIG" onclick="if(event.target===this) cerrarMigras()">
+  <div class="mi-box" role="dialog">
+    <div class="mi-head"><div><h2>🔁 Migraciones</h2><p id="miSub"></p></div>
+      <button class="mi-x" onclick="cerrarMigras()" title="Cerrar (Esc)">✖</button></div>
+    <div id="miCuerpo"></div>
+  </div>
+</div>
+<script>
+var URL_PLANILLA_RESP = '';   // enlace de la planilla RESPALDOS EN TERRENO (pendiente que Luis lo pase)
+var URL_APP_RESP = 'https://luis-sepulveda.github.io/respaldo-terreno/';
+function abrirMigras(){ document.getElementById('modalMIG').classList.add('abierto'); pintarMigras(); }
+function cerrarMigras(){ const m = document.getElementById('modalMIG'); if(m) m.classList.remove('abierto'); }
+/* abre una vista de Derivacion (solo migraciones, todos los supervisores) */
+function migDer(v){
+  cerrarMigras(); derModo = 'der'; derVista = v; derTipo = 'MIGRA'; derSup = 'Todos'; derAbierto = null;
+  if(v === 'fic') derFicTec = null;
+  if(v === 'hoy') cerrarAvisoDer();
+  abrirDeriv();
+}
+function migIr(fn){ cerrarMigras(); try { window[fn](); } catch(e){ console.warn('migraciones:', fn, e); } }
+function pintarMigras(){
+  const cu = document.getElementById('miCuerpo'); if(!cu) return;
+  let c = null; try { c = derHoyConteo(); } catch(e){}
+  const nueva = typeof DER_AVISO !== 'undefined' && DER_AVISO.length;
+  const pc = c && c.v ? Math.round(100 * (c.v - c.d) / c.v) : null;
+  document.getElementById('miSub').innerHTML = c && c.v
+    ? 'Hoy: <b>' + c.d + '</b> derivada' + (c.d === 1 ? '' : 's') + ' de <b>' + c.v + '</b> visitadas · completitud <b>' + pc + ' %</b> (meta ' + (100 - MG_META_DER) + ' %)'
+    : 'Hoy todavía no hay migraciones visitadas.';
+  const b = function(onc, ico, tit, txt, extra, cls){
+    return '<button class="mi-b' + (cls ? ' ' + cls : '') + '" onclick="' + onc + '"><span class="i">' + ico + '</span><span class="t"><b>' + tit + '</b>'
+      + (extra || '') + '<small>' + txt + '</small></span><span class="fl">›</span></button>'; };
+  const a = function(url, ico, tit, txt){
+    if(!url) return '<div class="mi-b off" title="Falta el enlace: pásaselo a Claude para agregarlo"><span class="i">' + ico + '</span><span class="t"><b>' + tit + '</b><small>' + txt + ' · falta agregar el enlace</small></span></div>';
+    return '<a class="mi-b" href="' + url + '" target="_blank" rel="noopener"><span class="i">' + ico + '</span><span class="t"><b>' + tit + '</b><small>' + txt + '</small></span><span class="fl">↗</span></a>'; };
+  const g = function(n, tit, preg, cuerpo){ return '<section class="mi-g"><div class="mi-gt"><span class="n">' + n + '</span><div><b>' + tit + '</b><small>' + preg + '</small></div></div>' + cuerpo + '</section>'; };
+  const nHoy = c ? '<span class="mi-n' + (c.d ? ' roj' : '') + (nueva ? ' nueva' : '') + '">' + c.d + (nueva ? ' · NUEVA' : '') + '</span>' : '';
+  cu.innerHTML = '<div class="mi-grid">'
+    + g('1', 'Hoy, en vivo', '¿Qué está pasando ahora?',
+        b("migDer('hoy')", '🔴', 'Derivadas de hoy', 'Visitadas, derivadas y por visitar, tal como van. Se actualiza sola.', nHoy)
+      + b("migIr('abrirResMig')", '🧾', 'Resumen supervisores', 'Cuántas se derivaron, por qué y quién, con filtro por supervisor y las fotos de respaldo.'))
+    + g('2', 'Técnicos', '¿Quién anda mal y qué hago con él?',
+        b("migIr('abrirSegVtr')", '🎯', 'Seguimiento VTR', 'Los ' + (typeof SV_TECS !== 'undefined' ? SV_TECS.length : '') + ' técnicos que VTR/CLARO marcó, semana a semana.')
+      + b("migDer('tec')", '👷', 'Por técnico', 'Quién deriva más en la semana. Cada orden y la historia de su dirección.')
+      + b("migDer('aud')", '🔍', 'A quién auditar', 'Lo derivado que es propio de cada técnico, sin causales ajenas.')
+      + b("migDer('evo')", '📈', 'Evolución', 'Últimas semanas de cada técnico: si va mejorando o empeorando.')
+      + b("migDer('fic')", '🪪', 'Ficha del técnico', 'Todo sobre un técnico y qué órdenes revisar primero.'))
+    + g('3', 'Direcciones', '¿Dónde fallamos una y otra vez?',
+        b("migDer('dir')", '🏠', 'Por dirección', 'Qué direcciones fallan y con qué técnicos, en la semana.'))
+    + g('4', 'Equipo y gerencia', '¿Cómo vamos como equipo?',
+        b("migDer('res')", '🧭', 'Resumen de derivación', 'Lo principal en una pantalla: cómo vamos, de qué depende y con quién conversar.')
+      + b("migIr('abrirMigGer')", '📊', 'Migraciones · Gerencia', 'Por mes, semana y hoy, contra la meta. Con Modo reunión.'))
+    + g('5', 'Respaldos', '¿Tenemos con qué defendernos?',
+        a(URL_PLANILLA_RESP, '📋', 'Planilla de respaldos', 'RESPALDOS EN TERRENO: lo que mandan los técnicos desde la app.')
+      + a(URL_APP_RESP, '📷', 'App Respaldo en terreno', 'La misma app que usan los técnicos en el celular.'))
+    + '</div>';
+}
+document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarMigras(); });
+</script>
+<style>
+  .pv-bar a.b-migr { background:#1e3a8a; color:#fff; font-weight:600; margin-left:6px; }
+  .pv-bar a.b-migr:hover { background:#1d4ed8; color:#fff; }
+  .pv-bar a.b-migr.nueva { animation:miLate 1.4s ease-in-out infinite; }
+  @keyframes miLate { 0%,100% { box-shadow:0 0 0 0 rgba(239,68,68,.0); } 50% { box-shadow:0 0 0 4px rgba(239,68,68,.55); } }
+  #modalMIG { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); }
+  #modalMIG.abierto { display:flex; align-items:flex-start; justify-content:center; padding:4vh 2vw; }
+  #modalMIG .mi-box { background:#f4f7fa; color:#16232f; border-radius:14px; width:min(1150px,100%); max-height:92vh; overflow:auto; box-shadow:0 20px 60px rgba(0,0,0,.35); }
+  #modalMIG .mi-head { display:flex; justify-content:space-between; gap:12px; padding:18px 22px 14px; background:#0f1b2d; color:#fff; border-radius:14px 14px 0 0; }
+  #modalMIG h2 { margin:0; font-family:'Archivo',sans-serif; font-size:20px; }
+  #modalMIG .mi-head p { margin:5px 0 0; font-size:13px; color:#a9b8cf; } #modalMIG .mi-head p b { color:#fff; }
+  #modalMIG .mi-x { border:1px solid #33475f; background:transparent; color:#fff; border-radius:8px; padding:5px 11px; cursor:pointer; align-self:flex-start; }
+  #miCuerpo { padding:18px 22px 22px; }
+  .mi-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:14px; align-items:start; }
+  .mi-g { background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:12px; }
+  .mi-gt { display:flex; gap:10px; align-items:center; margin:0 2px 10px; }
+  .mi-gt .n { width:26px; height:26px; border-radius:50%; background:#1e3a8a; color:#fff; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; flex:none; }
+  .mi-gt b { display:block; font-size:15px; } .mi-gt small { color:#64748b; font-size:12.5px; }
+  .mi-b { display:flex; align-items:center; gap:10px; width:100%; text-align:left; background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:9px 11px; margin-top:7px; cursor:pointer; color:inherit; text-decoration:none; font:inherit; }
+  .mi-b:hover { background:#eef4ff; border-color:#93c5fd; }
+  .mi-b .i { font-size:20px; flex:none; width:26px; text-align:center; }
+  .mi-b .t { flex:1; min-width:0; } .mi-b .t b { font-size:14px; } .mi-b .t small { display:block; color:#64748b; font-size:12px; margin-top:1px; }
+  .mi-b .fl { color:#94a3b8; font-size:18px; flex:none; }
+  .mi-b.off { cursor:default; opacity:.6; } .mi-b.off:hover { background:#f8fafc; border-color:#e2e8f0; }
+  .mi-n { display:inline-block; margin-left:8px; padding:0 7px; border-radius:9px; background:#e2e8f0; color:#334155; font-size:12px; font-weight:700; vertical-align:1px; }
+  .mi-n.roj { background:#dc2626; color:#fff; } .mi-n.nueva { animation:miLate 1.4s ease-in-out infinite; }
 </style>
 </body>
 </html>
