@@ -15802,7 +15802,14 @@ function pintarSegVtr(){
     const p4 = pc(b4), pw = pc(w);
     let top;
     if(!w.v) top = '<span class="sv-mt nada">Sin visitas esta semana</span>';
-    else if(pw >= meta) top = '<span class="sv-mt ok">✓ En meta esta semana</span>';
+    /* (26-10-2026, 17:15) Luis: "la idea seria saber cuando este a punto de salir
+       de la meta". En meta se muestra cuantas derivadas mas AGUANTA sin bajar
+       del 60 %: j = piso(completadas / 0,6 - visitadas). Si j = 0, ambar
+       "al borde": una derivada mas y sale. */
+    else if(pw >= meta){ const j = Math.max(0, Math.floor(w.c / m - w.v + 1e-9));
+      top = j === 0
+        ? '<span class="sv-mt borde" title="Va ' + w.c + ' de ' + w.v + ': si deriva la próxima queda bajo el ' + meta + ' %">⚠ Al borde: una derivada más y sale de la meta</span>'
+        : '<span class="sv-mt ok" title="Va ' + w.c + ' de ' + w.v + ': puede derivar ' + j + ' más y seguir en ' + meta + ' % o más">✓ En meta · aguanta ' + j + ' derivada' + (j === 1 ? '' : 's') + ' más</span>'; }
     else { const k = Math.max(1, Math.ceil((m * w.v - w.c) / (1 - m) - 1e-9));
       top = '<span class="sv-mt falta" title="Si completa sus próximas ' + k + ' visitas seguidas, llega al ' + meta + ' % esta semana">🎯 Le falta' + (k === 1 ? ' 1 completada' : 'n ' + k + ' completadas') + '</span>'; }
     const fl = p4 === null || pw === null ? '' : pw > p4 + 0.05 ? ' <i class="up">▲</i>' : pw < p4 - 0.05 ? ' <i class="dn">▼</i>' : '';
@@ -15815,7 +15822,7 @@ function pintarSegVtr(){
   });
   h += '<tr class="sv-tot"><td class="iz"><b>Los ' + SV_TECS.length + ' juntos</b>' + metaSem(T) + '</td><td></td>' + filaCeldas(T) + '</tr></tbody></table>'
     + '<p class="sv-nota">Verde: ' + meta + ' % o más (meta VTR/CLARO de ' + MG_META_DER + ' % de derivación) · ámbar: hasta 10 puntos bajo la meta · rojo: más abajo. '
-    + '🎯 Meta de la semana (bajo cada nombre): cuántas visitas seguidas tiene que completar para llegar al ' + meta + ' % esta semana; abajo, su promedio de las 4 semanas anteriores contra esta semana. ▲▼ en el mes en curso: contra el mes anterior; en cada semana: contra la semana anterior. "6 de 22" = completadas de visitadas. Días anteriores: lo que se ve con las credenciales de la agencia (datos.json, hasta ayer); hoy, en vivo.</p>';
+    + '🎯 Meta de la semana (bajo cada nombre): si está bajo la meta, cuántas visitas seguidas tiene que completar para llegar al ' + meta + ' %; si está en meta, cuántas derivadas más aguanta (⚠ al borde: una más y sale); abajo, su promedio de las 4 semanas anteriores contra esta semana. ▲▼ en el mes en curso: contra el mes anterior; en cada semana: contra la semana anterior. "6 de 22" = completadas de visitadas. Días anteriores: lo que se ve con las credenciales de la agencia (datos.json, hasta ayer); hoy, en vivo.</p>';
   cu.innerHTML = h;
 }
 document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarSegVtr(); });
@@ -15852,7 +15859,7 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarS
   .sv-nota { font-size:12px; color:#64748b; margin:10px 2px 0; }
   /* (26-10-2026, 16:20) meta de la semana bajo el nombre */
   .sv-mt { display:block; margin-top:3px; font-size:12px; font-weight:600; white-space:nowrap; }
-  .sv-mt.ok { color:#15803d; } .sv-mt.falta { color:#b91c1c; } .sv-mt.nada { color:#94a3b8; font-weight:500; }
+  .sv-mt.ok { color:#15803d; } .sv-mt.borde { color:#b45309; } .sv-mt.falta { color:#b91c1c; } .sv-mt.nada { color:#94a3b8; font-weight:500; }
   .sv-t td.iz small.sv-mb { display:block; font-size:11px; color:#64748b; white-space:nowrap; }
   .sv-t td.iz small.sv-mb i.up { color:#15803d; font-style:normal; } .sv-t td.iz small.sv-mb i.dn { color:#b91c1c; font-style:normal; }
   /* (26-10-2026) columnas por semana, titulos para ordenar */
