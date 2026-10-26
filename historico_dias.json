@@ -22234,19 +22234,19 @@
    }
   },
   "26-10-2026": {
-   "hasta": "16:29",
-   "actividades": 168,
-   "tecnicos": 34,
+   "hasta": "17:25",
+   "actividades": 169,
+   "tecnicos": 33,
    "estados": {
-    "Completado": 78,
-    "Iniciado": 23,
-    "Pendiente": 29,
-    "No Realizada": 28,
-    "Cancelado": 4,
+    "Completado": 88,
+    "Iniciado": 24,
+    "No Realizada": 33,
     "en ruta": 3,
+    "Pendiente": 14,
+    "Cancelado": 4,
     "Suspendido": 3
    },
-   "rgu": 240.0,
+   "rgu": 244.5,
    "caidas_total": 4,
    "caidas_activas": 4,
    "caidas_resueltas": 0,
@@ -22337,7 +22337,7 @@
       "f": "16-19",
       "hi": "16:59",
       "d": "AVENIDA BELLOTO 1157, QUILPUE",
-      "e": "en ruta"
+      "e": "Completado"
      },
      {
       "o": "1-3OMH8ZBK",
@@ -22350,12 +22350,12 @@
      },
      {
       "o": "1-3OMGHQP6",
-      "tec": "LEONEL HERNÁNDEZ OJE",
+      "tec": "ANTONHY MORALES MENDOZA",
       "cat": "Reparación",
       "f": "13-16",
       "hi": "17:09",
       "d": "DE VEER 1328 DEPTO 113, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OMG66TD",
@@ -22373,7 +22373,7 @@
       "f": "13-16",
       "hi": "16:25",
       "d": "HERMANOS PINZON 171, QUILPUE",
-      "e": "Iniciado"
+      "e": "No Realizada"
      },
      {
       "o": "1-3OMFC6P4",
@@ -22438,6 +22438,30 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OGUGQTY",
+      "cat": "Migración 1 Play",
+      "f": "16-19",
+      "hi": "16:52",
+      "d": "CAMINO DEL SOL 2400 EDIF. A DEPTO 47, QUILPUE",
+      "e": "No Realizada",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "visitas": 1,
+      "ult_fecha": "17-10-2026",
+      "ult_cierre": "Falta de dotación"
+     },
+     {
+      "o": "1-3OMGHQP6",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "17:39",
+      "d": "DE VEER 1328 DEPTO 113, QUILPUE",
+      "e": "en ruta",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "visitas": 1,
+      "ult_fecha": "09-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OLQB5A2",
       "cat": "Reparación",
       "f": "13-16",
@@ -22453,7 +22477,7 @@
       "o": "1-3OLMV11D",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "16:28",
+      "hi": "17:12",
       "d": "LOS ALGARROBOS 605, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
@@ -22498,18 +22522,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OJ6Q3E2",
-      "cat": "Modificación de Servicio",
-      "f": "16-19",
-      "hi": "17:08",
-      "d": "IRMA JOHNSON MOLINA 201 EDIF. B DEPTO 223, QUILPUE",
-      "e": "Pendiente",
-      "tec": "DANIEL NAVARRETE E",
-      "visitas": 2,
-      "ult_fecha": "15-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OLLCG29",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -22546,16 +22558,16 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OKZ5JER",
-      "cat": "Modificación de Servicio",
+      "o": "1-3OLMA9NE",
+      "cat": "Migración 3 Play",
       "f": "16-19",
-      "hi": "19:39",
-      "d": "BERLIN 1602 EDIF. A DEPTO 407, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "ESTEBAN PIZARRO QUINTANA",
+      "hi": "17:06",
+      "d": "LAS ORQUIDEAS 1650 CASA 78, VILLA ALEMANA",
+      "e": "Iniciado",
+      "tec": "JORDAN ROA PEREZ",
       "visitas": 1,
-      "ult_fecha": "19-10-2026",
-      "ult_cierre": "Sin moradores"
+      "ult_fecha": "22-09-2026",
+      "ult_cierre": "Direccion no encontrada"
      },
      {
       "o": "1-3OM2YOOA",
@@ -22573,24 +22585,48 @@
       "o": "1-3OK54ATB",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "18:16",
+      "hi": "16:43",
       "d": "LAS ROSAS 131, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "No Realizada",
       "tec": "JORGE PEZOA VICUÑA",
       "visitas": 1,
       "ult_fecha": "22-10-2026",
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OKZ5JER",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:28",
+      "d": "BERLIN 1602 EDIF. A DEPTO 407, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JORGE PEZOA VICUÑA",
+      "visitas": 1,
+      "ult_fecha": "19-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OLSB9JG",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:35",
+      "hi": "16:32",
       "d": "EL OCASO 848 EDIF. 1 DEPTO 34, QUILPUE",
-      "e": "en ruta",
+      "e": "No Realizada",
       "tec": "JOSE GALAZ D",
       "visitas": 1,
       "ult_fecha": "24-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OJ6Q3E2",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:07",
+      "d": "IRMA JOHNSON MOLINA 201 EDIF. B DEPTO 223, QUILPUE",
+      "e": "Iniciado",
+      "tec": "JOSE GALAZ D",
+      "visitas": 2,
+      "ult_fecha": "15-10-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -22627,30 +22663,6 @@
       "tec": "JUAN ARRIAGADA C",
       "visitas": 1,
       "ult_fecha": "22-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OK5X6DS",
-      "cat": "Migración 1 Play",
-      "f": "13-16",
-      "hi": "16:34",
-      "d": "FRESIA 22, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JUAN ARRIAGADA C",
-      "visitas": 1,
-      "ult_fecha": "07-10-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
-      "o": "1-3OMGHQP6",
-      "cat": "Reparación",
-      "f": "13-16",
-      "hi": "17:20",
-      "d": "DE VEER 1328 DEPTO 113, QUILPUE",
-      "e": "Pendiente",
-      "tec": "LEONEL HERNÁNDEZ OJE",
-      "visitas": 1,
-      "ult_fecha": "09-10-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -22719,7 +22731,7 @@
       "f": "13-16",
       "hi": "16:04",
       "d": "SAN PEDRO 1423 CASA B, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "MATIAS APELEO APELEO",
       "visitas": 1,
       "ult_fecha": "23-10-2026",
@@ -22750,24 +22762,24 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OLMA9NE",
-      "cat": "Migración 3 Play",
-      "f": "16-19",
-      "hi": "18:50",
-      "d": "LAS ORQUIDEAS 1650 CASA 78, VILLA ALEMANA",
-      "e": "Pendiente",
+      "o": "1-3OK5X6DS",
+      "cat": "Migración 1 Play",
+      "f": "13-16",
+      "hi": "17:05",
+      "d": "FRESIA 22, VILLA ALEMANA",
+      "e": "Iniciado",
       "tec": "MATÍAS JAQUE AG",
       "visitas": 1,
-      "ult_fecha": "22-09-2026",
-      "ult_cierre": "Direccion no encontrada"
+      "ult_fecha": "07-10-2026",
+      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3OK8WGA1",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "17:22",
+      "hi": "16:57",
       "d": "GOMEZ CARRENO 580 CASA 26, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "NICOLAS MOYANO R",
       "visitas": 1,
       "ult_fecha": "22-10-2026",
@@ -22827,23 +22839,11 @@
       "f": "16-19",
       "hi": "16:17",
       "d": "CALLE 5 0525, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "YENDER BOSCAN CADENAS",
       "visitas": 1,
       "ult_fecha": "13-08-2026",
       "ult_cierre": "Clte desiste motivo comercial"
-     },
-     {
-      "o": "1-3OGUGQTY",
-      "cat": "Migración 1 Play",
-      "f": "16-19",
-      "hi": "17:20",
-      "d": "CAMINO DEL SOL 2400 EDIF. A DEPTO 47, QUILPUE",
-      "e": "Pendiente",
-      "tec": "YENDER BOSCAN CADENAS",
-      "visitas": 1,
-      "ult_fecha": "17-10-2026",
-      "ult_cierre": "Falta de dotación"
      }
     ],
     "reagendadas": [
@@ -22863,7 +22863,7 @@
       "f": "13-16",
       "hi": "16:04",
       "d": "SAN PEDRO 1423 CASA B, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "MATIAS APELEO APELEO",
       "desde": "24-10-2026"
      },
@@ -22881,5 +22881,5 @@
    }
   }
  },
- "generado": "26-10-2026 16:29"
+ "generado": "26-10-2026 17:25"
 }
