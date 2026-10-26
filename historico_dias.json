@@ -22234,24 +22234,24 @@
    }
   },
   "26-10-2026": {
-   "hasta": "14:14",
-   "actividades": 152,
+   "hasta": "14:24",
+   "actividades": 153,
    "tecnicos": 34,
    "estados": {
-    "Completado": 55,
-    "Iniciado": 12,
-    "Pendiente": 50,
+    "Completado": 57,
+    "Iniciado": 16,
+    "Pendiente": 49,
     "No Realizada": 21,
-    "en ruta": 9,
+    "en ruta": 5,
     "Cancelado": 3,
     "Suspendido": 2
    },
-   "rgu": 219.3,
+   "rgu": 220.9,
    "caidas_total": 3,
    "caidas_activas": 3,
    "caidas_resueltas": 0,
-   "nuevas": 11,
-   "al_bucket": 21,
+   "nuevas": 12,
+   "al_bucket": 22,
    "repetidas": 32,
    "reagendadas": 2,
    "detalle": {
@@ -22285,6 +22285,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OMM11CM",
+      "tec": "JOSE CASTRO P",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "14:20",
+      "d": "PJE TORRE VIEJA 0170, VILLA ALEMANA",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3OMKLUWI",
       "tec": "ALFREDO ALCAYAGA F",
@@ -22328,7 +22337,7 @@
       "f": "13-16",
       "hi": "17:09",
       "d": "DE VEER 1328 DEPTO 113, QUILPUE",
-      "e": "en ruta"
+      "e": "Pendiente"
      },
      {
       "o": "1-3OMG66TD",
@@ -22402,13 +22411,25 @@
       "o": "1-3OLQLKVB",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:42",
+      "hi": "14:27",
       "d": "EL COIGUE 915, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "ANTONHY MORALES MENDOZA",
       "visitas": 1,
       "ult_fecha": "24-10-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OGUGQTY",
+      "cat": "Migración 1 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "CAMINO DEL SOL 2400 EDIF. A DEPTO 47, QUILPUE",
+      "e": "Pendiente",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "visitas": 1,
+      "ult_fecha": "17-10-2026",
+      "ult_cierre": "Falta de dotación"
      },
      {
       "o": "1-3OKZ9X9W",
@@ -22440,7 +22461,7 @@
       "f": "13-16",
       "hi": "13:39",
       "d": "SERENA 846, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "DANIEL NAVARRETE E",
       "visitas": 3,
       "ult_fecha": "24-10-2026",
@@ -22493,18 +22514,6 @@
       "visitas": 1,
       "ult_fecha": "22-09-2026",
       "ult_cierre": "Direccion no encontrada"
-     },
-     {
-      "o": "1-3OGUGQTY",
-      "cat": "Migración 1 Play",
-      "f": "16-19",
-      "hi": "17:22",
-      "d": "CAMINO DEL SOL 2400 EDIF. A DEPTO 47, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JORDAN ROA PEREZ",
-      "visitas": 1,
-      "ult_fecha": "17-10-2026",
-      "ult_cierre": "Falta de dotación"
      },
      {
       "o": "1-3OM2YOOA",
@@ -22582,9 +22591,9 @@
       "o": "1-3OMGHQP6",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:17",
+      "hi": "14:33",
       "d": "DE VEER 1328 DEPTO 113, QUILPUE",
-      "e": "en ruta",
+      "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
       "visitas": 1,
       "ult_fecha": "09-10-2026",
@@ -22750,7 +22759,7 @@
       "o": "1-3OHJS13Y",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "16:31",
+      "hi": "16:40",
       "d": "CALLE 5 0525, QUILPUE",
       "e": "Pendiente",
       "tec": "YENDER BOSCAN CADENAS",
@@ -22762,7 +22771,7 @@
       "o": "1-3OLSB9JG",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "17:32",
+      "hi": "17:41",
       "d": "EL OCASO 848 EDIF. 1 DEPTO 34, QUILPUE",
       "e": "Pendiente",
       "tec": "YENDER BOSCAN CADENAS",
@@ -22796,5 +22805,5 @@
    }
   }
  },
- "generado": "26-10-2026 14:14"
+ "generado": "26-10-2026 14:24"
 }
