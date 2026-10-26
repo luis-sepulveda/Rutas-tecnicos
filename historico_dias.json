@@ -22234,15 +22234,15 @@
    }
   },
   "26-10-2026": {
-   "hasta": "10:58",
-   "actividades": 142,
+   "hasta": "11:08",
+   "actividades": 144,
    "tecnicos": 34,
    "estados": {
-    "Iniciado": 28,
+    "Iniciado": 26,
     "Pendiente": 93,
-    "Completado": 8,
-    "No Realizada": 7,
+    "Completado": 11,
     "en ruta": 3,
+    "No Realizada": 8,
     "Cancelado": 2,
     "Suspendido": 1
    },
@@ -22250,13 +22250,22 @@
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 3,
+   "nuevas": 4,
    "al_bucket": 0,
    "repetidas": 34,
    "reagendadas": 3,
    "detalle": {
     "caidas": [],
     "nuevas": [
+     {
+      "o": "1-3OMFC6P4",
+      "tec": "JOSE PEREZ RANGEL",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "11:01",
+      "d": "ECHAURREN 545, VILLA ALEMANA",
+      "e": "Completado"
+     },
      {
       "o": "1-3OMEVNU1",
       "tec": "YENDER BOSCAN CADENAS",
@@ -22314,7 +22323,7 @@
       "o": "1-3OLQLKVB",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:01",
+      "hi": "14:10",
       "d": "EL COIGUE 915, QUILPUE",
       "e": "Pendiente",
       "tec": "ANTONHY MORALES MENDOZA",
@@ -22395,6 +22404,18 @@
       "ult_cierre": "Cliente Desiste"
      },
      {
+      "o": "1-3OKPX0OQ",
+      "cat": "Migración 1 Play",
+      "f": "10-13",
+      "hi": "20:15",
+      "d": "ALMIRANTE GERKEN 2522, QUILPUE",
+      "e": "Pendiente",
+      "tec": "FELIPE SILVA R",
+      "visitas": 2,
+      "ult_fecha": "23-10-2026",
+      "ult_cierre": "Direccion no encontrada"
+     },
+     {
       "o": "1-3OHJS13Y",
       "cat": "Modificación de Servicio",
       "f": "16-19",
@@ -22458,7 +22479,7 @@
       "o": "1-3OG51L7S",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "12:08",
+      "hi": "11:22",
       "d": "PJE LA SIEMBRA 81, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE PEREZ RANGEL",
@@ -22470,7 +22491,7 @@
       "o": "1-3OG5CCVC",
       "cat": "Migración 3 Play",
       "f": "13-16",
-      "hi": "16:33",
+      "hi": "15:51",
       "d": "PADRE CRISTOBAL KENNEDY 047, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE PEREZ RANGEL",
@@ -22482,7 +22503,7 @@
       "o": "1-3OK8WGA1",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "14:59",
       "d": "GOMEZ CARRENO 580 CASA 26, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -22530,7 +22551,7 @@
       "o": "1-3OLMV11D",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:05",
+      "hi": "14:00",
       "d": "LOS ALGARROBOS 605, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JUAN ARRIAGADA C",
@@ -22542,7 +22563,7 @@
       "o": "1-3OM2YOOA",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:15",
+      "hi": "14:36",
       "d": "SANTA FE 1466, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
@@ -22659,18 +22680,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OKPX0OQ",
-      "cat": "Migración 1 Play",
-      "f": "10-13",
-      "hi": "12:05",
-      "d": "ALMIRANTE GERKEN 2522, QUILPUE",
-      "e": "Pendiente",
-      "tec": "PABLO HERNANEZ FERNANDEZ",
-      "visitas": 2,
-      "ult_fecha": "23-10-2026",
-      "ult_cierre": "Direccion no encontrada"
-     },
-     {
       "o": "1-3OLSI7L2",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -22720,7 +22729,7 @@
       "o": "1-3OL6A3CA",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "15:28",
+      "hi": "14:32",
       "d": "LAGO LAS TORRES 170 DEPTO 701, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -22730,5 +22739,5 @@
    }
   }
  },
- "generado": "26-10-2026 10:58"
+ "generado": "26-10-2026 11:08"
 }
