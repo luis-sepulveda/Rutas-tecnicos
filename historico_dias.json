@@ -22234,24 +22234,24 @@
    }
   },
   "26-10-2026": {
-   "hasta": "13:08",
-   "actividades": 161,
+   "hasta": "13:29",
+   "actividades": 162,
    "tecnicos": 34,
    "estados": {
-    "Completado": 36,
+    "Completado": 38,
     "Iniciado": 18,
-    "Pendiente": 80,
-    "No Realizada": 18,
-    "en ruta": 4,
+    "Pendiente": 77,
+    "No Realizada": 20,
     "Cancelado": 3,
-    "Suspendido": 2
+    "Suspendido": 2,
+    "en ruta": 4
    },
-   "rgu": 233.2,
+   "rgu": 236.2,
    "caidas_total": 3,
    "caidas_activas": 3,
    "caidas_resueltas": 0,
    "nuevas": 10,
-   "al_bucket": 1,
+   "al_bucket": 2,
    "repetidas": 36,
    "reagendadas": 3,
    "detalle": {
@@ -22292,7 +22292,7 @@
       "f": "13-16",
       "hi": "13:08",
       "d": "TACNA 422, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OMJADDN",
@@ -22355,7 +22355,7 @@
       "f": "13-16",
       "hi": "15:51",
       "d": "SANTA FE 2362, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OMDQUXR",
@@ -22393,7 +22393,7 @@
       "o": "1-3OKRMEC3",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "15:34",
+      "hi": "15:44",
       "d": "SAN PEDRO 1423 CASA B, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -22405,25 +22405,13 @@
       "o": "1-3OLQLKVB",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:24",
+      "hi": "14:38",
       "d": "EL COIGUE 915, QUILPUE",
       "e": "Pendiente",
       "tec": "ANTONHY MORALES MENDOZA",
       "visitas": 1,
       "ult_fecha": "24-10-2026",
       "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OLMA9NE",
-      "cat": "Migración 3 Play",
-      "f": "16-19",
-      "hi": "17:25",
-      "d": "LAS ORQUIDEAS 1650 CASA 78, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "CESAR MENA OLIVEROS",
-      "visitas": 1,
-      "ult_fecha": "22-09-2026",
-      "ult_cierre": "Direccion no encontrada"
      },
      {
       "o": "1-3OKZ9X9W",
@@ -22441,7 +22429,7 @@
       "o": "1-3OL9HUME",
       "cat": "Migración 3 Play",
       "f": "13-16",
-      "hi": "14:34",
+      "hi": "14:45",
       "d": "GALLEGUILLOS 1535, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -22453,7 +22441,7 @@
       "o": "1-3OLL2WJW",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:20",
+      "hi": "14:41",
       "d": "SERENA 846, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -22489,7 +22477,7 @@
       "o": "1-3OG51L7S",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "13:30",
+      "hi": "14:00",
       "d": "PJE LA SIEMBRA 81, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "EDGAR VALERO C",
@@ -22498,10 +22486,34 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OLMA9NE",
+      "cat": "Migración 3 Play",
+      "f": "16-19",
+      "hi": "16:59",
+      "d": "LAS ORQUIDEAS 1650 CASA 78, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "EDGAR VALERO C",
+      "visitas": 1,
+      "ult_fecha": "22-09-2026",
+      "ult_cierre": "Direccion no encontrada"
+     },
+     {
+      "o": "1-3OGUGQTY",
+      "cat": "Migración 1 Play",
+      "f": "16-19",
+      "hi": "17:24",
+      "d": "CAMINO DEL SOL 2400 EDIF. A DEPTO 47, QUILPUE",
+      "e": "Pendiente",
+      "tec": "JORDAN ROA PEREZ",
+      "visitas": 1,
+      "ult_fecha": "17-10-2026",
+      "ult_cierre": "Falta de dotación"
+     },
+     {
       "o": "1-3OM2YOOA",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:02",
+      "hi": "15:07",
       "d": "SANTA FE 1466, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JORGE PEZOA VICUÑA",
@@ -22513,7 +22525,7 @@
       "o": "1-3OLMV11D",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:49",
+      "hi": "15:54",
       "d": "LOS ALGARROBOS 605, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JORGE PEZOA VICUÑA",
@@ -22525,7 +22537,7 @@
       "o": "1-3OK5X6DS",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "16:40",
+      "hi": "16:45",
       "d": "FRESIA 22, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JORGE PEZOA VICUÑA",
@@ -22537,7 +22549,7 @@
       "o": "1-3OK8WGA1",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "15:21",
+      "hi": "15:39",
       "d": "GOMEZ CARRENO 580 CASA 26, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -22609,7 +22621,7 @@
       "o": "1-3OMGHQP6",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:29",
+      "hi": "15:21",
       "d": "DE VEER 1328 DEPTO 113, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -22681,7 +22693,7 @@
       "o": "1-3OLSB9JG",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:27",
+      "hi": "18:10",
       "d": "EL OCASO 848 EDIF. 1 DEPTO 34, QUILPUE",
       "e": "Pendiente",
       "tec": "MARCO PEREZ G",
@@ -22705,7 +22717,7 @@
       "o": "1-3OJ6Q3E2",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "17:31",
       "d": "IRMA JOHNSON MOLINA 201 EDIF. B DEPTO 223, QUILPUE",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -22789,25 +22801,13 @@
       "o": "1-3OHJS13Y",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "16:44",
+      "hi": "16:04",
       "d": "CALLE 5 0525, QUILPUE",
       "e": "Pendiente",
       "tec": "YENDER BOSCAN CADENAS",
       "visitas": 1,
       "ult_fecha": "13-08-2026",
       "ult_cierre": "Clte desiste motivo comercial"
-     },
-     {
-      "o": "1-3OGUGQTY",
-      "cat": "Migración 1 Play",
-      "f": "16-19",
-      "hi": "17:47",
-      "d": "CAMINO DEL SOL 2400 EDIF. A DEPTO 47, QUILPUE",
-      "e": "Pendiente",
-      "tec": "YENDER BOSCAN CADENAS",
-      "visitas": 1,
-      "ult_fecha": "17-10-2026",
-      "ult_cierre": "Falta de dotación"
      }
     ],
     "reagendadas": [
@@ -22815,7 +22815,7 @@
       "o": "1-3OKRMEC3",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "15:34",
+      "hi": "15:44",
       "d": "SAN PEDRO 1423 CASA B, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -22835,9 +22835,9 @@
       "o": "1-3OL6A3CA",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "13:18",
+      "hi": "13:14",
       "d": "LAGO LAS TORRES 170 DEPTO 701, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "PABLO HERNANEZ FERNANDEZ",
       "desde": "24-10-2026"
      }
@@ -22845,5 +22845,5 @@
    }
   }
  },
- "generado": "26-10-2026 13:08"
+ "generado": "26-10-2026 13:29"
 }
