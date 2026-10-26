@@ -15801,23 +15801,23 @@ function pintarSegVtr(){
     let b4 = {c:0, v:0}; prev4.forEach(function(s){ if(o[s]){ b4.c += o[s].c; b4.v += o[s].v; } });
     const p4 = pc(b4), pw = pc(w);
     let top;
-    if(!w.v) top = '<span class="sv-mt nada">Sin visitas esta semana</span>';
+    if(!w.v) top = '<span class="sv-mt nada">Sin visitas aún</span>';
     /* (26-10-2026, 17:15) Luis: "la idea seria saber cuando este a punto de salir
        de la meta". En meta se muestra cuantas derivadas mas AGUANTA sin bajar
        del 60 %: j = piso(completadas / 0,6 - visitadas). Si j = 0, ambar
        "al borde": una derivada mas y sale. */
     else if(pw >= meta){ const j = Math.max(0, Math.floor(w.c / m - w.v + 1e-9));
       top = j === 0
-        ? '<span class="sv-mt borde" title="Va ' + w.c + ' de ' + w.v + ': si deriva la próxima queda bajo el ' + meta + ' %">⚠ Al borde: una derivada más y sale de la meta</span>'
-        : '<span class="sv-mt ok" title="Va ' + w.c + ' de ' + w.v + ': puede derivar ' + j + ' más y seguir en ' + meta + ' % o más">✓ En meta · aguanta ' + j + ' derivada' + (j === 1 ? '' : 's') + ' más</span>'; }
+        ? '<span class="sv-mt borde" title="Va ' + w.c + ' de ' + w.v + ': si deriva la próxima queda bajo el ' + meta + ' %">⚠ Al borde: 1 derivada más y sale</span>'
+        : '<span class="sv-mt ok" title="Va ' + w.c + ' de ' + w.v + ': puede derivar ' + j + ' más y seguir en ' + meta + ' % o más">✓ Aguanta ' + j + ' derivada' + (j === 1 ? '' : 's') + ' más</span>'; }
     else { const k = Math.max(1, Math.ceil((m * w.v - w.c) / (1 - m) - 1e-9));
       top = '<span class="sv-mt falta" title="Si completa sus próximas ' + k + ' visitas seguidas, llega al ' + meta + ' % esta semana">🎯 Le falta' + (k === 1 ? ' 1 completada' : 'n ' + k + ' completadas') + '</span>'; }
     const fl = p4 === null || pw === null ? '' : pw > p4 + 0.05 ? ' <i class="up">▲</i>' : pw < p4 - 0.05 ? ' <i class="dn">▼</i>' : '';
-    return top + '<small class="sv-mb" title="Su promedio de las 4 semanas anteriores (' + b4.c + ' de ' + b4.v + ') contra esta semana (' + w.c + ' de ' + w.v + ')">4 sem: '
-      + (p4 === null ? '—' : f1(p4) + ' %') + ' · semana: ' + (pw === null ? '—' : f1(pw) + ' %') + fl + '</small>'; };
+    return top + '<small class="sv-mb" title="Su promedio de las 4 semanas anteriores (' + b4.c + ' de ' + b4.v + ') contra esta semana (' + w.c + ' de ' + w.v + ')">4 sem '
+      + (p4 === null ? '—' : f1(p4) + '%') + ' · sem ' + (pw === null ? '—' : f1(pw) + '%') + fl + '</small>'; };
   idx.forEach(function(i){
     const t = SV_TECS[i], o = C[i];
-    h += '<tr onclick="svFicha(' + i + ')" title="Abrir su ficha"><td class="iz"><b>' + escR(t[0]) + '</b>' + metaSem(o) + '</td><td class="iz sv-sup">' + escR(o.sup ? derTitulo(o.sup) : '') + '</td>'
+    h += '<tr onclick="svFicha(' + i + ')" title="Abrir su ficha"><td class="iz"><b>' + escR(t[0]) + '</b>' + metaSem(o) + '</td><td class="iz sv-sup" title="' + escR(o.sup ? derTitulo(o.sup) : '') + '">' + escR(o.sup ? derTitulo(o.sup).replace(/^(\S+)\s+(\S).*$/, '$1 $2.') : '') + '</td>'
       + filaCeldas(o) + '</tr>';
   });
   h += '<tr class="sv-tot"><td class="iz"><b>Los ' + SV_TECS.length + ' juntos</b>' + metaSem(T) + '</td><td></td>' + filaCeldas(T) + '</tr></tbody></table>'
@@ -15872,7 +15872,8 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarS
   /* (26-10-2026, 13:00) casillas CENTRADAS: alineadas a la derecha formaban
      una escalera que se veia inclinada. La flecha va colgando a la derecha
      del recuadro COMPL. y no mueve el centro. */
-  .sv-t th:not(.iz), .sv-t td:not(.iz) { text-align:center; padding-left:12px; padding-right:12px; }
+  .sv-t th:not(.iz), .sv-t td:not(.iz) { text-align:center; padding-left:6px; padding-right:14px; }
+  .sv-t td.iz, .sv-t th.iz { padding-left:8px; padding-right:6px; }
   .sv-t td .sv-p { position:relative; display:inline-block; }
   .sv-t td .sv-p i.up, .sv-t td .sv-p i.dn { position:absolute; left:100%; margin-left:4px; top:2px; font-size:12px; }
   .sv-t td, .sv-t td.iz { vertical-align:middle; }
