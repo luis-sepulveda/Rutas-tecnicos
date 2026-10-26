@@ -15716,7 +15716,10 @@ function svFicha(i){
    hoy) ordena por % de completitud: 1er toque de mayor a menor, 2do de menor
    a mayor. Tocar "Tecnico" vuelve al orden de la lista. Los sin datos van
    siempre al final. La fila "Los N juntos" queda siempre abajo. */
-var SV_NSEM = 6;
+/* (26-10-2026, 16:00) Luis: primero el mes anterior y el mes en curso (con ▲▼
+   contra el anterior), despues las semanas. Sem 39 se cambio por la columna
+   del mes en curso, por eso quedan 5 semanas. */
+var SV_NSEM = 5;
 var svOrd = { col: null, dir: -1 };
 function svOrdenar(col){
   if(svOrd.col === col) svOrd.dir = -svOrd.dir; else { svOrd.col = col; svOrd.dir = -1; }
@@ -15732,15 +15735,16 @@ function pintarSegVtr(){
   /* semanas a mostrar (de la mas vieja a la actual) + una mas atras para comparar la primera */
   const SEMS = []; for(let j = SV_NSEM; j >= 0; j--) SEMS.push(rmMasDias(lun, -7 * j));
   const isoHoy = hoy.getFullYear() + String(hoy.getMonth() + 1).padStart(2, '0') + String(hoy.getDate()).padStart(2, '0'), mes = isoHoy.slice(0, 6);
+  const mesA = (function(){ const y = +mes.slice(0, 4), m = +mes.slice(4); return m === 1 ? (y - 1) + '12' : y + String(m - 1).padStart(2, '0'); })();
   const hoyL = (DER || []).some(function(x){ return x.iso === isoHoy; }) ? [] : rmHoy();
   const filas = (DER || []).filter(function(x){ return x.tp === 'MIGRA' && x.iso < isoHoy; }).concat(hoyL);
-  const nuevo = function(){ const o = { mes:{c:0,v:0}, hoy:{c:0,v:0}, sup:'' }; SEMS.forEach(function(s){ o[s] = {c:0,v:0}; }); return o; };
+  const nuevo = function(){ const o = { mesA:{c:0,v:0}, mes:{c:0,v:0}, hoy:{c:0,v:0}, sup:'' }; SEMS.forEach(function(s){ o[s] = {c:0,v:0}; }); return o; };
   const C = SV_TECS.map(nuevo), T = nuevo();
   const suma = function(o, x){ o.v++; if(!x.der) o.c++; };
   filas.forEach(function(x){
     const i = svDe(x.tec); if(i < 0) return; const o = C[i]; if(x.sup) o.sup = x.sup;
     const k = [];
-    if(String(x.iso).slice(0, 6) === mes) k.push('mes');
+    if(String(x.iso).slice(0, 6) === mes) k.push('mes'); else if(String(x.iso).slice(0, 6) === mesA) k.push('mesA');
     if(x.hoy) k.push('hoy', lun); else if(SEMS.indexOf(x.sem) >= 0) k.push(x.sem);
     k.forEach(function(q){ suma(o[q], x); suma(T[q], x); });
   });
@@ -15756,7 +15760,8 @@ function pintarSegVtr(){
       + '<small title="' + o.v + ' visitadas: ' + o.c + ' completas · ' + (o.v - o.c) + ' quiebres">' + o.c + ' de ' + o.v + '</small></td>'; };
   /* columnas visibles: mes, cada semana (sin la de comparar), hoy */
   const VIS = SEMS.slice(1);
-  const nomMes = DER_MESES_NOM[+mes.slice(4) - 1];
+  const nomMes = DER_MESES_NOM[+mes.slice(4) - 1], nomMesA = DER_MESES_NOM[+mesA.slice(4) - 1];
+  const may = function(t){ return String(t).replace(/^./, function(c){ return c.toUpperCase(); }); };
   const th = function(col, txt, sub){
     const act = svOrd.col === col, fl = act ? (svOrd.dir < 0 ? ' ▼' : ' ▲') : ' <span class="sv-fl">⇅</span>';
     return '<th class="sv-ord' + (act ? ' act' : '') + '" onclick="svOrdenar(\'' + col + '\')" title="Ordenar por % de completitud (toca otra vez para invertir)">' + txt + fl + (sub ? '<small>' + sub + '</small>' : '') + '</th>'; };
@@ -15764,12 +15769,12 @@ function pintarSegVtr(){
     + '<span><span class="sv-q ok"><i class="sv-et">quiebres</i> 40%</span> abajo: <b>quiebres</b>, como medimos nosotros (meta ' + MG_META_DER + ' % o menos)</span>'
     + '<span class="g">Son la misma cosa vista al revés: siempre suman 100. Toca el título de una semana para ordenar por %.</span></div>'
     + '<table class="sv-t"><thead><tr><th class="iz sv-ord' + (svOrd.col === null ? ' act' : '') + '" onclick="svOrdenar(null)" title="Volver al orden de la lista">Técnico</th><th class="iz">Supervisor</th>'
-    + th('mes', nomMes.replace(/^./, function(c){ return c.toUpperCase(); }), 'mes en curso');
+    + th('mesA', may(nomMesA), 'mes anterior') + th('mes', may(nomMes), 'mes en curso');
   VIS.forEach(function(s){ h += th(s, 'Sem ' + derNumSemana(s), derRango(s) + (s === lun ? ', con hoy' : '')); });
   h += th('hoy', 'Hoy', '') + '</tr></thead><tbody>';
   /* orden de las filas */
   const idx = SV_TECS.map(function(t, i){ return i; });
-  if(svOrd.col !== null && (svOrd.col === 'mes' || svOrd.col === 'hoy' || VIS.indexOf(svOrd.col) >= 0)){
+  if(svOrd.col !== null && (svOrd.col === 'mesA' || svOrd.col === 'mes' || svOrd.col === 'hoy' || VIS.indexOf(svOrd.col) >= 0)){
     idx.sort(function(a, b){
       const pa = pc(C[a][svOrd.col]), pb = pc(C[b][svOrd.col]);
       if(pa === null && pb === null) return a - b; if(pa === null) return 1; if(pb === null) return -1;
@@ -15777,7 +15782,7 @@ function pintarSegVtr(){
     });
   }
   const filaCeldas = function(o){
-    let s = cel(o.mes, null, svOrd.col === 'mes');
+    let s = cel(o.mesA, null, svOrd.col === 'mesA') + cel(o.mes, pc(o.mesA), svOrd.col === 'mes');
     VIS.forEach(function(w, j){ s += cel(o[w], pc(o[SEMS[j]]), svOrd.col === w); });
     return s + cel(o.hoy, null, svOrd.col === 'hoy'); };
   idx.forEach(function(i){
@@ -15787,7 +15792,7 @@ function pintarSegVtr(){
   });
   h += '<tr class="sv-tot"><td class="iz"><b>Los ' + SV_TECS.length + ' juntos</b></td><td></td>' + filaCeldas(T) + '</tr></tbody></table>'
     + '<p class="sv-nota">Verde: ' + meta + ' % o más (meta VTR/CLARO de ' + MG_META_DER + ' % de derivación) · ámbar: hasta 10 puntos bajo la meta · rojo: más abajo. '
-    + '▲▼ en cada semana: contra la semana anterior. "6 de 22" = completadas de visitadas. Días anteriores: lo que se ve con las credenciales de la agencia (datos.json, hasta ayer); hoy, en vivo.</p>';
+    + '▲▼ en el mes en curso: contra el mes anterior; en cada semana: contra la semana anterior. "6 de 22" = completadas de visitadas. Días anteriores: lo que se ve con las credenciales de la agencia (datos.json, hasta ayer); hoy, en vivo.</p>';
   cu.innerHTML = h;
 }
 document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarSegVtr(); });
