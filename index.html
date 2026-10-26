@@ -15857,7 +15857,11 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarS
   </div>
 </div>
 <script>
-var URL_PLANILLA_RESP = 'https://docs.google.com/spreadsheets/d/15Nc9YKFc8E-kbKBVkYtWMovzGIrWPhLmGr9ahWMl7O8/edit';   // planilla RESPALDOS EN TERRENO (Luis, 26-10-2026)
+/* (26-10-2026, 15:50) authuser: Google abre la planilla con la cuenta de la app
+   aunque el navegador tenga otra cuenta abierta (si esa cuenta no esta
+   agregada en el navegador, Google la pide). Una pagina NO puede abrir
+   incognito: el navegador no lo permite. */
+var URL_PLANILLA_RESP = 'https://docs.google.com/spreadsheets/d/15Nc9YKFc8E-kbKBVkYtWMovzGIrWPhLmGr9ahWMl7O8/edit?authuser=respaldosdominion@gmail.com';   // planilla RESPALDOS EN TERRENO (Luis, 26-10-2026)
 var URL_APP_RESP = 'https://luis-sepulveda.github.io/respaldo-terreno/';
 function abrirMigras(){ document.getElementById('modalMIG').classList.add('abierto'); pintarMigras(); }
 function cerrarMigras(){ const m = document.getElementById('modalMIG'); if(m) m.classList.remove('abierto'); }
