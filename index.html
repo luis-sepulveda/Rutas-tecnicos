@@ -15885,25 +15885,28 @@ function pintarMigras(){
     return '<a class="mi-b" href="' + url + '" target="_blank" rel="noopener"><span class="i">' + ico + '</span><span class="t"><b>' + tit + '</b><small>' + txt + '</small></span><span class="fl">↗</span></a>'; };
   const g = function(n, tit, preg, cuerpo){ return '<section class="mi-g"><div class="mi-gt"><span class="n">' + n + '</span><div><b>' + tit + '</b><small>' + preg + '</small></div></div>' + cuerpo + '</section>'; };
   const nHoy = c ? '<span class="mi-n' + (c.d ? ' roj' : '') + (nueva ? ' nueva' : '') + '">' + c.d + (nueva ? ' · NUEVA' : '') + '</span>' : '';
-  cu.innerHTML = '<div class="mi-grid">'
+  /* (26-10-2026, 15:45) tres columnas parejas, sin huecos: Hoy + Equipo | Tecnicos | Direcciones + Respaldos */
+  cu.innerHTML = '<div class="mi-grid"><div class="mi-col">'
     + g('1', 'Hoy, en vivo', '¿Qué está pasando ahora?',
         b("migDer('hoy')", '🔴', 'Derivadas de hoy', 'Visitadas, derivadas y por visitar, tal como van. Se actualiza sola.', nHoy)
       + b("migIr('abrirResMig')", '🧾', 'Resumen supervisores', 'Cuántas se derivaron, por qué y quién, con filtro por supervisor y las fotos de respaldo.'))
+    + g('4', 'Equipo y gerencia', '¿Cómo vamos como equipo?',
+        b("migDer('res')", '🧭', 'Resumen de derivación', 'Lo principal en una pantalla: cómo vamos, de qué depende y con quién conversar.')
+      + b("migIr('abrirMigGer')", '📊', 'Migraciones · Gerencia', 'Por mes, semana y hoy, contra la meta. Con Modo reunión.'))
+    + '</div><div class="mi-col">'
     + g('2', 'Técnicos', '¿Quién anda mal y qué hago con él?',
         b("migIr('abrirSegVtr')", '🎯', 'Seguimiento VTR', 'Los ' + (typeof SV_TECS !== 'undefined' ? SV_TECS.length : '') + ' técnicos que VTR/CLARO marcó, semana a semana.')
       + b("migDer('tec')", '👷', 'Por técnico', 'Quién deriva más en la semana. Cada orden y la historia de su dirección.')
       + b("migDer('aud')", '🔍', 'A quién auditar', 'Lo derivado que es propio de cada técnico, sin causales ajenas.')
       + b("migDer('evo')", '📈', 'Evolución', 'Últimas semanas de cada técnico: si va mejorando o empeorando.')
       + b("migDer('fic')", '🪪', 'Ficha del técnico', 'Todo sobre un técnico y qué órdenes revisar primero.'))
+    + '</div><div class="mi-col">'
     + g('3', 'Direcciones', '¿Dónde fallamos una y otra vez?',
         b("migDer('dir')", '🏠', 'Por dirección', 'Qué direcciones fallan y con qué técnicos, en la semana.'))
-    + g('4', 'Equipo y gerencia', '¿Cómo vamos como equipo?',
-        b("migDer('res')", '🧭', 'Resumen de derivación', 'Lo principal en una pantalla: cómo vamos, de qué depende y con quién conversar.')
-      + b("migIr('abrirMigGer')", '📊', 'Migraciones · Gerencia', 'Por mes, semana y hoy, contra la meta. Con Modo reunión.'))
     + g('5', 'Respaldos', '¿Tenemos con qué defendernos?',
         a(URL_PLANILLA_RESP, '📋', 'Planilla de respaldos', 'RESPALDOS EN TERRENO: lo que mandan los técnicos desde la app.')
       + a(URL_APP_RESP, '📷', 'App Respaldo en terreno', 'La misma app que usan los técnicos en el celular.'))
-    + '</div>';
+    + '</div></div>';
 }
 document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarMigras(); });
 </script>
@@ -15920,7 +15923,10 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarM
   #modalMIG .mi-head p { margin:5px 0 0; font-size:13px; color:#a9b8cf; } #modalMIG .mi-head p b { color:#fff; }
   #modalMIG .mi-x { border:1px solid #33475f; background:transparent; color:#fff; border-radius:8px; padding:5px 11px; cursor:pointer; align-self:flex-start; }
   #miCuerpo { padding:18px 22px 22px; }
-  .mi-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:14px; align-items:start; }
+  .mi-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:14px; align-items:stretch; }
+  .mi-col { display:flex; flex-direction:column; gap:14px; min-width:0; }
+  .mi-col > .mi-g:last-child { flex:1; }   /* el ultimo grupo de cada columna llega hasta abajo */
+  @media (max-width:900px){ .mi-grid { grid-template-columns:1fr; } }
   .mi-g { background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:12px; }
   .mi-gt { display:flex; gap:10px; align-items:center; margin:0 2px 10px; }
   .mi-gt .n { width:26px; height:26px; border-radius:50%; background:#1e3a8a; color:#fff; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center; flex:none; }
