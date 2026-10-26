@@ -22234,26 +22234,26 @@
    }
   },
   "26-10-2026": {
-   "hasta": "13:29",
-   "actividades": 162,
+   "hasta": "13:44",
+   "actividades": 150,
    "tecnicos": 34,
    "estados": {
-    "Completado": 38,
-    "Iniciado": 18,
-    "Pendiente": 77,
+    "Completado": 41,
+    "Iniciado": 21,
+    "Pendiente": 62,
     "No Realizada": 20,
+    "en ruta": 1,
     "Cancelado": 3,
-    "Suspendido": 2,
-    "en ruta": 4
+    "Suspendido": 2
    },
-   "rgu": 236.2,
+   "rgu": 212.3,
    "caidas_total": 3,
    "caidas_activas": 3,
    "caidas_resueltas": 0,
-   "nuevas": 10,
-   "al_bucket": 2,
-   "repetidas": 36,
-   "reagendadas": 3,
+   "nuevas": 11,
+   "al_bucket": 20,
+   "repetidas": 32,
+   "reagendadas": 2,
    "detalle": {
     "caidas": [
      {
@@ -22286,13 +22286,22 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OMKLUWI",
+      "tec": "ALFREDO ALCAYAGA F",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "13:33",
+      "d": "LAUTARO 1066 DEPTO 44, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
       "o": "1-3OMJMGJB",
       "tec": "JORGE PEZOA VICUÑA",
       "cat": "Modificación de Servicio",
       "f": "13-16",
       "hi": "13:08",
       "d": "TACNA 422, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OMJADDN",
@@ -22355,7 +22364,7 @@
       "f": "13-16",
       "hi": "15:51",
       "d": "SANTA FE 2362, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OMDQUXR",
@@ -22390,22 +22399,10 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OKRMEC3",
-      "cat": "Alta 2 Play",
-      "f": "13-16",
-      "hi": "15:44",
-      "d": "SAN PEDRO 1423 CASA B, QUILPUE",
-      "e": "Pendiente",
-      "tec": "ALFREDO ALCAYAGA F",
-      "visitas": 1,
-      "ult_fecha": "23-10-2026",
-      "ult_cierre": "Clte desiste motivo comercial"
-     },
-     {
       "o": "1-3OLQLKVB",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:38",
+      "hi": "14:42",
       "d": "EL COIGUE 915, QUILPUE",
       "e": "Pendiente",
       "tec": "ANTONHY MORALES MENDOZA",
@@ -22441,9 +22438,9 @@
       "o": "1-3OLL2WJW",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:41",
+      "hi": "13:39",
       "d": "SERENA 846, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "DANIEL NAVARRETE E",
       "visitas": 3,
       "ult_fecha": "24-10-2026",
@@ -22513,49 +22510,13 @@
       "o": "1-3OM2YOOA",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:07",
+      "hi": "14:49",
       "d": "SANTA FE 1466, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JORGE PEZOA VICUÑA",
       "visitas": 1,
       "ult_fecha": "24-09-2026",
       "ult_cierre": "Falla Masiva"
-     },
-     {
-      "o": "1-3OLMV11D",
-      "cat": "Reparación",
-      "f": "13-16",
-      "hi": "15:54",
-      "d": "LOS ALGARROBOS 605, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JORGE PEZOA VICUÑA",
-      "visitas": 1,
-      "ult_fecha": "24-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OK5X6DS",
-      "cat": "Migración 1 Play",
-      "f": "13-16",
-      "hi": "16:45",
-      "d": "FRESIA 22, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JORGE PEZOA VICUÑA",
-      "visitas": 1,
-      "ult_fecha": "07-10-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
-      "o": "1-3OK8WGA1",
-      "cat": "Migración 1 Play",
-      "f": "13-16",
-      "hi": "15:39",
-      "d": "GOMEZ CARRENO 580 CASA 26, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JOSE GALAZ D",
-      "visitas": 1,
-      "ult_fecha": "22-10-2026",
-      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3OKZ14PL",
@@ -22621,7 +22582,7 @@
       "o": "1-3OMGHQP6",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:21",
+      "hi": "14:21",
       "d": "DE VEER 1328 DEPTO 113, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -22633,7 +22594,7 @@
       "o": "1-3OMDQUXR",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:43",
+      "hi": "15:56",
       "d": "AVENIDA BELLOTO 1343, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS CASTRO TORRES",
@@ -22681,24 +22642,12 @@
       "o": "1-3OK54ATB",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "16:50",
+      "hi": "16:00",
       "d": "LAS ROSAS 131, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MARCELO GÓMEZ GÓME",
       "visitas": 1,
       "ult_fecha": "22-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OLSB9JG",
-      "cat": "Alta 2 Play",
-      "f": "16-19",
-      "hi": "18:10",
-      "d": "EL OCASO 848 EDIF. 1 DEPTO 34, QUILPUE",
-      "e": "Pendiente",
-      "tec": "MARCO PEREZ G",
-      "visitas": 1,
-      "ult_fecha": "24-10-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -22808,19 +22757,21 @@
       "visitas": 1,
       "ult_fecha": "13-08-2026",
       "ult_cierre": "Clte desiste motivo comercial"
+     },
+     {
+      "o": "1-3OLSB9JG",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "17:05",
+      "d": "EL OCASO 848 EDIF. 1 DEPTO 34, QUILPUE",
+      "e": "Pendiente",
+      "tec": "YENDER BOSCAN CADENAS",
+      "visitas": 1,
+      "ult_fecha": "24-10-2026",
+      "ult_cierre": "Sin moradores"
      }
     ],
     "reagendadas": [
-     {
-      "o": "1-3OKRMEC3",
-      "cat": "Alta 2 Play",
-      "f": "13-16",
-      "hi": "15:44",
-      "d": "SAN PEDRO 1423 CASA B, QUILPUE",
-      "e": "Pendiente",
-      "tec": "ALFREDO ALCAYAGA F",
-      "desde": "24-10-2026"
-     },
      {
       "o": "1-3OK6M1GW",
       "cat": "Reparación",
@@ -22845,5 +22796,5 @@
    }
   }
  },
- "generado": "26-10-2026 13:29"
+ "generado": "26-10-2026 13:44"
 }
