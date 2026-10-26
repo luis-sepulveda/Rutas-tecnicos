@@ -15652,7 +15652,7 @@ function mgHoyHtml(){
 </style>
 
 
-<!-- ===== SEGUIMIENTO VTR (23-10-2026) =====
+<!-- ===== SEGUIMIENTO VTR (23-10-2026; detalle por semana y orden por % el 26-10-2026) =====
      Luis: VTR/CLARO mando la lista de los tecnicos con peor "KPI de
      completitud" y pidio seguimiento solo a ellos, "lo mas simple". Boton
      "Seguimiento VTR" en la barra, al lado de Migraciones · Gerencia.
@@ -15697,49 +15697,85 @@ function svFicha(i){
   cerrarSegVtr(); derModo = 'der'; derTipo = 'MIGRA'; derSup = 'Todos'; derAbierto = null;
   derVista = 'fic'; derFicTec = x.tec; abrirDeriv();
 }
+/* (26-10-2026) Luis: "que se vea por semana el detalle y activar cada titulo
+   de las semanas para poder ordenarlos por %". Ahora hay una columna por
+   semana (las ultimas SV_NSEM, la actual con hoy en vivo), cada una con ▲▼
+   contra la semana anterior. Tocar el titulo de una semana (o del mes, o de
+   hoy) ordena por % de completitud: 1er toque de mayor a menor, 2do de menor
+   a mayor. Tocar "Tecnico" vuelve al orden de la lista. Los sin datos van
+   siempre al final. La fila "Los N juntos" queda siempre abajo. */
+var SV_NSEM = 6;
+var svOrd = { col: null, dir: -1 };
+function svOrdenar(col){
+  if(svOrd.col === col) svOrd.dir = -svOrd.dir; else { svOrd.col = col; svOrd.dir = -1; }
+  if(col === null) svOrd.dir = -1;
+  pintarSegVtr();
+}
 function pintarSegVtr(){
   const cu = document.getElementById('svCuerpo'); if(!cu) return;
   const meta = 100 - MG_META_DER; document.getElementById('svMeta').textContent = meta + ' %'; document.getElementById('svMetaQ').textContent = MG_META_DER + ' %';
   if(DER === null){ cu.innerHTML = '<div class="sv-vacio">' + (derFallo ? 'No se pudieron bajar los datos. Vuelve a abrir en un rato.' : 'Cargando…') + '</div>'; return; }
   const hoy = (typeof FECHA_DATOS !== 'undefined' && FECHA_DATOS) ? FECHA_DATOS : new Date();
-  const lun = rmLunes(hoy), ant = rmMasDias(lun, -7);
+  const lun = rmLunes(hoy);
+  /* semanas a mostrar (de la mas vieja a la actual) + una mas atras para comparar la primera */
+  const SEMS = []; for(let j = SV_NSEM; j >= 0; j--) SEMS.push(rmMasDias(lun, -7 * j));
   const isoHoy = hoy.getFullYear() + String(hoy.getMonth() + 1).padStart(2, '0') + String(hoy.getDate()).padStart(2, '0'), mes = isoHoy.slice(0, 6);
   const hoyL = (DER || []).some(function(x){ return x.iso === isoHoy; }) ? [] : rmHoy();
   const filas = (DER || []).filter(function(x){ return x.tp === 'MIGRA' && x.iso < isoHoy; }).concat(hoyL);
-  const C = SV_TECS.map(function(){ return { mes:{c:0,v:0}, ant:{c:0,v:0}, sem:{c:0,v:0}, hoy:{c:0,v:0}, sup:'' }; });
-  const T = { mes:{c:0,v:0}, ant:{c:0,v:0}, sem:{c:0,v:0}, hoy:{c:0,v:0} };
+  const nuevo = function(){ const o = { mes:{c:0,v:0}, hoy:{c:0,v:0}, sup:'' }; SEMS.forEach(function(s){ o[s] = {c:0,v:0}; }); return o; };
+  const C = SV_TECS.map(nuevo), T = nuevo();
   const suma = function(o, x){ o.v++; if(!x.der) o.c++; };
   filas.forEach(function(x){
     const i = svDe(x.tec); if(i < 0) return; const o = C[i]; if(x.sup) o.sup = x.sup;
     const k = [];
     if(String(x.iso).slice(0, 6) === mes) k.push('mes');
-    if(x.hoy) k.push('hoy', 'sem'); else if(x.sem === lun) k.push('sem'); else if(x.sem === ant) k.push('ant');
+    if(x.hoy) k.push('hoy', lun); else if(SEMS.indexOf(x.sem) >= 0) k.push(x.sem);
     k.forEach(function(q){ suma(o[q], x); suma(T[q], x); });
   });
-  const pc = function(o){ return o.v ? 100 * o.c / o.v : null; };
+  const pc = function(o){ return o && o.v ? 100 * o.c / o.v : null; };
   const f1 = function(v){ return v.toFixed(1).replace('.', ','); };
-  const cel = function(o, base){
-    const p = pc(o); if(p === null) return '<td class="sv-n">—</td>';
+  const cel = function(o, base, ord){
+    const p = pc(o), cs = ord ? ' class="sv-ordc"' : '';
+    if(p === null) return '<td class="sv-n' + (ord ? ' sv-ordc' : '') + '">—</td>';
     const cls = p >= meta ? 'ok' : p >= meta - 10 ? 'medio' : 'mal';
-    const fl = base === undefined || base === null ? '' : p > base + 0.05 ? ' <i class="up">▲</i>' : p < base - 0.05 ? ' <i class="dn">▼</i>' : '';
-    return '<td><b class="sv-p ' + cls + '" title="Completitud (VTR/CLARO): completó ' + o.c + ' de ' + o.v + '"><i class="sv-et">compl.</i> ' + f1(p) + '%</b>' + fl
+    const fl = base === undefined || base === null ? '' : p > base + 0.05 ? ' <i class="up" title="Mejor que la semana anterior">▲</i>' : p < base - 0.05 ? ' <i class="dn" title="Peor que la semana anterior">▼</i>' : '';
+    return '<td' + cs + '><b class="sv-p ' + cls + '" title="Completitud (VTR/CLARO): completó ' + o.c + ' de ' + o.v + '"><i class="sv-et">compl.</i> ' + f1(p) + '%</b>' + fl
       + '<span class="sv-q ' + cls + '" title="Quiebres (Dominion): ' + (o.v - o.c) + ' de ' + o.v + ' no se hicieron"><i class="sv-et">quiebres</i> ' + f1(100 - p) + '%</span>'
-      + '<small>' + o.v + ' visitadas: ' + o.c + ' completas · ' + (o.v - o.c) + ' quiebres</small></td>'; };
+      + '<small title="' + o.v + ' visitadas: ' + o.c + ' completas · ' + (o.v - o.c) + ' quiebres">' + o.c + ' de ' + o.v + '</small></td>'; };
+  /* columnas visibles: mes, cada semana (sin la de comparar), hoy */
+  const VIS = SEMS.slice(1);
   const nomMes = DER_MESES_NOM[+mes.slice(4) - 1];
+  const th = function(col, txt, sub){
+    const act = svOrd.col === col, fl = act ? (svOrd.dir < 0 ? ' ▼' : ' ▲') : ' <span class="sv-fl">⇅</span>';
+    return '<th class="sv-ord' + (act ? ' act' : '') + '" onclick="svOrdenar(\'' + col + '\')" title="Ordenar por % de completitud (toca otra vez para invertir)">' + txt + fl + (sub ? '<small>' + sub + '</small>' : '') + '</th>'; };
   let h = '<div class="sv-ley"><span><b class="sv-p ok"><i class="sv-et">compl.</i> 60%</b> arriba: <b>completitud</b>, como mide VTR/CLARO (meta ' + meta + ' % o más)</span>'
     + '<span><span class="sv-q ok"><i class="sv-et">quiebres</i> 40%</span> abajo: <b>quiebres</b>, como medimos nosotros (meta ' + MG_META_DER + ' % o menos)</span>'
-    + '<span class="g">Son la misma cosa vista al revés: siempre suman 100.</span></div>'
-    + '<table class="sv-t"><thead><tr><th class="iz">Técnico</th><th class="iz">Supervisor</th>'
-    + '<th>' + nomMes.replace(/^./, function(c){ return c.toUpperCase(); }) + '</th><th>Semana anterior<small>sem ' + derNumSemana(ant) + '</small></th>'
-    + '<th>Esta semana<small>sem ' + derNumSemana(lun) + ', con hoy</small></th><th>Hoy</th></tr></thead><tbody>';
-  SV_TECS.forEach(function(t, i){
-    const o = C[i], pA = pc(o.ant);
+    + '<span class="g">Son la misma cosa vista al revés: siempre suman 100. Toca el título de una semana para ordenar por %.</span></div>'
+    + '<table class="sv-t"><thead><tr><th class="iz sv-ord' + (svOrd.col === null ? ' act' : '') + '" onclick="svOrdenar(null)" title="Volver al orden de la lista">Técnico</th><th class="iz">Supervisor</th>'
+    + th('mes', nomMes.replace(/^./, function(c){ return c.toUpperCase(); }), 'mes en curso');
+  VIS.forEach(function(s){ h += th(s, 'Sem ' + derNumSemana(s), derRango(s) + (s === lun ? ', con hoy' : '')); });
+  h += th('hoy', 'Hoy', '') + '</tr></thead><tbody>';
+  /* orden de las filas */
+  const idx = SV_TECS.map(function(t, i){ return i; });
+  if(svOrd.col !== null && (svOrd.col === 'mes' || svOrd.col === 'hoy' || VIS.indexOf(svOrd.col) >= 0)){
+    idx.sort(function(a, b){
+      const pa = pc(C[a][svOrd.col]), pb = pc(C[b][svOrd.col]);
+      if(pa === null && pb === null) return a - b; if(pa === null) return 1; if(pb === null) return -1;
+      return pa === pb ? a - b : (pa - pb) * svOrd.dir;
+    });
+  }
+  const filaCeldas = function(o){
+    let s = cel(o.mes, null, svOrd.col === 'mes');
+    VIS.forEach(function(w, j){ s += cel(o[w], pc(o[SEMS[j]]), svOrd.col === w); });
+    return s + cel(o.hoy, null, svOrd.col === 'hoy'); };
+  idx.forEach(function(i){
+    const t = SV_TECS[i], o = C[i];
     h += '<tr onclick="svFicha(' + i + ')" title="Abrir su ficha"><td class="iz"><b>' + escR(t[0]) + '</b></td><td class="iz sv-sup">' + escR(o.sup ? derTitulo(o.sup) : '') + '</td>'
-      + cel(o.mes) + cel(o.ant) + cel(o.sem, pA) + cel(o.hoy) + '</tr>';
+      + filaCeldas(o) + '</tr>';
   });
-  h += '<tr class="sv-tot"><td class="iz"><b>Los ' + SV_TECS.length + ' juntos</b></td><td></td>' + cel(T.mes) + cel(T.ant) + cel(T.sem, pc(T.ant)) + cel(T.hoy) + '</tr></tbody></table>'
+  h += '<tr class="sv-tot"><td class="iz"><b>Los ' + SV_TECS.length + ' juntos</b></td><td></td>' + filaCeldas(T) + '</tr></tbody></table>'
     + '<p class="sv-nota">Verde: ' + meta + ' % o más (meta VTR/CLARO de ' + MG_META_DER + ' % de derivación) · ámbar: hasta 10 puntos bajo la meta · rojo: más abajo. '
-    + '▲▼ en esta semana: contra la semana anterior. Días anteriores: lo que se ve con las credenciales de la agencia (datos.json, hasta ayer); hoy, en vivo.</p>';
+    + '▲▼ en cada semana: contra la semana anterior. "6 de 22" = completadas de visitadas. Días anteriores: lo que se ve con las credenciales de la agencia (datos.json, hasta ayer); hoy, en vivo.</p>';
   cu.innerHTML = h;
 }
 document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarSegVtr(); });
@@ -15749,7 +15785,7 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarS
   .pv-bar a.b-sv:hover { background:#9a3412; color:#fff; }
   #modalSV { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); }
   #modalSV.abierto { display:flex; align-items:flex-start; justify-content:center; padding:3vh 2vw; }
-  #modalSV .sv-box { background:#f4f7fa; color:#16232f; border-radius:14px; width:min(1100px,100%); max-height:94vh; overflow:auto; box-shadow:0 20px 60px rgba(0,0,0,.35); }
+  #modalSV .sv-box { background:#f4f7fa; color:#16232f; border-radius:14px; width:min(1500px,100%); max-height:94vh; overflow:auto; box-shadow:0 20px 60px rgba(0,0,0,.35); }
   #modalSV .sv-head { display:flex; justify-content:space-between; gap:12px; padding:18px 22px 12px; background:#0f1b2d; color:#fff; border-radius:14px 14px 0 0; }
   #modalSV h2 { margin:0; font-family:'Archivo',sans-serif; font-size:19px; }
   #modalSV .sv-head p { margin:4px 0 0; font-size:12.5px; color:#a9b8cf; }
@@ -15774,6 +15810,12 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarS
   .sv-et { font-style:normal; font-weight:500; font-size:10.5px; opacity:.75; text-transform:uppercase; letter-spacing:.02em; }
   .sv-tot td { background:#f1f5f9; font-weight:600; }
   .sv-nota { font-size:12px; color:#64748b; margin:10px 2px 0; }
+  /* (26-10-2026) columnas por semana, titulos para ordenar */
+  .sv-t th.sv-ord { cursor:pointer; user-select:none; } .sv-t th.sv-ord:hover { background:#dbe7fd; }
+  .sv-t th.sv-ord.act { background:#1e3a8a; color:#fff; } .sv-t th.sv-ord.act small { color:#c7d2fe; }
+  .sv-t .sv-fl { color:#94a3b8; font-size:11px; }
+  .sv-t td.sv-ordc { background:#f5f8ff; }
+  .sv-t th, .sv-t td { padding-left:7px; padding-right:7px; }
 </style>
 </body>
 </html>
