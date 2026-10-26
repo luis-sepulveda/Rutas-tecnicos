@@ -15739,7 +15739,7 @@ function pintarSegVtr(){
     if(p === null) return '<td class="sv-n' + (ord ? ' sv-ordc' : '') + '">—</td>';
     const cls = p >= meta ? 'ok' : p >= meta - 10 ? 'medio' : 'mal';
     const fl = base === undefined || base === null ? '' : p > base + 0.05 ? ' <i class="up" title="Mejor que la semana anterior">▲</i>' : p < base - 0.05 ? ' <i class="dn" title="Peor que la semana anterior">▼</i>' : '';
-    return '<td' + cs + '><b class="sv-p ' + cls + '" title="Completitud (VTR/CLARO): completó ' + o.c + ' de ' + o.v + '"><i class="sv-et">compl.</i> ' + f1(p) + '%</b>' + fl
+    return '<td' + cs + '><b class="sv-p ' + cls + '" title="Completitud (VTR/CLARO): completó ' + o.c + ' de ' + o.v + '"><i class="sv-et">compl.</i> ' + f1(p) + '%' + fl + '</b>'
       + '<span class="sv-q ' + cls + '" title="Quiebres (Dominion): ' + (o.v - o.c) + ' de ' + o.v + ' no se hicieron"><i class="sv-et">quiebres</i> ' + f1(100 - p) + '%</span>'
       + '<small title="' + o.v + ' visitadas: ' + o.c + ' completas · ' + (o.v - o.c) + ' quiebres">' + o.c + ' de ' + o.v + '</small></td>'; };
   /* columnas visibles: mes, cada semana (sin la de comparar), hoy */
@@ -15817,9 +15817,13 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarS
   .sv-t td.sv-ordc { background:#f5f8ff; }
   .sv-t th, .sv-t td { padding-left:7px; padding-right:7px; }
   /* (26-10-2026) flechas fuera del flujo para que los numeros queden alineados */
-  .sv-t td:not(.iz) { position:relative; padding-right:22px; }
-  .sv-t th:not(.iz) { padding-right:22px; }
-  .sv-t td i.up, .sv-t td i.dn { position:absolute; right:5px; top:9px; font-size:12px; }
+  /* (26-10-2026, 13:00) casillas CENTRADAS: alineadas a la derecha formaban
+     una escalera que se veia inclinada. La flecha va colgando a la derecha
+     del recuadro COMPL. y no mueve el centro. */
+  .sv-t th:not(.iz), .sv-t td:not(.iz) { text-align:center; padding-left:12px; padding-right:12px; }
+  .sv-t td .sv-p { position:relative; display:inline-block; }
+  .sv-t td .sv-p i.up, .sv-t td .sv-p i.dn { position:absolute; left:100%; margin-left:4px; top:2px; font-size:12px; }
+  .sv-t td, .sv-t td.iz { vertical-align:middle; }
 </style>
 </body>
 </html>
