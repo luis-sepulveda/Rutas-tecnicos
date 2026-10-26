@@ -22234,25 +22234,25 @@
    }
   },
   "26-10-2026": {
-   "hasta": "14:24",
-   "actividades": 153,
+   "hasta": "14:54",
+   "actividades": 151,
    "tecnicos": 34,
    "estados": {
-    "Completado": 57,
-    "Iniciado": 16,
-    "Pendiente": 49,
-    "No Realizada": 21,
-    "en ruta": 5,
+    "Completado": 59,
+    "Pendiente": 40,
+    "No Realizada": 24,
+    "Iniciado": 18,
+    "en ruta": 4,
     "Cancelado": 3,
-    "Suspendido": 2
+    "Suspendido": 3
    },
-   "rgu": 220.9,
+   "rgu": 217.9,
    "caidas_total": 3,
    "caidas_activas": 3,
    "caidas_resueltas": 0,
    "nuevas": 12,
-   "al_bucket": 22,
-   "repetidas": 32,
+   "al_bucket": 26,
+   "repetidas": 31,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
@@ -22292,7 +22292,7 @@
       "f": "13-16",
       "hi": "14:20",
       "d": "PJE TORRE VIEJA 0170, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OMKLUWI",
@@ -22314,7 +22314,7 @@
      },
      {
       "o": "1-3OMJADDN",
-      "tec": "MATIAS APELEO APELEO",
+      "tec": "SAMUEL FERNANDEZ VIDAL",
       "cat": "Reparación",
       "f": "16-19",
       "hi": "16:59",
@@ -22337,7 +22337,7 @@
       "f": "13-16",
       "hi": "17:09",
       "d": "DE VEER 1328 DEPTO 113, QUILPUE",
-      "e": "Pendiente"
+      "e": "Pendiente (ya no está)"
      },
      {
       "o": "1-3OMG66TD",
@@ -22401,7 +22401,7 @@
       "f": "10-13",
       "hi": "12:21",
       "d": "HEVIA 0282, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "ALEXIS JARA",
       "visitas": 1,
       "ult_fecha": "11-09-2026",
@@ -22411,9 +22411,9 @@
       "o": "1-3OLQLKVB",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:27",
+      "hi": "14:33",
       "d": "EL COIGUE 915, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "ANTONHY MORALES MENDOZA",
       "visitas": 1,
       "ult_fecha": "24-10-2026",
@@ -22447,9 +22447,9 @@
       "o": "1-3OL9HUME",
       "cat": "Migración 3 Play",
       "f": "13-16",
-      "hi": "14:09",
+      "hi": "14:35",
       "d": "GALLEGUILLOS 1535, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "CRISTOBAL MIRANDA VALENC",
       "visitas": 1,
       "ult_fecha": "21-10-2026",
@@ -22497,29 +22497,17 @@
       "f": "10-13",
       "hi": "14:33",
       "d": "PJE LA SIEMBRA 81, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "EDGAR VALERO C",
       "visitas": 1,
       "ult_fecha": "16-10-2026",
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OLMA9NE",
-      "cat": "Migración 3 Play",
-      "f": "16-19",
-      "hi": "17:32",
-      "d": "LAS ORQUIDEAS 1650 CASA 78, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "EDGAR VALERO C",
-      "visitas": 1,
-      "ult_fecha": "22-09-2026",
-      "ult_cierre": "Direccion no encontrada"
-     },
-     {
       "o": "1-3OM2YOOA",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:49",
+      "hi": "14:59",
       "d": "SANTA FE 1466, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JORGE PEZOA VICUÑA",
@@ -22588,22 +22576,10 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OMGHQP6",
-      "cat": "Reparación",
-      "f": "13-16",
-      "hi": "14:33",
-      "d": "DE VEER 1328 DEPTO 113, QUILPUE",
-      "e": "Pendiente",
-      "tec": "LEONEL HERNÁNDEZ OJE",
-      "visitas": 1,
-      "ult_fecha": "09-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OMDQUXR",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:56",
+      "hi": "15:43",
       "d": "AVENIDA BELLOTO 1343, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS CASTRO TORRES",
@@ -22708,6 +22684,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OLMA9NE",
+      "cat": "Migración 3 Play",
+      "f": "16-19",
+      "hi": "16:11",
+      "d": "LAS ORQUIDEAS 1650 CASA 78, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "MATÍAS JAQUE AG",
+      "visitas": 1,
+      "ult_fecha": "22-09-2026",
+      "ult_cierre": "Direccion no encontrada"
+     },
+     {
       "o": "1-3OLSI7L2",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -22737,7 +22725,7 @@
       "f": "13-16",
       "hi": "14:11",
       "d": "PUERTO RICO 939, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "SAMUEL FERNANDEZ VIDAL",
       "visitas": 1,
       "ult_fecha": "21-10-2026",
@@ -22805,5 +22793,5 @@
    }
   }
  },
- "generado": "26-10-2026 14:24"
+ "generado": "26-10-2026 14:54"
 }
