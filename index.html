@@ -15816,6 +15816,10 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarS
   .sv-t .sv-fl { color:#94a3b8; font-size:11px; }
   .sv-t td.sv-ordc { background:#f5f8ff; }
   .sv-t th, .sv-t td { padding-left:7px; padding-right:7px; }
+  /* (26-10-2026) flechas fuera del flujo para que los numeros queden alineados */
+  .sv-t td:not(.iz) { position:relative; padding-right:22px; }
+  .sv-t th:not(.iz) { padding-right:22px; }
+  .sv-t td i.up, .sv-t td i.dn { position:absolute; right:5px; top:9px; font-size:12px; }
 </style>
 </body>
 </html>
