@@ -1691,6 +1691,10 @@
   .rp-fr { font-weight:700; color:#0f172a; }
   .rp-tec { max-width:200px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .rp-mas { color:#7c3aed; font-weight:700; font-size:11px; }
+  /* (27-10-2026) marca de migracion en Direcciones ya visitadas */
+  .rp-fila.migra { box-shadow:inset 4px 0 0 #0e7490; }
+  .rp-mig { display:inline-block; margin-left:8px; padding:1px 7px; border-radius:6px; background:#cffafe;
+    color:#0e7490; font-size:11px; font-weight:700; letter-spacing:.03em; vertical-align:2px; }
   .rp-fl { color:#94a3b8; transition:transform .15s; }
   .rp-fila.abierta .rp-fl { transform:rotate(180deg); }
   .rp-det { display:none; padding:0 12px 10px 54px; }
@@ -5788,6 +5792,9 @@ function renderRepe(){
           const ult = d.prev.length ? d.prev[d.prev.length-1].f : '';
           const h0 = d.hoy[0] || {};
           const masHoy = d.hoy.length > 1 ? ' <span class="rp-mas">+' + (d.hoy.length-1) + ' orden</span>' : '';
+          /* (27-10-2026) Luis: marcar las direcciones que hoy son migracion
+             (cualquiera de las ordenes de hoy en esa casa) */
+          const esMigra = d.hoy.some(function(w){ return familiaCat(w.cat) === 'Migraciones'; });
           const filasPrev = d.prev.slice().reverse().map(function(v){
             return '<tr><td>' + escR(v.f) + '</td><td><span class="rd-ot">' + escR(v.num) + '</span></td>'
               + '<td>' + escR(v.cat) + '</td><td>' + escR(v.tec) + '</td>'
@@ -5798,11 +5805,11 @@ function renderRepe(){
               + '<td>' + escR(w.cat) + '</td><td>' + escR(w.tec) + '</td>'
               + '<td><span class="bes ' + besRed(w.e) + '">' + escR(w.e) + '</span></td></tr>';
           }).join('');
-          return '<div class="rp-fila ' + niv + '" id="pc' + i + '">'
+          return '<div class="rp-fila ' + niv + (esMigra ? ' migra' : '') + '" id="pc' + i + '">'
             + '<div class="rp-top" onclick="document.getElementById(\'pc' + i + '\').classList.toggle(\'abierta\')">'
             +   '<span class="rp-n" title="' + n + ' visita(s) fallida(s) antes">' + n + '</span>'
             +   '<span class="rp-cen">'
-            +     '<span class="rp-dir">' + escR(tituloDir(d.d)) + '</span>'
+            +     '<span class="rp-dir">' + escR(tituloDir(d.d)) + (esMigra ? '<span class="rp-mig">MIGRACIÓN</span>' : '') + '</span>'
             +     '<span class="rp-mot">' + motivos + (ult ? ' · última ' + escR(ult) : '') + '</span>'
             +   '</span>'
             +   '<span class="rp-hoy">'
@@ -5826,7 +5833,8 @@ function renderRepe(){
   const nOrd = lista.reduce(function(a, x){ return a + x.hoy.length; }, 0);
   let total = 0;
   Object.keys(DB||{}).forEach(function(t){ total += (DB[t]||[]).length; });
-  nota.textContent = lista.length + ' dirección(es) · ' + nOrd + ' orden(es) de hoy sobre '
+  const nMig = lista.filter(function(x){ return x.hoy.some(function(w){ return familiaCat(w.cat) === 'Migraciones'; }); }).length;
+  nota.textContent = lista.length + ' dirección(es)' + (nMig ? ' (' + nMig + ' migración(es))' : '') + ' · ' + nOrd + ' orden(es) de hoy sobre '
     + total + ' en bandeja. El número del círculo son las visitas No Realizadas anteriores '
     + 'en esa misma dirección (una orden no se cuenta a sí misma). Toca una fila para ver el detalle.';
 }
@@ -12555,7 +12563,10 @@ function pintarPortada(){
     /* Red (24-09-2026): abre el mapa de red, pantalla aparte con su propio mapa.
        Desde el 26-09-2026 va al lado de Rutas y en su mismo azul, a pedido de
        Luis: los dos son mapas. */
+    /* (27-10-2026) Escondido el boton Red de la portada, a pedido de Luis.
+       La vista de red sigue existiendo (boton Red dentro del mapa de Rutas).
     +     '<a class="b-map b-red' + (alertaRedMasiva().n ? ' red-falla' : '') + (alertaRedMasiva().conf ? ' red-conf' : '') + '" onclick="abrirVistaRed()">Red</a>'
+    */
     /* Clases por boton (26-09-2026): b-inf = informe (abre otra pagina),
        b-map = mapa, y una propia por boton, para poder darles color. */
     +     '<a class="b-inf b-act" href="' + URL_ACTIVIDADES + '" target="_blank">Histórico diario</a>'
@@ -12568,8 +12579,11 @@ function pintarPortada(){
     /* Nodos y NAP al lado de Seguimiento, a pedido de Luis (24-09-2026). Abre
        el mismo modal que el boton del mapa. Se pone en rojo (.alarma, que ya
        existia) cuando hay algun grupo en rojo, con la cifra al lado. */
+    /* (27-10-2026) Escondido el boton Nodos y NAP de la portada, a pedido de
+       Luis. El modal sigue existiendo (boton Nodos y NAP dentro del mapa de Rutas).
     +     '<a' + (gruposRojos() ? ' class="alarma b-al"' : '') + ' onclick="desdePortada(toggleRed)">Nodos y NAP'
     +       (gruposRojos() ? '<span class="pv-nred">' + gruposRojos() + '</span>' : '') + '</a>'
+    */
     /* Reiterados al lado, 24-09-2026. Desde el 26-09-2026 se pinta en rojo
        (.alarma) cuando hay reiterados, igual que Nodos y NAP, a pedido de
        Luis (antes llevaba solo la cifra, en lila). */
