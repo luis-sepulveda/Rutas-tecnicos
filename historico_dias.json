@@ -22178,24 +22178,24 @@
    }
   },
   "27-10-2026": {
-   "hasta": "10:37",
+   "hasta": "10:47",
    "actividades": 143,
    "tecnicos": 33,
    "estados": {
     "Completado": 5,
     "Iniciado": 28,
     "Pendiente": 102,
-    "No Realizada": 3,
-    "en ruta": 4,
+    "No Realizada": 4,
+    "en ruta": 3,
     "Cancelado": 1
    },
    "rgu": 206.0,
-   "caidas_total": 2,
-   "caidas_activas": 2,
+   "caidas_total": 3,
+   "caidas_activas": 3,
    "caidas_resueltas": 0,
    "nuevas": 9,
-   "al_bucket": 7,
-   "repetidas": 27,
+   "al_bucket": 11,
+   "repetidas": 28,
    "reagendadas": 3,
    "detalle": {
     "caidas": [
@@ -22206,6 +22206,15 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "SERENA 890 DEPTO 14, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OLN61YJ",
+      "tec": "ALEXIS JARA",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "16:13",
+      "d": "LAGO LANALHUE 2408 DEPTO 34, QUILPUE",
       "e": "Pendiente"
      },
      {
@@ -22303,6 +22312,18 @@
     ],
     "repetidas": [
      {
+      "o": "1-3ON36FC1",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "CONDELL SUR 01237 DEPTO 1002, QUILPUE",
+      "e": "Pendiente",
+      "tec": "ALEXIS JARA",
+      "visitas": 1,
+      "ult_fecha": "23-10-2026",
+      "ult_cierre": "NAP Problema ubicación"
+     },
+     {
       "o": "1-3OMJ7VU2",
       "cat": "Migración 2 Play",
       "f": "13-16",
@@ -22368,7 +22389,7 @@
       "f": "10-13",
       "hi": "10:35",
       "d": "AV LA PALMA 151 EDIF. 6 DEPTO 221, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Pendiente",
       "tec": "EDGAR VALERO C",
       "visitas": 2,
       "ult_fecha": "19-10-2026",
@@ -22438,7 +22459,7 @@
       "o": "1-3OL2MPC4",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "18:16",
+      "hi": "16:08",
       "d": "SANTA MARIA 816, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "KEVIN TAPIA RETAMAL",
@@ -22524,7 +22545,7 @@
       "f": "10-13",
       "hi": "10:13",
       "d": "LONGITUDINAL 15 CASA MG, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "MATÍAS JAQUE AG",
       "visitas": 3,
       "ult_fecha": "26-10-2026",
@@ -22534,9 +22555,9 @@
       "o": "1-3OJC3PDE",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "12:15",
+      "hi": "11:05",
       "d": "SAN IGNACIO 2089, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "MATÍAS JAQUE AG",
       "visitas": 1,
       "ult_fecha": "21-10-2026",
@@ -22546,7 +22567,7 @@
       "o": "1-3OMUHSL8",
       "cat": "Upgrade promoción",
       "f": "13-16",
-      "hi": "16:43",
+      "hi": "15:33",
       "d": "ESPERANZA 1055 CASA 8, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATÍAS JAQUE AG",
@@ -22639,28 +22660,28 @@
       "desde": "24-10-2026"
      },
      {
-      "o": "1-3OL90K5X",
-      "cat": "Alta 2 Play",
-      "f": "10-13",
-      "hi": "15:28",
-      "d": "AV VICEPRESIDENTE BDO LEIGHTON 1431 EDIF. 3 DEPTO 11, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "CRISTOBAL SILVA LEIVA",
-      "desde": "24-10-2026"
-     },
-     {
       "o": "1-3OL2MPC4",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "18:16",
+      "hi": "16:08",
       "d": "SANTA MARIA 816, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "KEVIN TAPIA RETAMAL",
+      "desde": "24-10-2026"
+     },
+     {
+      "o": "1-3OL90K5X",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "14:51",
+      "d": "AV VICEPRESIDENTE BDO LEIGHTON 1431 EDIF. 3 DEPTO 11, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "SEBASTIAN DOSSOW A",
       "desde": "24-10-2026"
      }
     ]
    }
   }
  },
- "generado": "27-10-2026 10:37"
+ "generado": "27-10-2026 10:47"
 }
