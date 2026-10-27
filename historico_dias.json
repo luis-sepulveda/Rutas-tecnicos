@@ -22178,25 +22178,24 @@
    }
   },
   "27-10-2026": {
-   "hasta": "19:40",
-   "actividades": 181,
+   "hasta": "19:45",
+   "actividades": 182,
    "tecnicos": 33,
    "estados": {
     "Completado": 126,
     "No Realizada": 31,
     "Suspendido": 5,
-    "Iniciado": 6,
+    "Iniciado": 8,
     "Cancelado": 11,
-    "Pendiente": 1,
-    "en ruta": 1
+    "Pendiente": 1
    },
-   "rgu": 234.8,
+   "rgu": 235.8,
    "caidas_total": 4,
    "caidas_activas": 4,
    "caidas_resueltas": 0,
-   "nuevas": 29,
+   "nuevas": 30,
    "al_bucket": 70,
-   "repetidas": 34,
+   "repetidas": 35,
    "reagendadas": 3,
    "detalle": {
     "caidas": [
@@ -22238,6 +22237,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3ONM4WDI",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "cat": "Modificación de Servicio",
+      "f": "19-21",
+      "hi": "19:43",
+      "d": "BAQUEDANO 1718, QUILPUE",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3ONLVALK",
       "tec": "JOSE SALAS MEDINA",
@@ -22545,6 +22553,18 @@
       "d": "ATALAYA 2020, VILLA ALEMANA",
       "e": "Completado",
       "tec": "CESAR MENA OLIVEROS",
+      "visitas": 1,
+      "ult_fecha": "23-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3ONM4WDI",
+      "cat": "Modificación de Servicio",
+      "f": "19-21",
+      "hi": "19:43",
+      "d": "BAQUEDANO 1718, QUILPUE",
+      "e": "Iniciado",
+      "tec": "CRISTOBAL MIRANDA VALENC",
       "visitas": 1,
       "ult_fecha": "23-10-2026",
       "ult_cierre": "Sin moradores"
@@ -22944,5 +22964,5 @@
    }
   }
  },
- "generado": "27-10-2026 19:40"
+ "generado": "27-10-2026 19:45"
 }
