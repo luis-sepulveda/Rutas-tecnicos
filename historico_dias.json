@@ -22178,25 +22178,25 @@
    }
   },
   "27-10-2026": {
-   "hasta": "13:58",
-   "actividades": 151,
+   "hasta": "14:03",
+   "actividades": 140,
    "tecnicos": 33,
    "estados": {
-    "Completado": 48,
+    "Completado": 49,
+    "No Realizada": 16,
+    "en ruta": 6,
     "Iniciado": 21,
-    "Pendiente": 56,
-    "No Realizada": 14,
+    "Pendiente": 41,
     "Suspendido": 1,
-    "Cancelado": 6,
-    "en ruta": 5
+    "Cancelado": 6
    },
-   "rgu": 210.4,
+   "rgu": 191.6,
    "caidas_total": 4,
    "caidas_activas": 4,
    "caidas_resueltas": 0,
-   "nuevas": 15,
-   "al_bucket": 44,
-   "repetidas": 28,
+   "nuevas": 16,
+   "al_bucket": 47,
+   "repetidas": 25,
    "reagendadas": 3,
    "detalle": {
     "caidas": [
@@ -22238,6 +22238,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3ONCMTMA",
+      "tec": "MARCO PEREZ G",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "14:01",
+      "d": "WILLIAMS REBOLLEDO 130 CASA 2, QUILPUE",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3ONCOECO",
       "tec": "MARCELO GÓMEZ GÓME",
@@ -22362,7 +22371,7 @@
       "f": "13-16",
       "hi": "17:08",
       "d": "PATRICIO LYNCH 1265, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Pendiente (ya no está)"
      },
      {
       "o": "1-3OMQXE2N",
@@ -22371,7 +22380,7 @@
       "f": "13-16",
       "hi": "17:16",
       "d": "CAMINO DEL SOL 2229 CASA 2, QUILPUE",
-      "e": "Pendiente"
+      "e": "Pendiente (ya no está)"
      }
     ],
     "repetidas": [
@@ -22381,23 +22390,11 @@
       "f": "10-13",
       "hi": "13:51",
       "d": "MONTE GRANDE 01710, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "ALEXIS JARA",
       "visitas": 1,
       "ult_fecha": "24-10-2026",
       "ult_cierre": "Casa sin medidor-remarcador"
-     },
-     {
-      "o": "1-3ON36FC1",
-      "cat": "Alta 1 Play",
-      "f": "13-16",
-      "hi": "17:30",
-      "d": "CONDELL SUR 01237 DEPTO 1002, QUILPUE",
-      "e": "Pendiente",
-      "tec": "ALEXIS JARA",
-      "visitas": 1,
-      "ult_fecha": "23-10-2026",
-      "ult_cierre": "NAP Problema ubicación"
      },
      {
       "o": "1-3OMEOBSA",
@@ -22424,18 +22421,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OMSPN3J",
-      "cat": "Alta 2 Play",
-      "f": "13-16",
-      "hi": "16:39",
-      "d": "PIEDRA LUNA 1, QUILPUE",
-      "e": "Pendiente",
-      "tec": "DANIEL NAVARRETE E",
-      "visitas": 3,
-      "ult_fecha": "24-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OHSV6BU",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -22457,18 +22442,6 @@
       "tec": "JOEL GUSTAVE GUSTA",
       "visitas": 1,
       "ult_fecha": "27-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OMJ7VU2",
-      "cat": "Migración 2 Play",
-      "f": "13-16",
-      "hi": "17:42",
-      "d": "LAS YERBAS 1994, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JOEL GUSTAVE GUSTA",
-      "visitas": 3,
-      "ult_fecha": "30-09-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -22654,7 +22627,7 @@
       "o": "1-3OMNIZNZ",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:08",
+      "hi": "17:17",
       "d": "PJE SAUSALITO 1432, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -22680,7 +22653,7 @@
       "f": "10-13",
       "hi": "11:45",
       "d": "EL CIPRES 844, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "SAMUEL FERNANDEZ VIDAL",
       "visitas": 1,
       "ult_fecha": "13-10-2026",
@@ -22746,5 +22719,5 @@
    }
   }
  },
- "generado": "27-10-2026 13:58"
+ "generado": "27-10-2026 14:03"
 }
