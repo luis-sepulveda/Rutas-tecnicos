@@ -22178,25 +22178,25 @@
    }
   },
   "27-10-2026": {
-   "hasta": "14:23",
-   "actividades": 140,
+   "hasta": "14:28",
+   "actividades": 153,
    "tecnicos": 33,
    "estados": {
-    "Completado": 52,
+    "Completado": 56,
     "No Realizada": 18,
-    "Iniciado": 23,
-    "Pendiente": 36,
+    "Iniciado": 21,
+    "Pendiente": 48,
     "Suspendido": 1,
     "Cancelado": 6,
-    "en ruta": 4
+    "en ruta": 3
    },
-   "rgu": 191.7,
+   "rgu": 208.2,
    "caidas_total": 4,
    "caidas_activas": 4,
    "caidas_resueltas": 0,
    "nuevas": 18,
    "al_bucket": 50,
-   "repetidas": 25,
+   "repetidas": 27,
    "reagendadas": 3,
    "detalle": {
     "caidas": [
@@ -22245,7 +22245,7 @@
       "f": "13-16",
       "hi": "14:12",
       "d": "EL CIPRES 844, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3ONCZUQX",
@@ -22263,7 +22263,7 @@
       "f": "13-16",
       "hi": "14:01",
       "d": "WILLIAMS REBOLLEDO 130 CASA 2, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3ONCOECO",
@@ -22272,7 +22272,7 @@
       "f": "13-16",
       "hi": "13:58",
       "d": "SAN JORGE (BAQUEDANO) 207, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3ONA06NH",
@@ -22317,7 +22317,7 @@
       "f": "10-13",
       "hi": "12:37",
       "d": "EL BOSQUE 2079, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3ON5W1UB",
@@ -22384,21 +22384,21 @@
      },
      {
       "o": "1-3OMOCV1P",
-      "tec": "EDGAR VALERO C",
+      "tec": "CRISTOBAL SILVA LEIVA",
       "cat": "Alta 1 Play",
       "f": "13-16",
       "hi": "17:08",
       "d": "PATRICIO LYNCH 1265, VILLA ALEMANA",
-      "e": "Pendiente (ya no está)"
+      "e": "Pendiente"
      },
      {
       "o": "1-3OMQXE2N",
-      "tec": "LUIS CASTRO TORRES",
+      "tec": "JOEL GUSTAVE GUSTA",
       "cat": "Alta 2 Play",
       "f": "13-16",
       "hi": "17:16",
       "d": "CAMINO DEL SOL 2229 CASA 2, QUILPUE",
-      "e": "Pendiente (ya no está)"
+      "e": "Pendiente"
      }
     ],
     "repetidas": [
@@ -22451,12 +22451,24 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OMUHSL8",
+      "cat": "Upgrade promoción",
+      "f": "13-16",
+      "hi": "17:30",
+      "d": "ESPERANZA 1055 CASA 8, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "EDGAR VALERO C",
+      "visitas": 2,
+      "ult_fecha": "16-10-2026",
+      "ult_cierre": "Ductos tapados"
+     },
+     {
       "o": "1-3ON5R0GM",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:05",
+      "hi": "14:24",
       "d": "VALLE DEL PARAISO 2907 EDIF. B DEPTO 101, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JOEL GUSTAVE GUSTA",
       "visitas": 1,
       "ult_fecha": "27-10-2026",
@@ -22571,12 +22583,24 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3ON36FC1",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "17:05",
+      "d": "CONDELL SUR 01237 DEPTO 1002, QUILPUE",
+      "e": "Pendiente",
+      "tec": "LUIS CASTRO TORRES",
+      "visitas": 1,
+      "ult_fecha": "23-10-2026",
+      "ult_cierre": "NAP Problema ubicación"
+     },
+     {
       "o": "1-3OMJXFB7",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:41",
+      "hi": "14:40",
       "d": "AV LA PALMA 426 EDIF. B DEPTO 403, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "LUIS GATICA DAVILA",
       "visitas": 1,
       "ult_fecha": "26-10-2026",
@@ -22737,5 +22761,5 @@
    }
   }
  },
- "generado": "27-10-2026 14:23"
+ "generado": "27-10-2026 14:28"
 }
