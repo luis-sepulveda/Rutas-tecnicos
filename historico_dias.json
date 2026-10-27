@@ -22178,19 +22178,18 @@
    }
   },
   "27-10-2026": {
-   "hasta": "17:44",
-   "actividades": 175,
+   "hasta": "17:59",
+   "actividades": 176,
    "tecnicos": 33,
    "estados": {
-    "Completado": 92,
+    "Completado": 99,
     "No Realizada": 24,
-    "Iniciado": 30,
-    "Pendiente": 15,
-    "Suspendido": 4,
-    "Cancelado": 9,
-    "en ruta": 1
+    "Iniciado": 24,
+    "Pendiente": 14,
+    "Suspendido": 5,
+    "Cancelado": 10
    },
-   "rgu": 231.5,
+   "rgu": 232.5,
    "caidas_total": 4,
    "caidas_activas": 4,
    "caidas_resueltas": 0,
@@ -22407,7 +22406,7 @@
       "f": "16-19",
       "hi": "17:21",
       "d": "EL OCASO 848 EDIF. 1 DEPTO 34, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3ON47ESZ",
@@ -22434,7 +22433,7 @@
       "f": "13-16",
       "hi": "13:00",
       "d": "AVENIDA QUINTA 709 DEPTO 605, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OMXU773",
@@ -22470,7 +22469,7 @@
       "f": "13-16",
       "hi": "17:16",
       "d": "CAMINO DEL SOL 2229 CASA 2, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      }
     ],
     "repetidas": [
@@ -22526,9 +22525,9 @@
       "o": "1-3OMQ5NJA",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "17:51",
+      "hi": "17:50",
       "d": "EL OCASO 848 EDIF. 1 DEPTO 34, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "DANIEL NAVARRETE E",
       "visitas": 2,
       "ult_fecha": "26-10-2026",
@@ -22660,7 +22659,7 @@
       "f": "16-19",
       "hi": "15:59",
       "d": "SANTA MARIA 816, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JOSE PEREZ RANGEL",
       "visitas": 1,
       "ult_fecha": "08-10-2026",
@@ -22691,18 +22690,6 @@
       "ult_cierre": "Clte desiste motivo comercial"
      },
      {
-      "o": "1-3OL96CEG",
-      "cat": "Modificación de Servicio",
-      "f": "16-19",
-      "hi": "18:49",
-      "d": "PINTO 235, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JOSE ROJO A",
-      "visitas": 1,
-      "ult_fecha": "23-10-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
       "o": "1-3OMJ7VU2",
       "cat": "Migración 2 Play",
       "f": "13-16",
@@ -22713,6 +22700,18 @@
       "visitas": 3,
       "ult_fecha": "30-09-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OL96CEG",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "18:32",
+      "d": "PINTO 235, QUILPUE",
+      "e": "Pendiente",
+      "tec": "LUIS CASTRO TORRES",
+      "visitas": 1,
+      "ult_fecha": "23-10-2026",
+      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3OMJXFB7",
@@ -22827,7 +22826,7 @@
       "f": "16-19",
       "hi": "16:58",
       "d": "PARINACOTA 2690 EDIF. I DEPTO 303, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "RAFAEL VARGAS B",
       "visitas": 1,
       "ult_fecha": "24-10-2026",
@@ -22849,7 +22848,7 @@
       "o": "1-3OMUHSL8",
       "cat": "Upgrade promoción",
       "f": "13-16",
-      "hi": "17:42",
+      "hi": "18:12",
       "d": "ESPERANZA 1055 CASA 8, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -22887,7 +22886,7 @@
       "f": "16-19",
       "hi": "15:59",
       "d": "SANTA MARIA 816, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JOSE PEREZ RANGEL",
       "desde": "24-10-2026"
      },
@@ -22905,5 +22904,5 @@
    }
   }
  },
- "generado": "27-10-2026 17:44"
+ "generado": "27-10-2026 17:59"
 }
