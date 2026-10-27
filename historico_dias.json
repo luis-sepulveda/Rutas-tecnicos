@@ -22178,18 +22178,19 @@
    }
   },
   "27-10-2026": {
-   "hasta": "18:29",
-   "actividades": 178,
+   "hasta": "18:44",
+   "actividades": 179,
    "tecnicos": 33,
    "estados": {
-    "Completado": 106,
-    "No Realizada": 25,
-    "Iniciado": 21,
-    "Pendiente": 11,
+    "Completado": 111,
+    "No Realizada": 28,
+    "Iniciado": 16,
     "Suspendido": 5,
-    "Cancelado": 10
+    "Cancelado": 11,
+    "Pendiente": 6,
+    "en ruta": 2
    },
-   "rgu": 234.5,
+   "rgu": 234.6,
    "caidas_total": 4,
    "caidas_activas": 4,
    "caidas_resueltas": 0,
@@ -22244,7 +22245,7 @@
       "f": "16-19",
       "hi": "18:27",
       "d": "MADRID 1138, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3ONKAL4S",
@@ -22253,7 +22254,7 @@
       "f": "16-19",
       "hi": "18:23",
       "d": "LORD COCHRANE 2523, QUILPUE",
-      "e": "Pendiente"
+      "e": "Cancelado"
      },
      {
       "o": "1-3ONIN87X",
@@ -22262,7 +22263,7 @@
       "f": "16-19",
       "hi": "17:33",
       "d": "AV VICEPRESIDENTE BDO LEIGHTON 1431 EDIF. 3 DEPTO 11, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3ONISLJQ",
@@ -22325,7 +22326,7 @@
       "f": "16-19",
       "hi": "18:01",
       "d": "LAS AZUCENAS 2235, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OND4CN9",
@@ -22569,7 +22570,7 @@
       "f": "13-16",
       "hi": "17:10",
       "d": "LAS ACACIAS 1575 CASA 06, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "ESTEBAN PIZARRO QUINTANA",
       "visitas": 1,
       "ult_fecha": "26-10-2026",
@@ -22708,18 +22709,6 @@
       "ult_cierre": "Clte desiste motivo comercial"
      },
      {
-      "o": "1-3OL96CEG",
-      "cat": "Modificación de Servicio",
-      "f": "16-19",
-      "hi": "18:36",
-      "d": "PINTO 235, QUILPUE",
-      "e": "Pendiente",
-      "tec": "LEONEL HERNÁNDEZ OJE",
-      "visitas": 1,
-      "ult_fecha": "23-10-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
       "o": "1-3OMJ7VU2",
       "cat": "Migración 2 Play",
       "f": "13-16",
@@ -22741,18 +22730,6 @@
       "tec": "LUIS GATICA DAVILA",
       "visitas": 1,
       "ult_fecha": "26-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OL36SEG",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "19:23",
-      "d": "LONGITUDINAL 59, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "LUIS MARTIN NUÑEZ",
-      "visitas": 1,
-      "ult_fecha": "23-10-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -22827,6 +22804,18 @@
       "ult_cierre": "Direccion no encontrada"
      },
      {
+      "o": "1-3OL96CEG",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "18:36",
+      "d": "PINTO 235, QUILPUE",
+      "e": "Iniciado",
+      "tec": "PABLO HERNANEZ FERNANDEZ",
+      "visitas": 1,
+      "ult_fecha": "23-10-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3OMPC5I6",
       "cat": "Alta 2 Play",
       "f": "10-13",
@@ -22885,6 +22874,18 @@
       "visitas": 1,
       "ult_fecha": "24-10-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OL36SEG",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "18:57",
+      "d": "LONGITUDINAL 59, VILLA ALEMANA",
+      "e": "en ruta",
+      "tec": "YENDER BOSCAN CADENAS",
+      "visitas": 1,
+      "ult_fecha": "23-10-2026",
+      "ult_cierre": "Sin moradores"
      }
     ],
     "reagendadas": [
@@ -22912,15 +22913,15 @@
       "o": "1-3OL36SEG",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "19:23",
+      "hi": "18:57",
       "d": "LONGITUDINAL 59, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "LUIS MARTIN NUÑEZ",
+      "e": "en ruta",
+      "tec": "YENDER BOSCAN CADENAS",
       "desde": "24-10-2026"
      }
     ]
    }
   }
  },
- "generado": "27-10-2026 18:29"
+ "generado": "27-10-2026 18:44"
 }
