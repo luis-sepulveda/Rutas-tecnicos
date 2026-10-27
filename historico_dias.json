@@ -22178,24 +22178,23 @@
    }
   },
   "27-10-2026": {
-   "hasta": "20:10",
-   "actividades": 182,
+   "hasta": "20:15",
+   "actividades": 183,
    "tecnicos": 33,
    "estados": {
     "Completado": 132,
     "No Realizada": 31,
     "Suspendido": 5,
     "Cancelado": 11,
-    "Iniciado": 2,
-    "en ruta": 1
+    "Iniciado": 4
    },
-   "rgu": 235.8,
+   "rgu": 236.8,
    "caidas_total": 4,
    "caidas_activas": 4,
    "caidas_resueltas": 0,
-   "nuevas": 30,
+   "nuevas": 31,
    "al_bucket": 70,
-   "repetidas": 35,
+   "repetidas": 36,
    "reagendadas": 3,
    "detalle": {
     "caidas": [
@@ -22237,6 +22236,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3ONMS2HK",
+      "tec": "CRISTOBAL SILVA LEIVA",
+      "cat": "Modificación de Servicio",
+      "f": "19-21",
+      "hi": "20:12",
+      "d": "LO GAMBOA 124 CASA 6, QUILPUE",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3ONM4WDI",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -22568,6 +22576,18 @@
       "visitas": 1,
       "ult_fecha": "23-10-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3ONMS2HK",
+      "cat": "Modificación de Servicio",
+      "f": "19-21",
+      "hi": "20:12",
+      "d": "LO GAMBOA 124 CASA 6, QUILPUE",
+      "e": "Iniciado",
+      "tec": "CRISTOBAL SILVA LEIVA",
+      "visitas": 1,
+      "ult_fecha": "21-10-2026",
+      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3OMQ5NJA",
@@ -22964,5 +22984,5 @@
    }
   }
  },
- "generado": "27-10-2026 20:10"
+ "generado": "27-10-2026 20:15"
 }
