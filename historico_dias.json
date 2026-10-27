@@ -22178,23 +22178,23 @@
    }
   },
   "27-10-2026": {
-   "hasta": "16:29",
+   "hasta": "17:14",
    "actividades": 170,
    "tecnicos": 33,
    "estados": {
-    "Completado": 79,
-    "No Realizada": 22,
-    "Iniciado": 25,
-    "Pendiente": 29,
-    "Suspendido": 3,
-    "Cancelado": 8,
-    "en ruta": 4
+    "Completado": 90,
+    "No Realizada": 24,
+    "Iniciado": 26,
+    "Pendiente": 14,
+    "Suspendido": 4,
+    "Cancelado": 9,
+    "en ruta": 3
    },
-   "rgu": 228.3,
+   "rgu": 226.8,
    "caidas_total": 4,
    "caidas_activas": 4,
    "caidas_resueltas": 0,
-   "nuevas": 23,
+   "nuevas": 24,
    "al_bucket": 70,
    "repetidas": 33,
    "reagendadas": 3,
@@ -22239,13 +22239,22 @@
     ],
     "nuevas": [
      {
+      "o": "1-3ONH9C1W",
+      "tec": "RAFAEL VARGAS B",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "16:32",
+      "d": "QUIDORA 0616, QUILPUE",
+      "e": "Completado"
+     },
+     {
       "o": "1-3ONGZ6T7",
-      "tec": "LUIS MARTIN NUÑEZ",
+      "tec": "SAMUEL FERNANDEZ VIDAL",
       "cat": "Upgrade promoción",
       "f": "16-19",
       "hi": "17:23",
       "d": "EL MIRADOR 741 CASA 77, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3ONGUNB6",
@@ -22335,7 +22344,7 @@
       "f": "16-19",
       "hi": "18:14",
       "d": "MARGARITAS 1886, QUILPUE",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3ON9NN4G",
@@ -22407,7 +22416,7 @@
       "f": "13-16",
       "hi": "13:00",
       "d": "AVENIDA QUINTA 709 DEPTO 605, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OMXU773",
@@ -22425,7 +22434,7 @@
       "f": "13-16",
       "hi": "13:23",
       "d": "AZAPA 0947, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OMOCV1P",
@@ -22434,7 +22443,7 @@
       "f": "13-16",
       "hi": "17:08",
       "d": "PATRICIO LYNCH 1265, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OMQXE2N",
@@ -22511,9 +22520,9 @@
       "o": "1-3OMU5CWW",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "16:35",
+      "hi": "17:10",
       "d": "LAS ACACIAS 1575 CASA 06, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "ESTEBAN PIZARRO QUINTANA",
       "visitas": 1,
       "ult_fecha": "26-10-2026",
@@ -22525,7 +22534,7 @@
       "f": "13-16",
       "hi": "14:24",
       "d": "VALLE DEL PARAISO 2907 EDIF. B DEPTO 101, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JOEL GUSTAVE GUSTA",
       "visitas": 1,
       "ult_fecha": "27-10-2026",
@@ -22549,7 +22558,7 @@
       "f": "13-16",
       "hi": "16:00",
       "d": "VALLE DEL PARAISO 2907 EDIF. D DEPTO 101, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JORDAN ROA PEREZ",
       "visitas": 1,
       "ult_fecha": "15-10-2026",
@@ -22559,9 +22568,9 @@
       "o": "1-3OIFPXEV",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "17:08",
+      "hi": "17:07",
       "d": "FRODDEN 0277, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "JORDAN ROA PEREZ",
       "visitas": 2,
       "ult_fecha": "20-10-2026",
@@ -22595,9 +22604,9 @@
       "o": "1-3ON63G9E",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "16:36",
+      "hi": "16:53",
       "d": "AVENIDA SEGUNDA 0128 CASA A, QUILPUE",
-      "e": "Pendiente",
+      "e": "No Realizada",
       "tec": "JOSE GALAZ D",
       "visitas": 1,
       "ult_fecha": "27-10-2026",
@@ -22655,7 +22664,7 @@
       "o": "1-3OL96CEG",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:48",
+      "hi": "18:19",
       "d": "PINTO 235, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -22688,12 +22697,24 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OL36SEG",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "17:21",
+      "d": "LONGITUDINAL 59, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "LUIS MARTIN NUÑEZ",
+      "visitas": 1,
+      "ult_fecha": "23-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3ON4YXRS",
       "cat": "Reparación",
       "f": "13-16",
       "hi": "15:29",
       "d": "PEYRONNET 878, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "MARCO PEREZ G",
       "visitas": 1,
       "ult_fecha": "27-10-2026",
@@ -22703,9 +22724,9 @@
       "o": "1-3OMNIZNZ",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:36",
+      "hi": "17:01",
       "d": "PJE SAUSALITO 1432, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "MARCO PEREZ G",
       "visitas": 1,
       "ult_fecha": "26-10-2026",
@@ -22774,9 +22795,9 @@
       "o": "1-3OLQG14O",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:22",
+      "hi": "16:58",
       "d": "PARINACOTA 2690 EDIF. I DEPTO 303, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "RAFAEL VARGAS B",
       "visitas": 1,
       "ult_fecha": "24-10-2026",
@@ -22786,7 +22807,7 @@
       "o": "1-3OMQ5NJA",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "17:20",
+      "hi": "17:56",
       "d": "EL OCASO 848 EDIF. 1 DEPTO 34, QUILPUE",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -22810,25 +22831,13 @@
       "o": "1-3OMUHSL8",
       "cat": "Upgrade promoción",
       "f": "13-16",
-      "hi": "17:24",
+      "hi": "17:28",
       "d": "ESPERANZA 1055 CASA 8, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
       "visitas": 2,
       "ult_fecha": "16-10-2026",
       "ult_cierre": "Ductos tapados"
-     },
-     {
-      "o": "1-3OL36SEG",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "18:20",
-      "d": "LONGITUDINAL 59, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "SAMUEL FERNANDEZ VIDAL",
-      "visitas": 1,
-      "ult_fecha": "23-10-2026",
-      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OLPXLC2",
@@ -22850,7 +22859,7 @@
       "f": "10-13",
       "hi": "13:34",
       "d": "AV VICEPRESIDENTE BDO LEIGHTON 1431 EDIF. 3 DEPTO 11, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JOSE CASTRO P",
       "desde": "24-10-2026"
      },
@@ -22868,15 +22877,15 @@
       "o": "1-3OL36SEG",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "18:20",
+      "hi": "17:21",
       "d": "LONGITUDINAL 59, VILLA ALEMANA",
       "e": "Pendiente",
-      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "tec": "LUIS MARTIN NUÑEZ",
       "desde": "24-10-2026"
      }
     ]
    }
   }
  },
- "generado": "27-10-2026 16:29"
+ "generado": "27-10-2026 17:14"
 }
