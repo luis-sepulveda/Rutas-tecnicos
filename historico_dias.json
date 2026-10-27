@@ -22178,23 +22178,23 @@
    }
   },
   "27-10-2026": {
-   "hasta": "16:09",
-   "actividades": 167,
+   "hasta": "16:24",
+   "actividades": 169,
    "tecnicos": 33,
    "estados": {
-    "Completado": 74,
+    "Completado": 78,
     "No Realizada": 22,
-    "Pendiente": 35,
-    "en ruta": 4,
-    "Suspendido": 2,
+    "en ruta": 5,
+    "Pendiente": 30,
     "Iniciado": 23,
-    "Cancelado": 7
+    "Suspendido": 3,
+    "Cancelado": 8
    },
-   "rgu": 224.3,
+   "rgu": 226.3,
    "caidas_total": 4,
    "caidas_activas": 4,
    "caidas_resueltas": 0,
-   "nuevas": 21,
+   "nuevas": 22,
    "al_bucket": 70,
    "repetidas": 33,
    "reagendadas": 3,
@@ -22238,6 +22238,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3ONGUNB6",
+      "tec": "ALEXIS JARA",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "16:16",
+      "d": "CALLE 1 850 EDIF. H DEPTO 21, QUILPUE",
+      "e": "Completado"
+     },
      {
       "o": "1-3ONE2CPW",
       "tec": "JUAN ARRIAGADA C",
@@ -22445,9 +22454,9 @@
       "o": "1-3ON36FC1",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "16:36",
+      "hi": "16:35",
       "d": "CONDELL SUR 01237 DEPTO 1002, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "ALEXIS JARA",
       "visitas": 1,
       "ult_fecha": "23-10-2026",
@@ -22487,6 +22496,18 @@
       "tec": "EDGAR VALERO C",
       "visitas": 2,
       "ult_fecha": "19-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OMU5CWW",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "16:35",
+      "d": "LAS ACACIAS 1575 CASA 06, VILLA ALEMANA",
+      "e": "en ruta",
+      "tec": "ESTEBAN PIZARRO QUINTANA",
+      "visitas": 1,
+      "ult_fecha": "26-10-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -22625,7 +22646,7 @@
       "o": "1-3OL96CEG",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:28",
+      "hi": "17:48",
       "d": "PINTO 235, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -22744,7 +22765,7 @@
       "o": "1-3OLQG14O",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:41",
+      "hi": "16:22",
       "d": "PARINACOTA 2690 EDIF. I DEPTO 303, QUILPUE",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -22756,7 +22777,7 @@
       "o": "1-3OMQ5NJA",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "17:39",
+      "hi": "17:20",
       "d": "EL OCASO 848 EDIF. 1 DEPTO 34, QUILPUE",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -22780,7 +22801,7 @@
       "o": "1-3OMUHSL8",
       "cat": "Upgrade promoción",
       "f": "13-16",
-      "hi": "16:31",
+      "hi": "17:24",
       "d": "ESPERANZA 1055 CASA 8, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -22792,7 +22813,7 @@
       "o": "1-3OL36SEG",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:27",
+      "hi": "18:20",
       "d": "LONGITUDINAL 59, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -22810,18 +22831,6 @@
       "tec": "SEBASTIAN DOSSOW A",
       "visitas": 1,
       "ult_fecha": "24-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OMU5CWW",
-      "cat": "Alta 2 Play",
-      "f": "13-16",
-      "hi": "15:22",
-      "d": "LAS ACACIAS 1575 CASA 06, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "SEBASTIAN DOSSOW A",
-      "visitas": 1,
-      "ult_fecha": "26-10-2026",
       "ult_cierre": "Sin moradores"
      }
     ],
@@ -22850,7 +22859,7 @@
       "o": "1-3OL36SEG",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:27",
+      "hi": "18:20",
       "d": "LONGITUDINAL 59, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -22860,5 +22869,5 @@
    }
   }
  },
- "generado": "27-10-2026 16:09"
+ "generado": "27-10-2026 16:24"
 }
