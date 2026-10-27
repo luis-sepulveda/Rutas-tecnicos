@@ -22178,25 +22178,25 @@
    }
   },
   "27-10-2026": {
-   "hasta": "19:14",
-   "actividades": 180,
+   "hasta": "19:25",
+   "actividades": 181,
    "tecnicos": 33,
    "estados": {
-    "Completado": 123,
+    "Completado": 125,
     "No Realizada": 30,
     "Suspendido": 5,
-    "en ruta": 2,
+    "Iniciado": 6,
     "Cancelado": 11,
-    "Pendiente": 4,
-    "Iniciado": 5
+    "en ruta": 3,
+    "Pendiente": 1
    },
-   "rgu": 234.7,
+   "rgu": 234.8,
    "caidas_total": 4,
    "caidas_activas": 4,
    "caidas_resueltas": 0,
    "nuevas": 29,
    "al_bucket": 70,
-   "repetidas": 33,
+   "repetidas": 34,
    "reagendadas": 3,
    "detalle": {
     "caidas": [
@@ -22245,7 +22245,7 @@
       "f": "19-21",
       "hi": "19:58",
       "d": "AV LOS CARRERA 1172 DEPTO 602, QUILPUE",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3ONKJ9F3",
@@ -22299,7 +22299,7 @@
       "f": "16-19",
       "hi": "17:23",
       "d": "EL MIRADOR 741 CASA 77, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3ONGUNB6",
@@ -22861,12 +22861,24 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OMIJLLA",
+      "cat": "Upgrade promoción",
+      "f": "13-16",
+      "hi": "15:36",
+      "d": "EL MIRADOR 741 CASA 77, VILLA ALEMANA",
+      "e": "Suspendido",
+      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "visitas": 1,
+      "ult_fecha": "27-10-2026",
+      "ult_cierre": "Falla Aprovisionamiento"
+     },
+     {
       "o": "1-3OMUHSL8",
       "cat": "Upgrade promoción",
       "f": "13-16",
-      "hi": "18:44",
+      "hi": "19:31",
       "d": "ESPERANZA 1055 CASA 8, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "SAMUEL FERNANDEZ VIDAL",
       "visitas": 2,
       "ult_fecha": "16-10-2026",
@@ -22932,5 +22944,5 @@
    }
   }
  },
- "generado": "27-10-2026 19:14"
+ "generado": "27-10-2026 19:25"
 }
