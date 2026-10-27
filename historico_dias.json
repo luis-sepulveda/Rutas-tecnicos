@@ -22178,17 +22178,17 @@
    }
   },
   "27-10-2026": {
-   "hasta": "15:33",
+   "hasta": "15:59",
    "actividades": 166,
    "tecnicos": 33,
    "estados": {
-    "Completado": 70,
-    "No Realizada": 21,
-    "Pendiente": 40,
-    "Iniciado": 19,
+    "Completado": 71,
+    "No Realizada": 22,
+    "Pendiente": 34,
+    "Iniciado": 23,
+    "en ruta": 7,
     "Suspendido": 2,
-    "Cancelado": 7,
-    "en ruta": 7
+    "Cancelado": 7
    },
    "rgu": 223.3,
    "caidas_total": 4,
@@ -22425,7 +22425,7 @@
       "f": "13-16",
       "hi": "17:16",
       "d": "CAMINO DEL SOL 2229 CASA 2, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      }
     ],
     "repetidas": [
@@ -22452,18 +22452,6 @@
       "visitas": 1,
       "ult_fecha": "23-10-2026",
       "ult_cierre": "NAP Problema ubicación"
-     },
-     {
-      "o": "1-3OL96CEG",
-      "cat": "Modificación de Servicio",
-      "f": "16-19",
-      "hi": "18:37",
-      "d": "PINTO 235, QUILPUE",
-      "e": "Pendiente",
-      "tec": "ALFREDO ALCAYAGA F",
-      "visitas": 1,
-      "ult_fecha": "23-10-2026",
-      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3OMEOBSA",
@@ -22514,28 +22502,40 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OMW0W0J",
-      "cat": "Reparación",
-      "f": "13-16",
-      "hi": "16:30",
-      "d": "VALLE DEL PARAISO 2907 EDIF. D DEPTO 101, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JOEL GUSTAVE GUSTA",
-      "visitas": 1,
-      "ult_fecha": "15-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3ONA3TO8",
       "cat": "Alta 1 Play",
       "f": "13-16",
       "hi": "15:24",
       "d": "TIERRAS ROJAS 526 EDIF. B DEPTO 13, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JORDAN ROA PEREZ",
       "visitas": 1,
       "ult_fecha": "25-08-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OMW0W0J",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "16:03",
+      "d": "VALLE DEL PARAISO 2907 EDIF. D DEPTO 101, QUILPUE",
+      "e": "en ruta",
+      "tec": "JORDAN ROA PEREZ",
+      "visitas": 1,
+      "ult_fecha": "15-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OIFPXEV",
+      "cat": "Migración 2 Play",
+      "f": "16-19",
+      "hi": "17:11",
+      "d": "FRODDEN 0277, QUILPUE",
+      "e": "Pendiente",
+      "tec": "JORDAN ROA PEREZ",
+      "visitas": 2,
+      "ult_fecha": "20-10-2026",
+      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3OMMESRA",
@@ -22574,24 +22574,12 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OIFPXEV",
-      "cat": "Migración 2 Play",
-      "f": "16-19",
-      "hi": "18:02",
-      "d": "FRODDEN 0277, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JOSE GALAZ D",
-      "visitas": 2,
-      "ult_fecha": "20-10-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
       "o": "1-3OMPORRH",
       "cat": "Reparación",
       "f": "13-16",
       "hi": "15:19",
       "d": "SAN ENRIQUE 1780 EDIF. 2 DEPTO 304, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JOSE PEREZ RANGEL",
       "visitas": 1,
       "ult_fecha": "26-10-2026",
@@ -22601,9 +22589,9 @@
       "o": "1-3OL2MPC4",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "16:38",
+      "hi": "16:07",
       "d": "SANTA MARIA 816, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JOSE PEREZ RANGEL",
       "visitas": 1,
       "ult_fecha": "08-10-2026",
@@ -22634,13 +22622,25 @@
       "ult_cierre": "Clte desiste motivo comercial"
      },
      {
+      "o": "1-3OL96CEG",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:28",
+      "d": "PINTO 235, QUILPUE",
+      "e": "Pendiente",
+      "tec": "JOSE ROJO A",
+      "visitas": 1,
+      "ult_fecha": "23-10-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3OMJ7VU2",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "15:11",
+      "hi": "15:53",
       "d": "LAS YERBAS 1994, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JOSE SALAS MEDINA",
+      "e": "Iniciado",
+      "tec": "LUIS CASTRO TORRES",
       "visitas": 3,
       "ult_fecha": "30-09-2026",
       "ult_cierre": "Sin moradores"
@@ -22744,7 +22744,7 @@
       "o": "1-3OLQG14O",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "17:25",
+      "hi": "16:41",
       "d": "PARINACOTA 2690 EDIF. I DEPTO 303, QUILPUE",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -22756,7 +22756,7 @@
       "o": "1-3OMQ5NJA",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "18:23",
+      "hi": "17:39",
       "d": "EL OCASO 848 EDIF. 1 DEPTO 34, QUILPUE",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -22780,7 +22780,7 @@
       "o": "1-3OMUHSL8",
       "cat": "Upgrade promoción",
       "f": "13-16",
-      "hi": "16:29",
+      "hi": "16:31",
       "d": "ESPERANZA 1055 CASA 8, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -22792,7 +22792,7 @@
       "o": "1-3OL36SEG",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:25",
+      "hi": "17:27",
       "d": "LONGITUDINAL 59, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -22840,9 +22840,9 @@
       "o": "1-3OL2MPC4",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "16:38",
+      "hi": "16:07",
       "d": "SANTA MARIA 816, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JOSE PEREZ RANGEL",
       "desde": "24-10-2026"
      },
@@ -22850,7 +22850,7 @@
       "o": "1-3OL36SEG",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:25",
+      "hi": "17:27",
       "d": "LONGITUDINAL 59, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -22860,5 +22860,5 @@
    }
   }
  },
- "generado": "27-10-2026 15:33"
+ "generado": "27-10-2026 15:59"
 }
