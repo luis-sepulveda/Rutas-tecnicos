@@ -22178,23 +22178,23 @@
    }
   },
   "27-10-2026": {
-   "hasta": "16:24",
-   "actividades": 169,
+   "hasta": "16:29",
+   "actividades": 170,
    "tecnicos": 33,
    "estados": {
-    "Completado": 78,
+    "Completado": 79,
     "No Realizada": 22,
-    "en ruta": 5,
-    "Pendiente": 30,
-    "Iniciado": 23,
+    "Iniciado": 25,
+    "Pendiente": 29,
     "Suspendido": 3,
-    "Cancelado": 8
+    "Cancelado": 8,
+    "en ruta": 4
    },
-   "rgu": 226.3,
+   "rgu": 228.3,
    "caidas_total": 4,
    "caidas_activas": 4,
    "caidas_resueltas": 0,
-   "nuevas": 22,
+   "nuevas": 23,
    "al_bucket": 70,
    "repetidas": 33,
    "reagendadas": 3,
@@ -22238,6 +22238,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3ONGZ6T7",
+      "tec": "LUIS MARTIN NUÑEZ",
+      "cat": "Upgrade promoción",
+      "f": "16-19",
+      "hi": "17:23",
+      "d": "EL MIRADOR 741 CASA 77, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3ONGUNB6",
       "tec": "ALEXIS JARA",
@@ -22398,7 +22407,7 @@
       "f": "13-16",
       "hi": "13:00",
       "d": "AVENIDA QUINTA 709 DEPTO 605, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OMXU773",
@@ -22454,9 +22463,9 @@
       "o": "1-3ON36FC1",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "16:35",
+      "hi": "16:26",
       "d": "CONDELL SUR 01237 DEPTO 1002, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "ALEXIS JARA",
       "visitas": 1,
       "ult_fecha": "23-10-2026",
@@ -22869,5 +22878,5 @@
    }
   }
  },
- "generado": "27-10-2026 16:24"
+ "generado": "27-10-2026 16:29"
 }
