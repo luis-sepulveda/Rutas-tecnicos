@@ -1693,6 +1693,7 @@
   .rp-mas { color:#7c3aed; font-weight:700; font-size:11px; }
   /* (27-10-2026) marca de migracion en Direcciones ya visitadas */
   .rp-fila.migra { box-shadow:inset 4px 0 0 #0e7490; }
+  .rp-tec.sv { color:#be123c; font-weight:700; }
   .rp-mig { display:inline-block; margin-left:8px; padding:1px 7px; border-radius:6px; background:#cffafe;
     color:#0e7490; font-size:11px; font-weight:700; letter-spacing:.03em; vertical-align:2px; }
   .rp-fl { color:#94a3b8; transition:transform .15s; }
@@ -5487,6 +5488,13 @@ let repeMin = 1;            // minimo de visitas previas para listar
 let repeGSA = true;         // contar tambien las previas reclasificadas por GSA
 let repeAbiertas = false;   // solo las que hoy siguen sin cerrar
 let repeOrden = 'n';        // 'n' = mas caidas primero | 'h' = por hora de hoy
+let repeSV = false;         // (27-10-2026) solo migraciones de hoy de tecnicos del Seguimiento VTR
+/* (27-10-2026) Luis: que en Direcciones ya visitadas se vean los tecnicos del
+   Seguimiento VTR (SV_TECS). Se marca su nombre con 🎯 y hay un chip para
+   ver solo las MIGRACIONES de hoy que tienen ellos. */
+function repeEsSV(tec){ try { return typeof svDe === 'function' && svDe(tec) >= 0; } catch(e){ return false; } }
+function repeFilaSV(d){ return d.hoy.some(function(w){ return familiaCat(w.cat) === 'Migraciones' && repeEsSV(w.tec); }); }
+function toggleRepeSV(){ repeSV = !repeSV; renderRepe(); }
 
 // misma normalizacion que _dirbase() en Python: asi dos ordenes del mismo
 // domicilio caen en una sola tarjeta
@@ -5721,7 +5729,9 @@ function renderRepe(){
   const cont = document.getElementById('listaRepe');
   const chips = document.getElementById('repeChips');
   const nota = document.getElementById('repeNota');
-  const lista = agruparRepe();
+  const listaTodas = agruparRepe();
+  const nSV = listaTodas.filter(repeFilaSV).length;
+  const lista = repeSV ? listaTodas.filter(repeFilaSV) : listaTodas;
 
   chips.innerHTML =
       [1,2,3].map(function(n){
@@ -5730,6 +5740,7 @@ function renderRepe(){
       }).join('')
     + '<span class="pchip'+(repeGSA?' act':'')+'" onclick="toggleRepeGSA()">incluir GSA</span>'
     + '<span class="pchip'+(repeAbiertas?' act':'')+'" onclick="toggleRepeAbiertas()">solo sin cerrar hoy</span>'
+    + '<span class="pchip'+(repeSV?' act':'')+'" onclick="toggleRepeSV()" title="Solo migraciones de hoy de los técnicos del Seguimiento VTR">🎯 Seguimiento VTR (' + nSV + ')</span>'
     + '<span class="rsep"></span>'
     + '<span class="pchip'+(repeOrden==='n'?' act':'')+'" onclick="setRepeOrden(\'n\')">↕ más caídas</span>'
     + '<span class="pchip'+(repeOrden==='h'?' act':'')+'" onclick="setRepeOrden(\'h\')">🕘 por franja</span>'
@@ -5743,6 +5754,7 @@ function renderRepe(){
       + (nRepe() === 0 && !hayCampo
           ? '⚠️ El rutas.json no trae el cruce con el histórico.<br>'
             + 'Corre el pipeline con la versión nueva de generar_rutas.py.'
+          : repeSV ? '✅ Ningún técnico del Seguimiento VTR tiene hoy una migración en una dirección ya visitada (con estos filtros).'
           : '✅ Ninguna dirección de hoy con '+repeMin+' o más caídas previas'
             + (repeGSA?'':' (sin contar GSA)')+(repeAbiertas?' y todavía sin cerrar':'')+'.')
       + '</div>';
@@ -5802,7 +5814,7 @@ function renderRepe(){
           }).join('');
           const filasHoy = d.hoy.map(function(w){
             return '<tr><td>hoy ' + escR(w.f || 's/franja') + '</td><td><span class="rd-ot">' + escR(w.num) + '</span></td>'
-              + '<td>' + escR(w.cat) + '</td><td>' + escR(w.tec) + '</td>'
+              + '<td>' + escR(w.cat) + '</td><td>' + (repeEsSV(w.tec) ? '🎯 ' : '') + escR(w.tec) + '</td>'
               + '<td><span class="bes ' + besRed(w.e) + '">' + escR(w.e) + '</span></td></tr>';
           }).join('');
           return '<div class="rp-fila ' + niv + (esMigra ? ' migra' : '') + '" id="pc' + i + '">'
@@ -5814,7 +5826,7 @@ function renderRepe(){
             +   '</span>'
             +   '<span class="rp-hoy">'
             +     '<span class="rp-fr">' + escR(d.fr0 || 's/franja') + '</span>'
-            +     '<span class="rp-tec">' + escR(h0.tec || '') + masHoy + '</span>'
+            +     '<span class="rp-tec' + (repeEsSV(h0.tec) ? ' sv' : '') + '"' + (repeEsSV(h0.tec) ? ' title="Técnico del Seguimiento VTR"' : '') + '>' + (repeEsSV(h0.tec) ? '🎯 ' : '') + escR(h0.tec || '') + masHoy + '</span>'
             +     '<span class="bes ' + besRed(h0.e) + '">' + escR(h0.e || '') + '</span>'
             +     '<span class="rp-fl">▾</span>'
             +   '</span>'
