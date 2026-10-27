@@ -22178,23 +22178,23 @@
    }
   },
   "27-10-2026": {
-   "hasta": "14:33",
-   "actividades": 154,
+   "hasta": "14:43",
+   "actividades": 157,
    "tecnicos": 33,
    "estados": {
-    "Completado": 58,
-    "No Realizada": 18,
-    "Iniciado": 19,
+    "Completado": 59,
+    "No Realizada": 19,
+    "Iniciado": 21,
     "Pendiente": 48,
     "Suspendido": 1,
-    "Cancelado": 6,
-    "en ruta": 4
+    "en ruta": 3,
+    "Cancelado": 6
    },
-   "rgu": 209.2,
+   "rgu": 211.3,
    "caidas_total": 4,
    "caidas_activas": 4,
    "caidas_resueltas": 0,
-   "nuevas": 18,
+   "nuevas": 21,
    "al_bucket": 50,
    "repetidas": 28,
    "reagendadas": 3,
@@ -22238,6 +22238,33 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3ONE2CPW",
+      "tec": "JUAN ARRIAGADA C",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "14:41",
+      "d": "EL MIRADOR 493 CASA 2, VILLA ALEMANA",
+      "e": "Iniciado"
+     },
+     {
+      "o": "1-3ONE9V9P",
+      "tec": "EDGAR VALERO C",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "AVENIDA VALPARAISO 2060, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3ONCH9SG",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "18:01",
+      "d": "LAS AZUCENAS 2235, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OND4CN9",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -22393,7 +22420,7 @@
      },
      {
       "o": "1-3OMQXE2N",
-      "tec": "JOEL GUSTAVE GUSTA",
+      "tec": "DANIEL NAVARRETE E",
       "cat": "Alta 2 Play",
       "f": "13-16",
       "hi": "17:16",
@@ -22415,6 +22442,18 @@
       "ult_cierre": "Casa sin medidor-remarcador"
      },
      {
+      "o": "1-3ON36FC1",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "17:42",
+      "d": "CONDELL SUR 01237 DEPTO 1002, QUILPUE",
+      "e": "Pendiente",
+      "tec": "ALEXIS JARA",
+      "visitas": 1,
+      "ult_fecha": "23-10-2026",
+      "ult_cierre": "NAP Problema ubicación"
+     },
+     {
       "o": "1-3OMEOBSA",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -22430,9 +22469,9 @@
       "o": "1-3OKSI0VA",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:49",
+      "hi": "14:51",
       "d": "ATALAYA 2020, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "CESAR MENA OLIVEROS",
       "visitas": 1,
       "ult_fecha": "23-10-2026",
@@ -22442,7 +22481,7 @@
       "o": "1-3OL36SEG",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:05",
+      "hi": "16:07",
       "d": "LONGITUDINAL 59, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
@@ -22461,18 +22500,6 @@
       "visitas": 2,
       "ult_fecha": "19-10-2026",
       "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OMUHSL8",
-      "cat": "Upgrade promoción",
-      "f": "13-16",
-      "hi": "17:30",
-      "d": "ESPERANZA 1055 CASA 8, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "EDGAR VALERO C",
-      "visitas": 2,
-      "ult_fecha": "16-10-2026",
-      "ult_cierre": "Ductos tapados"
      },
      {
       "o": "1-3ON5R0GM",
@@ -22595,28 +22622,28 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3ON36FC1",
-      "cat": "Alta 1 Play",
-      "f": "13-16",
-      "hi": "17:05",
-      "d": "CONDELL SUR 01237 DEPTO 1002, QUILPUE",
-      "e": "Pendiente",
-      "tec": "LUIS CASTRO TORRES",
-      "visitas": 1,
-      "ult_fecha": "23-10-2026",
-      "ult_cierre": "NAP Problema ubicación"
-     },
-     {
       "o": "1-3OMJXFB7",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:40",
+      "hi": "14:35",
       "d": "AV LA PALMA 426 EDIF. B DEPTO 403, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "LUIS GATICA DAVILA",
       "visitas": 1,
       "ult_fecha": "26-10-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OMUHSL8",
+      "cat": "Upgrade promoción",
+      "f": "13-16",
+      "hi": "17:19",
+      "d": "ESPERANZA 1055 CASA 8, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "MARCELO GÓMEZ GÓME",
+      "visitas": 2,
+      "ult_fecha": "16-10-2026",
+      "ult_cierre": "Ductos tapados"
      },
      {
       "o": "1-3OLQG14O",
@@ -22693,7 +22720,7 @@
       "o": "1-3OMNIZNZ",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:17",
+      "hi": "17:08",
       "d": "PJE SAUSALITO 1432, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -22743,7 +22770,7 @@
       "o": "1-3OL36SEG",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:05",
+      "hi": "16:07",
       "d": "LONGITUDINAL 59, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
@@ -22773,5 +22800,5 @@
    }
   }
  },
- "generado": "27-10-2026 14:33"
+ "generado": "27-10-2026 14:43"
 }
