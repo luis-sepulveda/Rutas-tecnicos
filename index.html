@@ -12559,7 +12559,12 @@ function pintarPortada(){
     /* Clases por boton (26-09-2026): b-inf = informe (abre otra pagina),
        b-map = mapa, y una propia por boton, para poder darles color. */
     +     '<a class="b-inf b-act" href="' + URL_ACTIVIDADES + '" target="_blank">Histórico diario</a>'
+    /* (27-10-2026) Sacado el boton "Autonomia despacho" a pedido de Luis: esa
+       pagina ya no se usa. OJO: seguimiento.bat se sigue corriendo cada manana,
+       porque genera migraciones_semanas.json (Migraciones, Resumen de Derivacion
+       y la pastilla "Falta export completo"). URL_SEGUIMIENTO queda definida.
     +     '<a class="b-inf b-seg" href="' + URL_SEGUIMIENTO + '" target="_blank">Autonomía despacho</a>'
+    */
     /* Nodos y NAP al lado de Seguimiento, a pedido de Luis (24-09-2026). Abre
        el mismo modal que el boton del mapa. Se pone en rojo (.alarma, que ya
        existia) cuando hay algun grupo en rojo, con la cifra al lado. */
