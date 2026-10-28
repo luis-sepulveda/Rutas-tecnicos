@@ -22185,22 +22185,22 @@
    }
   },
   "28-10-2026": {
-   "hasta": "14:25",
-   "actividades": 136,
+   "hasta": "14:30",
+   "actividades": 137,
    "tecnicos": 31,
    "estados": {
     "No Realizada": 15,
-    "Completado": 51,
-    "Iniciado": 22,
+    "Completado": 52,
+    "Iniciado": 23,
     "Pendiente": 44,
-    "en ruta": 2,
-    "Cancelado": 2
+    "Cancelado": 2,
+    "en ruta": 1
    },
-   "rgu": 202.0,
+   "rgu": 202.1,
    "caidas_total": 7,
    "caidas_activas": 7,
    "caidas_resueltas": 0,
-   "nuevas": 14,
+   "nuevas": 15,
    "al_bucket": 17,
    "repetidas": 31,
    "reagendadas": 2,
@@ -22271,6 +22271,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OO1VBP4",
+      "tec": "KEVIN TAPIA RETAMAL",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "14:29",
+      "d": "PJE LOS GUAYABOS 5, VILLA ALEMANA",
+      "e": "en ruta"
+     },
      {
       "o": "1-3OO1267K",
       "tec": "ALFREDO ALCAYAGA F",
@@ -22523,9 +22532,9 @@
       "o": "1-3OK30RMO",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "14:27",
+      "hi": "14:28",
       "d": "LAS BARRANCAS 2491 CASA 5-E, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "CRISTOBAL MIRANDA VALENC",
       "visitas": 3,
       "ult_fecha": "22-10-2026",
@@ -22631,7 +22640,7 @@
       "o": "1-3OMPC2SZ",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "16:18",
+      "hi": "16:24",
       "d": "GABRIEL DAZAROLA 1064, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "KEVIN TAPIA RETAMAL",
@@ -22750,9 +22759,9 @@
       "o": "1-3ONFB7FX",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:14",
+      "hi": "14:28",
       "d": "AV LA PALMA 426 EDIF. B DEPTO 403, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "SAMUEL FERNANDEZ VIDAL",
       "visitas": 2,
       "ult_fecha": "27-10-2026",
@@ -22796,5 +22805,5 @@
    }
   }
  },
- "generado": "28-10-2026 14:25"
+ "generado": "28-10-2026 14:30"
 }
