@@ -22185,25 +22185,25 @@
    }
   },
   "28-10-2026": {
-   "hasta": "15:15",
-   "actividades": 142,
+   "hasta": "15:40",
+   "actividades": 143,
    "tecnicos": 31,
    "estados": {
-    "No Realizada": 16,
-    "Completado": 63,
-    "Pendiente": 35,
-    "Iniciado": 19,
+    "No Realizada": 17,
+    "Completado": 72,
+    "Pendiente": 25,
+    "en ruta": 10,
+    "Iniciado": 13,
     "Suspendido": 2,
-    "en ruta": 4,
-    "Cancelado": 3
+    "Cancelado": 4
    },
-   "rgu": 205.7,
+   "rgu": 206.7,
    "caidas_total": 8,
    "caidas_activas": 8,
    "caidas_resueltas": 0,
    "nuevas": 16,
    "al_bucket": 18,
-   "repetidas": 31,
+   "repetidas": 32,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
@@ -22288,7 +22288,7 @@
       "f": "13-16",
       "hi": "15:13",
       "d": "LONDRES 1391, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OO1VBP4",
@@ -22297,7 +22297,7 @@
       "f": "13-16",
       "hi": "14:29",
       "d": "PJE LOS GUAYABOS 5, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OO1267K",
@@ -22315,7 +22315,7 @@
       "f": "13-16",
       "hi": "13:53",
       "d": "INGENIERO HYATT 2551 CASA 13, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3ONZAT67",
@@ -22491,7 +22491,7 @@
       "o": "1-3ONI6ZEN",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "17:00",
       "d": "AVENIDA SEGUNDA 0128 CASA A, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -22515,7 +22515,7 @@
       "o": "1-3OMP12OI",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "18:41",
       "d": "QUIDORA 01483, QUILPUE",
       "e": "Pendiente",
       "tec": "ANTONHY MORALES MENDOZA",
@@ -22596,18 +22596,6 @@
       "ult_cierre": "Falta de dotación"
      },
      {
-      "o": "1-3OMSVRND",
-      "cat": "Migración 2 Play",
-      "f": "13-16",
-      "hi": "16:02",
-      "d": "PJE GRAN CANARIA 020, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "EDGAR VALERO C",
-      "visitas": 1,
-      "ult_fecha": "26-10-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
       "o": "1-3ONE8A80",
       "cat": "Alta 2 Play",
       "f": "10-13",
@@ -22625,7 +22613,7 @@
       "f": "13-16",
       "hi": "14:39",
       "d": "CALLE 3 035, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JOEL GUSTAVE GUSTA",
       "visitas": 1,
       "ult_fecha": "01-10-2026",
@@ -22671,9 +22659,9 @@
       "o": "1-3OG376JC",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "15:47",
       "d": "EL ALBA 1183 EDIF. B-36 DEPTO 303, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "LUIS CASTRO TORRES",
       "visitas": 1,
       "ult_fecha": "16-10-2026",
@@ -22689,6 +22677,18 @@
       "tec": "LUIS MARTIN NUÑEZ",
       "visitas": 1,
       "ult_fecha": "07-08-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3OMSVRND",
+      "cat": "Migración 2 Play",
+      "f": "13-16",
+      "hi": "15:48",
+      "d": "PJE GRAN CANARIA 020, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "LUIS MARTIN NUÑEZ",
+      "visitas": 1,
+      "ult_fecha": "26-10-2026",
       "ult_cierre": "Cliente reagenda"
      },
      {
@@ -22763,10 +22763,22 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OMKC9G5",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "15:48",
+      "d": "SAN JUAN(LOS NARANJOS) 122 CASA 5, QUILPUE",
+      "e": "Pendiente",
+      "tec": "RAFAEL VARGAS B",
+      "visitas": 1,
+      "ult_fecha": "26-10-2026",
+      "ult_cierre": "NAP Problema niveles PO"
+     },
+     {
       "o": "1-3ONXZ4MV",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "17:22",
       "d": "CARELMAPU 757, QUILPUE",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -22790,7 +22802,7 @@
       "o": "1-3OMEVE5E",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:31",
+      "hi": "16:43",
       "d": "LONGITUDINAL 42, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SEBASTIAN DOSSOW A",
@@ -22804,9 +22816,9 @@
       "o": "1-3OHMNZ9F",
       "cat": "Migración 3 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "15:36",
       "d": "CACIQUE 1111 CASA 3, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "MATIAS APELEO APELEO",
       "desde": "23-10-2026"
      },
@@ -22824,5 +22836,5 @@
    }
   }
  },
- "generado": "28-10-2026 15:15"
+ "generado": "28-10-2026 15:40"
 }
