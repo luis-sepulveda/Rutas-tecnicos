@@ -22185,25 +22185,25 @@
    }
   },
   "28-10-2026": {
-   "hasta": "16:30",
-   "actividades": 146,
+   "hasta": "17:05",
+   "actividades": 149,
    "tecnicos": 31,
    "estados": {
-    "No Realizada": 18,
-    "Completado": 77,
-    "Iniciado": 27,
-    "Pendiente": 13,
-    "Suspendido": 4,
-    "en ruta": 2,
-    "Cancelado": 5
+    "No Realizada": 22,
+    "Completado": 85,
+    "Iniciado": 22,
+    "en ruta": 3,
+    "Pendiente": 6,
+    "Suspendido": 5,
+    "Cancelado": 6
    },
-   "rgu": 213.2,
+   "rgu": 217.7,
    "caidas_total": 8,
    "caidas_activas": 8,
    "caidas_resueltas": 0,
    "nuevas": 17,
-   "al_bucket": 19,
-   "repetidas": 31,
+   "al_bucket": 20,
+   "repetidas": 32,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
@@ -22288,7 +22288,7 @@
       "f": "16-19",
       "hi": "16:17",
       "d": "SANTIAGO 1048, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OO3OEDT",
@@ -22297,7 +22297,7 @@
       "f": "13-16",
       "hi": "15:13",
       "d": "LONDRES 1391, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OO1VBP4",
@@ -22478,6 +22478,18 @@
       "f": "16-19",
       "hi": "15:59",
       "d": "PIEDRA LUNA 77 CASA 43, QUILPUE",
+      "e": "No Realizada",
+      "tec": "ALEXIS JARA",
+      "visitas": 2,
+      "ult_fecha": "27-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3ONI6ZEN",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "16:47",
+      "d": "AVENIDA SEGUNDA 0128 CASA A, QUILPUE",
       "e": "Iniciado",
       "tec": "ALEXIS JARA",
       "visitas": 2,
@@ -22497,15 +22509,15 @@
       "ult_cierre": "NAP Problema ubicación"
      },
      {
-      "o": "1-3ONI6ZEN",
-      "cat": "Alta 1 Play",
+      "o": "1-3OMP12OI",
+      "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:54",
-      "d": "AVENIDA SEGUNDA 0128 CASA A, QUILPUE",
-      "e": "Pendiente",
+      "hi": "16:51",
+      "d": "QUIDORA 01483, QUILPUE",
+      "e": "Iniciado",
       "tec": "ALFREDO ALCAYAGA F",
-      "visitas": 2,
-      "ult_fecha": "27-10-2026",
+      "visitas": 1,
+      "ult_fecha": "03-08-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -22562,7 +22574,7 @@
       "f": "13-16",
       "hi": "14:55",
       "d": "GABRIEL DAZAROLA 1064, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "CRISTOBAL SILVA LEIVA",
       "visitas": 1,
       "ult_fecha": "12-10-2026",
@@ -22620,9 +22632,9 @@
       "o": "1-3ONKR3EF",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:44",
+      "hi": "16:52",
       "d": "PABLO RAMIREZ 0184, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "JORDAN ROA PEREZ",
       "visitas": 1,
       "ult_fecha": "27-10-2026",
@@ -22765,7 +22777,7 @@
       "f": "13-16",
       "hi": "16:15",
       "d": "SAN JUAN(LOS NARANJOS) 122 CASA 5, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "RAFAEL VARGAS B",
       "visitas": 1,
       "ult_fecha": "26-10-2026",
@@ -22775,9 +22787,9 @@
       "o": "1-3ONXZ4MV",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "17:49",
+      "hi": "16:50",
       "d": "CARELMAPU 757, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "RAFAEL VARGAS B",
       "visitas": 1,
       "ult_fecha": "28-10-2026",
@@ -22799,9 +22811,9 @@
       "o": "1-3OMEVE5E",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "17:06",
+      "hi": "16:42",
       "d": "LONGITUDINAL 42, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "No Realizada",
       "tec": "SEBASTIAN DOSSOW A",
       "visitas": 1,
       "ult_fecha": "26-10-2026",
@@ -22809,6 +22821,16 @@
      }
     ],
     "reagendadas": [
+     {
+      "o": "1-3OLAD5CQ",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "18:55",
+      "d": "SEGUNDO DE LINEA 957, QUILPUE",
+      "e": "Pendiente",
+      "tec": "LEONEL HERNÁNDEZ OJE",
+      "desde": "26-10-2026"
+     },
      {
       "o": "1-3OHMNZ9F",
       "cat": "Migración 3 Play",
@@ -22818,20 +22840,10 @@
       "e": "Iniciado",
       "tec": "MATIAS APELEO APELEO",
       "desde": "23-10-2026"
-     },
-     {
-      "o": "1-3OLAD5CQ",
-      "cat": "Reparación",
-      "f": "16-19",
-      "hi": "19:57",
-      "d": "SEGUNDO DE LINEA 957, QUILPUE",
-      "e": "Pendiente",
-      "tec": "PABLO HERNANEZ FERNANDEZ",
-      "desde": "26-10-2026"
      }
     ]
    }
   }
  },
- "generado": "28-10-2026 16:30"
+ "generado": "28-10-2026 17:05"
 }
