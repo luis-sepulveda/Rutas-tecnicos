@@ -22185,17 +22185,17 @@
    }
   },
   "28-10-2026": {
-   "hasta": "17:26",
+   "hasta": "17:36",
    "actividades": 149,
    "tecnicos": 31,
    "estados": {
-    "No Realizada": 23,
-    "Completado": 85,
-    "Iniciado": 26,
-    "Pendiente": 3,
+    "No Realizada": 24,
+    "Completado": 87,
+    "Iniciado": 23,
     "Suspendido": 5,
+    "en ruta": 2,
     "Cancelado": 6,
-    "en ruta": 1
+    "Pendiente": 2
    },
    "rgu": 217.7,
    "caidas_total": 8,
@@ -22682,7 +22682,7 @@
       "f": "16-19",
       "hi": "15:48",
       "d": "EL ALBA 1183 EDIF. B-36 DEPTO 303, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "LUIS CASTRO TORRES",
       "visitas": 1,
       "ult_fecha": "16-10-2026",
@@ -22822,6 +22822,16 @@
     ],
     "reagendadas": [
      {
+      "o": "1-3OLAD5CQ",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "17:49",
+      "d": "SEGUNDO DE LINEA 957, QUILPUE",
+      "e": "en ruta",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "desde": "26-10-2026"
+     },
+     {
       "o": "1-3OHMNZ9F",
       "cat": "Migración 3 Play",
       "f": "16-19",
@@ -22830,20 +22840,10 @@
       "e": "Iniciado",
       "tec": "MATIAS APELEO APELEO",
       "desde": "23-10-2026"
-     },
-     {
-      "o": "1-3OLAD5CQ",
-      "cat": "Reparación",
-      "f": "16-19",
-      "hi": "17:58",
-      "d": "SEGUNDO DE LINEA 957, QUILPUE",
-      "e": "Pendiente",
-      "tec": "PABLO HERNANEZ FERNANDEZ",
-      "desde": "26-10-2026"
      }
     ]
    }
   }
  },
- "generado": "28-10-2026 17:26"
+ "generado": "28-10-2026 17:36"
 }
