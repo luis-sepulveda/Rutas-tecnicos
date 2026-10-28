@@ -22185,23 +22185,24 @@
    }
   },
   "28-10-2026": {
-   "hasta": "14:30",
-   "actividades": 137,
+   "hasta": "14:40",
+   "actividades": 139,
    "tecnicos": 31,
    "estados": {
     "No Realizada": 15,
-    "Completado": 52,
-    "Iniciado": 23,
-    "Pendiente": 44,
-    "Cancelado": 2,
-    "en ruta": 1
+    "Completado": 53,
+    "Iniciado": 22,
+    "Pendiente": 41,
+    "en ruta": 3,
+    "Suspendido": 2,
+    "Cancelado": 3
    },
-   "rgu": 202.1,
+   "rgu": 203.6,
    "caidas_total": 7,
    "caidas_activas": 7,
    "caidas_resueltas": 0,
    "nuevas": 15,
-   "al_bucket": 17,
+   "al_bucket": 18,
    "repetidas": 31,
    "reagendadas": 2,
    "detalle": {
@@ -22278,7 +22279,7 @@
       "f": "13-16",
       "hi": "14:29",
       "d": "PJE LOS GUAYABOS 5, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OO1267K",
@@ -22541,6 +22542,18 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3OMPC2SZ",
+      "cat": "Migración 1 Play",
+      "f": "13-16",
+      "hi": "14:50",
+      "d": "GABRIEL DAZAROLA 1064, VILLA ALEMANA",
+      "e": "en ruta",
+      "tec": "CRISTOBAL SILVA LEIVA",
+      "visitas": 1,
+      "ult_fecha": "12-10-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3OL82EC3",
       "cat": "Migración 1 Play",
       "f": "10-13",
@@ -22592,9 +22605,9 @@
       "o": "1-3ONBF303",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:00",
+      "hi": "14:39",
       "d": "CALLE 3 035, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "JOEL GUSTAVE GUSTA",
       "visitas": 1,
       "ult_fecha": "01-10-2026",
@@ -22635,18 +22648,6 @@
       "visitas": 1,
       "ult_fecha": "27-10-2026",
       "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OMPC2SZ",
-      "cat": "Migración 1 Play",
-      "f": "13-16",
-      "hi": "16:24",
-      "d": "GABRIEL DAZAROLA 1064, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "KEVIN TAPIA RETAMAL",
-      "visitas": 1,
-      "ult_fecha": "12-10-2026",
-      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3OG376JC",
@@ -22747,7 +22748,7 @@
       "o": "1-3ONXZ4MV",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "18:05",
+      "hi": "16:04",
       "d": "CARELMAPU 757, QUILPUE",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -22761,7 +22762,7 @@
       "f": "13-16",
       "hi": "14:28",
       "d": "AV LA PALMA 426 EDIF. B DEPTO 403, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Suspendido",
       "tec": "SAMUEL FERNANDEZ VIDAL",
       "visitas": 2,
       "ult_fecha": "27-10-2026",
@@ -22771,7 +22772,7 @@
       "o": "1-3OMEVE5E",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:46",
+      "hi": "16:00",
       "d": "LONGITUDINAL 42, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SEBASTIAN DOSSOW A",
@@ -22805,5 +22806,5 @@
    }
   }
  },
- "generado": "28-10-2026 14:30"
+ "generado": "28-10-2026 14:40"
 }
