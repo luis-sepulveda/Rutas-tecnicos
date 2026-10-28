@@ -22185,23 +22185,24 @@
    }
   },
   "28-10-2026": {
-   "hasta": "10:59",
-   "actividades": 117,
+   "hasta": "11:09",
+   "actividades": 118,
    "tecnicos": 32,
    "estados": {
-    "No Realizada": 7,
-    "Iniciado": 24,
-    "Pendiente": 73,
-    "Completado": 6,
-    "en ruta": 7
+    "No Realizada": 8,
+    "Iniciado": 26,
+    "Pendiente": 72,
+    "Completado": 7,
+    "en ruta": 4,
+    "Cancelado": 1
    },
-   "rgu": 184.0,
-   "caidas_total": 4,
-   "caidas_activas": 4,
+   "rgu": 185.0,
+   "caidas_total": 5,
+   "caidas_activas": 5,
    "caidas_resueltas": 0,
    "nuevas": 5,
    "al_bucket": 0,
-   "repetidas": 29,
+   "repetidas": 30,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
@@ -22221,6 +22222,15 @@
       "f": "13-16",
       "hi": "13:53",
       "d": "PRIMERA 1131, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OMT0W39",
+      "tec": "LUIS GATICA DAVILA",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "SAN ENRIQUE 1780 EDIF. 9 DEPTO 302, VILLA ALEMANA",
       "e": "Pendiente"
      },
      {
@@ -22259,7 +22269,7 @@
       "f": "10-13",
       "hi": "11:33",
       "d": "ROLANDO PEREIRA 2122, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3ONP79U0",
@@ -22330,7 +22340,7 @@
       "o": "1-3ONBF303",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "13:00",
+      "hi": "14:00",
       "d": "CALLE 3 035, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -22342,7 +22352,7 @@
       "o": "1-3ONT95MN",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:10",
+      "hi": "15:10",
       "d": "PJE CHERCAN 2758, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -22354,7 +22364,7 @@
       "o": "1-3ONA5A54",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "10:45",
+      "hi": "12:05",
       "d": "SERENA 846, QUILPUE",
       "e": "Pendiente",
       "tec": "ANTONHY MORALES MENDOZA",
@@ -22378,7 +22388,7 @@
       "o": "1-3ONFB7FX",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "13:00",
+      "hi": "14:00",
       "d": "AV LA PALMA 426 EDIF. B DEPTO 403, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
@@ -22498,7 +22508,7 @@
       "o": "1-3ON97U80",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "13:00",
+      "hi": "14:00",
       "d": "GILBERTO BARROS 2, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -22522,7 +22532,7 @@
       "o": "1-3OMPC2SZ",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "13:20",
+      "hi": "14:20",
       "d": "GABRIEL DAZAROLA 1064, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "KEVIN TAPIA RETAMAL",
@@ -22534,7 +22544,7 @@
       "o": "1-3ONKMR7E",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "13:00",
+      "hi": "14:00",
       "d": "LA PLACE 0408 CASA A, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -22546,7 +22556,7 @@
       "o": "1-3OMEANLM",
       "cat": "Migración 3 Play",
       "f": "13-16",
-      "hi": "13:00",
+      "hi": "14:00",
       "d": "MARGA MARGA 2570 CASA 8B, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS CASTRO TORRES",
@@ -22591,6 +22601,17 @@
       "ult_cierre": "Direccion no encontrada"
      },
      {
+      "o": "1-3ONUJN03",
+      "cat": "Reparación",
+      "f": "10-13",
+      "d": "SAN ENRIQUE (NODO 82) 550 CASA 3, VILLA ALEMANA",
+      "e": "Cancelado",
+      "tec": "MATÍAS JAQUE AG",
+      "visitas": 1,
+      "ult_fecha": "26-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OLKONTX",
       "cat": "Migración 3 Play",
       "f": "10-13",
@@ -22618,7 +22639,7 @@
       "o": "1-3ONE689A",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "13:00",
+      "hi": "14:00",
       "d": "BARROS MERINO 231, QUILPUE",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -22664,5 +22685,5 @@
    }
   }
  },
- "generado": "28-10-2026 10:59"
+ "generado": "28-10-2026 11:09"
 }
