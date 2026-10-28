@@ -1,8 +1,8 @@
 {
-  "actualizado": "2026-10-28T13:05:44",
+  "actualizado": "2026-10-28T13:35:45",
   "resumen": {
-    "sin informacion": 5,
-    "reagendada": 1
+    "sin informacion": 4,
+    "reagendada": 2
   },
   "estados": {
     "1-3ONL0DB2": {
@@ -104,28 +104,10 @@
       "cat": "Alta 1 Play",
       "franja_original": "10-13",
       "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
-      "estado": "sin informacion",
-      "nota": "la OT ya no existe en TOA",
-      "contexto": {
-        "buscado": "AVENIDA BALMACEDA 171",
-        "aviso": "historial de la direccion, NO es el estado de esta orden",
-        "filas": [
-          {
-            "estado": "no realizada",
-            "color": "rgb(96, 206, 206)",
-            "ot": "1-3OJVR6XJ",
-            "franja": "10-13",
-            "texto": "1-3OJVR6XJ - 10-13-Alta-1 Play-AVENIDA BALMACEDA 171Vie, 23 Oct"
-          },
-          {
-            "estado": "no realizada",
-            "color": "rgb(96, 206, 206)",
-            "ot": "1-3OJN2BHD",
-            "franja": "10-13",
-            "texto": "1-3OJN2BHD - 10-13-Alta-1 Play-AVENIDA BALMACEDA 171Jue, 22 Oct"
-          }
-        ]
-      }
+      "estado": "reagendada",
+      "color": "rgb(255, 170, 170)",
+      "detalle": "1-3OKPKB58 - 10-13-Alta-1 Play-AVENIDA BALMACEDA 171Jue, 29 Oct",
+      "franja_nueva": "10-13"
     },
     "1-3ON6280I": {
       "tec": "SAMUEL FERNANDEZ VIDAL",
