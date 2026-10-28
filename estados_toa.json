@@ -1,15 +1,14 @@
 {
-  "actualizado": "2026-10-27T20:45:59",
+  "actualizado": "2026-10-28T11:04:54",
   "resumen": {
-    "sin informacion": 2,
-    "reagendada": 1,
-    "cancelada": 1
+    "sin informacion": 4,
+    "reagendada": 1
   },
   "estados": {
-    "1-3OMOO30X": {
-      "tec": "ALEXIS JARA",
+    "1-3ONL0DB2": {
+      "tec": "CRISTOBAL MIRANDA VALENC",
       "cat": "Alta 1 Play",
-      "franja_original": "13-16",
+      "franja_original": "10-13",
       "d": "SERENA 890 DEPTO 14, QUILPUE",
       "estado": "sin informacion",
       "nota": "la OT ya no existe en TOA",
@@ -17,13 +16,6 @@
         "buscado": "SERENA 890",
         "aviso": "historial de la direccion, NO es el estado de esta orden",
         "filas": [
-          {
-            "estado": "reagendada",
-            "color": "rgb(255, 222, 0)",
-            "ot": "1-3ONL0DB2",
-            "franja": "10-13",
-            "texto": "1-3ONL0DB2 - 10-13-Alta-1 Play-SERENA 890 DEPTO 14Mie, 28 Oct"
-          },
           {
             "estado": "cancelada",
             "color": "rgb(128, 255, 128)",
@@ -55,31 +47,70 @@
         ]
       }
     },
-    "1-3OLN61YJ": {
-      "tec": "ALEXIS JARA",
+    "1-3OMLVRJA": {
+      "tec": "JOSE PEREZ RANGEL",
+      "cat": "Migración 3 Play",
+      "franja_original": "13-16",
+      "d": "PRIMERA 1131, VILLA ALEMANA",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "PRIMERA 1131",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3N7TJHO6",
+            "franja": "10-13",
+            "texto": "1-3N7TJHO6 - 10-13-Alta-2 Play-PRIMERA 1131 CASA CASALun, 17 Ago"
+          }
+        ]
+      }
+    },
+    "1-3OMT0W39": {
+      "tec": "LUIS GATICA DAVILA",
       "cat": "Alta 2 Play",
       "franja_original": "16-19",
-      "d": "LAGO LANALHUE 2408 DEPTO 34, QUILPUE",
+      "d": "SAN ENRIQUE 1780 EDIF. 9 DEPTO 302, VILLA ALEMANA",
       "estado": "reagendada",
       "color": "rgb(255, 222, 0)",
-      "detalle": "1-3OLN61YJ - 16-19-Alta-2 Play-LAGO LANALHUE 2408 DEPTO 34Mie, 28 Oct",
-      "franja_nueva": "16-19"
+      "detalle": "1-3OMT0W39 - 13-16-Alta-2 Play-SAN ENRIQUE 1780 EDIF. 9 DEPTO 302Sab, 31 Oct",
+      "franja_nueva": "13-16"
     },
-    "1-3OMXU773": {
-      "tec": "JORDAN ROA PEREZ",
-      "cat": "Reparación",
-      "franja_original": "13-16",
-      "d": "INFANTE 299, QUILPUE",
-      "estado": "cancelada",
-      "color": "rgb(128, 255, 128)",
-      "detalle": "1-3OMXU773 - 16-19-Reparación-2 Play Servicio Degradado-INFANTE 299Jue, 29 Oct",
-      "franja_nueva": "16-19"
-    },
-    "1-3OMYVKAK": {
-      "tec": "JOSE GALAZ D",
+    "1-3OKPKB58": {
+      "tec": "LUIS MARTIN NUÑEZ",
       "cat": "Alta 1 Play",
-      "franja_original": "13-16",
-      "d": "SAN FRANCISCO ORIENTE 1908, QUILPUE",
+      "franja_original": "10-13",
+      "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "AVENIDA BALMACEDA 171",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3OJVR6XJ",
+            "franja": "10-13",
+            "texto": "1-3OJVR6XJ - 10-13-Alta-1 Play-AVENIDA BALMACEDA 171Vie, 23 Oct"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3OJN2BHD",
+            "franja": "10-13",
+            "texto": "1-3OJN2BHD - 10-13-Alta-1 Play-AVENIDA BALMACEDA 171Jue, 22 Oct"
+          }
+        ]
+      }
+    },
+    "1-3ON6280I": {
+      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "cat": "Alta 1 Play",
+      "franja_original": "10-13",
+      "d": "PJE CATALUNA 1838, VILLA ALEMANA",
       "estado": "sin informacion",
       "nota": "la OT ya no existe en TOA"
     }
