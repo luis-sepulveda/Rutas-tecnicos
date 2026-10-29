@@ -21912,27 +21912,36 @@
    }
   },
   "29-10-2026": {
-   "hasta": "14:25",
-   "actividades": 149,
+   "hasta": "14:45",
+   "actividades": 151,
    "tecnicos": 33,
    "estados": {
-    "Completado": 61,
-    "Iniciado": 17,
-    "Pendiente": 48,
-    "No Realizada": 17,
-    "en ruta": 3,
-    "Cancelado": 3
+    "Completado": 69,
+    "Iniciado": 13,
+    "Pendiente": 45,
+    "No Realizada": 19,
+    "Cancelado": 3,
+    "en ruta": 2
    },
-   "rgu": 225.0,
-   "caidas_total": 6,
-   "caidas_activas": 5,
+   "rgu": 219.6,
+   "caidas_total": 7,
+   "caidas_activas": 6,
    "caidas_resueltas": 1,
-   "nuevas": 23,
-   "al_bucket": 19,
-   "repetidas": 21,
+   "nuevas": 24,
+   "al_bucket": 23,
+   "repetidas": 20,
    "reagendadas": 4,
    "detalle": {
     "caidas": [
+     {
+      "o": "1-3OODCAH6",
+      "tec": "DANIEL NAVARRETE E",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "17:51",
+      "d": "CALLE 3 3160 CASA 43, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OO1X9UG",
       "tec": "EDGAR VALERO C",
@@ -21981,13 +21990,22 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OOWCWPH",
+      "tec": "MARCO PEREZ G",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "15:33",
+      "d": "PJE 15 895 DEPTO 32, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3OOV7WE8",
       "tec": "JUAN ARRIAGADA C",
       "cat": "Modificación de Servicio",
       "f": "16-19",
       "hi": "14:13",
       "d": "LOS TREBOLES 55 CASA 31, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OOV4RA6",
@@ -21996,7 +22014,7 @@
       "f": "13-16",
       "hi": "14:10",
       "d": "CARLOS BOTTO 548, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OOU4SVW",
@@ -22005,7 +22023,7 @@
       "f": "13-16",
       "hi": "14:02",
       "d": "CHACABUCO 488, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OOU5P5V",
@@ -22018,7 +22036,7 @@
      },
      {
       "o": "1-3OOSZO0J",
-      "tec": "MARCO PEREZ G",
+      "tec": "NICOLAS MOYANO R",
       "cat": "Reparación",
       "f": "16-19",
       "hi": "16:00",
@@ -22077,7 +22095,7 @@
       "f": "13-16",
       "hi": "15:18",
       "d": "FRODDEN 01130, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OONUCNJ",
@@ -22122,7 +22140,7 @@
       "f": "13-16",
       "hi": "16:43",
       "d": "SANTA TERESA 0435, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OLS9VJN",
@@ -22205,25 +22223,13 @@
       "o": "1-3ONJSYTE",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "16:41",
+      "hi": "16:55",
       "d": "PJE B 0836 CASA 5 DEPTO 22, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
       "visitas": 5,
       "ult_fecha": "21-10-2026",
       "ult_cierre": "Direccion no encontrada"
-     },
-     {
-      "o": "1-3ONV34ML",
-      "cat": "Alta 2 Play",
-      "f": "13-16",
-      "hi": "16:22",
-      "d": "AV LA PALMA 1321, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "CESAR MENA OLIVEROS",
-      "visitas": 1,
-      "ult_fecha": "28-10-2026",
-      "ult_cierre": "Direccion incorrecta"
      },
      {
       "o": "1-3ONFSG03",
@@ -22314,7 +22320,7 @@
       "f": "13-16",
       "hi": "13:44",
       "d": "NUEVA HIPODROMO 1250, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JOSE PEREZ RANGEL",
       "visitas": 1,
       "ult_fecha": "28-10-2026",
@@ -22359,7 +22365,7 @@
       "o": "1-3OONUCNJ",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "16:14",
+      "hi": "16:00",
       "d": "AZAPA 1190, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS CASTRO TORRES",
@@ -22371,7 +22377,7 @@
       "o": "1-3OO3FIUV",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:28",
+      "hi": "16:12",
       "d": "AV LA PALMA 426 EDIF. B DEPTO 403, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MARCELO GÓMEZ GÓME",
@@ -22419,7 +22425,7 @@
       "o": "1-3OOSJRL7",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:47",
       "d": "RIQUELME 1763, QUILPUE",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -22445,7 +22451,7 @@
       "o": "1-3OKQYAJQ",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "18:34",
+      "hi": "16:00",
       "d": "LOURDES 1021 EDIF. F DEPTO 102, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
@@ -22455,7 +22461,7 @@
       "o": "1-3ONFNNLB",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "17:54",
+      "hi": "16:02",
       "d": "COVADONGA 716, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -22484,5 +22490,5 @@
    }
   }
  },
- "generado": "29-10-2026 14:25"
+ "generado": "29-10-2026 14:45"
 }
