@@ -3562,6 +3562,41 @@
 .mp-dsub { font-size:14px; font-weight:600; color:#1d4ed8; white-space:nowrap; } .mp-dsub i { display:inline-block; font-style:normal; transition:transform .15s; }
 .mp-desp.ab .mp-dsub i { transform:rotate(180deg); }
 .mp-desp:hover h3 { color:#1d4ed8; }
+/* ==== (29-10-2026, 09:20) barras de Evolución por semana tocables + PANTALLA de la semana ==== */
+button.mp-sem { border:0; background:none; font-family:inherit; cursor:pointer; padding:6px 0 0; border-radius:10px; transition:background .12s; }
+button.mp-sem:hover { background:#e8efff; } button.mp-sem:hover .l { color:#1d4ed8; }
+#modalSem, #modalMdSem { position:fixed; inset:0; z-index:3000; background:rgba(15,23,42,.55); display:none; align-items:flex-start; justify-content:center; padding:18px; overflow:auto; }
+#modalSem.abierto, #modalMdSem.abierto { display:flex; }
+.ms-box { background:#f1f5f9; width:min(1300px,100%); border-radius:14px; box-shadow:0 20px 60px rgba(0,0,0,.35); color:#0f172a; }
+.ms-top { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; background:#0f1e35; color:#fff; padding:16px 22px; border-radius:14px 14px 0 0; }
+.ms-top h2 { margin:0; font-size:21px; font-weight:800; } .ms-top h2 small { font-size:15px; font-weight:500; color:#cbd5e1; margin-left:6px; }
+.ms-top p { margin:3px 0 0; font-size:13px; color:#cbd5e1; }
+.ms-x { background:#fff; border:0; border-radius:8px; width:36px; height:36px; cursor:pointer; font-size:16px; flex:none; }
+.ms-tabs { display:flex; gap:8px; padding:12px 22px; background:#fff; border-bottom:1px solid #dbe3ee; overflow-x:auto; }
+.ms-tab { flex:1 0 108px; display:flex; flex-direction:column; align-items:flex-start; gap:1px; padding:8px 12px; border:1px solid #d3d8e2; border-radius:10px; background:#fff; font-family:inherit; cursor:pointer; text-align:left; }
+.ms-tab.tot { flex:1.4 0 150px; }
+.ms-tab .d { font-size:13px; font-weight:700; color:#13213c; } .ms-tab .q { font-size:11.5px; color:#64748b; }
+.ms-tab .p { font-size:20px; font-weight:800; font-variant-numeric:tabular-nums; } .ms-tab .p.ok { color:#0e7c6b; } .ms-tab .p.bad { color:#d04a46; } .ms-tab .p.gr { color:#94a3b8; }
+.ms-tab:hover { border-color:#1d4ed8; }
+.ms-tab.on { background:#13213c; border-color:#13213c; } .ms-tab.on .d { color:#fff; } .ms-tab.on .q { color:#b9c3d6; }
+.ms-tab.on .p.ok { color:#6ee7b7; } .ms-tab.on .p.bad { color:#fca5a5; }
+.ms-cuerpo { padding:16px 22px 22px; display:flex; flex-direction:column; gap:18px; }
+.ms-qt { margin:0; font-size:18px; font-weight:800; color:#13213c; }
+.ms-ks { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; }
+.ms-k { background:#fff; border:1px solid #dbe3ee; border-radius:12px; padding:12px 14px; display:flex; flex-direction:column; gap:3px; }
+.ms-k .l { font-size:12.5px; font-weight:600; color:#64748b; }
+.ms-k .v { font-size:30px; font-weight:800; color:#13213c; font-variant-numeric:tabular-nums; line-height:1.05; }
+.ms-k .s { font-size:12px; color:#64748b; }
+.ms-k.ok .v { color:#0e7c6b; } .ms-k.bad .v { color:#d04a46; } .ms-k.wa .v { color:#c2410c; }
+.ms-k.main { background:#13213c; border-color:#13213c; } .ms-k.main .v { color:#fff; } .ms-k.main .l, .ms-k.main .s { color:#b9c3d6; }
+.ms-k.main .mp-fl.ok { color:#6ee7b7; } .ms-k.main .mp-fl.bad { color:#fca5a5; } .ms-k.main .mp-fl.gr { color:#b9c3d6; }
+.ms-sub { background:#fff; border:1px solid #dbe3ee; border-radius:14px; padding:14px 16px; display:flex; flex-direction:column; gap:8px; min-width:0; }
+.ms-sub h4 { margin:0; font-size:15px; font-weight:800; color:#13213c; } .ms-sub h4 small { font-weight:400; color:#64748b; font-size:12.5px; margin-left:6px; }
+.ms-sub .ad-tbl td small { color:#64748b; }
+tr.ms-cl { cursor:pointer; } tr.ms-cl:hover td { background:#eef4ff; } td.ms-ir { color:#1d4ed8; font-weight:700; }
+tr.ms-tot td { font-weight:800; border-top:2px solid #e5eaf2; background:#f8fafc; }
+.ms-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:6px; vertical-align:middle; }
+@media (max-width:700px){ #modalSem, #modalMdSem { padding:0; } .ms-box { border-radius:0; } .ms-top { border-radius:0; } .ms-cuerpo, .ms-tabs, .ms-top { padding-left:14px; padding-right:14px; } }
 .mp-acc { margin-top:4px; }
 /* (REDISEÑO 28-10-2026, 18:50) DETALLE DEL MES por efectividad */
 .md2-top { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,2fr); gap:16px; }
@@ -12877,6 +12912,261 @@ function mpFalta(s){
   if(s.comp >= MP_META) return { ok:true, n: Math.floor(s.co / m - s.vis + 1e-9) };
   return { ok:false, n: Math.ceil((m * s.vis - s.co) / (1 - m) - 1e-9) };
 }
+/* ==== (29-10-2026, 09:20) PANTALLA DE UNA SEMANA desde "Evolución por semana" ====
+   Luis: "que abra una pantalla que muestre el total de la semana y por día".
+   Al tocar una barra se abre una ventana encima (como las demás del Módulo):
+   arriba "Total de la semana" y un botón por cada día (Lun..Sáb) con su %.
+   Lo elegido muestra: cifras, de quién es cada no realizada, técnicos y la
+   lista una por una. Se cierra con ✕, con Esc o tocando afuera.
+   Usa las mismas filas de migPaginaHtml() (window.MP_SEMS) y mgResp(). */
+var MP_DIAS = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+var MP_DCORTO = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+function mpSemAbrir(k){ window.MP_SEM = k; window.MP_SEM_DIA = null; window.MP_SEM_LST = false; mpSemPintar(); }
+function mpSemCerrar(){ window.MP_SEM = null; const m = document.getElementById('modalSem'); if(m) m.classList.remove('abierto'); }
+function mpSemDia(d){ window.MP_SEM_DIA = d; window.MP_SEM_LST = false; mpSemPintar(); const m = document.getElementById('modalSem'); if(m) m.scrollTop = 0; }
+document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && window.MP_SEM) mpSemCerrar(); });
+function mpSemPintar(){
+  const k = window.MP_SEM, SEM = window.MP_SEMS || {};
+  if(!k || !SEM[k]) return;
+  let m = document.getElementById('modalSem');
+  if(!m){
+    m = document.createElement('div'); m.id = 'modalSem';
+    m.onclick = function(e){ if(e.target === m) mpSemCerrar(); };
+    document.body.appendChild(m);
+  }
+  const y = m.scrollTop;
+  m.innerHTML = '<div class="ms-box" role="dialog">' + mpSemHtml(k, SEM, window.MP_SEM_HOY, window.MP_SEM_DIA) + '</div>';
+  m.classList.add('abierto'); m.scrollTop = y;
+}
+function mpSemHtml(k, SEM, semHoy, dia){
+  const TODO = SEM[k] || [];
+  const nom = t => String(t || '').toLowerCase().replace(/(^|\s)\S/g, c => c.toUpperCase());
+  const col = v => v === null ? 'gr' : v >= MP_META ? 'ok' : 'bad';
+  const fDia = iso => { const d = new Date(+iso.slice(0, 4), +iso.slice(4, 6) - 1, +iso.slice(6, 8)); return d.getDay(); };
+  const ddmm = iso => iso.slice(6) + '-' + iso.slice(4, 6);
+  const pc = (x, t) => t ? Math.round(100 * x / t) + '%' : '–';
+  const cur = k === semHoy;
+  const ks = Object.keys(SEM).sort(), i = ks.indexOf(k);
+  const D = {}; TODO.forEach(x => { (D[x.iso] = D[x.iso] || []).push(x); });
+  const dias = Object.keys(D).sort();
+  if(dia && !D[dia]) dia = null;
+
+  const L = dia ? D[dia] : TODO, s = mpSt(L);
+  /* con que se compara: la semana -> la semana anterior; un dia -> el total de su semana */
+  const B = dia ? mpSt(TODO) : (i > 0 ? mpSt(SEM[ks[i - 1]]) : null);
+  const bTxt = dia ? 'el total de la semana' : (i > 0 ? 'la semana ' + derNumSemana(ks[i - 1]) : '');
+  const dif = (v, b) => v === null || !b || b.comp === null ? '' : Math.abs(v - b.comp) < 1 ? '<span class="mp-fl gr">= igual que ' + bTxt + '</span>'
+    : '<span class="mp-fl ' + (v > b.comp ? 'ok' : 'bad') + '">' + (v > b.comp ? '▲ ' : '▼ ') + mpPc(Math.abs(v - b.comp)).replace('%', '') + ' pts vs ' + bTxt + '</span>';
+  const n = e => L.filter(x => x.e === e).length;
+  const ca = n('Cancelado'), su = n('Suspendido');
+  const tile = (cl, l, v, sub) => '<div class="ms-k ' + cl + '"><span class="l">' + l + '</span><span class="v">' + v + '</span><span class="s">' + sub + '</span></div>';
+  const qTit = dia ? MP_DIAS[fDia(dia)] + ' ' + ddmm(dia) : 'Total de la semana';
+
+  /* CABECERA + selector Total / dias */
+  let h = '<div class="ms-top"><div><h2>Semana ' + derNumSemana(k) + (cur ? ' · en curso' : '') + ' <small>' + derRango(k) + '</small></h2>'
+    + '<p>Migraciones de técnicos de Dominion' + (cur ? ' · hoy en vivo' : '') + ' · meta VTR/CLARO ' + MP_META + '% de completitud</p></div>'
+    + '<button class="ms-x" onclick="mpSemCerrar()" title="Cerrar (Esc)">✕</button></div>'
+    + '<div class="ms-tabs">'
+    + (function(){ const t = mpSt(TODO); return '<button class="ms-tab tot' + (!dia ? ' on' : '') + '" onclick="mpSemDia(null)"><span class="d">Total de la semana</span><span class="p ' + col(t.comp) + '">' + mpPc(t.comp) + '</span><span class="q">' + TODO.length + ' llegaron</span></button>'; })()
+    + dias.map(function(iso){ const t = mpSt(D[iso]);
+        return '<button class="ms-tab' + (dia === iso ? ' on' : '') + '" onclick="mpSemDia(\'' + iso + '\')"><span class="d">' + MP_DCORTO[fDia(iso)] + ' ' + ddmm(iso) + '</span><span class="p ' + col(t.comp) + '">' + mpPc(t.comp) + '</span><span class="q">' + D[iso].length + ' llegaron</span></button>'; }).join('')
+    + '</div>';
+
+  h += '<div class="ms-cuerpo"><h3 class="ms-qt">' + qTit + '</h3>';
+
+  /* 1. LAS CIFRAS */
+  h += '<div class="ms-ks">'
+    + tile('main', 'Completitud', mpPc(s.comp), (B ? dif(s.comp, B) : 'completadas ÷ visitadas'))
+    + tile('', 'Llegaron', L.length, 'migraciones asignadas')
+    + tile('ok', 'Completadas', s.co, pc(s.co, s.vis) + ' de las visitadas')
+    + tile('bad', 'No realizadas', s.nr, pc(s.nr, s.vis) + ' de las visitadas')
+    + tile('', 'Canceladas', ca, su ? '+ ' + su + ' suspendida' + (su === 1 ? '' : 's') : 'no cuentan en el %')
+    + (s.ab ? tile('wa', 'Sin cerrar', s.ab, s.ini + ' iniciada' + (s.ini === 1 ? '' : 's') + ' · ' + (s.ab - s.ini) + ' por iniciar') : '')
+    + '</div>';
+
+  /* 2. DIA A DIA (solo en el total)  +  DE QUIEN ES LA CAUSA */
+  const filaDia = function(iso){ const l = D[iso], t = mpSt(l);
+    const c = l.filter(x => x.e === 'Cancelado' || x.e === 'Suspendido').length;
+    return '<tr class="ms-cl" onclick="mpSemDia(\'' + iso + '\')" title="Ver solo este día"><td>' + MP_DIAS[fDia(iso)] + ' <small>' + ddmm(iso) + '</small></td><td class="nu">' + l.length + '</td><td class="nu ok">' + t.co + '</td><td class="nu bad">' + t.nr + '</td>'
+      + '<td class="nu">' + (c || '–') + '</td><td class="nu">' + (t.ab || '–') + '</td><td class="nu"><span class="ad-tag ' + col(t.comp) + '">' + mpPc(t.comp) + '</span></td><td class="ms-ir">›</td></tr>'; };
+  const st = mpSt(TODO), cT = TODO.filter(x => x.e === 'Cancelado' || x.e === 'Suspendido').length;
+  const grp = function(r){
+    const q = s.resp[r], cods = s.rcod[r], top = Object.keys(cods).sort((x, y) => cods[y] - cods[x]).slice(0, 5);
+    return '<div class="mp-g"><div class="mp-gh"><i style="background:' + MG_RCOL[r] + '"></i><b>' + MG_RNOM[r] + '</b><span>' + q + ' · ' + (s.nr ? Math.round(100 * q / s.nr) : 0) + '%</span></div>'
+      + '<div class="mp-gb"><span style="width:' + (s.nr ? 100 * q / s.nr : 0) + '%;background:' + MG_RCOL[r] + '"></span></div>'
+      + (top.length ? '<div class="mp-gc">' + top.map(c => '<span>' + escR(c) + ' <b>' + cods[c] + '</b></span>').join('') + '</div>' : '') + '</div>';
+  };
+  const causa = '<div class="ms-sub"><h4>¿De quién es cada no realizada?</h4>'
+    + (s.nr ? grp('vtr') + grp('cli') + grp('dom') : '<p class="ad-vacio">Ninguna no realizada.</p>') + '</div>';
+  if(!dia) h += '<div class="ad-dos">'
+    + '<div class="ms-sub"><h4>Día a día <small>toca un día para verlo solo</small></h4><div class="ad-tbl"><table><thead><tr><th>Día</th><th>Llegaron</th><th>Completadas</th><th>No realiz.</th><th>Cancel.</th><th>Sin cerrar</th><th>Completitud</th><th></th></tr></thead><tbody>'
+    +   dias.map(filaDia).join('')
+    +   '<tr class="ms-tot"><td>Total semana</td><td class="nu">' + TODO.length + '</td><td class="nu ok">' + st.co + '</td><td class="nu bad">' + st.nr + '</td><td class="nu">' + (cT || '–') + '</td><td class="nu">' + (st.ab || '–') + '</td><td class="nu"><span class="ad-tag ' + col(st.comp) + '">' + mpPc(st.comp) + '</span></td><td></td></tr>'
+    +   '</tbody></table></div></div>' + causa + '</div>';
+  else h += causa;
+
+  /* 3. TECNICOS */
+  const T = {}; L.forEach(x => { (T[x.tec] = T[x.tec] || []).push(x); });
+  const ft = Object.keys(T).map(t => ({ t: t, s: mpSt(T[t]) })).filter(o => o.s.vis)
+    .sort((x, y) => y.s.nr - x.s.nr || x.s.comp - y.s.comp || y.s.vis - x.s.vis);
+  h += '<div class="ms-sub"><h4>Técnicos · ' + qTit.toLowerCase() + ' (' + ft.length + ') <small>primero los que más no realizadas tuvieron</small></h4>'
+    + (ft.length ? '<div class="ad-tbl"><table><thead><tr><th>Técnico</th><th>Visitadas</th><th>Completadas</th><th>No realiz.</th><th>VTR/CLARO</th><th>Cliente</th><th>Dominion</th><th>Completitud</th></tr></thead><tbody>'
+    + ft.map(o => { const poco = o.s.vis < MP_POCAS;
+        return '<tr><td>' + nom(o.t) + '</td><td class="nu">' + o.s.vis + '</td><td class="nu ok">' + o.s.co + '</td><td class="nu bad">' + o.s.nr + '</td>'
+          + '<td class="nu">' + (o.s.resp.vtr || '–') + '</td><td class="nu">' + (o.s.resp.cli || '–') + '</td><td class="nu">' + (o.s.resp.dom ? '<b>' + o.s.resp.dom + '</b>' : '–') + '</td>'
+          + '<td class="nu"><span class="ad-tag ' + (poco ? 'gr' : col(o.s.comp)) + '">' + mpPc(o.s.comp) + '</span></td></tr>'; }).join('')
+    + '</tbody></table></div>' : '<p class="ad-vacio">Sin visitas.</p>') + '</div>';
+
+  /* 4. LISTA de las que no se completaron (desplegable) */
+  const NC = L.filter(x => x.e === 'No Realizada' || x.e === 'Cancelado' || x.e === 'Suspendido')
+    .sort((x, y) => x.iso.localeCompare(y.iso) || String(x.tec).localeCompare(String(y.tec)));
+  const ab = !!window.MP_SEM_LST;
+  h += '<div class="ms-sub"><button class="mp-desp' + (ab ? ' ab' : '') + '" onclick="window.MP_SEM_LST=!window.MP_SEM_LST; mpSemPintar()">'
+    + '<h4>Las ' + NC.length + ' que no se completaron, una por una</h4><span class="mp-dsub">' + (ab ? 'Ocultar' : 'Ver la lista') + ' <i>▾</i></span></button>'
+    + (!ab ? '' : '<div class="ad-tbl"><table><thead><tr><th>Día</th><th>Orden</th><th>Técnico</th><th>Estado</th><th>Código de cierre</th><th>De quién</th></tr></thead><tbody>'
+      + NC.map(x => { const r = x.e === 'No Realizada' ? mgResp(x.cod) : null;
+          return '<tr><td class="nu">' + MP_DCORTO[fDia(x.iso)] + ' ' + ddmm(x.iso) + '</td><td class="nu">' + escR(x.ot) + '</td><td>' + nom(x.tec) + '</td>'
+            + '<td><span class="ad-tag ' + (x.e === 'No Realizada' ? 'bad' : 'gr') + '">' + x.e + '</span></td><td>' + escR(x.cod || '–') + '</td>'
+            + '<td>' + (r ? '<span class="ms-dot" style="background:' + MG_RCOL[r] + '"></span>' + { cli:'Cliente', vtr:'VTR/CLARO', dom:'Dominion' }[r] : '–') + '</td></tr>'; }).join('')
+      + '</tbody></table></div>')
+    + '</div>';
+  return h + '</div>';
+}
+
+/* ==== (29-10-2026, 09:20) PANTALLA DE LA SEMANA desde "Día por día" del detalle del MES ====
+   Luis: "quedó bueno, haz lo mismo acá". Al tocar un día del gráfico se abre
+   una ventana encima con la SEMANA de ese día: arriba "Total de la semana" y
+   un botón por cada día (ya marcado el día tocado). Mirado como EFECTIVIDAD
+   (completadas ÷ asignadas), igual que el resto del detalle del mes, y con
+   TODAS las actividades (altas, migraciones, reparaciones...).
+   Datos: window.ACT_FILAS (datos.json), aunque la semana cruce de mes.
+   Verde/rojo = sobre o bajo la efectividad del mes que se está mirando.
+   Se cierra con ✕, Esc o tocando afuera. */
+var MD_DIAS = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+var MD_DCORTO = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+function mdIso(f){ const p = String(f || '').split('-'); return p.length === 3 ? p[2] + p[1] + p[0] : ''; }      // dd-mm-aaaa -> aaaammdd
+function mdLunes(iso){ const d = new Date(+iso.slice(0, 4), +iso.slice(4, 6) - 1, +iso.slice(6, 8)); d.setDate(d.getDate() - (d.getDay() + 6) % 7);
+  return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+function mdSemAbrir(fecha, ref){ const iso = mdIso(fecha); if(!iso) return;
+  window.MD_SEM = mdLunes(iso); window.MD_SEM_DIA = iso; window.MD_SEM_REF = ref; window.MD_SEM_LST = false; window.MD_SEM_TEC = false; mdSemPintar(); }
+function mdSemCerrar(){ window.MD_SEM = null; const m = document.getElementById('modalMdSem'); if(m) m.classList.remove('abierto'); }
+function mdSemDia(d){ window.MD_SEM_DIA = d; window.MD_SEM_LST = false; mdSemPintar(); const m = document.getElementById('modalMdSem'); if(m) m.scrollTop = 0; }
+document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && window.MD_SEM) mdSemCerrar(); });
+function mdSemPintar(){
+  if(!window.MD_SEM || !Array.isArray(window.ACT_FILAS)) return;
+  let m = document.getElementById('modalMdSem');
+  if(!m){ m = document.createElement('div'); m.id = 'modalMdSem'; m.onclick = function(e){ if(e.target === m) mdSemCerrar(); }; document.body.appendChild(m); }
+  const y = m.scrollTop;
+  m.innerHTML = '<div class="ms-box" role="dialog">' + mdSemHtml(window.MD_SEM, window.MD_SEM_DIA, window.MD_SEM_REF) + '</div>';
+  m.classList.add('abierto'); m.scrollTop = y;
+}
+function mdSemHtml(k, dia, ref){
+  const nf = n => n.toLocaleString('es-CL');
+  const p1 = v => v === null || v === undefined ? '–' : (Math.round(v * 10) / 10).toFixed(1).replace('.', ',') + '%';
+  const st = function(l){ const s = { a:l.length, co:0, nr:0, ca:0, su:0, ab:0, resp:{cli:0, vtr:0, dom:0}, rcod:{cli:{}, vtr:{}, dom:{}} };
+    l.forEach(r => { const e = r['Estado'];
+      if(e === 'Completado') s.co++;
+      else if(e === 'No Realizada'){ s.nr++; const c = r['Código de Cierre'] || 'Sin código', q = mgResp(c); s.resp[q]++; s.rcod[q][c] = (s.rcod[q][c] || 0) + 1; }
+      else if(e === 'Cancelado') s.ca++; else if(e === 'Suspendido') s.su++; else s.ab++; });
+    s.ef = s.a ? 100 * s.co / s.a : null; return s; };
+  const col = v => v === null ? 'gr' : (ref === null || ref === undefined) ? 'gr' : v >= ref ? 'ok' : 'bad';
+  const fDia = iso => new Date(+iso.slice(0, 4), +iso.slice(4, 6) - 1, +iso.slice(6, 8)).getDay();
+  const ddmm = iso => iso.slice(6) + '-' + iso.slice(4, 6);
+  const pc = (x, t) => t ? Math.round(100 * x / t) + '%' : '–';
+  const tec = r => { const n = String(r['Nombre'] || ''), i = n.indexOf('_DOMI_'); return (i >= 0 ? n.slice(i + 6) : n).replace(/ /g, ' ').trim(); };
+  const nom = t => String(t || '').toLowerCase().replace(/(^|\s)\S/g, c => c.toUpperCase());
+
+  /* la semana k y la anterior, desde todas las filas */
+  const ant = (function(){ const p = k.split('-'), d = new Date(+p[0], +p[1] - 1, +p[2] - 7);
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); })();
+  const TODO = [], PREV = [], D = {};
+  window.ACT_FILAS.forEach(function(r){ const iso = mdIso(r['Fecha']); if(!iso) return; const l = mdLunes(iso);
+    if(l === k){ TODO.push(r); (D[iso] = D[iso] || []).push(r); } else if(l === ant) PREV.push(r); });
+  const dias = Object.keys(D).sort();
+  if(dia && !D[dia]) dia = null;
+  const L = dia ? D[dia] : TODO, s = st(L), sT = st(TODO);
+  const B = dia ? sT : (PREV.length ? st(PREV) : null);
+  const bTxt = dia ? 'el total de la semana' : 'la semana ' + derNumSemana(ant);
+  const dif = (v, b) => v === null || !b || b.ef === null ? '' : Math.abs(v - b.ef) < 0.5 ? '<span class="mp-fl gr">= igual que ' + bTxt + '</span>'
+    : '<span class="mp-fl ' + (v > b.ef ? 'ok' : 'bad') + '">' + (v > b.ef ? '▲ ' : '▼ ') + p1(Math.abs(v - b.ef)).replace('%', '') + ' pts vs ' + bTxt + ' (' + p1(b.ef) + ')</span>';
+  const tile = (cl, l, v, sub) => '<div class="ms-k ' + cl + '"><span class="l">' + l + '</span><span class="v">' + v + '</span><span class="s">' + sub + '</span></div>';
+  const qTit = dia ? MD_DIAS[fDia(dia)] + ' ' + ddmm(dia) : 'Total de la semana';
+
+  /* CABECERA + selector */
+  let h = '<div class="ms-top"><div><h2>Semana ' + derNumSemana(k) + ' <small>' + derRango(k) + '</small></h2>'
+    + '<p>Todas las actividades · efectividad = completadas ÷ asignadas' + (ref !== null && ref !== undefined ? ' · verde = sobre el promedio del mes (' + p1(ref) + ')' : '') + '</p></div>'
+    + '<button class="ms-x" onclick="mdSemCerrar()" title="Cerrar (Esc)">✕</button></div>'
+    + '<div class="ms-tabs">'
+    + '<button class="ms-tab tot' + (!dia ? ' on' : '') + '" onclick="mdSemDia(null)"><span class="d">Total de la semana</span><span class="p ' + col(sT.ef) + '">' + p1(sT.ef) + '</span><span class="q">' + nf(sT.a) + ' asignadas</span></button>'
+    + dias.map(function(iso){ const t = st(D[iso]);
+        return '<button class="ms-tab' + (dia === iso ? ' on' : '') + '" onclick="mdSemDia(\'' + iso + '\')"><span class="d">' + MD_DCORTO[fDia(iso)] + ' ' + ddmm(iso) + '</span><span class="p ' + col(t.ef) + '">' + p1(t.ef) + '</span><span class="q">' + nf(t.a) + ' asignadas</span></button>'; }).join('')
+    + '</div><div class="ms-cuerpo"><h3 class="ms-qt">' + qTit + '</h3>';
+
+  /* 1. LAS CIFRAS */
+  h += '<div class="ms-ks">'
+    + tile('main', 'Efectividad', p1(s.ef), B ? dif(s.ef, B) : 'completadas ÷ asignadas')
+    + tile('', 'Asignadas', nf(s.a), 'todas las actividades')
+    + tile('ok', 'Completadas', nf(s.co), pc(s.co, s.a) + ' de las asignadas')
+    + tile('bad', 'No realizadas', nf(s.nr), pc(s.nr, s.a) + ' de las asignadas')
+    + tile('', 'Canceladas', nf(s.ca), pc(s.ca, s.a) + ' de las asignadas')
+    + tile('', 'Suspendidas', nf(s.su), pc(s.su, s.a) + ' de las asignadas')
+    + (s.ab ? tile('wa', 'Sin cerrar', nf(s.ab), 'pendientes o iniciadas') : '')
+    + '</div>';
+
+  /* 2. DIA A DIA (solo en el total) + POR QUE NO SE HICIERON */
+  const grp = function(q){ const n = s.resp[q], cods = s.rcod[q], top = Object.keys(cods).sort((x, y) => cods[y] - cods[x]).slice(0, 5);
+    return '<div class="mp-g"><div class="mp-gh"><i style="background:' + MG_RCOL[q] + '"></i><b>' + MG_RNOM[q] + '</b><span>' + nf(n) + ' · ' + (s.nr ? Math.round(100 * n / s.nr) : 0) + '%</span></div>'
+      + '<div class="mp-gb"><span style="width:' + (s.nr ? 100 * n / s.nr : 0) + '%;background:' + MG_RCOL[q] + '"></span></div>'
+      + (top.length ? '<div class="mp-gc">' + top.map(c => '<span>' + escR(c) + ' <b>' + cods[c] + '</b></span>').join('') + '</div>' : '') + '</div>'; };
+  const causa = '<div class="ms-sub"><h4>¿Por qué no se hicieron? <small>' + nf(s.nr) + ' no realizadas, según de quién es la causa</small></h4>'
+    + (s.nr ? grp('vtr') + grp('cli') + grp('dom') : '<p class="ad-vacio">Ninguna no realizada.</p>') + '</div>';
+  const filaD = function(nomb, t, onc, cl){ return '<tr' + (onc ? ' class="ms-cl" onclick="' + onc + '" title="Ver solo este día"' : ' class="' + cl + '"') + '><td>' + nomb + '</td><td class="nu">' + nf(t.a) + '</td><td class="nu ok">' + nf(t.co) + '</td><td class="nu bad">' + nf(t.nr) + '</td>'
+    + '<td class="nu">' + (t.ca || '–') + '</td><td class="nu">' + (t.su || '–') + '</td><td class="nu"><span class="ad-tag ' + col(t.ef) + '">' + p1(t.ef) + '</span></td><td class="ms-ir">' + (onc ? '›' : '') + '</td></tr>'; };
+  if(!dia) h += '<div class="ad-dos">'
+    + '<div class="ms-sub"><h4>Día a día <small>toca un día para verlo solo</small></h4><div class="ad-tbl"><table><thead><tr><th>Día</th><th>Asignadas</th><th>Completadas</th><th>No realiz.</th><th>Cancel.</th><th>Susp.</th><th>Efectividad</th><th></th></tr></thead><tbody>'
+    +   dias.map(iso => filaD(MD_DIAS[fDia(iso)] + ' <small>' + ddmm(iso) + '</small>', st(D[iso]), 'mdSemDia(\'' + iso + '\')')).join('')
+    +   filaD('Total semana', sT, null, 'ms-tot') + '</tbody></table></div></div>' + causa + '</div>';
+  else h += causa;
+
+  /* 3. POR ACTIVIDAD */
+  const G = {}; L.forEach(r => { const f = familiaCat(r['Tipo de Actividad']); (G[f] = G[f] || []).push(r); });
+  const GB = {}; (dia ? TODO : PREV).forEach(r => { const f = familiaCat(r['Tipo de Actividad']); (GB[f] = GB[f] || []).push(r); });
+  h += '<div class="ms-sub"><h4>Por actividad <small>la flecha es vs ' + bTxt + '</small></h4><div class="ad-tbl"><table><thead><tr><th>Actividad</th><th>Asignadas</th><th>Completadas</th><th>No realiz.</th><th>Canc/Susp</th><th>Efectividad</th><th>vs ' + (dia ? 'semana' : 'sem ' + derNumSemana(ant)) + '</th></tr></thead><tbody>'
+    + Object.keys(G).sort((a, b) => G[b].length - G[a].length).map(function(f){ const t = st(G[f]), tb = GB[f] ? st(GB[f]) : null, d = tb && tb.ef !== null ? t.ef - tb.ef : null;
+        return '<tr><td><b>' + f + '</b></td><td class="nu">' + nf(t.a) + '</td><td class="nu ok">' + nf(t.co) + '</td><td class="nu bad">' + nf(t.nr) + '</td><td class="nu">' + ((t.ca + t.su) || '–') + '</td>'
+          + '<td class="nu"><span class="ad-tag ' + col(t.ef) + '">' + p1(t.ef) + '</span></td>'
+          + '<td class="nu">' + (d === null ? '<span class="mp-fl gr">–</span>' : Math.abs(d) < 0.5 ? '<span class="mp-fl gr">= igual</span>' : '<span class="mp-fl ' + (d > 0 ? 'ok' : 'bad') + '">' + (d > 0 ? '▲ ' : '▼ ') + p1(Math.abs(d)).replace('%', '') + ' pts</span>') + '</td></tr>'; }).join('')
+    + '</tbody></table></div></div>';
+
+  /* 4. TECNICOS (desplegable, son muchos) */
+  const T = {}; L.forEach(r => { const t = tec(r); (T[t] = T[t] || []).push(r); });
+  const ft = Object.keys(T).map(t => ({ t: t, s: st(T[t]) })).sort((x, y) => y.s.nr - x.s.nr || x.s.ef - y.s.ef);
+  const tAb = !!window.MD_SEM_TEC, poc = dia ? 3 : 8;
+  h += '<div class="ms-sub"><button class="mp-desp' + (tAb ? ' ab' : '') + '" onclick="window.MD_SEM_TEC=!window.MD_SEM_TEC; mdSemPintar()"><h4>Técnicos · ' + qTit.toLowerCase() + ' (' + ft.length + ') <small>primero los que más no realizadas tuvieron</small></h4>'
+    + '<span class="mp-dsub">' + (tAb ? 'Ocultar' : 'Ver los ' + ft.length + ' técnicos') + ' <i>▾</i></span></button>'
+    + (!tAb ? '' : '<p class="ad-nota">Con menos de ' + poc + ' asignadas el % va en gris.</p><div class="ad-tbl"><table><thead><tr><th>Técnico</th><th>Asignadas</th><th>Completadas</th><th>No realiz.</th><th>VTR/CLARO</th><th>Cliente</th><th>Dominion</th><th>Canc/Susp</th><th>Efectividad</th></tr></thead><tbody>'
+      + ft.map(o => '<tr><td>' + nom(o.t) + '</td><td class="nu">' + o.s.a + '</td><td class="nu ok">' + o.s.co + '</td><td class="nu bad">' + o.s.nr + '</td>'
+          + '<td class="nu">' + (o.s.resp.vtr || '–') + '</td><td class="nu">' + (o.s.resp.cli || '–') + '</td><td class="nu">' + (o.s.resp.dom ? '<b>' + o.s.resp.dom + '</b>' : '–') + '</td><td class="nu">' + ((o.s.ca + o.s.su) || '–') + '</td>'
+          + '<td class="nu"><span class="ad-tag ' + (o.s.a < poc ? 'gr' : col(o.s.ef)) + '">' + p1(o.s.ef) + '</span></td></tr>').join('')
+      + '</tbody></table></div>')
+    + '</div>';
+
+  /* 5. LISTA de las que no se completaron (desplegable) */
+  const NC = L.filter(r => ['No Realizada', 'Cancelado', 'Suspendido'].indexOf(r['Estado']) >= 0)
+    .sort((x, y) => mdIso(x['Fecha']).localeCompare(mdIso(y['Fecha'])) || tec(x).localeCompare(tec(y)));
+  const ab = !!window.MD_SEM_LST;
+  h += '<div class="ms-sub"><button class="mp-desp' + (ab ? ' ab' : '') + '" onclick="window.MD_SEM_LST=!window.MD_SEM_LST; mdSemPintar()">'
+    + '<h4>Las ' + nf(NC.length) + ' que no se completaron, una por una</h4><span class="mp-dsub">' + (ab ? 'Ocultar' : 'Ver la lista') + ' <i>▾</i></span></button>'
+    + (!ab ? '' : '<div class="ad-tbl"><table><thead><tr><th>Día</th><th>Orden</th><th>Técnico</th><th>Actividad</th><th>Estado</th><th>Código de cierre</th><th>De quién</th></tr></thead><tbody>'
+      + NC.map(function(r){ const iso = mdIso(r['Fecha']), e = r['Estado'], q = e === 'No Realizada' ? mgResp(r['Código de Cierre']) : null;
+          return '<tr><td class="nu">' + MD_DCORTO[fDia(iso)] + ' ' + ddmm(iso) + '</td><td class="nu">' + escR(r['Orden de Trabajo']) + '</td><td>' + nom(tec(r)) + '</td><td>' + escR(r['Tipo de Actividad'] || '') + '</td>'
+            + '<td><span class="ad-tag ' + (e === 'No Realizada' ? 'bad' : 'gr') + '">' + e + '</span></td><td>' + escR(r['Código de Cierre'] || '–') + '</td>'
+            + '<td>' + (q ? '<span class="ms-dot" style="background:' + MG_RCOL[q] + '"></span>' + { cli:'Cliente', vtr:'VTR/CLARO', dom:'Dominion' }[q] : '–') + '</td></tr>'; }).join('')
+      + '</tbody></table></div>')
+    + '</div>';
+  return h + '</div>';
+}
+
 function migPaginaHtml(){
   mpCargar();
   const fd = (typeof FECHA_DATOS !== 'undefined' && FECHA_DATOS) ? FECHA_DATOS : new Date();
@@ -13015,11 +13305,13 @@ function migPaginaHtml(){
   /* 5. EVOLUCION por semana */
   const SEM = {}; R.forEach(x => { (SEM[x.sem] = SEM[x.sem] || []).push(x); });
   const ks = Object.keys(SEM).sort().slice(-8);
-  h += '<div class="ad-card"><h3>Evolución por semana</h3><p class="ad-nota">Completitud de cada semana. La línea punteada es la meta de ' + MP_META + '%. La semana en curso incluye hoy en vivo.</p>'
+  window.MP_SEMS = SEM; window.MP_SEM_HOY = semHoy;      /* (29-10-2026, 09:20) para la pantalla de la semana */
+  if(window.MP_SEM && !cargando) setTimeout(mpSemPintar, 0);
+  h += '<div class="ad-card"><h3>Evolución por semana</h3><p class="ad-nota">Completitud de cada semana. La línea punteada es la meta de ' + MP_META + '%. La semana en curso incluye hoy en vivo. <b>Toca una semana para ver el total y cada día.</b></p>'
     + (cargando ? '<p class="ad-vacio">Cargando el histórico…</p>' : '<div class="mp-evo">'
       + ks.map(function(k){ const s = mpSt(SEM[k]);
-          return '<div class="mp-sem' + (k === semHoy ? ' cur' : '') + '"><b>' + mpPc(s.comp) + '</b><span class="col"><i class="' + col(s.comp) + '" style="height:' + (s.comp || 0) + '%"></i><em style="bottom:' + MP_META + '%"></em></span>'
-            + '<span class="l">Sem ' + derNumSemana(k) + (k === semHoy ? ' · en curso' : '') + '<small>' + derRango(k) + ' · ' + s.vis + ' visitadas</small></span></div>'; }).join('') + '</div>')
+          return '<button class="mp-sem' + (k === semHoy ? ' cur' : '') + '" onclick="mpSemAbrir(\'' + k + '\')" title="Ver la semana ' + derNumSemana(k) + ', total y por día"><b>' + mpPc(s.comp) + '</b><span class="col"><i class="' + col(s.comp) + '" style="height:' + (s.comp || 0) + '%"></i><em style="bottom:' + MP_META + '%"></em></span>'
+            + '<span class="l">Sem ' + derNumSemana(k) + (k === semHoy ? ' · en curso' : '') + '<small>' + derRango(k) + ' · ' + s.vis + ' visitadas</small></span></button>'; }).join('') + '</div>')
     + '</div>';
 
   /* 6. ACCESOS de siempre */
@@ -13087,10 +13379,11 @@ function mesDetalleHtml(k){
   /* 2. DIA POR DIA */
   const dias = [...new Set(delMes.map(r => r['Fecha']))].sort((a, b) => a.slice(0, 2).localeCompare(b.slice(0, 2)));
   const SM = st(delMes);
-  h += '<div class="ad-card"><div class="md2-h"><h3>Día por día</h3><span class="ad-nota">Toca un día para ver solo ese día. Verde = sobre el promedio del mes (' + p1(SM.ef) + '), rojo = bajo.</span>'
+  h += '<div class="ad-card"><div class="md2-h"><h3>Día por día</h3><span class="ad-nota">Toca un día para ver su semana: el total y cada día. Verde = sobre el promedio del mes (' + p1(SM.ef) + '), rojo = bajo.</span>'
     + (dia ? '<button class="md-ch on" onclick="window.PV_MES_DIA=null; pintarPortada()">✕ Ver todo el mes</button>' : '') + '</div>'
     + '<div class="md2-dias">' + dias.map(function(d){ const s = st(delMes.filter(r => r['Fecha'] === d));
-        return '<button class="md2-d' + (dia === d ? ' on' : '') + '" onclick="window.PV_MES_DIA=' + (dia === d ? 'null' : '\'' + d + '\'') + '; pintarPortada()" title="' + d + ': ' + s.co + ' de ' + s.a + ' (' + p1(s.ef) + ')">'
+        /* (29-10-2026, 09:20) Luis: tocar un dia abre la pantalla de SU SEMANA (antes filtraba la pagina a ese dia) */
+        return '<button class="md2-d' + (dia === d ? ' on' : '') + '" onclick="mdSemAbrir(\'' + d + '\', ' + (SM.ef === null ? 'null' : Math.round(SM.ef * 10) / 10) + ')" title="' + d + ': ' + s.co + ' de ' + s.a + ' (' + p1(s.ef) + ') · toca para ver su semana">'
           + '<b>' + Math.round(s.ef) + '</b><span class="col"><i class="' + (s.ef >= SM.ef ? 'ok' : 'bad') + '" style="height:' + s.ef + '%"></i><em style="bottom:' + SM.ef + '%"></em></span><span class="l">' + d.slice(0, 2) + '</span></button>'; }).join('')
     + '</div></div>';
 
