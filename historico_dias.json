@@ -21912,30 +21912,51 @@
    }
   },
   "29-10-2026": {
-   "hasta": "09:17",
-   "actividades": 100,
+   "hasta": "09:27",
+   "actividades": 109,
    "tecnicos": 31,
    "estados": {
-    "Pendiente": 98,
-    "en ruta": 2
+    "en ruta": 18,
+    "Pendiente": 90,
+    "Iniciado": 1
    },
-   "rgu": 163.5,
-   "caidas_total": 0,
-   "caidas_activas": 0,
+   "rgu": 176.0,
+   "caidas_total": 1,
+   "caidas_activas": 1,
    "caidas_resueltas": 0,
-   "nuevas": 0,
+   "nuevas": 1,
    "al_bucket": 0,
-   "repetidas": 14,
-   "reagendadas": 2,
+   "repetidas": 16,
+   "reagendadas": 3,
    "detalle": {
-    "caidas": [],
-    "nuevas": [],
+    "caidas": [
+     {
+      "o": "1-3OOD4XCU",
+      "tec": "YENDER BOSCAN CADENAS",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "15:33",
+      "d": "AV LA PALMA 151 EDIF. 1 DEPTO 503, VILLA ALEMANA",
+      "e": "Pendiente"
+     }
+    ],
+    "nuevas": [
+     {
+      "o": "1-3OOLU63S",
+      "tec": "LUIS MARTIN NUÑEZ",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "09:25",
+      "d": "CONDELL 445 CASA 9, VILLA ALEMANA",
+      "e": "Iniciado"
+     }
+    ],
     "repetidas": [
      {
       "o": "1-3OO4WB0S",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "11:40",
+      "hi": "11:10",
       "d": "VALLE DEL PARAISO 2746, QUILPUE",
       "e": "Pendiente",
       "tec": "ALEXIS JARA",
@@ -21944,10 +21965,22 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3ONJSYTE",
+      "cat": "Migración 1 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "PJE B 0836 CASA 5 DEPTO 22, QUILPUE",
+      "e": "Pendiente",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "visitas": 5,
+      "ult_fecha": "21-10-2026",
+      "ult_cierre": "Direccion no encontrada"
+     },
+     {
       "o": "1-3ONFSG03",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "11:03",
+      "hi": "10:35",
       "d": "TIERRAS ROJAS 526 EDIF. B DEPTO 13, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -21959,7 +21992,7 @@
       "o": "1-3ONV34ML",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:43",
+      "hi": "14:17",
       "d": "AV LA PALMA 1321, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
@@ -21971,7 +22004,7 @@
       "o": "1-3ONC4BPU",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "10:46",
+      "hi": "10:16",
       "d": "OVALLE 1104, QUILPUE",
       "e": "Pendiente",
       "tec": "JOEL GUSTAVE GUSTA",
@@ -21983,7 +22016,7 @@
       "o": "1-3ON70XJC",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "12:24",
+      "hi": "10:00",
       "d": "CHIANG 1944, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE CASTRO P",
@@ -21995,7 +22028,7 @@
       "o": "1-3OOBCMX1",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:21",
+      "hi": "13:40",
       "d": "LOS ALMENDROS 017, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE CASTRO P",
@@ -22007,7 +22040,7 @@
       "o": "1-3OMIGA0T",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "11:12",
+      "hi": "10:42",
       "d": "MARGA MARGA 2950, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -22019,7 +22052,7 @@
       "o": "1-3OO4JUX8",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:52",
+      "hi": "13:52",
       "d": "NUEVA HIPODROMO 1250, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JUAN ARRIAGADA C",
@@ -22052,10 +22085,22 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3ON6BYWK",
+      "cat": "Migración 2 Play",
+      "f": "16-19",
+      "hi": "16:27",
+      "d": "TOQUI 2463, QUILPUE",
+      "e": "Pendiente",
+      "tec": "MATIAS APELEO APELEO",
+      "visitas": 1,
+      "ult_fecha": "16-10-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3OO6SXDO",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "11:22",
+      "hi": "10:53",
       "d": "FRUTILLAR 827, QUILPUE",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -22067,9 +22112,9 @@
       "o": "1-3OKPKB58",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:30",
       "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "SAMUEL FERNANDEZ VIDAL",
       "visitas": 2,
       "ult_fecha": "23-10-2026",
@@ -22112,12 +22157,22 @@
       "desde": "28-10-2026"
      },
      {
+      "o": "1-3OKQYAJQ",
+      "cat": "Migración 1 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "LOURDES 1021 EDIF. F DEPTO 102, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "EDGAR VALERO C",
+      "desde": "26-10-2026"
+     },
+     {
       "o": "1-3OKPKB58",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:30",
       "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "SAMUEL FERNANDEZ VIDAL",
       "desde": "24-10-2026"
      }
@@ -22125,5 +22180,5 @@
    }
   }
  },
- "generado": "29-10-2026 09:17"
+ "generado": "29-10-2026 09:27"
 }
