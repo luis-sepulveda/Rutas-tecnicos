@@ -3563,6 +3563,15 @@
 .mp-desp.ab .mp-dsub i { transform:rotate(180deg); }
 .mp-desp:hover h3 { color:#1d4ed8; }
 /* (29-10-2026, 18:45) "sin GSA" al lado de la completitud (como VTR) */
+.mp-sg.in { display:inline; margin:0 0 0 4px; }
+/* (29-10-2026, 19:15) morado de las GSA en el resto de MIGRACIONES */
+.ms-tab .mp-sg.tab { font-size:11px; color:#7c3aed; } .ms-tab.on .mp-sg.tab { color:#c4b5fd; }
+i.mg-gsa.in { display:inline; margin-left:4px; }
+i.mg-gsa { display:block; font-style:normal; font-size:10.5px; font-weight:700; color:#7c3aed; white-space:nowrap; }
+.mg-seg.per button.on i.mg-gsa { color:#ddd6fe; }
+b.mg-gsa-t { color:#7c3aed; font-weight:700; }
+.hb-ch.gsa { background:#ede9fe !important; color:#6d28d9 !important; }
+.mp-dl small { display:block; font-size:12px; color:#c4b5fd; font-weight:500; }
 .mp-sg { display:block; font-size:11px; font-weight:600; color:#7c3aed; white-space:nowrap; margin-top:2px; }
 .mp-big .mp-sg.big { font-size:14px; color:#7c3aed; } .ms-k.main .mp-sg.big { font-size:13px; color:#c4b5fd; }
 .mp-sem > b .mp-sg.evo { font-size:10.5px; color:#7c3aed; }
@@ -9093,6 +9102,8 @@ let derTipo = 'MIGRA';     // 'MIGRA' | 'ALTA' | 'AMBAS'
 const DER_TIPOS = [['MIGRA', 'Migraciones'], ['ALTA', 'Altas'], ['AMBAS', 'Altas y migraciones']];
 const DER_MESES = ['ene','feb','mar','abr','may','jun','jul','ago','sept','oct','nov','dic'];
 
+/* (29-10-2026, 19:15) ¿esta fila de DER es una MIGRACION cerrada por GSA que VTR cuenta como quiebre? */
+function mpGsaQ(tp, gsa){ return (typeof MP_GSA_QUIEBRE === 'undefined' || MP_GSA_QUIEBRE) && tp === 'MIGRA' && String(gsa || '') === '1'; }
 function derGrupo(cod){
   const c = String(cod || '').toLowerCase();
   if(c.indexOf('sin moradores') >= 0) return 'sm';
@@ -9136,7 +9147,8 @@ async function bajarDeriv(){
       tp: tp,
       act: String(val(row, 'Tipo de Actividad') || '').trim() + (play ? ' ' + play + ' Play' : ''),
       fr: String(val(row, 'Franja') || ''), ciu: String(val(row, 'Ciudad') || ''),
-      der: est === 'No Realizada', cod: cod || 'Sin código', g: est === 'No Realizada' ? derGrupo(cod) : '', gsa: String(val(row, 'gsa') || '') === '1'
+      der: est === 'No Realizada' || mpGsaQ(tp, val(row, 'gsa')), cod: mpGsaQ(tp, val(row, 'gsa')) ? 'GSA · Falla Aprovisionamiento' : (cod || 'Sin código'),
+      g: est === 'No Realizada' ? derGrupo(cod) : mpGsaQ(tp, val(row, 'gsa')) ? 'ot' : '', gsa: String(val(row, 'gsa') || '') === '1'
     });
   });
   filas.forEach(function(x){
@@ -9377,9 +9389,9 @@ function derTabla(sem, sup, todos){
   (DER || []).forEach(function(x){
     if(x.sem !== sem || !derEntra(x)) return;
     if(sup !== 'Todos' && x.sup !== sup) return;
-    const o = t[x.tec] || (t[x.tec] = {tec:x.tec, sup:x.sup, n:0, d:0, sm:0, re:0, de:0, ot:0, l:[]});
+    const o = t[x.tec] || (t[x.tec] = {tec:x.tec, sup:x.sup, n:0, d:0, sm:0, re:0, de:0, ot:0, gsa:0, l:[]});
     o.n++;
-    if(x.der){ o.d++; o[x.g]++; o.l.push(x); }
+    if(x.der){ o.d++; o[x.g]++; o.l.push(x); if(x.gsa) o.gsa++; }      /* (29-10-2026, 19:15) o.gsa = GSA contadas como derivada */
   });
   return Object.keys(t).map(function(k){ return t[k]; }).filter(function(o){ return todos || derActivo(o.tec); }).sort(function(a, b){
     const sa = derSobre(a, sem) ? 1 : 0;
@@ -11245,7 +11257,7 @@ function derHoyMigDer(){
   }); });
   return l;
 }
-function derHoyConteo(){ const l = derHoyMigDer(); return { v: l.length, d: l.filter(function(x){ return x.der; }).length }; }
+function derHoyConteo(){ const l = derHoyMigDer(); return { v: l.length, d: l.filter(function(x){ return x.der; }).length, g: l.filter(function(x){ return x.gsa; }).length }; }
 /* ---- Barra fija en la portada + sonido (09-10-2026, 10:45) ----
    Luis: "que la alerta suene y que se vea dentro de la pantalla que te
    muestro". La barra va arriba de todo en la portada (antes del cuadro del
@@ -11401,7 +11413,7 @@ function pintarDeriv(){
 
   const porSem = {};
   DER.forEach(function(x){ if(!derEntra(x)) return;
-    const s = porSem[x.sem] || (porSem[x.sem] = {n:0, d:0, dias:{}}); s.n++; if(x.der) s.d++; s.dias[x.iso] = 1; });
+    const s = porSem[x.sem] || (porSem[x.sem] = {n:0, d:0, g:0, dias:{}}); s.n++; if(x.der) s.d++; if(x.gsa && x.der) s.g++; s.dias[x.iso] = 1; });
   DER_REF = {}; Object.keys(porSem).forEach(function(k){ DER_REF[k] = porSem[k].n ? 100 * porSem[k].d / porSem[k].n : 0; });
   const tit = document.getElementById('dvTitulo'); if(tit) tit.textContent = 'Derivación en ' + derNomTipo();
   const semanas = Object.keys(porSem).sort().reverse().slice(0, DER_SEMANAS);
@@ -11436,7 +11448,7 @@ function pintarDeriv(){
   supBox.innerHTML = '<div class="fila"><span class="rot">' + (enRango.length > 1 ? 'Semanas' : 'Semana') + '</span><div class="sems">' + semanas.map(function(k){
       const s = porSem[k], p = derPct(s.d, s.n);
       return '<button class="' + (k === derSem ? 'on' : (enRango.indexOf(k) >= 0 ? 'rng' : '')) + (p > DER_UMBRAL ? ' alto' : '') + '" onclick="setSemDeriv(\'' + k + '\')" title="Semana '
-        + derNumSemana(k) + ', ' + derRango(k) + ': ' + s.n + ' ' + derNomTipo() + ' visitadas, ' + s.d + ' derivadas">' + derNumSemana(k) + '<b>' + p + '%</b></button>';
+        + derNumSemana(k) + ', ' + derRango(k) + ': ' + s.n + ' ' + derNomTipo() + ' visitadas, ' + s.d + ' derivadas' + (s.g ? ' (' + s.g + ' GSA como derivada, como VTR; sin GSA ' + derPct(s.d - s.g, s.n) + '%)' : '') + '">' + derNumSemana(k) + '<b>' + p + '%</b>' + (s.g ? '<i class="mg-gsa in">' + s.g + ' GSA</i>' : '') + '</button>';
     }).join('') + '</div><span class="rango">' + (usaPer && typeof derAudPer === 'string' ? 'Mes de ' + derPerTxt(enRango)
         : enRango.length > 1
         ? 'Semanas ' + derNumSemana(enRango[0]) + ' a ' + derNumSemana(derSem) + ' · hasta el ' + ultIso.slice(6, 8) + '-' + ultIso.slice(4, 6)
@@ -11486,7 +11498,7 @@ function pintarDeriv(){
   };
 
   const tb = derTabla(derSem, derSup);
-  const tot = derTabla(derSem, derSup, true).reduce(function(a, o){ a.n += o.n; a.d += o.d; a.sm += o.sm; a.re += o.re; a.de += o.de; a.ot += o.ot; return a; }, {n:0,d:0,sm:0,re:0,de:0,ot:0});
+  const tot = derTabla(derSem, derSup, true).reduce(function(a, o){ a.n += o.n; a.d += o.d; a.sm += o.sm; a.re += o.re; a.de += o.de; a.ot += o.ot; a.gsa += o.gsa || 0; return a; }, {n:0,d:0,sm:0,re:0,de:0,ot:0,gsa:0});
   const nSobre = tb.filter(function(o){ return derSobre(o); }).length;
   const nDias = Object.keys(porSem[derSem].dias).length;
   const enCurso = nDias < 6 && derSem === semanas[0];
@@ -11519,7 +11531,7 @@ function pintarDeriv(){
   const pTot = tot.n ? (100 * tot.d / tot.n).toFixed(1).replace('.', ',') : '0';
   const nPocas = tb.filter(function(o){ return derPocas(o); }).length;
   let hT = '<div class="dv-hv-b">' + hvT('Cómo va la semana', 'semana ' + derNumSemana(derSem) + ' · ' + derRango(derSem) + (enCurso ? ' · en curso, ' + nDias + ' día' + (nDias === 1 ? '' : 's') + ' con datos' : ''))
-    + '<p class="dv-hv-f">De <b>' + tot.n + '</b> ' + derNomTipo() + ' visitadas, <b>' + tot.d + (tot.d === 1 ? ' se derivó' : ' se derivaron') + ': ' + pTot + '%</b>. '
+    + '<p class="dv-hv-f">De <b>' + tot.n + '</b> ' + derNomTipo() + ' visitadas, <b>' + tot.d + (tot.d === 1 ? ' se derivó' : ' se derivaron') + ': ' + pTot + '%</b>' + (tot.gsa ? ' <b class="mg-gsa-t">(incluye ' + tot.gsa + ' GSA como derivada, como VTR; sin GSA: ' + (100 * (tot.d - tot.gsa) / tot.n).toFixed(1).replace('.', ',') + '%)</b>' : '') + '. '
     + (nSobre ? '<b class="mal">' + nSobre + (nSobre === 1 ? ' técnico está' : ' técnicos están') + '</b> ' + DER_PUNTOS_EQ + ' puntos o más sobre el equipo.' : 'Ningún técnico está ' + DER_PUNTOS_EQ + ' puntos o más sobre el equipo.') + '</p>' 
     + '<div class="dv-hv-bar">' + hvSeg(tot.n - tot.d, 'ok', 'completadas') + hvSeg(tot.d, 'der', 'derivadas') + '</div>'
     + '<div class="dv-ley"><span><i style="background:#86cfa3"></i><b>' + (tot.n - tot.d) + '</b> completadas</span>'
@@ -11540,7 +11552,7 @@ function pintarDeriv(){
     hT += '<tr class="t' + (sobre ? ' sobre' : pocas ? ' pocas' : '') + '" onclick="verTecDeriv(' + i + ')" title="Toca para ver el detalle completo de sus derivadas">'
       + '<td>' + (derAbierto === i ? '▾ ' : '▸ ') + escR(derTitulo(o.tec)) + '<small>' + escR(derTitulo(o.sup)) + '</small>'
       +   (sobre ? '<span class="marca">sobre el equipo</span>' : pocas ? '<span class="marca pocas">pocas ' + derNomTipo() + '</span>' : '') + '</td>'
-      + '<td>' + o.n + '</td><td>' + (o.n - o.d) + '</td>' + cel(o.d) + '<td class="p">' + derPct(o.d, o.n) + '%</td>'
+      + '<td>' + o.n + '</td><td>' + (o.n - o.d) + '</td>' + cel(o.d) + '<td class="p">' + derPct(o.d, o.n) + '%' + (o.gsa ? '<i class="mg-gsa" title="' + o.gsa + ' GSA contada(s) como derivada (como VTR)">' + o.gsa + ' GSA · sin GSA ' + derPct(o.d - o.gsa, o.n) + '%</i>' : '') + '</td>'
       + '<td>' + tendHtml(o.tec) + '</td>' + cel(o.sm) + cel(o.re) + cel(o.de) + cel(o.ot) + '</tr>';
     if(derAbierto === i) hT += '<tr class="det"><td colspan="10">' + derDetalleHtml(o, i) + '</td></tr>';
   });
@@ -11645,7 +11657,8 @@ function rmHoy(){
       if(String(j.t || '').trim().toUpperCase().indexOf('MIGRA') !== 0) return;
       const e = String(j.e || '');
       if(e !== 'Completado' && e !== 'No Realizada') return;
-      const cod = String(j.cie || '').trim() || 'Sin código', der = e === 'No Realizada';
+      const gq = !!j.gsa && (typeof MP_GSA_QUIEBRE === 'undefined' || MP_GSA_QUIEBRE);      /* (29-10-2026, 19:15) GSA = quiebre (como VTR) */
+      const cod = gq ? 'GSA · Falla Aprovisionamiento' : (String(j.cie || '').trim() || 'Sin código'), der = e === 'No Realizada' || gq;
       const prev = (Array.isArray(j.prev) ? j.prev : []).filter(function(v){ return !v.gsa; });
       const g = der ? derGrupo(cod) : '';
       out.push({ iso: iso, f: String(f.getDate()).padStart(2, '0') + '-' + String(f.getMonth() + 1).padStart(2, '0'), ot: String(j.o || ''),
@@ -12791,7 +12804,7 @@ function hoyBotonHtml(fecha, nAct, co, nr, nIni, caidas){
           + '<span class="hb-top"><span class="hb-nm">MIGRACIONES</span><span class="hb-fl">›</span></span>'
           + '<span class="hb-fe">Derivación y seguimiento del día</span>'
           + '<span class="hb-row">'
-          +   ch(d + ' derivadas hoy', d ? 'bad' : '')
+          +   ch(d + ' derivadas hoy', d ? 'bad' : '') + (c && c.g ? ch(c.g + ' GSA', 'gsa') : '')
           +   ch(v + ' visitadas')
           +   (comp === null ? '' : ch(comp.toFixed(1).replace('.', ',') + '% completitud · meta 60%', comp >= 60 ? 'ok' : 'bad'))
           + '</span></button>'; })()
@@ -12961,7 +12974,7 @@ function mpSinGSA(s, cls){ return s && s.g && MP_GSA_QUIEBRE ? '<small class="mp
 function mpSt(L){
   const s = { co:0, nr:0, ab:0, ini:0, g:0, resp:{cli:0, vtr:0, dom:0}, rcod:{cli:{}, vtr:{}, dom:{}} };
   L.forEach(function(x){
-    if(x.e === 'Completado' && x.gsa && MP_GSA_QUIEBRE){ s.g++; s.nr++; s.resp.vtr++; s.rcod.vtr['GSA · Falla Aprovisionamiento'] = (s.rcod.vtr['GSA · Falla Aprovisionamiento'] || 0) + 1; }
+    if(x.gsa && MP_GSA_QUIEBRE && (x.e === 'Completado' || x.e === 'No Realizada')){ s.g++; s.nr++; s.resp.vtr++; s.rcod.vtr['GSA · Falla Aprovisionamiento'] = (s.rcod.vtr['GSA · Falla Aprovisionamiento'] || 0) + 1; }
     else if(x.e === 'Completado') s.co++;
     else if(x.e === 'No Realizada'){ s.nr++; const c = x.cod || 'Sin código', r = mgResp(c); s.resp[r]++; s.rcod[r][c] = (s.rcod[r][c] || 0) + 1; }
     else if(x.e !== 'Cancelado' && x.e !== 'Suspendido'){ s.ab++; if(x.e === 'Iniciado' || x.e === 'en ruta') s.ini++; }
@@ -13032,9 +13045,9 @@ function mpSemHtml(k, SEM, semHoy, dia){
     + '<p>Migraciones de técnicos de Dominion' + (cur ? ' · hoy en vivo' : '') + ' · meta VTR/CLARO ' + MP_META + '% de completitud</p></div>'
     + '<button class="ms-x" onclick="mpSemCerrar()" title="Cerrar (Esc)">✕</button></div>'
     + '<div class="ms-tabs">'
-    + (function(){ const t = mpSt(TODO); return '<button class="ms-tab tot' + (!dia ? ' on' : '') + '" onclick="mpSemDia(null)"><span class="d">Total de la semana</span><span class="p ' + col(t.comp) + '">' + mpPc(t.comp) + '</span><span class="q">' + TODO.length + ' llegaron</span></button>'; })()
+    + (function(){ const t = mpSt(TODO); return '<button class="ms-tab tot' + (!dia ? ' on' : '') + '" onclick="mpSemDia(null)"><span class="d">Total de la semana</span><span class="p ' + col(t.comp) + '">' + mpPc(t.comp) + '</span>' + mpSinGSA(t, 'tab') + '<span class="q">' + TODO.length + ' llegaron</span></button>'; })()
     + dias.map(function(iso){ const t = mpSt(D[iso]);
-        return '<button class="ms-tab' + (dia === iso ? ' on' : '') + '" onclick="mpSemDia(\'' + iso + '\')"><span class="d">' + MP_DCORTO[fDia(iso)] + ' ' + ddmm(iso) + '</span><span class="p ' + col(t.comp) + '">' + mpPc(t.comp) + '</span><span class="q">' + D[iso].length + ' llegaron</span></button>'; }).join('')
+        return '<button class="ms-tab' + (dia === iso ? ' on' : '') + '" onclick="mpSemDia(\'' + iso + '\')"><span class="d">' + MP_DCORTO[fDia(iso)] + ' ' + ddmm(iso) + '</span><span class="p ' + col(t.comp) + '">' + mpPc(t.comp) + '</span>' + mpSinGSA(t, 'tab') + '<span class="q">' + D[iso].length + ' llegaron</span></button>'; }).join('')
     + '</div>';
 
   h += '<div class="ms-cuerpo"><h3 class="ms-qt">' + qTit + '</h3>';
@@ -13053,7 +13066,7 @@ function mpSemHtml(k, SEM, semHoy, dia){
   const filaDia = function(iso){ const l = D[iso], t = mpSt(l);
     const c = l.filter(x => x.e === 'Cancelado' || x.e === 'Suspendido').length;
     return '<tr class="ms-cl" onclick="mpSemDia(\'' + iso + '\')" title="Ver solo este día"><td>' + MP_DIAS[fDia(iso)] + ' <small>' + ddmm(iso) + '</small></td><td class="nu">' + l.length + '</td><td class="nu ok">' + t.co + '</td><td class="nu bad">' + t.nr + '</td>'
-      + '<td class="nu">' + (c || '–') + '</td><td class="nu">' + (t.ab || '–') + '</td><td class="nu"><span class="ad-tag ' + col(t.comp) + '">' + mpPc(t.comp) + '</span></td><td class="ms-ir">›</td></tr>'; };
+      + '<td class="nu">' + (c || '–') + '</td><td class="nu">' + (t.ab || '–') + '</td><td class="nu"><span class="ad-tag ' + col(t.comp) + '">' + mpPc(t.comp) + '</span>' + mpSinGSA(t) + '</td><td class="ms-ir">›</td></tr>'; };
   const st = mpSt(TODO), cT = TODO.filter(x => x.e === 'Cancelado' || x.e === 'Suspendido').length;
   const grp = function(r){
     const q = s.resp[r], cods = s.rcod[r], top = Object.keys(cods).sort((x, y) => cods[y] - cods[x]).slice(0, 5);
@@ -13066,7 +13079,7 @@ function mpSemHtml(k, SEM, semHoy, dia){
   if(!dia) h += '<div class="ad-dos">'
     + '<div class="ms-sub"><h4>Día a día <small>toca un día para verlo solo</small></h4><div class="ad-tbl"><table><thead><tr><th>Día</th><th>Llegaron</th><th>Completadas</th><th>No realiz.</th><th>Cancel.</th><th>Sin cerrar</th><th>Completitud</th><th></th></tr></thead><tbody>'
     +   dias.map(filaDia).join('')
-    +   '<tr class="ms-tot"><td>Total semana</td><td class="nu">' + TODO.length + '</td><td class="nu ok">' + st.co + '</td><td class="nu bad">' + st.nr + '</td><td class="nu">' + (cT || '–') + '</td><td class="nu">' + (st.ab || '–') + '</td><td class="nu"><span class="ad-tag ' + col(st.comp) + '">' + mpPc(st.comp) + '</span></td><td></td></tr>'
+    +   '<tr class="ms-tot"><td>Total semana</td><td class="nu">' + TODO.length + '</td><td class="nu ok">' + st.co + '</td><td class="nu bad">' + st.nr + '</td><td class="nu">' + (cT || '–') + '</td><td class="nu">' + (st.ab || '–') + '</td><td class="nu"><span class="ad-tag ' + col(st.comp) + '">' + mpPc(st.comp) + '</span>' + mpSinGSA(st) + '</td><td></td></tr>'
     +   '</tbody></table></div></div>' + causa + '</div>';
   else h += causa;
 
@@ -13079,19 +13092,19 @@ function mpSemHtml(k, SEM, semHoy, dia){
     + ft.map(o => { const poco = o.s.vis < MP_POCAS;
         return '<tr><td>' + nom(o.t) + '</td><td class="nu">' + o.s.vis + '</td><td class="nu ok">' + o.s.co + '</td><td class="nu bad">' + o.s.nr + '</td>'
           + '<td class="nu">' + (o.s.resp.vtr || '–') + '</td><td class="nu">' + (o.s.resp.cli || '–') + '</td><td class="nu">' + (o.s.resp.dom ? '<b>' + o.s.resp.dom + '</b>' : '–') + '</td>'
-          + '<td class="nu"><span class="ad-tag ' + (poco ? 'gr' : col(o.s.comp)) + '">' + mpPc(o.s.comp) + '</span></td></tr>'; }).join('')
+          + '<td class="nu"><span class="ad-tag ' + (poco ? 'gr' : col(o.s.comp)) + '">' + mpPc(o.s.comp) + '</span>' + mpSinGSA(o.s) + '</td></tr>'; }).join('')
     + '</tbody></table></div>' : '<p class="ad-vacio">Sin visitas.</p>') + '</div>';
 
   /* 4. LISTA de las que no se completaron (desplegable) */
-  const NC = L.filter(x => x.e === 'No Realizada' || x.e === 'Cancelado' || x.e === 'Suspendido' || (x.gsa && x.e === 'Completado' && MP_GSA_QUIEBRE))
+  const NC = L.filter(x => x.e === 'No Realizada' || x.e === 'Cancelado' || x.e === 'Suspendido' || (x.gsa && MP_GSA_QUIEBRE))
     .sort((x, y) => x.iso.localeCompare(y.iso) || String(x.tec).localeCompare(String(y.tec)));
   const ab = !!window.MP_SEM_LST;
   h += '<div class="ms-sub"><button class="mp-desp' + (ab ? ' ab' : '') + '" onclick="window.MP_SEM_LST=!window.MP_SEM_LST; mpSemPintar()">'
     + '<h4>Las ' + NC.length + ' que no se completaron, una por una</h4><span class="mp-dsub">' + (ab ? 'Ocultar' : 'Ver la lista') + ' <i>▾</i></span></button>'
     + (!ab ? '' : '<div class="ad-tbl"><table><thead><tr><th>Día</th><th>Orden</th><th>Técnico</th><th>Estado</th><th>Código de cierre</th><th>De quién</th></tr></thead><tbody>'
-      + NC.map(x => { const r = x.e === 'No Realizada' ? mgResp(x.cod) : (x.gsa ? 'vtr' : null);
+      + NC.map(x => { const r = x.gsa && MP_GSA_QUIEBRE ? 'vtr' : x.e === 'No Realizada' ? mgResp(x.cod) : null;
           return '<tr><td class="nu">' + MP_DCORTO[fDia(x.iso)] + ' ' + ddmm(x.iso) + '</td><td class="nu">' + escR(x.ot) + '</td><td>' + nom(x.tec) + '</td>'
-            + '<td><span class="ad-tag ' + (x.e === 'No Realizada' || x.gsa ? 'bad' : 'gr') + '">' + (x.gsa && x.e === 'Completado' ? 'GSA (quiebre VTR)' : x.e) + '</span></td><td>' + escR(x.cod || '–') + '</td>'
+            + '<td><span class="ad-tag ' + (x.e === 'No Realizada' || x.gsa ? 'bad' : 'gr') + '">' + (x.gsa && MP_GSA_QUIEBRE ? 'GSA (quiebre VTR)' : x.e) + '</span></td><td>' + escR(x.cod || '–') + '</td>'
             + '<td>' + (r ? '<span class="ms-dot" style="background:' + MG_RCOL[r] + '"></span>' + { cli:'Cliente', vtr:'VTR/CLARO', dom:'Dominion' }[r] : '–') + '</td></tr>'; }).join('')
       + '</tbody></table></div>')
     + '</div>';
@@ -13323,7 +13336,7 @@ function migPaginaHtml(){
         : '<p class="ad-vacio">' + (cargando && per !== 'hoy' ? 'Cargando…' : 'Ninguna derivada en este período.') + '</p>')
     + '</div>'
     + '<div class="ad-card mp-def"><h3>Para la reunión con VTR/CLARO</h3>'
-    +   '<div class="mp-dl"><span>Completitud real</span><b class="' + col(S.comp) + '">' + mpPc(S.comp) + '</b></div>'
+    +   '<div class="mp-dl"><span>Completitud real' + (S.g ? '<small>como mide VTR (GSA = quiebre) · sin GSA: ' + mpPc(S.compSG) + '</small>' : '') + '</span><b class="' + col(S.comp) + '">' + mpPc(S.comp) + '</b></div>'
     +   '<div class="mp-dl"><span>Sin las causas de VTR/CLARO<small>dirección, NAP, red, factibilidad, contingencia…</small></span><b class="' + col(sinVtr) + '">' + mpPc(sinVtr) + '</b></div>'
     /* (REDISEÑO 28-10-2026, 18:38) se saca "Solo lo que depende de Dominion": con la regla de Gerencia casi siempre da 100 % y le quita credibilidad frente a VTR */
     +   '<p class="ad-nota">' + S.resp.vtr + ' de las ' + S.nr + ' derivadas tienen causa de VTR/CLARO y ' + S.resp.cli + ' son del cliente.</p>'
@@ -15542,6 +15555,9 @@ async function bajarMigGer(){
     }
   } catch(e){ console.warn('migger visitas:', e); }
   const resp = (await pResp) || mgRespLeer();      // (22-10) si Google no respondio, la ultima copia guardada
+  /* (29-10-2026, 19:15) como VTR: la migracion cerrada por GSA cuenta como NO REALIZADA (causa VTR/CLARO) en todo
+     lo que usa MG (Gerencia, Por tecnico, Direcciones, pagina MIGRACIONES). Queda x.gsa para el morado. */
+  if(typeof MP_GSA_QUIEBRE === 'undefined' || MP_GSA_QUIEBRE) filas.forEach(function(x){ if(x.gsa && x.e === 'Completado'){ x.e = 'No Realizada'; x.cod = 'GSA · Falla Aprovisionamiento'; } });
   return { filas: filas, porOT: porOT, completo: completo, vis: vis, resp: resp, fuera: fuera, dirCa: dirCa };
 }
 function abrirMigGer(){
@@ -15597,6 +15613,7 @@ function mgAgrupar(){
     o.a++; o.dias[x.iso] = 1; if(x.otra) o.otra++;
     if(x.tec){ o.tecs[x.tec] = 1; o.td[x.iso + '|' + x.tec] = 1; }
     if(x.otra){ if(x.e === 'Completado') o.oco++; else if(x.e === 'No Realizada') o.onr++; }
+    if(x.gsa && x.e === 'No Realizada') o.g = (o.g || 0) + 1;      /* (29-10-2026, 19:15) GSA contada como quiebre */
     if(x.e === 'Completado') o.co++;
     else if(x.e === 'No Realizada'){ o.nr++; const c = x.cod || 'Sin código'; o.cod[c] = (o.cod[c] || 0) + 1; o.fam[MG_FAM(c)]++;
       const r = mgResp(c); o.resp[r]++; o.rcod[r][c] = (o.rcod[r][c] || 0) + 1; o.nrl.push(x); }
@@ -15666,7 +15683,7 @@ function pintarMigGer(){
       const o = P[k], d = mgPct(o.nr, o.co + o.nr);
       return '<button class="' + (k === mgSel ? 'on' : '') + '" onclick="setMgSel(\'' + k + '\')" title="% de derivación">'
         + (mgVer === 'mes' ? MG_MESES[+k.slice(4) - 1] : 'Sem ' + derNumSemana(k))
-        + '<b class="' + (d > MG_META_DER ? 'sobre' : 'ok') + '">' + Math.round(d) + '%</b></button>'; }).join('') + '</div>'
+        + '<b class="' + (d > MG_META_DER ? 'sobre' : 'ok') + '">' + Math.round(d) + '%</b>' + (o.g ? '<i class="mg-gsa" title="' + o.g + ' GSA contada(s) como quiebre (como VTR). Sin GSA: ' + Math.round(mgPct(o.nr - o.g, o.co + o.nr)) + '% de derivación">' + o.g + ' GSA</i>' : '') + '</button>'; }).join('') + '</div>'
     + '<span class="mg-meta">Meta VTR/CLARO de derivación: <b>' + MG_META_DER + '% o menos</b> · interna ' + MG_META_INT + '%</span>'
     + (mgTab === 'ger' ? mgSaltosHtml() : '');
   const i = ks.indexOf(mgSel), o = P[mgSel], a = i > 0 ? P[ks[i - 1]] : null;
@@ -16214,7 +16231,7 @@ function mgResumenHtml(o, a, k, kA, cur){
     + '<div class="mg-res">'
     + t('graf', '#1d4ed8', 'Llegaron', U, 'migraciones a nuestras bandejas: <b class="v">' + Math.round(pCo) + '</b> de cada 100 se completaron.',
         mgF1(prom) + ' por día' + (promA !== null ? ' · ' + mgCmpN(prom, promA, nomA) : ''), 'Ver semana a semana')
-    + t('graf', pDer > MG_META_DER ? '#dc2626' : '#15803d', 'Derivación', mgF1(pDer) + '%', 'de lo visitado no se pudo hacer. Meta VTR/CLARO: ' + MG_META_DER + '% o menos (interna ' + MG_META_INT + '%).',
+    + t('graf', pDer > MG_META_DER ? '#dc2626' : '#15803d', 'Derivación', mgF1(pDer) + '%', 'de lo visitado no se pudo hacer. Meta VTR/CLARO: ' + MG_META_DER + '% o menos (interna ' + MG_META_INT + '%).' + (o.g ? ' <b class="mg-gsa-t">Incluye ' + o.g + ' GSA como quiebre (como VTR); sin GSA: ' + mgF1(mgPct(o.nr - o.g, o.co + o.nr)) + '%.</b>' : ''),
         mgMeta(pDer) + (pDerA !== null ? '<br>' + mgCmp(pDer, pDerA, true, nomA) : ''), 'Ver semana a semana')
     + (nc ? t('quien', '#d97706', 'De quién depende', Math.round(mgPct(Rr.cli, nc)) + '%',
         'de lo que no se completó fue por el <b>cliente</b>; ' + Math.round(mgPct(Rr.vtr, nc)) + '% VTR/CLARO y <b class="r">' + Math.round(mgPct(Rr.dom, nc)) + '%</b> Dominion.',
@@ -16724,7 +16741,7 @@ function mgTablaHtml(P, ks, enCurso){
     ['Resultado'],
     ['Completadas', function(o){ return o.co + ' <small>' + Math.round(mgPct(o.co, o.u)) + '%</small>'; }],
     ['No realizadas', function(o){ return o.nr; }],
-    ['% derivación (meta ' + MG_META_DER + '% o menos)', function(o){ const p = mgPct(o.nr, o.co + o.nr); return '<b class="' + (p > MG_META_DER ? 'mg-sobre' : 'mg-ok') + '">' + mgF1(p) + '%</b>'; }, 'der'],
+    ['% derivación (meta ' + MG_META_DER + '% o menos)', function(o){ const p = mgPct(o.nr, o.co + o.nr); return '<b class="' + (p > MG_META_DER ? 'mg-sobre' : 'mg-ok') + '">' + mgF1(p) + '%</b>' + (o.g ? '<i class="mg-gsa" title="' + o.g + ' GSA como quiebre">sin GSA ' + mgF1(mgPct(o.nr - o.g, o.co + o.nr)) + '%</i>' : ''); }, 'der'],
     ['Visitas perdidas por día', function(o){ const n = Object.keys(o.dias).length; return n ? mgF1(o.nr / n) : '–'; }],
     ['Horas-técnico perdidas', function(o){ const H = mgHorasCalc(o), n = Object.keys(o.dias).length; return H ? '≈ ' + mgHorasTxt(H.total) + ' <small>' + mgF1(n ? H.total / n : 0) + '/día</small>' : '–'; }],
     ['Completadas por técnico al día', function(o){ const n = Object.keys(o.td).length; return n ? mgF1(o.co / n) : '–'; }],
@@ -17101,7 +17118,7 @@ var EV_POCAS = 3;
 var EV_DCORTO = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
 function evLunes(iso){ const d = new Date(+iso.slice(0, 4), +iso.slice(4, 6) - 1, +iso.slice(6, 8)); d.setDate(d.getDate() - (d.getDay() + 6) % 7);
   return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
-function evSt(l){ const s = { co:0, nr:0, g:0 }; l.forEach(x => { if(x.e === 'Completado' && x.gsa && MP_GSA_QUIEBRE){ s.g++; s.nr++; } else if(x.e === 'Completado') s.co++; else if(x.e === 'No Realizada') s.nr++; });
+function evSt(l){ const s = { co:0, nr:0, g:0 }; l.forEach(x => { if(x.gsa && MP_GSA_QUIEBRE && (x.e === 'Completado' || x.e === 'No Realizada')){ s.g++; s.nr++; } else if(x.e === 'Completado') s.co++; else if(x.e === 'No Realizada') s.nr++; });
   s.vis = s.co + s.nr; s.comp = s.vis ? 100 * s.co / s.vis : null; s.compSG = s.vis ? 100 * (s.co + s.g) / s.vis : null; return s; }   /* (29-10-2026, 18:45) GSA = quiebre (como VTR) */
 /* rotulo de la semana con los dias que de verdad tienen datos ("1 al 3 oct" si la semana parte en otro mes) */
 function evRango(s){ if(!s.d1) return derRango(s.k); const a = s.d1, b = s.d2, M = DER_MESES;
@@ -17283,7 +17300,7 @@ function svEvoHtml(FT, nomT){
     + '</tbody></table></div><p class="ad-nota">"Desde la lista" son pocos días: con menos de 5 visitas el cambio dice <b>pocas</b> y todavía no sirve para sacar conclusiones.</p></div>';
 
   /* 3. TARJETAS */
-  h += '<div class="sv-grid">' + filas.map(o => '<button class="sv-card" onclick="svEvoAbrir(' + o.i + ')"><div class="sv-ch"><b>' + nomT(o.nom) + '</b>' + tag(o.ad.m.comp) + '<span class="sv-cs">' + (totTxt.indexOf('desde') === 0 ? '' : 'en ') + totTxt + '</span><span class="sv-ver">Ver todo ›</span></div>'
+  h += '<div class="sv-grid">' + filas.map(o => '<button class="sv-card" onclick="svEvoAbrir(' + o.i + ')"><div class="sv-ch"><b>' + nomT(o.nom) + '</b>' + tag(o.ad.m.comp) + '<span class="sv-cs">' + (totTxt.indexOf('desde') === 0 ? '' : 'en ') + totTxt + '</span>' + (o.ad.m.g ? ' <span class="mp-sg in" title="' + o.ad.m.g + ' GSA: VTR la cuenta como quiebre">sin GSA ' + evPc(o.ad.m.compSG) + '</span>' : '') + '<span class="sv-ver">Ver todo ›</span></div>'
       + '<div class="sv-cs">Antes de la lista: ' + evPc(o.ad.a.comp) + ' (' + o.ad.a.co + ' de ' + o.ad.a.vis + ') · desde la lista: ' + (o.ad.d.vis ? evPc(o.ad.d.comp) + ' (' + o.ad.d.co + ' de ' + o.ad.d.vis + ') ' + fl(o.ad.dif, o.ad.d.vis) : 'sin visitas') + '</div>'
       + evSvg(svEvoPuntos(o.D, nomT(o.nom), 'la zona', true), { ancho:700, alto:240, meta:MP_META, pocas:EV_POCAS, etiq:true, marca:svEvoMarca(o.D), marcaTxt:'lista VTR' }) + '</button>').join('') + '</div>';
   return h;
@@ -17302,7 +17319,7 @@ function evHtmlOct(F, t){
   const nomT = x => String(x).toLowerCase().replace(/(^|\s)\S/g, c => c.toUpperCase());
   const ad = svAD(F, x => x.tec === t), zz = svAD(F, () => true);
   const cl = ad.dif === null ? 'gr' : ad.d.vis < 5 ? 'gr' : ad.dif >= 3 ? 'ok' : ad.dif <= -3 ? 'bad' : 'wa';
-  const fr = '<div class="ev-fr ' + cl + '">' + (F.every(x => x.iso.slice(0, 6) === SV_INI.slice(0, 6)) ? DER_MESES_NOM[+SV_INI.slice(4, 6) - 1].replace(/^./, c => c.toUpperCase()) : 'Desde el ' + +SV_INI.slice(6) + ' ' + DER_MESES[+SV_INI.slice(4, 6) - 1]) + ': <b>' + evPc(ad.m.comp) + '</b> (' + ad.m.co + ' de ' + ad.m.vis + ') vs ' + evPc(zz.m.comp) + ' la zona · antes de la lista: <b>' + evPc(ad.a.comp) + '</b> (' + ad.a.co + ' de ' + ad.a.vis + ') · desde la lista: <b>'
+  const fr = '<div class="ev-fr ' + cl + '">' + (F.every(x => x.iso.slice(0, 6) === SV_INI.slice(0, 6)) ? DER_MESES_NOM[+SV_INI.slice(4, 6) - 1].replace(/^./, c => c.toUpperCase()) : 'Desde el ' + +SV_INI.slice(6) + ' ' + DER_MESES[+SV_INI.slice(4, 6) - 1]) + ': <b>' + evPc(ad.m.comp) + '</b> (' + ad.m.co + ' de ' + ad.m.vis + ')' + (ad.m.g ? ' <span class="mp-sg in" title="' + ad.m.g + ' GSA: VTR la cuenta como quiebre">sin GSA ' + evPc(ad.m.compSG) + '</span>' : '') + ' vs ' + evPc(zz.m.comp) + ' la zona · antes de la lista: <b>' + evPc(ad.a.comp) + '</b> (' + ad.a.co + ' de ' + ad.a.vis + ') · desde la lista: <b>'
     + (ad.d.vis ? evPc(ad.d.comp) + '</b> (' + ad.d.co + ' de ' + ad.d.vis + ')' + (ad.dif !== null ? ' → ' + (ad.dif > 0 ? '▲ ' : '▼ ') + evPc(Math.abs(ad.dif)).replace('%', '') + ' pts' : '') + (ad.d.vis < 5 ? ' · <i>pocas visitas todavía</i>' : '') : 'sin visitas</b>') + '</div>';
   const h = evHtml(F, t, nomT, SV_DESDE);
   /* se cambia la frase de 4 semanas por la de octubre, y los rotulos de semana por los dias reales */
@@ -17348,7 +17365,7 @@ function pintarSegVtrTabla(){
   const nuevo = function(){ const o = { mesA:{c:0,v:0}, mes:{c:0,v:0}, hoy:{c:0,v:0}, sup:'' }; SEMS.forEach(function(s){ o[s] = {c:0,v:0}; }); return o; };
   const C = SV_TECS.map(nuevo), T = nuevo();
   /* (29-10-2026, 18:45) como VTR: la GSA es quiebre; o.g las cuenta para mostrar "sin GSA" */
-  const suma = function(o, x){ o.v++; if(x.gsa && !x.der && MP_GSA_QUIEBRE){ o.g = (o.g || 0) + 1; return; } if(!x.der) o.c++; };
+  const suma = function(o, x){ o.v++; if(x.gsa && MP_GSA_QUIEBRE){ o.g = (o.g || 0) + 1; return; } if(!x.der) o.c++; };
   filas.forEach(function(x){
     const i = svDe(x.tec); if(i < 0) return; const o = C[i]; if(x.sup) o.sup = x.sup;
     const k = [];
