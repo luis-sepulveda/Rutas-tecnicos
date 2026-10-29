@@ -3349,6 +3349,290 @@
   /* EVOLUCION POR MES (21-10-2026): selector Semanas | Meses */
   .dv-evo-per { display:flex; align-items:center; gap:10px; margin:0 0 12px; }
   .dv-evo-per > span { font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#64748b; }
+
+/* ==== (REDISEÑO 28-10-2026) TARJETA INICIO DE JORNADA AJUSTADA ==== */
+.pa-grid { align-items:start; }
+.pa-lado { align-self:start; height:auto; gap:18px; }
+.pa-lineas { display:none; }
+.pa-tit-ini { display:flex; align-items:center; justify-content:space-between; width:100%; padding:12px 16px; border:1px solid rgba(255,255,255,.25); border-radius:10px; background:rgba(255,255,255,.08); color:#fff; font-size:20px; font-weight:800; font-family:inherit; text-align:left; cursor:pointer; }
+.pa-tit-ini:hover { background:rgba(255,255,255,.16); border-color:#60a5fa; }
+.pa-tit-ini span { font-size:24px; color:#93c5fd; }
+.pa-ani .tx small.ef-vis { color:#86efac; margin-top:6px; }
+
+/* ==== (REDISEÑO 28-10-2026, 15:00) solo la tarjeta Inicio de jornada ==== */
+.pa-der { display:none !important; }
+.pa-grid { grid-template-columns:minmax(0,380px) !important; }
+
+/* ==== (REDISEÑO 28-10-2026, 15:06) tarjeta Inicio de jornada mas compacta ==== */
+.pa-grid { grid-template-columns:minmax(0,350px) !important; }
+.pa-lado { padding:16px 18px !important; gap:12px !important; }
+.pa-tit-ini { padding:9px 14px; font-size:18px; }
+.pa-tit-ini span { font-size:20px; }
+.pa-lado .pa-fe { font-size:17px; }
+.pa-lado .pa-sub { margin-top:2px; }
+.pa-lado .pa-tecl { margin-top:6px; gap:6px; font-size:13px; }
+.pa-ani { gap:12px; }
+.pa-ani .tx b { font-size:30px; }
+.pa-ani .tx small { font-size:11.5px; }
+
+/* ==== (REDISEÑO 28-10-2026, 15:26) sin los botones de la barra de arriba (Rutas, Historico diario, Resumen WhatsApp, Migraciones) ==== */
+#portada .pv-seg { display:none !important; }
+
+/* ==== (REDISEÑO 28-10-2026, 15:29) tarjetas por actividad ==== */
+.pa-grid { grid-template-columns:minmax(0,350px) minmax(0,1fr) !important; align-items:start; }
+.pa-acts { display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:16px; }
+.pa-act { background:#fff; border:1px solid #dbe3ee; border-top:4px solid var(--c); border-radius:14px; padding:16px 18px; display:flex; flex-direction:column; gap:10px; }
+.pa-act.vacia { border-top-color:#cbd5e1; color:#64748b; }
+.pa-act .hd { display:flex; justify-content:space-between; align-items:baseline; }
+.pa-act .nm { font-size:19px; font-weight:800; color:#13213c; }
+.pa-act .tot { font-size:34px; font-weight:800; color:var(--c); font-variant-numeric:tabular-nums; }
+.pa-act .sb { font-size:12.5px; color:#64748b; }
+.pa-act .sb b { color:#13213c; }
+.pa-act .br { display:flex; height:22px; border-radius:6px; overflow:hidden; background:#eef2f7; }
+.pa-act .br span { display:flex; align-items:center; justify-content:center; min-width:20px; font-size:11px; font-weight:700; color:#fff; }
+.pa-act .br .c { background:#0e7c6b; } .pa-act .br .n { background:#d04a46; } .pa-act .br .i { background:#1d4ed8; } .pa-act .br .p { background:#93c5fd; color:#13213c; } .pa-act .br .x { background:#c3d2e0; color:#13213c; }
+.pa-act .nums { display:flex; flex-wrap:wrap; gap:4px 14px; font-size:13px; color:#475569; }
+.pa-act .nums b { font-size:16px; color:#13213c; } .pa-act .nums b.ok { color:#0e7c6b; } .pa-act .nums b.bad { color:#d04a46; }
+.pa-act .ef { font-size:13px; color:#475569; border-top:1px solid #eef2f7; padding-top:8px; }
+.pa-act .ef b { font-size:16px; color:#13213c; } .pa-act .ef .sd { color:#94a3b8; }
+@media (max-width:900px){ .pa-grid { grid-template-columns:1fr !important; } }
+
+/* ==== (REDISEÑO 28-10-2026, 15:33) detalle de Migraciones ==== */
+.pa-act.act-on { cursor:pointer; text-align:left; font-family:inherit; }
+.pa-act.act-on:hover { box-shadow:0 0 0 2px var(--c); }
+.pa-act .ver { float:right; font-weight:700; color:var(--c); }
+.ad { display:flex; flex-direction:column; gap:18px; }
+.ad-bar { display:flex; flex-wrap:wrap; align-items:center; gap:14px; }
+.ad-volver { min-height:44px; padding:0 16px; border:2px solid #d3d8e2; border-radius:10px; background:#fff; color:#13213c; font-size:16px; font-weight:600; font-family:inherit; cursor:pointer; }
+.ad-volver:hover { border-color:#2563eb; }
+.ad-tit { font-size:26px; font-weight:800; color:#13213c; }
+.ad-sub { font-size:14px; color:#64748b; }
+.ad-ks { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:14px; }
+.ad-k { background:#fff; border:1px solid #dbe3ee; border-radius:14px; padding:14px 16px; display:flex; flex-direction:column; gap:4px; }
+.ad-k .l { font-size:13px; font-weight:600; color:#64748b; }
+.ad-k .v { font-size:36px; font-weight:800; color:#13213c; font-variant-numeric:tabular-nums; line-height:1.05; }
+.ad-k .s { font-size:12.5px; color:#64748b; }
+.ad-k.ok .v { color:#0e7c6b; } .ad-k.bad .v { color:#d04a46; }
+.ad-k.main { background:#13213c; border-color:#13213c; } .ad-k.main .v { color:#fff; } .ad-k.main .l, .ad-k.main .s { color:#b9c3d6; }
+.ad-dos { display:grid; grid-template-columns:minmax(0,1.3fr) minmax(0,1fr); gap:18px; }
+.ad-card { background:#fff; border:1px solid #dbe3ee; border-radius:14px; padding:16px 18px; display:flex; flex-direction:column; gap:10px; min-width:0; }
+.ad-card h3 { margin:0; font-size:17px; font-weight:800; color:#13213c; }
+.ad-tbl { overflow-x:auto; }
+.ad-tbl table { width:100%; border-collapse:collapse; font-size:13.5px; }
+.ad-tbl th { text-align:left; font-size:11.5px; text-transform:uppercase; letter-spacing:.04em; color:#64748b; padding:7px 8px; border-bottom:2px solid #e5eaf2; white-space:nowrap; }
+.ad-tbl td { padding:8px; border-bottom:1px solid #eef2f7; color:#13213c; vertical-align:top; }
+.ad-tbl td.nu { font-variant-numeric:tabular-nums; white-space:nowrap; }
+.ad-tbl td.ok { color:#0e7c6b; font-weight:700; } .ad-tbl td.bad { color:#d04a46; font-weight:700; }
+.ad-tbl tr.sv td { background:#fff8eb; }
+.ad-tag { display:inline-block; padding:2px 8px; border-radius:10px; font-size:12px; font-weight:700; }
+.ad-tag.ok { background:#e7f4ec; color:#0e7c6b; } .ad-tag.bad { background:#fdecec; color:#b91c1c; } .ad-tag.wa { background:#fff1ea; color:#c2410c; } .ad-tag.gr { background:#eef2f7; color:#334155; }
+.ad-causas { display:flex; flex-direction:column; gap:8px; }
+.ad-cau { display:grid; grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) 34px; align-items:center; gap:10px; font-size:13.5px; color:#13213c; }
+.ad-cau .pista { height:12px; background:#eef2f7; border-radius:6px; overflow:hidden; } .ad-cau .pista i { display:block; height:100%; background:#d04a46; }
+.ad-cau b { text-align:right; }
+.ad-vacio { margin:0; color:#94a3b8; font-size:14px; }
+.ad-nota { margin:0; font-size:12.5px; color:#64748b; }
+.ad-mas { display:flex; flex-wrap:wrap; gap:10px; }
+.ad-mas button { min-height:44px; padding:0 16px; border:1px solid #d3d8e2; border-radius:10px; background:#fff; color:#13213c; font-size:14.5px; font-weight:600; font-family:inherit; cursor:pointer; }
+.ad-mas button:hover { border-color:#2563eb; }
+@media (max-width:1100px){ .ad-ks { grid-template-columns:repeat(3,minmax(0,1fr)); } .ad-dos { grid-template-columns:1fr; } }
+
+/* ==== (REDISEÑO 28-10-2026, 15:56) boton HOY ==== */
+.hb-wrap { display:flex; }
+.hb { display:flex; flex-direction:column; align-items:flex-start; gap:12px; width:100%; max-width:760px; padding:28px 32px; border:0; border-radius:18px; background:#13213c; color:#fff; text-align:left; cursor:pointer; font-family:inherit; }
+.hb:hover { box-shadow:0 0 0 3px #60a5fa; }
+.hb-top { display:flex; justify-content:space-between; align-items:center; width:100%; }
+.hb-nm { font-size:48px; font-weight:800; letter-spacing:.03em; line-height:1; }
+.hb-fl { font-size:40px; color:#93c5fd; }
+.hb-fe { font-size:18px; color:#c7cedb; }
+.hb-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:6px; }
+.hb-ch { padding:7px 13px; border-radius:16px; background:rgba(255,255,255,.12); font-size:15px; font-weight:600; }
+.hb-ch.ok { background:rgba(52,211,153,.2); color:#a7f3d0; } .hb-ch.bad { background:rgba(248,113,113,.2); color:#fecaca; }
+.hoy-bar { margin-bottom:16px; }
+
+/* ==== (REDISEÑO 28-10-2026, 16:19) Requiere atencion bajo el Inicio de jornada ==== */
+.pa-izq { display:flex; flex-direction:column; gap:16px; min-width:0; }
+.pa-izq .pa-at { background:#fff; border:1px solid #dbe3ee; border-radius:14px; padding:14px 16px; }
+.pa-izq .pv-sinini, .pa-izq .pv-sm { margin:0; }
+
+/* ==== (REDISEÑO 28-10-2026, 16:23) Requiere atencion horizontal ==== */
+.pa-at-fila { grid-column:1 / -1; min-width:0; }
+.pa-at-fila .pa-at { background:#fff; border:1px solid #dbe3ee; border-radius:14px; padding:14px 18px; display:flex; flex-direction:column; gap:12px; }
+.pa-at-lista { width:100%; align-self:stretch; display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:12px; align-items:stretch; }
+.pa-at-lista .pv-al { margin:0; height:100%; }
+.pa-at-lista .pa-ceros { grid-column:1 / -1; }
+
+/* ==== (REDISEÑO 28-10-2026, 16:42) fila de botones dentro de HOY ==== */
+.hh { display:flex; flex-wrap:wrap; gap:12px 22px; align-items:center; background:#fff; border:1px solid #dbe3ee; border-radius:14px; padding:12px 16px; margin-bottom:16px; }
+.hh-g { display:flex; flex-wrap:wrap; align-items:center; gap:8px; }
+.hh-t { font-size:11px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:#64748b; margin-right:2px; }
+.hh-b { display:inline-flex; align-items:center; gap:7px; min-height:38px; padding:0 12px; border:1px solid #d3d8e2; border-radius:19px; background:#fff; color:#13213c; font-size:14px; font-weight:600; font-family:inherit; cursor:pointer; }
+.hh-b:hover { border-color:#2563eb; }
+.hh-b.sel { border-color:#2563eb; background:#eaf1ff; }
+.hh-b b { font-size:15px; color:#13213c; } .hh-b b.ok { color:#0e7c6b; } .hh-b b.bad { color:#d04a46; } .hh-b b.wa { color:#c2410c; } .hh-b b.gr { color:#94a3b8; }
+.hh-ir { background:#13213c; border-color:#13213c; color:#fff; }
+.hh-ir.wsp { background:#15803d; border-color:#15803d; }
+.hh-panel { margin-bottom:16px; }
+.hh-fc { background:#fff; border:1px solid #e3e8ef; border-radius:14px; padding:18px 22px; }
+
+/* ==== (REDISEÑO 28-10-2026, 17:14) Requiere atencion en una sola linea, orden fijo ==== */
+.pa-at-lista.una { grid-template-columns:repeat(7,minmax(0,1fr)); gap:10px; }
+.pa-at-lista.una .pv-al { flex-direction:column; align-items:flex-start; gap:8px; padding:12px; min-height:112px; }
+.pa-at-lista.una .pv-al::after { display:none; }
+.pa-at-lista.una .pv-al .n { min-width:40px; height:36px; line-height:36px; font-size:18px; }
+.pa-at-lista.una .pv-al .tx .t { font-size:13.5px; line-height:1.25; }
+.pa-at-lista.una .pv-al .tx .s { display:none; }
+.pa-at-lista.una .pv-al.cero { opacity:1; background:#f8fafc; } .pa-at-lista.una .pv-al.cero .tx .t { color:#64748b; }
+.pa-at-lista.una .pv-al.cero .n { background:#e2e8f0; color:#64748b; }
+@media (max-width:1100px){ .pa-at-lista.una { grid-template-columns:repeat(4,minmax(0,1fr)); } }
+@media (max-width:640px){ .pa-at-lista.una { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+
+/* ==== (REDISEÑO 28-10-2026, 17:23) boton MIGRACIONES al lado de HOY ==== */
+.hb-wrap { display:grid; grid-template-columns:repeat(auto-fit,minmax(420px,1fr)); gap:20px; max-width:1560px; }
+.hb { max-width:none; }
+.hb-mig { background:#1d3a8a; }
+.hb-mig:hover { box-shadow:0 0 0 3px #93c5fd; }
+
+/* ==== (REDISEÑO 28-10-2026, 17:26) Actividades por mes en la pagina principal ==== */
+.am { margin-top:28px; max-width:1560px; }
+.am-t { font-size:26px; font-weight:800; color:#13213c; }
+.am-sub { font-size:14px; color:#64748b; margin:2px 0 14px; }
+.am-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:18px; }
+.am-card { background:#fff; border:1px solid #dbe3ee; border-radius:14px; padding:22px 24px; display:flex; flex-direction:column; }
+.am-h { font-size:20px; font-weight:800; color:#13213c; display:flex; align-items:center; gap:8px; }
+.am-cur { font-size:11px; font-weight:700; background:#fef3c7; color:#92400e; padding:3px 9px; border-radius:10px; }
+.am-pc { font-size:44px; font-weight:800; color:#13213c; margin-top:10px; line-height:1.1; }
+.am-s { font-size:13px; color:#64748b; padding-bottom:14px; border-bottom:1px solid #e5eaf2; }
+.am-nums { display:flex; gap:26px; margin:14px 0 16px; }
+.am-nums div { display:flex; flex-direction:column; }
+.am-nums b { font-size:20px; color:#13213c; font-variant-numeric:tabular-nums; } .am-nums b.ok { color:#0e7c6b; } .am-nums b.bad { color:#c0392f; }
+.am-nums span { font-size:12px; color:#64748b; }
+.am-ver { font-size:13.5px; color:#7c3aed; text-decoration:none; font-weight:600; }
+.am-ver:hover { text-decoration:underline; }
+.am-vacio { color:#94a3b8; padding:20px 0; }
+.am-tb { display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-top:18px; padding-top:16px; border-top:1px solid #dbe3ee; font-size:13px; color:#64748b; }
+.am-tb a { padding:8px 16px; border:1px solid #d3d8e2; border-radius:18px; background:#fff; color:#13213c; text-decoration:none; font-weight:600; }
+.am-tb a:hover { border-color:#2563eb; }
+/* (REDISEÑO 28-10-2026, 18:08) INFORMES como bloque grande, mismo estilo que HOY y MIGRACIONES */
+.inf-b { margin-top:28px; max-width:1560px; padding:28px 32px; border-radius:18px; background:#13213c; color:#fff; display:flex; flex-direction:column; gap:12px; }
+.inf-b .if-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:10px; margin-top:6px; }
+.inf-b .if-c { display:flex; flex-direction:column; align-items:stretch; justify-content:flex-start; min-height:0; height:auto; gap:4px; padding:14px 16px; border:0; border-radius:12px; background:rgba(255,255,255,.08); color:#fff; text-align:left; text-decoration:none; font-family:inherit; cursor:pointer; }
+.inf-b .if-c:hover { background:rgba(255,255,255,.16); box-shadow:0 0 0 2px #60a5fa; }
+.inf-b .if-n { display:flex; justify-content:space-between; align-items:center; font-size:16px; font-weight:700; }
+.inf-b .if-n i { font-style:normal; font-size:22px; color:#93c5fd; line-height:1; }
+.inf-b .if-d { font-size:13px; color:#aab6c8; line-height:1.35; }
+.am-ver { color:#1d4ed8 !important; }
+/* (REDISEÑO 28-10-2026, 18:25) PAGINA MIGRACIONES por completitud */
+.mp-bigs { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+.mp-big { display:flex; flex-direction:column; gap:6px; padding:20px 22px; border:2px solid #dbe3ee; border-radius:16px; background:#fff; text-align:left; font-family:inherit; cursor:pointer; color:#13213c; border-top:6px solid #94a3b8; }
+.mp-big.ok { border-top-color:#0e7c6b; } .mp-big.bad { border-top-color:#d04a46; }
+.mp-big.on { border-color:#1d4ed8; border-top-width:6px; box-shadow:0 0 0 3px #bfdbfe; }
+.mp-big .t { font-size:17px; font-weight:800; } .mp-big .t small { font-weight:500; color:#64748b; font-size:13px; }
+.mp-big .v { font-size:52px; font-weight:800; line-height:1; font-variant-numeric:tabular-nums; }
+.mp-big.ok .v { color:#0e7c6b; } .mp-big.bad .v { color:#c0392f; }
+.mp-big .s { font-size:13.5px; color:#64748b; }
+.mp-big .a { font-size:14.5px; color:#13213c; padding-top:8px; border-top:1px solid #e5eaf2; }
+.mp-big .m { font-size:12.5px; font-weight:700; color:#64748b; }
+.mp-big.ok .m { color:#0e7c6b; } .mp-big.bad .m { color:#c0392f; }
+.mp-g { display:flex; flex-direction:column; gap:5px; padding:8px 0; border-top:1px solid #eef2f7; }
+.mp-gh { display:flex; align-items:center; gap:8px; font-size:14.5px; } .mp-gh i { width:12px; height:12px; border-radius:3px; } .mp-gh span { margin-left:auto; font-weight:700; font-variant-numeric:tabular-nums; }
+.mp-gb { height:10px; background:#eef2f7; border-radius:5px; overflow:hidden; } .mp-gb span { display:block; height:100%; }
+.mp-gc { display:flex; flex-wrap:wrap; gap:6px; } .mp-gc span { font-size:12.5px; background:#f1f5f9; border-radius:8px; padding:3px 9px; color:#334155; }
+.mp-def { background:#13213c; border-color:#13213c; } .mp-def h3 { color:#fff; } .mp-def .ad-nota { color:#b9c3d6; }
+.mp-dl { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:10px 0; border-top:1px solid rgba(255,255,255,.12); color:#e5e9f0; font-size:15px; }
+.mp-dl small { display:block; font-size:12px; color:#93a1bc; } .mp-dl b { font-size:30px; font-weight:800; font-variant-numeric:tabular-nums; }
+.mp-dl b.ok { color:#6ee7b7; } .mp-dl b.bad { color:#fca5a5; } .mp-dl b.gr { color:#cbd5e1; }
+.mp-fl { font-size:12.5px; font-weight:700; } .mp-fl.ok { color:#0e7c6b; } .mp-fl.bad { color:#c0392f; } .mp-fl.gr { color:#94a3b8; }
+.mp-par { grid-template-columns:1fr 1fr; }
+.mp-row { display:grid; grid-template-columns:150px minmax(0,1fr) 64px; align-items:center; gap:12px; padding:6px 0; }
+.mp-row .n { font-weight:700; font-size:15px; color:#13213c; } .mp-row .n small { display:block; font-weight:400; font-size:12px; color:#64748b; }
+.mp-row .b { position:relative; height:14px; background:#eef2f7; border-radius:7px; }
+.mp-row .b i { position:absolute; left:0; top:0; bottom:0; border-radius:7px; background:#94a3b8; } .mp-row .b i.ok { background:#0e7c6b; } .mp-row .b i.bad { background:#d04a46; }
+.mp-row .b em { position:absolute; top:-4px; bottom:-4px; width:2px; background:#13213c; }
+.mp-row > b { text-align:right; font-variant-numeric:tabular-nums; } .mp-row > b.ok { color:#0e7c6b; } .mp-row > b.bad { color:#c0392f; }
+.mp-evo { position:relative; display:grid; grid-auto-flow:column; grid-auto-columns:minmax(0,1fr); gap:12px; height:260px; padding-top:22px; }
+.mp-sem .col { position:relative; } .mp-sem .col em { position:absolute; left:-8px; right:-8px; border-top:2px dashed #13213c; pointer-events:none; }
+.mp-sem { display:flex; flex-direction:column; align-items:center; gap:4px; min-width:0; }
+.mp-sem > b { font-size:14px; color:#13213c; font-variant-numeric:tabular-nums; }
+.mp-sem .col { flex:1; width:70%; display:flex; align-items:flex-end; background:#f1f5f9; border-radius:8px 8px 0 0; }
+.mp-sem .col i { display:block; width:100%; border-radius:8px 8px 0 0; background:#94a3b8; } .mp-sem .col i.ok { background:#0e7c6b; } .mp-sem .col i.bad { background:#d04a46; }
+.mp-sem .l { height:48px; font-size:12.5px; font-weight:700; color:#13213c; text-align:center; } .mp-sem .l small { display:block; font-weight:400; color:#64748b; font-size:11px; }
+.mp-sem.cur .col { outline:2px solid #1d4ed8; }
+.mp-desp { display:flex; justify-content:space-between; align-items:center; gap:12px; width:100%; padding:0; border:0; background:none; font-family:inherit; cursor:pointer; text-align:left; }
+.mp-dsub { font-size:14px; font-weight:600; color:#1d4ed8; white-space:nowrap; } .mp-dsub i { display:inline-block; font-style:normal; transition:transform .15s; }
+.mp-desp.ab .mp-dsub i { transform:rotate(180deg); }
+.mp-desp:hover h3 { color:#1d4ed8; }
+.mp-acc { margin-top:4px; }
+/* (REDISEÑO 28-10-2026, 18:50) DETALLE DEL MES por efectividad */
+.md2-top { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,2fr); gap:16px; }
+.md2-big { display:flex; flex-direction:column; gap:6px; padding:20px 22px; border-radius:16px; background:#13213c; color:#fff; }
+.md2-big .t { font-size:16px; font-weight:700; color:#c7cedb; } .md2-big .v { font-size:56px; font-weight:800; line-height:1; font-variant-numeric:tabular-nums; }
+.md2-big .s { font-size:14px; color:#b9c3d6; } .md2-big .c { font-size:15px; padding-top:8px; border-top:1px solid rgba(255,255,255,.14); }
+.md2-big .c small { color:#93a1bc; font-size:13px; } .md2-big .mp-fl { font-size:15px; } .md2-big .mp-fl.ok { color:#6ee7b7; } .md2-big .mp-fl.bad { color:#fca5a5; }
+.md2-est { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; } .md2-est .md-e { cursor:default; }
+.md2-h { display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 14px; } .md2-h .md-ch { margin-left:auto; }
+.md2-dias { display:grid; grid-auto-flow:column; grid-auto-columns:minmax(0,1fr); gap:6px; height:190px; }
+.md2-d { display:flex; flex-direction:column; align-items:center; gap:3px; padding:4px 0; border:0; border-radius:8px; background:none; font-family:inherit; cursor:pointer; min-width:0; }
+.md2-d:hover { background:#f1f5f9; } .md2-d.on { background:#dbeafe; box-shadow:0 0 0 2px #1d4ed8; }
+.md2-d > b { font-size:12px; color:#13213c; } .md2-d .l { font-size:12px; font-weight:700; color:#64748b; }
+.md2-d .col { position:relative; flex:1; width:70%; display:flex; align-items:flex-end; background:#f1f5f9; border-radius:5px 5px 0 0; }
+.md2-d .col i { display:block; width:100%; border-radius:5px 5px 0 0; } .md2-d .col i.ok { background:#0e7c6b; } .md2-d .col i.bad { background:#d04a46; }
+.md2-d .col em { position:absolute; left:-4px; right:-4px; border-top:2px dashed #13213c; }
+.md2-cab, .md2-lin { display:grid; grid-template-columns:minmax(0,1.4fr) 70px minmax(0,1fr) 60px 96px; align-items:center; gap:12px; }
+.md2-cab span { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:#94a3b8; text-align:right; } .md2-cab span:nth-child(3) { text-align:left; }
+.md2-lin { padding:8px 0; border-bottom:1px solid #eef2f7; font-size:14px; color:#13213c; }
+.md2-lin .nm small { font-size:12px; color:#94a3b8; font-weight:400; } .md2-lin .n2 { text-align:right; font-variant-numeric:tabular-nums; color:#64748b; }
+.md2-lin .pista { height:12px; background:#eef2f7; border-radius:6px; overflow:hidden; } .md2-lin .pista i { display:block; height:100%; background:#1d4ed8; }
+.md2-lin > b { text-align:right; font-variant-numeric:tabular-nums; } .md2-lin .mp-fl { text-align:right; }
+.md2-lin.fam { font-weight:700; } .md2-lin.hija { padding-left:18px; font-size:13px; } .md2-lin.hija .pista i { background:#93c5fd; }
+.md2-det summary { cursor:pointer; list-style:none; } .md2-det summary::-webkit-details-marker { display:none; }
+.md2-det summary .nm::before { content:'▸ '; color:#1d4ed8; } .md2-det[open] summary .nm::before { content:'▾ '; } .md2-det[open] summary { background:#f8fafc; }
+.md2-tres { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+.md2-tres .md2-lin { grid-template-columns:minmax(0,1.1fr) 46px minmax(0,1fr) 50px 64px; gap:8px; font-size:13.5px; } .md2-tres .md2-lin .mp-fl { font-size:11.5px; white-space:nowrap; }
+.md2-gx { display:flex; justify-content:space-between; align-items:center; gap:10px; } .md2-pp { font-size:12.5px; color:#64748b; white-space:nowrap; }
+@media (max-width:1000px){ .md2-top, .md2-tres { grid-template-columns:1fr; } } .mp-acg { display:flex; flex-direction:column; gap:6px; margin-top:8px; }
+.mp-act { font-size:12px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:#93a1bc; }
+@media (max-width:900px){ .mp-bigs, .mp-par { grid-template-columns:1fr; } }
+
+/* (17:29) tarjetas de mes activas */
+a.am-card { text-decoration:none; color:inherit; cursor:pointer; transition:border-color .15s, box-shadow .15s; }
+a.am-card:hover { border-color:#7c3aed; box-shadow:0 4px 14px rgba(19,33,60,.08); }
+a.am-card:hover .am-ver { text-decoration:underline; }
+
+/* ==== (REDISEÑO 28-10-2026, 17:31) detalle del mes ==== */
+button.am-card { font-family:inherit; text-align:left; cursor:pointer; }
+button.am-card:hover { border-color:#7c3aed; box-shadow:0 4px 14px rgba(19,33,60,.08); }
+.md-dias { display:flex; flex-wrap:wrap; gap:6px; }
+.md-ch { min-height:32px; padding:0 11px; border:1px solid #d3d8e2; border-radius:16px; background:#fff; color:#13213c; font-size:13px; font-weight:600; font-family:inherit; cursor:pointer; }
+.md-ch.on { background:#13213c; border-color:#13213c; color:#fff; }
+.md-est { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; }
+.md-e { background:#fff; border:1px solid #dbe3ee; border-left:5px solid #cbd5e1; border-radius:12px; padding:14px 16px; text-align:left; font-family:inherit; cursor:pointer; color:#13213c; }
+.md-e.ok { border-left-color:#0e7c6b; } .md-e.bad { border-left-color:#d04a46; } .md-e.wa { border-left-color:#c2410c; } .md-e.gr { border-left-color:#94a3b8; }
+.md-e.on { box-shadow:0 0 0 2px #2563eb; }
+.md-e .n { font-size:30px; font-weight:800; line-height:1; } .md-e .l { font-size:13px; color:#64748b; margin-top:4px; } .md-e .p { font-size:12.5px; color:#94a3b8; }
+.md-e .p b { color:#13213c; } .md-e .ef { font-size:13px; color:#64748b; margin-top:6px; padding-top:6px; border-top:1px solid #eef2f7; } .md-e .ef b { color:#0e7c6b; font-size:15px; }
+.md-ch2 { font-size:12px; font-weight:500; color:#94a3b8; margin-left:6px; }
+.md-lin { display:grid; grid-template-columns:minmax(0,190px) minmax(0,1fr) 54px 54px; align-items:center; gap:10px; padding:7px 0; border-bottom:1px solid #eef2f7; font-size:13px; color:#13213c; }
+.md-lin .pista { height:14px; background:#eef2f7; border-radius:4px; overflow:hidden; } .md-lin .pista i { display:block; height:100%; }
+.md-lin b { text-align:right; } .md-lin .pc { text-align:right; color:#94a3b8; font-size:12px; }
+.md-lin.hija { padding-left:16px; font-size:12.5px; }
+.md-det summary { cursor:pointer; list-style:none; } .md-det summary::-webkit-details-marker { display:none; }
+.md-det[open] summary { background:#f8fafc; }
+.md-culpa { display:flex; height:28px; border-radius:7px; overflow:hidden; }
+.md-culpa span { display:flex; align-items:center; justify-content:center; color:#fff; font-size:12px; font-weight:700; }
+.md-culpa .cli, .md-cf i.cli { background:#94a3b8; } .md-culpa .man, .md-cf i.man { background:#7c3aed; } .md-culpa .nos, .md-cf i.nos { background:#d04a46; }
+.md-cf { display:grid; grid-template-columns:14px minmax(0,1fr) 50px 56px; align-items:center; gap:10px; padding:8px 0; border-bottom:1px solid #eef2f7; font-size:14px; color:#13213c; }
+.md-cf i { width:12px; height:12px; border-radius:3px; } .md-cf small { display:block; font-size:12px; color:#94a3b8; } .md-cf b { text-align:right; } .md-cf em { font-style:normal; text-align:right; color:#64748b; }
+@media (max-width:900px){ .md-est { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+
+/* ==== (REDISEÑO 28-10-2026, 17:50) informes como tarjetas + avisos arriba ==== */
+.if-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:16px; }
+.if-c { display:flex; flex-direction:column; align-items:flex-start; gap:8px; min-height:140px; padding:20px 22px; background:#fff; border:1px solid #dbe3ee; border-radius:14px; color:#13213c; text-decoration:none; text-align:left; font-family:inherit; cursor:pointer; box-sizing:border-box; }
+.if-c:hover { border-color:#7c3aed; box-shadow:0 4px 14px rgba(19,33,60,.08); }
+.if-n { font-size:18px; font-weight:800; }
+.if-d { font-size:13.5px; color:#64748b; line-height:1.4; }
+.if-c .am-ver { margin-top:auto; }
+.pp-avisos { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:18px; max-width:1560px; }
 </style>
 </head>
 <body>
@@ -12262,6 +12546,725 @@ function colDatos(filas, hoy, nTec){
   return r;
 }
 
+/* ==== (REDISEÑO 28-10-2026, 15:29) TARJETAS POR ACTIVIDAD DEL DIA ====
+   Una tarjeta por cada familia de actividad que hay hoy en las bandejas
+   (familiaCat: Migraciones, Altas, Reparaciones, Modificaciones, Otras).
+   Mismas reglas de la portada: visitadas = completadas + no realizadas;
+   sin cerrar = ni completada, ni no realizada, ni cancelada, ni suspendida. */
+function actsHoyHtml(filas){
+  const ORD = ['Migraciones','Altas','Reparaciones','Modificaciones','Otras'];
+  const COL = {Migraciones:'#2563eb', Altas:'#0e7c6b', Reparaciones:'#c2410c', Modificaciones:'#7c3aed', Otras:'#64748b'};
+  const g = {};
+  filas.forEach(o => { const f = familiaCat(o.cat); (g[f] = g[f] || []).push(o); });
+  const fams = ORD.filter(f => g[f] && g[f].length);
+  if(!fams.length) return '<section class="pa-acts"><div class="pa-act vacia">Todavía no hay actividades en las bandejas.</div></section>';
+  return '<section class="pa-acts">' + fams.map(function(f){
+    const L = g[f], e = o => String(o.e || 'Pendiente');
+    const co = L.filter(o => e(o) === 'Completado').length;
+    const nr = L.filter(o => e(o) === 'No Realizada').length;
+    const cs = L.filter(o => e(o) === 'Cancelado' || e(o) === 'Suspendido').length;
+    const ini = L.filter(o => e(o) === 'Iniciado' || e(o) === 'en ruta').length;
+    const ab = L.length - co - nr - cs, pen = ab - ini, vis = co + nr;
+    const pv = vis ? Math.round(1000 * co / vis) / 10 : null;
+    const sub = {}; L.forEach(o => { const k = String(o.cat || f); sub[k] = (sub[k] || 0) + 1; });
+    const subTx = Object.keys(sub).sort((a, b) => sub[b] - sub[a]).map(k => k.replace(/^Migraci[oó]n /, '').replace(/^Alta /, '') + ' <b>' + sub[k] + '</b>').join(' · ');
+    const t = (v, c, n) => v ? '<span class="' + c + '" style="flex-grow:' + v + '" title="' + v + ' ' + n + '">' + v + '</span>' : '';
+    const activa = true;   /* (15:41) todas las tarjetas abren su detalle */
+    return (activa ? '<button class="pa-act act-on" onclick="window.PV_ACT=\'' + f + '\'; pintarPortada(); window.scrollTo(0,0)" title="Toca para ver todo lo de ' + f.toLowerCase() + ' de hoy"' : '<div class="pa-act"')
+      + ' style="--c:' + COL[f] + '">'
+      + '<div class="hd"><span class="nm">' + f + '</span><span class="tot">' + L.length + '</span></div>'
+      + '<div class="sb">' + subTx + '</div>'
+      + '<div class="br">' + t(co, 'c', 'completadas') + t(nr, 'n', 'no realizadas') + t(ini, 'i', 'iniciadas o en ruta') + t(pen, 'p', 'pendientes') + t(cs, 'x', 'canceladas o suspendidas') + '</div>'
+      + '<div class="nums"><span><b class="ok">' + co + '</b> completadas</span><span><b class="bad">' + nr + '</b> no realizadas</span><span><b>' + ab + '</b> sin cerrar</span></div>'
+      + '<div class="ef">' + (pv === null ? '<span class="sd">nadie ha cerrado una visita todavía</span>' : '<b>' + pv.toFixed(1).replace('.', ',') + '%</b> de lo visitado · ' + co + ' de ' + vis) + (activa ? '<span class="ver">Ver detalle ›</span>' : '') + '</div>'
+      + (activa ? '</button>' : '</div>');
+  }).join('') + '</section>';
+}
+
+/* ==== (REDISEÑO 28-10-2026, 15:33) DETALLE DE MIGRACIONES DE HOY ====
+   Se abre al tocar la tarjeta Migraciones (window.PV_ACT). Todo sale de DB
+   (rutas.json en vivo), con las reglas de siempre: visitada = completada o
+   no realizada; derivada = no realizada; completitud = completadas /
+   visitadas, meta VTR/CLARO 60 % (= 40 % de derivacion). */
+function actDetalleHtml(fam){
+  const L = [];
+  Object.keys(DB || {}).forEach(t => (DB[t] || []).forEach(o => { if(familiaCat(o.cat) === fam) L.push(Object.assign({tec: t}, o)); }));
+  const e = o => String(o.e || 'Pendiente');
+  const co = L.filter(o => e(o) === 'Completado'), nr = L.filter(o => e(o) === 'No Realizada');
+  const cs = L.filter(o => e(o) === 'Cancelado' || e(o) === 'Suspendido');
+  const ab = L.filter(o => !['Completado','No Realizada','Cancelado','Suspendido'].includes(e(o)));
+  const ini = ab.filter(o => e(o) === 'Iniciado' || e(o) === 'en ruta');
+  const vis = co.length + nr.length;
+  const pc = (a, b) => b ? (Math.round(1000 * a / b) / 10).toFixed(1).replace('.', ',') + '%' : '–';
+  const isMig = fam === 'Migraciones';
+  const META = isMig ? 60 : null;   /* la meta de 60 % es solo de migraciones */
+  const NR = isMig ? 'Derivadas' : 'No realizadas', IND = isMig ? 'Completitud' : 'Efectividad';
+  const comp = vis ? 100 * co.length / vis : null;
+  const nom = t => String(t || '').toLowerCase().replace(/(^|\s)\S/g, c => c.toUpperCase());
+  const dir = d => (typeof tituloDir === 'function') ? tituloDir(d) : nom(d);
+  const min = (a, b) => { const m1 = /^(\d+):(\d+)/.exec(a || ''), m2 = /^(\d+):(\d+)/.exec(b || ''); return (m1 && m2) ? (+m2[1] * 60 + +m2[2]) - (+m1[1] * 60 + +m1[2]) : null; };
+  const sv = t => isMig && (typeof svDe === 'function' && svDe(t) >= 0);
+  const tag = (c, t) => '<span class="ad-tag ' + c + '">' + t + '</span>';
+  let h = '<div class="ad-bar"><button class="ad-volver" onclick="window.PV_ACT=null; pintarPortada()">← Volver</button>'
+    + '<span class="ad-tit">' + fam + ' de hoy</span><span class="ad-sub">' + L.length + ' en las bandejas · datos en vivo</span></div>';
+  /* 1. cifras */
+  const k = (l, v, sub, cls) => '<div class="ad-k' + (cls ? ' ' + cls : '') + '"><span class="l">' + l + '</span><span class="v">' + v + '</span><span class="s">' + sub + '</span></div>';
+  h += '<div class="ad-ks">'
+    + k('En bandejas', L.length, cs.length + ' canceladas o suspendidas')
+    + k('Visitadas', vis, 'completadas + no realizadas')
+    + k('Completadas', co.length, pc(co.length, vis) + ' de lo visitado', 'ok')
+    + k(NR, nr.length, nr.filter(o => /morador/i.test(o.cie || '')).length + ' sin moradores', 'bad')
+    + k('Por visitar', ab.length, ini.length + ' iniciadas o en ruta')
+    + k(IND + ' hoy', pc(co.length, vis), META ? 'meta ' + META + '% · ' + (comp === null ? 'sin visitas aún' : comp >= META ? '✓ en meta' : 'bajo la meta') : 'completadas sobre visitadas', 'main')
+    + '</div>';
+  /* 2. franjas + causas */
+  const frs = {}; L.forEach(o => { const f = String(o.f || 's/franja'); (frs[f] = frs[f] || []).push(o); });
+  const fila = f => { const x = frs[f], c = x.filter(o => e(o) === 'Completado').length, n = x.filter(o => e(o) === 'No Realizada').length,
+      i = x.filter(o => e(o) === 'Iniciado' || e(o) === 'en ruta').length, p = x.filter(o => e(o) === 'Pendiente').length;
+      return '<tr><td><b>' + f + '</b></td><td class="nu">' + x.length + '</td><td class="nu ok">' + c + '</td><td class="nu bad">' + n + '</td><td class="nu">' + i + '</td><td class="nu">' + p + '</td><td class="nu">' + pc(c, c + n) + '</td></tr>'; };
+  const causas = {}; nr.forEach(o => { const c = o.cie || 'Sin código'; causas[c] = (causas[c] || 0) + 1; });
+  h += '<div class="ad-dos">'
+    + '<div class="ad-card"><h3>Por franja</h3><div class="ad-tbl"><table><thead><tr><th>Franja</th><th>Total</th><th>Completadas</th><th>' + NR + '</th><th>Iniciadas</th><th>Pendientes</th><th>' + IND + '</th></tr></thead><tbody>'
+    +   Object.keys(frs).sort().map(fila).join('') + '</tbody></table></div></div>'
+    + '<div class="ad-card"><h3>' + (isMig ? 'Por qué se derivaron' : 'Por qué no se hicieron') + '</h3>'
+    +   (nr.length ? '<div class="ad-causas">' + Object.keys(causas).sort((a, b) => causas[b] - causas[a]).map(c =>
+          '<div class="ad-cau"><span>' + c + '</span><span class="pista"><i style="width:' + (100 * causas[c] / nr.length) + '%"></i></span><b>' + causas[c] + '</b></div>').join('') + '</div>'
+        : '<p class="ad-vacio">Ninguna por ahora.</p>')
+    + '</div></div>';
+  /* 3. derivadas de hoy */
+  const prevTx = o => (o.prev || []).map(p => p.f + ' · ' + nom(p.tec) + ' · ' + (p.cierre || p.cie || '')).join('\n');
+  h += '<div class="ad-card"><h3>' + NR + ' de hoy (' + nr.length + ')</h3>'
+    + (nr.length ? '<div class="ad-tbl"><table><thead><tr><th>Técnico</th><th>Petición</th><th>Tipo</th><th>Franja</th><th>Dirección</th><th>Causa</th><th>En la casa</th><th>Antes en esa casa</th></tr></thead><tbody>'
+      + nr.slice().sort((a, b) => String(a.hf || '').localeCompare(String(b.hf || ''))).map(o => {
+          const m = min(o.hi, o.hf), np = (o.prev || []).length;
+          return '<tr><td>' + nom(o.tec) + (sv(o.tec) ? ' <span title="Seguimiento VTR">🎯</span>' : '') + '</td><td class="nu">' + o.o + '</td><td>' + (o.cat || '') + '</td><td>' + (o.f || '') + '</td><td>' + dir(o.d) + '</td>'
+            + '<td>' + tag(/morador|reagenda|desiste/i.test(o.cie || '') ? 'wa' : 'gr', o.cie || '–') + '</td>'
+            + '<td class="nu">' + (o.hi || '') + ' a ' + (o.hf || '') + (m !== null ? ' · ' + m + ' min' + (m < 10 ? ' ' + tag('bad', 'corta') : '') : '') + '</td>'
+            + '<td title="' + prevTx(o).replace(/"/g, '&quot;') + '">' + (np ? tag(np >= 2 ? 'bad' : 'wa', np + (np === 1 ? ' falla antes' : ' fallas antes')) : 'Primera vez') + '</td></tr>'; }).join('')
+      + '</tbody></table></div>' : '<p class="ad-vacio">Ninguna por ahora.</p>')
+    + '</div>';
+  /* 4. por visitar en casas que ya fallaron */
+  const rk = ab.filter(o => (o.prev || []).length).sort((a, b) => String(a.f).localeCompare(String(b.f)) || (b.prev.length - a.prev.length));
+  h += '<div class="ad-card"><h3>Ojo: por visitar en casas que ya fallaron (' + rk.length + ')</h3>'
+    + (rk.length ? '<div class="ad-tbl"><table><thead><tr><th>Técnico</th><th>Franja</th><th>Estado</th><th>Petición</th><th>Dirección</th><th>Fallas antes</th></tr></thead><tbody>'
+      + rk.map(o => '<tr><td>' + nom(o.tec) + (sv(o.tec) ? ' 🎯' : '') + '</td><td>' + (o.f || '') + '</td><td>' + e(o) + '</td><td class="nu">' + o.o + '</td><td>' + dir(o.d) + '</td>'
+        + '<td title="' + prevTx(o).replace(/"/g, '&quot;') + '">' + tag(o.prev.length >= 2 ? 'bad' : 'wa', o.prev.length) + '</td></tr>').join('')
+      + '</tbody></table></div>' : '<p class="ad-vacio">Ninguna.</p>')
+    + '</div>';
+  /* 5. tecnico por tecnico */
+  const T = {}; L.forEach(o => { (T[o.tec] = T[o.tec] || []).push(o); });
+  h += '<div class="ad-card"><h3>Técnico por técnico (' + Object.keys(T).length + ')</h3>' + (isMig ? '<p class="ad-nota">🎯 = está en el Seguimiento VTR.</p>' : '')
+    + '<div class="ad-tbl"><table><thead><tr><th>Técnico</th><th>Asignadas</th><th>Completadas</th><th>' + NR + '</th><th>Por visitar</th><th>' + IND + '</th></tr></thead><tbody>'
+    + Object.keys(T).sort((a, b) => T[b].length - T[a].length || a.localeCompare(b)).map(t => {
+        const x = T[t], c = x.filter(o => e(o) === 'Completado').length, n = x.filter(o => e(o) === 'No Realizada').length;
+        const a2 = x.filter(o => !['Completado','No Realizada','Cancelado','Suspendido'].includes(e(o))).length;
+        const p2 = (c + n) ? 100 * c / (c + n) : null;
+        return '<tr' + (sv(t) ? ' class="sv"' : '') + '><td>' + nom(t) + (sv(t) ? ' 🎯' : '') + '</td><td class="nu">' + x.length + '</td><td class="nu ok">' + c + '</td><td class="nu bad">' + n + '</td><td class="nu">' + a2 + '</td>'
+          + '<td class="nu">' + (p2 === null ? '–' : META ? tag(p2 >= META ? 'ok' : 'bad', pc(c, c + n)) : pc(c, c + n)) + '</td></tr>'; }).join('')
+    + '</tbody></table></div></div>';
+  /* 6. accesos a lo que ya existe, segun la actividad */
+  const MAS = {
+    Migraciones: [['abrirDerivHoy()','Derivación · hoy en vivo'],['abrirResMig()','Resumen supervisores'],['abrirSegVtr()','Seguimiento VTR'],['abrirMigGer()','Gerencia'],['abrirMigras()','Panel Migraciones completo']],
+    Altas: [['abrirFranjas()','Derivaciones por franja'],['desdePortada(toggleRepe)','Direcciones ya visitadas']],
+    Reparaciones: [['desdePortada(toggleRed)','Nodos y NAP'],['abrirVistaRed()','Mapa de red'],['desdePortada(toggleRepe)','Direcciones ya visitadas']],
+    Modificaciones: [['desdePortada(toggleRepe)','Direcciones ya visitadas']],
+    Otras: [['desdePortada(toggleRepe)','Direcciones ya visitadas']]
+  };
+  const mas = MAS[fam] || [];
+  /* (15:49) Luis: sacar 'Mas detalle' de todas las tarjetas. MAS queda escrito por si se quiere volver. */
+  if(false && mas.length) h += '<div class="ad-card"><h3>Más detalle</h3><div class="ad-mas">' + mas.map(b => '<button onclick="' + b[0] + '">' + b[1] + '</button>').join('') + '</div></div>';
+  return '<div class="ad">' + h + '</div>';
+}
+
+/* ==== (REDISEÑO 28-10-2026, 15:56) BOTON HOY ====
+   Pantalla de inicio con un solo boton grande. Al tocarlo se ve el inicio
+   de jornada y las tarjetas por actividad. */
+function hoyBotonHtml(fecha, nAct, co, nr, nIni, caidas){
+  const vis = co + nr, pv = vis ? (Math.round(1000 * co / vis) / 10).toFixed(1).replace('.', ',') + '%' : '–';
+  const ch = (t, c) => '<span class="hb-ch' + (c ? ' ' + c : '') + '">' + t + '</span>';
+  /* (REDISEÑO 28-10-2026, 17:50) avisos importantes arriba de la pagina principal, solo cuando hay */
+  let avisos = ''; try { avisos = (compPastillaHtml() + saludPastillaHtml()).replace(/<br>/g, ' '); } catch(e){}
+  return (avisos ? '<div class="pp-avisos">' + avisos + '</div>' : '')
+    + '<div class="hb-wrap"><button class="hb" onclick="window.PV_HOY=true; pintarPortada(); window.scrollTo(0,0)" title="Toca para ver todo el día en curso">'
+    + '<span class="hb-top"><span class="hb-nm">DÍA EN CURSO</span><span class="hb-fl">›</span></span>'
+    + '<span class="hb-fe">' + (fecha || '') + ' · todo lo de hoy, en vivo</span>'   /* (28-10-2026, 19:23) Luis: HOY pasa a llamarse DIA EN CURSO */
+    + '<span class="hb-row">'
+    +   ch((nIni || '–') + ' inicio de jornada')
+    +   ch(co + ' completadas', 'ok')
+    +   ch(nr + ' no realizadas', 'bad')
+    +   (caidas ? ch(caidas + ' salieron de la bandeja', 'bad') : '')
+    + '</span></button>'
+    /* (REDISEÑO 28-10-2026, 17:23) boton MIGRACIONES en la pagina principal: abre el panel de siempre (abrirMigras) */
+    + (function(){ let c = null; try { c = derHoyConteo(); } catch(e){}
+        const v = c ? c.v : 0, d = c ? c.d : 0, comp = v ? (Math.round(1000 * (v - d) / v) / 10) : null;
+        return '<button class="hb hb-mig" onclick="window.PV_MIG=true; pintarPortada(); window.scrollTo(0,0)" title="Hoy en vivo, técnicos, direcciones, gerencia, Seguimiento VTR y respaldos">'
+          + '<span class="hb-top"><span class="hb-nm">MIGRACIONES</span><span class="hb-fl">›</span></span>'
+          + '<span class="hb-fe">Derivación y seguimiento del día</span>'
+          + '<span class="hb-row">'
+          +   ch(d + ' derivadas hoy', d ? 'bad' : '')
+          +   ch(v + ' visitadas')
+          +   (comp === null ? '' : ch(comp.toFixed(1).replace('.', ',') + '% completitud · meta 60%', comp >= 60 ? 'ok' : 'bad'))
+          + '</span></button>'; })()
+    + '</div>'
+    + actMesesHtml()
+    + infTarjetasHtml();
+}
+
+/* ==== (REDISEÑO 28-10-2026, 17:50) INFORMES como tarjetas activas ====
+   Los informes de la columna oscura y los reportes historicos. Cada tarjeta
+   abre lo MISMO de antes (mismo enlace o misma funcion). */
+function infTarjetasHtml(){
+  const T = [
+    ['link', URL_TIEMPOS, 'Tiempos en terreno', 'Cuánto demora cada técnico por tipo de trabajo, contra el equipo'],
+    ['link', URL_NEGOCIOS, 'Negocios', 'Órdenes y tiempos de los clientes de Negocios, por tipo y por dirección'],
+    ['fn', 'abrirResumen()', 'Resumen día por día', 'Asignadas, completadas, no realizadas y efectividad de cada día'],
+    ['link', URL_TABLA_HIST, 'Tabla del mes por técnico', 'Todas las órdenes del mes, técnico por técnico'],
+    ['fn', 'abrirFranjas()', 'Derivaciones por franja', 'En qué franja se deriva más: por actividad, semana, día, técnico y comuna'],
+    ['fn', 'desdePortada(verReporteRepe)', 'Direcciones ya visitadas', 'Histórico de las casas donde ya se falló antes'],
+    ['link', URL_EQUIPO, 'Carga de Play por técnico', 'Si a un técnico le cargan más de un Play que al resto, por supervisor'],
+    /* (REDISEÑO 28-10-2026, 18:10) Luis: Quiebres por tecnico pasa aca; la fila "Tambien" se elimina */
+    ['link', URL_ACTIVIDADES + '?t=' + Date.now() + '#quiebres', 'Quiebres por técnico', 'Quiebres de cada técnico en el Dashboard de Actividades']
+  ];
+  /* (REDISEÑO 28-10-2026, 18:08) Luis: "desentona con todo". Ahora es un bloque
+     grande como HOY y MIGRACIONES, con los informes como botones adentro. */
+  return '<section class="inf-b"><div class="hb-top"><span class="hb-nm">INFORMES</span></div>'
+    + '<span class="hb-fe">Histórico y reportes · cada botón abre su informe</span>'
+    + '<div class="if-grid">' + T.map(function(t){
+        const cuerpo = '<span class="if-n">' + t[2] + '<i>›</i></span><span class="if-d">' + t[3] + '</span>';
+        return t[0] === 'link' ? '<a class="if-c" href="' + t[1] + '" target="_blank">' + cuerpo + '</a>'
+                               : '<button class="if-c" onclick="' + t[1] + '">' + cuerpo + '</button>';
+      }).join('') + '</div></section>';
+}
+
+/* ==== (REDISEÑO 28-10-2026, 17:26) ACTIVIDADES POR MES en la pagina principal ====
+   "Tal cual" la portada del Dashboard de Actividades: los ultimos 3 meses con
+   % de completadas, actividades, completadas, no realizadas y dias. Sale del
+   MISMO datos.json (bajarResumen), asi los numeros calzan con esa pagina
+   (comprobado: oct 3.626 / 2.431 / 1.031 / 23 dias = 67,0%). Va hasta ayer. */
+function actMesesHtml(){
+  if(window.ACT_MES === undefined){
+    window.ACT_MES = null;
+    bajarResumen().then(function(dias){
+      const M = {};
+      dias.forEach(function(d){ const k = d.f.slice(6) + '-' + d.f.slice(3, 5);
+        const m = M[k] || (M[k] = {k:k, asig:0, comp:0, nr:0, dias:0}); m.asig += d.asig; m.comp += d.comp; m.nr += d.nr; m.dias++; });
+      window.ACT_MES = Object.keys(M).sort().slice(-3).map(k => M[k]);
+      pintarPortada();
+    }).catch(function(){ window.ACT_MES = 'error'; pintarPortada(); });
+  }
+  const NOM = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  const nf = n => n.toLocaleString('es-CL');
+  const hoyK = new Date().getFullYear() + '-' + String(new Date().getMonth() + 1).padStart(2, '0');
+  let cuerpo;
+  if(window.ACT_MES === null) cuerpo = '<div class="am-vacio">Cargando los meses…</div>';
+  else if(window.ACT_MES === 'error' || !window.ACT_MES.length) cuerpo = '<div class="am-vacio">No se pudieron cargar los datos de Actividades.</div>';
+  else cuerpo = '<div class="am-grid">' + window.ACT_MES.map(function(m){
+      const pc = m.asig ? (Math.round(1000 * m.comp / m.asig) / 10).toFixed(1).replace('.', ',') : '–';
+      /* (17:29) la tarjeta entera se puede tocar: abre el Dashboard de Actividades */
+      return '<button class="am-card" onclick="window.PV_MES=\'' + m.k + '\'; window.PV_MES_DIA=null; window.PV_MES_EST=\'Completado\'; pintarPortada(); window.scrollTo(0,0)" title="Ver el detalle del mes"><div class="am-h">' + NOM[+m.k.slice(5) - 1] + ' ' + m.k.slice(0, 4)
+        + (m.k === hoyK ? ' <span class="am-cur">En curso</span>' : '') + '</div>'
+        + '<div class="am-pc">' + pc + '%</div><div class="am-s">completadas · ' + nf(m.asig) + ' actividades</div>'
+        + '<div class="am-nums"><div><b class="ok">' + nf(m.comp) + '</b><span>completadas</span></div><div><b class="bad">' + nf(m.nr) + '</b><span>no realizadas</span></div><div><b>' + m.dias + '</b><span>días</span></div></div>'
+        + '<span class="am-ver">Ver el detalle →</span></button>';
+    }).join('') + '</div>';
+  return '<section class="am">'
+    + '<div class="am-t">Actividades por mes</div><div class="am-sub">VTR y Claro · Región de Valparaíso · ' + (Array.isArray(window.ACT_MES) ? window.ACT_MES.length : 3) + ' meses cargados</div>'
+    + cuerpo
+    + '</section>';
+}
+
+/* ==== (REDISEÑO 28-10-2026, 16:42) FILA DE BOTONES DENTRO DE HOY ====
+   Luis: dentro de HOY va todo lo del dia en curso (menos el bucket). Cada
+   boton llama a la MISMA funcion de antes: abrirEst (listas del dia, con su
+   tarjeta de WhatsApp), toggleComp (cierres 13:00), PV_SM (sin moradores de
+   hoy), verMapa (Rutas) y abrirResumenWsp (Resumen WhatsApp). */
+/* ==== (REDISEÑO 28-10-2026, 18:05) PANEL "FRANJAS Y COMUNAS" DENTRO DE HOY ====
+   Luis: en la revision faltaba la vista del dia completo por franja y por
+   comuna (lo que era "Como viene el dia" / "Por comuna"). Es la MISMA tabla
+   de antes, pero sin nada del bucket. Se abre con el boton de Reportes. */
+function frComHtml(){
+  const X = window._FRC || {fr:{}, co:{}, hoy:false};
+  const porFranja = X.fr, porComuna = X.co, hoy = X.hoy;
+  const ahora = new Date().getHours();
+  const lista = Object.keys(porFranja).sort(), coms = Object.keys(porComuna).sort();
+  const FR_AMBAR = 10, FR_ROJO = 25;
+  let max = 1;
+  lista.forEach(f => { max = Math.max(max, porFranja[f].t); });
+  coms.forEach(c => { max = Math.max(max, porComuna[c].t); });
+  const usados = {};
+  const tramo = (v, cls, txt) => { if(!v || v < 0) return ''; usados[cls] = 1;
+    return '<span class="' + cls + '" style="flex-grow:' + v + '" title="' + v + ' ' + txt + '">' + v + '</span>'; };
+  const efec = (co, nr, t) => (co + nr) ? '<div class="ef">' + Math.round(100 * co / t) + '%</div>' : '<div class="ef sd" title="Todavía nadie cierra una visita">–</div>';
+  const fila = (cls, h, largo, pista, tt, ef) => '<div class="pa-fl' + cls + '"><div class="h">' + h + '</div>'
+    + '<div class="pc"><div class="pista" style="width:' + (100 * largo / max).toFixed(1) + '%">' + pista + '</div></div>'
+    + '<div class="tt">' + tt + '</div>' + ef + '</div>';
+  const cab = (t, dos) => '<div class="pa-cab' + (dos ? ' dos' : '') + '"><span class="pv-rot">' + t + '</span><span>órdenes</span><span>efectividad</span></div>';
+  let h = cab('Cómo viene el día, por franja');
+  if(!lista.length) h += '<div class="pa-vacio">Todavía no hay órdenes del día.</div>';
+  h += lista.map(function(f){
+    const d = porFranja[f];
+    const m = /^(\d{1,2})\s*-\s*(\d{1,2})$/.exec(f);
+    const enCurso = hoy && m && ahora >= +m[1] && ahora < +m[2];
+    const pasada = !hoy || (m && ahora >= +m[2]);
+    const pAb = d.t ? 100 * d.ab / d.t : 0;
+    const cerradas = d.t - d.ab, sinIniF = d.ab - d.ini;
+    const abTx = d.ab ? '<span class="ab">' + d.ab + (d.ab === 1 ? ' abierta' : ' abiertas') + '</span>' : '';
+    const est = enCurso ? '<small><span class="ec">en curso</span>' + (sinIniF > 0 ? ' · <span class="ojo">' + sinIniF + ' sin iniciar</span>' : '') + '</small>'
+      : !pasada ? '<small><span class="px">próxima</span></small>'
+      : !d.ab ? '<small><span class="ok">✓ cerrada</span></small>'
+      : '<small>pasada' + (abTx ? ' · ' + abTx : '') + '</small>';
+    const tono = enCurso ? ' ahora' : !pasada ? '' : pAb > FR_ROJO ? ' roj' : pAb > FR_AMBAR ? ' amb' : '';
+    return fila(tono, f + est, d.t,
+      tramo(d.co || 0, 'c', 'completadas') + tramo(d.nr || 0, 'n', 'no realizadas')
+      + tramo(cerradas - (d.co || 0) - (d.nr || 0), 'x', 'canceladas o suspendidas')
+      + tramo(d.ini, 'i', 'iniciadas') + tramo(sinIniF, 'a', 'en bandeja sin iniciar'),
+      d.t, efec(d.co || 0, d.nr || 0, d.t));
+  }).join('');
+  if(coms.length){
+    h += cab('Por comuna', true);
+    h += coms.map(function(c){
+      const d = porComuna[c];
+      const nom = c.toLowerCase().replace(/(^|\s)\S/g, t => t.toUpperCase()).replace(/^Quilpue$/, 'Quilpué');
+      const est = '<small>' + (d.ab ? '<span class="ab">' + d.ab + (d.ab === 1 ? ' abierta' : ' abiertas') + '</span>' : '<span class="ok">✓ todo cerrado</span>') + '</small>';
+      return fila(' com', nom + est, d.t,
+        tramo(d.c, 'c', 'completadas') + tramo(d.nr, 'n', 'no realizadas') + tramo(d.cs, 'x', 'canceladas o suspendidas')
+        + tramo(d.ini, 'i', 'iniciadas') + tramo(d.ab - d.ini, 'a', 'en bandeja sin iniciar'),
+        d.t, efec(d.c, d.nr, d.t));
+    }).join('');
+  }
+  const LEY = [['c','completadas'],['n','no realizadas'],['x','canc/susp'],['i','iniciadas'],['a','en bandeja sin iniciar']];
+  h += '<div class="pa-ley">' + LEY.filter(x => usados[x[0]]).map(x => '<span><i class="' + x[0] + '"></i>' + x[1] + '</span>').join('') + '</div>';
+  return h;
+}
+
+/* ==== (REDISEÑO 28-10-2026, 18:25) PAGINA MIGRACIONES, mirada como COMPLETITUD ====
+   Luis: "en la actualidad mostramos solo derivadas y VTR lo ve como
+   completitud". Esta pagina dice lo mismo pero en el idioma de VTR/CLARO:
+   completitud = completadas / visitadas (visitadas = completadas + no
+   realizadas). Meta VTR/CLARO 60 % (= 40 % de derivacion, MG_META_DER).
+   Datos:
+     - hoy: en vivo, de las bandejas (DB), igual que la tarjeta de HOY
+     - historico: el MISMO de la vista Gerencia (bajarMigGer -> MG), hasta ayer
+     - Play de cada orden historica: datos.json (ACT_FILAS), por OT
+   De quien es cada no realizada: MISMA regla mgResp() de Gerencia
+   (cliente / VTR-CLARO / Dominion).
+   Los accesos de abajo abren lo MISMO de la ventana de siempre. */
+const MP_META = 60;
+const MP_POCAS = 3;     // con menos visitas que esto, el % del tecnico va en gris      // = 100 - MG_META_DER (40 % de derivacion)
+function mpCargar(){
+  try { mesCargar(); } catch(e){}
+  if(MG || mgBajando || mgFallo) return;
+  mgBajando = true;
+  bajarMigGer().then(function(d){ MG = d; mgBajando = false; pintarPortada(); })
+    .catch(function(e){ console.warn('mig pagina:', e); mgFallo = true; mgBajando = false; pintarPortada(); });
+}
+function mpNorm(t){ return String(t || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toUpperCase().replace(/\s+/g, ' ').trim(); }
+function mpPc(v){ return v === null ? '–' : (Math.round(v * 10) / 10).toFixed(1).replace('.', ',') + '%'; }
+function mpSt(L){
+  const s = { co:0, nr:0, ab:0, ini:0, resp:{cli:0, vtr:0, dom:0}, rcod:{cli:{}, vtr:{}, dom:{}} };
+  L.forEach(function(x){
+    if(x.e === 'Completado') s.co++;
+    else if(x.e === 'No Realizada'){ s.nr++; const c = x.cod || 'Sin código', r = mgResp(c); s.resp[r]++; s.rcod[r][c] = (s.rcod[r][c] || 0) + 1; }
+    else if(x.e !== 'Cancelado' && x.e !== 'Suspendido'){ s.ab++; if(x.e === 'Iniciado' || x.e === 'en ruta') s.ini++; }
+  });
+  s.vis = s.co + s.nr; s.comp = s.vis ? 100 * s.co / s.vis : null;
+  return s;
+}
+/* cuantas completadas faltan para llegar a la meta, o cuantas derivadas mas aguanta */
+function mpFalta(s){
+  const m = MP_META / 100;
+  if(!s.vis) return null;
+  if(s.comp >= MP_META) return { ok:true, n: Math.floor(s.co / m - s.vis + 1e-9) };
+  return { ok:false, n: Math.ceil((m * s.vis - s.co) / (1 - m) - 1e-9) };
+}
+function migPaginaHtml(){
+  mpCargar();
+  const fd = (typeof FECHA_DATOS !== 'undefined' && FECHA_DATOS) ? FECHA_DATOS : new Date();
+  const hoyIso = fd.getFullYear() + String(fd.getMonth() + 1).padStart(2, '0') + String(fd.getDate()).padStart(2, '0');
+  const semHoy = mgLunes(hoyIso), mesHoy = hoyIso.slice(0, 6);
+  const NOMMES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  const nomMes = k => NOMMES[+k.slice(4) - 1];
+  const nom = t => String(t || '').toLowerCase().replace(/(^|\s)\S/g, c => c.toUpperCase());
+  const tag = (c, t) => '<span class="ad-tag ' + c + '">' + t + '</span>';
+  const col = v => v === null ? 'gr' : v >= MP_META ? 'ok' : 'bad';
+
+  /* --- todas las migraciones: historico (hasta ayer) + hoy en vivo --- */
+  const play = {};
+  if(Array.isArray(window.ACT_FILAS)) window.ACT_FILAS.forEach(function(r){ if(r['Play']) play[String(r['Orden de Trabajo'] || '')] = String(r['Play']); });
+  const R = [];
+  if(MG) MG.filas.forEach(function(x){ if(x.iso < hoyIso) R.push({ iso:x.iso, sem:x.sem, mes:x.mes, tec:x.tec, e:x.e, cod:x.cod, fr:x.fr, ot:x.ot, play:(/(\d)/.exec(play[x.ot] || '') || [])[1] || '' }); });
+  Object.keys(DB || {}).forEach(function(t){ (DB[t] || []).forEach(function(o){
+    if(familiaCat(o.cat) !== 'Migraciones') return;
+    R.push({ iso:hoyIso, sem:semHoy, mes:mesHoy, tec:t, e:String(o.e || 'Pendiente'), cod:String(o.cie || ''), fr:String(o.f || ''), ot:String(o.o || ''), play:(/(\d)\s*Play/i.exec(o.cat || '') || [])[1] || '', hoy:true });
+  }); });
+
+  const semAnt = (function(){ const p = semHoy.split('-'), d = new Date(+p[0], +p[1] - 1, +p[2] - 7);
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); })();
+  const mesAnt = (function(){ const y = +mesHoy.slice(0, 4), m = +mesHoy.slice(4); return m === 1 ? (y - 1) + '12' : y + String(m - 1).padStart(2, '0'); })();
+  const PER = {
+    hoy: { f: x => x.hoy, tit: 'Hoy', ant: x => x.sem === semAnt, antTxt: 'vs semana pasada' },
+    sem: { f: x => x.sem === semHoy, tit: 'Semana ' + derNumSemana(semHoy), ant: x => x.sem === semAnt, antTxt: 'vs semana ' + derNumSemana(semAnt) },
+    mes: { f: x => x.mes === mesHoy, tit: nomMes(mesHoy).replace(/^./, c => c.toUpperCase()), ant: x => x.mes === mesAnt, antTxt: 'vs ' + nomMes(mesAnt) }
+  };
+  const per = PER[window.MP_PER] ? window.MP_PER : 'sem';
+  const cargando = !MG && !mgFallo;
+
+  let h = '<div class="ad-bar"><button class="ad-volver" onclick="window.PV_MIG=null; pintarPortada(); window.scrollTo(0,0)">← Volver</button>'
+    + '<span class="ad-tit">Migraciones · completitud</span>'
+    + '<span class="ad-sub">completadas ÷ visitadas · meta VTR/CLARO ' + MP_META + '% · hoy en vivo' + (cargando ? ' · cargando el histórico…' : mgFallo ? ' · no se pudo cargar el histórico' : ' + histórico hasta ayer') + '</span></div>';
+
+  /* 1. COMO VAMOS: hoy / semana / mes */
+  const big = function(k){
+    const s = mpSt(R.filter(PER[k].f)), f = mpFalta(s);
+    const hoyS = k === 'hoy' ? s : mpSt(R.filter(x => x.hoy && PER[k].f(x)));
+    let acc = '';
+    if(!s.vis) acc = 'Todavía no hay visitas.';
+    else if(f.ok) acc = '✓ En meta' + (f.n > 0 ? ': aguanta ' + f.n + ' derivada' + (f.n === 1 ? '' : 's') + ' más' : ' justo en el límite');
+    else if(k === 'mes'){
+      /* (REDISEÑO 28-10-2026, 18:38) para el mes: que % hay que hacer en lo que queda (resto de hoy + dias que faltan, sin domingos).
+         Las visitas que vienen se estiman con el promedio diario del mes. */
+      const diasMes = {}; R.forEach(x => { if(x.mes === mesHoy && !x.hoy && (x.e === 'Completado' || x.e === 'No Realizada')) diasMes[x.iso] = 1; });
+      const nD = Object.keys(diasMes).length, prom = nD ? (s.vis - hoyS.vis) / nD : 0;
+      let rest = 0; const d = new Date(fd); d.setDate(d.getDate() + 1);
+      while(d.getMonth() === fd.getMonth()){ if(d.getDay() !== 0) rest++; d.setDate(d.getDate() + 1); }
+      const vr = Math.round(hoyS.ab + rest * prom);
+      const nec = vr ? 100 * ((MP_META / 100) * (s.vis + vr) - s.co) / vr : null;
+      const mejor = vr ? 100 * (s.co + vr) / (s.vis + vr) : null;
+      acc = nec === null ? 'Ya no quedan visitas este mes.'
+        : nec > 100 ? 'El ' + MP_META + '% ya no alcanza este mes: aunque se complete todo lo que queda (~' + vr + ' visitas), cerraría en <b>' + mpPc(mejor) + '</b>'
+        : 'Para cerrar ' + nomMes(mesHoy) + ' en ' + MP_META + '% hay que hacer <b>' + mpPc(nec) + '</b> en lo que queda (~' + vr + ' visitas' + (rest ? ', ' + rest + ' día' + (rest === 1 ? '' : 's') + ' más' : '') + ')';
+    }
+    else acc = 'Faltan <b>' + f.n + '</b> completada' + (f.n === 1 ? '' : 's') + ' seguidas para llegar al ' + MP_META + '%';
+    /* (28-10-2026, 19:15) Luis: "quedan 4 por visitar" confundia si ya estaban todas iniciadas. Se separa iniciadas de por iniciar. */
+    if(hoyS.ab && k !== 'mes'){ const pe = hoyS.ab - hoyS.ini, pz = [];
+      if(hoyS.ini) pz.push('<b>' + hoyS.ini + '</b> iniciada' + (hoyS.ini === 1 ? '' : 's') + ' sin cerrar');
+      if(pe) pz.push('<b>' + pe + '</b> por iniciar');
+      acc += ' · hoy quedan ' + pz.join(' y '); }
+    const sinHist = k !== 'hoy' && cargando;
+    return '<button class="mp-big ' + col(s.comp) + (per === k ? ' on' : '') + '" onclick="window.MP_PER=\'' + k + '\'; pintarPortada()">'
+      + '<span class="t">' + PER[k].tit + (k === 'sem' ? ' <small>' + derRango(semHoy) + '</small>' : '') + '</span>'
+      + '<span class="v">' + (sinHist ? '…' : mpPc(s.comp)) + '</span>'
+      + '<span class="s">' + s.co + ' completadas de ' + s.vis + ' visitadas · ' + s.nr + ' derivadas</span>'
+      + '<span class="a">' + (sinHist ? 'cargando el histórico…' : acc) + '</span>'
+      + '<span class="m">' + (s.comp === null ? '' : s.comp >= MP_META ? '▲ ' + mpPc(s.comp - MP_META).replace('%', '') + ' pts sobre la meta' : '▼ ' + mpPc(MP_META - s.comp).replace('%', '') + ' pts bajo la meta') + '</span></button>';
+  };
+  h += '<div class="mp-bigs">' + big('hoy') + big('sem') + big('mes') + '</div>'
+    + '<p class="ad-nota">Toca hoy, semana o mes para ver el detalle de abajo de ese período. Ahora: <b>' + PER[per].tit + '</b>.</p>';
+
+  const L = R.filter(PER[per].f), S = mpSt(L);
+
+  /* 2. QUE NOS BAJA LA COMPLETITUD */
+  const sinVtr = (S.co + S.nr - S.resp.vtr) ? 100 * S.co / (S.co + S.nr - S.resp.vtr) : null;
+  const soloDom = (S.co + S.resp.dom) ? 100 * S.co / (S.co + S.resp.dom) : null;
+  const grp = function(r){
+    const n = S.resp[r], cods = S.rcod[r], top = Object.keys(cods).sort((a, b) => cods[b] - cods[a]).slice(0, 4);
+    return '<div class="mp-g"><div class="mp-gh"><i style="background:' + MG_RCOL[r] + '"></i><b>' + MG_RNOM[r] + '</b><span>' + n + ' · ' + (S.nr ? Math.round(100 * n / S.nr) : 0) + '%</span></div>'
+      + '<div class="mp-gb"><span style="width:' + (S.nr ? 100 * n / S.nr : 0) + '%;background:' + MG_RCOL[r] + '"></span></div>'
+      + (top.length ? '<div class="mp-gc">' + top.map(c => '<span>' + escR(c) + ' <b>' + cods[c] + '</b></span>').join('') + '</div>' : '') + '</div>';
+  };
+  h += '<div class="ad-dos mp-dos">'
+    + '<div class="ad-card"><h3>¿Qué nos baja la completitud? · ' + PER[per].tit + '</h3>'
+    +   (S.nr ? '<p class="ad-nota">Las ' + S.nr + ' derivadas, según de quién es la causa (misma regla de la vista Gerencia).</p>' + grp('vtr') + grp('cli') + grp('dom')
+        : '<p class="ad-vacio">' + (cargando && per !== 'hoy' ? 'Cargando…' : 'Ninguna derivada en este período.') + '</p>')
+    + '</div>'
+    + '<div class="ad-card mp-def"><h3>Para la reunión con VTR/CLARO</h3>'
+    +   '<div class="mp-dl"><span>Completitud real</span><b class="' + col(S.comp) + '">' + mpPc(S.comp) + '</b></div>'
+    +   '<div class="mp-dl"><span>Sin las causas de VTR/CLARO<small>dirección, NAP, red, factibilidad, contingencia…</small></span><b class="' + col(sinVtr) + '">' + mpPc(sinVtr) + '</b></div>'
+    /* (REDISEÑO 28-10-2026, 18:38) se saca "Solo lo que depende de Dominion": con la regla de Gerencia casi siempre da 100 % y le quita credibilidad frente a VTR */
+    +   '<p class="ad-nota">' + S.resp.vtr + ' de las ' + S.nr + ' derivadas tienen causa de VTR/CLARO y ' + S.resp.cli + ' son del cliente.</p>'
+    + '</div></div>';
+
+  /* 3. TECNICO POR TECNICO */
+  const T = {}, TA = {};
+  L.forEach(x => { (T[x.tec] = T[x.tec] || []).push(x); });
+  R.filter(PER[per].ant).forEach(x => { const k = mpNorm(x.tec); (TA[k] = TA[k] || []).push(x); });
+  const filasT = Object.keys(T).map(function(t){ const s = mpSt(T[t]), a = TA[mpNorm(t)] ? mpSt(TA[mpNorm(t)]) : null; return { t:t, s:s, a:a }; })
+    .filter(o => o.s.vis).sort((a, b) => b.s.nr - a.s.nr || a.s.comp - b.s.comp || b.s.vis - a.s.vis);
+  const sv = t => typeof svDe === 'function' && svDe(t) >= 0;
+  /* (REDISEÑO 28-10-2026, 18:28) Luis: titulo desplegable. Parte cerrado; se recuerda abierto/cerrado mientras se navega */
+  const tAb = !!window.MP_TEC_AB;
+  h += '<div class="ad-card"><button class="mp-desp' + (tAb ? ' ab' : '') + '" onclick="window.MP_TEC_AB=!window.MP_TEC_AB; pintarPortada()"><h3>Técnico por técnico · ' + PER[per].tit + ' (' + filasT.length + ')</h3>'
+    + '<span class="mp-dsub">' + (tAb ? 'Ocultar' : 'Ver los ' + filasT.length + ' técnicos') + ' <i>▾</i></span></button>'
+    + (!tAb ? '' : '<p class="ad-nota">Primero los que más derivan (los que más bajan la completitud del equipo). 🎯 = está en el Seguimiento VTR. La flecha compara con el período anterior (' + PER[per].antTxt + '). Con menos de ' + MP_POCAS + ' visitas el % va en gris: son muy pocas para sacar conclusiones.</p>'
+    + (filasT.length ? '<div class="ad-tbl"><table><thead><tr><th>Técnico</th><th>Visitadas</th><th>Completadas</th><th>Derivadas</th><th>VTR/CLARO</th><th>Cliente</th><th>Dominion</th><th>Completitud</th><th>' + PER[per].antTxt + '</th></tr></thead><tbody>'
+      + filasT.map(function(o){
+          const d = o.a && o.a.comp !== null ? o.s.comp - o.a.comp : null;
+          /* (REDISEÑO 28-10-2026, 18:38) con menos de 3 visitas el % no dice nada: va en gris */
+          const poco = o.s.vis < MP_POCAS;
+          const fl = poco ? '<span class="mp-fl gr">pocas visitas</span>' : d === null ? '<span class="mp-fl gr">sin datos</span>' : Math.abs(d) < 1 ? '<span class="mp-fl gr">= igual</span>'
+            : d > 0 ? '<span class="mp-fl ok">▲ ' + Math.round(d) + ' pts</span>' : '<span class="mp-fl bad">▼ ' + Math.round(-d) + ' pts</span>';
+          return '<tr' + (sv(o.t) ? ' class="sv"' : '') + '><td>' + nom(o.t) + (sv(o.t) ? ' 🎯' : '') + '</td><td class="nu">' + o.s.vis + '</td><td class="nu ok">' + o.s.co + '</td><td class="nu bad">' + o.s.nr + '</td>'
+            + '<td class="nu">' + (o.s.resp.vtr || '–') + '</td><td class="nu">' + (o.s.resp.cli || '–') + '</td><td class="nu">' + (o.s.resp.dom ? '<b>' + o.s.resp.dom + '</b>' : '–') + '</td>'
+            + '<td class="nu">' + tag(poco ? 'gr' : col(o.s.comp), mpPc(o.s.comp)) + '</td><td class="nu">' + fl + '</td></tr>'; }).join('')
+      + '</tbody></table></div>' : '<p class="ad-vacio">Sin visitas en este período.</p>'))
+    + '</div>';
+
+  /* 4. POR TIPO Y POR FRANJA */
+  const tabla = function(tit, keyf, nomf){
+    const G = {}; L.forEach(x => { const k = keyf(x); if(k) (G[k] = G[k] || []).push(x); });
+    const ks = Object.keys(G).sort().filter(k => mpSt(G[k]).vis);
+    return '<div class="ad-card"><h3>' + tit + '</h3>' + (ks.length ? ks.map(function(k){ const s = mpSt(G[k]);
+        return '<div class="mp-row"><span class="n">' + nomf(k) + '<small>' + s.co + ' de ' + s.vis + ' · ' + s.nr + ' derivadas</small></span>'
+          + '<span class="b"><i class="' + col(s.comp) + '" style="width:' + s.comp + '%"></i><em style="left:' + MP_META + '%"></em></span>'
+          + '<b class="' + col(s.comp) + '">' + mpPc(s.comp) + '</b></div>'; }).join('')
+        : '<p class="ad-vacio">Sin visitas.</p>') + '</div>';
+  };
+  /* (REDISEÑO 28-10-2026, 18:31) Luis: eliminar Por tipo y Por franja. La funcion tabla() queda por si se quiere volver. */
+  if(false) h += '<div class="ad-dos mp-par">' + tabla('Por tipo · ' + PER[per].tit, x => x.play, k => k + ' Play') + tabla('Por franja · ' + PER[per].tit, x => /^\d/.test(x.fr) ? x.fr : '', k => k) + '</div>';
+
+  /* 5. EVOLUCION por semana */
+  const SEM = {}; R.forEach(x => { (SEM[x.sem] = SEM[x.sem] || []).push(x); });
+  const ks = Object.keys(SEM).sort().slice(-8);
+  h += '<div class="ad-card"><h3>Evolución por semana</h3><p class="ad-nota">Completitud de cada semana. La línea punteada es la meta de ' + MP_META + '%. La semana en curso incluye hoy en vivo.</p>'
+    + (cargando ? '<p class="ad-vacio">Cargando el histórico…</p>' : '<div class="mp-evo">'
+      + ks.map(function(k){ const s = mpSt(SEM[k]);
+          return '<div class="mp-sem' + (k === semHoy ? ' cur' : '') + '"><b>' + mpPc(s.comp) + '</b><span class="col"><i class="' + col(s.comp) + '" style="height:' + (s.comp || 0) + '%"></i><em style="bottom:' + MP_META + '%"></em></span>'
+            + '<span class="l">Sem ' + derNumSemana(k) + (k === semHoy ? ' · en curso' : '') + '<small>' + derRango(k) + ' · ' + s.vis + ' visitadas</small></span></div>'; }).join('') + '</div>')
+    + '</div>';
+
+  /* 6. ACCESOS de siempre */
+  const b = (onc, t, d) => '<button class="if-c" onclick="' + onc + '"><span class="if-n">' + t + '<i>›</i></span><span class="if-d">' + d + '</span></button>';
+  const a = (url, t, d) => url ? '<a class="if-c" href="' + url + '" target="_blank" rel="noopener"><span class="if-n">' + t + '<i>↗</i></span><span class="if-d">' + d + '</span></a>' : '';
+  const g = (t, cuerpo) => '<div class="mp-acg"><span class="mp-act">' + t + '</span><div class="if-grid">' + cuerpo + '</div></div>';
+  h += '<section class="inf-b mp-acc"><div class="hb-top"><span class="hb-nm" style="font-size:34px">MÁS DETALLE</span></div>'
+    + '<span class="hb-fe">Las mismas herramientas de siempre</span>'
+    + g('Hoy, en vivo', b("migDer('hoy')", 'Derivadas de hoy', 'Visitadas, derivadas y por visitar, tal como van') + b("migIr('abrirResMig')", 'Resumen supervisores', 'Por qué y quién, con filtro por supervisor y fotos'))
+    + g('Técnicos', b("migIr('abrirSegVtr')", 'Seguimiento VTR', 'Los técnicos que VTR/CLARO marcó, semana a semana') + b("migDer('tec')", 'Por técnico', 'Quién deriva más y la historia de cada dirección')
+        + b("migDer('aud')", 'A quién auditar', 'Lo derivado propio de cada técnico') + b("migDer('evo')", 'Evolución', 'Si cada técnico va mejorando o empeorando') + b("migDer('fic')", 'Ficha del técnico', 'Todo sobre un técnico y qué revisar primero'))
+    + g('Direcciones, equipo y gerencia', b("migDer('dir')", 'Por dirección', 'Qué direcciones fallan y con qué técnicos') + b("migDer('res')", 'Resumen de derivación', 'Cómo vamos y con quién conversar')
+        + b("migIr('abrirMigGer')", 'Migraciones · Gerencia', 'Por mes, semana y hoy. Con Modo reunión'))
+    + g('Respaldos y plan', a(typeof URL_PLAN_SEMANA !== 'undefined' ? URL_PLAN_SEMANA + '?t=' + Date.now() : '', 'Plan de acción de la semana', 'A quién se fiscaliza y cómo se mide (PDF)')
+        + a(typeof URL_PLANILLA_RESP !== 'undefined' ? URL_PLANILLA_RESP : '', 'Planilla de respaldos', 'Lo que mandan los técnicos desde la app')
+        + a(typeof URL_APP_RESP !== 'undefined' ? URL_APP_RESP : '', 'App Respaldo en terreno', 'La app que usan los técnicos'))
+    + '</section>';
+  return '<div class="ad mp">' + h + '</div>';
+}
+
+/* ==== (REDISEÑO 28-10-2026, 18:50) DETALLE DEL MES, mirado como EFECTIVIDAD ====
+   Luis: "dale veamos como queda". Mismo tratamiento que MIGRACIONES:
+   efectividad = completadas / asignadas (la MISMA de la tarjeta del mes y
+   del Dashboard de Actividades). Todo se compara con el mes anterior
+   (▲/▼ en puntos). Si se elige un dia, se compara con el mes completo.
+   De quien es cada no realizada: MISMA regla mgResp() de MIGRACIONES.
+   La version anterior queda como mesDetalleHtmlViejo(). */
+const MD_POCAS = 10;   // tecnicos con menos asignadas que esto: % en gris
+function mesDetalleHtml(k){
+  mesCargar();
+  const NOM = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  const may = t => t.replace(/^./, c => c.toUpperCase());
+  const tit = may(NOM[+k.slice(5) - 1]) + ' ' + k.slice(0, 4);
+  let h = '<div class="ad-bar"><button class="ad-volver" onclick="window.PV_MES=null; pintarPortada(); window.scrollTo(0,0)">← Volver</button><span class="ad-tit">' + tit + '</span>';
+  if(window.ACT_FILAS === null || window.ACT_FILAS === undefined) return '<div class="ad">' + h + '</div><div class="ad-card"><p class="ad-vacio">Cargando el mes…</p></div></div>';
+  if(window.ACT_FILAS === 'error') return '<div class="ad">' + h + '</div><div class="ad-card"><p class="ad-vacio">No se pudieron cargar los datos de Actividades.</p></div></div>';
+  const mmDe = kk => kk.slice(5) + '-' + kk.slice(0, 4);
+  const kAnt = (function(){ const y = +k.slice(0, 4), m = +k.slice(5); return m === 1 ? (y - 1) + '-12' : y + '-' + String(m - 1).padStart(2, '0'); })();
+  const delMes = window.ACT_FILAS.filter(r => String(r['Fecha'] || '').slice(3) === mmDe(k));
+  const mesAnt = window.ACT_FILAS.filter(r => String(r['Fecha'] || '').slice(3) === mmDe(kAnt));
+  const dia = window.PV_MES_DIA || null;
+  const L = dia ? delMes.filter(r => r['Fecha'] === dia) : delMes;
+  const B = dia ? delMes : mesAnt;                                   // con que se compara
+  const bTxt = dia ? 'vs el mes' : 'vs ' + NOM[+kAnt.slice(5) - 1];
+  const nf = n => n.toLocaleString('es-CL');
+  const p1 = v => v === null ? '–' : (Math.round(v * 10) / 10).toFixed(1).replace('.', ',') + '%';
+  const st = function(l){ const s = { a:l.length, co:0, nr:0, ca:0, su:0 };
+    l.forEach(r => { const e = r['Estado']; if(e === 'Completado') s.co++; else if(e === 'No Realizada') s.nr++; else if(e === 'Cancelado') s.ca++; else if(e === 'Suspendido') s.su++; });
+    s.ef = s.a ? 100 * s.co / s.a : null; return s; };
+  const fl = function(a, b, chico){ if(a === null || b === null) return '<span class="mp-fl gr">' + (chico ? '' : 'sin datos') + '</span>';
+    const d = a - b; return Math.abs(d) < 0.5 ? '<span class="mp-fl gr">= igual</span>' : d > 0 ? '<span class="mp-fl ok">▲ ' + p1(d).replace('%', '') + ' pts</span>' : '<span class="mp-fl bad">▼ ' + p1(-d).replace('%', '') + ' pts</span>'; };
+  const S = st(L), SB = st(B);
+  h += '<span class="ad-sub">' + nf(S.a) + ' actividades · ' + (dia ? 'día ' + dia : 'todo el mes') + ' · efectividad = completadas ÷ asignadas</span></div>';
+
+  /* 1. COMO FUE EL MES */
+  h += '<div class="md2-top">'
+    + '<div class="md2-big"><span class="t">Efectividad ' + (dia ? 'del ' + dia.slice(0, 5) : 'de ' + NOM[+k.slice(5) - 1]) + '</span><span class="v">' + p1(S.ef) + '</span>'
+    +   '<span class="s">' + nf(S.co) + ' completadas de ' + nf(S.a) + ' asignadas</span>'
+    +   '<span class="c">' + fl(S.ef, SB.ef) + ' <small>' + bTxt + (SB.ef !== null ? ' (' + p1(SB.ef) + ')' : '') + '</small></span></div>'
+    + '<div class="md2-est">'
+    +   [['Completadas', S.co, 'ok'], ['No realizadas', S.nr, 'bad'], ['Canceladas', S.ca, 'wa'], ['Suspendidas', S.su, 'gr']].map(e =>
+          '<div class="md-e ' + e[2] + '"><div class="n">' + nf(e[1]) + '</div><div class="l">' + e[0] + '</div><div class="p">' + p1(S.a ? 100 * e[1] / S.a : null) + ' del total</div></div>').join('')
+    + '</div></div>';
+
+  /* 2. DIA POR DIA */
+  const dias = [...new Set(delMes.map(r => r['Fecha']))].sort((a, b) => a.slice(0, 2).localeCompare(b.slice(0, 2)));
+  const SM = st(delMes);
+  h += '<div class="ad-card"><div class="md2-h"><h3>Día por día</h3><span class="ad-nota">Toca un día para ver solo ese día. Verde = sobre el promedio del mes (' + p1(SM.ef) + '), rojo = bajo.</span>'
+    + (dia ? '<button class="md-ch on" onclick="window.PV_MES_DIA=null; pintarPortada()">✕ Ver todo el mes</button>' : '') + '</div>'
+    + '<div class="md2-dias">' + dias.map(function(d){ const s = st(delMes.filter(r => r['Fecha'] === d));
+        return '<button class="md2-d' + (dia === d ? ' on' : '') + '" onclick="window.PV_MES_DIA=' + (dia === d ? 'null' : '\'' + d + '\'') + '; pintarPortada()" title="' + d + ': ' + s.co + ' de ' + s.a + ' (' + p1(s.ef) + ')">'
+          + '<b>' + Math.round(s.ef) + '</b><span class="col"><i class="' + (s.ef >= SM.ef ? 'ok' : 'bad') + '" style="height:' + s.ef + '%"></i><em style="bottom:' + SM.ef + '%"></em></span><span class="l">' + d.slice(0, 2) + '</span></button>'; }).join('')
+    + '</div></div>';
+
+  /* 3. POR ACTIVIDAD, agrupada y desplegable */
+  const sub = r => { const t = String(r['Tipo de Actividad'] || '').trim(), T = t.toUpperCase(), p = parseInt(r['Play'], 10);
+    return (p >= 1 && p <= 3 && (T.indexOf('ALTA') === 0 || T.indexOf('MIGRAC') === 0)) ? t + ' ' + p + 'P' : t; };
+  const fam = r => familiaCat(r['Tipo de Actividad']);
+  const grupo = function(lista, fn){ const g = {}; lista.forEach(r => { const v = fn(r) || 'Sin dato'; (g[v] = g[v] || []).push(r); }); return g; };
+  const GA = grupo(L, fam), GB = grupo(B, fam);
+  const linEf = function(nomb, s, sb, extra){ return '<span class="nm">' + nomb + (extra || '') + '</span><span class="n2">' + nf(s.a) + '</span>'
+    + '<span class="pista"><i style="width:' + (s.ef || 0) + '%"></i></span><b>' + p1(s.ef) + '</b>' + fl(s.ef, sb ? sb.ef : null, true); };
+  h += '<div class="ad-card"><div class="md2-h"><h3>Por actividad</h3><span class="ad-nota">Toca una para ver sus tipos. La flecha es ' + bTxt + '.</span></div>'
+    + '<div class="md2-cab"><span></span><span>asignadas</span><span>efectividad</span><span></span><span>' + bTxt + '</span></div>'
+    + Object.keys(GA).sort((a, b) => GA[b].length - GA[a].length).map(function(f){
+        const sa = st(GA[f]), sb = GB[f] ? st(GB[f]) : null;
+        const ga = grupo(GA[f], sub), gb = grupo(GB[f] || [], sub);
+        const abF = (window.MD_AB || {})[f];   /* recuerda cuales estan abiertas aunque la pagina se repinte */
+        return '<details class="md2-det"' + (abF ? ' open' : '') + ' ontoggle="window.MD_AB=window.MD_AB||{}; window.MD_AB[\'' + f + '\']=this.open"><summary class="md2-lin fam">' + linEf(f, sa, sb, ' <small>' + nf(sa.nr) + ' no realizadas</small>') + '</summary>'
+          + Object.keys(ga).sort((a, b) => ga[b].length - ga[a].length).map(t => '<div class="md2-lin hija">' + linEf(t, st(ga[t]), gb[t] ? st(gb[t]) : null) + '</div>').join('') + '</details>';
+      }).join('') + '</div>';
+
+  /* 4. SUPERVISOR, FRANJA, CIUDAD */
+  const caja = function(titulo, fn, orden){
+    const ga = grupo(L, fn), gb = grupo(B, fn);
+    const ks = Object.keys(ga).sort(orden || ((a, b) => ga[b].length - ga[a].length));
+    return '<div class="ad-card"><h3>' + titulo + '</h3>' + ks.map(x => '<div class="md2-lin">' + linEf(may(String(x).toLowerCase()).replace(/ (\S)/g, (m, c) => ' ' + c.toUpperCase()), st(ga[x]), gb[x] ? st(gb[x]) : null) + '</div>').join('') + '</div>';
+  };
+  h += '<div class="md2-tres">' + caja('Por supervisor', r => r['supervisor']) + caja('Por franja', r => r['Franja'], (a, b) => a.localeCompare(b)) + caja('Por ciudad', r => r['Ciudad']) + '</div>';
+
+  /* 5. POR QUE NO SE HICIERON */
+  const nr = L.filter(r => r['Estado'] === 'No Realizada'), nrB = B.filter(r => r['Estado'] === 'No Realizada');
+  const R3 = {vtr:[], cli:[], dom:[]}, R3B = {vtr:0, cli:0, dom:0};
+  nr.forEach(r => R3[mgResp(r['Código de Cierre'])].push(r)); nrB.forEach(r => R3B[mgResp(r['Código de Cierre'])]++);
+  const g3 = function(q){ const l = R3[q], cods = {}; l.forEach(r => { const c = r['Código de Cierre'] || 'Sin código'; cods[c] = (cods[c] || 0) + 1; });
+    const top = Object.keys(cods).sort((a, b) => cods[b] - cods[a]).slice(0, 5);
+    const pa = S.a ? 100 * l.length / S.a : null, pb = SB.a ? 100 * R3B[q] / SB.a : null;
+    return '<div class="mp-g"><div class="mp-gh"><i style="background:' + MG_RCOL[q] + '"></i><b>' + MG_RNOM[q] + '</b><span>' + nf(l.length) + ' · ' + (nr.length ? Math.round(100 * l.length / nr.length) : 0) + '%</span></div>'
+      + '<div class="mp-gb"><span style="width:' + (nr.length ? 100 * l.length / nr.length : 0) + '%;background:' + MG_RCOL[q] + '"></span></div>'
+      + '<div class="md2-gx">' + (top.length ? '<div class="mp-gc">' + top.map(c => '<span>' + escR(c) + ' <b>' + cods[c] + '</b></span>').join('') + '</div>' : '<span></span>')
+      + '<span class="md2-pp">' + p1(pa) + ' de lo asignado ' + (pa !== null && pb !== null ? (pa - pb > 0.5 ? '<span class="mp-fl bad">▲ ' + p1(pa - pb).replace('%', '') + '</span>' : pb - pa > 0.5 ? '<span class="mp-fl ok">▼ ' + p1(pb - pa).replace('%', '') + '</span>' : '') : '') + '</span></div></div>';
+  };
+  h += '<div class="ad-card"><div class="md2-h"><h3>¿Por qué no se hicieron? <span class="md-ch2">' + nf(nr.length) + ' no realizadas</span></h3><span class="ad-nota">Según de quién es la causa (misma regla de MIGRACIONES). A la derecha, cuánto pesa sobre lo asignado y si subió o bajó ' + bTxt + '.</span></div>'
+    + (nr.length ? g3('vtr') + g3('cli') + g3('dom') : '<p class="ad-vacio">Ninguna.</p>') + '</div>';
+
+  /* 6. TECNICO POR TECNICO (desplegable) */
+  const tec = r => { const n = String(r['Nombre'] || ''), i = n.indexOf('_DOMI_'); return (i >= 0 ? n.slice(i + 6) : n).replace(/ /g, ' ').trim(); };
+  const TA = grupo(L, tec), TB = grupo(B, tec);
+  const FT = Object.keys(TA).map(t => ({ t:t, s:st(TA[t]), b:TB[t] ? st(TB[t]) : null })).sort((a, b) => b.s.nr - a.s.nr || a.s.ef - b.s.ef);
+  const ab = !!window.MD_TEC_AB;
+  const nomT = t => String(t).toLowerCase().replace(/(^|\s)\S/g, c => c.toUpperCase());
+  h += '<div class="ad-card"><button class="mp-desp' + (ab ? ' ab' : '') + '" onclick="window.MD_TEC_AB=!window.MD_TEC_AB; pintarPortada()"><h3>Técnico por técnico (' + FT.length + ')</h3>'
+    + '<span class="mp-dsub">' + (ab ? 'Ocultar' : 'Ver los ' + FT.length + ' técnicos') + ' <i>▾</i></span></button>'
+    + (!ab ? '' : '<p class="ad-nota">Primero los que tienen más no realizadas. Con menos de ' + (dia ? 3 : MD_POCAS) + ' asignadas' + (dia ? ' en el día' : '') + ' el % va en gris.</p>'
+      + '<div class="ad-tbl"><table><thead><tr><th>Técnico</th><th>Asignadas</th><th>Completadas</th><th>No realizadas</th><th>Canc/Susp</th><th>Efectividad</th><th>' + bTxt + '</th></tr></thead><tbody>'
+      + FT.map(function(o){ const poco = o.s.a < (dia ? 3 : MD_POCAS);
+          return '<tr><td>' + nomT(o.t) + '</td><td class="nu">' + o.s.a + '</td><td class="nu ok">' + o.s.co + '</td><td class="nu bad">' + o.s.nr + '</td><td class="nu">' + (o.s.ca + o.s.su || '–') + '</td>'
+            + '<td class="nu"><span class="ad-tag ' + (poco ? 'gr' : o.s.ef >= SM.ef ? 'ok' : 'bad') + '">' + p1(o.s.ef) + '</span></td>'
+            + '<td class="nu">' + (poco ? '<span class="mp-fl gr">pocas</span>' : fl(o.s.ef, o.b ? o.b.ef : null)) + '</td></tr>'; }).join('')
+      + '</tbody></table></div>')
+    + '</div>';
+  return '<div class="ad md2">' + h + '</div>';
+}
+
+function hoyHerrHtml(nAct, co, nr, ab, cs){
+  let c = null; try { c = calcularCompletitud(); } catch(e){}
+  const ok13 = c && c.total, p13 = ok13 ? Math.round(c.pct) + '%' : '–';
+  const antes13 = new Date().getHours() < 13;
+  const col13 = !ok13 || antes13 ? 'gr' : c.pct >= COMP_META * 100 ? 'ok' : c.pct >= 70 ? 'wa' : 'bad';
+  let sm = null; try { sm = pvSinMorHoy(); } catch(e){}
+  const nSm = sm ? sm.l.length : 0;
+  const lst = (est, n, txt, cls) => '<button class="hh-b" onclick="desdePortada(function(){abrirEst(\'' + est + '\')})"><b class="' + (cls || '') + '">' + n + '</b>' + txt + '</button>';
+  return '<div class="hh">'
+    + '<div class="hh-g"><span class="hh-t">Listas del día</span>'
+    +   lst('__TODAS__', nAct, 'todas') + lst('Completado', co, 'completadas', 'ok') + lst('No Realizada', nr, 'no realizadas', 'bad')
+    +   lst('__ABIERTAS__', ab, 'sin cerrar') + lst('__CANCSUSP__', cs, 'canc/susp', 'gr')
+    + '</div>'
+    + '<div class="hh-g"><span class="hh-t">Reportes</span>'
+    +   '<button class="hh-b" onclick="desdePortada(toggleComp)" title="Completitud al corte de las 13:00' + (ok13 ? ': ' + c.cumplen + ' de ' + c.total + ' técnicos' : '') + '"><b class="' + col13 + '">' + p13 + '</b>cierres 13:00</button>'
+    +   '<button class="hh-b' + (window.PV_SM ? ' sel' : '') + '" onclick="window.PV_SM = !window.PV_SM; pintarPortada()"><b class="' + (nSm ? 'bad' : 'gr') + '">' + nSm + '</b>sin moradores hoy</button>'
+    +   '<button class="hh-b' + (window.PV_FC ? ' sel' : '') + '" onclick="window.PV_FC = !window.PV_FC; pintarPortada()"><b class="gr">🕒</b>franjas y comunas</button>'
+    + '</div>'
+    + '<div class="hh-g"><span class="hh-t">Ir a</span>'
+    +   '<button class="hh-b hh-ir" onclick="verMapa()">🗺 Rutas</button>'
+    +   '<button class="hh-b hh-ir wsp" onclick="abrirResumenWsp()">💬 Resumen WhatsApp</button>'
+    + '</div>'
+    + '</div>' + (window.PV_FC ? '<div class="hh-panel hh-fc">' + frComHtml() + '</div>' : '') + (window.PV_SM ? '<div class="hh-panel">' + pvSinMorPanel() + '</div>' : '');
+}
+
+/* ==== (REDISEÑO 28-10-2026, 17:31) DETALLE DEL MES, dentro del Modulo ====
+   Luis: al tocar una tarjeta de mes, mostrar la informacion de ese mes (no
+   abrir otra vez la portada de Actividades). Mismo contenido que el detalle
+   del mes del Dashboard de Actividades: dia, estados, por tipo (con sus
+   motivos), de quien fue la caida, motivo de cierre, por supervisor y por
+   franja. Mismo datos.json y mismas reglas (culpaDe del Dashboard de
+   Actividades copiada aca como mesCulpa). */
+const MES_CLI = ['sin moradores','reagenda','desiste','sin contacto','sin acceso','sin apoyo','casa sin medidor','ducto'];
+const MES_MAN = ['falla','nap','sin red','niveles','poste','factible','masiva','contingencia','direccion','derivaci','ticket','zona roja','riesgo','mal generada'];
+function mesCulpa(c){ c = String(c || '').toLowerCase();
+  if(MES_CLI.some(k => c.indexOf(k) >= 0)) return 'cliente';
+  if(MES_MAN.some(k => c.indexOf(k) >= 0)) return 'mandante';
+  return 'empresa'; }
+function mesCargar(){
+  if(window.ACT_FILAS !== undefined) return;
+  window.ACT_FILAS = null;
+  fetch(URL_DATOS_ACT + '?t=' + Date.now(), {cache:'no-store'}).then(r => r.json()).then(function(js){
+    const cols = js.cols || [], dic = js.dic || {};
+    window.ACT_FILAS = (js.rows || []).map(function(row){ const o = {};
+      cols.forEach(function(c, i){ const v = row[i]; o[c] = (dic[c] && typeof v === 'number') ? dic[c][v] : v; }); return o; });
+    pintarPortada();
+  }).catch(function(){ window.ACT_FILAS = 'error'; pintarPortada(); });
+}
+function mesDetalleHtmlViejo(k){
+  mesCargar();
+  const NOM = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  const tit = NOM[+k.slice(5) - 1].replace(/^./, c => c.toUpperCase()) + ' ' + k.slice(0, 4);
+  let h = '<div class="ad-bar"><button class="ad-volver" onclick="window.PV_MES=null; pintarPortada()">← Volver</button><span class="ad-tit">' + tit + '</span>';
+  if(window.ACT_FILAS === null) return '<div class="ad">' + h + '</div><div class="ad-card"><p class="ad-vacio">Cargando el mes…</p></div></div>';
+  if(window.ACT_FILAS === 'error') return '<div class="ad">' + h + '</div><div class="ad-card"><p class="ad-vacio">No se pudieron cargar los datos de Actividades.</p></div></div>';
+  const mm = k.slice(5) + '-' + k.slice(0, 4);
+  const delMes = window.ACT_FILAS.filter(r => String(r['Fecha'] || '').slice(3) === mm);
+  const dia = window.PV_MES_DIA || null;
+  const todas = dia ? delMes.filter(r => r['Fecha'] === dia) : delMes;
+  const est = window.PV_MES_EST || 'Completado';
+  const nf = n => n.toLocaleString('es-CL');
+  const pc = (a, b) => b ? (Math.round(1000 * a / b) / 10).toFixed(1).replace('.', ',') + '%' : '–';
+  h += '<span class="ad-sub">' + nf(todas.length) + ' actividades · ' + (dia || 'todo el mes') + '</span></div>';
+  /* dias */
+  const dias = [...new Set(delMes.map(r => r['Fecha']))].sort((a, b) => a.slice(0, 2).localeCompare(b.slice(0, 2)));
+  h += '<div class="md-dias"><button class="md-ch' + (!dia ? ' on' : '') + '" onclick="window.PV_MES_DIA=null; pintarPortada()">Todo el mes</button>'
+    + dias.map(d => '<button class="md-ch' + (dia === d ? ' on' : '') + '" onclick="window.PV_MES_DIA=\'' + d + '\'; pintarPortada()">' + d.slice(0, 5) + '</button>').join('') + '</div>';
+  /* estados */
+  const EST = [['Completado','Completadas','ok'],['No Realizada','No realizadas','bad'],['Cancelado','Canceladas','wa'],['Suspendido','Suspendidas','gr']];
+  h += '<div class="md-est">' + EST.map(function(e){
+    const n = todas.filter(r => r['Estado'] === e[0]).length;
+    const pie = e[0] === 'Completado' ? '<div class="p">de <b>' + nf(todas.length) + '</b> asignadas</div><div class="ef">Efectividad <b>' + pc(n, todas.length) + '</b></div>'
+                                      : '<div class="p">' + pc(n, todas.length) + ' del total</div>';
+    return '<button class="md-e ' + e[2] + (est === e[0] ? ' on' : '') + '" onclick="window.PV_MES_EST=\'' + e[0] + '\'; pintarPortada()"><div class="n">' + nf(n) + '</div><div class="l">' + e[1] + '</div>' + pie + '</button>';
+  }).join('') + '</div>';
+  const sel = todas.filter(r => r['Estado'] === est);
+  const nomE = (EST.find(e => e[0] === est) || [])[1] || '';
+  const COL = {Completado:'#0e7c6b', 'No Realizada':'#d04a46', Cancelado:'#c2410c', Suspendido:'#94a3b8'}[est];
+  const cat = r => { const t = String(r['Tipo de Actividad'] || '').trim(), T = t.toUpperCase(), p = parseInt(r['Play'], 10);
+    if(T.indexOf('REPARAC') === 0) return t; return (p >= 1 && p <= 3 && (T.indexOf('ALTA') === 0 || T.indexOf('MIGRAC') === 0)) ? t + ' ' + p + 'P' : t; };
+  const barras = function(lista, fn, hijas){
+    if(!lista.length) return '<p class="ad-vacio">Sin órdenes en esta selección.</p>';
+    const c = {}, g = {}; lista.forEach(r => { const v = fn(r) || 'Sin dato'; c[v] = (c[v] || 0) + 1; (g[v] = g[v] || []).push(r); });
+    const pares = Object.entries(c).sort((a, b) => b[1] - a[1]), max = pares[0][1];
+    return pares.map(function(x){
+      const lin = '<span class="nm">' + x[0] + '</span><span class="pista"><i style="width:' + (100 * x[1] / max) + '%;background:' + COL + '"></i></span><b>' + nf(x[1]) + '</b><span class="pc">' + pc(x[1], lista.length) + '</span>';
+      if(!hijas) return '<div class="md-lin">' + lin + '</div>';
+      const cm = {}; g[x[0]].forEach(r => { const m = r['Código de Cierre'] || 'Sin dato'; cm[m] = (cm[m] || 0) + 1; });
+      const pm = Object.entries(cm).sort((a, b) => b[1] - a[1]), mx = pm[0][1];
+      return '<details class="md-det"><summary class="md-lin">' + lin + '</summary>' + pm.map(y => '<div class="md-lin hija"><span class="nm">' + y[0] + '</span><span class="pista"><i style="width:' + (100 * y[1] / mx) + '%;background:' + COL + ';opacity:.55"></i></span><b>' + y[1] + '</b><span class="pc">' + pc(y[1], x[1]) + '</span></div>').join('') + '</details>';
+    }).join('');
+  };
+  const conMot = est === 'No Realizada' || est === 'Cancelado';
+  h += '<div class="ad-dos"><div class="ad-card"><h3>' + nomE + ' por tipo de actividad <span class="md-ch2">' + nf(sel.length) + ' órdenes' + (conMot ? ' · toca un tipo para ver sus motivos' : '') + '</span></h3>' + barras(sel, cat, conMot) + '</div>';
+  if(est === 'No Realizada' && sel.length){
+    const c = {cliente:0, mandante:0, empresa:0}, d = {cliente:{}, mandante:{}, empresa:{}};
+    sel.forEach(r => { const q = mesCulpa(r['Código de Cierre']); c[q]++; const m = r['Código de Cierre'] || 'Sin código'; d[q][m] = (d[q][m] || 0) + 1; });
+    const t = sel.length, top = o => Object.entries(o).sort((a, b) => b[1] - a[1]).slice(0, 3).map(x => x[0]).join(' · ') || '—';
+    const seg = (v, cl) => v ? '<span class="' + cl + '" style="width:' + (100 * v / t) + '%">' + (100 * v / t >= 8 ? pc(v, t) : '') + '</span>' : '';
+    const fil = (v, cl, ti, q) => '<div class="md-cf"><i class="' + cl + '"></i><span>' + ti + '<small>' + top(d[q]) + '</small></span><b>' + v + '</b><em>' + pc(v, t) + '</em></div>';
+    h += '<div class="ad-card"><h3>De quién fue la caída <span class="md-ch2">' + t + ' no realizadas</span></h3><div class="md-culpa">' + seg(c.cliente, 'cli') + seg(c.mandante, 'man') + seg(c.empresa, 'nos') + '</div>'
+      + fil(c.cliente, 'cli', 'Del cliente', 'cliente') + fil(c.mandante, 'man', 'Del mandante · VTR/Claro', 'mandante') + fil(c.empresa, 'nos', 'De Dominion', 'empresa') + '</div>';
+  } else {
+    h += '<div class="ad-card"><h3>Por ciudad</h3>' + barras(sel, r => r['Ciudad']) + '</div>';
+  }
+  h += '</div>';
+  if(conMot) h += '<div class="ad-card"><h3>Motivo de cierre</h3>' + barras(sel, r => r['Código de Cierre']) + '</div>';
+  h += '<div class="ad-dos"><div class="ad-card"><h3>Por supervisor</h3>' + barras(sel, r => r['supervisor']) + '</div><div class="ad-card"><h3>Por franja horaria</h3>' + barras(sel, r => r['Franja']) + '</div></div>';
+  return '<div class="ad">' + h + '</div>';
+}
+
 function pintarPortada(){
   const caja = document.getElementById('portada');
   if(!caja || caja.style.display === 'none') return;
@@ -12342,6 +13345,7 @@ function pintarPortada(){
   const pct = filas.length ? Math.round(1000*comp/filas.length)/10 : 0;
 
   const ahoraH = new Date().getHours() + new Date().getMinutes()/60;
+  window._FRC = {fr: porFranja, co: porComuna, hoy: hoy};   /* (REDISEÑO 28-10-2026, 18:05) para el panel Franjas y comunas de HOY */
   /* ==== PRUEBA 08-10-2026 (cuatro ideas para la portada) ====
      1. Efectividad de lo YA CERRADO: completadas / (completadas + no
         realizadas). El % grande cuenta contra todo el dia, incluidas las
@@ -12565,6 +13569,51 @@ function pintarPortada(){
     : '<button class="pv-lk" onclick="desdePortada(' + destino + ')" title="' + (largo || texto) + '">' + texto
       + '<span class="fl">\u203a</span></button>';
 
+  /* (REDISEÑO 28-10-2026, 16:19) Requiere atencion como tarjeta propia, bajo el Inicio de jornada */
+  const atHtml =
+         '<div class="pa-card pa-at">'
+    +       '<div class="pv-rot pv-rot-son"><span>Requiere atención</span>'
+    +         '<span class="son-caja"><button id="derSonBtn" class="son' + (DER_SONIDO && !derAudioOk() ? ' falta' : '') + '" onclick="derToggleSonido(event)" title="Sonido de los avisos (migración derivada y monitor detenido). Toca para apagarlo o encenderlo.">' + derSonidoTxt() + '</button>'
+    +         '<button class="pr" onclick="derProbarSonido(event)" title="Hace sonar el aviso para probar el volumen">Probar</button></span></div>'
+    /* avisos que solo salen cuando hace falta, arriba de todo */
+    +       (compPastillaHtml() + saludPastillaHtml()).replace(/<br>/g, ' ')
+    +       (function(){
+              /* (20-10-2026, 08:55) Antes de que parta la primera franja, "Sin
+                 completar" y "Sin iniciar" no son alerta: nadie tiene por que
+                 haber partido. Se juntan en una linea gris "Parten a las 10:00"
+                 (siguen siendo botones). Desde la hora de la primera franja
+                 vuelven a ser tarjetas normales. */
+              let ini0 = 24;
+              Object.keys(porFranja).forEach(f => { const m = /^(\d{1,2})\s*-/.exec(f); if(m) ini0 = Math.min(ini0, +m[1]); });
+              if(ini0 === 24) ini0 = 10;
+              window.PA_ANTES = hoy && ahoraH < ini0 ? ini0 : 0;
+              return '';
+            })()
+    +       '<div class="pa-at-lista una">' + ([
+              alerta('toggleCaidas', caidas, 'Actividades que salieron de la bandeja del técnico', 'se las sacaron sin que alcanzara a tocarlas', '#c0392f'),
+              /* (26-10-2026) la pastilla "Migraciones derivadas" paso al boton Migraciones de la barra (con el numero). Era:
+              (function(){ const c = derHoyConteo();
+                return '<button class="pv-al ' + (c.d > 0 ? 'viva' : 'cero') + (DER_AVISO.length ? ' nueva' : '') + '" style="--tono:#b45309" title="Toca para abrir Derivación: hoy en vivo, por técnico, por dirección, a quién auditar y ficha del técnico." onclick="abrirDerivHoy()">'
+                  + '<span class="n">' + c.d + '</span><span class="tx"><span class="t">Migraciones derivadas</span><span class="s">' + c.d + ' de ' + c.v + ' migraciones ya visitadas</span></span></button>'; })(),
+              */
+              paEspera(alerta('toggleSinCompletar', sinComp, 'Sin completar', 'no han cerrado ninguna todavía hoy', '#b45309')),
+              paEspera('<button class="pv-al ' + (sinIni > 0 ? 'viva' : 'cero') + (window.PV_SININI ? ' sel' : '')
+                + '" style="--tono:#0f766e" title="Toca para ver quiénes son" onclick="window.PV_SININI = !window.PV_SININI; pintarPortada()">'
+                + '<span class="n">' + sinIni + '</span><span class="tx"><span class="t">Sin iniciar</span><span class="s">tienen órdenes y ninguna iniciada ni en ruta</span></span></button>'),
+              alerta('toggleAtrasados', atras, 'Actividades iniciadas por más de 3 horas', 'iniciadas hace más de 3 horas y todavía sin cerrar', '#c2410c'),
+              alerta('toggleNuevas', nuevas, 'Actividades nuevas', 'entraron a las bandejas después de la primera vuelta del monitor', '#2563eb'),
+              alerta('toggleReca', reca, 'Actividades devueltas a las bandejas', 'se las sacaron a un técnico y hoy volvieron a entrar', '#64748b'),
+              alerta('toggleRepe', repe, 'Direcciones ya visitadas', 'hoy volvemos a una casa donde ya fallamos antes', '#7c3aed')
+            ]).join('') + '</div>'   /* (REDISEÑO 28-10-2026, 17:14) todas en una linea, siempre en el mismo orden */
+    +     '</div>'
+    +    ''
+    +   (window.PV_SININI ? '<div class="pv-sinini"><div class="h"><b>' + sinIni + '</b> técnico'
+          + (sinIni === 1 ? '' : 's') + ' sin iniciar <span>con órdenes hoy y ninguna iniciada ni en ruta · primero los de la franja más temprana</span></div>'
+          + '<div class="l">' + (sinIniLista.map(x => '<span class="' + (/^10/.test(x.f) ? 'tmp' : '') + '">'
+              + x.t.toLowerCase().replace(/(^|\s)\S/g, c => c.toUpperCase())
+              + ' <small>' + x.n + (x.n === 1 ? ' orden' : ' órdenes') + ' · parte ' + x.f + '</small></span>').join('')
+              || '<span>Todos ya partieron.</span>') + '</div></div>' : '');
+
   caja.innerHTML =
 
       '<header class="pv-bar pz-barra">'
@@ -12689,7 +13738,14 @@ function pintarPortada(){
        verde = ya cerradas en bandeja (completadas + no realizadas), azul =
        en bandeja sin cerrar; las canceladas no entran. Cada renglon abre lo
        mismo que su cifra de siempre. CSS: bloque "COLUMNA OSCURA". */
-    +   '<div class="pa-grid">'
+    /* (REDISEÑO 28-10-2026, 15:56) todo queda dentro del boton HOY.
+       window.PV_HOY: false = pantalla de inicio con el boton; true = adentro de HOY. */
+    +   (window.PV_MIG ? migPaginaHtml() + '<div class="pa-grid" style="display:none">'
+    :    window.PV_MES ? mesDetalleHtml(window.PV_MES) + '<div class="pa-grid" style="display:none">'
+         : window.PV_ACT ? actDetalleHtml(window.PV_ACT) + '<div class="pa-grid" style="display:none">'
+         : !window.PV_HOY ? hoyBotonHtml(fecha, filas.length, comp, nore, nInicio, caidas) + '<div class="pa-grid" style="display:none">'
+         : '<div class="ad-bar hoy-bar"><button class="ad-volver" onclick="window.PV_HOY=false; pintarPortada()">← Inicio</button><span class="ad-tit">Día en curso</span><span class="ad-sub">' + (fecha || '') + '</span></div>' + hoyHerrHtml(filas.length, comp, nore, pend, canc) + '<div class="pa-grid">')
+    +   '<div class="pa-izq">'
     +   (function(){
           const bkN = bkTile ? bkTile.n : 0;
           const cerrB = comp + nore, abB = pend;
@@ -12702,16 +13758,27 @@ function pintarPortada(){
             + (tit ? ' title="' + tit + '"' : '') + '><span>' + txt + '</span><b class="' + (cls || '') + '">' + v + '</b></button>';
           const clicBkL = k => 'window.PV_BK = (window.PV_BK === \'' + k + '\' ? null : \'' + k + '\'); pintarPortada()';
           return '<aside class="pa-lado">'
+            /* (REDISEÑO 28-10-2026) titulo 'Inicio de jornada' arriba de la fecha, abre el detalle */
+            + '<button class="pa-tit-ini" onclick="desdePortada(abrirInicio)" title="Toca para ver el detalle del inicio de jornada">Inicio de jornada <span>›</span></button>'
             + '<div><div class="pa-fe">' + (fecha || 'Jornada') + '</div>'
             +   '<div class="pa-sub">' + (hoy ? 'en curso' : '') + botonCuadratura(filas.length) + '</div>'
             +   '<div class="pa-tecl"><span title="' + nTec + ' con órdenes en Quilpué y Villa Alemana'
             +     (nOtraCom() ? ' + ' + nOtraCom() + ' en otra comuna' : '') + '">' + (nTec + nOtraCom()) + ' técnicos operativos</span>'
             +     botonNoOperativos() + '</div></div>'
             + '<button class="pa-ani" onclick="desdePortada(abrirInicio)" title="Con cuántas actividades partió el día (Excel de la mañana). Toca para ver el detalle.">'
-            +   '<svg width="96" height="96" viewBox="0 0 96 96" aria-hidden="true"><circle cx="48" cy="48" r="40" fill="none" stroke="#24364f" stroke-width="10"/>'
-            +     seg(bkN, '#fdba74') + seg(cerrB, '#34d399') + seg(abB, '#60a5fa') + '</svg>'
+            /* (REDISEÑO 28-10-2026) el anillo muestra la EFECTIVIDAD DE LO VISITADO:
+               verde completadas, rojo no realizadas; adentro el % */
+            +   (function(){ const vis = comp + nore, R = 46, CC = 2 * Math.PI * R, lc = vis ? CC * comp / vis : 0;
+                  const pv = vis ? (Math.round(1000 * comp / vis) / 10).toFixed(1).replace('.', ',') : '–';
+                  return '<svg width="100" height="100" viewBox="0 0 120 120" role="img" aria-label="Efectividad de lo visitado ' + pv + '%">'
+                    + '<circle cx="60" cy="60" r="' + R + '" fill="none" stroke="' + (vis ? '#f87171' : '#24364f') + '" stroke-width="11"/>'
+                    + (vis ? '<circle cx="60" cy="60" r="' + R + '" fill="none" stroke="#34d399" stroke-width="11" stroke-dasharray="' + lc.toFixed(2) + ' ' + CC.toFixed(2) + '" transform="rotate(-90 60 60)"/>' : '')
+                    + '<text x="60" y="62" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="800" font-family="Archivo,Arial,sans-serif">' + pv + (vis ? '%' : '') + '</text>'
+                    + '<text x="60" y="80" text-anchor="middle" fill="#c9d5e6" font-size="11" font-family="DM Sans,Arial,sans-serif">de lo visitado</text>'
+                    + '</svg>'; })()
             +   '<span class="tx"><b>' + (nInicio || '–') + '</b><span>inicio de jornada ›</span>'
-            +   '<small>' + inicioDestinoTxt(bkN, cerrB + abB) + '</small></span></button>'
+            +   '<small>' + inicioDestinoTxt(bkN, cerrB + abB) + '</small>'
+            +   '<small class="ef-vis">' + comp + ' completadas · ' + nore + ' no realizadas</small></span></button>'
             + '<div class="pa-lineas">'
             /* (19-10-2026, 14:25) Luis: "se muestran los mismos numeros del estado
                de las actividades". Efectividad, Completadas, No realizadas y Sin
@@ -12722,32 +13789,21 @@ function pintarPortada(){
                Historial, Quiebres, Franjas) pasan a la columna, con el mismo
                enlace o funcion de siempre. En la barra quedaron comentados.
                colDatos() (ritmo, RGU...) queda escrita por si se quiere volver. */
-            +   '<div class="pa-inf-t">Informes</div>'
-            +   '<a class="pa-lin pa-inf" href="' + URL_TIEMPOS + '" target="_blank"><span>Tiempos en terreno por técnico</span><i>›</i></a>'
-            +   '<a class="pa-lin pa-inf" href="' + URL_NEGOCIOS + '" target="_blank"><span>Órdenes y tiempos por tipo de negocio</span><i>›</i></a>'
-            +   '<a class="pa-lin pa-inf" onclick="abrirResumen()"><span>Resumen día por día</span><i>›</i></a>'
-            +   '<a class="pa-lin pa-inf" href="' + URL_TABLA_HIST + '" target="_blank"><span>Tabla del mes por técnico</span><i>›</i></a>'
-            +   '<a class="pa-lin pa-inf" href="' + URL_ACTIVIDADES + '?t=' + Date.now() + '#quiebres" target="_blank"><span>Quiebres por técnico</span><i>›</i></a>'
-            +   '<a class="pa-lin pa-inf" onclick="abrirFranjas()" title="En qué franja se deriva más: por actividad, semana, día, técnico y comuna"><span>Derivaciones por franja</span><i>›</i></a>'
-            +   (bkTile ? '<div class="pa-inf-t">Bucket</div>' : '')
-            +   (bkTile ? fila('HFC en bucket', bkTile.hfc, '', bkTile.hfc ? clicBkL('__HFC__') : '', 'No son de Dominion; no cuentan arriba') : '')
-            +   (bkTile ? fila('Canceladas en bucket', bkTile.canc, '', bkTile.canc ? clicBkL('__CANC__') : '') : '')
+            /* (REDISEÑO 28-10-2026) sacados Informes y Bucket de la columna */
             + '</div></aside>';
         })()
+    +   '</div>'
+    /* (REDISEÑO 28-10-2026, 15:29) una tarjeta por cada actividad del dia */
+    +   actsHoyHtml(filas)
+    /* (REDISEÑO 28-10-2026, 16:23) Requiere atencion horizontal, a todo el ancho bajo las tarjetas */
+    +   '<div class="pa-at-fila">' + atHtml + '</div>'
     +   '<div class="pa-der">'
 
     /* ---- 1. los cuadros (Inicio de jornada paso a la columna oscura) ---- */
     +   '<section class="pa-kpis">'
     /* En el bucket: las tarjetas por franja, HFC, canceladas y otra empresa
        son los MISMOS botones de antes (PV_BK) */
-    +     (bkTile
-          ? '<div class="pa-kpi k-bk' + (bkTile.n ? '' : ' cero') + '" title="Solo NFTT y FTTH. Las HFC van aparte.">'
-          +   '<span class="l">Pendientes en el bucket</span>'
-          +   '<span class="n">' + bkTile.n + '</span>'
-          +   bkTile.botones
-          + '</div>'
-          : '<div class="pa-kpi k-bk cero"><span class="l">Pendientes en el bucket</span><span class="n">–</span>'
-          +   '<span class="s">sin datos del bucket</span></div>')
+    /* (REDISEÑO 28-10-2026) sacado el cuadro 'Pendientes en el bucket' */
     /* Actividades del dia: la cifra y las cuatro de siempre, cada una abre su detalle */
     +     '<div class="pa-kpi k-dia">'
     +       '<span class="l">Actividades del día en bandejas</span>'
@@ -12774,7 +13830,6 @@ function pintarPortada(){
     +       barra
     +     '</div>'
     +   '</section>'
-    +   (bkTile ? bkTile.panel : '')
 
     /* ---- 2. franjas y requiere atencion ---- */
     +   '<section class="pa-medio">'
@@ -12794,63 +13849,7 @@ function pintarPortada(){
          - la leyenda muestra solo los colores que aparecen
        Mismas cuentas de antes (porFranja, porComuna, bucket por franja).
        Para volver: ver la ficha (20-10-2026, 08:45) y el respaldo. */
-    +       (function(){
-              const bkF = (bkTile && bkTile.porFr) || {};
-              const keys = {};
-              Object.keys(porFranja).forEach(f => keys[f] = 1);
-              Object.keys(bkF).forEach(f => { if(bkF[f]) keys[f] = 1; });
-              const lista = Object.keys(keys).sort();
-              const coms = Object.keys(porComuna).sort();
-              const FR_AMBAR = 10, FR_ROJO = 25;
-              let max = 1;
-              lista.forEach(f => { const d = porFranja[f] || {t:0}; max = Math.max(max, d.t + (bkF[f] || 0)); });
-              coms.forEach(c => { max = Math.max(max, porComuna[c].t); });
-              const usados = {};
-              const tramo = (v, cls, txt) => { if(!v || v < 0) return ''; usados[cls] = 1;
-                return '<span class="' + cls + '" style="flex-grow:' + v + '" title="' + v + ' ' + txt + '">' + v + '</span>'; };
-              const efec = (co, nr, t) => (co + nr) ? '<div class="ef">' + Math.round(100 * co / t) + '%</div>' : '<div class="ef sd" title="Todavía nadie cierra una visita">–</div>';
-              const fila = (cls, h, largo, pista, tt, ef) => '<div class="pa-fl' + cls + '"><div class="h">' + h + '</div>'
-                + '<div class="pc"><div class="pista" style="width:' + (100 * largo / max).toFixed(1) + '%">' + pista + '</div></div>'
-                + '<div class="tt">' + tt + '</div>' + ef + '</div>';
-              const cab = (t, dos) => '<div class="pa-cab' + (dos ? ' dos' : '') + '"><span class="pv-rot">' + t + '</span><span>órdenes</span><span>efectividad</span></div>';
-              let h = cab('Cómo viene el día, por franja');
-              if(!lista.length) h += '<div class="pa-vacio">Todavía no hay órdenes del día.</div>';
-              h += lista.map(function(f){
-                const d = porFranja[f] || {t:0, ab:0, ini:0, co:0, nr:0}, b = bkF[f] || 0;
-                const m = /^(\d{1,2})\s*-\s*(\d{1,2})$/.exec(f);
-                const enCurso = hoy && m && ahora >= +m[1] && ahora < +m[2];
-                const pasada = !hoy || (m && ahora >= +m[2]);
-                const pAb = d.t ? 100 * d.ab / d.t : 0;
-                const cerradas = d.t - d.ab, sinIniF = d.ab - d.ini;
-                const abTx = d.ab ? '<span class="ab">' + d.ab + (d.ab === 1 ? ' abierta' : ' abiertas') + '</span>' : '';
-                const est = enCurso ? '<small><span class="ec">en curso</span>' + (sinIniF > 0 ? ' · <span class="ojo">' + sinIniF + ' sin iniciar</span>' : '') + '</small>'
-                  : !pasada ? '<small><span class="px">próxima</span></small>'
-                  : (!d.ab && !b) ? '<small><span class="ok">✓ cerrada</span></small>'
-                  : '<small>pasada' + (abTx ? ' · ' + abTx : '') + '</small>';
-                const tono = enCurso ? ' ahora' : !pasada ? '' : pAb > FR_ROJO ? ' roj' : pAb > FR_AMBAR ? ' amb' : '';
-                return fila(tono, f + est, d.t + b,
-                  tramo(d.co || 0, 'c', 'completadas') + tramo(d.nr || 0, 'n', 'no realizadas')
-                  + tramo(cerradas - (d.co || 0) - (d.nr || 0), 'x', 'canceladas o suspendidas')
-                  + tramo(d.ini, 'i', 'iniciadas') + tramo(sinIniF, 'a', 'en bandeja sin iniciar')
-                  + tramo(b, 'b', 'todavía en el bucket'),
-                  d.t + (b ? '<small>+' + b + ' bucket</small>' : ''), efec(d.co || 0, d.nr || 0, d.t));
-              }).join('');
-              if(coms.length){
-                h += cab('Por comuna', true);
-                h += coms.map(function(c){
-                  const d = porComuna[c];
-                  const nom = c.toLowerCase().replace(/(^|\s)\S/g, t => t.toUpperCase()).replace(/^Quilpue$/, 'Quilpué');   /* (12:55) con tilde */
-                  const est = '<small>' + (d.ab ? '<span class="ab">' + d.ab + (d.ab === 1 ? ' abierta' : ' abiertas') + '</span>' : '<span class="ok">✓ todo cerrado</span>') + '</small>';
-                  return fila(' com', nom + est, d.t,
-                    tramo(d.c, 'c', 'completadas') + tramo(d.nr, 'n', 'no realizadas') + tramo(d.cs, 'x', 'canceladas o suspendidas')
-                    + tramo(d.ini, 'i', 'iniciadas') + tramo(d.ab - d.ini, 'a', 'en bandeja sin iniciar'),
-                    d.t, efec(d.c, d.nr, d.t));
-                }).join('');
-              }
-              const LEY = [['c','completadas'],['n','no realizadas'],['x','canc/susp'],['i','iniciadas'],['a','en bandeja sin iniciar'],['b','todavía en el bucket']];
-              h += '<div class="pa-ley">' + LEY.filter(x => usados[x[0]]).map(x => '<span><i class="' + x[0] + '"></i>' + x[1] + '</span>').join('') + '</div>';
-              return h;
-            })()
+    /* (REDISEÑO 28-10-2026) sacados 'Como viene el dia, por franja' y 'Por comuna' */
     +   '<div class="pa-rep pa-rep-fr pv-linea"><span class="pv-rot">Reportes</span>'
     +   '<nav class="pv-links">'
     /* 19-10-2026: Resumen de migraciones para supervisores (abrirResMig) */
@@ -12874,52 +13873,11 @@ function pintarPortada(){
     +   '</nav></div>'
     +     '</div>'
 
-    +     '<div class="pa-card pa-at">'
-    +       '<div class="pv-rot pv-rot-son"><span>Requiere atención</span>'
-    +         '<span class="son-caja"><button id="derSonBtn" class="son' + (DER_SONIDO && !derAudioOk() ? ' falta' : '') + '" onclick="derToggleSonido(event)" title="Sonido de los avisos (migración derivada y monitor detenido). Toca para apagarlo o encenderlo.">' + derSonidoTxt() + '</button>'
-    +         '<button class="pr" onclick="derProbarSonido(event)" title="Hace sonar el aviso para probar el volumen">Probar</button></span></div>'
-    /* avisos que solo salen cuando hace falta, arriba de todo */
-    +       (compPastillaHtml() + saludPastillaHtml()).replace(/<br>/g, ' ')
-    +       (function(){
-              /* (20-10-2026, 08:55) Antes de que parta la primera franja, "Sin
-                 completar" y "Sin iniciar" no son alerta: nadie tiene por que
-                 haber partido. Se juntan en una linea gris "Parten a las 10:00"
-                 (siguen siendo botones). Desde la hora de la primera franja
-                 vuelven a ser tarjetas normales. */
-              let ini0 = 24;
-              Object.keys(porFranja).forEach(f => { const m = /^(\d{1,2})\s*-/.exec(f); if(m) ini0 = Math.min(ini0, +m[1]); });
-              if(ini0 === 24) ini0 = 10;
-              window.PA_ANTES = hoy && ahoraH < ini0 ? ini0 : 0;
-              return '';
-            })()
-    +       paAgrupar([
-              alerta('toggleCaidas', caidas, 'Actividades que salieron de la bandeja del técnico', 'se las sacaron sin que alcanzara a tocarlas', '#c0392f'),
-              /* (26-10-2026) la pastilla "Migraciones derivadas" paso al boton Migraciones de la barra (con el numero). Era:
-              (function(){ const c = derHoyConteo();
-                return '<button class="pv-al ' + (c.d > 0 ? 'viva' : 'cero') + (DER_AVISO.length ? ' nueva' : '') + '" style="--tono:#b45309" title="Toca para abrir Derivación: hoy en vivo, por técnico, por dirección, a quién auditar y ficha del técnico." onclick="abrirDerivHoy()">'
-                  + '<span class="n">' + c.d + '</span><span class="tx"><span class="t">Migraciones derivadas</span><span class="s">' + c.d + ' de ' + c.v + ' migraciones ya visitadas</span></span></button>'; })(),
-              */
-              paEspera(alerta('toggleSinCompletar', sinComp, 'Sin completar', 'no han cerrado ninguna todavía hoy', '#b45309')),
-              paEspera('<button class="pv-al ' + (sinIni > 0 ? 'viva' : 'cero') + (window.PV_SININI ? ' sel' : '')
-                + '" style="--tono:#0f766e" title="Toca para ver quiénes son" onclick="window.PV_SININI = !window.PV_SININI; pintarPortada()">'
-                + '<span class="n">' + sinIni + '</span><span class="tx"><span class="t">Sin iniciar</span><span class="s">tienen órdenes y ninguna iniciada ni en ruta</span></span></button>'),
-              alerta('toggleAtrasados', atras, 'Actividades iniciadas por más de 3 horas', 'iniciadas hace más de 3 horas y todavía sin cerrar', '#c2410c'),
-              alerta('toggleNuevas', nuevas, 'Actividades nuevas', 'entraron a las bandejas después de la primera vuelta del monitor', '#2563eb'),
-              alerta('toggleReca', reca, 'Actividades devueltas a las bandejas', 'se las sacaron a un técnico y hoy volvieron a entrar', '#64748b'),
-              alerta('toggleRepe', repe, 'Direcciones ya visitadas', 'hoy volvemos a una casa donde ya fallamos antes', '#7c3aed')
-            ])
-    +     '</div>'
+    /* (REDISEÑO 28-10-2026, 16:19) 'Requiere atencion' paso a la izquierda, dentro de HOY (atHtml) */
     +   '</section>'
 
     /* paneles que se abren debajo (los mismos de antes) */
-    +   (window.PV_SM ? pvSinMorPanel() : '')
-    +   (window.PV_SININI ? '<div class="pv-sinini"><div class="h"><b>' + sinIni + '</b> técnico'
-          + (sinIni === 1 ? '' : 's') + ' sin iniciar <span>con órdenes hoy y ninguna iniciada ni en ruta · primero los de la franja más temprana</span></div>'
-          + '<div class="l">' + (sinIniLista.map(x => '<span class="' + (/^10/.test(x.f) ? 'tmp' : '') + '">'
-              + x.t.toLowerCase().replace(/(^|\s)\S/g, c => c.toUpperCase())
-              + ' <small>' + x.n + (x.n === 1 ? ' orden' : ' órdenes') + ' · parte ' + x.f + '</small></span>').join('')
-              || '<span>Todos ya partieron.</span>') + '</div></div>' : '')
-
+    /* (REDISEÑO 28-10-2026) los paneles Sin moradores / Sin iniciar pasaron a atHtml */
     +   '</div></div>'
     /* ---- 3. reportes: los mismos enlaces de antes ---- */
 
