@@ -21912,22 +21912,22 @@
    }
   },
   "29-10-2026": {
-   "hasta": "12:19",
-   "actividades": 130,
+   "hasta": "12:24",
+   "actividades": 131,
    "tecnicos": 33,
    "estados": {
-    "Completado": 29,
-    "Pendiente": 59,
-    "Iniciado": 24,
-    "en ruta": 4,
+    "Completado": 30,
+    "Iniciado": 27,
+    "Pendiente": 57,
     "No Realizada": 13,
+    "en ruta": 3,
     "Cancelado": 1
    },
-   "rgu": 202.2,
+   "rgu": 203.2,
    "caidas_total": 3,
    "caidas_activas": 3,
    "caidas_resueltas": 0,
-   "nuevas": 14,
+   "nuevas": 15,
    "al_bucket": 15,
    "repetidas": 18,
    "reagendadas": 4,
@@ -21963,13 +21963,22 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OOR9U0X",
+      "tec": "FELIPE SILVA R",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "12:22",
+      "d": "CAMINO DEL SOL 2229 CASA 2, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
       "o": "1-3OOQI2S6",
       "tec": "CESAR MENA OLIVEROS",
       "cat": "Modificación de Servicio",
       "f": "10-13",
       "hi": "12:01",
       "d": "RIO BLANCO 1019, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OOQLEG7",
@@ -22094,9 +22103,9 @@
       "o": "1-3OO4WB0S",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "12:19",
+      "hi": "12:22",
       "d": "VALLE DEL PARAISO 2746, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "ALEXIS JARA",
       "visitas": 2,
       "ult_fecha": "29-09-2026",
@@ -22130,7 +22139,7 @@
       "o": "1-3OLS9VJN",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "13:21",
+      "hi": "13:26",
       "d": "SANTA ROSA 32 CASA 9, QUILPUE",
       "e": "Pendiente",
       "tec": "FELIPE SILVA R",
@@ -22142,7 +22151,7 @@
       "o": "1-3OON0P6D",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "17:37",
+      "hi": "17:42",
       "d": "LOS NARANJOS 511 CASA 12A, QUILPUE",
       "e": "Pendiente",
       "tec": "FELIPE SILVA R",
@@ -22190,7 +22199,7 @@
       "o": "1-3OO4JUX8",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "14:21",
       "d": "NUEVA HIPODROMO 1250, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE PEREZ RANGEL",
@@ -22202,7 +22211,7 @@
       "o": "1-3ONV34ML",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "15:20",
+      "hi": "15:41",
       "d": "AV LA PALMA 1321, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE PEREZ RANGEL",
@@ -22350,5 +22359,5 @@
    }
   }
  },
- "generado": "29-10-2026 12:19"
+ "generado": "29-10-2026 12:24"
 }
