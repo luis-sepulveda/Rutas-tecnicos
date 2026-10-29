@@ -21912,20 +21912,20 @@
    }
   },
   "29-10-2026": {
-   "hasta": "14:55",
+   "hasta": "15:05",
    "actividades": 156,
    "tecnicos": 33,
    "estados": {
-    "Completado": 69,
-    "Iniciado": 17,
-    "Pendiente": 46,
+    "Completado": 71,
+    "Iniciado": 16,
+    "Pendiente": 39,
     "No Realizada": 19,
-    "Cancelado": 3,
-    "en ruta": 2
+    "en ruta": 8,
+    "Cancelado": 3
    },
    "rgu": 232.2,
-   "caidas_total": 7,
-   "caidas_activas": 6,
+   "caidas_total": 8,
+   "caidas_activas": 7,
    "caidas_resueltas": 1,
    "nuevas": 24,
    "al_bucket": 23,
@@ -21933,6 +21933,15 @@
    "reagendadas": 4,
    "detalle": {
     "caidas": [
+     {
+      "o": "1-3OOVA4XP",
+      "tec": "ALEXIS JARA",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "16:26",
+      "d": "ALCALDE SUBERCASEAUX 1859, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OODCAH6",
       "tec": "DANIEL NAVARRETE E",
@@ -21996,7 +22005,7 @@
       "f": "13-16",
       "hi": "15:33",
       "d": "PJE 15 895 DEPTO 32, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OOV7WE8",
@@ -22140,7 +22149,7 @@
       "f": "13-16",
       "hi": "16:43",
       "d": "SANTA TERESA 0435, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OLS9VJN",
@@ -22354,7 +22363,7 @@
       "o": "1-3ONTYR6Q",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "17:25",
+      "hi": "17:20",
       "d": "EL CANELO 2090, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "KEVIN TAPIA RETAMAL",
@@ -22389,7 +22398,7 @@
       "o": "1-3OO3FIUV",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:12",
+      "hi": "16:23",
       "d": "AV LA PALMA 426 EDIF. B DEPTO 403, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MARCELO GÓMEZ GÓME",
@@ -22437,7 +22446,7 @@
       "o": "1-3OOSJRL7",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:47",
+      "hi": "16:35",
       "d": "RIQUELME 1763, QUILPUE",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -22485,7 +22494,7 @@
       "o": "1-3ONFNNLB",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "18:15",
+      "hi": "18:33",
       "d": "COVADONGA 716, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -22514,5 +22523,5 @@
    }
   }
  },
- "generado": "29-10-2026 14:55"
+ "generado": "29-10-2026 15:05"
 }
