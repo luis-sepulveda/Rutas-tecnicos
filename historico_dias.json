@@ -21912,26 +21912,44 @@
    }
   },
   "29-10-2026": {
-   "hasta": "10:14",
-   "actividades": 118,
-   "tecnicos": 31,
+   "hasta": "10:24",
+   "actividades": 120,
+   "tecnicos": 32,
    "estados": {
-    "Iniciado": 29,
-    "Pendiente": 84,
-    "No Realizada": 2,
-    "en ruta": 1,
-    "Completado": 2
+    "Iniciado": 26,
+    "Pendiente": 81,
+    "No Realizada": 5,
+    "en ruta": 5,
+    "Completado": 3
    },
-   "rgu": 190.0,
-   "caidas_total": 1,
-   "caidas_activas": 1,
+   "rgu": 192.0,
+   "caidas_total": 3,
+   "caidas_activas": 3,
    "caidas_resueltas": 0,
-   "nuevas": 5,
+   "nuevas": 6,
    "al_bucket": 0,
    "repetidas": 17,
    "reagendadas": 4,
    "detalle": {
     "caidas": [
+     {
+      "o": "1-3OMU15IX",
+      "tec": "JOSE SALAS MEDINA",
+      "cat": "Upgrade promoción",
+      "f": "13-16",
+      "hi": "13:00",
+      "d": "AV LOS CARRERA 01074 EDIF. 2 DEPTO 302, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3ONWR8H9",
+      "tec": "LUIS MARTIN NUÑEZ",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "10:22",
+      "d": "COLO COLO 275, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OOD4XCU",
       "tec": "YENDER BOSCAN CADENAS",
@@ -21944,13 +21962,22 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OON40AY",
+      "tec": "JOSE PEREZ RANGEL",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "10:24",
+      "d": "ALMIRANTE NEFF 653 EDIF. 1 DEPTO 23, VILLA ALEMANA",
+      "e": "Iniciado"
+     },
+     {
       "o": "1-3OOM01F9",
       "tec": "EDGAR VALERO C",
       "cat": "Reparación",
       "f": "10-13",
       "hi": "10:47",
       "d": "J J PEREZ 569, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OOMGYRB",
@@ -22150,9 +22177,9 @@
       "o": "1-3OO6SXDO",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "11:08",
+      "hi": "10:22",
       "d": "FRUTILLAR 827, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "RAFAEL VARGAS B",
       "visitas": 1,
       "ult_fecha": "28-10-2026",
@@ -22164,7 +22191,7 @@
       "f": "10-13",
       "hi": "09:45",
       "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "SAMUEL FERNANDEZ VIDAL",
       "visitas": 2,
       "ult_fecha": "23-10-2026",
@@ -22210,7 +22237,7 @@
       "o": "1-3OKQYAJQ",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "16:28",
+      "hi": "16:12",
       "d": "LOURDES 1021 EDIF. F DEPTO 102, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "EDGAR VALERO C",
@@ -22232,7 +22259,7 @@
       "f": "10-13",
       "hi": "09:45",
       "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "SAMUEL FERNANDEZ VIDAL",
       "desde": "24-10-2026"
      }
@@ -22240,5 +22267,5 @@
    }
   }
  },
- "generado": "29-10-2026 10:14"
+ "generado": "29-10-2026 10:24"
 }
