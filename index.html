@@ -17303,7 +17303,44 @@ function svEvoHtml(FT, nomT){
   h += '<div class="sv-grid">' + filas.map(o => '<button class="sv-card" onclick="svEvoAbrir(' + o.i + ')"><div class="sv-ch"><b>' + nomT(o.nom) + '</b>' + tag(o.ad.m.comp) + '<span class="sv-cs">' + (totTxt.indexOf('desde') === 0 ? '' : 'en ') + totTxt + '</span>' + (o.ad.m.g ? ' <span class="mp-sg in" title="' + o.ad.m.g + ' GSA: VTR la cuenta como quiebre">sin GSA ' + evPc(o.ad.m.compSG) + '</span>' : '') + '<span class="sv-ver">Ver todo ›</span></div>'
       + '<div class="sv-cs">Antes de la lista: ' + evPc(o.ad.a.comp) + ' (' + o.ad.a.co + ' de ' + o.ad.a.vis + ') · desde la lista: ' + (o.ad.d.vis ? evPc(o.ad.d.comp) + ' (' + o.ad.d.co + ' de ' + o.ad.d.vis + ') ' + fl(o.ad.dif, o.ad.d.vis) : 'sin visitas') + '</div>'
       + evSvg(svEvoPuntos(o.D, nomT(o.nom), 'la zona', true), { ancho:700, alto:240, meta:MP_META, pocas:EV_POCAS, etiq:true, marca:svEvoMarca(o.D), marcaTxt:'lista VTR' }) + '</button>').join('') + '</div>';
+
+  /* 4. (29-10-2026, 19:40) LOS DEMAS TECNICOS (no estan en el Seguimiento VTR), desplegable */
+  const nomsO = {}; F.forEach(x => { if(x.tec && !esSV(x)) nomsO[x.tec] = 1; });
+  const otros = Object.keys(nomsO).filter(t => typeof derActivo !== 'function' || derActivo(t) !== false)
+    .map(t => ({ nom:t, D:evDatos(F, t), ad:svAD(F, x => x.tec === t) })).filter(o => o.ad.m.vis >= 5)
+    .sort((a, b) => (a.ad.m.comp === null) - (b.ad.m.comp === null) || a.ad.m.comp - b.ad.m.comp);
+  window.SV_EVO_OTROS = otros.map(o => o.nom);
+  const oAb = !!window.SV_EVO_OTROS_AB;
+  h += '<div class="ad-card"><button class="mp-desp' + (oAb ? ' ab' : '') + '" onclick="window.SV_EVO_OTROS_AB=!window.SV_EVO_OTROS_AB; pintarSegVtr()"><h3>Los demás técnicos (' + otros.length + ') · no están en el Seguimiento VTR</h3>'
+    + '<span class="mp-dsub">' + (oAb ? 'Ocultar' : 'Ver los ' + otros.length + ' técnicos') + ' <i>▾</i></span></button>';
+  if(oAb){
+    h += '<p class="ad-nota">Mismo cálculo que arriba, para comparar. Primero los que peor van ' + (totTxt.indexOf('desde') === 0 ? '' : 'en ') + totTxt + '. Solo técnicos con 5 visitas o más. "Antes/desde la lista" usa la misma fecha (' + dd(SV_DESDE) + ') para que se pueda comparar.</p>'
+      + '<div class="ad-tbl"><table class="sv-tab"><thead><tr><th>Técnico</th>'
+      + S.map(s => '<th class="' + (s.k === evLunes(SV_DESDE) ? 'mk' : '') + '">Sem ' + derNumSemana(s.k) + '<br><small>' + svRango(s) + '</small></th>').join('')
+      + '<th class="sep">' + totMay + '</th><th>Antes de la lista<br><small>' + antTxt + '</small></th><th>Desde la lista<br><small>' + dd(SV_DESDE) + ' al ' + dd(hasta) + '</small></th><th>Cambio</th></tr></thead><tbody>'
+      + otros.map((o, j) => { const sm = {}; o.D.sem.forEach(s => sm[s.k] = s);
+          return '<tr class="ms-cl" onclick="svEvoAbrirOtro(' + j + ')"><td><b>' + nomT(o.nom) + '</b></td>'
+            + S.map(s => '<td class="nu sv-c' + (s.k === evLunes(SV_DESDE) ? ' mk' : '') + '">' + (sm[s.k] ? celda(sm[s.k]) : '–') + '</td>').join('')
+            + '<td class="nu sep"><b>' + tag(o.ad.m.comp) + '</b><small>' + o.ad.m.co + '/' + o.ad.m.vis + '</small>' + (o.ad.m.g ? '<small class="mp-sg">sin GSA ' + evPc(o.ad.m.compSG) + '</small>' : '') + '</td>'
+            + '<td class="nu">' + tag(o.ad.a.comp, o.ad.a.vis) + '<small>' + o.ad.a.co + '/' + o.ad.a.vis + '</small></td>'
+            + '<td class="nu">' + (o.ad.d.vis ? tag(o.ad.d.comp, o.ad.d.vis) + '<small>' + o.ad.d.co + '/' + o.ad.d.vis + '</small>' : '<span class="mp-fl gr">sin visitas</span>') + '</td>'
+            + '<td class="nu">' + fl(o.ad.dif, o.ad.d.vis) + '</td></tr>'; }).join('')
+      + '</tbody></table></div>'
+      + '<div class="sv-grid">' + otros.map((o, j) => '<button class="sv-card" onclick="svEvoAbrirOtro(' + j + ')"><div class="sv-ch"><b>' + nomT(o.nom) + '</b>' + tag(o.ad.m.comp) + '<span class="sv-cs">' + (totTxt.indexOf('desde') === 0 ? '' : 'en ') + totTxt + '</span>' + (o.ad.m.g ? ' <span class="mp-sg in" title="' + o.ad.m.g + ' GSA: VTR la cuenta como quiebre">sin GSA ' + evPc(o.ad.m.compSG) + '</span>' : '') + '<span class="sv-ver">Ver todo ›</span></div>'
+        + '<div class="sv-cs">Antes del ' + dd(SV_DESDE) + ': ' + evPc(o.ad.a.comp) + ' (' + o.ad.a.co + ' de ' + o.ad.a.vis + ') · desde el ' + dd(SV_DESDE) + ': ' + (o.ad.d.vis ? evPc(o.ad.d.comp) + ' (' + o.ad.d.co + ' de ' + o.ad.d.vis + ') ' + fl(o.ad.dif, o.ad.d.vis) : 'sin visitas') + '</div>'
+        + evSvg(svEvoPuntos(o.D, nomT(o.nom), 'la zona', true), { ancho:700, alto:240, meta:MP_META, pocas:EV_POCAS, etiq:true, marca:svEvoMarca(o.D), marcaTxt:'lista VTR' }) + '</button>').join('') + '</div>';
+  }
+  h += '</div>';
   return h;
+}
+function svEvoAbrirOtro(j){
+  const t = (window.SV_EVO_OTROS || [])[j]; if(!t) return;
+  let m = document.getElementById('modalSvEvo');
+  if(!m){ m = document.createElement('div'); m.id = 'modalSvEvo'; m.onclick = e => { if(e.target === m) svEvoCerrar(); }; document.body.appendChild(m); }
+  const nm = String(t).toLowerCase().replace(/(^|\s)\S/g, c => c.toUpperCase());
+  m.innerHTML = '<div class="ms-box" role="dialog"><div class="ms-top"><div><h2>' + nm + ' <small>👷 No está en el Seguimiento VTR</small></h2><p>Desde el ' + +SV_INI.slice(6) + ' ' + DER_MESES[+SV_INI.slice(4, 6) - 1] + ' · migraciones · completitud = completadas ÷ visitadas · raya = fecha de la lista de VTR (' + SV_DESDE.slice(6) + '-' + SV_DESDE.slice(4, 6) + '), para comparar</p></div>'
+    + '<button class="ms-x" onclick="svEvoCerrar()" title="Cerrar (Esc)">✕</button></div><div class="ms-cuerpo">' + evHtmlOct(window.SV_EVO_F, t) + '</div></div>';
+  m.classList.add('abierto'); m.scrollTop = 0;
 }
 function svEvoAbrir(i){
   const t = (window.SV_EVO_REAL || [])[i]; if(!t) return;
