@@ -3918,7 +3918,7 @@ button.am-card:hover { border-color:#7c3aed; box-shadow:0 4px 14px rgba(19,33,60
         <h2>Reiterados · reparaciones en casas trabajadas hace poco</h2>
         <div id="reitChips" class="mc-cont"></div>
       </div>
-      <button class="rk-olv" onclick="reitOlvidar()" title="Este computador vuelve a pedir la clave la próxima vez">🔒 Olvidar clave aquí</button>
+      <!-- (29-10-2026, 14:30) sin clave: se saca el boton "Olvidar clave aqui" -->
       <button class="mc-close" onclick="cerrarReit()" title="Cerrar (Esc)">✖</button>
     </div>
     <div id="reitTabs" class="rt-tabs"></div>
@@ -7319,7 +7319,9 @@ function reitOlvidar(){
 }
 document.addEventListener('keydown', function(e){ if(e.key === 'Escape') reitCerrarClave(); });
 function toggleReit(){
-  if(!reitAbierto && !reitAutorizado()){ reitPedirClave(); return; }     // (22-10-2026) clave
+  // (29-10-2026, 14:30) Luis: "elimina la clave y solo deja los 3 clic en el titulo". Ya no se pide clave.
+  // Para volver a pedirla: descomentar la linea de abajo.
+  // if(!reitAbierto && !reitAutorizado()){ reitPedirClave(); return; }
   cerrarPaneles('reit');
   reitAbierto = !reitAbierto;
   document.getElementById('modalReit').classList.toggle('abierto', reitAbierto);
@@ -7342,11 +7344,12 @@ function reitEntradaSecreta(){
   try { toggleReit(); } catch(e){ console.warn('reit:', e); }
   try { marcarAlertasPortada(); } catch(e){}
 }
+/* (29-10-2026, 14:30) se saca la entrada Ctrl + Alt + R: solo quedan los 3 clics en el titulo.
 document.addEventListener('keydown', function(e){
   if(e.ctrlKey && e.altKey && !e.shiftKey && (e.code === 'KeyR' || (e.key || '').toLowerCase() === 'r')){
     e.preventDefault(); reitEntradaSecreta();
   }
-});
+}); */
 let reitToques = 0, reitToqueT = 0;
 document.addEventListener('click', function(e){
   if(!e.target || !e.target.closest || !e.target.closest('.pv-nom')) return;
