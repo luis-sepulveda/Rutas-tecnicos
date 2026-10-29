@@ -3583,6 +3583,7 @@
 .ev-meta { stroke:#0e7c6b; stroke-width:1.5; stroke-dasharray:6 5; } .ev-mt { font-size:11.5px; fill:#0e7c6b; font-weight:700; }
 .ev-lz { fill:none; stroke:#94a3b8; stroke-width:2; stroke-dasharray:5 5; } .ev-pz { fill:#94a3b8; }
 .ev-lt { fill:none; stroke:#13213c; stroke-width:2.5; stroke-linejoin:round; }
+.ev-et.pc { fill:#64748b; font-weight:700; }
 .ev-pok { fill:#0e7c6b; stroke:#fff; stroke-width:2; } .ev-pbad { fill:#d04a46; stroke:#fff; stroke-width:2; } .ev-pp { fill:#fff; stroke:#94a3b8; stroke-width:2; }
 .ev-et { font-size:12.5px; font-weight:800; fill:#13213c; paint-order:stroke; stroke:#fff; stroke-width:4px; }
 .ev-hit { fill:transparent; cursor:crosshair; } .ev-hit:hover { fill:rgba(29,78,216,.06); }
@@ -17154,12 +17155,13 @@ function evSvg(P, o){
       + '<text x="' + (xm + 5) + '" y="' + (T - 10) + '" class="ev-mtxt">' + (o.marcaTxt || '') + '</text>'; }
   /* lineas con huecos */
   const linea = (f, cls) => { let d = '', ant = false; P.forEach((p, i) => { const v = f(p); if(v === null){ ant = false; return; } d += (ant ? 'L' : 'M') + x(i).toFixed(1) + ' ' + y(v).toFixed(1); ant = true; }); return '<path d="' + d + '" class="' + cls + '"/>'; };
-  g += linea(p => p.z.comp, 'ev-lz') + linea(p => p.t.vis >= o.pocas ? p.t.comp : null, 'ev-lt');
+  /* (29-10-2026, 11:55) Luis: "muestra el % aunque tenga pocas visitas": la linea pasa por todos los puntos con visitas */
+  g += linea(p => p.z.comp, 'ev-lz') + linea(p => p.t.vis ? p.t.comp : null, 'ev-lt');
   /* puntos y etiquetas */
   P.forEach((p, i) => { if(p.z.comp !== null) g += '<circle cx="' + x(i) + '" cy="' + y(p.z.comp) + '" r="3" class="ev-pz"/>';
     if(!p.t.vis || o.sinPuntos) return; const poco = p.t.vis < o.pocas;
     g += '<circle cx="' + x(i) + '" cy="' + y(p.t.comp) + '" r="' + (poco ? 4.5 : 5.5) + '" class="' + (poco ? 'ev-pp' : p.t.comp >= p.z.comp ? 'ev-pok' : 'ev-pbad') + '"/>';
-    if(o.etiq && !poco) g += '<text x="' + x(i) + '" y="' + (y(p.t.comp) - 10) + '" class="ev-et" text-anchor="middle">' + Math.round(p.t.comp) + '%</text>'; });
+    if(o.etiq) g += '<text x="' + x(i) + '" y="' + (y(p.t.comp) - 10) + '" class="ev-et' + (poco ? ' pc' : '') + '" text-anchor="middle">' + Math.round(p.t.comp) + '%</text>'; });
   /* ejes x + zonas para el mouse */
   P.forEach((p, i) => { g += '<text x="' + x(i) + '" y="' + (H - B + 18) + '" class="ev-lx' + (o.chico ? ' ch' : '') + '" text-anchor="middle">' + p.lab + '</text>'
       + (p.sub ? '<text x="' + x(i) + '" y="' + (H - B + 32) + '" class="ev-sx" text-anchor="middle">' + p.sub + '</text>' : '')
@@ -17191,7 +17193,7 @@ function evHtml(F, t, nomT, marcaIso){
     + '<div class="ad-card"><div class="ev-h"><h3>Semana a semana</h3><span class="ad-nota">Completitud de migraciones (completadas ÷ visitadas) desde agosto. El punto es verde si quedó sobre la zona, rojo si quedó bajo. Las barras (eje derecho) son sus visitadas.</span></div>'
     +   ley + evSvg(PS, { alto:320, meta:MP_META, pocas:EV_POCAS, etiq:true, marca:mS, marcaTxt:'lista VTR ' + (marcaIso ? marcaIso.slice(6) + '-' + marcaIso.slice(4, 6) : '') }) + '</div>'
     + '<div class="ad-card"><div class="ev-h"><h3>Día a día · últimos 30 días</h3><span class="ad-nota">' + nm + ' trabajó migraciones ' + diasCon + ' de los ' + D.dias.length + ' días: ' + evPc(tot.comp) + ' (' + tot.co + ' de ' + tot.vis + '). Las barras son lo de cada día; la línea es el % de sus <b>últimos 7 días</b> (con 1 o 2 visitas al día, el % de un solo día salta entre 0 y 100 y no dice nada).</span></div>'
-    +   ley.replace('Pocas visitas (menos de ' + EV_POCAS + ')', 'Sin línea: menos de ' + EV_POCAS + ' visitas en 7 días') + evSvg(PD, { alto:300, meta:MP_META, pocas:EV_POCAS, sinPuntos:true, chico:true, marca:mD, marcaTxt:'lista VTR' }) + '</div>';
+    +   ley.replace('Pocas visitas (menos de ' + EV_POCAS + ')', 'Ojo: con menos de ' + EV_POCAS + ' visitas en 7 días el % salta mucho') + evSvg(PD, { alto:300, meta:MP_META, pocas:EV_POCAS, sinPuntos:true, chico:true, marca:mD, marcaTxt:'lista VTR' }) + '</div>';
 }
 
 /* ==== (29-10-2026, 11:45) SEGUIMIENTO VTR · EVOLUCION DESDE OCTUBRE ====
