@@ -21912,24 +21912,24 @@
    }
   },
   "29-10-2026": {
-   "hasta": "16:05",
-   "actividades": 158,
+   "hasta": "17:23",
+   "actividades": 164,
    "tecnicos": 33,
    "estados": {
-    "Completado": 84,
-    "Iniciado": 24,
-    "No Realizada": 21,
-    "Pendiente": 21,
-    "en ruta": 5,
+    "Completado": 99,
+    "Iniciado": 21,
+    "Pendiente": 11,
+    "No Realizada": 27,
+    "en ruta": 3,
     "Cancelado": 3
    },
-   "rgu": 234.2,
+   "rgu": 239.3,
    "caidas_total": 8,
    "caidas_activas": 7,
    "caidas_resueltas": 1,
-   "nuevas": 26,
+   "nuevas": 32,
    "al_bucket": 23,
-   "repetidas": 22,
+   "repetidas": 23,
    "reagendadas": 4,
    "detalle": {
     "caidas": [
@@ -21999,13 +21999,67 @@
     ],
     "nuevas": [
      {
-      "o": "1-3OOY7VQX",
+      "o": "1-3OP0H62O",
+      "tec": "JOSE CASTRO P",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "16:45",
+      "d": "VALLENAR 1370, VILLA ALEMANA",
+      "e": "Completado"
+     },
+     {
+      "o": "1-3OP0E27M",
       "tec": "JUAN ARRIAGADA C",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:02",
+      "d": "AV VICTORIA 840, VILLA ALEMANA",
+      "e": "Completado"
+     },
+     {
+      "o": "1-3OP1AEE6",
+      "tec": "ALFREDO ALCAYAGA F",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:09",
+      "d": "FRODDEN 01130, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
+      "o": "1-3OOZNBB3",
+      "tec": "MARCELO GÓMEZ GÓME",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "17:15",
+      "d": "SANTA TERESA 0483, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OON654L",
+      "tec": "JOSE SALAS MEDINA",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "17:47",
+      "d": "EDUARDO ALQUINTA 1260 CASA 201, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OOZVDHF",
+      "tec": "ALEXIS JARA",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "18:27",
+      "d": "LOS CRISTALES 560 DEPTO 26, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OOY7VQX",
+      "tec": "YENDER BOSCAN CADENAS",
       "cat": "Reparación",
       "f": "16-19",
       "hi": "16:42",
       "d": "ANDRES BELLO 469, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OOX6ZK0",
@@ -22063,7 +22117,7 @@
      },
      {
       "o": "1-3OOSZO0J",
-      "tec": "ALFREDO ALCAYAGA F",
+      "tec": "LUIS CASTRO TORRES",
       "cat": "Reparación",
       "f": "16-19",
       "hi": "16:00",
@@ -22077,7 +22131,7 @@
       "f": "16-19",
       "hi": "17:20",
       "d": "MARGA MARGA 1540, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OORLG6W",
@@ -22122,7 +22176,7 @@
       "f": "13-16",
       "hi": "15:18",
       "d": "FRODDEN 01130, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OONUCNJ",
@@ -22131,7 +22185,7 @@
       "f": "16-19",
       "hi": "16:00",
       "d": "AZAPA 1190, QUILPUE",
-      "e": "en ruta"
+      "e": "No Realizada"
      },
      {
       "o": "1-3OOPLEUH",
@@ -22153,7 +22207,7 @@
      },
      {
       "o": "1-3OONNU84",
-      "tec": "MARCO PEREZ G",
+      "tec": "JORDAN ROA PEREZ",
       "cat": "Alta 2 Play",
       "f": "16-19",
       "hi": "16:26",
@@ -22276,7 +22330,7 @@
       "f": "13-16",
       "hi": "15:21",
       "d": "AV LA PALMA 1321, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "ESTEBAN PIZARRO QUINTANA",
       "visitas": 1,
       "ult_fecha": "28-10-2026",
@@ -22366,6 +22420,18 @@
       "ult_cierre": "Direccion incorrecta"
      },
      {
+      "o": "1-3OON654L",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "17:43",
+      "d": "EDUARDO ALQUINTA 1260 CASA 201, QUILPUE",
+      "e": "Pendiente",
+      "tec": "JOSE SALAS MEDINA",
+      "visitas": 1,
+      "ult_fecha": "29-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3ONVJLHB",
       "cat": "Alta 2 Play",
       "f": "10-13",
@@ -22404,9 +22470,9 @@
       "o": "1-3OO3FIUV",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "17:30",
+      "hi": "17:04",
       "d": "AV LA PALMA 426 EDIF. B DEPTO 403, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "LUIS MARTIN NUÑEZ",
       "visitas": 2,
       "ult_fecha": "27-10-2026",
@@ -22428,13 +22494,25 @@
       "o": "1-3OONUCNJ",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "16:19",
+      "hi": "16:22",
       "d": "AZAPA 1190, QUILPUE",
-      "e": "en ruta",
+      "e": "No Realizada",
       "tec": "NICOLAS MOYANO R",
       "visitas": 1,
       "ult_fecha": "28-10-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3ON6BYWK",
+      "cat": "Migración 2 Play",
+      "f": "16-19",
+      "hi": "17:37",
+      "d": "TOQUI 2463, QUILPUE",
+      "e": "en ruta",
+      "tec": "NICOLAS MOYANO R",
+      "visitas": 1,
+      "ult_fecha": "16-10-2026",
+      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3OOSJRL7",
@@ -22461,18 +22539,6 @@
       "ult_cierre": "Clte desiste motivo comercial"
      },
      {
-      "o": "1-3ON6BYWK",
-      "cat": "Migración 2 Play",
-      "f": "16-19",
-      "hi": "18:25",
-      "d": "TOQUI 2463, QUILPUE",
-      "e": "Pendiente",
-      "tec": "RAFAEL VARGAS B",
-      "visitas": 1,
-      "ult_fecha": "16-10-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
       "o": "1-3OKPKB58",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -22490,7 +22556,7 @@
       "f": "13-16",
       "hi": "15:39",
       "d": "LOS ALMENDROS 017, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "SEBASTIAN DOSSOW A",
       "visitas": 1,
       "ult_fecha": "17-08-2026",
@@ -22511,9 +22577,9 @@
       "o": "1-3OKQYAJQ",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "16:07",
+      "hi": "16:10",
       "d": "LOURDES 1021 EDIF. F DEPTO 102, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "MATÍAS JAQUE AG",
       "desde": "26-10-2026"
      },
@@ -22521,9 +22587,9 @@
       "o": "1-3ONFNNLB",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:30",
+      "hi": "16:57",
       "d": "COVADONGA 716, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "RAFAEL VARGAS B",
       "desde": "28-10-2026"
      },
@@ -22541,5 +22607,5 @@
    }
   }
  },
- "generado": "29-10-2026 16:05"
+ "generado": "29-10-2026 17:23"
 }
