@@ -21912,15 +21912,16 @@
    }
   },
   "29-10-2026": {
-   "hasta": "10:39",
+   "hasta": "10:49",
    "actividades": 127,
    "tecnicos": 33,
    "estados": {
     "Iniciado": 23,
-    "Pendiente": 81,
+    "Pendiente": 79,
     "No Realizada": 9,
-    "en ruta": 8,
-    "Completado": 6
+    "Completado": 9,
+    "en ruta": 6,
+    "Cancelado": 1
    },
    "rgu": 200.5,
    "caidas_total": 3,
@@ -22108,9 +22109,9 @@
       "o": "1-3ONC4BPU",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "10:32",
+      "hi": "10:47",
       "d": "OVALLE 1104, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JOEL GUSTAVE GUSTA",
       "visitas": 1,
       "ult_fecha": "27-10-2026",
@@ -22132,7 +22133,7 @@
       "o": "1-3OOBCMX1",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "13:11",
+      "hi": "13:00",
       "d": "LOS ALMENDROS 017, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE CASTRO P",
@@ -22144,9 +22145,9 @@
       "o": "1-3OMIGA0T",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "10:59",
+      "hi": "10:49",
       "d": "MARGA MARGA 2950, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JOSE GALAZ D",
       "visitas": 1,
       "ult_fecha": "26-10-2026",
@@ -22168,7 +22169,7 @@
       "o": "1-3OO4JUX8",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "13:37",
+      "hi": "16:24",
       "d": "NUEVA HIPODROMO 1250, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JUAN ARRIAGADA C",
@@ -22192,9 +22193,8 @@
       "o": "1-3ONL0DB2",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "12:36",
       "d": "SERENA 890 DEPTO 14, QUILPUE",
-      "e": "Pendiente",
+      "e": "Cancelado",
       "tec": "LEONEL HERNÁNDEZ OJE",
       "visitas": 3,
       "ult_fecha": "05-10-2026",
@@ -22298,9 +22298,8 @@
       "o": "1-3ONL0DB2",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "12:36",
       "d": "SERENA 890 DEPTO 14, QUILPUE",
-      "e": "Pendiente",
+      "e": "Cancelado",
       "tec": "LEONEL HERNÁNDEZ OJE",
       "desde": "28-10-2026"
      },
@@ -22318,5 +22317,5 @@
    }
   }
  },
- "generado": "29-10-2026 10:39"
+ "generado": "29-10-2026 10:49"
 }
