@@ -21912,24 +21912,24 @@
    }
   },
   "29-10-2026": {
-   "hasta": "10:49",
+   "hasta": "10:54",
    "actividades": 127,
    "tecnicos": 33,
    "estados": {
-    "Iniciado": 23,
-    "Pendiente": 79,
-    "No Realizada": 9,
+    "Iniciado": 24,
+    "Pendiente": 78,
+    "No Realizada": 10,
     "Completado": 9,
-    "en ruta": 6,
+    "en ruta": 5,
     "Cancelado": 1
    },
    "rgu": 200.5,
    "caidas_total": 3,
    "caidas_activas": 3,
    "caidas_resueltas": 0,
-   "nuevas": 9,
-   "al_bucket": 0,
-   "repetidas": 19,
+   "nuevas": 10,
+   "al_bucket": 3,
+   "repetidas": 18,
    "reagendadas": 4,
    "detalle": {
     "caidas": [
@@ -21963,6 +21963,15 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OOO0J7J",
+      "tec": "JOSE SALAS MEDINA",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "11:46",
+      "d": "MONTEVIDEO 442, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3OONNU84",
       "tec": "JOEL GUSTAVE GUSTA",
       "cat": "Alta 2 Play",
@@ -21987,7 +21996,7 @@
       "f": "16-19",
       "hi": "16:00",
       "d": "SANTA ROSA 32 CASA 9, QUILPUE",
-      "e": "Pendiente"
+      "e": "Pendiente (ya no está)"
      },
      {
       "o": "1-3OON40AY",
@@ -22085,25 +22094,13 @@
       "o": "1-3ONV34ML",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:41",
+      "hi": "14:48",
       "d": "AV LA PALMA 1321, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
       "visitas": 1,
       "ult_fecha": "28-10-2026",
       "ult_cierre": "Direccion incorrecta"
-     },
-     {
-      "o": "1-3OLS9VJN",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "16:00",
-      "d": "SANTA ROSA 32 CASA 9, QUILPUE",
-      "e": "Pendiente",
-      "tec": "FELIPE SILVA R",
-      "visitas": 1,
-      "ult_fecha": "21-10-2026",
-      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3ONC4BPU",
@@ -22133,7 +22130,7 @@
       "o": "1-3OOBCMX1",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "13:00",
+      "hi": "14:00",
       "d": "LOS ALMENDROS 017, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE CASTRO P",
@@ -22145,9 +22142,9 @@
       "o": "1-3OMIGA0T",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "10:49",
+      "hi": "10:51",
       "d": "MARGA MARGA 2950, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JOSE GALAZ D",
       "visitas": 1,
       "ult_fecha": "26-10-2026",
@@ -22157,7 +22154,7 @@
       "o": "1-3OON0P6D",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:31",
       "d": "LOS NARANJOS 511 CASA 12A, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE SALAS MEDINA",
@@ -22169,7 +22166,7 @@
       "o": "1-3OO4JUX8",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "16:24",
+      "hi": "13:29",
       "d": "NUEVA HIPODROMO 1250, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JUAN ARRIAGADA C",
@@ -22230,7 +22227,7 @@
       "f": "10-13",
       "hi": "10:26",
       "d": "FRUTILLAR 827, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "RAFAEL VARGAS B",
       "visitas": 1,
       "ult_fecha": "28-10-2026",
@@ -22317,5 +22314,5 @@
    }
   }
  },
- "generado": "29-10-2026 10:49"
+ "generado": "29-10-2026 10:54"
 }
