@@ -21912,22 +21912,22 @@
    }
   },
   "29-10-2026": {
-   "hasta": "15:45",
-   "actividades": 157,
+   "hasta": "16:00",
+   "actividades": 158,
    "tecnicos": 33,
    "estados": {
-    "Completado": 80,
-    "Pendiente": 27,
-    "No Realizada": 20,
-    "Iniciado": 23,
+    "Completado": 81,
+    "Iniciado": 26,
+    "No Realizada": 21,
+    "Pendiente": 23,
     "en ruta": 4,
     "Cancelado": 3
    },
-   "rgu": 233.2,
+   "rgu": 234.2,
    "caidas_total": 8,
    "caidas_activas": 7,
    "caidas_resueltas": 1,
-   "nuevas": 25,
+   "nuevas": 26,
    "al_bucket": 23,
    "repetidas": 22,
    "reagendadas": 4,
@@ -21998,6 +21998,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OOY7VQX",
+      "tec": "JUAN ARRIAGADA C",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "16:42",
+      "d": "ANDRES BELLO 469, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OOX6ZK0",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -22241,9 +22250,9 @@
       "o": "1-3ONJSYTE",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "16:26",
+      "hi": "15:59",
       "d": "PJE B 0836 CASA 5 DEPTO 22, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "ALEXIS JARA",
       "visitas": 5,
       "ult_fecha": "21-10-2026",
@@ -22431,9 +22440,9 @@
       "o": "1-3OOSJRL7",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:41",
+      "hi": "15:56",
       "d": "RIQUELME 1763, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "PABLO HERNANEZ FERNANDEZ",
       "visitas": 1,
       "ult_fecha": "25-08-2026",
@@ -22490,16 +22499,6 @@
     ],
     "reagendadas": [
      {
-      "o": "1-3OKQYAJQ",
-      "cat": "Migración 1 Play",
-      "f": "16-19",
-      "hi": "18:07",
-      "d": "LOURDES 1021 EDIF. F DEPTO 102, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "CRISTOBAL SILVA LEIVA",
-      "desde": "26-10-2026"
-     },
-     {
       "o": "1-3ONL0DB2",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -22507,6 +22506,16 @@
       "e": "Cancelado",
       "tec": "LEONEL HERNÁNDEZ OJE",
       "desde": "28-10-2026"
+     },
+     {
+      "o": "1-3OKQYAJQ",
+      "cat": "Migración 1 Play",
+      "f": "16-19",
+      "hi": "16:07",
+      "d": "LOURDES 1021 EDIF. F DEPTO 102, VILLA ALEMANA",
+      "e": "en ruta",
+      "tec": "MATÍAS JAQUE AG",
+      "desde": "26-10-2026"
      },
      {
       "o": "1-3ONFNNLB",
@@ -22532,5 +22541,5 @@
    }
   }
  },
- "generado": "29-10-2026 15:45"
+ "generado": "29-10-2026 16:00"
 }
