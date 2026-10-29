@@ -3562,6 +3562,53 @@
 .mp-dsub { font-size:14px; font-weight:600; color:#1d4ed8; white-space:nowrap; } .mp-dsub i { display:inline-block; font-style:normal; transition:transform .15s; }
 .mp-desp.ab .mp-dsub i { transform:rotate(180deg); }
 .mp-desp:hover h3 { color:#1d4ed8; }
+
+/* ==== (29-10-2026, 11:45) Seguimiento VTR · Evolución (evolutivo por técnico) ==== */
+.ev-top { display:flex; flex-wrap:wrap; align-items:center; gap:10px 16px; }
+.ev-top h2 { margin:0; font-size:22px; font-weight:800; } .ev-top h2 small { font-size:14px; font-weight:500; color:#64748b; margin-left:6px; }
+.ev-top select { min-height:40px; padding:0 12px; border:1px solid #d3d8e2; border-radius:10px; font:600 14px inherit; font-family:inherit; color:#13213c; background:#fff; margin-left:auto; }
+.ev-fr { border-radius:12px; padding:12px 16px; font-size:15px; line-height:1.45; border:1px solid; }
+.ev-fr.ok { background:#e7f4ec; border-color:#b7e0c6; color:#0b5e51; } .ev-fr.bad { background:#fdecec; border-color:#f5c2c2; color:#8f1d1d; }
+.ev-fr.wa { background:#fff4e5; border-color:#f5d9a8; color:#7c4a03; } .ev-fr.gr { background:#f1f5f9; border-color:#dbe3ee; color:#334155; }
+.ev-h { display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 14px; }
+.ev-ley { display:flex; flex-wrap:wrap; gap:6px 16px; font-size:12.5px; color:#475569; }
+.ev-ley span { display:inline-flex; align-items:center; gap:6px; }
+.ev-ley i { display:inline-block; width:18px; height:10px; border-radius:2px; }
+.ev-ley i.lt { height:3px; background:#13213c; } .ev-ley i.lz { height:0; border-top:2px dashed #94a3b8; } .ev-ley i.lm { height:0; border-top:2px dashed #0e7c6b; }
+.ev-ley i.bco { background:#b9e2cf; } .ev-ley i.bnr { background:#f6c4c2; } .ev-ley i.pp { width:10px; height:10px; border-radius:50%; border:2px solid #94a3b8; background:#fff; }
+.ev-svg { width:100%; height:auto; display:block; font-family:inherit; }
+.ev-grid { stroke:#eef2f7; stroke-width:1; } .ev-ax { font-size:12px; fill:#94a3b8; }
+.ev-lx { font-size:12.5px; font-weight:700; fill:#13213c; } .ev-lx.ch { font-size:12px; } .ev-sx { font-size:11px; fill:#64748b; }
+.ev-bco { fill:#b9e2cf; } .ev-bnr { fill:#f6c4c2; }
+.ev-meta { stroke:#0e7c6b; stroke-width:1.5; stroke-dasharray:6 5; } .ev-mt { font-size:11.5px; fill:#0e7c6b; font-weight:700; }
+.ev-lz { fill:none; stroke:#94a3b8; stroke-width:2; stroke-dasharray:5 5; } .ev-pz { fill:#94a3b8; }
+.ev-lt { fill:none; stroke:#13213c; stroke-width:2.5; stroke-linejoin:round; }
+.ev-pok { fill:#0e7c6b; stroke:#fff; stroke-width:2; } .ev-pbad { fill:#d04a46; stroke:#fff; stroke-width:2; } .ev-pp { fill:#fff; stroke:#94a3b8; stroke-width:2; }
+.ev-et { font-size:12.5px; font-weight:800; fill:#13213c; paint-order:stroke; stroke:#fff; stroke-width:4px; }
+.ev-hit { fill:transparent; cursor:crosshair; } .ev-hit:hover { fill:rgba(29,78,216,.06); }
+#evTip { position:fixed; z-index:5000; pointer-events:none; background:#13213c; color:#fff; font-size:13px; line-height:1.45; padding:8px 11px; border-radius:8px; box-shadow:0 8px 24px rgba(0,0,0,.25); display:none; max-width:320px; }
+#evTip .ok { color:#6ee7b7; } #evTip .bad { color:#fca5a5; }
+.ev-mzona { fill:rgba(180,83,9,.05); } .ev-mline { stroke:#b45309; stroke-width:2; stroke-dasharray:3 3; } .ev-mtxt { font-size:12px; font-weight:700; fill:#b45309; }
+.ev-ley i.mk { width:0; height:12px; border-left:2px dashed #b45309; border-radius:0; }
+.sv-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+.sv-card { background:#fff; border:1px solid #dbe3ee; border-radius:14px; padding:12px 14px 6px; display:flex; flex-direction:column; gap:4px; text-align:left; font-family:inherit; cursor:pointer; min-width:0; }
+.sv-card:hover { border-color:#1d4ed8; box-shadow:0 4px 14px rgba(29,78,216,.12); }
+.sv-ch { display:flex; align-items:center; gap:8px; flex-wrap:wrap; font-size:15.5px; color:#13213c; } .sv-ver { margin-left:auto; font-size:13px; font-weight:700; color:#1d4ed8; }
+.sv-cs { font-size:12.5px; color:#64748b; }
+.sv-spk { width:130px; height:34px; display:block; }
+.ad-tbl th small { font-weight:400; text-transform:none; letter-spacing:0; }
+#modalSvEvo .ev-fr, #modalSvEvo .ad-card { margin:0; }
+@media (max-width:900px){ .sv-grid { grid-template-columns:1fr; } }
+.sv-tab td small { display:block; color:#64748b; font-size:11px; margin-top:2px; } .sv-tab th { vertical-align:bottom; }
+.sv-tab th.mk, .sv-tab td.mk { border-left:2px dashed #b45309; } .sv-tab .sep { border-left:2px solid #dbe3ee; }
+.sv-tab td.sv-c { text-align:center; } .sv-tab th { text-align:center; } .sv-tab th:first-child { text-align:left; }
+tr.sv-resto td { color:#64748b; font-size:12.5px; background:#f8fafc; } .sv-poco { color:#94a3b8; font-weight:600; }
+#modalSvEvo { position:fixed; inset:0; z-index:3100; background:rgba(15,23,42,.55); display:none; align-items:flex-start; justify-content:center; padding:18px; overflow:auto; }
+#modalSvEvo.abierto { display:flex; }
+.sv-tabs { display:flex; gap:8px; margin:0 0 14px; }
+.sv-tabs button { min-height:40px; padding:0 16px; border:1px solid #d3d8e2; border-radius:10px; background:#fff; color:#13213c; font:600 14px inherit; font-family:inherit; cursor:pointer; }
+.sv-tabs button.on { background:#13213c; border-color:#13213c; color:#fff; } .sv-tabs button:hover { border-color:#1d4ed8; }
+#modalSV .sv-evo { color:#13213c; }
 /* ==== (29-10-2026, 09:20) barras de Evolución por semana tocables + PANTALLA de la semana ==== */
 button.mp-sem { border:0; background:none; font-family:inherit; cursor:pointer; padding:6px 0 0; border-radius:10px; transition:background .12s; }
 button.mp-sem:hover { background:#e8efff; } button.mp-sem:hover .l { color:#1d4ed8; }
@@ -17008,7 +17055,265 @@ function svOrdenar(col){
   if(col === null) svOrd.dir = -1;
   pintarSegVtr();
 }
+/* (29-10-2026, 11:45) Luis: "creala porfa" -> pestañas Tabla / Evolución en la ventana del Seguimiento VTR */
 function pintarSegVtr(){
+  const cu = document.getElementById('svCuerpo'); if(!cu) return;
+  if(window.SV_VISTA === 'evo' && DER !== null){
+    svEvoTip();
+    document.getElementById('svMeta').textContent = (100 - MG_META_DER) + ' %'; document.getElementById('svMetaQ').textContent = MG_META_DER + ' %';
+    cu.innerHTML = svTabsHtml() + '<div class="ad sv-evo">' + svEvoHtml(svEvoFilas(), rmTitulo) + '</div>';
+    return;
+  }
+  pintarSegVtrTabla();
+  if(DER !== null) cu.insertAdjacentHTML('afterbegin', svTabsHtml());
+}
+/* ==== (29-10-2026, 11:45) EVOLUTIVO DEL TECNICO (lo usa el Seguimiento VTR · Evolución) ====
+   Luis mostró un gráfico de otra página (mensual + diario) y preguntó si se
+   podía aplicar. Cambios respecto a esa foto:
+   - Por SEMANA (los datos parten el 01-08: por mes serían solo 3 puntos).
+   - Línea RECTA entre puntos y HUECO en los días/semanas sin actividad (la
+     curva de la foto inventaba 0 % en días sin visitas).
+   - Con pocas visitas (menos de EV_POCAS) el punto va hueco y gris.
+   - % derivadas = 100 - completitud: no se repite como otra línea; en su
+     lugar las barras muestran completadas (verde) y no realizadas (rojo).
+   Entrada: filas {iso, e, cod, tec} (mismas de MIGRACIONES). Dibuja SVG a
+   mano (el Módulo no usa librerías de gráficos). */
+var EV_POCAS = 3;
+var EV_DCORTO = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+function evLunes(iso){ const d = new Date(+iso.slice(0, 4), +iso.slice(4, 6) - 1, +iso.slice(6, 8)); d.setDate(d.getDate() - (d.getDay() + 6) % 7);
+  return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+function evSt(l){ const s = { co:0, nr:0 }; l.forEach(x => { if(x.e === 'Completado') s.co++; else if(x.e === 'No Realizada') s.nr++; });
+  s.vis = s.co + s.nr; s.comp = s.vis ? 100 * s.co / s.vis : null; return s; }
+/* rotulo de la semana con los dias que de verdad tienen datos ("1 al 3 oct" si la semana parte en otro mes) */
+function evRango(s){ if(!s.d1) return derRango(s.k); const a = s.d1, b = s.d2, M = DER_MESES;
+  return +a.slice(6) + (a.slice(4, 6) === b.slice(4, 6) ? '' : ' ' + M[+a.slice(4, 6) - 1]) + ' al ' + +b.slice(6) + ' ' + M[+b.slice(4, 6) - 1]; }
+function evPc(v){ return v === null ? '–' : (Math.round(v * 10) / 10).toFixed(1).replace('.', ',') + '%'; }
+
+/* --- calcula todo lo del tecnico t --- */
+/* t = nombre del tecnico, o una funcion (fila -> true/false) para un GRUPO; fZ = con quien se compara (por defecto toda la zona) */
+function evDatos(F, t, fZ){
+  const SEM = {}, DIA = {}, esT = typeof t === 'function' ? t : (x => x.tec === t);
+  F.forEach(x => { const k = evLunes(x.iso); SEM[k] = SEM[k] || { z:[], t:[] }; DIA[x.iso] = DIA[x.iso] || { z:[], t:[] };
+    if(!fZ || fZ(x)){ SEM[k].z.push(x); DIA[x.iso].z.push(x); }
+    if(esT(x)){ SEM[k].t.push(x); DIA[x.iso].t.push(x); } });
+  const ini = F.reduce((m, x) => x.iso < m ? x.iso : m, '99999999');
+  const ini0 = ini.slice(0, 4) + '-' + ini.slice(4, 6) + '-' + ini.slice(6, 8);
+  /* la semana que empieza antes del primer dia con datos queda incompleta: se saca si tiene menos de 3 dias con datos.
+     d1/d2 = primer y ultimo dia con datos de la semana (para el rotulo "1 al 3 oct") */
+  const sem = Object.keys(SEM).sort().map(k => { const ds = [...new Set(SEM[k].z.concat(SEM[k].t).map(x => x.iso))].sort();
+      return { k:k, z:evSt(SEM[k].z), t:evSt(SEM[k].t), d1:ds[0], d2:ds[ds.length - 1], nd:ds.length }; })
+    .filter(s => s.k >= ini0 || s.nd >= 3);
+  /* dia a dia: la linea es MOVIL de 7 dias (ese dia y los 6 anteriores). Un tecnico hace 1 o 2
+     migraciones por dia: el % de un solo dia salta entre 0 y 100 y no dice nada. */
+  const todos = Object.keys(DIA).sort(), u30 = todos.slice(-30);
+  const menos6 = iso => { const d = new Date(+iso.slice(0, 4), +iso.slice(4, 6) - 1, +iso.slice(6, 8) - 6); return d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0'); };
+  const dias = u30.map(function(k){ const desde = menos6(k), ven = todos.filter(x => x >= desde && x <= k);
+    const vz = [], vt = []; ven.forEach(x => { vz.push(...DIA[x].z); vt.push(...DIA[x].t); });
+    return { k:k, z:evSt(vz), t:evSt(vt), hoy:evSt(DIA[k].t), l:DIA[k].t }; });
+  return { sem:sem, dias:dias };
+}
+
+/* --- la frase de arriba --- */
+function evFrase(D, zNom){ zNom = zNom || 'la zona';
+  /* semanas FIJAS del calendario (las 4 ultimas y las 4 anteriores), iguales para todos los tecnicos */
+  const con = D.sem.filter(s => s.t.vis), u4 = D.sem.slice(-4).filter(s => s.t.vis), p4 = D.sem.slice(-8, -4).filter(s => s.t.vis);
+  if(!u4.length) return { txt:'Sin migraciones visitadas en las últimas 4 semanas.', cl:'gr', ca:null, cb:null, za:null, d:null, bajo:0, n4:0, a:null };
+  const sum = l => l.reduce((a, s) => ({ co:a.co + s.t.co, vis:a.vis + s.t.vis, zc:a.zc + s.z.co, zv:a.zv + s.z.vis }), { co:0, vis:0, zc:0, zv:0 });
+  const a = sum(u4), b = sum(p4);
+  const ca = a.vis ? 100 * a.co / a.vis : null, za = a.zv ? 100 * a.zc / a.zv : null, cb = b.vis ? 100 * b.co / b.vis : null;
+  const bajo = u4.filter(s => s.t.comp !== null && s.t.comp < s.z.comp).length;
+  let seguidas = 0; for(let i = con.length - 1; i >= 0 && con[i].t.comp < con[i].z.comp; i--) seguidas++;
+  const d = cb === null ? null : ca - cb;
+  const tend = d === null ? 'sin semanas antes para comparar' : Math.abs(d) < 3 ? 'parejo (= ' + evPc(cb) + ' las 4 anteriores)'
+    : d > 0 ? 'mejorando: ▲ ' + evPc(d).replace('%', '') + ' pts vs las 4 anteriores (' + evPc(cb) + ')' : 'empeorando: ▼ ' + evPc(-d).replace('%', '') + ' pts vs las 4 anteriores (' + evPc(cb) + ')';
+  const cl = d === null ? 'gr' : Math.abs(d) < 3 ? (ca >= za ? 'ok' : 'wa') : d > 0 ? 'ok' : 'bad';
+  return { cl:cl, ca:ca, cb:cb, za:za, d:d, bajo:bajo, n4:u4.length, a:a, txt:'Últimas 4 semanas: <b>' + evPc(ca) + '</b> de completitud (' + a.co + ' de ' + a.vis + ') vs <b>' + evPc(za) + '</b> ' + zNom + ' · '
+    + bajo + ' de ' + u4.length + ' semanas bajo ' + zNom + (seguidas >= 2 ? ' (<b>' + seguidas + ' seguidas</b>)' : '') + ' · <b>' + tend + '</b>' };
+}
+
+/* --- grafico SVG: puntos del tecnico + zona + meta + barras de volumen --- */
+function evSvg(P, o){
+  /* P: [{lab, sub, t:{co,nr,vis,comp}, z:{comp}, tip}]; o: {alto, meta, pocas} */
+  const W = o.ancho || 1200, H = o.alto || 300, L = 46, R = 46, T = 26, B = 46, iw = W - L - R, ih = H - T - B;
+  const n = P.length, cw = iw / n, x = i => L + cw * (i + .5), y = v => T + ih * (1 - v / 100);
+  const bar = p => p.b || p.t;
+  const maxV = Math.max(4, ...P.map(p => bar(p).vis)), yb = v => T + ih * (1 - v / maxV), bw = Math.min(34, cw * .55);
+  let g = '';
+  [0, 20, 40, 60, 80, 100].forEach(v => { g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + y(v) + '" y2="' + y(v) + '" class="ev-grid"/><text x="' + (L - 8) + '" y="' + (y(v) + 4) + '" class="ev-ax" text-anchor="end">' + v + '%</text>'; });
+  const pasos = maxV <= 6 ? 1 : maxV <= 15 ? 3 : maxV <= 30 ? 5 : 10;
+  for(let v = 0; v <= maxV; v += pasos) g += '<text x="' + (W - R + 8) + '" y="' + (yb(v) + 4) + '" class="ev-ax">' + v + '</text>';
+  /* barras: completadas abajo, no realizadas encima */
+  P.forEach((p, i) => { const q = bar(p); if(!q.vis) return; const x0 = x(i) - bw / 2;
+    g += '<rect x="' + x0 + '" y="' + yb(q.co) + '" width="' + bw + '" height="' + (yb(0) - yb(q.co)) + '" class="ev-bco"/>'
+      + '<rect x="' + x0 + '" y="' + yb(q.vis) + '" width="' + bw + '" height="' + (yb(q.co) - yb(q.vis)) + '" class="ev-bnr"/>'; });
+  /* meta */
+  if(o.meta) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + y(o.meta) + '" y2="' + y(o.meta) + '" class="ev-meta"/>' + (o.ancho ? '' : '<text x="' + (W - R - 4) + '" y="' + (y(o.meta) - 6) + '" class="ev-mt" text-anchor="end">meta ' + o.meta + '%</text>');
+  /* marca: desde cuando VTR/CLARO pidio el seguimiento (posicion en columnas, puede ser decimal) */
+  if(o.marca !== undefined && o.marca !== null && o.marca >= 0){ const xm = L + cw * o.marca;
+    g += '<rect x="' + xm + '" y="' + T + '" width="' + (W - R - xm) + '" height="' + ih + '" class="ev-mzona"/><line x1="' + xm + '" x2="' + xm + '" y1="' + (T - 8) + '" y2="' + (T + ih) + '" class="ev-mline"/>'
+      + '<text x="' + (xm + 5) + '" y="' + (T - 10) + '" class="ev-mtxt">' + (o.marcaTxt || '') + '</text>'; }
+  /* lineas con huecos */
+  const linea = (f, cls) => { let d = '', ant = false; P.forEach((p, i) => { const v = f(p); if(v === null){ ant = false; return; } d += (ant ? 'L' : 'M') + x(i).toFixed(1) + ' ' + y(v).toFixed(1); ant = true; }); return '<path d="' + d + '" class="' + cls + '"/>'; };
+  g += linea(p => p.z.comp, 'ev-lz') + linea(p => p.t.vis >= o.pocas ? p.t.comp : null, 'ev-lt');
+  /* puntos y etiquetas */
+  P.forEach((p, i) => { if(p.z.comp !== null) g += '<circle cx="' + x(i) + '" cy="' + y(p.z.comp) + '" r="3" class="ev-pz"/>';
+    if(!p.t.vis || o.sinPuntos) return; const poco = p.t.vis < o.pocas;
+    g += '<circle cx="' + x(i) + '" cy="' + y(p.t.comp) + '" r="' + (poco ? 4.5 : 5.5) + '" class="' + (poco ? 'ev-pp' : p.t.comp >= p.z.comp ? 'ev-pok' : 'ev-pbad') + '"/>';
+    if(o.etiq && !poco) g += '<text x="' + x(i) + '" y="' + (y(p.t.comp) - 10) + '" class="ev-et" text-anchor="middle">' + Math.round(p.t.comp) + '%</text>'; });
+  /* ejes x + zonas para el mouse */
+  P.forEach((p, i) => { g += '<text x="' + x(i) + '" y="' + (H - B + 18) + '" class="ev-lx' + (o.chico ? ' ch' : '') + '" text-anchor="middle">' + p.lab + '</text>'
+      + (p.sub ? '<text x="' + x(i) + '" y="' + (H - B + 32) + '" class="ev-sx" text-anchor="middle">' + p.sub + '</text>' : '')
+      + '<rect x="' + (x(i) - cw / 2) + '" y="' + T + '" width="' + cw + '" height="' + ih + '" class="ev-hit" data-tip="' + encodeURIComponent(p.tip) + '"/>'; });
+  return '<svg viewBox="0 0 ' + W + ' ' + H + '" class="ev-svg" role="img">' + g + '</svg>';
+}
+
+function evHtml(F, t, nomT, marcaIso){
+  const D = evDatos(F, t), fr = evFrase(D);
+  /* (opcional) desde que fecha VTR/CLARO pidio seguimiento: raya en los dos graficos */
+  const iS = marcaIso ? D.sem.findIndex(s => s.k === evLunes(marcaIso)) : -1;
+  const mS = iS >= 0 ? iS + (new Date(+marcaIso.slice(0, 4), +marcaIso.slice(4, 6) - 1, +marcaIso.slice(6, 8)).getDay() - 1) / 6 : null;
+  const iD = marcaIso ? D.dias.findIndex(d => d.k >= marcaIso) : -1, mD = iD >= 0 ? iD : null;
+  const nm = nomT(t);
+  const tipS = s => '<b>Semana ' + derNumSemana(s.k) + '</b> · ' + evRango(s) + '<br>' + nm + ': <b>' + evPc(s.t.comp) + '</b> (' + s.t.co + ' de ' + s.t.vis + ')' + (s.t.vis && s.t.vis < EV_POCAS ? ' · pocas visitas' : '')
+    + '<br>Zona: ' + evPc(s.z.comp) + '<br><span class="ok">' + s.t.co + ' completadas</span> · <span class="bad">' + s.t.nr + ' no realizadas</span>';
+  const PS = D.sem.map(s => ({ lab:'Sem ' + derNumSemana(s.k), sub:evRango(s), t:s.t, z:s.z, tip:tipS(s) }));
+  const tipD = dd => { const dt = new Date(+dd.k.slice(0, 4), +dd.k.slice(4, 6) - 1, +dd.k.slice(6, 8)), nr = dd.l.filter(x => x.e === 'No Realizada');
+    return '<b>' + EV_DCORTO[dt.getDay()] + ' ' + dd.k.slice(6) + '-' + dd.k.slice(4, 6) + '</b><br>'
+      + (dd.hoy.vis ? 'Ese día: <span class="ok">' + dd.hoy.co + ' completada' + (dd.hoy.co === 1 ? '' : 's') + '</span> · <span class="bad">' + dd.hoy.nr + ' no realizada' + (dd.hoy.nr === 1 ? '' : 's') + '</span>' : 'Ese día no visitó migraciones')
+      + (nr.length ? '<br>' + nr.map(x => escR(x.cod || 'Sin código')).join(', ') : '')
+      + '<br>Últimos 7 días: <b>' + evPc(dd.t.comp) + '</b> (' + dd.t.co + ' de ' + dd.t.vis + ')' + (dd.t.vis && dd.t.vis < EV_POCAS ? ' · pocas visitas' : '') + ' · zona ' + evPc(dd.z.comp); };
+  const PD = D.dias.map(dd => { const dt = new Date(+dd.k.slice(0, 4), +dd.k.slice(4, 6) - 1, +dd.k.slice(6, 8));
+    return { lab:String(+dd.k.slice(6)), sub:EV_DCORTO[dt.getDay()].slice(0, 2) + (dd.k.slice(6) === '01' || dd.k === D.dias[0].k ? ' ' + DER_MESES[+dd.k.slice(4, 6) - 1] : ''), t:dd.t, z:dd.z, b:dd.hoy, tip:tipD(dd) }; });
+  const diasCon = D.dias.filter(dd => dd.hoy.vis).length, tot = evSt(D.dias.reduce((a, dd) => a.concat(dd.l), []));
+  const ley = '<div class="ev-ley"><span><i class="lt"></i>' + nm + '</span><span><i class="lz"></i>Promedio de la zona</span><span><i class="lm"></i>Meta 60%</span>'
+    + '<span><i class="bco"></i>Completadas</span><span><i class="bnr"></i>No realizadas</span><span><i class="pp"></i>Pocas visitas (menos de ' + EV_POCAS + ')</span></div>';
+  return '<div class="ev-fr ' + fr.cl + '">' + fr.txt + '</div>'
+    + '<div class="ad-card"><div class="ev-h"><h3>Semana a semana</h3><span class="ad-nota">Completitud de migraciones (completadas ÷ visitadas) desde agosto. El punto es verde si quedó sobre la zona, rojo si quedó bajo. Las barras (eje derecho) son sus visitadas.</span></div>'
+    +   ley + evSvg(PS, { alto:320, meta:MP_META, pocas:EV_POCAS, etiq:true, marca:mS, marcaTxt:'lista VTR ' + (marcaIso ? marcaIso.slice(6) + '-' + marcaIso.slice(4, 6) : '') }) + '</div>'
+    + '<div class="ad-card"><div class="ev-h"><h3>Día a día · últimos 30 días</h3><span class="ad-nota">' + nm + ' trabajó migraciones ' + diasCon + ' de los ' + D.dias.length + ' días: ' + evPc(tot.comp) + ' (' + tot.co + ' de ' + tot.vis + '). Las barras son lo de cada día; la línea es el % de sus <b>últimos 7 días</b> (con 1 o 2 visitas al día, el % de un solo día salta entre 0 y 100 y no dice nada).</span></div>'
+    +   ley.replace('Pocas visitas (menos de ' + EV_POCAS + ')', 'Sin línea: menos de ' + EV_POCAS + ' visitas en 7 días') + evSvg(PD, { alto:300, meta:MP_META, pocas:EV_POCAS, sinPuntos:true, chico:true, marca:mD, marcaTxt:'lista VTR' }) + '</div>';
+}
+
+/* ==== (29-10-2026, 11:45) SEGUIMIENTO VTR · EVOLUCION DESDE OCTUBRE ====
+   Luis: "crealo con la evolucion solo de las semanas de octubre".
+   - Solo dias de octubre (sem 40 = 1 al 3 oct, porque el 28-30 sept es septiembre).
+   - Se compara ANTES de la lista (1 al 22 oct) contra DESDE la lista (23-10, cuando
+     VTR/CLARO mando los tecnicos).
+   - Tabla: el % de cada semana de octubre, tecnico por tecnico.
+   - Al tocar un tecnico: su evolutivo (semanas + dia a dia) solo de octubre. */
+var SV_DESDE = '20261023', SV_INI = '20261001';      /* fecha de la lista de VTR y desde cuando se mira */
+function svAntTxt(){ const d = new Date(+SV_DESDE.slice(0, 4), +SV_DESDE.slice(4, 6) - 1, +SV_DESDE.slice(6, 8) - 1);
+  const b = d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0'); return evRango({ k:'', d1:SV_INI, d2:b }); }
+function svRango(s){ return evRango(s); }
+function svEvoPuntos(D, nm, zNom, mini){
+  return D.sem.map(s => ({ lab:'Sem ' + derNumSemana(s.k), sub:mini ? '' : svRango(s), t:s.t, z:s.z,
+    tip:'<b>Semana ' + derNumSemana(s.k) + '</b> · ' + svRango(s) + '<br>' + nm + ': <b>' + evPc(s.t.comp) + '</b> (' + s.t.co + ' de ' + s.t.vis + ')' + (s.t.vis && s.t.vis < EV_POCAS ? ' · pocas visitas' : '')
+      + '<br>' + zNom.replace(/^./, c => c.toUpperCase()) + ': ' + evPc(s.z.comp) + '<br><span class="ok">' + s.t.co + ' completadas</span> · <span class="bad">' + s.t.nr + ' no realizadas</span>' }));
+}
+function svEvoMarca(D){ const i = D.sem.findIndex(s => s.k === evLunes(SV_DESDE));
+  return i < 0 ? null : i + (new Date(+SV_DESDE.slice(0, 4), +SV_DESDE.slice(4, 6) - 1, +SV_DESDE.slice(6, 8)).getDay() - 1) / 6; }
+/* antes / desde la lista, para un filtro de filas */
+function svAD(F, f){ const a = evSt(F.filter(x => f(x) && x.iso < SV_DESDE)), d = evSt(F.filter(x => f(x) && x.iso >= SV_DESDE)), m = evSt(F.filter(f));
+  return { a:a, d:d, m:m, dif:a.comp !== null && d.comp !== null ? d.comp - a.comp : null }; }
+function svEvoHtml(FT, nomT){
+  const F = FT.filter(x => x.iso >= SV_INI);
+  const totTxt = F.every(x => x.iso.slice(0, 6) === SV_INI.slice(0, 6)) ? DER_MESES_NOM[+SV_INI.slice(4, 6) - 1] : 'desde el ' + +SV_INI.slice(6) + ' ' + DER_MESES[+SV_INI.slice(4, 6) - 1];
+  const totMay = totTxt.replace(/^./, c => c.toUpperCase()), antTxt = svAntTxt();
+  window.SV_EVO_F = F;
+  const esSV = x => svDe(x.tec) >= 0;
+  const real = SV_TECS.map((t, i) => { const x = F.find(f => svDe(f.tec) === i); return x ? x.tec : null; });
+  window.SV_EVO_REAL = real;
+  const fl = (d, n) => d === null ? '<span class="mp-fl gr">–</span>' : Math.abs(d) < 3 ? '<span class="mp-fl gr">= parejo</span>'
+    : '<span class="mp-fl ' + (d > 0 ? 'ok' : 'bad') + '">' + (d > 0 ? '▲ ' : '▼ ') + evPc(Math.abs(d)).replace('%', '') + ' pts</span>' + (n !== undefined && n < 5 ? ' <small class="sv-poco">pocas</small>' : '');
+  const tag = (v, n) => '<span class="ad-tag ' + (v === null ? 'gr' : n !== undefined && n < EV_POCAS ? 'gr' : v >= MP_META ? 'ok' : v >= MP_META - 10 ? 'wa' : 'bad') + '">' + evPc(v) + '</span>';
+  const hasta = F.reduce((m, x) => x.iso > m ? x.iso : m, ''), dd = iso => iso.slice(6) + '-' + iso.slice(4, 6);
+
+  /* 1. LOS 11 JUNTOS vs EL RESTO, en octubre */
+  const DG = evDatos(F, esSV, x => !esSV(x)), G = svAD(F, esSV), Rr = svAD(F, x => !esSV(x));
+  const cl = G.dif === null ? 'gr' : G.dif >= 3 ? 'ok' : G.dif <= -3 ? 'bad' : 'wa';
+  let h = '<div class="ev-fr ' + cl + '"><b>Los ' + SV_TECS.length + ' juntos ' + (totTxt.indexOf('desde') === 0 ? '' : 'en ') + totTxt + ': ' + evPc(G.m.comp) + '</b> (' + G.m.co + ' de ' + G.m.vis + ') vs el resto de la zona ' + evPc(Rr.m.comp) + '.'
+    + '<br>Antes de la lista (' + antTxt + '): <b>' + evPc(G.a.comp) + '</b> (' + G.a.co + ' de ' + G.a.vis + ') · desde la lista (' + dd(SV_DESDE) + ' al ' + dd(hasta) + '): <b>' + evPc(G.d.comp) + '</b> (' + G.d.co + ' de ' + G.d.vis + ') → '
+    + (G.dif === null ? '–' : '<b>' + (G.dif > 0 ? '▲ ' : '▼ ') + evPc(Math.abs(G.dif)).replace('%', '') + ' pts</b>') + ' · el resto pasó de ' + evPc(Rr.a.comp) + ' a ' + evPc(Rr.d.comp) + '</div>';
+  const ley = n => '<div class="ev-ley"><span><i class="lt"></i>' + n + '</span><span><i class="lz"></i>Resto de la zona (sin ellos)</span><span><i class="lm"></i>Meta 60%</span>'
+    + '<span><i class="bco"></i>Completadas</span><span><i class="bnr"></i>No realizadas</span><span><i class="pp"></i>Pocas visitas</span><span><i class="mk"></i>Desde la lista VTR</span></div>';
+  h += '<div class="ad-card"><div class="ev-h"><h3>Los ' + SV_TECS.length + ' juntos, semana a semana · ' + totTxt + '</h3><span class="ad-nota">Completitud de migraciones de los técnicos del Seguimiento VTR contra el resto de la zona.' + (DG.sem.length && DG.sem[0].nd < 6 ? ' Sem ' + derNumSemana(DG.sem[0].k) + ' = solo ' + evRango(DG.sem[0]) + '.' : '') + ' Las barras (eje derecho) son sus visitadas.</span></div>'
+    + ley('Los ' + SV_TECS.length + ' del seguimiento') + evSvg(svEvoPuntos(DG, 'Los ' + SV_TECS.length, 'el resto de la zona'), { alto:320, meta:MP_META, pocas:EV_POCAS, etiq:true, marca:svEvoMarca(DG), marcaTxt:'lista VTR ' + dd(SV_DESDE) }) + '</div>';
+
+  /* 2. TABLA: cada semana de octubre */
+  const filas = SV_TECS.map((t, i) => { if(!real[i]) return null; const f = x => svDe(x.tec) === i;
+    return { i:i, t:t, nom:real[i], D:evDatos(F, real[i]), ad:svAD(F, f) }; }).filter(Boolean)
+    .sort((a, b) => (a.ad.m.comp === null) - (b.ad.m.comp === null) || a.ad.m.comp - b.ad.m.comp);
+  const S = DG.sem;
+  const celda = s => s.t.vis ? tag(s.t.comp, s.t.vis) + '<small>' + s.t.co + '/' + s.t.vis + '</small>' : '<span class="mp-fl gr">–</span>';
+  h += '<div class="ad-card"><div class="ev-h"><h3>Uno por uno, semana a semana</h3><span class="ad-nota">Primero los que peor van ' + (totTxt.indexOf('desde') === 0 ? '' : 'en ') + totTxt + '. En cada semana: completitud y completadas/visitadas (en gris con menos de ' + EV_POCAS + ' visitas). Toca un técnico para ver su gráfico.</span></div>'
+    + '<div class="ad-tbl"><table class="sv-tab"><thead><tr><th>Técnico</th><th>KPI que<br>dio VTR</th>'
+    + S.map(s => '<th class="' + (s.k === evLunes(SV_DESDE) ? 'mk' : '') + '">Sem ' + derNumSemana(s.k) + '<br><small>' + svRango(s) + '</small></th>').join('')
+    + '<th class="sep">' + totMay + '</th><th>Antes de la lista<br><small>' + antTxt + '</small></th><th>Desde la lista<br><small>' + dd(SV_DESDE) + ' al ' + dd(hasta) + '</small></th><th>Cambio</th></tr></thead><tbody>'
+    + filas.map(o => { const sm = {}; o.D.sem.forEach(s => sm[s.k] = s);
+        return '<tr class="ms-cl" onclick="svEvoAbrir(' + o.i + ')"><td><b>' + nomT(o.nom) + '</b></td><td class="nu">' + String(o.t[1]).replace('.', ',') + '%</td>'
+          + S.map(s => '<td class="nu sv-c' + (s.k === evLunes(SV_DESDE) ? ' mk' : '') + '">' + (sm[s.k] ? celda(sm[s.k]) : '–') + '</td>').join('')
+          + '<td class="nu sep"><b>' + tag(o.ad.m.comp) + '</b><small>' + o.ad.m.co + '/' + o.ad.m.vis + '</small></td>'
+          + '<td class="nu">' + tag(o.ad.a.comp, o.ad.a.vis) + '<small>' + o.ad.a.co + '/' + o.ad.a.vis + '</small></td>'
+          + '<td class="nu">' + (o.ad.d.vis ? tag(o.ad.d.comp, o.ad.d.vis) + '<small>' + o.ad.d.co + '/' + o.ad.d.vis + '</small>' : '<span class="mp-fl gr">sin visitas</span>') + '</td>'
+          + '<td class="nu">' + fl(o.ad.dif, o.ad.d.vis) + '</td></tr>'; }).join('')
+    + '<tr class="ms-tot"><td>Los ' + SV_TECS.length + ' juntos</td><td></td>' + S.map(s => '<td class="nu sv-c' + (s.k === evLunes(SV_DESDE) ? ' mk' : '') + '">' + celda(s) + '</td>').join('')
+    + '<td class="nu sep">' + tag(G.m.comp) + '<small>' + G.m.co + '/' + G.m.vis + '</small></td><td class="nu">' + tag(G.a.comp) + '<small>' + G.a.co + '/' + G.a.vis + '</small></td><td class="nu">' + tag(G.d.comp) + '<small>' + G.d.co + '/' + G.d.vis + '</small></td><td class="nu">' + fl(G.dif) + '</td></tr>'
+    + '<tr class="sv-resto"><td>Resto de la zona</td><td></td>' + S.map(s => '<td class="nu sv-c' + (s.k === evLunes(SV_DESDE) ? ' mk' : '') + '">' + evPc(s.z.comp) + '</td>').join('')
+    + '<td class="nu sep">' + evPc(Rr.m.comp) + '</td><td class="nu">' + evPc(Rr.a.comp) + '</td><td class="nu">' + evPc(Rr.d.comp) + '</td><td class="nu">' + fl(Rr.dif) + '</td></tr>'
+    + '</tbody></table></div><p class="ad-nota">"Desde la lista" son pocos días: con menos de 5 visitas el cambio dice <b>pocas</b> y todavía no sirve para sacar conclusiones.</p></div>';
+
+  /* 3. TARJETAS */
+  h += '<div class="sv-grid">' + filas.map(o => '<button class="sv-card" onclick="svEvoAbrir(' + o.i + ')"><div class="sv-ch"><b>' + nomT(o.nom) + '</b>' + tag(o.ad.m.comp) + '<span class="sv-cs">' + (totTxt.indexOf('desde') === 0 ? '' : 'en ') + totTxt + '</span><span class="sv-ver">Ver todo ›</span></div>'
+      + '<div class="sv-cs">Antes de la lista: ' + evPc(o.ad.a.comp) + ' (' + o.ad.a.co + ' de ' + o.ad.a.vis + ') · desde la lista: ' + (o.ad.d.vis ? evPc(o.ad.d.comp) + ' (' + o.ad.d.co + ' de ' + o.ad.d.vis + ') ' + fl(o.ad.dif, o.ad.d.vis) : 'sin visitas') + '</div>'
+      + evSvg(svEvoPuntos(o.D, nomT(o.nom), 'la zona', true), { ancho:700, alto:240, meta:MP_META, pocas:EV_POCAS, etiq:true, marca:svEvoMarca(o.D), marcaTxt:'lista VTR' }) + '</button>').join('') + '</div>';
+  return h;
+}
+function svEvoAbrir(i){
+  const t = (window.SV_EVO_REAL || [])[i]; if(!t) return;
+  let m = document.getElementById('modalSvEvo');
+  if(!m){ m = document.createElement('div'); m.id = 'modalSvEvo'; m.onclick = e => { if(e.target === m) svEvoCerrar(); }; document.body.appendChild(m); }
+  const nm = String(t).toLowerCase().replace(/(^|\s)\S/g, c => c.toUpperCase());
+  m.innerHTML = '<div class="ms-box" role="dialog"><div class="ms-top"><div><h2>' + nm + ' <small>🎯 Seguimiento VTR · KPI que dio VTR: ' + String(SV_TECS[i][1]).replace('.', ',') + '%</small></h2><p>Desde el ' + +SV_INI.slice(6) + ' ' + DER_MESES[+SV_INI.slice(4, 6) - 1] + ' · migraciones · completitud = completadas ÷ visitadas · raya = lista de VTR (' + SV_DESDE.slice(6) + '-' + SV_DESDE.slice(4, 6) + ')</p></div>'
+    + '<button class="ms-x" onclick="svEvoCerrar()" title="Cerrar (Esc)">✕</button></div><div class="ms-cuerpo">' + evHtmlOct(window.SV_EVO_F, t) + '</div></div>';
+  m.classList.add('abierto'); m.scrollTop = 0;
+}
+/* el evolutivo del tecnico, version octubre: frase antes/desde la lista + semanas + dias de octubre */
+function evHtmlOct(F, t){
+  const nomT = x => String(x).toLowerCase().replace(/(^|\s)\S/g, c => c.toUpperCase());
+  const ad = svAD(F, x => x.tec === t), zz = svAD(F, () => true);
+  const cl = ad.dif === null ? 'gr' : ad.d.vis < 5 ? 'gr' : ad.dif >= 3 ? 'ok' : ad.dif <= -3 ? 'bad' : 'wa';
+  const fr = '<div class="ev-fr ' + cl + '">' + (F.every(x => x.iso.slice(0, 6) === SV_INI.slice(0, 6)) ? DER_MESES_NOM[+SV_INI.slice(4, 6) - 1].replace(/^./, c => c.toUpperCase()) : 'Desde el ' + +SV_INI.slice(6) + ' ' + DER_MESES[+SV_INI.slice(4, 6) - 1]) + ': <b>' + evPc(ad.m.comp) + '</b> (' + ad.m.co + ' de ' + ad.m.vis + ') vs ' + evPc(zz.m.comp) + ' la zona · antes de la lista: <b>' + evPc(ad.a.comp) + '</b> (' + ad.a.co + ' de ' + ad.a.vis + ') · desde la lista: <b>'
+    + (ad.d.vis ? evPc(ad.d.comp) + '</b> (' + ad.d.co + ' de ' + ad.d.vis + ')' + (ad.dif !== null ? ' → ' + (ad.dif > 0 ? '▲ ' : '▼ ') + evPc(Math.abs(ad.dif)).replace('%', '') + ' pts' : '') + (ad.d.vis < 5 ? ' · <i>pocas visitas todavía</i>' : '') : 'sin visitas</b>') + '</div>';
+  const h = evHtml(F, t, nomT, SV_DESDE);
+  /* se cambia la frase de 4 semanas por la de octubre, y los rotulos de semana por los dias reales */
+  return fr + h.slice(h.indexOf('</div>') + 6).replace('últimos 30 días', 'desde el ' + +SV_INI.slice(6) + ' ' + DER_MESES[+SV_INI.slice(4, 6) - 1]).replace('desde agosto', 'desde el ' + +SV_INI.slice(6) + ' ' + DER_MESES[+SV_INI.slice(4, 6) - 1]);
+}
+function svEvoCerrar(){ const m = document.getElementById('modalSvEvo'); if(m) m.classList.remove('abierto'); }
+document.addEventListener('keydown', e => { if(e.key === 'Escape') svEvoCerrar(); });
+
+/* ---- dentro de la ventana del Seguimiento VTR: pestañas "Tabla" / "Evolución" ---- */
+function svVista(v){ window.SV_VISTA = v; pintarSegVtr(); const b = document.querySelector('#modalSV .sv-box'); if(b) b.scrollTop = 0; }
+function svTabsHtml(){ const v = window.SV_VISTA === 'evo' ? 'evo' : 'tab';
+  return '<div class="sv-tabs"><button class="' + (v === 'tab' ? 'on' : '') + '" onclick="svVista(\'tab\')">📋 Tabla por semana</button>'
+    + '<button class="' + (v === 'evo' ? 'on' : '') + '" onclick="svVista(\'evo\')">📈 Evolución desde el ' + +SV_INI.slice(6) + ' ' + DER_MESES[+SV_INI.slice(4, 6) - 1] + '</button></div>'; }
+/* las mismas filas de la tabla del Seguimiento VTR (DER + hoy en vivo), en el formato del evolutivo */
+function svEvoFilas(){
+  const hoy = (typeof FECHA_DATOS !== 'undefined' && FECHA_DATOS) ? FECHA_DATOS : new Date();
+  const isoHoy = hoy.getFullYear() + String(hoy.getMonth() + 1).padStart(2, '0') + String(hoy.getDate()).padStart(2, '0');
+  const hoyL = (DER || []).some(x => x.iso === isoHoy) ? [] : rmHoy();
+  return (DER || []).filter(x => x.tp === 'MIGRA' && x.iso < isoHoy).concat(hoyL)
+    .map(x => ({ iso:String(x.iso), e:x.der ? 'No Realizada' : 'Completado', cod:x.cod || '', tec:rmLimpia(x.tec) }));
+}
+function svEvoTip(){
+  if(document.getElementById('evTip')) return;
+  const tip = document.createElement('div'); tip.id = 'evTip'; document.body.appendChild(tip);
+  document.addEventListener('mousemove', function(e){ const r = e.target.closest && e.target.closest('.ev-hit');
+    if(!r){ tip.style.display = 'none'; return; }
+    tip.innerHTML = decodeURIComponent(r.getAttribute('data-tip')); tip.style.display = 'block';
+    const w = tip.offsetWidth; tip.style.left = Math.min(e.clientX + 14, innerWidth - w - 8) + 'px'; tip.style.top = (e.clientY + 14) + 'px'; });
+}
+
+function pintarSegVtrTabla(){
   const cu = document.getElementById('svCuerpo'); if(!cu) return;
   const meta = 100 - MG_META_DER; document.getElementById('svMeta').textContent = meta + ' %'; document.getElementById('svMetaQ').textContent = MG_META_DER + ' %';
   if(DER === null){ cu.innerHTML = '<div class="sv-vacio">' + (derFallo ? 'No se pudieron bajar los datos. Vuelve a abrir en un rato.' : 'Cargando…') + '</div>'; return; }
