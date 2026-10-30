@@ -21854,23 +21854,23 @@
    }
   },
   "30-10-2026": {
-   "hasta": "15:49",
-   "actividades": 159,
+   "hasta": "17:00",
+   "actividades": 161,
    "tecnicos": 34,
    "estados": {
-    "Completado": 68,
-    "Pendiente": 32,
-    "en ruta": 2,
-    "Iniciado": 20,
+    "Completado": 82,
+    "Iniciado": 26,
+    "Pendiente": 7,
+    "No Realizada": 29,
+    "en ruta": 3,
     "Cancelado": 8,
-    "No Realizada": 24,
-    "Suspendido": 5
+    "Suspendido": 6
    },
-   "rgu": 217.3,
-   "caidas_total": 4,
-   "caidas_activas": 3,
+   "rgu": 217.4,
+   "caidas_total": 5,
+   "caidas_activas": 4,
    "caidas_resueltas": 1,
-   "nuevas": 34,
+   "nuevas": 35,
    "al_bucket": 23,
    "repetidas": 27,
    "reagendadas": 5,
@@ -21883,6 +21883,15 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "PJE AZULILLO 21, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OIOQ27S",
+      "tec": "JOSE GALAZ D",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "17:31",
+      "d": "TOMAS EDISON 0596, QUILPUE",
       "e": "Pendiente"
      },
      {
@@ -21906,13 +21915,22 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OPQXVS5",
+      "tec": "ALFREDO ALCAYAGA F",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "15:55",
+      "d": "PJE CARLOS ISAMITT 567, QUILPUE",
+      "e": "Completado"
+     },
+     {
       "o": "1-3OPQHKSE",
       "tec": "JORDAN ROA PEREZ",
       "cat": "Modificación de Servicio",
       "f": "13-16",
       "hi": "15:41",
       "d": "SAN PEDRO 1938, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OPQPND2",
@@ -21921,7 +21939,7 @@
       "f": "13-16",
       "hi": "15:43",
       "d": "ALCALDE RODOLFO GALLEGUILLOS 1320, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OPQSPC2",
@@ -21930,7 +21948,7 @@
       "f": "13-16",
       "hi": "15:44",
       "d": "SERRANO 1026, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OPPEIXX",
@@ -21939,7 +21957,7 @@
       "f": "13-16",
       "hi": "15:24",
       "d": "VOLCAN LONQUIMAY 2671, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OPO9PT2",
@@ -22002,7 +22020,7 @@
       "f": "13-16",
       "hi": "16:16",
       "d": "GILBERTO BARROS 2, QUILPUE",
-      "e": "Pendiente"
+      "e": "No Realizada"
      },
      {
       "o": "1-3OPLV4LJ",
@@ -22020,7 +22038,7 @@
       "f": "13-16",
       "hi": "14:01",
       "d": "OCEANO ATLANTICO 351, QUILPUE",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OPL0QAS",
@@ -22105,12 +22123,12 @@
      },
      {
       "o": "1-3OPHSC8Q",
-      "tec": "KEVIN TAPIA RETAMAL",
+      "tec": "CRISTOBAL SILVA LEIVA",
       "cat": "Alta 1 Play",
       "f": "16-19",
       "hi": "16:18",
       "d": "LIMACHE 1480, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OJCL9TX",
@@ -22119,7 +22137,7 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "ACONCAGUA 02384, QUILPUE",
-      "e": "Iniciado"
+      "e": "No Realizada"
      },
      {
       "o": "1-3OPFY0C7",
@@ -22155,7 +22173,7 @@
       "f": "16-19",
       "hi": "16:00",
       "d": "SAN DIEGO 2338, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OPETFT0",
@@ -22241,12 +22259,24 @@
       "o": "1-3OL6EBR9",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "15:32",
+      "hi": "15:51",
       "d": "PJE.LA CAMANCHACA 1434, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "No Realizada",
       "tec": "CESAR MENA OLIVEROS",
       "visitas": 2,
       "ult_fecha": "23-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OPLL2FB",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "16:44",
+      "d": "PJE INTERIOR 1 616, VILLA ALEMANA",
+      "e": "Iniciado",
+      "tec": "CESAR MENA OLIVEROS",
+      "visitas": 1,
+      "ult_fecha": "16-10-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -22265,9 +22295,9 @@
       "o": "1-3OPMNCKX",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:42",
+      "hi": "16:03",
       "d": "MATURANA 34, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Suspendido",
       "tec": "EDGAR VALERO C",
       "visitas": 2,
       "ult_fecha": "24-09-2026",
@@ -22324,9 +22354,9 @@
       "o": "1-3OO32XD2",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "16:33",
+      "hi": "16:15",
       "d": "GILBERTO BARROS 2, QUILPUE",
-      "e": "Pendiente",
+      "e": "No Realizada",
       "tec": "JORDAN ROA PEREZ",
       "visitas": 2,
       "ult_fecha": "28-10-2026",
@@ -22381,18 +22411,6 @@
       "ult_cierre": "Clte desiste motivo comercial"
      },
      {
-      "o": "1-3OP1135P",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "16:00",
-      "d": "PJE TRES 1009, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOSE CASTRO P",
-      "visitas": 1,
-      "ult_fecha": "29-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OOMW3DF",
       "cat": "Reparación",
       "f": "10-13",
@@ -22422,7 +22440,7 @@
       "f": "13-16",
       "hi": "14:31",
       "d": "FIGUEROA LARRAIN 0872, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JOSE ROJO A",
       "visitas": 2,
       "ult_fecha": "17-10-2026",
@@ -22432,10 +22450,10 @@
       "o": "1-3OOXF7Z4",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "18:32",
+      "hi": "17:21",
       "d": "CALLE 3 0659, QUILPUE",
       "e": "Pendiente",
-      "tec": "JOSE ROJO A",
+      "tec": "JOSE SALAS MEDINA",
       "visitas": 1,
       "ult_fecha": "21-10-2026",
       "ult_cierre": "Falla Masiva"
@@ -22462,18 +22480,6 @@
       "tec": "KEVIN TAPIA RETAMAL",
       "visitas": 1,
       "ult_fecha": "28-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OPLL2FB",
-      "cat": "Reparación",
-      "f": "16-19",
-      "hi": "16:25",
-      "d": "PJE INTERIOR 1 616, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "MARCELO GÓMEZ GÓME",
-      "visitas": 1,
-      "ult_fecha": "16-10-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -22518,7 +22524,7 @@
       "f": "13-16",
       "hi": "15:43",
       "d": "ACONCAGUA 02384, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "RAFAEL VARGAS B",
       "visitas": 1,
       "ult_fecha": "21-10-2026",
@@ -22533,6 +22539,18 @@
       "e": "No Realizada",
       "tec": "SEBASTIAN DOSSOW A",
       "visitas": 3,
+      "ult_fecha": "29-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OP1135P",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "17:06",
+      "d": "PJE TRES 1009, VILLA ALEMANA",
+      "e": "en ruta",
+      "tec": "SEBASTIAN DOSSOW A",
+      "visitas": 1,
       "ult_fecha": "29-10-2026",
       "ult_cierre": "Sin moradores"
      }
@@ -22584,7 +22602,7 @@
       "f": "13-16",
       "hi": "13:27",
       "d": "CALLE 3 3160 CASA 43, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "PABLO HERNANEZ FERNANDEZ",
       "desde": "29-10-2026"
      }
@@ -22592,5 +22610,5 @@
    }
   }
  },
- "generado": "30-10-2026 15:49"
+ "generado": "30-10-2026 17:00"
 }
