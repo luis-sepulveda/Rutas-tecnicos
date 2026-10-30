@@ -3759,6 +3759,29 @@ button.am-card:hover { border-color:#7c3aed; box-shadow:0 4px 14px rgba(19,33,60
 .am-nums em { font-style:normal; font-size:13px; font-weight:700; margin-top:2px; white-space:nowrap; }
 .am-card .am-nums { gap:18px; flex-wrap:wrap; } .am-nums em.ok { color:#0e7c6b; } .am-nums em.bad { color:#c0392f; }
 .am-nota { font-size:11.5px; color:#94a3b8; margin:-4px 0 8px; }
+/* ==== (30-10-2026, 18:30) Luis: pagina principal mas compacta (tarjetas mas bajas, info ordenada) ==== */
+.hb { gap:6px; padding:14px 22px; }
+.hb-nm { font-size:30px; } .hb-fl { font-size:26px; }
+.hb-tt { display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; }
+.hb-tt .hb-fe { font-size:14.5px; }
+.hb-ch { padding:4px 11px; font-size:13.5px; } .hb-ch small { font-weight:500; opacity:.8; font-size:12px; }
+.hb-ch.fr.ok { background:rgba(16,185,129,.22); color:#d1fae5; } .hb-ch.fr.bad { background:rgba(248,113,113,.22); color:#fee2e2; }
+.am-t { font-size:20px; } .am-sub { margin:0 0 8px; }
+.am-card.am2 { padding:12px 18px; gap:6px; }
+.am2-h { display:flex; justify-content:space-between; align-items:center; gap:8px; }
+.am2-h .am-h { font-size:17px; } .am2-h .am-ver { font-size:12.5px; }
+.am2-cols { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.am2-c { display:flex; flex-direction:column; gap:1px; min-width:0; }
+.am2-m { border-left:1px solid #e5eaf2; padding-left:14px; }
+.am2-c i { font-style:normal; font-size:11px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; color:#64748b; }
+.am2-big { font-size:26px; font-weight:800; color:#13213c; line-height:1.15; } .am2-big.ok { color:#0e7c6b; } .am2-big.bad { color:#c0392f; }
+.am2-s { font-size:12px; color:#64748b; margin-bottom:3px; }
+.am2-l { font-size:12.5px; color:#475569; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; } .am2-l b { font-size:13.5px; } .am2-l b.ok { color:#0e7c6b; } .am2-l b.bad { color:#c0392f; }
+.am2-n { font-size:11.5px; color:#94a3b8; margin-top:2px; } .am2-n.gsa { color:#6d28d9; font-weight:700; }
+.inf-b { margin-top:16px; padding:14px 22px; gap:6px; }
+.inf-b .hb-nm { font-size:28px; }
+.inf-b .if-c { padding:8px 14px; }
+.inf-b .if-d { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .am-nums .am-mig { margin-left:auto; padding-left:16px; border-left:1px solid #e5eaf2; gap:2px; font-size:12.5px; color:#64748b; text-align:left; }
 .am-mig i { font-style:normal; font-size:12px; font-weight:800; color:#13213c; text-transform:uppercase; letter-spacing:.04em; margin-bottom:2px; }
 .am-mig span { white-space:nowrap; } .am-mig span b { font-size:14px; } .am-mig b.ok { color:#0e7c6b; } .am-mig b.bad { color:#c0392f; }
@@ -12823,12 +12846,14 @@ function hoyBotonHtml(fecha, nAct, co, nr, nIni, caidas){
   let avisos = ''; try { avisos = (compPastillaHtml() + saludPastillaHtml()).replace(/<br>/g, ' '); } catch(e){}
   return (avisos ? '<div class="pp-avisos">' + avisos + '</div>' : '')
     + '<div class="hb-wrap"><button class="hb" onclick="window.PV_HOY=true; pintarPortada(); window.scrollTo(0,0)" title="Toca para ver todo el día en curso">'
-    + '<span class="hb-top"><span class="hb-nm">DÍA EN CURSO</span><span class="hb-fl">›</span></span>'
-    + '<span class="hb-fe">' + (fecha || '') + ' · todo lo de hoy, en vivo</span>'   /* (28-10-2026, 19:23) Luis: HOY pasa a llamarse DIA EN CURSO */
+    /* (30-10-2026, 18:30) Luis: tarjetas mas bajas. La fecha va al lado del titulo. */
+    + '<span class="hb-top"><span class="hb-tt"><span class="hb-nm">DÍA EN CURSO</span><span class="hb-fe">' + (fecha || '') + ' · en vivo</span></span><span class="hb-fl">›</span></span>'   /* (28-10-2026, 19:23) Luis: HOY pasa a llamarse DIA EN CURSO */
     + '<span class="hb-row">'
-    +   ch((nIni || '–') + ' inicio de jornada')
+    /* (30-10-2026, 18:30) "N al inicio" (las completadas pueden pasar ese numero porque entran ordenes en el dia) y "N por cerrar" de TODAS las actividades */
+    +   '<span class="hb-ch" title="Órdenes al inicio de jornada. Durante el día entran más, por eso las completadas pueden pasar este número.">' + (nIni || '–') + ' al inicio <small>ⓘ</small></span>'
     +   ch(co + ' completadas', 'ok')
     +   ch(nr + ' no realizadas', 'bad')
+    +   (function(){ let ab = 0; try { Object.keys(DB || {}).forEach(function(t){ (DB[t] || []).forEach(function(o){ if(['Completado','No Realizada','Cancelado','Suspendido'].indexOf(String(o.e || '')) < 0) ab++; }); }); } catch(e){} return ab ? ch(ab + ' por cerrar') : ''; })()
     +   (caidas ? ch(caidas + ' salieron de la bandeja', 'bad') : '')
     + '</span>'
     /* (30-10-2026) Luis: "muestrame el detalle de la completitud de las migraciones del dia en curso".
@@ -12845,8 +12870,7 @@ function hoyBotonHtml(fecha, nAct, co, nr, nIni, caidas){
     + (function(){ let c = null; try { c = derHoyConteo(); } catch(e){}
         const v = c ? c.v : 0, d = c ? c.d : 0, comp = v ? (Math.round(1000 * (v - d) / v) / 10) : null;
         return '<button class="hb hb-mig" onclick="window.PV_MIG=true; pintarPortada(); window.scrollTo(0,0)" title="Hoy en vivo, técnicos, direcciones, gerencia, Seguimiento VTR y respaldos">'
-          + '<span class="hb-top"><span class="hb-nm">MIGRACIONES</span><span class="hb-fl">›</span></span>'
-          + '<span class="hb-fe">Derivación y seguimiento del día</span>'
+          + '<span class="hb-top"><span class="hb-tt"><span class="hb-nm">MIGRACIONES</span><span class="hb-fe">completitud · meta ' + MP_META + '%</span></span><span class="hb-fl">›</span></span>'
           /* (30-10-2026, 11:10) Luis: se sacan "N derivadas hoy", "N visitadas" y "% completitud hoy"
              (ya estan en DIA EN CURSO > Migraciones hoy). Queda solo la fila de semana y mes. */
           /* (30-10-2026) Luis: "muestrame tambien el % que va actual". Segunda fila: semana y mes en curso,
@@ -12855,8 +12879,19 @@ function hoyBotonHtml(fecha, nAct, co, nr, nIni, caidas){
               const pz = function(t, s){ return ch(t + ': ' + (s.comp === null ? '–' : mpPc(s.comp)), s.comp === null ? '' : s.comp >= r.meta ? 'ok' : 'bad'); };
               /* (30-10-2026, 17:30) Luis: debajo de semana y mes, los % sin GSA (en morado, como en el resto de MIGRACIONES) */
               const sg = function(t, s){ return ch(t + ' sin GSA: ' + (s.compSG === null ? '–' : mpPc(s.compSG)) + (s.g ? ' · ' + s.g + ' GSA' : ''), 'gsa'); };
-              return '<span class="hb-row">' + (r.cargando ? ch('Semana y mes: cargando…') : pz(r.semTit, r.sem) + pz(r.mesTit, r.mes) + ch('meta ' + r.meta + '%')) + '</span>'
-                + (r.cargando ? '' : '<span class="hb-row">' + sg(r.semTit, r.sem) + sg(r.mesTit, r.mes) + '</span>'); })()
+              if(r.cargando) return '<span class="hb-row">' + ch('Semana y mes: cargando…') + '</span>';
+              /* (30-10-2026, 18:30) Luis: flecha contra el periodo anterior + la meta en una frase */
+              const fl = function(s, a, tit){ if(s.comp === null || !a || a.comp === null) return ''; const d = s.comp - a.comp;
+                return ' <small>' + (Math.abs(d) < 0.05 ? '= ' : d > 0 ? '▲ ' : '▼ ') + mpPc(Math.abs(d)).replace('%', '') + ' pts vs ' + tit + '</small>'; };
+              const pz2 = function(t, s, a, tit){ return ch(t + ': ' + (s.comp === null ? '–' : mpPc(s.comp)) + fl(s, a, tit), s.comp === null ? '' : s.comp >= r.meta ? 'ok' : 'bad'); };
+              const frase = function(t, s, quedan){ if(!s.vis) return ''; const f = mpFalta(s);
+                if(f.ok) return ch('✓ ' + t + ': aguanta ' + f.n + ' derivada' + (f.n === 1 ? '' : 's') + ' más', 'fr ok');
+                if(quedan !== undefined){ const mx = 100 * (s.co + quedan) / (s.vis + quedan);
+                  if(mx < r.meta) return ch('✗ ' + t + ' no llega: cierra entre ' + Math.floor(s.comp) + ' y ' + Math.round(mx) + '%', 'fr bad'); }
+                return ch('✗ ' + t + ': faltan ' + f.n + ' completadas seguidas', 'fr bad'); };
+              return '<span class="hb-row">' + pz2(r.semTit, r.sem, r.semAnt, r.semAntTit) + pz2(r.mesTit, r.mes, r.mesAnt, r.mesAntTit) + '</span>'
+                + '<span class="hb-row">' + frase('Semana', r.sem) + frase(r.mesTit, r.mes, r.quedan) + '</span>'
+                + '<span class="hb-row">' + sg(r.semTit, r.sem) + sg(r.mesTit, r.mes) + '</span>'; })()
           + '</button>'; })()
     + '</div>'
     + actMesesHtml()
@@ -12868,25 +12903,23 @@ function hoyBotonHtml(fecha, nAct, co, nr, nIni, caidas){
    Misma cuenta de la pagina MIGRACIONES: historico MG (hasta ayer) + hoy en vivo (DB) si es el mes en curso,
    GSA = no realizada (mpSt). % sobre visitadas. Si el historico no ha bajado, dice "cargando". */
 function mpMesPortadaHtml(k){
+  /* (30-10-2026, 18:30) mismo corte que las actividades del mes: HASTA AYER (lo de hoy va arriba, en DIA EN CURSO y MIGRACIONES) */
   try {
     mpCargar();
     const mes = k.replace('-', '');
-    if(!MG) return '<div class="am-mig"><i>Migraciones</i><span>' + (mgFallo ? 'sin datos' : 'cargando…') + '</span></div>';
+    if(!MG) return '<div class="am2-c am2-m"><i>Migraciones</i><div class="am2-s">' + (mgFallo ? 'sin datos' : 'cargando…') + '</div></div>';
     const fd = (typeof FECHA_DATOS !== 'undefined' && FECHA_DATOS) ? FECHA_DATOS : new Date();
     const hoyIso = fd.getFullYear() + String(fd.getMonth() + 1).padStart(2, '0') + String(fd.getDate()).padStart(2, '0');
     const L = [];
     MG.filas.forEach(function(x){ if(x.mes === mes && x.iso < hoyIso) L.push({ e:x.e, cod:x.cod, gsa:!!x.gsa }); });
-    if(hoyIso.slice(0, 6) === mes) Object.keys(DB || {}).forEach(function(t){ (DB[t] || []).forEach(function(o){
-      if(familiaCat(o.cat || o.t) !== 'Migraciones') return;
-      L.push({ e:String(o.e || 'Pendiente'), cod:String(o.cie || ''), gsa:!!o.gsa });
-    }); });
     const s = mpSt(L);
-    if(!s.vis) return '<div class="am-mig"><i>Migraciones</i><span>sin visitas</span></div>';
+    if(!s.vis) return '<div class="am2-c am2-m"><i>Migraciones</i><div class="am2-s">sin visitas</div></div>';
     const nf = n => n.toLocaleString('es-CL');
-    return '<div class="am-mig"><i>Migraciones</i>'
-      + '<span><b class="ok">' + nf(s.co) + '</b> completadas · <b class="ok">' + mpPc(s.comp) + '</b></span>'
-      + '<span><b class="bad">' + nf(s.nr) + '</b> derivadas · <b class="bad">' + mpPc(100 - s.comp) + '</b></span>'
-      + '<span class="sv">' + nf(s.vis) + ' visitadas' + (s.g ? ' · <em>' + s.g + ' GSA</em>' : '') + '</span>' + (s.g ? '<span class="sv"><em>sin GSA: ' + mpPc(s.compSG) + ' completadas</em></span>' : '') + '</div>';
+    return '<div class="am2-c am2-m"><i>Migraciones</i><div class="am2-big ' + (s.comp >= MP_META ? 'ok' : 'bad') + '">' + mpPc(s.comp) + '</div>'
+      + '<div class="am2-s">completitud · ' + nf(s.vis) + ' visitadas</div>'
+      + '<div class="am2-l"><b class="ok">' + nf(s.co) + '</b> completadas · <b class="bad">' + nf(s.nr) + '</b> derivadas</div>'
+      + '<div class="am2-l">derivación <b class="bad">' + mpPc(100 - s.comp) + '</b></div>'
+      + '<div class="am2-n gsa">' + (s.g ? s.g + ' GSA · sin GSA ' + mpPc(s.compSG) : 'sin GSA en el mes') + '</div></div>';
   } catch(e){ return ''; }
 }
 
@@ -12919,13 +12952,27 @@ function mpResumenPortada(){
     const out = { semTit: 'Semana ' + derNumSemana(semHoy), mesTit: NOMMES[+mesHoy.slice(4) - 1], cargando: !MG && !mgFallo, meta: MP_META };
     if(out.cargando) return out;
     const R = [];
-    if(MG) MG.filas.forEach(function(x){ if(x.iso < hoyIso) R.push({ sem:x.sem, mes:x.mes, e:x.e, cod:x.cod, gsa:!!x.gsa }); });
+    if(MG) MG.filas.forEach(function(x){ if(x.iso < hoyIso) R.push({ iso:x.iso, sem:x.sem, mes:x.mes, e:x.e, cod:x.cod, gsa:!!x.gsa }); });
     Object.keys(DB || {}).forEach(function(t){ (DB[t] || []).forEach(function(o){
       if(familiaCat(o.cat || o.t) !== 'Migraciones') return;
-      R.push({ sem:semHoy, mes:mesHoy, e:String(o.e || 'Pendiente'), cod:String(o.cie || ''), gsa:!!o.gsa });
+      R.push({ sem:semHoy, mes:mesHoy, e:String(o.e || 'Pendiente'), cod:String(o.cie || ''), gsa:!!o.gsa, hoy:true });
     }); });
     out.sem = mpSt(R.filter(x => x.sem === semHoy));
     out.mes = mpSt(R.filter(x => x.mes === mesHoy));
+    /* (30-10-2026, 18:30) Luis: tendencia contra el periodo anterior y la meta en una frase */
+    const d0 = new Date(+hoyIso.slice(0, 4), +hoyIso.slice(4, 6) - 1, +hoyIso.slice(6, 8));
+    const dA = new Date(d0); dA.setDate(d0.getDate() - 7);
+    const semAnt = mgLunes(dA.getFullYear() + String(dA.getMonth() + 1).padStart(2, '0') + String(dA.getDate()).padStart(2, '0'));
+    const mA = +mesHoy.slice(4) === 1 ? (+mesHoy.slice(0, 4) - 1) + '12' : mesHoy.slice(0, 4) + String(+mesHoy.slice(4) - 1).padStart(2, '0');
+    out.semAnt = mpSt(R.filter(x => x.sem === semAnt)); out.semAntTit = 'Sem ' + derNumSemana(semAnt);
+    out.mesAnt = mpSt(R.filter(x => x.mes === mA)); out.mesAntTit = NOMMES[+mA.slice(4) - 1].slice(0, 3).toLowerCase();
+    /* visitas que quedan en el mes: las abiertas de hoy + dias habiles que faltan (sin domingos) x promedio de visitas de los ultimos 10 dias */
+    const porDia = {}; R.forEach(function(x){ if(x.iso && (x.e === 'Completado' || x.e === 'No Realizada')) porDia[x.iso] = (porDia[x.iso] || 0) + 1; });
+    const ult = Object.keys(porDia).sort().slice(-10), prom = ult.length ? ult.reduce((a, k) => a + porDia[k], 0) / ult.length : 0;
+    let dias = 0; const fin = new Date(d0.getFullYear(), d0.getMonth() + 1, 0);
+    for(let d = new Date(d0.getTime() + 864e5); d <= fin; d.setDate(d.getDate() + 1)) if(d.getDay() !== 0) dias++;
+    const abHoy = mpSt(R.filter(x => x.hoy)).ab;
+    out.quedan = Math.round(prom * dias + abHoy);
     return out;
   } catch(e){ return null; }
 }
@@ -12979,18 +13026,18 @@ function actMesesHtml(){
   if(window.ACT_MES === null) cuerpo = '<div class="am-vacio">Cargando los meses…</div>';
   else if(window.ACT_MES === 'error' || !window.ACT_MES.length) cuerpo = '<div class="am-vacio">No se pudieron cargar los datos de Actividades.</div>';
   else cuerpo = '<div class="am-grid">' + window.ACT_MES.map(function(m){
+      /* (30-10-2026, 18:30) Luis: tarjetas mas bajas y ordenadas: dos columnas, Actividades y Migraciones, con el mismo corte (hasta ayer) */
       const pc = m.asig ? (Math.round(1000 * m.comp / m.asig) / 10).toFixed(1).replace('.', ',') : '–';
-      /* (17:29) la tarjeta entera se puede tocar: abre el Dashboard de Actividades */
-      return '<button class="am-card" onclick="window.PV_MES=\'' + m.k + '\'; window.PV_MES_DIA=null; window.PV_MES_EST=\'Completado\'; pintarPortada(); window.scrollTo(0,0)" title="Ver el detalle del mes"><div class="am-h">' + NOM[+m.k.slice(5) - 1] + ' ' + m.k.slice(0, 4)
-        + (m.k === hoyK ? ' <span class="am-cur">En curso</span>' : '') + '</div>'
-        + '<div class="am-pc">' + pc + '%</div><div class="am-s">completadas · ' + nf(m.asig) + ' actividades</div>'
-        /* (30-10-2026, 17:45) Luis: % de completadas y derivadas de cada mes, sobre las visitadas (completadas + no realizadas): suman 100 % */
-        + (function(){ const vis = m.comp + m.nr, p = n => vis ? (Math.round(1000 * n / vis) / 10).toFixed(1).replace('.', ',') + '%' : '–';
-            return '<div class="am-nums"><div><b class="ok">' + nf(m.comp) + '</b><span>completadas</span><em class="ok">' + p(m.comp) + '</em></div>'
-              + '<div><b class="bad">' + nf(m.nr) + '</b><span>no realizadas</span><em class="bad">' + p(m.nr) + ' derivadas</em></div><div><b>' + m.dias + '</b><span>días</span></div>'
-              + mpMesPortadaHtml(m.k) + '</div>'
-              + '<div class="am-nota">% sobre ' + nf(vis) + ' visitadas</div>'; })()
-        + '<span class="am-ver">Ver el detalle →</span></button>';
+      const vis = m.comp + m.nr, p = n => vis ? (Math.round(1000 * n / vis) / 10).toFixed(1).replace('.', ',') + '%' : '–';
+      return '<button class="am-card am2" onclick="window.PV_MES=\'' + m.k + '\'; window.PV_MES_DIA=null; window.PV_MES_EST=\'Completado\'; pintarPortada(); window.scrollTo(0,0)" title="Ver el detalle del mes">'
+        + '<div class="am2-h"><span class="am-h">' + NOM[+m.k.slice(5) - 1] + ' ' + m.k.slice(0, 4)
+        + (m.k === hoyK ? ' <span class="am-cur">En curso · hasta ayer</span>' : '') + '</span><span class="am-ver">Ver el detalle →</span></div>'
+        + '<div class="am2-cols"><div class="am2-c"><i>Actividades</i><div class="am2-big">' + pc + '%</div>'
+        + '<div class="am2-s">completadas de ' + nf(m.asig) + ' · ' + m.dias + ' días</div>'
+        + '<div class="am2-l"><b class="ok">' + nf(m.comp) + '</b> completadas · <b class="ok">' + p(m.comp) + '</b></div>'
+        + '<div class="am2-l"><b class="bad">' + nf(m.nr) + '</b> derivadas · <b class="bad">' + p(m.nr) + '</b></div>'
+        + '<div class="am2-n">% sobre ' + nf(vis) + ' visitadas</div></div>'
+        + mpMesPortadaHtml(m.k) + '</div></button>';
     }).join('') + '</div>';
   return '<section class="am">'
     + '<div class="am-t">Actividades por mes</div><div class="am-sub">VTR y Claro · Región de Valparaíso · ' + (Array.isArray(window.ACT_MES) ? window.ACT_MES.length : 3) + ' meses cargados</div>'
