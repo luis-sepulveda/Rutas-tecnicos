@@ -12840,11 +12840,8 @@ function hoyBotonHtml(fecha, nAct, co, nr, nIni, caidas){
         return '<button class="hb hb-mig" onclick="window.PV_MIG=true; pintarPortada(); window.scrollTo(0,0)" title="Hoy en vivo, técnicos, direcciones, gerencia, Seguimiento VTR y respaldos">'
           + '<span class="hb-top"><span class="hb-nm">MIGRACIONES</span><span class="hb-fl">›</span></span>'
           + '<span class="hb-fe">Derivación y seguimiento del día</span>'
-          + '<span class="hb-row">'
-          +   ch(d + ' derivadas hoy', d ? 'bad' : '') + (c && c.g ? ch(c.g + ' GSA', 'gsa') : '')
-          +   ch(v + ' visitadas')
-          +   (comp === null ? '' : ch(comp.toFixed(1).replace('.', ',') + '% completitud hoy', comp >= 60 ? 'ok' : 'bad'))
-          + '</span>'
+          /* (30-10-2026, 11:10) Luis: se sacan "N derivadas hoy", "N visitadas" y "% completitud hoy"
+             (ya estan en DIA EN CURSO > Migraciones hoy). Queda solo la fila de semana y mes. */
           /* (30-10-2026) Luis: "muestrame tambien el % que va actual". Segunda fila: semana y mes en curso,
              con la MISMA cuenta de la pagina MIGRACIONES (historico + hoy en vivo, GSA = quiebre). */
           + (function(){ const r = mpResumenPortada(); if(!r) return '';
