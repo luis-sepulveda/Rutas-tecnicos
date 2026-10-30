@@ -3756,8 +3756,13 @@ button.am-card:hover { border-color:#7c3aed; box-shadow:0 4px 14px rgba(19,33,60
 .inf-b .if-n { font-size:15px; }
 .inf-b .if-d { font-size:12.5px; line-height:1.3; }
 .hb-ch.hb-lbl { background:transparent; padding-left:0; color:#c7cedb; font-weight:700; }
-.am-nums em { font-style:normal; font-size:13px; font-weight:700; margin-top:2px; } .am-nums em.ok { color:#0e7c6b; } .am-nums em.bad { color:#c0392f; }
+.am-nums em { font-style:normal; font-size:13px; font-weight:700; margin-top:2px; white-space:nowrap; }
+.am-card .am-nums { gap:18px; flex-wrap:wrap; } .am-nums em.ok { color:#0e7c6b; } .am-nums em.bad { color:#c0392f; }
 .am-nota { font-size:11.5px; color:#94a3b8; margin:-4px 0 8px; }
+.am-nums .am-mig { margin-left:auto; padding-left:16px; border-left:1px solid #e5eaf2; gap:2px; font-size:12.5px; color:#64748b; text-align:left; }
+.am-mig i { font-style:normal; font-size:12px; font-weight:800; color:#13213c; text-transform:uppercase; letter-spacing:.04em; margin-bottom:2px; }
+.am-mig span { white-space:nowrap; } .am-mig span b { font-size:14px; } .am-mig b.ok { color:#0e7c6b; } .am-mig b.bad { color:#c0392f; }
+.am-mig .sv { font-size:11.5px; color:#94a3b8; } .am-mig .sv em { font-style:normal; color:#6d28d9; font-weight:700; }
 </style>
 </head>
 <body>
@@ -12858,6 +12863,33 @@ function hoyBotonHtml(fecha, nAct, co, nr, nIni, caidas){
     + infTarjetasHtml();
 }
 
+/* ==== (30-10-2026, 18:00) MIGRACIONES de cada mes en las tarjetas de "Actividades por mes" ====
+   Luis: "agrega los % de lo mismo pero de las migraciones en los espacios en blanco de cada tarjeta".
+   Misma cuenta de la pagina MIGRACIONES: historico MG (hasta ayer) + hoy en vivo (DB) si es el mes en curso,
+   GSA = no realizada (mpSt). % sobre visitadas. Si el historico no ha bajado, dice "cargando". */
+function mpMesPortadaHtml(k){
+  try {
+    mpCargar();
+    const mes = k.replace('-', '');
+    if(!MG) return '<div class="am-mig"><i>Migraciones</i><span>' + (mgFallo ? 'sin datos' : 'cargando…') + '</span></div>';
+    const fd = (typeof FECHA_DATOS !== 'undefined' && FECHA_DATOS) ? FECHA_DATOS : new Date();
+    const hoyIso = fd.getFullYear() + String(fd.getMonth() + 1).padStart(2, '0') + String(fd.getDate()).padStart(2, '0');
+    const L = [];
+    MG.filas.forEach(function(x){ if(x.mes === mes && x.iso < hoyIso) L.push({ e:x.e, cod:x.cod, gsa:!!x.gsa }); });
+    if(hoyIso.slice(0, 6) === mes) Object.keys(DB || {}).forEach(function(t){ (DB[t] || []).forEach(function(o){
+      if(familiaCat(o.cat || o.t) !== 'Migraciones') return;
+      L.push({ e:String(o.e || 'Pendiente'), cod:String(o.cie || ''), gsa:!!o.gsa });
+    }); });
+    const s = mpSt(L);
+    if(!s.vis) return '<div class="am-mig"><i>Migraciones</i><span>sin visitas</span></div>';
+    const nf = n => n.toLocaleString('es-CL');
+    return '<div class="am-mig"><i>Migraciones</i>'
+      + '<span><b class="ok">' + nf(s.co) + '</b> completadas · <b class="ok">' + mpPc(s.comp) + '</b></span>'
+      + '<span><b class="bad">' + nf(s.nr) + '</b> derivadas · <b class="bad">' + mpPc(100 - s.comp) + '</b></span>'
+      + '<span class="sv">' + nf(s.vis) + ' visitadas' + (s.g ? ' · <em>' + s.g + ' GSA</em>' : '') + '</span>' + (s.g ? '<span class="sv"><em>sin GSA: ' + mpPc(s.compSG) + ' completadas</em></span>' : '') + '</div>';
+  } catch(e){ return ''; }
+}
+
 /* ==== (30-10-2026) migraciones de HOY para el boton DIA EN CURSO ====
    Solo DB (hoy en vivo), solo migraciones, contadas con mpSt (GSA = quiebre, como VTR).
    Visitadas = completadas + no realizadas; las abiertas van aparte como "por cerrar". */
@@ -12955,7 +12987,8 @@ function actMesesHtml(){
         /* (30-10-2026, 17:45) Luis: % de completadas y derivadas de cada mes, sobre las visitadas (completadas + no realizadas): suman 100 % */
         + (function(){ const vis = m.comp + m.nr, p = n => vis ? (Math.round(1000 * n / vis) / 10).toFixed(1).replace('.', ',') + '%' : '–';
             return '<div class="am-nums"><div><b class="ok">' + nf(m.comp) + '</b><span>completadas</span><em class="ok">' + p(m.comp) + '</em></div>'
-              + '<div><b class="bad">' + nf(m.nr) + '</b><span>no realizadas</span><em class="bad">' + p(m.nr) + ' derivadas</em></div><div><b>' + m.dias + '</b><span>días</span></div></div>'
+              + '<div><b class="bad">' + nf(m.nr) + '</b><span>no realizadas</span><em class="bad">' + p(m.nr) + ' derivadas</em></div><div><b>' + m.dias + '</b><span>días</span></div>'
+              + mpMesPortadaHtml(m.k) + '</div>'
               + '<div class="am-nota">% sobre ' + nf(vis) + ' visitadas</div>'; })()
         + '<span class="am-ver">Ver el detalle →</span></button>';
     }).join('') + '</div>';
