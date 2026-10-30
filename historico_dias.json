@@ -21854,29 +21854,47 @@
    }
   },
   "30-10-2026": {
-   "hasta": "11:28",
-   "actividades": 121,
+   "hasta": "11:58",
+   "actividades": 123,
    "tecnicos": 34,
    "estados": {
-    "Completado": 16,
-    "Iniciado": 28,
-    "Pendiente": 63,
-    "en ruta": 2,
-    "No Realizada": 10,
+    "Completado": 23,
+    "Iniciado": 23,
+    "Pendiente": 58,
+    "No Realizada": 13,
     "Cancelado": 1,
+    "en ruta": 4,
     "Suspendido": 1
    },
-   "rgu": 179.0,
+   "rgu": 180.1,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 14,
+   "nuevas": 16,
    "al_bucket": 1,
    "repetidas": 23,
    "reagendadas": 4,
    "detalle": {
     "caidas": [],
     "nuevas": [
+     {
+      "o": "1-3OPIUICX",
+      "tec": "CESAR MENA OLIVEROS",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "11:47",
+      "d": "PUDETO 454, VILLA ALEMANA",
+      "e": "Iniciado"
+     },
+     {
+      "o": "1-3OPIK7MS",
+      "tec": "JORDAN ROA PEREZ",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "11:38",
+      "d": "PJE 15 861 DEPTO 11, QUILPUE",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3OPIDPG0",
       "tec": "MARCO PEREZ G",
@@ -21893,7 +21911,7 @@
       "f": "10-13",
       "hi": "11:46",
       "d": "MADRID 620 CASA D, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OPHSC8Q",
@@ -21933,12 +21951,12 @@
      },
      {
       "o": "1-3OPFR7LL",
-      "tec": "CRISTOBAL MIRANDA VALENC",
+      "tec": "JOSE CASTRO P",
       "cat": "Reparación",
       "f": "10-13",
       "hi": "11:32",
       "d": "ERNESTINA 577, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3ONSMERV",
@@ -21992,7 +22010,7 @@
       "f": "10-13",
       "hi": "11:36",
       "d": "HUMBOLD 1358 CASA 4, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OPF5EQI",
@@ -22001,7 +22019,7 @@
       "f": "10-13",
       "hi": "13:04",
       "d": "EL ARRAYAN 886, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "No Realizada"
      }
     ],
     "repetidas": [
@@ -22021,9 +22039,9 @@
       "o": "1-3OPIEF1T",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "11:46",
+      "hi": "11:44",
       "d": "MADRID 620 CASA D, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "ANTONHY MORALES MENDOZA",
       "visitas": 5,
       "ult_fecha": "22-09-2026",
@@ -22045,7 +22063,7 @@
       "o": "1-3OMSIJJ5",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "14:38",
+      "hi": "14:10",
       "d": "GOMEZ CARRENO 580 CASA 26, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -22092,9 +22110,9 @@
       "o": "1-3OLJG0R1",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "13:00",
+      "hi": "11:49",
       "d": "PJE AZULILLO 21, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "ESTEBAN PIZARRO QUINTANA",
       "visitas": 1,
       "ult_fecha": "24-10-2026",
@@ -22118,7 +22136,7 @@
       "f": "10-13",
       "hi": "10:53",
       "d": "JOSE MARIA CARO 1044, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JORGE PEZOA VICUÑA",
       "visitas": 1,
       "ult_fecha": "12-09-2026",
@@ -22250,7 +22268,7 @@
       "f": "10-13",
       "hi": "10:06",
       "d": "TRONCOS VIEJOS 755 CASA A1 DEPTO 301, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "NICOLAS MOYANO R",
       "visitas": 1,
       "ult_fecha": "26-10-2026",
@@ -22286,7 +22304,7 @@
       "o": "1-3OODCAH6",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "13:01",
+      "hi": "13:00",
       "d": "CALLE 3 3160 CASA 43, QUILPUE",
       "e": "Pendiente",
       "tec": "ANTONHY MORALES MENDOZA",
@@ -22296,7 +22314,7 @@
       "o": "1-3OMU15IX",
       "cat": "Upgrade promoción",
       "f": "13-16",
-      "hi": "13:22",
+      "hi": "13:00",
       "d": "AV LOS CARRERA 01074 EDIF. 2 DEPTO 302, QUILPUE",
       "e": "Pendiente",
       "tec": "JORDAN ROA PEREZ",
@@ -22316,15 +22334,15 @@
       "o": "1-3ON6280I",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "11:39",
+      "hi": "11:49",
       "d": "PJE CATALUNA 1838, VILLA ALEMANA",
-      "e": "en ruta",
-      "tec": "JOSE CASTRO P",
+      "e": "Iniciado",
+      "tec": "JUAN ARRIAGADA C",
       "desde": "28-10-2026"
      }
     ]
    }
   }
  },
- "generado": "30-10-2026 11:28"
+ "generado": "30-10-2026 11:58"
 }
