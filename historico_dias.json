@@ -21854,25 +21854,25 @@
    }
   },
   "30-10-2026": {
-   "hasta": "14:24",
+   "hasta": "14:34",
    "actividades": 147,
    "tecnicos": 34,
    "estados": {
-    "Completado": 52,
-    "Iniciado": 16,
-    "Pendiente": 45,
+    "Completado": 55,
+    "Iniciado": 19,
+    "Pendiente": 40,
+    "en ruta": 5,
     "Cancelado": 5,
     "No Realizada": 20,
-    "Suspendido": 3,
-    "en ruta": 6
+    "Suspendido": 3
    },
-   "rgu": 203.9,
+   "rgu": 203.0,
    "caidas_total": 1,
    "caidas_activas": 1,
    "caidas_resueltas": 0,
-   "nuevas": 28,
-   "al_bucket": 11,
-   "repetidas": 25,
+   "nuevas": 30,
+   "al_bucket": 14,
+   "repetidas": 26,
    "reagendadas": 5,
    "detalle": {
     "caidas": [
@@ -21888,13 +21888,31 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OPO9PT2",
+      "tec": "LUIS MARTIN NUÑEZ",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "14:59",
+      "d": "AV BAQUEDANO 1080, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OPOC6JQ",
+      "tec": "RAFAEL VARGAS B",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "15:24",
+      "d": "COVADONGA 716, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
       "o": "1-3OPO06KW",
       "tec": "EDGAR VALERO C",
       "cat": "Reparación",
       "f": "13-16",
       "hi": "14:18",
       "d": "PJE 1 (INES DE SUAREZ) 0186, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OPMKD9Q",
@@ -22193,9 +22211,9 @@
       "o": "1-3OPMNCKX",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:57",
+      "hi": "14:40",
       "d": "MATURANA 34, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "CRISTOBAL SILVA LEIVA",
       "visitas": 2,
       "ult_fecha": "24-09-2026",
@@ -22205,7 +22223,7 @@
       "o": "1-3OOXF7Z4",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:39",
+      "hi": "16:44",
       "d": "CALLE 3 0659, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -22228,9 +22246,9 @@
       "o": "1-3OP5N2KU",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:49",
+      "hi": "14:40",
       "d": "LOS CRISTALES 560 DEPTO 26, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "FELIPE SILVA R",
       "visitas": 1,
       "ult_fecha": "29-10-2026",
@@ -22336,9 +22354,9 @@
       "o": "1-3OOC5B9T",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:28",
+      "hi": "14:31",
       "d": "FIGUEROA LARRAIN 0872, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "JOSE ROJO A",
       "visitas": 2,
       "ult_fecha": "17-10-2026",
@@ -22393,6 +22411,18 @@
       "ult_cierre": "Falla Aprovisionamiento"
      },
      {
+      "o": "1-3OP54QTY",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "14:42",
+      "d": "EL CANELO 2090, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "MATÍAS JAQUE AG",
+      "visitas": 1,
+      "ult_fecha": "28-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OMFV63S",
       "cat": "Alta 2 Play",
       "f": "10-13",
@@ -22408,7 +22438,7 @@
       "o": "1-3OJCL9TX",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:19",
+      "hi": "15:20",
       "d": "ACONCAGUA 02384, QUILPUE",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -22432,7 +22462,7 @@
       "o": "1-3OP1135P",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:55",
+      "hi": "16:57",
       "d": "PJE TRES 1009, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SEBASTIAN DOSSOW A",
@@ -22496,5 +22526,5 @@
    }
   }
  },
- "generado": "30-10-2026 14:24"
+ "generado": "30-10-2026 14:34"
 }
