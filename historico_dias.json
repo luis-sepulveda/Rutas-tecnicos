@@ -21854,29 +21854,47 @@
    }
   },
   "30-10-2026": {
-   "hasta": "12:59",
-   "actividades": 139,
+   "hasta": "13:09",
+   "actividades": 143,
    "tecnicos": 34,
    "estados": {
-    "Completado": 37,
+    "Completado": 38,
     "en ruta": 5,
-    "Pendiente": 59,
-    "Iniciado": 20,
+    "Pendiente": 60,
+    "Iniciado": 21,
     "No Realizada": 14,
     "Suspendido": 2,
-    "Cancelado": 2
+    "Cancelado": 3
    },
-   "rgu": 195.3,
+   "rgu": 200.9,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 22,
+   "nuevas": 24,
    "al_bucket": 4,
-   "repetidas": 26,
+   "repetidas": 28,
    "reagendadas": 4,
    "detalle": {
     "caidas": [],
     "nuevas": [
+     {
+      "o": "1-3OO32XD2",
+      "tec": "ALEXIS JARA",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "16:16",
+      "d": "GILBERTO BARROS 2, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OPLV4LJ",
+      "tec": "LUIS CASTRO TORRES",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "13:03",
+      "d": "LAGO PANGUIPULLI 2479, QUILPUE",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3OPLGCJR",
       "tec": "DANIEL NAVARRETE E",
@@ -22090,6 +22108,18 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3OO32XD2",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "16:16",
+      "d": "GILBERTO BARROS 2, QUILPUE",
+      "e": "Pendiente",
+      "tec": "ALEXIS JARA",
+      "visitas": 2,
+      "ult_fecha": "28-10-2026",
+      "ult_cierre": "Falla Masiva"
+     },
+     {
       "o": "1-3OPIEF1T",
       "cat": "Reparación",
       "f": "10-13",
@@ -22129,13 +22159,25 @@
       "o": "1-3OOXF7Z4",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:01",
+      "hi": "16:49",
       "d": "CALLE 3 0659, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
       "visitas": 1,
       "ult_fecha": "21-10-2026",
       "ult_cierre": "Falla Masiva"
+     },
+     {
+      "o": "1-3OP54QTY",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "15:12",
+      "d": "EL CANELO 2090, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "EDGAR VALERO C",
+      "visitas": 1,
+      "ult_fecha": "28-10-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OP4DY2K",
@@ -22152,7 +22194,7 @@
       "o": "1-3OLJG0R1",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "14:37",
+      "hi": "14:00",
       "d": "PJE AZULILLO 21, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
@@ -22236,9 +22278,9 @@
       "o": "1-3OPLIEP2",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "13:14",
+      "hi": "13:17",
       "d": "LAS ACACIAS 749 EDIF. 1 DEPTO 123, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JOSE CASTRO P",
       "visitas": 1,
       "ult_fecha": "30-10-2026",
@@ -22260,9 +22302,9 @@
       "o": "1-3OPKH3J7",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "13:02",
+      "hi": "13:23",
       "d": "ESMERALDA 2617 EDIF. 7 DEPTO 14, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JOSE GALAZ D",
       "visitas": 1,
       "ult_fecha": "24-10-2026",
@@ -22272,7 +22314,7 @@
       "o": "1-3OOC5B9T",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:16",
+      "hi": "14:21",
       "d": "FIGUEROA LARRAIN 0872, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -22296,24 +22338,12 @@
       "o": "1-3OPLL2FB",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:37",
+      "hi": "16:33",
       "d": "PJE INTERIOR 1 616, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JUAN ARRIAGADA C",
       "visitas": 1,
       "ult_fecha": "16-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OP54QTY",
-      "cat": "Reparación",
-      "f": "13-16",
-      "hi": "16:06",
-      "d": "EL CANELO 2090, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "LUIS MARTIN NUÑEZ",
-      "visitas": 1,
-      "ult_fecha": "28-10-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -22350,6 +22380,18 @@
       "tec": "NICOLAS MOYANO R",
       "visitas": 1,
       "ult_fecha": "26-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OPGPZNQ",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "15:24",
+      "d": "LAGO LAS TORRES 170 DEPTO 1607, QUILPUE",
+      "e": "Pendiente",
+      "tec": "PABLO HERNANEZ FERNANDEZ",
+      "visitas": 1,
+      "ult_fecha": "30-10-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -22424,7 +22466,7 @@
       "o": "1-3OODCAH6",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:15",
+      "hi": "14:12",
       "d": "CALLE 3 3160 CASA 43, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -22434,5 +22476,5 @@
    }
   }
  },
- "generado": "30-10-2026 12:59"
+ "generado": "30-10-2026 13:09"
 }
