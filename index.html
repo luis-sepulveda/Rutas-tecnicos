@@ -12829,7 +12829,7 @@ function hoyBotonHtml(fecha, nAct, co, nr, nIni, caidas){
     + (function(){ const m = mpHoyPortada(); if(!m) return '';
         const pc = (n) => m.vis ? mpPc(100 * n / m.vis) : '–';
         return '<span class="hb-row"><span class="hb-ch hb-lbl">Migraciones hoy</span>'
-          + ch(m.co + ' completadas · ' + pc(m.co), m.vis ? (100 * m.co / m.vis >= m.meta ? 'ok' : 'bad') : 'ok')
+          + ch(m.co + ' completadas · ' + pc(m.co), 'ok')   /* (30-10-2026, 11:00) Luis: completadas siempre en verde */
           + ch(m.nr + ' no realizadas · ' + pc(m.nr) + (m.g ? ' (' + m.g + ' GSA)' : ''), 'bad')
           + (m.ab ? ch(m.ab + ' por cerrar') : '')
           + '</span>'; })()
