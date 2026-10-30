@@ -21854,24 +21854,24 @@
    }
   },
   "30-10-2026": {
-   "hasta": "15:09",
-   "actividades": 153,
+   "hasta": "15:29",
+   "actividades": 155,
    "tecnicos": 34,
    "estados": {
-    "Completado": 61,
-    "Iniciado": 18,
-    "Pendiente": 40,
-    "Cancelado": 5,
-    "No Realizada": 21,
-    "Suspendido": 4,
-    "en ruta": 4
+    "Completado": 63,
+    "Pendiente": 34,
+    "Iniciado": 21,
+    "en ruta": 4,
+    "Cancelado": 7,
+    "No Realizada": 22,
+    "Suspendido": 4
    },
-   "rgu": 212.0,
+   "rgu": 214.1,
    "caidas_total": 4,
    "caidas_activas": 3,
    "caidas_resueltas": 1,
-   "nuevas": 30,
-   "al_bucket": 14,
+   "nuevas": 31,
+   "al_bucket": 22,
    "repetidas": 27,
    "reagendadas": 5,
    "detalle": {
@@ -21906,13 +21906,22 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OPPEIXX",
+      "tec": "JOSE GALAZ D",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "15:24",
+      "d": "VOLCAN LONQUIMAY 2671, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
       "o": "1-3OPO9PT2",
       "tec": "CRISTOBAL SILVA LEIVA",
       "cat": "Modificación de Servicio",
       "f": "13-16",
       "hi": "14:59",
       "d": "AV BAQUEDANO 1080, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OPOC6JQ",
@@ -21961,7 +21970,7 @@
      },
      {
       "o": "1-3OO32XD2",
-      "tec": "PABLO HERNANEZ FERNANDEZ",
+      "tec": "JORDAN ROA PEREZ",
       "cat": "Alta 2 Play",
       "f": "13-16",
       "hi": "16:16",
@@ -21979,7 +21988,7 @@
      },
      {
       "o": "1-3OPLGCJR",
-      "tec": "DANIEL NAVARRETE E",
+      "tec": "MARCO PEREZ G",
       "cat": "Alta 1 Play",
       "f": "13-16",
       "hi": "14:01",
@@ -22069,7 +22078,7 @@
      },
      {
       "o": "1-3OPHSC8Q",
-      "tec": "MATÍAS JAQUE AG",
+      "tec": "KEVIN TAPIA RETAMAL",
       "cat": "Alta 1 Play",
       "f": "16-19",
       "hi": "16:18",
@@ -22183,7 +22192,7 @@
       "f": "13-16",
       "hi": "13:23",
       "d": "DORIS MARTINEZ 690 EDIF. D DEPTO 304, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "ALEXIS JARA",
       "visitas": 1,
       "ult_fecha": "29-10-2026",
@@ -22202,24 +22211,12 @@
       "ult_cierre": "Ductos tapados"
      },
      {
-      "o": "1-3OPMNCKX",
-      "cat": "Reparación",
-      "f": "13-16",
-      "hi": "15:09",
-      "d": "MATURANA 34, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "CESAR MENA OLIVEROS",
-      "visitas": 2,
-      "ult_fecha": "24-09-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OL6EBR9",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "16:42",
+      "hi": "15:32",
       "d": "PJE.LA CAMANCHACA 1434, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "CESAR MENA OLIVEROS",
       "visitas": 2,
       "ult_fecha": "23-10-2026",
@@ -22238,16 +22235,16 @@
       "ult_cierre": "Sin acceso a vivienda"
      },
      {
-      "o": "1-3OOXF7Z4",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "17:02",
-      "d": "CALLE 3 0659, QUILPUE",
+      "o": "1-3OPMNCKX",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "15:42",
+      "d": "MATURANA 34, VILLA ALEMANA",
       "e": "Pendiente",
-      "tec": "DANIEL NAVARRETE E",
-      "visitas": 1,
-      "ult_fecha": "21-10-2026",
-      "ult_cierre": "Falla Masiva"
+      "tec": "EDGAR VALERO C",
+      "visitas": 2,
+      "ult_fecha": "24-09-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OP4DY2K",
@@ -22295,6 +22292,18 @@
       "visitas": 1,
       "ult_fecha": "23-10-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OO32XD2",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "15:25",
+      "d": "GILBERTO BARROS 2, QUILPUE",
+      "e": "Pendiente",
+      "tec": "JORDAN ROA PEREZ",
+      "visitas": 2,
+      "ult_fecha": "28-10-2026",
+      "ult_cierre": "Falla Masiva"
      },
      {
       "o": "1-3OOUCCIR",
@@ -22345,6 +22354,18 @@
       "ult_cierre": "Clte desiste motivo comercial"
      },
      {
+      "o": "1-3OP1135P",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "PJE TRES 1009, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOSE CASTRO P",
+      "visitas": 1,
+      "ult_fecha": "29-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OOMW3DF",
       "cat": "Reparación",
       "f": "10-13",
@@ -22381,6 +22402,18 @@
       "ult_cierre": "Clte desiste motivo comercial"
      },
      {
+      "o": "1-3OOXF7Z4",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "18:32",
+      "d": "CALLE 3 0659, QUILPUE",
+      "e": "Pendiente",
+      "tec": "JOSE ROJO A",
+      "visitas": 1,
+      "ult_fecha": "21-10-2026",
+      "ult_cierre": "Falla Masiva"
+     },
+     {
       "o": "1-3OP6TCUJ",
       "cat": "Reparación",
       "f": "10-13",
@@ -22393,27 +22426,27 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OPLL2FB",
-      "cat": "Reparación",
-      "f": "16-19",
-      "hi": "17:05",
-      "d": "PJE INTERIOR 1 616, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JUAN ARRIAGADA C",
-      "visitas": 1,
-      "ult_fecha": "16-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OP54QTY",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:10",
+      "hi": "15:28",
       "d": "EL CANELO 2090, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "KEVIN TAPIA RETAMAL",
       "visitas": 1,
       "ult_fecha": "28-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OPLL2FB",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "16:25",
+      "d": "PJE INTERIOR 1 616, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "MARCELO GÓMEZ GÓME",
+      "visitas": 1,
+      "ult_fecha": "16-10-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -22453,18 +22486,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OO32XD2",
-      "cat": "Alta 2 Play",
-      "f": "13-16",
-      "hi": "16:29",
-      "d": "GILBERTO BARROS 2, QUILPUE",
-      "e": "Pendiente",
-      "tec": "PABLO HERNANEZ FERNANDEZ",
-      "visitas": 2,
-      "ult_fecha": "28-10-2026",
-      "ult_cierre": "Falla Masiva"
-     },
-     {
       "o": "1-3OJCL9TX",
       "cat": "Alta 1 Play",
       "f": "13-16",
@@ -22485,18 +22506,6 @@
       "e": "No Realizada",
       "tec": "SEBASTIAN DOSSOW A",
       "visitas": 3,
-      "ult_fecha": "29-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OP1135P",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "16:00",
-      "d": "PJE TRES 1009, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "SEBASTIAN DOSSOW A",
-      "visitas": 1,
       "ult_fecha": "29-10-2026",
       "ult_cierre": "Sin moradores"
      }
@@ -22556,5 +22565,5 @@
    }
   }
  },
- "generado": "30-10-2026 15:09"
+ "generado": "30-10-2026 15:29"
 }
