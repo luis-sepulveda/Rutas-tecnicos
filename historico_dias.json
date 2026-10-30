@@ -21854,23 +21854,23 @@
    }
   },
   "30-10-2026": {
-   "hasta": "17:15",
-   "actividades": 162,
+   "hasta": "17:20",
+   "actividades": 163,
    "tecnicos": 34,
    "estados": {
-    "Completado": 85,
-    "Iniciado": 25,
-    "Pendiente": 5,
+    "Completado": 86,
+    "Iniciado": 26,
+    "Pendiente": 3,
     "No Realizada": 31,
     "Cancelado": 8,
     "Suspendido": 6,
-    "en ruta": 2
+    "en ruta": 3
    },
-   "rgu": 218.4,
+   "rgu": 218.5,
    "caidas_total": 5,
    "caidas_activas": 4,
    "caidas_resueltas": 1,
-   "nuevas": 35,
+   "nuevas": 36,
    "al_bucket": 23,
    "repetidas": 28,
    "reagendadas": 5,
@@ -21914,6 +21914,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OPTN62P",
+      "tec": "JORGE PEZOA VICUÑA",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:17",
+      "d": "PJE NVA.VICTORIA 83 CASA 14, VILLA ALEMANA",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3OPQXVS5",
       "tec": "ALFREDO ALCAYAGA F",
@@ -22476,7 +22485,7 @@
       "f": "13-16",
       "hi": "15:28",
       "d": "EL CANELO 2090, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "KEVIN TAPIA RETAMAL",
       "visitas": 1,
       "ult_fecha": "28-10-2026",
@@ -22486,9 +22495,9 @@
       "o": "1-3OOXF7Z4",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:26",
+      "hi": "17:37",
       "d": "CALLE 3 0659, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "MARCELO GÓMEZ GÓME",
       "visitas": 1,
       "ult_fecha": "21-10-2026",
@@ -22622,5 +22631,5 @@
    }
   }
  },
- "generado": "30-10-2026 17:15"
+ "generado": "30-10-2026 17:20"
 }
