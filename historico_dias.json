@@ -21854,29 +21854,66 @@
    }
   },
   "30-10-2026": {
-   "hasta": "13:14",
-   "actividades": 143,
+   "hasta": "13:29",
+   "actividades": 145,
    "tecnicos": 34,
    "estados": {
-    "Completado": 39,
-    "en ruta": 4,
-    "Pendiente": 59,
-    "Iniciado": 19,
+    "Completado": 43,
+    "Iniciado": 21,
+    "Pendiente": 56,
     "Cancelado": 4,
     "No Realizada": 16,
-    "Suspendido": 2
+    "Suspendido": 2,
+    "en ruta": 3
    },
-   "rgu": 200.9,
-   "caidas_total": 0,
-   "caidas_activas": 0,
+   "rgu": 203.4,
+   "caidas_total": 1,
+   "caidas_activas": 1,
    "caidas_resueltas": 0,
-   "nuevas": 24,
+   "nuevas": 27,
    "al_bucket": 4,
-   "repetidas": 28,
-   "reagendadas": 4,
+   "repetidas": 27,
+   "reagendadas": 5,
    "detalle": {
-    "caidas": [],
+    "caidas": [
+     {
+      "o": "1-3OLJG0R1",
+      "tec": "ESTEBAN PIZARRO QUINTANA",
+      "cat": "Migración 2 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "PJE AZULILLO 21, VILLA ALEMANA",
+      "e": "Pendiente"
+     }
+    ],
     "nuevas": [
+     {
+      "o": "1-3OPMKD9Q",
+      "tec": "DANIEL NAVARRETE E",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "13:27",
+      "d": "HUMBOLD 1358 CASA 4, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
+      "o": "1-3ONAQ8VP",
+      "tec": "NICOLAS MOYANO R",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "16:22",
+      "d": "ASADO AL PALO 143, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OPMHR2G",
+      "tec": "RAFAEL VARGAS B",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "16:09",
+      "d": "LOS CEREZOS 3121, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OO32XD2",
       "tec": "ALEXIS JARA",
@@ -22099,9 +22136,9 @@
       "o": "1-3OP4BTAQ",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "13:12",
+      "hi": "13:23",
       "d": "DORIS MARTINEZ 690 EDIF. D DEPTO 304, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "ALEXIS JARA",
       "visitas": 1,
       "ult_fecha": "29-10-2026",
@@ -22111,7 +22148,7 @@
       "o": "1-3OO32XD2",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "16:16",
+      "hi": "16:27",
       "d": "GILBERTO BARROS 2, QUILPUE",
       "e": "Pendiente",
       "tec": "ALEXIS JARA",
@@ -22149,7 +22186,7 @@
       "f": "13-16",
       "hi": "13:21",
       "d": "GOMEZ CARRENO 580 CASA 26, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "CRISTOBAL MIRANDA VALENC",
       "visitas": 2,
       "ult_fecha": "26-10-2026",
@@ -22159,7 +22196,7 @@
       "o": "1-3OOXF7Z4",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:14",
+      "hi": "17:12",
       "d": "CALLE 3 0659, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -22171,7 +22208,7 @@
       "o": "1-3OP54QTY",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:12",
+      "hi": "15:27",
       "d": "EL CANELO 2090, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "EDGAR VALERO C",
@@ -22191,22 +22228,10 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3OLJG0R1",
-      "cat": "Migración 2 Play",
-      "f": "13-16",
-      "hi": "14:00",
-      "d": "PJE AZULILLO 21, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "ESTEBAN PIZARRO QUINTANA",
-      "visitas": 1,
-      "ult_fecha": "24-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OP5N2KU",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:32",
+      "hi": "14:39",
       "d": "LOS CRISTALES 560 DEPTO 26, QUILPUE",
       "e": "Pendiente",
       "tec": "FELIPE SILVA R",
@@ -22304,7 +22329,7 @@
       "f": "13-16",
       "hi": "13:23",
       "d": "ESMERALDA 2617 EDIF. 7 DEPTO 14, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JOSE GALAZ D",
       "visitas": 1,
       "ult_fecha": "24-10-2026",
@@ -22314,7 +22339,7 @@
       "o": "1-3OOC5B9T",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:21",
+      "hi": "14:43",
       "d": "FIGUEROA LARRAIN 0872, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -22338,7 +22363,7 @@
       "o": "1-3OPLL2FB",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:33",
+      "hi": "17:08",
       "d": "PJE INTERIOR 1 616, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JUAN ARRIAGADA C",
@@ -22386,7 +22411,7 @@
       "o": "1-3OPGPZNQ",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:24",
+      "hi": "15:45",
       "d": "LAGO LAS TORRES 170 DEPTO 1607, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -22398,7 +22423,7 @@
       "o": "1-3OJCL9TX",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:47",
+      "hi": "14:30",
       "d": "ACONCAGUA 02384, QUILPUE",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -22463,12 +22488,22 @@
       "desde": "28-10-2026"
      },
      {
+      "o": "1-3ONAQ8VP",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "16:22",
+      "d": "ASADO AL PALO 143, QUILPUE",
+      "e": "Pendiente",
+      "tec": "NICOLAS MOYANO R",
+      "desde": "28-10-2026"
+     },
+     {
       "o": "1-3OODCAH6",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "13:12",
+      "hi": "13:27",
       "d": "CALLE 3 3160 CASA 43, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "PABLO HERNANEZ FERNANDEZ",
       "desde": "29-10-2026"
      }
@@ -22476,5 +22511,5 @@
    }
   }
  },
- "generado": "30-10-2026 13:14"
+ "generado": "30-10-2026 13:29"
 }
