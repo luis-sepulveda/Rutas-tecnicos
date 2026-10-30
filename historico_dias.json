@@ -21854,27 +21854,45 @@
    }
   },
   "30-10-2026": {
-   "hasta": "10:08",
-   "actividades": 108,
+   "hasta": "10:13",
+   "actividades": 110,
    "tecnicos": 34,
    "estados": {
-    "Iniciado": 25,
-    "Pendiente": 72,
-    "en ruta": 7,
+    "Iniciado": 26,
+    "Pendiente": 74,
+    "en ruta": 5,
     "No Realizada": 1,
-    "Completado": 3
+    "Completado": 4
    },
-   "rgu": 164.0,
+   "rgu": 167.0,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 8,
+   "nuevas": 10,
    "al_bucket": 0,
    "repetidas": 20,
    "reagendadas": 4,
    "detalle": {
     "caidas": [],
     "nuevas": [
+     {
+      "o": "1-3OPFY0C7",
+      "tec": "EDGAR VALERO C",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "10:12",
+      "d": "YUNGAY (SAN ENRIQUE) 667, VILLA ALEMANA",
+      "e": "Iniciado"
+     },
+     {
+      "o": "1-3OOOJ0SZ",
+      "tec": "JOSE CASTRO P",
+      "cat": "Migración 2 Play",
+      "f": "10-13",
+      "hi": "10:26",
+      "d": "CUMMING 176, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OPFR7LL",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -22013,7 +22031,7 @@
       "o": "1-3OP4DY2K",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "13:12",
+      "hi": "13:13",
       "d": "SANTA TERESA 0483, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "EDGAR VALERO C",
@@ -22235,5 +22253,5 @@
    }
   }
  },
- "generado": "30-10-2026 10:08"
+ "generado": "30-10-2026 10:13"
 }
