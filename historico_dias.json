@@ -21854,25 +21854,25 @@
    }
   },
   "30-10-2026": {
-   "hasta": "17:05",
-   "actividades": 161,
+   "hasta": "17:15",
+   "actividades": 162,
    "tecnicos": 34,
    "estados": {
-    "Completado": 83,
+    "Completado": 85,
     "Iniciado": 25,
     "Pendiente": 5,
-    "No Realizada": 30,
-    "en ruta": 4,
+    "No Realizada": 31,
     "Cancelado": 8,
-    "Suspendido": 6
+    "Suspendido": 6,
+    "en ruta": 2
    },
-   "rgu": 217.4,
+   "rgu": 218.4,
    "caidas_total": 5,
    "caidas_activas": 4,
    "caidas_resueltas": 1,
    "nuevas": 35,
    "al_bucket": 23,
-   "repetidas": 27,
+   "repetidas": 28,
    "reagendadas": 5,
    "detalle": {
     "caidas": [
@@ -22011,7 +22011,7 @@
       "f": "13-16",
       "hi": "16:09",
       "d": "LOS CEREZOS 3121, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OO32XD2",
@@ -22128,7 +22128,7 @@
       "f": "16-19",
       "hi": "16:18",
       "d": "LIMACHE 1480, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OJCL9TX",
@@ -22292,6 +22292,18 @@
       "ult_cierre": "Sin acceso a vivienda"
      },
      {
+      "o": "1-3ONU7BSF",
+      "cat": "Migración 1 Play",
+      "f": "16-19",
+      "hi": "17:22",
+      "d": "CLAUDIO VICUNA 807, QUILPUE",
+      "e": "Pendiente",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "visitas": 5,
+      "ult_fecha": "28-10-2026",
+      "ult_cierre": "Falla Masiva"
+     },
+     {
       "o": "1-3OPMNCKX",
       "cat": "Reparación",
       "f": "13-16",
@@ -22447,18 +22459,6 @@
       "ult_cierre": "Clte desiste motivo comercial"
      },
      {
-      "o": "1-3OOXF7Z4",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "17:21",
-      "d": "CALLE 3 0659, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JOSE SALAS MEDINA",
-      "visitas": 1,
-      "ult_fecha": "21-10-2026",
-      "ult_cierre": "Falla Masiva"
-     },
-     {
       "o": "1-3OP6TCUJ",
       "cat": "Reparación",
       "f": "10-13",
@@ -22481,6 +22481,18 @@
       "visitas": 1,
       "ult_fecha": "28-10-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OOXF7Z4",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "17:26",
+      "d": "CALLE 3 0659, QUILPUE",
+      "e": "Pendiente",
+      "tec": "MARCELO GÓMEZ GÓME",
+      "visitas": 1,
+      "ult_fecha": "21-10-2026",
+      "ult_cierre": "Falla Masiva"
      },
      {
       "o": "1-3OP04QVD",
@@ -22546,9 +22558,9 @@
       "o": "1-3OP1135P",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:06",
+      "hi": "17:09",
       "d": "PJE TRES 1009, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "SEBASTIAN DOSSOW A",
       "visitas": 1,
       "ult_fecha": "29-10-2026",
@@ -22610,5 +22622,5 @@
    }
   }
  },
- "generado": "30-10-2026 17:05"
+ "generado": "30-10-2026 17:15"
 }
