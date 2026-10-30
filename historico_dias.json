@@ -21854,23 +21854,23 @@
    }
   },
   "30-10-2026": {
-   "hasta": "12:13",
-   "actividades": 123,
+   "hasta": "12:24",
+   "actividades": 125,
    "tecnicos": 34,
    "estados": {
-    "Completado": 25,
+    "Completado": 28,
     "Iniciado": 23,
-    "Pendiente": 57,
+    "Pendiente": 56,
     "No Realizada": 14,
     "Cancelado": 1,
     "en ruta": 2,
     "Suspendido": 1
    },
-   "rgu": 176.2,
+   "rgu": 177.3,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 18,
+   "nuevas": 20,
    "al_bucket": 4,
    "repetidas": 23,
    "reagendadas": 4,
@@ -21878,13 +21878,31 @@
     "caidas": [],
     "nuevas": [
      {
+      "o": "1-3OPKC5ZX",
+      "tec": "DANIEL NAVARRETE E",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "13:17",
+      "d": "HUMBOLD 1358 CASA 4, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OPK4ES8",
+      "tec": "MATÍAS JAQUE AG",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "13:13",
+      "d": "VIA UNO SIETE 2065 EDIF. E DEPTO 42, VILLA ALEMANA",
+      "e": "Iniciado"
+     },
+     {
       "o": "1-3OPJLJVA",
       "tec": "NICOLAS MOYANO R",
       "cat": "Modificación de Servicio",
       "f": "10-13",
       "hi": "13:09",
       "d": "TRONCOS VIEJOS 755 CASA A1 DEPTO 301, QUILPUE",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OPJTOJ6",
@@ -21911,7 +21929,7 @@
       "f": "10-13",
       "hi": "11:38",
       "d": "PJE 15 861 DEPTO 11, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OPIDPG0",
@@ -22362,5 +22380,5 @@
    }
   }
  },
- "generado": "30-10-2026 12:13"
+ "generado": "30-10-2026 12:24"
 }
