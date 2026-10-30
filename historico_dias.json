@@ -21854,29 +21854,56 @@
    }
   },
   "30-10-2026": {
-   "hasta": "11:08",
-   "actividades": 118,
+   "hasta": "11:28",
+   "actividades": 121,
    "tecnicos": 34,
    "estados": {
-    "Completado": 13,
-    "Iniciado": 27,
+    "Completado": 16,
+    "Iniciado": 28,
     "Pendiente": 63,
-    "No Realizada": 9,
+    "en ruta": 2,
+    "No Realizada": 10,
     "Cancelado": 1,
-    "en ruta": 4,
     "Suspendido": 1
    },
-   "rgu": 176.0,
+   "rgu": 179.0,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 11,
+   "nuevas": 14,
    "al_bucket": 1,
-   "repetidas": 21,
+   "repetidas": 23,
    "reagendadas": 4,
    "detalle": {
     "caidas": [],
     "nuevas": [
+     {
+      "o": "1-3OPIDPG0",
+      "tec": "MARCO PEREZ G",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "11:27",
+      "d": "CONDELL NORTE 137, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
+      "o": "1-3OPIEF1T",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "cat": "Reparación",
+      "f": "10-13",
+      "hi": "11:46",
+      "d": "MADRID 620 CASA D, QUILPUE",
+      "e": "en ruta"
+     },
+     {
+      "o": "1-3OPHSC8Q",
+      "tec": "MATÍAS JAQUE AG",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "16:18",
+      "d": "LIMACHE 1480, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OJCL9TX",
       "tec": "MATIAS APELEO APELEO",
@@ -21956,7 +21983,7 @@
       "f": "10-13",
       "hi": "10:28",
       "d": "TIERRAS ROJAS 471, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OPF8Z5Y",
@@ -21974,7 +22001,7 @@
       "f": "10-13",
       "hi": "13:04",
       "d": "EL ARRAYAN 886, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      }
     ],
     "repetidas": [
@@ -21989,6 +22016,18 @@
       "visitas": 1,
       "ult_fecha": "29-10-2026",
       "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3OPIEF1T",
+      "cat": "Reparación",
+      "f": "10-13",
+      "hi": "11:46",
+      "d": "MADRID 620 CASA D, QUILPUE",
+      "e": "en ruta",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "visitas": 5,
+      "ult_fecha": "22-09-2026",
+      "ult_cierre": "Ductos tapados"
      },
      {
       "o": "1-3OL6EBR9",
@@ -22067,7 +22106,7 @@
       "f": "10-13",
       "hi": "09:48",
       "d": "PJE 15 861 DEPTO 11, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JORDAN ROA PEREZ",
       "visitas": 1,
       "ult_fecha": "23-10-2026",
@@ -22182,6 +22221,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OPIDPG0",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "11:27",
+      "d": "CONDELL NORTE 137, QUILPUE",
+      "e": "Iniciado",
+      "tec": "MARCO PEREZ G",
+      "visitas": 1,
+      "ult_fecha": "26-10-2026",
+      "ult_cierre": "Falla Aprovisionamiento"
+     },
+     {
       "o": "1-3OJCL9TX",
       "cat": "Alta 1 Play",
       "f": "13-16",
@@ -22223,7 +22274,7 @@
       "f": "10-13",
       "hi": "10:59",
       "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "SEBASTIAN DOSSOW A",
       "visitas": 3,
       "ult_fecha": "29-10-2026",
@@ -22235,7 +22286,7 @@
       "o": "1-3OODCAH6",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "13:00",
+      "hi": "13:01",
       "d": "CALLE 3 3160 CASA 43, QUILPUE",
       "e": "Pendiente",
       "tec": "ANTONHY MORALES MENDOZA",
@@ -22245,7 +22296,7 @@
       "o": "1-3OMU15IX",
       "cat": "Upgrade promoción",
       "f": "13-16",
-      "hi": "13:00",
+      "hi": "13:22",
       "d": "AV LOS CARRERA 01074 EDIF. 2 DEPTO 302, QUILPUE",
       "e": "Pendiente",
       "tec": "JORDAN ROA PEREZ",
@@ -22265,15 +22316,15 @@
       "o": "1-3ON6280I",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "11:23",
+      "hi": "11:39",
       "d": "PJE CATALUNA 1838, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "e": "en ruta",
+      "tec": "JOSE CASTRO P",
       "desde": "28-10-2026"
      }
     ]
    }
   }
  },
- "generado": "30-10-2026 11:08"
+ "generado": "30-10-2026 11:28"
 }
