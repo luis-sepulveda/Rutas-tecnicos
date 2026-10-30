@@ -21854,25 +21854,43 @@
    }
   },
   "30-10-2026": {
-   "hasta": "09:53",
-   "actividades": 104,
+   "hasta": "09:58",
+   "actividades": 108,
    "tecnicos": 34,
    "estados": {
-    "Iniciado": 19,
-    "Pendiente": 73,
-    "en ruta": 12
+    "Iniciado": 24,
+    "Pendiente": 77,
+    "en ruta": 7
    },
-   "rgu": 157.0,
+   "rgu": 164.0,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 6,
+   "nuevas": 8,
    "al_bucket": 0,
    "repetidas": 20,
    "reagendadas": 4,
    "detalle": {
     "caidas": [],
     "nuevas": [
+     {
+      "o": "1-3OPFR7LL",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "cat": "Reparación",
+      "f": "10-13",
+      "hi": "11:32",
+      "d": "ERNESTINA 577, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3ONSMERV",
+      "tec": "SEBASTIAN DOSSOW A",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "SAN DIEGO 2338, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OPETFT0",
       "tec": "JOSE ROJO A",
@@ -22101,9 +22119,9 @@
       "o": "1-3OP3B1MI",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "09:47",
+      "hi": "09:53",
       "d": "MARGA MARGA 1540, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "MARCELO GÓMEZ GÓME",
       "visitas": 1,
       "ult_fecha": "29-10-2026",
@@ -22215,5 +22233,5 @@
    }
   }
  },
- "generado": "30-10-2026 09:53"
+ "generado": "30-10-2026 09:58"
 }
