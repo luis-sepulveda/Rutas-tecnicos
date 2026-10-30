@@ -12832,11 +12832,41 @@ function hoyBotonHtml(fecha, nAct, co, nr, nIni, caidas){
           + '<span class="hb-row">'
           +   ch(d + ' derivadas hoy', d ? 'bad' : '') + (c && c.g ? ch(c.g + ' GSA', 'gsa') : '')
           +   ch(v + ' visitadas')
-          +   (comp === null ? '' : ch(comp.toFixed(1).replace('.', ',') + '% completitud · meta 60%', comp >= 60 ? 'ok' : 'bad'))
-          + '</span></button>'; })()
+          +   (comp === null ? '' : ch(comp.toFixed(1).replace('.', ',') + '% completitud hoy', comp >= 60 ? 'ok' : 'bad'))
+          + '</span>'
+          /* (30-10-2026) Luis: "muestrame tambien el % que va actual". Segunda fila: semana y mes en curso,
+             con la MISMA cuenta de la pagina MIGRACIONES (historico + hoy en vivo, GSA = quiebre). */
+          + (function(){ const r = mpResumenPortada(); if(!r) return '';
+              const pz = function(t, s){ return ch(t + ': ' + (s.comp === null ? '–' : mpPc(s.comp)), s.comp === null ? '' : s.comp >= r.meta ? 'ok' : 'bad'); };
+              return '<span class="hb-row">' + (r.cargando ? ch('Semana y mes: cargando…') : pz(r.semTit, r.sem) + pz(r.mesTit, r.mes) + ch('meta ' + r.meta + '%')) + '</span>'; })()
+          + '</button>'; })()
     + '</div>'
     + actMesesHtml()
     + infTarjetasHtml();
+}
+
+/* ==== (30-10-2026) % de la semana y del mes en curso para el boton MIGRACIONES ====
+   Misma cuenta que migPaginaHtml(): historico (MG, hasta ayer) + hoy en vivo (DB),
+   solo migraciones, GSA como quiebre (mpSt). Si el historico aun no baja, avisa "cargando". */
+function mpResumenPortada(){
+  try {
+    mpCargar();
+    const fd = (typeof FECHA_DATOS !== 'undefined' && FECHA_DATOS) ? FECHA_DATOS : new Date();
+    const hoyIso = fd.getFullYear() + String(fd.getMonth() + 1).padStart(2, '0') + String(fd.getDate()).padStart(2, '0');
+    const semHoy = mgLunes(hoyIso), mesHoy = hoyIso.slice(0, 6);
+    const NOMMES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    const out = { semTit: 'Semana ' + derNumSemana(semHoy), mesTit: NOMMES[+mesHoy.slice(4) - 1], cargando: !MG && !mgFallo, meta: MP_META };
+    if(out.cargando) return out;
+    const R = [];
+    if(MG) MG.filas.forEach(function(x){ if(x.iso < hoyIso) R.push({ sem:x.sem, mes:x.mes, e:x.e, cod:x.cod, gsa:!!x.gsa }); });
+    Object.keys(DB || {}).forEach(function(t){ (DB[t] || []).forEach(function(o){
+      if(familiaCat(o.cat) !== 'Migraciones') return;
+      R.push({ sem:semHoy, mes:mesHoy, e:String(o.e || 'Pendiente'), cod:String(o.cie || ''), gsa:!!o.gsa });
+    }); });
+    out.sem = mpSt(R.filter(x => x.sem === semHoy));
+    out.mes = mpSt(R.filter(x => x.mes === mesHoy));
+    return out;
+  } catch(e){ return null; }
 }
 
 /* ==== (REDISEÑO 28-10-2026, 17:50) INFORMES como tarjetas activas ====
