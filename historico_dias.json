@@ -21854,13 +21854,15 @@
    }
   },
   "30-10-2026": {
-   "hasta": "10:03",
+   "hasta": "10:08",
    "actividades": 108,
    "tecnicos": 34,
    "estados": {
-    "Iniciado": 27,
-    "Pendiente": 77,
-    "en ruta": 4
+    "Iniciado": 25,
+    "Pendiente": 72,
+    "en ruta": 7,
+    "No Realizada": 1,
+    "Completado": 3
    },
    "rgu": 164.0,
    "caidas_total": 0,
@@ -21907,7 +21909,7 @@
       "f": "10-13",
       "hi": "09:30",
       "d": "MOLLENDO 739, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OPEV3VI",
@@ -21916,7 +21918,7 @@
       "f": "10-13",
       "hi": "09:38",
       "d": "PJE TOLEDO 2309, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OPEON0K",
@@ -22061,7 +22063,7 @@
       "f": "10-13",
       "hi": "09:51",
       "d": "CHAMPAGNAT 766, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JOSE CASTRO P",
       "visitas": 1,
       "ult_fecha": "29-10-2026",
@@ -22083,9 +22085,9 @@
       "o": "1-3OOMW3DF",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "09:30",
+      "hi": "10:04",
       "d": "VOLCAN LICANCABUR 2170, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JOSE GALAZ D",
       "visitas": 1,
       "ult_fecha": "29-10-2026",
@@ -22095,7 +22097,7 @@
       "o": "1-3OP5N2KU",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "13:00",
+      "hi": "13:20",
       "d": "LOS CRISTALES 560 DEPTO 26, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -22109,7 +22111,7 @@
       "f": "10-13",
       "hi": "09:45",
       "d": "MALLECO 2142, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JUAN ARRIAGADA C",
       "visitas": 1,
       "ult_fecha": "06-08-2026",
@@ -22167,9 +22169,9 @@
       "o": "1-3OMFV63S",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "10:06",
       "d": "TRONCOS VIEJOS 755 CASA A1 DEPTO 301, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "NICOLAS MOYANO R",
       "visitas": 1,
       "ult_fecha": "26-10-2026",
@@ -22233,5 +22235,5 @@
    }
   }
  },
- "generado": "30-10-2026 10:03"
+ "generado": "30-10-2026 10:08"
 }
