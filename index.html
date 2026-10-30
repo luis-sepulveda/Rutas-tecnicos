@@ -12846,7 +12846,10 @@ function hoyBotonHtml(fecha, nAct, co, nr, nIni, caidas){
              con la MISMA cuenta de la pagina MIGRACIONES (historico + hoy en vivo, GSA = quiebre). */
           + (function(){ const r = mpResumenPortada(); if(!r) return '';
               const pz = function(t, s){ return ch(t + ': ' + (s.comp === null ? '–' : mpPc(s.comp)), s.comp === null ? '' : s.comp >= r.meta ? 'ok' : 'bad'); };
-              return '<span class="hb-row">' + (r.cargando ? ch('Semana y mes: cargando…') : pz(r.semTit, r.sem) + pz(r.mesTit, r.mes) + ch('meta ' + r.meta + '%')) + '</span>'; })()
+              /* (30-10-2026, 17:30) Luis: debajo de semana y mes, los % sin GSA (en morado, como en el resto de MIGRACIONES) */
+              const sg = function(t, s){ return ch(t + ' sin GSA: ' + (s.compSG === null ? '–' : mpPc(s.compSG)) + (s.g ? ' · ' + s.g + ' GSA' : ''), 'gsa'); };
+              return '<span class="hb-row">' + (r.cargando ? ch('Semana y mes: cargando…') : pz(r.semTit, r.sem) + pz(r.mesTit, r.mes) + ch('meta ' + r.meta + '%')) + '</span>'
+                + (r.cargando ? '' : '<span class="hb-row">' + sg(r.semTit, r.sem) + sg(r.mesTit, r.mes) + '</span>'); })()
           + '</button>'; })()
     + '</div>'
     + actMesesHtml()
