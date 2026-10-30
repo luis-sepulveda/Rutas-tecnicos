@@ -3755,6 +3755,7 @@ button.am-card:hover { border-color:#7c3aed; box-shadow:0 4px 14px rgba(19,33,60
 .inf-b .if-c { padding:10px 14px; gap:2px; }
 .inf-b .if-n { font-size:15px; }
 .inf-b .if-d { font-size:12.5px; line-height:1.3; }
+.hb-ch.hb-lbl { background:transparent; padding-left:0; color:#c7cedb; font-weight:700; }
 </style>
 </head>
 <body>
@@ -12822,7 +12823,17 @@ function hoyBotonHtml(fecha, nAct, co, nr, nIni, caidas){
     +   ch(co + ' completadas', 'ok')
     +   ch(nr + ' no realizadas', 'bad')
     +   (caidas ? ch(caidas + ' salieron de la bandeja', 'bad') : '')
-    + '</span></button>'
+    + '</span>'
+    /* (30-10-2026) Luis: "muestrame el detalle de la completitud de las migraciones del dia en curso".
+       Segunda fila: solo migraciones de hoy, misma cuenta de MIGRACIONES > Hoy (GSA = quiebre). */
+    + (function(){ const m = mpHoyPortada(); if(!m) return '';
+        const pc = (n) => m.vis ? mpPc(100 * n / m.vis) : '–';
+        return '<span class="hb-row"><span class="hb-ch hb-lbl">Migraciones hoy</span>'
+          + ch(m.co + ' completadas · ' + pc(m.co), m.vis ? (100 * m.co / m.vis >= m.meta ? 'ok' : 'bad') : 'ok')
+          + ch(m.nr + ' no realizadas · ' + pc(m.nr) + (m.g ? ' (' + m.g + ' GSA)' : ''), 'bad')
+          + (m.ab ? ch(m.ab + ' por cerrar') : '')
+          + '</span>'; })()
+    + '</button>'
     /* (REDISEÑO 28-10-2026, 17:23) boton MIGRACIONES en la pagina principal: abre el panel de siempre (abrirMigras) */
     + (function(){ let c = null; try { c = derHoyConteo(); } catch(e){}
         const v = c ? c.v : 0, d = c ? c.d : 0, comp = v ? (Math.round(1000 * (v - d) / v) / 10) : null;
@@ -12845,6 +12856,22 @@ function hoyBotonHtml(fecha, nAct, co, nr, nIni, caidas){
     + infTarjetasHtml();
 }
 
+/* ==== (30-10-2026) migraciones de HOY para el boton DIA EN CURSO ====
+   Solo DB (hoy en vivo), solo migraciones, contadas con mpSt (GSA = quiebre, como VTR).
+   Visitadas = completadas + no realizadas; las abiertas van aparte como "por cerrar". */
+function mpHoyPortada(){
+  try {
+    const L = [];
+    Object.keys(DB || {}).forEach(function(t){ (DB[t] || []).forEach(function(o){
+      if(familiaCat(o.cat || o.t) !== 'Migraciones') return;
+      L.push({ e:String(o.e || 'Pendiente'), cod:String(o.cie || ''), gsa:!!o.gsa });
+    }); });
+    if(!L.length) return null;
+    const s = mpSt(L); s.meta = MP_META;
+    return s;
+  } catch(e){ return null; }
+}
+
 /* ==== (30-10-2026) % de la semana y del mes en curso para el boton MIGRACIONES ====
    Misma cuenta que migPaginaHtml(): historico (MG, hasta ayer) + hoy en vivo (DB),
    solo migraciones, GSA como quiebre (mpSt). Si el historico aun no baja, avisa "cargando". */
@@ -12860,7 +12887,7 @@ function mpResumenPortada(){
     const R = [];
     if(MG) MG.filas.forEach(function(x){ if(x.iso < hoyIso) R.push({ sem:x.sem, mes:x.mes, e:x.e, cod:x.cod, gsa:!!x.gsa }); });
     Object.keys(DB || {}).forEach(function(t){ (DB[t] || []).forEach(function(o){
-      if(familiaCat(o.cat) !== 'Migraciones') return;
+      if(familiaCat(o.cat || o.t) !== 'Migraciones') return;
       R.push({ sem:semHoy, mes:mesHoy, e:String(o.e || 'Pendiente'), cod:String(o.cie || ''), gsa:!!o.gsa });
     }); });
     out.sem = mpSt(R.filter(x => x.sem === semHoy));
