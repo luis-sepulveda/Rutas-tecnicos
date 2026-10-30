@@ -21854,17 +21854,18 @@
    }
   },
   "30-10-2026": {
-   "hasta": "10:33",
-   "actividades": 110,
+   "hasta": "10:43",
+   "actividades": 112,
    "tecnicos": 34,
    "estados": {
-    "Completado": 7,
-    "Iniciado": 26,
-    "Pendiente": 67,
-    "en ruta": 4,
-    "No Realizada": 6
+    "Completado": 9,
+    "Iniciado": 29,
+    "Pendiente": 64,
+    "No Realizada": 6,
+    "en ruta": 3,
+    "Cancelado": 1
    },
-   "rgu": 167.0,
+   "rgu": 169.0,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
@@ -21891,7 +21892,7 @@
       "f": "10-13",
       "hi": "10:12",
       "d": "YUNGAY (SAN ENRIQUE) 667, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OOOJ0SZ",
@@ -21958,12 +21959,12 @@
      },
      {
       "o": "1-3OPF8Z5Y",
-      "tec": "JORDAN ROA PEREZ",
+      "tec": "DANIEL NAVARRETE E",
       "cat": "Reparación",
       "f": "10-13",
       "hi": "11:36",
       "d": "HUMBOLD 1358 CASA 4, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OPF5EQI",
@@ -22040,9 +22041,8 @@
       "o": "1-3OP4DY2K",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "13:13",
       "d": "SANTA TERESA 0483, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Cancelado",
       "tec": "EDGAR VALERO C",
       "visitas": 1,
       "ult_fecha": "29-10-2026",
@@ -22076,7 +22076,7 @@
       "o": "1-3OOUCCIR",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:48",
+      "hi": "10:50",
       "d": "JOSE MARIA CARO 1044, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JORGE PEZOA VICUÑA",
@@ -22244,7 +22244,7 @@
       "f": "10-13",
       "hi": "09:48",
       "d": "AV LA PALMA 151 EDIF. 1 DEPTO 503, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JORGE PEZOA VICUÑA",
       "desde": "29-10-2026"
      },
@@ -22262,5 +22262,5 @@
    }
   }
  },
- "generado": "30-10-2026 10:33"
+ "generado": "30-10-2026 10:43"
 }
