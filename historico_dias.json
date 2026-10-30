@@ -21854,27 +21854,36 @@
    }
   },
   "30-10-2026": {
-   "hasta": "10:23",
-   "actividades": 109,
+   "hasta": "10:28",
+   "actividades": 110,
    "tecnicos": 34,
    "estados": {
     "Completado": 6,
-    "Pendiente": 70,
-    "Iniciado": 28,
-    "en ruta": 3,
-    "No Realizada": 2
+    "Iniciado": 27,
+    "Pendiente": 69,
+    "en ruta": 4,
+    "No Realizada": 4
    },
-   "rgu": 166.0,
+   "rgu": 167.0,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 10,
+   "nuevas": 11,
    "al_bucket": 1,
-   "repetidas": 19,
+   "repetidas": 20,
    "reagendadas": 4,
    "detalle": {
     "caidas": [],
     "nuevas": [
+     {
+      "o": "1-3OJCL9TX",
+      "tec": "MATIAS APELEO APELEO",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "ACONCAGUA 02384, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OPFY0C7",
       "tec": "EDGAR VALERO C",
@@ -22172,6 +22181,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OJCL9TX",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "ACONCAGUA 02384, QUILPUE",
+      "e": "Pendiente",
+      "tec": "MATIAS APELEO APELEO",
+      "visitas": 1,
+      "ult_fecha": "21-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OMFV63S",
       "cat": "Alta 2 Play",
       "f": "10-13",
@@ -22241,5 +22262,5 @@
    }
   }
  },
- "generado": "30-10-2026 10:23"
+ "generado": "30-10-2026 10:28"
 }
