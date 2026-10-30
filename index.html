@@ -3765,6 +3765,7 @@ button.am-card:hover { border-color:#7c3aed; box-shadow:0 4px 14px rgba(19,33,60
 .hb-tt { display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; }
 .hb-tt .hb-fe { font-size:14.5px; }
 .hb-ch { padding:4px 11px; font-size:13.5px; } .hb-ch small { font-weight:500; opacity:.8; font-size:12px; }
+.hb-ch.hb-big { background:rgba(255,255,255,.16); font-weight:800; font-size:14.5px; }
 .hb-ch.fr.ok { background:rgba(16,185,129,.22); color:#d1fae5; } .hb-ch.fr.bad { background:rgba(248,113,113,.22); color:#fee2e2; }
 .am-t { font-size:20px; } .am-sub { margin:0 0 8px; }
 .am-card.am2 { padding:12px 18px; gap:6px; }
@@ -12856,6 +12857,20 @@ function hoyBotonHtml(fecha, nAct, co, nr, nIni, caidas){
     +   (function(){ let ab = 0; try { Object.keys(DB || {}).forEach(function(t){ (DB[t] || []).forEach(function(o){ if(['Completado','No Realizada','Cancelado','Suspendido'].indexOf(String(o.e || '')) < 0) ab++; }); }); } catch(e){} return ab ? ch(ab + ' por cerrar') : ''; })()
     +   (caidas ? ch(caidas + ' salieron de la bandeja', 'bad') : '')
     + '</span>'
+    /* (30-10-2026, 19:00) Luis: completitud del dia de TODAS las actividades (completadas / visitadas) y flecha contra ayer */
+    + (function(){ if(!vis) return '';
+        const hoyPc = 100 * co / vis; let cmp = '';
+        try {
+          const fd = (typeof FECHA_DATOS !== 'undefined' && FECHA_DATOS) ? FECHA_DATOS : new Date();
+          const hoyIso = fd.getFullYear() + String(fd.getMonth() + 1).padStart(2, '0') + String(fd.getDate()).padStart(2, '0');
+          const D = (window.ACT_DIAS || []).map(function(d){ return { iso: d.f.slice(6) + d.f.slice(3, 5) + d.f.slice(0, 2), co: d.comp, nr: d.nr }; })
+            .filter(function(d){ return d.iso < hoyIso && (d.co + d.nr); }).sort(function(a, b){ return a.iso < b.iso ? -1 : 1; });
+          const a = D[D.length - 1];
+          if(a){ const ap = 100 * a.co / (a.co + a.nr), dd = hoyPc - ap;
+            cmp = ch((Math.abs(dd) < 0.05 ? '= igual' : (dd > 0 ? '▲ ' : '▼ ') + mpPc(Math.abs(dd)).replace('%', '') + ' pts') + ' vs ayer (' + mpPc(ap) + ')', Math.abs(dd) < 0.05 ? '' : dd > 0 ? 'ok' : 'bad'); }
+        } catch(e){}
+        return '<span class="hb-row"><span class="hb-ch hb-lbl">Completitud del día</span>'
+          + '<span class="hb-ch hb-big">' + mpPc(hoyPc) + ' <small>· ' + co + ' de ' + vis + ' visitadas</small></span>' + cmp + '</span>'; })()
     /* (30-10-2026) Luis: "muestrame el detalle de la completitud de las migraciones del dia en curso".
        Segunda fila: solo migraciones de hoy, misma cuenta de MIGRACIONES > Hoy (GSA = quiebre). */
     + (function(){ const m = mpHoyPortada(); if(!m) return '';
@@ -13012,6 +13027,7 @@ function actMesesHtml(){
   if(window.ACT_MES === undefined){
     window.ACT_MES = null;
     bajarResumen().then(function(dias){
+      window.ACT_DIAS = dias;      /* (30-10-2026, 19:00) para comparar el dia en curso con ayer */
       const M = {};
       dias.forEach(function(d){ const k = d.f.slice(6) + '-' + d.f.slice(3, 5);
         const m = M[k] || (M[k] = {k:k, asig:0, comp:0, nr:0, dias:0}); m.asig += d.asig; m.comp += d.comp; m.nr += d.nr; m.dias++; });
