@@ -21854,25 +21854,25 @@
    }
   },
   "30-10-2026": {
-   "hasta": "14:14",
-   "actividades": 147,
+   "hasta": "14:19",
+   "actividades": 152,
    "tecnicos": 34,
    "estados": {
-    "Completado": 50,
+    "Completado": 51,
     "Iniciado": 17,
-    "Pendiente": 51,
+    "Pendiente": 53,
     "Cancelado": 4,
     "No Realizada": 19,
     "Suspendido": 3,
-    "en ruta": 3
+    "en ruta": 5
    },
-   "rgu": 203.9,
+   "rgu": 212.4,
    "caidas_total": 1,
    "caidas_activas": 1,
    "caidas_resueltas": 0,
-   "nuevas": 27,
+   "nuevas": 28,
    "al_bucket": 10,
-   "repetidas": 26,
+   "repetidas": 28,
    "reagendadas": 5,
    "detalle": {
     "caidas": [
@@ -21887,6 +21887,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OPO06KW",
+      "tec": "EDGAR VALERO C",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "14:18",
+      "d": "PJE 1 (INES DE SUAREZ) 0186, VILLA ALEMANA",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3OPMKD9Q",
       "tec": "DANIEL NAVARRETE E",
@@ -21916,12 +21925,12 @@
      },
      {
       "o": "1-3OO32XD2",
-      "tec": "RAFAEL VARGAS B",
+      "tec": "CRISTOBAL MIRANDA VALENC",
       "cat": "Alta 2 Play",
       "f": "13-16",
       "hi": "16:16",
       "d": "GILBERTO BARROS 2, QUILPUE",
-      "e": "Pendiente (ya no está)"
+      "e": "Pendiente"
      },
      {
       "o": "1-3OPLV4LJ",
@@ -22181,6 +22190,18 @@
       "ult_cierre": "Sin acceso a vivienda"
      },
      {
+      "o": "1-3OO32XD2",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "16:24",
+      "d": "GILBERTO BARROS 2, QUILPUE",
+      "e": "Pendiente",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "visitas": 2,
+      "ult_fecha": "28-10-2026",
+      "ult_cierre": "Falla Masiva"
+     },
+     {
       "o": "1-3OPMNCKX",
       "cat": "Reparación",
       "f": "13-16",
@@ -22208,7 +22229,7 @@
       "o": "1-3OP54QTY",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:31",
+      "hi": "17:00",
       "d": "EL CANELO 2090, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "EDGAR VALERO C",
@@ -22408,6 +22429,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OPGPZNQ",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "15:45",
+      "d": "LAGO LAS TORRES 170 DEPTO 1607, QUILPUE",
+      "e": "Pendiente",
+      "tec": "PABLO HERNANEZ FERNANDEZ",
+      "visitas": 1,
+      "ult_fecha": "30-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OJCL9TX",
       "cat": "Alta 1 Play",
       "f": "13-16",
@@ -22435,7 +22468,7 @@
       "o": "1-3OP1135P",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:57",
+      "hi": "16:55",
       "d": "PJE TRES 1009, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SEBASTIAN DOSSOW A",
@@ -22499,5 +22532,5 @@
    }
   }
  },
- "generado": "30-10-2026 14:14"
+ "generado": "30-10-2026 14:19"
 }
