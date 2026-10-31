@@ -21841,31 +21841,68 @@
    }
   },
   "31-10-2026": {
-   "hasta": "10:12",
-   "actividades": 54,
-   "tecnicos": 21,
+   "hasta": "10:32",
+   "actividades": 56,
+   "tecnicos": 20,
    "estados": {
-    "Iniciado": 16,
-    "Pendiente": 30,
-    "No Realizada": 3,
+    "Iniciado": 14,
+    "Pendiente": 26,
+    "No Realizada": 7,
+    "en ruta": 6,
     "Completado": 2,
-    "Suspendido": 1,
-    "en ruta": 2
+    "Suspendido": 1
    },
-   "rgu": 92.5,
-   "caidas_total": 0,
-   "caidas_activas": 0,
+   "rgu": 95.5,
+   "caidas_total": 1,
+   "caidas_activas": 1,
    "caidas_resueltas": 0,
-   "nuevas": 3,
-   "al_bucket": 2,
-   "repetidas": 21,
+   "nuevas": 6,
+   "al_bucket": 4,
+   "repetidas": 20,
    "reagendadas": 4,
    "detalle": {
-    "caidas": [],
+    "caidas": [
+     {
+      "o": "1-3OPI9M1X",
+      "tec": "JOSE CASTRO P",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "11:52",
+      "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
+      "e": "Pendiente"
+     }
+    ],
     "nuevas": [
      {
+      "o": "1-3OQ64CN7",
+      "tec": "CESAR MENA OLIVEROS",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "12:25",
+      "d": "PJE 1 01299 EDIF. 2 DEPTO 31, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OQ5XE1P",
+      "tec": "KEVIN TAPIA RETAMAL",
+      "cat": "Migración 2 Play",
+      "f": "10-13",
+      "hi": "12:48",
+      "d": "MEJILLONES 85, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OQ628OQ",
+      "tec": "JOSE ROJO A",
+      "cat": "Migración 1 Play",
+      "f": "10-13",
+      "hi": "12:58",
+      "d": "ANTONIO VARAS 2030, QUILPUE",
+      "e": "en ruta"
+     },
+     {
       "o": "1-3OQ5TYXY",
-      "tec": "CRISTOBAL MIRANDA VALENC",
+      "tec": "LEONEL HERNÁNDEZ OJE",
       "cat": "Migración 1 Play",
       "f": "13-16",
       "hi": "14:00",
@@ -21908,12 +21945,36 @@
       "o": "1-3OPXFV8Q",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "13:00",
+      "hi": "14:00",
       "d": "LEUCOTON 9994 CASA FIC, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
       "visitas": 3,
       "ult_fecha": "13-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OPQ76TD",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "10:37",
+      "d": "CALLE 1 2073, VILLA ALEMANA",
+      "e": "en ruta",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "visitas": 3,
+      "ult_fecha": "23-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OP01CDK",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "10:33",
+      "d": "PJE INTERIOR(INES DE SUAREZ) 196, VILLA ALEMANA",
+      "e": "en ruta",
+      "tec": "CESAR MENA OLIVEROS",
+      "visitas": 1,
+      "ult_fecha": "29-10-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -21946,23 +22007,11 @@
       "f": "10-13",
       "hi": "10:05",
       "d": "CHAMPAGNAT 766, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "ESTEBAN PIZARRO QUINTANA",
       "visitas": 2,
       "ult_fecha": "30-10-2026",
       "ult_cierre": "Orden mal generada"
-     },
-     {
-      "o": "1-3OPQ76TD",
-      "cat": "Alta 1 Play",
-      "f": "10-13",
-      "hi": "13:25",
-      "d": "CALLE 1 2073, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "ESTEBAN PIZARRO QUINTANA",
-      "visitas": 3,
-      "ult_fecha": "23-10-2026",
-      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OPR1UVI",
@@ -21982,7 +22031,7 @@
       "f": "10-13",
       "hi": "10:02",
       "d": "LOS ALMENDROS 017, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JOEL GUSTAVE GUSTA",
       "visitas": 2,
       "ult_fecha": "29-10-2026",
@@ -21992,7 +22041,7 @@
       "o": "1-3OPOVZU7",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "13:00",
+      "hi": "14:00",
       "d": "JOSE URIBE 95, QUILPUE",
       "e": "Pendiente",
       "tec": "JORDAN ROA PEREZ",
@@ -22001,40 +22050,16 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OP01CDK",
-      "cat": "Alta 2 Play",
-      "f": "10-13",
-      "hi": "13:22",
-      "d": "PJE INTERIOR(INES DE SUAREZ) 196, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JORGE PEZOA VICUÑA",
-      "visitas": 1,
-      "ult_fecha": "29-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OPSEMQX",
       "cat": "Alta 1 Play",
       "f": "10-13",
       "hi": "09:53",
       "d": "PATRICIO LYNCH 560 EDIF. 2 DEPTO 2502, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JOSE CASTRO P",
       "visitas": 1,
       "ult_fecha": "30-10-2026",
       "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OPI9M1X",
-      "cat": "Alta 1 Play",
-      "f": "10-13",
-      "hi": "11:52",
-      "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOSE CASTRO P",
-      "visitas": 4,
-      "ult_fecha": "30-10-2026",
-      "ult_cierre": "Direccion incorrecta"
      },
      {
       "o": "1-3OPTAKEC",
@@ -22054,7 +22079,7 @@
       "f": "10-13",
       "hi": "10:07",
       "d": "AGUAS CRISTALINAS 1347, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JOSE ROJO A",
       "visitas": 2,
       "ult_fecha": "23-10-2026",
@@ -22064,7 +22089,7 @@
       "o": "1-3ONDJ93W",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "13:00",
+      "hi": "14:20",
       "d": "AV LOS CARRERA 01512 DEPTO 21, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -22076,7 +22101,7 @@
       "o": "1-3OPQ8BQB",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "13:00",
+      "hi": "14:00",
       "d": "ASADO AL PALO 143, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE SALAS MEDINA",
@@ -22112,9 +22137,9 @@
       "o": "1-3OPMSL0X",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:16",
+      "hi": "10:26",
       "d": "ESMERALDA 2617 EDIF. 7 DEPTO 14, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "LUIS GATICA DAVILA",
       "visitas": 2,
       "ult_fecha": "30-10-2026",
@@ -22170,7 +22195,7 @@
       "o": "1-3OMT0W39",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "15:31",
+      "hi": "14:00",
       "d": "SAN ENRIQUE 1780 EDIF. 9 DEPTO 302, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOEL GUSTAVE GUSTA",
@@ -22190,5 +22215,5 @@
    }
   }
  },
- "generado": "31-10-2026 10:12"
+ "generado": "31-10-2026 10:32"
 }
