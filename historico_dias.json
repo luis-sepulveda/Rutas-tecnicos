@@ -21841,22 +21841,23 @@
    }
   },
   "31-10-2026": {
-   "hasta": "12:57",
-   "actividades": 65,
+   "hasta": "13:02",
+   "actividades": 66,
    "tecnicos": 20,
    "estados": {
-    "Completado": 14,
-    "Pendiente": 22,
-    "No Realizada": 10,
-    "Iniciado": 14,
+    "Completado": 17,
+    "Pendiente": 20,
+    "No Realizada": 11,
     "Suspendido": 3,
-    "Cancelado": 2
+    "Iniciado": 12,
+    "Cancelado": 2,
+    "en ruta": 1
    },
-   "rgu": 104.6,
+   "rgu": 106.6,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
-   "nuevas": 12,
+   "nuevas": 13,
    "al_bucket": 5,
    "repetidas": 22,
    "reagendadas": 4,
@@ -21882,6 +21883,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OQ8F1Z5",
+      "tec": "MARCELO GÓMEZ GÓME",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "13:02",
+      "d": "JUAN LUIS MARTINEZ 1130, VILLA ALEMANA",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3OPQFUTF",
       "tec": "JOEL GUSTAVE GUSTA",
@@ -22022,7 +22032,7 @@
       "f": "10-13",
       "hi": "10:39",
       "d": "CALLE 1 2073, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "ANTONHY MORALES MENDOZA",
       "visitas": 3,
       "ult_fecha": "23-10-2026",
@@ -22058,7 +22068,7 @@
       "f": "10-13",
       "hi": "09:53",
       "d": "LAGO LAS TORRES 170 DEPTO 1607, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "EDGAR VALERO C",
       "visitas": 1,
       "ult_fecha": "30-10-2026",
@@ -22190,7 +22200,7 @@
       "f": "13-16",
       "hi": "13:00",
       "d": "AV LOS CARRERA 01512 DEPTO 21, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "JOSE ROJO A",
       "visitas": 1,
       "ult_fecha": "13-10-2026",
@@ -22200,7 +22210,7 @@
       "o": "1-3OPQ8BQB",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:04",
+      "hi": "14:17",
       "d": "ASADO AL PALO 143, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE SALAS MEDINA",
@@ -22274,7 +22284,7 @@
       "f": "10-13",
       "hi": "09:53",
       "d": "LAGO LAS TORRES 170 DEPTO 1607, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "EDGAR VALERO C",
       "desde": "30-10-2026"
      },
@@ -22302,5 +22312,5 @@
    }
   }
  },
- "generado": "31-10-2026 12:57"
+ "generado": "31-10-2026 13:02"
 }
