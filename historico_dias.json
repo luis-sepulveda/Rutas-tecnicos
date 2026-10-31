@@ -21841,24 +21841,35 @@
    }
   },
   "31-10-2026": {
-   "hasta": "09:31",
-   "actividades": 50,
+   "hasta": "09:41",
+   "actividades": 51,
    "tecnicos": 21,
    "estados": {
-    "Pendiente": 38,
-    "en ruta": 12
+    "Pendiente": 37,
+    "en ruta": 11,
+    "Iniciado": 3
    },
-   "rgu": 88.5,
+   "rgu": 89.5,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 0,
+   "nuevas": 1,
    "al_bucket": 0,
    "repetidas": 21,
    "reagendadas": 4,
    "detalle": {
     "caidas": [],
-    "nuevas": [],
+    "nuevas": [
+     {
+      "o": "1-3OPZLAF8",
+      "tec": "LEONEL HERNÁNDEZ OJE",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "09:36",
+      "d": "TEMUCO 01273, QUILPUE",
+      "e": "Iniciado"
+     }
+    ],
     "repetidas": [
      {
       "o": "1-3OPQ8BQB",
@@ -21912,9 +21923,9 @@
       "o": "1-3OPQQD8I",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "09:32",
+      "hi": "09:40",
       "d": "LOS ALMENDROS (LEIGHTON) 17, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "ESTEBAN PIZARRO QUINTANA",
       "visitas": 3,
       "ult_fecha": "27-08-2026",
@@ -21924,7 +21935,7 @@
       "o": "1-3OPFPQ3E",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "11:24",
+      "hi": "11:32",
       "d": "CHAMPAGNAT 766, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
@@ -21972,7 +21983,7 @@
       "o": "1-3OP01CDK",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "13:29",
+      "hi": "13:13",
       "d": "PJE INTERIOR(INES DE SUAREZ) 196, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JORGE PEZOA VICUÑA",
@@ -22056,7 +22067,7 @@
       "o": "1-3OO5UJWF",
       "cat": "Migración 2 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "10:40",
       "d": "AGUAS CRISTALINAS 1347, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -22068,7 +22079,7 @@
       "o": "1-3ONDJ93W",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "13:00",
+      "hi": "13:04",
       "d": "AV LOS CARRERA 01512 DEPTO 21, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -22092,7 +22103,7 @@
       "o": "1-3OOAO3CT",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "12:06",
+      "hi": "12:15",
       "d": "SANTIAGO 718 CASA C, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "KEVIN TAPIA RETAMAL",
@@ -22104,7 +22115,7 @@
       "o": "1-3OPMSL0X",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:41",
+      "hi": "10:39",
       "d": "ESMERALDA 2617 EDIF. 7 DEPTO 14, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -22158,5 +22169,5 @@
    }
   }
  },
- "generado": "31-10-2026 09:31"
+ "generado": "31-10-2026 09:41"
 }
