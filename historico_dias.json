@@ -21841,23 +21841,23 @@
    }
   },
   "31-10-2026": {
-   "hasta": "12:42",
-   "actividades": 62,
+   "hasta": "12:47",
+   "actividades": 64,
    "tecnicos": 20,
    "estados": {
     "Completado": 13,
     "Pendiente": 22,
     "No Realizada": 10,
     "Iniciado": 12,
-    "Suspendido": 2,
-    "Cancelado": 1,
-    "en ruta": 2
+    "Suspendido": 3,
+    "en ruta": 3,
+    "Cancelado": 1
    },
-   "rgu": 100.6,
+   "rgu": 103.6,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
-   "nuevas": 10,
+   "nuevas": 11,
    "al_bucket": 5,
    "repetidas": 21,
    "reagendadas": 4,
@@ -21883,6 +21883,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OQ8D01W",
+      "tec": "DANIEL NAVARRETE E",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "12:46",
+      "d": "AVENIDA VALPARAISO 1293, VILLA ALEMANA",
+      "e": "en ruta"
+     },
      {
       "o": "1-3OQ8G63O",
       "tec": "KEVIN TAPIA RETAMAL",
@@ -22111,9 +22120,9 @@
       "o": "1-3OOB10K0",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "13:00",
+      "hi": "12:43",
       "d": "GABRIEL DAZAROLA 1064, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "JORGE PEZOA VICUÑA",
       "visitas": 1,
       "ult_fecha": "12-10-2026",
@@ -22171,7 +22180,7 @@
       "o": "1-3OPQ8BQB",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "14:04",
       "d": "ASADO AL PALO 143, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE SALAS MEDINA",
@@ -22221,7 +22230,7 @@
       "f": "10-13",
       "hi": "10:09",
       "d": "JUAN LUIS MARTINEZ 1130, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Suspendido",
       "tec": "MARCELO GÓMEZ GÓME",
       "visitas": 1,
       "ult_fecha": "29-10-2026",
@@ -22273,5 +22282,5 @@
    }
   }
  },
- "generado": "31-10-2026 12:42"
+ "generado": "31-10-2026 12:47"
 }
