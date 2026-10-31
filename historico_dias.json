@@ -21841,22 +21841,22 @@
    }
   },
   "31-10-2026": {
-   "hasta": "11:17",
-   "actividades": 57,
+   "hasta": "11:32",
+   "actividades": 58,
    "tecnicos": 20,
    "estados": {
-    "Iniciado": 16,
+    "Iniciado": 17,
     "Pendiente": 23,
     "No Realizada": 9,
-    "en ruta": 3,
-    "Completado": 5,
+    "Completado": 6,
+    "en ruta": 2,
     "Suspendido": 1
    },
-   "rgu": 96.5,
+   "rgu": 97.5,
    "caidas_total": 1,
    "caidas_activas": 1,
    "caidas_resueltas": 0,
-   "nuevas": 7,
+   "nuevas": 8,
    "al_bucket": 4,
    "repetidas": 20,
    "reagendadas": 4,
@@ -21874,13 +21874,22 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OQ7CSTG",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "LOS MAQUIS 1635, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3OQ5V8GF",
-      "tec": "JUAN ARRIAGADA C",
+      "tec": "DANIEL NAVARRETE E",
       "cat": "Alta 1 Play",
       "f": "10-13",
       "hi": "11:36",
       "d": "AVENIDA VALPARAISO 1293, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OQ64CN7",
@@ -21987,18 +21996,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OOAO3CT",
-      "cat": "Migración 1 Play",
-      "f": "10-13",
-      "hi": "11:22",
-      "d": "SANTIAGO 718 CASA C, VILLA ALEMANA",
-      "e": "en ruta",
-      "tec": "DANIEL NAVARRETE E",
-      "visitas": 1,
-      "ult_fecha": "28-10-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
       "o": "1-3OPGPZNQ",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -22035,10 +22032,22 @@
       "ult_cierre": "Orden mal generada"
      },
      {
+      "o": "1-3OOAO3CT",
+      "cat": "Migración 1 Play",
+      "f": "10-13",
+      "hi": "12:27",
+      "d": "SANTIAGO 718 CASA C, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "ESTEBAN PIZARRO QUINTANA",
+      "visitas": 1,
+      "ult_fecha": "28-10-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3OPR1UVI",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:14",
+      "hi": "17:32",
       "d": "LOMAS DE MACUL 2731, QUILPUE",
       "e": "Pendiente",
       "tec": "FELIPE SILVA R",
@@ -22184,7 +22193,7 @@
       "o": "1-3OIOQ27S",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:10",
       "d": "TOMAS EDISON 0596, QUILPUE",
       "e": "Pendiente",
       "tec": "ANTONHY MORALES MENDOZA",
@@ -22224,5 +22233,5 @@
    }
   }
  },
- "generado": "31-10-2026 11:17"
+ "generado": "31-10-2026 11:32"
 }
