@@ -21841,21 +21841,21 @@
    }
   },
   "31-10-2026": {
-   "hasta": "13:33",
+   "hasta": "13:48",
    "actividades": 69,
    "tecnicos": 20,
    "estados": {
-    "Completado": 22,
-    "en ruta": 2,
+    "Completado": 23,
+    "en ruta": 3,
     "No Realizada": 12,
-    "Pendiente": 18,
+    "Pendiente": 16,
     "Suspendido": 3,
     "Iniciado": 10,
     "Cancelado": 2
    },
    "rgu": 108.3,
-   "caidas_total": 2,
-   "caidas_activas": 2,
+   "caidas_total": 3,
+   "caidas_activas": 3,
    "caidas_resueltas": 0,
    "nuevas": 16,
    "al_bucket": 5,
@@ -21870,6 +21870,15 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "LOS MAQUIS 1635, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OOV5E56",
+      "tec": "EDGAR VALERO C",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "17:23",
+      "d": "PEDRO AGUIRRE CERDA 985, QUILPUE",
       "e": "Pendiente"
      },
      {
@@ -21921,7 +21930,7 @@
      },
      {
       "o": "1-3OPQFUTF",
-      "tec": "JOEL GUSTAVE GUSTA",
+      "tec": "CESAR MENA OLIVEROS",
       "cat": "Alta 1 Play",
       "f": "13-16",
       "hi": "13:08",
@@ -22007,7 +22016,7 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "PJE 1 250  50, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OQ5OPVM",
@@ -22078,6 +22087,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OPQFUTF",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "13:55",
+      "d": "MARGA MARGA 1540, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "CESAR MENA OLIVEROS",
+      "visitas": 4,
+      "ult_fecha": "30-10-2026",
+      "ult_cierre": "Direccion incorrecta"
+     },
+     {
       "o": "1-3OPR1UVI",
       "cat": "Alta 1 Play",
       "f": "16-19",
@@ -22129,7 +22150,7 @@
       "o": "1-3OPTDGSF",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:51",
+      "hi": "14:23",
       "d": "MATURANA 1090 CASA B, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
@@ -22148,30 +22169,6 @@
       "visitas": 2,
       "ult_fecha": "29-10-2026",
       "ult_cierre": "Direccion incorrecta"
-     },
-     {
-      "o": "1-3OPQFUTF",
-      "cat": "Alta 1 Play",
-      "f": "13-16",
-      "hi": "13:43",
-      "d": "MARGA MARGA 1540, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOEL GUSTAVE GUSTA",
-      "visitas": 4,
-      "ult_fecha": "30-10-2026",
-      "ult_cierre": "Direccion incorrecta"
-     },
-     {
-      "o": "1-3OPOVZU7",
-      "cat": "Alta 2 Play",
-      "f": "13-16",
-      "hi": "14:43",
-      "d": "JOSE URIBE 95, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JORDAN ROA PEREZ",
-      "visitas": 1,
-      "ult_fecha": "30-10-2026",
-      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OOB10K0",
@@ -22282,6 +22279,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OPOVZU7",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "13:58",
+      "d": "JOSE URIBE 95, QUILPUE",
+      "e": "en ruta",
+      "tec": "KEVIN TAPIA RETAMAL",
+      "visitas": 1,
+      "ult_fecha": "30-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OPMSL0X",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -22351,5 +22360,5 @@
    }
   }
  },
- "generado": "31-10-2026 13:33"
+ "generado": "31-10-2026 13:48"
 }
