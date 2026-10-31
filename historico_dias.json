@@ -21841,26 +21841,26 @@
    }
   },
   "31-10-2026": {
-   "hasta": "13:48",
-   "actividades": 69,
-   "tecnicos": 20,
+   "hasta": "14:08",
+   "actividades": 64,
+   "tecnicos": 19,
    "estados": {
-    "Completado": 23,
-    "en ruta": 3,
-    "No Realizada": 12,
-    "Pendiente": 16,
-    "Suspendido": 3,
+    "Completado": 22,
     "Iniciado": 10,
+    "No Realizada": 12,
+    "en ruta": 5,
+    "Pendiente": 10,
+    "Suspendido": 3,
     "Cancelado": 2
    },
-   "rgu": 108.3,
+   "rgu": 100.3,
    "caidas_total": 3,
    "caidas_activas": 3,
    "caidas_resueltas": 0,
    "nuevas": 16,
    "al_bucket": 5,
    "repetidas": 23,
-   "reagendadas": 4,
+   "reagendadas": 3,
    "detalle": {
     "caidas": [
      {
@@ -21935,7 +21935,7 @@
       "f": "13-16",
       "hi": "13:08",
       "d": "MARGA MARGA 1540, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "No Realizada"
      },
      {
       "o": "1-3OQ8D01W",
@@ -21962,7 +21962,7 @@
       "f": "13-16",
       "hi": "14:01",
       "d": "C BRITO 3045, QUILPUE",
-      "e": "Iniciado"
+      "e": "Iniciado (ya no está)"
      },
      {
       "o": "1-3OQ7CSTG",
@@ -21984,12 +21984,12 @@
      },
      {
       "o": "1-3OQ64CN7",
-      "tec": "EDGAR VALERO C",
+      "tec": "LUIS GATICA DAVILA",
       "cat": "Alta 1 Play",
       "f": "10-13",
       "hi": "12:25",
       "d": "PJE 1 01299 EDIF. 2 DEPTO 31, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OQ5XE1P",
@@ -22016,7 +22016,7 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "PJE 1 250  50, QUILPUE",
-      "e": "Iniciado"
+      "e": "No Realizada"
      },
      {
       "o": "1-3OQ5OPVM",
@@ -22054,9 +22054,9 @@
       "o": "1-3OPXFV8Q",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "13:25",
+      "hi": "13:58",
       "d": "LEUCOTON 9994 CASA FIC, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "ALFREDO ALCAYAGA F",
       "visitas": 3,
       "ult_fecha": "13-10-2026",
@@ -22090,9 +22090,9 @@
       "o": "1-3OPQFUTF",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "13:55",
+      "hi": "13:51",
       "d": "MARGA MARGA 1540, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "No Realizada",
       "tec": "CESAR MENA OLIVEROS",
       "visitas": 4,
       "ult_fecha": "30-10-2026",
@@ -22171,6 +22171,18 @@
       "ult_cierre": "Direccion incorrecta"
      },
      {
+      "o": "1-3OPTAKEC",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "ARNEB 2590, QUILPUE",
+      "e": "Pendiente",
+      "tec": "JORDAN ROA PEREZ",
+      "visitas": 1,
+      "ult_fecha": "30-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OOB10K0",
       "cat": "Migración 1 Play",
       "f": "13-16",
@@ -22190,18 +22202,6 @@
       "d": "PATRICIO LYNCH 560 EDIF. 2 DEPTO 2502, VILLA ALEMANA",
       "e": "No Realizada",
       "tec": "JOSE CASTRO P",
-      "visitas": 1,
-      "ult_fecha": "30-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OPTAKEC",
-      "cat": "Alta 2 Play",
-      "f": "16-19",
-      "hi": "16:00",
-      "d": "ARNEB 2590, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JOSE GALAZ D",
       "visitas": 1,
       "ult_fecha": "30-10-2026",
       "ult_cierre": "Sin moradores"
@@ -22234,9 +22234,9 @@
       "o": "1-3OPQ8BQB",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:17",
+      "hi": "14:22",
       "d": "ASADO AL PALO 143, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JOSE SALAS MEDINA",
       "visitas": 1,
       "ult_fecha": "30-10-2026",
@@ -22284,7 +22284,7 @@
       "f": "13-16",
       "hi": "13:58",
       "d": "JOSE URIBE 95, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "KEVIN TAPIA RETAMAL",
       "visitas": 1,
       "ult_fecha": "30-10-2026",
@@ -22330,9 +22330,9 @@
       "o": "1-3OIOQ27S",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "14:15",
       "d": "TOMAS EDISON 0596, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "FELIPE SILVA R",
       "desde": "30-10-2026"
      },
@@ -22345,20 +22345,10 @@
       "e": "Iniciado",
       "tec": "JOSE CASTRO P",
       "desde": "28-10-2026"
-     },
-     {
-      "o": "1-3OLN61YJ",
-      "cat": "Alta 2 Play",
-      "f": "16-19",
-      "hi": "16:00",
-      "d": "LAGO LANALHUE 2408 DEPTO 34, QUILPUE",
-      "e": "Pendiente",
-      "tec": "LEONEL HERNÁNDEZ OJE",
-      "desde": "27-10-2026"
      }
     ]
    }
   }
  },
- "generado": "31-10-2026 13:48"
+ "generado": "31-10-2026 14:08"
 }
