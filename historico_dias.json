@@ -21841,25 +21841,25 @@
    }
   },
   "31-10-2026": {
-   "hasta": "13:02",
-   "actividades": 66,
+   "hasta": "13:07",
+   "actividades": 69,
    "tecnicos": 20,
    "estados": {
-    "Completado": 17,
-    "Pendiente": 20,
+    "Completado": 18,
+    "Pendiente": 23,
     "No Realizada": 11,
     "Suspendido": 3,
-    "Iniciado": 12,
+    "Iniciado": 11,
     "Cancelado": 2,
     "en ruta": 1
    },
-   "rgu": 106.6,
+   "rgu": 109.2,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
-   "nuevas": 13,
+   "nuevas": 15,
    "al_bucket": 5,
-   "repetidas": 22,
+   "repetidas": 23,
    "reagendadas": 4,
    "detalle": {
     "caidas": [
@@ -21883,6 +21883,24 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OQ8UXTD",
+      "tec": "CESAR MENA OLIVEROS",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "14:07",
+      "d": "DINAMARCA 1481 EDIF. 4 DEPTO 303, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OQ92QXZ",
+      "tec": "ESTEBAN PIZARRO QUINTANA",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "17:20",
+      "d": "PARIS 960 CASA 1, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OQ8F1Z5",
       "tec": "MARCELO GÓMEZ GÓME",
@@ -21962,7 +21980,7 @@
       "f": "10-13",
       "hi": "12:48",
       "d": "MEJILLONES 85, QUILPUE",
-      "e": "Pendiente"
+      "e": "Pendiente (ya no está)"
      },
      {
       "o": "1-3OQ628OQ",
@@ -22102,7 +22120,7 @@
       "o": "1-3OPTDGSF",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "14:24",
       "d": "MATURANA 1090 CASA B, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
@@ -22126,7 +22144,7 @@
       "o": "1-3OPQFUTF",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "13:08",
+      "hi": "13:24",
       "d": "MARGA MARGA 1540, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOEL GUSTAVE GUSTA",
@@ -22243,6 +22261,18 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3OPJNEDT",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "15:36",
+      "d": "PJE CATALUNA 1838, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JUAN ARRIAGADA C",
+      "visitas": 1,
+      "ult_fecha": "30-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OPMSL0X",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -22312,5 +22342,5 @@
    }
   }
  },
- "generado": "31-10-2026 13:02"
+ "generado": "31-10-2026 13:07"
 }
