@@ -21841,23 +21841,23 @@
    }
   },
   "31-10-2026": {
-   "hasta": "15:13",
-   "actividades": 66,
+   "hasta": "15:23",
+   "actividades": 67,
    "tecnicos": 19,
    "estados": {
     "Completado": 25,
-    "Iniciado": 11,
+    "Iniciado": 12,
     "No Realizada": 15,
     "en ruta": 3,
     "Suspendido": 4,
-    "Cancelado": 3,
-    "Pendiente": 5
+    "Pendiente": 5,
+    "Cancelado": 3
    },
-   "rgu": 105.3,
+   "rgu": 106.3,
    "caidas_total": 4,
    "caidas_activas": 4,
    "caidas_resueltas": 0,
-   "nuevas": 17,
+   "nuevas": 18,
    "al_bucket": 5,
    "repetidas": 23,
    "reagendadas": 3,
@@ -21902,6 +21902,15 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OQB9GCD",
+      "tec": "LEONEL HERNÁNDEZ OJE",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "15:41",
+      "d": "AV LOS CARRERA 01200 DEPTO 1404, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3OQAXI2S",
       "tec": "JOSE ROJO A",
       "cat": "Modificación de Servicio",
@@ -21930,7 +21939,7 @@
      },
      {
       "o": "1-3OQ92QXZ",
-      "tec": "JOSE ROJO A",
+      "tec": "JORGE PEZOA VICUÑA",
       "cat": "Alta 2 Play",
       "f": "16-19",
       "hi": "17:20",
@@ -22129,6 +22138,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OPR1UVI",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "LOMAS DE MACUL 2731, QUILPUE",
+      "e": "Pendiente",
+      "tec": "DANIEL NAVARRETE E",
+      "visitas": 1,
+      "ult_fecha": "30-10-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3OPGPZNQ",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -22144,9 +22165,9 @@
       "o": "1-3OPTAKEC",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "15:18",
       "d": "ARNEB 2590, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "EDGAR VALERO C",
       "visitas": 1,
       "ult_fecha": "30-10-2026",
@@ -22297,18 +22318,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OPR1UVI",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "16:00",
-      "d": "LOMAS DE MACUL 2731, QUILPUE",
-      "e": "Pendiente",
-      "tec": "LEONEL HERNÁNDEZ OJE",
-      "visitas": 1,
-      "ult_fecha": "30-10-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
       "o": "1-3OPMSL0X",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -22368,5 +22377,5 @@
    }
   }
  },
- "generado": "31-10-2026 15:13"
+ "generado": "31-10-2026 15:23"
 }
