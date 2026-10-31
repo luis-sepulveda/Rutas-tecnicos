@@ -21841,23 +21841,23 @@
    }
   },
   "31-10-2026": {
-   "hasta": "13:22",
+   "hasta": "13:33",
    "actividades": 69,
    "tecnicos": 20,
    "estados": {
-    "Completado": 21,
-    "Pendiente": 21,
+    "Completado": 22,
+    "en ruta": 2,
     "No Realizada": 12,
+    "Pendiente": 18,
     "Suspendido": 3,
-    "Iniciado": 9,
-    "Cancelado": 2,
-    "en ruta": 1
+    "Iniciado": 10,
+    "Cancelado": 2
    },
-   "rgu": 109.2,
+   "rgu": 108.3,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
-   "nuevas": 15,
+   "nuevas": 16,
    "al_bucket": 5,
    "repetidas": 23,
    "reagendadas": 4,
@@ -21884,6 +21884,15 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OQ9BSTC",
+      "tec": "LEONEL HERNÁNDEZ OJE",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "13:26",
+      "d": "LAS BARRANCAS 2581 EDIF. C DEPTO 304, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
       "o": "1-3OQ8UXTD",
       "tec": "CESAR MENA OLIVEROS",
       "cat": "Modificación de Servicio",
@@ -21894,7 +21903,7 @@
      },
      {
       "o": "1-3OQ92QXZ",
-      "tec": "JOEL GUSTAVE GUSTA",
+      "tec": "JOSE ROJO A",
       "cat": "Alta 2 Play",
       "f": "16-19",
       "hi": "17:20",
@@ -21935,7 +21944,7 @@
       "f": "10-13",
       "hi": "12:37",
       "d": "SANTA CATALINA 2171, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OQ7258V",
@@ -21944,7 +21953,7 @@
       "f": "13-16",
       "hi": "14:01",
       "d": "C BRITO 3045, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OQ7CSTG",
@@ -21998,7 +22007,7 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "PJE 1 250  50, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OQ5OPVM",
@@ -22038,7 +22047,7 @@
       "f": "13-16",
       "hi": "13:25",
       "d": "LEUCOTON 9994 CASA FIC, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "ALFREDO ALCAYAGA F",
       "visitas": 3,
       "ult_fecha": "13-10-2026",
@@ -22120,7 +22129,7 @@
       "o": "1-3OPTDGSF",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:23",
+      "hi": "15:51",
       "d": "MATURANA 1090 CASA B, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
@@ -22144,7 +22153,7 @@
       "o": "1-3OPQFUTF",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "13:28",
+      "hi": "13:43",
       "d": "MARGA MARGA 1540, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOEL GUSTAVE GUSTA",
@@ -22156,7 +22165,7 @@
       "o": "1-3OPOVZU7",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:30",
+      "hi": "14:43",
       "d": "JOSE URIBE 95, QUILPUE",
       "e": "Pendiente",
       "tec": "JORDAN ROA PEREZ",
@@ -22299,16 +22308,6 @@
     ],
     "reagendadas": [
      {
-      "o": "1-3OLN61YJ",
-      "cat": "Alta 2 Play",
-      "f": "16-19",
-      "hi": "16:00",
-      "d": "LAGO LANALHUE 2408 DEPTO 34, QUILPUE",
-      "e": "Pendiente",
-      "tec": "CRISTOBAL SILVA LEIVA",
-      "desde": "27-10-2026"
-     },
-     {
       "o": "1-3OPGPZNQ",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -22337,10 +22336,20 @@
       "e": "Iniciado",
       "tec": "JOSE CASTRO P",
       "desde": "28-10-2026"
+     },
+     {
+      "o": "1-3OLN61YJ",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "LAGO LANALHUE 2408 DEPTO 34, QUILPUE",
+      "e": "Pendiente",
+      "tec": "LEONEL HERNÁNDEZ OJE",
+      "desde": "27-10-2026"
      }
     ]
    }
   }
  },
- "generado": "31-10-2026 13:22"
+ "generado": "31-10-2026 13:33"
 }
