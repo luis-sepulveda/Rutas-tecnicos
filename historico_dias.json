@@ -21706,24 +21706,25 @@
    }
   },
   "02-11-2026": {
-   "hasta": "13:10",
-   "actividades": 143,
+   "hasta": "13:20",
+   "actividades": 145,
    "tecnicos": 32,
    "estados": {
     "Suspendido": 1,
-    "Iniciado": 19,
-    "Pendiente": 78,
+    "Iniciado": 18,
+    "Pendiente": 79,
     "Cancelado": 5,
-    "Completado": 30,
-    "No Realizada": 10
+    "Completado": 31,
+    "No Realizada": 10,
+    "en ruta": 1
    },
-   "rgu": 213.4,
-   "caidas_total": 2,
-   "caidas_activas": 2,
+   "rgu": 216.4,
+   "caidas_total": 3,
+   "caidas_activas": 3,
    "caidas_resueltas": 0,
-   "nuevas": 11,
-   "al_bucket": 11,
-   "repetidas": 19,
+   "nuevas": 12,
+   "al_bucket": 12,
+   "repetidas": 20,
    "reagendadas": 6,
    "detalle": {
     "caidas": [
@@ -21744,9 +21745,27 @@
       "hi": "11:19",
       "d": "PJE GALVARINO 1494, QUILPUE",
       "e": "Pendiente"
+     },
+     {
+      "o": "1-3OR0JL8L",
+      "tec": "PABLO HERNANEZ FERNANDEZ",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "18:23",
+      "d": "ERCILLA 996, QUILPUE",
+      "e": "Pendiente"
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OPYLIPS",
+      "tec": "LUIS CASTRO TORRES",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "16:35",
+      "d": "TIERRAS ROJAS 484, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OR6E6T1",
       "tec": "JOSE CASTRO P",
@@ -21897,6 +21916,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OPX8382",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "17:04",
+      "d": "SANTA TERESA 0483, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JORGE PEZOA VICUÑA",
+      "visitas": 1,
+      "ult_fecha": "29-10-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3OR0CHB0",
       "cat": "Reparación",
       "f": "13-16",
@@ -21984,7 +22015,7 @@
       "o": "1-3OLPSYX7",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "18:19",
+      "hi": "18:17",
       "d": "PJE COLTAUCO 2438, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -22008,7 +22039,7 @@
       "o": "1-3OR6376I",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "18:46",
+      "hi": "17:09",
       "d": "DE VEER 1328 DEPTO 113, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -22102,9 +22133,9 @@
       "o": "1-3OOV5E56",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:02",
+      "hi": "13:31",
       "d": "PEDRO AGUIRRE CERDA 985, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "LEONEL HERNÁNDEZ OJE",
       "desde": "31-10-2026"
      },
@@ -22132,7 +22163,7 @@
       "o": "1-3OQ7CSTG",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:43",
+      "hi": "18:37",
       "d": "LOS MAQUIS 1635, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -22142,5 +22173,5 @@
    }
   }
  },
- "generado": "02-11-2026 13:10"
+ "generado": "02-11-2026 13:20"
 }
