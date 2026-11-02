@@ -21706,21 +21706,21 @@
    }
   },
   "02-11-2026": {
-   "hasta": "16:16",
+   "hasta": "17:01",
    "actividades": 163,
    "tecnicos": 32,
    "estados": {
     "Suspendido": 1,
-    "Completado": 68,
-    "Pendiente": 42,
+    "Completado": 71,
+    "Pendiente": 38,
     "Cancelado": 8,
-    "Iniciado": 23,
-    "en ruta": 4,
+    "Iniciado": 21,
+    "en ruta": 7,
     "No Realizada": 17
    },
    "rgu": 233.9,
-   "caidas_total": 3,
-   "caidas_activas": 3,
+   "caidas_total": 5,
+   "caidas_activas": 5,
    "caidas_resueltas": 0,
    "nuevas": 23,
    "al_bucket": 25,
@@ -21735,6 +21735,24 @@
       "f": "10-13",
       "hi": "10:00",
       "d": "ARAUS 172, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OR0V9MH",
+      "tec": "DANIEL NAVARRETE E",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "17:53",
+      "d": "JOSE FUENTES 660, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OQZEL25",
+      "tec": "ESTEBAN PIZARRO QUINTANA",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "16:15",
+      "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
       "e": "Pendiente"
      },
      {
@@ -21773,7 +21791,7 @@
       "f": "16-19",
       "hi": "16:00",
       "d": "SAN MARTIN 219, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OQ9PGLF",
@@ -22017,9 +22035,9 @@
       "o": "1-3OR0CHB0",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "16:14",
+      "hi": "16:20",
       "d": "AVENIDA VALPARAISO 1674, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "FELIPE SILVA R",
       "visitas": 1,
       "ult_fecha": "02-11-2026",
@@ -22053,7 +22071,7 @@
       "o": "1-3OLPSYX7",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "17:59",
+      "hi": "18:00",
       "d": "PJE COLTAUCO 2438, QUILPUE",
       "e": "Pendiente",
       "tec": "JORDAN ROA PEREZ",
@@ -22148,7 +22166,7 @@
       "o": "1-3OQPSC7I",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:26",
+      "hi": "17:24",
       "d": "OVALLE 1104, QUILPUE",
       "e": "Pendiente",
       "tec": "KEVIN TAPIA RETAMAL",
@@ -22196,7 +22214,7 @@
       "o": "1-3OPUK5C5",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "17:18",
+      "hi": "17:47",
       "d": "OVALLE 1126, QUILPUE",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -22306,5 +22324,5 @@
    }
   }
  },
- "generado": "02-11-2026 16:16"
+ "generado": "02-11-2026 17:01"
 }
