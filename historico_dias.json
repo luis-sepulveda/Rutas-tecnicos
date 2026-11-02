@@ -21706,24 +21706,24 @@
    }
   },
   "02-11-2026": {
-   "hasta": "11:09",
-   "actividades": 117,
+   "hasta": "11:19",
+   "actividades": 119,
    "tecnicos": 32,
    "estados": {
-    "Iniciado": 24,
-    "Pendiente": 72,
-    "Completado": 10,
-    "en ruta": 4,
-    "No Realizada": 6,
-    "Cancelado": 1
+    "Iniciado": 27,
+    "Pendiente": 71,
+    "Completado": 11,
+    "No Realizada": 7,
+    "Cancelado": 2,
+    "en ruta": 1
    },
-   "rgu": 180.5,
+   "rgu": 186.5,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
-   "nuevas": 6,
+   "nuevas": 7,
    "al_bucket": 3,
-   "repetidas": 18,
+   "repetidas": 19,
    "reagendadas": 6,
    "detalle": {
     "caidas": [
@@ -21748,6 +21748,15 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OQCL18X",
+      "tec": "MATÍAS JAQUE AG",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "16:40",
+      "d": "2 SUR 1394, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3OR1W69G",
       "tec": "JOSE ROJO A",
       "cat": "Reparación",
@@ -21767,12 +21776,12 @@
      },
      {
       "o": "1-3OR08265",
-      "tec": "KEVIN TAPIA RETAMAL",
+      "tec": "JOSE SALAS MEDINA",
       "cat": "Alta 2 Play",
       "f": "10-13",
       "hi": "12:41",
       "d": "HUANHUALI 456 EDIF. B3 DEPTO 42, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OR03LXQ",
@@ -21804,22 +21813,10 @@
     ],
     "repetidas": [
      {
-      "o": "1-3OPTE61P",
-      "cat": "Reparación",
-      "f": "10-13",
-      "hi": "11:56",
-      "d": "CLAUDIO GAY 46, QUILPUE",
-      "e": "Pendiente",
-      "tec": "ALEXIS JARA",
-      "visitas": 1,
-      "ult_fecha": "30-10-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
       "o": "1-3OLPSYX7",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "16:16",
+      "hi": "16:12",
       "d": "PJE COLTAUCO 2438, QUILPUE",
       "e": "Pendiente",
       "tec": "ALEXIS JARA",
@@ -21843,7 +21840,7 @@
       "o": "1-3OOVSF8C",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "13:33",
+      "hi": "14:33",
       "d": "CUMMING 951 DEPTO 30, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -21867,7 +21864,7 @@
       "o": "1-3OPSH1KW",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "15:55",
+      "hi": "15:09",
       "d": "GILBERTO BARROS 2, QUILPUE",
       "e": "Pendiente",
       "tec": "JORDAN ROA PEREZ",
@@ -21939,7 +21936,7 @@
       "o": "1-3OR1LSEQ",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:16",
+      "hi": "17:23",
       "d": "RIQUELME 2063, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
@@ -22013,11 +22010,35 @@
       "f": "10-13",
       "hi": "10:00",
       "d": "CLAUDIO VICUNA 951, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "YENDER BOSCAN CADENAS",
       "visitas": 4,
       "ult_fecha": "19-10-2026",
       "ult_cierre": "NAP Problema ubicación"
+     },
+     {
+      "o": "1-3OON2AT4",
+      "cat": "Migración 3 Play",
+      "f": "10-13",
+      "hi": "11:34",
+      "d": "MORRO LA CRUZ 2948, QUILPUE",
+      "e": "Pendiente",
+      "tec": "YENDER BOSCAN CADENAS",
+      "visitas": 1,
+      "ult_fecha": "16-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OPTE61P",
+      "cat": "Reparación",
+      "f": "10-13",
+      "hi": "15:57",
+      "d": "CLAUDIO GAY 46, QUILPUE",
+      "e": "Pendiente",
+      "tec": "YENDER BOSCAN CADENAS",
+      "visitas": 1,
+      "ult_fecha": "30-10-2026",
+      "ult_cierre": "Cliente reagenda"
      }
     ],
     "reagendadas": [
@@ -22035,7 +22056,7 @@
       "o": "1-3OQ7CSTG",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:51",
+      "hi": "16:57",
       "d": "LOS MAQUIS 1635, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -22055,9 +22076,9 @@
       "o": "1-3OO1X9UG",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "11:08",
+      "hi": "11:13",
       "d": "NAVARRA 1825 EDIF. H DEPTO 31, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JUAN ARRIAGADA C",
       "desde": "29-10-2026"
      },
@@ -22085,5 +22106,5 @@
    }
   }
  },
- "generado": "02-11-2026 11:09"
+ "generado": "02-11-2026 11:19"
 }
