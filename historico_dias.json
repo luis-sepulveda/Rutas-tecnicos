@@ -21706,23 +21706,23 @@
    }
   },
   "02-11-2026": {
-   "hasta": "10:04",
-   "actividades": 102,
+   "hasta": "10:09",
+   "actividades": 103,
    "tecnicos": 35,
    "estados": {
-    "Iniciado": 26,
-    "Pendiente": 69,
-    "en ruta": 5,
+    "Iniciado": 27,
+    "Pendiente": 71,
+    "en ruta": 3,
     "Cancelado": 1,
     "No Realizada": 1
    },
-   "rgu": 155.5,
+   "rgu": 156.5,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
-   "nuevas": 2,
+   "nuevas": 3,
    "al_bucket": 0,
-   "repetidas": 15,
+   "repetidas": 16,
    "reagendadas": 6,
    "detalle": {
     "caidas": [
@@ -21746,6 +21746,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OR03LXQ",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "13:00",
+      "d": "LIMACHE 1638, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OQZ66O9",
       "tec": "NICOLAS MOYANO R",
@@ -21777,6 +21786,18 @@
       "visitas": 1,
       "ult_fecha": "24-10-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OR03LXQ",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "13:00",
+      "d": "LIMACHE 1638, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "visitas": 1,
+      "ult_fecha": "03-09-2026",
+      "ult_cierre": "Falla Aprovisionamiento"
      },
      {
       "o": "1-3OOPOT3M",
@@ -21878,9 +21899,9 @@
       "o": "1-3OON2AT4",
       "cat": "Migración 3 Play",
       "f": "10-13",
-      "hi": "09:32",
+      "hi": "10:00",
       "d": "MORRO LA CRUZ 2948, QUILPUE",
-      "e": "en ruta",
+      "e": "Pendiente",
       "tec": "NICOLAS MOYANO R",
       "visitas": 1,
       "ult_fecha": "16-10-2026",
@@ -22012,5 +22033,5 @@
    }
   }
  },
- "generado": "02-11-2026 10:04"
+ "generado": "02-11-2026 10:09"
 }
