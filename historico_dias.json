@@ -21706,23 +21706,23 @@
    }
   },
   "02-11-2026": {
-   "hasta": "14:10",
-   "actividades": 154,
+   "hasta": "14:30",
+   "actividades": 155,
    "tecnicos": 32,
    "estados": {
     "Suspendido": 1,
-    "Iniciado": 17,
-    "Pendiente": 72,
-    "Cancelado": 5,
-    "Completado": 40,
+    "Iniciado": 25,
+    "Pendiente": 67,
+    "Cancelado": 6,
+    "Completado": 44,
     "No Realizada": 10,
-    "en ruta": 9
+    "en ruta": 2
    },
-   "rgu": 224.5,
+   "rgu": 224.6,
    "caidas_total": 3,
    "caidas_activas": 3,
    "caidas_resueltas": 0,
-   "nuevas": 15,
+   "nuevas": 16,
    "al_bucket": 22,
    "repetidas": 21,
    "reagendadas": 6,
@@ -21758,13 +21758,22 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OR9DSB3",
+      "tec": "YENDER BOSCAN CADENAS",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "14:20",
+      "d": "MORRO LA CRUZ 2948, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
       "o": "1-3OR8BU7B",
       "tec": "DANIEL NAVARRETE E",
       "cat": "Modificación de Servicio",
       "f": "13-16",
       "hi": "13:48",
       "d": "FLOR DE LA PLUMA 1069, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OR7VV0L",
@@ -21910,7 +21919,7 @@
       "o": "1-3OOVSF8C",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "15:22",
+      "hi": "15:28",
       "d": "CUMMING 951 DEPTO 30, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
@@ -21922,9 +21931,9 @@
       "o": "1-3OPSH1KW",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:19",
+      "hi": "14:27",
       "d": "GILBERTO BARROS 2, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "EDGAR VALERO C",
       "visitas": 3,
       "ult_fecha": "30-10-2026",
@@ -21955,10 +21964,22 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OLPSYX7",
+      "cat": "Migración 1 Play",
+      "f": "16-19",
+      "hi": "17:55",
+      "d": "PJE COLTAUCO 2438, QUILPUE",
+      "e": "Pendiente",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "visitas": 1,
+      "ult_fecha": "24-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OPX8382",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "18:06",
+      "hi": "17:05",
       "d": "SANTA TERESA 0483, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JORGE PEZOA VICUÑA",
@@ -21970,7 +21991,7 @@
       "o": "1-3OQ7RTSD",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "17:08",
+      "hi": "16:48",
       "d": "IGNACIO CARRERA PINTO 0356 DEPTO 408, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE CASTRO P",
@@ -21994,7 +22015,7 @@
       "o": "1-3OR2GY6Y",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "17:09",
+      "hi": "17:00",
       "d": "PJE CATALUNA 1838, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE PEREZ RANGEL",
@@ -22051,18 +22072,6 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3OLPSYX7",
-      "cat": "Migración 1 Play",
-      "f": "16-19",
-      "hi": "19:30",
-      "d": "PJE COLTAUCO 2438, QUILPUE",
-      "e": "Pendiente",
-      "tec": "LEONEL HERNÁNDEZ OJE",
-      "visitas": 1,
-      "ult_fecha": "24-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OOMLNQO",
       "cat": "Reparación",
       "f": "10-13",
@@ -22078,7 +22087,7 @@
       "o": "1-3OR6376I",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "17:43",
+      "hi": "16:27",
       "d": "DE VEER 1328 DEPTO 113, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -22152,7 +22161,7 @@
       "o": "1-3OQ7CSTG",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:44",
       "d": "LOS MAQUIS 1635, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -22204,7 +22213,7 @@
       "f": "10-13",
       "hi": "10:50",
       "d": "MEJILLONES 85, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "MARCO PEREZ G",
       "desde": "31-10-2026"
      }
@@ -22212,5 +22221,5 @@
    }
   }
  },
- "generado": "02-11-2026 14:10"
+ "generado": "02-11-2026 14:30"
 }
