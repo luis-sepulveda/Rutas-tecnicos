@@ -21706,19 +21706,19 @@
    }
   },
   "02-11-2026": {
-   "hasta": "18:45",
-   "actividades": 166,
+   "hasta": "19:05",
+   "actividades": 167,
    "tecnicos": 32,
    "estados": {
-    "Suspendido": 3,
-    "Completado": 107,
-    "Cancelado": 10,
-    "No Realizada": 24,
+    "Suspendido": 4,
+    "Completado": 108,
+    "Cancelado": 11,
+    "No Realizada": 27,
+    "en ruta": 1,
     "Iniciado": 12,
-    "Pendiente": 7,
-    "en ruta": 3
+    "Pendiente": 4
    },
-   "rgu": 236.0,
+   "rgu": 237.0,
    "caidas_total": 5,
    "caidas_activas": 5,
    "caidas_resueltas": 0,
@@ -22024,6 +22024,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OLPSYX7",
+      "cat": "Migración 1 Play",
+      "f": "16-19",
+      "hi": "19:03",
+      "d": "PJE COLTAUCO 2438, QUILPUE",
+      "e": "Iniciado",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "visitas": 1,
+      "ult_fecha": "24-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OOVSF8C",
       "cat": "Migración 1 Play",
       "f": "13-16",
@@ -22195,7 +22207,7 @@
       "f": "16-19",
       "hi": "18:31",
       "d": "GABRIEL GONZALEZ VIDELA 1785, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "LUIS CASTRO TORRES",
       "visitas": 1,
       "ult_fecha": "19-10-2026",
@@ -22212,18 +22224,6 @@
       "visitas": 1,
       "ult_fecha": "29-10-2026",
       "ult_cierre": "Cliente reagenda"
-     },
-     {
-      "o": "1-3OLPSYX7",
-      "cat": "Migración 1 Play",
-      "f": "16-19",
-      "hi": "18:58",
-      "d": "PJE COLTAUCO 2438, QUILPUE",
-      "e": "Pendiente",
-      "tec": "LUIS MARTIN NUÑEZ",
-      "visitas": 1,
-      "ult_fecha": "24-10-2026",
-      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OPTE61P",
@@ -22311,9 +22311,9 @@
       "o": "1-3OQ7CSTG",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "18:59",
+      "hi": "18:58",
       "d": "LOS MAQUIS 1635, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "KEVIN TAPIA RETAMAL",
       "desde": "31-10-2026"
      },
@@ -22331,9 +22331,9 @@
       "o": "1-3OHYRCK1",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "18:46",
+      "hi": "18:55",
       "d": "OROPESA 019, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "LUIS GATICA DAVILA",
       "desde": "26-10-2026"
      },
@@ -22351,5 +22351,5 @@
    }
   }
  },
- "generado": "02-11-2026 18:45"
+ "generado": "02-11-2026 19:05"
 }
