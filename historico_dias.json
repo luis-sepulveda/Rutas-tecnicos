@@ -21706,25 +21706,25 @@
    }
   },
   "02-11-2026": {
-   "hasta": "13:45",
-   "actividades": 141,
+   "hasta": "13:50",
+   "actividades": 153,
    "tecnicos": 32,
    "estados": {
     "Suspendido": 1,
     "Iniciado": 11,
-    "Pendiente": 73,
+    "Pendiente": 82,
     "Cancelado": 5,
-    "Completado": 38,
-    "en ruta": 3,
-    "No Realizada": 10
+    "Completado": 39,
+    "No Realizada": 10,
+    "en ruta": 5
    },
-   "rgu": 207.9,
+   "rgu": 223.5,
    "caidas_total": 3,
    "caidas_activas": 3,
    "caidas_resueltas": 0,
-   "nuevas": 14,
+   "nuevas": 15,
    "al_bucket": 22,
-   "repetidas": 20,
+   "repetidas": 21,
    "reagendadas": 6,
    "detalle": {
     "caidas": [
@@ -21758,13 +21758,22 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OR8BU7B",
+      "tec": "DANIEL NAVARRETE E",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "13:48",
+      "d": "FLOR DE LA PLUMA 1069, QUILPUE",
+      "e": "en ruta"
+     },
+     {
       "o": "1-3OR7VV0L",
-      "tec": "JOSE SALAS MEDINA",
+      "tec": "FELIPE SILVA R",
       "cat": "Migración 2 Play",
       "f": "13-16",
       "hi": "17:42",
       "d": "ALCALDE ALEJANDRO PERALTA 1439, VILLA ALEMANA",
-      "e": "Pendiente (ya no está)"
+      "e": "Pendiente"
      },
      {
       "o": "1-3OR762WZ",
@@ -21863,7 +21872,7 @@
       "f": "13-16",
       "hi": "13:00",
       "d": "LIMACHE 1638, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OQZ66O9",
@@ -21889,7 +21898,7 @@
       "o": "1-3OOVSF8C",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "15:54",
+      "hi": "16:50",
       "d": "CUMMING 951 DEPTO 30, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -21937,7 +21946,7 @@
       "o": "1-3OPX8382",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:56",
+      "hi": "18:03",
       "d": "SANTA TERESA 0483, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JORGE PEZOA VICUÑA",
@@ -21949,7 +21958,7 @@
       "o": "1-3OQ7RTSD",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "17:06",
       "d": "IGNACIO CARRERA PINTO 0356 DEPTO 408, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE CASTRO P",
@@ -21961,25 +21970,37 @@
       "o": "1-3OR03LXQ",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:08",
+      "hi": "14:02",
       "d": "LIMACHE 1638, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JOSE PEREZ RANGEL",
       "visitas": 1,
       "ult_fecha": "03-09-2026",
       "ult_cierre": "Falla Aprovisionamiento"
      },
      {
-      "o": "1-3OQATP2G",
+      "o": "1-3OR2GY6Y",
       "cat": "Alta 1 Play",
-      "f": "10-13",
-      "hi": "10:57",
+      "f": "13-16",
+      "hi": "17:11",
       "d": "PJE CATALUNA 1838, VILLA ALEMANA",
-      "e": "No Realizada",
-      "tec": "JOSE ROJO A",
-      "visitas": 2,
-      "ult_fecha": "31-10-2026",
+      "e": "Pendiente",
+      "tec": "JOSE PEREZ RANGEL",
+      "visitas": 3,
+      "ult_fecha": "02-11-2026",
       "ult_cierre": "Clte desiste motivo comercial"
+     },
+     {
+      "o": "1-3OR0CHB0",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "17:31",
+      "d": "AVENIDA VALPARAISO 1674, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOSE ROJO A",
+      "visitas": 1,
+      "ult_fecha": "02-11-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OPI9M1X",
@@ -22033,7 +22054,7 @@
       "o": "1-3OLPSYX7",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "18:46",
+      "hi": "19:30",
       "d": "PJE COLTAUCO 2438, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -22057,7 +22078,7 @@
       "o": "1-3OR6376I",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "17:13",
+      "hi": "17:37",
       "d": "DE VEER 1328 DEPTO 113, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -22151,9 +22172,9 @@
       "o": "1-3OOV5E56",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "13:31",
+      "hi": "13:48",
       "d": "PEDRO AGUIRRE CERDA 985, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "LEONEL HERNÁNDEZ OJE",
       "desde": "31-10-2026"
      },
@@ -22181,7 +22202,7 @@
       "o": "1-3OQ7CSTG",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "18:33",
+      "hi": "18:57",
       "d": "LOS MAQUIS 1635, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -22191,5 +22212,5 @@
    }
   }
  },
- "generado": "02-11-2026 13:45"
+ "generado": "02-11-2026 13:50"
 }
