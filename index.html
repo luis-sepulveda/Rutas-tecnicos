@@ -17838,5 +17838,379 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarM
   .mi-n { display:inline-block; margin-left:8px; padding:0 7px; border-radius:9px; background:#e2e8f0; color:#334155; font-size:12px; font-weight:700; vertical-align:1px; }
   .mi-n.roj { background:#dc2626; color:#fff; } .mi-n.nueva { animation:miLate 1.4s ease-in-out infinite; }
 </style>
+<!-- ==== (02-11-2026) MI ANALISIS (vista escondida, solo Luis) ====
+     Luis: "otra mirada de la informacion, pero solo para mi, la mirada actual
+     que siga tal cual". Se abre con Ctrl + Alt + A (y se cierra igual, con Esc
+     o con el boton Cerrar). No tiene boton en pantalla.
+     - Relojes de completitud de Migraciones, Altas y Reparaciones: hoy,
+       semana y mes (completadas / visitadas, meta MP_META = 60 %).
+     - Semaforo de las ultimas 8 semanas y "Como cierra el mes".
+     - Tocar un reloj (o una casilla del semaforo) abre el detalle de esa
+       actividad: cifras, por que no se hicieron (mgResp), por franja,
+       tecnico por tecnico y la lista de ordenes.
+     Datos (los MISMOS de siempre, no se baja nada nuevo):
+     - hoy: DB (rutas.json, en vivo)
+     - migraciones de dias anteriores: MG (bajarMigGer, igual que la pagina
+       MIGRACIONES, con la GSA como quiebre)
+     - altas y reparaciones de dias anteriores: ACT_FILAS (datos.json,
+       solo tecnicos _DOMI_)
+     No cambia ningun calculo ni pantalla existente. Para sacarla: borrar
+     este bloque completo (style + script). -->
+<style>
+  #anPage { position:fixed; inset:0; z-index:3500; display:none; background:#ffffff; overflow:auto; color:#e2e8f0;
+    font-family:'Segoe UI',Arial,sans-serif; }
+  #anPage.abierto { display:block; }
+  #anPage .an-wrap { max-width:1500px; margin:0 auto; padding:16px 18px 30px; }
+  #anPage .an-head { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:12px; }
+  #anPage h1 { margin:0; font-size:24px; letter-spacing:.5px; color:#0f172a; }
+  #anPage h1 small { font-size:13px; color:#64748b; font-weight:400; margin-left:8px; }
+  #anPage .an-chips { display:flex; gap:6px; flex-wrap:wrap; align-items:center; }
+  #anPage .an-chip { background:#16213a; border:1px solid #22304f; border-radius:999px; padding:6px 13px; font-size:12.5px; color:#94a3b8; cursor:pointer; }
+  #anPage .an-chip.on { background:#1d4ed8; border-color:#1d4ed8; color:#fff; }
+  #anPage .an-x { background:#f1f5f9; border:1px solid #cbd5e1; color:#334155; border-radius:8px; padding:6px 12px; cursor:pointer; font-size:14px; margin-left:6px; }
+  #anPage .an-sec { font-size:12px; text-transform:uppercase; letter-spacing:1.5px; color:#475569; font-weight:600; margin:16px 0 8px; }
+  #anPage .an-g3 { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:12px; }
+  #anPage .an-g2 { display:grid; grid-template-columns:1.3fr 1fr; gap:12px; }
+  @media (max-width:1050px){ #anPage .an-g3, #anPage .an-g2 { grid-template-columns:1fr; } }
+  #anPage .an-card, #anDet .an-card, #anDet .an-kpi { background:#111a2e; border:1px solid #22304f; border-radius:14px; padding:14px; box-shadow:0 2px 10px rgba(15,23,42,.15); color:#e2e8f0; }
+  .an-card h3 { margin:0 0 2px; font-size:16px; display:flex; align-items:center; gap:8px; }
+  .an-card h3 i.pt { width:10px; height:10px; border-radius:50%; display:inline-block; }
+  .an-card p.s { margin:0 0 6px; font-size:12px; color:#94a3b8; }
+  #anPage .an-clic { cursor:pointer; position:relative; transition:border-color .15s, transform .15s; }
+  #anPage .an-clic:hover { border-color:#3b82f6; transform:translateY(-2px); }
+  #anPage .an-ver { position:absolute; top:14px; right:14px; font-size:12px; color:#93c5fd; }
+  #anPage .an-rel { display:grid; grid-template-columns:1fr 1.5fr 1fr; align-items:end; gap:4px; }
+  #anPage .an-rel svg { width:100%; height:auto; display:block; }
+  .an-card svg text { font-family:'Segoe UI',Arial,sans-serif; }
+  #anPage .an-pie { display:flex; justify-content:space-between; gap:8px; flex-wrap:wrap; font-size:12px; color:#94a3b8; margin-top:6px; border-top:1px dashed #22304f; padding-top:6px; }
+  #anPage .an-pie b { color:#e2e8f0; }
+  #anPage .an-sem { display:grid; grid-template-columns:110px repeat(8, 1fr); gap:5px; align-items:center; font-size:12px; }
+  #anPage .an-sem .d { height:28px; border-radius:6px; display:flex; flex-direction:column; align-items:center; justify-content:center; font-weight:700; font-size:11.5px; color:#0b1220; cursor:pointer; line-height:1.05; }
+  #anPage .an-sem .d small { font-weight:500; font-size:9.5px; opacity:.8; }
+  #anPage .an-sem .d.vac { background:#1e293b; color:#64748b; cursor:default; }
+  #anPage .an-sem .d.act { outline:2px solid #fff; outline-offset:-2px; }
+  #anPage .an-sem .h { color:#94a3b8; text-align:center; }
+  #anPage .an-ley { display:flex; gap:14px; flex-wrap:wrap; font-size:12px; color:#94a3b8; margin-top:6px; }
+  #anPage .an-nota { margin-top:14px; background:#111a2e; border:1px solid #22304f; border-radius:12px; padding:12px 16px; font-size:13px; line-height:1.55; color:#cbd5e1; }
+  #anPage .an-nota ul { margin:4px 0 0; padding-left:20px; }
+  #anPage .an-carga { padding:40px; text-align:center; color:#475569; font-size:15px; }
+  /* detalle (fondo blanco, tarjetas oscuras) */
+  #anDet { position:fixed; inset:0; z-index:3600; display:none; background:rgba(15,23,42,.45); overflow:auto; padding:24px 16px; font-family:'Segoe UI',Arial,sans-serif; }
+  #anDet.abierto { display:block; }
+  #anDet .an-md { max-width:1250px; margin:0 auto; background:#fff; border:1px solid #e2e8f0; border-radius:16px; padding:18px; box-shadow:0 10px 40px rgba(15,23,42,.25); }
+  #anDet .an-mdtop { display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; }
+  #anDet .an-mdtop h2 { margin:0; font-size:22px; display:flex; align-items:center; gap:10px; color:#0f172a; }
+  #anDet .an-mdtop h2 small { font-size:13px; color:#64748b; font-weight:400; }
+  #anDet .an-x { background:#f1f5f9; border:1px solid #cbd5e1; color:#334155; border-radius:8px; padding:6px 12px; cursor:pointer; font-size:14px; }
+  #anDet .an-tabs { display:flex; gap:6px; margin:12px 0; flex-wrap:wrap; }
+  #anDet .an-tab { background:#f1f5f9; border:1px solid #cbd5e1; color:#334155; border-radius:999px; padding:6px 14px; cursor:pointer; font-size:13px; }
+  #anDet .an-tab.on { background:#1d4ed8; border-color:#1d4ed8; color:#fff; }
+  #anDet .an-kpis { display:grid; grid-template-columns:repeat(5, minmax(0,1fr)); gap:10px; }
+  @media (max-width:900px){ #anDet .an-kpis { grid-template-columns:repeat(2, 1fr); } }
+  #anDet .an-kpi { padding:10px 12px; }
+  #anDet .an-kpi small { display:block; font-size:11.5px; color:#94a3b8; text-transform:uppercase; letter-spacing:1px; }
+  #anDet .an-kpi b { font-size:26px; }
+  #anDet .an-kpi span { font-size:12px; color:#94a3b8; }
+  #anDet .an-mg { display:grid; grid-template-columns:1fr 1.25fr; gap:12px; margin-top:12px; }
+  @media (max-width:900px){ #anDet .an-mg { grid-template-columns:1fr; } }
+  #anDet .an-bar { display:grid; grid-template-columns:150px 1fr 74px; gap:8px; align-items:center; font-size:13px; margin:7px 0; }
+  #anDet .an-bar .t { height:14px; background:#16213a; border-radius:7px; overflow:hidden; }
+  #anDet .an-bar .t i { display:block; height:100%; border-radius:7px; }
+  #anDet .an-mot { font-size:12px; color:#94a3b8; margin:-2px 0 8px 158px; }
+  #anDet table.an-tb { width:100%; border-collapse:collapse; font-size:12.5px; }
+  #anDet .an-tb th { text-align:left; color:#94a3b8; font-weight:600; padding:6px; border-bottom:1px solid #22304f; position:sticky; top:0; background:#111a2e; }
+  #anDet .an-tb td { padding:6px; border-bottom:1px solid #1b2742; }
+  #anDet .an-tb tr:hover td { background:#16213a; }
+  #anDet .an-tb tr.gr td { color:#64748b; }
+  #anDet .an-scroll { max-height:340px; overflow:auto; }
+  #anDet .an-est { border-radius:999px; padding:2px 8px; font-size:11.5px; font-weight:600; white-space:nowrap; }
+  #anDet .e-c { background:#14532d; color:#86efac; } #anDet .e-n { background:#7f1d1d; color:#fca5a5; }
+  #anDet .e-a { background:#334155; color:#cbd5e1; } #anDet .e-x { background:#1e293b; color:#64748b; }
+  #anDet .e-g { background:#3b0764; color:#d8b4fe; }
+  #anDet .an-mini { height:8px; background:#16213a; border-radius:4px; overflow:hidden; width:90px; display:inline-block; vertical-align:middle; margin-right:6px; }
+  #anDet .an-mini i { display:block; height:100%; }
+  #anDet .an-vac { color:#94a3b8; font-size:13px; padding:8px 0; }
+</style>
+<script>
+var AN_FAMS = [
+  { f:'Migraciones', c:'#e2e8f0' },
+  { f:'Altas', c:'#3b82f6' },
+  { f:'Reparaciones', c:'#fb923c' }
+];
+var AN_COM = 'Todo';                 // Todo / QUILPUE / VILLA ALEMANA
+var AN_DET = null;                   // { fam, per:{t:'hoy'|'sem'|'mes', k} }
+var AN_NOMMES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+var AN_RNOM = { cli:'Cliente', vtr:'VTR/CLARO', dom:'Dominion' };
+var AN_RCOL = { cli:'#f59e0b', vtr:'#3b82f6', dom:'#ef4444' };
+
+function anCol(v){ return v === null || v === undefined ? '#64748b' : v >= MP_META ? '#22c55e' : v >= MP_META - 5 ? '#f59e0b' : '#ef4444'; }
+function anF1(v){ return (Math.round(v * 10) / 10).toFixed(1).replace('.', ','); }
+function anIso(d){ return d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0'); }
+function anHoyIso(){ return anIso((typeof FECHA_DATOS !== 'undefined' && FECHA_DATOS) ? FECHA_DATOS : new Date()); }
+function anMasDias(iso, n){ const d = new Date(+iso.slice(0, 4), +iso.slice(4, 6) - 1, +iso.slice(6, 8) + n); return anIso(d); }
+function anCiuDir(d){ const m = /,\s*([^,]+)$/.exec(String(d || '')); return m ? m[1] : ''; }
+function anTec(t){ return typeof rmTitulo === 'function' ? rmTitulo(t) : String(t || ''); }
+
+/* Todas las filas que usa la vista: [{fam, iso, sem, mes, e, cod, gsa, fr, tec, ciu, ot, dir, hoy}] */
+function anFilas(){
+  try { mpCargar(); } catch(e){}
+  const cargando = (!MG && !mgFallo) || window.ACT_FILAS === null || window.ACT_FILAS === undefined;
+  const hoyIso = anHoyIso(), semHoy = mgLunes(hoyIso), mesHoy = hoyIso.slice(0, 6);
+  const R = [], AF = Array.isArray(window.ACT_FILAS) ? window.ACT_FILAS : [];
+  const ciuOT = {};
+  AF.forEach(function(r){ const ot = String(r['Orden de Trabajo'] || ''); if(ot) ciuOT[ot] = String(r['Ciudad'] || ''); });
+  /* migraciones de dias anteriores: MG (lo mismo de la pagina MIGRACIONES) */
+  if(MG && MG.filas) MG.filas.forEach(function(x){
+    if(!(x.iso < hoyIso)) return;
+    if(['Completado','No Realizada','Cancelado','Suspendido'].indexOf(x.e) < 0) return;
+    R.push({ fam:'Migraciones', iso:x.iso, sem:x.sem, mes:x.mes, e:x.e, cod:x.cod, gsa:!!x.gsa, fr:x.fr || '', tec:x.tec || '',
+      ciu: x.otra ? 'Otra comuna' : (ciuOT[x.ot] || ''), ot:x.ot || '', dir:'' });
+  });
+  /* altas y reparaciones de dias anteriores: datos.json, solo _DOMI_ */
+  AF.forEach(function(r){
+    const nom = String(r['Nombre'] || ''); if(nom.indexOf('_DOMI_') < 0) return;
+    const fam = familiaCat(r['Tipo de Actividad']); if(fam !== 'Altas' && fam !== 'Reparaciones') return;
+    const p = /^(\d{2})-(\d{2})-(\d{4})$/.exec(String(r['Fecha'] || '')); if(!p) return;
+    const iso = p[3] + p[2] + p[1]; if(!(iso < hoyIso)) return;
+    const est = String(r['Estado'] || '').trim();
+    if(['Completado','No Realizada','Cancelado','Suspendido'].indexOf(est) < 0) return;      // dias pasados: solo estados cerrados
+    R.push({ fam:fam, iso:iso, sem:mgLunes(iso), mes:iso.slice(0, 6), e:String(r['Estado'] || '').trim(), cod:String(r['Código de Cierre'] || '').trim(),
+      gsa:false, fr:String(r['Franja'] || ''), tec:nom.slice(nom.indexOf('_DOMI_') + 6).replace(/ /g, ' ').trim(),
+      ciu:String(r['Ciudad'] || ''), ot:String(r['Orden de Trabajo'] || ''), dir:'' });
+  });
+  /* hoy en vivo */
+  Object.keys(typeof DB === 'object' && DB ? DB : {}).forEach(function(t){ (DB[t] || []).forEach(function(o){
+    const fam = familiaCat(o.cat || o.t); if(fam !== 'Migraciones' && fam !== 'Altas' && fam !== 'Reparaciones') return;
+    R.push({ fam:fam, iso:hoyIso, sem:semHoy, mes:mesHoy, e:String(o.e || 'Pendiente'), cod:String(o.cie || ''), gsa: fam === 'Migraciones' && !!o.gsa,
+      fr:String(o.f || ''), tec:t, ciu:anCiuDir(o.d), ot:String(o.o || ''), dir:String(o.d || ''), hoy:true });
+  }); });
+  const F = AN_COM === 'Todo' ? R : R.filter(function(x){ return mpNorm(x.ciu).indexOf(AN_COM) >= 0; });
+  return { R:F, cargando:cargando, hoyIso:hoyIso, semHoy:semHoy, mesHoy:mesHoy };
+}
+function anPer(D, fam, per){
+  return D.R.filter(function(x){ return x.fam === fam && (per.t === 'hoy' ? x.hoy : per.t === 'sem' ? x.sem === per.k : x.mes === per.k); });
+}
+function anSemAnt(sem, n){ const p = sem.split('-'); const d = new Date(+p[0], +p[1] - 1, +p[2] - 7 * (n === undefined ? 1 : n));
+  return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+function anMesAnt(m){ return +m.slice(4) === 1 ? (+m.slice(0, 4) - 1) + '12' : m.slice(0, 4) + String(+m.slice(4) - 1).padStart(2, '0'); }
+function anPerTit(per){ return per.t === 'hoy' ? 'Hoy' : per.t === 'sem' ? 'Semana ' + derNumSemana(per.k) : AN_NOMMES[+per.k.slice(4) - 1]; }
+
+/* reloj con aguja: v = % (o null), r = radio */
+function anReloj(v, r, label, big){
+  const w = r * 2 + 20, h = r + (big ? 62 : 50), cx = w / 2, cy = r + 10, sw = big ? 16 : 11;
+  const ang = function(p){ return Math.PI * (1 - p / 100); };
+  const pt = function(p, rr){ return [cx + rr * Math.cos(ang(p)), cy - rr * Math.sin(ang(p))]; };
+  const arc = function(a, b, rr){ const p1 = pt(a, rr), p2 = pt(b, rr); return 'M' + p1[0] + ' ' + p1[1] + ' A' + rr + ' ' + rr + ' 0 0 1 ' + p2[0] + ' ' + p2[1]; };
+  const m = MP_META, m1 = pt(m, r - sw / 2 - 4), m2 = pt(m, r + sw / 2 + 4);
+  let s = '<svg viewBox="0 0 ' + w + ' ' + h + '">'
+    + '<path d="' + arc(0, m - 5, r) + '" stroke="#ef4444" stroke-opacity=".22" stroke-width="' + sw + '" fill="none"/>'
+    + '<path d="' + arc(m - 5, m, r) + '" stroke="#f59e0b" stroke-opacity=".25" stroke-width="' + sw + '" fill="none"/>'
+    + '<path d="' + arc(m, 100, r) + '" stroke="#22c55e" stroke-opacity=".22" stroke-width="' + sw + '" fill="none"/>';
+  if(v !== null && v !== undefined){
+    const vv = Math.max(0.5, Math.min(99.5, v)), n = pt(vv, r - sw - 8);
+    s += '<path d="' + arc(0, vv, r) + '" stroke="' + anCol(v) + '" stroke-width="' + sw + '" fill="none" stroke-linecap="round"/>'
+      + '<line x1="' + cx + '" y1="' + cy + '" x2="' + n[0] + '" y2="' + n[1] + '" stroke="#e2e8f0" stroke-width="' + (big ? 3 : 2) + '" stroke-linecap="round"/>';
+  }
+  s += '<line x1="' + m1[0] + '" y1="' + m1[1] + '" x2="' + m2[0] + '" y2="' + m2[1] + '" stroke="#fff" stroke-width="2.5"/>'
+    + '<circle cx="' + cx + '" cy="' + cy + '" r="' + (big ? 6 : 4) + '" fill="#e2e8f0"/>'
+    + '<text x="' + cx + '" y="' + (cy + (big ? 30 : 22)) + '" text-anchor="middle" font-size="' + (big ? 24 : 15) + '" font-weight="700" fill="' + anCol(v) + '">' + (v === null || v === undefined ? '–' : anF1(v) + '%') + '</text>'
+    + '<text x="' + cx + '" y="' + (cy + (big ? 48 : 38)) + '" text-anchor="middle" font-size="' + (big ? 12 : 10.5) + '" letter-spacing="1" fill="#94a3b8">' + label + '</text></svg>';
+  return s;
+}
+
+function anPintar(){
+  const box = document.getElementById('anPage'); if(!box || !box.classList.contains('abierto')) return;
+  const y = box.scrollTop, D = anFilas(), fd = (typeof FECHA_DATOS !== 'undefined' && FECHA_DATOS) ? FECHA_DATOS : new Date();
+  const hh = String(fd.getHours()).padStart(2, '0') + ':' + String(fd.getMinutes()).padStart(2, '0');
+  let h = '<div class="an-wrap"><div class="an-head"><h1>MI ANÁLISIS <small>solo Luis · ' + fd.toLocaleDateString('es-CL', { weekday:'long', day:'2-digit', month:'2-digit', year:'numeric' }) + ', datos de las ' + hh + '</small></h1>'
+    + '<div class="an-chips">' + [['Todo','Todo el equipo'], ['QUILPUE','Quilpué'], ['VILLA ALEMANA','Villa Alemana']].map(function(c){
+        return '<span class="an-chip' + (AN_COM === c[0] ? ' on' : '') + '" onclick="AN_COM=\'' + c[0] + '\'; anPintar(); anDetPintar()">' + c[1] + '</span>'; }).join('')
+    + '<button class="an-x" onclick="anCerrar()" title="Cerrar (Esc o Ctrl+Alt+A)">✕ Cerrar</button></div></div>';
+  if(D.cargando) h += '<div class="an-carga">Cargando el histórico (datos.json)… lo de hoy ya está, el resto aparece en unos segundos.</div>';
+  const semAnt = anSemAnt(D.semHoy), mesAnt = anMesAnt(D.mesHoy);
+  h += '<div class="an-sec">Relojes de completitud · completadas ÷ visitadas · meta ' + MP_META + '%</div><div class="an-g3">';
+  AN_FAMS.forEach(function(F){
+    const sh = mpSt(anPer(D, F.f, { t:'hoy' })), ss = mpSt(anPer(D, F.f, { t:'sem', k:D.semHoy })), sm = mpSt(anPer(D, F.f, { t:'mes', k:D.mesHoy }));
+    const sa = mpSt(anPer(D, F.f, { t:'sem', k:semAnt }));
+    const dl = ss.comp !== null && sa.comp !== null ? ss.comp - sa.comp : null;
+    h += '<div class="an-card an-clic" onclick="anDetAbrir(\'' + F.f + '\', {t:\'sem\', k:\'' + D.semHoy + '\'})" title="Toca para ver el detalle de ' + F.f.toLowerCase() + '">'
+      + '<h3><i class="pt" style="background:' + F.c + '"></i>' + F.f + '</h3><span class="an-ver">ver detalle ›</span>'
+      + '<div class="an-rel">' + anReloj(sh.comp, 52, 'HOY') + anReloj(ss.comp, 80, 'SEMANA ' + derNumSemana(D.semHoy), true) + anReloj(sm.comp, 52, AN_NOMMES[+D.mesHoy.slice(4) - 1].toUpperCase()) + '</div>'
+      + '<div class="an-pie"><span>vs Sem ' + derNumSemana(semAnt) + ': ' + (dl === null ? '<b>–</b>' : '<b style="color:' + (dl >= 0 ? '#22c55e' : '#ef4444') + '">' + (dl >= 0 ? '▲' : '▼') + ' ' + anF1(Math.abs(dl)) + ' pts</b>')
+      + '</span><span><b>' + ss.vis + '</b> visitadas en la semana' + (ss.ab ? ' · <b>' + ss.ab + '</b> por cerrar' : '') + '</span></div>'
+      + (F.f === 'Migraciones' && (ss.g || sm.g) ? '<div class="an-pie" style="border:0;padding-top:0;color:#a78bfa">GSA como quiebre (como VTR) · semana sin GSA ' + mpPc(ss.compSG) + ' · mes sin GSA ' + mpPc(sm.compSG) + '</div>' : '')
+      + '</div>';
+  });
+  h += '</div>';
+  /* semaforo 8 semanas */
+  const SEMS = []; for(let i = 7; i >= 0; i--) SEMS.push(anSemAnt(D.semHoy, i));
+  h += '<div class="an-sec">Una mirada distinta</div><div class="an-g2"><div class="an-card"><h3>Semáforo de las últimas 8 semanas</h3>'
+    + '<p class="s">Completitud semana a semana. Verde: sobre la meta. Ámbar: a menos de 5 pts. Rojo: bajo eso. Toca una casilla para ver esa semana.</p>'
+    + '<div class="an-sem"><div></div>' + SEMS.map(function(k){ return '<div class="h">S' + derNumSemana(k) + (k === D.semHoy ? '<br><small>en curso</small>' : '') + '</div>'; }).join('');
+  AN_FAMS.forEach(function(F){
+    h += '<div>' + F.f + '</div>';
+    SEMS.forEach(function(k){
+      const s = mpSt(anPer(D, F.f, { t:'sem', k:k }));
+      h += s.comp === null ? '<div class="d vac">–</div>'
+        : '<div class="d' + (k === D.semHoy ? ' act' : '') + '" style="background:' + anCol(s.comp) + '" title="' + F.f + ' semana ' + derNumSemana(k) + ': ' + s.co + ' de ' + s.vis + ' visitadas" onclick="anDetAbrir(\'' + F.f + '\', {t:\'sem\', k:\'' + k + '\'})">'
+          + Math.round(s.comp) + '%<small>' + s.vis + ' vis.</small></div>';
+    });
+  });
+  h += '</div></div>';
+  /* como cierra el mes */
+  h += '<div class="an-card"><h3>¿Cómo cierra ' + AN_NOMMES[+D.mesHoy.slice(4) - 1].toLowerCase() + '?</h3>'
+    + '<p class="s">Lo que queda del mes (abiertas de hoy + días hábiles que faltan × visitas por día de los últimos 10 días) cerrado con la completitud de esos 10 días, ± 5 pts. La línea blanca es la meta; el punto, dónde va hoy.</p>';
+  const W = 460, L = 104, Rr = 70, xa = function(v){ return L + (Math.max(30, Math.min(90, v)) - 30) / 60 * (W - L - Rr); };
+  let g = '<svg viewBox="0 0 ' + W + ' ' + (AN_FAMS.length * 58 + 30) + '" style="width:100%">';
+  [30, 40, 50, 60, 70, 80, 90].forEach(function(v){ g += '<text x="' + xa(v) + '" y="' + (AN_FAMS.length * 58 + 22) + '" font-size="10.5" fill="#94a3b8" text-anchor="middle">' + v + '%</text><line x1="' + xa(v) + '" x2="' + xa(v) + '" y1="6" y2="' + (AN_FAMS.length * 58 + 8) + '" stroke="#22304f"/>'; });
+  const d0 = new Date(+D.hoyIso.slice(0, 4), +D.hoyIso.slice(4, 6) - 1, +D.hoyIso.slice(6, 8));
+  let dias = 0; const fin = new Date(d0.getFullYear(), d0.getMonth() + 1, 0);
+  for(let d = new Date(d0.getTime() + 864e5); d <= fin; d.setDate(d.getDate() + 1)) if(d.getDay() !== 0) dias++;
+  AN_FAMS.forEach(function(F, i){
+    const yy = 20 + i * 58, sm = mpSt(anPer(D, F.f, { t:'mes', k:D.mesHoy }));
+    const porDia = {}; D.R.forEach(function(x){ if(x.fam === F.f && !x.hoy) (porDia[x.iso] = porDia[x.iso] || []).push(x); });
+    const ult = Object.keys(porDia).sort().slice(-10), L10 = []; ult.forEach(function(k){ porDia[k].forEach(function(x){ L10.push(x); }); });
+    const s10 = mpSt(L10), prom = ult.length ? s10.vis / ult.length : 0, quedan = Math.round(prom * dias + sm.ab);
+    g += '<text x="0" y="' + (yy + 5) + '" font-size="13" fill="#e2e8f0">' + F.f + '</text>';
+    if(s10.comp === null){ g += '<text x="' + L + '" y="' + (yy + 5) + '" font-size="11" fill="#94a3b8">sin datos suficientes</text>'; return; }
+    const proy = function(p){ p = Math.max(0, Math.min(100, p)) / 100; const tv = sm.vis + quedan; return tv ? 100 * (sm.co + quedan * p) / tv : null; };
+    const a = proy(s10.comp - 5), b = proy(s10.comp + 5), c = a >= MP_META ? '#22c55e' : b >= MP_META ? '#f59e0b' : '#ef4444';
+    g += '<rect x="' + xa(a) + '" y="' + (yy - 9) + '" width="' + Math.max(6, xa(b) - xa(a)) + '" height="18" rx="9" fill="' + c + '" fill-opacity=".55"><title>' + quedan + ' visitas por delante · últimos 10 días: ' + anF1(s10.comp) + '%</title></rect>';
+    if(sm.comp !== null) g += '<circle cx="' + xa(sm.comp) + '" cy="' + yy + '" r="5" fill="#fff"><title>Va en ' + anF1(sm.comp) + '% (' + sm.co + ' de ' + sm.vis + ')</title></circle>';
+    g += '<text x="' + (Math.max(xa(b), sm.comp === null ? 0 : xa(sm.comp)) + 9) + '" y="' + (yy + 4) + '" font-size="11" fill="#94a3b8">' + Math.round(a) + '–' + Math.round(b) + '%</text>'
+      + '<text x="' + xa(a) + '" y="' + (yy + 24) + '" font-size="10.5" fill="' + c + '">' + (a >= MP_META ? 'llega a la meta' : b >= MP_META ? 'puede llegar' : 'no llega') + ' · quedan ~' + quedan + ' visitas</text>';
+  });
+  g += '<line x1="' + xa(MP_META) + '" x2="' + xa(MP_META) + '" y1="4" y2="' + (AN_FAMS.length * 58 + 10) + '" stroke="#fff" stroke-width="2"/></svg>';
+  h += g + '</div></div>';
+  h += '<div class="an-nota"><b>Cómo se leería</b><ul>'
+    + '<li><b>Relojes:</b> el grande es la semana y los chicos son hoy y el mes. La rayita blanca es la meta de ' + MP_META + ' %. Toca la tarjeta para ver el detalle.</li>'
+    + '<li><b>Migraciones</b> se cuentan igual que en la página MIGRACIONES (GSA como quiebre). <b>Altas y Reparaciones</b> salen del mismo datos.json (días anteriores) y de las bandejas de hoy.</li>'
+    + '<li><b>Semáforo y cierre:</b> las tres actividades lado a lado. Toca una casilla para abrir esa semana.</li>'
+    + '<li>Se abre y se cierra con <b>Ctrl + Alt + A</b>. No tiene botón en pantalla.</li></ul></div></div>';
+  box.innerHTML = h; box.scrollTop = y;
+  if(D.cargando) setTimeout(function(){ anPintar(); anDetPintar(); }, 1500);
+}
+
+function anAbrir(){
+  let m = document.getElementById('anPage');
+  if(!m){ m = document.createElement('div'); m.id = 'anPage'; document.body.appendChild(m); }
+  m.classList.add('abierto'); anPintar();
+}
+function anCerrar(){ anDetCerrar(); const m = document.getElementById('anPage'); if(m) m.classList.remove('abierto'); }
+function anDetAbrir(fam, per){
+  AN_DET = { fam:fam, per:per };
+  let m = document.getElementById('anDet');
+  if(!m){ m = document.createElement('div'); m.id = 'anDet'; m.onclick = function(e){ if(e.target === m) anDetCerrar(); }; document.body.appendChild(m); }
+  m.classList.add('abierto'); m.scrollTop = 0; anDetPintar();
+}
+function anDetCerrar(){ AN_DET = null; const m = document.getElementById('anDet'); if(m) m.classList.remove('abierto'); }
+function anDetPer(t, k){ if(!AN_DET) return; AN_DET.per = { t:t, k:k }; anDetPintar(); }
+
+function anDetPintar(){
+  const m = document.getElementById('anDet'); if(!m || !AN_DET || !m.classList.contains('abierto')) return;
+  const y = m.scrollTop, D = anFilas(), fam = AN_DET.fam, per = AN_DET.per, F = AN_FAMS.filter(function(x){ return x.f === fam; })[0] || AN_FAMS[0];
+  const L = anPer(D, fam, per), s = mpSt(L);
+  /* periodo anterior para la flecha */
+  let ant = null, antTx = '';
+  if(per.t === 'hoy'){ const k = anMasDias(D.hoyIso, -7); ant = D.R.filter(function(x){ return x.fam === fam && x.iso === k; }); antTx = 'vs mismo día sem. pasada'; }
+  else if(per.t === 'sem'){ const k = anSemAnt(per.k); ant = anPer(D, fam, { t:'sem', k:k }); antTx = 'vs Sem ' + derNumSemana(k); }
+  else { const k = anMesAnt(per.k); ant = anPer(D, fam, { t:'mes', k:k }); antTx = 'vs ' + AN_NOMMES[+k.slice(4) - 1].toLowerCase(); }
+  const sa = mpSt(ant), dl = s.comp !== null && sa.comp !== null ? s.comp - sa.comp : null;
+  const fa = mpFalta(s);
+  /* pestanas: hoy, semana en curso, mes en curso y (si se abrio otra) esa semana */
+  const tabs = [{ t:'hoy', k:'' }, { t:'sem', k:D.semHoy }, { t:'mes', k:D.mesHoy }];
+  if(per.t === 'sem' && per.k !== D.semHoy) tabs.splice(2, 0, { t:'sem', k:per.k });
+  let h = '<div class="an-md"><div class="an-mdtop"><h2><i style="width:12px;height:12px;border-radius:50%;background:' + F.c + ';display:inline-block;border:1px solid #cbd5e1"></i>' + fam + ' · detalle'
+    + (AN_COM !== 'Todo' ? ' <small>' + (AN_COM === 'QUILPUE' ? 'Quilpué' : 'Villa Alemana') + '</small>' : '') + '</h2>'
+    + '<button class="an-x" onclick="anDetCerrar()">✕ Cerrar</button></div>'
+    + '<div class="an-tabs">' + tabs.map(function(p){ const on = p.t === per.t && (p.t === 'hoy' || p.k === per.k);
+        return '<span class="an-tab' + (on ? ' on' : '') + '" onclick="anDetPer(\'' + p.t + '\', \'' + p.k + '\')">' + anPerTit(p) + (p.t === 'sem' && p.k === D.semHoy ? ' (en curso)' : '') + '</span>'; }).join('') + '</div>';
+  h += '<div class="an-kpis">'
+    + '<div class="an-kpi"><small>Completitud</small><b style="color:' + anCol(s.comp) + '">' + mpPc(s.comp) + '</b><br><span>' + (dl === null ? 'sin período para comparar' : (dl >= 0 ? '▲ ' : '▼ ') + anF1(Math.abs(dl)) + ' pts ' + antTx) + '</span></div>'
+    + '<div class="an-kpi"><small>Completadas</small><b style="color:#22c55e">' + s.co + '</b><br><span>' + (s.vis ? mpPc(s.comp) + ' de ' + s.vis + ' visitadas' : 'sin visitas cerradas') + '</span></div>'
+    + '<div class="an-kpi"><small>No realizadas</small><b style="color:#ef4444">' + s.nr + '</b><br><span>' + (s.vis ? mpPc(100 - s.comp) + ' derivadas' : '–') + (s.g ? ' · <span style="color:#a78bfa">' + s.g + ' GSA</span>' : '') + '</span></div>'
+    + '<div class="an-kpi"><small>Por cerrar</small><b>' + s.ab + '</b><br><span>' + (s.ab ? (s.ini ? s.ini + ' iniciadas o en ruta' : 'ninguna iniciada') : 'nada abierto') + '</span></div>'
+    + '<div class="an-kpi"><small>Meta ' + MP_META + '%</small><b style="font-size:17px;color:' + (!fa ? '#94a3b8' : fa.ok ? '#22c55e' : '#ef4444') + '">'
+      + (!fa ? 'sin visitas' : fa.ok ? '✓ aguanta ' + fa.n + ' derivada' + (fa.n === 1 ? '' : 's') : '✗ faltan ' + fa.n + ' completada' + (fa.n === 1 ? '' : 's')) + '</b><br><span>'
+      + (!fa ? '' : fa.ok ? 'antes de bajar de la meta' : 'seguidas para llegar') + '</span></div></div>';
+  /* por que no se hicieron + por franja */
+  let izq = '<div class="an-card"><h3>¿Por qué no se hicieron?</h3><p class="s">' + s.nr + ' no realizada' + (s.nr === 1 ? '' : 's') + ', por responsable</p>';
+  const rs = ['cli', 'vtr', 'dom'].filter(function(r){ return s.resp[r]; }).sort(function(a, b){ return s.resp[b] - s.resp[a]; });
+  if(!rs.length) izq += '<div class="an-vac">No hay no realizadas en este período.</div>';
+  rs.forEach(function(r){
+    const n = s.resp[r], cods = s.rcod[r];
+    izq += '<div class="an-bar"><span>' + AN_RNOM[r] + '</span><span class="t"><i style="width:' + (100 * n / s.nr) + '%;background:' + AN_RCOL[r] + '"></i></span><b>' + n + ' · ' + Math.round(100 * n / s.nr) + '%</b></div>'
+      + '<div class="an-mot">' + Object.keys(cods).sort(function(a, b){ return cods[b] - cods[a]; }).map(function(c){ return escR(c) + ' ' + cods[c]; }).join(' · ') + '</div>';
+  });
+  izq += '<h3 style="margin-top:14px">Por franja</h3><p class="s">completitud de cada franja</p>';
+  const frs = {}; L.forEach(function(x){ if(x.fr) (frs[x.fr] = frs[x.fr] || []).push(x); });
+  const frk = Object.keys(frs).sort();
+  if(!frk.length) izq += '<div class="an-vac">Sin franja en los datos.</div>';
+  frk.forEach(function(k){ const sf = mpSt(frs[k]);
+    izq += '<div class="an-bar"><span>' + escR(k) + '</span><span class="t"><i style="width:' + (sf.comp || 0) + '%;background:' + anCol(sf.comp) + '"></i></span><b>' + (sf.comp === null ? '–' : mpPc(sf.comp)) + '</b></div>'; });
+  izq += '</div>';
+  /* tecnico por tecnico */
+  const T = {}; L.forEach(function(x){ (T[x.tec] = T[x.tec] || []).push(x); });
+  const filas = Object.keys(T).map(function(k){ const st = mpSt(T[k]); st.k = k; return st; })
+    .sort(function(a, b){ const pa = a.comp === null ? 999 : a.comp, pb = b.comp === null ? 999 : b.comp; return pa - pb || b.vis - a.vis; });
+  let der = '<div class="an-card"><h3>Técnico por técnico</h3><p class="s">Primero los que más derivan. En gris, con menos de ' + MP_POCAS + ' visitas.</p>';
+  if(!filas.length) der += '<div class="an-vac">No hay órdenes en este período.</div>';
+  else {
+    der += '<div class="an-scroll"><table class="an-tb"><tr><th>Técnico</th><th>Visitadas</th><th>Comp.</th><th>No real.</th><th>Por cerrar</th><th>Completitud</th></tr>';
+    filas.forEach(function(t){ const gr = t.vis < MP_POCAS, c = gr ? '#475569' : anCol(t.comp);
+      der += '<tr class="' + (gr ? 'gr' : '') + '"><td>' + escR(anTec(t.k)) + '</td><td>' + t.vis + '</td><td>' + t.co + '</td><td>' + t.nr + '</td><td>' + (t.ab || '') + '</td>'
+        + '<td><span class="an-mini"><i style="width:' + (t.comp || 0) + '%;background:' + c + '"></i></span><b style="color:' + (gr ? '#64748b' : c) + '">' + (t.comp === null ? '–' : mpPc(t.comp)) + '</b></td></tr>'; });
+    der += '</table></div>';
+  }
+  der += '</div>';
+  h += '<div class="an-mg">' + izq + der + '</div>';
+  /* lista de ordenes */
+  const esHoy = per.t === 'hoy';
+  const lista = esHoy ? L.slice() : L.filter(function(x){ return x.e === 'No Realizada' || (x.gsa && x.e === 'Completado'); });
+  const ord = function(x){ return x.e === 'No Realizada' || x.gsa ? 0 : x.e === 'Completado' ? 2 : x.e === 'Cancelado' || x.e === 'Suspendido' ? 3 : 1; };
+  lista.sort(function(a, b){ return ord(a) - ord(b) || (a.iso < b.iso ? 1 : a.iso > b.iso ? -1 : 0) || String(a.fr).localeCompare(String(b.fr)); });
+  const est = function(x){
+    if(x.gsa && (x.e === 'Completado' || x.e === 'No Realizada')) return '<span class="an-est e-g">GSA (quiebre VTR)</span>';
+    if(x.e === 'Completado') return '<span class="an-est e-c">Completada</span>';
+    if(x.e === 'No Realizada') return '<span class="an-est e-n">No realizada</span>';
+    if(x.e === 'Cancelado' || x.e === 'Suspendido') return '<span class="an-est e-x">' + escR(x.e) + '</span>';
+    return '<span class="an-est e-a">Por cerrar · ' + escR(x.e) + '</span>';
+  };
+  h += '<div class="an-card" style="margin-top:12px"><h3>' + (esHoy ? 'Órdenes de hoy' : 'No realizadas del período') + ' <span style="font-size:12px;color:#94a3b8;font-weight:400">(' + lista.length + ')</span></h3>';
+  if(!lista.length) h += '<div class="an-vac">' + (esHoy ? 'Todavía no hay órdenes de ' + fam.toLowerCase() + ' hoy.' : 'No hay no realizadas en este período.') + '</div>';
+  else {
+    h += '<div class="an-scroll"><table class="an-tb"><tr><th>Petición</th>' + (esHoy ? '' : '<th>Fecha</th>') + '<th>Estado</th><th>Técnico</th><th>Franja</th>'
+      + (esHoy ? '<th>Dirección</th>' : '<th>Comuna</th>') + '<th>Motivo</th><th>Responsable</th></tr>';
+    lista.forEach(function(x){
+      const nr = x.e === 'No Realizada' || (x.gsa && x.e === 'Completado'), r = nr ? (x.gsa ? 'vtr' : mgResp(x.cod)) : '';
+      h += '<tr><td>' + escR(x.ot) + '</td>' + (esHoy ? '' : '<td>' + x.iso.slice(6, 8) + '-' + x.iso.slice(4, 6) + '</td>') + '<td>' + est(x) + '</td><td>' + escR(anTec(x.tec)) + '</td><td>' + escR(x.fr) + '</td>'
+        + '<td>' + escR(esHoy ? x.dir : anTec(x.ciu)) + '</td><td>' + (nr ? escR(x.gsa ? 'GSA · Falla Aprovisionamiento' : (x.cod || 'Sin código')) : '') + '</td>'
+        + '<td style="color:' + (r ? AN_RCOL[r] : 'inherit') + '">' + (r ? AN_RNOM[r] : '') + '</td></tr>';
+    });
+    h += '</table></div>';
+  }
+  h += '</div></div>';
+  m.innerHTML = h; m.scrollTop = y;
+}
+
+/* entrada secreta: Ctrl + Alt + A (abre y cierra) */
+document.addEventListener('keydown', function(e){
+  if(e.ctrlKey && e.altKey && !e.shiftKey && (e.code === 'KeyA' || (e.key || '').toLowerCase() === 'a')){
+    e.preventDefault();
+    const m = document.getElementById('anPage');
+    if(m && m.classList.contains('abierto')) anCerrar(); else anAbrir();
+    return;
+  }
+  if(e.key === 'Escape'){
+    const d = document.getElementById('anDet');
+    if(d && d.classList.contains('abierto')){ anDetCerrar(); return; }
+    const m = document.getElementById('anPage');
+    if(m && m.classList.contains('abierto')) anCerrar();
+  }
+});
+/* se refresca solo cada minuto mientras esta abierta (lo de hoy cambia con rutas.json) */
+setInterval(function(){ try { anPintar(); anDetPintar(); } catch(e){ console.warn('analisis:', e); } }, 60000);
+</script>
+
 </body>
 </html>
