@@ -21706,25 +21706,25 @@
    }
   },
   "02-11-2026": {
-   "hasta": "13:35",
-   "actividades": 149,
+   "hasta": "13:40",
+   "actividades": 151,
    "tecnicos": 32,
    "estados": {
     "Suspendido": 1,
-    "Iniciado": 15,
-    "Pendiente": 82,
+    "Iniciado": 12,
+    "Pendiente": 83,
     "Cancelado": 5,
-    "Completado": 34,
-    "en ruta": 2,
+    "Completado": 37,
+    "en ruta": 3,
     "No Realizada": 10
    },
-   "rgu": 220.4,
+   "rgu": 223.4,
    "caidas_total": 3,
    "caidas_activas": 3,
    "caidas_resueltas": 0,
-   "nuevas": 13,
+   "nuevas": 14,
    "al_bucket": 18,
-   "repetidas": 20,
+   "repetidas": 21,
    "reagendadas": 6,
    "detalle": {
     "caidas": [
@@ -21758,6 +21758,15 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OR7VV0L",
+      "tec": "JOSE SALAS MEDINA",
+      "cat": "Migración 2 Play",
+      "f": "13-16",
+      "hi": "17:42",
+      "d": "ALCALDE ALEJANDRO PERALTA 1439, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3OR762WZ",
       "tec": "ALEXIS JARA",
       "cat": "Reparación",
@@ -21782,7 +21791,7 @@
       "f": "13-16",
       "hi": "13:03",
       "d": "VIA UNO SIETE 2065 EDIF. E DEPTO 32, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OR66TER",
@@ -21845,7 +21854,7 @@
       "f": "10-13",
       "hi": "12:41",
       "d": "HUANHUALI 456 EDIF. B3 DEPTO 42, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OR03LXQ",
@@ -21904,7 +21913,7 @@
       "o": "1-3OR0CHB0",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:26",
+      "hi": "15:35",
       "d": "AVENIDA VALPARAISO 1674, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "FELIPE SILVA R",
@@ -21952,7 +21961,7 @@
       "o": "1-3OQ7RTSD",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "18:29",
+      "hi": "18:18",
       "d": "IGNACIO CARRERA PINTO 0356 DEPTO 408, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE CASTRO P",
@@ -22012,12 +22021,24 @@
       "o": "1-3OQPSC7I",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:09",
+      "hi": "16:00",
       "d": "OVALLE 1104, QUILPUE",
       "e": "Pendiente",
       "tec": "KEVIN TAPIA RETAMAL",
       "visitas": 1,
       "ult_fecha": "27-10-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3ONATGZ8",
+      "cat": "Migración 1 Play",
+      "f": "16-19",
+      "hi": "18:06",
+      "d": "GABRIEL GONZALEZ VIDELA 1785, QUILPUE",
+      "e": "Pendiente",
+      "tec": "KEVIN TAPIA RETAMAL",
+      "visitas": 1,
+      "ult_fecha": "19-10-2026",
       "ult_cierre": "Cliente reagenda"
      },
      {
@@ -22152,7 +22173,7 @@
       "o": "1-3OHYRCK1",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:54",
+      "hi": "17:49",
       "d": "OROPESA 019, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MARCELO GÓMEZ GÓME",
@@ -22182,5 +22203,5 @@
    }
   }
  },
- "generado": "02-11-2026 13:35"
+ "generado": "02-11-2026 13:40"
 }
