@@ -21706,23 +21706,23 @@
    }
   },
   "02-11-2026": {
-   "hasta": "14:35",
-   "actividades": 154,
+   "hasta": "14:40",
+   "actividades": 157,
    "tecnicos": 32,
    "estados": {
     "Suspendido": 1,
-    "Iniciado": 24,
-    "Pendiente": 63,
+    "Completado": 45,
+    "Pendiente": 66,
     "Cancelado": 7,
-    "Completado": 44,
+    "Iniciado": 25,
     "No Realizada": 11,
-    "en ruta": 4
+    "en ruta": 2
    },
-   "rgu": 223.6,
+   "rgu": 225.7,
    "caidas_total": 3,
    "caidas_activas": 3,
    "caidas_resueltas": 0,
-   "nuevas": 16,
+   "nuevas": 17,
    "al_bucket": 23,
    "repetidas": 21,
    "reagendadas": 6,
@@ -21757,6 +21757,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3ORAF9V4",
+      "tec": "JOSE PEREZ RANGEL",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "17:09",
+      "d": "SAN ENRIQUE 1890 EDIF. 8 DEPTO 102, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OR9DSB3",
       "tec": "YENDER BOSCAN CADENAS",
@@ -21991,7 +22000,7 @@
       "o": "1-3OQ7RTSD",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:54",
+      "hi": "16:48",
       "d": "IGNACIO CARRERA PINTO 0356 DEPTO 408, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE CASTRO P",
@@ -22086,7 +22095,7 @@
       "o": "1-3OR6376I",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:35",
+      "hi": "17:46",
       "d": "DE VEER 1328 DEPTO 113, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -22110,7 +22119,7 @@
       "o": "1-3OQC6X1K",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "14:50",
+      "hi": "14:53",
       "d": "RAFAEL FABRES 3143 CASA LOC-B, QUILPUE",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -22160,7 +22169,7 @@
       "o": "1-3OQ7CSTG",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:55",
+      "hi": "16:44",
       "d": "LOS MAQUIS 1635, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -22220,5 +22229,5 @@
    }
   }
  },
- "generado": "02-11-2026 14:35"
+ "generado": "02-11-2026 14:40"
 }
