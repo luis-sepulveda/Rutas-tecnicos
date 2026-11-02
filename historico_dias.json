@@ -21706,24 +21706,24 @@
    }
   },
   "02-11-2026": {
-   "hasta": "10:54",
-   "actividades": 113,
+   "hasta": "10:59",
+   "actividades": 115,
    "tecnicos": 32,
    "estados": {
     "Iniciado": 26,
-    "Pendiente": 71,
-    "Completado": 6,
-    "en ruta": 3,
+    "Pendiente": 73,
+    "Completado": 7,
+    "en ruta": 2,
     "No Realizada": 6,
     "Cancelado": 1
    },
-   "rgu": 175.0,
+   "rgu": 177.0,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
-   "nuevas": 4,
+   "nuevas": 5,
    "al_bucket": 3,
-   "repetidas": 17,
+   "repetidas": 18,
    "reagendadas": 6,
    "detalle": {
     "caidas": [
@@ -21747,6 +21747,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OR1LSEQ",
+      "tec": "LUIS MARTIN NUÑEZ",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "17:12",
+      "d": "RIQUELME 2063, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OR08265",
       "tec": "KEVIN TAPIA RETAMAL",
@@ -21861,9 +21870,9 @@
       "o": "1-3OQATP2G",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:59",
+      "hi": "10:57",
       "d": "PJE CATALUNA 1838, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JOSE ROJO A",
       "visitas": 2,
       "ult_fecha": "31-10-2026",
@@ -21916,6 +21925,18 @@
       "visitas": 1,
       "ult_fecha": "29-10-2026",
       "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3OR1LSEQ",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "17:12",
+      "d": "RIQUELME 2063, QUILPUE",
+      "e": "Pendiente",
+      "tec": "LUIS MARTIN NUÑEZ",
+      "visitas": 4,
+      "ult_fecha": "21-10-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OQ7RTSD",
@@ -22005,7 +22026,7 @@
       "o": "1-3OQ7CSTG",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:32",
+      "hi": "16:34",
       "d": "LOS MAQUIS 1635, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -22055,5 +22076,5 @@
    }
   }
  },
- "generado": "02-11-2026 10:54"
+ "generado": "02-11-2026 10:59"
 }
