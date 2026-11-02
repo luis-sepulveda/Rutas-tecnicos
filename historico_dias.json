@@ -21706,24 +21706,24 @@
    }
   },
   "02-11-2026": {
-   "hasta": "17:01",
-   "actividades": 163,
+   "hasta": "17:07",
+   "actividades": 165,
    "tecnicos": 32,
    "estados": {
     "Suspendido": 1,
-    "Completado": 71,
-    "Pendiente": 38,
+    "Completado": 76,
+    "Pendiente": 30,
     "Cancelado": 8,
-    "Iniciado": 21,
-    "en ruta": 7,
-    "No Realizada": 17
+    "No Realizada": 19,
+    "Iniciado": 26,
+    "en ruta": 5
    },
-   "rgu": 233.9,
+   "rgu": 235.0,
    "caidas_total": 5,
    "caidas_activas": 5,
    "caidas_resueltas": 0,
-   "nuevas": 23,
-   "al_bucket": 25,
+   "nuevas": 25,
+   "al_bucket": 33,
    "repetidas": 23,
    "reagendadas": 6,
    "detalle": {
@@ -21776,6 +21776,24 @@
     ],
     "nuevas": [
      {
+      "o": "1-3ORFGRWI",
+      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:01",
+      "d": "MATEO DE TORO Y ZAMBRANO 945 CASA 18, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
+      "o": "1-3OREZFEY",
+      "tec": "JUAN ARRIAGADA C",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:22",
+      "d": "PRIMERA 513, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3ORD9K93",
       "tec": "JOSE SALAS MEDINA",
       "cat": "Migración 3 Play",
@@ -21795,7 +21813,7 @@
      },
      {
       "o": "1-3OQ9PGLF",
-      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "tec": "ALEXIS JARA",
       "cat": "Alta 1 Play",
       "f": "16-19",
       "hi": "17:55",
@@ -21831,7 +21849,7 @@
      },
      {
       "o": "1-3ORAF9V4",
-      "tec": "ANTONHY MORALES MENDOZA",
+      "tec": "JOSE PEREZ RANGEL",
       "cat": "Reparación",
       "f": "16-19",
       "hi": "17:09",
@@ -21863,7 +21881,7 @@
       "f": "13-16",
       "hi": "17:42",
       "d": "ALCALDE ALEJANDRO PERALTA 1439, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OR762WZ",
@@ -21872,11 +21890,11 @@
       "f": "13-16",
       "hi": "14:31",
       "d": "RIQUELME 1726, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OPYLIPS",
-      "tec": "LUIS CASTRO TORRES",
+      "tec": "JOSE GALAZ D",
       "cat": "Reparación",
       "f": "16-19",
       "hi": "16:35",
@@ -21894,7 +21912,7 @@
      },
      {
       "o": "1-3OR66TER",
-      "tec": "LEONEL HERNÁNDEZ OJE",
+      "tec": "EDGAR VALERO C",
       "cat": "Reparación",
       "f": "16-19",
       "hi": "16:29",
@@ -21966,7 +21984,7 @@
      },
      {
       "o": "1-3OQZ66O9",
-      "tec": "KEVIN TAPIA RETAMAL",
+      "tec": "JORDAN ROA PEREZ",
       "cat": "Reparación",
       "f": "16-19",
       "hi": "16:00",
@@ -21988,7 +22006,7 @@
       "o": "1-3OR1LSEQ",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:59",
+      "hi": "17:21",
       "d": "RIQUELME 2063, QUILPUE",
       "e": "Pendiente",
       "tec": "ALEXIS JARA",
@@ -22071,25 +22089,13 @@
       "o": "1-3OLPSYX7",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "18:00",
+      "hi": "18:32",
       "d": "PJE COLTAUCO 2438, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JORDAN ROA PEREZ",
-      "visitas": 1,
-      "ult_fecha": "24-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3ONATGZ8",
-      "cat": "Migración 1 Play",
-      "f": "16-19",
-      "hi": "17:37",
-      "d": "GABRIEL GONZALEZ VIDELA 1785, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
       "visitas": 1,
-      "ult_fecha": "19-10-2026",
-      "ult_cierre": "Cliente reagenda"
+      "ult_fecha": "24-10-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OR03LXQ",
@@ -22107,7 +22113,7 @@
       "o": "1-3OQ7RTSD",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "18:17",
+      "hi": "18:40",
       "d": "IGNACIO CARRERA PINTO 0356 DEPTO 408, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE PEREZ RANGEL",
@@ -22166,12 +22172,24 @@
       "o": "1-3OQPSC7I",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:24",
+      "hi": "17:38",
       "d": "OVALLE 1104, QUILPUE",
       "e": "Pendiente",
       "tec": "KEVIN TAPIA RETAMAL",
       "visitas": 1,
       "ult_fecha": "27-10-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3OPUK5C5",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "17:22",
+      "d": "OVALLE 1126, QUILPUE",
+      "e": "en ruta",
+      "tec": "LUIS CASTRO TORRES",
+      "visitas": 1,
+      "ult_fecha": "30-10-2026",
       "ult_cierre": "Cliente reagenda"
      },
      {
@@ -22184,6 +22202,18 @@
       "tec": "LUIS GATICA DAVILA",
       "visitas": 1,
       "ult_fecha": "29-10-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3ONATGZ8",
+      "cat": "Migración 1 Play",
+      "f": "16-19",
+      "hi": "18:15",
+      "d": "GABRIEL GONZALEZ VIDELA 1785, QUILPUE",
+      "e": "Pendiente",
+      "tec": "LUIS MARTIN NUÑEZ",
+      "visitas": 1,
+      "ult_fecha": "19-10-2026",
       "ult_cierre": "Cliente reagenda"
      },
      {
@@ -22208,18 +22238,6 @@
       "tec": "RAFAEL VARGAS B",
       "visitas": 1,
       "ult_fecha": "31-10-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
-      "o": "1-3OPUK5C5",
-      "cat": "Reparación",
-      "f": "16-19",
-      "hi": "17:47",
-      "d": "OVALLE 1126, QUILPUE",
-      "e": "Pendiente",
-      "tec": "SAMUEL FERNANDEZ VIDAL",
-      "visitas": 1,
-      "ult_fecha": "30-10-2026",
       "ult_cierre": "Cliente reagenda"
      },
      {
@@ -22294,7 +22312,7 @@
       "o": "1-3OHYRCK1",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "18:08",
+      "hi": "17:57",
       "d": "OROPESA 019, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
@@ -22314,7 +22332,7 @@
       "o": "1-3OQ7CSTG",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:37",
+      "hi": "17:50",
       "d": "LOS MAQUIS 1635, QUILPUE",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -22324,5 +22342,5 @@
    }
   }
  },
- "generado": "02-11-2026 17:01"
+ "generado": "02-11-2026 17:07"
 }
