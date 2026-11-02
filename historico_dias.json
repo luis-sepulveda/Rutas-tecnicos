@@ -21706,19 +21706,19 @@
    }
   },
   "02-11-2026": {
-   "hasta": "13:50",
-   "actividades": 153,
+   "hasta": "14:00",
+   "actividades": 154,
    "tecnicos": 32,
    "estados": {
     "Suspendido": 1,
-    "Iniciado": 11,
-    "Pendiente": 82,
+    "Iniciado": 13,
+    "Pendiente": 77,
     "Cancelado": 5,
-    "Completado": 39,
+    "Completado": 40,
     "No Realizada": 10,
-    "en ruta": 5
+    "en ruta": 8
    },
-   "rgu": 223.5,
+   "rgu": 224.5,
    "caidas_total": 3,
    "caidas_activas": 3,
    "caidas_resueltas": 0,
@@ -21764,7 +21764,7 @@
       "f": "13-16",
       "hi": "13:48",
       "d": "FLOR DE LA PLUMA 1069, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OR7VV0L",
@@ -21872,7 +21872,7 @@
       "f": "13-16",
       "hi": "13:00",
       "d": "LIMACHE 1638, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Pendiente"
      },
      {
       "o": "1-3OQZ66O9",
@@ -21895,13 +21895,25 @@
     ],
     "repetidas": [
      {
+      "o": "1-3OR0CHB0",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "14:55",
+      "d": "AVENIDA VALPARAISO 1674, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "visitas": 1,
+      "ult_fecha": "02-11-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OOVSF8C",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "16:50",
+      "hi": "15:47",
       "d": "CUMMING 951 DEPTO 30, QUILPUE",
       "e": "Pendiente",
-      "tec": "DANIEL NAVARRETE E",
+      "tec": "CRISTOBAL SILVA LEIVA",
       "visitas": 1,
       "ult_fecha": "29-10-2026",
       "ult_cierre": "Sin moradores"
@@ -21934,9 +21946,9 @@
       "o": "1-3OPNK6OH",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:01",
+      "hi": "13:57",
       "d": "AZAPA 1190, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "JOEL GUSTAVE GUSTA",
       "visitas": 3,
       "ult_fecha": "30-10-2026",
@@ -21946,7 +21958,7 @@
       "o": "1-3OPX8382",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "18:03",
+      "hi": "17:50",
       "d": "SANTA TERESA 0483, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JORGE PEZOA VICUÑA",
@@ -21958,7 +21970,7 @@
       "o": "1-3OQ7RTSD",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "17:06",
+      "hi": "16:46",
       "d": "IGNACIO CARRERA PINTO 0356 DEPTO 408, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE CASTRO P",
@@ -21970,9 +21982,9 @@
       "o": "1-3OR03LXQ",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:02",
+      "hi": "13:53",
       "d": "LIMACHE 1638, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Pendiente",
       "tec": "JOSE PEREZ RANGEL",
       "visitas": 1,
       "ult_fecha": "03-09-2026",
@@ -21982,25 +21994,13 @@
       "o": "1-3OR2GY6Y",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "17:11",
+      "hi": "16:53",
       "d": "PJE CATALUNA 1838, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE PEREZ RANGEL",
       "visitas": 3,
       "ult_fecha": "02-11-2026",
       "ult_cierre": "Clte desiste motivo comercial"
-     },
-     {
-      "o": "1-3OR0CHB0",
-      "cat": "Reparación",
-      "f": "13-16",
-      "hi": "17:31",
-      "d": "AVENIDA VALPARAISO 1674, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOSE ROJO A",
-      "visitas": 1,
-      "ult_fecha": "02-11-2026",
-      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OPI9M1X",
@@ -22054,7 +22054,7 @@
       "o": "1-3OLPSYX7",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "19:30",
+      "hi": "19:03",
       "d": "PJE COLTAUCO 2438, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -22078,7 +22078,7 @@
       "o": "1-3OR6376I",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "17:37",
+      "hi": "17:26",
       "d": "DE VEER 1328 DEPTO 113, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -22140,7 +22140,7 @@
       "f": "10-13",
       "hi": "11:46",
       "d": "MORRO LA CRUZ 2948, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "YENDER BOSCAN CADENAS",
       "visitas": 1,
       "ult_fecha": "16-10-2026",
@@ -22182,7 +22182,7 @@
       "o": "1-3OHYRCK1",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:49",
+      "hi": "18:06",
       "d": "OROPESA 019, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MARCELO GÓMEZ GÓME",
@@ -22202,7 +22202,7 @@
       "o": "1-3OQ7CSTG",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "18:57",
+      "hi": "18:46",
       "d": "LOS MAQUIS 1635, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -22212,5 +22212,5 @@
    }
   }
  },
- "generado": "02-11-2026 13:50"
+ "generado": "02-11-2026 14:00"
 }
