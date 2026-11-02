@@ -17867,8 +17867,9 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarM
   #anPage .an-chips { display:flex; gap:6px; flex-wrap:wrap; align-items:center; }
   #anPage .an-chip { background:#16213a; border:1px solid #22304f; border-radius:999px; padding:6px 13px; font-size:12.5px; color:#94a3b8; cursor:pointer; }
   #anPage .an-chip.on { background:#1d4ed8; border-color:#1d4ed8; color:#fff; }
-  .an-upd { font-weight:600; color:#15803d; }
-  .an-upd.mal { color:#b91c1c; animation:anParp 1s ease-in-out infinite; }
+  .an-upd { display:inline-flex; align-items:center; gap:6px; border-radius:999px; padding:5px 12px; font-size:12.5px; font-weight:600; background:#dcfce7; color:#15803d; border:1px solid #86efac; }
+  .an-upd::before { content:''; width:8px; height:8px; border-radius:50%; background:currentColor; }
+  .an-upd.mal { background:#fee2e2; color:#b91c1c; border-color:#fca5a5; animation:anParp 1s ease-in-out infinite; }
   @keyframes anParp { 0%,100% { opacity:1; } 50% { opacity:.35; } }
   #anPage .an-x { background:#f1f5f9; border:1px solid #cbd5e1; color:#334155; border-radius:8px; padding:6px 12px; cursor:pointer; font-size:14px; margin-left:6px; }
   #anPage .an-sec { font-size:12px; text-transform:uppercase; letter-spacing:1.5px; color:#475569; font-weight:600; margin:16px 0 8px; }
@@ -17940,6 +17941,10 @@ var AN_FAMS = [
   { f:'Altas', c:'#3b82f6' },
   { f:'Reparaciones', c:'#fb923c' }
 ];
+/* (02-11-2026, 12:40) con menos visitas que esto, el reloj y la casilla del semaforo van en GRIS ("pocas visitas"):
+   un lunes temprano 5 visitas no dicen nada. Para el punto del cierre del mes se pide AN_MIN_MES. */
+var AN_MIN_VIS = 15;
+var AN_MIN_MES = 30;
 var AN_COM = 'Todo';                 // Todo / QUILPUE / VILLA ALEMANA
 var AN_DET = null;                   // { fam, per:{t:'hoy'|'sem'|'mes', k} }
 var AN_NOMMES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
@@ -18008,8 +18013,10 @@ function anMesAnt(m){ return +m.slice(4) === 1 ? (+m.slice(0, 4) - 1) + '12' : m
 function anPerTit(per){ return per.t === 'hoy' ? 'Hoy' : per.t === 'sem' ? 'Semana ' + derNumSemana(per.k) : AN_NOMMES[+per.k.slice(4) - 1]; }
 
 /* reloj con aguja: v = % (o null), r = radio */
-function anReloj(v, r, label, big){
-  const w = r * 2 + 20, h = r + (big ? 62 : 50), cx = w / 2, cy = r + 10, sw = big ? 16 : 11;
+function anReloj(v, r, label, big, nv){
+  const poca = v !== null && v !== undefined && nv !== undefined && nv < AN_MIN_VIS;
+  const col = function(x){ return poca ? '#64748b' : anCol(x); };
+  const w = r * 2 + 20, h = r + (big ? 78 : 64), cx = w / 2, cy = r + 10, sw = big ? 16 : 11;
   const ang = function(p){ return Math.PI * (1 - p / 100); };
   const pt = function(p, rr){ return [cx + rr * Math.cos(ang(p)), cy - rr * Math.sin(ang(p))]; };
   const arc = function(a, b, rr){ const p1 = pt(a, rr), p2 = pt(b, rr); return 'M' + p1[0] + ' ' + p1[1] + ' A' + rr + ' ' + rr + ' 0 0 1 ' + p2[0] + ' ' + p2[1]; };
@@ -18020,13 +18027,15 @@ function anReloj(v, r, label, big){
     + '<path d="' + arc(m, 100, r) + '" stroke="#22c55e" stroke-opacity=".22" stroke-width="' + sw + '" fill="none"/>';
   if(v !== null && v !== undefined){
     const vv = Math.max(0.5, Math.min(99.5, v)), n = pt(vv, r - sw - 8);
-    s += '<path d="' + arc(0, vv, r) + '" stroke="' + anCol(v) + '" stroke-width="' + sw + '" fill="none" stroke-linecap="round"/>'
+    s += '<path d="' + arc(0, vv, r) + '" stroke="' + col(v) + '" stroke-width="' + sw + '" fill="none" stroke-linecap="round"/>'
       + '<line x1="' + cx + '" y1="' + cy + '" x2="' + n[0] + '" y2="' + n[1] + '" stroke="#e2e8f0" stroke-width="' + (big ? 3 : 2) + '" stroke-linecap="round"/>';
   }
   s += '<line x1="' + m1[0] + '" y1="' + m1[1] + '" x2="' + m2[0] + '" y2="' + m2[1] + '" stroke="#fff" stroke-width="2.5"/>'
     + '<circle cx="' + cx + '" cy="' + cy + '" r="' + (big ? 6 : 4) + '" fill="#e2e8f0"/>'
-    + '<text x="' + cx + '" y="' + (cy + (big ? 30 : 22)) + '" text-anchor="middle" font-size="' + (big ? 24 : 15) + '" font-weight="700" fill="' + anCol(v) + '">' + (v === null || v === undefined ? '–' : anF1(v) + '%') + '</text>'
-    + '<text x="' + cx + '" y="' + (cy + (big ? 48 : 38)) + '" text-anchor="middle" font-size="' + (big ? 12 : 10.5) + '" letter-spacing="1" fill="#94a3b8">' + label + '</text></svg>';
+    + '<text x="' + cx + '" y="' + (cy + (big ? 30 : 22)) + '" text-anchor="middle" font-size="' + (big ? 24 : 15) + '" font-weight="700" fill="' + col(v) + '">' + (v === null || v === undefined ? '–' : anF1(v) + '%') + '</text>'
+    + '<text x="' + cx + '" y="' + (cy + (big ? 48 : 38)) + '" text-anchor="middle" font-size="' + (big ? 12 : 10.5) + '" letter-spacing="1" fill="#94a3b8">' + label + '</text>'
+    + (poca ? '<text x="' + cx + '" y="' + (cy + (big ? 64 : 52)) + '" text-anchor="middle" font-size="' + (big ? 11.5 : 10) + '" fill="#f59e0b">pocas visitas (' + nv + ')</text>' : '')
+    + '</svg>';
   return s;
 }
 
@@ -18034,8 +18043,8 @@ function anPintar(){
   const box = document.getElementById('anPage'); if(!box || !box.classList.contains('abierto')) return;
   const y = box.scrollTop, D = anFilas(), fd = (typeof FECHA_DATOS !== 'undefined' && FECHA_DATOS) ? FECHA_DATOS : new Date();
   const hh = String(fd.getHours()).padStart(2, '0') + ':' + String(fd.getMinutes()).padStart(2, '0');
-  let h = '<div class="an-wrap"><div class="an-head"><h1>MI ANÁLISIS <small>solo Luis · ' + fd.toLocaleDateString('es-CL', { weekday:'long', day:'2-digit', month:'2-digit', year:'numeric' }) + ', datos de las ' + hh + ' · <span class="an-updbox">' + anUpdHtml() + '</span></small></h1>'
-    + '<div class="an-chips">' + [['Todo','Todo el equipo'], ['QUILPUE','Quilpué'], ['VILLA ALEMANA','Villa Alemana']].map(function(c){
+  let h = '<div class="an-wrap"><div class="an-head"><h1>MI ANÁLISIS <small>solo Luis · ' + fd.toLocaleDateString('es-CL', { weekday:'long', day:'2-digit', month:'2-digit', year:'numeric' }) + ', datos de las ' + hh + '</small></h1>'
+    + '<div class="an-chips"><span class="an-updbox">' + anUpdHtml() + '</span>' + [['Todo','Todo el equipo'], ['QUILPUE','Quilpué'], ['VILLA ALEMANA','Villa Alemana']].map(function(c){
         return '<span class="an-chip' + (AN_COM === c[0] ? ' on' : '') + '" onclick="AN_COM=\'' + c[0] + '\'; anPintar(); anDetPintar()">' + c[1] + '</span>'; }).join('')
     + '<button class="an-x" onclick="anCerrar()" title="Cerrar (Esc o Ctrl+Alt+A)">✕ Cerrar</button></div></div>';
   if(D.cargando) h += '<div class="an-carga">Cargando el histórico (datos.json)… lo de hoy ya está, el resto aparece en unos segundos.</div>';
@@ -18047,8 +18056,8 @@ function anPintar(){
     const dl = ss.comp !== null && sa.comp !== null ? ss.comp - sa.comp : null;
     h += '<div class="an-card an-clic" onclick="anDetAbrir(\'' + F.f + '\', {t:\'sem\', k:\'' + D.semHoy + '\'})" title="Toca para ver el detalle de ' + F.f.toLowerCase() + '">'
       + '<h3><i class="pt" style="background:' + F.c + '"></i>' + F.f + '</h3><span class="an-ver">ver detalle ›</span>'
-      + '<div class="an-rel">' + anReloj(sh.comp, 52, 'HOY') + anReloj(ss.comp, 80, 'SEMANA ' + derNumSemana(D.semHoy), true) + anReloj(sm.comp, 52, AN_NOMMES[+D.mesHoy.slice(4) - 1].toUpperCase()) + '</div>'
-      + '<div class="an-pie"><span>vs Sem ' + derNumSemana(semAnt) + ': ' + (dl === null ? '<b>–</b>' : '<b style="color:' + (dl >= 0 ? '#22c55e' : '#ef4444') + '">' + (dl >= 0 ? '▲' : '▼') + ' ' + anF1(Math.abs(dl)) + ' pts</b>')
+      + '<div class="an-rel">' + anReloj(sh.comp, 52, 'HOY', false, sh.vis) + anReloj(ss.comp, 80, 'SEMANA ' + derNumSemana(D.semHoy), true, ss.vis) + anReloj(sm.comp, 52, AN_NOMMES[+D.mesHoy.slice(4) - 1].toUpperCase(), false, sm.vis) + '</div>'
+      + '<div class="an-pie"><span>vs Sem ' + derNumSemana(semAnt) + ': ' + (dl === null ? '<b>–</b>' : '<b style="color:' + (ss.vis < AN_MIN_VIS ? '#94a3b8' : dl >= 0 ? '#22c55e' : '#ef4444') + '" title="' + (ss.vis < AN_MIN_VIS ? 'Con pocas visitas la comparación todavía no dice mucho' : '') + '">' + (dl >= 0 ? '▲' : '▼') + ' ' + anF1(Math.abs(dl)) + ' pts</b>')
       + '</span><span><b>' + ss.vis + '</b> visitadas en la semana' + (ss.ab ? ' · <b>' + ss.ab + '</b> por cerrar' : '') + '</span></div>'
       + (F.f === 'Migraciones' && (ss.g || sm.g) ? '<div class="an-pie" style="border:0;padding-top:0;color:#a78bfa">GSA como quiebre (como VTR) · semana sin GSA ' + mpPc(ss.compSG) + ' · mes sin GSA ' + mpPc(sm.compSG) + '</div>' : '')
       + '</div>';
@@ -18057,24 +18066,26 @@ function anPintar(){
   /* semaforo 8 semanas */
   const SEMS = []; for(let i = 7; i >= 0; i--) SEMS.push(anSemAnt(D.semHoy, i));
   h += '<div class="an-sec">Una mirada distinta</div><div class="an-g2"><div class="an-card"><h3>Semáforo de las últimas 8 semanas</h3>'
-    + '<p class="s">Completitud semana a semana. Verde: sobre la meta. Ámbar: a menos de 5 pts. Rojo: bajo eso. Toca una casilla para ver esa semana.</p>'
+    + '<p class="s">Completitud semana a semana. Verde: sobre la meta. Ámbar: a menos de 5 pts. Rojo: bajo eso. Gris: menos de ' + AN_MIN_VIS + ' visitas, todavía no dice mucho. Toca una casilla para ver esa semana.</p>'
     + '<div class="an-sem"><div></div>' + SEMS.map(function(k){ return '<div class="h">S' + derNumSemana(k) + (k === D.semHoy ? '<br><small>en curso</small>' : '') + '</div>'; }).join('');
   AN_FAMS.forEach(function(F){
     h += '<div>' + F.f + '</div>';
     SEMS.forEach(function(k){
       const s = mpSt(anPer(D, F.f, { t:'sem', k:k }));
       h += s.comp === null ? '<div class="d vac">–</div>'
-        : '<div class="d' + (k === D.semHoy ? ' act' : '') + '" style="background:' + anCol(s.comp) + '" title="' + F.f + ' semana ' + derNumSemana(k) + ': ' + s.co + ' de ' + s.vis + ' visitadas" onclick="anDetAbrir(\'' + F.f + '\', {t:\'sem\', k:\'' + k + '\'})">'
+        : '<div class="d' + (k === D.semHoy ? ' act' : '') + '" style="background:' + (s.vis < AN_MIN_VIS ? '#64748b' : anCol(s.comp)) + (s.vis < AN_MIN_VIS ? ';color:#f1f5f9' : '') + '" title="' + (s.vis < AN_MIN_VIS ? 'Pocas visitas todavía · ' : '') + F.f + ' semana ' + derNumSemana(k) + ': ' + s.co + ' de ' + s.vis + ' visitadas" onclick="anDetAbrir(\'' + F.f + '\', {t:\'sem\', k:\'' + k + '\'})">'
           + Math.round(s.comp) + '%<small>' + s.vis + ' vis.</small></div>';
     });
   });
   h += '</div></div>';
   /* como cierra el mes */
   h += '<div class="an-card"><h3>¿Cómo cierra ' + AN_NOMMES[+D.mesHoy.slice(4) - 1].toLowerCase() + '?</h3>'
-    + '<p class="s">Lo que queda del mes (abiertas de hoy + días hábiles que faltan × visitas por día de los últimos 10 días) cerrado con la completitud de esos 10 días, ± 5 pts. La línea blanca es la meta; el punto, dónde va hoy.</p>';
-  const W = 460, L = 104, Rr = 70, xa = function(v){ return L + (Math.max(30, Math.min(90, v)) - 30) / 60 * (W - L - Rr); };
+    + '<p class="s">Lo que queda del mes (abiertas de hoy + días hábiles que faltan × visitas por día de los últimos 10 días) cerrado con la completitud de esos 10 días, ± 5 pts. La línea blanca es la meta; el punto, dónde va el mes (sale desde ' + AN_MIN_MES + ' visitas).</p>';
+  const W = 460, L = 104, Rr = 16, xa = function(v){ return L + (Math.max(30, Math.min(90, v)) - 30) / 60 * (W - L - Rr); };
   let g = '<svg viewBox="0 0 ' + W + ' ' + (AN_FAMS.length * 58 + 30) + '" style="width:100%">';
+  const halo = ' stroke="#111a2e" stroke-width="4" paint-order="stroke" stroke-linejoin="round"';
   [30, 40, 50, 60, 70, 80, 90].forEach(function(v){ g += '<text x="' + xa(v) + '" y="' + (AN_FAMS.length * 58 + 22) + '" font-size="10.5" fill="#94a3b8" text-anchor="middle">' + v + '%</text><line x1="' + xa(v) + '" x2="' + xa(v) + '" y1="6" y2="' + (AN_FAMS.length * 58 + 8) + '" stroke="#22304f"/>'; });
+  g += '<line x1="' + xa(MP_META) + '" x2="' + xa(MP_META) + '" y1="4" y2="' + (AN_FAMS.length * 58 + 10) + '" stroke="#fff" stroke-width="2"/>';
   const d0 = new Date(+D.hoyIso.slice(0, 4), +D.hoyIso.slice(4, 6) - 1, +D.hoyIso.slice(6, 8));
   let dias = 0; const fin = new Date(d0.getFullYear(), d0.getMonth() + 1, 0);
   for(let d = new Date(d0.getTime() + 864e5); d <= fin; d.setDate(d.getDate() + 1)) if(d.getDay() !== 0) dias++;
@@ -18088,11 +18099,15 @@ function anPintar(){
     const proy = function(p){ p = Math.max(0, Math.min(100, p)) / 100; const tv = sm.vis + quedan; return tv ? 100 * (sm.co + quedan * p) / tv : null; };
     const a = proy(s10.comp - 5), b = proy(s10.comp + 5), c = a >= MP_META ? '#22c55e' : b >= MP_META ? '#f59e0b' : '#ef4444';
     g += '<rect x="' + xa(a) + '" y="' + (yy - 9) + '" width="' + Math.max(6, xa(b) - xa(a)) + '" height="18" rx="9" fill="' + c + '" fill-opacity=".55"><title>' + quedan + ' visitas por delante · últimos 10 días: ' + anF1(s10.comp) + '%</title></rect>';
-    if(sm.comp !== null) g += '<circle cx="' + xa(sm.comp) + '" cy="' + yy + '" r="5" fill="#fff"><title>Va en ' + anF1(sm.comp) + '% (' + sm.co + ' de ' + sm.vis + ')</title></circle>';
-    g += '<text x="' + (Math.max(xa(b), sm.comp === null ? 0 : xa(sm.comp)) + 9) + '" y="' + (yy + 4) + '" font-size="11" fill="#94a3b8">' + Math.round(a) + '–' + Math.round(b) + '%</text>'
-      + '<text x="' + xa(a) + '" y="' + (yy + 24) + '" font-size="10.5" fill="' + c + '">' + (a >= MP_META ? 'llega a la meta' : b >= MP_META ? 'puede llegar' : 'no llega') + ' · quedan ~' + quedan + ' visitas</text>';
+    const punto = sm.comp !== null && sm.vis >= AN_MIN_MES;
+    if(punto) g += '<circle cx="' + xa(sm.comp) + '" cy="' + yy + '" r="5" fill="#fff"><title>Va en ' + anF1(sm.comp) + '% (' + sm.co + ' de ' + sm.vis + ')</title></circle>';
+    const xr = Math.max(xa(b), punto ? xa(sm.comp) : 0) + 9, rt = Math.round(a) + '–' + Math.round(b) + '%';
+    g += xr > W - 46 ? '<text x="' + (Math.min(xa(a), punto ? xa(sm.comp) : 9e9) - 9) + '" y="' + (yy + 4) + '" font-size="11" fill="#94a3b8" text-anchor="end"' + halo + '>' + rt + '</text>'
+                     : '<text x="' + xr + '" y="' + (yy + 4) + '" font-size="11" fill="#94a3b8"' + halo + '>' + rt + '</text>';
+    g += '<text x="' + L + '" y="' + (yy + 25) + '" font-size="10.5" fill="' + c + '"' + halo + '>' + (a >= MP_META ? 'llega a la meta' : b >= MP_META ? 'puede llegar' : 'no llega')
+      + ' · quedan ~' + quedan + ' visitas' + (punto ? '' : ' · el mes lleva ' + sm.vis + ' visitas') + '</text>';
   });
-  g += '<line x1="' + xa(MP_META) + '" x2="' + xa(MP_META) + '" y1="4" y2="' + (AN_FAMS.length * 58 + 10) + '" stroke="#fff" stroke-width="2"/></svg>';
+  g += '</svg>';
   h += g + '</div></div>';
   h += '<div class="an-nota"><b>Cómo se leería</b><ul>'
     + '<li><b>Relojes:</b> el grande es la semana y los chicos son hoy y el mes. La rayita blanca es la meta de ' + MP_META + ' %. Toca la tarjeta para ver el detalle.</li>'
