@@ -18153,11 +18153,7 @@ function anPintar(){
   });
   g += '</svg>';
   h += g + '</div></div>';
-  h += '<div class="an-nota"><b>Cómo se leería</b><ul>'
-    + '<li><b>Relojes:</b> el grande es la semana y los chicos son hoy y el mes. La rayita blanca es la meta de ' + MP_META + ' %. Toca la tarjeta para ver el detalle.</li>'
-    + '<li><b>Migraciones</b> se cuentan igual que en la página MIGRACIONES (GSA como quiebre). <b>Altas y Reparaciones</b> salen del mismo datos.json (días anteriores) y de las bandejas de hoy.</li>'
-    + '<li><b>Semáforo y cierre:</b> las tres actividades lado a lado. Toca una casilla para abrir esa semana.</li>'
-    + '<li>Se abre y se cierra con <b>Ctrl + Alt + A</b>. No tiene botón en pantalla.</li></ul></div></div>';
+  h += '</div>';   /* (02-11-2026) Luis: se borro la leyenda "Como se leeria" */
   box.innerHTML = h; box.scrollTop = y;
   if(D.cargando) setTimeout(function(){ anPintar(); anDetPintar(); }, 1500);
 }
