@@ -21706,8 +21706,8 @@
    }
   },
   "02-11-2026": {
-   "hasta": "19:50",
-   "actividades": 167,
+   "hasta": "19:55",
+   "actividades": 168,
    "tecnicos": 32,
    "estados": {
     "Suspendido": 5,
@@ -21715,13 +21715,14 @@
     "Cancelado": 11,
     "No Realizada": 30,
     "Iniciado": 6,
+    "en ruta": 1,
     "Pendiente": 1
    },
-   "rgu": 237.0,
+   "rgu": 237.1,
    "caidas_total": 6,
    "caidas_activas": 6,
    "caidas_resueltas": 0,
-   "nuevas": 26,
+   "nuevas": 27,
    "al_bucket": 34,
    "repetidas": 23,
    "reagendadas": 6,
@@ -21783,6 +21784,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3ORL11PH",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "cat": "Modificación de Servicio",
+      "f": "19-21",
+      "hi": "19:52",
+      "d": "OVALLE 1557, QUILPUE",
+      "e": "en ruta"
+     },
      {
       "o": "1-3ORGLPZB",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -22359,5 +22369,5 @@
    }
   }
  },
- "generado": "02-11-2026 19:50"
+ "generado": "02-11-2026 19:55"
 }
