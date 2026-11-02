@@ -21706,24 +21706,24 @@
    }
   },
   "02-11-2026": {
-   "hasta": "17:12",
-   "actividades": 166,
+   "hasta": "17:27",
+   "actividades": 165,
    "tecnicos": 32,
    "estados": {
     "Suspendido": 2,
-    "Completado": 78,
-    "Iniciado": 25,
-    "Pendiente": 29,
-    "Cancelado": 8,
-    "No Realizada": 19,
+    "Completado": 81,
+    "Iniciado": 26,
+    "Cancelado": 9,
+    "No Realizada": 20,
+    "Pendiente": 22,
     "en ruta": 5
    },
-   "rgu": 236.0,
+   "rgu": 235.0,
    "caidas_total": 5,
    "caidas_activas": 5,
    "caidas_resueltas": 0,
    "nuevas": 25,
-   "al_bucket": 33,
+   "al_bucket": 34,
    "repetidas": 23,
    "reagendadas": 6,
    "detalle": {
@@ -21795,7 +21795,7 @@
      },
      {
       "o": "1-3ORD9K93",
-      "tec": "JOSE SALAS MEDINA",
+      "tec": "ALFREDO ALCAYAGA F",
       "cat": "Migración 3 Play",
       "f": "16-19",
       "hi": "18:27",
@@ -21813,7 +21813,7 @@
      },
      {
       "o": "1-3OQ9PGLF",
-      "tec": "ALEXIS JARA",
+      "tec": "JOSE GALAZ D",
       "cat": "Alta 1 Play",
       "f": "16-19",
       "hi": "17:55",
@@ -21854,7 +21854,7 @@
       "f": "16-19",
       "hi": "17:09",
       "d": "SAN ENRIQUE 1890 EDIF. 8 DEPTO 102, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OR9DSB3",
@@ -21881,7 +21881,7 @@
       "f": "13-16",
       "hi": "17:42",
       "d": "ALCALDE ALEJANDRO PERALTA 1439, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "No Realizada"
      },
      {
       "o": "1-3OR762WZ",
@@ -21899,7 +21899,7 @@
       "f": "16-19",
       "hi": "16:35",
       "d": "TIERRAS ROJAS 484, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OR6E6T1",
@@ -21989,7 +21989,7 @@
       "f": "16-19",
       "hi": "16:00",
       "d": "LOS LUNES 134, QUILPUE",
-      "e": "Pendiente"
+      "e": "Pendiente (ya no está)"
      },
      {
       "o": "1-3OQYPMMS",
@@ -22062,6 +22062,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OQ7RTSD",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "17:34",
+      "d": "IGNACIO CARRERA PINTO 0356 DEPTO 408, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "FELIPE SILVA R",
+      "visitas": 1,
+      "ult_fecha": "29-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OR06XBY",
       "cat": "Alta 2 Play",
       "f": "10-13",
@@ -22086,18 +22098,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OLPSYX7",
-      "cat": "Migración 1 Play",
-      "f": "16-19",
-      "hi": "18:18",
-      "d": "PJE COLTAUCO 2438, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JOSE GALAZ D",
-      "visitas": 1,
-      "ult_fecha": "24-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OR03LXQ",
       "cat": "Reparación",
       "f": "13-16",
@@ -22108,18 +22108,6 @@
       "visitas": 1,
       "ult_fecha": "03-09-2026",
       "ult_cierre": "Falla Aprovisionamiento"
-     },
-     {
-      "o": "1-3OQ7RTSD",
-      "cat": "Reparación",
-      "f": "16-19",
-      "hi": "18:36",
-      "d": "IGNACIO CARRERA PINTO 0356 DEPTO 408, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOSE PEREZ RANGEL",
-      "visitas": 1,
-      "ult_fecha": "29-10-2026",
-      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OR2GY6Y",
@@ -22184,12 +22172,24 @@
       "o": "1-3OPUK5C5",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "17:22",
+      "hi": "17:26",
       "d": "OVALLE 1126, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "LUIS CASTRO TORRES",
       "visitas": 1,
       "ult_fecha": "30-10-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3ONATGZ8",
+      "cat": "Migración 1 Play",
+      "f": "16-19",
+      "hi": "18:42",
+      "d": "GABRIEL GONZALEZ VIDELA 1785, QUILPUE",
+      "e": "Pendiente",
+      "tec": "LUIS CASTRO TORRES",
+      "visitas": 1,
+      "ult_fecha": "19-10-2026",
       "ult_cierre": "Cliente reagenda"
      },
      {
@@ -22205,16 +22205,16 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3ONATGZ8",
+      "o": "1-3OLPSYX7",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "18:15",
-      "d": "GABRIEL GONZALEZ VIDELA 1785, QUILPUE",
+      "hi": "18:49",
+      "d": "PJE COLTAUCO 2438, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
       "visitas": 1,
-      "ult_fecha": "19-10-2026",
-      "ult_cierre": "Cliente reagenda"
+      "ult_fecha": "24-10-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OPTE61P",
@@ -22312,7 +22312,7 @@
       "o": "1-3OHYRCK1",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:57",
+      "hi": "18:27",
       "d": "OROPESA 019, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
@@ -22332,7 +22332,7 @@
       "o": "1-3OQ7CSTG",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:50",
+      "hi": "18:49",
       "d": "LOS MAQUIS 1635, QUILPUE",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -22342,5 +22342,5 @@
    }
   }
  },
- "generado": "02-11-2026 17:12"
+ "generado": "02-11-2026 17:27"
 }
