@@ -17867,6 +17867,10 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarM
   #anPage .an-chips { display:flex; gap:6px; flex-wrap:wrap; align-items:center; }
   #anPage .an-chip { background:#16213a; border:1px solid #22304f; border-radius:999px; padding:6px 13px; font-size:12.5px; color:#94a3b8; cursor:pointer; }
   #anPage .an-chip.on { background:#1d4ed8; border-color:#1d4ed8; color:#fff; }
+  .an-upd { display:inline-flex; align-items:center; gap:6px; border-radius:999px; padding:5px 12px; font-size:12.5px; font-weight:600; background:#dcfce7; color:#15803d; border:1px solid #86efac; }
+  .an-upd::before { content:''; width:8px; height:8px; border-radius:50%; background:currentColor; }
+  .an-upd.mal { background:#fee2e2; color:#b91c1c; border-color:#fca5a5; animation:anParp 1s ease-in-out infinite; }
+  @keyframes anParp { 0%,100% { opacity:1; } 50% { opacity:.35; } }
   #anPage .an-x { background:#f1f5f9; border:1px solid #cbd5e1; color:#334155; border-radius:8px; padding:6px 12px; cursor:pointer; font-size:14px; margin-left:6px; }
   #anPage .an-sec { font-size:12px; text-transform:uppercase; letter-spacing:1.5px; color:#475569; font-weight:600; margin:16px 0 8px; }
   #anPage .an-g3 { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:12px; }
@@ -17949,6 +17953,15 @@ function anIso(d){ return d.getFullYear() + String(d.getMonth() + 1).padStart(2,
 function anHoyIso(){ return anIso((typeof FECHA_DATOS !== 'undefined' && FECHA_DATOS) ? FECHA_DATOS : new Date()); }
 function anMasDias(iso, n){ const d = new Date(+iso.slice(0, 4), +iso.slice(4, 6) - 1, +iso.slice(6, 8) + n); return anIso(d); }
 function anCiuDir(d){ const m = /,\s*([^,]+)$/.exec(String(d || '')); return m ? m[1] : ''; }
+/* (02-11-2026) Luis: "necesito ver el dato de hace cuanto se actualizo". Usa estadoMonitor(),
+   el mismo de la barra de la portada (rojo y parpadeando si pasa de MIN_SIN_AVISO en horario). */
+function anUpdHtml(){
+  let e = null; try { e = estadoMonitor(); } catch(_){}
+  if(!e) return '';
+  return '<span class="an-upd' + (e.alarma ? ' mal' : '') + '" title="Hace cuánto llegó el último dato del monitor (rutas.json)">' + escR(e.texto) + '</span>';
+}
+function anUpdRefrescar(){ const t = anUpdHtml(); document.querySelectorAll('.an-updbox').forEach(function(b){ b.innerHTML = t; }); }
+setInterval(function(){ try { anUpdRefrescar(); } catch(_){} }, 20000);
 function anTec(t){ return typeof rmTitulo === 'function' ? rmTitulo(t) : String(t || ''); }
 
 /* Todas las filas que usa la vista: [{fam, iso, sem, mes, e, cod, gsa, fr, tec, ciu, ot, dir, hoy}] */
@@ -18023,7 +18036,7 @@ function anPintar(){
   const y = box.scrollTop, D = anFilas(), fd = (typeof FECHA_DATOS !== 'undefined' && FECHA_DATOS) ? FECHA_DATOS : new Date();
   const hh = String(fd.getHours()).padStart(2, '0') + ':' + String(fd.getMinutes()).padStart(2, '0');
   let h = '<div class="an-wrap"><div class="an-head"><h1>MI ANÁLISIS <small>solo Luis · ' + fd.toLocaleDateString('es-CL', { weekday:'long', day:'2-digit', month:'2-digit', year:'numeric' }) + ', datos de las ' + hh + '</small></h1>'
-    + '<div class="an-chips">' + [['Todo','Todo el equipo'], ['QUILPUE','Quilpué'], ['VILLA ALEMANA','Villa Alemana']].map(function(c){
+    + '<div class="an-chips"><span class="an-updbox">' + anUpdHtml() + '</span>' + [['Todo','Todo el equipo'], ['QUILPUE','Quilpué'], ['VILLA ALEMANA','Villa Alemana']].map(function(c){
         return '<span class="an-chip' + (AN_COM === c[0] ? ' on' : '') + '" onclick="AN_COM=\'' + c[0] + '\'; anPintar(); anDetPintar()">' + c[1] + '</span>'; }).join('')
     + '<button class="an-x" onclick="anCerrar()" title="Cerrar (Esc o Ctrl+Alt+A)">✕ Cerrar</button></div></div>';
   if(D.cargando) h += '<div class="an-carga">Cargando el histórico (datos.json)… lo de hoy ya está, el resto aparece en unos segundos.</div>';
@@ -18122,7 +18135,7 @@ function anDetPintar(){
   if(per.t === 'sem' && per.k !== D.semHoy) tabs.splice(2, 0, { t:'sem', k:per.k });
   let h = '<div class="an-md"><div class="an-mdtop"><h2><i style="width:12px;height:12px;border-radius:50%;background:' + F.c + ';display:inline-block;border:1px solid #cbd5e1"></i>' + fam + ' · detalle'
     + (AN_COM !== 'Todo' ? ' <small>' + (AN_COM === 'QUILPUE' ? 'Quilpué' : 'Villa Alemana') + '</small>' : '') + '</h2>'
-    + '<button class="an-x" onclick="anDetCerrar()">✕ Cerrar</button></div>'
+    + '<div style="display:flex;gap:8px;align-items:center"><span class="an-updbox">' + anUpdHtml() + '</span><button class="an-x" onclick="anDetCerrar()">✕ Cerrar</button></div></div>'
     + '<div class="an-tabs">' + tabs.map(function(p){ const on = p.t === per.t && (p.t === 'hoy' || p.k === per.k);
         return '<span class="an-tab' + (on ? ' on' : '') + '" onclick="anDetPer(\'' + p.t + '\', \'' + p.k + '\')">' + anPerTit(p) + (p.t === 'sem' && p.k === D.semHoy ? ' (en curso)' : '') + '</span>'; }).join('') + '</div>';
   h += '<div class="an-kpis">'
