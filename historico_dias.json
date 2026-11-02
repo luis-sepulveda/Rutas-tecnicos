@@ -21706,22 +21706,22 @@
    }
   },
   "02-11-2026": {
-   "hasta": "10:59",
-   "actividades": 115,
+   "hasta": "11:04",
+   "actividades": 117,
    "tecnicos": 32,
    "estados": {
     "Iniciado": 26,
     "Pendiente": 73,
-    "Completado": 7,
-    "en ruta": 2,
+    "Completado": 8,
+    "en ruta": 3,
     "No Realizada": 6,
     "Cancelado": 1
    },
-   "rgu": 177.0,
+   "rgu": 180.5,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
-   "nuevas": 5,
+   "nuevas": 6,
    "al_bucket": 3,
    "repetidas": 18,
    "reagendadas": 6,
@@ -21747,6 +21747,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OR1W69G",
+      "tec": "JOSE ROJO A",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "16:26",
+      "d": "HUANHUALI 77, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OR1LSEQ",
       "tec": "LUIS MARTIN NUÑEZ",
@@ -21834,7 +21843,7 @@
       "o": "1-3OOVSF8C",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "13:23",
+      "hi": "13:33",
       "d": "CUMMING 951 DEPTO 30, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -21930,7 +21939,7 @@
       "o": "1-3OR1LSEQ",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:12",
+      "hi": "17:17",
       "d": "RIQUELME 2063, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
@@ -22026,7 +22035,7 @@
       "o": "1-3OQ7CSTG",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:34",
+      "hi": "16:56",
       "d": "LOS MAQUIS 1635, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -22046,9 +22055,9 @@
       "o": "1-3OO1X9UG",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "10:55",
+      "hi": "11:08",
       "d": "NAVARRA 1825 EDIF. H DEPTO 31, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JUAN ARRIAGADA C",
       "desde": "29-10-2026"
      },
@@ -22076,5 +22085,5 @@
    }
   }
  },
- "generado": "02-11-2026 10:59"
+ "generado": "02-11-2026 11:04"
 }
