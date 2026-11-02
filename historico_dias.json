@@ -21706,18 +21706,18 @@
    }
   },
   "02-11-2026": {
-   "hasta": "11:19",
-   "actividades": 119,
+   "hasta": "11:30",
+   "actividades": 121,
    "tecnicos": 32,
    "estados": {
-    "Iniciado": 27,
+    "Iniciado": 26,
     "Pendiente": 71,
-    "Completado": 11,
-    "No Realizada": 7,
+    "Completado": 12,
+    "No Realizada": 8,
     "Cancelado": 2,
-    "en ruta": 1
+    "en ruta": 2
    },
-   "rgu": 186.5,
+   "rgu": 188.5,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
@@ -21763,7 +21763,7 @@
       "f": "13-16",
       "hi": "16:26",
       "d": "HUANHUALI 77, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OR1LSEQ",
@@ -21813,6 +21813,18 @@
     ],
     "repetidas": [
      {
+      "o": "1-3OPTE61P",
+      "cat": "Reparación",
+      "f": "10-13",
+      "hi": "11:50",
+      "d": "CLAUDIO GAY 46, QUILPUE",
+      "e": "Pendiente",
+      "tec": "ALEXIS JARA",
+      "visitas": 1,
+      "ult_fecha": "30-10-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3OLPSYX7",
       "cat": "Migración 1 Play",
       "f": "16-19",
@@ -21840,7 +21852,7 @@
       "o": "1-3OOVSF8C",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "14:33",
+      "hi": "14:36",
       "d": "CUMMING 951 DEPTO 30, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -21864,7 +21876,7 @@
       "o": "1-3OPSH1KW",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "15:09",
+      "hi": "16:01",
       "d": "GILBERTO BARROS 2, QUILPUE",
       "e": "Pendiente",
       "tec": "JORDAN ROA PEREZ",
@@ -21878,7 +21890,7 @@
       "f": "10-13",
       "hi": "10:57",
       "d": "PJE CATALUNA 1838, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JOSE ROJO A",
       "visitas": 2,
       "ult_fecha": "31-10-2026",
@@ -21900,7 +21912,7 @@
       "o": "1-3OQC6X1K",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "13:00",
+      "hi": "15:13",
       "d": "RAFAEL FABRES 3143 CASA LOC-B, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -21912,7 +21924,7 @@
       "o": "1-3OOPOT3M",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "12:17",
+      "hi": "12:12",
       "d": "BILBAO 1534 DEPTO 44, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS CASTRO TORRES",
@@ -21936,7 +21948,7 @@
       "o": "1-3OR1LSEQ",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:23",
+      "hi": "17:11",
       "d": "RIQUELME 2063, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
@@ -21972,7 +21984,7 @@
       "o": "1-3OQPSC7I",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "16:48",
+      "hi": "16:35",
       "d": "OVALLE 1104, QUILPUE",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -21996,7 +22008,7 @@
       "o": "1-3OPNK6OH",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "13:15",
+      "hi": "13:08",
       "d": "AZAPA 1190, QUILPUE",
       "e": "Pendiente",
       "tec": "SEBASTIAN DOSSOW A",
@@ -22020,25 +22032,13 @@
       "o": "1-3OON2AT4",
       "cat": "Migración 3 Play",
       "f": "10-13",
-      "hi": "11:34",
+      "hi": "11:40",
       "d": "MORRO LA CRUZ 2948, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "YENDER BOSCAN CADENAS",
       "visitas": 1,
       "ult_fecha": "16-10-2026",
       "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OPTE61P",
-      "cat": "Reparación",
-      "f": "10-13",
-      "hi": "15:57",
-      "d": "CLAUDIO GAY 46, QUILPUE",
-      "e": "Pendiente",
-      "tec": "YENDER BOSCAN CADENAS",
-      "visitas": 1,
-      "ult_fecha": "30-10-2026",
-      "ult_cierre": "Cliente reagenda"
      }
     ],
     "reagendadas": [
@@ -22046,7 +22046,7 @@
       "o": "1-3OOV5E56",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:44",
+      "hi": "15:29",
       "d": "PEDRO AGUIRRE CERDA 985, QUILPUE",
       "e": "Pendiente",
       "tec": "EDGAR VALERO C",
@@ -22056,7 +22056,7 @@
       "o": "1-3OQ7CSTG",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:57",
+      "hi": "16:40",
       "d": "LOS MAQUIS 1635, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -22106,5 +22106,5 @@
    }
   }
  },
- "generado": "02-11-2026 11:19"
+ "generado": "02-11-2026 11:30"
 }
