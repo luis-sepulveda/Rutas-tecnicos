@@ -21706,25 +21706,25 @@
    }
   },
   "02-11-2026": {
-   "hasta": "14:40",
-   "actividades": 157,
+   "hasta": "14:51",
+   "actividades": 162,
    "tecnicos": 32,
    "estados": {
     "Suspendido": 1,
-    "Completado": 45,
+    "Completado": 48,
     "Pendiente": 66,
     "Cancelado": 7,
-    "Iniciado": 25,
+    "Iniciado": 24,
     "No Realizada": 11,
-    "en ruta": 2
+    "en ruta": 5
    },
-   "rgu": 225.7,
+   "rgu": 232.7,
    "caidas_total": 3,
    "caidas_activas": 3,
    "caidas_resueltas": 0,
-   "nuevas": 17,
+   "nuevas": 18,
    "al_bucket": 23,
-   "repetidas": 21,
+   "repetidas": 24,
    "reagendadas": 6,
    "detalle": {
     "caidas": [
@@ -21758,6 +21758,15 @@
     ],
     "nuevas": [
      {
+      "o": "1-3ORAH59D",
+      "tec": "YENDER BOSCAN CADENAS",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "16:04",
+      "d": "MADRID 620 CASA H, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3ORAF9V4",
       "tec": "JOSE PEREZ RANGEL",
       "cat": "Reparación",
@@ -21773,7 +21782,7 @@
       "f": "13-16",
       "hi": "14:20",
       "d": "MORRO LA CRUZ 2948, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OR8BU7B",
@@ -21795,7 +21804,7 @@
      },
      {
       "o": "1-3OR762WZ",
-      "tec": "ALEXIS JARA",
+      "tec": "LUIS MARTIN NUÑEZ",
       "cat": "Reparación",
       "f": "13-16",
       "hi": "14:31",
@@ -21867,12 +21876,12 @@
      },
      {
       "o": "1-3OR1LSEQ",
-      "tec": "MARCO PEREZ G",
+      "tec": "JOSE GALAZ D",
       "cat": "Alta 1 Play",
       "f": "16-19",
       "hi": "17:12",
       "d": "RIQUELME 2063, QUILPUE",
-      "e": "Pendiente (ya no está)"
+      "e": "Pendiente"
      },
      {
       "o": "1-3OR08265",
@@ -21923,6 +21932,18 @@
       "visitas": 1,
       "ult_fecha": "02-11-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OPUK5C5",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "18:55",
+      "d": "OVALLE 1126, QUILPUE",
+      "e": "Pendiente",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "visitas": 1,
+      "ult_fecha": "30-10-2026",
+      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3OOVSF8C",
@@ -22009,6 +22030,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OR1LSEQ",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "19:16",
+      "d": "RIQUELME 2063, QUILPUE",
+      "e": "Pendiente",
+      "tec": "JOSE GALAZ D",
+      "visitas": 4,
+      "ult_fecha": "21-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OR03LXQ",
       "cat": "Reparación",
       "f": "13-16",
@@ -22059,7 +22092,7 @@
       "o": "1-3OQPSC7I",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:07",
       "d": "OVALLE 1104, QUILPUE",
       "e": "Pendiente",
       "tec": "KEVIN TAPIA RETAMAL",
@@ -22071,7 +22104,7 @@
       "o": "1-3ONATGZ8",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "17:53",
+      "hi": "18:00",
       "d": "GABRIEL GONZALEZ VIDELA 1785, QUILPUE",
       "e": "Pendiente",
       "tec": "KEVIN TAPIA RETAMAL",
@@ -22162,6 +22195,18 @@
       "visitas": 1,
       "ult_fecha": "16-10-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3ORAH59D",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "16:04",
+      "d": "MADRID 620 CASA H, QUILPUE",
+      "e": "Pendiente",
+      "tec": "YENDER BOSCAN CADENAS",
+      "visitas": 2,
+      "ult_fecha": "22-10-2026",
+      "ult_cierre": "Ductos tapados"
      }
     ],
     "reagendadas": [
@@ -22169,7 +22214,7 @@
       "o": "1-3OQ7CSTG",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:44",
+      "hi": "17:44",
       "d": "LOS MAQUIS 1635, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -22209,7 +22254,7 @@
       "o": "1-3OHYRCK1",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "18:15",
+      "hi": "17:42",
       "d": "OROPESA 019, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MARCELO GÓMEZ GÓME",
@@ -22229,5 +22274,5 @@
    }
   }
  },
- "generado": "02-11-2026 14:40"
+ "generado": "02-11-2026 14:51"
 }
