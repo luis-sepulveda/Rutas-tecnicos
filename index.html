@@ -17898,8 +17898,8 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarM
   #anPage .an-nota { margin-top:14px; background:#111a2e; border:1px solid #22304f; border-radius:12px; padding:12px 16px; font-size:13px; line-height:1.55; color:#cbd5e1; }
   #anPage .an-nota ul { margin:4px 0 0; padding-left:20px; }
   #anPage .an-carga { padding:40px; text-align:center; color:#475569; font-size:15px; }
-  #anPage .an-sec .an-btn { float:right; margin-top:-6px; background:#1d4ed8; color:#fff; border:0; border-radius:999px; padding:7px 16px; font-size:13px; font-weight:600; cursor:pointer; letter-spacing:0; text-transform:none; }
-  #anPage .an-sec .an-btn:hover { background:#1e40af; }
+  #anPage .an-btn { background:#7c3aed; color:#fff; border:0; border-radius:999px; padding:7px 14px; font-size:12.5px; font-weight:600; cursor:pointer; margin-right:6px; }
+  #anPage .an-btn:hover { background:#6d28d9; }
   /* (02-11-2026) tecnicos semana a semana */
   #anDet table.an-ts { width:100%; border-collapse:separate; border-spacing:4px 4px; font-size:12.5px; }
   #anDet .an-ts th { color:#94a3b8; font-weight:600; padding:4px 6px; text-align:center; position:sticky; top:0; background:#111a2e; z-index:1; }
@@ -18063,7 +18063,8 @@ function anPintar(){
   const y = box.scrollTop, D = anFilas(), fd = (typeof FECHA_DATOS !== 'undefined' && FECHA_DATOS) ? FECHA_DATOS : new Date();
   const hh = String(fd.getHours()).padStart(2, '0') + ':' + String(fd.getMinutes()).padStart(2, '0');
   let h = '<div class="an-wrap"><div class="an-head"><h1>MI ANÁLISIS <small>solo Luis · ' + fd.toLocaleDateString('es-CL', { weekday:'long', day:'2-digit', month:'2-digit', year:'numeric' }) + ', datos de las ' + hh + '</small></h1>'
-    + '<div class="an-chips"><span class="an-updbox">' + anUpdHtml() + '</span>' + [['Todo','Todo el equipo'], ['QUILPUE','Quilpué'], ['VILLA ALEMANA','Villa Alemana']].map(function(c){
+    + '<div class="an-chips"><span class="an-updbox">' + anUpdHtml() + '</span>'
+    + '<button class="an-btn" onclick="anTsAbrir(\'Migraciones\')" title="Completitud de cada técnico en las últimas 8 semanas">👥 Técnicos semana a semana ›</button>' + [['Todo','Todo el equipo'], ['QUILPUE','Quilpué'], ['VILLA ALEMANA','Villa Alemana']].map(function(c){
         return '<span class="an-chip' + (AN_COM === c[0] ? ' on' : '') + '" onclick="AN_COM=\'' + c[0] + '\'; anPintar(); anDetPintar()">' + c[1] + '</span>'; }).join('')
     + '<button class="an-x" onclick="anCerrar()" title="Cerrar (Esc o Ctrl+Alt+A)">✕ Cerrar</button></div></div>';
   if(D.cargando) h += '<div class="an-carga">Cargando el histórico (datos.json)… lo de hoy ya está, el resto aparece en unos segundos.</div>';
@@ -18084,7 +18085,7 @@ function anPintar(){
   h += '</div>';
   /* semaforo 8 semanas */
   const SEMS = []; for(let i = 7; i >= 0; i--) SEMS.push(anSemAnt(D.semHoy, i));
-  h += '<div class="an-sec">Una mirada distinta<button class="an-btn" onclick="anTsAbrir(\'Migraciones\')" title="Completitud de cada técnico en las últimas 8 semanas">👥 Técnicos semana a semana ›</button></div><div class="an-g2"><div class="an-card"><h3>Semáforo de las últimas 8 semanas</h3>'
+  h += '<div class="an-sec">Una mirada distinta</div><div class="an-g2"><div class="an-card"><h3>Semáforo de las últimas 8 semanas</h3>'
     + '<p class="s">Completitud semana a semana. Verde: sobre la meta. Ámbar: a menos de 5 pts. Rojo: bajo eso. Gris: menos de ' + AN_MIN_VIS + ' visitas, todavía no dice mucho. Toca una casilla para ver esa semana.</p>'
     + '<div class="an-sem"><div></div>' + SEMS.map(function(k){ return '<div class="h">S' + derNumSemana(k) + (k === D.semHoy ? '<br><small>en curso</small>' : '') + '</div>'; }).join('');
   AN_FAMS.forEach(function(F){
