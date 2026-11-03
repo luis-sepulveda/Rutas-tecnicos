@@ -17958,6 +17958,27 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarM
   #anDet .pastel .an-ts td.l.top { background:#fdf1d6; color:#8a4b06; font-weight:700; border-radius:6px; padding-left:8px; box-shadow:inset 3px 0 0 #e8a33a; }
   #anDet .pastel .an-ts td.l.top b { display:inline-block; min-width:18px; color:#a15c07; font-size:11px; }
   #anDet .pastel .an-top-ley { display:inline-block; background:#fdf1d6; color:#8a4b06; font-weight:700; border-radius:6px; padding:1px 8px; box-shadow:inset 3px 0 0 #e8a33a; }
+  /* (03-11-2026) ventana "Noviembre día a día" (migraciones) */
+  #anDet .an-dia-res { background:#f8fafc; border:1px solid #eef0f3; border-radius:12px; padding:10px 14px; font-size:13px; color:#374151; margin:4px 0 16px; }
+  #anDet .an-dia-res b { color:#0f172a; }
+  #anDet .an-dia-sec { font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:#64748b; margin:6px 0 8px; }
+  #anDet .an-dia-sem { display:grid; grid-template-columns:repeat(6,1fr); gap:8px; margin-bottom:20px; }
+  #anDet .an-dia-d { border-radius:10px; padding:10px 6px; text-align:center; cursor:pointer; }
+  #anDet .an-dia-d .dd { font-size:11px; font-weight:700; color:#64748b; text-transform:uppercase; }
+  #anDet .an-dia-d .pp { font-size:22px; font-weight:800; line-height:1.1; margin-top:2px; }
+  #anDet .an-dia-d .vv { font-size:10.5px; color:#9ca3af; }
+  #anDet .an-dia-d.hoy { outline:2px solid #374151; outline-offset:-2px; }
+  #anDet .an-dia-meshd { display:grid; grid-template-columns:70px repeat(6,1fr); gap:6px; font-size:10.5px; color:#9ca3af; text-align:center; margin-bottom:4px; }
+  #anDet .an-dia-mesrow { display:grid; grid-template-columns:70px repeat(6,1fr); gap:6px; align-items:center; margin-bottom:6px; }
+  #anDet .an-dia-mesrow .wk { font-size:11.5px; color:#64748b; font-weight:600; }
+  #anDet .an-dia-cel { height:40px; border-radius:7px; display:flex; flex-direction:column; align-items:center; justify-content:center; font-weight:700; font-size:12.5px; cursor:pointer; line-height:1.05; }
+  #anDet .an-dia-cel small { font-size:9px; font-weight:500; color:#9ca3af; }
+  #anDet .an-dia-cel.wkcur { box-shadow:inset 0 0 0 2px #374151; }
+  #anDet .an-dia-d.ok  { background:#dcf3e4; } #anDet .an-dia-d.ok .pp  { color:#1e7a46; } #anDet .an-dia-cel.ok  { background:#dcf3e4; color:#1e7a46; }
+  #anDet .an-dia-d.med { background:#fdf1d6; } #anDet .an-dia-d.med .pp { color:#a15c07; } #anDet .an-dia-cel.med { background:#fdf1d6; color:#a15c07; }
+  #anDet .an-dia-d.baj { background:#fde4e4; } #anDet .an-dia-d.baj .pp { color:#b42318; } #anDet .an-dia-cel.baj { background:#fde4e4; color:#b42318; }
+  #anDet .an-dia-d.gr  { background:#f1f2f4; } #anDet .an-dia-d.gr .pp  { color:#9ca3af; font-size:16px; } #anDet .an-dia-cel.gr  { background:#f1f2f4; color:#9ca3af; }
+  #anDet .an-dia-d.vac { background:#fafafa; cursor:default; } #anDet .an-dia-d.vac .pp { color:#cbd5e1; font-size:16px; } #anDet .an-dia-cel.vac { background:#fafafa; color:#cbd5e1; cursor:default; }
   /* detalle (fondo blanco, tarjetas oscuras) */
   #anDet { position:fixed; inset:0; z-index:3600; display:none; background:rgba(15,23,42,.45); overflow:auto; padding:24px 16px; font-family:'Segoe UI',Arial,sans-serif; }
   #anDet.abierto { display:block; }
@@ -18068,12 +18089,12 @@ function anFilas(){
   return { R:F, cargando:cargando, hoyIso:hoyIso, semHoy:semHoy, mesHoy:mesHoy };
 }
 function anPer(D, fam, per){
-  return D.R.filter(function(x){ return x.fam === fam && (per.t === 'hoy' ? x.hoy : per.t === 'sem' ? x.sem === per.k : x.mes === per.k); });
+  return D.R.filter(function(x){ return x.fam === fam && (per.t === 'hoy' ? x.hoy : per.t === 'dia' ? x.iso === per.k : per.t === 'sem' ? x.sem === per.k : x.mes === per.k); });
 }
 function anSemAnt(sem, n){ const p = sem.split('-'); const d = new Date(+p[0], +p[1] - 1, +p[2] - 7 * (n === undefined ? 1 : n));
   return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
 function anMesAnt(m){ return +m.slice(4) === 1 ? (+m.slice(0, 4) - 1) + '12' : m.slice(0, 4) + String(+m.slice(4) - 1).padStart(2, '0'); }
-function anPerTit(per){ return per.t === 'hoy' ? 'Hoy' : per.t === 'sem' ? 'Semana ' + derNumSemana(per.k) : AN_NOMMES[+per.k.slice(4) - 1]; }
+function anPerTit(per){ if(per.t === 'hoy') return 'Hoy'; if(per.t === 'dia'){ var dw = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'], d = new Date(+per.k.slice(0,4), +per.k.slice(4,6)-1, +per.k.slice(6,8)); return dw[d.getDay()] + ' ' + (+per.k.slice(6,8)); } return per.t === 'sem' ? 'Semana ' + derNumSemana(per.k) : AN_NOMMES[+per.k.slice(4) - 1]; }
 
 /* reloj con aguja: v = % (o null), r = radio */
 function anReloj(v, r, label, big, nv, min, ref){
@@ -18178,7 +18199,8 @@ function anPintar(){
   }
   h += '</div>';   /* cierra .an-col */
   /* como cierra el mes */
-  h += '<div class="an-card"><h3>¿Cómo cierra ' + AN_NOMMES[+D.mesHoy.slice(4) - 1].toLowerCase() + '?</h3>'
+  h += '<div class="an-card"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap"><h3 style="margin:0">¿Cómo cierra ' + AN_NOMMES[+D.mesHoy.slice(4) - 1].toLowerCase() + '?</h3>'
+    + '<button class="an-btn" style="background:#0ea5e9" onclick="anDiarioAbrir()" title="Ver migraciones día a día, con el mes completo">📅 Día a día ›</button></div>'
     + '<p class="s">Lo que queda del mes (abiertas de hoy + días hábiles que faltan × visitas por día de los últimos 10 días) cerrado con la completitud de esos 10 días, ± 5 pts. La línea blanca es la meta; el punto, dónde va el mes (sale desde ' + AN_MIN_MES + ' visitas).</p>';
   const W = 460, L = 104, Rr = 16, xa = function(v){ return L + (Math.max(30, Math.min(90, v)) - 30) / 60 * (W - L - Rr); };
   let g = '<svg viewBox="0 0 ' + W + ' ' + (AN_FAMS.length * 58 + 30) + '" style="width:100%">';
@@ -18232,11 +18254,13 @@ function anDetPintar(){
   const m = document.getElementById('anDet'); if(!m || !AN_DET || !m.classList.contains('abierto')) return;
   if(AN_DET.ts) return anTsPintar(m);
   if(AN_DET.seg) return anSegPintar(m);
+  if(AN_DET.diario) return anDiarioPintar(m);
   const y = m.scrollTop, D = anFilas(), fam = AN_DET.fam, per = AN_DET.per, F = AN_FAMS.filter(function(x){ return x.f === fam; })[0] || AN_FAMS[0];
   const L = anPer(D, fam, per), s = mpSt(L);
   /* periodo anterior para la flecha */
   let ant = null, antTx = '';
   if(per.t === 'hoy'){ const k = anMasDias(D.hoyIso, -7); ant = D.R.filter(function(x){ return x.fam === fam && x.iso === k; }); antTx = 'vs mismo día sem. pasada'; }
+  else if(per.t === 'dia'){ const k = anMasDias(per.k, -7); ant = D.R.filter(function(x){ return x.fam === fam && x.iso === k; }); antTx = 'vs mismo día sem. pasada'; }
   else if(per.t === 'sem'){ const k = anSemAnt(per.k); ant = anPer(D, fam, { t:'sem', k:k }); antTx = 'vs Sem ' + derNumSemana(k); }
   else { const k = anMesAnt(per.k); ant = anPer(D, fam, { t:'mes', k:k }); antTx = 'vs ' + AN_NOMMES[+k.slice(4) - 1].toLowerCase(); }
   const sa = mpSt(ant), dl = s.comp !== null && sa.comp !== null ? s.comp - sa.comp : null;
@@ -18244,11 +18268,13 @@ function anDetPintar(){
   /* pestanas: hoy, semana en curso, mes en curso y (si se abrio otra) esa semana */
   const tabs = [{ t:'hoy', k:'' }, { t:'sem', k:D.semHoy }, { t:'mes', k:D.mesHoy }];
   if(per.t === 'sem' && per.k !== D.semHoy) tabs.splice(2, 0, { t:'sem', k:per.k });
+  if(per.t === 'dia') tabs.splice(1, 0, { t:'dia', k:per.k });
   let h = '<div class="an-md"><div class="an-mdtop"><h2><i style="width:12px;height:12px;border-radius:50%;background:' + F.c + ';display:inline-block;border:1px solid #cbd5e1"></i>' + fam + ' · detalle'
     + (AN_COM !== 'Todo' ? ' <small>' + (AN_COM === 'QUILPUE' ? 'Quilpué' : 'Villa Alemana') + '</small>' : '') + '</h2>'
     + '<div style="display:flex;gap:8px;align-items:center"><span class="an-updbox">' + anUpdHtml() + '</span>'
     + (AN_DET.volver ? '<button class="an-x" onclick="anTsAbrir(\'' + AN_DET.volver + '\')">‹ Volver a técnicos</button>' : '')
     + (AN_DET.volverSeg ? '<button class="an-x" onclick="anSegAbrir()">‹ Volver a Seguimiento</button>' : '')
+    + (AN_DET.volverDiario ? '<button class="an-x" onclick="anDiarioAbrir()">‹ Volver a día a día</button>' : '')
     + '<button class="an-x" onclick="anDetCerrar()">✕ Cerrar</button></div></div>'
     + '<div class="an-tabs">' + tabs.map(function(p){ const on = p.t === per.t && (p.t === 'hoy' || p.k === per.k);
         return '<span class="an-tab' + (on ? ' on' : '') + '" onclick="anDetPer(\'' + p.t + '\', \'' + p.k + '\')">' + anPerTit(p) + (p.t === 'sem' && p.k === D.semHoy ? ' (en curso)' : '') + '</span>'; }).join('') + '</div>';
@@ -18451,6 +18477,76 @@ function anSegPintar(m){
     });
     h += '</table></div>';
   }
+  h += '</div></div>';
+  m.innerHTML = h; m.scrollTop = y;
+}
+
+/* ==== (03-11-2026) NOVIEMBRE DÍA A DÍA (solo migraciones) ====
+   Luis: ventana "por día" de la semana en curso, pero que GUARDE el mes en
+   curso. Solo migraciones. Se abre desde el botón "📅 Día a día" de la tarjeta
+   "¿Cómo cierra el mes?". Arriba la semana en curso (lun-sáb, casillas grandes,
+   hoy marcado); abajo el mes completo, una fila por semana (se va guardando día
+   a día), la semana en curso recuadrada. Tocar un día abre ese día (AN_DET.per
+   {t:'dia'}), con "‹ Volver a día a día". Respeta el filtro de comuna. */
+var AN_DOW6 = ['Lun','Mar','Mié','Jue','Vie','Sáb'];
+function anDow6(iso){ var d = new Date(+iso.slice(0,4), +iso.slice(4,6)-1, +iso.slice(6,8)); return (d.getDay() + 6) % 7; }
+function anDiaStat(D, iso){ return mpSt(D.R.filter(function(x){ return x.fam === 'Migraciones' && x.iso === iso; })); }
+function anDiaCls(s){ if(!s.vis) return 'vac'; if(s.vis < MP_POCAS) return 'gr'; return s.comp >= MP_META ? 'ok' : s.comp >= MP_META - 5 ? 'med' : 'baj'; }
+function anDiarioAbrir(){
+  AN_DET = { diario:true };
+  var m = document.getElementById('anDet');
+  if(!m){ m = document.createElement('div'); m.id = 'anDet'; m.onclick = function(e){ if(e.target === m) anDetCerrar(); }; document.body.appendChild(m); }
+  m.classList.add('abierto'); m.scrollTop = 0; anDetPintar();
+}
+function anDiarioPintar(m){
+  var y = m.scrollTop, D = anFilas();
+  var semIni = D.semHoy.replace(/-/g, '');                 // lunes de la semana en curso, YYYYMMDD
+  var nomMes = AN_NOMMES[+D.mesHoy.slice(4) - 1];
+  var semTot = mpSt(D.R.filter(function(x){ return x.fam === 'Migraciones' && x.sem === D.semHoy; }));
+  var mesTot = mpSt(D.R.filter(function(x){ return x.fam === 'Migraciones' && x.mes === D.mesHoy; }));
+  var clickDia = function(iso){ return ' onclick="anDetAbrir(\'Migraciones\', {t:\'dia\', k:\'' + iso + '\'}); AN_DET.volverDiario = true; anDetPintar()"'; };
+  var h = '<div class="an-md"><div class="an-mdtop"><h2>📅 ' + nomMes + ' día a día <small>· migraciones'
+    + (AN_COM !== 'Todo' ? ' · ' + (AN_COM === 'QUILPUE' ? 'Quilpué' : 'Villa Alemana') : '') + '</small></h2>'
+    + '<div style="display:flex;gap:8px;align-items:center"><span class="an-updbox">' + anUpdHtml() + '</span><button class="an-x" onclick="anDetCerrar()">✕ Cerrar</button></div></div>'
+    + '<div class="an-card pastel" style="margin-top:12px">';
+  if(D.cargando){ h += '<div class="an-vac">Cargando el histórico…</div></div></div>'; m.innerHTML = h; m.scrollTop = y; return; }
+  h += '<div class="an-dia-res">' + nomMes + ' va en <b style="color:' + anColP(mesTot.comp) + '">' + mpPc(mesTot.comp) + '</b> (' + mesTot.co + ' de ' + mesTot.vis + ' visitadas) · esta semana (S' + derNumSemana(D.semHoy) + ') <b style="color:' + anColP(semTot.comp) + '">' + mpPc(semTot.comp) + '</b> (' + semTot.co + ' de ' + semTot.vis + '). Meta ' + MP_META + '%.</div>';
+  /* semana en curso */
+  h += '<div class="an-dia-sec">Esta semana · S' + derNumSemana(D.semHoy) + '</div><div class="an-dia-sem">';
+  for(var i = 0; i < 6; i++){
+    var iso = anMasDias(semIni, i), s = anDiaStat(D, iso), cls = anDiaCls(s), hoy = iso === D.hoyIso, dn = +iso.slice(6, 8);
+    h += '<div class="an-dia-d ' + cls + (hoy ? ' hoy' : '') + '"' + (s.vis ? clickDia(iso) : '') + '><div class="dd">' + AN_DOW6[i] + ' ' + dn + (hoy ? ' · hoy' : '') + '</div>'
+      + (s.vis ? '<div class="pp">' + Math.round(s.comp) + '%</div><div class="vv">' + s.vis + ' vis.</div>' : '<div class="pp">–</div><div class="vv">sin datos aún</div>') + '</div>';
+  }
+  h += '</div>';
+  /* mes completo, una fila por semana */
+  var ym = D.mesHoy, fin = new Date(+ym.slice(0, 4), +ym.slice(4), 0).getDate(), weeks = {}, worder = [];
+  for(var d = 1; d <= fin; d++){
+    var di = ym + String(d).padStart(2, '0'), dw = anDow6(di);
+    if(dw === 6) continue;                                  // domingo
+    var lun = mgLunes(di);
+    if(!weeks[lun]){ weeks[lun] = [null, null, null, null, null, null]; worder.push(lun); }
+    weeks[lun][dw] = di;
+  }
+  h += '<div class="an-dia-sec">Todo el mes · ' + nomMes.toLowerCase() + ' (se va guardando día a día)</div>';
+  h += '<div class="an-dia-meshd"><div></div>' + AN_DOW6.map(function(n){ return '<div>' + n + '</div>'; }).join('') + '</div>';
+  worder.forEach(function(lun){
+    var cur = lun === D.semHoy;
+    h += '<div class="an-dia-mesrow"><div class="wk">S' + derNumSemana(lun) + (cur ? ' <b style="color:#374151">•</b>' : '') + '</div>';
+    for(var c = 0; c < 6; c++){
+      var di = weeks[lun][c];
+      if(!di){ h += '<div></div>'; continue; }
+      var s = anDiaStat(D, di), cls = anDiaCls(s), dn = +di.slice(6, 8);
+      h += '<div class="an-dia-cel ' + cls + (cur ? ' wkcur' : '') + '"' + (s.vis ? clickDia(di) : '') + ' title="' + dn + ' ' + nomMes.toLowerCase() + '">'
+        + (s.vis ? Math.round(s.comp) + '%<small>' + dn + ' · ' + s.vis + ' vis.</small>' : '<small style="color:#cbd5e1">' + dn + '</small>') + '</div>';
+    }
+    h += '</div>';
+  });
+  h += '<div class="an-ts-ley" style="margin-top:12px"><span><i style="background:#dcf3e4;border:1px solid #9fd8b4"></i>' + MP_META + '% o más</span>'
+    + '<span><i style="background:#fdf1d6;border:1px solid #f3d08a"></i>' + (MP_META - 5) + ' a ' + (MP_META - 1) + '%</span>'
+    + '<span><i style="background:#fde4e4;border:1px solid #f2a7a7"></i>bajo ' + (MP_META - 5) + '%</span>'
+    + '<span><i style="background:#f1f2f4;border:1px solid #e5e7eb"></i>pocas visitas</span>'
+    + '<span><i style="background:#fafafa;border:1px dashed #d1d5db"></i>sin datos aún</span></div>';
   h += '</div></div>';
   m.innerHTML = h; m.scrollTop = y;
 }
