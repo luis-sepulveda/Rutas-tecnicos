@@ -21557,22 +21557,22 @@
    }
   },
   "03-11-2026": {
-   "hasta": "15:39",
-   "actividades": 153,
+   "hasta": "16:09",
+   "actividades": 154,
    "tecnicos": 33,
    "estados": {
-    "Completado": 65,
-    "Pendiente": 40,
+    "Completado": 69,
+    "en ruta": 6,
+    "Pendiente": 31,
     "Cancelado": 6,
-    "Iniciado": 24,
-    "No Realizada": 15,
-    "en ruta": 3
+    "Iniciado": 25,
+    "No Realizada": 17
    },
-   "rgu": 224.5,
+   "rgu": 225.5,
    "caidas_total": 7,
    "caidas_activas": 7,
    "caidas_resueltas": 0,
-   "nuevas": 12,
+   "nuevas": 13,
    "al_bucket": 48,
    "repetidas": 35,
    "reagendadas": 2,
@@ -21643,6 +21643,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OSDE330",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "16:07",
+      "d": "LOS MANZANOS 3120, QUILPUE",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3OS682LA",
       "tec": "LUIS CASTRO TORRES",
@@ -21757,9 +21766,9 @@
       "o": "1-3OR6J45A",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:50",
+      "hi": "16:23",
       "d": "LOS LENADORES 848, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "ALEXIS JARA",
       "visitas": 1,
       "ult_fecha": "02-11-2026",
@@ -21769,7 +21778,7 @@
       "o": "1-3OKQLWOK",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "18:58",
+      "hi": "20:57",
       "d": "ALFONSO LOPEZ EMANUELLI 1544, QUILPUE",
       "e": "Pendiente",
       "tec": "ALEXIS JARA",
@@ -21855,11 +21864,23 @@
       "f": "13-16",
       "hi": "15:33",
       "d": "MATURANA 34, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "FELIPE SILVA R",
       "visitas": 2,
       "ult_fecha": "24-09-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OR1Z2DO",
+      "cat": "Migración 2 Play",
+      "f": "16-19",
+      "hi": "16:23",
+      "d": "CONDELL SUR 01565 CASA G, QUILPUE",
+      "e": "en ruta",
+      "tec": "FELIPE SILVA R",
+      "visitas": 4,
+      "ult_fecha": "14-10-2026",
+      "ult_cierre": "Sin acceso a vivienda"
      },
      {
       "o": "1-3OPEVCJ6",
@@ -22033,7 +22054,7 @@
       "o": "1-3ORIE25L",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "18:26",
+      "hi": "16:14",
       "d": "IGNACIO CARRERA PINTO 0650 EDIF. D DEPTO 103, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MARCELO GÓMEZ GÓME",
@@ -22093,7 +22114,7 @@
       "o": "1-3OPGP1JL",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "18:44",
+      "hi": "18:43",
       "d": "PJE 2 1206 CASA D19, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNANDEZ",
@@ -22149,18 +22170,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OR1Z2DO",
-      "cat": "Migración 2 Play",
-      "f": "16-19",
-      "hi": "18:00",
-      "d": "CONDELL SUR 01565 CASA G, QUILPUE",
-      "e": "Pendiente",
-      "tec": "SEBASTIAN DOSSOW A",
-      "visitas": 4,
-      "ult_fecha": "14-10-2026",
-      "ult_cierre": "Sin acceso a vivienda"
-     },
-     {
       "o": "1-3ORC95J7",
       "cat": "Reparación",
       "f": "10-13",
@@ -22177,9 +22186,9 @@
       "o": "1-3OO6D0LH",
       "cat": "Alta Traslado",
       "f": "13-16",
-      "hi": "16:15",
+      "hi": "16:14",
       "d": "VALLE NEVADO 2874, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "PABLO HERNANEZ FERNANDEZ",
       "desde": "02-11-2026"
      },
@@ -22189,7 +22198,7 @@
       "f": "13-16",
       "hi": "15:27",
       "d": "JOSE FUENTES 660, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "SAMUEL FERNANDEZ VIDAL",
       "desde": "02-11-2026"
      }
@@ -22197,5 +22206,5 @@
    }
   }
  },
- "generado": "03-11-2026 15:39"
+ "generado": "03-11-2026 16:09"
 }
