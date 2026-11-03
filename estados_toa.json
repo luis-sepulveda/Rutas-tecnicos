@@ -1,7 +1,8 @@
 {
-  "actualizado": "2026-11-03T10:40:04",
+  "actualizado": "2026-11-03T11:05:39",
   "resumen": {
-    "reagendada": 2
+    "reagendada": 3,
+    "sin informacion": 1
   },
   "estados": {
     "1-3ORU761E": {
@@ -23,6 +24,65 @@
       "color": "rgb(255, 222, 0)",
       "detalle": "1-3ORUM3GM - 10-13-Alta-1 Play-ARGELIA 782Mie, 4 Nov",
       "franja_nueva": "10-13"
+    },
+    "1-3ORJF5AS": {
+      "tec": "CESAR MENA OLIVEROS",
+      "cat": "Migración 2 Play",
+      "franja_original": "13-16",
+      "d": "PJE PARTICULAR 1451, QUILPUE",
+      "estado": "reagendada",
+      "color": "rgb(255, 222, 0)",
+      "detalle": "1-3ORJF5AS - 16-19-Migración-Migración-PJE PARTICULAR 1451Mie, 4 Nov",
+      "franja_nueva": "16-19"
+    },
+    "1-3OQZEL25": {
+      "tec": "JOSE SALAS MEDINA",
+      "cat": "Alta 1 Play",
+      "franja_original": "10-13",
+      "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "AVENIDA BALMACEDA 171",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3OPI9M1X",
+            "franja": "10-13",
+            "texto": "1-3OPI9M1X - 10-13-Alta-1 Play-AVENIDA BALMACEDA 171Lun, 2 Nov"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3OOMNZHU",
+            "franja": "10-13",
+            "texto": "1-3OOMNZHU - 10-13-Alta-1 Play-AVENIDA BALMACEDA 171Vie, 30 Oct"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3OKPKB58",
+            "franja": "10-13",
+            "texto": "1-3OKPKB58 - 10-13-Alta-1 Play-AVENIDA BALMACEDA 171Jue, 29 Oct"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3OJVR6XJ",
+            "franja": "10-13",
+            "texto": "1-3OJVR6XJ - 10-13-Alta-1 Play-AVENIDA BALMACEDA 171Vie, 23 Oct"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3OJN2BHD",
+            "franja": "10-13",
+            "texto": "1-3OJN2BHD - 10-13-Alta-1 Play-AVENIDA BALMACEDA 171Jue, 22 Oct"
+          }
+        ]
+      }
     }
   }
 }
