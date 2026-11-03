@@ -21557,21 +21557,22 @@
    }
   },
   "03-11-2026": {
-   "hasta": "20:17",
-   "actividades": 161,
+   "hasta": "20:22",
+   "actividades": 162,
    "tecnicos": 33,
    "estados": {
     "Completado": 111,
     "Cancelado": 7,
     "No Realizada": 38,
     "Iniciado": 4,
+    "Pendiente": 1,
     "Suspendido": 1
    },
-   "rgu": 229.9,
+   "rgu": 230.0,
    "caidas_total": 9,
    "caidas_activas": 9,
    "caidas_resueltas": 0,
-   "nuevas": 18,
+   "nuevas": 19,
    "al_bucket": 48,
    "repetidas": 36,
    "reagendadas": 2,
@@ -21660,6 +21661,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OSYMUE1",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "cat": "Modificación de Servicio",
+      "f": "19-21",
+      "hi": "21:12",
+      "d": "RIO MALLECO 154 CASA D, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OSW62GA",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -22280,5 +22290,5 @@
    }
   }
  },
- "generado": "03-11-2026 20:17"
+ "generado": "03-11-2026 20:22"
 }
