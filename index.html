@@ -17951,6 +17951,9 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarM
   #anDet .pastel .an-ts td.c.cur { outline-color:#374151; }
   #anDet .pastel .an-ts td.tot small { color:#9ca3af; }
   #anDet .pastel .an-ts-ley, #anDet .pastel .an-vac { color:#6b7280; }
+  #anDet .pastel .an-ts td.l.top { background:#fdf1d6; color:#8a4b06; font-weight:700; border-radius:6px; padding-left:8px; box-shadow:inset 3px 0 0 #e8a33a; }
+  #anDet .pastel .an-ts td.l.top b { display:inline-block; min-width:18px; color:#a15c07; font-size:11px; }
+  #anDet .pastel .an-top-ley { display:inline-block; background:#fdf1d6; color:#8a4b06; font-weight:700; border-radius:6px; padding:1px 8px; box-shadow:inset 3px 0 0 #e8a33a; }
   /* detalle (fondo blanco, tarjetas oscuras) */
   #anDet { position:fixed; inset:0; z-index:3600; display:none; background:rgba(15,23,42,.45); overflow:auto; padding:24px 16px; font-family:'Segoe UI',Arial,sans-serif; }
   #anDet.abierto { display:block; }
@@ -18366,6 +18369,7 @@ function anTsPintar(m){
    (mpFalta), lo de hoy y las 8 semanas en casillas (tocar abre esa semana).
    Arriba: "Los N juntos" (base vs semana en curso). Respeta el filtro de comuna. */
 var AN_SEG_MIN = 8;
+var AN_SEG_TOP = 10;   /* (03-11-2026) los N peores van con el nombre en ambar: los primeros a auditar */
 function anSegAbrir(){
   AN_DET = { seg:true };
   let m = document.getElementById('anDet');
@@ -18391,18 +18395,19 @@ function anSegPintar(m){
   let h = '<div class="an-md"><div class="an-mdtop"><h2>🎯 Seguimiento · técnicos a auditar <small>migraciones' + (AN_COM !== 'Todo' ? ' · ' + (AN_COM === 'QUILPUE' ? 'Quilpué' : 'Villa Alemana') : '') + '</small></h2>'
     + '<div style="display:flex;gap:8px;align-items:center"><span class="an-updbox">' + anUpdHtml() + '</span><button class="an-x" onclick="anDetCerrar()">✕ Cerrar</button></div></div>'
     + '<div class="an-card pastel" style="margin-top:12px"><h3>' + lista.length + ' técnico' + (lista.length === 1 ? '' : 's') + ' bajo ' + MP_META + ' % en las últimas 4 semanas (' + r1 + ')</h3>'
-    + '<p class="s">Del peor al mejor. "Cómo va" compara la semana en curso con su promedio de esas 4 semanas. Toca una casilla para ver esa semana.</p>';
+    + '<p class="s">Del peor al mejor. <span class="an-top-ley">En ámbar: los ' + Math.min(AN_SEG_TOP, lista.length) + ' primeros a auditar</span> (los de peor promedio). "Cómo va" compara la semana en curso con su promedio de esas 4 semanas. Toca una casilla para ver esa semana.</p>';
   if(D.cargando) h += '<div class="an-vac">Cargando el histórico…</div>';
   else if(!lista.length) h += '<div class="an-vac">Ningún técnico bajo ' + MP_META + ' %. 🎉</div>';
   else {
     h += '<div class="an-ts-scroll"><table class="an-ts"><tr><th class="l">Técnico</th>' + SEMS.map(function(k){ return '<th>S' + derNumSemana(k) + (k === D.semHoy ? '<br><small style="font-weight:400">en curso</small>' : '') + '</th>'; }).join('')
       + '<th>Promedio 4 sem.</th><th>Cómo va</th></tr>';
-    lista.forEach(function(t){
+    lista.forEach(function(t, n){
+      const top = n < AN_SEG_TOP;
       const s = t.sems[7], d = s.comp !== null ? s.comp - t.base.comp : null;
       const va = s.vis === 0 ? '<td class="fl" style="color:#9ca3af">sin visitas aún</td>'
         : s.vis < MP_POCAS ? '<td class="fl" style="color:#9ca3af">pocas visitas</td>'
         : d >= 0 ? '<td class="fl" style="color:#1e7a46">▲ mejorando +' + Math.round(d) + '</td>' : '<td class="fl" style="color:#b42318">▼ peor ' + Math.round(d) + '</td>';
-      h += '<tr><td class="l">' + escR(anTec(t.k)) + '</td>' + t.sems.map(function(x, i){
+      h += '<tr><td class="l' + (top ? ' top' : '') + '"' + (top ? ' title="Entre los ' + AN_SEG_TOP + ' primeros a auditar"' : '') + '>' + (top ? '<b>' + (n + 1) + '</b>' : '') + escR(anTec(t.k)) + '</td>' + t.sems.map(function(x, i){
           const cur = i === 7 ? ' cur' : '', oc = ' onclick="anDetAbrir(\'Migraciones\', {t:\'sem\', k:\'' + SEMS[i] + '\'}); AN_DET.volverSeg = true; anDetPintar()" title="' + x.co + ' de ' + x.vis + ' visitadas"';
           if(!x.vis) return '<td class="c vac' + cur + '">–</td>';
           if(x.vis < MP_POCAS) return '<td class="c gr' + cur + '"' + oc + ' style="cursor:pointer">' + Math.round(x.comp) + '%<small>' + x.vis + ' vis.</small></td>';
