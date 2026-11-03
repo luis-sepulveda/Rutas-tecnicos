@@ -17936,6 +17936,21 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarM
   #anDet .an-ts-ley { display:flex; gap:14px; flex-wrap:wrap; font-size:12px; color:#94a3b8; margin-top:10px; }
   #anDet .an-ts-ley i { display:inline-block; width:12px; height:12px; border-radius:3px; margin-right:5px; vertical-align:-2px; }
   #anDet .an-ts-scroll { max-height:66vh; overflow:auto; }
+  /* (03-11-2026) colores pastel en fondo blanco: Seguimiento y Tecnicos semana a semana */
+  #anDet .an-card.pastel { background:#fff; border:1px solid #e5e7eb; color:#1f2937; box-shadow:0 1px 3px rgba(15,23,42,.06); }
+  #anDet .an-card.pastel h3 { color:#0f172a; }
+  #anDet .an-card.pastel p.s { color:#6b7280; }
+  #anDet .pastel .an-ts th { background:#fff; color:#6b7280; }
+  #anDet .pastel .an-ts td.l { color:#1f2937; }
+  #anDet .pastel .an-ts tr.eq td.l { color:#0f172a; }
+  #anDet .pastel .an-ts td.c.ok  { background:#dcf3e4; color:#1e7a46; }
+  #anDet .pastel .an-ts td.c.med { background:#fdf1d6; color:#a15c07; }
+  #anDet .pastel .an-ts td.c.baj { background:#fde4e4; color:#b42318; }
+  #anDet .pastel .an-ts td.c.gr  { background:#f1f2f4; color:#9ca3af; }
+  #anDet .pastel .an-ts td.c.vac { background:#fafafa; color:#d1d5db; }
+  #anDet .pastel .an-ts td.c.cur { outline-color:#374151; }
+  #anDet .pastel .an-ts td.tot small { color:#9ca3af; }
+  #anDet .pastel .an-ts-ley, #anDet .pastel .an-vac { color:#6b7280; }
   /* detalle (fondo blanco, tarjetas oscuras) */
   #anDet { position:fixed; inset:0; z-index:3600; display:none; background:rgba(15,23,42,.45); overflow:auto; padding:24px 16px; font-family:'Segoe UI',Arial,sans-serif; }
   #anDet.abierto { display:block; }
@@ -17989,6 +18004,9 @@ var AN_NOMMES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agost
 var AN_RNOM = { cli:'Cliente', vtr:'VTR/CLARO', dom:'Dominion' };
 var AN_RCOL = { cli:'#f59e0b', vtr:'#3b82f6', dom:'#ef4444' };
 
+/* (03-11-2026) version pastel para fondo blanco (Seguimiento y Tecnicos semana a semana) */
+function anColP(v){ return v === null || v === undefined ? '#9ca3af' : v >= MP_META ? '#1e7a46' : v >= MP_META - 5 ? '#a15c07' : '#b42318'; }
+function anCls(v){ return v >= MP_META ? 'ok' : v >= MP_META - 5 ? 'med' : 'baj'; }
 function anCol(v){ return v === null || v === undefined ? '#64748b' : v >= MP_META ? '#22c55e' : v >= MP_META - 5 ? '#f59e0b' : '#ef4444'; }
 function anF1(v){ return (Math.round(v * 10) / 10).toFixed(1).replace('.', ','); }
 function anIso(d){ return d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0'); }
@@ -18304,16 +18322,16 @@ function anTsPintar(m){
     const oc = ' onclick="anDetAbrir(\'' + fam + '\', {t:\'sem\', k:\'' + SEMS[i] + '\'}); AN_DET.volver = \'' + fam + '\'; anDetPintar()" style="cursor:pointer;';
     if(!s.vis) return '<td class="c vac' + cur + '">–</td>';
     if(s.vis < min) return '<td class="c gr' + cur + '" title="Pocas visitas · ' + tt + '"' + oc + '">' + Math.round(s.comp) + '%<small>' + s.vis + ' vis.</small></td>';
-    return '<td class="c' + cur + '" title="' + tt + '"' + oc + 'background:' + anCol(s.comp) + '">' + Math.round(s.comp) + '%<small>' + s.vis + ' vis.</small></td>';
+    return '<td class="c ' + anCls(s.comp) + cur + '" title="' + tt + '"' + oc + '">' + Math.round(s.comp) + '%<small>' + s.vis + ' vis.</small></td>';
   };
-  const fl = function(d){ if(d === null) return '<td class="fl" style="color:#64748b">–</td>';
-    if(Math.abs(d) <= 3) return '<td class="fl" style="color:#f59e0b" title="Últimas 4 semanas contra las 4 anteriores">= ' + (d >= 0 ? '+' : '') + Math.round(d) + '</td>';
-    return '<td class="fl" style="color:' + (d > 0 ? '#22c55e' : '#ef4444') + '" title="Últimas 4 semanas contra las 4 anteriores">' + (d > 0 ? '▲ +' : '▼ ') + Math.round(d) + ' pts</td>'; };
+  const fl = function(d){ if(d === null) return '<td class="fl" style="color:#9ca3af">–</td>';
+    if(Math.abs(d) <= 3) return '<td class="fl" style="color:#a15c07" title="Últimas 4 semanas contra las 4 anteriores">= ' + (d >= 0 ? '+' : '') + Math.round(d) + '</td>';
+    return '<td class="fl" style="color:' + (d > 0 ? '#1e7a46' : '#b42318') + '" title="Últimas 4 semanas contra las 4 anteriores">' + (d > 0 ? '▲ +' : '▼ ') + Math.round(d) + ' pts</td>'; };
   let h = '<div class="an-md"><div class="an-mdtop"><h2><i style="width:12px;height:12px;border-radius:50%;background:' + F.c + ';display:inline-block;border:1px solid #cbd5e1"></i>Técnicos semana a semana'
     + (AN_COM !== 'Todo' ? ' <small>' + (AN_COM === 'QUILPUE' ? 'Quilpué' : 'Villa Alemana') + '</small>' : '') + '</h2>'
     + '<div style="display:flex;gap:8px;align-items:center"><span class="an-updbox">' + anUpdHtml() + '</span><button class="an-x" onclick="anDetCerrar()">✕ Cerrar</button></div></div>'
     + '<div class="an-tabs">' + AN_FAMS.map(function(f){ return '<span class="an-tab' + (f.f === fam ? ' on' : '') + '" onclick="anTsAbrir(\'' + f.f + '\')">' + f.f + '</span>'; }).join('') + '</div>';
-  h += '<div class="an-card"><h3>Completitud de cada técnico, semana a semana · ' + fam + '</h3>'
+  h += '<div class="an-card pastel"><h3>Completitud de cada técnico, semana a semana · ' + fam + '</h3>'
     + '<p class="s">Últimas 8 semanas. Cada casilla: % de completitud y visitas (toca una para ver esa semana). Gris: menos de ' + MP_POCAS + ' visitas esa semana. Primero los de peor completitud en las 8 semanas. La tendencia compara las últimas 4 semanas con las 4 anteriores.'
     + (fam === 'Migraciones' ? ' GSA como quiebre, igual que la página MIGRACIONES.' : '') + '</p>';
   if(D.cargando) h += '<div class="an-vac">Cargando el histórico…</div>';
@@ -18323,15 +18341,15 @@ function anTsPintar(m){
       + '<th>8 semanas</th><th>Tendencia</th></tr>';
     filas.forEach(function(f){
       h += '<tr><td class="l">' + escR(anTec(f.k)) + '</td>' + f.sem.map(function(s, i){ return celda(s, i, MP_POCAS); }).join('')
-        + '<td class="tot" style="color:' + anCol(f.tot.comp) + '">' + mpPc(f.tot.comp) + '<small>' + f.tot.vis + ' vis.</small></td>' + fl(f.dl) + '</tr>';
+        + '<td class="tot" style="color:' + anColP(f.tot.comp) + '">' + mpPc(f.tot.comp) + '<small>' + f.tot.vis + ' vis.</small></td>' + fl(f.dl) + '</tr>';
     });
     const et = mpSt(juntar(E));
     h += '<tr class="eq"><td class="l">Todo el equipo</td>' + E.map(function(a, i){ return celda(mpSt(a), i, AN_MIN_VIS); }).join('')
-      + '<td class="tot" style="color:' + anCol(et.comp) + '">' + mpPc(et.comp) + '<small>' + et.vis + ' vis.</small></td>' + fl(tend(E)) + '</tr></table></div>';
+      + '<td class="tot" style="color:' + anColP(et.comp) + '">' + mpPc(et.comp) + '<small>' + et.vis + ' vis.</small></td>' + fl(tend(E)) + '</tr></table></div>';
   }
-  h += '<div class="an-ts-ley"><span><i style="background:#22c55e"></i>' + MP_META + ' % o más (meta)</span><span><i style="background:#f59e0b"></i>' + (MP_META - 5) + ' a ' + (MP_META - 1) + ' %</span>'
-    + '<span><i style="background:#ef4444"></i>bajo ' + (MP_META - 5) + ' %</span><span><i style="background:#334155"></i>pocas visitas</span><span><i style="background:#1b2742"></i>sin visitas</span>'
-    + '<span><b style="color:#22c55e">▲</b> mejorando · <b style="color:#ef4444">▼</b> empeorando · <b style="color:#f59e0b">=</b> igual (±3 pts)</span></div></div></div>';
+  h += '<div class="an-ts-ley"><span><i style="background:#dcf3e4;border:1px solid #9fd8b4"></i>' + MP_META + ' % o más (meta)</span><span><i style="background:#fdf1d6;border:1px solid #f3d08a"></i>' + (MP_META - 5) + ' a ' + (MP_META - 1) + ' %</span>'
+    + '<span><i style="background:#fde4e4;border:1px solid #f2a7a7"></i>bajo ' + (MP_META - 5) + ' %</span><span><i style="background:#f1f2f4;border:1px solid #e5e7eb"></i>pocas visitas</span><span><i style="background:#fafafa;border:1px dashed #d1d5db"></i>sin visitas</span>'
+    + '<span><b style="color:#1e7a46">▲</b> mejorando · <b style="color:#b42318">▼</b> empeorando · <b style="color:#a15c07">=</b> igual (±3 pts)</span></div></div></div>';
   m.innerHTML = h; m.scrollTop = y;
 }
 
@@ -18372,7 +18390,7 @@ function anSegPintar(m){
   const r1 = 'S' + derNumSemana(SEMS[3]) + ' a S' + derNumSemana(SEMS[6]);
   let h = '<div class="an-md"><div class="an-mdtop"><h2>🎯 Seguimiento · técnicos a auditar <small>migraciones' + (AN_COM !== 'Todo' ? ' · ' + (AN_COM === 'QUILPUE' ? 'Quilpué' : 'Villa Alemana') : '') + '</small></h2>'
     + '<div style="display:flex;gap:8px;align-items:center"><span class="an-updbox">' + anUpdHtml() + '</span><button class="an-x" onclick="anDetCerrar()">✕ Cerrar</button></div></div>'
-    + '<div class="an-card" style="margin-top:12px"><h3>' + lista.length + ' técnico' + (lista.length === 1 ? '' : 's') + ' bajo ' + MP_META + ' % en las últimas 4 semanas (' + r1 + ')</h3>'
+    + '<div class="an-card pastel" style="margin-top:12px"><h3>' + lista.length + ' técnico' + (lista.length === 1 ? '' : 's') + ' bajo ' + MP_META + ' % en las últimas 4 semanas (' + r1 + ')</h3>'
     + '<p class="s">Del peor al mejor. "Cómo va" compara la semana en curso con su promedio de esas 4 semanas. Toca una casilla para ver esa semana.</p>';
   if(D.cargando) h += '<div class="an-vac">Cargando el histórico…</div>';
   else if(!lista.length) h += '<div class="an-vac">Ningún técnico bajo ' + MP_META + ' %. 🎉</div>';
@@ -18381,16 +18399,16 @@ function anSegPintar(m){
       + '<th>Promedio 4 sem.</th><th>Cómo va</th></tr>';
     lista.forEach(function(t){
       const s = t.sems[7], d = s.comp !== null ? s.comp - t.base.comp : null;
-      const va = s.vis === 0 ? '<td class="fl" style="color:#64748b">sin visitas aún</td>'
-        : s.vis < MP_POCAS ? '<td class="fl" style="color:#94a3b8">pocas visitas</td>'
-        : d >= 0 ? '<td class="fl" style="color:#22c55e">▲ mejorando +' + Math.round(d) + '</td>' : '<td class="fl" style="color:#ef4444">▼ peor ' + Math.round(d) + '</td>';
+      const va = s.vis === 0 ? '<td class="fl" style="color:#9ca3af">sin visitas aún</td>'
+        : s.vis < MP_POCAS ? '<td class="fl" style="color:#9ca3af">pocas visitas</td>'
+        : d >= 0 ? '<td class="fl" style="color:#1e7a46">▲ mejorando +' + Math.round(d) + '</td>' : '<td class="fl" style="color:#b42318">▼ peor ' + Math.round(d) + '</td>';
       h += '<tr><td class="l">' + escR(anTec(t.k)) + '</td>' + t.sems.map(function(x, i){
           const cur = i === 7 ? ' cur' : '', oc = ' onclick="anDetAbrir(\'Migraciones\', {t:\'sem\', k:\'' + SEMS[i] + '\'}); AN_DET.volverSeg = true; anDetPintar()" title="' + x.co + ' de ' + x.vis + ' visitadas"';
           if(!x.vis) return '<td class="c vac' + cur + '">–</td>';
           if(x.vis < MP_POCAS) return '<td class="c gr' + cur + '"' + oc + ' style="cursor:pointer">' + Math.round(x.comp) + '%<small>' + x.vis + ' vis.</small></td>';
-          return '<td class="c' + cur + '"' + oc + ' style="cursor:pointer;background:' + anCol(x.comp) + '">' + Math.round(x.comp) + '%<small>' + x.vis + ' vis.</small></td>';
+          return '<td class="c ' + anCls(x.comp) + cur + '"' + oc + ' style="cursor:pointer">' + Math.round(x.comp) + '%<small>' + x.vis + ' vis.</small></td>';
         }).join('')
-        + '<td class="tot" style="color:' + anCol(t.base.comp) + '">' + mpPc(t.base.comp) + '<small>' + t.base.vis + ' vis.</small></td>' + va + '</tr>';
+        + '<td class="tot" style="color:' + anColP(t.base.comp) + '">' + mpPc(t.base.comp) + '<small>' + t.base.vis + ' vis.</small></td>' + va + '</tr>';
     });
     h += '</table></div>';
   }
