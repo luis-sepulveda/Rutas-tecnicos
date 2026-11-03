@@ -1,8 +1,7 @@
 {
-  "actualizado": "2026-11-03T12:48:50",
+  "actualizado": "2026-11-03T13:18:55",
   "resumen": {
-    "reagendada": 3,
-    "sin informacion": 1
+    "reagendada": 5
   },
   "estados": {
     "1-3ORU761E": {
@@ -40,49 +39,20 @@
       "cat": "Alta 1 Play",
       "franja_original": "10-13",
       "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
-      "estado": "sin informacion",
-      "nota": "la OT ya no existe en TOA",
-      "contexto": {
-        "buscado": "AVENIDA BALMACEDA 171",
-        "aviso": "historial de la direccion, NO es el estado de esta orden",
-        "filas": [
-          {
-            "estado": "no realizada",
-            "color": "rgb(96, 206, 206)",
-            "ot": "1-3OPI9M1X",
-            "franja": "10-13",
-            "texto": "1-3OPI9M1X - 10-13-Alta-1 Play-AVENIDA BALMACEDA 171Lun, 2 Nov"
-          },
-          {
-            "estado": "no realizada",
-            "color": "rgb(96, 206, 206)",
-            "ot": "1-3OOMNZHU",
-            "franja": "10-13",
-            "texto": "1-3OOMNZHU - 10-13-Alta-1 Play-AVENIDA BALMACEDA 171Vie, 30 Oct"
-          },
-          {
-            "estado": "no realizada",
-            "color": "rgb(96, 206, 206)",
-            "ot": "1-3OKPKB58",
-            "franja": "10-13",
-            "texto": "1-3OKPKB58 - 10-13-Alta-1 Play-AVENIDA BALMACEDA 171Jue, 29 Oct"
-          },
-          {
-            "estado": "no realizada",
-            "color": "rgb(96, 206, 206)",
-            "ot": "1-3OJVR6XJ",
-            "franja": "10-13",
-            "texto": "1-3OJVR6XJ - 10-13-Alta-1 Play-AVENIDA BALMACEDA 171Vie, 23 Oct"
-          },
-          {
-            "estado": "no realizada",
-            "color": "rgb(96, 206, 206)",
-            "ot": "1-3OJN2BHD",
-            "franja": "10-13",
-            "texto": "1-3OJN2BHD - 10-13-Alta-1 Play-AVENIDA BALMACEDA 171Jue, 22 Oct"
-          }
-        ]
-      }
+      "estado": "reagendada",
+      "color": "rgb(255, 170, 170)",
+      "detalle": "1-3OQZEL25 - 10-13-Alta-1 Play-AVENIDA BALMACEDA 171Mie, 4 Nov",
+      "franja_nueva": "10-13"
+    },
+    "1-3ORF6CI8": {
+      "tec": "LUIS GATICA DAVILA",
+      "cat": "Alta 1 Play",
+      "franja_original": "10-13",
+      "d": "MARIA MERCEDES 1482 EDIF. 6 DEPTO 304, VILLA ALEMANA",
+      "estado": "reagendada",
+      "color": "rgb(255, 222, 0)",
+      "detalle": "1-3ORF6CI8 - 13-16-Alta-1 Play-MARIA MERCEDES 1482 EDIF. 6 DEPTO 304Jue, 5 Nov",
+      "franja_nueva": "13-16"
     }
   }
 }
