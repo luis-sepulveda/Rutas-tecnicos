@@ -15258,7 +15258,7 @@ setInterval(function(){
    en sus cabeceras y el intervalo se ajusta solo: con saldo de sobra pregunta
    seguido, cuando queda poco se espacia, y si se acaba cae a raw y sigue
    andando con 5 minutos de atraso en vez de quedarse en blanco. */
-const REFRESCO_BASE_MIN = 1;     // con saldo holgado
+const REFRESCO_BASE_MIN = 3;     // (03-11-2026) era 1: con 1/min una sola pestana gastaba las 60 llamadas/hora de la API sin autenticar y caia a raw (atraso 7-11 min). Con 3 son 20/hora: el cupo alcanza todo el dia y se queda en la via instantanea. No se pierde frescura: el monitor igual publica cada 5 min
 const REFRESCO_MAX_MIN = 5;      // piso util: el monitor publica cada 5 min
 /* Intervalo cuando se anda por raw. Va MAS APRETADO que el maximo, no mas
    suelto, aunque parezca al reves: raw no tiene tope de llamadas, asi que
