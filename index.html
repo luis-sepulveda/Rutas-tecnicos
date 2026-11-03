@@ -18105,14 +18105,16 @@ function anReloj(v, r, label, big, nv, min, ref){
   const pt = function(p, rr){ return [cx + rr * Math.cos(ang(p)), cy - rr * Math.sin(ang(p))]; };
   const arc = function(a, b, rr){ const p1 = pt(a, rr), p2 = pt(b, rr); return 'M' + p1[0] + ' ' + p1[1] + ' A' + rr + ' ' + rr + ' 0 0 1 ' + p2[0] + ' ' + p2[1]; };
   const m = MP_META, m1 = pt(m, r - sw / 2 - 4), m2 = pt(m, r + sw / 2 + 4);
+  /* (03-11-2026) Opción A: el dial va pintado por zonas (rojo/amarillo/verde) y la
+     aguja marca dónde va. Las zonas se atenúan solo cuando hay pocas visitas. */
+  const zop = poca ? '.28' : '.92';
   let s = '<svg viewBox="0 0 ' + w + ' ' + h + '">'
-    + '<path d="' + arc(0, m - 5, r) + '" stroke="#ef4444" stroke-opacity=".22" stroke-width="' + sw + '" fill="none"/>'
-    + '<path d="' + arc(m - 5, m, r) + '" stroke="#f59e0b" stroke-opacity=".25" stroke-width="' + sw + '" fill="none"/>'
-    + '<path d="' + arc(m, 100, r) + '" stroke="#22c55e" stroke-opacity=".22" stroke-width="' + sw + '" fill="none"/>';
+    + '<path d="' + arc(0, m - 5, r) + '" stroke="#ef4444" stroke-opacity="' + zop + '" stroke-width="' + sw + '" fill="none"/>'
+    + '<path d="' + arc(m - 5, m, r) + '" stroke="#f59e0b" stroke-opacity="' + zop + '" stroke-width="' + sw + '" fill="none"/>'
+    + '<path d="' + arc(m, 100, r) + '" stroke="#22c55e" stroke-opacity="' + zop + '" stroke-width="' + sw + '" fill="none"/>';
   if(v !== null && v !== undefined){
     const vv = Math.max(0.5, Math.min(99.5, v)), n = pt(vv, r - sw - 8);
-    s += '<path d="' + arc(0, vv, r) + '" stroke="' + col(v) + '" stroke-width="' + sw + '" fill="none" stroke-linecap="round"/>'
-      + '<line x1="' + cx + '" y1="' + cy + '" x2="' + n[0] + '" y2="' + n[1] + '" stroke="#e2e8f0" stroke-width="' + (big ? 3 : 2) + '" stroke-linecap="round"/>';
+    s += '<line x1="' + cx + '" y1="' + cy + '" x2="' + n[0] + '" y2="' + n[1] + '" stroke="#e2e8f0" stroke-width="' + (big ? 3.5 : 2.5) + '" stroke-linecap="round"/>';
   }
   if(ref !== null && ref !== undefined){      // (02-11-2026) marca celeste: de donde partio (Seguimiento)
     const q1 = pt(Math.max(0.5, Math.min(99.5, ref)), r - sw / 2 - 5), q2 = pt(Math.max(0.5, Math.min(99.5, ref)), r + sw / 2 + 5);
