@@ -1710,6 +1710,10 @@
   #modalReit.abierto { display:flex; align-items:flex-start; justify-content:center; padding:4vh 2vw; }
   #modalReit .mc-body { display:block; }
   /* (22-10-2026) clave de Reiterados */
+  /* (04-11-2026) canceladas: se muestran, no cuentan */
+  .rt-canc { margin-top:14px; border:1px dashed #94a3b8; border-radius:10px; padding:10px 12px; color:#e2e8f0; }
+  .rt-canc td, .rt-canc th { color:#cbd5e1 !important; }
+  .rt-canc-t { font-weight:600; margin-bottom:6px; }
   #reitClave { position:fixed; inset:0; z-index:3200; background:rgba(2,6,23,.72); display:none; align-items:center; justify-content:center; padding:16px; }
   #reitClave.on { display:flex; }
   #reitClave .rk-box { background:#fff; color:#0f172a; border-radius:14px; padding:22px 22px 18px; width:min(360px,100%); box-shadow:0 20px 60px rgba(0,0,0,.4); font-family:'DM Sans',system-ui,sans-serif; }
@@ -7803,12 +7807,34 @@ function detalleReitTec(t){
   }).join('');
 }
 
+/* (04-11-2026, 12:20) Luis: "las canceladas no debe contabilizarlas, solo mostrar". reit.hist guarda el estado
+   del dia en que se anoto; si despues la reparacion se cancelo, seguia contando. Ahora se busca su estado FINAL
+   (calidad.json: reparaciones canceladas de los export completos; datos.json: ultimo dia de esa OT; rutas.json
+   de hoy) y las canceladas salen de los conteos y del %, pero se listan al final de "Por tecnico". */
+function reitCanceladas(){
+  const c = {};
+  try { if(typeof cqCargar === 'function') cqCargar(); if(typeof mesCargar === 'function') mesCargar(); } catch(e){}
+  if(typeof CQ_J === 'object' && CQ_J && CQ_J.canc) CQ_J.canc.forEach(function(x){ if(x.ot) c[x.ot] = 1; });
+  if(typeof cqEstados === 'function'){ const est = cqEstados(); Object.keys(est).forEach(function(ot){ if(est[ot].e === 'Cancelado') c[ot] = 1; else if(est[ot].hoy) delete c[ot]; }); }
+  return c;
+}
+let reitEsperaDatos = false;
 function renderReitTec(){
   const cont = document.getElementById('listaReit');
   const chips = document.getElementById('reitChips');
   const intro = document.getElementById('reitIntro');
   const nota = document.getElementById('reitNota');
-  const filas = filasReitHist();
+  const filasTodas = filasReitHist();
+  const cancOT = filasTodas ? reitCanceladas() : {};
+  /* si todavia no bajan calidad.json / datos.json, se repinta cuando lleguen */
+  if(filasTodas && !reitEsperaDatos && ((typeof CQ_J === 'undefined' || CQ_J === null || CQ_J === undefined) || window.ACT_FILAS === null || window.ACT_FILAS === undefined)){
+    reitEsperaDatos = true;
+    const t = setInterval(function(){ const ok1 = typeof CQ_J !== 'undefined' && CQ_J !== null && CQ_J !== undefined, ok2 = window.ACT_FILAS !== null && window.ACT_FILAS !== undefined;
+      if(ok1 && ok2){ clearInterval(t); reitEsperaDatos = false; if(reitAbierto && reitVista === 'tec') renderReit(); } }, 800);
+    setTimeout(function(){ clearInterval(t); reitEsperaDatos = false; }, 60000);
+  }
+  const filas = filasTodas ? filasTodas.filter(function(f){ return !cancOT[f.rep_ot]; }) : filasTodas;
+  const canceladas = filasTodas ? filasTodas.filter(function(f){ return cancOT[f.rep_ot]; }) : [];
   if(!filas){
     chips.innerHTML = ''; intro.innerHTML = ''; nota.textContent = '';
     cont.innerHTML = '<div class="vacio">Todavía no llega el historial de reiterados. Falta la versión del '
@@ -7878,7 +7904,15 @@ function renderReitTec(){
         + (ab ? '<div class="rt-det">' + detalleReitTec(t) + '</div>' : '');
     }).join('');
   }
-  nota.textContent = 'Se cuenta un reiterado por trabajo: si la misma casa tuvo dos reparaciones por el mismo '
+  /* canceladas del periodo: se muestran, no cuentan */
+  { const rgc = rangoReit(per, new Date()), vis = {};
+    const lc = canceladas.filter(function(f){ if(f.fecha < rgc.d0 || f.fecha > rgc.d1 || vis[f.rep_ot]) return false; vis[f.rep_ot] = 1; return true; });
+    if(lc.length) cont.innerHTML += '<div class="rt-canc"><div class="rt-canc-t">🚫 ' + lc.length + (lc.length === 1 ? ' reparación cancelada' : ' reparaciones canceladas') + ' en ' + nomPer + ' · <b>no cuentan</b> en los reiterados ni en el %</div>'
+      + '<table class="rd-tabla"><thead><tr><th>Fecha</th><th>Reparación</th><th>Casa</th><th>Trabajo anterior</th><th>Técnico del trabajo</th></tr></thead><tbody>'
+      + lc.map(function(f){ return '<tr><td>' + escR(fechaCL(f.fecha)) + '</td><td><span class="rd-ot">' + escR(f.rep_ot) + '</span> <span class="bes">Cancelado</span></td><td>' + escR(f.direccion || '') + '</td><td>' + escR(fechaCL(f.prev_fecha)) + ' · ' + escR(f.prev_categoria || f.prev_tipo || '') + '</td><td>' + escR(f.prev_tec || '') + '</td></tr>'; }).join('')
+      + '</tbody></table></div>'; }
+  nota.textContent = 'Las reparaciones que terminaron CANCELADAS no cuentan (se listan al final). '
+    + 'Se cuenta un reiterado por trabajo: si la misma casa tuvo dos reparaciones por el mismo '
     + 'trabajo, cuenta una y las dos se ven en el detalle. Una reparación reagendada cuenta una vez, con el '
     + 'estado en que quedó su último día. Incluye las que quedaron en el bucket o atendió otro técnico. '
     + 'El % es reiterados dividido por las altas, traslados, migraciones y reparaciones que el técnico completó '
@@ -18752,6 +18786,14 @@ setInterval(function(){ try { anPintar(); anDetPintar(); } catch(e){ console.war
   .cg-t { width:100%; border-collapse:collapse; font-size:13.5px; } .cg-t td { padding:5px 6px; border-top:1px solid #f1f5f9; } .cg-t td.n { text-align:right; white-space:nowrap; } .cg-t td.bb { width:30%; }
   @media (max-width: 1000px){ .cg-2, .cg-kp { grid-template-columns:1fr 1fr; } .cg-row.cg-cie { grid-template-columns:200px 1fr 70px 40px; } }
   .cq-vis button.ger { border-color:#0f172a; }
+  .cg-cierre { background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:12px 14px; } .cg-cierre.mal { background:#fef2f2; border-color:#fecaca; } .cg-cierre.ok { background:#f0fdf4; border-color:#bbf7d0; }
+  .cg-rng { position:relative; height:22px; margin:14px 0 18px; } .cg-rng span { position:absolute; top:8px; height:6px; } .cg-rng span.ok { background:#bbf7d0; } .cg-rng span.mal { background:#fecaca; }
+  .cg-rng i.rg { position:absolute; top:4px; height:14px; background:rgba(220,38,38,.55); border-radius:7px; } .cg-rng i.pt { position:absolute; top:3px; width:16px; height:16px; margin-left:-8px; background:#0f172a; border:2px solid #fff; border-radius:50%; }
+  .cg-rng b.mt { position:absolute; top:-12px; font-size:11px; color:#334155; transform:translateX(-50%); border-left:2px solid #0f172a; padding-left:3px; height:34px; }
+  .cg-row.cg-sem { grid-template-columns:200px 1fr 70px 230px; } .cg-row.cg-sem small { text-align:left; }
+  .cg-rec { border-top:1px solid #f1f5f9; padding:6px 0; font-size:13.5px; } .cg-rec small { color:#64748b; } .cg-rec details summary { cursor:pointer; color:#2563eb; font-size:12.5px; }
+  .cg-t code { background:#eef2ff; color:#3730a3; border-radius:4px; padding:1px 5px; font-size:12px; }
+
   @media (max-width: 900px){ .cq-kpis { grid-template-columns:1fr 1fr; } }
 </style>
 <div id="modalCQ" onclick="if(event.target===this) cqCerrar()"><div class="cq-box"><div class="cq-head" id="cqHead"></div><div class="cq-body" id="cqBody"></div></div></div>
@@ -18909,7 +18951,7 @@ function cqCalcJson(mes){
   const cierre = cqMasDias(cqFinMes(mes), CQ_DIAS);
   const abiertos = L.reduce(function(a, t){ return a + t.reps.filter(function(r){ return ['Completado','No Realizada','Cancelado'].indexOf(r.est) < 0; }).length; }, 0);
   const otraEps = L.filter(function(t){ return t.reps.some(function(r){ return r.emp && r.emp !== 'DOMINION' && r.emp !== 'BUCKET'; }); }).length;
-  return { mes: mes, L: L, n: L.length, base: base, p: base ? 100 * L.length / base : null, tecs: tecs, canc: canc, bt: bt, btTot: base,
+  return { mes: mes, L: L, n: L.length, base: base, p: base ? 100 * L.length / base : null, tecs: tecs, canc: canc, bt: bt, btTot: base, dias: M.dias || {},
            cierre: cierre, cerrado: hoy > cierre, desde: cqMasDias(hoy, -CQ_DIAS), registro: J.desde,
            incompleto: J.desde > mes + '-01', abiertos: abiertos, sinDatos: false, json: true,
            otras: otras, ciu: ciu, otraEps: otraEps, nHoy: nHoy, hasta: J.hasta, faltan: (J.faltan || []).filter(function(d){ return d.slice(0, 7) === mes || d.slice(0, 7) === cqFinMes(mes).slice(0, 7); }),
@@ -19012,6 +19054,8 @@ function cqPintar(){
   if(CQ_VISTA === 'ger'){ h += cqGerenciaHtml(R, meta); cqPonBody(body, h); return; }
   if(CQ_VISTA === 'det'){ h += cqDetalleHtml(R, meta); cqPonBody(body, h); return; }
   if(CQ_VISTA === 'casa'){ h += cqCasasHtml(R); cqPonBody(body, h); return; }
+  /* (04-11-2026, 12:30) Luis: "en boton calidad del mes, todo el detalle": lo nuevo del resumen gerencia tambien aca */
+  h += cqCierreHtml(R, meta);
   /* por tipo */
   h += '<div class="cq-sec">Por tipo de trabajo<small>completadas de ' + cqNomMes(CQ_MES) + ' y cuántas tuvieron reparación</small></div>'
     + '<table class="cq-t"><thead><tr><th>Trabajo</th><th>Completadas</th><th>Con reparación</th><th>Calidad</th></tr></thead><tbody>'
@@ -19019,20 +19063,22 @@ function cqPintar(){
         return '<tr><td>' + k + '</td><td>' + (R.sinDatos ? '…' : c) + '</td><td>' + n + '</td><td class="p ' + (p === null ? 'poca' : p > meta ? 'mal' : 'ok') + '">' + (p === null ? '–' : P2(p) + '%') + '</td></tr>'; }).join('')
     + '<tr class="tot"><td>Total</td><td>' + R.base + '</td><td>' + R.n + '</td><td class="p ' + (R.p === null ? '' : mal ? 'mal' : 'ok') + '">' + (R.p === null ? '–' : P2(R.p) + '%') + '</td></tr></tbody></table>'
     + (!R.sinDatos && R.btTot !== R.base ? '<p class="cq-nota">Ojo: por tipo suman ' + R.btTot + ' completadas (datos.json) y el total del registro de Reiterados dice ' + R.base + '. El % total usa ' + R.base + '.</p>' : '');
+  h += cqSemanasHtml(R, meta);
   /* por tecnico */
   h += '<div class="cq-sec">Técnico por técnico<small>el reiterado se le carga al que hizo el trabajo de ' + CQ_NOMMES[+CQ_MES.slice(5, 7) - 1] + ' · toca un técnico para ver sus casas · en gris, menos de ' + MIN_COMP_REIT + ' completadas</small></div>'
-    + '<table class="cq-t"><thead><tr><th>Técnico</th><th>Supervisor</th><th>Completadas</th><th>Con reparación</th><th>Calidad</th></tr></thead><tbody>';
+    + '<table class="cq-t"><thead><tr><th>Técnico</th><th>Supervisor</th><th>Completadas</th><th>Con reparación</th><th>Calidad</th><th>Lo que más se repite</th></tr></thead><tbody>';
   R.tecs.forEach(function(o, i){
     const poca = o.c < MIN_COMP_REIT, m = !poca && o.p !== null && o.p > meta;
     h += '<tr class="t' + (m ? ' mal' : '') + '" onclick="cqTec(' + i + ')"><td>' + (CQ_AB === i ? '▾ ' : '▸ ') + escR(derTitulo(o.nom)) + '</td><td><small>' + escR(derTitulo(o.sup || '')) + '</small></td><td>' + o.c + '</td><td>' + o.n + '</td>'
-      + '<td class="p ' + (o.p === null ? 'poca' : poca ? 'poca' : m ? 'mal' : 'ok') + '">' + (o.p === null ? '–' : P2(o.p) + '%') + (poca && o.c ? ' <small>pocas</small>' : '') + '</td></tr>';
-    if(CQ_AB === i) h += '<tr class="det"><td colspan="5">' + (o.l.length ? '<table class="cq-d"><thead><tr><th>Trabajo</th><th>Casa</th><th>Reparación</th><th>Días</th><th>Estado de la reparación</th><th>Código</th><th>Quién reparó</th></tr></thead><tbody>'
+      + '<td class="p ' + (o.p === null ? 'poca' : poca ? 'poca' : m ? 'mal' : 'ok') + '">' + (o.p === null ? '–' : P2(o.p) + '%') + (poca && o.c ? ' <small>pocas</small>' : '') + '</td><td style="text-align:left"><small>' + escR(o.n ? cqPatron(o) : '') + '</small></td></tr>';
+    if(CQ_AB === i) h += '<tr class="det"><td colspan="6">' + (o.l.length ? '<table class="cq-d"><thead><tr><th>Trabajo</th><th>Casa</th><th>Reparación</th><th>Días</th><th>Estado de la reparación</th><th>Código</th><th>Quién reparó</th></tr></thead><tbody>'
       + o.l.slice().sort(function(a, b){ return a.fecha.localeCompare(b.fecha); }).map(function(t){ return t.reps.map(function(r, j){
           return '<tr><td>' + (j ? '' : escR(fechaCL(t.fecha)).slice(0, 5) + ' · ' + escR(t.cat || t.tipo) + '<br><small>' + escR(t.ot) + '</small>') + '</td><td>' + (j ? '' : escR(t.dir) + (t.ciu && t.ciu !== 'QUILPUE' && t.ciu !== 'VILLA ALEMANA' ? ' <small>· ' + escR(derTitulo(t.ciu)) + '</small>' : '')) + '</td>'
             + '<td>' + escR(fechaCL(r.fecha)).slice(0, 5) + '<br><small>' + escR(r.ot) + '</small></td><td>' + r.dias + '</td><td>' + cqEstHtml(r) + '</td><td>' + escR(r.cie || '–') + '</td><td>' + escR(derTitulo(r.tec || '')) + (r.emp && r.emp !== 'DOMINION' && r.emp !== 'BUCKET' ? ' <span class="cq-e a">' + escR(r.emp) + '</span>' : '') + (r.hoy ? ' <small>(hoy)</small>' : '') + '</td></tr>'; }).join(''); }).join('')
       + '</tbody></table>' : '<p class="cq-nota">Sin reparaciones en sus trabajos de ' + cqNomMes(CQ_MES) + '.</p>') + '</td></tr>';
   });
-  h += '<tr class="tot"><td>Equipo</td><td></td><td>' + R.base + '</td><td>' + R.n + '</td><td class="p">' + (R.p === null ? '–' : P2(R.p) + '%') + '</td></tr></tbody></table>';
+  h += '<tr class="tot"><td>Equipo</td><td></td><td>' + R.base + '</td><td>' + R.n + '</td><td class="p">' + (R.p === null ? '–' : P2(R.p) + '%') + '</td><td></td></tr></tbody></table>';
+  h += cqReclamoHtml(R, meta) + cqAbiertasHtml(R) + cqAlertaHtml(meta);
   if(R.json && R.tapadas.length) h += '<div class="cq-sec">No se cargan a Dominion<small>después de nuestro trabajo, otra empresa hizo un trabajo en la casa: la reparación es de ese trabajo</small></div>'
     + '<table class="cq-t"><thead><tr><th>Casa</th><th>Nuestro trabajo</th><th>Técnico</th><th>Trabajo de otra empresa</th><th>Reparación</th></tr></thead><tbody>'
     + R.tapadas.map(function(x){ return '<tr><td>' + escR(x.dir) + '</td><td>' + escR(x.ot) + '</td><td>' + escR(derTitulo(x.tec)) + '</td><td>' + escR(x.por) + ' · ' + escR(fechaCL(x.pf)).slice(0, 5) + '</td><td>' + escR(fechaCL(x.rf)).slice(0, 5) + ' · ' + escR(x.rep) + '</td></tr>'; }).join('') + '</tbody></table>';
@@ -19252,11 +19298,13 @@ function cqGerenciaHtml(R, meta){
     + '<div><b>' + n + '</b><span>tuvieron una reparación dentro de ' + CQ_DIAS + ' días</span></div>'
     + '<div class="' + (n > tope ? 'mal' : 'ok') + '"><b>' + (n > tope ? '+' + (n - tope) : (tope - n)) + '</b><span>' + (n > tope ? 'trabajos con reparación sobre el tope de ' + tope : 'reparaciones más que aguanta (tope ' + tope + ')') + '</span></div>'
     + '<div><b>' + P2(pc(L.filter(function(t){ return cqPrim(t).dias <= 7; }).length, n)) + '%</b><span>falló en los primeros 7 días</span></div></div>';
+  h += cqCierreHtml(R, meta);   /* 1 (12:20) */
   /* 2 donde se concentra */
   h += '<div class="cg-sec"><h4>Dónde se concentra</h4><p><b>' + sobre.length + ' de ' + tec20.length + '</b> técnicos (con ' + MIN_COMP_REIT + ' o más trabajos) están sobre la meta y juntan el <b>' + P2(pc(nS, n)) + '%</b> de los reiterados (' + nS + ' de ' + n + '). '
     + 'Si esos técnicos estuvieran justo en la meta, el equipo quedaría en <b class="ok">' + P2(pc(ajus, base)) + '%</b>.</p>'
     + '<div class="cg-row"><span>Técnicos sobre la meta</span>' + cqBarra(pc(nS, n), '#dc2626') + '<b>' + P2(pc(nS, n)) + '%</b></div>'
     + '<div class="cg-row"><span>El resto del equipo</span>' + cqBarra(pc(n - nS, n), '#94a3b8') + '<b>' + P2(pc(n - nS, n)) + '%</b></div></div>';
+  h += cqSemanasHtml(R, meta);   /* 2 (12:20) */
   /* 3 por supervisor y 4 por tipo */
   const sup = {}; R.tecs.forEach(function(o){ const k = derTitulo(o.sup || 'Sin supervisor'); const s = sup[k] || (sup[k] = { c: 0, n: 0 }); s.c += o.c; s.n += o.n; });
   const tipos = ['Alta', 'Alta Traslado', 'Migración', 'Reparación'].map(function(k){ const x = L.filter(function(t){ return t.tipo === k; }).length; return [k, x, R.bt[k] || 0]; }).filter(function(f){ return f[2]; });
@@ -19282,10 +19330,99 @@ function cqGerenciaHtml(R, meta){
   /* 8 tecnicos con mas reiterados */
   const top = tec20.filter(function(o){ return o.n; }).slice(0, 8);
   h += '<div class="cg-sec"><h4>Técnicos con peor calidad</h4><p class="cg-ay">con ' + MIN_COMP_REIT + ' o más trabajos en el mes · ordenados por %</p><table class="cg-t"><tbody>'
-    + top.map(function(o){ return fila(derTitulo(o.nom), o.n, o.c, '<td><small>' + escR(derTitulo(o.sup || '')) + '</small></td>'); }).join('') + '</tbody></table></div>';
+    + top.map(function(o){ return fila(derTitulo(o.nom), o.n, o.c, '<td><small>' + escR(derTitulo(o.sup || '')) + '</small></td><td><small>lo que más se repite: <b>' + escR(cqPatron(o)) + '</b></small></td>'); }).join('') + '</tbody></table></div>';
+  h += cqReclamoHtml(R, meta) + cqAbiertasHtml(R) + cqAlertaHtml(meta);   /* 5, 6 y 3 (12:20) */
   h += '<p class="cq-nota">Calidad = trabajos completados en ' + cqNomMes(CQ_MES) + ' (altas, traslados, migraciones y reparaciones, en cualquier comuna) que tuvieron una reparación en la misma casa dentro de ' + CQ_DIAS + ' días, de cualquier empresa; no cuentan las canceladas; cada trabajo cuenta una vez. '
     + (R.json ? 'Fuente: export completos del ' + fechaCL(R.registro) + ' al ' + fechaCL(R.hasta) + (R.nHoy ? ' más ' + R.nHoy + ' reparaciones de hoy' : '') + '.' : '') + '</p></div>';
   return h;
+}
+/* ===== RESUMEN GERENCIA, PARTE 2 (04-11-2026, 12:20) =====
+   Luis dijo "dale" a: 1 como cierra el mes, 2 semana a semana, 3 alerta
+   temprana del mes siguiente, 4 patron por tecnico, 5 lo que se le podria
+   reclamar a VTR y 6 reparaciones abiertas. Todo sale de calidad.json (base
+   por dia: meses[m].dias, que escribe calidad_mes.py desde el 04-11). */
+function cqDiasEntre(a, b){ return Math.round((new Date(+b.slice(0, 4), +b.slice(5, 7) - 1, +b.slice(8, 10)) - new Date(+a.slice(0, 4), +a.slice(5, 7) - 1, +a.slice(8, 10))) / 864e5); }
+/* 1. Proyeccion: "ritmo" = de cada trabajo que lleva d dias medido, cuantos fallan en el dia d (h[d]).
+   A los trabajos que todavia no cumplen sus 30 dias se les suma lo que deberia caerles en los dias que les faltan. */
+function cqProyeccion(R){
+  const dias = R.dias || {}, hoy = cqIsoHoy(), h = [];
+  const exp = Object.keys(dias).map(function(f){ return { f: f, c: dias[f], e: Math.max(0, Math.min(CQ_DIAS, cqDiasEntre(f, hoy))) }; });
+  if(!exp.length) return null;
+  const fx = {}; R.L.forEach(function(t){ const d = Math.min(CQ_DIAS, cqPrim(t).dias); fx[d] = (fx[d] || 0) + 1; });
+  for(let d = 0; d <= CQ_DIAS; d++){ const exp_d = exp.reduce(function(a, x){ return a + (x.e >= d ? x.c : 0); }, 0); h[d] = exp_d ? (fx[d] || 0) / exp_d : 0; }
+  let extra = 0, abiertos = 0;
+  exp.forEach(function(x){ if(x.e >= CQ_DIAS) return; abiertos += x.c; for(let d = x.e + 1; d <= CQ_DIAS; d++) extra += x.c * h[d]; });
+  const mg = 1.645 * Math.sqrt(extra);
+  return { extra: extra, abiertos: abiertos, lo: R.n + Math.max(0, extra - mg), med: R.n + extra, hi: R.n + extra + mg };
+}
+function cqCierreHtml(R, meta){
+  if(R.cerrado || !R.base) return '';
+  const P = cqProyeccion(R); if(!P) return '';
+  const tope = Math.floor(R.base * meta / 100), q = function(x){ return P2(100 * x / R.base); };
+  const llega = 100 * P.hi / R.base <= meta, no = 100 * P.lo / R.base > meta;
+  return '<div class="cg-sec cg-cierre ' + (no ? 'mal' : llega ? 'ok' : 'med') + '"><h4>¿Cómo cierra ' + CQ_NOMMES[+CQ_MES.slice(5, 7) - 1] + '?</h4>'
+    + '<p>Si sigue el ritmo de reparaciones que lleva el mes, ' + cqNomMes(CQ_MES) + ' cerraría el ' + fechaCL(R.cierre) + ' cerca de <b>' + q(P.med) + '%</b> (entre ' + q(P.lo) + '% y ' + q(P.hi) + '%). '
+    + 'Todavía hay <b>' + P.abiertos + '</b> trabajos dentro de sus ' + CQ_DIAS + ' días y se esperan unas <b>' + Math.round(P.extra) + '</b> reparaciones más. '
+    + (R.n > tope ? 'Ya va <b>' + (R.n - tope) + ' sobre el tope</b> de ' + tope + ': aunque no caiga ninguna más, cierra sobre la meta.' : 'Para cumplir la meta pueden caer como máximo <b>' + (tope - R.n) + '</b> más.') + '</p>'
+    + '<div class="cg-rng"><span style="left:0;width:' + Math.min(100, 100 * meta / 10) + '%" class="ok"></span><span style="left:' + Math.min(100, 100 * meta / 10) + '%;right:0" class="mal"></span>'
+    + '<i class="rg" style="left:' + Math.min(100, 10 * 100 * P.lo / R.base) + '%;width:' + Math.max(1, Math.min(100, 10 * 100 * (P.hi - P.lo) / R.base)) + '%"></i>'
+    + '<i class="pt" style="left:' + Math.min(100, 10 * R.p) + '%" title="hoy"></i><b class="mt" style="left:' + (10 * meta) + '%">meta ' + String(meta).replace('.', ',') + '%</b></div>'
+    + '<p class="cg-ay">Escala de 0 a 10%. Punto = hoy (' + P2(R.p) + '%); franja = dónde cerraría. El "ritmo" sale de los trabajos del mismo mes que ya cumplieron cada día.</p></div>';
+}
+/* 2. Semana a semana: calidad segun la semana en que se hizo el trabajo */
+function cqSemanasHtml(R, meta){
+  const dias = R.dias || {}, hoy = cqIsoHoy(), S = {};
+  Object.keys(dias).forEach(function(f){ const k = cqSemK(f), s = S[k] || (S[k] = { c: 0, n: 0, d0: f, d1: f }); s.c += dias[f]; if(f < s.d0) s.d0 = f; if(f > s.d1) s.d1 = f; });
+  R.L.forEach(function(t){ const s = S[cqSemK(t.fecha)]; if(s) s.n++; });
+  const ks = Object.keys(S).sort(); if(!ks.length) return '';
+  return '<div class="cg-sec"><h4>Semana a semana</h4><p class="cg-ay">según la semana en que se hizo el trabajo · las semanas que todavía no cumplen ' + CQ_DIAS + ' días pueden subir</p>'
+    + ks.map(function(k){ const s = S[k], p = s.c ? 100 * s.n / s.c : 0, lleva = cqDiasEntre(s.d1, hoy), ab = lleva < CQ_DIAS;
+        return '<div class="cg-row cg-sem"><span>Sem ' + derNumSemana(k) + ' <small>' + fechaCL(s.d0).slice(0, 5) + ' al ' + fechaCL(s.d1).slice(0, 5) + '</small></span>' + cqBarra(p / (meta * 2) * 100, p > meta ? '#dc2626' : '#16a34a')
+          + '<b style="color:' + (p > meta ? '#dc2626' : '#16a34a') + '">' + P2(p) + '%</b><small>' + s.n + ' de ' + s.c + (ab ? ' · abierta (' + Math.max(0, lleva) + ' de ' + CQ_DIAS + ' días)' : '') + '</small></div>'; }).join('')
+    + '<p class="cg-ay">La barra llega a la mitad en la meta (' + String(meta).replace('.', ',') + '%).</p></div>';
+}
+/* 3. Alerta temprana: el mes siguiente, que se mide despues */
+function cqAlertaHtml(meta){
+  if(!cqUsaJson()) return '';
+  const sig = (function(){ const y = +CQ_MES.slice(0, 4), m = +CQ_MES.slice(5, 7); return m === 12 ? (y + 1) + '-01' : y + '-' + String(m + 1).padStart(2, '0'); })();
+  if(!(CQ_J.meses || {})[sig]) return '';
+  const N = cqCalcJson(sig), mesG = CQ_MES; CQ_MES = mesG;
+  const l = N.tecs.filter(function(o){ return o.n; }).sort(function(a, b){ return b.n - a.n || (b.p || 0) - (a.p || 0); }).slice(0, 10);
+  return '<div class="cg-sec"><h4>Alerta temprana: ' + cqNomMes(sig) + '</h4><p>Lo que se completa en ' + CQ_NOMMES[+sig.slice(5, 7) - 1] + ' se mide recién el mes siguiente, pero ya va en <b style="color:' + ((N.p || 0) > meta ? '#dc2626' : '#16a34a') + '">' + (N.p === null ? '–' : P2(N.p) + '%') + '</b> (' + N.n + ' de ' + N.base + ' trabajos con reparación hasta hoy).'
+    + (l.length ? ' Estos técnicos ya tienen reiterados:' : ' Ningún técnico tiene reiterados todavía.') + '</p>'
+    + (l.length ? '<table class="cg-t"><tbody>' + l.map(function(o){ const p = o.c ? 100 * o.n / o.c : 0;
+        return '<tr><td>' + escR(derTitulo(o.nom)) + '</td><td><small>' + escR(derTitulo(o.sup || '')) + '</small></td><td class="n">' + o.n + ' de ' + o.c + '</td><td class="n"><b style="color:' + (p > meta ? '#dc2626' : '#16a34a') + '">' + P2(p) + '%</b></td><td><small>' + escR(cqPatron(o)) + '</small></td></tr>'; }).join('') + '</tbody></table>' : '') + '</div>';
+}
+/* 4. Patron: la causa que mas se repite en los reiterados del tecnico */
+function cqPatron(o){
+  const c = cqCuenta(o.l || [], function(t){ return cqPrim(t).cie || 'Sin código'; });
+  return c.length && c[0][1] >= 2 ? c[0][0] + ' (' + c[0][1] + ' de ' + o.n + ')' : (o.n ? 'ninguna causa se repite' : '');
+}
+/* 5. Lo que se le podria reclamar a VTR/CLARO */
+const CQ_RE_RED = /masiva|plataforma|aprovision|sin red|caida de nodo|olt/i, CQ_RE_CLI = /sin moradores|reagenda|desiste|sin contacto|cliente no|no contesta/i;
+function cqReclamoHtml(R, meta){
+  const porNodo = {}; R.L.forEach(function(t){ if(t.nodo){ const k = t.ciu + '|' + t.nodo; porNodo[k] = (porNodo[k] || 0) + 1; } });
+  const g = { red: [], cli: [], nodo: [] }, usados = {};
+  R.L.forEach(function(t){ const c = cqPrim(t).cie || '';
+    if(CQ_RE_RED.test(c)){ g.red.push(t); usados[t.ot] = 1; } else if(CQ_RE_CLI.test(c)){ g.cli.push(t); usados[t.ot] = 1; } });
+  R.L.forEach(function(t){ if(!usados[t.ot] && t.nodo && porNodo[t.ciu + '|' + t.nodo] >= 3) g.nodo.push(t); });
+  const tot = g.red.length + g.cli.length + g.nodo.length; if(!tot) return '';
+  const lista = function(l){ return '<details><summary>ver ' + l.length + '</summary><table class="cg-t"><tbody>' + l.map(function(t){ const r = cqPrim(t);
+      return '<tr><td>' + escR(t.dir || '') + ' <small>' + escR(cqCiuT(t.ciu)) + (t.nodo ? ' · nodo ' + escR(t.nodo) : '') + '</small></td><td><small>' + escR(fechaCL(t.fecha)).slice(0, 5) + ' ' + escR(t.tipo) + ' · ' + escR(derTitulo(t.tec)) + '</small></td><td><small>' + escR(fechaCL(r.fecha)).slice(0, 5) + ' ' + escR(r.ot) + '</small></td><td><small>' + escR(r.cie || '') + '</small></td></tr>'; }).join('') + '</tbody></table></details>'; };
+  const fila = function(tit, sub, l){ return l.length ? '<div class="cg-rec"><div><b>' + l.length + '</b> ' + tit + ' <small>' + P2(100 * l.length / R.n) + '% de los reiterados · ' + sub + '</small></div>' + lista(l) + '</div>' : ''; };
+  return '<div class="cg-sec"><h4>Lo que se podría conversar con VTR/CLARO</h4><p>Reiterados que probablemente no dependen del técnico. Si se descontaran, la calidad de ' + CQ_NOMMES[+CQ_MES.slice(5, 7) - 1] + ' quedaría en <b class="ok">' + P2(100 * (R.n - tot) / R.base) + '%</b> en vez de ' + P2(R.p) + '%.</p>'
+    + fila('por falla de red o plataforma', 'falla masiva, reset de plataforma, aprovisionamiento', g.red)
+    + fila('en que la reparación no se hizo por el cliente', 'sin moradores, reagenda, desiste', g.cli)
+    + fila('en nodos con 3 o más reiterados del mes', 'puede ser la red, no el trabajo', g.nodo) + '</div>';
+}
+/* 6. Reparaciones abiertas: siguen contando; si se cancelan, salen solas */
+function cqAbiertasHtml(R){
+  const l = []; R.L.forEach(function(t){ t.reps.forEach(function(r){ if(['Completado', 'No Realizada', 'Cancelado'].indexOf(r.est) < 0) l.push({ t: t, r: r }); }); });
+  if(!l.length) return '';
+  l.sort(function(a, b){ return a.r.fecha.localeCompare(b.r.fecha); });
+  return '<div class="cg-sec"><h4>Reparaciones abiertas para seguir (' + l.length + ')</h4><p class="cg-ay">cuentan en la calidad mientras estén abiertas; si VTR/CLARO las cancela, dejan de contar</p><table class="cg-t"><tbody>'
+    + l.map(function(x){ return '<tr><td><code>' + escR(x.r.ot) + '</code> <small>' + escR(fechaCL(x.r.fecha)).slice(0, 5) + '</small></td><td>' + cqEstHtml(x.r) + '</td><td>' + escR(x.t.dir || '') + ' <small>' + escR(cqCiuT(x.t.ciu)) + '</small></td><td><small>trabajo ' + escR(fechaCL(x.t.fecha)).slice(0, 5) + ' ' + escR(x.t.tipo) + ' · ' + escR(derTitulo(x.t.tec)) + '</small></td></tr>'; }).join('')
+    + '</tbody></table></div>';
 }
 function cqExcel(){
   if(typeof XLSX === 'undefined' || !window._CQ_LISTA || !window._CQ_LISTA.length){ return; }
