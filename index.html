@@ -18697,6 +18697,12 @@ setInterval(function(){ try { anPintar(); anDetPintar(); } catch(e){ console.war
   .cq-head { background:#fff; border-bottom:1px solid #e2e8f0; padding:16px 22px 12px; position:sticky; top:0; z-index:2; }
   .cq-head h2 { margin:0; font:800 21px 'Archivo',sans-serif; color:#0f172a; display:flex; align-items:center; gap:10px; }
   .cq-head p { margin:4px 0 0; color:#5f7386; font-size:13.5px; }
+  .cqm { display:inline-flex; gap:10px; margin-left:22px; vertical-align:middle; }
+  .cqm-b { display:inline-flex; flex-direction:column; gap:1px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:5px 12px; font:500 12.5px 'DM Sans',sans-serif; color:#334155; line-height:1.35; cursor:help; }
+  .cqm-t { font:800 11px 'Archivo',sans-serif; letter-spacing:.05em; text-transform:uppercase; color:#64748b; }
+  .cqm-t b { color:#0f172a; font-size:12.5px; }
+  .cqm-si b { color:#16a34a; } .cqm-no b { color:#dc2626; }
+  .cqm-si, .cqm-no { white-space:nowrap; }
   .cq-x { margin-left:auto; background:#fff; border:1px solid #cbd5e1; border-radius:8px; padding:5px 12px; cursor:pointer; font:600 14px 'DM Sans',sans-serif; color:#334155; }
   .cq-tabs { display:flex; gap:6px; margin-top:10px; flex-wrap:wrap; }
   .cq-tabs button { background:#fff; border:1px solid #cbd5e1; border-radius:8px; padding:6px 14px; cursor:pointer; font:600 13.5px 'DM Sans',sans-serif; color:#334155; }
@@ -19072,7 +19078,7 @@ function cqPintar(){
   if(!CQ_MES || meses.indexOf(CQ_MES) < 0){ const ant = meses.filter(function(m){ return m < hoyM; }); CQ_MES = ant.length ? ant[ant.length - 1] : meses[meses.length - 1]; }
   const R = cqCalc(CQ_MES), meta = META_REIT;
   const R0reg = R.registro;
-  if(CQ_SOLO_GER){ head.innerHTML = '<h2>🛠 Calidad · resumen gerencia<button class="cq-x" onclick="cqCerrar()">✕ Cerrar</button></h2>'; cqPonBody(body, cqGerenciaHtml(R, meta)); return; }
+  if(CQ_SOLO_GER){ head.innerHTML = '<h2>🛠 Calidad · resumen gerencia' + cqCumplenHtml(R, meta) + '<button class="cq-x" onclick="cqCerrar()">✕ Cerrar</button></h2>'; cqPonBody(body, cqGerenciaHtml(R, meta)); return; }
   head.innerHTML = '<h2>🛠 Calidad de ' + cqNomMes(CQ_MES) + '<button class="cq-x" onclick="cqCerrar()">✕ Cerrar</button></h2>'
     + '<p>Trabajos completados en ' + cqNomMes(CQ_MES) + ' (altas, traslados, migraciones y reparaciones) que tuvieron una reparación en la misma casa dentro de ' + CQ_DIAS + ' días · las canceladas no cuentan · meta ' + String(meta).replace('.', ',') + '% o menos</p>'
     + '<div class="cq-tabs">' + meses.map(function(m){ const c = cqMasDias(cqFinMes(m), CQ_DIAS), cer = cqIsoHoy() > c, inc = !!R0reg && R0reg > m + '-01';
@@ -19336,6 +19342,27 @@ function cqUlt(t){ return t.reps.slice().sort(function(a, b){ return b.fecha.loc
    con mas reiterados. Todo del mes elegido y SIN los filtros de las otras
    vistas. Cada trabajo cuenta una vez: su primera reparacion (cqPrim). */
 function cqBarra(p, col){ return '<span class="cg-bar"><i style="width:' + Math.max(0, Math.min(100, p)).toFixed(2) + '%;background:' + col + '"></i></span>'; }
+/* (04-11-2026, 15:35) Luis: al lado del titulo del resumen gerencia, tecnicos que cumplen y no cumplen (cantidad y %),
+   mirando el plantel total (rutas.json -> plantel, hoy 37) y los operativos (tecnicos del plantel con al menos un
+   trabajo completado en el mes medido). Cumple = su calidad del mes en la meta o bajo ella. Los del plantel sin
+   trabajos en el mes no tienen fallas: en la mirada plantel cuentan como "cumplen". */
+function cqCumplen(R, meta){
+  const op = R.tecs.filter(function(o){ return o.c > 0 && derActivo(o.nom); });
+  const no = op.filter(function(o){ return o.p !== null && o.p > meta; }).length;
+  const nPl = (PLANTEL && PLANTEL.length) ? Math.max(PLANTEL.length, op.length) : op.length;
+  return { pl: nPl, op: op.length, no: no, siOp: op.length - no, siPl: nPl - no, sinTrab: nPl - op.length };
+}
+function cqCumplenHtml(R, meta){
+  const k = cqCumplen(R, meta), pc = function(a, b){ return b ? P2(100 * a / b) + '%' : '–'; };
+  const caja = function(tit, tot, si, no, ay){
+    return '<span class="cqm-b" title="' + ay + '"><span class="cqm-t">' + tit + ' <b>' + tot + '</b></span>'
+      + '<span class="cqm-si">✔ ' + si + ' cumplen <b>' + pc(si, tot) + '</b></span>'
+      + '<span class="cqm-no">✖ ' + no + ' no cumplen <b>' + pc(no, tot) + '</b></span></span>'; };
+  return '<span class="cqm">'
+    + caja('Plantel', k.pl, k.siPl, k.no, 'Todo el plantel. ' + k.sinTrab + ' sin trabajos completados en el mes cuentan como cumplen (sin fallas).')
+    + caja('Operativos', k.op, k.siOp, k.no, 'Técnicos del plantel con al menos un trabajo completado en el mes.')
+    + '</span>';
+}
 function cqGerenciaHtml(R, meta){
   const L = R.L, n = R.n || 0, base = R.base || 0, pc = function(a, b){ return b ? 100 * a / b : 0; };
   const mal = R.p !== null && R.p > meta, tope = base ? Math.floor(base * meta / 100) : 0;
