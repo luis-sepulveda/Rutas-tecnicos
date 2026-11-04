@@ -18837,11 +18837,33 @@ function cqTipoEquipo(){
   const nav = /Edg\//.test(u) ? 'Edge' : /OPR\//.test(u) ? 'Opera' : /Chrome\//.test(u) ? 'Chrome' : /Firefox\//.test(u) ? 'Firefox' : /Safari\//.test(u) ? 'Safari' : 'otro';
   return so + ' · ' + nav + ' · pantalla ' + screen.width + 'x' + screen.height;
 }
-function cqRegistrar(quien){
+/* (04-11-2026, 14:50) HUELLA DEL PC. El codigo EQ vive en el navegador (otro navegador = otro codigo). La huella se
+   arma con datos del equipo que no dependen del navegador: tarjeta de video (WebGL), nucleos, memoria, sistema y zona
+   horaria (sin la pantalla, que cambia con un segundo monitor). Chrome y Edge del mismo PC dan la misma huella.
+   Dos PC del mismo modelo pueden dar la misma. Se manda como "PC-XXXXXX" + el detalle legible. */
+function cqDetallePC(){
+  let gpu = '';
+  try { const c = document.createElement('canvas'), g = c.getContext('webgl') || c.getContext('experimental-webgl');
+    if(g){ const x = g.getExtension('WEBGL_debug_renderer_info');
+      gpu = x ? (g.getParameter(x.UNMASKED_VENDOR_WEBGL) + ' | ' + g.getParameter(x.UNMASKED_RENDERER_WEBGL)) : (g.getParameter(g.RENDERER) || ''); } } catch(e){}
+  const u = navigator.userAgent || '';
+  const so = /Android/i.test(u) ? 'Android' : /iPhone|iPad/i.test(u) ? 'iPhone/iPad' : /Windows/i.test(u) ? 'Windows' : /Mac OS/i.test(u) ? 'Mac' : /Linux/i.test(u) ? 'Linux' : 'otro';
+  let tz = ''; try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch(e){}
+  return [so, gpu.replace(/\s+/g, ' ').trim(), (navigator.hardwareConcurrency || '?') + ' núcleos', (navigator.deviceMemory ? navigator.deviceMemory + ' GB' : '? GB'), tz].join(' · ');
+}
+async function cqHuella(det){
+  try { const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode('dominion-pc|' + det));
+    return 'PC-' + Array.from(new Uint8Array(b)).slice(0, 4).map(v => v.toString(16).padStart(2, '0')).join('').toUpperCase().slice(0, 6);
+  } catch(e){ return 'PC-SINHUELLA'; }
+}
+async function cqRegistrar(quien){
   if(!CQ_REG_URL) return;
   try {
+    const boton = CQ_SOLO_GER ? '🛠 Calidad (MI ANÁLISIS)' : 'Calidad del mes (INFORMES)';
+    const det = cqDetallePC(), hu = await cqHuella(det);
     const q = 'equipo=' + encodeURIComponent(cqEquipo()) + '&tipo=' + encodeURIComponent(cqTipoEquipo())
-      + '&quien=' + encodeURIComponent(quien) + '&boton=' + encodeURIComponent(CQ_SOLO_GER ? '🛠 Calidad (MI ANÁLISIS)' : 'Calidad del mes (INFORMES)') + '&t=' + Date.now();
+      + '&quien=' + encodeURIComponent(quien) + '&boton=' + encodeURIComponent(boton)
+      + '&huella=' + encodeURIComponent(hu) + '&detalle=' + encodeURIComponent(det.slice(0, 200)) + '&t=' + Date.now();
     (new Image()).src = CQ_REG_URL + (CQ_REG_URL.indexOf('?') < 0 ? '?' : '&') + q;
   } catch(e){}
 }
@@ -18859,13 +18881,11 @@ function cqPedirClave(){
       + '<h3>🔒 Calidad</h3><p>Ingresa la clave para ver la calidad del mes.</p>'
       + '<input id="cqkIn" type="password" autocomplete="current-password" placeholder="Clave">'
       + '<div id="cqkErr" class="rk-err" hidden>Clave incorrecta.</div>'
-      + '<div style="margin-top:10px;font-size:12px;color:#94a3b8">Este equipo: <b id="cqkEq"></b></div>'
       + '<div class="rk-bot"><button type="button" onclick="cqCerrarClave()">Cancelar</button><button type="submit" class="ok">Entrar</button></div></form>';
     d.addEventListener('click', function(e){ if(e.target === d) cqCerrarClave(); });
     document.body.appendChild(d);
   }
   document.getElementById('cqkIn').value = ''; document.getElementById('cqkErr').hidden = true;
-  const eqx = document.getElementById('cqkEq'); if(eqx) eqx.textContent = cqEquipo();
   d.classList.add('on'); setTimeout(function(){ document.getElementById('cqkIn').focus(); }, 30);
 }
 function cqCerrarClave(){ const d = document.getElementById('cqClave'); if(d) d.classList.remove('on'); CQ_SOLO_GER = false; }
