@@ -9162,7 +9162,7 @@ function verPortada(){
    trae TODAS las visitas (tambien las completadas) con horas; ver derHist().
    Tambien hay un filtro de tipo: Migraciones (lo que pide la jefatura),
    Altas, o las dos juntas. */
-const DER_UMBRAL = 50;      // % de derivacion sobre el que se marca al tecnico
+const DER_UMBRAL = 40;      // % de derivacion sobre el que se pinta rojo. (04-11-2026) Luis: manda la meta VTR/CLARO, 60 % de completitud = 40 % de derivacion (igual que MG_META_DER). Antes 50.
 const DER_MINIMO = 5;       // migraciones visitadas en la semana para marcarlo
 const DER_SEMANAS = 8;      // cuantas semanas se ofrecen arriba
 let DER = null, derBajando = false, derFallo = false, derSem = null, derSup = 'Todos', derAbierto = null;
@@ -11597,7 +11597,7 @@ function pintarDeriv(){
     + '<div><b>' + tot.n + '</b><span>' + derNomTipo() + ' visitadas</span></div>'
     + '<div><b>' + tot.d + '</b><span>derivadas (no realizadas)</span></div>'
     + '<div class="' + ((tot.n ? 100 * tot.d / tot.n : 0) > DER_UMBRAL ? 'mal' : '') + '"><b>' + P2(tot.n ? 100 * tot.d / tot.n : 0) + '%</b><span>derivación</span></div>'
-    + '<div class="' + (nSobre ? 'mal' : '') + '"><b>' + nSobre + '</b><span>técnicos sobre ' + DER_UMBRAL + '%</span></div>'
+    + '<div class="' + (nSobre ? 'mal' : '') + '"><b>' + nSobre + '</b><span>técnicos ' + DER_PUNTOS_EQ + ' pts o más sobre el equipo</span></div>'
     + '</div>'
     + derCausalesSemHtml(tb, tot);
   if(derVista === 'res'){ cuerpo.innerHTML = derVistaResHtml(todasSem, enCurso); return; }
@@ -11895,7 +11895,7 @@ function pintarResMig(){
     + '<div class="k"><b>' + ca.vis + '</b><span>migraciones visitadas</span></div>'
     + '<div class="k ok"><b>' + ca.comp + '</b><span>completadas</span></div>'
     + '<div class="k mal"><b>' + ca.der + '</b><span>derivadas</span></div>'
-    + '<div class="k pct' + (ca.pct >= 50 ? ' alto' : '') + '"><b>' + (ca.vis ? rmPct(ca.pct) : '–') + '</b><span>de derivación</span>' + flecha + '</div></div>';
+    + '<div class="k pct' + (ca.pct > DER_UMBRAL ? ' alto' : '')   /* (04-11-2026) rojo sobre la meta VTR (40 % de derivacion = bajo 60 % de completitud); antes desde 50 */ + '"><b>' + (ca.vis ? rmPct(ca.pct) : '–') + '</b><span>de derivación</span>' + flecha + '</div></div>';
   if(!ca.vis){
     cu.innerHTML = h + '<div class="rm-vacio">Todavía no hay migraciones visitadas en este período.</div>';
     return;
