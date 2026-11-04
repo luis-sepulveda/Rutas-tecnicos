@@ -18933,7 +18933,7 @@ async function cqPermiso(quien){
     const q = 'accion=entrar&equipo=' + encodeURIComponent(cqEquipo()) + '&tipo=' + encodeURIComponent(cqTipoEquipo())
       + '&quien=' + encodeURIComponent(quien) + '&boton=' + encodeURIComponent(boton)
       + '&huella=' + encodeURIComponent(hu) + '&detalle=' + encodeURIComponent(det.slice(0, 200)) + '&t=' + Date.now();
-    const ctl = new AbortController(), tm = setTimeout(function(){ ctl.abort(); }, 10000);
+    const ctl = new AbortController(), tm = setTimeout(function(){ ctl.abort(); }, 25000);
     const r = await fetch(CQ_REG_URL + (CQ_REG_URL.indexOf('?') < 0 ? '?' : '&') + q, { signal: ctl.signal });
     clearTimeout(tm);
     const j = JSON.parse(await r.text());
@@ -18971,9 +18971,19 @@ function cqPedirClave(){
   }
   document.getElementById('cqkIn').value = ''; document.getElementById('cqkErr').hidden = true;
   d.classList.add('on'); setTimeout(function(){ document.getElementById('cqkIn').focus(); }, 30);
+  cqDespertar();
 }
 function cqCerrarClave(){ const d = document.getElementById('cqClave'); if(d) d.classList.remove('on'); CQ_SOLO_GER = false; }
+let CQ_VALIDANDO = false;
+/* (04-11-2026, 18:00) Google se demora en "despertar" si lleva rato sin uso: al abrir la ventana de la clave se le manda
+   un aviso (accion=ping, no anota nada) para que ya este despierto cuando se aprieta Entrar. */
+function cqDespertar(){ if(!CQ_REG_URL) return; try { fetch(CQ_REG_URL + (CQ_REG_URL.indexOf('?') < 0 ? '?' : '&') + 'accion=ping&t=' + Date.now()).catch(function(){}); } catch(e){} }
 async function cqProbarClave(){
+  if(CQ_VALIDANDO) return;
+  CQ_VALIDANDO = true;
+  try { await cqProbarClave2(); } finally { CQ_VALIDANDO = false; }
+}
+async function cqProbarClave2(){
   const v = document.getElementById('cqkIn').value; let h = '';
   try { h = await reitHuella(v); } catch(e){}
   const ok = CQ_CLAVES.filter(function(c){ return c.h === h; })[0];
