@@ -21548,22 +21548,22 @@
    }
   },
   "04-11-2026": {
-   "hasta": "15:52",
-   "actividades": 171,
+   "hasta": "16:02",
+   "actividades": 172,
    "tecnicos": 32,
    "estados": {
-    "Completado": 81,
+    "Completado": 83,
     "Iniciado": 23,
-    "Pendiente": 45,
-    "No Realizada": 13,
-    "Cancelado": 6,
-    "en ruta": 3
+    "Pendiente": 42,
+    "No Realizada": 14,
+    "en ruta": 4,
+    "Cancelado": 6
    },
-   "rgu": 255.2,
+   "rgu": 255.3,
    "caidas_total": 5,
    "caidas_activas": 5,
    "caidas_resueltas": 0,
-   "nuevas": 17,
+   "nuevas": 18,
    "al_bucket": 66,
    "repetidas": 26,
    "reagendadas": 10,
@@ -21617,13 +21617,22 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OTYEWU0",
+      "tec": "LUIS CASTRO TORRES",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "15:55",
+      "d": "LAUTARO 1030 DEPTO 31, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
       "o": "1-3OTUWGH3",
       "tec": "JORGE PEZOA VICUÑA",
       "cat": "Modificación de Servicio",
       "f": "13-16",
       "hi": "15:50",
       "d": "VOLCAN VILLARRICA 2869, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OTXQXAS",
@@ -21641,7 +21650,7 @@
       "f": "13-16",
       "hi": "16:03",
       "d": "DOLORES 352 CASA 7, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OTX4PX1",
@@ -21847,7 +21856,7 @@
       "o": "1-3ORYQFAF",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "19:24",
+      "hi": "19:13",
       "d": "SIMPSON 246 DEPTO 86, QUILPUE",
       "e": "Pendiente",
       "tec": "EDGAR VALERO C",
@@ -21883,7 +21892,7 @@
       "o": "1-3OSVK80X",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "18:59",
+      "hi": "19:04",
       "d": "VOLCAN ACONCAGUA 2617, QUILPUE",
       "e": "Pendiente",
       "tec": "JORGE PEZOA VICUÑA",
@@ -21967,7 +21976,7 @@
       "o": "1-3OTJTKQH",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "17:50",
+      "hi": "17:52",
       "d": "VALLE DEL PARAISO 2746, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS CASTRO TORRES",
@@ -21993,7 +22002,7 @@
       "f": "13-16",
       "hi": "15:41",
       "d": "WILLIAMSON 565, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "LUIS GATICA DAVILA",
       "visitas": 1,
       "ult_fecha": "02-11-2026",
@@ -22109,7 +22118,7 @@
       "o": "1-3ORKP8D7",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "18:32",
+      "hi": "18:21",
       "d": "MATEO DE TORO Y ZAMBRANO 945 CASA 15, QUILPUE",
       "e": "Pendiente",
       "tec": "EDGAR VALERO C",
@@ -22139,7 +22148,7 @@
       "o": "1-3ORU761E",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "17:39",
+      "hi": "17:34",
       "d": "EL BOSQUE 1719, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MARCELO GÓMEZ GÓME",
@@ -22188,5 +22197,5 @@
    }
   }
  },
- "generado": "04-11-2026 15:52"
+ "generado": "04-11-2026 16:02"
 }
