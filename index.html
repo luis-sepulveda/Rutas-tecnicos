@@ -13039,7 +13039,9 @@ function infTarjetasHtml(){
     ['fn', 'desdePortada(verReporteRepe)', 'Direcciones ya visitadas', 'Histórico de las casas donde ya se falló antes'],
     ['link', URL_EQUIPO, 'Carga de Play por técnico', 'Si a un técnico le cargan más de un Play que al resto, por supervisor'],
     /* (REDISEÑO 28-10-2026, 18:10) Luis: Quiebres por tecnico pasa aca; la fila "Tambien" se elimina */
-    ['link', URL_ACTIVIDADES + '?t=' + Date.now() + '#quiebres', 'Quiebres por técnico', 'Quiebres de cada técnico en el Dashboard de Actividades']
+    ['link', URL_ACTIVIDADES + '?t=' + Date.now() + '#quiebres', 'Quiebres por técnico', 'Quiebres de cada técnico en el Dashboard de Actividades'],
+    /* (04-11-2026) Calidad del mes: lo completado en un mes con reparacion dentro de 30 dias (bloque CALIDAD DEL MES) */
+    ['fn', 'cqAbrir()', 'Calidad del mes', 'Lo completado en el mes que tuvo reparación dentro de 30 días · meta 5,32%']
   ];
   /* (REDISEÑO 28-10-2026, 18:08) Luis: "desentona con todo". Ahora es un bloque
      grande como HOY y MIGRACIONES, con los informes como botones adentro. */
@@ -18615,6 +18617,303 @@ document.addEventListener('keydown', function(e){
 });
 /* se refresca solo cada minuto mientras esta abierta (lo de hoy cambia con rutas.json) */
 setInterval(function(){ try { anPintar(); anDetPintar(); } catch(e){ console.warn('analisis:', e); } }, 60000);
+</script>
+
+<!-- ===== CALIDAD DEL MES (04-11-2026) =====
+     Luis: "en noviembre se medira la calidad de octubre". Regla:
+     - Base: todo lo COMPLETADO en el mes por los tecnicos DOMI en Quilpue y
+       Villa Alemana: altas, altas traslado, migraciones y reparaciones
+       (reit.hist.comp de rutas.json, el mismo divisor de Reiterados).
+     - Fallas: cada trabajo de ese mes que tuvo una reparacion en la misma casa
+       dentro de los 30 dias (regla de Reiterados, DIAS_REITERADO = 30; la OT
+       de la reparacion mas nueva que la del trabajo). Cuenta si la reparacion
+       cae en el mismo mes o en el siguiente.
+     - Sin mezclar: si en la casa se completo despues OTRO trabajo, la
+       reparacion es de ese otro trabajo (generar_rutas.py ya la amarra al
+       trabajo anterior mas reciente) y va a la calidad de su mes.
+     - Cuenta toda reparacion (completada, no realizada, pendiente, en bucket)
+       MENOS las canceladas. Como reit.hist guarda el estado del dia en que se
+       anoto, el estado final se busca en datos.json (ultimo dia de esa OT) y
+       en rutas.json de hoy: si termino Cancelado, se descarta y se muestra
+       aparte.
+     - Uno por trabajo (si un trabajo tuvo dos reparaciones, cuenta una vez).
+     - Meta: META_REIT (5,32 % o menos). Tecnico en rojo con MIN_COMP_REIT
+       completadas o mas y sobre la meta.
+     El mes queda cerrado el ultimo dia del mes + 30 dias (octubre: 30-11).
+     Para quitarlo: borrar este bloque y la tarjeta 'Calidad del mes' de
+     infTarjetasHtml(). -->
+<style>
+  #modalCQ { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); font-family:'DM Sans',system-ui,sans-serif; }
+  #modalCQ.abierto { display:flex; align-items:flex-start; justify-content:center; padding:2vh 16px; }
+  #modalCQ .cq-box { background:#f4f7fa; color:#16232f; border-radius:14px; width:min(1250px,100%); max-height:96vh; overflow:auto; box-shadow:0 20px 60px rgba(0,0,0,.35); }
+  .cq-head { background:#fff; border-bottom:1px solid #e2e8f0; padding:16px 22px 12px; position:sticky; top:0; z-index:2; }
+  .cq-head h2 { margin:0; font:800 21px 'Archivo',sans-serif; color:#0f172a; display:flex; align-items:center; gap:10px; }
+  .cq-head p { margin:4px 0 0; color:#5f7386; font-size:13.5px; }
+  .cq-x { margin-left:auto; background:#fff; border:1px solid #cbd5e1; border-radius:8px; padding:5px 12px; cursor:pointer; font:600 14px 'DM Sans',sans-serif; color:#334155; }
+  .cq-tabs { display:flex; gap:6px; margin-top:10px; flex-wrap:wrap; }
+  .cq-tabs button { background:#fff; border:1px solid #cbd5e1; border-radius:8px; padding:6px 14px; cursor:pointer; font:600 13.5px 'DM Sans',sans-serif; color:#334155; }
+  .cq-tabs button.on { background:#1e3a8a; border-color:#1e3a8a; color:#fff; }
+  .cq-tabs button small { display:block; font-weight:500; font-size:11px; opacity:.75; }
+  .cq-body { padding:14px 22px 22px; }
+  .cq-est { background:#fff; border:1px solid #e2e8f0; border-radius:10px; padding:10px 14px; font-size:14px; color:#334155; margin-bottom:12px; }
+  .cq-est.curso { border-left:4px solid #f59e0b; } .cq-est.cerr { border-left:4px solid #22c55e; } .cq-est.inc { border-left:4px solid #94a3b8; }
+  .cq-kpis { display:grid; grid-template-columns:1.4fr repeat(4, 1fr); gap:10px; margin-bottom:12px; }
+  .cq-k { background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:12px 14px; }
+  .cq-k small { display:block; color:#5f7386; font-size:12px; text-transform:uppercase; letter-spacing:.04em; font-weight:700; }
+  .cq-k b { display:block; font:800 28px 'Archivo',sans-serif; color:#0f172a; margin-top:2px; }
+  .cq-k span { display:block; color:#5f7386; font-size:12.5px; margin-top:2px; }
+  .cq-k.big b { font-size:40px; }
+  .cq-k.ok { background:#e9f7ef; border-color:#9fd8b4; } .cq-k.ok b { color:#17603a; }
+  .cq-k.mal { background:#fdecec; border-color:#f2a7a7; } .cq-k.mal b { color:#b42318; }
+  .cq-sec { font:800 15px 'Archivo',sans-serif; color:#0f172a; margin:16px 0 8px; }
+  .cq-sec small { font:500 12.5px 'DM Sans',sans-serif; color:#5f7386; margin-left:6px; }
+  .cq-t { width:100%; border-collapse:collapse; background:#fff; border-radius:10px; overflow:hidden; font-size:14px; }
+  .cq-t th { background:#eef2f7; color:#334155; font-size:12px; text-transform:uppercase; letter-spacing:.03em; padding:8px 10px; text-align:right; }
+  .cq-t th:first-child, .cq-t td:first-child { text-align:left; }
+  .cq-t td { padding:8px 10px; border-top:1px solid #eef2f7; text-align:right; }
+  .cq-t td small { color:#64748b; font-size:12px; }
+  .cq-t tr.t { cursor:pointer; } .cq-t tr.t:hover td { background:#f8fafc; }
+  .cq-t td.p { font-weight:800; }
+  .cq-t td.p.mal { color:#b42318; } .cq-t td.p.ok { color:#17603a; } .cq-t td.p.poca { color:#94a3b8; font-weight:600; }
+  .cq-t tr.mal td:first-child { box-shadow:inset 4px 0 0 #ef4444; }
+  .cq-t tr.det td { background:#f8fafc; padding:0 10px 10px 26px; text-align:left; }
+  .cq-t tr.tot td { background:#eef2f7; font-weight:700; }
+  .cq-d { width:100%; border-collapse:collapse; font-size:13px; margin-top:6px; }
+  .cq-d th { text-align:left; font-size:11.5px; color:#5f7386; padding:5px 6px; border-bottom:1px solid #e2e8f0; text-transform:uppercase; }
+  .cq-d td { text-align:left; padding:5px 6px; border-bottom:1px solid #eef2f7; }
+  .cq-e { display:inline-block; border-radius:6px; padding:1px 7px; font-size:12px; font-weight:700; background:#eef2f7; color:#334155; }
+  .cq-e.c { background:#e9f7ef; color:#17603a; } .cq-e.n { background:#fdecec; color:#b42318; } .cq-e.a { background:#fff4dc; color:#a15c07; } .cq-e.x { background:#e2e8f0; color:#64748b; text-decoration:line-through; }
+  .cq-nota { color:#5f7386; font-size:12.5px; margin:10px 0 0; line-height:1.5; }
+  @media (max-width: 900px){ .cq-kpis { grid-template-columns:1fr 1fr; } }
+</style>
+<div id="modalCQ" onclick="if(event.target===this) cqCerrar()"><div class="cq-box"><div class="cq-head" id="cqHead"></div><div class="cq-body" id="cqBody"></div></div></div>
+<script>
+let CQ_MES = null, CQ_AB = null, CQ_VISTA = 'tec';
+const CQ_DIAS = 30;    /* igual que DIAS_REITERADO de generar_rutas.py */
+const CQ_NOMMES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+function cqNomMes(m, may){ const t = CQ_NOMMES[+m.slice(5, 7) - 1] + ' ' + m.slice(0, 4); return may ? t.charAt(0).toUpperCase() + t.slice(1) : t; }
+function cqIsoHoy(){ const f = (typeof FECHA_DATOS !== 'undefined' && FECHA_DATOS) ? FECHA_DATOS : new Date(); return isoLocal(f); }
+function cqMasDias(iso, n){ const d = new Date(+iso.slice(0, 4), +iso.slice(5, 7) - 1, +iso.slice(8, 10)); d.setDate(d.getDate() + n); return isoLocal(d); }
+function cqFinMes(m){ const d = new Date(+m.slice(0, 4), +m.slice(5, 7), 0); return isoLocal(d); }
+function cqTipo(t){ const u = String(t || '').trim().toUpperCase();
+  return u.indexOf('ALTA TRASLADO') === 0 ? 'Alta Traslado' : u.indexOf('ALTA') === 0 ? 'Alta' : u.indexOf('MIGRA') === 0 ? 'Migración' : u.indexOf('REPARA') === 0 ? 'Reparación' : ''; }
+function cqNom(n){ return String(n || '').replace(/\s+/g, ' ').trim().toUpperCase(); }
+function cqAbrir(){
+  document.getElementById('modalCQ').classList.add('abierto');
+  try { if(typeof mesCargar === 'function') mesCargar(); } catch(e){}
+  cqCargar();
+  cqPintar();
+  /* datos.json (estado final de cada reparacion y base por tipo) baja aparte: se repinta cuando llega */
+  if(window.ACT_FILAS === null || window.ACT_FILAS === undefined){ const t = setInterval(function(){
+    if(window.ACT_FILAS !== null && window.ACT_FILAS !== undefined){ clearInterval(t); cqPintar(); } }, 700); setTimeout(function(){ clearInterval(t); }, 60000); }
+}
+function cqCerrar(){ document.getElementById('modalCQ').classList.remove('abierto'); }
+document.addEventListener('keydown', function(e){ if(e.key === 'Escape'){ const m = document.getElementById('modalCQ'); if(m && m.classList.contains('abierto')) cqCerrar(); } });
+function cqVer(m){ CQ_MES = m; CQ_AB = null; cqPintar(); }
+function cqTec(i){ CQ_AB = CQ_AB === i ? null : i; cqPintar(); }
+function cqSetVista(v){ CQ_VISTA = v; cqPintar(); }
+/* Meses que se pueden medir: los que tienen completadas en reit.hist.comp */
+function cqMeses(){
+  if(cqUsaJson()) return Object.keys(CQ_J.meses || {}).sort();
+  const c = REIT && REIT.hist && REIT.hist.comp;
+  const s = {}; ((c && c.fechas) || []).forEach(function(f){ s[f.slice(0, 7)] = 1; });
+  return Object.keys(s).sort();
+}
+/* Estado FINAL de cada OT: el ultimo dia que aparece en datos.json y, encima, lo de hoy en rutas.json */
+function cqEstados(){
+  const est = {};
+  if(Array.isArray(window.ACT_FILAS)) window.ACT_FILAS.forEach(function(r){
+    const ot = String(r['Orden de Trabajo'] || ''), q = /^(\d{2})-(\d{2})-(\d{4})$/.exec(String(r['Fecha'] || ''));
+    if(!ot || !q) return; const iso = q[3] + '-' + q[2] + '-' + q[1];
+    if(!est[ot] || iso >= est[ot].iso) est[ot] = { iso: iso, e: String(r['Estado'] || ''), cie: String(r['Código de Cierre'] || '') };
+  });
+  const hoy = cqIsoHoy();
+  Object.keys(typeof DB === 'object' && DB ? DB : {}).forEach(function(t){ (DB[t] || []).forEach(function(j){
+    const ot = String(j.o || ''); if(ot) est[ot] = { iso: hoy, e: String(j.e || ''), cie: String(j.cie || ''), hoy: true }; }); });
+  return est;
+}
+/* ---- (04-11-2026, tarde) calidad.json: lo arma calidad_mes.py con los EXPORT COMPLETOS ----
+   Luis: "necesito que se midan las actividades completadas en otras comunas y que
+   cuente si la reparacion la completo algun tecnico de otras eps". El export
+   completo (cuenta del jefe) trae TODAS las empresas del Area Centro y todas las
+   comunas, asi que el calculo se hace en Python y aca solo se muestra. Encima se
+   suman las reparaciones de HOY (rutas.json -> reit.hist), que el export completo
+   trae recien manana. Si calidad.json no baja, se usa lo de antes (cqCalcViejo,
+   solo Quilpue y Villa Alemana) con un aviso. */
+let CQ_J;          // undefined = no se ha pedido, null = bajando, 'error', o el objeto
+const CQ_TIPO = { 'alta':'Alta', 'alta traslado':'Alta Traslado', 'migracion':'Migración', 'reparacion':'Reparación' };
+function cqCargar(){
+  if(CQ_J !== undefined) return;
+  CQ_J = null;
+  fetch(URL_ACTIVIDADES + 'calidad.json?t=' + Date.now(), { cache:'no-store' })
+    .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function(j){ CQ_J = j; cqPintar(); })
+    .catch(function(){ CQ_J = 'error'; cqPintar(); });
+}
+function cqUsaJson(){ return CQ_J && typeof CQ_J === 'object'; }
+function cqCalc(mes){ return cqUsaJson() ? cqCalcJson(mes) : cqCalcViejo(mes); }
+function cqCalcJson(mes){
+  const J = CQ_J, meta = J.meta || META_REIT, hoy = cqIsoHoy();
+  const M = (J.meses || {})[mes] || { base:{}, ciu:{} };
+  const L = (J.fallas || []).filter(function(x){ return x.m === mes; }).map(function(x){
+    return { ot: x.ot, fecha: x.f, tipo: CQ_TIPO[x.t] || x.t, cat: (CQ_TIPO[x.t] || x.t) + (x.gsa ? ' (GSA)' : ''), tec: cqNom(x.tec), sup: x.sup, dir: x.dir, ciu: x.ciu,
+      reps: (x.reps || []).map(function(r){ return { fecha: r.f, ot: r.ot, est: r.est, cie: r.cie, tec: r.tec, emp: r.emp, dias: r.dias }; }) }; });
+  const yaOT = {}; L.forEach(function(t){ yaOT[t.ot] = t; t.reps.forEach(function(r){ yaOT['R' + r.ot] = 1; }); });
+  (J.canc || []).forEach(function(c){ yaOT['R' + c.ot] = 1; });
+  /* reparaciones de HOY (despues del ultimo export completo): de reit.hist, con el estado de hoy */
+  const est = cqEstados(); let nHoy = 0;
+  const canc = (J.canc || []).filter(function(c){ return c.m === mes; }).map(function(c){ return { dir: c.dir || '', fecha: c.f, ot: c.ot, est: c.est, prev: { prev_fecha: c.jf || '', prev_tipo: CQ_TIPO[c.jt] || c.jt || '', prev_tec: c.jtec || '' }, job: c.job }; });
+  ((typeof filasReitHist === 'function' && filasReitHist()) || []).forEach(function(f){
+    if(!(f.fecha > J.hasta) || String(f.prev_fecha || '').slice(0, 7) !== mes || yaOT['R' + f.rep_ot]) return;
+    yaOT['R' + f.rep_ot] = 1;
+    const fe = est[f.rep_ot], fin = fe ? fe.e : f.rep_estado;
+    const r = { fecha: f.fecha, ot: f.rep_ot, est: fin, cie: (fe && fe.cie) || f.rep_cierre || '', tec: f.rep_tec, emp: /bucket/i.test(f.rep_tec || '') ? 'BUCKET' : 'DOMINION', dias: +f.dias || 0, hoy: true };
+    if(fin === 'Cancelado'){ canc.push({ dir: f.direccion, fecha: f.fecha, ot: f.rep_ot, est: fin, prev: f }); return; }
+    nHoy++;
+    let t = yaOT[f.prev_ot];
+    if(!t){ t = yaOT[f.prev_ot] = { ot: f.prev_ot, fecha: f.prev_fecha, tipo: cqTipo(f.prev_tipo) || f.prev_tipo, cat: f.prev_categoria || f.prev_tipo, tec: cqNom(f.prev_tec), sup: f.prev_sup, dir: f.direccion, reps: [] }; L.push(t); }
+    t.reps.push(r); });
+  /* base por tecnico y por tipo */
+  const tt = {}; let base = 0; const bt = { 'Alta':0, 'Alta Traslado':0, 'Migración':0, 'Reparación':0 };
+  Object.keys(M.base || {}).forEach(function(n){ const o = M.base[n], k = cqNom(n); let c = 0;
+    Object.keys(o).forEach(function(t){ c += o[t]; bt[CQ_TIPO[t] || t] = (bt[CQ_TIPO[t] || t] || 0) + o[t]; });
+    base += c; tt[k] = { nom: k, sup: (J.tecs || {})[n] || '', c: c, l: [] }; });
+  L.forEach(function(t){ const o = tt[t.tec] || (tt[t.tec] = { nom: t.tec, sup: t.sup || '', c: 0, l: [] }); o.l.push(t); if(!o.sup && t.sup) o.sup = t.sup; });
+  const tecs = Object.keys(tt).map(function(k){ const o = tt[k]; o.n = o.l.length; o.p = o.c ? 100 * o.n / o.c : null; return o; }).filter(function(o){ return o.c || o.n; });
+  tecs.sort(function(a, b){ const pa = a.c >= MIN_COMP_REIT ? 1 : 0, pb = b.c >= MIN_COMP_REIT ? 1 : 0;
+    return pb - pa || (b.p || 0) - (a.p || 0) || b.n - a.n || a.nom.localeCompare(b.nom); });
+  const ciu = M.ciu || {}, otras = Object.keys(ciu).reduce(function(a, c){ return a + (c === 'QUILPUE' || c === 'VILLA ALEMANA' ? 0 : ciu[c]); }, 0);
+  const cierre = cqMasDias(cqFinMes(mes), CQ_DIAS);
+  const abiertos = L.reduce(function(a, t){ return a + t.reps.filter(function(r){ return ['Completado','No Realizada','Cancelado'].indexOf(r.est) < 0; }).length; }, 0);
+  const otraEps = L.filter(function(t){ return t.reps.some(function(r){ return r.emp && r.emp !== 'DOMINION' && r.emp !== 'BUCKET'; }); }).length;
+  return { mes: mes, L: L, n: L.length, base: base, p: base ? 100 * L.length / base : null, tecs: tecs, canc: canc, bt: bt, btTot: base,
+           cierre: cierre, cerrado: hoy > cierre, desde: cqMasDias(hoy, -CQ_DIAS), registro: J.desde,
+           incompleto: J.desde > mes + '-01', abiertos: abiertos, sinDatos: false, json: true,
+           otras: otras, ciu: ciu, otraEps: otraEps, nHoy: nHoy, hasta: J.hasta, faltan: (J.faltan || []).filter(function(d){ return d.slice(0, 7) === mes || d.slice(0, 7) === cqFinMes(mes).slice(0, 7); }),
+           tapadas: (J.tapadas || []).filter(function(x){ return x.m === mes; }) };
+}
+function cqCalcViejo(mes){
+  const filas = (typeof filasReitHist === 'function' && filasReitHist()) || [];
+  const est = cqEstados();
+  const registro = filas.map(function(f){ return f.fecha; }).filter(Boolean).sort()[0] || '';
+  /* una fila por reparacion (la ultima anotada), solo de trabajos del mes */
+  const porRep = {};
+  filas.forEach(function(f){ if(String(f.prev_fecha || '').slice(0, 7) !== mes) return;
+    const k = f.rep_ot || (f.fecha + '|' + f.direccion);
+    if(!porRep[k] || f.fecha >= porRep[k].fecha) porRep[k] = f; });
+  const trab = {}, canc = [];
+  Object.keys(porRep).forEach(function(k){ const f = porRep[k], fe = est[f.rep_ot];
+    const fin = fe ? fe.e : f.rep_estado, cie = (fe && fe.cie) || f.rep_cierre || '';
+    const r = { fecha: f.fecha, ot: f.rep_ot, est: fin, cie: cie, tec: f.rep_tec, dias: +f.dias || 0, dir: f.direccion, deDatos: !!fe };
+    if(fin === 'Cancelado'){ canc.push(Object.assign({ prev: f }, r)); return; }
+    const t = trab[f.prev_ot] || (trab[f.prev_ot] = { ot: f.prev_ot, fecha: f.prev_fecha, tipo: cqTipo(f.prev_tipo) || f.prev_tipo, cat: f.prev_categoria, tec: cqNom(f.prev_tec), sup: f.prev_sup, cie: f.prev_cierre, dir: f.direccion, reps: [] });
+    t.reps.push(r); });
+  const L = Object.keys(trab).map(function(k){ return trab[k]; });
+  /* base: mismo divisor de Reiterados (completadas DOMI de Quilpue y Villa Alemana, incluye GSA) */
+  const comp = compReit(mes + '-01', mes + '-31');
+  const base = comp ? comp.total() : 0;
+  /* base por tipo: datos.json, mismas reglas (Completado, _DOMI_, Quilpue y Villa Alemana) */
+  const bt = { 'Alta':0, 'Alta Traslado':0, 'Migración':0, 'Reparación':0 }; let btTot = 0;
+  if(Array.isArray(window.ACT_FILAS)) window.ACT_FILAS.forEach(function(r){
+    const q = /^(\d{2})-(\d{2})-(\d{4})$/.exec(String(r['Fecha'] || '')); if(!q || q[3] + '-' + q[2] !== mes) return;
+    if(String(r['Estado'] || '') !== 'Completado' || String(r['Nombre'] || '').indexOf('_DOMI_') < 0) return;
+    const c = String(r['Ciudad'] || '').toUpperCase(); if(c !== 'QUILPUE' && c !== 'VILLA ALEMANA') return;
+    const t = cqTipo(r['Tipo de Actividad']); if(!t) return; bt[t]++; btTot++; });
+  /* por tecnico */
+  const tt = {};
+  L.forEach(function(t){ const o = tt[t.tec] || (tt[t.tec] = { nom: t.tec, sup: '', supF: '', l: [] }); o.l.push(t);
+    if(t.sup && t.fecha >= o.supF){ o.sup = t.sup; o.supF = t.fecha; } });
+  if(comp && REIT.hist.comp.tecs) Object.keys(REIT.hist.comp.tecs).forEach(function(n){ const k = cqNom(n), c = comp(k);
+    if(c && !tt[k]) tt[k] = { nom: k, sup: '', supF: '', l: [] }; });
+  const tecs = Object.keys(tt).map(function(k){ const o = tt[k]; o.n = o.l.length; o.c = comp ? (comp(o.nom) || 0) : 0; o.p = o.c ? 100 * o.n / o.c : null; return o; })
+    .filter(function(o){ return o.c || o.n; });
+  tecs.forEach(function(o){ if(!o.sup){ const f = filas.filter(function(x){ return cqNom(x.prev_tec) === o.nom && x.prev_sup; }).sort(function(a, b){ return a.fecha < b.fecha ? 1 : -1; })[0]; if(f) o.sup = f.prev_sup; } });
+  tecs.sort(function(a, b){ const pa = a.c >= MIN_COMP_REIT ? 1 : 0, pb = b.c >= MIN_COMP_REIT ? 1 : 0;
+    return pb - pa || (b.p || 0) - (a.p || 0) || b.n - a.n || a.nom.localeCompare(b.nom); });
+  const hoy = cqIsoHoy(), cierre = cqMasDias(cqFinMes(mes), CQ_DIAS);
+  const abiertos = L.reduce(function(a, t){ return a + t.reps.filter(function(r){ return ['Completado','No Realizada','Cancelado'].indexOf(r.est) < 0; }).length; }, 0);
+  return { mes: mes, L: L, n: L.length, base: base, p: base ? 100 * L.length / base : null, tecs: tecs, canc: canc, bt: bt, btTot: btTot,
+           cierre: cierre, cerrado: hoy > cierre, desde: cqMasDias(hoy, -CQ_DIAS), registro: registro,
+           incompleto: !!registro && registro > mes + '-01', abiertos: abiertos, sinDatos: !Array.isArray(window.ACT_FILAS) };
+}
+function cqEstHtml(r){
+  const e = r.est || '';
+  const cls = e === 'Completado' ? 'c' : e === 'No Realizada' ? 'n' : e === 'Cancelado' ? 'x' : 'a';
+  const txt = e === 'Completado' ? 'completada' : e === 'No Realizada' ? 'no realizada' : e === 'Cancelado' ? 'cancelada' : (e ? e.toLowerCase() : 'sin estado') + ' (abierta)';
+  return '<span class="cq-e ' + cls + '">' + escR(txt) + '</span>';
+}
+function cqPintar(){
+  const head = document.getElementById('cqHead'), body = document.getElementById('cqBody'); if(!head || !body) return;
+  const meses = cqMeses();
+  if(CQ_J === null){ head.innerHTML = '<h2>🛠 Calidad del mes<button class="cq-x" onclick="cqCerrar()">✕ Cerrar</button></h2>'; body.innerHTML = '<div class="cq-est inc">Bajando calidad.json…</div>'; return; }
+  if(!meses.length){ head.innerHTML = '<h2>🛠 Calidad del mes<button class="cq-x" onclick="cqCerrar()">✕ Cerrar</button></h2>';
+    body.innerHTML = '<div class="cq-est inc">Todavía no llega el historial de reiterados en rutas.json (reit.hist). Vuelve a abrir en unos minutos.</div>'; return; }
+  const hoyM = cqIsoHoy().slice(0, 7);
+  if(!CQ_MES || meses.indexOf(CQ_MES) < 0){ const ant = meses.filter(function(m){ return m < hoyM; }); CQ_MES = ant.length ? ant[ant.length - 1] : meses[meses.length - 1]; }
+  const R = cqCalc(CQ_MES), meta = META_REIT;
+  const R0reg = R.registro;
+  head.innerHTML = '<h2>🛠 Calidad de ' + cqNomMes(CQ_MES) + '<button class="cq-x" onclick="cqCerrar()">✕ Cerrar</button></h2>'
+    + '<p>Trabajos completados en ' + cqNomMes(CQ_MES) + ' (altas, traslados, migraciones y reparaciones) que tuvieron una reparación en la misma casa dentro de ' + CQ_DIAS + ' días · las canceladas no cuentan · meta ' + String(meta).replace('.', ',') + '% o menos</p>'
+    + '<div class="cq-tabs">' + meses.map(function(m){ const c = cqMasDias(cqFinMes(m), CQ_DIAS), cer = cqIsoHoy() > c, inc = !!R0reg && R0reg > m + '-01';
+        return '<button class="' + (m === CQ_MES ? 'on' : '') + '" onclick="cqVer(\'' + m + '\')">' + cqNomMes(m, true) + '<small>' + (inc ? 'incompleto' : cer ? 'cerrado' : m === hoyM ? 'se mide en ' + CQ_NOMMES[(+m.slice(5, 7)) % 12] + ' · va armándose' : '● se está midiendo ahora · cierra el ' + fechaCL(c).slice(0, 5)) + '</small></button>'; }).join('') + '</div>';
+  let h = '';
+  /* (04-11-2026) Luis: "octubre es lo que se esta midiendo ahora??" -> decirlo con todas sus letras */
+  if(CQ_MES === hoyM) h += '<div class="cq-est inc"><b>Este mes todavía no se mide:</b> lo que se completa en ' + cqNomMes(CQ_MES) + ' se mide en ' + CQ_NOMMES[(+CQ_MES.slice(5, 7)) % 12] + '. Acá ves cómo viene, pero el número que vale ahora es el del mes anterior.</div>';
+  /* estado del periodo */
+  const dQ = Math.round((new Date(+R.cierre.slice(0, 4), +R.cierre.slice(5, 7) - 1, +R.cierre.slice(8, 10)) - new Date(+cqIsoHoy().slice(0, 4), +cqIsoHoy().slice(5, 7) - 1, +cqIsoHoy().slice(8, 10))) / 864e5);
+  if(R.incompleto) h += '<div class="cq-est inc"><b>Mes incompleto:</b> ' + (R.json ? 'los export completos parten' : 'el registro de reiterados parte') + ' el ' + escR(fechaCL(R.registro)) + '. Las reparaciones de antes de esa fecha no están, así que el % de ' + cqNomMes(CQ_MES) + ' sale más bajo de lo real. No sirve para compararlo con VTR/CLARO.</div>';
+  if(R.cerrado) h += '<div class="cq-est cerr"><b>Cerrado</b> el ' + escR(fechaCL(R.cierre)) + ': ya pasaron los ' + CQ_DIAS + ' días del último trabajo de ' + cqNomMes(CQ_MES) + '. Este número ya no cambia.</div>';
+  else h += '<div class="cq-est curso"><b>' + (CQ_MES < hoyM ? 'Es la calidad que se está midiendo ahora' : 'En curso') + ':</b> se termina de medir el ' + escR(fechaCL(R.cierre)) + ' (faltan ' + dQ + ' día' + (dQ === 1 ? '' : 's') + '). Todavía pueden caer reparaciones de los trabajos hechos desde el ' + escR(fechaCL(R.desde > CQ_MES + '-01' ? R.desde : CQ_MES + '-01')) + ', así que el % puede subir.'
+    + (R.abiertos ? ' Hay <b>' + R.abiertos + '</b> reparación' + (R.abiertos === 1 ? '' : 'es') + ' abierta' + (R.abiertos === 1 ? '' : 's') + ' (cuentan; si la cancelan, sale sola).' : '') + '</div>';
+  if(R.json) h += '<div class="cq-est">Fuente: <b>export completos</b> (todas las empresas y comunas) del ' + escR(fechaCL(R.registro)) + ' al ' + escR(fechaCL(R.hasta)) + (R.nHoy ? ', más <b>' + R.nHoy + '</b> reparación' + (R.nHoy === 1 ? '' : 'es') + ' de hoy en vivo' : '') + '. '
+    + 'Entran <b>' + R.otras + '</b> trabajos en otras comunas' + (R.otras ? ' (' + Object.keys(R.ciu).filter(function(c){ return c !== 'QUILPUE' && c !== 'VILLA ALEMANA'; }).sort(function(a, b){ return R.ciu[b] - R.ciu[a]; }).map(function(c){ return derTitulo(c) + ' ' + R.ciu[c]; }).join(', ') + ')' : '')
+    + ' y <b>' + R.otraEps + '</b> trabajo' + (R.otraEps === 1 ? '' : 's') + ' con reparación de otra empresa.'
+    + (R.tapadas.length ? ' <b>' + R.tapadas.length + '</b> reparación' + (R.tapadas.length === 1 ? '' : 'es') + ' no se le' + (R.tapadas.length === 1 ? '' : 's') + ' carga' + (R.tapadas.length === 1 ? '' : 'n') + ' a Dominion porque otra empresa trabajó después en la casa (abajo).' : '')
+    + (R.faltan.length ? ' <b style="color:#b42318">Faltan los export de: ' + R.faltan.map(function(d){ return fechaCL(d).slice(0, 5); }).join(', ') + '.</b>' : '') + '</div>';
+  else if(CQ_J === 'error') h += '<div class="cq-est inc"><b>No bajó calidad.json</b> (falta subirlo a Actividades-diario): se muestra solo Quilpué y Villa Alemana con lo que ven tus export, sin otras comunas ni reparaciones de otras empresas.</div>';
+  if(R.sinDatos) h += '<div class="cq-est inc">Bajando datos.json para ver el estado final de cada reparación (las canceladas)… mientras tanto se usa el estado del día en que se anotó.</div>';
+  /* tarjetas */
+  const mal = R.p !== null && R.p > meta;
+  h += '<div class="cq-kpis">'
+    + '<div class="cq-k big ' + (R.p === null ? '' : mal ? 'mal' : 'ok') + '"><small>Calidad ' + cqNomMes(CQ_MES) + (R.cerrado ? '' : ' · hasta hoy') + '</small><b>' + (R.p === null ? '–' : P2(R.p) + '%') + '</b><span>' + R.n + ' de ' + R.base + ' trabajos con reparación · meta ' + String(meta).replace('.', ',') + '%'
+    + (R.p === null ? '' : mal ? ' · <b style="display:inline;font-size:inherit;color:#b42318">' + P2(R.p - meta) + ' pts sobre la meta</b>' : ' · ' + P2(meta - R.p) + ' pts bajo la meta') + '</span></div>'
+    + '<div class="cq-k"><small>Completadas en ' + CQ_NOMMES[+CQ_MES.slice(5, 7) - 1] + '</small><b>' + R.base + '</b><span>la base del %</span></div>'
+    + '<div class="cq-k"><small>Trabajos con reparación</small><b>' + R.n + '</b><span>' + R.L.reduce(function(a, t){ return a + t.reps.length; }, 0) + ' reparaciones</span></div>'
+    + '<div class="cq-k"><small>Para no pasar la meta</small><b>' + (R.base ? Math.max(0, Math.floor(R.base * meta / 100) - R.n) : '–') + '</b><span>' + (R.base && Math.floor(R.base * meta / 100) - R.n < 0 ? 'ya está sobre la meta' : 'reparaciones más que aguanta el mes') + '</span></div>'
+    + '<div class="cq-k"><small>Canceladas</small><b>' + R.canc.length + '</b><span>reparaciones que se cancelaron: no cuentan</span></div></div>';
+  /* por tipo */
+  h += '<div class="cq-sec">Por tipo de trabajo<small>completadas de ' + cqNomMes(CQ_MES) + ' y cuántas tuvieron reparación</small></div>'
+    + '<table class="cq-t"><thead><tr><th>Trabajo</th><th>Completadas</th><th>Con reparación</th><th>Calidad</th></tr></thead><tbody>'
+    + ['Alta', 'Alta Traslado', 'Migración', 'Reparación'].map(function(k){ const n = R.L.filter(function(t){ return t.tipo === k; }).length, c = R.bt[k] || 0, p = c ? 100 * n / c : null;
+        return '<tr><td>' + k + '</td><td>' + (R.sinDatos ? '…' : c) + '</td><td>' + n + '</td><td class="p ' + (p === null ? 'poca' : p > meta ? 'mal' : 'ok') + '">' + (p === null ? '–' : P2(p) + '%') + '</td></tr>'; }).join('')
+    + '<tr class="tot"><td>Total</td><td>' + R.base + '</td><td>' + R.n + '</td><td class="p ' + (R.p === null ? '' : mal ? 'mal' : 'ok') + '">' + (R.p === null ? '–' : P2(R.p) + '%') + '</td></tr></tbody></table>'
+    + (!R.sinDatos && R.btTot !== R.base ? '<p class="cq-nota">Ojo: por tipo suman ' + R.btTot + ' completadas (datos.json) y el total del registro de Reiterados dice ' + R.base + '. El % total usa ' + R.base + '.</p>' : '');
+  /* por tecnico */
+  h += '<div class="cq-sec">Técnico por técnico<small>el reiterado se le carga al que hizo el trabajo de ' + CQ_NOMMES[+CQ_MES.slice(5, 7) - 1] + ' · toca un técnico para ver sus casas · en gris, menos de ' + MIN_COMP_REIT + ' completadas</small></div>'
+    + '<table class="cq-t"><thead><tr><th>Técnico</th><th>Supervisor</th><th>Completadas</th><th>Con reparación</th><th>Calidad</th></tr></thead><tbody>';
+  R.tecs.forEach(function(o, i){
+    const poca = o.c < MIN_COMP_REIT, m = !poca && o.p !== null && o.p > meta;
+    h += '<tr class="t' + (m ? ' mal' : '') + '" onclick="cqTec(' + i + ')"><td>' + (CQ_AB === i ? '▾ ' : '▸ ') + escR(derTitulo(o.nom)) + '</td><td><small>' + escR(derTitulo(o.sup || '')) + '</small></td><td>' + o.c + '</td><td>' + o.n + '</td>'
+      + '<td class="p ' + (o.p === null ? 'poca' : poca ? 'poca' : m ? 'mal' : 'ok') + '">' + (o.p === null ? '–' : P2(o.p) + '%') + (poca && o.c ? ' <small>pocas</small>' : '') + '</td></tr>';
+    if(CQ_AB === i) h += '<tr class="det"><td colspan="5">' + (o.l.length ? '<table class="cq-d"><thead><tr><th>Trabajo</th><th>Casa</th><th>Reparación</th><th>Días</th><th>Estado de la reparación</th><th>Código</th><th>Quién reparó</th></tr></thead><tbody>'
+      + o.l.slice().sort(function(a, b){ return a.fecha.localeCompare(b.fecha); }).map(function(t){ return t.reps.map(function(r, j){
+          return '<tr><td>' + (j ? '' : escR(fechaCL(t.fecha)).slice(0, 5) + ' · ' + escR(t.cat || t.tipo) + '<br><small>' + escR(t.ot) + '</small>') + '</td><td>' + (j ? '' : escR(t.dir) + (t.ciu && t.ciu !== 'QUILPUE' && t.ciu !== 'VILLA ALEMANA' ? ' <small>· ' + escR(derTitulo(t.ciu)) + '</small>' : '')) + '</td>'
+            + '<td>' + escR(fechaCL(r.fecha)).slice(0, 5) + '<br><small>' + escR(r.ot) + '</small></td><td>' + r.dias + '</td><td>' + cqEstHtml(r) + '</td><td>' + escR(r.cie || '–') + '</td><td>' + escR(derTitulo(r.tec || '')) + (r.emp && r.emp !== 'DOMINION' && r.emp !== 'BUCKET' ? ' <span class="cq-e a">' + escR(r.emp) + '</span>' : '') + (r.hoy ? ' <small>(hoy)</small>' : '') + '</td></tr>'; }).join(''); }).join('')
+      + '</tbody></table>' : '<p class="cq-nota">Sin reparaciones en sus trabajos de ' + cqNomMes(CQ_MES) + '.</p>') + '</td></tr>';
+  });
+  h += '<tr class="tot"><td>Equipo</td><td></td><td>' + R.base + '</td><td>' + R.n + '</td><td class="p">' + (R.p === null ? '–' : P2(R.p) + '%') + '</td></tr></tbody></table>';
+  if(R.json && R.tapadas.length) h += '<div class="cq-sec">No se cargan a Dominion<small>después de nuestro trabajo, otra empresa hizo un trabajo en la casa: la reparación es de ese trabajo</small></div>'
+    + '<table class="cq-t"><thead><tr><th>Casa</th><th>Nuestro trabajo</th><th>Técnico</th><th>Trabajo de otra empresa</th><th>Reparación</th></tr></thead><tbody>'
+    + R.tapadas.map(function(x){ return '<tr><td>' + escR(x.dir) + '</td><td>' + escR(x.ot) + '</td><td>' + escR(derTitulo(x.tec)) + '</td><td>' + escR(x.por) + ' · ' + escR(fechaCL(x.pf)).slice(0, 5) + '</td><td>' + escR(fechaCL(x.rf)).slice(0, 5) + ' · ' + escR(x.rep) + '</td></tr>'; }).join('') + '</tbody></table>';
+  /* canceladas */
+  if(R.canc.length) h += '<div class="cq-sec">Reparaciones canceladas<small>se anotaron como reiterado pero terminaron canceladas: no cuentan</small></div>'
+    + '<table class="cq-t"><thead><tr><th>Casa</th><th>Trabajo</th><th>Técnico del trabajo</th><th>Reparación</th><th>Estado</th></tr></thead><tbody>'
+    + R.canc.map(function(r){ const jt = r.job && cqUsaJson() ? (CQ_J.fallas || []).filter(function(x){ return x.ot === r.job; })[0] : null; return '<tr><td>' + escR(r.dir || '') + '</td><td>' + (r.prev.prev_fecha ? escR(fechaCL(r.prev.prev_fecha)).slice(0, 5) + ' · ' + escR(r.prev.prev_tipo) : escR(r.job || '')) + '</td><td>' + escR(derTitulo(r.prev.prev_tec || (jt ? jt.tec : ''))) + '</td><td>' + escR(fechaCL(r.fecha)).slice(0, 5) + ' · ' + escR(r.ot) + '</td><td>' + cqEstHtml(r) + '</td></tr>'; }).join('') + '</tbody></table>';
+  h += '<p class="cq-nota"><b>Cómo se mide:</b> base = todo lo completado en ' + cqNomMes(CQ_MES) + ' por los técnicos de Dominion' + (R.json ? ', en cualquier comuna' : ' en Quilpué y Villa Alemana') + ' (altas, altas traslado, migraciones y reparaciones). ' + (R.json ? 'La reparación puede ser de cualquier empresa. ' : '')
+    + 'Falla = el trabajo tuvo una reparación en la misma casa dentro de ' + CQ_DIAS + ' días (puede caer en ' + CQ_NOMMES[+CQ_MES.slice(5, 7) - 1] + ' o en el mes siguiente); cada trabajo cuenta una vez aunque tenga dos reparaciones. '
+    + 'Si en esa casa se completó después otro trabajo, la reparación es de ese otro trabajo y va a la calidad de su mes. Cuenta toda reparación menos las canceladas: el estado final sale de datos.json y de lo de hoy.</p>';
+  const y = body.scrollTop; body.innerHTML = h; body.scrollTop = y;
+}
 </script>
 
 </body>
