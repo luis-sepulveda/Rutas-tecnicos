@@ -1,7 +1,7 @@
 {
-  "actualizado": "2026-11-04T10:41:21",
+  "actualizado": "2026-11-04T11:11:36",
   "resumen": {
-    "reagendada": 1
+    "sin informacion": 1
   },
   "estados": {
     "1-3OSTMHAO": {
@@ -9,10 +9,56 @@
       "cat": "Alta 1 Play",
       "franja_original": "13-16",
       "d": "MARGA MARGA 600, VILLA ALEMANA",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3OSTMHAO - 16-19-Alta-1 Play-MARGA MARGA 600Vie, 6 Nov",
-      "franja_nueva": "16-19"
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "MARGA MARGA 600",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3NSYDMN9",
+            "franja": "10-13",
+            "texto": "1-3NSYDMN9 - 10-13-Alta-1 Play-MARGA MARGA 600Lun, 14 Sep"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3NRTTWLG",
+            "franja": "10-13",
+            "texto": "1-3NRTTWLG - 10-13-Alta-1 Play-MARGA MARGA 600Vie, 11 Sep"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3NSODDEI",
+            "franja": "16-19",
+            "texto": "1-3NSODDEI - 16-19-Alta-1 Play-MARGA MARGA 600Vie, 11 Sep"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3NR56W4B",
+            "franja": "10-13",
+            "texto": "1-3NR56W4B - 10-13-Alta-1 Play-MARGA MARGA 600Jue, 10 Sep"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3NQK68J2",
+            "franja": "10-13",
+            "texto": "1-3NQK68J2 - 10-13-Alta-1 Play-MARGA MARGA 600Mie, 9 Sep"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3NQGLPZF",
+            "franja": "13-16",
+            "texto": "1-3NQGLPZF - 13-16-Alta-1 Play-MARGA MARGA 600Mar, 8 Sep"
+          }
+        ]
+      }
     }
   }
 }
