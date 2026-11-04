@@ -18773,7 +18773,11 @@ function cqNom(n){ return String(n || '').replace(/\s+/g, ' ').trim().toUpperCas
    es publico en GitHub). Para una clave distinta: poner su SHA-256 de 'dominion-reit|' + clave en CQ_CLAVE_H. */
 const CQ_CLAVE_H = REIT_CLAVE_H, CQ_LS = 'cqLlave';
 let cqOkSesion = false;
-function cqAutorizado(){ if(cqOkSesion) return true; try { return localStorage.getItem(CQ_LS) === CQ_CLAVE_H; } catch(e){ return false; } }
+/* (04-11-2026, 11:55) Luis: "al ingresar la clave queda siempre visible" -> la clave se pide CADA VEZ que se presiona
+   el boton: no se recuerda en el navegador ni en la sesion. cqOkSesion sirve para UNA sola apertura (la que sigue a
+   la clave) y se gasta en cqAbrir(). Ademas se borra lo que haya quedado guardado de antes. */
+try { localStorage.removeItem('cqLlave'); } catch(e){}
+function cqAutorizado(){ return cqOkSesion; }
 function cqPedirClave(){
   let d = document.getElementById('cqClave');
   if(!d){
@@ -18781,7 +18785,6 @@ function cqPedirClave(){
     d.innerHTML = '<form class="rk-box" onsubmit="event.preventDefault(); cqProbarClave()">'
       + '<h3>🔒 Calidad</h3><p>Ingresa la clave para ver la calidad del mes.</p>'
       + '<input id="cqkIn" type="password" autocomplete="current-password" placeholder="Clave">'
-      + '<label class="rk-rec"><input id="cqkRec" type="checkbox" checked> Recordar en este computador</label>'
       + '<div id="cqkErr" class="rk-err" hidden>Clave incorrecta.</div>'
       + '<div class="rk-bot"><button type="button" onclick="cqCerrarClave()">Cancelar</button><button type="submit" class="ok">Entrar</button></div></form>';
     d.addEventListener('click', function(e){ if(e.target === d) cqCerrarClave(); });
@@ -18796,7 +18799,6 @@ async function cqProbarClave(){
   try { h = await reitHuella(v); } catch(e){}
   if(h !== CQ_CLAVE_H){ document.getElementById('cqkErr').hidden = false; document.getElementById('cqkIn').select(); return; }
   cqOkSesion = true;
-  if(document.getElementById('cqkRec').checked){ try { localStorage.setItem(CQ_LS, CQ_CLAVE_H); } catch(e){} }
   const d = document.getElementById('cqClave'); if(d) d.classList.remove('on');
   cqAbrir();
 }
@@ -18804,6 +18806,7 @@ function cqOlvidarClave(){ try { localStorage.removeItem(CQ_LS); } catch(e){} cq
 document.addEventListener('keydown', function(e){ if(e.key === 'Escape'){ const d = document.getElementById('cqClave'); if(d && d.classList.contains('on')) cqCerrarClave(); } });
 function cqAbrir(){
   if(!cqAutorizado()){ cqPedirClave(); return; }
+  cqOkSesion = false;   /* se gasta: la proxima vez la vuelve a pedir */
   document.getElementById('modalCQ').classList.add('abierto');
   try { if(typeof mesCargar === 'function') mesCargar(); } catch(e){}
   cqCargar();
