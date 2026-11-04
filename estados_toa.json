@@ -1,8 +1,9 @@
 {
-  "actualizado": "2026-11-04T14:42:52",
+  "actualizado": "2026-11-04T15:13:03",
   "resumen": {
-    "reagendada": 3,
-    "sin informacion": 1
+    "reagendada": 2,
+    "sin informacion": 1,
+    "no realizada": 1
   },
   "estados": {
     "1-3OQYPFFB": {
@@ -86,10 +87,47 @@
       "cat": "Reparación",
       "franja_original": "16-19",
       "d": "CUMMING 1986, QUILPUE",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3OSIT071 - 16-19-Reparación-2 Play Servicio Degradado-CUMMING 1986Lun, 9 Nov",
-      "franja_nueva": "16-19"
+      "estado": "no realizada",
+      "color": "rgb(96, 206, 206)",
+      "detalle": "1-3NSYDMN9 - 10-13-Alta-1 Play-MARGA MARGA 600Lun, 14 Sep",
+      "franja_nueva": "10-13",
+      "previas": [
+        {
+          "estado": "no realizada",
+          "color": "rgb(96, 206, 206)",
+          "ot": "1-3NRTTWLG",
+          "franja": "10-13",
+          "texto": "1-3NRTTWLG - 10-13-Alta-1 Play-MARGA MARGA 600Vie, 11 Sep"
+        },
+        {
+          "estado": "no realizada",
+          "color": "rgb(96, 206, 206)",
+          "ot": "1-3NSODDEI",
+          "franja": "16-19",
+          "texto": "1-3NSODDEI - 16-19-Alta-1 Play-MARGA MARGA 600Vie, 11 Sep"
+        },
+        {
+          "estado": "no realizada",
+          "color": "rgb(96, 206, 206)",
+          "ot": "1-3NR56W4B",
+          "franja": "10-13",
+          "texto": "1-3NR56W4B - 10-13-Alta-1 Play-MARGA MARGA 600Jue, 10 Sep"
+        },
+        {
+          "estado": "no realizada",
+          "color": "rgb(96, 206, 206)",
+          "ot": "1-3NQK68J2",
+          "franja": "10-13",
+          "texto": "1-3NQK68J2 - 10-13-Alta-1 Play-MARGA MARGA 600Mie, 9 Sep"
+        },
+        {
+          "estado": "no realizada",
+          "color": "rgb(96, 206, 206)",
+          "ot": "1-3NQGLPZF",
+          "franja": "13-16",
+          "texto": "1-3NQGLPZF - 13-16-Alta-1 Play-MARGA MARGA 600Mar, 8 Sep"
+        }
+      ]
     }
   }
 }
