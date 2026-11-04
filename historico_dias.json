@@ -21548,22 +21548,22 @@
    }
   },
   "04-11-2026": {
-   "hasta": "15:47",
-   "actividades": 169,
+   "hasta": "15:52",
+   "actividades": 171,
    "tecnicos": 32,
    "estados": {
     "Completado": 81,
-    "en ruta": 5,
+    "Iniciado": 23,
     "Pendiente": 45,
-    "No Realizada": 12,
-    "Iniciado": 20,
-    "Cancelado": 6
+    "No Realizada": 13,
+    "Cancelado": 6,
+    "en ruta": 3
    },
-   "rgu": 251.2,
+   "rgu": 255.2,
    "caidas_total": 5,
    "caidas_activas": 5,
    "caidas_resueltas": 0,
-   "nuevas": 16,
+   "nuevas": 17,
    "al_bucket": 66,
    "repetidas": 26,
    "reagendadas": 10,
@@ -21617,6 +21617,15 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OTUWGH3",
+      "tec": "JORGE PEZOA VICUÑA",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "15:50",
+      "d": "VOLCAN VILLARRICA 2869, QUILPUE",
+      "e": "en ruta"
+     },
+     {
       "o": "1-3OTXQXAS",
       "tec": "RAFAEL VARGAS B",
       "cat": "Modificación de Servicio",
@@ -21632,7 +21641,7 @@
       "f": "13-16",
       "hi": "16:03",
       "d": "DOLORES 352 CASA 7, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OTX4PX1",
@@ -21874,7 +21883,7 @@
       "o": "1-3OSVK80X",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "19:13",
+      "hi": "18:59",
       "d": "VOLCAN ACONCAGUA 2617, QUILPUE",
       "e": "Pendiente",
       "tec": "JORGE PEZOA VICUÑA",
@@ -21948,7 +21957,7 @@
       "f": "13-16",
       "hi": "15:12",
       "d": "BRASILIA 2360, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "KEVIN TAPIA RETAMAL",
       "visitas": 1,
       "ult_fecha": "03-11-2026",
@@ -22018,7 +22027,7 @@
       "o": "1-3OR49AQ2",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "18:11",
+      "hi": "18:16",
       "d": "PARIS 858, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -22080,9 +22089,9 @@
       "o": "1-3ORKDG1U",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:56",
+      "hi": "15:50",
       "d": "PJE 2 1210 CASA E25, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "ALEXIS JARA",
       "desde": "03-11-2026"
      },
@@ -22179,5 +22188,5 @@
    }
   }
  },
- "generado": "04-11-2026 15:47"
+ "generado": "04-11-2026 15:52"
 }
