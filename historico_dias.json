@@ -21548,22 +21548,22 @@
    }
   },
   "04-11-2026": {
-   "hasta": "13:46",
-   "actividades": 161,
+   "hasta": "13:52",
+   "actividades": 162,
    "tecnicos": 32,
    "estados": {
-    "Completado": 48,
-    "en ruta": 1,
-    "Pendiente": 79,
+    "Completado": 52,
+    "Iniciado": 17,
+    "Pendiente": 78,
     "No Realizada": 8,
-    "Iniciado": 19,
+    "en ruta": 1,
     "Cancelado": 6
    },
-   "rgu": 246.8,
+   "rgu": 247.8,
    "caidas_total": 3,
    "caidas_activas": 3,
    "caidas_resueltas": 0,
-   "nuevas": 7,
+   "nuevas": 8,
    "al_bucket": 37,
    "repetidas": 26,
    "reagendadas": 10,
@@ -21598,6 +21598,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OTROGBW",
+      "tec": "JOSE SALAS MEDINA",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "13:51",
+      "d": "HUANHUALI 456 EDIF. B3 DEPTO 42, VILLA ALEMANA",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3OTODL4E",
       "tec": "JOEL GUSTAVE GUSTA",
@@ -21667,9 +21676,9 @@
       "o": "1-3OSJMK3R",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "13:45",
+      "hi": "13:48",
       "d": "HERNANDO DE MAGALLANES 2136, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "ALEXIS JARA",
       "visitas": 1,
       "ult_fecha": "03-11-2026",
@@ -21703,7 +21712,7 @@
       "o": "1-3OS8R7IX",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "18:09",
+      "hi": "18:29",
       "d": "PJE CHIGUAYANTE 1485, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -21727,7 +21736,7 @@
       "o": "1-3OS16VZ0",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "15:50",
+      "hi": "15:51",
       "d": "CONDELL SUR 01565 CASA D, QUILPUE",
       "e": "Pendiente",
       "tec": "EDGAR VALERO C",
@@ -21823,7 +21832,7 @@
       "o": "1-3ORGK9OQ",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "15:39",
+      "hi": "15:52",
       "d": "WILLIAMSON 565, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE SALAS MEDINA",
@@ -21909,7 +21918,7 @@
       "f": "10-13",
       "hi": "12:18",
       "d": "ARRIETA 419, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "MATÍAS JAQUE AG",
       "visitas": 2,
       "ult_fecha": "03-11-2026",
@@ -21967,7 +21976,7 @@
       "o": "1-3ORWP9E7",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "16:14",
+      "hi": "16:11",
       "d": "BRASILIA 2360, QUILPUE",
       "e": "Pendiente",
       "tec": "YENDER BOSCAN CADENAS",
@@ -22070,7 +22079,7 @@
       "o": "1-3ORKDG1U",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:05",
+      "hi": "15:02",
       "d": "PJE 2 1210 CASA E25, QUILPUE",
       "e": "Pendiente",
       "tec": "YENDER BOSCAN CADENAS",
@@ -22080,5 +22089,5 @@
    }
   }
  },
- "generado": "04-11-2026 13:46"
+ "generado": "04-11-2026 13:52"
 }
