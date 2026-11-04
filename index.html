@@ -3791,6 +3791,9 @@ button.am-card:hover { border-color:#7c3aed; box-shadow:0 4px 14px rgba(19,33,60
 .am-mig i { font-style:normal; font-size:12px; font-weight:800; color:#13213c; text-transform:uppercase; letter-spacing:.04em; margin-bottom:2px; }
 .am-mig span { white-space:nowrap; } .am-mig span b { font-size:14px; } .am-mig b.ok { color:#0e7c6b; } .am-mig b.bad { color:#c0392f; }
 .am-mig .sv { font-size:11.5px; color:#94a3b8; } .am-mig .sv em { font-style:normal; color:#6d28d9; font-weight:700; }
+  .an-lin-ley { display:flex; flex-direction:column; gap:4px; margin-top:6px; font-size:12.5px; color:#cbd5e1; }
+  .an-lin-ley i { display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:6px; vertical-align:-1px; }
+  .an-lin-ley b { color:#f1f5f9; }
 </style>
 </head>
 <body>
@@ -18285,42 +18288,94 @@ function anPintar(){
   /* como cierra el mes */
   h += '<div class="an-card"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap"><h3 style="margin:0">¿Cómo cierra ' + AN_NOMMES[+D.mesHoy.slice(4) - 1].toLowerCase() + '?</h3>'
     + '<button class="an-btn" style="background:#0ea5e9" onclick="anDiarioAbrir()" title="Ver migraciones día a día, con el mes completo">📅 Día a día ›</button></div>'
-    + '<p class="s">Lo que queda del mes (abiertas de hoy + días hábiles que faltan × visitas por día de los últimos 10 días) cerrado con la completitud de esos 10 días, ± 5 pts. La línea blanca es la meta; el punto, dónde va el mes (sale desde ' + AN_MIN_MES + ' visitas).</p>';
-  const W = 460, L = 104, Rr = 16, xa = function(v){ return L + (Math.max(30, Math.min(90, v)) - 30) / 60 * (W - L - Rr); };
-  let g = '<svg viewBox="0 0 ' + W + ' ' + (AN_FAMS.length * 58 + 30) + '" style="width:100%">';
-  const halo = ' stroke="#111a2e" stroke-width="4" paint-order="stroke" stroke-linejoin="round"';
-  [30, 40, 50, 60, 70, 80, 90].forEach(function(v){ g += '<text x="' + xa(v) + '" y="' + (AN_FAMS.length * 58 + 22) + '" font-size="10.5" fill="#94a3b8" text-anchor="middle">' + v + '%</text><line x1="' + xa(v) + '" x2="' + xa(v) + '" y1="6" y2="' + (AN_FAMS.length * 58 + 8) + '" stroke="#22304f"/>'; });
-  g += '<line x1="' + xa(MP_META) + '" x2="' + xa(MP_META) + '" y1="4" y2="' + (AN_FAMS.length * 58 + 10) + '" stroke="#fff" stroke-width="2"/>';
-  const d0 = new Date(+D.hoyIso.slice(0, 4), +D.hoyIso.slice(4, 6) - 1, +D.hoyIso.slice(6, 8));
-  let dias = 0; const fin = new Date(d0.getFullYear(), d0.getMonth() + 1, 0);
-  for(let d = new Date(d0.getTime() + 864e5); d <= fin; d.setDate(d.getDate() + 1)) if(d.getDay() !== 0) dias++;
-  AN_FAMS.forEach(function(F, i){
-    const yy = 20 + i * 58, sm = mpSt(anPer(D, F.f, { t:'mes', k:D.mesHoy }));
-    /* (04-11-2026) solo dias CON VISITAS (completadas o no realizadas), igual que la portada: antes un dia con puras
-       canceladas contaba como dia y bajaba el promedio de visitas */
-    const porDia = {}; D.R.forEach(function(x){ if(x.fam === F.f && !x.hoy && (x.e === 'Completado' || x.e === 'No Realizada')) (porDia[x.iso] = porDia[x.iso] || []).push(x); });
-    const ult = Object.keys(porDia).sort().slice(-10), L10 = []; ult.forEach(function(k){ porDia[k].forEach(function(x){ L10.push(x); }); });
-    const s10 = mpSt(L10), prom = ult.length ? s10.vis / ult.length : 0, quedan = Math.round(prom * dias + sm.ab);
-    g += '<text x="0" y="' + (yy + 5) + '" font-size="13" fill="#e2e8f0">' + F.f + '</text>';
-    if(s10.comp === null){ g += '<text x="' + L + '" y="' + (yy + 5) + '" font-size="11" fill="#94a3b8">sin datos suficientes</text>'; return; }
-    const proy = function(p){ p = Math.max(0, Math.min(100, p)) / 100; const tv = sm.vis + quedan; return tv ? 100 * (sm.co + quedan * p) / tv : null; };
-    const a = proy(s10.comp - 5), b = proy(s10.comp + 5), c = a >= MP_META ? '#22c55e' : b >= MP_META ? '#f59e0b' : '#ef4444';
-    g += '<rect x="' + xa(a) + '" y="' + (yy - 9) + '" width="' + Math.max(6, xa(b) - xa(a)) + '" height="18" rx="9" fill="' + c + '" fill-opacity=".55"><title>' + quedan + ' visitas por delante · últimos 10 días: ' + P2(s10.comp) + '%</title></rect>';
-    const punto = sm.comp !== null && sm.vis >= AN_MIN_MES;
-    if(punto) g += '<circle cx="' + xa(sm.comp) + '" cy="' + yy + '" r="5" fill="#fff"><title>Va en ' + P2(sm.comp) + '% (' + sm.co + ' de ' + sm.vis + ')</title></circle>';
-    const xr = Math.max(xa(b), punto ? xa(sm.comp) : 0) + 9, rt = P2(a) + '–' + P2(b) + '%';
-    g += xr > W - 46 ? '<text x="' + (Math.min(xa(a), punto ? xa(sm.comp) : 9e9) - 9) + '" y="' + (yy + 4) + '" font-size="11" fill="#94a3b8" text-anchor="end"' + halo + '>' + rt + '</text>'
-                     : '<text x="' + xr + '" y="' + (yy + 4) + '" font-size="11" fill="#94a3b8"' + halo + '>' + rt + '</text>';
-    g += '<text x="' + L + '" y="' + (yy + 25) + '" font-size="10.5" fill="' + c + '"' + halo + '>' + (a >= MP_META ? 'llega a la meta' : b >= MP_META ? 'puede llegar' : 'no llega')
-      + ' · quedan ~' + quedan + ' visitas' + (punto ? '' : ' · el mes lleva ' + sm.vis + ' visitas') + '</text>';
-  });
-  g += '</svg>';
-  h += g + '</div></div>';
+    + '<p class="s">Línea llena: cómo va la completitud acumulada del mes, día a día. Punteada: hacia dónde va hasta fin de mes si sigue como los últimos 10 días (abiertas de hoy + días hábiles que faltan × visitas por día); la franja es ± 5 pts. La línea blanca es la meta.</p>';
+  /* (04-11-2026, 15:55) Luis: "¿se podría representar con un gráfico lineal?". Línea = completitud ACUMULADA del mes
+     día a día (como va el mes); desde hoy, línea punteada = proyección hasta fin de mes con la completitud de los
+     últimos 10 días, y franja = ± 5 pts. Misma cuenta que antes (quedan = abiertas + días hábiles × visitas/día). */
+  h += '<div id="anLinBox">' + anLinSvg(D, 230) + '</div></div></div>';
   h += '</div>';   /* (02-11-2026) Luis: se borro la leyenda "Como se leeria" */
   box.innerHTML = h; box.scrollTop = y;
+  anLinAjustar(D); box.scrollTop = y;
   if(D.cargando) setTimeout(function(){ anPintar(); anDetPintar(); }, 1500);
 }
 
+/* (04-11-2026, 16:00) Luis: "ajusta el gráfico para que quede en línea al finalizar con cuánto nos cuesta la GSA".
+   El gráfico se arma con un alto H; despues de pintar, anLinAjustar() mide la columna de la izquierda (semáforo +
+   GSA) y vuelve a armarlo con el alto justo para que la tarjeta termine a la misma altura. */
+function anLinSvg(D, H){
+  const W = 460, L = 34, Rr = 54, T = 10, B = 24;
+  const d0 = new Date(+D.hoyIso.slice(0, 4), +D.hoyIso.slice(4, 6) - 1, +D.hoyIso.slice(6, 8));
+  const fin = new Date(d0.getFullYear(), d0.getMonth() + 1, 0), nD = fin.getDate();
+  let dias = 0; const fut = [];
+  for(let d = new Date(d0.getTime() + 864e5); d <= fin; d.setDate(d.getDate() + 1)) if(d.getDay() !== 0){ dias++; fut.push(d.getDate()); }
+  const yMin = 30, yMax = 100;
+  const xa = function(dia){ return L + (dia - 1) / Math.max(1, nD - 1) * (W - L - Rr); };
+  const ya = function(v){ return T + (1 - (Math.max(yMin, Math.min(yMax, v)) - yMin) / (yMax - yMin)) * (H - T - B); };
+  const halo = ' stroke="#111a2e" stroke-width="4" paint-order="stroke" stroke-linejoin="round"';
+  let g = '<svg viewBox="0 0 ' + W + ' ' + H + '" style="width:100%">';
+  [30, 40, 50, 60, 70, 80, 90, 100].forEach(function(v){ g += '<line x1="' + L + '" x2="' + (W - Rr) + '" y1="' + ya(v) + '" y2="' + ya(v) + '" stroke="#1e2a44"/><text x="' + (L - 6) + '" y="' + (ya(v) + 3.5) + '" font-size="10" fill="#94a3b8" text-anchor="end">' + v + '%</text>'; });
+  [1, 5, 10, 15, 20, 25, nD].forEach(function(dd){ g += '<text x="' + xa(dd) + '" y="' + (H - 7) + '" font-size="10" fill="#94a3b8" text-anchor="middle">' + dd + '</text>'; });
+  g += '<line x1="' + xa(d0.getDate()) + '" x2="' + xa(d0.getDate()) + '" y1="' + T + '" y2="' + (H - B) + '" stroke="#475569" stroke-dasharray="2 3"/><text x="' + xa(d0.getDate()) + '" y="' + (T + 8) + '" font-size="9.5" fill="#94a3b8" text-anchor="middle"' + halo + '>hoy</text>';
+  g += '<line x1="' + L + '" x2="' + (W - Rr) + '" y1="' + ya(MP_META) + '" y2="' + ya(MP_META) + '" stroke="#fff" stroke-width="1.6"/><text x="' + (W - Rr - 2) + '" y="' + (ya(MP_META) - 4) + '" font-size="9.5" fill="#fff" text-anchor="end"' + halo + '>meta ' + MP_META + '%</text>';
+  const leyenda = [], etiq = [];
+  AN_FAMS.forEach(function(F){
+    const sm = mpSt(anPer(D, F.f, { t:'mes', k:D.mesHoy }));
+    /* (04-11-2026) solo dias CON VISITAS (completadas o no realizadas), igual que la portada */
+    const porDia = {}; D.R.forEach(function(x){ if(x.fam === F.f && !x.hoy && (x.e === 'Completado' || x.e === 'No Realizada')) (porDia[x.iso] = porDia[x.iso] || []).push(x); });
+    const ult = Object.keys(porDia).sort().slice(-10), L10 = []; ult.forEach(function(k){ porDia[k].forEach(function(x){ L10.push(x); }); });
+    const s10 = mpSt(L10), prom = ult.length ? s10.vis / ult.length : 0, quedan = Math.round(prom * dias + sm.ab);
+    if(s10.comp === null){ leyenda.push('<div><i style="background:' + F.c + '"></i><b>' + F.f + '</b> · sin datos suficientes</div>'); return; }
+    /* acumulado del mes, dia por dia */
+    const mesL = anPer(D, F.f, { t:'mes', k:D.mesHoy }), porD = {};
+    mesL.forEach(function(x){ const dd = +String(x.iso).replace(/-/g, '').slice(6, 8); (porD[dd] = porD[dd] || []).push(x); });
+    const acu = [], cum = [];
+    for(let dd = 1; dd <= d0.getDate(); dd++){ if(!porD[dd]) continue; porD[dd].forEach(function(x){ cum.push(x); }); const st = mpSt(cum); if(st.comp !== null) acu.push([dd, st.comp, st.co, st.vis]); }
+    const proyEn = function(p, j){ p = Math.max(0, Math.min(100, p)) / 100; const q = j === 0 ? 0 : sm.ab + prom * j, tv = sm.vis + q; return tv ? 100 * (sm.co + q * p) / tv : null; };
+    const a = proyEn(s10.comp - 5, dias), b = proyEn(s10.comp + 5, dias), m = proyEn(s10.comp, dias);
+    const c = a >= MP_META ? '#22c55e' : b >= MP_META ? '#f59e0b' : '#ef4444';
+    const x0 = d0.getDate(), v0 = sm.comp;
+    if(v0 !== null && fut.length){
+      const up = [[x0, v0]].concat(fut.map(function(dd, j){ return [dd, proyEn(s10.comp + 5, j + 1)]; }));
+      const lo = [[x0, v0]].concat(fut.map(function(dd, j){ return [dd, proyEn(s10.comp - 5, j + 1)]; }));
+      g += '<path d="M' + up.map(function(q){ return xa(q[0]) + ',' + ya(q[1]); }).join('L') + 'L' + lo.reverse().map(function(q){ return xa(q[0]) + ',' + ya(q[1]); }).join('L') + 'Z" fill="' + F.c + '" fill-opacity=".14"/>';
+      const md = [[x0, v0]].concat(fut.map(function(dd, j){ return [dd, proyEn(s10.comp, j + 1)]; }));
+      g += '<path d="M' + md.map(function(q){ return xa(q[0]) + ',' + ya(q[1]); }).join('L') + '" fill="none" stroke="' + F.c + '" stroke-width="2" stroke-dasharray="5 4"><title>' + F.f + ': cerraría cerca de ' + P2(m) + '% (' + P2(a) + '–' + P2(b) + '%)</title></path>';
+    }
+    if(acu.length){
+      g += '<path d="M' + acu.map(function(q){ return xa(q[0]) + ',' + ya(q[1]); }).join('L') + '" fill="none" stroke="' + F.c + '" stroke-width="2.6" stroke-linejoin="round"/>';
+      acu.forEach(function(q){ g += '<circle cx="' + xa(q[0]) + '" cy="' + ya(q[1]) + '" r="2.6" fill="' + F.c + '"><title>' + F.f + ' al ' + q[0] + ': ' + P2(q[1]) + '% (' + q[2] + ' de ' + q[3] + ')</title></circle>'; });
+    }
+    etiq.push({ y: ya(m), t: P2(m) + '%', c: F.c });
+    leyenda.push('<div><i style="background:' + F.c + '"></i><b>' + F.f + '</b> va ' + (sm.comp === null ? '–' : P2(sm.comp) + '%') + ' · cerraría ~<b>' + P2(m) + '%</b> (' + P2(a) + '–' + P2(b) + '%) · <span style="color:' + c + '">'
+      + (a >= MP_META ? 'llega a la meta' : b >= MP_META ? 'puede llegar' : 'no llega') + '</span> · quedan ~' + quedan + ' visitas' + (sm.vis >= AN_MIN_MES ? '' : ' · el mes lleva ' + sm.vis + ' visitas') + '</div>');
+  });
+  /* etiquetas del cierre a la derecha, sin que se monten */
+  etiq.sort(function(p, q){ return p.y - q.y; }); for(let i = 1; i < etiq.length; i++) if(etiq[i].y - etiq[i - 1].y < 13) etiq[i].y = etiq[i - 1].y + 13;
+  etiq.forEach(function(e){ g += '<text x="' + (W - Rr + 5) + '" y="' + (e.y + 4) + '" font-size="11" font-weight="700" fill="' + e.c + '"' + halo + '>' + e.t + '</text>'; });
+  g += '</svg><div class="an-lin-ley">' + leyenda.join('') + '</div>';
+  return g;
+}
+let AN_LIN_D = null, AN_LIN_T = 0;
+window.addEventListener('resize', function(){ clearTimeout(AN_LIN_T); AN_LIN_T = setTimeout(function(){ if(AN_LIN_D) anLinAjustar(AN_LIN_D); }, 200); });
+function anLinAjustar(D){
+  AN_LIN_D = D;
+  try {
+    const box = document.getElementById('anLinBox'); if(!box) return;
+    const card = box.closest('.an-card'), col = card && card.parentElement ? card.parentElement.querySelector('.an-col') : null;
+    if(!col || Math.abs(col.getBoundingClientRect().top - card.getBoundingClientRect().top) > 4) return;   /* una sola columna (pantalla chica) */
+    const svg = box.querySelector('svg'); if(!svg) return;
+    /* la grilla estira las dos columnas al mismo alto: se mide el contenido real de cada lado */
+    const sv = svg.getBoundingClientRect();
+    const colH = col.lastElementChild.getBoundingClientRect().bottom - col.firstElementChild.getBoundingClientRect().top;
+    const cs = getComputedStyle(card), padV = parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom) + parseFloat(cs.borderTopWidth) + parseFloat(cs.borderBottomWidth);
+    const contenido = card.lastElementChild.getBoundingClientRect().bottom - card.firstElementChild.getBoundingClientRect().top;
+    const px = colH - padV - (contenido - sv.height);
+    if(px < 120 || !sv.width) return;
+    const H = Math.round(px * 460 / sv.width);
+    if(Math.abs(H - (+svg.getAttribute('viewBox').split(' ')[3])) < 2) return;
+    box.innerHTML = anLinSvg(D, H);
+  } catch(e){}
+}
 function anAbrir(){
   let m = document.getElementById('anPage');
   if(!m){ m = document.createElement('div'); m.id = 'anPage'; document.body.appendChild(m); }
