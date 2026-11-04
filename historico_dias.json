@@ -21548,26 +21548,35 @@
    }
   },
   "04-11-2026": {
-   "hasta": "09:40",
-   "actividades": 156,
+   "hasta": "09:45",
+   "actividades": 157,
    "tecnicos": 32,
    "estados": {
+    "Iniciado": 5,
     "Pendiente": 130,
-    "en ruta": 22,
-    "Cancelado": 2,
-    "Iniciado": 2
+    "en ruta": 20,
+    "Cancelado": 2
    },
-   "rgu": 246.5,
+   "rgu": 247.5,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 3,
+   "nuevas": 4,
    "al_bucket": 0,
    "repetidas": 27,
    "reagendadas": 10,
    "detalle": {
     "caidas": [],
     "nuevas": [
+     {
+      "o": "1-3OTA05VV",
+      "tec": "ALEXIS JARA",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "09:44",
+      "d": "AV BLANCO ENCALADA 1531 DEPTO 13, QUILPUE",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3OT9KIBQ",
       "tec": "KEVIN TAPIA RETAMAL",
@@ -21769,9 +21778,9 @@
       "o": "1-3OQZEL25",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "09:41",
+      "hi": "09:45",
       "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JUAN ARRIAGADA C",
       "visitas": 5,
       "ult_fecha": "02-11-2026",
@@ -21957,7 +21966,7 @@
       "o": "1-3ORKP8D7",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:22",
+      "hi": "16:36",
       "d": "MATEO DE TORO Y ZAMBRANO 945 CASA 15, QUILPUE",
       "e": "Pendiente",
       "tec": "JOEL GUSTAVE GUSTA",
@@ -21977,9 +21986,9 @@
       "o": "1-3OQZEL25",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "09:41",
+      "hi": "09:45",
       "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JUAN ARRIAGADA C",
       "desde": "02-11-2026"
      },
@@ -21997,7 +22006,7 @@
       "o": "1-3OR8CTRC",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:55",
+      "hi": "10:45",
       "d": "G TELLEZ 2830 EDIF. H DEPTO 104, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
@@ -22027,5 +22036,5 @@
    }
   }
  },
- "generado": "04-11-2026 09:40"
+ "generado": "04-11-2026 09:45"
 }
