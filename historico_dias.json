@@ -21548,12 +21548,12 @@
    }
   },
   "04-11-2026": {
-   "hasta": "10:15",
+   "hasta": "10:21",
    "actividades": 157,
    "tecnicos": 32,
    "estados": {
-    "Iniciado": 24,
-    "Pendiente": 126,
+    "Iniciado": 27,
+    "Pendiente": 123,
     "en ruta": 5,
     "Cancelado": 2
    },
@@ -21561,13 +21561,22 @@
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 4,
+   "nuevas": 5,
    "al_bucket": 0,
-   "repetidas": 27,
+   "repetidas": 26,
    "reagendadas": 10,
    "detalle": {
     "caidas": [],
     "nuevas": [
+     {
+      "o": "1-3OTBAFVB",
+      "tec": "LUIS MARTIN NUÑEZ",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "10:30",
+      "d": "PJE LARGO 245, QUILPUE",
+      "e": "en ruta"
+     },
      {
       "o": "1-3OTA05VV",
       "tec": "ALEXIS JARA",
@@ -21706,7 +21715,7 @@
       "o": "1-3OS85Z9P",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "11:53",
+      "hi": "12:38",
       "d": "ARRIETA 419, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "FELIPE SILVA R",
@@ -21754,7 +21763,7 @@
       "o": "1-3OR49AQ2",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "18:10",
+      "hi": "18:19",
       "d": "PARIS 858, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE PEREZ RANGEL",
@@ -21814,7 +21823,7 @@
       "o": "1-3OSJMK3R",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "13:15",
+      "hi": "14:29",
       "d": "HERNANDO DE MAGALLANES 2136, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
@@ -21826,7 +21835,7 @@
       "o": "1-3OQ5NE77",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "13:11",
+      "hi": "13:20",
       "d": "FLAMARION 01042, QUILPUE",
       "e": "Pendiente",
       "tec": "MARCO PEREZ G",
@@ -21847,22 +21856,10 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OSTMHAO",
-      "cat": "Alta 1 Play",
-      "f": "13-16",
-      "hi": "15:48",
-      "d": "MARGA MARGA 600, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "MATIAS APELEO APELEO",
-      "visitas": 6,
-      "ult_fecha": "14-09-2026",
-      "ult_cierre": "Sin apoyo vivienda-Pierrack"
-     },
-     {
       "o": "1-3OSQ7UPL",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "17:34",
+      "hi": "16:00",
       "d": "LOS ALMENDROS (LEIGHTON) 17, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -22006,7 +22003,7 @@
       "o": "1-3OR8CTRC",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "11:16",
+      "hi": "12:30",
       "d": "G TELLEZ 2830 EDIF. H DEPTO 104, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
@@ -22036,5 +22033,5 @@
    }
   }
  },
- "generado": "04-11-2026 10:15"
+ "generado": "04-11-2026 10:21"
 }
