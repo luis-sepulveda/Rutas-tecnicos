@@ -21548,26 +21548,35 @@
    }
   },
   "04-11-2026": {
-   "hasta": "09:35",
-   "actividades": 154,
+   "hasta": "09:40",
+   "actividades": 156,
    "tecnicos": 32,
    "estados": {
     "Pendiente": 130,
     "en ruta": 22,
-    "Cancelado": 1,
-    "Iniciado": 1
+    "Cancelado": 2,
+    "Iniciado": 2
    },
-   "rgu": 244.5,
+   "rgu": 246.5,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 2,
+   "nuevas": 3,
    "al_bucket": 0,
-   "repetidas": 26,
+   "repetidas": 27,
    "reagendadas": 10,
    "detalle": {
     "caidas": [],
     "nuevas": [
+     {
+      "o": "1-3OT9KIBQ",
+      "tec": "KEVIN TAPIA RETAMAL",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "09:39",
+      "d": "BILBAO 1544 DEPTO 22, QUILPUE",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3OT9KE58",
       "tec": "JOSE GALAZ D",
@@ -21772,7 +21781,7 @@
       "o": "1-3ORXW7I0",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "15:10",
+      "hi": "15:22",
       "d": "FRANCISCO MONTESSI 1572, QUILPUE",
       "e": "Pendiente",
       "tec": "KEVIN TAPIA RETAMAL",
@@ -21851,6 +21860,18 @@
       "visitas": 4,
       "ult_fecha": "31-10-2026",
       "ult_cierre": "Direccion incorrecta"
+     },
+     {
+      "o": "1-3OSVK80X",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "17:47",
+      "d": "VOLCAN ACONCAGUA 2617, QUILPUE",
+      "e": "Pendiente",
+      "tec": "NICOLAS MOYANO R",
+      "visitas": 1,
+      "ult_fecha": "03-11-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OSVEPF1",
@@ -22006,5 +22027,5 @@
    }
   }
  },
- "generado": "04-11-2026 09:35"
+ "generado": "04-11-2026 09:40"
 }
