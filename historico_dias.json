@@ -21548,22 +21548,22 @@
    }
   },
   "04-11-2026": {
-   "hasta": "17:31",
-   "actividades": 176,
+   "hasta": "17:42",
+   "actividades": 177,
    "tecnicos": 32,
    "estados": {
     "Completado": 102,
-    "Iniciado": 26,
+    "Iniciado": 28,
     "No Realizada": 19,
-    "Pendiente": 17,
-    "en ruta": 4,
-    "Cancelado": 8
+    "Pendiente": 18,
+    "Cancelado": 8,
+    "en ruta": 2
    },
-   "rgu": 254.7,
+   "rgu": 254.8,
    "caidas_total": 6,
    "caidas_activas": 6,
    "caidas_resueltas": 0,
-   "nuevas": 23,
+   "nuevas": 24,
    "al_bucket": 66,
    "repetidas": 25,
    "reagendadas": 10,
@@ -21625,6 +21625,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OU3KC3L",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:41",
+      "d": "AVENIDA CUARTA 796, QUILPUE",
+      "e": "en ruta"
+     },
      {
       "o": "1-3OU2DVY4",
       "tec": "MATÍAS JAQUE AG",
@@ -21909,9 +21918,9 @@
       "o": "1-3OS1C3X2",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "17:30",
+      "hi": "17:41",
       "d": "PJE 2 260, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JORDAN ROA PEREZ",
       "visitas": 4,
       "ult_fecha": "08-10-2026",
@@ -21933,7 +21942,7 @@
       "o": "1-3OSVK80X",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "17:40",
+      "hi": "17:38",
       "d": "VOLCAN ACONCAGUA 2617, QUILPUE",
       "e": "Pendiente",
       "tec": "JORGE PEZOA VICUÑA",
@@ -22005,9 +22014,9 @@
       "o": "1-3OTJTKQH",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "17:44",
+      "hi": "17:37",
       "d": "VALLE DEL PARAISO 2746, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "LUIS CASTRO TORRES",
       "visitas": 2,
       "ult_fecha": "29-09-2026",
@@ -22237,5 +22246,5 @@
    }
   }
  },
- "generado": "04-11-2026 17:31"
+ "generado": "04-11-2026 17:42"
 }
