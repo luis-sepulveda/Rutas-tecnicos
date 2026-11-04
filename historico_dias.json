@@ -21548,22 +21548,23 @@
    }
   },
   "04-11-2026": {
-   "hasta": "19:17",
-   "actividades": 180,
+   "hasta": "19:27",
+   "actividades": 182,
    "tecnicos": 32,
    "estados": {
-    "Completado": 132,
+    "Completado": 133,
     "No Realizada": 24,
-    "Iniciado": 11,
-    "Pendiente": 3,
-    "Cancelado": 9,
-    "Suspendido": 1
+    "Iniciado": 10,
+    "Pendiente": 1,
+    "Suspendido": 2,
+    "Cancelado": 10,
+    "en ruta": 2
    },
-   "rgu": 254.4,
+   "rgu": 255.5,
    "caidas_total": 8,
    "caidas_activas": 8,
    "caidas_resueltas": 0,
-   "nuevas": 28,
+   "nuevas": 29,
    "al_bucket": 66,
    "repetidas": 25,
    "reagendadas": 10,
@@ -21644,13 +21645,22 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OU7FYD9",
+      "tec": "CESAR MENA OLIVEROS",
+      "cat": "Modificación de Servicio",
+      "f": "19-21",
+      "hi": "19:26",
+      "d": "DIAMANTES 1392, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
       "o": "1-3OU6QLNM",
       "tec": "CRISTOBAL MIRANDA VALENC",
       "cat": "Modificación de Servicio",
       "f": "19-21",
       "hi": "19:06",
       "d": "LA LOMA 2608, QUILPUE",
-      "e": "Iniciado"
+      "e": "Suspendido"
      },
      {
       "o": "1-3OU5JJJC",
@@ -21883,7 +21893,7 @@
       "f": "16-19",
       "hi": "17:58",
       "d": "PJE EL BAQUEANO 859, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OT8DHBJ",
@@ -21955,6 +21965,18 @@
       "visitas": 1,
       "ult_fecha": "03-11-2026",
       "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3OR49AQ2",
+      "cat": "Migración 1 Play",
+      "f": "16-19",
+      "hi": "19:49",
+      "d": "PARIS 858, VILLA ALEMANA",
+      "e": "en ruta",
+      "tec": "DANIEL NAVARRETE E",
+      "visitas": 1,
+      "ult_fecha": "14-08-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3ORJ3RBR",
@@ -22160,18 +22182,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OR49AQ2",
-      "cat": "Migración 1 Play",
-      "f": "16-19",
-      "hi": "19:37",
-      "d": "PARIS 858, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "SEBASTIAN DOSSOW A",
-      "visitas": 1,
-      "ult_fecha": "14-08-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OS0L584",
       "cat": "Alta 2 Play",
       "f": "10-13",
@@ -22300,5 +22310,5 @@
    }
   }
  },
- "generado": "04-11-2026 19:17"
+ "generado": "04-11-2026 19:27"
 }
