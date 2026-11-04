@@ -18924,6 +18924,22 @@ async function cqHuella(det){
     return 'PC-' + Array.from(new Uint8Array(b)).slice(0, 4).map(v => v.toString(16).padStart(2, '0')).join('').toUpperCase().slice(0, 6);
   } catch(e){ return 'PC-SINHUELLA'; }
 }
+/* Pregunta a la planilla si este equipo puede entrar y deja el registro. true = puede. Sin URL = no bloquea. */
+async function cqPermiso(quien){
+  if(!CQ_REG_URL) return true;
+  try {
+    const boton = CQ_SOLO_GER ? '🛠 Calidad (MI ANÁLISIS)' : 'Calidad del mes (INFORMES)';
+    const det = cqDetallePC(), hu = await cqHuella(det);
+    const q = 'accion=entrar&equipo=' + encodeURIComponent(cqEquipo()) + '&tipo=' + encodeURIComponent(cqTipoEquipo())
+      + '&quien=' + encodeURIComponent(quien) + '&boton=' + encodeURIComponent(boton)
+      + '&huella=' + encodeURIComponent(hu) + '&detalle=' + encodeURIComponent(det.slice(0, 200)) + '&t=' + Date.now();
+    const ctl = new AbortController(), tm = setTimeout(function(){ ctl.abort(); }, 10000);
+    const r = await fetch(CQ_REG_URL + (CQ_REG_URL.indexOf('?') < 0 ? '?' : '&') + q, { signal: ctl.signal });
+    clearTimeout(tm);
+    const j = JSON.parse(await r.text());
+    return j && j.permitido === true;
+  } catch(e){ return false; }
+}
 async function cqRegistrar(quien){
   if(!CQ_REG_URL) return;
   try {
@@ -18961,8 +18977,18 @@ async function cqProbarClave(){
   const v = document.getElementById('cqkIn').value; let h = '';
   try { h = await reitHuella(v); } catch(e){}
   const ok = CQ_CLAVES.filter(function(c){ return c.h === h; })[0];
-  if(!ok){ CQ_QUIEN = 'clave incorrecta'; cqRegistrar('clave incorrecta'); document.getElementById('cqkErr').hidden = false; document.getElementById('cqkIn').select(); return; }
-  CQ_QUIEN = ok.quien; cqRegistrar(ok.quien);
+  if(!ok){ CQ_QUIEN = 'clave incorrecta'; cqRegistrar('clave incorrecta'); document.getElementById('cqkErr').textContent = 'Clave incorrecta.'; document.getElementById('cqkErr').hidden = false; document.getElementById('cqkIn').select(); return; }
+  CQ_QUIEN = ok.quien;
+  /* (04-11-2026, 17:20) Luis: "si un pc que no esta registrado lo ve, se puede bloquear ... que le arroje mensaje
+     problemas con clave, para que no sea tan evidente". Con clave correcta se le pregunta a la planilla (Apps Script,
+     accion=entrar) si el equipo (codigo EQ o huella PC) esta en "Equipos conocidos". La misma llamada deja la fila en
+     Registro. Si no esta, o Google no responde en 10 s, sale un mensaje de falla y NO se abre. */
+  const bt = document.querySelector('#cqClave .ok'), err = document.getElementById('cqkErr');
+  if(bt){ bt.disabled = true; bt.textContent = 'Validando…'; }
+  const perm = await cqPermiso(ok.quien);
+  if(bt){ bt.disabled = false; bt.textContent = 'Entrar'; }
+  if(!perm){ err.textContent = 'Problema al validar la clave. Intenta más tarde.'; err.hidden = false; document.getElementById('cqkIn').value = ''; return; }
+  err.textContent = 'Clave incorrecta.';
   cqOkSesion = true;
   const d = document.getElementById('cqClave'); if(d) d.classList.remove('on');
   cqAbrir();
