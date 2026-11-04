@@ -21548,25 +21548,25 @@
    }
   },
   "04-11-2026": {
-   "hasta": "14:27",
-   "actividades": 137,
+   "hasta": "14:32",
+   "actividades": 164,
    "tecnicos": 32,
    "estados": {
-    "Completado": 58,
-    "Iniciado": 17,
-    "Pendiente": 44,
-    "No Realizada": 9,
-    "Cancelado": 6,
-    "en ruta": 3
+    "Completado": 60,
+    "Iniciado": 14,
+    "Pendiente": 68,
+    "No Realizada": 10,
+    "en ruta": 6,
+    "Cancelado": 6
    },
-   "rgu": 201.1,
+   "rgu": 247.1,
    "caidas_total": 4,
    "caidas_activas": 4,
    "caidas_resueltas": 0,
-   "nuevas": 11,
+   "nuevas": 12,
    "al_bucket": 43,
-   "repetidas": 19,
-   "reagendadas": 8,
+   "repetidas": 26,
+   "reagendadas": 10,
    "detalle": {
     "caidas": [
      {
@@ -21607,6 +21607,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OTUK1CJ",
+      "tec": "YENDER BOSCAN CADENAS",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "EGANA 404 EDIF. B DEPTO 22, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OTT8DPT",
       "tec": "CESAR MENA OLIVEROS",
@@ -21733,6 +21742,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3ORWP9E7",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "15:39",
+      "d": "BRASILIA 2360, QUILPUE",
+      "e": "Pendiente",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "visitas": 1,
+      "ult_fecha": "03-11-2026",
+      "ult_cierre": "Clte desiste motivo comercial"
+     },
+     {
       "o": "1-3ORUCTX4",
       "cat": "Alta 1 Play",
       "f": "13-16",
@@ -21748,7 +21769,7 @@
       "o": "1-3OS8R7IX",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:16",
+      "hi": "18:40",
       "d": "PJE CHIGUAYANTE 1485, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -21769,10 +21790,22 @@
       "ult_cierre": "Zona Roja"
      },
      {
+      "o": "1-3OS16VZ0",
+      "cat": "Migración 1 Play",
+      "f": "13-16",
+      "hi": "15:51",
+      "d": "CONDELL SUR 01565 CASA D, QUILPUE",
+      "e": "Pendiente",
+      "tec": "EDGAR VALERO C",
+      "visitas": 1,
+      "ult_fecha": "17-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OSQ7UPL",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "17:42",
       "d": "LOS ALMENDROS (LEIGHTON) 17, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "FELIPE SILVA R",
@@ -21793,6 +21826,18 @@
       "ult_cierre": "Falla Aprovisionamiento"
      },
      {
+      "o": "1-3ORXW7I0",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "16:42",
+      "d": "FRANCISCO MONTESSI 1572, QUILPUE",
+      "e": "Pendiente",
+      "tec": "JORDAN ROA PEREZ",
+      "visitas": 1,
+      "ult_fecha": "03-11-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OS00WZE",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -21808,13 +21853,37 @@
       "o": "1-3OQ5NE77",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:27",
+      "hi": "14:42",
       "d": "FLAMARION 01042, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
       "visitas": 1,
       "ult_fecha": "31-10-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OTJTKQH",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "17:30",
+      "d": "VALLE DEL PARAISO 2746, QUILPUE",
+      "e": "Pendiente",
+      "tec": "JOSE GALAZ D",
+      "visitas": 2,
+      "ult_fecha": "29-09-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3OMKVED1",
+      "cat": "Migración 3 Play",
+      "f": "13-16",
+      "hi": "15:43",
+      "d": "EL BOSQUE 0150 CASA 2, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOSE SALAS MEDINA",
+      "visitas": 2,
+      "ult_fecha": "10-10-2026",
+      "ult_cierre": "Cliente Desiste"
      },
      {
       "o": "1-3OQZEL25",
@@ -21834,7 +21903,7 @@
       "f": "10-13",
       "hi": "12:10",
       "d": "SAN ENRIQUE 1155, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "LUIS GATICA DAVILA",
       "visitas": 4,
       "ult_fecha": "26-10-2026",
@@ -21844,7 +21913,7 @@
       "o": "1-3ORGK9OQ",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "15:56",
+      "hi": "15:33",
       "d": "WILLIAMSON 565, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
@@ -21853,10 +21922,22 @@
       "ult_cierre": "Direccion incorrecta"
      },
      {
+      "o": "1-3OSVEMY4",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "16:32",
+      "d": "VOLCAN ISLUGA 3048, QUILPUE",
+      "e": "Pendiente",
+      "tec": "LUIS MARTIN NUÑEZ",
+      "visitas": 1,
+      "ult_fecha": "03-11-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3OSVEPF1",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:41",
+      "hi": "15:28",
       "d": "TOCOPILLA 01650, QUILPUE",
       "e": "Pendiente",
       "tec": "MARCO PEREZ G",
@@ -21880,7 +21961,7 @@
       "o": "1-3OR49AQ2",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "16:24",
+      "hi": "18:11",
       "d": "PARIS 858, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -21916,13 +21997,25 @@
       "o": "1-3OS1C3X2",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "18:13",
       "d": "PJE 2 260, QUILPUE",
       "e": "Pendiente",
       "tec": "NICOLAS MOYANO R",
       "visitas": 4,
       "ult_fecha": "08-10-2026",
       "ult_cierre": "Falta de dotación"
+     },
+     {
+      "o": "1-3ORVQRIU",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "16:17",
+      "d": "COVADONGA 1156 CASA A, QUILPUE",
+      "e": "Pendiente",
+      "tec": "SEBASTIAN DOSSOW A",
+      "visitas": 1,
+      "ult_fecha": "03-11-2026",
+      "ult_cierre": "Clte desiste motivo com SC"
      },
      {
       "o": "1-3OS0L584",
@@ -21952,10 +22045,20 @@
       "o": "1-3ORKP8D7",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "17:59",
       "d": "MATEO DE TORO Y ZAMBRANO 945 CASA 15, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL MIRANDA VALENC",
+      "desde": "03-11-2026"
+     },
+     {
+      "o": "1-3ORU761E",
+      "cat": "Migración 2 Play",
+      "f": "13-16",
+      "hi": "16:03",
+      "d": "EL BOSQUE 1719, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOSE ROJO A",
       "desde": "03-11-2026"
      },
      {
@@ -21972,7 +22075,7 @@
       "o": "1-3ORJF5AS",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "16:44",
+      "hi": "18:51",
       "d": "PJE PARTICULAR 1451, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -22016,10 +22119,20 @@
       "e": "Completado",
       "tec": "RAFAEL VARGAS B",
       "desde": "03-11-2026"
+     },
+     {
+      "o": "1-3ORKDG1U",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "17:00",
+      "d": "PJE 2 1210 CASA E25, QUILPUE",
+      "e": "Pendiente",
+      "tec": "YENDER BOSCAN CADENAS",
+      "desde": "03-11-2026"
      }
     ]
    }
   }
  },
- "generado": "04-11-2026 14:27"
+ "generado": "04-11-2026 14:32"
 }
