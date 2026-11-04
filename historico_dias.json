@@ -21548,22 +21548,22 @@
    }
   },
   "04-11-2026": {
-   "hasta": "17:11",
-   "actividades": 175,
+   "hasta": "17:26",
+   "actividades": 176,
    "tecnicos": 32,
    "estados": {
-    "Completado": 98,
-    "Iniciado": 26,
+    "Completado": 100,
+    "Iniciado": 27,
     "No Realizada": 19,
-    "en ruta": 3,
-    "Pendiente": 21,
-    "Cancelado": 8
+    "Pendiente": 20,
+    "Cancelado": 8,
+    "en ruta": 2
    },
-   "rgu": 254.6,
+   "rgu": 254.7,
    "caidas_total": 6,
    "caidas_activas": 6,
    "caidas_resueltas": 0,
-   "nuevas": 22,
+   "nuevas": 23,
    "al_bucket": 66,
    "repetidas": 25,
    "reagendadas": 10,
@@ -21626,6 +21626,15 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OU2DVY4",
+      "tec": "MATÍAS JAQUE AG",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:26",
+      "d": "PUDETO 273, VILLA ALEMANA",
+      "e": "en ruta"
+     },
+     {
       "o": "1-3OU0OUD6",
       "tec": "JORDAN ROA PEREZ",
       "cat": "Modificación de Servicio",
@@ -21658,7 +21667,7 @@
       "f": "16-19",
       "hi": "16:59",
       "d": "PJE REPUBLICA 1224, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OTYEWU0",
@@ -21806,7 +21815,7 @@
      },
      {
       "o": "1-3OT9KE58",
-      "tec": "JORDAN ROA PEREZ",
+      "tec": "SEBASTIAN DOSSOW A",
       "cat": "Reparación",
       "f": "16-19",
       "hi": "17:58",
@@ -21852,9 +21861,9 @@
       "o": "1-3OSQ7UPL",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "17:20",
+      "hi": "17:26",
       "d": "LOS ALMENDROS (LEIGHTON) 17, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "ANTONHY MORALES MENDOZA",
       "visitas": 4,
       "ult_fecha": "31-10-2026",
@@ -21900,9 +21909,9 @@
       "o": "1-3OS1C3X2",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "18:55",
+      "hi": "17:30",
       "d": "PJE 2 260, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JORDAN ROA PEREZ",
       "visitas": 4,
       "ult_fecha": "08-10-2026",
@@ -22169,7 +22178,7 @@
       "o": "1-3ORU761E",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "17:25",
+      "hi": "17:30",
       "d": "EL BOSQUE 1719, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MARCELO GÓMEZ GÓME",
@@ -22208,9 +22217,9 @@
       "o": "1-3ORKP8D7",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "17:18",
+      "hi": "17:12",
       "d": "MATEO DE TORO Y ZAMBRANO 945 CASA 15, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "SAMUEL FERNANDEZ VIDAL",
       "desde": "03-11-2026"
      },
@@ -22228,5 +22237,5 @@
    }
   }
  },
- "generado": "04-11-2026 17:11"
+ "generado": "04-11-2026 17:26"
 }
