@@ -18814,6 +18814,37 @@ function cqNom(n){ return String(n || '').replace(/\s+/g, ' ').trim().toUpperCas
    cqOlvidarClave() (escribirlo en la consola, F12) la borra. OJO: protege la pantalla, no los datos (calidad.json
    es publico en GitHub). Para una clave distinta: poner su SHA-256 de 'dominion-reit|' + clave en CQ_CLAVE_H. */
 const CQ_CLAVE_H = REIT_CLAVE_H, CQ_LS = 'cqLlave';
+/* (04-11-2026, 13:15) Luis: "inventa una clave para el jefe, la mia queda como esta". Dos claves: la de Luis (la
+   misma de Reiterados) y la del jefe de operaciones. Se sabe cual se uso (CQ_QUIEN), para el registro de accesos.
+   Para anular la del jefe: borrar su fila. Para cambiarla: SHA-256 de 'dominion-reit|' + clave nueva (Claude lo calcula). */
+const CQ_CLAVES = [ { h: REIT_CLAVE_H, quien: 'Luis' }, { h: '909909690d1eb67a5af56539d432df8d005d71bd9adf3864499a14d35e4f956b', quien: 'Jefe de operaciones' } ];
+let CQ_QUIEN = '';
+/* (04-11-2026, 13:55) REGISTRO DE ACCESOS. Luis: que avise si un PC desconocido entra a Calidad. Cada apertura (y
+   cada clave incorrecta) se manda a la planilla de Google "Registro Calidad" de Luis (Apps Script, registro_calidad.gs):
+   fecha y hora, boton, quien (Luis / Jefe de operaciones / clave incorrecta), codigo del equipo y tipo de equipo.
+   Si el equipo no esta en su hoja "Equipos conocidos", le llega un correo. No se manda la clave.
+   CQ_REG_URL = la URL de la aplicacion web (termina en /exec). Vacia = no se registra nada.
+   El codigo del equipo se crea en cada navegador la primera vez (cqEquipo) y se ve en la ventana de la clave. */
+const CQ_REG_URL = 'https://script.google.com/macros/s/AKfycbzzmPgGTQF78vMk7HUhilOcOOOrMlZa1R0EwNffHBd-Qj4yAOWARxtQZrGnG1gBXckQ/exec';
+function cqEquipo(){
+  try { let e = localStorage.getItem('cqEquipo');
+    if(!e){ e = 'EQ-' + Math.random().toString(36).slice(2, 6).toUpperCase() + Math.random().toString(36).slice(2, 4).toUpperCase(); localStorage.setItem('cqEquipo', e); }
+    return e; } catch(err){ return 'SIN-ID'; }
+}
+function cqTipoEquipo(){
+  const u = navigator.userAgent || '';
+  const so = /Android/i.test(u) ? 'Android' : /iPhone|iPad/i.test(u) ? 'iPhone/iPad' : /Windows/i.test(u) ? 'Windows' : /Mac OS/i.test(u) ? 'Mac' : /Linux/i.test(u) ? 'Linux' : 'otro';
+  const nav = /Edg\//.test(u) ? 'Edge' : /OPR\//.test(u) ? 'Opera' : /Chrome\//.test(u) ? 'Chrome' : /Firefox\//.test(u) ? 'Firefox' : /Safari\//.test(u) ? 'Safari' : 'otro';
+  return so + ' · ' + nav + ' · pantalla ' + screen.width + 'x' + screen.height;
+}
+function cqRegistrar(quien){
+  if(!CQ_REG_URL) return;
+  try {
+    const q = 'equipo=' + encodeURIComponent(cqEquipo()) + '&tipo=' + encodeURIComponent(cqTipoEquipo())
+      + '&quien=' + encodeURIComponent(quien) + '&boton=' + encodeURIComponent(CQ_SOLO_GER ? '🛠 Calidad (MI ANÁLISIS)' : 'Calidad del mes (INFORMES)') + '&t=' + Date.now();
+    (new Image()).src = CQ_REG_URL + (CQ_REG_URL.indexOf('?') < 0 ? '?' : '&') + q;
+  } catch(e){}
+}
 let cqOkSesion = false;
 /* (04-11-2026, 11:55) Luis: "al ingresar la clave queda siempre visible" -> la clave se pide CADA VEZ que se presiona
    el boton: no se recuerda en el navegador ni en la sesion. cqOkSesion sirve para UNA sola apertura (la que sigue a
@@ -18828,18 +18859,22 @@ function cqPedirClave(){
       + '<h3>🔒 Calidad</h3><p>Ingresa la clave para ver la calidad del mes.</p>'
       + '<input id="cqkIn" type="password" autocomplete="current-password" placeholder="Clave">'
       + '<div id="cqkErr" class="rk-err" hidden>Clave incorrecta.</div>'
+      + '<div style="margin-top:10px;font-size:12px;color:#94a3b8">Este equipo: <b id="cqkEq"></b></div>'
       + '<div class="rk-bot"><button type="button" onclick="cqCerrarClave()">Cancelar</button><button type="submit" class="ok">Entrar</button></div></form>';
     d.addEventListener('click', function(e){ if(e.target === d) cqCerrarClave(); });
     document.body.appendChild(d);
   }
   document.getElementById('cqkIn').value = ''; document.getElementById('cqkErr').hidden = true;
+  const eqx = document.getElementById('cqkEq'); if(eqx) eqx.textContent = cqEquipo();
   d.classList.add('on'); setTimeout(function(){ document.getElementById('cqkIn').focus(); }, 30);
 }
 function cqCerrarClave(){ const d = document.getElementById('cqClave'); if(d) d.classList.remove('on'); CQ_SOLO_GER = false; }
 async function cqProbarClave(){
   const v = document.getElementById('cqkIn').value; let h = '';
   try { h = await reitHuella(v); } catch(e){}
-  if(h !== CQ_CLAVE_H){ document.getElementById('cqkErr').hidden = false; document.getElementById('cqkIn').select(); return; }
+  const ok = CQ_CLAVES.filter(function(c){ return c.h === h; })[0];
+  if(!ok){ CQ_QUIEN = 'clave incorrecta'; cqRegistrar('clave incorrecta'); document.getElementById('cqkErr').hidden = false; document.getElementById('cqkIn').select(); return; }
+  CQ_QUIEN = ok.quien; cqRegistrar(ok.quien);
   cqOkSesion = true;
   const d = document.getElementById('cqClave'); if(d) d.classList.remove('on');
   cqAbrir();
