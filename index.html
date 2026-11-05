@@ -17998,6 +17998,12 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarM
   #anPage .an-sem { display:grid; grid-template-columns:110px repeat(8, 1fr); gap:5px; align-items:center; font-size:12px; }
   #anPage .an-sem .d { height:28px; border-radius:6px; display:flex; flex-direction:column; align-items:center; justify-content:center; font-weight:700; font-size:11.5px; color:#0b1220; cursor:pointer; line-height:1.05; }
   #anPage .an-sem .d small { font-weight:500; font-size:9.5px; opacity:.8; }
+  /* (05-11-2026) "sin GSA" bajo cada indicador */
+  #anPage .an-g2 .an-card:first-child .an-sem .d { height:44px; white-space:nowrap; overflow:hidden; }
+  #anPage .an-sem .d small.sg { font-weight:600; font-size:9px; opacity:.9; letter-spacing:-.1px; }
+  #anPage .an-relsg { align-items:start; margin-top:4px; }
+  #anPage .an-relsg span { text-align:center; font-size:11.5px; color:#94a3b8; }
+  #anPage .an-relsg span b { color:#e2e8f0; }
   #anPage .an-sem .d.vac { background:#1e293b; color:#64748b; cursor:default; }
   #anPage .an-sem .d.act { outline:2px solid #fff; outline-offset:-2px; }
   #anPage .an-sem .h { color:#94a3b8; text-align:center; }
@@ -18209,13 +18215,15 @@ function anFilas(){
     const est = String(r['Estado'] || '').trim();
     if(['Completado','No Realizada','Cancelado','Suspendido'].indexOf(est) < 0) return;      // dias pasados: solo estados cerrados
     R.push({ fam:fam, iso:iso, sem:mgLunes(iso), mes:iso.slice(0, 6), e:String(r['Estado'] || '').trim(), cod:String(r['Código de Cierre'] || '').trim(),
-      gsa:false, fr:String(r['Franja'] || ''), tec:nom.slice(nom.indexOf('_DOMI_') + 6).replace(/ /g, ' ').trim(),
+      /* (05-11-2026) Luis: "los % de completitud deben mostrarse con la regla GSA tal como lo mide VTR": la GSA es quiebre
+         tambien en altas y reparaciones (antes solo en migraciones). datos.json la marca en la columna gsa. */
+      gsa:String(r['gsa'] || '') === '1', fr:String(r['Franja'] || ''), tec:nom.slice(nom.indexOf('_DOMI_') + 6).replace(/ /g, ' ').trim(),
       ciu:String(r['Ciudad'] || ''), ot:String(r['Orden de Trabajo'] || ''), dir:'' });
   });
   /* hoy en vivo */
   Object.keys(typeof DB === 'object' && DB ? DB : {}).forEach(function(t){ (DB[t] || []).forEach(function(o){
     const fam = familiaCat(o.cat || o.t); if(fam !== 'Migraciones' && fam !== 'Altas' && fam !== 'Reparaciones') return;
-    R.push({ fam:fam, iso:hoyIso, sem:semHoy, mes:mesHoy, e:String(o.e || 'Pendiente'), cod:String(o.cie || ''), gsa: fam === 'Migraciones' && !!o.gsa,
+    R.push({ fam:fam, iso:hoyIso, sem:semHoy, mes:mesHoy, e:String(o.e || 'Pendiente'), cod:String(o.cie || ''), gsa: !!o.gsa,
       fr:String(o.f || ''), tec:t, ciu:anCiuDir(o.d), ot:String(o.o || ''), dir:String(o.d || ''), hoy:true });
   }); });
   const F = AN_COM === 'Todo' ? R : R.filter(function(x){ return mpNorm(x.ciu).indexOf(AN_COM) >= 0; });
@@ -18281,7 +18289,7 @@ function anPintar(){
   if(AN_COM !== 'Todo' && !D.cargando){ const sc = (D.R || []).filter(function(x){ return x.fam === 'Migraciones' && !x.ciu; }).length;
     if(sc) h += '<div class="an-carga">Ojo: ' + sc + ' migraci' + (sc === 1 ? 'ón' : 'ones') + ' de días anteriores no ' + (sc === 1 ? 'trae' : 'traen') + ' comuna (vienen de los export completos y no están en datos.json): cuentan en Todo el equipo, no en este filtro.</div>'; }
   const semAnt = anSemAnt(D.semHoy), mesAnt = anMesAnt(D.mesHoy);
-  h += '<div class="an-sec">Relojes de completitud · completadas ÷ visitadas · meta ' + MP_META + '%</div><div class="an-g3">';
+  h += '<div class="an-sec">Relojes de completitud · completadas ÷ visitadas · GSA como quiebre (como VTR) · meta ' + MP_META + '%</div><div class="an-g3">';
   AN_FAMS.forEach(function(F){
     const sh = mpSt(anPer(D, F.f, { t:'hoy' })), ss = mpSt(anPer(D, F.f, { t:'sem', k:D.semHoy })), sm = mpSt(anPer(D, F.f, { t:'mes', k:D.mesHoy }));
     const sa = mpSt(anPer(D, F.f, { t:'sem', k:semAnt }));
@@ -18289,24 +18297,25 @@ function anPintar(){
     h += '<div class="an-card an-clic" onclick="anDetAbrir(\'' + F.f + '\', {t:\'sem\', k:\'' + D.semHoy + '\'})" title="Toca para ver el detalle de ' + F.f.toLowerCase() + '">'
       + '<h3><i class="pt" style="background:' + F.c + '"></i>' + F.f + '</h3><span class="an-ver">ver detalle ›</span>'
       + '<div class="an-rel">' + anReloj(sh.comp, 52, 'HOY', false, sh.vis) + anReloj(ss.comp, 80, 'SEMANA ' + derNumSemana(D.semHoy), true, ss.vis) + anReloj(sm.comp, 52, AN_NOMMES[+D.mesHoy.slice(4) - 1].toUpperCase(), false, sm.vis) + '</div>'
+      /* (05-11-2026) bajo cada reloj, el mismo % sin castigar la GSA (como Dominion) */
+      + '<div class="an-rel an-relsg">' + [sh, ss, sm].map(function(x){ return '<span title="' + (x.g ? x.g + ' cerrada' + (x.g === 1 ? '' : 's') + ' por GSA: VTR las cuenta como quiebre' : 'Sin cierres por GSA') + '">sin GSA <b>' + (x.compSG === null ? '–' : P2(x.compSG) + '%') + '</b>' + (x.g ? ' · ' + x.g + ' GSA' : '') + '</span>'; }).join('') + '</div>'
       + '<div class="an-pie"><span>vs Sem ' + derNumSemana(semAnt) + ': ' + (dl === null ? '<b>–</b>' : '<b style="color:' + (ss.vis < AN_MIN_VIS ? '#94a3b8' : dl >= 0 ? '#22c55e' : '#ef4444') + '" title="' + (ss.vis < AN_MIN_VIS ? 'Con pocas visitas la comparación todavía no dice mucho' : '') + '">' + (dl >= 0 ? '▲' : '▼') + ' ' + P2(Math.abs(dl)) + ' pts</b>')
       + '</span><span><b>' + ss.vis + '</b> visitadas en la semana' + (ss.ab ? ' · <b>' + ss.ab + '</b> por cerrar' : '') + '</span></div>'
-      + (F.f === 'Migraciones' && (ss.g || sm.g) ? '<div class="an-pie" style="border:0;padding-top:0;color:#a78bfa">GSA como quiebre (como VTR) · semana sin GSA ' + mpPc(ss.compSG) + ' · mes sin GSA ' + mpPc(sm.compSG) + '</div>' : '')
       + '</div>';
   });
   h += '</div>';
   /* semaforo 8 semanas */
   const SEMS = []; for(let i = 7; i >= 0; i--) SEMS.push(anSemAnt(D.semHoy, i));
   h += '<div class="an-sec">Una mirada distinta</div><div class="an-g2"><div class="an-col"><div class="an-card"><h3>Semáforo de las últimas 8 semanas</h3>'
-    + '<p class="s">Completitud semana a semana. Verde: sobre la meta. Ámbar: a menos de 5 pts. Rojo: bajo eso. Gris: menos de ' + AN_MIN_VIS + ' visitas, todavía no dice mucho. Toca una casilla para ver esa semana.</p>'
+    + '<p class="s">Completitud semana a semana, con la GSA como quiebre (como VTR); debajo, sin GSA. Verde: sobre la meta. Ámbar: a menos de 5 pts. Rojo: bajo eso. Gris: menos de ' + AN_MIN_VIS + ' visitas, todavía no dice mucho. Toca una casilla para ver esa semana.</p>'
     + '<div class="an-sem"><div></div>' + SEMS.map(function(k){ return '<div class="h">S' + derNumSemana(k) + (k === D.semHoy ? '<br><small>en curso</small>' : '') + '</div>'; }).join('');
   AN_FAMS.forEach(function(F){
     h += '<div>' + F.f + '</div>';
     SEMS.forEach(function(k){
       const s = mpSt(anPer(D, F.f, { t:'sem', k:k }));
       h += s.comp === null ? '<div class="d vac">–</div>'
-        : '<div class="d' + (k === D.semHoy ? ' act' : '') + '" style="background:' + (s.vis < AN_MIN_VIS ? '#64748b' : anCol(s.comp)) + (s.vis < AN_MIN_VIS ? ';color:#f1f5f9' : '') + '" title="' + (s.vis < AN_MIN_VIS ? 'Pocas visitas todavía · ' : '') + F.f + ' semana ' + derNumSemana(k) + ': ' + s.co + ' de ' + s.vis + ' visitadas" onclick="anDetAbrir(\'' + F.f + '\', {t:\'sem\', k:\'' + k + '\'})">'
-          + P2(s.comp) + '%<small>' + s.vis + ' vis.</small></div>';
+        : '<div class="d' + (k === D.semHoy ? ' act' : '') + '" style="background:' + (s.vis < AN_MIN_VIS ? '#64748b' : anCol(s.comp)) + (s.vis < AN_MIN_VIS ? ';color:#f1f5f9' : '') + '" title="' + (s.vis < AN_MIN_VIS ? 'Pocas visitas todavía · ' : '') + F.f + ' semana ' + derNumSemana(k) + ': ' + s.co + ' de ' + s.vis + ' visitadas' + (s.g ? ' · ' + s.g + ' cerrada' + (s.g === 1 ? '' : 's') + ' por GSA (quiebre para VTR); sin GSA: ' + (s.co + s.g) + ' de ' + s.vis : '') + '" onclick="anDetAbrir(\'' + F.f + '\', {t:\'sem\', k:\'' + k + '\'})">'
+          + P2(s.comp) + '%<small class="sg">sin GSA ' + P2(s.compSG) + '%</small><small>' + s.vis + ' vis.</small></div>';
     });
   });
   h += '</div></div>';
@@ -18406,7 +18415,7 @@ function anLinSvg(D, H){
       acu.forEach(function(q){ g += '<circle cx="' + xa(q[0]) + '" cy="' + ya(q[1]) + '" r="2.6" fill="' + F.c + '"><title>' + F.f + ' al ' + q[0] + ': ' + P2(q[1]) + '% (' + q[2] + ' de ' + q[3] + ')</title></circle>'; });
     }
     etiq.push({ y: ya(m), t: P2(m) + '%', c: F.c });
-    leyenda.push('<div><i style="background:' + F.c + '"></i><b>' + F.f + '</b> va ' + (sm.comp === null ? '–' : P2(sm.comp) + '%') + ' · cerraría ~<b>' + P2(m) + '%</b> (' + P2(a) + '–' + P2(b) + '%) · <span style="color:' + c + '">'
+    leyenda.push('<div><i style="background:' + F.c + '"></i><b>' + F.f + '</b> va ' + (sm.comp === null ? '–' : P2(sm.comp) + '%' + ' <span style="color:#94a3b8">(sin GSA ' + P2(sm.compSG) + '%)</span>') + ' · cerraría ~<b>' + P2(m) + '%</b> (' + P2(a) + '–' + P2(b) + '%) · <span style="color:' + c + '">'
       + (a >= MP_META ? 'llega a la meta' : b >= MP_META ? 'puede llegar' : 'no llega') + '</span> · quedan ~' + quedan + ' visitas' + (sm.vis >= AN_MIN_MES ? '' : ' · el mes lleva ' + sm.vis + ' visitas') + '</div>');
   });
   /* etiquetas del cierre a la derecha, sin que se monten */
