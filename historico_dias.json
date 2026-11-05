@@ -21520,25 +21520,25 @@
    }
   },
   "05-11-2026": {
-   "hasta": "13:29",
-   "actividades": 159,
+   "hasta": "13:49",
+   "actividades": 162,
    "tecnicos": 33,
    "estados": {
-    "No Realizada": 15,
-    "Completado": 46,
-    "en ruta": 5,
-    "Pendiente": 72,
+    "No Realizada": 18,
+    "Completado": 50,
     "Iniciado": 13,
+    "Pendiente": 70,
     "Cancelado": 6,
-    "Suspendido": 2
+    "Suspendido": 3,
+    "en ruta": 2
    },
-   "rgu": 228.8,
+   "rgu": 230.9,
    "caidas_total": 9,
    "caidas_activas": 8,
    "caidas_resueltas": 1,
-   "nuevas": 18,
-   "al_bucket": 24,
-   "repetidas": 27,
+   "nuevas": 20,
+   "al_bucket": 25,
+   "repetidas": 28,
    "reagendadas": 6,
    "detalle": {
     "caidas": [
@@ -21617,8 +21617,26 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OUS8DR1",
+      "tec": "JUAN ARRIAGADA C",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "13:42",
+      "d": "LOS ANDES 381, VILLA ALEMANA",
+      "e": "Iniciado"
+     },
+     {
+      "o": "1-3OURZ6WF",
+      "tec": "JUAN ARRIAGADA C",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "16:37",
+      "d": "SANTA ROSA 17 CASA MK, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3OUQ2R4Z",
-      "tec": "JOEL GUSTAVE GUSTA",
+      "tec": "CRISTOBAL SILVA LEIVA",
       "cat": "Alta 2 Play",
       "f": "13-16",
       "hi": "15:37",
@@ -21627,7 +21645,7 @@
      },
      {
       "o": "1-3OUQDGF8",
-      "tec": "MARCO PEREZ G",
+      "tec": "KEVIN TAPIA RETAMAL",
       "cat": "Alta 2 Play",
       "f": "13-16",
       "hi": "15:46",
@@ -21650,7 +21668,7 @@
       "f": "10-13",
       "hi": "12:51",
       "d": "ECHAURREN 586 CASA 9, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OUPI6IS",
@@ -21749,11 +21767,11 @@
       "f": "13-16",
       "hi": "16:11",
       "d": "PJE KELLET 2177, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OUJ70PR",
-      "tec": "CRISTOBAL MIRANDA VALENC",
+      "tec": "EDGAR VALERO C",
       "cat": "Reparación",
       "f": "13-16",
       "hi": "13:45",
@@ -21784,9 +21802,9 @@
       "o": "1-3OSR66U8",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "13:28",
+      "hi": "13:30",
       "d": "CAMINO DEL SOL 2300 CASA 8-I, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "ALEXIS JARA",
       "visitas": 1,
       "ult_fecha": "03-11-2026",
@@ -21828,22 +21846,10 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3ORXW7I0",
-      "cat": "Alta 2 Play",
-      "f": "13-16",
-      "hi": "16:08",
-      "d": "FRANCISCO MONTESSI 1572, QUILPUE",
-      "e": "Pendiente",
-      "tec": "DANIEL NAVARRETE E",
-      "visitas": 1,
-      "ult_fecha": "03-11-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3ORLE81C",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "18:08",
+      "hi": "18:07",
       "d": "OVALLE 1557, QUILPUE",
       "e": "Pendiente",
       "tec": "EDGAR VALERO C",
@@ -21852,10 +21858,22 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3OU58MV6",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "15:07",
+      "d": "LOS NARCISOS 1520 DEPTO 201, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "ESTEBAN PIZARRO QUINTANA",
+      "visitas": 1,
+      "ult_fecha": "04-11-2026",
+      "ult_cierre": "Zona Roja"
+     },
+     {
       "o": "1-3OSQLNT6",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:53",
+      "hi": "17:31",
       "d": "ANA MARIA FRESNO 150 CASA 8 DEPTO 124, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
@@ -21869,7 +21887,7 @@
       "f": "13-16",
       "hi": "12:51",
       "d": "CAUPOLICAN 749, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "GEEYSER PEREZ O",
       "visitas": 1,
       "ult_fecha": "04-11-2026",
@@ -21983,6 +22001,18 @@
       "ult_cierre": "NAP Problema ubicación"
      },
      {
+      "o": "1-3OURZ6WF",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "16:38",
+      "d": "SANTA ROSA 17 CASA MK, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JUAN ARRIAGADA C",
+      "visitas": 3,
+      "ult_fecha": "29-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OTIDTTT",
       "cat": "Reparación",
       "f": "10-13",
@@ -21998,7 +22028,7 @@
       "o": "1-3OS25P7I",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "17:12",
+      "hi": "17:22",
       "d": "SEGUNDA 475 CASA 9, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
@@ -22010,7 +22040,7 @@
       "o": "1-3OSLLVFH",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "18:08",
+      "hi": "18:28",
       "d": "IGNACIO CARRERA PINTO 0650 EDIF. D DEPTO 103, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
@@ -22043,10 +22073,22 @@
       "ult_cierre": "Cliente Desiste"
      },
      {
+      "o": "1-3ORXW7I0",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "15:27",
+      "d": "FRANCISCO MONTESSI 1572, QUILPUE",
+      "e": "Pendiente",
+      "tec": "MARCO PEREZ G",
+      "visitas": 1,
+      "ult_fecha": "03-11-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OS9UEAK",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:08",
+      "hi": "18:59",
       "d": "PORVENIR 1731, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -22055,24 +22097,12 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OU58MV6",
-      "cat": "Alta 1 Play",
-      "f": "13-16",
-      "hi": "15:58",
-      "d": "LOS NARCISOS 1520 DEPTO 201, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "MATÍAS JAQUE AG",
-      "visitas": 1,
-      "ult_fecha": "04-11-2026",
-      "ult_cierre": "Zona Roja"
-     },
-     {
       "o": "1-3OTUEM99",
       "cat": "Alta Traslado",
       "f": "13-16",
-      "hi": "17:40",
+      "hi": "13:47",
       "d": "ILUSION 7, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "MATÍAS JAQUE AG",
       "visitas": 1,
       "ult_fecha": "13-08-2026",
@@ -22084,7 +22114,7 @@
       "f": "10-13",
       "hi": "10:13",
       "d": "ANDRES BELLO 463, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "PABLO HERNANEZ FERNAN",
       "visitas": 1,
       "ult_fecha": "24-09-2026",
@@ -22094,7 +22124,7 @@
       "o": "1-3OU77HZ9",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:49",
+      "hi": "15:52",
       "d": "VOLCAN ACONCAGUA 2617, QUILPUE",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -22113,16 +22143,6 @@
       "e": "No Realizada",
       "tec": "ALEXIS JARA",
       "desde": "03-11-2026"
-     },
-     {
-      "o": "1-3ORXW7I0",
-      "cat": "Alta 2 Play",
-      "f": "13-16",
-      "hi": "16:08",
-      "d": "FRANCISCO MONTESSI 1572, QUILPUE",
-      "e": "Pendiente",
-      "tec": "DANIEL NAVARRETE E",
-      "desde": "04-11-2026"
      },
      {
       "o": "1-3ORF6CI8",
@@ -22145,12 +22165,22 @@
       "desde": "30-10-2026"
      },
      {
+      "o": "1-3ORXW7I0",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "15:27",
+      "d": "FRANCISCO MONTESSI 1572, QUILPUE",
+      "e": "Pendiente",
+      "tec": "MARCO PEREZ G",
+      "desde": "04-11-2026"
+     },
+     {
       "o": "1-3OSYDEHI",
       "cat": "Alta 1 Play",
       "f": "10-13",
       "hi": "13:05",
       "d": "PJE AZULILLO 69, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "MATÍAS JAQUE AG",
       "desde": "04-11-2026"
      },
@@ -22158,15 +22188,15 @@
       "o": "1-3OS1I0EU",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "16:01",
+      "hi": "16:02",
       "d": "LAGO LAS TORRES 170 DEPTO 1506, QUILPUE",
       "e": "Pendiente",
-      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "tec": "RAFAEL VARGAS B",
       "desde": "04-11-2026"
      }
     ]
    }
   }
  },
- "generado": "05-11-2026 13:29"
+ "generado": "05-11-2026 13:49"
 }
