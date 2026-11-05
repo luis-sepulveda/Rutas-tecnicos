@@ -18682,13 +18682,22 @@ function asOrdenes(dia){
 function asDiaCalc(dia){
   const D = AS_J.dias[dia]; if(!D) return null;
   const O = asOrdenes(dia), keys = Object.keys(O.o), usados = {};
+  /* (05-11-2026) x[5] = ordenes de ese dia en los EXPORT COMPLETOS (todas las comunas, cruce por RUT en asistencia.py);
+     null si ese dia todavia no tiene export completo (hoy): ahi se usan las bandejas y, si el tecnico esta en
+     CAMBIO DE COMUNA en estado_tecnicos, no se avisa "marco y no tuvo ordenes". */
+  const hoy = dia === cqIsoHoy(), noop = (hoy && typeof NOOP === 'object' && NOOP && NOOP.lista) ? NOOP.lista : [];
   const L = D.t.map(function(x){
     const r = { nom:x[0], marca:x[1], txt:x[2] || '', ent:x[3], lic:x[4] === 'lic' };
+    const comp = (x[5] !== undefined && x[5] !== null) ? x[5] : null;
     if(r.marca === null || r.marca === undefined){ r.marca = null; r.res = r.lic ? 'lic' : 'sin'; }
     else { r.dif = r.marca - r.ent; r.res = r.dif > AS_DESPUES * 60 ? 'tarde' : r.dif < -AS_ANTES * 60 ? 'temprano' : 'ok'; }
     const k = asBusca(r.nom, keys); r.key = k; if(k) usados[k] = 1; r.ord = k ? O.o[k] : 0;
+    if(comp !== null){ r.ord = comp; r.key = true; r.comp = true; }
+    const nx = noop.length ? asBusca(r.nom, noop.map(function(q){ return q.tec; })) : null;
+    const nq = nx ? noop.filter(function(q){ return q.tec === nx; })[0] : null;
+    r.otraCom = !!(nq && nq.otra_comuna);
     r.av = [];
-    if(O.ok){
+    if(comp !== null || (O.ok && !r.otraCom)){
       if(r.marca !== null && !r.ord){ let e = '';
         if(dia === cqIsoHoy() && typeof NOOP === 'object' && NOOP && NOOP.lista){ const nk = asBusca(r.nom, NOOP.lista.map(function(x){ return x.tec; }));
           const x = nk ? NOOP.lista.filter(function(q){ return q.tec === nk; })[0] : null; if(x && x.estado) e = ' (en el Módulo: ' + x.estado.toLowerCase() + ')'; }
@@ -18699,7 +18708,7 @@ function asDiaCalc(dia){
     return r; });
   const fuera = O.ok ? keys.filter(function(k){ return !usados[k] && O.o[k]; }) : [];
   const c = { ok:0, tarde:0, temprano:0, sin:0, lic:0 }; L.forEach(function(r){ c[r.res]++; });
-  return { dia:dia, L:L, c:c, fuera:fuera, ordOk:O.ok, archivo:D.archivo };
+  return { dia:dia, L:L, c:c, fuera:fuera, ordOk:O.ok, archivo:D.archivo, completos:!!D.completos };
 }
 /* un mes -> por tecnico */
 function asMesCalc(mes){
@@ -18772,7 +18781,7 @@ function asPintar(m){
     const R = asDiaCalc(AS_DIA), nAv = R.L.filter(function(r){ return r.av.length; }).length + R.fuera.length;
     h = h.replace('@@CUMPLEN@@', plCumplenHtml(R.L.map(function(r){ return { nom:r.nom, op:r.marca !== null, no:r.res === 'tarde' }; }),
       'marcó sin atraso el ' + asFechaCL(AS_DIA), 'sin marca ese día (licencia, permiso o sin registro)', 'Técnicos del plantel que marcaron el ' + asFechaCL(AS_DIA) + '.'));
-    h += '<p class="as-sub">' + asFechaCL(AS_DIA) + '-' + AS_DIA.slice(0, 4) + ' · ' + R.L.length + ' técnicos · archivo ' + escR(R.archivo) + (R.ordOk ? '' : ' · <span class="as-oj">sin datos de órdenes de ese día todavía: el cruce con las bandejas no se hace</span>') + '</p>'
+    h += '<p class="as-sub">' + asFechaCL(AS_DIA) + '-' + AS_DIA.slice(0, 4) + ' · ' + R.L.length + ' técnicos · archivo ' + escR(R.archivo) + (R.completos ? ' · órdenes cruzadas con los export completos (todas las comunas)' : R.ordOk ? ' · órdenes de las bandejas (el export completo de este día llega mañana)' : ' · <span class="as-oj">sin datos de órdenes de ese día todavía: el cruce no se hace</span>') + '</p>'
       + '<div class="as-kpis"><div class="as-k ok"><b>' + R.c.ok + '</b><span>dentro de la ventana</span></div><div class="as-k ' + (R.c.tarde ? 'mal' : '') + '"><b>' + R.c.tarde + '</b><span>tarde</span></div>'
       + '<div class="as-k"><b>' + R.c.temprano + '</b><span>temprano</span></div><div class="as-k"><b>' + (R.c.sin + R.c.lic) + '</b><span>sin marca' + (R.c.lic ? ' (' + R.c.lic + ' licencia/permiso)' : '') + '</span></div>'
       + '<div class="as-k ' + (nAv ? 'av' : 'ok') + '"><b>' + nAv + '</b><span>no cuadran con las órdenes</span></div></div>';
@@ -18805,7 +18814,7 @@ function asPintar(m){
       + '</table></div>';
   }
   h += '<p class="as-n"><b>Cómo se mide:</b> el técnico marca dentro de ' + AS_ANTES + ' min antes o ' + AS_DESPUES + ' min después de su entrada (turno 09:45: entre 09:40 y 09:50). Después del tope es <b>tarde</b> (los minutos que se muestran son los que pasan del tope). Antes de la ventana es "temprano": se muestra, no es falta. '
-    + '"No cuadra": marcó y no tuvo órdenes ese día, o tuvo órdenes y no marcó, o marcó con licencia/permiso. Las órdenes salen de las bandejas (hoy) y de datos.json (días anteriores). '
+    + '"No cuadra": marcó y no tuvo órdenes ese día, o tuvo órdenes y no marcó, o marcó con licencia/permiso. Las órdenes de días anteriores salen de los export completos (todas las comunas, cruce por RUT); las de hoy, de las bandejas (si está en cambio de comuna no se avisa). '
     + 'Fuente: asistencia.json (generado ' + escR(AS_J.generado || '') + '), con los Excel de VTR guardados en Rutas tecnicos\\asistencia.</p></div>';
   m.innerHTML = h.replace('@@CUMPLEN@@', ''); m.scrollTop = y;
 }
