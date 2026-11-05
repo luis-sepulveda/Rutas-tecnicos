@@ -21520,21 +21520,21 @@
    }
   },
   "05-11-2026": {
-   "hasta": "13:04",
+   "hasta": "13:19",
    "actividades": 158,
    "tecnicos": 33,
    "estados": {
     "No Realizada": 14,
-    "Completado": 41,
-    "Pendiente": 75,
+    "Completado": 45,
+    "en ruta": 4,
+    "Pendiente": 73,
     "Cancelado": 6,
-    "en ruta": 6,
-    "Iniciado": 14,
-    "Suspendido": 2
+    "Suspendido": 2,
+    "Iniciado": 14
    },
    "rgu": 227.8,
-   "caidas_total": 7,
-   "caidas_activas": 6,
+   "caidas_total": 9,
+   "caidas_activas": 8,
    "caidas_resueltas": 1,
    "nuevas": 18,
    "al_bucket": 24,
@@ -21549,6 +21549,15 @@
       "f": "10-13",
       "hi": "10:00",
       "d": "PJE ALMAR 146, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OTI4SOL",
+      "tec": "JORGE PEZOA VICUÑA",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "16:53",
+      "d": "EUGENIO GRANDI 695, VILLA ALEMANA",
       "e": "Pendiente"
      },
      {
@@ -21594,6 +21603,15 @@
       "f": "13-16",
       "hi": "15:57",
       "d": "HIPODROMO(NODO 77) 53 EDIF. 10 DEPTO 1054, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OUQ900I",
+      "tec": "SEBASTIAN DOSSOW A",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "16:25",
+      "d": "AVENIDA QUINTA 709 DEPTO 103, QUILPUE",
       "e": "Pendiente"
      }
     ],
@@ -21641,7 +21659,7 @@
       "f": "10-13",
       "hi": "12:47",
       "d": "CHANARAL 01753, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OUPMTEC",
@@ -21650,7 +21668,7 @@
       "f": "10-13",
       "hi": "14:07",
       "d": "PJE POZO 156 CASA C, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OUOJZSN",
@@ -21659,7 +21677,7 @@
       "f": "10-13",
       "hi": "12:23",
       "d": "AV LOS CARRERA (BTO 2000) 1570 DEPTO 42, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OUNQLJZ",
@@ -21766,9 +21784,9 @@
       "o": "1-3OSR66U8",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:13",
+      "hi": "13:28",
       "d": "CAMINO DEL SOL 2300 CASA 8-I, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "ALEXIS JARA",
       "visitas": 1,
       "ult_fecha": "03-11-2026",
@@ -21813,7 +21831,7 @@
       "o": "1-3ORXW7I0",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "16:50",
+      "hi": "16:08",
       "d": "FRANCISCO MONTESSI 1572, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -21837,7 +21855,7 @@
       "o": "1-3OSQLNT6",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:49",
+      "hi": "16:53",
       "d": "ANA MARIA FRESNO 150 CASA 8 DEPTO 124, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
@@ -21873,7 +21891,7 @@
       "o": "1-3OUH9J7Q",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:34",
+      "hi": "14:32",
       "d": "MADRID 97, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -21885,7 +21903,7 @@
       "o": "1-3OTXQTK6",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "15:27",
+      "hi": "15:25",
       "d": "BRASILIA 2360, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -21980,7 +21998,7 @@
       "o": "1-3OS25P7I",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "17:08",
+      "hi": "17:12",
       "d": "SEGUNDA 475 CASA 9, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
@@ -21992,7 +22010,7 @@
       "o": "1-3OSLLVFH",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "18:04",
+      "hi": "18:08",
       "d": "IGNACIO CARRERA PINTO 0650 EDIF. D DEPTO 103, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
@@ -22028,7 +22046,7 @@
       "o": "1-3OS9UEAK",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:05",
+      "hi": "17:08",
       "d": "PORVENIR 1731, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -22040,7 +22058,7 @@
       "o": "1-3OU58MV6",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:53",
+      "hi": "15:58",
       "d": "LOS NARCISOS 1520 DEPTO 201, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATÍAS JAQUE AG",
@@ -22052,7 +22070,7 @@
       "o": "1-3OTUEM99",
       "cat": "Alta Traslado",
       "f": "13-16",
-      "hi": "17:35",
+      "hi": "17:40",
       "d": "ILUSION 7, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATÍAS JAQUE AG",
@@ -22076,7 +22094,7 @@
       "o": "1-3OU77HZ9",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:22",
+      "hi": "14:29",
       "d": "VOLCAN ACONCAGUA 2617, QUILPUE",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -22100,7 +22118,7 @@
       "o": "1-3ORXW7I0",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "16:50",
+      "hi": "16:08",
       "d": "FRANCISCO MONTESSI 1572, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -22130,9 +22148,9 @@
       "o": "1-3OSYDEHI",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "13:04",
+      "hi": "13:05",
       "d": "PJE AZULILLO 69, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "MATÍAS JAQUE AG",
       "desde": "04-11-2026"
      },
@@ -22140,7 +22158,7 @@
       "o": "1-3OS1I0EU",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:34",
+      "hi": "15:41",
       "d": "LAGO LAS TORRES 170 DEPTO 1506, QUILPUE",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -22150,5 +22168,5 @@
    }
   }
  },
- "generado": "05-11-2026 13:04"
+ "generado": "05-11-2026 13:19"
 }
