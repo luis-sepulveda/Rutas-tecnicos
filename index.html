@@ -1711,6 +1711,9 @@
   #modalReit .mc-body { display:block; }
   /* (22-10-2026) clave de Reiterados */
   /* (04-11-2026) canceladas: se muestran, no cuentan */
+  /* (05-11-2026) no realizadas y suspendidas de hoy: en gris, no cuentan */
+  .rd-card.rt-nc { opacity:.55; }
+  .rt-nc-tag { font-size:11px; font-weight:600; color:#475569; background:#e2e8f0; border-radius:6px; padding:1px 6px; margin-left:6px; }
   .rt-canc { margin-top:14px; border:1px dashed #94a3b8; border-radius:10px; padding:10px 12px; color:#e2e8f0; }
   .rt-canc td, .rt-canc th { color:#cbd5e1 !important; }
   .rt-canc-t { font-weight:600; margin-bottom:6px; }
@@ -7336,7 +7339,10 @@ let REIT = null;
 let reitAbierto = false;
 let CONC = null;          // cuadratura del dia (rutas.json -> conc)
 
-function nReit(){ return REIT && REIT.items ? REIT.items.length : 0; }
+/* (05-11-2026) Regla de Luis para TODO lo de reiterados: solo cuentan las reparaciones completadas (o abiertas,
+   mientras no tengan estado final). No Realizada o Suspendido = se visito y no hubo contacto: no cuenta. */
+function reitNoCuenta(e){ e = String(e || ''); return e === 'No Realizada' || e === 'Suspendido' || e === 'Cancelado'; }
+function nReit(){ return REIT && REIT.items ? REIT.items.filter(function(w){ return !reitNoCuenta(w.e); }).length : 0; }
 
 // "hoy" / "1 día" / "12 días". Desde el 24-09-2026 tambien cuentan los
 // trabajos completados hoy mismo (dias = 0), antes de la reparacion.
@@ -7814,11 +7820,22 @@ function detalleReitTec(t){
    del dia en que se anoto; si despues la reparacion se cancelo, seguia contando. Ahora se busca su estado FINAL
    (calidad.json: reparaciones canceladas de los export completos; datos.json: ultimo dia de esa OT; rutas.json
    de hoy) y las canceladas salen de los conteos y del %, pero se listan al final de "Por tecnico". */
-function reitCanceladas(){
-  const c = {};
+/* (05-11-2026) Ahora devuelve TODAS las que no cuentan, con su estado final: Cancelado, No Realizada o
+   Suspendido (regla de Luis: solo cuentan las completadas). Estado final = el del dia mas reciente entre
+   reit.hist (filas), calidad.json (export completos) y datos.json; lo de hoy (rutas.json) manda. */
+function reitCanceladas(filasTodas){
   try { if(typeof cqCargar === 'function') cqCargar(); if(typeof mesCargar === 'function') mesCargar(); } catch(e){}
-  if(typeof CQ_J === 'object' && CQ_J && CQ_J.canc) CQ_J.canc.forEach(function(x){ if(x.ot) c[x.ot] = 1; });
-  if(typeof cqEstados === 'function'){ const est = cqEstados(); Object.keys(est).forEach(function(ot){ if(est[ot].e === 'Cancelado') c[ot] = 1; else if(est[ot].hoy) delete c[ot]; }); }
+  const fin = {};
+  const pon = function(ot, iso, e, hoy){ if(!ot || !e) return; const v = fin[ot];
+    if(!v || (!v.hoy && (hoy || iso >= v.iso))) fin[ot] = { iso: iso || '', e: e, hoy: !!hoy }; };
+  (filasTodas || []).forEach(function(f){ pon(f.rep_ot, f.fecha, f.rep_estado, false); });
+  if(typeof CQ_J === 'object' && CQ_J){
+    (CQ_J.fallas || []).forEach(function(x){ (x.reps || []).forEach(function(r){ pon(r.ot, r.ff || r.f, r.est, false); }); });
+    (CQ_J.noreal || []).concat(CQ_J.canc || []).forEach(function(r){ pon(r.ot, r.ff || r.f, r.est, false); });
+  }
+  if(typeof cqEstados === 'function'){ const est = cqEstados(); Object.keys(est).forEach(function(ot){ pon(ot, est[ot].iso, est[ot].e, est[ot].hoy); }); }
+  const c = {};
+  Object.keys(fin).forEach(function(ot){ if(reitNoCuenta(fin[ot].e)) c[ot] = fin[ot].e; });
   return c;
 }
 let reitEsperaDatos = false;
@@ -7828,7 +7845,7 @@ function renderReitTec(){
   const intro = document.getElementById('reitIntro');
   const nota = document.getElementById('reitNota');
   const filasTodas = filasReitHist();
-  const cancOT = filasTodas ? reitCanceladas() : {};
+  const cancOT = filasTodas ? reitCanceladas(filasTodas) : {};
   /* si todavia no bajan calidad.json / datos.json, se repinta cuando lleguen */
   if(filasTodas && !reitEsperaDatos && ((typeof CQ_J === 'undefined' || CQ_J === null || CQ_J === undefined) || window.ACT_FILAS === null || window.ACT_FILAS === undefined)){
     reitEsperaDatos = true;
@@ -7907,14 +7924,14 @@ function renderReitTec(){
         + (ab ? '<div class="rt-det">' + detalleReitTec(t) + '</div>' : '');
     }).join('');
   }
-  /* canceladas del periodo: se muestran, no cuentan */
+  /* canceladas, no realizadas y suspendidas del periodo: se muestran, no cuentan (05-11-2026) */
   { const rgc = rangoReit(per, new Date()), vis = {};
     const lc = canceladas.filter(function(f){ if(f.fecha < rgc.d0 || f.fecha > rgc.d1 || vis[f.rep_ot]) return false; vis[f.rep_ot] = 1; return true; });
-    if(lc.length) cont.innerHTML += '<div class="rt-canc"><div class="rt-canc-t">🚫 ' + lc.length + (lc.length === 1 ? ' reparación cancelada' : ' reparaciones canceladas') + ' en ' + nomPer + ' · <b>no cuentan</b> en los reiterados ni en el %</div>'
+    if(lc.length) cont.innerHTML += '<div class="rt-canc"><div class="rt-canc-t">🚫 ' + lc.length + (lc.length === 1 ? ' reparación cancelada, no realizada o suspendida' : ' reparaciones canceladas, no realizadas o suspendidas') + ' en ' + nomPer + ' · <b>no cuentan</b> en los reiterados ni en el % (solo cuentan las completadas)</div>'
       + '<table class="rd-tabla"><thead><tr><th>Fecha</th><th>Reparación</th><th>Casa</th><th>Trabajo anterior</th><th>Técnico del trabajo</th></tr></thead><tbody>'
-      + lc.map(function(f){ return '<tr><td>' + escR(fechaCL(f.fecha)) + '</td><td><span class="rd-ot">' + escR(f.rep_ot) + '</span> <span class="bes">Cancelado</span></td><td>' + escR(f.direccion || '') + '</td><td>' + escR(fechaCL(f.prev_fecha)) + ' · ' + escR(f.prev_categoria || f.prev_tipo || '') + '</td><td>' + escR(f.prev_tec || '') + '</td></tr>'; }).join('')
+      + lc.map(function(f){ return '<tr><td>' + escR(fechaCL(f.fecha)) + '</td><td><span class="rd-ot">' + escR(f.rep_ot) + '</span> <span class="bes">' + escR(cancOT[f.rep_ot] || 'Cancelado') + '</span></td><td>' + escR(f.direccion || '') + '</td><td>' + escR(fechaCL(f.prev_fecha)) + ' · ' + escR(f.prev_categoria || f.prev_tipo || '') + '</td><td>' + escR(f.prev_tec || '') + '</td></tr>'; }).join('')
       + '</tbody></table></div>'; }
-  nota.textContent = 'Las reparaciones que terminaron CANCELADAS no cuentan (se listan al final). '
+  nota.textContent = 'Solo cuentan las reparaciones COMPLETADAS (o abiertas, mientras no tengan estado final). Las que terminaron NO REALIZADAS, SUSPENDIDAS o CANCELADAS no cuentan (se listan al final): se visitó y no hubo contacto. Si otra reparación de esa casa se completa dentro de los 30 días, ahí sí cuenta. '
     + 'Se cuenta un reiterado por trabajo: si la misma casa tuvo dos reparaciones por el mismo '
     + 'trabajo, cuenta una y las dos se ven en el detalle. Una reparación reagendada cuenta una vez, con el '
     + 'estado en que quedó su último día. Incluye las que quedaron en el bucket o atendió otro técnico. '
@@ -7955,17 +7972,20 @@ function renderReit(){
     return;
   }
   const items = REIT.items || [];
+  const nNo = items.filter(function(w){ return reitNoCuenta(w.e); }).length;
   const dias = REIT.dias || 30;
   const cerca = items.filter(function(w){ return w.prev[0].dias <= 7; }).length;
   chips.innerHTML = '<span class="fchip"><b>' + (REIT.n_rep||0) + '</b> reparaciones hoy</span>'
-    + '<span class="fchip"><b>' + items.length + '</b> reiteradas</span>'
+    + '<span class="fchip"><b>' + (items.length - nNo) + '</b> reiteradas</span>'
+    + (nNo ? '<span class="fchip"><b>' + nNo + '</b> no cuentan (no realizada o suspendida)</span>' : '')
     + '<span class="fchip"><b>' + cerca + '</b> de la última semana</span>'
     + (items.some(function(w){ return w.fort; }) ? '<span class="fchip"><b>'
         + items.filter(function(w){ return w.fort; }).length + '</b> en colegios con Fortinet</span>' : '');
   intro.innerHTML = 'Reparaciones de hoy en una casa donde un técnico de Dominion completó una '
     + '<b>alta, traslado, migración o reparación en los últimos ' + dias + ' días</b>, '
     + 'o hoy mismo antes de la reparación. '
-    + 'Incluye las que siguen en el bucket. No entran las canceladas.';
+    + 'Incluye las que siguen en el bucket. No entran las canceladas. '
+    + 'Las que terminan No Realizada o Suspendida se muestran en gris pero <b>no cuentan</b> (solo cuentan las completadas o abiertas).';
 
   if(!items.length){
     cont.innerHTML = '<div class="vacio">Ninguna reparación de hoy es reiterada.</div>';
@@ -7984,8 +8004,9 @@ function renderReit(){
           + '<td>' + escR(v.cie || '—') + '</td>'
           + '</tr>';
       }).join('');
-      return '<div class="rd-card reit' + (p0.dias <= 7 ? ' cerca' : '') + '">'
-        + '<div class="rd-top"><span class="rd-tit">' + escR(w.d) + tagFort(w.fort) + '</span>'
+      const nc = reitNoCuenta(w.e);
+      return '<div class="rd-card reit' + (p0.dias <= 7 ? ' cerca' : '') + (nc ? ' rt-nc' : '') + '">'
+        + '<div class="rd-top"><span class="rd-tit">' + escR(w.d) + tagFort(w.fort) + (nc ? ' <span class="rt-nc-tag">no cuenta · ' + escR(String(w.e).toLowerCase()) + '</span>' : '') + '</span>'
         + '<span class="rd-sello">' + escR(p0.cat || p0.tipo) + (p0.dias === 0 ? ' hoy mismo' : ' hace ' + haceReit(p0.dias))
         + ' · ' + escR(p0.tec) + '</span></div>'
         + '<div class="rd-hoy"><span class="rd-hoy-tag">HOY</span> <span class="rd-ot">' + escR(w.pet || w.o) + '</span>' + tagNeg(w.o)
@@ -19090,6 +19111,9 @@ function cqCalcJson(mes){
     const r = { fecha: f.fecha, ot: f.rep_ot, est: fin, cie: (fe && fe.cie) || f.rep_cierre || '', tec: f.rep_tec, emp: /bucket/i.test(f.rep_tec || '') ? 'BUCKET' : 'DOMINION', dias: +f.dias || 0, hoy: true,
                 sub: it ? (it.sub || it.cat || '') : '', fr: it ? it.f || '' : (f.franja || ''), prev: prevH };
     if(fin === 'Cancelado'){ canc.push({ dir: f.direccion, fecha: f.fecha, ot: f.rep_ot, est: fin, prev: f }); return; }
+    /* (05-11-2026) Regla de Luis: solo cuentan las reparaciones completadas (o abiertas, mientras no tengan
+       estado final). No Realizada o Suspendido = se visito y no hubo contacto: no cuenta. */
+    if(fin === 'No Realizada' || fin === 'Suspendido') return;
     nHoy++;
     let t = yaOT[f.prev_ot];
     if(!t){ const dd = String(f.direccion || ''), m = /,\s*([^,]+)$/.exec(dd);
@@ -19130,6 +19154,7 @@ function cqCalcViejo(mes){
     const fin = fe ? fe.e : f.rep_estado, cie = (fe && fe.cie) || f.rep_cierre || '';
     const r = { fecha: f.fecha, ot: f.rep_ot, est: fin, cie: cie, tec: f.rep_tec, dias: +f.dias || 0, dir: f.direccion, deDatos: !!fe };
     if(fin === 'Cancelado'){ canc.push(Object.assign({ prev: f }, r)); return; }
+    if(fin === 'No Realizada' || fin === 'Suspendido') return;   /* (05-11-2026) solo completadas */
     const t = trab[f.prev_ot] || (trab[f.prev_ot] = { ot: f.prev_ot, fecha: f.prev_fecha, tipo: cqTipo(f.prev_tipo) || f.prev_tipo, cat: f.prev_categoria, tec: cqNom(f.prev_tec), sup: f.prev_sup, cie: f.prev_cierre, dir: f.direccion, reps: [] });
     t.reps.push(r); });
   const L = Object.keys(trab).map(function(k){ return trab[k]; });
@@ -19178,7 +19203,7 @@ function cqPintar(){
   const R0reg = R.registro;
   if(CQ_SOLO_GER){ head.innerHTML = '<h2>🛠 Calidad · resumen gerencia' + cqCumplenHtml(R, meta) + '<button class="cq-x" onclick="cqCerrar()">✕ Cerrar</button></h2>'; cqPonBody(body, cqGerenciaHtml(R, meta)); return; }
   head.innerHTML = '<h2>🛠 Calidad de ' + cqNomMes(CQ_MES) + '<button class="cq-x" onclick="cqCerrar()">✕ Cerrar</button></h2>'
-    + '<p>Trabajos completados en ' + cqNomMes(CQ_MES) + ' (altas, traslados, migraciones y reparaciones) que tuvieron una reparación en la misma casa dentro de ' + CQ_DIAS + ' días · las canceladas no cuentan · meta ' + String(meta).replace('.', ',') + '% o menos</p>'
+    + '<p>Trabajos completados en ' + cqNomMes(CQ_MES) + ' (altas, traslados, migraciones y reparaciones) que tuvieron una reparación en la misma casa dentro de ' + CQ_DIAS + ' días · solo cuentan las reparaciones completadas · meta ' + String(meta).replace('.', ',') + '% o menos</p>'
     + '<div class="cq-tabs">' + meses.map(function(m){ const c = cqMasDias(cqFinMes(m), CQ_DIAS), cer = cqIsoHoy() > c, inc = !!R0reg && R0reg > m + '-01';
         return '<button class="' + (m === CQ_MES ? 'on' : '') + '" onclick="cqVer(\'' + m + '\')">' + cqNomMes(m, true) + '<small>' + (inc ? 'incompleto' : cer ? 'cerrado' : m === hoyM ? 'se mide en ' + CQ_NOMMES[(+m.slice(5, 7)) % 12] + ' · va armándose' : '● se está midiendo ahora · cierra el ' + fechaCL(c).slice(0, 5)) + '</small></button>'; }).join('') + '</div>';
   let h = '';
@@ -19247,7 +19272,7 @@ function cqPintar(){
     + R.canc.map(function(r){ const jt = r.job && cqUsaJson() ? (CQ_J.fallas || []).filter(function(x){ return x.ot === r.job; })[0] : null; return '<tr><td>' + escR(r.dir || '') + '</td><td>' + (r.prev.prev_fecha ? escR(fechaCL(r.prev.prev_fecha)).slice(0, 5) + ' · ' + escR(r.prev.prev_tipo) : escR(r.job || '')) + '</td><td>' + escR(derTitulo(r.prev.prev_tec || (jt ? jt.tec : ''))) + '</td><td>' + escR(fechaCL(r.fecha)).slice(0, 5) + ' · ' + escR(r.ot) + '</td><td>' + cqEstHtml(r) + '</td></tr>'; }).join('') + '</tbody></table>';
   h += '<p class="cq-nota"><b>Cómo se mide:</b> base = todo lo completado en ' + cqNomMes(CQ_MES) + ' por los técnicos de Dominion' + (R.json ? ', en cualquier comuna' : ' en Quilpué y Villa Alemana') + ' (altas, altas traslado, migraciones y reparaciones). ' + (R.json ? 'La reparación puede ser de cualquier empresa. ' : '')
     + 'Falla = el trabajo tuvo una reparación en la misma casa dentro de ' + CQ_DIAS + ' días (puede caer en ' + CQ_NOMMES[+CQ_MES.slice(5, 7) - 1] + ' o en el mes siguiente); cada trabajo cuenta una vez aunque tenga dos reparaciones. '
-    + 'Si en esa casa se completó después otro trabajo, la reparación es de ese otro trabajo y va a la calidad de su mes. Cuenta toda reparación menos las canceladas: el estado final sale de datos.json y de lo de hoy.</p>';
+    + 'Si en esa casa se completó después otro trabajo, la reparación es de ese otro trabajo y va a la calidad de su mes. Solo cuentan las reparaciones COMPLETADAS (desde el 05-11-2026): si la reparación terminó No Realizada o Suspendida (se visitó y no hubo contacto, por cualquier motivo) o Cancelada, no cuenta; si otra reparación de la casa se completa dentro de los ' + CQ_DIAS + ' días, ahí sí. Una reparación abierta cuenta mientras no tenga estado final. El estado final sale de los export, de datos.json y de lo de hoy.</p>';
   cqPonBody(body, h);
 }
 /* pinta el cuerpo sin perder el scroll ni el foco del buscador */
@@ -19334,7 +19359,7 @@ function cqDetalleHtml(R, meta){
     + cqCorte('Días hasta la reparación', 'desde el trabajo hasta la primera reparación · promedio ' + P2(prom) + ' días', 'dias', dias)
     + cqCorte('Causa de la reparación', 'código de cierre de la reparación', 'cau', cau)
     + cqCorte('Quién hizo la reparación', otrasE.length ? 'otras empresas: ' + otrasE.map(function(f){ return f[0] + ' ' + f[1]; }).join(', ') : '', 'emp', emp)
-    + cqCorte('Cómo quedó la reparación', 'abierta = pendiente, iniciada, en ruta o suspendida (cuenta igual)', 'est', est)
+    + cqCorte('Cómo quedó la reparación', 'abierta = pendiente, iniciada o en ruta (cuenta mientras no tenga estado final)', 'est', est)
     + cqCorte('Por comuna', 'con reparación · completadas · calidad', 'ciu', ciu, true)
     + cqCorte('Nodos que se repiten', '2 o más trabajos con reparación en el mismo nodo: puede ser la red', 'nodo', nodo)
     + cqCorte('Por semana del trabajo', 'semana en que se hizo el trabajo', '', sem)
@@ -19512,7 +19537,7 @@ function cqGerenciaHtml(R, meta){
   h += '<div class="cg-sec"><h4>Técnicos con peor calidad</h4><p class="cg-ay">con ' + MIN_COMP_REIT + ' o más trabajos en el mes · ordenados por %</p><table class="cg-t"><tbody>'
     + top.map(function(o){ return fila(derTitulo(o.nom), o.n, o.c, '<td><small>' + escR(derTitulo(o.sup || '')) + '</small></td><td><small>lo que más se repite: <b>' + escR(cqPatron(o)) + '</b></small></td>'); }).join('') + '</tbody></table></div>';
   h += cqReclamoHtml(R, meta) + cqAbiertasHtml(R) + cqAlertaHtml(meta);   /* 5, 6 y 3 (12:20) */
-  h += '<p class="cq-nota">Calidad = trabajos completados en ' + cqNomMes(CQ_MES) + ' (altas, traslados, migraciones y reparaciones, en cualquier comuna) que tuvieron una reparación en la misma casa dentro de ' + CQ_DIAS + ' días, de cualquier empresa; no cuentan las canceladas; cada trabajo cuenta una vez. '
+  h += '<p class="cq-nota">Calidad = trabajos completados en ' + cqNomMes(CQ_MES) + ' (altas, traslados, migraciones y reparaciones, en cualquier comuna) que tuvieron una reparación en la misma casa dentro de ' + CQ_DIAS + ' días, de cualquier empresa; solo cuentan las reparaciones completadas (no realizadas, suspendidas y canceladas no cuentan); cada trabajo cuenta una vez. '
     + (R.json ? 'Fuente: export completos del ' + fechaCL(R.registro) + ' al ' + fechaCL(R.hasta) + (R.nHoy ? ' más ' + R.nHoy + ' reparaciones de hoy' : '') + '.' : '') + '</p></div>';
   return h;
 }
