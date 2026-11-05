@@ -18296,8 +18296,10 @@ function anPerTit(per){ if(per.t === 'hoy') return 'Hoy'; if(per.t === 'dia'){ v
 
 /* reloj con aguja: v = % (o null), r = radio */
 function anReloj(v, r, label, big, nv, min, ref){
-  const poca = v !== null && v !== undefined && nv !== undefined && nv < (min === undefined ? AN_MIN_VIS : min);
-  const col = function(x){ return poca ? '#64748b' : anCol(x); };
+  /* (05-11-2026) Luis: "no me gusta que se vea gris por pocas ordenes, muestramelo de acuerdo a la completitud no
+     importando la cantidad de migraciones visitadas": el reloj ya no se apaga con pocas visitas; solo se dice cuantas. */
+  const poca = false, pocasVis = v !== null && v !== undefined && nv !== undefined && nv < (min === undefined ? AN_MIN_VIS : min);
+  const col = function(x){ return anCol(x); };
   const w = r * 2 + 20, h = r + (big ? 78 : 64), cx = w / 2, cy = r + 10, sw = big ? 16 : 11;
   const ang = function(p){ return Math.PI * (1 - p / 100); };
   const pt = function(p, rr){ return [cx + rr * Math.cos(ang(p)), cy - rr * Math.sin(ang(p))]; };
@@ -18322,7 +18324,7 @@ function anReloj(v, r, label, big, nv, min, ref){
     + '<circle cx="' + cx + '" cy="' + cy + '" r="' + (big ? 6 : 4) + '" fill="#e2e8f0"/>'
     + '<text x="' + cx + '" y="' + (cy + (big ? 30 : 22)) + '" text-anchor="middle" font-size="' + (big ? 24 : 15) + '" font-weight="700" fill="' + col(v) + '">' + (v === null || v === undefined ? '–' : P2(v) + '%') + '</text>'
     + '<text x="' + cx + '" y="' + (cy + (big ? 48 : 38)) + '" text-anchor="middle" font-size="' + (big ? 12 : 10.5) + '" letter-spacing="1" fill="#94a3b8">' + label + '</text>'
-    + (poca ? '<text x="' + cx + '" y="' + (cy + (big ? 64 : 52)) + '" text-anchor="middle" font-size="' + (big ? 11.5 : 10) + '" fill="#f59e0b">pocas visitas (' + nv + ')</text>' : '')
+    + (pocasVis ? '<text x="' + cx + '" y="' + (cy + (big ? 64 : 52)) + '" text-anchor="middle" font-size="' + (big ? 11.5 : 10) + '" fill="#94a3b8">' + nv + ' visita' + (nv === 1 ? '' : 's') + '</text>' : '')
     + '</svg>';
   return s;
 }
