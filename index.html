@@ -18019,6 +18019,7 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarM
   #anPage .an-btn.rgu { background:#b45309; } #anPage .an-btn.rgu:hover { background:#92400e; }
   /* (05-11-2026) boton y ventana Asistencia */
   #anPage .an-btn.asis { background:#0e7490; } #anPage .an-btn.asis:hover { background:#155e75; }
+  #anDet .pl-cqm { margin-left:14px; } #anDet .asis .an-mdtop h2, #anDet .rgu .an-mdtop h2 { flex-wrap:wrap; }
   #anDet .asis .as-sub { margin:2px 0 10px; font-size:13px; color:#64748b; } #anDet .asis .as-oj { color:#b45309; }
   #anDet .asis .as-sel { border:1px solid #cbd5e1; border-radius:999px; padding:5px 10px; font-size:13px; }
   #anDet .asis .as-kpis { display:grid; grid-template-columns:repeat(5, 1fr); gap:10px; }
@@ -18582,6 +18583,8 @@ function rguPintar(m){
   h += '<div class="an-tabs">' + meses.map(function(k){ return '<button class="an-tab' + (k === RGU_MES ? ' on' : '') + '" onclick="rguMes(\'' + k + '\')">' + AN_NOMMES[+k.slice(5) - 1] + '</button>'; }).join('') + '</div>';
   if(!R.L.length){ m.innerHTML = h + '<div class="an-vac">Sin órdenes de ' + nomM.toLowerCase() + ' en datos.json.</div></div>'; return; }
   const enMeta = R.L.filter(function(t){ return t.prom >= RGU_META; }).length, mal = R.eq.prom < RGU_META;
+  h = h.replace('</small></h2>', '</small>' + plCumplenHtml(R.L.map(function(t){ return { nom:t.nom, op:t.dias > 0, no:t.prom < RGU_META }; }),
+    'promedio de ' + RGU_META + ' RGU o más al día en ' + nomM.toLowerCase(), 'sin días trabajados en el mes', 'Técnicos del plantel con al menos un día trabajado en ' + nomM.toLowerCase() + '.') + '</h2>');
   h += '<p class="rgu-sub">' + nomM + ': ' + R.D.length + ' día' + (R.D.length === 1 ? '' : 's') + ' con datos, hasta el ' + ult.slice(8) + '-' + ult.slice(5, 7) + ' (lo de hoy entra mañana).</p>'
     + '<div class="rgu-kpis">'
     + '<div class="rgu-k big ' + (mal ? 'mal' : 'ok') + '"><b>' + rguN(R.eq.prom) + '</b><span>RGU por técnico al día · ' + (mal ? rguN(RGU_META - R.eq.prom) + ' bajo la meta' : rguN(R.eq.prom - RGU_META) + ' sobre la meta') + '</span></div>'
@@ -18633,7 +18636,9 @@ function asLev1(a, b){ if(Math.abs(a.length - b.length) > 1) return false; let i
   return a.slice(i + 1) === b.slice(i + 1) || a.slice(i) === b.slice(i + 1) || a.slice(i + 1) === b.slice(i); }
 function asTok(a, b){ if(a.length < 2) return false;
   if(a === b || (a.length >= 3 && b.indexOf(a) === 0) || (b.length >= 3 && a.indexOf(b) === 0)) return true;
-  return a.length >= 5 && b.length >= 5 && asLev1(a, b); }
+  if(a.length >= 5 && b.length >= 5 && asLev1(a, b)) return true;
+  /* letras cambiadas de lugar ("ANTONHY" / "ANTHONY") */
+  return a.length >= 5 && a.length === b.length && a[0] === b[0] && a.split('').sort().join('') === b.split('').sort().join('') && a.split('').filter(function(c, i){ return c !== b[i]; }).length <= 3; }
 /* clave de 'keys' (nombre de bandeja, a veces cortado) que calza con el nombre completo de VTR; null si no hay una clara */
 function asBusca(nom, keys){
   const V = asNorm(nom).split(' '); let best = null, bs = 0, emp = false;
@@ -18726,9 +18731,31 @@ function asDetTec(t, dias){
         + '<td><span class="as-r ' + r.res + '">' + AS_RES[r.res] + '</span></td><td>' + (r.key ? r.ord : '–') + '</td><td class="l s">' + escR(r.av.join(' · ')) + '</td></tr>'; }).join('')
     + '</table></div>';
 }
+/* (05-11-2026) Luis: "el detalle de los % igual que en la ventana calidad, plantel total 37, plantel operativo" (Asistencia y RGU).
+   Plantel = PLANTEL de rutas.json (37). Operativos = tecnicos del plantel con datos en el periodo (marcaron / trabajaron).
+   Los del plantel sin datos en el periodo (licencia, permiso, sin registro) cuentan como cumplen, igual que en Calidad. */
+function plCumplen(L){   /* L = [{nom, op:bool, no:bool}] */
+  const pl = (typeof PLANTEL !== 'undefined' && PLANTEL && PLANTEL.length) ? PLANTEL : null;
+  const enPl = function(n){ return !pl || !!asBusca(n, pl); };
+  const op = L.filter(function(t){ return t.op && enPl(t.nom); });
+  const no = op.filter(function(t){ return t.no; }).length;
+  const nPl = pl ? Math.max(pl.length, op.length) : op.length;
+  return { pl:nPl, op:op.length, no:no, siOp:op.length - no, siPl:nPl - no, sinDatos:nPl - op.length };
+}
+function plCumplenHtml(L, regla, sinDatos, opTxt){
+  const k = plCumplen(L), pc = function(a, b){ return b ? P2(100 * a / b) + '%' : '–'; };
+  const caja = function(tit, tot, si, no, ay){
+    return '<span class="cqm-b" title="' + ay + '"><span class="cqm-t">' + tit + ' <b>' + tot + '</b></span>'
+      + '<span class="cqm-si">✔ ' + si + ' cumplen <b>' + pc(si, tot) + '</b></span>'
+      + '<span class="cqm-no">✖ ' + no + ' no cumplen <b>' + pc(no, tot) + '</b></span></span>'; };
+  return '<span class="cqm pl-cqm">'
+    + caja('Plantel', k.pl, k.siPl, k.no, 'Todo el plantel. Cumple = ' + regla + '. ' + k.sinDatos + ' ' + sinDatos + ' cuentan como cumplen (igual que en Calidad).')
+    + caja('Operativos', k.op, k.siOp, k.no, opTxt + ' Cumple = ' + regla + '.')
+    + '</span>';
+}
 function asPintar(m){
   const y = m.scrollTop;
-  let h = '<div class="an-md asis"><div class="an-mdtop"><h2>⏰ Asistencia <small>marcación de entrada · ventana ' + AS_ANTES + ' min antes y ' + AS_DESPUES + ' después (turno 09:45: 09:40 a 09:50)</small></h2>'
+  let h = '<div class="an-md asis"><div class="an-mdtop"><h2>⏰ Asistencia <small>marcación de entrada · ventana ' + AS_ANTES + ' min antes y ' + AS_DESPUES + ' después (turno 09:45: 09:40 a 09:50)</small>@@CUMPLEN@@</h2>'
     + '<div style="display:flex;gap:8px;align-items:center"><span class="an-updbox">' + anUpdHtml() + '</span><button class="an-x" onclick="anDetCerrar()">✕ Cerrar</button></div></div>';
   if(AS_J === null || AS_J === undefined){ m.innerHTML = h + '<div class="an-vac">Bajando asistencia.json…</div></div>'; return; }
   if(AS_J === 'error'){ m.innerHTML = h + '<div class="an-vac">Todavía no hay registro de asistencia (no se encontró asistencia.json en Actividades-diario).<br><br>'
@@ -18743,6 +18770,8 @@ function asPintar(m){
     + '</div>';
   if(AS_VISTA === 'dia'){
     const R = asDiaCalc(AS_DIA), nAv = R.L.filter(function(r){ return r.av.length; }).length + R.fuera.length;
+    h = h.replace('@@CUMPLEN@@', plCumplenHtml(R.L.map(function(r){ return { nom:r.nom, op:r.marca !== null, no:r.res === 'tarde' }; }),
+      'marcó sin atraso el ' + asFechaCL(AS_DIA), 'sin marca ese día (licencia, permiso o sin registro)', 'Técnicos del plantel que marcaron el ' + asFechaCL(AS_DIA) + '.'));
     h += '<p class="as-sub">' + asFechaCL(AS_DIA) + '-' + AS_DIA.slice(0, 4) + ' · ' + R.L.length + ' técnicos · archivo ' + escR(R.archivo) + (R.ordOk ? '' : ' · <span class="as-oj">sin datos de órdenes de ese día todavía: el cruce con las bandejas no se hace</span>') + '</p>'
       + '<div class="as-kpis"><div class="as-k ok"><b>' + R.c.ok + '</b><span>dentro de la ventana</span></div><div class="as-k ' + (R.c.tarde ? 'mal' : '') + '"><b>' + R.c.tarde + '</b><span>tarde</span></div>'
       + '<div class="as-k"><b>' + R.c.temprano + '</b><span>temprano</span></div><div class="as-k"><b>' + (R.c.sin + R.c.lic) + '</b><span>sin marca' + (R.c.lic ? ' (' + R.c.lic + ' licencia/permiso)' : '') + '</span></div>'
@@ -18757,6 +18786,8 @@ function asPintar(m){
           + '<td><span class="as-r ' + r.res + '">' + AS_RES[r.res] + (r.res === 'tarde' ? ' · ' + asDur(r.dif - AS_DESPUES * 60) : '') + '</span></td><td>' + (r.key ? r.ord : '–') + '</td><td class="l s">' + escR(r.av.join(' · ')) + '</td></tr>'; }).join('') + '</table></div>';
   } else {
     const M = asMesCalc(AS_MES), E = M.eq, nomM = AN_NOMMES[+AS_MES.slice(5) - 1];
+    h = h.replace('@@CUMPLEN@@', plCumplenHtml(M.L.map(function(t){ return { nom:t.nom, op:t.marco > 0, no:t.tarde > 0 }; }),
+      'sin atrasos en ' + nomM.toLowerCase(), 'sin ninguna marca en el mes', 'Técnicos del plantel que marcaron al menos un día en ' + nomM.toLowerCase() + '.'));
     const conAt = M.L.filter(function(t){ return t.tarde; }).length;
     h += '<p class="as-sub">' + nomM + ': ' + M.dias.length + ' día' + (M.dias.length === 1 ? '' : 's') + ' registrado' + (M.dias.length === 1 ? '' : 's') + ' (' + M.dias.map(asFechaCL).join(', ') + ') · ' + M.L.length + ' técnicos</p>'
       + '<div class="as-kpis"><div class="as-k ' + (E.tarde ? '' : 'ok') + '"><b>' + (E.marcas ? (100 * (E.ok + E.temprano) / E.marcas).toFixed(1).replace('.', ',') + ' %' : '–') + '</b><span>de las marcas a tiempo (' + (E.ok + E.temprano) + ' de ' + E.marcas + ')</span></div>'
@@ -18776,7 +18807,7 @@ function asPintar(m){
   h += '<p class="as-n"><b>Cómo se mide:</b> el técnico marca dentro de ' + AS_ANTES + ' min antes o ' + AS_DESPUES + ' min después de su entrada (turno 09:45: entre 09:40 y 09:50). Después del tope es <b>tarde</b> (los minutos que se muestran son los que pasan del tope). Antes de la ventana es "temprano": se muestra, no es falta. '
     + '"No cuadra": marcó y no tuvo órdenes ese día, o tuvo órdenes y no marcó, o marcó con licencia/permiso. Las órdenes salen de las bandejas (hoy) y de datos.json (días anteriores). '
     + 'Fuente: asistencia.json (generado ' + escR(AS_J.generado || '') + '), con los Excel de VTR guardados en Rutas tecnicos\\asistencia.</p></div>';
-  m.innerHTML = h; m.scrollTop = y;
+  m.innerHTML = h.replace('@@CUMPLEN@@', ''); m.scrollTop = y;
 }
 
 function anDetCerrar(){ AN_DET = null; const m = document.getElementById('anDet'); if(m) m.classList.remove('abierto'); }
