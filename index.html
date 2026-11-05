@@ -18009,6 +18009,33 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarM
   #anPage .an-btn:hover { background:#6d28d9; }
   #anPage .an-btn.seg { background:#dc2626; } #anPage .an-btn.seg:hover { background:#b91c1c; }
   #anPage .an-btn.cal { background:#0f766e; } #anPage .an-btn.cal:hover { background:#115e59; }   /* (04-11-2026) boton Calidad */
+  /* (05-11-2026) boton y ventana RGU */
+  #anPage .an-btn.rgu { background:#b45309; } #anPage .an-btn.rgu:hover { background:#92400e; }
+  #anDet .rgu .rgu-sub { margin:2px 0 10px; font-size:13px; color:#64748b; }
+  #anDet .rgu .rgu-kpis { display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:10px; }
+  @media (max-width:900px){ #anDet .rgu .rgu-kpis { grid-template-columns:1fr 1fr; } #anDet .rgu .rgu-2 { grid-template-columns:1fr !important; } }
+  #anDet .rgu .rgu-k { border:1px solid #e2e8f0; border-radius:12px; padding:12px 14px; background:#f8fafc; }
+  #anDet .rgu .rgu-k b { display:block; font-size:26px; color:#0f172a; font-variant-numeric:tabular-nums; }
+  #anDet .rgu .rgu-k span { font-size:12.5px; color:#475569; }
+  #anDet .rgu .rgu-k.big b { font-size:40px; }
+  #anDet .rgu .rgu-k.ok { background:#f0fdf4; border-color:#bbf7d0; } #anDet .rgu .rgu-k.ok b { color:#15803d; }
+  #anDet .rgu .rgu-k.mal { background:#fef2f2; border-color:#fecaca; } #anDet .rgu .rgu-k.mal b { color:#b91c1c; }
+  #anDet .rgu .rgu-sec { margin:18px 0 6px; font-size:13px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:#1e3a8a; }
+  #anDet .rgu .rgu-sec small { display:block; text-transform:none; letter-spacing:0; font-weight:400; color:#64748b; font-size:12px; }
+  #anDet .rgu .rgu-svg { width:100%; height:auto; display:block; }
+  #anDet .rgu .rgu-2 { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  #anDet .rgu .rgu-t { width:100%; border-collapse:collapse; font-size:13px; color:#1e293b; }
+  #anDet .rgu .rgu-t th { font-size:11.5px; color:#64748b; font-weight:600; text-align:center; padding:6px; border-bottom:1px solid #e2e8f0; background:#fff; }
+  #anDet .rgu .rgu-scroll .rgu-t th { position:sticky; top:0; z-index:1; }
+  #anDet .rgu .rgu-t td { text-align:center; padding:5px 6px; border-bottom:1px solid #f1f5f9; font-variant-numeric:tabular-nums; }
+  #anDet .rgu .rgu-t .l { text-align:left; } #anDet .rgu .rgu-t td.s { color:#64748b; font-size:12px; }
+  #anDet .rgu .rgu-t td.m { color:#b91c1c; font-weight:700; background:#fef2f2; } #anDet .rgu .rgu-t td.b { color:#15803d; font-weight:700; background:#f0fdf4; }
+  #anDet .rgu .rgu-t tr.tot td { font-weight:700; border-top:2px solid #cbd5e1; }
+  #anDet .rgu .rgu-scroll { max-height:70vh; overflow:auto; }
+  #anDet .rgu .rgu-dias { display:inline-flex; gap:2px; }
+  #anDet .rgu .rgu-dias i { font-style:normal; width:20px; height:20px; border-radius:4px; font-size:10.5px; line-height:20px; text-align:center; color:#fff; }
+  #anDet .rgu .rgu-dias i.v { background:#16a34a; } #anDet .rgu .rgu-dias i.r { background:#dc2626; } #anDet .rgu .rgu-dias i.n { background:#e2e8f0; }
+  #anDet .rgu .rgu-n { font-size:12px; color:#64748b; margin:8px 0 0; line-height:1.5; }
   /* (02-11-2026) Seguimiento: una tarjeta por tecnico a auditar */
   #anDet .an-sg-res { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:12px; }
   #anDet .an-sg-res .an-kpi { flex:1; min-width:180px; }
@@ -18243,6 +18270,8 @@ function anPintar(){
     + '<div class="an-chips"><span class="an-updbox">' + anUpdHtml() + '</span>'
     /* (04-11-2026) Luis: "agregame el boton de calidad en esta mirada": abre la ventana Calidad del mes encima de MI ANALISIS */
     + '<button class="an-btn cal" onclick="cqAbrirGerencia()" title="Resumen gerencia de la calidad del mes (meta 5,32%)">🛠 Calidad ›</button>'
+    /* (05-11-2026) Luis: "arma un boton al lado derecho de calidad ... mostrando un resumen detallado" de los RGU */
+    + '<button class="an-btn rgu" onclick="rguAbrir()" title="RGU por técnico al día (meta ' + RGU_META + ')">📈 RGU ›</button>'
     + '<button class="an-btn seg" onclick="anSegAbrir()" title="Técnicos de migraciones bajo 60 % de completitud: cómo se mueve la aguja">🎯 Seguimiento ›</button>'
     + '<button class="an-btn" onclick="anTsAbrir(\'Migraciones\')" title="Completitud de cada técnico en las últimas 8 semanas">👥 Técnicos semana a semana ›</button>' + [['Todo','Todo el equipo'], ['QUILPUE','Quilpué'], ['VILLA ALEMANA','Villa Alemana']].map(function(c){
         return '<span class="an-chip' + (AN_COM === c[0] ? ' on' : '') + '" onclick="AN_COM=\'' + c[0] + '\'; anPintar(); anDetPintar()">' + c[1] + '</span>'; }).join('')
@@ -18421,6 +18450,129 @@ function anDetAbrir(fam, per){
   if(!m){ m = document.createElement('div'); m.id = 'anDet'; m.onclick = function(e){ if(e.target === m) anDetCerrar(); }; document.body.appendChild(m); }
   m.classList.add('abierto'); m.scrollTop = 0; anDetPintar();
 }
+/* ===== (05-11-2026) RGU POR TECNICO · boton "📈 RGU" en MI ANALISIS, al lado de 🛠 Calidad =====
+   Luis: "necesito medir los rgu, 1 play vale 1, 2 play vale 2, 3 play vale 3 y las reparaciones valen 1,
+   la meta minima 4 RGU por tecnico diario" y "las completadas por GSA cuentan como completadas".
+   - Sale de datos.json (ACT_FILAS, export de la agencia, tecnicos de Dominion, hasta ayer).
+   - RGU de una orden COMPLETADA (incluye GSA, que datos.json ya trae como Completado): alta, alta traslado y
+     migracion = su play (1, 2 o 3; sin play = 1); reparacion = 1; modificacion, upgrade y otras = 0.
+   - Dia trabajado = dia con al menos una orden completada o no realizada (las canceladas/suspendidas no).
+   - Promedio = RGU del mes / dias trabajados. Un dia "cumple" si suma RGU_META o mas. */
+const RGU_META = 4;
+let RGU_MES = null;
+function rguAbrir(){
+  AN_DET = { rgu:true };
+  try { mesCargar(); } catch(e){}
+  let m = document.getElementById('anDet');
+  if(!m){ m = document.createElement('div'); m.id = 'anDet'; m.onclick = function(e){ if(e.target === m) anDetCerrar(); }; document.body.appendChild(m); }
+  m.classList.add('abierto'); m.scrollTop = 0; anDetPintar();
+  if(window.ACT_FILAS === null){ const t = setInterval(function(){ if(window.ACT_FILAS !== null){ clearInterval(t); if(AN_DET && AN_DET.rgu) anDetPintar(); } }, 600); setTimeout(function(){ clearInterval(t); }, 60000); }
+}
+function rguMes(k){ RGU_MES = k; anDetPintar(); }
+function rguTec(n){ return String(n || '').replace(/^.*?_DOMI_/, '').replace(/\s+/g, ' ').trim().toUpperCase(); }
+function rguDe(r){
+  if(String(r['Estado'] || '') !== 'Completado') return 0;
+  const t = String(r['Tipo de Actividad'] || '').trim().toUpperCase();
+  if(t.indexOf('REPARA') === 0) return 1;
+  if(t.indexOf('ALTA') === 0 || t.indexOf('MIGRA') === 0){ const p = parseInt(r['Play'], 10); return p >= 1 && p <= 3 ? p : 1; }
+  return 0;
+}
+function rguTipo(r){ const t = String(r['Tipo de Actividad'] || '').trim().toUpperCase();
+  return t.indexOf('ALTA TRASLADO') === 0 ? 'Altas traslado' : t.indexOf('ALTA') === 0 ? 'Altas' : t.indexOf('MIGRA') === 0 ? 'Migraciones' : t.indexOf('REPARA') === 0 ? 'Reparaciones' : 'Otras'; }
+/* arma todo para un mes 'AAAA-MM' */
+function rguCalc(F, mes){
+  const dias = {}, tecs = {}, tipos = { 'Altas':0, 'Altas traslado':0, 'Migraciones':0, 'Reparaciones':0 }, porPlay = { 1:0, 2:0, 3:0 };
+  F.forEach(function(r){
+    const q = /^(\d{2})-(\d{2})-(\d{4})$/.exec(String(r['Fecha'] || '')); if(!q || q[3] + '-' + q[2] !== mes) return;
+    const e = String(r['Estado'] || ''); if(e !== 'Completado' && e !== 'No Realizada') return;
+    if(String(r['Nombre'] || '').indexOf('_DOMI_') < 0) return;
+    const iso = q[3] + '-' + q[2] + '-' + q[1], n = rguTec(r['Nombre']), v = rguDe(r);
+    const t = tecs[n] || (tecs[n] = { nom:n, sup:'', d:{} });
+    if(r['supervisor']) t.sup = String(r['supervisor']);
+    t.d[iso] = (t.d[iso] || 0) + v; dias[iso] = 1;
+    if(v){ const tp = rguTipo(r); if(tipos[tp] !== undefined) tipos[tp] += v;
+      if(tp !== 'Reparaciones') porPlay[Math.min(v, 3)] += 1; }
+  });
+  /* el export a veces corta el nombre ("PABLO HERNANEZ FERNAN" / "PABLO HERNANEZ FERNANDEZ"): se juntan con el nombre mas largo */
+  const nk = Object.keys(tecs).sort(function(x, y){ return y.length - x.length; });
+  nk.forEach(function(k){ if(!tecs[k]) return; const lar = nk.filter(function(o){ return o !== k && o.length > k.length && k.length >= 12 && o.indexOf(k) === 0 && tecs[o]; })[0];
+    if(!lar) return; const t = tecs[k], u = tecs[lar]; Object.keys(t.d).forEach(function(d){ u.d[d] = (u.d[d] || 0) + t.d[d]; }); if(!u.sup) u.sup = t.sup; delete tecs[k]; });
+  const D = Object.keys(dias).sort();
+  const L = Object.keys(tecs).map(function(k){ const t = tecs[k], ds = Object.keys(t.d);
+    t.dias = ds.length; t.rgu = ds.reduce(function(a, d){ return a + t.d[d]; }, 0);
+    t.ok = ds.filter(function(d){ return t.d[d] >= RGU_META; }).length; t.prom = t.dias ? t.rgu / t.dias : 0; return t; })
+    .sort(function(a, b){ return a.prom - b.prom || a.nom.localeCompare(b.nom); });
+  const eq = { dias:0, rgu:0, ok:0 }; L.forEach(function(t){ eq.dias += t.dias; eq.rgu += t.rgu; eq.ok += t.ok; });
+  eq.prom = eq.dias ? eq.rgu / eq.dias : 0;
+  const sups = {}; L.forEach(function(t){ const s = sups[t.sup || 'Sin supervisor'] || (sups[t.sup || 'Sin supervisor'] = { dias:0, rgu:0, ok:0, n:0, enMeta:0 });
+    s.dias += t.dias; s.rgu += t.rgu; s.ok += t.ok; s.n++; if(t.prom >= RGU_META) s.enMeta++; });
+  const porDia = D.map(function(d){ let n = 0, g = 0, ok = 0; L.forEach(function(t){ if(t.d[d] !== undefined){ n++; g += t.d[d]; if(t.d[d] >= RGU_META) ok++; } });
+    return { d:d, n:n, rgu:g, prom:n ? g / n : 0, ok:ok }; });
+  return { mes:mes, D:D, L:L, eq:eq, sups:sups, porDia:porDia, tipos:tipos, porPlay:porPlay };
+}
+function rguMeses(F){ const s = {}; F.forEach(function(r){ const q = /^\d{2}-(\d{2})-(\d{4})$/.exec(String(r['Fecha'] || '')); if(q) s[q[2] + '-' + q[1]] = 1; }); return Object.keys(s).sort(); }
+function rguN(x){ return x.toFixed(2).replace('.', ','); }
+function rguP(a, b){ return b ? (100 * a / b).toFixed(1).replace('.', ',') + ' %' : '–'; }
+function rguGrafico(R){
+  const P = R.porDia; if(!P.length) return '';
+  const W = 1180, H = 210, l = 34, r = 10, t = 14, b = 34, max = Math.max(7, Math.ceil(Math.max.apply(null, P.map(function(p){ return p.prom; })) + 0.5));
+  const bw = (W - l - r) / P.length, y = function(v){ return t + (H - t - b) * (1 - v / max); };
+  let s = '<svg viewBox="0 0 ' + W + ' ' + H + '" class="rgu-svg" role="img" aria-label="Promedio de RGU por técnico, día a día">';
+  for(let v = 0; v <= max; v += 1){ s += '<line x1="' + l + '" x2="' + (W - r) + '" y1="' + y(v) + '" y2="' + y(v) + '" stroke="#eef2f6"/><text x="' + (l - 6) + '" y="' + (y(v) + 4) + '" text-anchor="end" font-size="11" fill="#94a3b8">' + v + '</text>'; }
+  P.forEach(function(p, i){ const x = l + i * bw + bw * 0.18, w = bw * 0.64, ok = p.prom >= RGU_META;
+    s += '<rect x="' + x + '" y="' + y(p.prom) + '" width="' + w + '" height="' + (y(0) - y(p.prom)) + '" rx="3" fill="' + (ok ? '#16a34a' : '#dc2626') + '" opacity=".85"><title>' + p.d.slice(8) + '-' + p.d.slice(5, 7) + ': ' + rguN(p.prom) + ' RGU por técnico · ' + p.n + ' técnicos · ' + p.ok + ' cumplen</title></rect>';
+    s += '<text x="' + (x + w / 2) + '" y="' + (H - b + 14) + '" text-anchor="middle" font-size="10.5" fill="#64748b">' + p.d.slice(8) + '</text>';
+    if(P.length <= 12) s += '<text x="' + (x + w / 2) + '" y="' + (y(p.prom) - 4) + '" text-anchor="middle" font-size="11" fill="#334155">' + rguN(p.prom) + '</text>'; });
+  s += '<line x1="' + l + '" x2="' + (W - r) + '" y1="' + y(RGU_META) + '" y2="' + y(RGU_META) + '" stroke="#0f172a" stroke-width="1.5" stroke-dasharray="5 4"/>'
+    + '<text x="' + (W - r) + '" y="' + (y(RGU_META) - 5) + '" text-anchor="end" font-size="11.5" font-weight="700" fill="#0f172a">meta ' + RGU_META + '</text></svg>';
+  return s;
+}
+function rguPintar(m){
+  const y = m.scrollTop, F = Array.isArray(window.ACT_FILAS) ? window.ACT_FILAS : null;
+  let h = '<div class="an-md rgu"><div class="an-mdtop"><h2>📈 RGU por técnico <small>meta ' + RGU_META + ' RGU por técnico al día</small></h2>'
+    + '<div style="display:flex;gap:8px;align-items:center"><span class="an-updbox">' + anUpdHtml() + '</span><button class="an-x" onclick="anDetCerrar()">✕ Cerrar</button></div></div>';
+  if(window.ACT_FILAS === 'error'){ m.innerHTML = h + '<div class="an-vac">No se pudo bajar datos.json (Actividades-diario). Cierra y vuelve a abrir.</div></div>'; return; }
+  if(!F){ m.innerHTML = h + '<div class="an-vac">Bajando datos.json…</div></div>'; return; }
+  const meses = rguMeses(F).slice(-3), hoyM = cqIsoHoy().slice(0, 7);
+  if(!RGU_MES || meses.indexOf(RGU_MES) < 0) RGU_MES = meses.indexOf(hoyM) >= 0 ? hoyM : meses[meses.length - 1];
+  const R = rguCalc(F, RGU_MES), nomM = AN_NOMMES[+RGU_MES.slice(5) - 1];
+  const ult = R.D.length ? R.D[R.D.length - 1] : '';
+  h += '<div class="an-tabs">' + meses.map(function(k){ return '<button class="an-tab' + (k === RGU_MES ? ' on' : '') + '" onclick="rguMes(\'' + k + '\')">' + AN_NOMMES[+k.slice(5) - 1] + '</button>'; }).join('') + '</div>';
+  if(!R.L.length){ m.innerHTML = h + '<div class="an-vac">Sin órdenes de ' + nomM.toLowerCase() + ' en datos.json.</div></div>'; return; }
+  const enMeta = R.L.filter(function(t){ return t.prom >= RGU_META; }).length, mal = R.eq.prom < RGU_META;
+  h += '<p class="rgu-sub">' + nomM + ': ' + R.D.length + ' día' + (R.D.length === 1 ? '' : 's') + ' con datos, hasta el ' + ult.slice(8) + '-' + ult.slice(5, 7) + ' (lo de hoy entra mañana).</p>'
+    + '<div class="rgu-kpis">'
+    + '<div class="rgu-k big ' + (mal ? 'mal' : 'ok') + '"><b>' + rguN(R.eq.prom) + '</b><span>RGU por técnico al día · ' + (mal ? rguN(RGU_META - R.eq.prom) + ' bajo la meta' : rguN(R.eq.prom - RGU_META) + ' sobre la meta') + '</span></div>'
+    + '<div class="rgu-k"><b>' + rguP(R.eq.ok, R.eq.dias) + '</b><span>de los días cumplieron ' + RGU_META + ' o más (' + R.eq.ok + ' de ' + R.eq.dias + ')</span></div>'
+    + '<div class="rgu-k"><b>' + enMeta + ' de ' + R.L.length + '</b><span>técnicos con promedio en la meta</span></div>'
+    + '<div class="rgu-k"><b>' + R.eq.rgu.toLocaleString('es-CL') + '</b><span>RGU del equipo en ' + R.eq.dias + ' días-técnico</span></div></div>';
+  /* grafico dia a dia */
+  h += '<div class="rgu-sec">Equipo día a día<small>promedio de RGU por técnico; verde = sobre la meta, rojo = bajo · pasa el mouse por una barra</small></div>' + rguGrafico(R);
+  /* supervisores y composicion */
+  const SK = Object.keys(R.sups).sort();
+  const totT = R.tipos['Altas'] + R.tipos['Altas traslado'] + R.tipos['Migraciones'] + R.tipos['Reparaciones'];
+  h += '<div class="rgu-2"><div><div class="rgu-sec">Por supervisor</div><table class="rgu-t"><tr><th class="l">Supervisor</th><th>Técnicos</th><th>Promedio</th><th>Días que cumplen</th><th>En la meta</th></tr>'
+    + SK.map(function(k){ const s = R.sups[k], p = s.dias ? s.rgu / s.dias : 0;
+      return '<tr><td class="l">' + escR(derTitulo(k)) + '</td><td>' + s.n + '</td><td class="' + (p < RGU_META ? 'm' : 'b') + '">' + rguN(p) + '</td><td>' + rguP(s.ok, s.dias) + '</td><td>' + s.enMeta + ' de ' + s.n + '</td></tr>'; }).join('')
+    + '</table></div><div><div class="rgu-sec">De dónde salen los RGU</div><table class="rgu-t"><tr><th class="l">Tipo</th><th>RGU</th><th>% del total</th></tr>'
+    + ['Altas', 'Migraciones', 'Reparaciones', 'Altas traslado'].map(function(k){ return '<tr><td class="l">' + k + '</td><td>' + R.tipos[k].toLocaleString('es-CL') + '</td><td>' + rguP(R.tipos[k], totT) + '</td></tr>'; }).join('')
+    + '</table><p class="rgu-n">Altas, traslados y migraciones: ' + R.porPlay[1] + ' de 1 play, ' + R.porPlay[2] + ' de 2 y ' + R.porPlay[3] + ' de 3.</p></div></div>';
+  /* tabla por tecnico */
+  const DD = R.D;
+  h += '<div class="rgu-sec">Técnico por técnico<small>del promedio más bajo al más alto · cada cuadro es un día: verde ' + RGU_META + ' o más, rojo menos, gris no trabajó</small></div>'
+    + '<div class="rgu-scroll"><table class="rgu-t tec"><tr><th class="l">Técnico</th><th class="l">Supervisor</th><th>Días</th><th>RGU</th><th>Promedio</th><th>Días que cumplen</th><th class="l">Día a día</th></tr>'
+    + R.L.map(function(t){ const bajo = t.prom < RGU_META;
+      return '<tr><td class="l"><b>' + escR(derTitulo(t.nom)) + '</b></td><td class="l s">' + escR(derTitulo(t.sup)) + '</td><td>' + t.dias + '</td><td>' + t.rgu + '</td>'
+        + '<td class="' + (bajo ? 'm' : 'b') + '">' + rguN(t.prom) + '</td><td>' + t.ok + ' de ' + t.dias + ' · ' + rguP(t.ok, t.dias) + '</td><td class="l"><span class="rgu-dias">'
+        + DD.map(function(d){ const v = t.d[d]; return '<i class="' + (v === undefined ? 'n' : v >= RGU_META ? 'v' : 'r') + '" title="' + d.slice(8) + '-' + d.slice(5, 7) + ': ' + (v === undefined ? 'no trabajó' : v + ' RGU') + '">' + (v === undefined ? '' : v) + '</i>'; }).join('')
+        + '</span></td></tr>'; }).join('')
+    + '<tr class="tot"><td class="l">Equipo</td><td></td><td>' + R.eq.dias + '</td><td>' + R.eq.rgu + '</td><td class="' + (mal ? 'm' : 'b') + '">' + rguN(R.eq.prom) + '</td><td>' + R.eq.ok + ' de ' + R.eq.dias + ' · ' + rguP(R.eq.ok, R.eq.dias) + '</td><td></td></tr></table></div>';
+  h += '<p class="rgu-n"><b>Cómo se mide:</b> RGU de cada orden COMPLETADA (las completadas por GSA cuentan): alta, alta traslado y migración = su play (1, 2 o 3); reparación = 1; modificaciones y upgrades = 0. '
+    + 'Promedio = RGU del mes / días trabajados (día con al menos una orden completada o no realizada). Un día cumple con ' + RGU_META + ' RGU o más. '
+    + 'Fuente: datos.json (export de la agencia: Quilpué y Villa Alemana, técnicos de Dominion), hasta ayer. Si un técnico apoyó en otra comuna, esos RGU no salen.</p></div>';
+  m.innerHTML = h; m.scrollTop = y;
+}
+
 function anDetCerrar(){ AN_DET = null; const m = document.getElementById('anDet'); if(m) m.classList.remove('abierto'); }
 function anDetPer(t, k){ if(!AN_DET) return; AN_DET.per = { t:t, k:k }; anDetPintar(); }
 
@@ -18429,6 +18581,7 @@ function anDetPintar(){
   if(AN_DET.ts) return anTsPintar(m);
   if(AN_DET.seg) return anSegPintar(m);
   if(AN_DET.diario) return anDiarioPintar(m);
+  if(AN_DET.rgu) return rguPintar(m);
   const y = m.scrollTop, D = anFilas(), fam = AN_DET.fam, per = AN_DET.per, F = AN_FAMS.filter(function(x){ return x.f === fam; })[0] || AN_FAMS[0];
   const L = anPer(D, fam, per), s = mpSt(L);
   /* periodo anterior para la flecha */
