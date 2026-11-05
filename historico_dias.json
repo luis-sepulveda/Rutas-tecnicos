@@ -21520,22 +21520,41 @@
    }
   },
   "05-11-2026": {
-   "hasta": "08:57",
+   "hasta": "09:07",
    "actividades": 113,
    "tecnicos": 31,
    "estados": {
     "Pendiente": 113
    },
    "rgu": 165.0,
-   "caidas_total": 0,
-   "caidas_activas": 0,
+   "caidas_total": 2,
+   "caidas_activas": 2,
    "caidas_resueltas": 0,
    "nuevas": 0,
    "al_bucket": 0,
    "repetidas": 25,
    "reagendadas": 6,
    "detalle": {
-    "caidas": [],
+    "caidas": [
+     {
+      "o": "1-3OU27JPD",
+      "tec": "DANIEL NAVARRETE E",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "10:00",
+      "d": "PJE ALMAR 146, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OS9IMEN",
+      "tec": "MARCO PEREZ G",
+      "cat": "Migración 2 Play",
+      "f": "10-13",
+      "hi": "11:33",
+      "d": "LAS MARIAS 1663, QUILPUE",
+      "e": "Pendiente"
+     }
+    ],
     "nuevas": [],
     "repetidas": [
      {
@@ -21904,5 +21923,5 @@
    }
   }
  },
- "generado": "05-11-2026 08:57"
+ "generado": "05-11-2026 09:07"
 }
