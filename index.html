@@ -17968,8 +17968,12 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarM
   #anPage h1 { margin:0; font-size:24px; letter-spacing:.5px; color:#0f172a; }
   #anPage h1 small { font-size:13px; color:#64748b; font-weight:400; margin-left:8px; }
   #anPage .an-chips { display:flex; gap:6px; flex-wrap:wrap; align-items:center; }
+  #anPage .an-btns { margin:-4px 0 14px; } #anPage .an-fil { margin-left:auto; }
   #anPage .an-chip { background:#16213a; border:1px solid #22304f; border-radius:999px; padding:6px 13px; font-size:12.5px; color:#94a3b8; cursor:pointer; }
   #anPage .an-chip.on { background:#1d4ed8; border-color:#1d4ed8; color:#fff; }
+  /* (05-11-2026) filtro por supervisor */
+  #anPage .an-sep { width:1px; height:22px; background:#334155; margin:0 4px; }
+  #anPage .an-chip.sup.on { background:#7c3aed; border-color:#7c3aed; }
   .an-upd { display:inline-flex; align-items:center; gap:6px; border-radius:999px; padding:5px 12px; font-size:12.5px; font-weight:600; background:#dcfce7; color:#15803d; border:1px solid #86efac; }
   .an-upd::before { content:''; width:8px; height:8px; border-radius:50%; background:currentColor; }
   .an-upd.mal { background:#fee2e2; color:#b91c1c; border-color:#fca5a5; animation:anParp 1s ease-in-out infinite; }
@@ -18196,6 +18200,25 @@ var AN_FAMS = [
 var AN_MIN_VIS = 15;
 var AN_MIN_MES = 30;
 var AN_COM = 'Todo';                 // Todo / QUILPUE / VILLA ALEMANA
+/* (05-11-2026) Luis: "necesito la mirada por super, crea 3 botones al lado derecho de Villa Alemana: todo el equipo,
+   Victor Moreira, Terry Riverol". Filtro por supervisor del tecnico (se combina con el de comuna). */
+var AN_SUP = 'Todo';                 // Todo / VICTOR MOREIRA / TERRY RIVEROL
+var AN_SUPMAP = null, AN_SUPN = -1;
+/* supervisor de un tecnico (nombre de bandeja / export): de datos.json (columna supervisor, el dato mas reciente);
+   si el nombre no esta igual, se busca por nombre y apellido (asBusca). '' si no se sabe. */
+function anSupDe(tec){
+  const AF = Array.isArray(window.ACT_FILAS) ? window.ACT_FILAS : [];
+  if(!AN_SUPMAP || AN_SUPN !== AF.length){
+    AN_SUPMAP = {}; AN_SUPN = AF.length; const f = {};
+    AF.forEach(function(r){ const n = String(r['Nombre'] || ''), s = String(r['supervisor'] || ''); if(n.indexOf('_DOMI_') < 0 || !s) return;
+      const p = /^(\d{2})-(\d{2})-(\d{4})$/.exec(String(r['Fecha'] || '')), iso = p ? p[3] + p[2] + p[1] : '';
+      const k = mpNorm(n.slice(n.indexOf('_DOMI_') + 6)); if(!f[k] || iso >= f[k]){ f[k] = iso; AN_SUPMAP[k] = mpNorm(s); } });
+    AN_SUPMAP.__k = Object.keys(AN_SUPMAP);
+  }
+  const k = mpNorm(tec); if(AN_SUPMAP[k]) return AN_SUPMAP[k];
+  const b = (typeof asBusca === 'function') ? asBusca(k, AN_SUPMAP.__k) : null;
+  AN_SUPMAP[k] = b ? AN_SUPMAP[b] : ''; return AN_SUPMAP[k];
+}
 var AN_DET = null;                   // { fam, per:{t:'hoy'|'sem'|'mes', k} }
 var AN_NOMMES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 var AN_RNOM = { cli:'Cliente', vtr:'VTR/CLARO', dom:'Dominion' };
@@ -18258,8 +18281,10 @@ function anFilas(){
     R.push({ fam:fam, iso:hoyIso, sem:semHoy, mes:mesHoy, e:String(o.e || 'Pendiente'), cod:String(o.cie || ''), gsa: !!o.gsa,
       fr:String(o.f || ''), tec:t, ciu:anCiuDir(o.d), ot:String(o.o || ''), dir:String(o.d || ''), hoy:true });
   }); });
-  const F = AN_COM === 'Todo' ? R : R.filter(function(x){ return mpNorm(x.ciu).indexOf(AN_COM) >= 0; });
-  return { R:F, cargando:cargando, hoyIso:hoyIso, semHoy:semHoy, mesHoy:mesHoy };
+  const F0 = AN_COM === 'Todo' ? R : R.filter(function(x){ return mpNorm(x.ciu).indexOf(AN_COM) >= 0; });
+  let sinSup = 0;
+  const F = AN_SUP === 'Todo' ? F0 : F0.filter(function(x){ const s = anSupDe(x.tec); if(!s) sinSup++; return s === AN_SUP; });
+  return { R:F, cargando:cargando, hoyIso:hoyIso, semHoy:semHoy, mesHoy:mesHoy, sinSup:sinSup };
 }
 function anPer(D, fam, per){
   return D.R.filter(function(x){ return x.fam === fam && (per.t === 'hoy' ? x.hoy : per.t === 'dia' ? x.iso === per.k : per.t === 'sem' ? x.sem === per.k : x.mes === per.k); });
@@ -18307,7 +18332,15 @@ function anPintar(){
   const y = box.scrollTop, D = anFilas(), fd = (typeof FECHA_DATOS !== 'undefined' && FECHA_DATOS) ? FECHA_DATOS : new Date();
   const hh = String(fd.getHours()).padStart(2, '0') + ':' + String(fd.getMinutes()).padStart(2, '0');
   let h = '<div class="an-wrap"><div class="an-head"><h1>MI ANÁLISIS <small>solo Luis · ' + fd.toLocaleDateString('es-CL', { weekday:'long', day:'2-digit', month:'2-digit', year:'numeric' }) + ', datos de las ' + hh + '</small></h1>'
-    + '<div class="an-chips"><span class="an-updbox">' + anUpdHtml() + '</span>'
+  /* (05-11-2026) Luis: "que quede en 1 sola linea si no los dejas al lado derecho, la hora arriba": comuna y supervisor
+     van en la fila del titulo (a la derecha) y los botones de ventanas en la fila de abajo */
+    + '<div class="an-chips an-fil">' + [['Todo','Todo el equipo'], ['QUILPUE','Quilpué'], ['VILLA ALEMANA','Villa Alemana']].map(function(c){
+        return '<span class="an-chip' + (AN_COM === c[0] ? ' on' : '') + '" onclick="AN_COM=\'' + c[0] + '\'; anPintar(); anDetPintar()">' + c[1] + '</span>'; }).join('')
+    /* (05-11-2026) mirada por supervisor */
+    + '<span class="an-sep"></span>' + [['Todo','Todo el equipo'], ['VICTOR MOREIRA','Víctor Moreira'], ['TERRY RIVEROL','Terry Riverol']].map(function(c){
+        return '<span class="an-chip sup' + (AN_SUP === c[0] ? ' on' : '') + '" title="Filtrar por supervisor del técnico" onclick="AN_SUP=\'' + c[0] + '\'; anPintar(); anDetPintar()">' + c[1] + '</span>'; }).join('')
+    + '<button class="an-x" onclick="anCerrar()" title="Cerrar (Esc o Ctrl+Alt+A)">✕ Cerrar</button></div></div>';
+  h += '<div class="an-chips an-btns"><span class="an-updbox">' + anUpdHtml() + '</span>'
     /* (04-11-2026) Luis: "agregame el boton de calidad en esta mirada": abre la ventana Calidad del mes encima de MI ANALISIS */
     + '<button class="an-btn cal" onclick="cqAbrirGerencia()" title="Resumen gerencia de la calidad del mes (meta 5,32%)">🛠 Calidad ›</button>'
     /* (05-11-2026) Luis: "arma un boton al lado derecho de calidad ... mostrando un resumen detallado" de los RGU */
@@ -18315,9 +18348,9 @@ function anPintar(){
     /* (05-11-2026) Luis: "crea un boton dentro de mi analisis ... al lado derecho de RGU ... llevar registro de la asistencia a diario" */
     + '<button class="an-btn asis" onclick="asAbrir()" title="Marcación de entrada día a día (tope 09:50)">⏰ Asistencia ›</button>'
     + '<button class="an-btn seg" onclick="anSegAbrir()" title="Técnicos de migraciones bajo 60 % de completitud: cómo se mueve la aguja">🎯 Seguimiento ›</button>'
-    + '<button class="an-btn" onclick="anTsAbrir(\'Migraciones\')" title="Completitud de cada técnico en las últimas 8 semanas">👥 Técnicos semana a semana ›</button>' + [['Todo','Todo el equipo'], ['QUILPUE','Quilpué'], ['VILLA ALEMANA','Villa Alemana']].map(function(c){
-        return '<span class="an-chip' + (AN_COM === c[0] ? ' on' : '') + '" onclick="AN_COM=\'' + c[0] + '\'; anPintar(); anDetPintar()">' + c[1] + '</span>'; }).join('')
-    + '<button class="an-x" onclick="anCerrar()" title="Cerrar (Esc o Ctrl+Alt+A)">✕ Cerrar</button></div></div>';
+    + '<button class="an-btn" onclick="anTsAbrir(\'Migraciones\')" title="Completitud de cada técnico en las últimas 8 semanas">👥 Técnicos semana a semana ›</button>' + '</div>';
+
+  if(AN_SUP !== 'Todo' && !D.cargando && D.sinSup) h += '<div class="an-carga">Ojo: ' + D.sinSup + ' orden' + (D.sinSup === 1 ? '' : 'es') + ' de técnicos sin supervisor conocido en datos.json: cuentan en Todo el equipo, no en este filtro.</div>';
   if(D.cargando) h += '<div class="an-carga">Cargando el histórico (datos.json)… lo de hoy ya está, el resto aparece en unos segundos.</div>';
   /* (04-11-2026) migraciones sin comuna conocida: entran en Todo el equipo pero no en Quilpué ni en Villa Alemana. Se dice cuantas. */
   if(AN_COM !== 'Todo' && !D.cargando){ const sc = (D.R || []).filter(function(x){ return x.fam === 'Migraciones' && !x.ciu; }).length;
@@ -18844,7 +18877,7 @@ function anDetPintar(){
   if(per.t === 'sem' && per.k !== D.semHoy) tabs.splice(2, 0, { t:'sem', k:per.k });
   if(per.t === 'dia') tabs.splice(1, 0, { t:'dia', k:per.k });
   let h = '<div class="an-md"><div class="an-mdtop"><h2><i style="width:12px;height:12px;border-radius:50%;background:' + F.c + ';display:inline-block;border:1px solid #cbd5e1"></i>' + fam + ' · detalle'
-    + (AN_COM !== 'Todo' ? ' <small>' + (AN_COM === 'QUILPUE' ? 'Quilpué' : 'Villa Alemana') + '</small>' : '') + '</h2>'
+    + (AN_COM !== 'Todo' ? ' <small>' + (AN_COM === 'QUILPUE' ? 'Quilpué' : 'Villa Alemana') + '</small>' : '') + (AN_SUP !== 'Todo' ? ' <small>' + derTitulo(AN_SUP) + '</small>' : '') + '</h2>'
     + '<div style="display:flex;gap:8px;align-items:center"><span class="an-updbox">' + anUpdHtml() + '</span>'
     + (AN_DET.volver ? '<button class="an-x" onclick="anTsAbrir(\'' + AN_DET.volver + '\')">‹ Volver a técnicos</button>' : '')
     + (AN_DET.volverSeg ? '<button class="an-x" onclick="anSegAbrir()">‹ Volver a Seguimiento</button>' : '')
@@ -18965,7 +18998,7 @@ function anTsPintar(m){
     if(Math.abs(d) <= 3) return '<td class="fl" style="color:#a15c07" title="Últimas 4 semanas contra las 4 anteriores">= ' + (d >= 0 ? '+' : '') + Math.round(d) + '</td>';
     return '<td class="fl" style="color:' + (d > 0 ? '#1e7a46' : '#b42318') + '" title="Últimas 4 semanas contra las 4 anteriores">' + (d > 0 ? '▲ +' : '▼ ') + Math.round(d) + ' pts</td>'; };
   let h = '<div class="an-md"><div class="an-mdtop"><h2><i style="width:12px;height:12px;border-radius:50%;background:' + F.c + ';display:inline-block;border:1px solid #cbd5e1"></i>Técnicos semana a semana'
-    + (AN_COM !== 'Todo' ? ' <small>' + (AN_COM === 'QUILPUE' ? 'Quilpué' : 'Villa Alemana') + '</small>' : '') + '</h2>'
+    + (AN_COM !== 'Todo' ? ' <small>' + (AN_COM === 'QUILPUE' ? 'Quilpué' : 'Villa Alemana') + '</small>' : '') + (AN_SUP !== 'Todo' ? ' <small>' + derTitulo(AN_SUP) + '</small>' : '') + '</h2>'
     + '<div style="display:flex;gap:8px;align-items:center"><span class="an-updbox">' + anUpdHtml() + '</span><button class="an-x" onclick="anDetCerrar()">✕ Cerrar</button></div></div>'
     + '<div class="an-tabs">' + AN_FAMS.map(function(f){ return '<span class="an-tab' + (f.f === fam ? ' on' : '') + '" onclick="anTsAbrir(\'' + f.f + '\')">' + f.f + '</span>'; }).join('') + '</div>';
   h += '<div class="an-card pastel"><h3>Completitud de cada técnico, semana a semana · ' + fam + '</h3>'
@@ -19026,7 +19059,7 @@ function anSegPintar(m){
     .filter(function(t){ return t.base.vis >= AN_SEG_MIN && t.base.comp < MP_META; })
     .sort(function(a, b){ return a.base.comp - b.base.comp; });
   const r1 = 'S' + derNumSemana(SEMS[3]) + ' a S' + derNumSemana(SEMS[6]);
-  let h = '<div class="an-md"><div class="an-mdtop"><h2>🎯 Seguimiento · técnicos a auditar <small>migraciones' + (AN_COM !== 'Todo' ? ' · ' + (AN_COM === 'QUILPUE' ? 'Quilpué' : 'Villa Alemana') : '') + '</small></h2>'
+  let h = '<div class="an-md"><div class="an-mdtop"><h2>🎯 Seguimiento · técnicos a auditar <small>migraciones' + (AN_COM !== 'Todo' ? ' · ' + (AN_COM === 'QUILPUE' ? 'Quilpué' : 'Villa Alemana') : '') + (AN_SUP !== 'Todo' ? ' · ' + derTitulo(AN_SUP) : '') + '</small></h2>'
     + '<div style="display:flex;gap:8px;align-items:center"><span class="an-updbox">' + anUpdHtml() + '</span><button class="an-x" onclick="anDetCerrar()">✕ Cerrar</button></div></div>'
     + '<div class="an-card pastel" style="margin-top:12px"><h3>' + lista.length + ' técnico' + (lista.length === 1 ? '' : 's') + ' bajo ' + MP_META + ' % en las últimas 4 semanas (' + r1 + ')</h3>'
     + '<p class="s">Del peor al mejor. <span class="an-top-ley">En ámbar: los ' + Math.min(AN_SEG_TOP, lista.length) + ' primeros a auditar</span> (los de peor promedio). "Cómo va" compara la semana en curso con su promedio de esas 4 semanas. Toca una casilla para ver esa semana.</p>';
@@ -19080,7 +19113,7 @@ function anDiarioPintar(m){
   var mesTot = mpSt(D.R.filter(function(x){ return x.fam === 'Migraciones' && x.mes === D.mesHoy; }));
   var clickDia = function(iso){ return ' onclick="anDetAbrir(\'Migraciones\', {t:\'dia\', k:\'' + iso + '\'}); AN_DET.volverDiario = true; anDetPintar()"'; };
   var h = '<div class="an-md"><div class="an-mdtop"><h2>📅 ' + nomMes + ' día a día <small>· migraciones'
-    + (AN_COM !== 'Todo' ? ' · ' + (AN_COM === 'QUILPUE' ? 'Quilpué' : 'Villa Alemana') : '') + '</small></h2>'
+    + (AN_COM !== 'Todo' ? ' · ' + (AN_COM === 'QUILPUE' ? 'Quilpué' : 'Villa Alemana') : '') + (AN_SUP !== 'Todo' ? ' · ' + derTitulo(AN_SUP) : '') + '</small></h2>'
     + '<div style="display:flex;gap:8px;align-items:center"><span class="an-updbox">' + anUpdHtml() + '</span><button class="an-x" onclick="anDetCerrar()">✕ Cerrar</button></div></div>'
     + '<div class="an-card pastel" style="margin-top:12px">';
   if(D.cargando){ h += '<div class="an-vac">Cargando el histórico…</div></div></div>'; m.innerHTML = h; m.scrollTop = y; return; }
