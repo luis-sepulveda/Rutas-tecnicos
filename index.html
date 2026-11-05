@@ -18017,6 +18017,37 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarM
   #anPage .an-btn.cal { background:#0f766e; } #anPage .an-btn.cal:hover { background:#115e59; }   /* (04-11-2026) boton Calidad */
   /* (05-11-2026) boton y ventana RGU */
   #anPage .an-btn.rgu { background:#b45309; } #anPage .an-btn.rgu:hover { background:#92400e; }
+  /* (05-11-2026) boton y ventana Asistencia */
+  #anPage .an-btn.asis { background:#0e7490; } #anPage .an-btn.asis:hover { background:#155e75; }
+  #anDet .asis .as-sub { margin:2px 0 10px; font-size:13px; color:#64748b; } #anDet .asis .as-oj { color:#b45309; }
+  #anDet .asis .as-sel { border:1px solid #cbd5e1; border-radius:999px; padding:5px 10px; font-size:13px; }
+  #anDet .asis .as-kpis { display:grid; grid-template-columns:repeat(5, 1fr); gap:10px; }
+  @media (max-width:900px){ #anDet .asis .as-kpis { grid-template-columns:1fr 1fr; } }
+  #anDet .asis .as-k { border:1px solid #e2e8f0; border-radius:12px; padding:10px 12px; background:#f8fafc; }
+  #anDet .asis .as-k b { display:block; font-size:26px; color:#0f172a; font-variant-numeric:tabular-nums; }
+  #anDet .asis .as-k span { font-size:12.5px; color:#475569; }
+  #anDet .asis .as-k.ok b { color:#15803d; } #anDet .asis .as-k.mal { background:#fef2f2; border-color:#fecaca; } #anDet .asis .as-k.mal b { color:#b91c1c; }
+  #anDet .asis .as-k.av { background:#fffbeb; border-color:#fde68a; } #anDet .asis .as-k.av b { color:#b45309; }
+  #anDet .asis .as-sec { margin:18px 0 6px; font-size:13px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:#1e3a8a; }
+  #anDet .asis .as-sec small { display:block; text-transform:none; letter-spacing:0; font-weight:400; color:#64748b; font-size:12px; }
+  #anDet .asis .as-t { width:100%; border-collapse:collapse; font-size:13px; color:#1e293b; }
+  #anDet .asis .as-t th { font-size:11.5px; color:#64748b; font-weight:600; text-align:center; padding:6px; border-bottom:1px solid #e2e8f0; background:#fff; }
+  #anDet .asis .as-scroll .as-t th { position:sticky; top:0; z-index:1; }
+  #anDet .asis .as-t td { text-align:center; padding:5px 6px; border-bottom:1px solid #f1f5f9; font-variant-numeric:tabular-nums; }
+  #anDet .asis .as-t .l { text-align:left; } #anDet .asis .as-t td.s { color:#64748b; font-size:12px; }
+  #anDet .asis .as-t td.m { color:#b91c1c; font-weight:700; } #anDet .asis .as-t td.a { color:#b45309; font-weight:700; }
+  #anDet .asis .as-t tr.cl { cursor:pointer; } #anDet .asis .as-t tr.cl:hover td { background:#f8fafc; } #anDet .asis .as-t tr.ab td { background:#eff6ff; }
+  #anDet .asis .as-scroll { max-height:65vh; overflow:auto; }
+  #anDet .asis .as-r { border-radius:999px; padding:1px 9px; font-size:12px; font-weight:600; white-space:nowrap; }
+  #anDet .asis .as-r.ok { background:#dcfce7; color:#166534; } #anDet .asis .as-r.tarde { background:#fee2e2; color:#b91c1c; }
+  #anDet .asis .as-r.temprano { background:#e0f2fe; color:#075985; } #anDet .asis .as-r.sin { background:#fef3c7; color:#92400e; } #anDet .asis .as-r.lic { background:#f1f5f9; color:#475569; }
+  #anDet .asis .as-dias { display:inline-flex; gap:3px; flex-wrap:wrap; }
+  #anDet .asis .as-dias i { font-style:normal; min-width:38px; height:20px; border-radius:4px; font-size:10.5px; line-height:20px; text-align:center; color:#fff; padding:0 2px; box-sizing:border-box; }
+  #anDet .asis .as-dias i.ok { background:#16a34a; } #anDet .asis .as-dias i.tarde { background:#dc2626; } #anDet .asis .as-dias i.temprano { background:#0284c7; }
+  #anDet .asis .as-dias i.sin, #anDet .asis .as-dias i.lic { background:#94a3b8; } #anDet .asis .as-dias i.n { background:#e2e8f0; }
+  #anDet .asis .as-dias i.av { box-shadow:inset 0 0 0 2px #f59e0b; }
+  #anDet .asis .as-det { background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:8px; margin:2px 0 6px; }
+  #anDet .asis .as-n { font-size:12px; color:#64748b; margin:10px 0 0; line-height:1.5; }
   #anDet .rgu .rgu-sub { margin:2px 0 10px; font-size:13px; color:#64748b; }
   #anDet .rgu .rgu-kpis { display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:10px; }
   @media (max-width:900px){ #anDet .rgu .rgu-kpis { grid-template-columns:1fr 1fr; } #anDet .rgu .rgu-2 { grid-template-columns:1fr !important; } }
@@ -18280,6 +18311,8 @@ function anPintar(){
     + '<button class="an-btn cal" onclick="cqAbrirGerencia()" title="Resumen gerencia de la calidad del mes (meta 5,32%)">🛠 Calidad ›</button>'
     /* (05-11-2026) Luis: "arma un boton al lado derecho de calidad ... mostrando un resumen detallado" de los RGU */
     + '<button class="an-btn rgu" onclick="rguAbrir()" title="RGU por técnico al día (meta ' + RGU_META + ')">📈 RGU ›</button>'
+    /* (05-11-2026) Luis: "crea un boton dentro de mi analisis ... al lado derecho de RGU ... llevar registro de la asistencia a diario" */
+    + '<button class="an-btn asis" onclick="asAbrir()" title="Marcación de entrada día a día (tope 09:50)">⏰ Asistencia ›</button>'
     + '<button class="an-btn seg" onclick="anSegAbrir()" title="Técnicos de migraciones bajo 60 % de completitud: cómo se mueve la aguja">🎯 Seguimiento ›</button>'
     + '<button class="an-btn" onclick="anTsAbrir(\'Migraciones\')" title="Completitud de cada técnico en las últimas 8 semanas">👥 Técnicos semana a semana ›</button>' + [['Todo','Todo el equipo'], ['QUILPUE','Quilpué'], ['VILLA ALEMANA','Villa Alemana']].map(function(c){
         return '<span class="an-chip' + (AN_COM === c[0] ? ' on' : '') + '" onclick="AN_COM=\'' + c[0] + '\'; anPintar(); anDetPintar()">' + c[1] + '</span>'; }).join('')
@@ -18582,6 +18615,170 @@ function rguPintar(m){
   m.innerHTML = h; m.scrollTop = y;
 }
 
+/* ===== (05-11-2026) ASISTENCIA · boton "⏰ Asistencia" en MI ANALISIS, a la derecha de 📈 RGU =====
+   Luis: "crea un boton dentro de mi analisis ... la idea es guardar y llevar registro de la asistencia a diario
+   con resumen y detalle". Regla: marcar a las 9:45, 5 minutos antes o despues; tope 9:50.
+   - Datos: asistencia.json (repo Actividades-diario), que arma asistencia.py (carpeta Rutas tecnicos) con todos
+     los Excel "Registro de marcacion entrada" de VTR guardados en Rutas tecnicos\asistencia\. Por tecnico:
+     [nombre, primera marca (seg), texto si no hubo marca, entrada turno (seg), 'lic' si licencia/permiso/vacaciones].
+   - Ventana: entrada - AS_ANTES a entrada + AS_DESPUES (09:40 a 09:50). Despues = tarde. Antes = temprano (no es falta).
+   - Cruce con las ordenes de ese dia: hoy = bandejas (DB); dias anteriores = datos.json (ACT_FILAS). "Marco sin
+     ordenes" = marco y no tuvo ninguna orden ese dia; "Ordenes sin marca" = tuvo ordenes y no marco. */
+const AS_ANTES = 5, AS_DESPUES = 5;
+const URL_ASIS = URL_ACTIVIDADES + 'asistencia.json';
+let AS_J;            // undefined = no pedido, null = bajando, 'error', o el objeto
+let AS_VISTA = 'mes', AS_MES = null, AS_DIA = null, AS_AB = null;
+function asNorm(s){ return String(s || '').replace(/ /g, ' ').normalize('NFD').replace(/[̀-ͯ]/g, '').toUpperCase().replace(/[^A-Z ]/g, ' ').replace(/\s+/g, ' ').trim(); }
+function asLev1(a, b){ if(Math.abs(a.length - b.length) > 1) return false; let i = 0; while(i < a.length && a[i] === b[i]) i++;
+  return a.slice(i + 1) === b.slice(i + 1) || a.slice(i) === b.slice(i + 1) || a.slice(i + 1) === b.slice(i); }
+function asTok(a, b){ if(a.length < 2) return false;
+  if(a === b || (a.length >= 3 && b.indexOf(a) === 0) || (b.length >= 3 && a.indexOf(b) === 0)) return true;
+  return a.length >= 5 && b.length >= 5 && asLev1(a, b); }
+/* clave de 'keys' (nombre de bandeja, a veces cortado) que calza con el nombre completo de VTR; null si no hay una clara */
+function asBusca(nom, keys){
+  const V = asNorm(nom).split(' '); let best = null, bs = 0, emp = false;
+  keys.forEach(function(k){ const K = asNorm(k).split(' '); let sc = 0; const us = {};
+    K.forEach(function(t, i){ for(let j = 0; j < V.length; j++){ if(!us[j] && asTok(t, V[j])){ us[j] = 1; sc += (i === 0 && j === 0) ? 1 : 2; break; } } });
+    if(sc > bs){ bs = sc; best = k; emp = false; } else if(sc === bs && sc > 0) emp = true; });
+  return bs >= 3 && !emp ? best : null;
+}
+function asHora(s){ if(s === null || s === undefined) return '–'; return String(Math.floor(s / 3600)).padStart(2, '0') + ':' + String(Math.floor(s % 3600 / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0'); }
+function asDur(s){ s = Math.abs(s); return s >= 60 ? Math.floor(s / 60) + ' min ' + (s % 60) + ' s' : s + ' s'; }
+function asFechaCL(d){ return d.slice(8) + '-' + d.slice(5, 7); }
+function asCargar(){
+  if(AS_J !== undefined) return;
+  AS_J = null;
+  fetch(URL_ASIS + '?t=' + Date.now(), { cache:'no-store' }).then(function(r){ if(!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(function(j){ AS_J = j; if(AN_DET && AN_DET.asis) anDetPintar(); })
+    .catch(function(){ AS_J = 'error'; if(AN_DET && AN_DET.asis) anDetPintar(); });
+}
+function asAbrir(){
+  AN_DET = { asis:true };
+  try { mesCargar(); } catch(e){}
+  asCargar();
+  let m = document.getElementById('anDet');
+  if(!m){ m = document.createElement('div'); m.id = 'anDet'; m.onclick = function(e){ if(e.target === m) anDetCerrar(); }; document.body.appendChild(m); }
+  m.classList.add('abierto'); m.scrollTop = 0; anDetPintar();
+  if(window.ACT_FILAS === null){ const t = setInterval(function(){ if(window.ACT_FILAS !== null){ clearInterval(t); if(AN_DET && AN_DET.asis) anDetPintar(); } }, 700); setTimeout(function(){ clearInterval(t); }, 60000); }
+}
+function asVer(v, k){ AS_VISTA = v; if(v === 'mes') AS_MES = k; if(v === 'dia') AS_DIA = k; AS_AB = null; anDetPintar(); }
+function asAbrirTec(n){ AS_AB = AS_AB === n ? null : n; anDetPintar(); }
+/* ordenes por tecnico de un dia 'AAAA-MM-DD': hoy de las bandejas, antes de datos.json */
+function asOrdenes(dia){
+  const o = {};
+  if(dia === cqIsoHoy()){ Object.keys(typeof DB === 'object' && DB ? DB : {}).forEach(function(k){ o[k] = (DB[k] || []).length; }); return { o:o, ok:true }; }
+  if(!Array.isArray(window.ACT_FILAS)) return { o:o, ok:false };
+  const f = dia.slice(8) + '-' + dia.slice(5, 7) + '-' + dia.slice(0, 4);
+  window.ACT_FILAS.forEach(function(r){ if(String(r['Fecha'] || '') !== f) return; const n = String(r['Nombre'] || ''); if(n.indexOf('_DOMI_') < 0) return;
+    const k = n.slice(n.indexOf('_DOMI_') + 6).replace(/\s+/g, ' ').trim(); o[k] = (o[k] || 0) + 1; });
+  return { o:o, ok:Object.keys(o).length > 0 };
+}
+/* un dia -> resultado por tecnico */
+function asDiaCalc(dia){
+  const D = AS_J.dias[dia]; if(!D) return null;
+  const O = asOrdenes(dia), keys = Object.keys(O.o), usados = {};
+  const L = D.t.map(function(x){
+    const r = { nom:x[0], marca:x[1], txt:x[2] || '', ent:x[3], lic:x[4] === 'lic' };
+    if(r.marca === null || r.marca === undefined){ r.marca = null; r.res = r.lic ? 'lic' : 'sin'; }
+    else { r.dif = r.marca - r.ent; r.res = r.dif > AS_DESPUES * 60 ? 'tarde' : r.dif < -AS_ANTES * 60 ? 'temprano' : 'ok'; }
+    const k = asBusca(r.nom, keys); r.key = k; if(k) usados[k] = 1; r.ord = k ? O.o[k] : 0;
+    r.av = [];
+    if(O.ok){
+      if(r.marca !== null && !r.ord){ let e = '';
+        if(dia === cqIsoHoy() && typeof NOOP === 'object' && NOOP && NOOP.lista){ const nk = asBusca(r.nom, NOOP.lista.map(function(x){ return x.tec; }));
+          const x = nk ? NOOP.lista.filter(function(q){ return q.tec === nk; })[0] : null; if(x && x.estado) e = ' (en el Módulo: ' + x.estado.toLowerCase() + ')'; }
+        r.av.push('Marcó y no tuvo órdenes' + e); }
+      if(r.marca === null && !r.lic && r.ord) r.av.push('Tuvo órdenes y no marcó');
+    }
+    if(r.marca !== null && r.lic) r.av.push('Marcó, pero su turno dice licencia/permiso');
+    return r; });
+  const fuera = O.ok ? keys.filter(function(k){ return !usados[k] && O.o[k]; }) : [];
+  const c = { ok:0, tarde:0, temprano:0, sin:0, lic:0 }; L.forEach(function(r){ c[r.res]++; });
+  return { dia:dia, L:L, c:c, fuera:fuera, ordOk:O.ok, archivo:D.archivo };
+}
+/* un mes -> por tecnico */
+function asMesCalc(mes){
+  const dias = Object.keys(AS_J.dias).filter(function(d){ return d.slice(0, 7) === mes; }).sort();
+  const T = {};
+  const DD = dias.map(function(d){ return asDiaCalc(d); });
+  DD.forEach(function(R){ R.L.forEach(function(r){
+    const t = T[r.nom] || (T[r.nom] = { nom:r.nom, d:{}, ok:0, tarde:0, temprano:0, sin:0, lic:0, seg:0, av:0 });
+    t.d[R.dia] = r; t[r.res]++; if(r.res === 'tarde') t.seg += r.dif - AS_DESPUES * 60; if(r.av.length) t.av++; }); });
+  const L = Object.keys(T).map(function(k){ const t = T[k]; t.dias = Object.keys(t.d).length; t.marco = t.ok + t.tarde + t.temprano; return t; })
+    .sort(function(a, b){ return b.tarde - a.tarde || b.seg - a.seg || b.av - a.av || a.nom.localeCompare(b.nom); });
+  const eq = { marcas:0, ok:0, tarde:0, temprano:0, sin:0, lic:0, seg:0, av:0 };
+  L.forEach(function(t){ eq.ok += t.ok; eq.tarde += t.tarde; eq.temprano += t.temprano; eq.sin += t.sin; eq.lic += t.lic; eq.seg += t.seg; eq.av += t.av; });
+  eq.marcas = eq.ok + eq.tarde + eq.temprano;
+  return { mes:mes, dias:dias, DD:DD, L:L, eq:eq };
+}
+const AS_RES = { ok:'Dentro', tarde:'Tarde', temprano:'Temprano', sin:'Sin marca', lic:'Licencia / permiso' };
+function asCelda(r, dia){
+  if(!r) return '<i class="n" title="' + asFechaCL(dia) + ': no está en el registro"></i>';
+  const t = asFechaCL(dia) + ': ' + (r.marca === null ? (r.txt || AS_RES[r.res]) : asHora(r.marca) + ' · ' + AS_RES[r.res] + (r.res === 'tarde' ? ' (' + asDur(r.dif - AS_DESPUES * 60) + ' sobre el tope)' : '')) + (r.av.length ? ' · ' + r.av.join(' · ') : '');
+  /* si llego en el mismo minuto del tope (09:50:xx), se muestran los segundos para que no parezca "a tiempo" */
+  const txt = r.marca === null ? (r.res === 'lic' ? 'L' : '–') : (r.res === 'tarde' && asHora(r.marca).slice(0, 5) === asHora(r.ent + AS_DESPUES * 60).slice(0, 5) ? asHora(r.marca) : asHora(r.marca).slice(0, 5));
+  return '<i class="' + r.res + (r.av.length ? ' av' : '') + '" title="' + escR(t) + '">' + txt + '</i>';
+}
+function asDetTec(t, dias){
+  return '<div class="as-det"><table class="as-t"><tr><th>Día</th><th>Primera marca</th><th>Entrada</th><th>Diferencia</th><th>Resultado</th><th>Órdenes</th><th class="l">Observación</th></tr>'
+    + dias.slice().reverse().map(function(d){ const r = t.d[d]; if(!r) return '<tr><td>' + asFechaCL(d) + '</td><td colspan="6" class="l s">no está en el registro de ese día</td></tr>';
+      return '<tr><td>' + asFechaCL(d) + '</td><td>' + (r.marca === null ? escR(r.txt || '–') : asHora(r.marca)) + '</td><td>' + asHora(r.ent).slice(0, 5) + '</td><td>' + (r.dif === undefined ? '–' : (r.dif > 0 ? '+' : r.dif < 0 ? '−' : '') + asDur(r.dif)) + '</td>'
+        + '<td><span class="as-r ' + r.res + '">' + AS_RES[r.res] + '</span></td><td>' + (r.key ? r.ord : '–') + '</td><td class="l s">' + escR(r.av.join(' · ')) + '</td></tr>'; }).join('')
+    + '</table></div>';
+}
+function asPintar(m){
+  const y = m.scrollTop;
+  let h = '<div class="an-md asis"><div class="an-mdtop"><h2>⏰ Asistencia <small>marcación de entrada · ventana ' + AS_ANTES + ' min antes y ' + AS_DESPUES + ' después (turno 09:45: 09:40 a 09:50)</small></h2>'
+    + '<div style="display:flex;gap:8px;align-items:center"><span class="an-updbox">' + anUpdHtml() + '</span><button class="an-x" onclick="anDetCerrar()">✕ Cerrar</button></div></div>';
+  if(AS_J === null || AS_J === undefined){ m.innerHTML = h + '<div class="an-vac">Bajando asistencia.json…</div></div>'; return; }
+  if(AS_J === 'error'){ m.innerHTML = h + '<div class="an-vac">Todavía no hay registro de asistencia (no se encontró asistencia.json en Actividades-diario).<br><br>'
+    + '1) Guarda el Excel de marcación de VTR en la carpeta <b>Rutas tecnicos\\asistencia</b> (sin renombrar).<br>2) Doble clic a <b>asistencia.bat</b>.<br>3) Sube <b>asistencia.json</b> al repo Actividades-diario.</div></div>'; return; }
+  const todos = Object.keys(AS_J.dias || {}).sort(); if(!todos.length){ m.innerHTML = h + '<div class="an-vac">asistencia.json no trae días.</div></div>'; return; }
+  const meses = []; todos.forEach(function(d){ if(meses.indexOf(d.slice(0, 7)) < 0) meses.push(d.slice(0, 7)); });
+  if(!AS_MES || meses.indexOf(AS_MES) < 0) AS_MES = meses[meses.length - 1];
+  if(!AS_DIA || todos.indexOf(AS_DIA) < 0) AS_DIA = todos[todos.length - 1];
+  h += '<div class="an-tabs">' + meses.map(function(k){ return '<button class="an-tab' + (AS_VISTA === 'mes' && k === AS_MES ? ' on' : '') + '" onclick="asVer(\'mes\', \'' + k + '\')">Resumen ' + AN_NOMMES[+k.slice(5) - 1].toLowerCase() + '</button>'; }).join('')
+    + '<button class="an-tab' + (AS_VISTA === 'dia' ? ' on' : '') + '" onclick="asVer(\'dia\', \'' + todos[todos.length - 1] + '\')">Día ' + asFechaCL(AS_VISTA === 'dia' ? AS_DIA : todos[todos.length - 1]) + '</button>'
+    + (AS_VISTA === 'dia' ? '<select class="as-sel" onchange="asVer(\'dia\', this.value)">' + todos.slice().reverse().map(function(d){ return '<option value="' + d + '"' + (d === AS_DIA ? ' selected' : '') + '>' + asFechaCL(d) + '-' + d.slice(0, 4) + '</option>'; }).join('') + '</select>' : '')
+    + '</div>';
+  if(AS_VISTA === 'dia'){
+    const R = asDiaCalc(AS_DIA), nAv = R.L.filter(function(r){ return r.av.length; }).length + R.fuera.length;
+    h += '<p class="as-sub">' + asFechaCL(AS_DIA) + '-' + AS_DIA.slice(0, 4) + ' · ' + R.L.length + ' técnicos · archivo ' + escR(R.archivo) + (R.ordOk ? '' : ' · <span class="as-oj">sin datos de órdenes de ese día todavía: el cruce con las bandejas no se hace</span>') + '</p>'
+      + '<div class="as-kpis"><div class="as-k ok"><b>' + R.c.ok + '</b><span>dentro de la ventana</span></div><div class="as-k ' + (R.c.tarde ? 'mal' : '') + '"><b>' + R.c.tarde + '</b><span>tarde</span></div>'
+      + '<div class="as-k"><b>' + R.c.temprano + '</b><span>temprano</span></div><div class="as-k"><b>' + (R.c.sin + R.c.lic) + '</b><span>sin marca' + (R.c.lic ? ' (' + R.c.lic + ' licencia/permiso)' : '') + '</span></div>'
+      + '<div class="as-k ' + (nAv ? 'av' : 'ok') + '"><b>' + nAv + '</b><span>no cuadran con las órdenes</span></div></div>';
+    if(nAv) h += '<div class="as-sec">No cuadran</div><table class="as-t"><tr><th class="l">Técnico</th><th>Marca</th><th>Órdenes</th><th class="l">Qué pasa</th></tr>'
+      + R.L.filter(function(r){ return r.av.length; }).map(function(r){ return '<tr><td class="l"><b>' + escR(derTitulo(r.nom)) + '</b></td><td>' + (r.marca === null ? escR(r.txt || '–') : asHora(r.marca)) + '</td><td>' + r.ord + '</td><td class="l">' + escR(r.av.join(' · ')) + '</td></tr>'; }).join('')
+      + R.fuera.map(function(k){ return '<tr><td class="l"><b>' + escR(derTitulo(k)) + '</b></td><td>–</td><td>' + (R.ordOk ? asOrdenes(AS_DIA).o[k] : '–') + '</td><td class="l">Tuvo órdenes y no está en el registro de marcación</td></tr>'; }).join('') + '</table>';
+    const ORD = { tarde:0, sin:1, lic:2, temprano:3, ok:4 };
+    h += '<div class="as-sec">Todos los técnicos</div><div class="as-scroll"><table class="as-t"><tr><th class="l">Técnico</th><th>Primera marca</th><th>Entrada</th><th>Diferencia</th><th>Resultado</th><th>Órdenes</th><th class="l">Observación</th></tr>'
+      + R.L.slice().sort(function(a, b){ return ORD[a.res] - ORD[b.res] || (b.dif || 0) - (a.dif || 0); }).map(function(r){
+        return '<tr><td class="l">' + escR(derTitulo(r.nom)) + '</td><td>' + (r.marca === null ? escR(r.txt || '–') : asHora(r.marca)) + '</td><td>' + asHora(r.ent).slice(0, 5) + '</td><td>' + (r.dif === undefined ? '–' : (r.dif > 0 ? '+' : r.dif < 0 ? '−' : '') + asDur(r.dif)) + '</td>'
+          + '<td><span class="as-r ' + r.res + '">' + AS_RES[r.res] + (r.res === 'tarde' ? ' · ' + asDur(r.dif - AS_DESPUES * 60) : '') + '</span></td><td>' + (r.key ? r.ord : '–') + '</td><td class="l s">' + escR(r.av.join(' · ')) + '</td></tr>'; }).join('') + '</table></div>';
+  } else {
+    const M = asMesCalc(AS_MES), E = M.eq, nomM = AN_NOMMES[+AS_MES.slice(5) - 1];
+    const conAt = M.L.filter(function(t){ return t.tarde; }).length;
+    h += '<p class="as-sub">' + nomM + ': ' + M.dias.length + ' día' + (M.dias.length === 1 ? '' : 's') + ' registrado' + (M.dias.length === 1 ? '' : 's') + ' (' + M.dias.map(asFechaCL).join(', ') + ') · ' + M.L.length + ' técnicos</p>'
+      + '<div class="as-kpis"><div class="as-k ' + (E.tarde ? '' : 'ok') + '"><b>' + (E.marcas ? (100 * (E.ok + E.temprano) / E.marcas).toFixed(1).replace('.', ',') + ' %' : '–') + '</b><span>de las marcas a tiempo (' + (E.ok + E.temprano) + ' de ' + E.marcas + ')</span></div>'
+      + '<div class="as-k ' + (E.tarde ? 'mal' : '') + '"><b>' + E.tarde + '</b><span>atrasos · ' + asDur(E.seg) + ' sobre el tope en total</span></div>'
+      + '<div class="as-k"><b>' + conAt + ' de ' + M.L.length + '</b><span>técnicos con al menos un atraso</span></div>'
+      + '<div class="as-k"><b>' + (E.sin + E.lic) + '</b><span>días sin marca (' + E.lic + ' licencia/permiso)</span></div>'
+      + '<div class="as-k ' + (E.av ? 'av' : 'ok') + '"><b>' + E.av + '</b><span>días que no cuadran con las órdenes</span></div></div>';
+    h += '<div class="as-sec">Técnico por técnico <small>primero los con más atrasos · cada cuadro es un día: verde dentro, rojo tarde, celeste temprano, gris sin marca, borde ámbar = no cuadra con las órdenes · toca un técnico para ver el detalle</small></div>'
+      + '<div class="as-scroll"><table class="as-t tec"><tr><th class="l">Técnico</th><th>Días</th><th>Dentro</th><th>Tarde</th><th>Minutos sobre el tope</th><th>Temprano</th><th>Sin marca</th><th>No cuadra</th><th class="l">Día a día</th></tr>'
+      + M.L.map(function(t){ const ab = AS_AB === t.nom;
+        return '<tr class="cl' + (ab ? ' ab' : '') + '" onclick="asAbrirTec(\'' + escR(t.nom).replace(/'/g, "\\'") + '\')"><td class="l"><b>' + (ab ? '▾ ' : '▸ ') + escR(derTitulo(t.nom)) + '</b></td><td>' + t.dias + '</td><td>' + t.ok + '</td>'
+          + '<td class="' + (t.tarde ? 'm' : '') + '">' + t.tarde + '</td><td>' + (t.seg ? asDur(t.seg) : '–') + '</td><td>' + t.temprano + '</td><td>' + (t.sin + t.lic) + (t.lic ? ' <small>(' + t.lic + ' L)</small>' : '') + '</td><td class="' + (t.av ? 'a' : '') + '">' + t.av + '</td>'
+          + '<td class="l"><span class="as-dias">' + M.dias.map(function(d){ return asCelda(t.d[d], d); }).join('') + '</span></td></tr>'
+          + (ab ? '<tr><td colspan="9">' + asDetTec(t, M.dias) + '</td></tr>' : ''); }).join('')
+      + '</table></div>';
+  }
+  h += '<p class="as-n"><b>Cómo se mide:</b> el técnico marca dentro de ' + AS_ANTES + ' min antes o ' + AS_DESPUES + ' min después de su entrada (turno 09:45: entre 09:40 y 09:50). Después del tope es <b>tarde</b> (los minutos que se muestran son los que pasan del tope). Antes de la ventana es "temprano": se muestra, no es falta. '
+    + '"No cuadra": marcó y no tuvo órdenes ese día, o tuvo órdenes y no marcó, o marcó con licencia/permiso. Las órdenes salen de las bandejas (hoy) y de datos.json (días anteriores). '
+    + 'Fuente: asistencia.json (generado ' + escR(AS_J.generado || '') + '), con los Excel de VTR guardados en Rutas tecnicos\\asistencia.</p></div>';
+  m.innerHTML = h; m.scrollTop = y;
+}
+
 function anDetCerrar(){ AN_DET = null; const m = document.getElementById('anDet'); if(m) m.classList.remove('abierto'); }
 function anDetPer(t, k){ if(!AN_DET) return; AN_DET.per = { t:t, k:k }; anDetPintar(); }
 
@@ -18591,6 +18788,7 @@ function anDetPintar(){
   if(AN_DET.seg) return anSegPintar(m);
   if(AN_DET.diario) return anDiarioPintar(m);
   if(AN_DET.rgu) return rguPintar(m);
+  if(AN_DET.asis) return asPintar(m);
   const y = m.scrollTop, D = anFilas(), fam = AN_DET.fam, per = AN_DET.per, F = AN_FAMS.filter(function(x){ return x.f === fam; })[0] || AN_FAMS[0];
   const L = anPer(D, fam, per), s = mpSt(L);
   /* periodo anterior para la flecha */
