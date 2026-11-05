@@ -21520,15 +21520,15 @@
    }
   },
   "05-11-2026": {
-   "hasta": "17:50",
+   "hasta": "17:59",
    "actividades": 181,
    "tecnicos": 33,
    "estados": {
-    "No Realizada": 32,
-    "Completado": 100,
+    "No Realizada": 33,
+    "Completado": 101,
     "Iniciado": 21,
     "Suspendido": 10,
-    "Pendiente": 5,
+    "Pendiente": 3,
     "Cancelado": 11,
     "en ruta": 2
    },
@@ -21803,7 +21803,7 @@
       "f": "13-16",
       "hi": "15:46",
       "d": "VOLCAN LICANCABUR 2672, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OUQ900I",
@@ -21933,12 +21933,12 @@
      },
      {
       "o": "1-3OSQLNT6",
-      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "tec": "KEVIN TAPIA RETAMAL",
       "cat": "Alta 1 Play",
       "f": "13-16",
       "hi": "14:00",
       "d": "ANA MARIA FRESNO 150 CASA 8 DEPTO 124, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OUI4E21",
@@ -22038,9 +22038,9 @@
       "o": "1-3OUIMG7G",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "18:04",
+      "hi": "17:50",
       "d": "EL PATAGUAL 2, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "ESTEBAN PIZARRO QUINTANA",
       "visitas": 2,
       "ult_fecha": "05-11-2026",
@@ -22178,6 +22178,18 @@
       "ult_cierre": "Cliente Desiste"
      },
      {
+      "o": "1-3OSQLNT6",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "18:20",
+      "d": "ANA MARIA FRESNO 150 CASA 8 DEPTO 124, VILLA ALEMANA",
+      "e": "en ruta",
+      "tec": "KEVIN TAPIA RETAMAL",
+      "visitas": 1,
+      "ult_fecha": "03-11-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OSLLVFH",
       "cat": "Modificación de Servicio",
       "f": "16-19",
@@ -22272,18 +22284,6 @@
       "visitas": 1,
       "ult_fecha": "02-11-2026",
       "ult_cierre": "Cliente reagenda"
-     },
-     {
-      "o": "1-3OSQLNT6",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "18:19",
-      "d": "ANA MARIA FRESNO 150 CASA 8 DEPTO 124, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "SAMUEL FERNANDEZ VIDAL",
-      "visitas": 1,
-      "ult_fecha": "03-11-2026",
-      "ult_cierre": "Sin moradores"
      }
     ],
     "reagendadas": [
@@ -22341,5 +22341,5 @@
    }
   }
  },
- "generado": "05-11-2026 17:50"
+ "generado": "05-11-2026 17:59"
 }
