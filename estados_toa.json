@@ -1,8 +1,8 @@
 {
-  "actualizado": "2026-11-05T10:03:47",
+  "actualizado": "2026-11-05T10:34:01",
   "resumen": {
     "reagendada": 1,
-    "sin informacion": 2
+    "sin informacion": 3
   },
   "estados": {
     "1-3OU27JPD": {
@@ -14,6 +14,62 @@
       "color": "rgb(255, 222, 0)",
       "detalle": "1-3OU27JPD - 10-13-Alta-1 Play-PJE ALMAR 146Vie, 6 Nov",
       "franja_nueva": "10-13"
+    },
+    "1-3OTLTPQE": {
+      "tec": "JOSE PEREZ RANGEL",
+      "cat": "Alta 1 Play",
+      "franja_original": "10-13",
+      "d": "YUNGAY 871, VILLA ALEMANA",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "YUNGAY 871",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3OS00WZE",
+            "franja": "10-13",
+            "texto": "1-3OS00WZE - 10-13-Alta-1 Play-YUNGAY 871Mie, 4 Nov"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3OQZT1G4",
+            "franja": "10-13",
+            "texto": "1-3OQZT1G4 - 10-13-Alta-1 Play-YUNGAY 871Mar, 3 Nov"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3OQRJZJZ",
+            "franja": "10-13",
+            "texto": "1-3OQRJZJZ - 10-13-Alta-1 Play-YUNGAY 871Lun, 2 Nov"
+          },
+          {
+            "estado": "completada",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3NWQ4E3N",
+            "franja": "16-19",
+            "texto": "1-3NWQ4E3N - 16-19-Alta-1 Play-YUNGAY 871 CASA BLun, 21 Sep"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3NW6DTXF",
+            "franja": "13-16",
+            "texto": "1-3NW6DTXF - 13-16-Alta-1 Play-YUNGAY 871 CASA BJue, 17 Sep"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3NUJW4LO",
+            "franja": "16-19",
+            "texto": "1-3NUJW4LO - 16-19-Alta-1 Play-YUNGAY 871 CASA BMie, 16 Sep"
+          }
+        ]
+      }
     },
     "1-3OTC59LC": {
       "tec": "LUIS GATICA DAVILA",
@@ -77,7 +133,55 @@
       "franja_original": "10-13",
       "d": "LAS MARIAS 1663, QUILPUE",
       "estado": "sin informacion",
-      "nota": "la OT ya no existe en TOA"
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "LAS MARIAS 1663",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "cancelada",
+            "color": "rgb(128, 255, 128)",
+            "ot": "1-3NKUUVXS",
+            "franja": "10-13",
+            "texto": "1-3NKUUVXS - 10-13-Reparación-3 Play Servicio Degradado-GUARANIES 1342Mar, 1 Sep"
+          },
+          {
+            "estado": "completada",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3NKRTG5I",
+            "franja": "10-13",
+            "texto": "1-3NKRTG5I - 10-13-Reparación-3 Play Sin Servicio-GUARANIES 1342Lun, 31 Ago"
+          },
+          {
+            "estado": "?",
+            "color": "rgb(93, 190, 63)",
+            "ot": "1-3OTWC5G7",
+            "franja": "10-13",
+            "texto": "1-3OTWC5G7 - 10-13-Alta-2 Play-LAS MARIAS 1652"
+          },
+          {
+            "estado": "completada",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3OEJVSK6",
+            "franja": "10-13",
+            "texto": "1-3OEJVSK6 - 10-13-Reparación-2 Play Servicio Degradado-LAS MARIAS 1543Jue, 15 Oct"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3NWYMNSS",
+            "franja": "10-13",
+            "texto": "1-3NWYMNSS - 10-13-Migración-Migración-LAS MARIAS 1643 CASA ALun, 21 Sep"
+          },
+          {
+            "estado": "completada",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3NFFODEV",
+            "franja": "13-16",
+            "texto": "1-3NFFODEV - 13-16-Alta-1 Play-LAS MARIAS 1592Lun, 24 Ago"
+          }
+        ]
+      }
     }
   }
 }
