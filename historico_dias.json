@@ -21520,16 +21520,16 @@
    }
   },
   "05-11-2026": {
-   "hasta": "18:50",
+   "hasta": "19:00",
    "actividades": 182,
    "tecnicos": 33,
    "estados": {
-    "No Realizada": 34,
-    "Completado": 113,
+    "No Realizada": 35,
+    "Completado": 115,
     "Suspendido": 10,
-    "Iniciado": 12,
+    "Iniciado": 9,
     "Cancelado": 11,
-    "Pendiente": 2
+    "en ruta": 2
    },
    "rgu": 243.1,
    "caidas_total": 13,
@@ -21537,7 +21537,7 @@
    "caidas_resueltas": 1,
    "nuevas": 34,
    "al_bucket": 37,
-   "repetidas": 28,
+   "repetidas": 29,
    "reagendadas": 5,
    "detalle": {
     "caidas": [
@@ -21658,7 +21658,7 @@
       "f": "16-19",
       "hi": "19:01",
       "d": "RAUL GONZALEZ 638, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OV00W21",
@@ -21730,7 +21730,7 @@
       "f": "16-19",
       "hi": "16:12",
       "d": "MANUEL BULNES 969, QUILPUE",
-      "e": "Iniciado"
+      "e": "No Realizada"
      },
      {
       "o": "1-3OUXAPXO",
@@ -22004,6 +22004,18 @@
       "tec": "CESAR MENA OLIVEROS",
       "visitas": 2,
       "ult_fecha": "04-11-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3OUB639P",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "14:12",
+      "d": "MANUEL BULNES 969, QUILPUE",
+      "e": "Suspendido",
+      "tec": "CRISTOBAL SILVA LEIVA",
+      "visitas": 1,
+      "ult_fecha": "05-11-2026",
       "ult_cierre": "Cliente reagenda"
      },
      {
@@ -22349,5 +22361,5 @@
    }
   }
  },
- "generado": "05-11-2026 18:50"
+ "generado": "05-11-2026 19:00"
 }
