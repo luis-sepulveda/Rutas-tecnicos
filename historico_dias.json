@@ -21520,22 +21520,23 @@
    }
   },
   "05-11-2026": {
-   "hasta": "09:43",
-   "actividades": 127,
+   "hasta": "09:53",
+   "actividades": 128,
    "tecnicos": 33,
    "estados": {
-    "en ruta": 26,
-    "Pendiente": 98,
-    "Iniciado": 2,
-    "Cancelado": 1
+    "en ruta": 11,
+    "Pendiente": 96,
+    "Iniciado": 19,
+    "Cancelado": 1,
+    "Completado": 1
    },
-   "rgu": 184.5,
+   "rgu": 185.5,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
    "nuevas": 2,
    "al_bucket": 1,
-   "repetidas": 28,
+   "repetidas": 29,
    "reagendadas": 7,
    "detalle": {
     "caidas": [
@@ -21561,12 +21562,12 @@
     "nuevas": [
      {
       "o": "1-3OSQLNT6",
-      "tec": "GEEYSER PEREZ O",
+      "tec": "FELIPE SILVA R",
       "cat": "Alta 1 Play",
       "f": "13-16",
       "hi": "14:00",
       "d": "ANA MARIA FRESNO 150 CASA 8 DEPTO 124, VILLA ALEMANA",
-      "e": "Pendiente (ya no está)"
+      "e": "Pendiente"
      },
      {
       "o": "1-3OUI4E21",
@@ -21575,7 +21576,7 @@
       "f": "16-19",
       "hi": "09:25",
       "d": "PJE C 824 EDIF. D-7 DEPTO 23, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      }
     ],
     "repetidas": [
@@ -21583,7 +21584,7 @@
       "o": "1-3OLJG0R1",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "16:57",
+      "hi": "17:14",
       "d": "PJE AZULILLO 21, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ANTONHY MORALES MENDOZA",
@@ -21628,6 +21629,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3ORXW7I0",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "15:18",
+      "d": "FRANCISCO MONTESSI 1572, QUILPUE",
+      "e": "Pendiente",
+      "tec": "DANIEL NAVARRETE E",
+      "visitas": 1,
+      "ult_fecha": "03-11-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OU58MV6",
       "cat": "Alta 1 Play",
       "f": "13-16",
@@ -21640,10 +21653,34 @@
       "ult_cierre": "Zona Roja"
      },
      {
+      "o": "1-3OSQLNT6",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "17:35",
+      "d": "ANA MARIA FRESNO 150 CASA 8 DEPTO 124, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "FELIPE SILVA R",
+      "visitas": 1,
+      "ult_fecha": "03-11-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3ORF6CI8",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "13:52",
+      "d": "MARIA MERCEDES 1482 EDIF. 6 DEPTO 304, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "GEEYSER PEREZ O",
+      "visitas": 2,
+      "ult_fecha": "09-09-2026",
+      "ult_cierre": "Clte desiste motivo comercial"
+     },
+     {
       "o": "1-3OTI4SOL",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:43",
       "d": "EUGENIO GRANDI 695, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "GEEYSER PEREZ O",
@@ -21655,7 +21692,7 @@
       "o": "1-3OU6PGRI",
       "cat": "Modificación de Servicio",
       "f": "10-13",
-      "hi": "11:46",
+      "hi": "12:00",
       "d": "CHORRILLOS 670 CASA B, QUILPUE",
       "e": "Pendiente",
       "tec": "JOEL GUSTAVE GUSTA",
@@ -21679,7 +21716,7 @@
       "o": "1-3OTRIC4N",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:03",
+      "hi": "13:00",
       "d": "MARGA MARGA 1540, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JORGE PEZOA VICUÑA",
@@ -21691,7 +21728,7 @@
       "o": "1-3OS9UEAK",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:39",
+      "hi": "16:00",
       "d": "PORVENIR 1731, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JORGE PEZOA VICUÑA",
@@ -21724,22 +21761,10 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3ORF6CI8",
-      "cat": "Alta 1 Play",
-      "f": "13-16",
-      "hi": "14:14",
-      "d": "MARIA MERCEDES 1482 EDIF. 6 DEPTO 304, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOSE PEREZ RANGEL",
-      "visitas": 2,
-      "ult_fecha": "09-09-2026",
-      "ult_cierre": "Clte desiste motivo comercial"
-     },
-     {
       "o": "1-3OTUEM99",
       "cat": "Alta Traslado",
       "f": "13-16",
-      "hi": "15:41",
+      "hi": "15:21",
       "d": "ILUSION 7, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -21751,9 +21776,9 @@
       "o": "1-3OTEJVGT",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "09:37",
+      "hi": "09:43",
       "d": "EL PATAGUAL 2, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JUAN ARRIAGADA C",
       "visitas": 1,
       "ult_fecha": "02-11-2026",
@@ -21763,9 +21788,9 @@
       "o": "1-3OTIDTTT",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "09:31",
+      "hi": "09:45",
       "d": "SIRIA 389, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "KEVIN TAPIA RETAMAL",
       "visitas": 1,
       "ult_fecha": "10-08-2026",
@@ -21775,7 +21800,7 @@
       "o": "1-3OSR66U8",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "13:22",
+      "hi": "14:36",
       "d": "CAMINO DEL SOL 2300 CASA 8-I, QUILPUE",
       "e": "Pendiente",
       "tec": "KEVIN TAPIA RETAMAL",
@@ -21787,7 +21812,7 @@
       "o": "1-3OU77HZ9",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "13:30",
+      "hi": "13:47",
       "d": "VOLCAN ACONCAGUA 2617, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -21799,7 +21824,7 @@
       "o": "1-3OTC59LC",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:30",
+      "hi": "10:43",
       "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
@@ -21811,7 +21836,7 @@
       "o": "1-3OSLLVFH",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:07",
+      "hi": "17:19",
       "d": "IGNACIO CARRERA PINTO 0650 EDIF. D DEPTO 103, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
@@ -21823,7 +21848,7 @@
       "o": "1-3OQ902IY",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:47",
+      "hi": "10:49",
       "d": "PJE 615 1094, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
@@ -21868,18 +21893,6 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3ORXW7I0",
-      "cat": "Alta 2 Play",
-      "f": "13-16",
-      "hi": "16:00",
-      "d": "FRANCISCO MONTESSI 1572, QUILPUE",
-      "e": "Pendiente",
-      "tec": "MARCO PEREZ G",
-      "visitas": 1,
-      "ult_fecha": "03-11-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OTMVCHF",
       "cat": "Migración 1 Play",
       "f": "10-13",
@@ -21897,7 +21910,7 @@
       "f": "10-13",
       "hi": "10:00",
       "d": "ANDRES BELLO 463, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "PABLO HERNANEZ FERNAN",
       "visitas": 1,
       "ult_fecha": "24-09-2026",
@@ -21931,30 +21944,40 @@
       "o": "1-3OLJG0R1",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "16:57",
+      "hi": "17:14",
       "d": "PJE AZULILLO 21, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ANTONHY MORALES MENDOZA",
       "desde": "30-10-2026"
      },
      {
+      "o": "1-3ORXW7I0",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "15:18",
+      "d": "FRANCISCO MONTESSI 1572, QUILPUE",
+      "e": "Pendiente",
+      "tec": "DANIEL NAVARRETE E",
+      "desde": "04-11-2026"
+     },
+     {
       "o": "1-3OSYDEHI",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "12:30",
+      "hi": "12:01",
       "d": "PJE AZULILLO 69, VILLA ALEMANA",
       "e": "Pendiente",
-      "tec": "JORGE PEZOA VICUÑA",
+      "tec": "GEEYSER PEREZ O",
       "desde": "04-11-2026"
      },
      {
       "o": "1-3ORF6CI8",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:14",
+      "hi": "13:52",
       "d": "MARIA MERCEDES 1482 EDIF. 6 DEPTO 304, VILLA ALEMANA",
       "e": "Pendiente",
-      "tec": "JOSE PEREZ RANGEL",
+      "tec": "GEEYSER PEREZ O",
       "desde": "03-11-2026"
      },
      {
@@ -21965,16 +21988,6 @@
       "d": "FEDERICO BARREDO 584 EDIF. B-6 DEPTO 101, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
-      "desde": "04-11-2026"
-     },
-     {
-      "o": "1-3ORXW7I0",
-      "cat": "Alta 2 Play",
-      "f": "13-16",
-      "hi": "16:00",
-      "d": "FRANCISCO MONTESSI 1572, QUILPUE",
-      "e": "Pendiente",
-      "tec": "MARCO PEREZ G",
       "desde": "04-11-2026"
      },
      {
@@ -21991,5 +22004,5 @@
    }
   }
  },
- "generado": "05-11-2026 09:43"
+ "generado": "05-11-2026 09:53"
 }
