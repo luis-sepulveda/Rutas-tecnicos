@@ -7501,6 +7501,9 @@ let RDIR = null;          // { k: [visitas] } por direccion, o 'error'
 let rdirDesde = '';
 let rdirSoloRep = true;   // (10:25) Luis: "que muestre solo reparaciones": fijo, sin chip
 let rdirMin = 1;          // chip: 1+, 2+, 3+ visitas antes
+/* (05-11-2026) una reparacion anterior CUENTA si es reparacion, completada y de los ultimos 30 dias */
+function rdirDias(){ return (typeof CQ_DIAS !== 'undefined' && CQ_DIAS) ? CQ_DIAS : 30; }
+function rdirCuenta(a){ return /^Reparaci/.test(a.cat) && a.ok && rdirHace(a.iso) <= rdirDias(); }
 async function bajarRdir(){
   try {
     const r = await fetch(URL_VIS_RAW + '?t=' + Date.now(), { cache:'no-store' });
@@ -7567,35 +7570,36 @@ function renderReitDir(){
        direccion entra por sus reparaciones (como antes), pero la tabla trae
        TODAS las visitas: asi se ve la alta, migracion o traslado original. */
     const todas = (RDIR[k] || []).slice();
-    let v = todas;
-    if(rdirSoloRep) v = v.filter(function(a){ return /^Reparaci/.test(a.cat); });
+    /* (05-11-2026) Regla de Luis para todo lo de reiterados: cuentan solo las reparaciones COMPLETADAS de
+       los ultimos 30 dias (CQ_DIAS). Las no realizadas y las de hace mas de 30 dias se ven en la tabla,
+       en gris, pero no suman ni entran en los filtros 1+ / 2+ / 3+ ni en el rojo. */
+    const v = todas.filter(rdirCuenta);
     if(v.length >= rdirMin) lista.push({ x: x, v: v, todas: todas });
   });
   lista.sort(function(a, b){ return b.v.length - a.v.length || b.v[0].iso.localeCompare(a.v[0].iso); });
-  const conHist = hoyRep.filter(function(x){ return (RDIR[claveDir(x.w.d)] || []).some(function(a){ return /^Reparaci/.test(a.cat); }); }).length;
+  const conHist = hoyRep.filter(function(x){ return (RDIR[claveDir(x.w.d)] || []).some(rdirCuenta); }).length;
   const chip = function(on, txt, onc){ return '<span class="pchip' + (on ? ' act' : '') + '" onclick="' + onc + '">' + txt + '</span>'; };
   chips.innerHTML = '<span class="fchip"><b>' + hoyRep.length + '</b> reparaciones hoy</span>'
-    + '<span class="fchip"><b>' + conHist + '</b> en direcciones con reparaciones antes</span>'
+    + '<span class="fchip"><b>' + conHist + '</b> en direcciones con reparaciones completadas en 30 días</span>'
     + '<span class="rsep"></span>'
-    + [1, 2, 3].map(function(n){ return chip(rdirMin === n, n + '+ reparaci' + (n > 1 ? 'ones' : 'ón') + ' antes', 'rdirSet(\'min\',' + n + ')'); }).join('');
-  intro.innerHTML = 'Reparaciones de hoy en una dirección (con casa y depto) donde ya hubo <b>reparaciones</b>'
-    + (rdirDesde ? ' desde el ' + rdirDesde : '') + ', completadas o no realizadas, sin límite de días. '
-    + 'La lista empieza por las direcciones con más reparaciones.';
+    + [1, 2, 3].map(function(n){ return chip(rdirMin === n, n + '+ reparaci' + (n > 1 ? 'ones' : 'ón') + ' en 30 días', 'rdirSet(\'min\',' + n + ')'); }).join('');
+  intro.innerHTML = 'Reparaciones de hoy en una dirección (con casa y depto) donde hubo <b>reparaciones COMPLETADAS en los últimos ' + rdirDias() + ' días</b>. '
+    + 'Las no realizadas y las de hace más de ' + rdirDias() + ' días se ven en gris en el historial, pero <b>no cuentan</b>. '
+    + 'El historial de la casa se muestra completo' + (rdirDesde ? ' (desde el ' + rdirDesde + ')' : '') + '. La lista empieza por las direcciones con más reparaciones.';
   if(!lista.length){
     cont.innerHTML = '<div class="vacio">Ninguna reparación de hoy cumple el filtro.</div>';
   } else {
     cont.innerHTML = lista.map(function(it){
       const w = it.x.w, v = it.v, u = v[0];
-      const nRep = v.filter(function(a){ return /^Reparaci/.test(a.cat); }).length;
-      const nFal = v.filter(function(a){ return !a.ok; }).length;
+      const nFal = it.todas.filter(function(a){ return /^Reparaci/.test(a.cat) && !a.ok && rdirHace(a.iso) <= rdirDias(); }).length;
       const dU = rdirHace(u.iso);
       /* orden original: el trabajo completado que NO es reparacion ni
          modificacion/upgrade (alta, migracion, traslado) mas reciente */
       const orig = it.todas.filter(function(a){ return a.ok && !/^(Reparaci|Modif|Upgrade|Downgrade)/.test(a.cat); })[0] || null;
       const filas = it.todas.map(function(a){
         const dd = rdirHace(a.iso);
-        const esRep = /^Reparaci/.test(a.cat), esOrig = orig && a === orig;
-        return '<tr class="' + (esOrig ? 'rd-orig' : (esRep ? '' : 'rd-otro')) + '">'
+        const esRep = /^Reparaci/.test(a.cat), esOrig = orig && a === orig, nc = esRep && !rdirCuenta(a);
+        return '<tr class="' + (esOrig ? 'rd-orig' : (esRep ? (nc ? 'rd-otro' : '') : 'rd-otro')) + '"' + (nc ? ' title="No cuenta: ' + (a.ok ? 'hace más de ' + rdirDias() + ' días' : 'no realizada') + '"' : '') + '>'
           + '<td style="white-space:nowrap">' + escR(a.f) + '</td>'
           + '<td style="white-space:nowrap"><b>' + haceReit(dd) + '</b></td>'
           + '<td>' + (esOrig ? '<b>' + escR(a.cat) + '</b> <span class="rd-tag-orig">orden original</span>' : escR(a.cat)) + '</td>'
@@ -7607,8 +7611,8 @@ function renderReitDir(){
       }).join('');
       return '<div class="rd-card reit' + (v.length >= 3 || dU <= 7 ? ' cerca' : '') + '">'
         + '<div class="rd-top"><span class="rd-tit">' + escR(w.d) + '</span>'
-        + '<span class="rd-sello">' + v.length + ' reparaci' + (v.length === 1 ? 'ón' : 'ones') + ' antes'
-        + (nFal ? ' · ' + nFal + ' no realizada' + (nFal === 1 ? '' : 's') : '')
+        + '<span class="rd-sello">' + v.length + ' reparaci' + (v.length === 1 ? 'ón completada' : 'ones completadas') + ' en ' + rdirDias() + ' días'
+        + (nFal ? ' · ' + nFal + ' no realizada' + (nFal === 1 ? '' : 's') + ' (no cuenta' + (nFal === 1 ? '' : 'n') + ')' : '')
         + ' · última hace ' + haceReit(dU) + '</span></div>'
         + '<div class="rd-hoy"><span class="rd-hoy-tag">HOY</span> <span class="rd-ot">' + escR(w.o) + '</span>'
         + ' · ' + escR(w.cat || w.t || 'Reparación')
@@ -7628,9 +7632,10 @@ function renderReitDir(){
         + '</div>';
     }).join('');
   }
-  nota.textContent = 'Las reparaciones anteriores salen de visitas_dir.json (hasta ayer): visitas de técnicos de Dominion, '
-    + 'completadas y no realizadas. Se compara la dirección exacta, con casa y depto. En rojo, las direcciones con 3 o más '
-    + 'reparaciones o con una en la última semana.';
+  nota.textContent = 'Las reparaciones anteriores salen de visitas_dir.json (hasta ayer): visitas de técnicos de Dominion. '
+    + 'Cuentan solo las COMPLETADAS de los últimos ' + rdirDias() + ' días (misma regla que Calidad y Reiterados); las no realizadas '
+    + 'y las más antiguas se ven en gris y no suman. Se compara la dirección exacta, con casa y depto. En rojo, las direcciones con 3 o más '
+    + 'reparaciones completadas en ' + rdirDias() + ' días o con una en la última semana.';
 }
 function verReitVista(v){ reitVista = v; renderReit(); }
 function verReitPer(p){ reitPer = p; renderReit(); }
