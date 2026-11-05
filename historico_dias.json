@@ -21520,23 +21520,24 @@
    }
   },
   "05-11-2026": {
-   "hasta": "09:58",
+   "hasta": "10:13",
    "actividades": 128,
    "tecnicos": 33,
    "estados": {
-    "en ruta": 8,
-    "Pendiente": 95,
-    "Iniciado": 23,
+    "Iniciado": 25,
+    "Pendiente": 92,
+    "No Realizada": 2,
+    "en ruta": 6,
     "Cancelado": 1,
-    "Completado": 1
+    "Completado": 2
    },
    "rgu": 185.5,
-   "caidas_total": 2,
-   "caidas_activas": 2,
+   "caidas_total": 4,
+   "caidas_activas": 4,
    "caidas_resueltas": 0,
-   "nuevas": 2,
+   "nuevas": 3,
    "al_bucket": 1,
-   "repetidas": 28,
+   "repetidas": 27,
    "reagendadas": 7,
    "detalle": {
     "caidas": [
@@ -21550,6 +21551,24 @@
       "e": "Pendiente"
      },
      {
+      "o": "1-3OTLTPQE",
+      "tec": "JOSE PEREZ RANGEL",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "11:55",
+      "d": "YUNGAY 871, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OTC59LC",
+      "tec": "LUIS GATICA DAVILA",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "10:43",
+      "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3OS9IMEN",
       "tec": "MARCO PEREZ G",
       "cat": "Migración 2 Play",
@@ -21560,6 +21579,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OUJ70PR",
+      "tec": "SEBASTIAN DOSSOW A",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "13:45",
+      "d": "POPAYAN (P.MENA) 548, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OSQLNT6",
       "tec": "FELIPE SILVA R",
@@ -21598,7 +21626,7 @@
       "f": "10-13",
       "hi": "09:37",
       "d": "TOCOPILLA 01650, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "CESAR MENA OLIVEROS",
       "visitas": 2,
       "ult_fecha": "04-11-2026",
@@ -21749,18 +21777,6 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3OTLTPQE",
-      "cat": "Alta 1 Play",
-      "f": "10-13",
-      "hi": "11:55",
-      "d": "YUNGAY 871, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOSE PEREZ RANGEL",
-      "visitas": 3,
-      "ult_fecha": "04-11-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OTUEM99",
       "cat": "Alta Traslado",
       "f": "13-16",
@@ -21778,7 +21794,7 @@
       "f": "10-13",
       "hi": "09:43",
       "d": "EL PATAGUAL 2, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JUAN ARRIAGADA C",
       "visitas": 1,
       "ult_fecha": "02-11-2026",
@@ -21898,7 +21914,7 @@
       "f": "10-13",
       "hi": "10:00",
       "d": "ANDRES BELLO 463, QUILPUE",
-      "e": "en ruta",
+      "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNAN",
       "visitas": 1,
       "ult_fecha": "24-09-2026",
@@ -21922,9 +21938,9 @@
       "o": "1-3OR3YGE2",
       "cat": "Migración 3 Play",
       "f": "10-13",
-      "hi": "09:30",
+      "hi": "10:03",
       "d": "RAMON ANGEL JARA 311, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "ALEXIS JARA",
       "desde": "03-11-2026"
      },
@@ -21992,5 +22008,5 @@
    }
   }
  },
- "generado": "05-11-2026 09:58"
+ "generado": "05-11-2026 10:13"
 }
