@@ -21520,19 +21520,20 @@
    }
   },
   "05-11-2026": {
-   "hasta": "09:22",
-   "actividades": 122,
+   "hasta": "09:28",
+   "actividades": 123,
    "tecnicos": 33,
    "estados": {
-    "en ruta": 16,
-    "Pendiente": 105,
-    "Cancelado": 1
+    "en ruta": 21,
+    "Pendiente": 100,
+    "Cancelado": 1,
+    "Iniciado": 1
    },
-   "rgu": 178.0,
+   "rgu": 179.0,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
-   "nuevas": 0,
+   "nuevas": 1,
    "al_bucket": 0,
    "repetidas": 28,
    "reagendadas": 7,
@@ -21557,7 +21558,17 @@
       "e": "Pendiente"
      }
     ],
-    "nuevas": [],
+    "nuevas": [
+     {
+      "o": "1-3OUI4E21",
+      "tec": "JOSE ROJO A",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "09:25",
+      "d": "PJE C 824 EDIF. D-7 DEPTO 23, QUILPUE",
+      "e": "Iniciado"
+     }
+    ],
     "repetidas": [
      {
       "o": "1-3OLJG0R1",
@@ -21575,9 +21586,9 @@
       "o": "1-3OU12SZQ",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:33",
       "d": "TOCOPILLA 01650, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "CESAR MENA OLIVEROS",
       "visitas": 2,
       "ult_fecha": "04-11-2026",
@@ -21587,7 +21598,7 @@
       "o": "1-3OTVLNYM",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "13:19",
+      "hi": "13:00",
       "d": "FLAMARION 01042, QUILPUE",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
@@ -21599,7 +21610,7 @@
       "o": "1-3OUH9J7Q",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "13:27",
+      "hi": "13:01",
       "d": "MADRID 97, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -21719,7 +21730,7 @@
       "o": "1-3OTUEM99",
       "cat": "Alta Traslado",
       "f": "13-16",
-      "hi": "15:16",
+      "hi": "15:47",
       "d": "ILUSION 7, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -21731,9 +21742,9 @@
       "o": "1-3OTEJVGT",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:37",
       "d": "EL PATAGUAL 2, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JUAN ARRIAGADA C",
       "visitas": 1,
       "ult_fecha": "02-11-2026",
@@ -21755,7 +21766,7 @@
       "o": "1-3OSR66U8",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:22",
+      "hi": "13:22",
       "d": "CAMINO DEL SOL 2300 CASA 8-I, QUILPUE",
       "e": "Pendiente",
       "tec": "KEVIN TAPIA RETAMAL",
@@ -21779,7 +21790,7 @@
       "o": "1-3OTC59LC",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:56",
+      "hi": "10:30",
       "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
@@ -21791,7 +21802,7 @@
       "o": "1-3OSLLVFH",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:32",
+      "hi": "17:07",
       "d": "IGNACIO CARRERA PINTO 0650 EDIF. D DEPTO 103, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
@@ -21971,5 +21982,5 @@
    }
   }
  },
- "generado": "05-11-2026 09:22"
+ "generado": "05-11-2026 09:28"
 }
