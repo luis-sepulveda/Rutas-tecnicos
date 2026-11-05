@@ -19243,7 +19243,16 @@ setInterval(function(){ try { anPintar(); anDetPintar(); } catch(e){ console.war
   .cq-k.ok { background:#e9f7ef; border-color:#9fd8b4; } .cq-k.ok b { color:#17603a; }
   .cq-k.mal { background:#fdecec; border-color:#f2a7a7; } .cq-k.mal b { color:#b42318; }
   .cq-sec { font:800 15px 'Archivo',sans-serif; color:#0f172a; margin:16px 0 8px; }
+  /* (05-11-2026) Tope de fallas por tecnico */
+  .cq-t.cqt { margin-top:10px; } .cq-t.cqt tr.mal td { background:#fef2f2; } .cq-t.cqt tr.jus td { background:#fffbeb; }
+  .cq-t td.cqt-m { color:#b42318; font-weight:800; } .cq-t td.cqt-j { color:#b45309; font-weight:800; } .cq-t td.cqt-o { color:#15803d; font-weight:700; }
+  .cqt-e { border-radius:999px; padding:2px 9px; font-size:12px; font-weight:700; white-space:nowrap; }
+  .cqt-e.mal { background:#fee2e2; color:#b42318; } .cqt-e.jus { background:#fef3c7; color:#92400e; } .cqt-e.ok { background:#dcfce7; color:#166534; }
   .cq-sec small { font:500 12.5px 'DM Sans',sans-serif; color:#5f7386; margin-left:6px; }
+  .cqt-cab { display:flex; align-items:center; flex-wrap:wrap; gap:4px; }
+  .cqt-xls { margin-left:auto; font:700 13px 'DM Sans',sans-serif; padding:7px 14px; border-radius:8px; cursor:pointer; background:#e9f7ef; border:1px solid #9fd8b4; color:#17603a; }
+  .cqt-xls:hover { background:#d5f0df; }
+  .cqt-xls[disabled] { opacity:.6; cursor:wait; }
   .cq-t { width:100%; border-collapse:collapse; background:#fff; border-radius:10px; overflow:hidden; font-size:14px; }
   .cq-t th { background:#eef2f7; color:#334155; font-size:12px; text-transform:uppercase; letter-spacing:.03em; padding:8px 10px; text-align:right; }
   .cq-t th:first-child, .cq-t td:first-child { text-align:left; }
@@ -19565,7 +19574,8 @@ function cqCalcJson(mes){
   const tt = {}; let base = 0; const bt = { 'Alta':0, 'Alta Traslado':0, 'Migración':0, 'Reparación':0 };
   Object.keys(M.base || {}).forEach(function(n){ const o = M.base[n], k = cqNom(n); let c = 0;
     Object.keys(o).forEach(function(t){ c += o[t]; bt[CQ_TIPO[t] || t] = (bt[CQ_TIPO[t] || t] || 0) + o[t]; });
-    base += c; tt[k] = { nom: k, sup: (J.tecs || {})[n] || '', c: c, l: [] }; });
+    base += c; const bk = {}; Object.keys(o).forEach(function(t){ const q = CQ_TIPO[t] || t; bk[q] = (bk[q] || 0) + o[t]; });
+    tt[k] = { nom: k, sup: (J.tecs || {})[n] || '', c: c, bt: bk, l: [] }; });
   L.forEach(function(t){ const o = tt[t.tec] || (tt[t.tec] = { nom: t.tec, sup: t.sup || '', c: 0, l: [] }); o.l.push(t); if(!o.sup && t.sup) o.sup = t.sup; });
   const tecs = Object.keys(tt).map(function(k){ const o = tt[k]; o.n = o.l.length; o.p = o.c ? 100 * o.n / o.c : null; return o; }).filter(function(o){ return o.c || o.n; });
   tecs.sort(function(a, b){ const pa = a.c >= MIN_COMP_REIT ? 1 : 0, pb = b.c >= MIN_COMP_REIT ? 1 : 0;
@@ -19641,7 +19651,10 @@ function cqPintar(){
   if(!CQ_MES || meses.indexOf(CQ_MES) < 0){ const ant = meses.filter(function(m){ return m < hoyM; }); CQ_MES = ant.length ? ant[ant.length - 1] : meses[meses.length - 1]; }
   const R = cqCalc(CQ_MES), meta = META_REIT;
   const R0reg = R.registro;
-  if(CQ_SOLO_GER){ head.innerHTML = '<h2>🛠 Calidad · resumen gerencia' + cqCumplenHtml(R, meta) + '<button class="cq-x" onclick="cqCerrar()">✕ Cerrar</button></h2>'; cqPonBody(body, cqGerenciaHtml(R, meta)); return; }
+  if(CQ_SOLO_GER){ head.innerHTML = '<h2>🛠 Calidad · resumen gerencia' + cqCumplenHtml(R, meta) + '<button class="cq-x" onclick="cqCerrar()">✕ Cerrar</button></h2>'
+      /* (05-11-2026) "y tambien en noviembre": pestañas de mes tambien en el resumen gerencia */
+      + '<div class="cq-tabs">' + meses.slice(-3).map(function(m){ return '<button class="' + (m === CQ_MES ? 'on' : '') + '" onclick="cqVer(\'' + m + '\')">' + cqNomMes(m, true) + '<small>' + (m === hoyM ? 'se mide en ' + CQ_NOMMES[(+m.slice(5, 7)) % 12] + ' · va armándose' : cqIsoHoy() > cqMasDias(cqFinMes(m), CQ_DIAS) ? 'cerrado' : '● se está midiendo ahora') + '</small></button>'; }).join('') + '</div>';
+    cqPonBody(body, cqGerenciaHtml(R, meta) + cqTopeHtml(R, meta)); return; }
   head.innerHTML = '<h2>🛠 Calidad de ' + cqNomMes(CQ_MES) + '<button class="cq-x" onclick="cqCerrar()">✕ Cerrar</button></h2>'
     + '<p>Trabajos completados en ' + cqNomMes(CQ_MES) + ' (altas, traslados, migraciones y reparaciones) que tuvieron una reparación en la misma casa dentro de ' + CQ_DIAS + ' días · solo cuentan las reparaciones completadas · meta ' + String(meta).replace('.', ',') + '% o menos</p>'
     + '<div class="cq-tabs">' + meses.map(function(m){ const c = cqMasDias(cqFinMes(m), CQ_DIAS), cer = cqIsoHoy() > c, inc = !!R0reg && R0reg > m + '-01';
@@ -19674,8 +19687,9 @@ function cqPintar(){
           : '<div class="cq-k mal"><small>Sobre la meta</small><b>' + (-x) + '</b><span>trabajos con reparación de más (el tope para ' + String(meta).replace('.', ',') + '% es ' + tope + ')</span></div>'; })()
     + '<div class="cq-k"><small>Canceladas</small><b>' + R.canc.length + '</b><span>reparaciones que se cancelaron: no cuentan</span></div></div>';
   /* (04-11-2026) Luis: "en calidad del mes mostrar todos los detalles referente a reiterados" */
-  h += '<div class="cq-tabs cq-vis"><button class="' + (CQ_VISTA !== 'det' ? 'on' : '') + '" onclick="cqSetVista(\'tec\')">📊 Resumen y técnicos</button><button class="' + (CQ_VISTA === 'det' ? 'on' : '') + '" onclick="cqSetVista(\'det\')">🔎 Todos los reiterados (' + R.n + ')</button><button class="' + (CQ_VISTA === 'casa' ? 'on' : '') + '" onclick="cqSetVista(\'casa\')">🏠 Casa por casa</button><button class="ger' + (CQ_VISTA === 'ger' ? ' on' : '') + '" onclick="cqSetVista(\'ger\')">📄 Resumen gerencia</button></div>';
-  if(CQ_VISTA === 'ger'){ h += cqGerenciaHtml(R, meta); cqPonBody(body, h); return; }
+  h += '<div class="cq-tabs cq-vis"><button class="' + (CQ_VISTA !== 'det' ? 'on' : '') + '" onclick="cqSetVista(\'tec\')">📊 Resumen y técnicos</button><button class="' + (CQ_VISTA === 'det' ? 'on' : '') + '" onclick="cqSetVista(\'det\')">🔎 Todos los reiterados (' + R.n + ')</button><button class="' + (CQ_VISTA === 'casa' ? 'on' : '') + '" onclick="cqSetVista(\'casa\')">🏠 Casa por casa</button><button class="' + (CQ_VISTA === 'tope' ? 'on' : '') + '" onclick="cqSetVista(\'tope\')">🎯 Tope por técnico</button><button class="ger' + (CQ_VISTA === 'ger' ? ' on' : '') + '" onclick="cqSetVista(\'ger\')">📄 Resumen gerencia</button></div>';
+  if(CQ_VISTA === 'ger'){ h += cqGerenciaHtml(R, meta) + cqTopeHtml(R, meta); cqPonBody(body, h); return; }
+  if(CQ_VISTA === 'tope'){ h += cqTopeHtml(R, meta); cqPonBody(body, h); return; }
   if(CQ_VISTA === 'det'){ h += cqDetalleHtml(R, meta); cqPonBody(body, h); return; }
   if(CQ_VISTA === 'casa'){ h += cqCasasHtml(R); cqPonBody(body, h); return; }
   /* (04-11-2026, 12:30) Luis: "en boton calidad del mes, todo el detalle": lo nuevo del resumen gerencia tambien aca */
@@ -19926,6 +19940,48 @@ function cqCumplenHtml(R, meta){
     + caja('Operativos', k.op, k.siOp, k.no, 'Técnicos del plantel con al menos un trabajo completado en el mes.')
     + '</span>';
 }
+/* (05-11-2026) Luis: "podrias agregar este reporte tal cual dentro de los botones que miran la calidad explicando lo
+   mismo, y tambien en noviembre". TOPE DE FALLAS POR TECNICO: tope = trabajos completados del mes x meta, redondeado
+   hacia abajo (63 x 5,32 % = 3,35 -> 3). Margen = tope - fallas (negativo = sobre el tope). Ordenado de mayor a menor
+   cantidad de trabajos completados. El tope del equipo (y de cada supervisor) se calcula sobre su total. */
+function cqTopeHtml(R, meta){
+  const m = CQ_MES, mSig = (function(){ const y = +m.slice(0, 4), k = +m.slice(5, 7); return k === 12 ? (y + 1) + '-01' : y + '-' + String(k + 1).padStart(2, '0'); })();
+  const nomM = CQ_NOMMES[+m.slice(5, 7) - 1], nomS = CQ_NOMMES[+mSig.slice(5, 7) - 1];
+  const tope = function(c){ return Math.floor(c * meta / 100 + 1e-9); };
+  const cae = function(t){ const f = (t.reps || []).map(function(r){ return r.fecha; }).sort()[0] || ''; return f.slice(0, 7) > m ? 'sig' : 'mes'; };
+  const L = R.tecs.filter(function(o){ return o.c > 0; }).map(function(o){
+    const tp = tope(o.c), nm = (o.l || []).filter(function(t){ return cae(t) === 'mes'; }).length;
+    /* sube = cuantos trabajos completados mas necesita para que su tope suba en 1 */
+    const sube = Math.ceil((tp + 1) * 100 / meta - 1e-9) - o.c;
+    return { nom:o.nom, sup:o.sup || '', c:o.c, n:o.n, tp:tp, mg:tp - o.n, nm:nm, ns:o.n - nm, p:o.p, sube:sube }; })
+    .sort(function(a, b){ return b.c - a.c || a.mg - b.mg || a.nom.localeCompare(b.nom); });
+  /* (sin fallas y tope 0 = "Sin fallas", no "En el tope": pasa en el mes que va armandose, con pocos trabajos) */
+  const cls = function(o){ return o.mg < 0 ? 'mal' : (o.mg === 0 && o.n > 0) ? 'jus' : 'ok'; };
+  const vaArmando = m === cqIsoHoy().slice(0, 7);   /* solo en el mes en curso los trabajos (y el tope) todavia suben */
+  const est = function(o){ const k = cls(o); return k === 'mal' ? '<span class="cqt-e mal">Sobre el tope</span>' : k === 'jus' ? '<span class="cqt-e jus">En el tope</span>' : o.n === 0 ? '<span class="cqt-e ok">Sin fallas</span>' : '<span class="cqt-e ok">Bajo el tope</span>'; };
+  const grp = {}; L.forEach(function(o){ const k = o.sup || 'Sin supervisor'; const g = grp[k] || (grp[k] = { c:0, n:0, t:0, s:0, j:0, b:0 });
+    g.c += o.c; g.n += o.n; g.t++; const kc = cls(o); if(kc === 'mal') g.s++; else if(kc === 'jus') g.j++; else g.b++; });
+  const eq = { c:R.base, n:R.n, t:L.length, s:L.filter(function(o){ return cls(o) === 'mal'; }).length, j:L.filter(function(o){ return cls(o) === 'jus'; }).length, b:L.filter(function(o){ return cls(o) === 'ok'; }).length };
+  const fila = function(nom, g){ const tp = tope(g.c), mg = tp - g.n, p = g.c ? 100 * g.n / g.c : null;
+    return '<tr' + (nom === 'Equipo' ? ' class="tot"' : '') + '><td>' + escR(nom === 'Equipo' ? nom : derTitulo(nom)) + '</td><td>' + g.t + '</td><td>' + g.c + '</td><td>' + tp + '</td><td>' + g.n + '</td><td class="' + (mg < 0 ? 'cqt-m' : mg === 0 ? 'cqt-j' : 'cqt-o') + '">' + (mg > 0 ? '+' : '') + mg + '</td>'
+      + '<td class="p ' + (p === null ? 'poca' : p > meta ? 'mal' : 'ok') + '">' + (p === null ? '–' : P2(p) + '%') + '</td><td>' + g.s + ' / ' + g.j + ' / ' + g.b + '</td></tr>'; };
+  (window._CQ_TOPE = window._CQ_TOPE || {})[m] = { R:R, meta:meta, L:L, mSig:mSig, nomM:nomM, nomS:nomS, vaArmando:vaArmando };
+  let h = '<div class="cq-sec cqt-cab">Tope de fallas por técnico · ' + cqNomMes(m) + '<small>de mayor a menor cantidad de trabajos completados</small>'
+    + '<button class="cqt-xls" onclick="cqTopeExcel(\'' + m + '\', this)">⬇ Descargar Excel</button></div>'
+    + '<div class="cq-est"><b>Cómo se lee:</b> la meta de ' + String(meta).replace('.', ',') + '% equivale a unas ' + P2(meta).replace(/,00$/, '') + ' fallas por cada 100 trabajos completados (1 cada ' + Math.round(100 / meta) + ' trabajos). '
+    + 'El <b>tope</b> de cada técnico es <b>trabajos completados × ' + String(meta).replace('.', ',') + '%</b>, redondeado hacia abajo: con 20 trabajos el tope es ' + tope(20) + ', con 40 es ' + tope(40) + ', con 60 es ' + tope(60) + ', con 80 es ' + tope(80) + ' y con 100 es ' + tope(100) + '. '
+    + 'El <b>margen</b> es cuántas fallas más le caben (negativo = ya pasó su tope). El tope del equipo y de cada supervisor se calcula sobre su propio total, no sumando los topes de cada técnico. '
+    + (R.cerrado ? 'El mes está cerrado.' : 'El mes se mide hasta el ' + escR(fechaCL(R.cierre)) + ': las fallas todavía pueden subir, así que los que están "en el tope" no tienen espacio para ninguna más.')
+    + (CQ_MES === cqIsoHoy().slice(0, 7) ? ' <b>Este mes va armándose:</b> con menos de ' + Math.ceil(100 / meta - 1e-9) + ' trabajos el tope es 0 (una sola falla ya pasa el tope); el tope sube a medida que el técnico completa trabajos (columna "Para subir el tope").' : '') + '</div>'
+    + '<table class="cq-t"><thead><tr><th></th><th>Técnicos</th><th>Trabajos</th><th>Tope</th><th>Fallas</th><th>Margen</th><th>Calidad</th><th>Sobre / en / bajo el tope</th></tr></thead><tbody>'
+    + Object.keys(grp).sort().map(function(k){ return fila(k, grp[k]); }).join('') + fila('Equipo', eq) + '</tbody></table>'
+    + '<table class="cq-t cqt"><thead><tr><th>Técnico</th><th>Supervisor</th><th>Trabajos completados</th><th>Tope</th><th>Fallas</th><th>Cayeron en ' + nomM.toLowerCase() + '</th><th>Cayeron en ' + nomS.toLowerCase() + '</th><th>Margen</th><th>Calidad</th>' + (vaArmando ? '<th>Para subir el tope</th>' : '') + '<th>Estado</th></tr></thead><tbody>'
+    + L.map(function(o){ return '<tr class="' + cls(o) + '"><td>' + escR(derTitulo(o.nom)) + '</td><td><small>' + escR(derTitulo(o.sup)) + '</small></td><td>' + o.c + '</td><td>' + o.tp + '</td><td><b>' + o.n + '</b></td><td>' + o.nm + '</td><td>' + o.ns + '</td>'
+      + '<td class="' + (cls(o) === 'mal' ? 'cqt-m' : cls(o) === 'jus' ? 'cqt-j' : 'cqt-o') + '">' + (o.mg > 0 ? '+' : '') + o.mg + '</td><td class="p ' + (o.p === null ? 'poca' : o.p > meta ? 'mal' : 'ok') + '">' + (o.p === null ? '–' : P2(o.p) + '%') + '</td>' + (vaArmando ? '<td title="Trabajos completados que le faltan para que su tope suba a ' + (o.tp + 1) + '">+' + o.sube + ' trab.</td>' : '') + '<td>' + est(o) + '</td></tr>'; }).join('')
+    + '</tbody></table>'
+    + '<p class="cq-nota">Fallas con la regla de Dominion (solo reparaciones completadas dentro de ' + CQ_DIAS + ' días; ver "Cómo se mide"). Para ver cada falla, toca el técnico en "📊 Resumen y técnicos" o mira "🔎 Todos los reiterados".</p>';
+  return h;
+}
 function cqGerenciaHtml(R, meta){
   const L = R.L, n = R.n || 0, base = R.base || 0, pc = function(a, b){ return b ? 100 * a / b : 0; };
   const mal = R.p !== null && R.p > meta, tope = base ? Math.floor(base * meta / 100) : 0;
@@ -20081,6 +20137,155 @@ function cqExcel(){
   ws['!cols'] = Object.keys(filas[0]).map(function(k){ return { wch: Math.min(40, Math.max(10, k.length + 2)) }; });
   XLSX.utils.book_append_sheet(wb, ws, 'Reiterados');
   XLSX.writeFile(wb, 'reiterados_' + CQ_MES + '.xlsx');
+}
+
+/* ==================== TOPE DE FALLAS: DESCARGA EN EXCEL (05-11-2026) ====================
+   Arma el mismo Excel que Tope_fallas_octubre.xlsx: hojas Resumen, Por tecnico y Fallas, con
+   formulas (si se cambia la meta en 'Por técnico'!B3 todo se recalcula) y colores. Usa ExcelJS,
+   que se baja solo al tocar el boton; si no carga, sale el mismo Excel sin colores (SheetJS). */
+function cqCargarExcelJS(){
+  if(window.ExcelJS) return Promise.resolve(window.ExcelJS);
+  const urls = ['https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.3.0/exceljs.min.js', 'https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js'];
+  return urls.reduce(function(pr, u){ return pr.catch(function(){ return new Promise(function(ok, mal){
+    const sc = document.createElement('script'); sc.src = u;
+    sc.onload = function(){ window.ExcelJS ? ok(window.ExcelJS) : mal(); }; sc.onerror = mal; document.head.appendChild(sc); }); }); }, Promise.reject());
+}
+function cqTopeDatos(m){
+  const D = (window._CQ_TOPE || {})[m]; if(!D) return null;
+  const R = D.R, meta = D.meta, NM = D.nomM.toUpperCase(), NS = D.nomS.toUpperCase();
+  const tecs = D.L.map(function(o){ const t = (R.tecs || []).filter(function(x){ return x.nom === o.nom; })[0] || {};
+    return { nom:o.nom, sup:(o.sup || 'SIN SUPERVISOR').toUpperCase(), c:o.c, bt:t.bt || null, n:o.n, nm:o.nm, ns:o.ns, tp:o.tp, mg:o.mg, sube:o.sube }; });
+  const fallas = [];
+  D.L.forEach(function(o){ const t = (R.tecs || []).filter(function(x){ return x.nom === o.nom; })[0]; if(!t) return;
+    (t.l || []).forEach(function(w){ const r = (w.reps || []).slice().sort(function(a, b){ return a.fecha < b.fecha ? -1 : 1; })[0] || {};
+      fallas.push({ tec:o.nom, sup:(o.sup || 'SIN SUPERVISOR').toUpperCase(), tipo:w.tipo || '', ft:w.fecha || '', ot:w.ot || '', dir:w.dir || '', ciu:w.ciu || '',
+        fr:r.fecha || '', cae:(r.fecha || '').slice(0, 7) > m ? NS : NM, dias:r.dias === undefined ? '' : +r.dias, otr:r.ot || '',
+        rep:(r.emp || 'DOMINION') + (r.tec ? ' · ' + r.tec : ''), cie:r.cie || '' }); }); });
+  fallas.sort(function(a, b){ return a.tec.localeCompare(b.tec) || (a.ft < b.ft ? -1 : a.ft > b.ft ? 1 : 0); });
+  const sups = []; tecs.forEach(function(o){ if(sups.indexOf(o.sup) < 0) sups.push(o.sup); }); sups.sort();
+  return { D:D, R:R, meta:meta, NM:NM, NS:NS, tecs:tecs, fallas:fallas, sups:sups };
+}
+function cqTopeExcel(m, btn){
+  const X = cqTopeDatos(m); if(!X){ alert('Abre primero el reporte del mes.'); return; }
+  const txt = btn ? btn.textContent : ''; if(btn){ btn.disabled = true; btn.textContent = 'Armando Excel…'; }
+  const listo = function(){ if(btn){ btn.disabled = false; btn.textContent = txt; } };
+  cqCargarExcelJS().then(function(EX){ return cqTopeExcelJS(EX, X, m); })
+    .catch(function(e){ console.log('ExcelJS no cargó, Excel simple', e); cqTopeExcelSimple(X, m); })
+    .then(listo, listo);
+}
+function cqTopeNombre(X, m){ return 'Tope_fallas_' + X.D.nomM.toLowerCase() + '_' + m.slice(0, 4) + '.xlsx'; }
+function cqTopeIso(s){ const q = /^(\d{4})-(\d{2})-(\d{2})/.exec(s || ''); return q ? new Date(Date.UTC(+q[1], +q[2] - 1, +q[3])) : (s || ''); }
+function cqTopeExcelJS(EX, X, m){
+  const wb = new EX.Workbook(), R = X.R, meta = X.meta / 100, nT = X.tecs.length, nF = X.fallas.length;
+  const AZ = 'FF1F3A8A', GRIS = 'FF475569', F0 = { name:'Arial', size:10 };
+  const r1 = 6, rN = 5 + nT, rTot = rN + 1, fL = 1 + Math.max(nF, 1);
+  const va = X.D.vaArmando, nomMes = cqNomMes(m), mm = X.D.nomM.toLowerCase().slice(0, 3), ms = X.D.nomS.toLowerCase().slice(0, 3);
+  const cab = function(row){ row.eachCell(function(c){ c.font = { name:'Arial', size:10, bold:true, color:{ argb:'FFFFFFFF' } };
+    c.fill = { type:'pattern', pattern:'solid', fgColor:{ argb:AZ } }; c.alignment = { wrapText:true, vertical:'middle', horizontal:'center' }; }); row.height = 33; };
+  const est = function(o){ return o.mg < 0 ? 'Sobre el tope' : o.n === 0 ? 'Sin fallas' : o.mg === 0 ? 'En el tope' : 'Bajo el tope'; };
+  const fecha = R.cerrado ? 'El mes está cerrado.' : 'Datos al ' + fechaCL(R.hasta || cqIsoHoy()) + '; ' + X.D.nomM.toLowerCase() + ' se cierra el ' + fechaCL(R.cierre) + '.';
+  /* ---------- Resumen ---------- */
+  const ws0 = wb.addWorksheet('Resumen');
+  /* ---------- Por tecnico ---------- */
+  const ws = wb.addWorksheet('Por técnico', { views:[{ state:'frozen', xSplit:1, ySplit:5 }] });
+  ws.getCell('A1').value = 'Calidad ' + nomMes.toLowerCase() + ' · tope de fallas por técnico (meta ' + String(X.meta).replace('.', ',') + ' %)'; ws.getCell('A1').font = { name:'Arial', size:13, bold:true };
+  ws.getCell('A2').value = 'Ordenado de mayor a menor cantidad de trabajos completados. Tope = trabajos × meta, redondeado hacia abajo. Falla = trabajo con reparación COMPLETADA en la casa dentro de ' + CQ_DIAS + ' días (regla Dominion). ' + fecha;
+  ws.getCell('A2').font = { name:'Arial', size:9, color:{ argb:GRIS } };
+  ws.getCell('A3').value = 'Meta'; ws.getCell('A3').font = { name:'Arial', size:10, bold:true };
+  ws.getCell('B3').value = meta; ws.getCell('B3').numFmt = '0.00%'; ws.getCell('B3').font = { name:'Arial', size:10, color:{ argb:'FF0000FF' } };
+  ws.getCell('B3').fill = { type:'pattern', pattern:'solid', fgColor:{ argb:'FFFFFF00' } };
+  ws.getCell('C3').value = '← se puede cambiar: todo se recalcula'; ws.getCell('C3').font = { name:'Arial', size:9, italic:true, color:{ argb:GRIS } };
+  const tit = ['Técnico', 'Supervisor', 'Trabajos completados ' + mm, 'Altas', 'Migraciones', 'Reparaciones', 'Altas traslado', 'Tope de fallas', 'Fallas', 'Cayeron en ' + mm, 'Cayeron en ' + ms, 'Margen (tope − fallas)', '% calidad', 'Estado'];
+  if(va) tit.push('Para subir el tope (trabajos que faltan)');
+  cab(ws.getRow(5)); ws.getRow(5).values = tit; cab(ws.getRow(5));
+  const fx = function(f, v){ return { formula:f, result:v }; };
+  const rngF = function(col){ return 'Fallas!$' + col + '$2:$' + col + '$' + fL; };
+  X.tecs.forEach(function(o, i){ const r = r1 + i, row = ws.getRow(r), b = o.bt;
+    row.getCell(1).value = o.nom; row.getCell(1).font = { name:'Arial', size:10, bold:true }; row.getCell(2).value = o.sup;
+    if(b){ [b['Alta'] || 0, b['Migración'] || 0, b['Reparación'] || 0, b['Alta Traslado'] || 0].forEach(function(v, j){ const c = row.getCell(4 + j); c.value = v; c.font = { name:'Arial', size:10, color:{ argb:'FF0000FF' } }; });
+      row.getCell(3).value = fx('SUM(D' + r + ':G' + r + ')', o.c); }
+    else { row.getCell(3).value = o.c; row.getCell(3).font = { name:'Arial', size:10, color:{ argb:'FF0000FF' } }; }
+    row.getCell(8).value = fx('ROUNDDOWN(C' + r + '*$B$3,0)', o.tp);
+    row.getCell(9).value = fx('J' + r + '+K' + r, o.n);
+    row.getCell(10).value = fx('COUNTIFS(' + rngF('A') + ',$A' + r + ',' + rngF('I') + ',"' + X.NM + '")', o.nm);
+    row.getCell(11).value = fx('COUNTIFS(' + rngF('A') + ',$A' + r + ',' + rngF('I') + ',"' + X.NS + '")', o.ns);
+    row.getCell(12).value = fx('H' + r + '-I' + r, o.mg);
+    row.getCell(13).value = fx('IF(C' + r + '=0,0,I' + r + '/C' + r + ')', o.c ? o.n / o.c : 0); row.getCell(13).numFmt = '0.00%';
+    row.getCell(14).value = fx('IF(L' + r + '<0,"Sobre el tope",IF(I' + r + '=0,"Sin fallas",IF(L' + r + '=0,"En el tope","Bajo el tope")))', est(o));
+    if(va) row.getCell(15).value = fx('ROUNDUP((H' + r + '+1)/$B$3,0)-C' + r, o.sube);
+  });
+  const tr = ws.getRow(rTot), sumT = function(L){ return X.tecs.reduce(function(s, o){ return s + L(o); }, 0); };
+  const bsum = function(k){ return sumT(function(o){ return o.bt ? (o.bt[k] || 0) : 0; }); };
+  tr.getCell(1).value = 'EQUIPO';
+  ['C', 'D', 'E', 'F', 'G', 'I', 'J', 'K'].forEach(function(col){ const v = { C:R.base, D:bsum('Alta'), E:bsum('Migración'), F:bsum('Reparación'), G:bsum('Alta Traslado'), I:R.n, J:sumT(function(o){ return o.nm; }), K:sumT(function(o){ return o.ns; }) }[col];
+    tr.getCell(col).value = fx('SUM(' + col + r1 + ':' + col + rN + ')', v); });
+  const tpE = Math.floor(R.base * X.meta / 100 + 1e-9);
+  tr.getCell('H').value = fx('ROUNDDOWN(C' + rTot + '*$B$3,0)', tpE);
+  tr.getCell('L').value = fx('H' + rTot + '-I' + rTot, tpE - R.n);
+  tr.getCell('M').value = fx('IF(C' + rTot + '=0,0,I' + rTot + '/C' + rTot + ')', R.base ? R.n / R.base : 0); tr.getCell('M').numFmt = '0.00%';
+  tr.getCell('N').value = fx('IF(L' + rTot + '<0,"Sobre el tope",IF(L' + rTot + '=0,"En el tope","Bajo el tope"))', tpE - R.n < 0 ? 'Sobre el tope' : tpE - R.n === 0 ? 'En el tope' : 'Bajo el tope');
+  tr.eachCell(function(c){ c.font = { name:'Arial', size:10, bold:true }; c.fill = { type:'pattern', pattern:'solid', fgColor:{ argb:'FFE2E8F0' } }; c.border = { top:{ style:'thin' } }; });
+  ws.getCell('A' + (rTot + 1)).value = 'El tope del equipo se calcula sobre el total (no es la suma de los topes de cada técnico).';
+  ws.getCell('A' + (rTot + 1)).font = { name:'Arial', size:9, italic:true, color:{ argb:GRIS } };
+  [30, 17, 11, 8, 11, 12, 10, 9, 8, 10, 10, 11, 10, 16, 14].slice(0, tit.length).forEach(function(w, j){ ws.getColumn(j + 1).width = w; });
+  for(let r = r1; r <= rN; r++) for(let c = 1; c <= tit.length; c++){ const k = ws.getCell(r, c); if(!k.font || !k.font.name) k.font = F0; if(c > 2) k.alignment = { horizontal:'center' }; }
+  const lastCol = String.fromCharCode(64 + tit.length);
+  if(nT) ws.addConditionalFormatting({ ref:'A' + r1 + ':' + lastCol + rN, rules:[
+    { type:'expression', priority:1, formulae:['$L' + r1 + '<0'], style:{ fill:{ type:'pattern', pattern:'solid', bgColor:{ argb:'FFFEE2E2' } } } },
+    { type:'expression', priority:2, formulae:['AND($L' + r1 + '=0,$I' + r1 + '>0)'], style:{ fill:{ type:'pattern', pattern:'solid', bgColor:{ argb:'FFFEF3C7' } } } },
+    { type:'expression', priority:3, formulae:['OR($L' + r1 + '>0,$I' + r1 + '=0)'], style:{ fill:{ type:'pattern', pattern:'solid', bgColor:{ argb:'FFDCFCE7' } } } } ] });
+  ws.autoFilter = 'A5:' + lastCol + rN;
+  /* ---------- Resumen (formulas sobre 'Por técnico') ---------- */
+  ws0.getColumn(1).width = 38; for(let j = 2; j <= 2 + X.sups.length; j++) ws0.getColumn(j).width = 16;
+  ws0.getCell('A1').value = 'Tope de fallas · calidad ' + nomMes.toLowerCase(); ws0.getCell('A1').font = { name:'Arial', size:13, bold:true };
+  ws0.getCell('A2').value = 'Fuente: calidad.json (export completos, regla Dominion: solo reparaciones completadas). Meta en la hoja \'Por técnico\' (celda B3). ' + fecha;
+  ws0.getCell('A2').font = { name:'Arial', size:9, color:{ argb:GRIS } };
+  const PT = "'Por técnico'!", rg = function(col){ return PT + col + r1 + ':' + col + rN; };
+  ws0.getRow(4).values = [''].concat(['Equipo'].concat(X.sups.map(function(s){ return derTitulo(s); }))); 
+  ws0.getRow(4).eachCell(function(c, j){ if(j > 1){ c.font = { name:'Arial', size:10, bold:true, color:{ argb:'FFFFFFFF' } }; c.fill = { type:'pattern', pattern:'solid', fgColor:{ argb:AZ } }; c.alignment = { horizontal:'center' }; } });
+  const gr = function(s){ return X.tecs.filter(function(o){ return s === null || o.sup === s; }); };
+  const filasR = [
+    ['Técnicos', function(s){ return s === null ? 'COUNTA(' + rg('A') + ')' : 'COUNTIF(' + rg('B') + ',"' + s + '")'; }, function(L){ return L.length; }],
+    ['Trabajos completados', function(s){ return s === null ? PT + 'C' + rTot : 'SUMIF(' + rg('B') + ',"' + s + '",' + rg('C') + ')'; }, function(L){ return L.reduce(function(a, o){ return a + o.c; }, 0); }],
+    ['Fallas', function(s){ return s === null ? PT + 'I' + rTot : 'SUMIF(' + rg('B') + ',"' + s + '",' + rg('I') + ')'; }, function(L){ return L.reduce(function(a, o){ return a + o.n; }, 0); }],
+    ['% calidad', function(s, c){ return s === null ? PT + 'M' + rTot : 'IF(' + c + '6=0,0,' + c + '7/' + c + '6)'; }, function(L){ const c = L.reduce(function(a, o){ return a + o.c; }, 0); return c ? L.reduce(function(a, o){ return a + o.n; }, 0) / c : 0; }],
+    ['Tope de fallas (sobre su total)', function(s, c){ return s === null ? PT + 'H' + rTot : 'ROUNDDOWN(' + c + '6*' + PT + '$B$3,0)'; }, function(L){ return Math.floor(L.reduce(function(a, o){ return a + o.c; }, 0) * X.meta / 100 + 1e-9); }],
+    ['Técnicos sobre el tope', function(s){ return s === null ? 'COUNTIF(' + rg('N') + ',"Sobre el tope")' : 'COUNTIFS(' + rg('B') + ',"' + s + '",' + rg('N') + ',"Sobre el tope")'; }, function(L){ return L.filter(function(o){ return o.mg < 0; }).length; }],
+    ['Técnicos en el tope', function(s){ return s === null ? 'COUNTIF(' + rg('N') + ',"En el tope")' : 'COUNTIFS(' + rg('B') + ',"' + s + '",' + rg('N') + ',"En el tope")'; }, function(L){ return L.filter(function(o){ return o.mg === 0 && o.n > 0; }).length; }],
+    ['Técnicos bajo el tope o sin fallas', function(s){ return s === null ? 'COUNTIF(' + rg('N') + ',"Bajo el tope")+COUNTIF(' + rg('N') + ',"Sin fallas")' : 'COUNTIFS(' + rg('B') + ',"' + s + '",' + rg('N') + ',"Bajo el tope")+COUNTIFS(' + rg('B') + ',"' + s + '",' + rg('N') + ',"Sin fallas")'; }, function(L){ return L.filter(function(o){ return o.mg > 0 || o.n === 0; }).length; }] ];
+  filasR.forEach(function(f, i){ const r = 5 + i; ws0.getCell(r, 1).value = f[0]; ws0.getCell(r, 1).font = F0;
+    [null].concat(X.sups).forEach(function(s, j){ const col = String.fromCharCode(66 + j), c = ws0.getCell(col + r);
+      c.value = fx(f[1](s, col), f[2](gr(s))); c.font = { name:'Arial', size:10, bold:true }; c.alignment = { horizontal:'center' }; if(f[0] === '% calidad') c.numFmt = '0.00%'; }); });
+  const t20 = function(c){ return Math.floor(c * X.meta / 100 + 1e-9); };
+  ws0.getCell('A14').value = 'Cómo leerlo: tope = trabajos completados × ' + String(X.meta).replace('.', ',') + ' %, redondeado hacia abajo (con 20 trabajos el tope es ' + t20(20) + ', con 40 es ' + t20(40) + ', con 60 es ' + t20(60) + ', con 100 es ' + t20(100) + '). Margen = tope − fallas: cuántas fallas más le caben (negativo = ya pasó su tope).'
+    + (va ? ' Este mes va armándose: el tope sube a medida que el técnico completa trabajos (columna "Para subir el tope").' : '');
+  ws0.getCell('A14').font = { name:'Arial', size:9, color:{ argb:GRIS } }; ws0.getCell('A14').alignment = { wrapText:true, vertical:'top' };
+  ws0.mergeCells('A14:' + String.fromCharCode(66 + X.sups.length) + '14'); ws0.getRow(14).height = 52;
+  /* ---------- Fallas ---------- */
+  const wf = wb.addWorksheet('Fallas', { views:[{ state:'frozen', xSplit:1, ySplit:1 }] });
+  wf.getRow(1).values = ['Técnico', 'Supervisor', 'Tipo trabajo', 'Fecha trabajo', 'OT trabajo', 'Dirección', 'Comuna', 'Fecha reparación', 'Cayó en', 'Días', 'OT reparación', 'Reparó', 'Cierre de la reparación'];
+  cab(wf.getRow(1));
+  X.fallas.forEach(function(f, i){ const row = wf.getRow(2 + i);
+    row.values = [f.tec, f.sup, f.tipo, cqTopeIso(f.ft), f.ot, f.dir, f.ciu, cqTopeIso(f.fr), f.cae, f.dias, f.otr, f.rep, f.cie];
+    row.eachCell(function(c){ c.font = F0; }); row.getCell(4).numFmt = 'dd-mm-yyyy'; row.getCell(8).numFmt = 'dd-mm-yyyy'; });
+  [26, 17, 13, 12, 13, 36, 14, 12, 11, 7, 13, 30, 34].forEach(function(w, j){ wf.getColumn(j + 1).width = w; });
+  if(nF) wf.autoFilter = 'A1:M' + (1 + nF);
+  return wb.xlsx.writeBuffer().then(function(buf){
+    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([buf], { type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }));
+    a.download = cqTopeNombre(X, m); document.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 1500); });
+}
+/* respaldo sin colores ni formulas (si ExcelJS no se pudo bajar) */
+function cqTopeExcelSimple(X, m){
+  if(typeof XLSX === 'undefined'){ alert('No se pudo armar el Excel (sin conexión a la librería).'); return; }
+  const est = function(o){ return o.mg < 0 ? 'Sobre el tope' : o.n === 0 ? 'Sin fallas' : o.mg === 0 ? 'En el tope' : 'Bajo el tope'; };
+  const wb = XLSX.utils.book_new();
+  const pt = X.tecs.map(function(o){ const b = o.bt || {}, f = { 'Técnico':o.nom, 'Supervisor':o.sup, 'Trabajos completados':o.c, 'Altas':b['Alta'] || 0, 'Migraciones':b['Migración'] || 0, 'Reparaciones':b['Reparación'] || 0, 'Altas traslado':b['Alta Traslado'] || 0,
+    'Tope de fallas':o.tp, 'Fallas':o.n }; f['Cayeron en ' + X.D.nomM.toLowerCase()] = o.nm; f['Cayeron en ' + X.D.nomS.toLowerCase()] = o.ns;
+    f['Margen'] = o.mg; f['% calidad'] = o.c ? Math.round(10000 * o.n / o.c) / 100 : 0; f['Estado'] = est(o); if(X.D.vaArmando) f['Para subir el tope'] = o.sube; return f; });
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(pt), 'Por técnico');
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(X.fallas.map(function(f){ return { 'Técnico':f.tec, 'Supervisor':f.sup, 'Tipo trabajo':f.tipo, 'Fecha trabajo':fechaCL(f.ft), 'OT trabajo':f.ot, 'Dirección':f.dir, 'Comuna':f.ciu,
+    'Fecha reparación':fechaCL(f.fr), 'Cayó en':f.cae, 'Días':f.dias, 'OT reparación':f.otr, 'Reparó':f.rep, 'Cierre de la reparación':f.cie }; })), 'Fallas');
+  XLSX.writeFile(wb, cqTopeNombre(X, m));
 }
 </script>
 
