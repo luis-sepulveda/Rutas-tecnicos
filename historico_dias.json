@@ -21520,21 +21520,21 @@
    }
   },
   "05-11-2026": {
-   "hasta": "09:33",
-   "actividades": 125,
+   "hasta": "09:43",
+   "actividades": 127,
    "tecnicos": 33,
    "estados": {
-    "en ruta": 23,
-    "Pendiente": 100,
-    "Cancelado": 1,
-    "Iniciado": 1
+    "en ruta": 26,
+    "Pendiente": 98,
+    "Iniciado": 2,
+    "Cancelado": 1
    },
-   "rgu": 182.5,
+   "rgu": 184.5,
    "caidas_total": 2,
    "caidas_activas": 2,
    "caidas_resueltas": 0,
-   "nuevas": 1,
-   "al_bucket": 0,
+   "nuevas": 2,
+   "al_bucket": 1,
    "repetidas": 28,
    "reagendadas": 7,
    "detalle": {
@@ -21559,6 +21559,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OSQLNT6",
+      "tec": "GEEYSER PEREZ O",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "ANA MARIA FRESNO 150 CASA 8 DEPTO 124, VILLA ALEMANA",
+      "e": "Pendiente (ya no está)"
+     },
      {
       "o": "1-3OUI4E21",
       "tec": "JOSE ROJO A",
@@ -21586,9 +21595,9 @@
       "o": "1-3OU12SZQ",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "09:33",
+      "hi": "09:37",
       "d": "TOCOPILLA 01650, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "CESAR MENA OLIVEROS",
       "visitas": 2,
       "ult_fecha": "04-11-2026",
@@ -21862,7 +21871,7 @@
       "o": "1-3ORXW7I0",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "13:53",
+      "hi": "16:00",
       "d": "FRANCISCO MONTESSI 1572, QUILPUE",
       "e": "Pendiente",
       "tec": "MARCO PEREZ G",
@@ -21874,7 +21883,7 @@
       "o": "1-3OTMVCHF",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "11:46",
+      "hi": "11:34",
       "d": "MATURANA 386 EDIF. A DEPTO 44, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATÍAS JAQUE AG",
@@ -21962,7 +21971,7 @@
       "o": "1-3ORXW7I0",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "13:53",
+      "hi": "16:00",
       "d": "FRANCISCO MONTESSI 1572, QUILPUE",
       "e": "Pendiente",
       "tec": "MARCO PEREZ G",
@@ -21982,5 +21991,5 @@
    }
   }
  },
- "generado": "05-11-2026 09:33"
+ "generado": "05-11-2026 09:43"
 }
