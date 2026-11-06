@@ -21616,16 +21616,16 @@
    }
   },
   "06-11-2026": {
-   "hasta": "13:29",
+   "hasta": "13:39",
    "actividades": 157,
    "tecnicos": 34,
    "estados": {
-    "Completado": 41,
-    "en ruta": 3,
-    "Pendiente": 73,
+    "Completado": 43,
+    "Iniciado": 15,
+    "Pendiente": 70,
     "Cancelado": 4,
     "No Realizada": 21,
-    "Iniciado": 14,
+    "en ruta": 3,
     "Suspendido": 1
    },
    "rgu": 220.7,
@@ -21633,7 +21633,7 @@
    "caidas_activas": 0,
    "caidas_resueltas": 0,
    "nuevas": 13,
-   "al_bucket": 15,
+   "al_bucket": 25,
    "repetidas": 37,
    "reagendadas": 7,
    "detalle": {
@@ -21646,7 +21646,7 @@
       "f": "13-16",
       "hi": "13:24",
       "d": "FUENTE CLARA NORTE 1085, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OVITXRP",
@@ -21782,6 +21782,18 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3OV094DH",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "15:40",
+      "d": "PAUL HARRIS 1190, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "visitas": 1,
+      "ult_fecha": "05-11-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OUZTR1Y",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -21804,6 +21816,18 @@
       "visitas": 1,
       "ult_fecha": "05-11-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OVFLJDT",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "13:53",
+      "d": "PABLO RAMIREZ 0219, QUILPUE",
+      "e": "en ruta",
+      "tec": "CESAR MENA OLIVEROS",
+      "visitas": 3,
+      "ult_fecha": "01-10-2026",
+      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3ORXW7I0",
@@ -21869,25 +21893,13 @@
       "o": "1-3OVFQ02L",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:16",
+      "hi": "15:28",
       "d": "VETERANOS DEL 79 086, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
       "visitas": 1,
       "ult_fecha": "06-11-2026",
       "ult_cierre": "Cliente reagenda"
-     },
-     {
-      "o": "1-3OV094DH",
-      "cat": "Alta 2 Play",
-      "f": "13-16",
-      "hi": "16:38",
-      "d": "PAUL HARRIS 1190, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "FELIPE SILVA R",
-      "visitas": 1,
-      "ult_fecha": "05-11-2026",
-      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OVCP1AS",
@@ -21902,22 +21914,10 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OVGXNX0",
-      "cat": "Alta 2 Play",
-      "f": "13-16",
-      "hi": "16:59",
-      "d": "HUANHUALI 219 CASA A, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "GEEYSER PEREZ O",
-      "visitas": 1,
-      "ult_fecha": "06-11-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OQBKZ96",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "19:08",
+      "hi": "16:57",
       "d": "PARIS 960 CASA 1, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "GEEYSER PEREZ O",
@@ -21960,6 +21960,18 @@
       "visitas": 1,
       "ult_fecha": "04-11-2026",
       "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3OVGXNX0",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "16:28",
+      "d": "HUANHUALI 219 CASA A, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOSE CASTRO P",
+      "visitas": 1,
+      "ult_fecha": "06-11-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OV4OEVV",
@@ -22024,7 +22036,7 @@
       "o": "1-3OV3H1CJ",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "18:18",
+      "hi": "18:32",
       "d": "DINAMARCA 1451 EDIF. 6 DEPTO 402, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -22084,7 +22096,7 @@
       "o": "1-3OUULJ2N",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:47",
+      "hi": "16:11",
       "d": "AZAPA 1190, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -22093,22 +22105,10 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OVFLJDT",
-      "cat": "Reparación",
-      "f": "13-16",
-      "hi": "16:05",
-      "d": "PABLO RAMIREZ 0219, QUILPUE",
-      "e": "Pendiente",
-      "tec": "LEONEL HERNÁNDEZ OJE",
-      "visitas": 3,
-      "ult_fecha": "01-10-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
       "o": "1-3OUIWRCC",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:22",
+      "hi": "17:30",
       "d": "TOCOPILLA 01650, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -22192,7 +22192,7 @@
       "o": "1-3OURRX9O",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:51",
+      "hi": "16:06",
       "d": "ACONCAGUA 11 CASA S/N, QUILPUE",
       "e": "Pendiente",
       "tec": "YENDER BOSCAN CADENAS",
@@ -22236,7 +22236,7 @@
       "o": "1-3OU8FEI2",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:54",
+      "hi": "16:55",
       "d": "GOD BLESS YOU 0260 EDIF. 1 DEPTO 132, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
@@ -22276,5 +22276,5 @@
    }
   }
  },
- "generado": "06-11-2026 13:29"
+ "generado": "06-11-2026 13:39"
 }
