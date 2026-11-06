@@ -17988,12 +17988,15 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarM
   #anPage .an-g3 { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:12px; }
   #anPage .an-g2 { display:grid; grid-template-columns:1.3fr 1fr; gap:12px; }
   /* (06-11-2026, 18:23) sin "Cuanto nos cuesta la GSA": el semaforo se estira hasta el alto de "Como cierra" (misma linea) */
-  #anPage .an-par .an-col > .an-card { flex:1; display:flex; flex-direction:column; }
-  #anPage .an-par .an-col > .an-card .an-sem { flex:1; grid-template-rows:auto repeat(3, 1fr); }
-  #anPage .an-par .an-sem .d { height:auto !important; min-height:44px; align-self:stretch; font-size:16px; }
-  #anPage .an-par .an-sem .d small { font-size:10.5px; } #anPage .an-par .an-sem .d small.sg { font-size:9.5px; white-space:nowrap; }
-  #anPage .an-par .an-sem .d { overflow:hidden; }
-  @media (max-width:1500px){ #anPage .an-par .an-sem .d { font-size:14px; } #anPage .an-par .an-sem .d small.sg { font-size:8.5px; letter-spacing:-.3px; } }
+  #anPage .an-par .an-col > .an-card:first-child { flex:1; display:flex; flex-direction:column; }
+  /* (06-11-2026, 19:50) tarjeta Migraciones en otras comunas */
+  #anPage .an-otras .an-sem .d { height:40px; }
+  #anPage .an-otras .an-sem .d.ot { background:rgba(20,184,166,.14); cursor:default; }
+  #anPage .an-par .an-col > .an-card:first-child .an-sem { flex:1; grid-template-rows:auto repeat(3, 1fr); }
+  #anPage .an-par .an-col > .an-card:first-child .an-sem .d { height:auto !important; min-height:44px; align-self:stretch; font-size:16px; }
+  #anPage .an-par .an-col > .an-card:first-child .an-sem .d small { font-size:10.5px; } #anPage .an-par .an-col > .an-card:first-child .an-sem .d small.sg { font-size:9.5px; white-space:nowrap; }
+  #anPage .an-par .an-col > .an-card:first-child .an-sem .d { overflow:hidden; }
+  @media (max-width:1500px){ #anPage .an-par .an-col > .an-card:first-child .an-sem .d { font-size:14px; } #anPage .an-par .an-col > .an-card:first-child .an-sem .d small.sg { font-size:8.5px; letter-spacing:-.3px; } }
   #anPage .an-col { display:flex; flex-direction:column; gap:12px; min-width:0; }   /* (03-11-2026) semaforo + GSA en la misma columna */
   #anPage .an-gsa-res { font-size:12.5px; color:#cbd5e1; margin:0 0 8px; }
   #anPage .an-gsa-res b { font-size:15px; }
@@ -18570,6 +18573,12 @@ function anPintar(){
   h += '</div></div>';
   /* (06-11-2026, 18:20) Luis: se elimino "¿Cuanto nos cuesta la GSA?" (el sin GSA ya sale en relojes, semaforo y tarjetas).
      Semaforo y "¿Como cierra?" siguen lado a lado y terminan a la misma altura (clase an-par): el semaforo se estira. */
+  /* ==== (06-11-2026, 19:50) MIGRACIONES EN OTRAS COMUNAS (debajo del semaforo, donde estaba "¿Cuanto nos cuesta la GSA?") ====
+     Luis: "estado de las migras que se ejecutan en otras comunas". VTR/CLARO las cuenta en la completitud igual que las de
+     Quilpue y Villa Alemana; vienen solo del export completo (cuenta del jefe), por eso solo estan los dias con ese archivo.
+     Fila 1: completitud de las de otras comunas por semana (alineada con el semaforo). Fila 2: cuantos puntos le restan
+     (o suman) al total de esa semana. Tocar una casilla abre el detalle de la semana filtrado a "otra comuna". */
+  h += anOtrasCardHtml(D, SEMS);
   h += '</div>';   /* cierra .an-col */
   /* como cierra el mes */
   h += '<div class="an-card"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap"><h3 style="margin:0">¿Cómo cierra ' + AN_NOMMES[+D.mesHoy.slice(4) - 1].toLowerCase() + '?</h3>'
@@ -18585,6 +18594,39 @@ function anPintar(){
   if(D.cargando) setTimeout(function(){ anPintar(); anDetPintar(); }, 1500);
 }
 
+function anOtrasIr(per){ AN_LISTA_Q = 'otra comuna'; anDetAbrir('Migraciones', per); }
+function anOtrasCardHtml(D, SEMS){
+  const esOtra = function(x){ return x.ciu === 'Otra comuna'; }, MINV = 5;
+  let h = '<div class="an-card an-otras"><h3><i class="pt" style="background:#14b8a6"></i>Migraciones en otras comunas <small style="font-size:12px;color:#94a3b8;font-weight:400">cuentan igual en la completitud de VTR/CLARO</small></h3>';
+  if(AN_COM !== 'Todo') return h + '<p class="s">Con el filtro de comuna en ' + (AN_COM === 'QUILPUE' ? 'Quilpué' : 'Villa Alemana') + ' no entran las de otras comunas. Elige "Todas" para verlas.</p></div>';
+  /* resumen del mes */
+  const Lm = anPer(D, 'Migraciones', { t:'mes', k:D.mesHoy }), Om = Lm.filter(esOtra), sm = mpSt(Om);
+  const Zm = mpSt(Lm.filter(function(x){ return !esOtra(x); })), Tm = mpSt(Lm);
+  const ciu = {}, tec = {};
+  Om.forEach(function(x){ const d = (typeof AN_OTRAS_OT === 'object' && AN_OTRAS_OT[x.ot]) || ''; const c = d.indexOf(',') >= 0 ? d.slice(d.lastIndexOf(',') + 1).trim() : 'sin dirección';
+    ciu[c] = (ciu[c] || 0) + 1; const t = anTec(x.tec); tec[t] = (tec[t] || 0) + 1; });
+  const top = function(o, n){ return Object.keys(o).sort(function(a, b){ return o[b] - o[a]; }).slice(0, n).map(function(k){ return escR(k.replace(/\b([A-ZÁÉÍÓÚÑ])([A-ZÁÉÍÓÚÑ]+)/g, function(_, a, b){ return a + b.toLowerCase(); })) + ' ' + o[k]; }).join(' · '); };
+  if(sm.vis){
+    const resta = (Zm.comp !== null && Tm.comp !== null) ? Tm.comp - Zm.comp : null;
+    h += '<p class="an-gsa-res" style="cursor:pointer" onclick="anOtrasIr({t:\'mes\', k:\'' + D.mesHoy + '\'})" title="Toca para ver las no realizadas del mes en otras comunas">'
+      + AN_NOMMES[+D.mesHoy.slice(4) - 1] + ': <b>' + sm.vis + '</b> visitadas · <b style="color:' + anCol(sm.comp) + '">' + mpPc(sm.comp) + '</b> completitud (Quilpué + V. Alemana ' + mpPc(Zm.comp) + ')'
+      + (resta !== null ? ' · al total le ' + (resta < 0 ? 'restan <b style="color:#f87171">' + P2(-resta) + ' pts</b>' : 'suman <b style="color:#4ade80">' + P2(resta) + ' pts</b>') : '')
+      + '<br><span style="color:#94a3b8">' + top(ciu, 3) + ' · técnicos: ' + top(tec, 4) + '</span></p>';
+  } else h += '<p class="an-gsa-res">' + AN_NOMMES[+D.mesHoy.slice(4) - 1] + ': sin migraciones en otras comunas todavía (o falta el export completo).</p>';
+  /* fila por semana, alineada con el semaforo */
+  h += '<div class="an-sem"><div></div>' + SEMS.map(function(k){ return '<div class="h">S' + derNumSemana(k) + '</div>'; }).join('');
+  const W = SEMS.map(function(k){ const L = anPer(D, 'Migraciones', { t:'sem', k:k }); return { k:k, o:mpSt(L.filter(esOtra)), z:mpSt(L.filter(function(x){ return !esOtra(x); })), t:mpSt(L) }; });
+  h += '<div title="Completitud de las migraciones hechas en otras comunas (GSA como quiebre)">Otras comunas</div>';
+  W.forEach(function(w){ const s = w.o, poca = s.vis < MINV;
+    h += !s.vis ? '<div class="d vac" title="Sin migraciones en otras comunas esa semana">–</div>'
+      : '<div class="d' + (w.k === D.semHoy ? ' act' : '') + '" style="background:' + (poca ? '#64748b' : anCol(s.comp)) + (poca ? ';color:#f1f5f9' : '') + '" title="Semana ' + derNumSemana(w.k) + ' en otras comunas: ' + s.co + ' de ' + s.vis + (poca ? ' (pocas visitas, dice poco)' : '') + '" onclick="anOtrasIr({t:\'sem\', k:\'' + w.k + '\'})">' + P2(s.comp) + '%<small>' + s.vis + ' vis.</small></div>'; });
+  h += '<div style="color:#5eead4" title="Puntos que las de otras comunas le restan (−) o suman (+) a la completitud total de la semana">Efecto en el total</div>';
+  W.forEach(function(w){ const d = (w.o.vis && w.t.comp !== null && w.z.comp !== null) ? w.t.comp - w.z.comp : null;
+    h += d === null ? '<div class="d vac">–</div>'
+      : '<div class="d ot' + (w.k === D.semHoy ? ' act' : '') + '" style="color:' + (d < -0.005 ? '#fca5a5' : '#86efac') + '" title="Total ' + P2(w.t.comp) + '% · solo Quilpué + V. Alemana ' + P2(w.z.comp) + '%">' + (d > 0 ? '+' : d < 0 ? '−' : '') + anF1(Math.abs(d)) + ' pts<small>total ' + P2(w.t.comp) + '%</small></div>'; });
+  h += '</div><p class="s" style="margin:6px 0 0">Solo los días con export completo (cuenta del jefe). Gris: menos de ' + MINV + ' visitas en la semana.</p></div>';
+  return h;
+}
 /* (04-11-2026, 16:00) Luis: "ajusta el gráfico para que quede en línea al finalizar con cuánto nos cuesta la GSA".
    El gráfico se arma con un alto H; despues de pintar, anLinAjustar() mide la columna de la izquierda (semáforo +
    GSA) y vuelve a armarlo con el alto justo para que la tarjeta termine a la misma altura. */
