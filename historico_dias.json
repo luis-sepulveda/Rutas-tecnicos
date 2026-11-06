@@ -21616,19 +21616,19 @@
    }
   },
   "06-11-2026": {
-   "hasta": "17:25",
-   "actividades": 176,
+   "hasta": "17:41",
+   "actividades": 177,
    "tecnicos": 33,
    "estados": {
-    "Completado": 92,
-    "Iniciado": 24,
+    "Completado": 99,
+    "No Realizada": 32,
     "Cancelado": 9,
-    "No Realizada": 30,
-    "Pendiente": 13,
+    "Iniciado": 23,
+    "Pendiente": 5,
     "Suspendido": 4,
-    "en ruta": 4
+    "en ruta": 5
    },
-   "rgu": 236.8,
+   "rgu": 236.9,
    "caidas_total": 1,
    "caidas_activas": 1,
    "caidas_resueltas": 0,
@@ -21651,12 +21651,12 @@
     "nuevas": [
      {
       "o": "1-3OVQHAA9",
-      "tec": "JOEL GUSTAVE GUSTA",
+      "tec": "CESAR MENA OLIVEROS",
       "cat": "Modificación de Servicio",
       "f": "16-19",
       "hi": "17:41",
       "d": "SAN PEDRO 1675, QUILPUE",
-      "e": "Pendiente"
+      "e": "Completado"
      },
      {
       "o": "1-3OVQDX5W",
@@ -21665,7 +21665,7 @@
       "f": "16-19",
       "hi": "17:28",
       "d": "MARIA MERCEDES 1482 EDIF. 6 DEPTO 304, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OVPWWWF",
@@ -21674,7 +21674,7 @@
       "f": "16-19",
       "hi": "16:54",
       "d": "SANTA MARGARITA 1326 CASA B, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OVOR0M6",
@@ -21710,7 +21710,7 @@
       "f": "16-19",
       "hi": "16:37",
       "d": "EL RINCON DE LOS CISNES 688, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OVOBPWB",
@@ -21719,7 +21719,7 @@
       "f": "16-19",
       "hi": "17:26",
       "d": "PJE EXTREMADURA 0527, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OVP3EDU",
@@ -21728,7 +21728,7 @@
       "f": "16-19",
       "hi": "17:43",
       "d": "IGNACIO CARRERA PINTO 0705, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OVMN7RN",
@@ -21875,7 +21875,7 @@
      },
      {
       "o": "1-3OV3H1CJ",
-      "tec": "JOSE SALAS MEDINA",
+      "tec": "SEBASTIAN DOSSOW A",
       "cat": "Alta 1 Play",
       "f": "16-19",
       "hi": "17:01",
@@ -21890,7 +21890,7 @@
       "f": "16-19",
       "hi": "16:31",
       "d": "ACONCAGUA 11 CASA S/N, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "ALEXIS JARA",
       "visitas": 1,
       "ult_fecha": "05-11-2026",
@@ -21900,7 +21900,7 @@
       "o": "1-3OUI563V",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "18:15",
+      "hi": "18:28",
       "d": "PJE VIGO 2095, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -22046,7 +22046,7 @@
       "f": "13-16",
       "hi": "17:34",
       "d": "HUANHUALI 219 CASA A, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "FELIPE SILVA R",
       "visitas": 1,
       "ult_fecha": "06-11-2026",
@@ -22186,25 +22186,13 @@
       "o": "1-3OVQDX5W",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:28",
+      "hi": "17:36",
       "d": "MARIA MERCEDES 1482 EDIF. 6 DEPTO 304, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JOSE SALAS MEDINA",
       "visitas": 2,
       "ult_fecha": "09-09-2026",
       "ult_cierre": "Clte desiste motivo comercial"
-     },
-     {
-      "o": "1-3OV3H1CJ",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "18:29",
-      "d": "DINAMARCA 1451 EDIF. 6 DEPTO 402, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOSE SALAS MEDINA",
-      "visitas": 1,
-      "ult_fecha": "05-11-2026",
-      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OUZ101C",
@@ -22234,9 +22222,9 @@
       "o": "1-3OUMWGJP",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:29",
+      "hi": "17:26",
       "d": "GALLEGUILLOS 1421 EDIF. C DEPTO 32, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "KEVIN TAPIA RETAMAL",
       "visitas": 1,
       "ult_fecha": "05-08-2026",
@@ -22326,6 +22314,18 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3OV3H1CJ",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "18:06",
+      "d": "DINAMARCA 1451 EDIF. 6 DEPTO 402, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "SEBASTIAN DOSSOW A",
+      "visitas": 1,
+      "ult_fecha": "05-11-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OUJF806",
       "cat": "Reparación",
       "f": "16-19",
@@ -22365,7 +22365,7 @@
       "f": "16-19",
       "hi": "16:55",
       "d": "GOD BLESS YOU 0260 EDIF. 1 DEPTO 132, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "ESTEBAN PIZARRO QUINTANA",
       "desde": "05-11-2026"
      },
@@ -22413,5 +22413,5 @@
    }
   }
  },
- "generado": "06-11-2026 17:25"
+ "generado": "06-11-2026 17:41"
 }
