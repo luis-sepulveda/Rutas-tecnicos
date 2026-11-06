@@ -21616,29 +21616,38 @@
    }
   },
   "06-11-2026": {
-   "hasta": "14:30",
-   "actividades": 159,
-   "tecnicos": 34,
+   "hasta": "14:35",
+   "actividades": 149,
+   "tecnicos": 33,
    "estados": {
-    "Completado": 53,
-    "Pendiente": 51,
+    "Completado": 54,
+    "Pendiente": 42,
     "Cancelado": 4,
     "No Realizada": 22,
     "Iniciado": 22,
-    "en ruta": 6,
+    "en ruta": 4,
     "Suspendido": 1
    },
-   "rgu": 221.8,
+   "rgu": 205.9,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 14,
-   "al_bucket": 26,
-   "repetidas": 37,
+   "nuevas": 15,
+   "al_bucket": 30,
+   "repetidas": 34,
    "reagendadas": 7,
    "detalle": {
     "caidas": [],
     "nuevas": [
+     {
+      "o": "1-3OVLHTDF",
+      "tec": "PABLO HERNANEZ FERNAN",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "14:35",
+      "d": "PJE VARI 2317, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OVKTX4N",
       "tec": "SEBASTIAN DOSSOW A",
@@ -21803,18 +21812,6 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3OV094DH",
-      "cat": "Alta 2 Play",
-      "f": "13-16",
-      "hi": "15:31",
-      "d": "PAUL HARRIS 1190, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "ANTONHY MORALES MENDOZA",
-      "visitas": 1,
-      "ult_fecha": "05-11-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OUZTR1Y",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -21921,30 +21918,6 @@
       "visitas": 1,
       "ult_fecha": "06-11-2026",
       "ult_cierre": "Cliente reagenda"
-     },
-     {
-      "o": "1-3OV2YNWB",
-      "cat": "Alta 1 Play",
-      "f": "13-16",
-      "hi": "15:48",
-      "d": "ANA MARIA FRESNO 150 CASA 8 DEPTO 124, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "ESTEBAN PIZARRO QUINTANA",
-      "visitas": 2,
-      "ult_fecha": "05-11-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OVGXNX0",
-      "cat": "Alta 2 Play",
-      "f": "13-16",
-      "hi": "16:20",
-      "d": "HUANHUALI 219 CASA A, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "FELIPE SILVA R",
-      "visitas": 1,
-      "ult_fecha": "06-11-2026",
-      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OVCP1AS",
@@ -22057,7 +22030,7 @@
       "o": "1-3OV3H1CJ",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:02",
+      "hi": "16:00",
       "d": "DINAMARCA 1451 EDIF. 6 DEPTO 402, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -22177,7 +22150,7 @@
       "o": "1-3OUJF806",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "17:34",
+      "hi": "16:00",
       "d": "BETELGEUSSE 445, QUILPUE",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -22245,7 +22218,7 @@
       "o": "1-3OU8FEI2",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "17:13",
+      "hi": "17:14",
       "d": "GOD BLESS YOU 0260 EDIF. 1 DEPTO 132, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
@@ -22285,5 +22258,5 @@
    }
   }
  },
- "generado": "06-11-2026 14:30"
+ "generado": "06-11-2026 14:35"
 }
