@@ -17989,11 +17989,18 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarM
   #anPage .an-g2 { display:grid; grid-template-columns:1.3fr 1fr; gap:12px; }
   /* (06-11-2026, 18:23) sin "Cuanto nos cuesta la GSA": el semaforo se estira hasta el alto de "Como cierra" (misma linea) */
   #anPage .an-par .an-col > .an-card:first-child { flex:1; display:flex; flex-direction:column; }
+  /* (06-11-2026, 20:10) casillas del semaforo con GSA: etiqueta morada y el sin GSA con la diferencia */
+  #anPage .an-sem .d.sgsa { position:relative; box-shadow:inset 0 0 0 2px #a78bfa; }
+  #anPage .an-sem .d .gtag { position:absolute; top:2px; right:3px; font-style:normal; font-size:9px; font-weight:800; background:#6d28d9; color:#fff; border-radius:4px; padding:0 4px; line-height:13px; }
+  #anPage .an-sem .d.sgsa small.sg { color:#3b0764; font-weight:800; }
+  #anPage .an-sem .d.sgsa small.sg.dif { color:#4c1d95; }
   /* (06-11-2026, 19:50) tarjeta Migraciones en otras comunas */
   #anPage .an-otras .an-sem .d { height:40px; }
   #anPage .an-otras .an-sem .d.ot { background:rgba(20,184,166,.14); cursor:default; }
   #anPage .an-par .an-col > .an-card:first-child .an-sem { flex:1; grid-template-rows:auto repeat(3, 1fr); }
   #anPage .an-par .an-col > .an-card:first-child .an-sem .d { height:auto !important; min-height:44px; align-self:stretch; font-size:16px; }
+  /* (06-11-2026, 20:15) Luis: "dejalas alineadas, las que no tienen gsa del mismo porte que las que si" */
+  #anPage .an-par .an-col > .an-card:first-child .an-sem .d { min-height:86px; position:relative; }
   #anPage .an-par .an-col > .an-card:first-child .an-sem .d small { font-size:10.5px; } #anPage .an-par .an-col > .an-card:first-child .an-sem .d small.sg { font-size:9.5px; white-space:nowrap; }
   #anPage .an-par .an-col > .an-card:first-child .an-sem .d { overflow:hidden; }
   @media (max-width:1500px){ #anPage .an-par .an-col > .an-card:first-child .an-sem .d { font-size:14px; } #anPage .an-par .an-col > .an-card:first-child .an-sem .d small.sg { font-size:8.5px; letter-spacing:-.3px; } }
@@ -18559,15 +18566,19 @@ function anPintar(){
   /* semaforo 8 semanas */
   const SEMS = []; for(let i = 7; i >= 0; i--) SEMS.push(anSemAnt(D.semHoy, i));
   h += '<div class="an-sec">Una mirada distinta</div><div class="an-g2 an-par"><div class="an-col"><div class="an-card"><h3>Semáforo de las últimas 8 semanas</h3>'
-    + '<p class="s">Completitud semana a semana, con la GSA como quiebre (como VTR); debajo, sin GSA. Verde: sobre la meta. Ámbar: a menos de 5 pts. Rojo: bajo eso. Gris: menos de ' + AN_MIN_VIS + ' visitas, todavía no dice mucho. Toca una casilla para ver esa semana.</p>'
+    + '<p class="s">Completitud semana a semana, con la GSA como quiebre (como VTR). Las casillas con <b style="color:#c4b5fd">GSA</b> muestran además cuánto daría sin GSA y los puntos que restó. Verde: sobre la meta. Ámbar: a menos de 5 pts. Rojo: bajo eso. Gris: menos de ' + AN_MIN_VIS + ' visitas, todavía no dice mucho. Toca una casilla para ver esa semana.</p>'
     + '<div class="an-sem"><div></div>' + SEMS.map(function(k){ return '<div class="h">S' + derNumSemana(k) + (k === D.semHoy ? '<br><small>en curso</small>' : '') + '</div>'; }).join('');
   AN_FAMS.forEach(function(F){
     h += '<div>' + F.f + '</div>';
     SEMS.forEach(function(k){
       const s = mpSt(anPer(D, F.f, { t:'sem', k:k }));
       h += s.comp === null ? '<div class="d vac">–</div>'
-        : '<div class="d' + (k === D.semHoy ? ' act' : '') + '" style="background:' + (s.vis < AN_MIN_VIS ? '#64748b' : anCol(s.comp)) + (s.vis < AN_MIN_VIS ? ';color:#f1f5f9' : '') + '" title="' + (s.vis < AN_MIN_VIS ? 'Pocas visitas todavía · ' : '') + F.f + ' semana ' + derNumSemana(k) + ': ' + s.co + ' de ' + s.vis + ' visitadas' + (s.g ? ' · ' + s.g + ' cerrada' + (s.g === 1 ? '' : 's') + ' por GSA (quiebre para VTR); sin GSA: ' + (s.co + s.g) + ' de ' + s.vis : '') + '" onclick="anDetAbrir(\'' + F.f + '\', {t:\'sem\', k:\'' + k + '\'})">'
-          + P2(s.comp) + '%<small class="sg">sin GSA ' + P2(s.compSG) + '%</small><small>' + s.vis + ' vis.</small></div>';
+        /* (06-11-2026, 20:10) Luis: "solo marcar en el semaforo cuando tengamos quiebres con el item de gsa": el "sin GSA"
+           y la diferencia solo salen en las casillas con GSA, marcadas con la etiqueta morada "GSA" */
+        : '<div class="d' + (k === D.semHoy ? ' act' : '') + (s.g ? ' sgsa' : '') + '" style="background:' + (s.vis < AN_MIN_VIS ? '#64748b' : anCol(s.comp)) + (s.vis < AN_MIN_VIS ? ';color:#f1f5f9' : '') + '" title="' + (s.vis < AN_MIN_VIS ? 'Pocas visitas todavía · ' : '') + F.f + ' semana ' + derNumSemana(k) + ': ' + s.co + ' de ' + s.vis + ' visitadas' + (s.g ? ' · ' + s.g + ' cerrada' + (s.g === 1 ? '' : 's') + ' por GSA (quiebre para VTR); sin GSA: ' + (s.co + s.g) + ' de ' + s.vis : '') + '" onclick="anDetAbrir(\'' + F.f + '\', {t:\'sem\', k:\'' + k + '\'})">'
+          + (s.g ? '<i class="gtag">' + s.g + ' GSA</i>' : '') + P2(s.comp) + '%'
+          + (s.g ? '<small class="sg">sin GSA ' + P2(s.compSG) + '%</small><small class="sg dif">−' + P2(s.compSG - s.comp) + ' pts</small>' : '')
+          + '<small>' + s.vis + ' vis.</small></div>';
     });
   });
   h += '</div></div>';
