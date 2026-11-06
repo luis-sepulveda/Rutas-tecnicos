@@ -21616,29 +21616,37 @@
    }
   },
   "06-11-2026": {
-   "hasta": "10:44",
-   "actividades": 130,
+   "hasta": "10:49",
+   "actividades": 131,
    "tecnicos": 34,
    "estados": {
-    "Iniciado": 30,
-    "Pendiente": 85,
-    "Completado": 4,
-    "en ruta": 3,
+    "Completado": 7,
+    "en ruta": 6,
+    "Pendiente": 82,
+    "Cancelado": 3,
     "No Realizada": 5,
-    "Suspendido": 1,
-    "Cancelado": 2
+    "Iniciado": 27,
+    "Suspendido": 1
    },
-   "rgu": 191.5,
+   "rgu": 192.5,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 6,
+   "nuevas": 7,
    "al_bucket": 9,
    "repetidas": 33,
    "reagendadas": 7,
    "detalle": {
     "caidas": [],
     "nuevas": [
+     {
+      "o": "1-3OVEMFPS",
+      "tec": "ALEXIS JARA",
+      "cat": "Reparación",
+      "f": "13-16",
+      "d": "LAS BARRANCAS 2581 EDIF. B DEPTO 401, QUILPUE",
+      "e": "Cancelado"
+     },
      {
       "o": "1-3OVE5NIL",
       "tec": "DANIEL NAVARRETE E",
@@ -21711,9 +21719,9 @@
       "o": "1-3OURDY3H",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:52",
+      "hi": "10:53",
       "d": "PJE AZULILLO 69, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "ANTONHY MORALES MENDOZA",
       "visitas": 1,
       "ult_fecha": "05-11-2026",
@@ -22098,7 +22106,7 @@
       "f": "10-13",
       "hi": "09:46",
       "d": "PJE ALMAR 146, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "ALEXIS JARA",
       "desde": "05-11-2026"
      },
@@ -22166,5 +22174,5 @@
    }
   }
  },
- "generado": "06-11-2026 10:44"
+ "generado": "06-11-2026 10:49"
 }
