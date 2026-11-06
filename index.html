@@ -18056,6 +18056,7 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarM
   body.an-sobre #modalCaidas, body.an-sobre #modalNuevas, body.an-sobre #modalReca, body.an-sobre #modalRepe, body.an-sobre #modalRed,
   body.an-sobre #vistaRed, body.an-sobre #modalRJ, body.an-sobre #modalNoop { z-index:3650; }
   body.an-sobre #avisoDer { z-index:3660; }
+  body.an-sobre #modalReit { z-index:3650; } body.an-sobre #reitClave { z-index:3670; }
   /* (06-11-2026, 17:10) avisos, Resumen WhatsApp, Requiere atencion y mapa en MI ANALISIS / Dia en curso */
   #anPage .an-btn.wsp { background:#15803d; } #anPage .an-btn.wsp:hover { background:#166534; }
   #anPage .an-avisos { display:flex; gap:8px; flex-wrap:wrap; margin:-6px 0 12px; }
@@ -18091,7 +18092,10 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarM
   #anDet .an-sec2 small { text-transform:none; letter-spacing:0; font-weight:400; color:#64748b; margin-left:6px; }
   #anDet .an-dia-acts { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:12px; }
   #anDet .an-dia-act .nums span, #anDet .an-dia-act .ef .ver { white-space:nowrap; }
-  #anDet .an-dia-act .ef .sg { color:#c4b5fd; font-size:11.5px; }
+  #anDet .an-dia-act .ef .sg { display:block; color:#c4b5fd; font-size:11.5px; margin-top:1px; }
+  /* (06-11-2026, 17:45) en pantallas mas chicas la linea del % no se aprieta: "sin GSA" va en su propia linea y "Ver detalle" abajo a la derecha */
+  #anDet .an-dia-act .ef { align-items:flex-end; gap:8px; }
+  #anDet .an-dia-act .nums { flex-wrap:wrap; gap:2px 10px; }
   #anDet .an-dia-act { border-top:3px solid var(--c) !important; }
   #anDet .an-dia-act .hd { display:flex; justify-content:space-between; align-items:center; }
   #anDet .an-dia-act .nm { font-size:16px; font-weight:800; color:#fff; display:flex; align-items:center; gap:8px; } #anDet .an-dia-act .nm i { width:10px; height:10px; border-radius:50%; background:var(--c); display:inline-block; }
@@ -18480,7 +18484,8 @@ function anPintar(){
   const box = document.getElementById('anPage'); if(!box || !box.classList.contains('abierto')) return;
   const y = box.scrollTop, D = anFilas(), fd = (typeof FECHA_DATOS !== 'undefined' && FECHA_DATOS) ? FECHA_DATOS : new Date();
   const hh = String(fd.getHours()).padStart(2, '0') + ':' + String(fd.getMinutes()).padStart(2, '0');
-  let h = '<div class="an-wrap"><div class="an-head"><h1>MI ANÁLISIS <small>solo Luis · ' + fd.toLocaleDateString('es-CL', { weekday:'long', day:'2-digit', month:'2-digit', year:'numeric' }) + ', datos de las ' + hh + '</small></h1>'
+  /* (06-11-2026, 17:47) Luis: los 3 clics en el titulo abren Reiterados, igual que en la pantalla principal (reitEntradaSecreta) */
+  let h = '<div class="an-wrap"><div class="an-head"><h1 onclick="if(event.detail === 3){ try { reitEntradaSecreta(); } catch(x){} }" style="user-select:none">MI ANÁLISIS <small>solo Luis · ' + fd.toLocaleDateString('es-CL', { weekday:'long', day:'2-digit', month:'2-digit', year:'numeric' }) + ', datos de las ' + hh + '</small></h1>'
   /* (05-11-2026) Luis: "que quede en 1 sola linea si no los dejas al lado derecho, la hora arriba": comuna y supervisor
      van en la fila del titulo (a la derecha) y los botones de ventanas en la fila de abajo */
     + '<div class="an-chips an-fil">' + [['Todo','Todo el equipo'], ['QUILPUE','Quilpué'], ['VILLA ALEMANA','Villa Alemana']].map(function(c){
@@ -19634,7 +19639,7 @@ function anDiaPintar(m){
       + '<div class="sb">' + subTx + '</div>'
       + '<div class="br">' + t(co, 'c', 'completadas') + t(nr, 'n', 'no realizadas') + t(ini2, 'i', 'iniciadas o en ruta') + t(pen, 'p', 'pendientes') + t(cs, 'x', 'canceladas o suspendidas') + '</div>'
       + '<div class="nums"><span><b class="ok">' + co + '</b> completadas</span><span><b class="bad">' + nr + '</b> no realizadas</span><span><b>' + ab + '</b> sin cerrar</span></div>'
-      + '<div class="ef">' + (pv === null ? '<span class="sd">nadie ha cerrado una visita todavía</span>' : '<span><b style="color:' + (meta === null ? '#e2e8f0' : pv >= meta ? '#22c55e' : '#ef4444') + '">' + P2(pv) + '%</b> de lo visitado' + ' <small class="sg">sin GSA ' + P2(pvSG) + '% · ' + gg + ' GSA</small>' + '</span>') + '<span class="ver">Ver detalle ›</span></div>'
+      + '<div class="ef">' + (pv === null ? '<span class="sd">nadie ha cerrado una visita todavía</span>' : '<span><b style="color:' + (meta === null ? '#e2e8f0' : pv >= meta ? '#22c55e' : '#ef4444') + '">' + P2(pv) + '%</b> de lo visitado' + '<small class="sg">sin GSA ' + P2(pvSG) + '% · ' + gg + ' GSA</small>' + '</span>') + '<span class="ver">Ver detalle ›</span></div>'
       + '</button>';
   }).join('') + '</div>';
   h += '</div>';
