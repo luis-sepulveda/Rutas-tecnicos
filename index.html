@@ -15820,6 +15820,8 @@ async function bajarMigGer(){
            seguimiento_autonomia.py leyendo los export crudos del portal */
         if(mj.fuera && mj.fuera.ots) fuera = mj.fuera;
         if(mj.dir_canc) dirCa = mj.dir_canc;
+        /* (06-11-2026) visitas de Dominion en OTRAS comunas (solo las usa MI ANALISIS) */
+        if(mj.otras_dir) try { anOtrasCargar(mj.otras_dir); } catch(e){}
       }
     }
   } catch(e){ console.warn('migger completos:', e); }
@@ -18440,14 +18442,7 @@ function anPintar(){
       + '<div class="an-rel an-relsg">' + [sh, ss, sm].map(function(x){ return '<span title="' + (x.g ? x.g + ' cerrada' + (x.g === 1 ? '' : 's') + ' por GSA: VTR las cuenta como quiebre' : 'Sin cierres por GSA') + '">sin GSA <b>' + (x.compSG === null ? '–' : P2(x.compSG) + '%') + '</b>' + (x.g ? ' · ' + x.g + ' GSA' : '') + '</span>'; }).join('') + '</div>'
       + '<div class="an-pie"><span>vs Sem ' + derNumSemana(semAnt) + ': ' + (dl === null ? '<b>–</b>' : '<b style="color:' + (ss.vis < AN_MIN_VIS ? '#94a3b8' : dl >= 0 ? '#22c55e' : '#ef4444') + '" title="' + (ss.vis < AN_MIN_VIS ? 'Con pocas visitas la comparación todavía no dice mucho' : '') + '">' + (dl >= 0 ? '▲' : '▼') + ' ' + P2(Math.abs(dl)) + ' pts</b>')
       + '</span><span><b>' + ss.vis + '</b> visitadas en la semana' + (ss.ab ? ' · <b>' + ss.ab + '</b> por cerrar' : '') + '</span></div>'
-      /* (06-11-2026) Luis: "agregar los otros meses agosto, sept, oct, pero dentro de cada tarjeta": los 3 meses anteriores,
-         cada uno con su completitud (GSA como quiebre), sin GSA y visitadas. Tocar un mes abre el detalle de ese mes. */
-      + '<div class="an-meses">' + AN_MESES_ANT(D.mesHoy).map(function(k){
-          const sx = mpSt(anPer(D, F.f, { t:'mes', k:k })), nom = AN_NOMMES[+k.slice(4) - 1];
-          if(sx.comp === null) return '<div class="an-mes vac"><small>' + nom + '</small><b>–</b><span>sin datos</span></div>';
-          return '<div class="an-mes" onclick="event.stopPropagation(); anDetAbrir(\'' + F.f + '\', {t:\'mes\', k:\'' + k + '\'})" title="' + F.f + ' ' + nom.toLowerCase() + ': ' + sx.co + ' de ' + sx.vis + ' visitadas' + (sx.g ? ' · ' + sx.g + ' por GSA' : '') + '. Toca para ver el detalle del mes.">'
-            + '<small>' + nom + '</small><b style="color:' + anCol(sx.comp) + '">' + P2(sx.comp) + '%</b><span>sin GSA ' + (sx.compSG === null ? '–' : P2(sx.compSG) + '%') + '</span><span>' + sx.vis + ' visitadas</span></div>';
-        }).join('') + '</div>'
+      /* (06-11-2026) los meses anteriores se sacaron de la tarjeta (Luis: "solo deja los meses dentro del detalle"): quedan como pestañas del detalle */
       + '</div>';
   });
   h += '</div>';
@@ -19018,6 +19013,11 @@ function anDirVisitas(dir, hoyIso){
     const id = v.o + '|' + v.iso; if(vistas[id]) return; vistas[id] = 1;
     L.push({ iso:v.iso, f:v.f, o:v.o, tec:v.tec, cat:v.cat, ok:v.ok, cie:v.cie, hoy:false });
   });
+  /* (06-11-2026) visitas en otras comunas (de los export completos) */
+  (AN_OTRAS_K[k] || []).forEach(function(v){
+    const id = v.o + '|' + v.iso; if(vistas[id]) return; vistas[id] = 1;
+    L.push({ iso:v.iso, f:v.f, o:v.o, tec:v.tec, cat:v.cat, ok:v.ok, cie:v.cie, hoy:false, otra:true });
+  });
   Object.keys(typeof DB === 'object' && DB ? DB : {}).forEach(function(t){ (DB[t] || []).forEach(function(o){
     if(o.e !== 'Completado' && o.e !== 'No Realizada') return;
     if(claveDir(o.d) !== k) return;
@@ -19038,9 +19038,28 @@ function anDirVisitas(dir, hoyIso){
 /* (06-11-2026) Luis: "en los botones semana y mes tambien aparezca el detalle de las direcciones como en el boton dia".
    Las ordenes de dias anteriores no traen direccion: se busca por la peticion en visitas_dir.json (RDIR_OT)
    y, si no esta, en el historial de Derivacion (DER_DIR / DER_UNI). */
+/* (06-11-2026) Luis: "trae la direccion real" de las migraciones hechas en OTRAS comunas (salian "sin direccion en
+   el historial": visitas_dir.json solo trae Quilpue y Villa Alemana). seguimiento_autonomia.py las saca de los export
+   completos y las deja en migraciones_semanas.json -> otras_dir { cols:[iso, ot, tec, ok, cod], d:{ direccion: [visitas] } }.
+   Solo migraciones de Dominion y solo los dias que hay export completo. */
+let AN_OTRAS_OT = {}, AN_OTRAS_K = {};
+function anOtrasCargar(o){
+  const ot = {}, kk = {};
+  Object.keys((o && o.d) || {}).forEach(function(dir){
+    const k = claveDir(dir);
+    (o.d[dir] || []).forEach(function(v){
+      const iso = String(v[0]);
+      ot[String(v[1])] = dir;
+      (kk[k] = kk[k] || []).push({ iso: iso, f: iso.slice(6, 8) + '-' + iso.slice(4, 6) + '-' + iso.slice(0, 4), o: String(v[1]),
+        tec: String(v[2] || ''), cat: 'Migración', ok: v[3] ? 1 : 0, cie: String(v[4] || '') });
+    });
+  });
+  AN_OTRAS_OT = ot; AN_OTRAS_K = kk;
+}
 function anDirDe(x){
   if(x.dir) return x.dir;
   if(RDIR_OT[x.ot]) return RDIR_OT[x.ot];
+  if(AN_OTRAS_OT[x.ot]) return AN_OTRAS_OT[x.ot];
   if(typeof DER_DIR === 'object' && DER_DIR && DER_DIR[x.ot] && DER_DIR[x.ot].d) return DER_DIR[x.ot].d;
   if(typeof DER_UNI === 'object' && DER_UNI && DER_UNI[x.ot]) return DER_UNI[x.ot];
   return '';
