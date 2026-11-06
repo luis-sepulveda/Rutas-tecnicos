@@ -18000,7 +18000,12 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarM
   #anPage .an-par .an-col > .an-card:first-child .an-sem { flex:1; grid-template-rows:auto repeat(3, 1fr); }
   #anPage .an-par .an-col > .an-card:first-child .an-sem .d { height:auto !important; min-height:44px; align-self:stretch; font-size:16px; }
   /* (06-11-2026, 20:15) Luis: "dejalas alineadas, las que no tienen gsa del mismo porte que las que si" */
-  #anPage .an-par .an-col > .an-card:first-child .an-sem .d { min-height:86px; position:relative; }
+  #anPage .an-par .an-col > .an-card:first-child .an-sem .d { min-height:66px; position:relative; line-height:1; padding:2px 0; font-size:14px; }
+  /* (06-11-2026, 20:22) Luis: "se pueden achicar un poco mas las tarjetas del semaforo??" */
+  #anPage .an-par .an-col > .an-card:first-child .an-sem { gap:4px; }
+  #anPage .an-par .an-col > .an-card:first-child .an-sem .d small { font-size:9.5px; }
+  #anPage .an-par .an-col > .an-card:first-child .an-sem .d small.sg { font-size:8.5px; letter-spacing:-.3px; }
+  #anPage .an-par .an-col > .an-card:first-child .an-sem .d .gtag { font-size:8px; line-height:11px; top:1px; right:2px; padding:0 3px; }
   #anPage .an-par .an-col > .an-card:first-child .an-sem .d small { font-size:10.5px; } #anPage .an-par .an-col > .an-card:first-child .an-sem .d small.sg { font-size:9.5px; white-space:nowrap; }
   #anPage .an-par .an-col > .an-card:first-child .an-sem .d { overflow:hidden; }
   @media (max-width:1500px){ #anPage .an-par .an-col > .an-card:first-child .an-sem .d { font-size:14px; } #anPage .an-par .an-col > .an-card:first-child .an-sem .d small.sg { font-size:8.5px; letter-spacing:-.3px; } }
