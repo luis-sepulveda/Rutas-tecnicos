@@ -21616,23 +21616,23 @@
    }
   },
   "06-11-2026": {
-   "hasta": "16:50",
-   "actividades": 170,
+   "hasta": "17:10",
+   "actividades": 173,
    "tecnicos": 33,
    "estados": {
-    "Completado": 83,
-    "Iniciado": 25,
-    "Cancelado": 7,
+    "Completado": 91,
+    "Iniciado": 20,
+    "Cancelado": 8,
     "No Realizada": 30,
-    "Pendiente": 18,
-    "Suspendido": 2,
-    "en ruta": 5
+    "Pendiente": 13,
+    "Suspendido": 4,
+    "en ruta": 7
    },
-   "rgu": 231.7,
+   "rgu": 234.7,
    "caidas_total": 1,
    "caidas_activas": 1,
    "caidas_resueltas": 0,
-   "nuevas": 23,
+   "nuevas": 24,
    "al_bucket": 31,
    "repetidas": 37,
    "reagendadas": 7,
@@ -21649,6 +21649,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OVPWWWF",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "16:54",
+      "d": "SANTA MARGARITA 1326 CASA B, VILLA ALEMANA",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3OVOR0M6",
       "tec": "JOSE SALAS MEDINA",
@@ -21674,7 +21683,7 @@
       "f": "16-19",
       "hi": "16:26",
       "d": "JOSE MIGUEL CARRERA 496, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OVOX7HZ",
@@ -21687,16 +21696,16 @@
      },
      {
       "o": "1-3OVOBPWB",
-      "tec": "JOSE SALAS MEDINA",
+      "tec": "NICOLAS MOYANO R",
       "cat": "Alta 2 Play",
       "f": "16-19",
       "hi": "17:26",
       "d": "PJE EXTREMADURA 0527, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OVP3EDU",
-      "tec": "ANTONHY MORALES MENDOZA",
+      "tec": "ESTEBAN PIZARRO QUINTANA",
       "cat": "Alta 1 Play",
       "f": "16-19",
       "hi": "17:43",
@@ -21848,7 +21857,7 @@
      },
      {
       "o": "1-3OV3H1CJ",
-      "tec": "JUAN ARRIAGADA C",
+      "tec": "JOSE SALAS MEDINA",
       "cat": "Alta 1 Play",
       "f": "16-19",
       "hi": "17:01",
@@ -21873,7 +21882,7 @@
       "o": "1-3OUI563V",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "17:12",
+      "hi": "17:15",
       "d": "PJE VIGO 2095, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -22156,24 +22165,24 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OV3H1CJ",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "18:18",
+      "d": "DINAMARCA 1451 EDIF. 6 DEPTO 402, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOSE SALAS MEDINA",
+      "visitas": 1,
+      "ult_fecha": "05-11-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OUZ101C",
       "cat": "Alta 1 Play",
       "f": "10-13",
       "hi": "12:26",
       "d": "DINAMARCA 1485 EDIF. 14 DEPTO 403, VILLA ALEMANA",
       "e": "No Realizada",
-      "tec": "JUAN ARRIAGADA C",
-      "visitas": 1,
-      "ult_fecha": "05-11-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OV3H1CJ",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "18:07",
-      "d": "DINAMARCA 1451 EDIF. 6 DEPTO 402, VILLA ALEMANA",
-      "e": "Pendiente",
       "tec": "JUAN ARRIAGADA C",
       "visitas": 1,
       "ult_fecha": "05-11-2026",
@@ -22195,9 +22204,9 @@
       "o": "1-3OUMWGJP",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:47",
+      "hi": "17:29",
       "d": "GALLEGUILLOS 1421 EDIF. C DEPTO 32, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "KEVIN TAPIA RETAMAL",
       "visitas": 1,
       "ult_fecha": "05-08-2026",
@@ -22324,9 +22333,9 @@
       "o": "1-3OU8FEI2",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:59",
+      "hi": "16:55",
       "d": "GOD BLESS YOU 0260 EDIF. 1 DEPTO 132, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "ESTEBAN PIZARRO QUINTANA",
       "desde": "05-11-2026"
      },
@@ -22374,5 +22383,5 @@
    }
   }
  },
- "generado": "06-11-2026 16:50"
+ "generado": "06-11-2026 17:10"
 }
