@@ -21616,16 +21616,17 @@
    }
   },
   "06-11-2026": {
-   "hasta": "10:13",
+   "hasta": "10:19",
    "actividades": 128,
    "tecnicos": 34,
    "estados": {
-    "Iniciado": 30,
-    "Pendiente": 91,
+    "Iniciado": 29,
+    "Pendiente": 88,
+    "Completado": 3,
+    "en ruta": 4,
     "Suspendido": 1,
-    "Completado": 2,
-    "en ruta": 2,
-    "Cancelado": 2
+    "Cancelado": 2,
+    "No Realizada": 1
    },
    "rgu": 190.5,
    "caidas_total": 0,
@@ -21918,7 +21919,7 @@
       "f": "10-13",
       "hi": "09:50",
       "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JOSE SALAS MEDINA",
       "visitas": 6,
       "ult_fecha": "04-11-2026",
@@ -21928,9 +21929,9 @@
       "o": "1-3OV3L3VL",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "12:20",
+      "hi": "10:29",
       "d": "AVIADOR FIGUEROA 575, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JOSE SALAS MEDINA",
       "visitas": 1,
       "ult_fecha": "05-11-2026",
@@ -21940,7 +21941,7 @@
       "o": "1-3OUMWGJP",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "16:09",
+      "hi": "16:00",
       "d": "GALLEGUILLOS 1421 EDIF. C DEPTO 32, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE SALAS MEDINA",
@@ -21952,7 +21953,7 @@
       "o": "1-3OV3H1CJ",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:10",
+      "hi": "17:01",
       "d": "DINAMARCA 1451 EDIF. 6 DEPTO 402, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE SALAS MEDINA",
@@ -22126,7 +22127,7 @@
       "f": "10-13",
       "hi": "09:50",
       "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JOSE SALAS MEDINA",
       "desde": "05-11-2026"
      },
@@ -22144,5 +22145,5 @@
    }
   }
  },
- "generado": "06-11-2026 10:13"
+ "generado": "06-11-2026 10:19"
 }
