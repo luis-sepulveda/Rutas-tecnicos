@@ -21616,19 +21616,19 @@
    }
   },
   "06-11-2026": {
-   "hasta": "13:50",
-   "actividades": 157,
+   "hasta": "14:00",
+   "actividades": 158,
    "tecnicos": 34,
    "estados": {
-    "Completado": 44,
-    "Iniciado": 17,
-    "Pendiente": 67,
+    "Completado": 50,
+    "Iniciado": 11,
+    "Pendiente": 64,
     "Cancelado": 4,
     "No Realizada": 21,
-    "en ruta": 3,
+    "en ruta": 7,
     "Suspendido": 1
    },
-   "rgu": 220.7,
+   "rgu": 221.7,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
@@ -21655,7 +21655,7 @@
       "f": "16-19",
       "hi": "17:27",
       "d": "SAN MARTIN 960 DEPTO 21, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OVH9DND",
@@ -21691,7 +21691,7 @@
       "f": "13-16",
       "hi": "13:21",
       "d": "CASTELLON 0268, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OVEMFPS",
@@ -21761,7 +21761,7 @@
       "o": "1-3OUULJ2N",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:44",
+      "hi": "15:44",
       "d": "AZAPA 1190, QUILPUE",
       "e": "Pendiente",
       "tec": "ALEXIS JARA",
@@ -21792,18 +21792,6 @@
       "visitas": 1,
       "ult_fecha": "05-11-2026",
       "ult_cierre": "Cliente reagenda"
-     },
-     {
-      "o": "1-3OV2YNWB",
-      "cat": "Alta 1 Play",
-      "f": "13-16",
-      "hi": "15:39",
-      "d": "ANA MARIA FRESNO 150 CASA 8 DEPTO 124, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "ANTONHY MORALES MENDOZA",
-      "visitas": 2,
-      "ult_fecha": "05-11-2026",
-      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OUZTR1Y",
@@ -21881,7 +21869,7 @@
       "o": "1-3OV3WJYA",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:59",
+      "hi": "16:24",
       "d": "LEUCOTON 945 CASA G, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -21926,6 +21914,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OVGXNX0",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "17:35",
+      "d": "HUANHUALI 219 CASA A, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "FELIPE SILVA R",
+      "visitas": 1,
+      "ult_fecha": "06-11-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OVCP1AS",
       "cat": "Modificación de Servicio",
       "f": "10-13",
@@ -21965,9 +21965,9 @@
       "o": "1-3OTTQVOO",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:03",
+      "hi": "13:48",
       "d": "VENECIA (PROGRESO) 1753 EDIF. 7 DEPTO 14, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Pendiente",
       "tec": "JOSE CASTRO P",
       "visitas": 1,
       "ult_fecha": "04-11-2026",
@@ -22033,22 +22033,10 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OVGXNX0",
-      "cat": "Alta 2 Play",
-      "f": "13-16",
-      "hi": "16:17",
-      "d": "HUANHUALI 219 CASA A, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOSE ROJO A",
-      "visitas": 1,
-      "ult_fecha": "06-11-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OV3H1CJ",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "18:28",
+      "hi": "18:32",
       "d": "DINAMARCA 1451 EDIF. 6 DEPTO 402, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -22108,7 +22096,7 @@
       "o": "1-3OUIWRCC",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:11",
+      "hi": "16:36",
       "d": "TOCOPILLA 01650, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -22120,9 +22108,9 @@
       "o": "1-3OU97FOS",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "14:17",
       "d": "CALLE 2 2287, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "LUIS CASTRO TORRES",
       "visitas": 1,
       "ult_fecha": "04-11-2026",
@@ -22144,13 +22132,25 @@
       "o": "1-3OUMWGJP",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:44",
+      "hi": "17:53",
       "d": "GALLEGUILLOS 1421 EDIF. C DEPTO 32, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
       "visitas": 1,
       "ult_fecha": "05-08-2026",
       "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3OV2YNWB",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "16:25",
+      "d": "ANA MARIA FRESNO 150 CASA 8 DEPTO 124, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "MATIAS APELEO APELEO",
+      "visitas": 2,
+      "ult_fecha": "05-11-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OS4ETM6",
@@ -22168,7 +22168,7 @@
       "o": "1-3OUJF806",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:48",
+      "hi": "17:13",
       "d": "BETELGEUSSE 445, QUILPUE",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -22182,7 +22182,7 @@
       "f": "10-13",
       "hi": "11:16",
       "d": "TOQUI 2463, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "SEBASTIAN DOSSOW A",
       "visitas": 2,
       "ult_fecha": "29-10-2026",
@@ -22276,5 +22276,5 @@
    }
   }
  },
- "generado": "06-11-2026 13:50"
+ "generado": "06-11-2026 14:00"
 }
