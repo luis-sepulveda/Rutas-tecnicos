@@ -21616,28 +21616,38 @@
    }
   },
   "06-11-2026": {
-   "hasta": "15:35",
+   "hasta": "15:45",
    "actividades": 163,
    "tecnicos": 33,
    "estados": {
-    "Completado": 65,
-    "Pendiente": 41,
+    "Completado": 66,
+    "Pendiente": 36,
     "Cancelado": 5,
     "No Realizada": 25,
     "Iniciado": 24,
     "Suspendido": 2,
-    "en ruta": 1
+    "en ruta": 5
    },
    "rgu": 224.0,
-   "caidas_total": 0,
-   "caidas_activas": 0,
+   "caidas_total": 1,
+   "caidas_activas": 1,
    "caidas_resueltas": 0,
    "nuevas": 17,
    "al_bucket": 31,
    "repetidas": 37,
    "reagendadas": 7,
    "detalle": {
-    "caidas": [],
+    "caidas": [
+     {
+      "o": "1-3OTAN371",
+      "tec": "MARCO PEREZ G",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "17:05",
+      "d": "MATURANA 208, VILLA ALEMANA",
+      "e": "Pendiente"
+     }
+    ],
     "nuevas": [
      {
       "o": "1-3OVMN7RN",
@@ -21833,7 +21843,7 @@
       "o": "1-3OV094DH",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "15:35",
+      "hi": "15:52",
       "d": "PAUL HARRIS 1190, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ANTONHY MORALES MENDOZA",
@@ -21929,9 +21939,9 @@
       "o": "1-3OV3WJYA",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "15:56",
       "d": "LEUCOTON 945 CASA G, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "EDGAR VALERO C",
       "visitas": 1,
       "ult_fecha": "11-09-2026",
@@ -21953,7 +21963,7 @@
       "o": "1-3OV3H1CJ",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:02",
       "d": "DINAMARCA 1451 EDIF. 6 DEPTO 402, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
@@ -22108,7 +22118,7 @@
       "o": "1-3OVGXNX0",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "15:39",
+      "hi": "15:59",
       "d": "HUANHUALI 219 CASA A, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE SALAS MEDINA",
@@ -22180,9 +22190,9 @@
       "o": "1-3OUULJ2N",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:40",
+      "hi": "15:44",
       "d": "AZAPA 1190, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "MARCO PEREZ G",
       "visitas": 4,
       "ult_fecha": "03-11-2026",
@@ -22228,9 +22238,9 @@
       "o": "1-3OUJF806",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "15:50",
       "d": "BETELGEUSSE 445, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "YENDER BOSCAN CADENAS",
       "visitas": 1,
       "ult_fecha": "05-11-2026",
@@ -22262,7 +22272,7 @@
       "o": "1-3OU8FEI2",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "17:28",
+      "hi": "17:30",
       "d": "GOD BLESS YOU 0260 EDIF. 1 DEPTO 132, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
@@ -22312,5 +22322,5 @@
    }
   }
  },
- "generado": "06-11-2026 15:35"
+ "generado": "06-11-2026 15:45"
 }
