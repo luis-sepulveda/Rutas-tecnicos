@@ -18182,6 +18182,33 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarM
   #anDet .an-tb tr.gr td { color:#64748b; }
   #anDet .an-scroll { max-height:340px; overflow:auto; }
   #anDet .an-est { border-radius:999px; padding:2px 8px; font-size:11.5px; font-weight:600; white-space:nowrap; }
+  /* ==== (06-11-2026) VISITAS POR DIRECCION Y ALARMA DE 3 DERIVACIONES ==== */
+  #anDet .an-dir { cursor:pointer; border-bottom:1px dotted #64748b; }
+  #anDet .an-dir:hover { color:#93c5fd; border-bottom-color:#93c5fd; }
+  #anDet .an-dir.ab { color:#93c5fd; }
+  #anDet .an-vb { display:inline-block; margin-left:6px; border-radius:999px; padding:1px 7px; font-size:11px; font-weight:700; white-space:nowrap; background:#1e293b; color:#cbd5e1; border:1px solid #334155; cursor:pointer; }
+  #anDet .an-vb.v0 { color:#64748b; border-color:#1e293b; font-weight:600; }
+  #anDet .an-al { display:inline-block; margin-left:6px; border-radius:999px; padding:1px 8px; font-size:11px; font-weight:800; white-space:nowrap; cursor:pointer; }
+  #anDet .an-al.rojo { background:#7f1d1d; color:#fecaca; border:1px solid #ef4444; animation: anAlLate 1.2s ease-in-out infinite; }
+  #anDet .an-al.ambar { background:#451a03; color:#fde68a; border:1px solid #d97706; }
+  @keyframes anAlLate { 0%,100% { box-shadow:0 0 0 0 rgba(239,68,68,.0); } 50% { box-shadow:0 0 0 4px rgba(239,68,68,.45); } }
+  #anDet .an-tb tr.al-rojo td { background:rgba(127,29,29,.28); }
+  #anDet .an-tb tr.al-rojo td:first-child { box-shadow: inset 3px 0 0 #ef4444; }
+  #anDet .an-tb tr.an-dirdet td { background:#0b1324; padding:8px 10px 12px 26px; }
+  #anDet .an-tb tr.an-dirdet:hover td { background:#0b1324; }
+  #anDet .an-dvis { width:100%; border-collapse:collapse; font-size:12px; }
+  #anDet .an-dvis th { text-align:left; color:#94a3b8; font-weight:600; padding:4px 6px; border-bottom:1px solid #22304f; position:static; background:transparent; }
+  #anDet .an-dvis td { padding:4px 6px; border-bottom:1px solid #16213a; }
+  #anDet .an-dvis .ok { color:#4ade80; font-weight:600; }
+  #anDet .an-dvis .nr { color:#f87171; font-weight:600; }
+  #anDet .an-dvis tr.hoy td { background:rgba(59,130,246,.10); }
+  #anDet .an-dres { font-size:12px; color:#cbd5e1; margin-bottom:6px; }
+  #anDet .an-dres b.r { color:#f87171; } #anDet .an-dres b.v { color:#4ade80; }
+  #anDet .an-alban { margin:6px 0 10px; border:1px solid #ef4444; background:rgba(127,29,29,.35); border-radius:10px; padding:8px 12px; font-size:12.5px; color:#fecaca; }
+  #anDet .an-alban b.t { color:#fff; font-size:13px; }
+  #anDet .an-alban .it { margin-top:4px; cursor:pointer; }
+  #anDet .an-alban .it:hover { text-decoration:underline; }
+  #anDet .an-dnota { font-size:11.5px; color:#94a3b8; margin:2px 0 8px; }
   #anDet .e-c { background:#14532d; color:#86efac; } #anDet .e-n { background:#7f1d1d; color:#fca5a5; }
   #anDet .e-a { background:#334155; color:#cbd5e1; } #anDet .e-x { background:#1e293b; color:#64748b; }
   #anDet .e-g { background:#3b0764; color:#d8b4fe; }
@@ -18857,6 +18884,98 @@ function asPintar(m){
 function anDetCerrar(){ AN_DET = null; const m = document.getElementById('anDet'); if(m) m.classList.remove('abierto'); }
 function anDetPer(t, k){ if(!AN_DET) return; AN_DET.per = { t:t, k:k }; anDetPintar(); }
 
+/* ==== (06-11-2026) VISITAS POR DIRECCION Y ALARMA DE 3 DERIVACIONES ====
+   Luis: "en este listado de las migraciones del dia en curso, podrias activar las
+   direcciones para que marquen la cantidad de veces que se visitan y una alarma
+   cuando una direccion se derivo 3 veces por mismo motivo".
+   Donde: MI ANALISIS -> detalle de la actividad -> pestana Hoy -> "Ordenes de hoy".
+   De donde sale:
+   - Dias anteriores: visitas_dir.json (RDIR, el MISMO que usa Reiterados ->
+     Direcciones; se baja con bajarRdir()). Trae todas las visitas a la direccion,
+     completadas y no realizadas, de cualquier actividad, hasta ayer.
+   - Hoy: las ordenes de DB (rutas.json) en esa misma direccion ya cerradas.
+   - La direccion se compara con claveDir() (mayusculas, sin tildes ni espacios
+     dobles), igual que Reiterados.
+   Reglas:
+   - Visita = Completado o No Realizada (cancelada o suspendida no es visita).
+   - Derivacion = visita No Realizada. Se agrupan por motivo (codigo de cierre).
+   - Alarma (rojo, late) = AN_DIR_ALARMA (3) o mas derivaciones con el MISMO motivo.
+     Con una menos (2) va en ambar: si vuelve a fallar por lo mismo, salta la alarma.
+   - Tocar la direccion (o su marca) abre debajo todas sus visitas. */
+const AN_DIR_ALARMA = 3;
+let AN_DIR_AB = {};        // direcciones abiertas en la lista (clave = claveDir)
+let AN_DIR_KEYS = [];      // claves de la lista pintada (el onclick pasa la posicion)
+let anDirBajando = false, anDirErrT = 0;
+function anDirAsegurar(){
+  /* baja visitas_dir.json si todavia no esta; si fallo, reintenta cada 5 minutos */
+  if(anDirBajando) return;
+  if(RDIR === 'error' && Date.now() - anDirErrT < 300000) return;
+  if(RDIR && RDIR !== 'error') return;
+  anDirBajando = true;
+  bajarRdir().then(function(){
+    anDirBajando = false;
+    if(RDIR === 'error') anDirErrT = Date.now();
+    anDetPintar();
+  });
+}
+function anDirVisitas(dir, hoyIso){
+  const k = claveDir(dir), L = [], vistas = {};
+  const hoyF = hoyIso ? hoyIso.slice(6, 8) + '-' + hoyIso.slice(4, 6) + '-' + hoyIso.slice(0, 4) : 'hoy';
+  if(RDIR && RDIR !== 'error') (RDIR[k] || []).forEach(function(v){
+    const id = v.o + '|' + v.iso; if(vistas[id]) return; vistas[id] = 1;
+    L.push({ iso:v.iso, f:v.f, o:v.o, tec:v.tec, cat:v.cat, ok:v.ok, cie:v.cie, hoy:false });
+  });
+  Object.keys(typeof DB === 'object' && DB ? DB : {}).forEach(function(t){ (DB[t] || []).forEach(function(o){
+    if(o.e !== 'Completado' && o.e !== 'No Realizada') return;
+    if(claveDir(o.d) !== k) return;
+    const id = String(o.o || '') + '|' + hoyIso; if(vistas[id]) return; vistas[id] = 1;
+    L.push({ iso:hoyIso || '', f:hoyF, o:String(o.o || ''), tec:t, cat:String(o.cat || o.t || ''), ok:o.e === 'Completado' ? 1 : 0, cie:String(o.cie || ''), hoy:true, hi:String(o.hi || '') });
+  }); });
+  L.sort(function(a, b){ return b.iso.localeCompare(a.iso); });
+  const mot = {};
+  L.forEach(function(v){ if(!v.ok){ const c = v.cie || 'Sin código'; mot[c] = (mot[c] || 0) + 1; } });
+  const mk = Object.keys(mot).sort(function(a, b){ return mot[b] - mot[a]; });
+  const top = mk.length ? { c:mk[0], n:mot[mk[0]] } : null;
+  const nivel = !top ? '' : top.n >= AN_DIR_ALARMA ? 'rojo' : top.n === AN_DIR_ALARMA - 1 ? 'ambar' : '';
+  /* todos los motivos que llegan a la alarma (puede haber mas de uno) */
+  const alarmas = mk.filter(function(c){ return mot[c] >= AN_DIR_ALARMA; }).map(function(c){ return { c:c, n:mot[c] }; });
+  return { k:k, v:L, n:L.length, co:L.filter(function(v){ return v.ok; }).length, nr:L.filter(function(v){ return !v.ok; }).length,
+    mot:mot, mk:mk, top:top, nivel:nivel, alarmas:alarmas };
+}
+function anDirToggle(i){
+  const k = AN_DIR_KEYS[i]; if(k === undefined) return;
+  if(AN_DIR_AB[k]) delete AN_DIR_AB[k]; else AN_DIR_AB[k] = 1;
+  anDetPintar();
+}
+function anDirIr(i){
+  /* desde el aviso rojo: abre la direccion y la deja a la vista */
+  const k = AN_DIR_KEYS[i]; if(k === undefined) return;
+  AN_DIR_AB[k] = 1; anDetPintar();
+  const f = document.getElementById('anDirFila' + i);
+  if(f) f.scrollIntoView({ block:'center', behavior:'smooth' });
+}
+function anDirMarcas(V, i){
+  let h = '<span class="an-vb' + (V.n ? '' : ' v0') + '" onclick="anDirToggle(' + i + ')" title="' + (V.n ? V.n + ' visita' + (V.n === 1 ? '' : 's') + ' a esta dirección: ' + V.co + ' completada' + (V.co === 1 ? '' : 's') + ', ' + V.nr + ' derivada' + (V.nr === 1 ? '' : 's') + '. Toca para ver el detalle.' : 'Ninguna visita anterior registrada a esta dirección') + '">'
+    + (V.n ? V.n + ' visita' + (V.n === 1 ? '' : 's') : '1ª visita') + '</span>';
+  if(V.nivel === 'rojo') V.alarmas.forEach(function(a){
+    h += '<span class="an-al rojo" onclick="anDirToggle(' + i + ')" title="Se derivó ' + a.n + ' veces por el mismo motivo">⚠ ' + a.n + '× ' + escR(a.c) + '</span>'; });
+  else if(V.nivel === 'ambar') h += '<span class="an-al ambar" onclick="anDirToggle(' + i + ')" title="Ya se derivó ' + V.top.n + ' veces por el mismo motivo: si vuelve a fallar por lo mismo, salta la alarma">' + V.top.n + '× ' + escR(V.top.c) + '</span>';
+  return h;
+}
+function anDirDetalle(V, cols){
+  let h = '<tr class="an-dirdet"><td colspan="' + cols + '">';
+  if(!V.n){ h += '<div class="an-dnota">No hay visitas anteriores registradas a esta dirección' + (rdirDesde ? ' desde el ' + rdirDesde : '') + '. Sería la primera.</div></td></tr>'; return h; }
+  h += '<div class="an-dres">' + V.n + ' visita' + (V.n === 1 ? '' : 's') + (rdirDesde ? ' desde el ' + rdirDesde : '') + ': <b class="v">' + V.co + ' completada' + (V.co === 1 ? '' : 's') + '</b> · <b class="r">' + V.nr + ' derivada' + (V.nr === 1 ? '' : 's') + '</b>'
+    + (V.mk.length ? ' · por motivo: ' + V.mk.map(function(c){ return '<b' + (V.mot[c] >= AN_DIR_ALARMA ? ' class="r"' : '') + '>' + escR(c) + ' ' + V.mot[c] + '</b>'; }).join(', ') : '') + '</div>';
+  h += '<table class="an-dvis"><tr><th>Fecha</th><th>Técnico</th><th>Petición</th><th>Actividad</th><th>Resultado</th></tr>';
+  V.v.forEach(function(v){
+    h += '<tr' + (v.hoy ? ' class="hoy"' : '') + '><td>' + escR(v.f) + (v.hoy ? ' <b style="color:#93c5fd">hoy</b>' : '') + '</td><td>' + escR(anTec(v.tec)) + '</td><td>' + escR(v.o) + '</td><td>' + escR(v.cat) + '</td>'
+      + '<td>' + (v.ok ? '<span class="ok">Completada</span>' : '<span class="nr">' + escR(v.cie || 'Sin código') + '</span>') + '</td></tr>';
+  });
+  h += '</table></td></tr>';
+  return h;
+}
+
 function anDetPintar(){
   const m = document.getElementById('anDet'); if(!m || !AN_DET || !m.classList.contains('abierto')) return;
   if(AN_DET.ts) return anTsPintar(m);
@@ -18939,15 +19058,44 @@ function anDetPintar(){
     return '<span class="an-est e-a">Por cerrar · ' + escR(x.e) + '</span>';
   };
   h += '<div class="an-card" style="margin-top:12px"><h3>' + (esHoy ? 'Órdenes de hoy' : 'No realizadas del período') + ' <span style="font-size:12px;color:#94a3b8;font-weight:400">(' + lista.length + ')</span></h3>';
+  /* (06-11-2026) visitas por direccion y alarma de 3 derivaciones por el mismo motivo (solo en Hoy) */
+  const VD = {};
+  AN_DIR_KEYS = [];
+  if(esHoy && lista.length){
+    anDirAsegurar();
+    const alr = [], amb = [];
+    lista.forEach(function(x, i){
+      const V = anDirVisitas(x.dir, x.iso); VD[i] = V; AN_DIR_KEYS[i] = V.k;
+      if(V.nivel === 'rojo') alr.push({ x:x, V:V, i:i });
+      else if(V.nivel === 'ambar') amb.push(i);
+    });
+    if(!RDIR || anDirBajando) h += '<div class="an-dnota">Bajando el historial de visitas por dirección… (por ahora se cuentan solo las de hoy)</div>';
+    else if(RDIR === 'error') h += '<div class="an-dnota" style="color:#fbbf24">No se pudo bajar el historial de visitas (visitas_dir.json): se cuentan solo las visitas de hoy. Se vuelve a intentar solo en unos minutos.</div>';
+    else h += '<div class="an-dnota">Toca una dirección para ver todas sus visitas' + (rdirDesde ? ' desde el ' + rdirDesde : '') + '. Alarma roja: ' + AN_DIR_ALARMA + ' o más derivaciones por el mismo motivo; en ámbar, a una de la alarma.</div>';
+    if(alr.length){
+      h += '<div class="an-alban"><b class="t">⚠ ' + alr.length + ' dirección' + (alr.length === 1 ? '' : 'es') + ' de hoy ya se derivó ' + AN_DIR_ALARMA + ' o más veces por el mismo motivo</b>';
+      alr.forEach(function(a){
+        h += '<div class="it" onclick="anDirIr(' + a.i + ')">• ' + escR(a.x.dir) + ' — ' + a.V.alarmas.map(function(m){ return m.n + '× ' + escR(m.c); }).join(', ')
+          + ' · hoy: ' + escR(anTec(a.x.tec)) + ', petición ' + escR(a.x.ot) + ', franja ' + escR(a.x.fr) + '</div>';
+      });
+      h += '</div>';
+    }
+  }
   if(!lista.length) h += '<div class="an-vac">' + (esHoy ? 'Todavía no hay órdenes de ' + fam.toLowerCase() + ' hoy.' : 'No hay no realizadas en este período.') + '</div>';
   else {
     h += '<div class="an-scroll"><table class="an-tb"><tr><th>Petición</th>' + (esHoy ? '' : '<th>Fecha</th>') + '<th>Estado</th><th>Técnico</th><th>Franja</th>'
       + (esHoy ? '<th>Dirección</th>' : '<th>Comuna</th>') + '<th>Motivo</th><th>Responsable</th></tr>';
-    lista.forEach(function(x){
+    lista.forEach(function(x, i){
       const nr = x.e === 'No Realizada' || (x.gsa && x.e === 'Completado'), r = nr ? (x.gsa ? 'vtr' : mgResp(x.cod)) : '';
-      h += '<tr><td>' + escR(x.ot) + '</td>' + (esHoy ? '' : '<td>' + x.iso.slice(6, 8) + '-' + x.iso.slice(4, 6) + '</td>') + '<td>' + est(x) + '</td><td>' + escR(anTec(x.tec)) + '</td><td>' + escR(x.fr) + '</td>'
-        + '<td>' + escR(esHoy ? x.dir : anTec(x.ciu)) + '</td><td>' + (nr ? escR(x.gsa ? 'GSA · Falla Aprovisionamiento' : (x.cod || 'Sin código')) : '') + '</td>'
+      const V = VD[i], ab = V && AN_DIR_AB[V.k];
+      /* (06-11-2026) en Hoy la direccion se toca y lleva sus marcas */
+      const celDir = esHoy && V
+        ? '<span class="an-dir' + (ab ? ' ab' : '') + '" onclick="anDirToggle(' + i + ')">' + (ab ? '▾ ' : '▸ ') + escR(x.dir) + '</span>' + anDirMarcas(V, i)
+        : escR(esHoy ? x.dir : anTec(x.ciu));
+      h += '<tr' + (V && V.nivel === 'rojo' ? ' class="al-rojo"' : '') + (esHoy ? ' id="anDirFila' + i + '"' : '') + '><td>' + escR(x.ot) + '</td>' + (esHoy ? '' : '<td>' + x.iso.slice(6, 8) + '-' + x.iso.slice(4, 6) + '</td>') + '<td>' + est(x) + '</td><td>' + escR(anTec(x.tec)) + '</td><td>' + escR(x.fr) + '</td>'
+        + '<td>' + celDir + '</td><td>' + (nr ? escR(x.gsa ? 'GSA · Falla Aprovisionamiento' : (x.cod || 'Sin código')) : '') + '</td>'
         + '<td style="color:' + (r ? AN_RCOL[r] : 'inherit') + '">' + (r ? AN_RNOM[r] : '') + '</td></tr>';
+      if(ab) h += anDirDetalle(V, 7);
     });
     h += '</table></div>';
   }
