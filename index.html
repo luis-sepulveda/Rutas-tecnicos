@@ -7498,6 +7498,7 @@ let REIT_TECS = [];        // lo que esta pintado, para abrir por indice
    ayer), que se baja una sola vez al abrir la pestana. La direccion se
    compara con claveDir() (mayusculas, sin tildes ni espacios dobles). */
 let RDIR = null;          // { k: [visitas] } por direccion, o 'error'
+let RDIR_OT = {};         // (06-11-2026) peticion -> direccion (de visitas_dir.json)
 let rdirDesde = '';
 let rdirSoloRep = true;   // (10:25) Luis: "que muestre solo reparaciones": fijo, sin chip
 let rdirMin = 1;          // chip: 1+, 2+, 3+ visitas antes
@@ -7514,6 +7515,7 @@ async function bajarRdir(){
       const d = (vj.dirs || [])[v[0]]; if(!d) return;
       const s = String(v[1]);
       const k = claveDir(d[0]);
+      if(v[2]) RDIR_OT[String(v[2])] = String(d[0]);   /* (06-11-2026) peticion -> direccion, para Semana y Mes de MI ANALISIS */
       (m[k] = m[k] || []).push({ iso: s, f: s.slice(6, 8) + '-' + s.slice(4, 6) + '-' + s.slice(0, 4), o: String(v[2] || ''),
         tec: String((vj.tecs || [])[v[3]] || '').replace(/ /g, ' ').replace(/\s+/g, ' ').trim(),
         cat: String((vj.cats || [])[v[4]] || ''), ok: v[5] ? 1 : 0, cie: String((vj.cies || [])[v[6]] || '') });
@@ -18164,6 +18166,19 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarM
   #anDet .an-mdtop h2 small { font-size:13px; color:#64748b; font-weight:400; }
   #anDet .an-x { background:#f1f5f9; border:1px solid #cbd5e1; color:#334155; border-radius:8px; padding:6px 12px; cursor:pointer; font-size:14px; }
   #anDet .an-tabs { display:flex; gap:6px; margin:12px 0; flex-wrap:wrap; }
+  /* (06-11-2026) periodos (Hoy / Semana / Mes) en la linea del titulo del detalle */
+  #anDet .an-mdtop-per { margin-bottom:12px; }
+  #anDet .an-titper { display:flex; align-items:center; gap:18px; flex-wrap:wrap; }
+  #anDet .an-titper .an-tabs { margin:0; }
+  /* (06-11-2026) el detalle de Migraciones / Altas / Reparaciones aprovecha el ancho de la pantalla */
+  #anDet .an-md.an-md-ancho { max-width:none; width:auto; }
+  #anDet .an-dvis tr.esta td { background:rgba(251,191,36,.12); }
+  /* (06-11-2026) boton y modo pantalla completa de la lista de ordenes */
+  #anDet .an-h3l { display:flex; align-items:center; gap:6px; }
+  #anDet .an-fullb { margin-left:auto; background:#1e293b; color:#e2e8f0; border:1px solid #334155; border-radius:999px; padding:5px 12px; font-size:12.5px; font-weight:600; cursor:pointer; }
+  #anDet .an-fullb:hover { background:#2563eb; border-color:#2563eb; color:#fff; }
+  #anDet .an-card.an-full { position:fixed; inset:10px; z-index:3700; margin:0 !important; display:flex; flex-direction:column; box-shadow:0 0 0 100vmax rgba(15,23,42,.55); }
+  #anDet .an-card.an-full .an-scroll { max-height:none; flex:1; min-height:0; }
   #anDet .an-tab { background:#f1f5f9; border:1px solid #cbd5e1; color:#334155; border-radius:999px; padding:6px 14px; cursor:pointer; font-size:13px; }
   #anDet .an-tab.on { background:#1d4ed8; border-color:#1d4ed8; color:#fff; }
   #anDet .an-kpis { display:grid; grid-template-columns:repeat(5, minmax(0,1fr)); gap:10px; }
@@ -18885,7 +18900,7 @@ function asPintar(m){
   m.innerHTML = h.replace('@@CUMPLEN@@', ''); m.scrollTop = y;
 }
 
-function anDetCerrar(){ AN_DET = null; const m = document.getElementById('anDet'); if(m) m.classList.remove('abierto'); }
+function anDetCerrar(){ AN_DET = null; AN_LISTA_FULL = false; const m = document.getElementById('anDet'); if(m) m.classList.remove('abierto'); }
 function anDetPer(t, k){ if(!AN_DET) return; AN_DET.per = { t:t, k:k }; anDetPintar(); }
 
 /* ==== (06-11-2026) VISITAS POR DIRECCION Y ALARMA DE 3 DERIVACIONES ====
@@ -18908,7 +18923,14 @@ function anDetPer(t, k){ if(!AN_DET) return; AN_DET.per = { t:t, k:k }; anDetPin
    - Tocar la direccion (o su marca) abre debajo todas sus visitas. */
 const AN_DIR_ALARMA = 3;
 let AN_DIR_AB = {};        // direcciones abiertas en la lista (clave = claveDir)
-let AN_DIR_KEYS = [];      // claves de la lista pintada (el onclick pasa la posicion)
+let AN_DIR_KEYS = [];
+let AN_DIR_FOCO = null;
+let AN_LISTA_FULL = false; // (06-11-2026) lista de ordenes en pantalla completa
+function anListaFull(){ AN_LISTA_FULL = !AN_LISTA_FULL; anDetPintar(); }
+document.addEventListener('keydown', function(e){
+  /* Esc con la lista en pantalla completa: solo sale de pantalla completa, no cierra la ventana */
+  if(e.key === 'Escape' && AN_LISTA_FULL){ AN_LISTA_FULL = false; anDetPintar(); e.stopImmediatePropagation(); e.preventDefault(); }
+}, true);    // (06-11-2026) fila a encuadrar despues de pintar      // claves de la lista pintada (el onclick pasa la posicion)
 let anDirBajando = false, anDirErrT = 0;
 function anDirAsegurar(){
   /* baja visitas_dir.json si todavia no esta; si fallo, reintenta cada 5 minutos */
@@ -18946,9 +18968,19 @@ function anDirVisitas(dir, hoyIso){
   return { k:k, v:L, n:L.length, co:L.filter(function(v){ return v.ok; }).length, nr:L.filter(function(v){ return !v.ok; }).length,
     mot:mot, mk:mk, top:top, nivel:nivel, alarmas:alarmas };
 }
+/* (06-11-2026) Luis: "en los botones semana y mes tambien aparezca el detalle de las direcciones como en el boton dia".
+   Las ordenes de dias anteriores no traen direccion: se busca por la peticion en visitas_dir.json (RDIR_OT)
+   y, si no esta, en el historial de Derivacion (DER_DIR / DER_UNI). */
+function anDirDe(x){
+  if(x.dir) return x.dir;
+  if(RDIR_OT[x.ot]) return RDIR_OT[x.ot];
+  if(typeof DER_DIR === 'object' && DER_DIR && DER_DIR[x.ot] && DER_DIR[x.ot].d) return DER_DIR[x.ot].d;
+  if(typeof DER_UNI === 'object' && DER_UNI && DER_UNI[x.ot]) return DER_UNI[x.ot];
+  return '';
+}
 function anDirToggle(i){
-  const k = AN_DIR_KEYS[i]; if(k === undefined) return;
-  if(AN_DIR_AB[k]) delete AN_DIR_AB[k]; else AN_DIR_AB[k] = 1;
+  const k = AN_DIR_KEYS[i]; if(k === undefined || k.charAt(0) === '|') return;
+  if(AN_DIR_AB[k]) delete AN_DIR_AB[k]; else { AN_DIR_AB[k] = 1; AN_DIR_FOCO = i; }
   anDetPintar();
 }
 function anDirIr(i){
@@ -18966,14 +18998,15 @@ function anDirMarcas(V, i){
   else if(V.nivel === 'ambar') h += '<span class="an-al ambar" onclick="anDirToggle(' + i + ')" title="Ya se derivó ' + V.top.n + ' veces por el mismo motivo: si vuelve a fallar por lo mismo, salta la alarma">' + V.top.n + '× ' + escR(V.top.c) + '</span>';
   return h;
 }
-function anDirDetalle(V, cols){
+function anDirDetalle(V, cols, ot){
   let h = '<tr class="an-dirdet"><td colspan="' + cols + '">';
   if(!V.n){ h += '<div class="an-dnota">No hay visitas anteriores registradas a esta dirección' + (rdirDesde ? ' desde el ' + rdirDesde : '') + '. Sería la primera.</div></td></tr>'; return h; }
   h += '<div class="an-dres">' + V.n + ' visita' + (V.n === 1 ? '' : 's') + (rdirDesde ? ' desde el ' + rdirDesde : '') + ': <b class="v">' + V.co + ' completada' + (V.co === 1 ? '' : 's') + '</b> · <b class="r">' + V.nr + ' derivada' + (V.nr === 1 ? '' : 's') + '</b>'
     + (V.mk.length ? ' · por motivo: ' + V.mk.map(function(c){ return '<b' + (V.mot[c] >= AN_DIR_ALARMA ? ' class="r"' : '') + '>' + escR(c) + ' ' + V.mot[c] + '</b>'; }).join(', ') : '') + '</div>';
   h += '<table class="an-dvis"><tr><th>Fecha</th><th>Técnico</th><th>Petición</th><th>Actividad</th><th>Resultado</th></tr>';
   V.v.forEach(function(v){
-    h += '<tr' + (v.hoy ? ' class="hoy"' : '') + '><td>' + escR(v.f) + (v.hoy ? ' <b style="color:#93c5fd">hoy</b>' : '') + '</td><td>' + escR(anTec(v.tec)) + '</td><td>' + escR(v.o) + '</td><td>' + escR(v.cat) + '</td>'
+    const esta = ot && v.o === ot;
+    h += '<tr class="' + (v.hoy ? 'hoy' : '') + (esta ? ' esta' : '') + '"><td>' + escR(v.f) + (v.hoy ? ' <b style="color:#93c5fd">hoy</b>' : '') + (esta ? ' <b style="color:#fbbf24">← esta</b>' : '') + '</td><td>' + escR(anTec(v.tec)) + '</td><td>' + escR(v.o) + '</td><td>' + escR(v.cat) + '</td>'
       + '<td>' + (v.ok ? '<span class="ok">Completada</span>' : '<span class="nr">' + escR(v.cie || 'Sin código') + '</span>') + '</td></tr>';
   });
   h += '</table></td></tr>';
@@ -19001,15 +19034,16 @@ function anDetPintar(){
   const tabs = [{ t:'hoy', k:'' }, { t:'sem', k:D.semHoy }, { t:'mes', k:D.mesHoy }];
   if(per.t === 'sem' && per.k !== D.semHoy) tabs.splice(2, 0, { t:'sem', k:per.k });
   if(per.t === 'dia') tabs.splice(1, 0, { t:'dia', k:per.k });
-  let h = '<div class="an-md"><div class="an-mdtop"><h2><i style="width:12px;height:12px;border-radius:50%;background:' + F.c + ';display:inline-block;border:1px solid #cbd5e1"></i>' + fam + ' · detalle'
+  /* (06-11-2026) Luis: "dejar los botones hoy, semana y mes al lado derecho del titulo para ganar espacio": los periodos van en la misma linea del titulo */
+  let h = '<div class="an-md an-md-ancho"><div class="an-mdtop an-mdtop-per"><div class="an-titper"><h2><i style="width:12px;height:12px;border-radius:50%;background:' + F.c + ';display:inline-block;border:1px solid #cbd5e1"></i>' + fam + ' · detalle'
     + (AN_COM !== 'Todo' ? ' <small>' + (AN_COM === 'QUILPUE' ? 'Quilpué' : 'Villa Alemana') + '</small>' : '') + (AN_SUP !== 'Todo' ? ' <small>' + derTitulo(AN_SUP) + '</small>' : '') + '</h2>'
+    + '<div class="an-tabs">' + tabs.map(function(p){ const on = p.t === per.t && (p.t === 'hoy' || p.k === per.k);
+        return '<span class="an-tab' + (on ? ' on' : '') + '" onclick="anDetPer(\'' + p.t + '\', \'' + p.k + '\')">' + anPerTit(p) + (p.t === 'sem' && p.k === D.semHoy ? ' (en curso)' : '') + '</span>'; }).join('') + '</div></div>'
     + '<div style="display:flex;gap:8px;align-items:center"><span class="an-updbox">' + anUpdHtml() + '</span>'
     + (AN_DET.volver ? '<button class="an-x" onclick="anTsAbrir(\'' + AN_DET.volver + '\')">‹ Volver a técnicos</button>' : '')
     + (AN_DET.volverSeg ? '<button class="an-x" onclick="anSegAbrir()">‹ Volver a Seguimiento</button>' : '')
     + (AN_DET.volverDiario ? '<button class="an-x" onclick="anDiarioAbrir()">‹ Volver a día a día</button>' : '')
-    + '<button class="an-x" onclick="anDetCerrar()">✕ Cerrar</button></div></div>'
-    + '<div class="an-tabs">' + tabs.map(function(p){ const on = p.t === per.t && (p.t === 'hoy' || p.k === per.k);
-        return '<span class="an-tab' + (on ? ' on' : '') + '" onclick="anDetPer(\'' + p.t + '\', \'' + p.k + '\')">' + anPerTit(p) + (p.t === 'sem' && p.k === D.semHoy ? ' (en curso)' : '') + '</span>'; }).join('') + '</div>';
+    + '<button class="an-x" onclick="anDetCerrar()">✕ Cerrar</button></div></div>';
   h += '<div class="an-kpis">'
     + '<div class="an-kpi"><small>Completitud</small><b style="color:' + anCol(s.comp) + '">' + mpPc(s.comp) + '</b><br><span>' + (dl === null ? 'sin período para comparar' : (dl >= 0 ? '▲ ' : '▼ ') + P2(Math.abs(dl)) + ' pts ' + antTx) + '</span></div>'
     + '<div class="an-kpi"><small>Completadas</small><b style="color:#22c55e">' + s.co + '</b><br><span>' + (s.vis ? mpPc(s.comp) + ' de ' + s.vis + ' visitadas' : 'sin visitas cerradas') + '</span></div>'
@@ -19061,50 +19095,63 @@ function anDetPintar(){
     if(x.e === 'Cancelado' || x.e === 'Suspendido') return '<span class="an-est e-x">' + escR(x.e) + '</span>';
     return '<span class="an-est e-a">Por cerrar · ' + escR(x.e) + '</span>';
   };
-  h += '<div class="an-card" style="margin-top:12px"><h3>' + (esHoy ? 'Órdenes de hoy' : 'No realizadas del período') + ' <span style="font-size:12px;color:#94a3b8;font-weight:400">(' + lista.length + ')</span></h3>';
-  /* (06-11-2026) visitas por direccion y alarma de 3 derivaciones por el mismo motivo (solo en Hoy) */
-  const VD = {};
+  /* (06-11-2026) Luis: "crea un boton para pantalla completa ... dentro de la misma tarjeta, al lado derecho, al final" */
+  h += '<div class="an-card' + (AN_LISTA_FULL ? ' an-full' : '') + '" style="margin-top:12px"><h3 class="an-h3l">' + (esHoy ? 'Órdenes de hoy' : 'No realizadas del período') + ' <span style="font-size:12px;color:#94a3b8;font-weight:400">(' + lista.length + ')</span>'
+    + '<button class="an-fullb" onclick="anListaFull()" title="' + (AN_LISTA_FULL ? 'Volver al tamaño normal (o tecla Esc)' : 'Ver esta lista en toda la pantalla') + '">' + (AN_LISTA_FULL ? '✕ Salir de pantalla completa' : '⛶ Pantalla completa') + '</button></h3>';
+  /* (06-11-2026) visitas por direccion y alarma de 3 derivaciones por el mismo motivo (Hoy, Semana y Mes) */
+  const VD = {}, DIRS = {};
   AN_DIR_KEYS = [];
-  if(esHoy && lista.length){
+  if(lista.length){
     anDirAsegurar();
-    const alr = [], amb = [];
+    const alr = [], amb = [], vistaAl = {};
     lista.forEach(function(x, i){
-      const V = anDirVisitas(x.dir, x.iso); VD[i] = V; AN_DIR_KEYS[i] = V.k;
-      if(V.nivel === 'rojo') alr.push({ x:x, V:V, i:i });
+      const dir = anDirDe(x); DIRS[i] = dir;
+      if(!dir){ AN_DIR_KEYS[i] = '|' + x.ot; return; }
+      const V = anDirVisitas(dir, D.hoyIso); VD[i] = V; AN_DIR_KEYS[i] = V.k + '|' + x.ot;
+      /* el aviso rojo nombra cada direccion una sola vez, aunque salga en varias filas */
+      if(V.nivel === 'rojo' && !vistaAl[V.k]){ vistaAl[V.k] = 1; alr.push({ x:x, V:V, i:i, dir:dir }); }
       else if(V.nivel === 'ambar') amb.push(i);
     });
     if(!RDIR || anDirBajando) h += '<div class="an-dnota">Bajando el historial de visitas por dirección… (por ahora se cuentan solo las de hoy)</div>';
     else if(RDIR === 'error') h += '<div class="an-dnota" style="color:#fbbf24">No se pudo bajar el historial de visitas (visitas_dir.json): se cuentan solo las visitas de hoy. Se vuelve a intentar solo en unos minutos.</div>';
     else h += '<div class="an-dnota">Toca una dirección para ver todas sus visitas' + (rdirDesde ? ' desde el ' + rdirDesde : '') + '. Alarma roja: ' + AN_DIR_ALARMA + ' o más derivaciones por el mismo motivo; en ámbar, a una de la alarma.</div>';
-    if(alr.length){
-      h += '<div class="an-alban"><b class="t">⚠ ' + alr.length + ' dirección' + (alr.length === 1 ? '' : 'es') + ' de hoy ya se derivó ' + AN_DIR_ALARMA + ' o más veces por el mismo motivo</b>';
-      alr.forEach(function(a){
-        h += '<div class="it" onclick="anDirIr(' + a.i + ')">• ' + escR(a.x.dir) + ' — ' + a.V.alarmas.map(function(m){ return m.n + '× ' + escR(m.c); }).join(', ')
-          + ' · hoy: ' + escR(anTec(a.x.tec)) + ', petición ' + escR(a.x.ot) + ', franja ' + escR(a.x.fr) + '</div>';
-      });
-      h += '</div>';
-    }
+    /* (06-11-2026) Luis pidio borrar el aviso rojo de arriba ("solo ocupa espacio"): la alarma queda solo en cada fila */
   }
   if(!lista.length) h += '<div class="an-vac">' + (esHoy ? 'Todavía no hay órdenes de ' + fam.toLowerCase() + ' hoy.' : 'No hay no realizadas en este período.') + '</div>';
   else {
     h += '<div class="an-scroll"><table class="an-tb"><tr><th>Petición</th>' + (esHoy ? '' : '<th>Fecha</th>') + '<th>Estado</th><th>Técnico</th><th>Franja</th>'
-      + (esHoy ? '<th>Dirección</th>' : '<th>Comuna</th>') + '<th>Motivo</th><th>Responsable</th></tr>';
+      + '<th>Dirección</th>' + (esHoy ? '' : '<th>Comuna</th>') + '<th>Motivo</th><th>Responsable</th></tr>';
     lista.forEach(function(x, i){
       const nr = x.e === 'No Realizada' || (x.gsa && x.e === 'Completado'), r = nr ? (x.gsa ? 'vtr' : mgResp(x.cod)) : '';
-      const V = VD[i], ab = V && AN_DIR_AB[V.k];
-      /* (06-11-2026) en Hoy la direccion se toca y lleva sus marcas */
-      const celDir = esHoy && V
-        ? '<span class="an-dir' + (ab ? ' ab' : '') + '" onclick="anDirToggle(' + i + ')">' + (ab ? '▾ ' : '▸ ') + escR(x.dir) + '</span>' + anDirMarcas(V, i)
-        : escR(esHoy ? x.dir : anTec(x.ciu));
-      h += '<tr' + (V && V.nivel === 'rojo' ? ' class="al-rojo"' : '') + (esHoy ? ' id="anDirFila' + i + '"' : '') + '><td>' + escR(x.ot) + '</td>' + (esHoy ? '' : '<td>' + x.iso.slice(6, 8) + '-' + x.iso.slice(4, 6) + '</td>') + '<td>' + est(x) + '</td><td>' + escR(anTec(x.tec)) + '</td><td>' + escR(x.fr) + '</td>'
-        + '<td>' + celDir + '</td><td>' + (nr ? escR(x.gsa ? 'GSA · Falla Aprovisionamiento' : (x.cod || 'Sin código')) : '') + '</td>'
+      const V = VD[i], ab = V && AN_DIR_AB[AN_DIR_KEYS[i]];
+      /* (06-11-2026) la direccion se toca y lleva sus marcas (Hoy, Semana y Mes) */
+      const celDir = V
+        ? '<span class="an-dir' + (ab ? ' ab' : '') + '" onclick="anDirToggle(' + i + ')">' + (ab ? '▾ ' : '▸ ') + escR(DIRS[i]) + '</span>' + anDirMarcas(V, i)
+        : '<span style="color:#64748b" title="Esta petición no está en el historial de visitas">' + (RDIR && RDIR !== 'error' && !anDirBajando ? 'sin dirección en el historial' : '…') + '</span>';
+      h += '<tr' + (V && V.nivel === 'rojo' ? ' class="al-rojo"' : '') + ' id="anDirFila' + i + '"><td>' + escR(x.ot) + '</td>' + (esHoy ? '' : '<td>' + x.iso.slice(6, 8) + '-' + x.iso.slice(4, 6) + '</td>') + '<td>' + est(x) + '</td><td>' + escR(anTec(x.tec)) + '</td><td>' + escR(x.fr) + '</td>'
+        + '<td>' + celDir + '</td>' + (esHoy ? '' : '<td>' + escR(anTec(x.ciu)) + '</td>') + '<td>' + (nr ? escR(x.gsa ? 'GSA · Falla Aprovisionamiento' : (x.cod || 'Sin código')) : '') + '</td>'
         + '<td style="color:' + (r ? AN_RCOL[r] : 'inherit') + '">' + (r ? AN_RNOM[r] : '') + '</td></tr>';
-      if(ab) h += anDirDetalle(V, 7);
+      if(ab) h += anDirDetalle(V, esHoy ? 7 : 9, x.ot);
     });
     h += '</table></div>';
   }
   h += '</div></div>';
+  /* (06-11-2026) Luis: "si presiono el boton 2x la pantalla vuelve a arriba": se guarda y repone el scroll de las listas
+     (al tocar una direccion y en el refresco de cada minuto), y al abrir una direccion la lista se encuadra sola en ella */
+  const perK = per.t + '|' + per.k + '|' + fam, scAnt = m._anScPer === perK ? [].map.call(m.querySelectorAll('.an-scroll'), function(e){ return e.scrollTop; }) : [];
   m.innerHTML = h; m.scrollTop = y;
+  m._anScPer = perK;
+  [].forEach.call(m.querySelectorAll('.an-scroll'), function(e, i){ if(scAnt[i] !== undefined) e.scrollTop = scAnt[i]; });
+  if(AN_DIR_FOCO !== null){
+    const fila = document.getElementById('anDirFila' + AN_DIR_FOCO); AN_DIR_FOCO = null;
+    const cont = fila ? fila.closest('.an-scroll') : null;
+    if(cont){
+      const cab = cont.querySelector('tr'), alto = cab ? cab.getBoundingClientRect().height : 0;
+      cont.scrollTop += fila.getBoundingClientRect().top - cont.getBoundingClientRect().top - alto;
+      const rc = cont.getBoundingClientRect(), rm = m.getBoundingClientRect();
+      if(rc.top < rm.top || rc.bottom > rm.bottom) cont.scrollIntoView({ block:'nearest' });
+    }
+  }
 }
 
 /* ==== (02-11-2026) TECNICOS SEMANA A SEMANA ====
