@@ -1,2 +1,2 @@
 # Rutas-tecnicos
-Actualizado 04-11-2026 
+Actualizado 06-11-2026 
