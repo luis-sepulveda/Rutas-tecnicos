@@ -18039,7 +18039,83 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarM
   #anPage .an-inf { position:relative; display:inline-block; }
   #anPage .an-btn.inf { background:#1e40af; } #anPage .an-btn.inf:hover, #anPage .an-btn.inf.ab { background:#1e3a8a; }
   #anPage .an-infm { position:absolute; top:calc(100% + 6px); left:0; z-index:50; display:flex; flex-direction:column; gap:6px; padding:8px; background:#fff; border:1px solid #e2e8f0; border-radius:12px; box-shadow:0 10px 30px rgba(15,23,42,.25); min-width:170px; }
-  #anPage .an-infm .an-btn { margin:0; text-align:left; width:100%; }
+  #anPage .an-infm .an-btn { margin:0; text-align:left; }
+  /* (06-11-2026) menu Informes con los informes de la pantalla principal */
+  #anPage .an-infm { min-width:560px; padding:10px 12px 12px; }
+  #anPage .an-infh { font-size:10.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#64748b; margin:2px 2px 0; }
+  #anPage .an-inf3 { display:flex; gap:6px; }
+  #anPage .an-infl { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+  #anPage .an-infi { display:block; text-align:left; background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:7px 10px; cursor:pointer; text-decoration:none; font-family:inherit; }
+  #anPage .an-infi:hover { background:#eff6ff; border-color:#93c5fd; }
+  #anPage .an-infi b { display:block; font-size:12.5px; color:#0f172a; } #anPage .an-infi b i { font-style:normal; color:#2563eb; }
+  #anPage .an-infi span { display:block; font-size:11px; color:#64748b; line-height:1.3; margin-top:1px; }
+  /* (06-11-2026) con MI ANALISIS abierto, Resumen dia por dia y Derivaciones (franjas) se abren encima de el.
+     Solo mientras MI ANALISIS esta abierto (clase an-sobre en body): la pantalla principal no cambia. */
+  /* 3650: encima de MI ANALISIS (3500) y de su detalle (3600) */
+  body.an-sobre #modalRes, body.an-sobre #modalDer, body.an-sobre #modalRM, body.an-sobre #modalSV, body.an-sobre #modalMG, body.an-sobre #modalEst,
+  body.an-sobre #modalCaidas, body.an-sobre #modalNuevas, body.an-sobre #modalReca, body.an-sobre #modalRepe, body.an-sobre #modalRed,
+  body.an-sobre #vistaRed, body.an-sobre #modalRJ, body.an-sobre #modalNoop { z-index:3650; }
+  body.an-sobre #avisoDer { z-index:3660; }
+  /* (06-11-2026, 17:10) avisos, Resumen WhatsApp, Requiere atencion y mapa en MI ANALISIS / Dia en curso */
+  #anPage .an-btn.wsp { background:#15803d; } #anPage .an-btn.wsp:hover { background:#166534; }
+  #anPage .an-avisos { display:flex; gap:8px; flex-wrap:wrap; margin:-6px 0 12px; }
+  #anPage .an-aviso { border:0; border-radius:10px; padding:8px 14px; font-size:13px; font-weight:700; cursor:pointer; color:#fff; font-family:inherit; }
+  #anPage .an-aviso.der { background:#dc2626; animation:anAvLat 1.4s ease-in-out infinite; } #anPage .an-aviso.sal { background:#7f1d1d; } #anPage .an-aviso.fc { background:#b45309; }
+  @keyframes anAvLat { 0%,100% { box-shadow:0 0 0 0 rgba(220,38,38,0); } 50% { box-shadow:0 0 0 5px rgba(220,38,38,.35); } }
+  #anDet .an-dia-at { display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; }
+  #anDet .an-dia-al { display:flex; align-items:center; gap:12px; text-align:left; background:#111a2e; border:1px solid #22304f; border-radius:12px; padding:10px 14px; cursor:pointer; font-family:inherit; color:#e2e8f0; }
+  #anDet .an-dia-al:hover { border-color:#3b82f6; }
+  #anDet .an-dia-al b { font-size:28px; min-width:44px; text-align:center; font-variant-numeric:tabular-nums; }
+  #anDet .an-dia-al.viva b { color:#f87171; } #anDet .an-dia-al.cero b { color:#64748b; }
+  #anDet .an-dia-al span { display:flex; flex-direction:column; } #anDet .an-dia-al i { font-style:normal; font-weight:700; font-size:14px; } #anDet .an-dia-al small { font-size:11.5px; color:#94a3b8; }
+  #anDet .an-dia-map { display:flex; gap:8px; align-items:center; margin-top:10px; font-size:12.5px; color:#475569; font-weight:600; }
+  /* (06-11-2026) DIA EN CURSO en MI ANALISIS */
+  #anPage .an-btn.dia { background:#0f766e; } #anPage .an-btn.dia:hover { background:#115e59; }
+  #anDet .an-dia .an-mdtop { margin-bottom:12px; }
+  #anDet .an-dia-top { display:grid; grid-template-columns:1fr 2fr 1fr; gap:12px; }
+  #anDet .an-dia button.an-card { text-align:left; font-family:inherit; cursor:pointer; display:flex; flex-direction:column; gap:3px; }
+  #anDet .an-dia button.an-card:hover { border-color:#3b82f6; }
+  #anDet .an-dia-top small { font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:#94a3b8; font-weight:700; }
+  #anDet .an-dia-ini > b, #anDet .an-dia-13 > b { font-size:38px; line-height:1.1; color:#fff; font-variant-numeric:tabular-nums; }
+  #anDet .an-dia-ini > span, #anDet .an-dia-13 > span { font-size:12.5px; color:#cbd5e1; }
+  #anDet .an-dia .ef { font-size:12px; color:#94a3b8; } #anDet .an-dia .ef i { font-style:normal; font-weight:800; }
+  #anDet .an-dia-13.ab { border-color:#3b82f6; }
+  #anDet .an-dia-cifs .row { display:grid; grid-template-columns:repeat(5, 1fr); gap:8px; margin-top:8px; }
+  #anDet .an-dia-cif { background:#0b1324; border:1px solid #22304f; border-radius:12px; padding:10px 6px; cursor:pointer; font-family:inherit; color:#e2e8f0; display:flex; flex-direction:column; align-items:center; gap:2px; }
+  #anDet .an-dia-cif:hover { border-color:#3b82f6; }
+  #anDet .an-dia-cif b { font-size:28px; line-height:1.1; font-variant-numeric:tabular-nums; } #anDet .an-dia-cif span { font-size:12px; color:#94a3b8; }
+  #anDet .an-dia-cif.ok b { color:#22c55e; } #anDet .an-dia-cif.bad b { color:#ef4444; } #anDet .an-dia-cif.ab b { color:#60a5fa; } #anDet .an-dia-cif.cs b { color:#94a3b8; }
+  #anDet .an-dia-13det { margin-top:12px; } #anDet .an-dia-13det .ver { font-size:13px; color:#cbd5e1; margin:4px 0 8px; }
+  #anDet .an-dia-ciu { display:flex; gap:18px; font-size:13px; color:#cbd5e1; margin-bottom:8px; }
+  #anDet .an-sec2 { margin:18px 0 8px; font-size:13px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:#1e3a8a; }
+  #anDet .an-sec2 small { text-transform:none; letter-spacing:0; font-weight:400; color:#64748b; margin-left:6px; }
+  #anDet .an-dia-acts { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:12px; }
+  #anDet .an-dia-act .nums span, #anDet .an-dia-act .ef .ver { white-space:nowrap; }
+  #anDet .an-dia-act { border-top:3px solid var(--c) !important; }
+  #anDet .an-dia-act .hd { display:flex; justify-content:space-between; align-items:center; }
+  #anDet .an-dia-act .nm { font-size:16px; font-weight:800; color:#fff; display:flex; align-items:center; gap:8px; } #anDet .an-dia-act .nm i { width:10px; height:10px; border-radius:50%; background:var(--c); display:inline-block; }
+  #anDet .an-dia-act .tot { font-size:28px; font-weight:800; color:#fff; }
+  #anDet .an-dia-act .sb { font-size:12px; color:#94a3b8; } #anDet .an-dia-act .sb b { color:#e2e8f0; }
+  #anDet .an-dia-act .br { display:flex; height:16px; border-radius:6px; overflow:hidden; margin:6px 0; background:#0b1324; }
+  #anDet .an-dia-act .br span { font-size:10px; line-height:16px; text-align:center; color:#fff; min-width:14px; }
+  #anDet .an-dia-act .br .c { background:#16a34a; } #anDet .an-dia-act .br .n { background:#dc2626; } #anDet .an-dia-act .br .i { background:#2563eb; } #anDet .an-dia-act .br .p { background:#475569; } #anDet .an-dia-act .br .x { background:#334155; color:#94a3b8; }
+  #anDet .an-dia-act .nums { display:flex; gap:12px; font-size:12.5px; color:#cbd5e1; } #anDet .an-dia-act .nums .ok { color:#22c55e; } #anDet .an-dia-act .nums .bad { color:#ef4444; }
+  #anDet .an-dia-act .ef { display:flex; justify-content:space-between; font-size:12.5px; margin-top:4px; } #anDet .an-dia-act .ef .ver { color:#93c5fd; }
+  #anDet .an-dia-det { background:#f1f5f9; border-radius:14px; padding:16px; color:#0f172a; }
+  /* (06-11-2026) boton Informes dentro del detalle de Migraciones */
+  #anDet .an-miginf { position:relative; display:inline-block; }
+  #anDet .an-son { background:#14532d; color:#dcfce7; border:1px solid #166534; border-radius:999px; padding:6px 12px; font-size:12.5px; font-weight:600; cursor:pointer; font-family:inherit; white-space:nowrap; }
+  #anDet .an-son.off { background:#334155; color:#cbd5e1; border-color:#475569; }
+  #anDet .an-son.pr { background:transparent; color:#475569; border-color:#cbd5e1; }
+  #anDet .an-miginf .an-btn { background:#1e40af; color:#fff; border:0; border-radius:999px; padding:6px 12px; font-size:12.5px; font-weight:600; cursor:pointer; }
+  #anDet .an-miginf .an-btn:hover, #anDet .an-miginf .an-btn.ab { background:#1e3a8a; }
+  #anDet .an-miginf .an-infm { position:absolute; top:calc(100% + 6px); right:0; z-index:60; display:flex; flex-direction:column; gap:6px; padding:10px 12px 12px; background:#fff; border:1px solid #e2e8f0; border-radius:12px; box-shadow:0 10px 30px rgba(15,23,42,.35); min-width:560px; }
+  #anDet .an-miginf .an-infh { font-size:10.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#64748b; margin:2px 2px 0; }
+  #anDet .an-miginf .an-infl { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+  #anDet .an-miginf .an-infi { display:block; text-align:left; background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:7px 10px; cursor:pointer; text-decoration:none; font-family:inherit; }
+  #anDet .an-miginf .an-infi:hover { background:#eff6ff; border-color:#93c5fd; }
+  #anDet .an-miginf .an-infi b { display:block; font-size:12.5px; color:#0f172a; } #anDet .an-miginf .an-infi b i { font-style:normal; color:#2563eb; }
+  #anDet .an-miginf .an-infi span { display:block; font-size:11px; color:#64748b; line-height:1.3; margin-top:1px; }
   #anDet .pl-cqm { margin-left:14px; } #anDet .asis .an-mdtop h2, #anDet .rgu .an-mdtop h2 { flex-wrap:wrap; }
   #anDet .asis .as-sub { margin:2px 0 10px; font-size:13px; color:#64748b; } #anDet .asis .as-oj { color:#b45309; }
   #anDet .asis .as-sel { border:1px solid #cbd5e1; border-radius:999px; padding:5px 10px; font-size:13px; }
@@ -18416,14 +18492,29 @@ function anPintar(){
     /* (06-11-2026) Luis: "los botones de calidad, rgu, asistencia dejalos dentro de un boton llamado informes".
        Boton "Informes" que abre un menu con los tres (Calidad 04-11, RGU 05-11, Asistencia 05-11). */
     + '<span class="an-inf"><button class="an-btn inf' + (AN_INF_AB ? ' ab' : '') + '" onclick="anInfToggle(event)" title="Calidad, RGU y Asistencia">📑 Informes ' + (AN_INF_AB ? '▴' : '▾') + '</button>'
-    + (AN_INF_AB ? '<span class="an-infm">'
+    + (AN_INF_AB ? '<span class="an-infm"><small class="an-infh">Mi análisis</small><span class="an-inf3">'
       + '<button class="an-btn cal" onclick="anInfIr(cqAbrirGerencia)" title="Resumen gerencia de la calidad del mes (meta 5,32%)">🛠 Calidad ›</button>'
       + '<button class="an-btn rgu" onclick="anInfIr(rguAbrir)" title="RGU por técnico al día (meta ' + RGU_META + ')">📈 RGU ›</button>'
-      + '<button class="an-btn asis" onclick="anInfIr(asAbrir)" title="Marcación de entrada día a día (tope 09:50)">⏰ Asistencia ›</button>'
-      + '</span>' : '') + '</span>'
+      + '<button class="an-btn asis" onclick="anInfIr(asAbrir)" title="Marcación de entrada día a día (tope 09:50)">⏰ Asistencia ›</button></span>'
+      /* (06-11-2026) Luis: "todos estos botones de informes agrégalos dentro del botón informes" -> los 9 informes del bloque
+         INFORMES de la pantalla principal (infTarjetasHtml). Abren LO MISMO (mismo enlace o misma función); la pantalla
+         principal no se toca. */
+      + '<small class="an-infh">Informes del Módulo</small><span class="an-infl">' + AN_INF_PORTADA().map(function(t){
+          const cuerpo = '<b>' + t[2] + ' <i>›</i></b><span>' + t[3] + '</span>';
+          return t[0] === 'link' ? '<a class="an-infi" href="' + t[1] + '" target="_blank" onclick="anInfCerrar()">' + cuerpo + '</a>'
+                                 : '<button class="an-infi" onclick="anInfIr(function(){ ' + t[1] + '; })">' + cuerpo + '</button>';
+        }).join('') + '</span></span>' : '') + '</span>'
+    /* (06-11-2026, 17:10) Luis: Resumen WhatsApp como boton dentro de Mi analisis (abre lo mismo, abrirResumenWsp) */
+    + '<button class="an-btn wsp" onclick="anDiaIr(abrirResumenWsp)" title="El resumen del día para mandar por WhatsApp">💬 Resumen WhatsApp ›</button>'
+    /* (06-11-2026) Luis: "dia en curso como boton 'dia en curso' y dentro el boton inicio de jornada y el detalle de las ordenes del dia" */
+    + '<button class="an-btn dia" onclick="anDiaAbrir()" title="Inicio de jornada, cifras del día, cierres al corte de las 13:00 y detalle por actividad">🗓 Día en curso ›</button>'
     + '<button class="an-btn seg" onclick="anSegAbrir()" title="Técnicos de migraciones bajo 60 % de completitud: cómo se mueve la aguja">🎯 Seguimiento ›</button>'
     + '<button class="an-btn" onclick="anTsAbrir(\'Migraciones\')" title="Completitud de cada técnico en las últimas 8 semanas">👥 Técnicos semana a semana ›</button>' + '</div>';
 
+  /* (06-11-2026, 17:10) Luis: "en pantalla principal mi analisis, cuando se deriva 1 migra, archivo dañado".
+     Los mismos avisos de la pantalla principal: migraciones derivadas nuevas (DER_AVISO, el aviso flotante #avisoDer
+     tambien se ve encima) y archivos del sistema con falla (saludProblemas / abrirSalud). Solo salen cuando hay. */
+  h += anAvisosHtml();
   if(AN_SUP !== 'Todo' && !D.cargando && D.sinSup) h += '<div class="an-carga">Ojo: ' + D.sinSup + ' orden' + (D.sinSup === 1 ? '' : 'es') + ' de técnicos sin supervisor conocido en datos.json: cuentan en Todo el equipo, no en este filtro.</div>';
   if(D.cargando) h += '<div class="an-carga">Cargando el histórico (datos.json)… lo de hoy ya está, el resto aparece en unos segundos.</div>';
   /* (04-11-2026) migraciones sin comuna conocida: entran en Todo el equipo pero no en Quilpué ni en Villa Alemana. Se dice cuantas. */
@@ -18437,6 +18528,7 @@ function anPintar(){
     const dl = ss.comp !== null && sa.comp !== null ? ss.comp - sa.comp : null;
     h += '<div class="an-card an-clic" onclick="anDetAbrir(\'' + F.f + '\', {t:\'sem\', k:\'' + D.semHoy + '\'})" title="Toca para ver el detalle de ' + F.f.toLowerCase() + '">'
       + '<h3><i class="pt" style="background:' + F.c + '"></i>' + F.f + '</h3><span class="an-ver">ver detalle ›</span>'
+
       + '<div class="an-rel">' + anReloj(sh.comp, 52, 'HOY', false, sh.vis) + anReloj(ss.comp, 80, 'SEMANA ' + derNumSemana(D.semHoy), true, ss.vis) + anReloj(sm.comp, 52, AN_NOMMES[+D.mesHoy.slice(4) - 1].toUpperCase(), false, sm.vis) + '</div>'
       /* (05-11-2026) bajo cada reloj, el mismo % sin castigar la GSA (como Dominion) */
       + '<div class="an-rel an-relsg">' + [sh, ss, sm].map(function(x){ return '<span title="' + (x.g ? x.g + ' cerrada' + (x.g === 1 ? '' : 's') + ' por GSA: VTR las cuenta como quiebre' : 'Sin cierres por GSA') + '">sin GSA <b>' + (x.compSG === null ? '–' : P2(x.compSG) + '%') + '</b>' + (x.g ? ' · ' + x.g + ' GSA' : '') + '</span>'; }).join('') + '</div>'
@@ -18593,8 +18685,9 @@ function anAbrir(){
   let m = document.getElementById('anPage');
   if(!m){ m = document.createElement('div'); m.id = 'anPage'; document.body.appendChild(m); }
   m.classList.add('abierto'); anPintar();
+  document.body.classList.add('an-sobre');   /* (06-11-2026) las ventanas de la pantalla principal abiertas desde Informes van encima */
 }
-function anCerrar(){ anDetCerrar(); const m = document.getElementById('anPage'); if(m) m.classList.remove('abierto'); }
+function anCerrar(){ anDetCerrar(); const m = document.getElementById('anPage'); if(m) m.classList.remove('abierto'); document.body.classList.remove('an-sobre'); }
 function anDetAbrir(fam, per){
   AN_DET = { fam:fam, per:per };
   let m = document.getElementById('anDet');
@@ -18928,7 +19021,7 @@ function asPintar(m){
   m.innerHTML = h.replace('@@CUMPLEN@@', ''); m.scrollTop = y;
 }
 
-function anDetCerrar(){ AN_DET = null; AN_LISTA_FULL = false; AN_LISTA_Q = ''; const m = document.getElementById('anDet'); if(m) m.classList.remove('abierto'); }
+function anDetCerrar(){ AN_DIA_FAM = null; AN_DET = null; AN_LISTA_FULL = false; AN_MIGINF_AB = false; AN_LISTA_Q = ''; const m = document.getElementById('anDet'); if(m) m.classList.remove('abierto'); }
 function anDetPer(t, k){ if(!AN_DET) return; AN_DET.per = { t:t, k:k }; anDetPintar(); }
 
 /* ==== (06-11-2026) VISITAS POR DIRECCION Y ALARMA DE 3 DERIVACIONES ====
@@ -18958,9 +19051,45 @@ function AN_MESES_ANT(mesHoy){ const a = []; let k = mesHoy; for(let i = 0; i < 
 let AN_INF_AB = false;     // (06-11-2026) menu Informes abierto
 function anInfToggle(e){ if(e) e.stopPropagation(); AN_INF_AB = !AN_INF_AB; anPintar(); }
 function anInfIr(fn){ AN_INF_AB = false; anPintar(); fn(); }
+/* (06-11-2026) boton "Informes" de la tarjeta Migraciones: la misma lista de MAS DETALLE de la pagina MIGRACIONES
+   (migPaginaHtml), con las mismas funciones y enlaces. La pagina MIGRACIONES no se toca. */
+let AN_MIGINF_AB = false;
+function anMigInfToggle(e){ if(e) e.stopPropagation(); AN_MIGINF_AB = !AN_MIGINF_AB; AN_INF_AB = false; anDetPintar(); }
+function anMigInfIr(e, fn){ if(e) e.stopPropagation(); AN_MIGINF_AB = false; anDetPintar(); try { fn(); } catch(x){ console.warn('informes migraciones:', x); } }
+function anMigInfHtml(){
+  const b = function(onc, t, d){ return '<button class="an-infi" onclick="anMigInfIr(event, function(){ ' + onc + '; })"><b>' + t + ' <i>›</i></b><span>' + d + '</span></button>'; };
+  const a = function(url, t, d){ return url ? '<a class="an-infi" href="' + url + '" target="_blank" rel="noopener" onclick="event.stopPropagation(); anInfCerrar()"><b>' + t + ' <i>↗</i></b><span>' + d + '</span></a>' : ''; };
+  const g = function(t, cuerpo){ return '<small class="an-infh">' + t + '</small><span class="an-infl">' + cuerpo + '</span>'; };
+  return '<span class="an-inf an-miginf" onclick="event.stopPropagation()"><button class="an-btn inf' + (AN_MIGINF_AB ? ' ab' : '') + '" onclick="anMigInfToggle(event)" title="Informes de migraciones (los mismos de la página MIGRACIONES)">📑 Informes ' + (AN_MIGINF_AB ? '▴' : '▾') + '</button>'
+    + (AN_MIGINF_AB ? '<span class="an-infm">'
+      + g('Hoy, en vivo', b("migDer('hoy')", 'Derivadas de hoy', 'Visitadas, derivadas y por visitar, tal como van') + b("migIr('abrirResMig')", 'Resumen supervisores', 'Por qué y quién, con filtro por supervisor y fotos'))
+      + g('Técnicos', b("migIr('abrirSegVtr')", 'Seguimiento VTR', 'Los técnicos que VTR/CLARO marcó, semana a semana') + b("migDer('tec')", 'Por técnico', 'Quién deriva más y la historia de cada dirección')
+          + b("migDer('aud')", 'A quién auditar', 'Lo derivado propio de cada técnico') + b("migDer('evo')", 'Evolución', 'Si cada técnico va mejorando o empeorando') + b("migDer('fic')", 'Ficha del técnico', 'Todo sobre un técnico y qué revisar primero'))
+      + g('Direcciones, equipo y gerencia', b("migDer('dir')", 'Por dirección', 'Qué direcciones fallan y con qué técnicos') + b("migDer('res')", 'Resumen de derivación', 'Cómo vamos y con quién conversar')
+          + b("migIr('abrirMigGer')", 'Migraciones · Gerencia', 'Por mes, semana y hoy. Con Modo reunión'))
+      + g('Respaldos y plan', a(typeof URL_PLAN_SEMANA !== 'undefined' ? URL_PLAN_SEMANA + '?t=' + Date.now() : '', 'Plan de acción de la semana', 'A quién se fiscaliza y cómo se mide (PDF)')
+          + a(typeof URL_PLANILLA_RESP !== 'undefined' ? URL_PLANILLA_RESP : '', 'Planilla de respaldos', 'Lo que mandan los técnicos desde la app')
+          + a(typeof URL_APP_RESP !== 'undefined' ? URL_APP_RESP : '', 'App Respaldo en terreno', 'La app que usan los técnicos'))
+      + '</span>' : '') + '</span>';
+}
+function anInfCerrar(){ setTimeout(function(){ const d = AN_MIGINF_AB; AN_INF_AB = false; AN_MIGINF_AB = false; anPintar(); if(d) anDetPintar(); }, 0); }
+/* (06-11-2026) la misma lista del bloque INFORMES de la pantalla principal (infTarjetasHtml), con los mismos enlaces y funciones */
+function AN_INF_PORTADA(){ return [
+  ['link', URL_TIEMPOS, 'Tiempos en terreno', 'Cuánto demora cada técnico por tipo de trabajo, contra el equipo'],
+  ['link', URL_NEGOCIOS, 'Negocios', 'Órdenes y tiempos de los clientes de Negocios, por tipo y por dirección'],
+  ['fn', 'abrirResumen()', 'Resumen día por día', 'Asignadas, completadas, no realizadas y efectividad de cada día'],
+  ['link', URL_TABLA_HIST, 'Tabla del mes por técnico', 'Todas las órdenes del mes, técnico por técnico'],
+  ['fn', 'abrirFranjas()', 'Derivaciones por franja', 'En qué franja se deriva más: por actividad, semana, día, técnico y comuna'],
+  /* este se pinta EN la pantalla principal (no es ventana): se cierra MI ANALISIS para verlo */
+  ['fn', 'anCerrar(); desdePortada(verReporteRepe)', 'Direcciones ya visitadas', 'Histórico de las casas donde ya se falló antes'],
+  ['link', URL_EQUIPO, 'Carga de Play por técnico', 'Si a un técnico le cargan más de un Play que al resto, por supervisor'],
+  ['link', URL_ACTIVIDADES + '?t=' + Date.now() + '#quiebres', 'Quiebres por técnico', 'Quiebres de cada técnico en el Dashboard de Actividades'],
+  ['fn', 'cqAbrir()', 'Calidad del mes', 'Lo completado en el mes que tuvo reparación dentro de 30 días · meta 5,32%']
+]; }
 document.addEventListener('click', function(e){
   /* clic fuera del menu Informes: se cierra */
   if(AN_INF_AB && !(e.target.closest && e.target.closest('.an-inf'))){ AN_INF_AB = false; anPintar(); }
+  if(AN_MIGINF_AB && !(e.target.closest && e.target.closest('.an-miginf'))){ AN_MIGINF_AB = false; anDetPintar(); }
 });
 let AN_LISTA_FULL = false; // (06-11-2026) lista de ordenes en pantalla completa
 /* (06-11-2026) Luis: "imagina la ultima semana de noviembre y buscar alguna direccion en particular se dificultara" ->
@@ -19103,6 +19232,7 @@ function anDetPintar(){
   const m = document.getElementById('anDet'); if(!m || !AN_DET || !m.classList.contains('abierto')) return;
   if(AN_DET.ts) return anTsPintar(m);
   if(AN_DET.seg) return anSegPintar(m);
+  if(AN_DET.dia) return anDiaPintar(m);
   if(AN_DET.diario) return anDiarioPintar(m);
   if(AN_DET.rgu) return rguPintar(m);
   if(AN_DET.asis) return asPintar(m);
@@ -19127,7 +19257,8 @@ function anDetPintar(){
     + (AN_COM !== 'Todo' ? ' <small>' + (AN_COM === 'QUILPUE' ? 'Quilpué' : 'Villa Alemana') + '</small>' : '') + (AN_SUP !== 'Todo' ? ' <small>' + derTitulo(AN_SUP) + '</small>' : '') + '</h2>'
     + '<div class="an-tabs">' + tabs.map(function(p){ const on = p.t === per.t && (p.t === 'hoy' || p.k === per.k);
         return '<span class="an-tab' + (on ? ' on' : '') + '" onclick="anDetPer(\'' + p.t + '\', \'' + p.k + '\')">' + anPerTit(p) + (p.t === 'sem' && p.k === D.semHoy ? ' (en curso)' : '') + '</span>'; }).join('') + '</div></div>'
-    + '<div style="display:flex;gap:8px;align-items:center"><span class="an-updbox">' + anUpdHtml() + '</span>'
+    /* (06-11-2026) Luis: "deja el boton dentro del detalle de las migraciones": los informes de MAS DETALLE de la pagina MIGRACIONES */
+    + '<div style="display:flex;gap:8px;align-items:center">' + (fam === 'Migraciones' ? anMigInfHtml() + anSonidoHtml() : '') + '<span class="an-updbox">' + anUpdHtml() + '</span>'
     + (AN_DET.volver ? '<button class="an-x" onclick="anTsAbrir(\'' + AN_DET.volver + '\')">‹ Volver a técnicos</button>' : '')
     + (AN_DET.volverSeg ? '<button class="an-x" onclick="anSegAbrir()">‹ Volver a Seguimiento</button>' : '')
     + (AN_DET.volverDiario ? '<button class="an-x" onclick="anDiarioAbrir()">‹ Volver a día a día</button>' : '')
@@ -19351,6 +19482,160 @@ function anTsPintar(m){
    Arriba: "Los N juntos" (base vs semana en curso). Respeta el filtro de comuna. */
 var AN_SEG_MIN = 8;
 var AN_SEG_TOP = 10;   /* (03-11-2026) los N peores van con el nombre en ambar: los primeros a auditar */
+/* (06-11-2026, 17:20) Luis: el boton del sonido de las derivadas (activar / silenciar) dentro del detalle de Migraciones.
+   Es el MISMO de la pantalla principal (DER_SONIDO / derToggleSonido / derSonidoTxt). */
+function anSonidoHtml(){
+  let tx = '🔔 Con sonido', on = true;
+  try { tx = derSonidoTxt(); on = !!DER_SONIDO; } catch(x){}
+  return '<button class="an-son' + (on ? '' : ' off') + '" onclick="anSonido(event)" title="Sonido cuando se deriva una migración del día. Toca para ' + (on ? 'silenciarlo' : 'activarlo') + '.">' + tx + '</button>'
+    + (on ? '<button class="an-son pr" onclick="anSonidoProbar(event)" title="Hace sonar el aviso una vez">Probar</button>' : '');
+}
+function anSonido(e){ try { derToggleSonido(e); } catch(x){} anDetPintar(); }
+function anSonidoProbar(e){ try { derProbarSonido(e); } catch(x){} }
+function anAvisosHtml(){
+  let nd = 0, ns = 0, sal = [];
+  try { nd = (typeof DER_AVISO !== 'undefined' && DER_AVISO) ? DER_AVISO.length : 0; } catch(x){}
+  try { sal = saludProblemas(); ns = sal.length; } catch(x){}
+  /* (06-11-2026, 17:20) Luis: el aviso "Falta export completo" tambien en la pantalla de Mi analisis (compPendientes / abrirFaltaCompleto) */
+  let fc = []; try { fc = compPendientes(); } catch(x){}
+  if(!nd && !ns && !fc.length) return '';
+  return '<div class="an-avisos">'
+    + (nd ? '<button class="an-aviso der" onclick="anDiaIr(function(){ migDer(\'hoy\'); })" title="Ver las derivadas de hoy">⚠ ' + nd + (nd === 1 ? ' migración derivada nueva' : ' migraciones derivadas nuevas') + ' ›</button>' : '')
+    + (fc.length ? '<button class="an-aviso fc" onclick="anDiaIr(abrirFaltaCompleto)" title="Días en que no aparecen técnicos habituales y no hay export completo. Si estuvieron en otra comuna, falta pedir el archivo.">⚠ Falta export completo · ' + fc.length + (fc.length === 1 ? ' día' : ' días') + ' ›</button>' : '')
+    + (ns ? '<button class="an-aviso sal" onclick="anDiaIr(abrirSalud)" title="' + escR(sal.map(function(p){ return p.a; }).join(', ')) + '">⚠ ' + ns + (ns === 1 ? ' archivo dañado' : ' archivos dañados') + ' · ' + escR(sal.map(function(p){ return p.a; }).slice(0, 3).join(', ')) + ' ›</button>' : '')
+    + '</div>';
+}
+/* ==== (06-11-2026) DIA EN CURSO dentro de MI ANALISIS ====
+   Luis: pasar el DIA EN CURSO de la pantalla principal a MI ANALISIS, sin tocar la otra:
+   boton "Dia en curso" y adentro: inicio de jornada (abre el mismo detalle, abrirInicio), las cifras del dia
+   (cada una abre la misma lista, abrirEst), los cierres al corte de las 13:00 (mismo calculo, calcularCompletitud,
+   mostrado aqui mismo) y una tarjeta por actividad que abre el MISMO detalle de la pantalla principal
+   (actDetalleHtml), dentro de esta ventana. La cuadratura (cuadra) quedo fuera a pedido de Luis.
+   Todo sale de DB (rutas.json en vivo) con las mismas cuentas de la pantalla principal. */
+let AN_DIA_FAM = null, AN_DIA_C13 = false;
+function anDiaAbrir(){
+  AN_DET = { dia:true }; AN_DIA_FAM = null;
+  let m = document.getElementById('anDet');
+  if(!m){ m = document.createElement('div'); m.id = 'anDet'; m.onclick = function(e){ if(e.target === m) anDetCerrar(); }; document.body.appendChild(m); }
+  m.classList.add('abierto'); m.scrollTop = 0; anDetPintar();
+}
+function anDiaFam(f){ AN_DIA_FAM = f; const m = document.getElementById('anDet'); if(m) m.scrollTop = 0; anDetPintar(); }
+function anDiaPintar(m){
+  const y = m.scrollTop;
+  const filas = []; Object.keys(DB || {}).forEach(function(t){ (DB[t] || []).forEach(function(o){ filas.push(o); }); });
+  const e = function(o){ return String(o.e || 'Pendiente'); };
+  const comp = filas.filter(function(o){ return e(o) === 'Completado'; }).length, nore = filas.filter(function(o){ return e(o) === 'No Realizada'; }).length;
+  const canc = filas.filter(function(o){ return e(o) === 'Cancelado' || e(o) === 'Suspendido'; }).length, pend = filas.length - comp - nore - canc;
+  const vis = comp + nore, iso = anHoyIso();
+  const DSEM = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+  const dd = new Date(+iso.slice(0, 4), +iso.slice(4, 6) - 1, +iso.slice(6, 8));
+  const fecha = DSEM[dd.getDay()].replace(/^./, function(c){ return c.toUpperCase(); }) + ' ' + (+iso.slice(6, 8)) + ' de ' + AN_NOMMES[+iso.slice(4, 6) - 1].toLowerCase();
+  let h = '<div class="an-md an-md-ancho an-dia"><div class="an-mdtop"><h2>🗓 Día en curso <small>' + fecha + ' · en vivo</small></h2>'
+    + '<div style="display:flex;gap:8px;align-items:center"><span class="an-updbox">' + anUpdHtml() + '</span>'
+    + '<button class="an-x" onclick="anDetCerrar()">✕ Cerrar</button></div></div>';
+  if(AN_DIA_FAM){
+    /* el MISMO detalle de la tarjeta de la pantalla principal; su "Volver" vuelve aqui */
+    let det = ''; try { det = actDetalleHtml(AN_DIA_FAM); } catch(x){ det = '<p>No se pudo armar el detalle.</p>'; }
+    det = det.split('window.PV_ACT=null; pintarPortada()').join('anDiaFam(null)');
+    h += '<div class="an-dia-det">' + det + '</div></div>';
+    m.innerHTML = h; m.scrollTop = y; return;
+  }
+  /* 1. inicio de jornada + cifras + corte 13:00 */
+  const ini = (typeof inicioHoy === 'function' && inicioHoy()) ? inicioHoy().total : 0;
+  let c13 = null; try { c13 = calcularCompletitud(); } catch(x){}
+  const antes13 = (function(){ try { const r = ahoraRef(); return r && (r.getHours() < 13); } catch(x){ return false; } })();
+  const col13 = !c13 || !c13.total || antes13 ? '#94a3b8' : c13.pct >= COMP_META * 100 ? '#22c55e' : c13.pct >= 70 ? '#f59e0b' : '#ef4444';
+  const cif = function(n, t, cls, k, tip){ return '<button class="an-dia-cif ' + cls + '" onclick="anDiaEst(\'' + k + '\')" title="' + tip + '"><b>' + n + '</b><span>' + t + '</span></button>'; };
+  h += '<div class="an-dia-top">'
+    + '<button class="an-card an-dia-ini" onclick="anDiaIr(abrirInicio)" title="Con cuántas actividades partió el día (Excel de la mañana). Toca para ver el detalle.">'
+    +   '<small>Inicio de jornada ›</small><b>' + (ini || '–') + '</b><span>actividades al inicio' + (ini ? '' : ' (todavía no está el Excel de la mañana)') + '</span>'
+    +   '<span class="ef">' + (vis ? '<i style="color:' + (100 * comp / vis >= 60 ? '#22c55e' : '#ef4444') + '">' + P2(100 * comp / vis) + '%</i> de lo visitado · ' : '') + comp + ' completadas · ' + nore + ' no realizadas</span></button>'
+    + '<div class="an-card an-dia-cifs"><small>Actividades del día en bandejas</small><div class="row">'
+    +   cif(filas.length, 'en total', 'tot', '__TODAS__', 'Ver todas las actividades del día')
+    +   cif(comp, 'completadas', 'ok', 'Completado', 'Ver las completadas')
+    +   cif(nore, 'no realizadas', 'bad', 'No Realizada', 'Ver las no realizadas')
+    +   cif(pend, 'sin cerrar', 'ab', '__ABIERTAS__', 'Ver las que siguen abiertas')
+    +   cif(canc, 'canc/susp', 'cs', '__CANCSUSP__', 'Ver canceladas y suspendidas')
+    + '</div></div>'
+    + '<button class="an-card an-dia-13' + (AN_DIA_C13 ? ' ab' : '') + '" onclick="AN_DIA_C13 = !AN_DIA_C13; anDetPintar()" title="Técnicos con al menos un cierre antes de las 13:00 · meta ' + Math.round(COMP_META * 100) + '%">'
+    +   '<small>Cierres al corte de las 13:00 ' + (AN_DIA_C13 ? '▴' : '▾') + '</small><b style="color:' + col13 + '">' + (c13 && c13.total ? P2(c13.pct) + '%' : '–') + '</b>'
+    +   '<span>' + (c13 && c13.total ? c13.cumplen + ' de ' + c13.total + ' técnicos con un cierre antes de las 13:00' : 'sin técnicos con trabajo todavía') + '</span>'
+    +   '<span class="ef">meta ' + Math.round(COMP_META * 100) + '%' + (antes13 ? ' · todavía no es la hora del corte' : '') + '</span></button>'
+    + '</div>';
+  if(AN_DIA_C13 && c13 && c13.total){
+    /* el mismo detalle del panel de la pantalla principal (renderPanelComp), con los mismos datos */
+    const restan = (typeof minutosParaCorte === 'function') ? minutosParaCorte() : null, logrado = c13.pct >= COMP_META * 100;
+    h += '<div class="an-card an-dia-13det"><h3>Cierres al corte de las 13:00</h3>'
+      + '<p class="ver">' + (logrado ? '✅ Meta cumplida: se necesitaban ' + c13.necesarios + ' y van ' + c13.cumplen + '.' + (restan ? ' Quedan ' + restan + ' min de margen.' : '')
+          : restan ? '⚠️ Faltan <b>' + c13.faltan + ' técnico' + (c13.faltan > 1 ? 's' : '') + '</b> con al menos 1 cierre para llegar a la meta. Quedan <b>' + restan + ' min</b> antes del corte.'
+          : '🔒 El corte de las 13:00 ya pasó. Cifra final del día: ' + c13.cumplen + ' de ' + c13.total + '. Faltaron ' + c13.faltan + ' para la meta.') + '</p>'
+      + '<div class="an-dia-ciu">' + Object.keys(c13.porCiudad).sort().map(function(k){ const v = c13.porCiudad[k], p = v.tot ? 100 * v.ok / v.tot : 0;
+          return '<span>' + escR(anTec(k)) + ': <b style="color:' + (p >= COMP_META * 100 ? '#22c55e' : '#ef4444') + '">' + P2(p) + '%</b> · ' + v.ok + ' de ' + v.tot + '</span>'; }).join('') + '</div>'
+      + (c13.faltantes.length ? '<div class="an-scroll"><table class="an-tb"><tr><th>Sin cierre antes del corte (' + c13.faltantes.length + ')</th><th>Iniciadas</th><th>En ruta</th><th>Pendientes</th><th>Cerró después del corte</th></tr>'
+          + c13.faltantes.map(function(f){ return '<tr><td>' + escR(anTec(f.t)) + '</td><td>' + (f.ini || '') + '</td><td>' + (f.ruta || '') + '</td><td>' + (f.pend || '') + '</td><td>' + (f.tarde || '') + '</td></tr>'; }).join('') + '</table></div>'
+        : '<p class="ver">🎉 Todos los técnicos cerraron al menos una antes de las 13:00.</p>')
+      + '</div>';
+  }
+  /* (06-11-2026, 17:10) Luis: "caidas, sin completar, mas de 3 horas, nuevas, devueltas, direcciones ya visitadas hoy:
+     dentro de dia en curso como botones" y "rutas, nodos y nap, mapa de red" tambien como botones.
+     Cada boton abre LO MISMO de la pantalla principal (misma funcion); los numeros son las mismas cuentas. */
+  const nz = function(fn){ try { const v = fn(); return (v === null || v === undefined) ? null : v; } catch(x){ return null; } };
+  const AT = [
+    ['caidas', nz(function(){ return nCaidas(); }), 'Salieron de la bandeja', 'actividades que se las sacaron al técnico sin cerrarlas', 'anDiaIr(toggleCaidas)'],
+    ['sc', nz(function(){ return tecnicosSinCompletar().length; }), 'Sin completar', 'técnicos que no han cerrado ninguna todavía hoy (se ve en el mapa)', 'anDiaMapa(\'sc\')'],
+    ['atr', nz(function(){ return trabajosAtrasados().length; }), 'Más de 3 horas', 'actividades iniciadas hace más de 3 horas (se ve en el mapa)', 'anDiaMapa(\'atr\')'],
+    ['nue', nz(function(){ return contar(nuevasDelDia()).nuevita; }), 'Nuevas', 'entraron a las bandejas después de la primera vuelta', 'anDiaIr(toggleNuevas)'],
+    ['dev', nz(function(){ return nRecaidasVivas(); }), 'Devueltas', 'se las sacaron a un técnico y hoy volvieron a una bandeja', 'anDiaIr(toggleReca)'],
+    ['rep', nz(function(){ return nRepe(); }), 'Direcciones ya visitadas hoy', 'hoy volvemos a una casa donde ya fallamos antes', 'anDiaIr(toggleRepe)']
+  ];
+  h += '<div class="an-sec2">Requiere atención <small>cada botón abre lo mismo de la pantalla principal</small></div><div class="an-dia-at">'
+    + AT.map(function(a){ const v = a[1];
+        return '<button class="an-dia-al' + (v ? ' viva' : ' cero') + '" onclick="' + a[4] + '" title="' + a[3] + '"><b>' + (v === null ? '–' : v) + '</b><span><i>' + a[2] + '</i><small>' + a[3] + '</small></span></button>'; }).join('')
+    + '</div>'
+    + '<div class="an-dia-map"><span>Mapa y red:</span>'
+    + '<button class="an-x" onclick="anDiaMapa(\'rutas\')" title="Cierra Mi análisis y abre el mapa con las rutas de los técnicos">🗺 Rutas ›</button>'
+    + '<button class="an-x" onclick="anDiaIr(toggleRed)" title="Reparaciones del día agrupadas por NAP y nodo">🔌 Nodos y NAP ›</button>'
+    + '<button class="an-x" onclick="anDiaIr(abrirVistaRed)" title="Mapa de la red">🛰 Mapa de red ›</button></div>';
+  /* 2. una tarjeta por actividad (mismas cuentas que la pantalla principal, actsHoyHtml) */
+  const ORD = ['Migraciones','Altas','Reparaciones','Modificaciones','Otras'];
+  const COL = { Migraciones:'#3b82f6', Altas:'#14b8a6', Reparaciones:'#f97316', Modificaciones:'#a78bfa', Otras:'#94a3b8' };
+  const g = {}; filas.forEach(function(o){ const f = familiaCat(o.cat); (g[f] = g[f] || []).push(o); });
+  const fams = ORD.filter(function(f){ return g[f] && g[f].length; });
+  h += '<div class="an-sec2">Detalle por actividad <small>toca una tarjeta para ver todo lo de esa actividad hoy</small></div>';
+  if(!fams.length) h += '<div class="an-vac">Todavía no hay actividades en las bandejas.</div>';
+  else h += '<div class="an-dia-acts">' + fams.map(function(f){
+    const L = g[f];
+    const co = L.filter(function(o){ return e(o) === 'Completado'; }).length, nr = L.filter(function(o){ return e(o) === 'No Realizada'; }).length;
+    const cs = L.filter(function(o){ return e(o) === 'Cancelado' || e(o) === 'Suspendido'; }).length;
+    const ini2 = L.filter(function(o){ return e(o) === 'Iniciado' || e(o) === 'en ruta'; }).length;
+    const ab = L.length - co - nr - cs, pen = ab - ini2, vv = co + nr, pv = vv ? 100 * co / vv : null;
+    const sub = {}; L.forEach(function(o){ const k = String(o.cat || f); sub[k] = (sub[k] || 0) + 1; });
+    const subTx = Object.keys(sub).sort(function(a, b){ return sub[b] - sub[a]; }).map(function(k){ return escR(k.replace(/^Migraci[oó]n /, '').replace(/^Alta /, '')) + ' <b>' + sub[k] + '</b>'; }).join(' · ');
+    const t = function(v, c, n){ return v ? '<span class="' + c + '" style="flex-grow:' + v + '" title="' + v + ' ' + n + '">' + v + '</span>' : ''; };
+    const meta = f === 'Migraciones' ? 60 : null;
+    return '<button class="an-card an-dia-act" style="--c:' + COL[f] + '" onclick="anDiaFam(\'' + f + '\')" title="Toca para ver todo lo de ' + f.toLowerCase() + ' de hoy">'
+      + '<div class="hd"><span class="nm"><i></i>' + f + '</span><span class="tot">' + L.length + '</span></div>'
+      + '<div class="sb">' + subTx + '</div>'
+      + '<div class="br">' + t(co, 'c', 'completadas') + t(nr, 'n', 'no realizadas') + t(ini2, 'i', 'iniciadas o en ruta') + t(pen, 'p', 'pendientes') + t(cs, 'x', 'canceladas o suspendidas') + '</div>'
+      + '<div class="nums"><span><b class="ok">' + co + '</b> completadas</span><span><b class="bad">' + nr + '</b> no realizadas</span><span><b>' + ab + '</b> sin cerrar</span></div>'
+      + '<div class="ef">' + (pv === null ? '<span class="sd">nadie ha cerrado una visita todavía</span>' : '<b style="color:' + (meta === null ? '#e2e8f0' : pv >= meta ? '#22c55e' : '#ef4444') + '">' + P2(pv) + '%</b> de lo visitado · ' + co + ' de ' + vv) + '<span class="ver">Ver detalle ›</span></div>'
+      + '</button>';
+  }).join('') + '</div>';
+  h += '</div>';
+  m.innerHTML = h; m.scrollTop = y;
+}
+/* inicio de jornada y listas del dia: las mismas ventanas de la pantalla principal (modalEst), encima de esta */
+function anDiaIr(fn){ try { fn(); } catch(x){ console.warn('dia en curso:', x); } }
+/* Sin completar y Mas de 3 horas son paneles del MAPA (#panelSC / #panelAtr): se cierra Mi analisis, se muestra el mapa y
+   se enciende el panel (si ya estaba encendido, se deja). Rutas: solo el mapa. */
+function anDiaMapa(k){
+  try { anCerrar(); verMapa(); } catch(x){ console.warn('dia en curso, mapa:', x); }
+  try {
+    if(k === 'sc' && document.getElementById('panelSC').style.display !== 'block') toggleSinCompletar();
+    if(k === 'atr' && document.getElementById('panelAtr').style.display !== 'block') toggleAtrasados();
+  } catch(x){ console.warn('dia en curso, panel:', x); }
+}
+function anDiaEst(k){ try { abrirEst(k); } catch(x){ console.warn('dia en curso:', x); } }
 function anSegAbrir(){
   AN_DET = { seg:true };
   let m = document.getElementById('anDet');
