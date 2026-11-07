@@ -3555,6 +3555,67 @@
 .hb-mig { background:#1d3a8a; }
 .hb-mig:hover { box-shadow:0 0 0 3px #93c5fd; }
 
+
+
+/* (07-11-2026) Mi analisis: detalle del mes dentro de anDet y menus Herramientas / Detalle meses */
+#anDet .mda-an { background:#eef2f7; }
+#anDet .mda-an .an-mdtop { margin-bottom:6px; }
+#anDet .mda-an .mda-top { margin-bottom:2px; }
+#anPage .an-infm.an-herm, #anPage .an-infm.an-mesm { min-width:330px; }
+#anPage .an-btn.her { background:#0f766e; color:#fff; } #anPage .an-btn.her:hover, #anPage .an-btn.her.ab { background:#115e59; }
+#anPage .an-btn.mes { background:#1d4ed8; color:#fff; } #anPage .an-btn.mes:hover, #anPage .an-btn.mes.ab { background:#1e40af; }
+#anDet .mda-an .an-chip { background:#fff; border:1px solid #cbd5e1; border-radius:999px; padding:5px 12px; font-size:12.5px; color:#334155; font-weight:600; cursor:pointer; }
+#anDet .mda-an .an-chip.on { background:#1d4ed8; border-color:#1d4ed8; color:#fff; }
+/* ==== (07-11-2026) DETALLE DEL MES · TABLERO (mesDetalleHtml) ==== */
+.mda { color:#15293e; } .ad.mda { gap:8px; }
+.mda .ad-volver { min-height:34px; font-size:14px; padding:0 12px; }
+.mda .mda-g { margin-bottom:0; } .mda .mda-top { margin-bottom:0; }
+.mda-t td .mp-fl { font-size:11.5px; }
+.mda-f1 .mda-t td { padding:3px 3px; }
+.mda-top { display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:10px; }
+.mda-tit { font-size:24px; font-weight:800; color:#13213c; }
+.mda-top .am-cur { position:static; }
+.mda-g { display:grid; gap:10px; margin-bottom:10px; }
+.mda-f1 { grid-template-columns:1fr 1.2fr 1fr 1fr; } .mda-f2 { grid-template-columns:1.35fr 1fr 1fr; } .mda-f3 { grid-template-columns:1fr 1fr 1fr; }
+@media (max-width:900px){ .mda-f1, .mda-f2, .mda-f3 { grid-template-columns:1fr; } }
+.mda-c { background:#fff; border:1px solid #dbe3ee; border-radius:12px; padding:10px 14px; min-width:0; }
+.mda-c .ct { font-size:11px; font-weight:800; letter-spacing:.05em; color:#5d7389; margin-bottom:6px; text-transform:uppercase; }
+.mda-ayu { font-size:11px; color:#94a3b8; font-weight:500; text-transform:none; letter-spacing:0; }
+.mda-osc { background:#0f2236; border-color:#0f2236; color:#fff; } .mda-osc .ct { color:#93c5fd; }
+.mda-c .big { font-size:34px; font-weight:800; line-height:1.1; } .mda-c .big2 { font-size:26px; font-weight:800; line-height:1.1; }
+.mda-c .s { font-size:12px; color:#5d7389; } .mda-osc .s { color:#cbd5e1; } .mda-osc .s2 { font-size:12px; margin-top:4px; color:#e2e8f0; }
+.mda-osc .mp-fl.ok { color:#4ade80; } .mda-osc .mp-fl.bad { color:#fca5a5; }
+.mda-t { width:100%; border-collapse:collapse; font-size:13px; }
+.mda-t th { font-size:10.5px; color:#5d7389; text-align:right; padding:2px 5px; font-weight:700; white-space:nowrap; }
+.mda-t td { padding:3px 5px; border-top:1px solid #eef2f6; text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums; }
+.mda-t th:first-child, .mda-t td:first-child { text-align:left; }
+.mda-t td.bar { width:30%; }
+.mda-bar { display:block; height:7px; background:#e2e8f0; border-radius:4px; overflow:hidden; } .mda-bar i { display:block; height:100%; background:#2563eb; }
+.mda-clk { cursor:pointer; } .mda-clk:hover td { background:#f1f5f9; } .mda-clk.on td { background:#eff6ff; font-weight:700; }
+.mda-hija td { font-size:12px; color:#41586f; background:#f8fafc; } .mda-hija td:first-child { padding-left:18px; }
+.mda-pc { border-radius:6px; padding:1px 7px; font-weight:800; } .mda-pc.ok { background:#dcfce7; color:#166534; } .mda-pc.bad { background:#fee2e2; color:#991b1b; }
+.mda-gsa { background:#ede9fe; color:#5b21b6; border-radius:5px; padding:0 5px; font-size:10.5px; font-weight:800; }
+.mda-stk { display:flex; height:20px; border-radius:6px; overflow:hidden; font-size:11px; font-weight:800; color:#fff; }
+.mda-stk span { display:flex; align-items:center; justify-content:center; white-space:nowrap; overflow:hidden; }
+.mda-ley { font-size:11.5px; margin-top:5px; display:flex; flex-wrap:wrap; gap:2px 10px; }
+.mda-ul { list-style:none; margin:6px 0 0; padding:0; font-size:12.5px; line-height:1.6; }
+.mda-ul li { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.mda-dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:6px; vertical-align:1px; }
+.mda-lnk { border:0; background:none; color:#2563eb; font-weight:700; font-size:12.5px; padding:4px 0 0; cursor:pointer; }
+.mda-dd { display:flex; gap:4px; height:62px; align-items:stretch; }
+.mda-dd button { flex:1; border:0; background:none; padding:0; display:flex; flex-direction:column; cursor:pointer; min-width:0; }
+.mda-dd .col { flex:1; display:flex; align-items:flex-end; background:#f1f5f9; border-radius:4px 4px 0 0; }
+.mda-dd .col i { display:block; width:100%; border-radius:4px 4px 0 0; color:#fff; font-size:10px; font-weight:800; font-style:normal; text-align:center; }
+.mda-dd .col i.ok { background:#16a34a; } .mda-dd .col i.bad { background:#dc2626; }
+.mda-dd .l { font-size:9.5px; color:#5d7389; text-align:center; white-space:nowrap; }
+.mda-desp { margin-bottom:10px; } .mda-desp h4 { margin:8px 0 2px; font-size:13px; color:#13213c; }
+.mda-dh { display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; } .mda-dh .mda-lnk { margin-left:auto; }
+.mda-tt td, .mda-tt th { padding:5px 8px; } .mda-tt td small { color:#94a3b8; }
+.mda-tt tr.mda-tot td { background:#f1f5f9; font-weight:800; }
+.mda-q { color:#fff; border-radius:5px; padding:1px 7px; font-size:11px; font-weight:800; }
+.mda-cod { display:inline-block; background:#f1f5f9; border-radius:6px; padding:1px 7px; margin:1px 4px 1px 0; font-size:12px; white-space:nowrap; }
+.mda-cod i { display:inline-block; width:7px; height:7px; border-radius:50%; margin-right:4px; }
+.mda-cero { color:#cbd5e1; }
 /* ==== (REDISEÑO 28-10-2026, 17:26) Actividades por mes en la pagina principal ==== */
 .am { margin-top:28px; max-width:1560px; }
 .am-t { font-size:26px; font-weight:800; color:#13213c; }
@@ -13862,7 +13923,7 @@ function migPaginaHtml(){
    De quien es cada no realizada: MISMA regla mgResp() de MIGRACIONES.
    La version anterior queda como mesDetalleHtmlViejo(). */
 const MD_POCAS = 10;   // tecnicos con menos asignadas que esto: % en gris
-function mesDetalleHtml(k){
+function mesDetalleHtmlV2(k){
   mesCargar();
   const NOM = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
   const may = t => t.replace(/^./, c => c.toUpperCase());
@@ -13968,6 +14029,190 @@ function mesDetalleHtml(k){
     + '</div>';
   return '<div class="ad md2">' + h + '</div>';
 }
+
+/* ==== (07-11-2026, 11:30) DETALLE DEL MES · "TABLERO DEL MES" (opción A elegida por Luis) ====
+   Luis: "con esta (A), revisa donde agregar el detalle de las no realizadas, por actividad, por tipo de quiebre etc".
+   Todo el mes en una pantalla (cabe en ~1170 x 560): efectividad, completitud como VTR (GSA = quiebre) de
+   migraciones, altas y reparaciones, migraciones (derivación y otras comunas), cómo terminaron, por actividad,
+   por qué no se hicieron, día por día, franja, comuna y supervisor. Debajo, dos desplegables:
+   "Detalle de las no realizadas" (por actividad × quién, por código × actividad, por franja × quién)
+   y "Técnico por técnico". Mismos datos y reglas que antes (ACT_FILAS, mgResp, mpSt, MG para migraciones).
+   La versión anterior queda como mesDetalleHtmlV2(k). */
+function mesDetalleHtml(k){
+  mesCargar(); try { mpCargar(); } catch(e){}
+  const NOM = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  const may = t => String(t).replace(/^./, c => c.toUpperCase());
+  const tit = may(NOM[+k.slice(5) - 1]) + ' ' + k.slice(0, 4);
+  const kAnt = (function(){ const y = +k.slice(0, 4), m = +k.slice(5); return m === 1 ? (y - 1) + '-12' : y + '-' + String(m - 1).padStart(2, '0'); })();
+  const nAnt = NOM[+kAnt.slice(5) - 1], bTxt = 'vs ' + nAnt.slice(0, 3);
+  const fd = (typeof FECHA_DATOS !== 'undefined' && FECHA_DATOS) ? FECHA_DATOS : new Date();
+  const hoyIso = fd.getFullYear() + String(fd.getMonth() + 1).padStart(2, '0') + String(fd.getDate()).padStart(2, '0');
+  const enCurso = hoyIso.slice(0, 6) === k.replace('-', '');
+  let h = '<div class="mda-top"><button class="ad-volver" onclick="window.PV_MES=null; mdaRepintar(); window.scrollTo(0,0)">← Volver</button><span class="mda-tit">' + tit + '</span>';
+  if(window.ACT_FILAS === null || window.ACT_FILAS === undefined) return '<div class="ad mda">' + h + '</div><div class="ad-card"><p class="ad-vacio">Cargando el mes…</p></div></div>';
+  if(window.ACT_FILAS === 'error') return '<div class="ad mda">' + h + '</div><div class="ad-card"><p class="ad-vacio">No se pudieron cargar los datos de Actividades.</p></div></div>';
+  const mmDe = kk => kk.slice(5) + '-' + kk.slice(0, 4);
+  const L = window.ACT_FILAS.filter(r => String(r['Fecha'] || '').slice(3) === mmDe(k));
+  const B = window.ACT_FILAS.filter(r => String(r['Fecha'] || '').slice(3) === mmDe(kAnt));
+  const nf = n => Number(n).toLocaleString('es-CL');
+  const p1 = v => v === null || v === undefined || isNaN(v) ? '–' : P2(v) + '%';
+  const st = function(l){ const s = { a:l.length, co:0, nr:0, ca:0, su:0 };
+    l.forEach(r => { const e = r['Estado']; if(e === 'Completado') s.co++; else if(e === 'No Realizada') s.nr++; else if(e === 'Cancelado') s.ca++; else if(e === 'Suspendido') s.su++; });
+    s.ef = s.a ? 100 * s.co / s.a : null; return s; };
+  /* flecha en puntos; alReves = true cuando subir es malo (no realizadas) */
+  const fl = function(a, b, alReves){ if(a === null || b === null || a === undefined || b === undefined) return '<span class="mp-fl gr"></span>';
+    const d = a - b; if(Math.abs(d) < 0.5) return '<span class="mp-fl gr">= igual</span>';
+    const bueno = alReves ? d < 0 : d > 0;
+    return '<span class="mp-fl ' + (bueno ? 'ok' : 'bad') + '">' + (d > 0 ? '▲ ' : '▼ ') + P2(Math.abs(d)) + '</span>'; };
+  const grupo = function(lista, fn){ const g = {}; lista.forEach(r => { const v = fn(r) || 'Sin dato'; (g[v] = g[v] || []).push(r); }); return g; };
+  const fam = r => familiaCat(r['Tipo de Actividad']);
+  const S = st(L), SB = st(B);
+  const dias = [...new Set(L.map(r => r['Fecha']))].sort((a, b) => a.slice(0, 2).localeCompare(b.slice(0, 2)));
+  h += (enCurso ? '<span class="am-cur">En curso · hasta ayer (' + dias.length + ' días)</span>' : '') + '<span class="ad-sub">' + nf(S.a) + ' actividades · efectividad = completadas ÷ asignadas</span></div>';
+
+  /* ---- completitud como VTR (GSA = quiebre), hasta ayer ---- */
+  const mesK = k.replace('-', ''), mesKA = kAnt.replace('-', '');
+  const vtrFam = function(f, mk){
+    const l = [];
+    if(f === 'Migraciones'){ if(!MG || !MG.filas) return null;
+      MG.filas.forEach(x => { if(x.mes === mk && x.iso < hoyIso) l.push({ e:x.e, cod:x.cod, gsa:!!x.gsa, otra:!!x.otra }); });
+    } else {
+      window.ACT_FILAS.forEach(function(r){ const nom = String(r['Nombre'] || ''); if(nom.indexOf('_DOMI_') < 0 || familiaCat(r['Tipo de Actividad']) !== f) return;
+        const pz = /^(\d{2})-(\d{2})-(\d{4})$/.exec(String(r['Fecha'] || '')); if(!pz) return; const iso = pz[3] + pz[2] + pz[1];
+        if(iso.slice(0, 6) !== mk || !(iso < hoyIso)) return;
+        l.push({ e:String(r['Estado'] || '').trim(), cod:String(r['Código de Cierre'] || '').trim(), gsa:String(r['gsa'] || '') === '1' }); });
+    }
+    const s = mpSt(l); s.L = l; return s;
+  };
+  const VF = ['Migraciones', 'Altas', 'Reparaciones'].map(f => ({ f:f, s:vtrFam(f, mesK), b:vtrFam(f, mesKA) }));
+  const mig = VF[0].s, migO = mig ? mpSt(mig.L.filter(x => x.otra)) : null;
+
+  /* FILA 1 */
+  h += '<div class="mda-g mda-f1">'
+    + '<div class="mda-c mda-osc"><div class="ct">Efectividad del mes</div><div class="big">' + p1(S.ef) + '</div>'
+    +   '<div class="s">' + nf(S.co) + ' completadas de ' + nf(S.a) + ' asignadas</div>'
+    +   '<div class="s2">' + fl(S.ef, SB.ef) + ' vs ' + nAnt + (SB.ef !== null ? ' (' + p1(SB.ef) + ')' : '') + '</div></div>'
+    + '<div class="mda-c"><div class="ct">Completitud como VTR · meta ' + MP_META + '%</div><table class="mda-t">'
+    +   VF.map(o => '<tr><td>' + o.f + (o.s && o.s.g ? ' <span class="mda-gsa" title="sin GSA ' + p1(o.s.compSG) + '">' + o.s.g + ' GSA</span>' : '') + '</td>'
+          + '<td>' + (!o.s ? '<span class="mp-fl gr">cargando…</span>' : !o.s.vis ? '–' : '<span class="mda-pc ' + (o.s.comp >= MP_META ? 'ok' : 'bad') + '">' + p1(o.s.comp) + '</span>') + '</td>'
+          + '<td>' + (o.s && o.b && o.s.vis && o.b.vis ? fl(o.s.comp, o.b.comp) : '') + '</td></tr>').join('')
+    +   '</table></div>'
+    + '<div class="mda-c"><div class="ct">Migraciones</div>'
+    +   (!mig ? '<div class="s">cargando…</div>' : '<div class="big2">' + (mig.vis ? p1(100 - mig.comp) : '–') + '</div><div class="s">derivación · ' + nf(mig.nr) + ' de ' + nf(mig.vis) + ' visitadas</div>'
+    +   '<div class="s">' + (migO && migO.vis ? 'Otras comunas: <b>' + nf(migO.vis) + '</b> visitadas · ' + p1(migO.comp) : 'Sin migraciones en otras comunas') + '</div>') + '</div>'
+    + '<div class="mda-c"><div class="ct">Cómo terminaron las ' + nf(S.a) + '</div>'
+    +   '<div class="mda-stk">' + [[S.co, '#16a34a'], [S.nr, '#dc2626'], [S.ca + S.su, '#94a3b8']].filter(x => x[0]).map(x => '<span style="flex:' + x[0] + ';background:' + x[1] + '">' + (x[0] / (S.a || 1) > 0.06 ? nf(x[0]) : '') + '</span>').join('') + '</div>'
+    +   '<div class="mda-ley"><b style="color:#16a34a">■ ' + nf(S.co) + ' completadas</b> <b style="color:#dc2626">■ ' + nf(S.nr) + ' no realizadas</b> <b style="color:#64748b">■ ' + nf(S.ca) + ' canceladas' + (S.su ? ' · ' + S.su + ' susp.' : '') + '</b></div></div>'
+    + '</div>';
+
+  /* FILA 2: por actividad · por que no · dia por dia */
+  const GA = grupo(L, fam), GB = grupo(B, fam);
+  const sub = r => { const t = String(r['Tipo de Actividad'] || '').trim(), T = t.toUpperCase(), pl = parseInt(r['Play'], 10);
+    return (pl >= 1 && pl <= 3 && (T.indexOf('ALTA') === 0 || T.indexOf('MIGRAC') === 0)) ? t + ' ' + pl + 'P' : t; };
+  const famOrd = Object.keys(GA).sort((a, b) => GA[b].length - GA[a].length);
+  const abF = window.MDA_FAM || null;
+  const actHtml = '<div class="mda-c"><div class="ct">Por actividad · efectividad y ' + bTxt + ' <span class="mda-ayu">toca una para ver sus tipos</span></div><table class="mda-t mda-act">'
+    + '<tr><th>Actividad</th><th>Asig.</th><th></th><th>Efect.</th><th>' + bTxt + '</th></tr>'
+    + famOrd.map(function(f){ const sa = st(GA[f]), sb = GB[f] ? st(GB[f]) : null;
+        let r = '<tr class="mda-clk' + (abF === f ? ' on' : '') + '" onclick="window.MDA_FAM=(window.MDA_FAM===\'' + f + '\'?null:\'' + f + '\'); mdaRepintar()"><td>' + (abF === f ? '▾ ' : '▸ ') + f + '</td><td>' + nf(sa.a) + '</td>'
+          + '<td class="bar"><span class="mda-bar"><i style="width:' + (sa.ef || 0) + '%"></i></span></td><td>' + p1(sa.ef) + '</td><td>' + fl(sa.ef, sb ? sb.ef : null) + '</td></tr>';
+        if(abF === f){ const ga = grupo(GA[f], sub), gb = grupo(GB[f] || [], sub);
+          r += Object.keys(ga).sort((a, b) => ga[b].length - ga[a].length).map(function(t){ const s2 = st(ga[t]), b2 = gb[t] ? st(gb[t]) : null;
+            return '<tr class="mda-hija"><td>' + escR(t) + '</td><td>' + nf(s2.a) + '</td><td class="bar"><span class="mda-bar"><i style="width:' + (s2.ef || 0) + '%"></i></span></td><td>' + p1(s2.ef) + '</td><td>' + fl(s2.ef, b2 ? b2.ef : null) + '</td></tr>'; }).join(''); }
+        return r; }).join('') + '</table></div>';
+  const nr = L.filter(r => r['Estado'] === 'No Realizada'), nrB = B.filter(r => r['Estado'] === 'No Realizada');
+  const quien = r => mgResp(r['Código de Cierre']);
+  const Q = { cli:0, vtr:0, dom:0 }; nr.forEach(r => Q[quien(r)]++);
+  const cods = {}; nr.forEach(r => { const c = r['Código de Cierre'] || 'Sin código'; cods[c] = (cods[c] || 0) + 1; });
+  const topC = Object.keys(cods).sort((a, b) => cods[b] - cods[a]);
+  const QN = { cli:'Cliente', vtr:'VTR', dom:'Dominion' };
+  const nrAb = !!window.MDA_NR;
+  const porQueHtml = '<div class="mda-c"><div class="ct">¿Por qué no se hicieron? · ' + nf(nr.length) + '</div>'
+    + (nr.length ? '<div class="mda-stk">' + ['cli', 'vtr', 'dom'].filter(q => Q[q]).map(q => '<span style="flex:' + Q[q] + ';background:' + MG_RCOL[q] + '" title="' + MG_RNOM[q] + ': ' + Q[q] + '">' + (Q[q] / nr.length > 0.12 ? QN[q] + ' ' + Math.round(100 * Q[q] / nr.length) + '%' : '') + '</span>').join('') + '</div>'
+      + '<ul class="mda-ul">' + topC.slice(0, 4).map(c => '<li><span class="mda-dot" style="background:' + MG_RCOL[mgResp(c)] + '"></span>' + escR(c) + ' <b>' + cods[c] + '</b></li>').join('') + '</ul>'
+      + '<button class="mda-lnk" onclick="window.MDA_NR=!window.MDA_NR; mdaRepintar(); if(window.MDA_NR) setTimeout(function(){ var e=document.getElementById(\'mdaNR\'); if(e) e.scrollIntoView({behavior:\'smooth\'}); }, 60)">' + (nrAb ? 'Ocultar el detalle ▴' : 'Ver el detalle de las ' + nf(nr.length) + ' ›') + '</button>'
+      : '<p class="ad-vacio">Ninguna.</p>') + '</div>';
+  const SM = S;
+  const diaHtml = '<div class="mda-c"><div class="ct">Día por día · efectividad <span class="mda-ayu">toca un día</span></div><div class="mda-dd">'
+    + dias.map(function(d, di){ const s = st(L.filter(r => r['Fecha'] === d)); const dw = ['do','lu','ma','mi','ju','vi','sá'][new Date(+d.slice(6), +d.slice(3, 5) - 1, +d.slice(0, 2)).getDay()];
+        return '<button onclick="mdSemAbrir(\'' + d + '\', ' + (SM.ef === null ? 'null' : Math.round(SM.ef * 10) / 10) + ')" title="' + d + ': ' + s.co + ' de ' + s.a + ' (' + p1(s.ef) + ')"><span class="col"><i class="' + (s.ef >= SM.ef ? 'ok' : 'bad') + '" style="height:' + (s.ef || 0) + '%">' + (dias.length <= 14 ? Math.round(s.ef) : '') + '</i></span><span class="l">' + (dias.length <= 10 ? dw + ' ' + d.slice(0, 2) : (dias.length <= 16 || di % 3 === 0) ? d.slice(0, 2) : '&nbsp;') + '</span></button>'; }).join('')
+    + '</div><div class="mda-ayu" style="margin-top:3px">Verde: sobre el promedio del mes (' + p1(SM.ef) + ')</div></div>';
+  h += '<div class="mda-g mda-f2">' + actHtml + porQueHtml + diaHtml + '</div>';
+
+  /* FILA 3: franja, comuna, supervisor */
+  const nomBonito = x => String(x).toLowerCase().replace(/(^|\s)\S/g, c => c.toUpperCase());
+  const caja = function(titulo, fn, orden, pie){
+    const ga = grupo(L, fn), gb = grupo(B, fn);
+    const ks = Object.keys(ga).sort(orden || ((a, b) => ga[b].length - ga[a].length));
+    return '<div class="mda-c"><div class="ct">' + titulo + '</div><table class="mda-t">' + ks.map(function(x){ const s2 = st(ga[x]), b2 = gb[x] ? st(gb[x]) : null;
+      return '<tr><td>' + escR(nomBonito(x)) + '</td><td>' + nf(s2.a) + '</td><td>' + p1(s2.ef) + '</td><td>' + fl(s2.ef, b2 ? b2.ef : null) + '</td></tr>'; }).join('') + '</table>' + (pie || '') + '</div>';
+  };
+  const tec = r => { const n = String(r['Nombre'] || ''), i = n.indexOf('_DOMI_'); return (i >= 0 ? n.slice(i + 6) : n).replace(/ /g, ' ').trim(); };
+  const TA = grupo(L, tec), TB = grupo(B, tec);
+  const tecAb = !!window.MD_TEC_AB;
+  const pieSup = '<button class="mda-lnk" onclick="window.MD_TEC_AB=!window.MD_TEC_AB; mdaRepintar(); if(window.MD_TEC_AB) setTimeout(function(){ var e=document.getElementById(\'mdaTEC\'); if(e) e.scrollIntoView({behavior:\'smooth\'}); }, 60)">' + (tecAb ? 'Ocultar los técnicos ▴' : 'Ver los ' + Object.keys(TA).length + ' técnicos ›') + '</button>';
+  h += '<div class="mda-g mda-f3">' + caja('Por franja', r => r['Franja'], (a, b) => a.localeCompare(b)) + caja('Por comuna', r => r['Ciudad']) + caja('Por supervisor', r => r['supervisor'], null, pieSup) + '</div>';
+
+  /* DESPLEGABLE 1: DETALLE DE LAS NO REALIZADAS */
+  if(nrAb && nr.length){
+    const FO = famOrd;
+    const famNR = grupo(nr, fam), famNRB = grupo(nrB, fam);
+    const chip = q => '<span class="mda-q" style="background:' + MG_RCOL[q] + '">' + QN[q] + '</span>';
+    /* a) por actividad x quien */
+    let a = '<h4>Por actividad y de quién es la causa</h4><div class="ad-tbl"><table class="mda-tt"><thead><tr><th>Actividad</th><th>Asignadas</th><th>No realizadas</th><th>% de lo asignado</th><th>' + bTxt + '</th>'
+      + '<th style="color:' + MG_RCOL.cli + '">Cliente</th><th style="color:' + MG_RCOL.vtr + '">VTR/CLARO</th><th style="color:' + MG_RCOL.dom + '">Dominion</th><th>Códigos que más se repiten</th></tr></thead><tbody>';
+    FO.forEach(function(f){ const l = famNR[f] || [], asig = GA[f].length, pa = 100 * l.length / (asig || 1);
+      const lb = famNRB[f] || [], ab2 = (GB[f] || []).length, pb = ab2 ? 100 * lb.length / ab2 : null;
+      const q = { cli:0, vtr:0, dom:0 }, cc = {}; l.forEach(r => { q[quien(r)]++; const c = r['Código de Cierre'] || 'Sin código'; cc[c] = (cc[c] || 0) + 1; });
+      a += '<tr><td><b>' + f + '</b></td><td class="nu">' + nf(asig) + '</td><td class="nu bad">' + nf(l.length) + '</td><td class="nu">' + p1(pa) + '</td><td class="nu">' + fl(pa, pb, true) + '</td>'
+        + ['cli', 'vtr', 'dom'].map(x => '<td class="nu">' + (q[x] ? nf(q[x]) + ' <small>' + Math.round(100 * q[x] / (l.length || 1)) + '%</small>' : '–') + '</td>').join('')
+        + '<td>' + Object.keys(cc).sort((x, y) => cc[y] - cc[x]).slice(0, 3).map(c => '<span class="mda-cod"><i style="background:' + MG_RCOL[mgResp(c)] + '"></i>' + escR(c) + ' <b>' + cc[c] + '</b></span>').join('') + '</td></tr>'; });
+    const pT = 100 * nr.length / (S.a || 1), pTB = SB.a ? 100 * nrB.length / SB.a : null;
+    a += '<tr class="mda-tot"><td>Total</td><td class="nu">' + nf(S.a) + '</td><td class="nu">' + nf(nr.length) + '</td><td class="nu">' + p1(pT) + '</td><td class="nu">' + fl(pT, pTB, true) + '</td>'
+      + ['cli', 'vtr', 'dom'].map(x => '<td class="nu">' + nf(Q[x]) + ' <small>' + Math.round(100 * Q[x] / nr.length) + '%</small></td>').join('') + '<td></td></tr></tbody></table></div>';
+    /* b) por codigo x actividad */
+    const codsB = {}; nrB.forEach(r => { const c = r['Código de Cierre'] || 'Sin código'; codsB[c] = (codsB[c] || 0) + 1; });
+    let b = '<h4>Por código de cierre</h4><div class="ad-tbl"><table class="mda-tt"><thead><tr><th>Código</th><th>De quién</th><th>Total</th><th>% de las no realizadas</th>'
+      + FO.map(f => '<th>' + f + '</th>').join('') + '<th>% ' + bTxt + '</th></tr></thead><tbody>';
+    topC.forEach(function(c){ const l = nr.filter(r => (r['Código de Cierre'] || 'Sin código') === c), g = grupo(l, fam);
+      const d = codsB[c] || 0;
+      b += '<tr><td>' + escR(c) + '</td><td>' + chip(mgResp(c)) + '</td><td class="nu"><b>' + cods[c] + '</b></td><td class="nu">' + p1(100 * cods[c] / nr.length) + '</td>'
+        + FO.map(f => '<td class="nu">' + (g[f] ? g[f].length : '<span class="mda-cero">–</span>') + '</td>').join('')
+        + '<td class="nu">' + (nrB.length ? fl(100 * cods[c] / nr.length, 100 * d / nrB.length, true) + ' <span class="mda-ayu">(' + P2(100 * d / nrB.length) + '%)</span>' : '') + '</td></tr>'; });
+    b += '</tbody></table></div>';
+    /* c) por franja x quien */
+    const frs = Object.keys(grupo(L, r => r['Franja'])).sort();
+    let c = '<h4>Por franja</h4><div class="ad-tbl"><table class="mda-tt"><thead><tr><th>Franja</th><th>Asignadas</th><th>No realizadas</th><th>% de lo asignado</th><th style="color:' + MG_RCOL.cli + '">Cliente</th><th style="color:' + MG_RCOL.vtr + '">VTR/CLARO</th><th style="color:' + MG_RCOL.dom + '">Dominion</th><th>Sin moradores</th></tr></thead><tbody>';
+    frs.forEach(function(fr){ const asig = L.filter(r => r['Franja'] === fr).length, l = nr.filter(r => r['Franja'] === fr);
+      const q = { cli:0, vtr:0, dom:0 }; l.forEach(r => q[quien(r)]++); const sm = l.filter(r => /sin morador/i.test(r['Código de Cierre'] || '')).length;
+      c += '<tr><td><b>' + escR(fr) + '</b></td><td class="nu">' + nf(asig) + '</td><td class="nu bad">' + nf(l.length) + '</td><td class="nu">' + p1(100 * l.length / (asig || 1)) + '</td>'
+        + ['cli', 'vtr', 'dom'].map(x => '<td class="nu">' + (q[x] || '–') + '</td>').join('') + '<td class="nu">' + (sm || '–') + '</td></tr>'; });
+    c += '</tbody></table></div>';
+    h += '<div class="ad-card mda-desp" id="mdaNR"><div class="mda-dh"><h3>Detalle de las no realizadas · ' + nf(nr.length) + '</h3><span class="mda-ayu">'
+      + p1(pT) + ' de lo asignado · ' + bTxt + ': ' + fl(pT, pTB, true) + ' · la causa se reparte con la misma regla de MIGRACIONES</span>'
+      + '<button class="mda-lnk" onclick="window.MDA_NR=false; mdaRepintar()">Ocultar ▴</button></div>' + a + b + c + '</div>';
+  }
+
+  /* DESPLEGABLE 2: TECNICO POR TECNICO (igual que antes) */
+  if(tecAb){
+    const FT = Object.keys(TA).map(t => ({ t:t, s:st(TA[t]), b:TB[t] ? st(TB[t]) : null })).sort((a, b) => b.s.nr - a.s.nr || a.s.ef - b.s.ef);
+    h += '<div class="ad-card mda-desp" id="mdaTEC"><div class="mda-dh"><h3>Técnico por técnico (' + FT.length + ')</h3><span class="mda-ayu">Primero los que tienen más no realizadas. Con menos de ' + MD_POCAS + ' asignadas el % va en gris.</span>'
+      + '<button class="mda-lnk" onclick="window.MD_TEC_AB=false; mdaRepintar()">Ocultar ▴</button></div>'
+      + '<div class="ad-tbl"><table class="mda-tt"><thead><tr><th>Técnico</th><th>Asignadas</th><th>Completadas</th><th>No realizadas</th><th>Cliente</th><th>VTR/CLARO</th><th>Dominion</th><th>Canc/Susp</th><th>Efectividad</th><th>' + bTxt + '</th></tr></thead><tbody>'
+      + FT.map(function(o){ const poco = o.s.a < MD_POCAS; const q = { cli:0, vtr:0, dom:0 }; TA[o.t].forEach(r => { if(r['Estado'] === 'No Realizada') q[quien(r)]++; });
+          return '<tr><td>' + escR(nomBonito(o.t)) + '</td><td class="nu">' + o.s.a + '</td><td class="nu ok">' + o.s.co + '</td><td class="nu bad">' + o.s.nr + '</td>'
+            + ['cli', 'vtr', 'dom'].map(x => '<td class="nu">' + (q[x] || '–') + '</td>').join('') + '<td class="nu">' + (o.s.ca + o.s.su || '–') + '</td>'
+            + '<td class="nu"><span class="ad-tag ' + (poco ? 'gr' : o.s.ef >= SM.ef ? 'ok' : 'bad') + '">' + p1(o.s.ef) + '</span></td>'
+            + '<td class="nu">' + (poco ? '<span class="mp-fl gr">pocas</span>' : fl(o.s.ef, o.b ? o.b.ef : null)) + '</td></tr>'; }).join('')
+      + '</tbody></table></div></div>';
+  }
+  return '<div class="ad mda">' + h + '</div>';
+}
+
+/* (07-11-2026, 11:40) el detalle del mes se puede abrir en la pantalla principal (PV_MES) o dentro de Mi análisis (AN_DET.mes).
+   Los clics de adentro llaman a mdaRepintar(), que repinta donde esté abierto. */
+function mdaRepintar(){ const m = document.getElementById('anDet');
+  if(typeof AN_DET !== 'undefined' && AN_DET && AN_DET.mes && m && m.classList.contains('abierto')) anDetPintar(); else pintarPortada(); }
 
 function hoyHerrHtml(nAct, co, nr, ab, cs){
   let c = null; try { c = calcularCompletitud(); } catch(e){}
@@ -18695,12 +18940,21 @@ function anPintar(){
           return t[0] === 'link' ? '<a class="an-infi" href="' + t[1] + '" target="_blank" onclick="anInfCerrar()">' + cuerpo + '</a>'
                                  : '<button class="an-infi" onclick="anInfIr(function(){ ' + t[1] + '; })">' + cuerpo + '</button>';
         }).join('') + '</span></span>' : '') + '</span>'
-    /* (06-11-2026, 17:10) Luis: Resumen WhatsApp como boton dentro de Mi analisis (abre lo mismo, abrirResumenWsp) */
-    + '<button class="an-btn wsp" onclick="anDiaIr(abrirResumenWsp)" title="El resumen del día para mandar por WhatsApp">💬 Resumen WhatsApp ›</button>'
-    /* (06-11-2026) Luis: "dia en curso como boton 'dia en curso' y dentro el boton inicio de jornada y el detalle de las ordenes del dia" */
-    + '<button class="an-btn dia" onclick="anDiaAbrir()" title="Inicio de jornada, cifras del día, cierres al corte de las 13:00 y detalle por actividad">🗓 Día en curso ›</button>'
-    + '<button class="an-btn seg" onclick="anSegAbrir()" title="Técnicos de migraciones bajo 60 % de completitud: cómo se mueve la aguja">🎯 Seguimiento ›</button>'
-    + '<button class="an-btn" onclick="anTsAbrir(\'Migraciones\')" title="Completitud de cada técnico en las últimas 8 semanas">👥 Técnicos semana a semana ›</button>' + '</div>';
+    /* (07-11-2026, 11:40) Luis: "crea un boton desplegable para guardar estos" (Resumen WhatsApp, Día en curso, Seguimiento,
+       Técnicos semana a semana) -> boton "Herramientas". "Otro boton desplegable que diga detalle meses y dentro cada mes"
+       -> abre el mismo detalle del mes de la pantalla principal (mesDetalleHtml) dentro de Mi analisis. */
+    + '<span class="an-inf" onclick="event.stopPropagation()"><button class="an-btn her' + (AN_HER_AB ? ' ab' : '') + '" onclick="anHerToggle(event)" title="Resumen WhatsApp, Día en curso, Seguimiento y Técnicos semana a semana">🧰 Herramientas ' + (AN_HER_AB ? '▴' : '▾') + '</button>'
+    + (AN_HER_AB ? '<span class="an-infm an-herm">'
+      + '<button class="an-infi" onclick="anHerIr(function(){ anDiaIr(abrirResumenWsp); })"><b>💬 Resumen WhatsApp <i>›</i></b><span>El resumen del día para mandar por WhatsApp</span></button>'
+      + '<button class="an-infi" onclick="anHerIr(anDiaAbrir)"><b>🗓 Día en curso <i>›</i></b><span>Inicio de jornada, cifras del día, cierres de las 13:00 y detalle por actividad</span></button>'
+      + '<button class="an-infi" onclick="anHerIr(anSegAbrir)"><b>🎯 Seguimiento <i>›</i></b><span>Técnicos de migraciones bajo 60 %: cómo se mueve la aguja</span></button>'
+      + '<button class="an-infi" onclick="anHerIr(function(){ anTsAbrir(\'Migraciones\'); })"><b>👥 Técnicos semana a semana <i>›</i></b><span>Completitud de cada técnico en las últimas 8 semanas</span></button>'
+      + '</span>' : '') + '</span>'
+    + '<span class="an-inf" onclick="event.stopPropagation()"><button class="an-btn mes' + (AN_MES_AB ? ' ab' : '') + '" onclick="anMesToggle(event)" title="El detalle de cada mes: efectividad, completitud, no realizadas, franja, comuna, supervisor y técnicos">📅 Detalle meses ' + (AN_MES_AB ? '▴' : '▾') + '</button>'
+    + (AN_MES_AB ? '<span class="an-infm an-mesm">' + anMesesLista().map(function(k){
+        return '<button class="an-infi" onclick="anHerIr(function(){ anMesAbrir(\'' + k + '\'); })"><b>' + anMesNom(k) + ' <i>›</i></b><span>' + (anMesEnCurso(k) ? 'En curso · hasta ayer' : 'Mes completo') + '</span></button>'; }).join('')
+      + '</span>' : '') + '</span>'
+    + '</div>';
 
   /* (06-11-2026, 17:10) Luis: "en pantalla principal mi analisis, cuando se deriva 1 migra, archivo dañado".
      Los mismos avisos de la pantalla principal: migraciones derivadas nuevas (DER_AVISO, el aviso flotante #avisoDer
@@ -19256,6 +19510,44 @@ let AN_DIR_FOCO = null;
 /* (06-11-2026) los 3 meses anteriores al mes en curso, del mas antiguo al mas nuevo (en noviembre: agosto, septiembre, octubre) */
 function AN_MESES_ANT(mesHoy){ const a = []; let k = mesHoy; for(let i = 0; i < 3; i++){ k = anMesAnt(k); a.unshift(k); } return a; }
 let AN_INF_AB = false;     // (06-11-2026) menu Informes abierto
+/* (07-11-2026, 11:40) menus "Herramientas" y "Detalle meses" */
+let AN_HER_AB = false, AN_MES_AB = false;
+function anHerToggle(e){ if(e) e.stopPropagation(); AN_HER_AB = !AN_HER_AB; AN_MES_AB = false; AN_INF_AB = false; anPintar(); }
+function anMesToggle(e){ if(e) e.stopPropagation(); AN_MES_AB = !AN_MES_AB; AN_HER_AB = false; AN_INF_AB = false; anPintar(); }
+function anHerIr(fn){ AN_HER_AB = false; AN_MES_AB = false; anPintar(); try { fn(); } catch(x){ console.warn('mi analisis:', x); } }
+const AN_MES_NOM = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+function anMesNom(k){ return AN_MES_NOM[+k.slice(5) - 1] + ' ' + k.slice(0, 4); }
+function anMesEnCurso(k){ const fd = (typeof FECHA_DATOS !== 'undefined' && FECHA_DATOS) ? FECHA_DATOS : new Date(); return k === fd.getFullYear() + '-' + String(fd.getMonth() + 1).padStart(2, '0'); }
+/* meses con datos en datos.json (los mismos de "Actividades por mes"), del más nuevo al más antiguo */
+function anMesesLista(){
+  try { mesCargar(); } catch(e){}
+  const set = {};
+  if(Array.isArray(window.ACT_FILAS)) window.ACT_FILAS.forEach(function(r){ const f = String(r['Fecha'] || ''); if(/^\d{2}-\d{2}-\d{4}$/.test(f)) set[f.slice(6) + '-' + f.slice(3, 5)] = 1; });
+  let ks = Object.keys(set).sort().reverse().slice(0, 3);   // los mismos 3 meses de "Actividades por mes"
+  if(!ks.length){ const fd = (typeof FECHA_DATOS !== 'undefined' && FECHA_DATOS) ? FECHA_DATOS : new Date(); let k = fd.getFullYear() + String(fd.getMonth() + 1).padStart(2, '0');
+    ks = [k].concat(AN_MESES_ANT(k).slice().reverse()).map(function(x){ return x.slice(0, 4) + '-' + x.slice(4); }); }
+  return ks;
+}
+function anMesAbrir(k){
+  AN_DET = { mes:k };
+  try { mesCargar(); mpCargar(); } catch(e){}
+  let m = document.getElementById('anDet');
+  if(!m){ m = document.createElement('div'); m.id = 'anDet'; m.onclick = function(e){ if(e.target === m) anDetCerrar(); }; document.body.appendChild(m); }
+  m.classList.add('abierto'); m.scrollTop = 0; anDetPintar();
+  /* mientras bajan datos.json o el historico de migraciones, repinta cuando lleguen */
+  const t = setInterval(function(){ if(!(AN_DET && AN_DET.mes)){ clearInterval(t); return; }
+    if(Array.isArray(window.ACT_FILAS) && (typeof MG !== 'undefined' && (MG || mgFallo))){ clearInterval(t); anDetPintar(); } }, 700);
+  setTimeout(function(){ clearInterval(t); }, 60000);
+}
+function anMesPintar(m){
+  const y = m.scrollTop, k = AN_DET.mes;
+  let h = mesDetalleHtml(k);
+  h = h.replace('<button class="ad-volver" onclick="window.PV_MES=null; mdaRepintar(); window.scrollTo(0,0)">← Volver</button>', '');
+  const chips = anMesesLista().slice().reverse().map(function(x){ return '<span class="an-chip' + (x === k ? ' on' : '') + '" onclick="AN_DET.mes=\'' + x + '\'; window.MDA_FAM=null; anDetPintar(); document.getElementById(\'anDet\').scrollTop=0">' + AN_MES_NOM[+x.slice(5) - 1] + '</span>'; }).join('');
+  m.innerHTML = '<div class="an-md an-md-ancho mda-an"><div class="an-mdtop"><h2>📅 Detalle del mes</h2><div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">' + chips
+    + '<span class="an-updbox">' + anUpdHtml() + '</span><button class="an-x" onclick="anDetCerrar()">✕ Cerrar</button></div></div>' + h + '</div>';
+  m.scrollTop = y;
+}
 function anInfToggle(e){ if(e) e.stopPropagation(); AN_INF_AB = !AN_INF_AB; anPintar(); }
 function anInfIr(fn){ AN_INF_AB = false; anPintar(); fn(); }
 /* (06-11-2026) boton "Informes" de la tarjeta Migraciones: la misma lista de MAS DETALLE de la pagina MIGRACIONES
@@ -19296,6 +19588,7 @@ function AN_INF_PORTADA(){ return [
 document.addEventListener('click', function(e){
   /* clic fuera del menu Informes: se cierra */
   if(AN_INF_AB && !(e.target.closest && e.target.closest('.an-inf'))){ AN_INF_AB = false; anPintar(); }
+  if((AN_HER_AB || AN_MES_AB) && !(e.target.closest && e.target.closest('.an-inf'))){ AN_HER_AB = false; AN_MES_AB = false; anPintar(); }
   if(AN_MIGINF_AB && !(e.target.closest && e.target.closest('.an-miginf'))){ AN_MIGINF_AB = false; anDetPintar(); }
 });
 let AN_LISTA_FULL = false; // (06-11-2026) lista de ordenes en pantalla completa
@@ -19443,6 +19736,7 @@ function anDetPintar(){
   if(AN_DET.diario) return anDiarioPintar(m);
   if(AN_DET.rgu) return rguPintar(m);
   if(AN_DET.asis) return asPintar(m);
+  if(AN_DET.mes) return anMesPintar(m);
   const y = m.scrollTop, D = anFilas(), fam = AN_DET.fam, per = AN_DET.per, F = AN_FAMS.filter(function(x){ return x.f === fam; })[0] || AN_FAMS[0];
   const L = anPer(D, fam, per), s = mpSt(L);
   /* periodo anterior para la flecha */
