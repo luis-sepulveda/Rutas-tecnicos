@@ -21875,23 +21875,23 @@
    }
   },
   "07-11-2026": {
-   "hasta": "18:00",
-   "actividades": 177,
+   "hasta": "18:10",
+   "actividades": 179,
    "tecnicos": 34,
    "estados": {
     "No Realizada": 40,
-    "Completado": 101,
-    "en ruta": 3,
-    "Iniciado": 13,
+    "Completado": 102,
+    "Iniciado": 17,
     "Suspendido": 7,
     "Cancelado": 7,
-    "Pendiente": 6
+    "Pendiente": 4,
+    "en ruta": 2
    },
-   "rgu": 246.4,
+   "rgu": 246.6,
    "caidas_total": 3,
    "caidas_activas": 3,
    "caidas_resueltas": 0,
-   "nuevas": 32,
+   "nuevas": 33,
    "al_bucket": 38,
    "repetidas": 34,
    "reagendadas": 2,
@@ -21927,6 +21927,15 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OWBZZDL",
+      "tec": "CRISTOBAL SILVA LEIVA",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "18:01",
+      "d": "AV LOS CARRERA 359, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
       "o": "1-3OWBVUAM",
       "tec": "YENDER BOSCAN CADENAS",
       "cat": "Modificación de Servicio",
@@ -21951,7 +21960,7 @@
       "f": "16-19",
       "hi": "17:16",
       "d": "GRECIA 1237, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OWBFZUA",
@@ -22167,7 +22176,7 @@
       "f": "16-19",
       "hi": "16:53",
       "d": "MADRID 97, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OW2YN6N",
@@ -22244,9 +22253,9 @@
       "o": "1-3OW55ZCG",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "18:10",
+      "hi": "18:06",
       "d": "SAN EUGENIO 1175, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "ALEXIS JARA",
       "visitas": 1,
       "ult_fecha": "07-11-2026",
@@ -22340,9 +22349,9 @@
       "o": "1-3OW33F7Q",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "18:05",
+      "hi": "18:06",
       "d": "MADRID 97, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "DANIEL NAVARRETE E",
       "visitas": 2,
       "ult_fecha": "05-11-2026",
@@ -22544,7 +22553,7 @@
       "o": "1-3OUUJYB7",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "18:20",
+      "hi": "18:29",
       "d": "JAVIERA CARRERA 1054 DEPTO 21, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -22604,7 +22613,7 @@
       "o": "1-3OUUIJ87",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "18:15",
+      "hi": "18:30",
       "d": "PEDRO AGUIRRE CERDA 974, QUILPUE",
       "e": "Pendiente",
       "tec": "SEBASTIAN DOSSOW A",
@@ -22650,5 +22659,5 @@
    }
   }
  },
- "generado": "07-11-2026 18:00"
+ "generado": "07-11-2026 18:10"
 }
