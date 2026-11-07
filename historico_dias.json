@@ -21875,25 +21875,25 @@
    }
   },
   "07-11-2026": {
-   "hasta": "14:13",
-   "actividades": 152,
+   "hasta": "14:34",
+   "actividades": 146,
    "tecnicos": 34,
    "estados": {
-    "No Realizada": 23,
-    "Completado": 45,
-    "Iniciado": 20,
-    "Pendiente": 46,
-    "en ruta": 10,
+    "No Realizada": 25,
+    "Completado": 46,
+    "Iniciado": 27,
+    "Pendiente": 36,
+    "en ruta": 4,
     "Suspendido": 4,
     "Cancelado": 4
    },
-   "rgu": 225.8,
+   "rgu": 217.3,
    "caidas_total": 1,
    "caidas_activas": 1,
    "caidas_resueltas": 0,
    "nuevas": 19,
-   "al_bucket": 25,
-   "repetidas": 33,
+   "al_bucket": 32,
+   "repetidas": 32,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
@@ -21910,7 +21910,7 @@
     "nuevas": [
      {
       "o": "1-3OW47MMX",
-      "tec": "JUAN ARRIAGADA C",
+      "tec": "ESTEBAN PIZARRO QUINTANA",
       "cat": "Alta 1 Play",
       "f": "16-19",
       "hi": "17:45",
@@ -21919,7 +21919,7 @@
      },
      {
       "o": "1-3OW65PV5",
-      "tec": "ANTONHY MORALES MENDOZA",
+      "tec": "GEEYSER PEREZ O",
       "cat": "Alta 1 Play",
       "f": "16-19",
       "hi": "16:32",
@@ -21928,7 +21928,7 @@
      },
      {
       "o": "1-3OW458AT",
-      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "tec": "CESAR MENA OLIVEROS",
       "cat": "Alta 2 Play",
       "f": "13-16",
       "hi": "15:49",
@@ -21987,7 +21987,7 @@
       "f": "13-16",
       "hi": "16:47",
       "d": "AVENIDA VALPARAISO 810, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OW4E35R",
@@ -21996,7 +21996,7 @@
       "f": "13-16",
       "hi": "13:14",
       "d": "AV LOS CARRERA 912 DEPTO 10, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OW4I464",
@@ -22005,7 +22005,7 @@
       "f": "13-16",
       "hi": "14:37",
       "d": "ALCALDE RODOLFO GALLEGUILLOS GATICA 2350 CASA 80, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OW4E08A",
@@ -22118,6 +22118,18 @@
       "ult_cierre": "Clte desiste motivo comercial"
      },
      {
+      "o": "1-3OV0WKY9",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "16:00",
+      "d": "EDUARDO ALQUINTA 370, QUILPUE",
+      "e": "Pendiente",
+      "tec": "ALFREDO ALCAYAGA F",
+      "visitas": 1,
+      "ult_fecha": "05-11-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OVMVXHQ",
       "cat": "Alta 1 Play",
       "f": "13-16",
@@ -22145,24 +22157,12 @@
       "o": "1-3OVOY495",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:25",
+      "hi": "14:40",
       "d": "TOCOPILLA 01650, QUILPUE",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
       "visitas": 4,
       "ult_fecha": "06-11-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OV0WKY9",
-      "cat": "Alta 2 Play",
-      "f": "16-19",
-      "hi": "16:12",
-      "d": "EDUARDO ALQUINTA 370, QUILPUE",
-      "e": "Pendiente",
-      "tec": "CESAR MENA OLIVEROS",
-      "visitas": 1,
-      "ult_fecha": "05-11-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -22190,18 +22190,6 @@
       "ult_cierre": "Sin acceso a vivienda"
      },
      {
-      "o": "1-3OW55ZCG",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "17:45",
-      "d": "SAN EUGENIO 1175, QUILPUE",
-      "e": "Pendiente",
-      "tec": "EDGAR VALERO C",
-      "visitas": 1,
-      "ult_fecha": "07-11-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OVEB310",
       "cat": "Alta 2 Play",
       "f": "13-16",
@@ -22214,6 +22202,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OW47MMX",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "17:11",
+      "d": "LO GODOY 2330, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "ESTEBAN PIZARRO QUINTANA",
+      "visitas": 2,
+      "ult_fecha": "07-11-2026",
+      "ult_cierre": "Direccion incorrecta"
+     },
+     {
       "o": "1-3OVES70J",
       "cat": "Reparación",
       "f": "10-13",
@@ -22223,18 +22223,6 @@
       "tec": "FELIPE SILVA R",
       "visitas": 1,
       "ult_fecha": "13-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OW3QCDP",
-      "cat": "Alta 2 Play",
-      "f": "13-16",
-      "hi": "15:36",
-      "d": "PJE TORREMOLINOS 0375, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "FELIPE SILVA R",
-      "visitas": 1,
-      "ult_fecha": "07-11-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -22277,9 +22265,9 @@
       "o": "1-3OVREKZQ",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:13",
+      "hi": "14:27",
       "d": "AVENIDA VALPARAISO 810, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JORDAN ROA PEREZ",
       "visitas": 1,
       "ult_fecha": "06-11-2026",
@@ -22301,13 +22289,25 @@
       "o": "1-3OSS45SU",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:59",
+      "hi": "14:28",
       "d": "TEMUCO 448, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "JORGE PEZOA VICUÑA",
       "visitas": 2,
       "ult_fecha": "03-11-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OVDLCRT",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "15:28",
+      "d": "INES DE SUAREZ 457, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JORGE PEZOA VICUÑA",
+      "visitas": 2,
+      "ult_fecha": "06-11-2026",
+      "ult_cierre": "Clte desiste motivo comercial"
      },
      {
       "o": "1-3OUQ4TX9",
@@ -22382,30 +22382,6 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3OW47MMX",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "17:41",
-      "d": "LO GODOY 2330, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JUAN ARRIAGADA C",
-      "visitas": 2,
-      "ult_fecha": "07-11-2026",
-      "ult_cierre": "Direccion incorrecta"
-     },
-     {
-      "o": "1-3OR03O8D",
-      "cat": "Migración 1 Play",
-      "f": "13-16",
-      "hi": "15:34",
-      "d": "HEROES DE LA CONCEPCION 886 DEPTO 31, QUILPUE",
-      "e": "Pendiente",
-      "tec": "KEVIN TAPIA RETAMAL",
-      "visitas": 1,
-      "ult_fecha": "07-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OVECIJB",
       "cat": "Alta 2 Play",
       "f": "10-13",
@@ -22430,16 +22406,16 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OUUIJ87",
-      "cat": "Alta 2 Play",
+      "o": "1-3OW55ZCG",
+      "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:35",
-      "d": "PEDRO AGUIRRE CERDA 974, QUILPUE",
+      "hi": "16:33",
+      "d": "SAN EUGENIO 1175, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
       "visitas": 1,
-      "ult_fecha": "05-11-2026",
-      "ult_cierre": "Orden mal generada"
+      "ult_fecha": "07-11-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OLJF2EL",
@@ -22457,13 +22433,25 @@
       "o": "1-3OUK1M5V",
       "cat": "Upgrade promoción",
       "f": "13-16",
-      "hi": "15:22",
+      "hi": "15:28",
       "d": "LAS ESMERALDAS 2490, QUILPUE",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
       "visitas": 1,
       "ult_fecha": "05-11-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OUUIJ87",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "16:15",
+      "d": "PEDRO AGUIRRE CERDA 974, QUILPUE",
+      "e": "Pendiente",
+      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "visitas": 1,
+      "ult_fecha": "05-11-2026",
+      "ult_cierre": "Orden mal generada"
      },
      {
       "o": "1-3OLMQCUW",
@@ -22493,7 +22481,7 @@
       "o": "1-3OQ8FG4L",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:13",
+      "hi": "16:38",
       "d": "RENE QUEVEDO 2496, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
@@ -22503,5 +22491,5 @@
    }
   }
  },
- "generado": "07-11-2026 14:13"
+ "generado": "07-11-2026 14:34"
 }
