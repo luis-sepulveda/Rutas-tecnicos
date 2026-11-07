@@ -21875,25 +21875,25 @@
    }
   },
   "07-11-2026": {
-   "hasta": "11:12",
-   "actividades": 133,
+   "hasta": "11:22",
+   "actividades": 141,
    "tecnicos": 34,
    "estados": {
-    "Iniciado": 25,
-    "Pendiente": 72,
-    "No Realizada": 10,
+    "No Realizada": 12,
     "en ruta": 6,
+    "Pendiente": 78,
+    "Iniciado": 25,
     "Completado": 14,
     "Suspendido": 3,
     "Cancelado": 3
    },
-   "rgu": 203.0,
+   "rgu": 215.5,
    "caidas_total": 1,
    "caidas_activas": 1,
    "caidas_resueltas": 0,
-   "nuevas": 10,
+   "nuevas": 11,
    "al_bucket": 6,
-   "repetidas": 30,
+   "repetidas": 31,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
@@ -21908,6 +21908,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OVREKZQ",
+      "tec": "JUAN ARRIAGADA C",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "16:47",
+      "d": "AVENIDA VALPARAISO 810, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OW4E35R",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -21942,7 +21951,7 @@
       "f": "10-13",
       "hi": "12:47",
       "d": "WENCESLAO VIDAL 101, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OW33F7Q",
@@ -22004,9 +22013,9 @@
       "o": "1-3OQB7BEM",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "11:36",
+      "hi": "11:22",
       "d": "AV LOS CARRERA 683, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "ALEXIS JARA",
       "visitas": 1,
       "ult_fecha": "17-10-2026",
@@ -22016,7 +22025,7 @@
       "o": "1-3OW33F7Q",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:59",
+      "hi": "17:12",
       "d": "MADRID 97, QUILPUE",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -22040,7 +22049,7 @@
       "o": "1-3OUK1M5V",
       "cat": "Upgrade promoción",
       "f": "13-16",
-      "hi": "14:01",
+      "hi": "13:01",
       "d": "LAS ESMERALDAS 2490, QUILPUE",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
@@ -22076,7 +22085,7 @@
       "o": "1-3OSS45SU",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:06",
+      "hi": "13:06",
       "d": "TEMUCO 448, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
@@ -22088,7 +22097,7 @@
       "o": "1-3OVMVXHQ",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:04",
+      "hi": "14:04",
       "d": "PJE VILCUN 2453, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
@@ -22126,7 +22135,7 @@
       "f": "10-13",
       "hi": "10:53",
       "d": "DOS ORIENTE 17 CASA A, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JOEL GUSTAVE GUSTA",
       "visitas": 1,
       "ult_fecha": "05-11-2026",
@@ -22172,7 +22181,7 @@
       "o": "1-3OUQ4TX9",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:47",
+      "hi": "13:31",
       "d": "SEXTA 0437, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE CASTRO P",
@@ -22220,7 +22229,7 @@
       "o": "1-3OQ7IN4L",
       "cat": "Migración 3 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "13:00",
       "d": "DEL VILLAR 1120 CASA 2, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE SALAS MEDINA",
@@ -22229,10 +22238,22 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3OVREKZQ",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "16:47",
+      "d": "AVENIDA VALPARAISO 810, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JUAN ARRIAGADA C",
+      "visitas": 1,
+      "ult_fecha": "06-11-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OR03O8D",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "14:39",
+      "hi": "17:19",
       "d": "HEROES DE LA CONCEPCION 886 DEPTO 31, QUILPUE",
       "e": "Pendiente",
       "tec": "KEVIN TAPIA RETAMAL",
@@ -22256,9 +22277,9 @@
       "o": "1-3OW3EYIU",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "11:10",
+      "hi": "11:15",
       "d": "WENCESLAO VIDAL 101, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "LEONEL HERNÁNDEZ OJE",
       "visitas": 1,
       "ult_fecha": "07-11-2026",
@@ -22301,6 +22322,18 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3OVOY495",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "16:16",
+      "d": "TOCOPILLA 01650, QUILPUE",
+      "e": "Pendiente",
+      "tec": "MARCO PEREZ G",
+      "visitas": 4,
+      "ult_fecha": "06-11-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OVIC5SI",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -22316,7 +22349,7 @@
       "o": "1-3OVOKGXO",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:40",
+      "hi": "13:40",
       "d": "LAS AZUCENAS 2658 EDIF. T DEPTO 403, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNAN",
@@ -22347,18 +22380,6 @@
       "visitas": 3,
       "ult_fecha": "24-10-2026",
       "ult_cierre": "Sin acceso a vivienda"
-     },
-     {
-      "o": "1-3OVOY495",
-      "cat": "Alta 1 Play",
-      "f": "13-16",
-      "hi": "15:00",
-      "d": "TOCOPILLA 01650, QUILPUE",
-      "e": "Pendiente",
-      "tec": "YENDER BOSCAN CADENAS",
-      "visitas": 4,
-      "ult_fecha": "06-11-2026",
-      "ult_cierre": "Sin moradores"
      }
     ],
     "reagendadas": [
@@ -22376,7 +22397,7 @@
       "o": "1-3OQYPFFB",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "11:24",
+      "hi": "12:24",
       "d": "PJE RAMON LOPEZ 1930, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "GEEYSER PEREZ O",
@@ -22386,5 +22407,5 @@
    }
   }
  },
- "generado": "07-11-2026 11:12"
+ "generado": "07-11-2026 11:22"
 }
