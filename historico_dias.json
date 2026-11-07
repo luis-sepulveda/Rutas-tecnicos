@@ -21875,23 +21875,23 @@
    }
   },
   "07-11-2026": {
-   "hasta": "15:24",
-   "actividades": 165,
+   "hasta": "15:34",
+   "actividades": 167,
    "tecnicos": 34,
    "estados": {
-    "No Realizada": 28,
-    "Completado": 64,
-    "Pendiente": 40,
-    "Iniciado": 21,
-    "en ruta": 4,
+    "No Realizada": 30,
+    "Completado": 66,
+    "Pendiente": 38,
+    "en ruta": 3,
+    "Iniciado": 22,
     "Suspendido": 4,
     "Cancelado": 4
    },
-   "rgu": 243.0,
+   "rgu": 245.5,
    "caidas_total": 1,
    "caidas_activas": 1,
    "caidas_resueltas": 0,
-   "nuevas": 24,
+   "nuevas": 25,
    "al_bucket": 38,
    "repetidas": 34,
    "reagendadas": 2,
@@ -21909,13 +21909,22 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OW9UN4E",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "15:33",
+      "d": "MADRID 3111, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
       "o": "1-3OW92NSX",
       "tec": "LEONEL HERNÁNDEZ OJE",
       "cat": "Modificación de Servicio",
       "f": "13-16",
       "hi": "16:09",
       "d": "EL OCASO 324, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OW9BO89",
@@ -21964,7 +21973,7 @@
      },
      {
       "o": "1-3OW65PV5",
-      "tec": "MATÍAS JAQUE AG",
+      "tec": "JORDAN ROA PEREZ",
       "cat": "Alta 1 Play",
       "f": "16-19",
       "hi": "16:32",
@@ -22168,7 +22177,7 @@
       "f": "13-16",
       "hi": "15:21",
       "d": "PJE VILCUN 2453, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "ANTONHY MORALES MENDOZA",
       "visitas": 1,
       "ult_fecha": "06-11-2026",
@@ -22192,7 +22201,7 @@
       "f": "13-16",
       "hi": "14:55",
       "d": "TOCOPILLA 01650, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "CESAR MENA OLIVEROS",
       "visitas": 4,
       "ult_fecha": "06-11-2026",
@@ -22274,9 +22283,9 @@
       "o": "1-3OW3QCDP",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "15:25",
+      "hi": "15:30",
       "d": "PJE TORREMOLINOS 0375, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "FELIPE SILVA R",
       "visitas": 1,
       "ult_fecha": "07-11-2026",
@@ -22298,7 +22307,7 @@
       "o": "1-3OW33F7Q",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:56",
+      "hi": "17:08",
       "d": "MADRID 97, QUILPUE",
       "e": "Pendiente",
       "tec": "JOEL GUSTAVE GUSTA",
@@ -22379,28 +22388,28 @@
       "ult_cierre": "Direccion incorrecta"
      },
      {
-      "o": "1-3OW55ZCG",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "16:34",
-      "d": "SAN EUGENIO 1175, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JOSE GALAZ D",
-      "visitas": 1,
-      "ult_fecha": "07-11-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OUUIJ87",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "17:45",
+      "hi": "16:41",
       "d": "PEDRO AGUIRRE CERDA 974, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
       "visitas": 1,
       "ult_fecha": "05-11-2026",
       "ult_cierre": "Orden mal generada"
+     },
+     {
+      "o": "1-3OW55ZCG",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "18:33",
+      "d": "SAN EUGENIO 1175, QUILPUE",
+      "e": "Pendiente",
+      "tec": "JOSE GALAZ D",
+      "visitas": 1,
+      "ult_fecha": "07-11-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OORRZ0E",
@@ -22454,7 +22463,7 @@
       "o": "1-3OW47MMX",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:37",
+      "hi": "18:07",
       "d": "LO GODOY 2330, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
@@ -22490,7 +22499,7 @@
       "o": "1-3OUUJYB7",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "17:41",
+      "hi": "18:06",
       "d": "JAVIERA CARRERA 1054 DEPTO 21, QUILPUE",
       "e": "Pendiente",
       "tec": "MARCO PEREZ G",
@@ -22514,9 +22523,9 @@
       "o": "1-3OR03O8D",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "15:23",
+      "hi": "15:32",
       "d": "HEROES DE LA CONCEPCION 886 DEPTO 31, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "RAFAEL VARGAS B",
       "visitas": 1,
       "ult_fecha": "07-10-2026",
@@ -22560,5 +22569,5 @@
    }
   }
  },
- "generado": "07-11-2026 15:24"
+ "generado": "07-11-2026 15:34"
 }
