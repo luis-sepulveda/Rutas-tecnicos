@@ -21875,23 +21875,23 @@
    }
   },
   "07-11-2026": {
-   "hasta": "12:33",
-   "actividades": 145,
+   "hasta": "12:43",
+   "actividades": 147,
    "tecnicos": 34,
    "estados": {
-    "No Realizada": 20,
-    "Completado": 27,
+    "No Realizada": 21,
+    "Completado": 28,
     "en ruta": 4,
-    "Pendiente": 65,
-    "Iniciado": 23,
+    "Pendiente": 64,
+    "Iniciado": 24,
     "Suspendido": 3,
     "Cancelado": 3
    },
-   "rgu": 217.7,
+   "rgu": 218.8,
    "caidas_total": 1,
    "caidas_activas": 1,
    "caidas_resueltas": 0,
-   "nuevas": 15,
+   "nuevas": 16,
    "al_bucket": 14,
    "repetidas": 30,
    "reagendadas": 2,
@@ -21909,13 +21909,22 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OW6BKRT",
+      "tec": "MARCO PEREZ G",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "12:42",
+      "d": "FLORENCIA 1276, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
       "o": "1-3OW5R6NI",
       "tec": "JOSE ROJO A",
       "cat": "Modificación de Servicio",
       "f": "10-13",
       "hi": "12:21",
       "d": "AV LA PALMA 344 CASA 5, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OW5WJB2",
@@ -22121,7 +22130,7 @@
       "o": "1-3OVEB310",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "13:38",
       "d": "GALLEGUILLOS 1815, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
@@ -22277,7 +22286,7 @@
       "o": "1-3OQ7IN4L",
       "cat": "Migración 3 Play",
       "f": "13-16",
-      "hi": "14:32",
+      "hi": "14:42",
       "d": "DEL VILLAR 1120 CASA 2, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE SALAS MEDINA",
@@ -22382,28 +22391,28 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OLMQCUW",
-      "cat": "Migración 1 Play",
-      "f": "10-13",
-      "hi": "12:50",
-      "d": "CERRO MANANTIALES 1861, QUILPUE",
-      "e": "Pendiente",
-      "tec": "SEBASTIAN DOSSOW A",
-      "visitas": 3,
-      "ult_fecha": "24-10-2026",
-      "ult_cierre": "Sin acceso a vivienda"
-     },
-     {
       "o": "1-3OVOKGXO",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:03",
+      "hi": "17:13",
       "d": "LAS AZUCENAS 2658 EDIF. T DEPTO 403, QUILPUE",
       "e": "Pendiente",
-      "tec": "YENDER BOSCAN CADENAS",
+      "tec": "SAMUEL FERNANDEZ VIDAL",
       "visitas": 1,
       "ult_fecha": "06-11-2026",
       "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3OLMQCUW",
+      "cat": "Migración 1 Play",
+      "f": "10-13",
+      "hi": "12:54",
+      "d": "CERRO MANANTIALES 1861, QUILPUE",
+      "e": "en ruta",
+      "tec": "YENDER BOSCAN CADENAS",
+      "visitas": 3,
+      "ult_fecha": "24-10-2026",
+      "ult_cierre": "Sin acceso a vivienda"
      }
     ],
     "reagendadas": [
@@ -22411,9 +22420,9 @@
       "o": "1-3OQYPFFB",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "12:31",
+      "hi": "12:40",
       "d": "PJE RAMON LOPEZ 1930, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "GEEYSER PEREZ O",
       "desde": "04-11-2026"
      },
@@ -22431,5 +22440,5 @@
    }
   }
  },
- "generado": "07-11-2026 12:33"
+ "generado": "07-11-2026 12:43"
 }
