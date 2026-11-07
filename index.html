@@ -3356,6 +3356,23 @@
   .ivC td { padding:6px 4px; text-align:center; border-top:1px solid #eef2f6; font-variant-numeric:tabular-nums; }
   .ivC td.hm { font-weight:700; border-radius:6px; }
   .ivC tr.tt td { font-weight:800; background:#f8fafc; }
+  /* (07-11-2026, 10:57) Luis: "ajusta la pantalla para que se vea completa": la vista C cabe sin bajar en su pantalla (~1170 x 555) */
+  #modalEst.abierto:has(.ivC) { padding:1vh 1vw; }
+  #modalEst:has(.ivC) .mc-box { max-height:98vh; }
+  #modalEst:has(.ivC) .mc-head { padding:7px 14px; }
+  #modalEst:has(.ivC) .mc-body { padding:8px 12px; }
+  #modalEst:has(.ivC) #estNota { display:none; }
+  .ivAv:has(+ .ivC) { padding:7px 12px !important; margin-bottom:8px !important; }
+  .ivAv:has(+ .ivC) > div { margin-top:3px !important; }
+  .ivAv:has(+ .ivC) .ivAvPie { display:none; }
+  .ivC .ivK { margin-bottom:8px; gap:8px; }
+  .ivC .ivK > div { padding:4px 12px; border-radius:10px; }
+  .ivC .ivK .l, .ivC .ivK .s { font-size:11px; } .ivC .ivK .n { font-size:21px; }
+  .ivC .g { gap:10px; }
+  .ivC .c .h { padding:5px 12px; } .ivC .c .h b { font-size:16px; } .ivC .c .h span { font-size:22px; }
+  .ivC th { padding:3px 4px; font-size:11px; }
+  .ivC td { padding:2px 4px; font-size:13px; }
+  .ivC .ib-leer { margin-top:8px; padding:6px 12px; font-size:12px; }
   .ib-cm div span { white-space:nowrap; font-size:11.5px; }
   .ib-h b .ib-hs { display:block; margin:2px 0 0; font-family:'DM Sans',sans-serif; font-weight:500; font-size:12px; color:#5d7389; }
 
@@ -8644,7 +8661,7 @@ function tablasInicio(lista, pal, grad, porTipo, total){
       .sort(function(a, b){ return (b.lejos - a.lejos) || a.c.localeCompare(b.c); });
     if(!fuera.length) return '';
     const nL = fuera.filter(function(z){ return z.lejos; }).length;
-    return '<div style="margin:0 0 12px; border-radius:12px; padding:12px 14px; background:' + (nL ? '#fef2f2' : '#fffbeb')
+    return '<div class="ivAv" style="margin:0 0 12px; border-radius:12px; padding:12px 14px; background:' + (nL ? '#fef2f2' : '#fffbeb')
       + '; border:1px solid ' + (nL ? '#fca5a5' : '#fcd34d') + '; color:#1f2937">'
       + '<div style="font-weight:800; font-size:14.5px; color:' + (nL ? '#b91c1c' : '#92400e') + '">⚠ ' + fuera.length
       + (fuera.length === 1 ? ' orden fuera de Quilpué y Villa Alemana' : ' órdenes fuera de Quilpué y Villa Alemana')
@@ -8655,7 +8672,7 @@ function tablasInicio(lista, pal, grad, porTipo, total){
             + (z.lejos ? 'FUERA DE LA REGIÓN' : 'OTRA COMUNA') + '</span>'
             + '<b>' + escR(p.o || '') + '</b><span>' + escR(p.cat || p.t || '') + '</span><span>' + escR(p.f || '') + ' hrs</span>'
             + '<span>' + escR(z.x.tec || '') + '</span><span style="color:#4b5563">' + escR(p.d || '') + '</span></div>'; }).join('')
-      + '<div style="margin-top:8px; font-size:12px; color:#4b5563">Rojo: casi seguro mal asignada, conviene avisar a VTR/CLARO. '
+      + '<div class="ivAvPie" style="margin-top:8px; font-size:12px; color:#4b5563">Rojo: casi seguro mal asignada, conviene avisar a VTR/CLARO. '
       + 'Ámbar: otra comuna de la región, puede ser normal.</div></div>';
   })();
   /* (07-11-2026, 10:47) Luis eligió la C: "me gusto la C cambiala porfa". Las otras (actual arreglada, A tabla única,
