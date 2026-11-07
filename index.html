@@ -13904,7 +13904,7 @@ function migPaginaHtml(){
   h += '<section class="inf-b mp-acc"><div class="hb-top"><span class="hb-nm" style="font-size:34px">MÁS DETALLE</span></div>'
     + '<span class="hb-fe">Las mismas herramientas de siempre</span>'
     + g('Hoy, en vivo', b("migDer('hoy')", 'Derivadas de hoy', 'Visitadas, derivadas y por visitar, tal como van') + b("migIr('abrirResMig')", 'Resumen supervisores', 'Por qué y quién, con filtro por supervisor y fotos'))
-    + g('Técnicos', b("migIr('abrirSegVtr')", 'Seguimiento VTR', 'Los técnicos que VTR/CLARO marcó, semana a semana') + b("migDer('tec')", 'Por técnico', 'Quién deriva más y la historia de cada dirección')
+    + g('Técnicos', b("migIr('abrirSegVtr')", 'Seguimiento VTR', 'Los técnicos bajo 60 %, rojo y amarillo (lista automática)') + b("migDer('tec')", 'Por técnico', 'Quién deriva más y la historia de cada dirección')
         + b("migDer('aud')", 'A quién auditar', 'Lo derivado propio de cada técnico') + b("migDer('evo')", 'Evolución', 'Si cada técnico va mejorando o empeorando') + b("migDer('fic')", 'Ficha del técnico', 'Todo sobre un técnico y qué revisar primero'))
     + g('Direcciones, equipo y gerencia', b("migDer('dir')", 'Por dirección', 'Qué direcciones fallan y con qué técnicos') + b("migDer('res')", 'Resumen de derivación', 'Cómo vamos y con quién conversar')
         + b("migIr('abrirMigGer')", 'Migraciones · Gerencia', 'Por mes, semana y hoy. Con Modo reunión'))
@@ -18579,6 +18579,10 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarM
   #anPage .an-infh { font-size:10.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#64748b; margin:2px 2px 0; }
   #anPage .an-inf3 { display:flex; gap:6px; }
   #anPage .an-infl { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+  #anPage .an-inf > .an-infm { max-height:calc(100vh - 140px); overflow-y:auto; }
+  #anPage .an-infh-mig { margin-top:8px; padding-top:8px; border-top:2px solid #e2e8f0; color:#1e40af; }
+  #anPage .an-infsub { font-size:10px; font-weight:700; color:#94a3b8; margin:2px 2px -2px; }
+
   #anPage .an-infi { display:block; text-align:left; background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:7px 10px; cursor:pointer; text-decoration:none; font-family:inherit; }
   #anPage .an-infi:hover { background:#eff6ff; border-color:#93c5fd; }
   #anPage .an-infi b { display:block; font-size:12.5px; color:#0f172a; } #anPage .an-infi b i { font-style:normal; color:#2563eb; }
@@ -19044,7 +19048,16 @@ function anPintar(){
           const cuerpo = '<b>' + t[2] + ' <i>›</i></b><span>' + t[3] + '</span>';
           return t[0] === 'link' ? '<a class="an-infi" href="' + t[1] + '" target="_blank" onclick="anInfCerrar()">' + cuerpo + '</a>'
                                  : '<button class="an-infi" onclick="anInfIr(function(){ ' + t[1] + '; })">' + cuerpo + '</button>';
-        }).join('') + '</span></span>' : '') + '</span>'
+        }).join('') + '</span>'
+      /* (07-11-2026, 12:31) Luis: "el boton informes dentro de migraciones, todos esos informes agregalos dentro del boton informes
+         que esta en la pantalla principal de mi analisis pero separados: informes de migraciones, abajo de este titulo los demas".
+         Abren lo mismo que en el detalle de Migraciones (anMigInfSecciones). */
+      + '<small class="an-infh an-infh-mig">Informes de migraciones</small>'
+      + anMigInfSecciones(
+          function(onc, t, d){ return '<button class="an-infi" onclick="anInfIr(function(){ ' + onc + '; })"><b>' + t + ' <i>›</i></b><span>' + d + '</span></button>'; },
+          function(url, t, d){ return url ? '<a class="an-infi" href="' + url + '" target="_blank" rel="noopener" onclick="anInfCerrar()"><b>' + t + ' <i>↗</i></b><span>' + d + '</span></a>' : ''; },
+          function(t, cuerpo){ return '<small class="an-infsub">' + t + '</small><span class="an-infl">' + cuerpo + '</span>'; })
+      + '</span>' : '') + '</span>'
     /* (07-11-2026, 11:40) Luis: "crea un boton desplegable para guardar estos" (Resumen WhatsApp, Día en curso, Seguimiento,
        Técnicos semana a semana) -> boton "Herramientas". "Otro boton desplegable que diga detalle meses y dentro cada mes"
        -> abre el mismo detalle del mes de la pantalla principal (mesDetalleHtml) dentro de Mi analisis. */
@@ -19660,20 +19673,26 @@ function anInfIr(fn){ AN_INF_AB = false; anPintar(); fn(); }
 let AN_MIGINF_AB = false;
 function anMigInfToggle(e){ if(e) e.stopPropagation(); AN_MIGINF_AB = !AN_MIGINF_AB; AN_INF_AB = false; anDetPintar(); }
 function anMigInfIr(e, fn){ if(e) e.stopPropagation(); AN_MIGINF_AB = false; anDetPintar(); try { fn(); } catch(x){ console.warn('informes migraciones:', x); } }
-function anMigInfHtml(){
-  const b = function(onc, t, d){ return '<button class="an-infi" onclick="anMigInfIr(event, function(){ ' + onc + '; })"><b>' + t + ' <i>›</i></b><span>' + d + '</span></button>'; };
-  const a = function(url, t, d){ return url ? '<a class="an-infi" href="' + url + '" target="_blank" rel="noopener" onclick="event.stopPropagation(); anInfCerrar()"><b>' + t + ' <i>↗</i></b><span>' + d + '</span></a>' : ''; };
-  const g = function(t, cuerpo){ return '<small class="an-infh">' + t + '</small><span class="an-infl">' + cuerpo + '</span>'; };
-  return '<span class="an-inf an-miginf" onclick="event.stopPropagation()"><button class="an-btn inf' + (AN_MIGINF_AB ? ' ab' : '') + '" onclick="anMigInfToggle(event)" title="Informes de migraciones (los mismos de la página MIGRACIONES)">📑 Informes ' + (AN_MIGINF_AB ? '▴' : '▾') + '</button>'
-    + (AN_MIGINF_AB ? '<span class="an-infm">'
+/* (07-11-2026, 12:31) la lista de informes de migraciones queda en una sola funcion: la usa el boton "Informes" del detalle
+   de Migraciones (anMigInfHtml) y el boton "Informes" de la pantalla principal de Mi analisis (seccion "Informes de migraciones").
+   b(onclick, titulo, descripcion) = boton · a(url, titulo, descripcion) = enlace · g(titulo, cuerpo) = grupo */
+function anMigInfSecciones(b, a, g){
+  return ''
       + g('Hoy, en vivo', b("migDer('hoy')", 'Derivadas de hoy', 'Visitadas, derivadas y por visitar, tal como van') + b("migIr('abrirResMig')", 'Resumen supervisores', 'Por qué y quién, con filtro por supervisor y fotos'))
-      + g('Técnicos', b("migIr('abrirSegVtr')", 'Seguimiento VTR', 'Los técnicos que VTR/CLARO marcó, semana a semana') + b("migDer('tec')", 'Por técnico', 'Quién deriva más y la historia de cada dirección')
+      + g('Técnicos', b("migIr('abrirSegVtr')", 'Seguimiento VTR', 'Los técnicos bajo 60 %, rojo y amarillo (lista automática)') + b("migDer('tec')", 'Por técnico', 'Quién deriva más y la historia de cada dirección')
           + b("migDer('aud')", 'A quién auditar', 'Lo derivado propio de cada técnico') + b("migDer('evo')", 'Evolución', 'Si cada técnico va mejorando o empeorando') + b("migDer('fic')", 'Ficha del técnico', 'Todo sobre un técnico y qué revisar primero'))
       + g('Direcciones, equipo y gerencia', b("migDer('dir')", 'Por dirección', 'Qué direcciones fallan y con qué técnicos') + b("migDer('res')", 'Resumen de derivación', 'Cómo vamos y con quién conversar')
           + b("migIr('abrirMigGer')", 'Migraciones · Gerencia', 'Por mes, semana y hoy. Con Modo reunión'))
       /* (06-11-2026, 18:17) Luis pidio eliminar "Plan de accion de la semana" de este menu */
       + g('Respaldos', a(typeof URL_PLANILLA_RESP !== 'undefined' ? URL_PLANILLA_RESP : '', 'Planilla de respaldos', 'Lo que mandan los técnicos desde la app')
-          + a(typeof URL_APP_RESP !== 'undefined' ? URL_APP_RESP : '', 'App Respaldo en terreno', 'La app que usan los técnicos'))
+          + a(typeof URL_APP_RESP !== 'undefined' ? URL_APP_RESP : '', 'App Respaldo en terreno', 'La app que usan los técnicos'));
+}
+function anMigInfHtml(){
+  const b = function(onc, t, d){ return '<button class="an-infi" onclick="anMigInfIr(event, function(){ ' + onc + '; })"><b>' + t + ' <i>›</i></b><span>' + d + '</span></button>'; };
+  const a = function(url, t, d){ return url ? '<a class="an-infi" href="' + url + '" target="_blank" rel="noopener" onclick="event.stopPropagation(); anInfCerrar()"><b>' + t + ' <i>↗</i></b><span>' + d + '</span></a>' : ''; };
+  const g = function(t, cuerpo){ return '<small class="an-infh">' + t + '</small><span class="an-infl">' + cuerpo + '</span>'; };
+  return '<span class="an-inf an-miginf" onclick="event.stopPropagation()"><button class="an-btn inf' + (AN_MIGINF_AB ? ' ab' : '') + '" onclick="anMigInfToggle(event)" title="Informes de migraciones (los mismos de la página MIGRACIONES)">📑 Informes ' + (AN_MIGINF_AB ? '▴' : '▾') + '</button>'
+    + (AN_MIGINF_AB ? '<span class="an-infm">' + anMigInfSecciones(b, a, g)
       + '</span>' : '') + '</span>';
 }
 function anInfCerrar(){ setTimeout(function(){ const d = AN_MIGINF_AB; AN_INF_AB = false; AN_MIGINF_AB = false; anPintar(); if(d) anDetPintar(); }, 0); }
@@ -19864,7 +19883,7 @@ function anDetPintar(){
     + '<div class="an-tabs">' + tabs.map(function(p){ const on = p.t === per.t && (p.t === 'hoy' || p.k === per.k);
         return '<span class="an-tab' + (on ? ' on' : '') + '" onclick="anDetPer(\'' + p.t + '\', \'' + p.k + '\')">' + anPerTit(p) + (p.t === 'sem' && p.k === D.semHoy ? ' (en curso)' : '') + '</span>'; }).join('') + '</div></div>'
     /* (06-11-2026) Luis: "deja el boton dentro del detalle de las migraciones": los informes de MAS DETALLE de la pagina MIGRACIONES */
-    + '<div style="display:flex;gap:8px;align-items:center">' + (fam === 'Migraciones' ? anMigInfHtml() + anSonidoHtml() : '') + '<span class="an-updbox">' + anUpdHtml() + '</span>'
+    + '<div style="display:flex;gap:8px;align-items:center">' + (fam === 'Migraciones' ? /* (07-11-2026, 12:35) Luis: "saca el boton informes que esta dentro de la tarjeta de migraciones" (quedan en Informes de la pantalla principal) */ anSonidoHtml() : '') + '<span class="an-updbox">' + anUpdHtml() + '</span>'
     + (AN_DET.volver ? '<button class="an-x" onclick="anTsAbrir(\'' + AN_DET.volver + '\')">‹ Volver a técnicos</button>' : '')
     + (AN_DET.volverSeg ? '<button class="an-x" onclick="anSegAbrir()">‹ Volver a Seguimiento</button>' : '')
     + (AN_DET.volverDiario ? '<button class="an-x" onclick="anDiarioAbrir()">‹ Volver a día a día</button>' : '')
