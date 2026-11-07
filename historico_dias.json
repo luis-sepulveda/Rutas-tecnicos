@@ -21875,17 +21875,17 @@
    }
   },
   "07-11-2026": {
-   "hasta": "16:29",
+   "hasta": "16:39",
    "actividades": 170,
    "tecnicos": 34,
    "estados": {
     "No Realizada": 34,
-    "Completado": 79,
-    "Iniciado": 20,
-    "en ruta": 10,
+    "Completado": 81,
+    "Iniciado": 24,
+    "Pendiente": 15,
     "Suspendido": 5,
     "Cancelado": 5,
-    "Pendiente": 17
+    "en ruta": 6
    },
    "rgu": 244.8,
    "caidas_total": 3,
@@ -21933,7 +21933,7 @@
       "f": "16-19",
       "hi": "16:02",
       "d": "MATILDE 594 CASA A, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OWA4FZ4",
@@ -22205,6 +22205,18 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3OW55ZCG",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "17:53",
+      "d": "SAN EUGENIO 1175, QUILPUE",
+      "e": "Pendiente",
+      "tec": "ALEXIS JARA",
+      "visitas": 1,
+      "ult_fecha": "07-11-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3ORUHFCH",
       "cat": "Alta 2 Play",
       "f": "10-13",
@@ -22352,7 +22364,7 @@
       "o": "1-3OW33F7Q",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:57",
+      "hi": "18:18",
       "d": "MADRID 97, QUILPUE",
       "e": "Pendiente",
       "tec": "JOEL GUSTAVE GUSTA",
@@ -22433,24 +22445,12 @@
       "ult_cierre": "Orden mal generada"
      },
      {
-      "o": "1-3OW55ZCG",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "18:33",
-      "d": "SAN EUGENIO 1175, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JOSE GALAZ D",
-      "visitas": 1,
-      "ult_fecha": "07-11-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OORRZ0E",
       "cat": "Migración 3 Play",
       "f": "13-16",
       "hi": "14:12",
       "d": "GREGORIA 186, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JOSE PEREZ RANGEL",
       "visitas": 1,
       "ult_fecha": "29-10-2026",
@@ -22505,6 +22505,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OUUJYB7",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "17:43",
+      "d": "JAVIERA CARRERA 1054 DEPTO 21, QUILPUE",
+      "e": "Pendiente",
+      "tec": "LEONEL HERNÁNDEZ OJE",
+      "visitas": 2,
+      "ult_fecha": "25-08-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3OW47MMX",
       "cat": "Alta 1 Play",
       "f": "16-19",
@@ -22538,18 +22550,6 @@
       "tec": "MARCELO GÓMEZ GÓME",
       "visitas": 1,
       "ult_fecha": "24-10-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
-      "o": "1-3OUUJYB7",
-      "cat": "Alta 2 Play",
-      "f": "16-19",
-      "hi": "18:24",
-      "d": "JAVIERA CARRERA 1054 DEPTO 21, QUILPUE",
-      "e": "Pendiente",
-      "tec": "MARCO PEREZ G",
-      "visitas": 2,
-      "ult_fecha": "25-08-2026",
       "ult_cierre": "Cliente reagenda"
      },
      {
@@ -22604,9 +22604,9 @@
       "o": "1-3OQ8FG4L",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "16:29",
+      "hi": "16:35",
       "d": "RENE QUEVEDO 2496, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JOSE CASTRO P",
       "desde": "04-11-2026"
      }
@@ -22614,5 +22614,5 @@
    }
   }
  },
- "generado": "07-11-2026 16:29"
+ "generado": "07-11-2026 16:39"
 }
