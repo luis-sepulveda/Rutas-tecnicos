@@ -21875,17 +21875,16 @@
    }
   },
   "07-11-2026": {
-   "hasta": "18:20",
+   "hasta": "18:30",
    "actividades": 180,
    "tecnicos": 34,
    "estados": {
     "No Realizada": 41,
-    "Completado": 102,
-    "Iniciado": 17,
+    "Completado": 107,
+    "Iniciado": 14,
     "Suspendido": 7,
     "Cancelado": 7,
-    "Pendiente": 5,
-    "en ruta": 1
+    "Pendiente": 4
    },
    "rgu": 246.7,
    "caidas_total": 3,
@@ -21928,12 +21927,12 @@
     "nuevas": [
      {
       "o": "1-3OWC4NZF",
-      "tec": "EDGAR VALERO C",
+      "tec": "YENDER BOSCAN CADENAS",
       "cat": "Modificación de Servicio",
       "f": "16-19",
       "hi": "18:46",
       "d": "CERRO MANANTIALES 1861, QUILPUE",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OWBZZDL",
@@ -22367,18 +22366,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OWC4NZF",
-      "cat": "Modificación de Servicio",
-      "f": "16-19",
-      "hi": "18:46",
-      "d": "CERRO MANANTIALES 1861, QUILPUE",
-      "e": "Pendiente",
-      "tec": "EDGAR VALERO C",
-      "visitas": 3,
-      "ult_fecha": "24-10-2026",
-      "ult_cierre": "Sin acceso a vivienda"
-     },
-     {
       "o": "1-3OVEB310",
       "cat": "Alta 2 Play",
       "f": "13-16",
@@ -22574,7 +22561,7 @@
       "o": "1-3OUUJYB7",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "18:29",
+      "hi": "18:43",
       "d": "JAVIERA CARRERA 1054 DEPTO 21, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -22641,6 +22628,18 @@
       "visitas": 1,
       "ult_fecha": "05-11-2026",
       "ult_cierre": "Orden mal generada"
+     },
+     {
+      "o": "1-3OLMQCUW",
+      "cat": "Migración 1 Play",
+      "f": "10-13",
+      "hi": "12:48",
+      "d": "CERRO MANANTIALES 1861, QUILPUE",
+      "e": "Completado",
+      "tec": "YENDER BOSCAN CADENAS",
+      "visitas": 3,
+      "ult_fecha": "24-10-2026",
+      "ult_cierre": "Sin acceso a vivienda"
      }
     ],
     "reagendadas": [
@@ -22668,5 +22667,5 @@
    }
   }
  },
- "generado": "07-11-2026 18:20"
+ "generado": "07-11-2026 18:30"
 }
