@@ -1,18 +1,29 @@
 {
-  "actualizado": "2026-11-06T20:37:20",
+  "actualizado": "2026-11-07T09:37:42",
   "resumen": {
-    "reagendada": 1
+    "sin informacion": 1
   },
   "estados": {
-    "1-3OTAN371": {
-      "tec": "MARCO PEREZ G",
-      "cat": "Alta 1 Play",
-      "franja_original": "10-13",
-      "d": "MATURANA 208, VILLA ALEMANA",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3OTAN371 - 10-13-Alta-1 Play-MATURANA 208Mar, 10 Nov",
-      "franja_nueva": "10-13"
+    "1-3ONLZH57": {
+      "tec": "GEEYSER PEREZ O",
+      "cat": "Migración 1 Play",
+      "franja_original": "13-16",
+      "d": "VENECIA (PROGRESO) 937, VILLA ALEMANA",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "VENECIA (PROGRESO) 937",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3OL7G8AA",
+            "franja": "16-19",
+            "texto": "1-3OL7G8AA - 16-19-Migración-Migración-VENECIA (PROGRESO) 937Mar, 27 Oct"
+          }
+        ]
+      }
     }
   }
 }
