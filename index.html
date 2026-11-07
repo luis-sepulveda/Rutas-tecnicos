@@ -18520,6 +18520,22 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarM
   #anPage .an-gsa-res b { font-size:15px; }
   #anPage .an-sem .d.gsa { background:rgba(167,139,250,.22); color:#ddd6fe; cursor:pointer; }
   @media (max-width:1050px){ #anPage .an-g3, #anPage .an-g2 { grid-template-columns:1fr; } }
+  /* (07-11-2026, 12:55) Luis (celular): "aca se ven corridas" -> en pantalla chica las ventanas de Mi análisis van en una columna */
+  @media (max-width:700px){
+    #anDet .an-dia-top, #anDet .an-dia-at, #anDet .an-mg { grid-template-columns:1fr !important; }
+    #anDet .an-dia-top > *, #anDet .an-dia-at > *, #anDet .an-mg > * { min-width:0; }
+    #anDet .an-dia-sem { grid-template-columns:repeat(3, 1fr) !important; }
+    #anDet .an-dia-mesrow { grid-template-columns:34px repeat(6, minmax(0, 1fr)) !important; font-size:10px; }
+    #anDet .an-dia-mesrow > * { min-width:0; overflow:hidden; }
+    #anDet .an-mdtop-per, #anDet .an-h3l, #anDet .an-mdtop { flex-wrap:wrap; }
+    #anPage .an-inf > .an-infm { position:fixed; left:10px; right:10px; top:110px; min-width:0 !important; width:auto; max-height:calc(100vh - 130px); }
+    #anPage .an-infl { grid-template-columns:1fr; }
+    #anPage .an-inf3 { flex-wrap:wrap; }
+    #anDet .an-dia-top .row { grid-template-columns:repeat(3, minmax(0, 1fr)) !important; }
+    #anDet .an-titper { flex-wrap:wrap; min-width:0; } #anDet .an-titper > * { flex-wrap:wrap; }
+    #anDet .an-mdtop-per > * { min-width:0; max-width:100%; }
+    #anDet .an-mdtop-per > div[style*="display:flex"] { flex-wrap:wrap !important; }
+  }
   /* (07-11-2026) celular: el semáforo y las otras comunas se deslizan de lado en vez de aplastarse */
   @media (max-width:700px){
     #anPage .an-card:has(.an-sem) { overflow-x:auto; -webkit-overflow-scrolling:touch; }
