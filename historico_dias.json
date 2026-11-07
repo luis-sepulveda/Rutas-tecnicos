@@ -21875,17 +21875,17 @@
    }
   },
   "07-11-2026": {
-   "hasta": "11:52",
+   "hasta": "11:58",
    "actividades": 141,
    "tecnicos": 34,
    "estados": {
     "No Realizada": 16,
-    "Pendiente": 72,
-    "Iniciado": 29,
-    "Completado": 15,
+    "Pendiente": 71,
+    "Iniciado": 25,
+    "Completado": 19,
+    "en ruta": 4,
     "Suspendido": 3,
-    "Cancelado": 3,
-    "en ruta": 3
+    "Cancelado": 3
    },
    "rgu": 217.1,
    "caidas_total": 1,
@@ -21933,7 +21933,7 @@
       "f": "13-16",
       "hi": "13:14",
       "d": "AV LOS CARRERA 912 DEPTO 10, QUILPUE",
-      "e": "en ruta"
+      "e": "Pendiente"
      },
      {
       "o": "1-3OW4I464",
@@ -22029,6 +22029,18 @@
       "visitas": 1,
       "ult_fecha": "17-10-2026",
       "ult_cierre": "Direccion no encontrada"
+     },
+     {
+      "o": "1-3ORUHFCH",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "09:46",
+      "d": "WENCESLAO VIDAL 101, QUILPUE",
+      "e": "No Realizada",
+      "tec": "ALFREDO ALCAYAGA F",
+      "visitas": 1,
+      "ult_fecha": "07-11-2026",
+      "ult_cierre": "Clte desiste motivo comercial"
      },
      {
       "o": "1-3OW33F7Q",
@@ -22132,7 +22144,7 @@
       "f": "10-13",
       "hi": "09:45",
       "d": "EL CIPRES 844, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "FELIPE SILVA R",
       "visitas": 1,
       "ult_fecha": "13-10-2026",
@@ -22202,9 +22214,9 @@
       "o": "1-3OUQ4TX9",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "13:00",
+      "hi": "12:04",
       "d": "SEXTA 0437, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JOSE CASTRO P",
       "visitas": 1,
       "ult_fecha": "05-11-2026",
@@ -22293,18 +22305,6 @@
       "visitas": 2,
       "ult_fecha": "06-11-2026",
       "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OW3EYIU",
-      "cat": "Alta 2 Play",
-      "f": "10-13",
-      "hi": "11:15",
-      "d": "WENCESLAO VIDAL 101, QUILPUE",
-      "e": "No Realizada",
-      "tec": "LEONEL HERNÁNDEZ OJE",
-      "visitas": 1,
-      "ult_fecha": "07-11-2026",
-      "ult_cierre": "Direccion incorrecta"
      },
      {
       "o": "1-3OUUJYB7",
@@ -22418,5 +22418,5 @@
    }
   }
  },
- "generado": "07-11-2026 11:52"
+ "generado": "07-11-2026 11:58"
 }
