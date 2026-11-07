@@ -21875,23 +21875,23 @@
    }
   },
   "07-11-2026": {
-   "hasta": "17:34",
-   "actividades": 176,
+   "hasta": "17:49",
+   "actividades": 177,
    "tecnicos": 34,
    "estados": {
-    "No Realizada": 36,
-    "Completado": 91,
-    "Iniciado": 24,
-    "Pendiente": 10,
+    "No Realizada": 40,
+    "Completado": 97,
+    "Iniciado": 16,
+    "Pendiente": 8,
     "Suspendido": 7,
     "Cancelado": 7,
-    "en ruta": 1
+    "en ruta": 2
    },
-   "rgu": 246.3,
+   "rgu": 246.4,
    "caidas_total": 3,
    "caidas_activas": 3,
    "caidas_resueltas": 0,
-   "nuevas": 31,
+   "nuevas": 32,
    "al_bucket": 38,
    "repetidas": 34,
    "reagendadas": 2,
@@ -21927,13 +21927,22 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OWBVUAM",
+      "tec": "YENDER BOSCAN CADENAS",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:37",
+      "d": "CERRO MANANTIALES 1861, QUILPUE",
+      "e": "Completado"
+     },
+     {
       "o": "1-3OWBM98L",
       "tec": "RAFAEL VARGAS B",
       "cat": "Modificación de Servicio",
       "f": "16-19",
       "hi": "17:28",
       "d": "HEROES DE LA CONCEPCION 886 DEPTO 31, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OWAVCXP",
@@ -22032,7 +22041,7 @@
       "f": "16-19",
       "hi": "16:08",
       "d": "TERESA DE CALCUTA 320 EDIF. B-24 DEPTO 24, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OW47MMX",
@@ -22041,7 +22050,7 @@
       "f": "16-19",
       "hi": "17:45",
       "d": "LO GODOY 2330, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "No Realizada"
      },
      {
       "o": "1-3OW65PV5",
@@ -22153,12 +22162,12 @@
      },
      {
       "o": "1-3OW33F7Q",
-      "tec": "CRISTOBAL MIRANDA VALENC",
+      "tec": "DANIEL NAVARRETE E",
       "cat": "Reparación",
       "f": "16-19",
       "hi": "16:53",
       "d": "MADRID 97, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OW2YN6N",
@@ -22304,18 +22313,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OW33F7Q",
-      "cat": "Reparación",
-      "f": "16-19",
-      "hi": "17:45",
-      "d": "MADRID 97, QUILPUE",
-      "e": "Pendiente",
-      "tec": "CRISTOBAL MIRANDA VALENC",
-      "visitas": 2,
-      "ult_fecha": "05-11-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OVK2GY0",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -22333,9 +22330,21 @@
       "f": "16-19",
       "hi": "15:50",
       "d": "EDUARDO ALQUINTA 370, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "DANIEL NAVARRETE E",
       "visitas": 1,
+      "ult_fecha": "05-11-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OW33F7Q",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "18:05",
+      "d": "MADRID 97, QUILPUE",
+      "e": "en ruta",
+      "tec": "DANIEL NAVARRETE E",
+      "visitas": 2,
       "ult_fecha": "05-11-2026",
       "ult_cierre": "Sin moradores"
      },
@@ -22453,7 +22462,7 @@
       "f": "16-19",
       "hi": "17:30",
       "d": "LO GODOY 2330, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JOSE CASTRO P",
       "visitas": 2,
       "ult_fecha": "07-11-2026",
@@ -22513,7 +22522,7 @@
       "f": "13-16",
       "hi": "16:52",
       "d": "INES DE SUAREZ 457, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JOSE SALAS MEDINA",
       "visitas": 2,
       "ult_fecha": "06-11-2026",
@@ -22641,5 +22650,5 @@
    }
   }
  },
- "generado": "07-11-2026 17:34"
+ "generado": "07-11-2026 17:49"
 }
