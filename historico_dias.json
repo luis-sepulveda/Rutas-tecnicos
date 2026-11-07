@@ -21875,21 +21875,21 @@
    }
   },
   "07-11-2026": {
-   "hasta": "16:14",
-   "actividades": 169,
+   "hasta": "16:29",
+   "actividades": 170,
    "tecnicos": 34,
    "estados": {
-    "No Realizada": 33,
-    "Completado": 74,
-    "Pendiente": 26,
-    "Iniciado": 21,
-    "Suspendido": 4,
-    "Cancelado": 4,
-    "en ruta": 7
+    "No Realizada": 34,
+    "Completado": 79,
+    "Iniciado": 20,
+    "en ruta": 10,
+    "Suspendido": 5,
+    "Cancelado": 5,
+    "Pendiente": 17
    },
    "rgu": 244.8,
-   "caidas_total": 1,
-   "caidas_activas": 1,
+   "caidas_total": 3,
+   "caidas_activas": 3,
    "caidas_resueltas": 0,
    "nuevas": 28,
    "al_bucket": 38,
@@ -21904,6 +21904,24 @@
       "f": "13-16",
       "hi": "15:42",
       "d": "VENECIA (PROGRESO) 937, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OW38IGC",
+      "tec": "JOSE PEREZ RANGEL",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "16:10",
+      "d": "LAGO LAS TORRES 29 DEPTO 906, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OW3QARJ",
+      "tec": "SEBASTIAN DOSSOW A",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "16:25",
+      "d": "CALLE HERALDO ORREGO 3201 EDIF. A DEPTO 704, QUILPUE",
       "e": "Pendiente"
      }
     ],
@@ -21933,7 +21951,7 @@
       "f": "13-16",
       "hi": "15:43",
       "d": "LAS DELICIAS 651, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OW9UN4E",
@@ -22005,7 +22023,7 @@
       "f": "16-19",
       "hi": "16:32",
       "d": "FRANCIA 2441, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OW458AT",
@@ -22014,7 +22032,7 @@
       "f": "13-16",
       "hi": "15:49",
       "d": "FRANCISCO MONTESSI 1572, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OW6BKRT",
@@ -22086,7 +22104,7 @@
       "f": "13-16",
       "hi": "14:37",
       "d": "ALCALDE RODOLFO GALLEGUILLOS GATICA 2350 CASA 80, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OW4E08A",
@@ -22178,9 +22196,9 @@
       "o": "1-3OVOKGXO",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "16:39",
+      "hi": "16:16",
       "d": "LAS AZUCENAS 2658 EDIF. T DEPTO 403, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "ALEXIS JARA",
       "visitas": 1,
       "ult_fecha": "06-11-2026",
@@ -22276,7 +22294,7 @@
       "f": "13-16",
       "hi": "13:50",
       "d": "GALLEGUILLOS 1815, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "ESTEBAN PIZARRO QUINTANA",
       "visitas": 1,
       "ult_fecha": "06-11-2026",
@@ -22286,9 +22304,9 @@
       "o": "1-3OW45YFJ",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "16:04",
+      "hi": "16:26",
       "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "ESTEBAN PIZARRO QUINTANA",
       "visitas": 8,
       "ult_fecha": "07-11-2026",
@@ -22538,9 +22556,9 @@
       "o": "1-3OUK1M5V",
       "cat": "Upgrade promoción",
       "f": "13-16",
-      "hi": "16:21",
+      "hi": "16:29",
       "d": "LAS ESMERALDAS 2490, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "PABLO HERNANEZ FERNAN",
       "visitas": 1,
       "ult_fecha": "05-11-2026",
@@ -22596,5 +22614,5 @@
    }
   }
  },
- "generado": "07-11-2026 16:14"
+ "generado": "07-11-2026 16:29"
 }
