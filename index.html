@@ -17735,8 +17735,8 @@ function mgHoyHtml(){
      linea del boton b-sv. -->
 <div id="modalSV" onclick="if(event.target===this) cerrarSegVtr()">
   <div class="sv-box" role="dialog">
-    <div class="sv-head"><div><h2>🎯 Seguimiento de técnicos marcados por VTR/CLARO</h2>
-      <p>Migraciones · las dos miradas en cada casilla: <b>completitud</b> (VTR/CLARO, meta <span id="svMeta"></span> o más) y <b>quiebres</b> (meta <span id="svMetaQ"></span> o menos; la GSA va como quiebre, igual que VTR) · toca un técnico para abrir su ficha</p></div>
+    <div class="sv-head"><div><h2>🎯 Seguimiento de técnicos bajo la meta</h2>
+      <p>Migraciones · técnicos bajo la meta de completitud (VTR/CLARO, meta <span id="svMeta"></span> o más; quiebres <span id="svMetaQ"></span> o menos; la GSA va como quiebre, igual que VTR) · la lista se arma sola · toca un técnico para abrir su ficha</p></div>
       <button class="sv-x" onclick="cerrarSegVtr()" title="Cerrar (Esc)">✖</button></div>
     <div id="svCuerpo"></div>
   </div>
@@ -17746,13 +17746,46 @@ function mgHoyHtml(){
    ya no se muestra el KPI que mando VTR (queda en la lista solo como
    referencia). Cada casilla trae completitud (como VTR, meta 60 %) y
    quiebres (como Dominion, meta 40 %). */
-const SV_TECS = [
+/* La lista que mando VTR/CLARO el 23-10 queda como referencia (marca 🎯 "marcado por VTR"). */
+const SV_TECS_VTR = [
   ['D. Navarrete', 25.0, 'DANIEL NAVARRETE'], ['J. Castro', 27.3, 'JOSE CASTRO'], ['J. Arriagada', 38.9, 'JUAN ARRIAGADA'],
   ['P. Hernández', 40.0, 'PABLO HERNANEZ'], ['A. Alcayaga', 43.5, 'ALFREDO ALCAYAGA'], ['L. Martín', 44.0, 'LUIS MARTIN'],
   ['A. Jara', 44.4, 'ALEXIS JARA'], ['F. Silva', 45.2, 'FELIPE SILVA'], ['José Salas', 39, 'JOSE SALAS'],
   ['Jordan Roa', 39, 'JORDAN ROA'], ['José Galaz', 42, 'JOSE GALAZ']];
+/* (07-11-2026, 12:05) Luis: "la idea es que la lista se vaya actualizando sola de acuerdo a la evolución de cada técnico,
+   indicador rojo, indicador amarillo de acuerdo a su %".
+   La lista ya no es fija: cada vez que se abre, entran los técnicos con completitud de migraciones (como VTR, GSA = quiebre)
+   BAJO LA META (60 %) en las ÚLTIMAS 4 SEMANAS COMPLETAS (sin la semana en curso), con al menos SV_MINV visitadas.
+   Rojo: bajo SV_ROJO (50 %). Amarillo: de 50 % a 59,99 %. Cuando sube a 60 % o más, sale solo.
+   Cada lunes cambia la ventana de 4 semanas, así que la lista se mueve sola semana a semana.
+   Mientras no bajan los datos (DER), se usa la lista de VTR para no dejar vacías las marcas 🎯 de otras ventanas. */
+var SV_MINV = 8, SV_ROJO = 50;
+let SV_TECS = SV_TECS_VTR.slice();
+let SV_INFO = [], SV_SALIERON = [], SV_VENT = [], SV_AUTO = false;
 function svNorm(t){ return rmLimpia(t).toUpperCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); }
-function svDe(tec){ const n = svNorm(tec); for(let i = 0; i < SV_TECS.length; i++){ if(n.indexOf(SV_TECS[i][2]) === 0) return i; } return -1; }
+function svClave(t){ return svNorm(t).split(' ').slice(0, 2).join(' '); }      /* nombre + apellido: junta "PABLO HERNANEZ FERNAN" y "...FERNANDEZ" */
+function svCorto(t){ const w = svNorm(t).split(' '); return rmTitulo(w[0] + ' ' + (w[1] || '')); }
+function svArmarLista(){
+  if(!Array.isArray(DER)) return;
+  const hoy = (typeof FECHA_DATOS !== 'undefined' && FECHA_DATOS) ? FECHA_DATOS : new Date();
+  const lun = rmLunes(hoy), W = [4, 3, 2, 1].map(function(j){ return rmMasDias(lun, -7 * j); });
+  const acc = {};
+  DER.forEach(function(x){ if(x.tp !== 'MIGRA' || W.indexOf(x.sem) < 0) return;
+    const k = svClave(x.tec); if(!k) return; const o = acc[k] = acc[k] || { k:k, tec:x.tec, c:0, v:0, g:0 };
+    o.v++; if(x.gsa && MP_GSA_QUIEBRE){ o.g++; return; } if(!x.der) o.c++; });
+  const meta = 100 - MG_META_DER;
+  const esVTR = function(k){ return SV_TECS_VTR.some(function(t){ return (k + ' ').indexOf(t[2] + ' ') === 0 || k === t[2]; }); };
+  const L = Object.keys(acc).map(function(k){ const o = acc[k]; o.p = 100 * o.c / o.v; return o; })
+    .filter(function(o){ return o.v >= SV_MINV && o.p < meta; }).sort(function(a, b){ return a.p - b.p; });
+  SV_TECS = L.map(function(o){ return [svCorto(o.tec), o.p, o.k]; });
+  SV_INFO = L.map(function(o){ return { p:o.p, c:o.c, v:o.v, g:o.g, nivel: o.p < SV_ROJO ? 'rojo' : 'amarillo', vtr: esVTR(o.k) }; });
+  /* los que marco VTR y ya no estan (subieron a la meta o casi no visitaron) */
+  SV_SALIERON = SV_TECS_VTR.filter(function(t){ return !L.some(function(o){ return o.k.indexOf(t[2]) === 0 || t[2].indexOf(o.k) === 0; }); })
+    .map(function(t){ const o = Object.keys(acc).map(function(k){ return acc[k]; }).filter(function(o){ return o.k.indexOf(t[2]) === 0 || t[2].indexOf(o.k) === 0; })[0];
+      return { n:t[0], p:o ? o.p : null, v:o ? o.v : 0 }; });
+  SV_VENT = W; SV_AUTO = true;
+}
+function svDe(tec){ const n = svNorm(tec) + ' '; for(let i = 0; i < SV_TECS.length; i++){ if(n.indexOf(SV_TECS[i][2] + ' ') === 0) return i; } return -1; }
 function abrirSegVtr(){
   document.getElementById('modalSV').classList.add('abierto'); pintarSegVtr();
   if(DER !== null || derBajando) return;
@@ -17787,6 +17820,7 @@ function svOrdenar(col){
 /* (29-10-2026, 11:45) Luis: "creala porfa" -> pestañas Tabla / Evolución en la ventana del Seguimiento VTR */
 function pintarSegVtr(){
   const cu = document.getElementById('svCuerpo'); if(!cu) return;
+  if(DER !== null) svArmarLista();
   if(window.SV_VISTA === 'evo' && DER !== null){
     svEvoTip();
     document.getElementById('svMeta').textContent = (100 - MG_META_DER) + ' %'; document.getElementById('svMetaQ').textContent = MG_META_DER + ' %';
@@ -18040,7 +18074,7 @@ function svEvoAbrir(i){
   let m = document.getElementById('modalSvEvo');
   if(!m){ m = document.createElement('div'); m.id = 'modalSvEvo'; m.onclick = e => { if(e.target === m) svEvoCerrar(); }; document.body.appendChild(m); }
   const nm = String(t).toLowerCase().replace(/(^|\s)\S/g, c => c.toUpperCase());
-  m.innerHTML = '<div class="ms-box" role="dialog"><div class="ms-top"><div><h2>' + nm + ' <small>🎯 Seguimiento VTR · KPI que dio VTR: ' + P2(SV_TECS[i][1]) + '%</small></h2><p>Desde el ' + +SV_INI.slice(6) + ' ' + DER_MESES[+SV_INI.slice(4, 6) - 1] + ' · migraciones · completitud = completadas ÷ visitadas · raya = lista de VTR (' + SV_DESDE.slice(6) + '-' + SV_DESDE.slice(4, 6) + ')</p></div>'
+  m.innerHTML = '<div class="ms-box" role="dialog"><div class="ms-top"><div><h2>' + nm + ' <small>🎯 Seguimiento · ' + (SV_AUTO ? 'últimas 4 semanas: ' : 'KPI que dio VTR: ') + P2(SV_TECS[i][1]) + '%</small></h2><p>Desde el ' + +SV_INI.slice(6) + ' ' + DER_MESES[+SV_INI.slice(4, 6) - 1] + ' · migraciones · completitud = completadas ÷ visitadas · raya = lista de VTR (' + SV_DESDE.slice(6) + '-' + SV_DESDE.slice(4, 6) + ')</p></div>'
     + '<button class="ms-x" onclick="svEvoCerrar()" title="Cerrar (Esc)">✕</button></div><div class="ms-cuerpo">' + evHtmlOct(window.SV_EVO_F, t) + '</div></div>';
   m.classList.add('abierto'); m.scrollTop = 0;
 }
@@ -18061,7 +18095,7 @@ document.addEventListener('keydown', e => { if(e.key === 'Escape') svEvoCerrar()
 /* ---- dentro de la ventana del Seguimiento VTR: pestañas "Tabla" / "Evolución" ---- */
 function svVista(v){ window.SV_VISTA = v; pintarSegVtr(); const b = document.querySelector('#modalSV .sv-box'); if(b) b.scrollTop = 0; }
 function svTabsHtml(){ const v = window.SV_VISTA === 'evo' ? 'evo' : 'tab';
-  return '<div class="sv-tabs"><button class="' + (v === 'tab' ? 'on' : '') + '" onclick="svVista(\'tab\')">📋 Tabla por semana</button>'
+  return '<div class="sv-tabs"><button class="' + (v === 'tab' ? 'on' : '') + '" onclick="svVista(\'tab\')">🏁 Ranking</button>'
     + '<button class="' + (v === 'evo' ? 'on' : '') + '" onclick="svVista(\'evo\')">📈 Evolución desde el ' + +SV_INI.slice(6) + ' ' + DER_MESES[+SV_INI.slice(4, 6) - 1] + '</button></div>'; }
 /* las mismas filas de la tabla del Seguimiento VTR (DER + hoy en vivo), en el formato del evolutivo */
 function svEvoFilas(){
@@ -18121,7 +18155,13 @@ function pintarSegVtrTabla(){
   const th = function(col, txt, sub){
     const act = svOrd.col === col, fl = act ? (svOrd.dir < 0 ? ' ▼' : ' ▲') : ' <span class="sv-fl">⇅</span>';
     return '<th class="sv-ord' + (act ? ' act' : '') + '" onclick="svOrdenar(\'' + col + '\')" title="Ordenar por % de completitud (toca otra vez para invertir)">' + txt + fl + (sub ? '<small>' + sub + '</small>' : '') + '</th>'; };
-  let h = '<div class="sv-ley"><span><b class="sv-p ok"><i class="sv-et">compl.</i> 60%</b> arriba: <b>completitud</b>, como mide VTR/CLARO (meta ' + meta + ' % o más)</span>'
+  const nR = SV_INFO.filter(function(x){ return x.nivel === 'rojo'; }).length, nA = SV_INFO.length - nR;
+  let h = (SV_AUTO ? '<div class="sv-auto"><b>La lista se arma sola:</b> técnicos bajo ' + meta + ' % de completitud en las últimas 4 semanas completas ('
+      + 'Sem ' + derNumSemana(SV_VENT[0]) + ' a Sem ' + derNumSemana(SV_VENT[3]) + '), con ' + SV_MINV + ' visitas o más. Se actualiza sola cada lunes.'
+      + '<span class="sv-cnt"><span class="sv-niv rojo">🔴 ' + nR + ' bajo ' + SV_ROJO + ' %</span><span class="sv-niv amarillo">🟡 ' + nA + ' entre ' + SV_ROJO + ' y ' + (meta - 0.01).toFixed(2).replace('.', ',') + ' %</span></span>'
+      + (SV_SALIERON.length ? '<div class="sv-sal">✅ <b>Salieron de la lista de VTR:</b> ' + SV_SALIERON.map(function(x){ return escR(x.n) + (x.p === null ? ' (sin visitas)' : ' ' + P2(x.p) + '%' + (x.v < SV_MINV ? ' · ' + x.v + ' visitas' : '')); }).join(' · ') + '</div>' : '')
+      + '</div>' : '')
+    + '<div class="sv-ley"><span><b class="sv-p ok"><i class="sv-et">compl.</i> 60%</b> arriba: <b>completitud</b>, como mide VTR/CLARO (meta ' + meta + ' % o más)</span>'
     + '<span><span class="sv-q ok"><i class="sv-et">quiebres</i> 40%</span> abajo: <b>quiebres</b> (meta ' + MG_META_DER + ' % o menos), con la GSA contada como quiebre, igual que VTR</span>'
     + '<span class="g">Son la misma cosa vista al revés: siempre suman 100. Toca el título de una semana para ordenar por %.</span></div>'
     + '<table class="sv-t"><thead><tr><th class="iz sv-ord' + (svOrd.col === null ? ' act' : '') + '" onclick="svOrdenar(null)" title="Volver al orden de la lista">Técnico</th><th class="iz">Supervisor</th>'
@@ -18171,9 +18211,49 @@ function pintarSegVtrTabla(){
     const fl = p4 === null || pw === null ? '' : pw > p4 + 0.05 ? ' <i class="up">▲</i>' : pw < p4 - 0.05 ? ' <i class="dn">▼</i>' : '';
     return top + '<small class="sv-mb" title="Su promedio de las 4 semanas anteriores (' + b4.c + ' de ' + b4.v + ') contra esta semana (' + w.c + ' de ' + w.v + ')">4 sem '
       + (p4 === null ? '—' : P2(p4) + '%') + ' · sem ' + (pw === null ? '—' : P2(pw) + '%') + fl + '</small>'; };
+  /* ==== (07-11-2026, 12:12) Luis eligió la vista C "ranking con barras": "la C compa porfa, para todos los que van bajo 60 %
+     tal como lo muestras y los que quedaron en seguimiento de VTR con la marca VTR". Una fila por técnico (del peor al mejor):
+     barra con su completitud de las últimas 4 semanas completas (raya negra = meta 60 %, gris = 50 %), las 5 semanas en
+     cuadritos de color, tendencia (Sem anterior vs el promedio de las 3 antes) y cómo va esta semana. Toca una fila = su ficha.
+     La tabla anterior queda abajo de este bloque (solo se usa si la lista no se pudo armar sola). ==== */
+  if(SV_AUTO){
+    const colP = function(p){ return p === null ? '#e2e8f0' : p >= meta ? '#16a34a' : p >= SV_ROJO ? '#f59e0b' : '#dc2626'; };
+    const sumW = function(o, ws){ const r = { c:0, v:0 }; ws.forEach(function(w){ if(o[w]){ r.c += o[w].c; r.v += o[w].v; } }); return r; };
+    const tend = function(o){ const a = pc(o[VIS[3]]), b = pc(sumW(o, VIS.slice(0, 3))); if(a === null || b === null) return '<span class="svr-t gr">sin datos</span>';
+      const d = a - b, tt = ' title="Sem ' + derNumSemana(VIS[3]) + ': ' + P2(a) + '% · las 3 anteriores: ' + P2(b) + '%"';
+      return Math.abs(d) < 3 ? '<span class="svr-t gr"' + tt + '>= parejo</span>' : d > 0 ? '<span class="svr-t ok"' + tt + '>▲ mejorando</span>' : '<span class="svr-t bad"' + tt + '>▼ empeorando</span>'; };
+    const estaSem = function(o){ const w = o[lun] || { c:0, v:0 }, m = meta / 100;
+      if(!w.v) return '<span class="svr-e gr">Sin visitas esta semana</span>';
+      if(pc(w) >= meta){ const j = Math.max(0, Math.floor(w.c / m - w.v + 1e-9));
+        return j ? '<span class="svr-e ok" title="Va ' + w.c + ' de ' + w.v + '">✓ Aguanta ' + j + ' derivada' + (j === 1 ? '' : 's') + '</span>' : '<span class="svr-e wa" title="Va ' + w.c + ' de ' + w.v + ': una derivada más y queda bajo ' + meta + ' %">⚠ Al borde</span>'; }
+      const k = Math.max(1, Math.ceil((m * w.v - w.c) / (1 - m) - 1e-9));
+      return '<span class="svr-e bad" title="Va ' + w.c + ' de ' + w.v + ': si completa sus próximas ' + k + ' visitas llega al ' + meta + ' %">🎯 Le falta' + (k === 1 ? ' 1 completada' : 'n ' + k + ' completadas') + '</span>'; };
+    const nR = SV_INFO.filter(function(x){ return x.nivel === 'rojo'; }).length, nA = SV_INFO.length - nR;
+    const tot = SV_INFO.reduce(function(a, x){ a.c += x.c; a.v += x.v; return a; }, { c:0, v:0 });
+    let r = '<div class="svr-res"><span class="svr-k"><b class="bad">' + nR + '</b> 🔴 bajo ' + SV_ROJO + ' %</span><span class="svr-k"><b class="wa">' + nA + '</b> 🟡 ' + SV_ROJO + ' a ' + (meta - 1) + ' %</span>'
+      + (SV_SALIERON.length ? '<span class="svr-k"><b class="ok">' + SV_SALIERON.length + '</b> ✅ ' + (SV_SALIERON.length === 1 ? 'salió' : 'salieron') + ' de la lista de VTR: ' + SV_SALIERON.map(function(x){ return escR(x.n) + (x.p === null ? ' (sin visitas)' : ' ' + P2(x.p) + '%'); }).join(', ') + '</span>' : '')
+      + '<span class="svr-k">Los ' + SV_TECS.length + ' juntos: <b>' + (tot.v ? P2(100 * tot.c / tot.v) + '%' : '–') + '</b> (' + tot.c + ' de ' + tot.v + ')</span>'
+      + '<span class="svr-ay">Últimas 4 semanas completas (Sem ' + derNumSemana(SV_VENT[0]) + ' a ' + derNumSemana(SV_VENT[3]) + ') · ' + SV_MINV + ' visitas o más · se actualiza sola cada lunes · <span class="sv-vtr">🎯 VTR</span> = estaba en la lista que mandó VTR/CLARO el 23-10</span></div>'
+      + '<div class="svr"><div class="svr-f svr-h"><span>Técnico</span><span>Completitud últimas 4 semanas · raya negra = meta ' + meta + ' %, gris = ' + SV_ROJO + ' %</span><span>Sem ' + derNumSemana(VIS[0]) + ' → ' + derNumSemana(VIS[VIS.length - 1]) + '</span><span>Tendencia</span><span>Esta semana</span></div>';
+    SV_TECS.forEach(function(t, i){ const inf = SV_INFO[i], o = C[i];
+      r += '<div class="svr-f" onclick="svFicha(' + i + ')" title="Abrir su ficha">'
+        + '<span class="svr-n"><b>' + escR(t[0]) + '</b>' + (inf.vtr ? ' <span class="sv-vtr" title="Estaba en la lista que mandó VTR/CLARO el 23-10">🎯 VTR</span>' : '') + '<small>' + escR(o.sup ? derTitulo(o.sup) : '') + '</small></span>'
+        + '<span class="svr-b" title="Completó ' + inf.c + ' de ' + inf.v + ' en las últimas 4 semanas' + (inf.g ? ' (' + inf.g + ' GSA como quiebre)' : '') + '"><i style="width:' + inf.p + '%;background:' + colP(inf.p) + '"></i><em class="m"></em><em class="r"></em><b>' + P2(inf.p) + '% · ' + inf.c + '/' + inf.v + '</b></span>'
+        + '<span class="svr-w">' + VIS.map(function(w){ const q = o[w], p = pc(q);
+            return '<span style="background:' + colP(p) + (p === null ? ';color:#94a3b8' : '') + '" title="Sem ' + derNumSemana(w) + (w === lun ? ' (en curso)' : '') + ': ' + (q && q.v ? q.c + ' de ' + q.v + ' · ' + P2(p) + '%' : 'sin visitas') + '">' + (p === null ? '–' : Math.round(p)) + '</span>'; }).join('') + '</span>'
+        + tend(o) + estaSem(o) + '</div>';
+    });
+    r += '</div><p class="sv-nota">Verde: ' + meta + ' % o más · amarillo: de ' + SV_ROJO + ' a ' + (meta - 1) + ' % · rojo: bajo ' + SV_ROJO + ' %. Los cuadritos son las semanas (la última es la semana en curso, con hoy). '
+      + 'Tendencia: la Sem ' + derNumSemana(VIS[3]) + ' contra el promedio de las 3 anteriores. Esta semana: cuántas completadas seguidas le faltan para llegar al ' + meta + ' %, o cuántas derivadas más aguanta. Completitud como VTR: la GSA cuenta como quiebre.</p>';
+    cu.innerHTML = r;
+    return;
+  }
   idx.forEach(function(i){
     const t = SV_TECS[i], o = C[i];
-    h += '<tr onclick="svFicha(' + i + ')" title="Abrir su ficha"><td class="iz"><b>' + escR(t[0]) + '</b>' + metaSem(o) + '</td><td class="iz sv-sup" title="' + escR(o.sup ? derTitulo(o.sup) : '') + '">' + escR(o.sup ? derTitulo(o.sup).replace(/^(\S+)\s+(\S).*$/, '$1 $2.') : '') + '</td>'
+    const inf = SV_AUTO ? SV_INFO[i] : null;
+    const sem = inf ? '<span class="sv-niv ' + inf.nivel + '" title="Últimas 4 semanas completas: completó ' + inf.c + ' de ' + inf.v + (inf.g ? ' (' + inf.g + ' GSA como quiebre)' : '') + '">' + (inf.nivel === 'rojo' ? '🔴' : '🟡') + ' 4 sem ' + P2(inf.p) + '%</span>'
+      + (inf.vtr ? '<span class="sv-vtr" title="Estaba en la lista que mandó VTR/CLARO el 23-10">🎯 VTR</span>' : '') : '';
+    h += '<tr onclick="svFicha(' + i + ')" title="Abrir su ficha" class="sv-f-' + (inf ? inf.nivel : '') + '"><td class="iz"><b>' + escR(t[0]) + '</b>' + sem + metaSem(o) + '</td><td class="iz sv-sup" title="' + escR(o.sup ? derTitulo(o.sup) : '') + '">' + escR(o.sup ? derTitulo(o.sup).replace(/^(\S+)\s+(\S).*$/, '$1 $2.') : '') + '</td>'
       + filaCeldas(o) + '</tr>';
   });
   h += '<tr class="sv-tot"><td class="iz"><b>Los ' + SV_TECS.length + ' juntos</b>' + metaSem(T) + '</td><td></td>' + filaCeldas(T) + '</tr></tbody></table>'
@@ -18194,6 +18274,31 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarS
   #modalSV .sv-head p { margin:4px 0 0; font-size:12.5px; color:#a9b8cf; }
   #modalSV .sv-x { border:1px solid #33475f; background:transparent; color:#fff; border-radius:8px; padding:5px 11px; cursor:pointer; align-self:flex-start; }
   #svCuerpo { padding:16px 22px 20px; }
+  .svr-res { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-bottom:10px; font-size:13px; }
+  .svr-k { background:#fff; border:1px solid #dbe3ee; border-radius:10px; padding:5px 12px; } .svr-k b { font-size:18px; margin-right:3px; }
+  .svr-k b.bad { color:#b91c1c; } .svr-k b.wa { color:#b45309; } .svr-k b.ok { color:#15803d; }
+  .svr-ay { font-size:12px; color:#64748b; }
+  .svr { background:#fff; border-radius:10px; padding:4px 12px; }
+  .svr-f { display:grid; grid-template-columns:180px 1fr 160px 110px 200px; gap:10px; align-items:center; padding:4px 0; border-top:1px solid #f1f5f9; font-size:13px; cursor:pointer; }
+  .svr-f:hover { background:#f8fafc; }
+  .svr-h { font-size:10.5px; color:#5d7389; font-weight:800; text-transform:uppercase; letter-spacing:.03em; border:0; cursor:default; } .svr-h:hover { background:none; }
+  .svr-n small { display:block; font-size:11px; color:#94a3b8; }
+  .svr-b { position:relative; height:16px; background:#f1f5f9; border-radius:4px; display:block; }
+  .svr-b i { position:absolute; left:0; top:0; bottom:0; border-radius:4px; }
+  .svr-b em { position:absolute; top:-3px; bottom:-3px; } .svr-b em.m { left:60%; width:2px; background:#0f172a; } .svr-b em.r { left:50%; width:1px; background:#94a3b8; }
+  .svr-b b { position:absolute; right:5px; top:0; font-size:11px; line-height:16px; color:#0f172a; }
+  .svr-w { display:flex; gap:4px; } .svr-w span { width:26px; height:17px; border-radius:4px; font-size:10px; color:#fff; font-weight:800; display:flex; align-items:center; justify-content:center; }
+  .svr-t { font-weight:700; font-size:12.5px; } .svr-t.ok { color:#15803d; } .svr-t.bad { color:#dc2626; } .svr-t.gr { color:#64748b; font-weight:500; }
+  .svr-e { font-weight:700; font-size:12.5px; } .svr-e.ok { color:#15803d; } .svr-e.bad { color:#dc2626; } .svr-e.wa { color:#b45309; } .svr-e.gr { color:#94a3b8; font-weight:500; }
+  @media (max-width:900px){ .svr-f { grid-template-columns:1fr; gap:3px; } .svr-h { display:none; } }
+  .sv-auto { background:#fff; border:1px solid #dbe3ee; border-radius:10px; padding:9px 12px; margin-bottom:10px; font-size:13px; color:#334155; }
+  .sv-auto .sv-cnt { display:inline-flex; gap:8px; margin-left:10px; }
+  .sv-niv { display:inline-block; border-radius:6px; padding:1px 7px; font-size:11.5px; font-weight:800; margin:2px 6px 2px 0; }
+  .sv-niv.rojo { background:#fee2e2; color:#991b1b; } .sv-niv.amarillo { background:#fef3c7; color:#92400e; }
+  .sv-vtr { display:inline-block; border-radius:6px; padding:1px 6px; font-size:10.5px; font-weight:700; background:#e0e7ff; color:#3730a3; }
+  .sv-sal { margin-top:5px; font-size:12.5px; color:#166534; }
+  .sv-t tr.sv-f-rojo td.iz:first-child { box-shadow:inset 4px 0 0 #dc2626; } .sv-t tr.sv-f-amarillo td.iz:first-child { box-shadow:inset 4px 0 0 #f59e0b; }
+
   .sv-vacio { padding:30px; text-align:center; color:#64748b; }
   .sv-t { width:100%; border-collapse:collapse; background:#fff; border-radius:10px; overflow:hidden; font-size:14px; }
   .sv-t th { background:#e8f0fe; color:#1e3a8a; font-size:12px; text-transform:uppercase; letter-spacing:.03em; padding:9px 10px; text-align:right; }
@@ -18300,7 +18405,7 @@ function pintarMigras(){
       + b("migIr('abrirMigGer')", '📊', 'Migraciones · Gerencia', 'Por mes, semana y hoy, contra la meta. Con Modo reunión.'))
     + '</div><div class="mi-col">'
     + g('2', 'Técnicos', '¿Quién anda mal y qué hago con él?',
-        b("migIr('abrirSegVtr')", '🎯', 'Seguimiento VTR', 'Los ' + (typeof SV_TECS !== 'undefined' ? SV_TECS.length : '') + ' técnicos que VTR/CLARO marcó, semana a semana.')
+        b("migIr('abrirSegVtr')", '🎯', 'Seguimiento VTR', 'Los técnicos bajo 60 % en las últimas 4 semanas (se actualiza sola), semana a semana.')
       + b("migDer('tec')", '👷', 'Por técnico', 'Quién deriva más en la semana. Cada orden y la historia de su dirección.')
       + b("migDer('aud')", '🔍', 'A quién auditar', 'Lo derivado que es propio de cada técnico, sin causales ajenas.')
       + b("migDer('evo')", '📈', 'Evolución', 'Últimas semanas de cada técnico: si va mejorando o empeorando.')
