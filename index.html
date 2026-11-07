@@ -8591,7 +8591,36 @@ function tablasInicio(lista, pal, grad, porTipo, total){
   const leer = '<div class="ib-leer"><b>Cómo leer:</b> cada tarjeta es una franja horaria; la última, <b>Todo el día</b>, suma las tres. Arriba, cuántas actividades trae y cuánto pesa en el día; '
     + 'al medio, cuántas son de cada comuna; abajo, de qué tipo son. Las de <b>3 Play</b> son las que más tiempo toman.</div>';
   /* (14:55) sin la fila de 3 cajas (kpis): ahora repetia la tarjeta "Todo el dia". kpis queda escrita, sin usar. */
-  return cartas + leer;
+  /* (07-11-2026) Luis: "hay una orden de la comuna de concepción" en el inicio de jornada → aviso arriba con las
+     órdenes que no son de Quilpué ni Villa Alemana. Ámbar: otra comuna de la V Región (puede ser normal, VTR/CLARO
+     manda migraciones a otras comunas). Rojo: fuera de la V Región (casi seguro mal asignada, como Concepción). */
+  const avisoZona = (function(){
+    const sinT = function(t){ return String(t || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase().trim(); };
+    const V_REG = ['VALPARAISO','VINA DEL MAR','CONCON','QUINTERO','PUCHUNCAVI','CASABLANCA','JUAN FERNANDEZ','LIMACHE','OLMUE',
+      'QUILLOTA','LA CALERA','CALERA','LA CRUZ','NOGALES','HIJUELAS','SAN ANTONIO','CARTAGENA','EL TABO','EL QUISCO','ALGARROBO',
+      'SANTO DOMINGO','SAN FELIPE','LOS ANDES','CALLE LARGA','RINCONADA','SAN ESTEBAN','LLAILLAY','LLAY LLAY','CATEMU','PANQUEHUE',
+      'PUTAENDO','SANTA MARIA','LA LIGUA','CABILDO','PAPUDO','ZAPALLAR','PETORCA','ISLA DE PASCUA','PLACILLA'];
+    const fuera = lista.map(function(x){ const c = sinT(String(x.p.d || '').split(',').pop());
+        return { x:x, c:c, lejos: !c || V_REG.indexOf(c) < 0 }; })
+      .filter(function(z){ return z.c !== 'QUILPUE' && z.c !== 'VILLA ALEMANA'; })
+      .sort(function(a, b){ return (b.lejos - a.lejos) || a.c.localeCompare(b.c); });
+    if(!fuera.length) return '';
+    const nL = fuera.filter(function(z){ return z.lejos; }).length;
+    return '<div style="margin:0 0 12px; border-radius:12px; padding:12px 14px; background:' + (nL ? '#fef2f2' : '#fffbeb')
+      + '; border:1px solid ' + (nL ? '#fca5a5' : '#fcd34d') + '; color:#1f2937">'
+      + '<div style="font-weight:800; font-size:14.5px; color:' + (nL ? '#b91c1c' : '#92400e') + '">⚠ ' + fuera.length
+      + (fuera.length === 1 ? ' orden fuera de Quilpué y Villa Alemana' : ' órdenes fuera de Quilpué y Villa Alemana')
+      + (nL ? ' · ' + nL + ' fuera de la V Región' : '') + '</div>'
+      + fuera.map(function(z){ const p = z.x.p;
+          return '<div style="display:flex; flex-wrap:wrap; gap:4px 10px; align-items:center; margin-top:7px; font-size:13px">'
+            + '<span style="font-weight:800; font-size:11px; border-radius:5px; padding:1px 7px; color:#fff; background:' + (z.lejos ? '#dc2626' : '#d97706') + '">'
+            + (z.lejos ? 'FUERA DE LA REGIÓN' : 'OTRA COMUNA') + '</span>'
+            + '<b>' + escR(p.o || '') + '</b><span>' + escR(p.cat || p.t || '') + '</span><span>' + escR(p.f || '') + ' hrs</span>'
+            + '<span>' + escR(z.x.tec || '') + '</span><span style="color:#4b5563">' + escR(p.d || '') + '</span></div>'; }).join('')
+      + '<div style="margin-top:8px; font-size:12px; color:#4b5563">Rojo: casi seguro mal asignada, conviene avisar a VTR/CLARO. '
+      + 'Ámbar: otra comuna de la región, puede ser normal.</div></div>';
+  })();
+  return avisoZona + cartas + leer;
 }
 
 function actividadesDeEstado(est){
