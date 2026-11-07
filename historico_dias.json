@@ -21875,23 +21875,23 @@
    }
   },
   "07-11-2026": {
-   "hasta": "16:59",
-   "actividades": 172,
+   "hasta": "17:24",
+   "actividades": 174,
    "tecnicos": 34,
    "estados": {
     "No Realizada": 34,
-    "Completado": 85,
-    "Iniciado": 24,
-    "Pendiente": 14,
+    "Completado": 88,
+    "Iniciado": 27,
+    "Pendiente": 12,
     "Suspendido": 6,
     "Cancelado": 6,
-    "en ruta": 3
+    "en ruta": 1
    },
-   "rgu": 245.9,
+   "rgu": 246.1,
    "caidas_total": 3,
    "caidas_activas": 3,
    "caidas_resueltas": 0,
-   "nuevas": 28,
+   "nuevas": 30,
    "al_bucket": 38,
    "repetidas": 34,
    "reagendadas": 2,
@@ -21926,6 +21926,24 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OWAVCXP",
+      "tec": "MARCELO GÓMEZ GÓME",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:16",
+      "d": "GRECIA 1237, VILLA ALEMANA",
+      "e": "Iniciado"
+     },
+     {
+      "o": "1-3OWBFZUA",
+      "tec": "YENDER BOSCAN CADENAS",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:09",
+      "d": "CERRO MANANTIALES 1861, QUILPUE",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3OWAF83X",
       "tec": "EDGAR VALERO C",
@@ -22000,7 +22018,7 @@
      },
      {
       "o": "1-3OW8XEKX",
-      "tec": "LUIS MARTIN NUÑEZ",
+      "tec": "JOEL GUSTAVE GUSTA",
       "cat": "Alta 1 Play",
       "f": "16-19",
       "hi": "16:08",
@@ -22009,7 +22027,7 @@
      },
      {
       "o": "1-3OW47MMX",
-      "tec": "LUIS GATICA DAVILA",
+      "tec": "JOSE CASTRO P",
       "cat": "Alta 1 Play",
       "f": "16-19",
       "hi": "17:45",
@@ -22328,9 +22346,9 @@
       "o": "1-3OW45YFJ",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "16:52",
+      "hi": "17:04",
       "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "ESTEBAN PIZARRO QUINTANA",
       "visitas": 8,
       "ult_fecha": "07-11-2026",
@@ -22421,6 +22439,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OW47MMX",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "17:24",
+      "d": "LO GODOY 2330, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOSE CASTRO P",
+      "visitas": 2,
+      "ult_fecha": "07-11-2026",
+      "ult_cierre": "Direccion incorrecta"
+     },
+     {
       "o": "1-3OVGWJL4",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -22505,18 +22535,6 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3OW47MMX",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "18:25",
-      "d": "LO GODOY 2330, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "LUIS GATICA DAVILA",
-      "visitas": 2,
-      "ult_fecha": "07-11-2026",
-      "ult_cierre": "Direccion incorrecta"
-     },
-     {
       "o": "1-3OVDWGRL",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -22558,11 +22576,23 @@
       "f": "13-16",
       "hi": "15:32",
       "d": "HEROES DE LA CONCEPCION 886 DEPTO 31, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "RAFAEL VARGAS B",
       "visitas": 1,
       "ult_fecha": "07-10-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OUUIJ87",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "18:15",
+      "d": "PEDRO AGUIRRE CERDA 974, QUILPUE",
+      "e": "Pendiente",
+      "tec": "SEBASTIAN DOSSOW A",
+      "visitas": 1,
+      "ult_fecha": "05-11-2026",
+      "ult_cierre": "Orden mal generada"
      },
      {
       "o": "1-3OLMQCUW",
@@ -22575,18 +22605,6 @@
       "visitas": 3,
       "ult_fecha": "24-10-2026",
       "ult_cierre": "Sin acceso a vivienda"
-     },
-     {
-      "o": "1-3OUUIJ87",
-      "cat": "Alta 2 Play",
-      "f": "16-19",
-      "hi": "18:07",
-      "d": "PEDRO AGUIRRE CERDA 974, QUILPUE",
-      "e": "Pendiente",
-      "tec": "YENDER BOSCAN CADENAS",
-      "visitas": 1,
-      "ult_fecha": "05-11-2026",
-      "ult_cierre": "Orden mal generada"
      }
     ],
     "reagendadas": [
@@ -22606,7 +22624,7 @@
       "f": "16-19",
       "hi": "16:35",
       "d": "RENE QUEVEDO 2496, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JOSE CASTRO P",
       "desde": "04-11-2026"
      }
@@ -22614,5 +22632,5 @@
    }
   }
  },
- "generado": "07-11-2026 16:59"
+ "generado": "07-11-2026 17:24"
 }
