@@ -7746,7 +7746,7 @@ function renderReitDir(){
         + '<div class="rd-scroll"><table class="rd-tabla">'
         + '<tr><th>Fecha</th><th>Hace</th><th>Trabajo</th><th>Orden</th><th>Técnico</th><th>Resultado</th><th>Cierre / quiebre</th></tr>'
         + filas + '</table></div>'
-        + (w.lat && w.lng ? '<span class="rd-mapa" onclick="cerrarReit(); if(document.getElementById(\'portada\').style.display !== \'none\') verMapa(); setTimeout(function(){ map.setView([' + w.lat + ',' + w.lng + '], 17); }, 150)">📍 ver en el mapa</span>' : '')
+        /* (07-11-2026) Luis: sacar los links 'ver en el mapa' de Reiterados */ 
         + '</div>';
     }).join('');
   }
@@ -8144,7 +8144,7 @@ function renderReit(){
         + '<div class="rd-scroll"><table class="rd-tabla">'
         + '<tr><th>Fecha</th><th>Hace</th><th>Trabajo</th><th>Orden</th><th>Técnico</th><th>Supervisor</th><th>Cierre</th></tr>'
         + filas + '</table></div>'
-        + '<span class="rd-mapa" onclick="verReitEnMapa(' + i + ')">📍 ver en el mapa</span>'
+        /* (07-11-2026) link 'ver en el mapa' sacado */
         + '</div>';
     }).join('');
   }
@@ -8180,7 +8180,7 @@ function redDeReit(w){
     + (r30 !== null ? ' · ' + r30 + ' en 30 días' : '') + '</span>';
   if(w.nodo) h += '<span class="rr ' + col(nNodo) + '">Nodo ' + escR(w.nodo) + (w.red === 'HFC' ? ' HFC' : '')
     + ' · ' + nNodo + ' casa' + (nNodo === 1 ? '' : 's') + ' con reparación hoy</span>';
-  if(w.lat && w.lng) h += '<span class="rd-mapa" onclick="verReitEnRed(\'' + escR(w.kn || '') + '\',' + w.lat + ',' + w.lng + ')">🗺 ver en el mapa de red</span>';
+  /* (07-11-2026) link 'ver en el mapa de red' sacado */
   return h + '</div>';
 }
 
