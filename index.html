@@ -18477,6 +18477,11 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarM
   #anPage .an-head { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:12px; }
   #anPage h1 { margin:0; font-size:24px; letter-spacing:.5px; color:#0f172a; }
   #anPage h1 small { font-size:13px; color:#64748b; font-weight:400; margin-left:8px; }
+  /* (07-11-2026, 15:45) Luis: titulo "ANÁLISIS DE LAS ACTIVIDADES: Luis Sepúlveda" en una sola linea con los filtros */
+  #anPage .an-head h1 { font-size:20px; letter-spacing:.2px; }
+  #anPage .an-fecha { font-size:12px; color:#64748b; margin-right:4px; white-space:nowrap; }
+  @media (min-width:1280px){ #anPage .an-head { flex-wrap:nowrap; } #anPage .an-head h1 { white-space:nowrap; } }
+  #anPage .an-head .an-chip { padding:5px 11px; font-size:12px; }
   #anPage .an-chips { display:flex; gap:6px; flex-wrap:wrap; align-items:center; }
   #anPage .an-btns { margin:-4px 0 14px; } #anPage .an-fil { margin-left:auto; }
   #anPage .an-chip { background:#16213a; border:1px solid #22304f; border-radius:999px; padding:6px 13px; font-size:12.5px; color:#94a3b8; cursor:pointer; }
@@ -19039,7 +19044,7 @@ function anPintar(){
   const y = box.scrollTop, D = anFilas(), fd = (typeof FECHA_DATOS !== 'undefined' && FECHA_DATOS) ? FECHA_DATOS : new Date();
   const hh = String(fd.getHours()).padStart(2, '0') + ':' + String(fd.getMinutes()).padStart(2, '0');
   /* (06-11-2026, 17:47) Luis: los 3 clics en el titulo abren Reiterados, igual que en la pantalla principal (reitEntradaSecreta) */
-  let h = '<div class="an-wrap"><div class="an-head"><h1 onclick="if(event.detail === 3){ try { reitEntradaSecreta(); } catch(x){} }" style="user-select:none">MI ANÁLISIS <small>solo Luis · ' + fd.toLocaleDateString('es-CL', { weekday:'long', day:'2-digit', month:'2-digit', year:'numeric' }) + ', datos de las ' + hh + '</small></h1>'
+  let h = '<div class="an-wrap"><div class="an-head"><h1 onclick="if(event.detail === 3){ try { reitEntradaSecreta(); } catch(x){} }" style="user-select:none"><span style="color:#4b5563;font-weight:800">ANÁLISIS DE LAS ACTIVIDADES:</span> <span style="color:#6b7280;font-weight:400">Luis Sepúlveda</span></h1>'
   /* (05-11-2026) Luis: "que quede en 1 sola linea si no los dejas al lado derecho, la hora arriba": comuna y supervisor
      van en la fila del titulo (a la derecha) y los botones de ventanas en la fila de abajo */
     /* (06-11-2026, 18:06) Luis: rotulo "Comuna" y "Supervisor" para que los dos "Todo el equipo" no se confundan */
@@ -19049,7 +19054,8 @@ function anPintar(){
     + '<span class="an-sep"></span><span class="an-filrot">Supervisor</span>' + [['Todo','Todos'], ['VICTOR MOREIRA','Víctor Moreira'], ['TERRY RIVEROL','Terry Riverol']].map(function(c){
         return '<span class="an-chip sup' + (AN_SUP === c[0] ? ' on' : '') + '" title="Filtrar por supervisor del técnico" onclick="AN_SUP=\'' + c[0] + '\'; anPintar(); anDetPintar()">' + c[1] + '</span>'; }).join('')
     + '<button class="an-x" onclick="anCerrar()" title="Cerrar (Esc o Ctrl+Alt+A)">✕ Cerrar</button></div></div>';
-  h += '<div class="an-chips an-btns"><span class="an-updbox">' + anUpdHtml() + '</span>'
+  /* (07-11-2026, 15:47) la fecha y la hora de los datos bajan a esta fila para que el titulo y los filtros queden en una sola linea */
+  h += '<div class="an-chips an-btns"><span class="an-fecha">' + fd.toLocaleDateString('es-CL', { weekday:'long', day:'2-digit', month:'2-digit', year:'numeric' }) + ' · datos de las ' + hh + '</span><span class="an-updbox">' + anUpdHtml() + '</span>'
     /* (06-11-2026) Luis: "los botones de calidad, rgu, asistencia dejalos dentro de un boton llamado informes".
        Boton "Informes" que abre un menu con los tres (Calidad 04-11, RGU 05-11, Asistencia 05-11). */
     + '<span class="an-inf"><button class="an-btn inf' + (AN_INF_AB ? ' ab' : '') + '" onclick="anInfToggle(event)" title="Calidad, RGU y Asistencia">📑 Informes ' + (AN_INF_AB ? '▴' : '▾') + '</button>'
