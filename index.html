@@ -3318,6 +3318,44 @@
   .ib-h span { font-size:32px; white-space:nowrap; }
   .ib-h small { font-size:11.5px; }
   .ib-cm { padding:12px 14px 4px; } .ib-pl { padding:8px 14px 14px; }
+  /* (07-11-2026) Luis: a ~1170 px se cortaba el "% del día" y la caja de Villa Alemana en "Todo el día" */
+  .ib-h { flex-wrap:wrap; row-gap:2px; } .ib-h span { font-size:30px; }
+  .ib-cm div { min-width:0; } .ib-cm div span { display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  /* ==== MUESTRAS DE OTRA VISUAL PARA INICIO DE JORNADA (07-11-2026) ==== */
+  .ivA, .ivB, .ivC { color:#15293e; }
+  .ivK { display:grid; grid-template-columns:repeat(auto-fit,minmax(118px,1fr)); gap:10px; margin-bottom:12px; }
+  .ivK > div { background:#fff; border-radius:12px; padding:10px 14px; border-left:5px solid #0e7c6b; }
+  .ivK .l { font-size:12px; color:#5d7389; } .ivK .n { font-family:'Archivo',sans-serif; font-size:28px; font-weight:700; line-height:1.1; }
+  .ivK .s { font-size:11.5px; color:#5d7389; }
+  .ivT { width:100%; border-collapse:separate; border-spacing:0; background:#fff; border-radius:12px; overflow:hidden; font-size:14px; }
+  .ivT th { background:#f1f5f9; color:#41586f; font-size:12px; font-weight:700; padding:8px 6px; text-align:center; white-space:nowrap; }
+  .ivT th.g { background:#e2e8f0; color:#15293e; font-size:11.5px; letter-spacing:.04em; }
+  .ivT td { padding:9px 6px; text-align:center; border-top:1px solid #eef2f6; font-variant-numeric:tabular-nums; }
+  .ivT td.f { text-align:left; padding-left:14px; font-family:'Archivo',sans-serif; font-weight:700; font-size:16px; white-space:nowrap; }
+  .ivT td.t { font-family:'Archivo',sans-serif; font-weight:700; font-size:20px; color:#0e7c6b; }
+  .ivT td small { display:block; font-size:10.5px; color:#5d7389; }
+  .ivT tr.tot td { background:#0e7c6b; color:#fff; } .ivT tr.tot td small, .ivT tr.tot td.t { color:#fff; }
+  .ivT td.sep, .ivT th.sep { border-left:2px solid #e2e8f0; }
+  .ivT td.cero { color:#cbd5e1; }
+  .ivB .fr { background:#fff; border-radius:12px; padding:12px 16px; margin-bottom:10px; display:grid; grid-template-columns:120px 1fr; gap:6px 16px; align-items:center; }
+  .ivB .fr .h b { font-family:'Archivo',sans-serif; font-size:18px; display:block; } .ivB .fr .h span { font-family:'Archivo',sans-serif; font-size:30px; font-weight:700; color:#0e7c6b; }
+  .ivB .fr .h small { display:block; font-size:11.5px; color:#5d7389; }
+  .ivB .bar { display:flex; height:30px; border-radius:8px; overflow:hidden; font-size:12.5px; font-weight:700; }
+  .ivB .bar span { display:flex; align-items:center; justify-content:center; min-width:24px; white-space:nowrap; overflow:hidden; }
+  .ivB .rt { font-size:11px; color:#5d7389; font-weight:700; letter-spacing:.04em; margin:2px 0 3px; }
+  .ivB .ley { display:flex; flex-wrap:wrap; gap:4px 14px; font-size:12.5px; margin-top:4px; color:#cbd5e1; }
+  .ivB .ley i { display:inline-block; width:11px; height:11px; border-radius:3px; margin-right:5px; vertical-align:-1px; }
+  .ivC .g { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:12px; }
+  .ivC .c { background:#fff; border-radius:14px; overflow:hidden; }
+  .ivC .c .h { padding:10px 14px; color:#fff; display:flex; justify-content:space-between; align-items:baseline; }
+  .ivC .c .h b { font-family:'Archivo',sans-serif; font-size:18px; } .ivC .c .h span { font-family:'Archivo',sans-serif; font-size:28px; font-weight:700; }
+  .ivC .c .h small { font-size:11.5px; opacity:.9; margin-left:4px; }
+  .ivC table { width:100%; border-collapse:collapse; font-size:13.5px; }
+  .ivC th { font-size:11.5px; color:#5d7389; font-weight:700; padding:7px 4px; text-align:center; }
+  .ivC th:first-child, .ivC td:first-child { text-align:left; padding-left:14px; }
+  .ivC td { padding:6px 4px; text-align:center; border-top:1px solid #eef2f6; font-variant-numeric:tabular-nums; }
+  .ivC td.hm { font-weight:700; border-radius:6px; }
+  .ivC tr.tt td { font-weight:800; background:#f8fafc; }
   .ib-cm div span { white-space:nowrap; font-size:11.5px; }
   .ib-h b .ib-hs { display:block; margin:2px 0 0; font-family:'DM Sans',sans-serif; font-weight:500; font-size:12px; color:#5d7389; }
 
@@ -8620,6 +8658,78 @@ function tablasInicio(lista, pal, grad, porTipo, total){
       + '<div style="margin-top:8px; font-size:12px; color:#4b5563">Rojo: casi seguro mal asignada, conviene avisar a VTR/CLARO. '
       + 'Ámbar: otra comuna de la región, puede ser normal.</div></div>';
   })();
+  /* (07-11-2026, 10:47) Luis eligió la C: "me gusto la C cambiala porfa". Las otras (actual arreglada, A tabla única,
+     B barras por franja) quedan escritas; se ven poniendo window.IJ_VISTA = 'actual' / 'A' / 'B' en la consola. */
+  const VIS = window.IJ_VISTA || 'C';
+  if(VIS === 'actual') return avisoZona + cartas + leer;
+  /* Las comunas que no son de Luis van juntas en "Otras" (el detalle ya está en el aviso de arriba). */
+  const comZ = function(x){ const c = comuna(x); const k = c.normalize('NFD').replace(/[\u0300-\u036f]/g, ''); return (k === 'Quilpue' || k === 'Villa Alemana') ? k : 'Otras'; };
+  const COMZ = ['Quilpue','Villa Alemana','Otras'].filter(function(c){ return lista.some(function(x){ return comZ(x) === c; }); });
+  const colZ = function(c){ return c === 'Otras' ? '#888780' : colB(c); };
+  const nomZ = function(c){ return c === 'Otras' ? 'Otras comunas' : nomB(c); };
+  const filasF = franjas.map(function(f){ return { f:f, l:lista.filter(function(x){ return x.p.f === f; }) }; });
+  const pct = function(a, b){ return P2(100 * a / (b || 1)) + '%'; };
+  const kpisZ = '<div class="ivK"><div><div class="l">Actividades para hoy</div><div class="n">' + lista.length + '</div><div class="s">Excel de las ' + escR((inicioHoy() || {}).hora || '') + '</div></div>'
+    + COMZ.map(function(c){ const n = lista.filter(function(x){ return comZ(x) === c; }).length;
+        return '<div style="border-left-color:' + colZ(c) + '"><div class="l">' + escR(nomZ(c)) + '</div><div class="n">' + n + '</div><div class="s">' + pct(n, N) + ' del día</div></div>'; }).join('')
+    + filasF.map(function(z){ return '<div style="border-left-color:#94a3b8"><div class="l">' + escR(z.f) + ' hrs</div><div class="n">' + z.l.length + '</div><div class="s">' + pct(z.l.length, N) + ' del día</div></div>'; }).join('')
+    + '</div>';
+
+  if(VIS === 'A'){
+    /* A: una sola tabla. Filas = franjas + total; columnas = comunas y tipos. */
+    const celda = function(v, t){ return '<td' + (v ? '' : ' class="cero"') + '>' + (v || '–') + (v ? '<small>' + pct(v, t) + '</small>' : '') + '</td>'; };
+    const fila = function(nom, l, cls){
+      const pc = cuentaPor(l, comZ), pp = cuentaPor(l, grupoPlay);
+      return '<tr' + (cls ? ' class="' + cls + '"' : '') + '><td class="f">' + nom + '</td><td class="t">' + l.length + '<small>' + pct(l.length, N) + ' del día</small></td>'
+        + COMZ.map(function(c, i){ return celda(pc[c] || 0, l.length).replace('<td', '<td' + (i === 0 ? ' class="sep"' : '')).replace('class="sep" class="cero"', 'class="sep cero"'); }).join('')
+        + ORDEN_PLAY.map(function(k, i){ return celda(pp[k] || 0, l.length).replace('<td', '<td' + (i === 0 ? ' class="sep"' : '')).replace('class="sep" class="cero"', 'class="sep cero"'); }).join('') + '</tr>';
+    };
+    return avisoZona + '<div class="ivA">' + '<div style="overflow-x:auto"><table class="ivT"><tr><th></th><th></th><th class="g sep" colspan="' + COMZ.length + '">POR COMUNA</th><th class="g sep" colspan="5">POR TIPO</th></tr>'
+      + '<tr><th style="text-align:left;padding-left:14px">Franja</th><th>Total</th>'
+      + COMZ.map(function(c, i){ return '<th' + (i === 0 ? ' class="sep"' : '') + ' style="color:' + colZ(c) + '">' + escR(nomZ(c)) + '</th>'; }).join('')
+      + ORDEN_PLAY.map(function(k, i){ return '<th' + (i === 0 ? ' class="sep"' : '') + '><i style="display:inline-block;width:10px;height:10px;border-radius:3px;background:' + COL_PLAY[k][0] + ';margin-right:4px"></i>' + NOM_B[k] + '</th>'; }).join('') + '</tr>'
+      + filasF.map(function(z){ return fila(escR(z.f) + ' hrs', z.l); }).join('')
+      + fila('Todo el día', lista, 'tot') + '</table></div>'
+      + '<div class="ib-leer"><b>Cómo leer:</b> cada fila es una franja y la última suma el día. El número grande es cuántas trae la franja; en cada casilla, cuántas son de esa comuna o tipo y su % dentro de la franja.</div></div>';
+  }
+  if(VIS === 'B'){
+    /* B: una fila por franja con dos barras apiladas (comuna y tipo). */
+    const barra = function(o, orden, color, total){
+      return '<div class="bar">' + orden.filter(function(k){ return o[k]; }).map(function(k){ const c = color(k);
+        return '<span style="flex:' + o[k] + ';background:' + c[0] + ';color:' + c[1] + '" title="' + escR(k) + ': ' + o[k] + '">' + o[k] + (100 * o[k] / total >= 12 ? ' · ' + P2(100 * o[k] / total) + '%' : '') + '</span>'; }).join('') + '</div>';
+    };
+    const bloque = function(nom, sub, l, tot){
+      const pc = cuentaPor(l, comZ), pp = cuentaPor(l, grupoPlay);
+      return '<div class="fr"' + (tot ? ' style="box-shadow:inset 0 0 0 2px #0e7c6b"' : '') + '><div class="h"><b>' + nom + '</b><span>' + l.length + '</span><small>' + sub + '</small></div><div>'
+        + '<div class="rt">POR COMUNA</div>' + barra(pc, COMZ, function(k){ return [colZ(k), '#fff']; }, l.length)
+        + '<div class="rt" style="margin-top:8px">POR TIPO</div>' + barra(pp, ORDEN_PLAY, function(k){ return COL_PLAY[k]; }, l.length) + '</div></div>';
+    };
+    const leyB = '<div class="ley" style="margin:-2px 0 10px">' + COMZ.map(function(c){ return '<span><i style="background:' + colZ(c) + '"></i>' + escR(nomZ(c)) + '</span>'; }).join('')
+      + ORDEN_PLAY.map(function(k){ return '<span><i style="background:' + COL_PLAY[k][0] + '"></i>' + NOM_B[k] + '</span>'; }).join('') + '</div>';
+    return avisoZona + '<div class="ivB">' + kpisZ + leyB
+      + filasF.map(function(z){ return bloque(escR(z.f) + ' hrs', pct(z.l.length, N) + ' del día', z.l); }).join('')
+      + bloque('Todo el día', 'las ' + franjas.length + ' franjas', lista, true) + '</div>';
+  }
+  if(VIS === 'C'){
+    /* C: una tarjeta por comuna con una tabla tipo × franja, coloreada según cuánto pesa. */
+    const tarjeta = function(c, l){
+      const tot = l.length || 1, max = Math.max.apply(null, [1].concat(ORDEN_PLAY.map(function(k){ return Math.max.apply(null, franjas.map(function(f){ return l.filter(function(x){ return x.p.f === f && grupoPlay(x) === k; }).length; })); })));
+      const col = c === '__T' ? '#0e7c6b' : colZ(c);
+      return '<div class="c"><div class="h" style="background:' + col + '"><b>' + (c === '__T' ? 'Todo el día' : escR(nomZ(c))) + '</b><span>' + l.length + '<small>' + pct(l.length, N) + ' del día</small></span></div>'
+        + '<table><tr><th>Tipo</th>' + franjas.map(function(f){ return '<th>' + escR(f) + '</th>'; }).join('') + '<th>Total</th></tr>'
+        + ORDEN_PLAY.map(function(k){ let t = 0;
+            return '<tr><td><i style="display:inline-block;width:10px;height:10px;border-radius:3px;background:' + COL_PLAY[k][0] + ';margin-right:6px"></i>' + NOM_B[k] + '</td>'
+              + franjas.map(function(f){ const v = l.filter(function(x){ return x.p.f === f && grupoPlay(x) === k; }).length; t += v;
+                  const a = v ? (0.12 + 0.55 * v / max) : 0;
+                  return '<td class="hm" style="' + (v ? 'background:' + col + Math.round(a * 255).toString(16).padStart(2, '0') : 'color:#cbd5e1') + '">' + (v || '–') + '</td>'; }).join('')
+              + '<td><b>' + t + '</b></td></tr>'; }).join('')
+        + '<tr class="tt"><td>Total</td>' + franjas.map(function(f){ return '<td>' + l.filter(function(x){ return x.p.f === f; }).length + '</td>'; }).join('') + '<td>' + l.length + '</td></tr></table></div>';
+    };
+    return avisoZona + '<div class="ivC">' + kpisZ + '<div class="g">'
+      + COMZ.map(function(c){ return tarjeta(c, lista.filter(function(x){ return comZ(x) === c; })); }).join('')
+      + tarjeta('__T', lista)
+      + '</div><div class="ib-leer"><b>Cómo leer:</b> una tarjeta por comuna; dentro, cuántas de cada tipo hay en cada franja. Mientras más oscura la casilla, más actividades.</div></div>';
+  }
   return avisoZona + cartas + leer;
 }
 
