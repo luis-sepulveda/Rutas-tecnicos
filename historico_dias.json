@@ -21766,28 +21766,37 @@
    }
   },
   "09-11-2026": {
-   "hasta": "10:31",
-   "actividades": 112,
+   "hasta": "10:41",
+   "actividades": 115,
    "tecnicos": 36,
    "estados": {
-    "Iniciado": 23,
-    "Pendiente": 66,
-    "en ruta": 10,
+    "Iniciado": 29,
+    "Pendiente": 67,
     "Cancelado": 3,
-    "No Realizada": 7,
-    "Completado": 3
+    "No Realizada": 10,
+    "Completado": 3,
+    "en ruta": 3
    },
-   "rgu": 151.0,
+   "rgu": 155.5,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 20,
-   "al_bucket": 1,
-   "repetidas": 21,
+   "nuevas": 21,
+   "al_bucket": 2,
+   "repetidas": 22,
    "reagendadas": 6,
    "detalle": {
     "caidas": [],
     "nuevas": [
+     {
+      "o": "1-3OX2RFCE",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "cat": "Migración 2 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "PEDRO MONTT 1670, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OX2D11F",
       "tec": "NICOLAS MOYANO R",
@@ -21822,7 +21831,7 @@
       "f": "10-13",
       "hi": "11:04",
       "d": "AV CHILE 220 DEPTO 21, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OWQ9PVM",
@@ -21840,25 +21849,25 @@
       "f": "10-13",
       "hi": "12:06",
       "d": "PJE SOTAQUI 01163, QUILPUE",
-      "e": "Iniciado"
+      "e": "No Realizada"
      },
      {
       "o": "1-3OWNX0GB",
-      "tec": "MARCELO GÓMEZ GÓME",
+      "tec": "JOSE CASTRO P",
       "cat": "Reparación",
       "f": "10-13",
       "hi": "13:23",
       "d": "LOS ARRAYANES 151, VILLA ALEMANA",
-      "e": "Pendiente (ya no está)"
+      "e": "Pendiente"
      },
      {
       "o": "1-3OW3YBX7",
-      "tec": "CESAR MENA OLIVEROS",
+      "tec": "LEONEL HERNÁNDEZ OJE",
       "cat": "Alta 1 Play",
       "f": "10-13",
       "hi": "15:04",
       "d": "LOS INCAS 1543, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OX1MSQW",
@@ -22036,7 +22045,7 @@
       "f": "10-13",
       "hi": "10:30",
       "d": "PJE SOTAQUI 01163, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JORDAN ROA PEREZ",
       "visitas": 1,
       "ult_fecha": "07-11-2026",
@@ -22048,7 +22057,7 @@
       "f": "10-13",
       "hi": "10:35",
       "d": "PJE VILCUN 2453, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "JORGE PEZOA VICUÑA",
       "visitas": 2,
       "ult_fecha": "07-11-2026",
@@ -22130,13 +22139,25 @@
       "o": "1-3OVNYDZB",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:07",
+      "hi": "14:03",
       "d": "AZAPA 1190, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
       "visitas": 5,
       "ult_fecha": "06-11-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OX2M1WF",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "14:21",
+      "d": "PAUL HARRIS 1190, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "MARCELO GÓMEZ GÓME",
+      "visitas": 2,
+      "ult_fecha": "06-11-2026",
+      "ult_cierre": "Clte desiste motivo comercial"
      },
      {
       "o": "1-3OWEIPA0",
@@ -22201,9 +22222,9 @@
       "o": "1-3OW5AKO5",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "09:53",
+      "hi": "10:32",
       "d": "AV LOS CARRERA 661, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "PABLO HERNANEZ FERNAN",
       "visitas": 3,
       "ult_fecha": "07-11-2026",
@@ -22287,5 +22308,5 @@
    }
   }
  },
- "generado": "09-11-2026 10:31"
+ "generado": "09-11-2026 10:41"
 }
