@@ -21766,19 +21766,19 @@
    }
   },
   "09-11-2026": {
-   "hasta": "11:31",
+   "hasta": "11:41",
    "actividades": 126,
    "tecnicos": 36,
    "estados": {
-    "Completado": 14,
-    "en ruta": 8,
-    "Pendiente": 62,
-    "Iniciado": 23,
-    "Cancelado": 5,
-    "No Realizada": 13,
-    "Suspendido": 1
+    "Completado": 16,
+    "en ruta": 6,
+    "Pendiente": 60,
+    "Iniciado": 22,
+    "Cancelado": 6,
+    "No Realizada": 14,
+    "Suspendido": 2
    },
-   "rgu": 170.5,
+   "rgu": 171.0,
    "caidas_total": 1,
    "caidas_activas": 1,
    "caidas_resueltas": 0,
@@ -21824,7 +21824,7 @@
       "f": "13-16",
       "hi": "14:00",
       "d": "PEDRO MONTT 1670, QUILPUE",
-      "e": "Pendiente"
+      "e": "Pendiente (ya no está)"
      },
      {
       "o": "1-3OX2D11F",
@@ -21842,7 +21842,7 @@
       "f": "10-13",
       "hi": "12:29",
       "d": "MATURANA 34, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Suspendido"
      },
      {
       "o": "1-3OX21XG2",
@@ -21851,7 +21851,7 @@
       "f": "10-13",
       "hi": "10:57",
       "d": "LOS CORCHOS 2981, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OX16I1R",
@@ -21896,7 +21896,7 @@
       "f": "10-13",
       "hi": "15:04",
       "d": "LOS INCAS 1543, QUILPUE",
-      "e": "Iniciado"
+      "e": "No Realizada"
      },
      {
       "o": "1-3OX1MSQW",
@@ -21932,7 +21932,7 @@
       "f": "13-16",
       "hi": "13:00",
       "d": "SANTA ELENA 098 EDIF. 2 DEPTO 408, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Cancelado"
      },
      {
       "o": "1-3OX1FV2I",
@@ -21999,7 +21999,7 @@
      },
      {
       "o": "1-3OX0U6ZD",
-      "tec": "JOSE PEREZ RANGEL",
+      "tec": "JUAN ARRIAGADA C",
       "cat": "Alta 2 Play",
       "f": "10-13",
       "hi": "12:02",
@@ -22028,9 +22028,9 @@
       "d": "LOS INCAS 1543, QUILPUE",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
-      "visitas": 3,
-      "ult_fecha": "07-11-2026",
-      "ult_cierre": "Cliente reagenda"
+      "visitas": 4,
+      "ult_fecha": "09-11-2026",
+      "ult_cierre": "Orden mal generada"
      },
      {
       "o": "1-3OTEBNIL",
@@ -22060,9 +22060,8 @@
       "o": "1-3OW91BE6",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:30",
       "d": "SANTA ELENA 098 EDIF. 2 DEPTO 408, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Cancelado",
       "tec": "FELIPE SILVA R",
       "visitas": 1,
       "ult_fecha": "07-11-2026",
@@ -22141,18 +22140,6 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3OX0U6ZD",
-      "cat": "Alta 2 Play",
-      "f": "10-13",
-      "hi": "11:50",
-      "d": "YUNGAY 871, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOSE PEREZ RANGEL",
-      "visitas": 3,
-      "ult_fecha": "04-11-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OX1TFV5",
       "cat": "Alta 2 Play",
       "f": "16-19",
@@ -22177,12 +22164,24 @@
       "ult_cierre": "Falta de dotación"
      },
      {
+      "o": "1-3OX0U6ZD",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "11:56",
+      "d": "YUNGAY 871, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JUAN ARRIAGADA C",
+      "visitas": 3,
+      "ult_fecha": "04-11-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OVNYDZB",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "13:00",
+      "hi": "11:51",
       "d": "AZAPA 1190, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "LUIS GATICA DAVILA",
       "visitas": 5,
       "ult_fecha": "06-11-2026",
@@ -22228,7 +22227,7 @@
       "o": "1-3OV40OZX",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "11:42",
+      "hi": "12:42",
       "d": "EL PATAGUAL 2, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -22240,7 +22239,7 @@
       "o": "1-3OVT0U76",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "13:40",
+      "hi": "15:40",
       "d": "DINAMARCA 1451 EDIF. 6 DEPTO 402, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -22254,7 +22253,7 @@
       "f": "10-13",
       "hi": "11:19",
       "d": "MATURANA 34, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Suspendido",
       "tec": "MATÍAS JAQUE AG",
       "visitas": 3,
       "ult_fecha": "03-11-2026",
@@ -22264,7 +22263,7 @@
       "o": "1-3OX2DDD2",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "14:19",
+      "hi": "13:00",
       "d": "PJE CASTILLA 0323, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATÍAS JAQUE AG",
@@ -22315,7 +22314,7 @@
       "f": "10-13",
       "hi": "09:45",
       "d": "LAGO LAS TORRES 29 DEPTO 906, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "ALFREDO ALCAYAGA F",
       "desde": "07-11-2026"
      },
@@ -22373,5 +22372,5 @@
    }
   }
  },
- "generado": "09-11-2026 11:31"
+ "generado": "09-11-2026 11:41"
 }
