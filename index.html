@@ -18871,6 +18871,12 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarM
   #anDet .an-dir.ab { color:#93c5fd; }
   #anDet .an-vb { display:inline-block; margin-left:6px; border-radius:999px; padding:1px 7px; font-size:11px; font-weight:700; white-space:nowrap; background:#1e293b; color:#cbd5e1; border:1px solid #334155; cursor:pointer; }
   #anDet .an-vb.v0 { color:#64748b; border-color:#1e293b; font-weight:600; }
+  /* (09-11-2026) marca "hoy": la direccion tiene una orden hoy (bandeja o bucket) */
+  #anDet .an-hoy { display:inline-block; margin-left:6px; border-radius:999px; padding:1px 8px; font-size:11px; font-weight:700; white-space:nowrap; cursor:pointer; background:rgba(59,130,246,.18); color:#93c5fd; border:1px solid #3b82f6; }
+  #anDet .an-hoy.ok { background:rgba(34,197,94,.15); color:#86efac; border-color:#22c55e; }
+  #anDet .an-hoy.nr { background:rgba(239,68,68,.15); color:#fca5a5; border-color:#ef4444; }
+  #anDet .an-hoyn { font-size:12px; font-weight:600; color:#93c5fd; margin-left:6px; }
+  #anDet .an-hoydet { margin:2px 0 6px; font-size:12px; color:#93c5fd; }
   #anDet .an-al { display:inline-block; margin-left:6px; border-radius:999px; padding:1px 8px; font-size:11px; font-weight:800; white-space:nowrap; cursor:pointer; }
   #anDet .an-al.rojo { background:#7f1d1d; color:#fecaca; border:1px solid #ef4444; animation: anAlLate 1.2s ease-in-out infinite; }
   #anDet .an-al.ambar { background:#451a03; color:#fde68a; border:1px solid #d97706; }
@@ -19851,6 +19857,38 @@ function anDirIr(i){
   const f = document.getElementById('anDirFila' + i);
   if(f) f.scrollIntoView({ block:'center', behavior:'smooth' });
 }
+/* (09-11-2026) Luis: "agregala para saber en el historial de cada dia, las ordenes que ya hemos visitado".
+   En la lista (Semana, Mes, dia y Hoy) cada direccion lleva la marca "📍 hoy" si HOY tiene otra orden en esa casa:
+   en la bandeja de un tecnico (DB, cualquier estado menos Cancelado) o en el bucket (BUCKET con b = 1, sin HFC).
+   Azul = abierta (pendiente, en ruta, iniciada), verde = ya completada hoy, rojo = no realizada hoy.
+   No cuenta la misma peticion de la fila. Solo lee lo que ya baja el modulo (rutas.json); no cambia ningun calculo. */
+let AN_HOY_IX = {};
+function anHoyArmar(){
+  const ix = {}, vis = {};
+  const add = function(o, tec, buck){
+    if(!o || !o.d || o.e === 'Cancelado') return;
+    const ot = String(o.o || ''); if(!ot || vis[ot]) return; vis[ot] = 1;
+    const k = claveDir(o.d);
+    (ix[k] = ix[k] || []).push({ ot:ot, tec:tec, buck:buck, e:String(o.e || ''), fr:String(o.f || ''), cat:String(o.cat || o.t || '') });
+  };
+  Object.keys(typeof DB === 'object' && DB ? DB : {}).forEach(function(t){ (DB[t] || []).forEach(function(o){ add(o, t, false); }); });
+  if(typeof BUCKET !== 'undefined' && Array.isArray(BUCKET)) BUCKET.forEach(function(o){ if(o.b === 1 && o.red !== 'HFC' && o.red !== 'CHFC') add(o, '', true); });
+  AN_HOY_IX = ix;
+}
+function anHoyDe(k, otFila){ return (AN_HOY_IX[k] || []).filter(function(h){ return h.ot !== String(otFila || ''); }); }
+function anHoyEst(h){ return h.e === 'Completado' ? 'Completada' : h.e === 'No Realizada' ? 'No realizada' : h.e ? h.e.charAt(0).toUpperCase() + h.e.slice(1) : 'Pendiente'; }
+function anHoyCls(h){ return h.e === 'Completado' ? ' ok' : h.e === 'No Realizada' ? ' nr' : ''; }
+function anHoyMarca(k, otFila, i){
+  const L = anHoyDe(k, otFila); if(!L.length) return '';
+  const h0 = L[0], tx = h0.buck ? 'en bucket' : anTec(h0.tec) + ' · ' + anHoyEst(h0);
+  const tip = 'Hoy hay ' + L.length + ' orden' + (L.length === 1 ? '' : 'es') + ' en esta dirección: ' + L.map(function(h){ return h.ot + ' ' + h.cat + ' (' + (h.buck ? 'bucket' : anTec(h.tec)) + ', ' + anHoyEst(h) + (h.fr ? ', franja ' + h.fr : '') + ')'; }).join(' · ') + '. Toca para ver el detalle.';
+  return '<span class="an-hoy' + anHoyCls(h0) + '" onclick="anDirToggle(' + i + ')" title="' + escR(tip) + '">📍 hoy: ' + escR(tx) + (L.length > 1 ? ' +' + (L.length - 1) : '') + '</span>';
+}
+function anHoyDetalle(k, otFila){
+  const L = anHoyDe(k, otFila); if(!L.length) return '';
+  return '<div class="an-hoydet">📍 <b>Hoy en esta dirección:</b> ' + L.map(function(h){
+    return escR(h.ot) + ' · ' + escR(h.cat) + ' · ' + (h.buck ? 'en bucket' : escR(anTec(h.tec))) + ' · <b>' + escR(anHoyEst(h)) + '</b>' + (h.fr ? ' · franja ' + escR(h.fr) : ''); }).join('<br>') + '</div>';
+}
 function anDirMarcas(V, i){
   let h = '<span class="an-vb' + (V.n ? '' : ' v0') + '" onclick="anDirToggle(' + i + ')" title="' + (V.n ? V.n + ' visita' + (V.n === 1 ? '' : 's') + ' a esta dirección: ' + V.co + ' completada' + (V.co === 1 ? '' : 's') + ', ' + V.nr + ' derivada' + (V.nr === 1 ? '' : 's') + '. Toca para ver el detalle.' : 'Ninguna visita anterior registrada a esta dirección') + '">'
     + (V.n ? V.n + ' visita' + (V.n === 1 ? '' : 's') : '1ª visita') + '</span>';
@@ -19860,7 +19898,7 @@ function anDirMarcas(V, i){
   return h;
 }
 function anDirDetalle(V, cols, ot){
-  let h = '<tr class="an-dirdet"><td colspan="' + cols + '">';
+  let h = '<tr class="an-dirdet"><td colspan="' + cols + '">' + anHoyDetalle(V.k, ot);
   if(!V.n){ h += '<div class="an-dnota">No hay visitas anteriores registradas a esta dirección' + (rdirDesde ? ' desde el ' + rdirDesde : '') + '. Sería la primera.</div></td></tr>'; return h; }
   h += '<div class="an-dres">' + V.n + ' visita' + (V.n === 1 ? '' : 's') + (rdirDesde ? ' desde el ' + rdirDesde : '') + ': <b class="v">' + V.co + ' completada' + (V.co === 1 ? '' : 's') + '</b> · <b class="r">' + V.nr + ' derivada' + (V.nr === 1 ? '' : 's') + '</b>'
     + (V.mk.length ? ' · por motivo: ' + V.mk.map(function(c){ return '<b' + (V.mot[c] >= AN_DIR_ALARMA ? ' class="r"' : '') + '>' + escR(c) + ' ' + V.mot[c] + '</b>'; }).join(', ') : '') + '</div>';
@@ -19962,7 +20000,7 @@ function anDetPintar(){
     return '<span class="an-est e-a">Por cerrar · ' + escR(x.e) + '</span>';
   };
   /* (06-11-2026) Luis: "crea un boton para pantalla completa ... dentro de la misma tarjeta, al lado derecho, al final" */
-  h += '<div class="an-card' + (AN_LISTA_FULL ? ' an-full' : '') + '" style="margin-top:12px"><h3 class="an-h3l">' + (esHoy ? 'Órdenes de hoy' : 'No realizadas del período') + ' <span id="anListaN" style="font-size:12px;color:#94a3b8;font-weight:400">(' + lista.length + ')</span>'
+  h += '<div class="an-card' + (AN_LISTA_FULL ? ' an-full' : '') + '" style="margin-top:12px"><h3 class="an-h3l">' + (esHoy ? 'Órdenes de hoy' : 'No realizadas del período') + ' <span id="anListaN" style="font-size:12px;color:#94a3b8;font-weight:400">(' + lista.length + ')</span>%%ANHOYN%%'
     + (lista.length ? '<span class="an-busca"><input id="anListaQ" type="search" placeholder="Buscar dirección, petición, técnico o motivo…" value="' + escR(AN_LISTA_Q) + '" oninput="anListaFiltrar()" onkeydown="if(event.key===\'Escape\' && this.value){ anListaLimpiar(); event.stopPropagation(); event.preventDefault(); }">'
       + '<b id="anListaX" onclick="anListaLimpiar()" title="Borrar la búsqueda" style="display:none">✕</b></span>' : '')
     + '<button class="an-fullb" onclick="anListaFull()" title="' + (AN_LISTA_FULL ? 'Volver al tamaño normal (o tecla Esc)' : 'Ver esta lista en toda la pantalla') + '">' + (AN_LISTA_FULL ? '✕ Salir de pantalla completa' : '⛶ Pantalla completa') + '</button></h3>';
@@ -19971,6 +20009,7 @@ function anDetPintar(){
   AN_DIR_KEYS = [];
   if(lista.length){
     anDirAsegurar();
+    anHoyArmar();   /* (09-11-2026) marca "📍 hoy" */
     const alr = [], amb = [], vistaAl = {};
     lista.forEach(function(x, i){
       const dir = anDirDe(x); DIRS[i] = dir;
@@ -19996,6 +20035,7 @@ function anDetPintar(){
     const motDe = function(x){ const nr = x.e === 'No Realizada' || (x.gsa && x.e === 'Completado'); return nr ? (x.gsa ? 'GSA · Falla Aprovisionamiento' : (x.cod || 'Sin código')) : ''; };
     const respDe = function(x){ const nr = x.e === 'No Realizada' || (x.gsa && x.e === 'Completado'), r = nr ? (x.gsa ? 'vtr' : mgResp(x.cod)) : ''; return r ? AN_RNOM[r] : ''; };
     const idx = lista.map(function(x, i){ return i; });
+    let nHoy = 0;   /* (09-11-2026) filas cuya direccion tiene orden hoy */
     if(O.c){
       const val = function(i){ const x = lista[i];
         switch(O.c){ case 'ot': return x.ot; case 'fecha': return x.iso + ' ' + x.fr; case 'est': return ord(x) + x.e; case 'tec': return anTec(x.tec);
@@ -20010,11 +20050,13 @@ function anDetPintar(){
     }
     idx.forEach(function(i){ const x = lista[i];
       const nr = x.e === 'No Realizada' || (x.gsa && x.e === 'Completado'), r = nr ? (x.gsa ? 'vtr' : mgResp(x.cod)) : '';
-      const dataB = anNormQ([x.ot, anTec(x.tec), DIRS[i], x.ciu, motDe(x), respDe(x), x.iso.slice(6, 8) + '-' + x.iso.slice(4, 6), x.fr].join(' '));
       const V = VD[i], ab = V && AN_DIR_AB[AN_DIR_KEYS[i]];
+      const mHoy = V ? anHoyMarca(V.k, x.ot, i) : '';   /* (09-11-2026) */
+      if(mHoy) nHoy++;
+      const dataB = anNormQ([x.ot, anTec(x.tec), DIRS[i], x.ciu, motDe(x), respDe(x), x.iso.slice(6, 8) + '-' + x.iso.slice(4, 6), x.fr, mHoy ? 'hoy' : ''].join(' '));
       /* (06-11-2026) la direccion se toca y lleva sus marcas (Hoy, Semana y Mes) */
       const celDir = V
-        ? '<span class="an-dir' + (ab ? ' ab' : '') + '" onclick="anDirToggle(' + i + ')">' + (ab ? '▾ ' : '▸ ') + escR(DIRS[i]) + '</span>' + anDirMarcas(V, i)
+        ? '<span class="an-dir' + (ab ? ' ab' : '') + '" onclick="anDirToggle(' + i + ')">' + (ab ? '▾ ' : '▸ ') + escR(DIRS[i]) + '</span>' + anDirMarcas(V, i) + mHoy
         : '<span style="color:#64748b" title="Esta petición no está en el historial de visitas">' + (RDIR && RDIR !== 'error' && !anDirBajando ? 'sin dirección en el historial' : '…') + '</span>';
       h += '<tr' + (V && V.nivel === 'rojo' ? ' class="al-rojo"' : '') + ' id="anDirFila' + i + '" data-b="' + escR(dataB) + '"><td>' + escR(x.ot) + '</td>' + (esHoy ? '' : '<td>' + x.iso.slice(6, 8) + '-' + x.iso.slice(4, 6) + '</td>') + '<td>' + est(x) + '</td><td>' + escR(anTec(x.tec)) + '</td><td>' + escR(x.fr) + '</td>'
         + '<td>' + celDir + '</td>' + (esHoy ? '' : '<td>' + escR(anTec(x.ciu)) + '</td>') + '<td>' + (nr ? escR(x.gsa ? 'GSA · Falla Aprovisionamiento' : (x.cod || 'Sin código')) : '') + '</td>'
@@ -20022,7 +20064,9 @@ function anDetPintar(){
       if(ab) h += anDirDetalle(V, esHoy ? 7 : 9, x.ot);
     });
     h += '</table></div>';
+    h = h.replace('%%ANHOYN%%', nHoy ? '<span class="an-hoyn" title="Filas cuya dirección tiene hoy otra orden (bandeja o bucket). Escribe hoy en el buscador para ver solo esas.">· 📍 ' + nHoy + ' con orden hoy</span>' : '');
   }
+  h = h.replace('%%ANHOYN%%', '');
   h += '</div></div>';
   /* (06-11-2026) Luis: "si presiono el boton 2x la pantalla vuelve a arriba": se guarda y repone el scroll de las listas
      (al tocar una direccion y en el refresco de cada minuto), y al abrir una direccion la lista se encuadra sola en ella */
