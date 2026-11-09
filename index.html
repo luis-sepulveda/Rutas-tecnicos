@@ -13592,7 +13592,7 @@ function mpSemHtml(k, SEM, semHoy, dia){
     .sort((x, y) => y.s.nr - x.s.nr || x.s.comp - y.s.comp || y.s.vis - x.s.vis);
   h += '<div class="ms-sub"><h4>Técnicos · ' + qTit.toLowerCase() + ' (' + ft.length + ') <small>primero los que más no realizadas tuvieron</small></h4>'
     + (ft.length ? '<div class="ad-tbl"><table><thead><tr><th>Técnico</th><th>Visitadas</th><th>Completadas</th><th>No realiz.</th><th>VTR/CLARO</th><th>Cliente</th><th>Dominion</th><th>Completitud</th></tr></thead><tbody>'
-    + ft.map(o => { const poco = o.s.vis < MP_POCAS;
+    + ft.map(o => { /* (09-11-2026) Luis: "cambia todo": sin gris por pocas visitas, el color va siempre por el % */ const poco = false;
         return '<tr><td>' + nom(o.t) + '</td><td class="nu">' + o.s.vis + '</td><td class="nu ok">' + o.s.co + '</td><td class="nu bad">' + o.s.nr + '</td>'
           + '<td class="nu">' + (o.s.resp.vtr || '–') + '</td><td class="nu">' + (o.s.resp.cli || '–') + '</td><td class="nu">' + (o.s.resp.dom ? '<b>' + o.s.resp.dom + '</b>' : '–') + '</td>'
           + '<td class="nu"><span class="ad-tag ' + (poco ? 'gr' : col(o.s.comp)) + '">' + mpPc(o.s.comp) + '</span>' + mpSinGSA(o.s) + '</td></tr>'; }).join('')
@@ -13858,12 +13858,13 @@ function migPaginaHtml(){
   const tAb = !!window.MP_TEC_AB;
   h += '<div class="ad-card"><button class="mp-desp' + (tAb ? ' ab' : '') + '" onclick="window.MP_TEC_AB=!window.MP_TEC_AB; pintarPortada()"><h3>Técnico por técnico · ' + PER[per].tit + ' (' + filasT.length + ')</h3>'
     + '<span class="mp-dsub">' + (tAb ? 'Ocultar' : 'Ver los ' + filasT.length + ' técnicos') + ' <i>▾</i></span></button>'
-    + (!tAb ? '' : '<p class="ad-nota">Primero los que más derivan (los que más bajan la completitud del equipo). 🎯 = está en el Seguimiento VTR. La flecha compara con el período anterior (' + PER[per].antTxt + '). Con menos de ' + MP_POCAS + ' visitas el % va en gris: son muy pocas para sacar conclusiones.</p>'
+    + (!tAb ? '' : '<p class="ad-nota">Primero los que más derivan (los que más bajan la completitud del equipo). 🎯 = está en el Seguimiento VTR. La flecha compara con el período anterior (' + PER[per].antTxt + '). El color va siempre por el %, aunque tenga pocas visitas.</p>'
     + (filasT.length ? '<div class="ad-tbl"><table><thead><tr><th>Técnico</th><th>Visitadas</th><th>Completadas</th><th>Derivadas</th><th>VTR/CLARO</th><th>Cliente</th><th>Dominion</th><th>Completitud</th><th>' + PER[per].antTxt + '</th></tr></thead><tbody>'
       + filasT.map(function(o){
           const d = o.a && o.a.comp !== null ? o.s.comp - o.a.comp : null;
           /* (REDISEÑO 28-10-2026, 18:38) con menos de 3 visitas el % no dice nada: va en gris */
-          const poco = o.s.vis < MP_POCAS;
+          /* (09-11-2026) Luis: "cambia todo": sin gris por pocas visitas, el color va siempre por el % */ 
+          const poco = false;
           const fl = poco ? '<span class="mp-fl gr">pocas visitas</span>' : d === null ? '<span class="mp-fl gr">sin datos</span>' : Math.abs(d) < 1 ? '<span class="mp-fl gr">= igual</span>'
             : d > 0 ? '<span class="mp-fl ok">▲ ' + Math.round(d) + ' pts</span>' : '<span class="mp-fl bad">▼ ' + Math.round(-d) + ' pts</span>';
           return '<tr' + (sv(o.t) ? ' class="sv"' : '') + '><td>' + nom(o.t) + (sv(o.t) ? ' 🎯' : '') + '</td><td class="nu">' + o.s.vis + '</td><td class="nu ok">' + o.s.co + '</td><td class="nu bad">' + o.s.nr + '</td>'
@@ -14019,9 +14020,9 @@ function mesDetalleHtmlV2(k){
   const nomT = t => String(t).toLowerCase().replace(/(^|\s)\S/g, c => c.toUpperCase());
   h += '<div class="ad-card"><button class="mp-desp' + (ab ? ' ab' : '') + '" onclick="window.MD_TEC_AB=!window.MD_TEC_AB; pintarPortada()"><h3>Técnico por técnico (' + FT.length + ')</h3>'
     + '<span class="mp-dsub">' + (ab ? 'Ocultar' : 'Ver los ' + FT.length + ' técnicos') + ' <i>▾</i></span></button>'
-    + (!ab ? '' : '<p class="ad-nota">Primero los que tienen más no realizadas. Con menos de ' + (dia ? 3 : MD_POCAS) + ' asignadas' + (dia ? ' en el día' : '') + ' el % va en gris.</p>'
+    + (!ab ? '' : '<p class="ad-nota">Primero los que tienen más no realizadas. El color va siempre por el %, aunque tenga pocas asignadas.</p>'
       + '<div class="ad-tbl"><table><thead><tr><th>Técnico</th><th>Asignadas</th><th>Completadas</th><th>No realizadas</th><th>Canc/Susp</th><th>Efectividad</th><th>' + bTxt + '</th></tr></thead><tbody>'
-      + FT.map(function(o){ const poco = o.s.a < (dia ? 3 : MD_POCAS);
+      + FT.map(function(o){ /* (09-11-2026) Luis: "cambia todo": sin gris por pocas visitas, el color va siempre por el % */ const poco = false;
           return '<tr><td>' + nomT(o.t) + '</td><td class="nu">' + o.s.a + '</td><td class="nu ok">' + o.s.co + '</td><td class="nu bad">' + o.s.nr + '</td><td class="nu">' + (o.s.ca + o.s.su || '–') + '</td>'
             + '<td class="nu"><span class="ad-tag ' + (poco ? 'gr' : o.s.ef >= SM.ef ? 'ok' : 'bad') + '">' + p1(o.s.ef) + '</span></td>'
             + '<td class="nu">' + (poco ? '<span class="mp-fl gr">pocas</span>' : fl(o.s.ef, o.b ? o.b.ef : null)) + '</td></tr>'; }).join('')
@@ -14196,10 +14197,10 @@ function mesDetalleHtml(k){
   /* DESPLEGABLE 2: TECNICO POR TECNICO (igual que antes) */
   if(tecAb){
     const FT = Object.keys(TA).map(t => ({ t:t, s:st(TA[t]), b:TB[t] ? st(TB[t]) : null })).sort((a, b) => b.s.nr - a.s.nr || a.s.ef - b.s.ef);
-    h += '<div class="ad-card mda-desp" id="mdaTEC"><div class="mda-dh"><h3>Técnico por técnico (' + FT.length + ')</h3><span class="mda-ayu">Primero los que tienen más no realizadas. Con menos de ' + MD_POCAS + ' asignadas el % va en gris.</span>'
+    h += '<div class="ad-card mda-desp" id="mdaTEC"><div class="mda-dh"><h3>Técnico por técnico (' + FT.length + ')</h3><span class="mda-ayu">Primero los que tienen más no realizadas. El color va siempre por el %, aunque tenga pocas asignadas.</span>'
       + '<button class="mda-lnk" onclick="window.MD_TEC_AB=false; mdaRepintar()">Ocultar ▴</button></div>'
       + '<div class="ad-tbl"><table class="mda-tt"><thead><tr><th>Técnico</th><th>Asignadas</th><th>Completadas</th><th>No realizadas</th><th>Cliente</th><th>VTR/CLARO</th><th>Dominion</th><th>Canc/Susp</th><th>Efectividad</th><th>' + bTxt + '</th></tr></thead><tbody>'
-      + FT.map(function(o){ const poco = o.s.a < MD_POCAS; const q = { cli:0, vtr:0, dom:0 }; TA[o.t].forEach(r => { if(r['Estado'] === 'No Realizada') q[quien(r)]++; });
+      + FT.map(function(o){ /* (09-11-2026) Luis: "cambia todo": sin gris por pocas visitas, el color va siempre por el % */ const poco = false; const q = { cli:0, vtr:0, dom:0 }; TA[o.t].forEach(r => { if(r['Estado'] === 'No Realizada') q[quien(r)]++; });
           return '<tr><td>' + escR(nomBonito(o.t)) + '</td><td class="nu">' + o.s.a + '</td><td class="nu ok">' + o.s.co + '</td><td class="nu bad">' + o.s.nr + '</td>'
             + ['cli', 'vtr', 'dom'].map(x => '<td class="nu">' + (q[x] || '–') + '</td>').join('') + '<td class="nu">' + (o.s.ca + o.s.su || '–') + '</td>'
             + '<td class="nu"><span class="ad-tag ' + (poco ? 'gr' : o.s.ef >= SM.ef ? 'ok' : 'bad') + '">' + p1(o.s.ef) + '</span></td>'
@@ -17921,7 +17922,7 @@ function evSvg(P, o){
   g += linea(p => p.z.comp, 'ev-lz') + linea(p => p.t.vis ? p.t.comp : null, 'ev-lt');
   /* puntos y etiquetas */
   P.forEach((p, i) => { if(p.z.comp !== null) g += '<circle cx="' + x(i) + '" cy="' + y(p.z.comp) + '" r="3" class="ev-pz"/>';
-    if(!p.t.vis || o.sinPuntos) return; const poco = p.t.vis < o.pocas;
+    if(!p.t.vis || o.sinPuntos) return; /* (09-11-2026) Luis: "cambia todo": sin gris por pocas visitas, el color va siempre por el % */ const poco = false;
     g += '<circle cx="' + x(i) + '" cy="' + y(p.t.comp) + '" r="' + (poco ? 4.5 : 5.5) + '" class="' + (poco ? 'ev-pp' : p.t.comp >= p.z.comp ? 'ev-pok' : 'ev-pbad') + '"/>';
     if(o.etiq) g += '<text x="' + x(i) + '" y="' + (y(p.t.comp) - 10) + '" class="ev-et' + (poco ? ' pc' : '') + '" text-anchor="middle">' + P2(p.t.comp) + '%</text>'; });
   /* ejes x + zonas para el mouse */
@@ -17950,7 +17951,7 @@ function evHtml(F, t, nomT, marcaIso){
     return { lab:String(+dd.k.slice(6)), sub:EV_DCORTO[dt.getDay()].slice(0, 2) + (dd.k.slice(6) === '01' || dd.k === D.dias[0].k ? ' ' + DER_MESES[+dd.k.slice(4, 6) - 1] : ''), t:dd.t, z:dd.z, b:dd.hoy, tip:tipD(dd) }; });
   const diasCon = D.dias.filter(dd => dd.hoy.vis).length, tot = evSt(D.dias.reduce((a, dd) => a.concat(dd.l), []));
   const ley = '<div class="ev-ley"><span><i class="lt"></i>' + nm + '</span><span><i class="lz"></i>Promedio de la zona</span><span><i class="lm"></i>Meta 60%</span>'
-    + '<span><i class="bco"></i>Completadas</span><span><i class="bnr"></i>No realizadas</span><span><i class="pp"></i>Pocas visitas (menos de ' + EV_POCAS + ')</span></div>';
+    + '<span><i class="bco"></i>Completadas</span><span><i class="bnr"></i>No realizadas</span></div>';
   return '<div class="ev-fr ' + fr.cl + '">' + fr.txt + '</div>'
     + '<div class="ad-card"><div class="ev-h"><h3>Semana a semana</h3><span class="ad-nota">Completitud de migraciones (completadas ÷ visitadas) desde agosto. El punto es verde si quedó sobre la zona, rojo si quedó bajo. Las barras (eje derecho) son sus visitadas.</span></div>'
     +   ley + evSvg(PS, { alto:320, meta:MP_META, pocas:EV_POCAS, etiq:true, marca:mS, marcaTxt:'lista VTR ' + (marcaIso ? marcaIso.slice(6) + '-' + marcaIso.slice(4, 6) : '') }) + '</div>'
@@ -17989,7 +17990,7 @@ function svEvoHtml(FT, nomT){
   window.SV_EVO_REAL = real;
   const fl = (d, n) => d === null ? '<span class="mp-fl gr">–</span>' : Math.abs(d) < 3 ? '<span class="mp-fl gr">= parejo</span>'
     : '<span class="mp-fl ' + (d > 0 ? 'ok' : 'bad') + '">' + (d > 0 ? '▲ ' : '▼ ') + evPc(Math.abs(d)).replace('%', '') + ' pts</span>' + (n !== undefined && n < 5 ? ' <small class="sv-poco">pocas</small>' : '');
-  const tag = (v, n) => '<span class="ad-tag ' + (v === null ? 'gr' : n !== undefined && n < EV_POCAS ? 'gr' : v >= MP_META ? 'ok' : v >= MP_META - 10 ? 'wa' : 'bad') + '">' + evPc(v) + '</span>';
+  const tag = (v, n) => '<span class="ad-tag ' + (v === null ? 'gr' : v >= MP_META ? 'ok' : v >= MP_META - 10 ? 'wa' : 'bad') + '">' + evPc(v) + '</span>';
   const hasta = F.reduce((m, x) => x.iso > m ? x.iso : m, ''), dd = iso => iso.slice(6) + '-' + iso.slice(4, 6);
 
   /* 1. LOS 11 JUNTOS vs EL RESTO, en octubre */
@@ -19123,7 +19124,7 @@ function anPintar(){
       + '<div class="an-rel">' + anReloj(sh.comp, 52, 'HOY', false, sh.vis) + anReloj(ss.comp, 80, 'SEMANA ' + derNumSemana(D.semHoy), true, ss.vis) + anReloj(sm.comp, 52, AN_NOMMES[+D.mesHoy.slice(4) - 1].toUpperCase(), false, sm.vis) + '</div>'
       /* (05-11-2026) bajo cada reloj, el mismo % sin castigar la GSA (como Dominion) */
       + '<div class="an-rel an-relsg">' + [sh, ss, sm].map(function(x){ return '<span title="' + (x.g ? x.g + ' cerrada' + (x.g === 1 ? '' : 's') + ' por GSA: VTR las cuenta como quiebre' : 'Sin cierres por GSA') + '">sin GSA <b>' + (x.compSG === null ? '–' : P2(x.compSG) + '%') + '</b>' + (x.g ? ' · ' + x.g + ' GSA' : '') + '</span>'; }).join('') + '</div>'
-      + '<div class="an-pie"><span>vs Sem ' + derNumSemana(semAnt) + ': ' + (dl === null ? '<b>–</b>' : '<b style="color:' + (ss.vis < AN_MIN_VIS ? '#94a3b8' : dl >= 0 ? '#22c55e' : '#ef4444') + '" title="' + (ss.vis < AN_MIN_VIS ? 'Con pocas visitas la comparación todavía no dice mucho' : '') + '">' + (dl >= 0 ? '▲' : '▼') + ' ' + P2(Math.abs(dl)) + ' pts</b>')
+      + '<div class="an-pie"><span>vs Sem ' + derNumSemana(semAnt) + ': ' + (dl === null ? '<b>–</b>' : '<b style="color:' + (dl >= 0 ? '#22c55e' : '#ef4444') + '" title="' + (ss.vis < AN_MIN_VIS ? 'Con pocas visitas todavía' : '') + '">' + (dl >= 0 ? '▲' : '▼') + ' ' + P2(Math.abs(dl)) + ' pts</b>')
       + '</span><span><b>' + ss.vis + '</b> visitadas en la semana' + (ss.ab ? ' · <b>' + ss.ab + '</b> por cerrar' : '') + '</span></div>'
       /* (06-11-2026) los meses anteriores se sacaron de la tarjeta (Luis: "solo deja los meses dentro del detalle"): quedan como pestañas del detalle */
       + '</div>';
@@ -19132,7 +19133,7 @@ function anPintar(){
   /* semaforo 8 semanas */
   const SEMS = []; for(let i = 7; i >= 0; i--) SEMS.push(anSemAnt(D.semHoy, i));
   h += '<div class="an-sec">Una mirada distinta</div><div class="an-g2 an-par"><div class="an-col"><div class="an-card"><h3>Semáforo de las últimas 8 semanas</h3>'
-    + '<p class="s">Completitud semana a semana, con la GSA como quiebre (como VTR). Las casillas con <b style="color:#c4b5fd">GSA</b> muestran además cuánto daría sin GSA y los puntos que restó. Verde: sobre la meta. Ámbar: a menos de 5 pts. Rojo: bajo eso. Gris: menos de ' + AN_MIN_VIS + ' visitas, todavía no dice mucho. Toca una casilla para ver esa semana.</p>'
+    + '<p class="s">Completitud semana a semana, con la GSA como quiebre (como VTR). Las casillas con <b style="color:#c4b5fd">GSA</b> muestran además cuánto daría sin GSA y los puntos que restó. Verde: sobre la meta. Ámbar: a menos de 5 pts. Rojo: bajo eso. El color va siempre por el porcentaje, aunque tenga pocas visitas. Toca una casilla para ver esa semana.</p>'
     + '<div class="an-sem"><div></div>' + SEMS.map(function(k){ return '<div class="h">S' + derNumSemana(k) + (k === D.semHoy ? '<br><small>en curso</small>' : '') + '</div>'; }).join('');
   AN_FAMS.forEach(function(F){
     h += '<div>' + F.f + '</div>';
@@ -19141,7 +19142,9 @@ function anPintar(){
       h += s.comp === null ? '<div class="d vac">–</div>'
         /* (06-11-2026, 20:10) Luis: "solo marcar en el semaforo cuando tengamos quiebres con el item de gsa": el "sin GSA"
            y la diferencia solo salen en las casillas con GSA, marcadas con la etiqueta morada "GSA" */
-        : '<div class="d' + (k === D.semHoy ? ' act' : '') + (s.g ? ' sgsa' : '') + '" style="background:' + (s.vis < AN_MIN_VIS ? '#64748b' : anCol(s.comp)) + (s.vis < AN_MIN_VIS ? ';color:#f1f5f9' : '') + '" title="' + (s.vis < AN_MIN_VIS ? 'Pocas visitas todavía · ' : '') + F.f + ' semana ' + derNumSemana(k) + ': ' + s.co + ' de ' + s.vis + ' visitadas' + (s.g ? ' · ' + s.g + ' cerrada' + (s.g === 1 ? '' : 's') + ' por GSA (quiebre para VTR); sin GSA: ' + (s.co + s.g) + ' de ' + s.vis : '') + '" onclick="anDetAbrir(\'' + F.f + '\', {t:\'sem\', k:\'' + k + '\'})">'
+        /* (09-11-2026) Luis: "muestra en rojo, amarillo o verde de acuerdo a su porcentaje sin importar la cantidad de actividades":
+           se saco el gris de menos de AN_MIN_VIS visitas; el color va siempre por la completitud (anCol) */
+        : '<div class="d' + (k === D.semHoy ? ' act' : '') + (s.g ? ' sgsa' : '') + '" style="background:' + anCol(s.comp) + '" title="' + (s.vis < AN_MIN_VIS ? 'Pocas visitas todavía · ' : '') + F.f + ' semana ' + derNumSemana(k) + ': ' + s.co + ' de ' + s.vis + ' visitadas' + (s.g ? ' · ' + s.g + ' cerrada' + (s.g === 1 ? '' : 's') + ' por GSA (quiebre para VTR); sin GSA: ' + (s.co + s.g) + ' de ' + s.vis : '') + '" onclick="anDetAbrir(\'' + F.f + '\', {t:\'sem\', k:\'' + k + '\'})">'
           + (s.g ? '<i class="gtag">' + s.g + ' GSA</i>' : '') + P2(s.comp) + '%'
           + (s.g ? '<small class="sg">sin GSA ' + P2(s.compSG) + '%</small><small class="sg dif">−' + P2(s.compSG - s.comp) + ' pts</small>' : '')
           + '<small>' + s.vis + ' vis.</small></div>';
@@ -19976,11 +19979,11 @@ function anDetPintar(){
   const T = {}; L.forEach(function(x){ (T[x.tec] = T[x.tec] || []).push(x); });
   const filas = Object.keys(T).map(function(k){ const st = mpSt(T[k]); st.k = k; return st; })
     .sort(function(a, b){ const pa = a.comp === null ? 999 : a.comp, pb = b.comp === null ? 999 : b.comp; return pa - pb || b.vis - a.vis; });
-  let der = '<div class="an-card"><h3>Técnico por técnico</h3><p class="s">Primero los que más derivan. En gris, con menos de ' + MP_POCAS + ' visitas.</p>';
+  let der = '<div class="an-card"><h3>Técnico por técnico</h3><p class="s">Primero los que más derivan.</p>';
   if(!filas.length) der += '<div class="an-vac">No hay órdenes en este período.</div>';
   else {
     der += '<div class="an-scroll"><table class="an-tb"><tr><th>Técnico</th><th>Visitadas</th><th>Comp.</th><th>No real.</th><th>Por cerrar</th><th>Completitud</th></tr>';
-    filas.forEach(function(t){ const gr = t.vis < MP_POCAS, c = gr ? '#475569' : anCol(t.comp);
+    filas.forEach(function(t){ /* (09-11-2026) Luis: "cambia todo": sin gris por pocas visitas, el color va siempre por el % */ const gr = false, c = anCol(t.comp);
       der += '<tr class="' + (gr ? 'gr' : '') + '"><td>' + escR(anTec(t.k)) + '</td><td>' + t.vis + '</td><td>' + t.co + '</td><td>' + t.nr + '</td><td>' + (t.ab || '') + '</td>'
         + '<td><span class="an-mini"><i style="width:' + (t.comp || 0) + '%;background:' + c + '"></i></span><b style="color:' + (gr ? '#64748b' : c) + '">' + (t.comp === null ? '–' : mpPc(t.comp)) + '</b></td></tr>'; });
     der += '</table></div>';
@@ -20127,7 +20130,7 @@ function anTsPintar(m){
     const cur = i === 7 ? ' cur' : '', tt = s.co + ' de ' + s.vis + ' visitadas' + (s.g ? ' · ' + s.g + ' GSA' : '') + ' · toca para ver la semana';
     const oc = ' onclick="anDetAbrir(\'' + fam + '\', {t:\'sem\', k:\'' + SEMS[i] + '\'}); AN_DET.volver = \'' + fam + '\'; anDetPintar()" style="cursor:pointer;';
     if(!s.vis) return '<td class="c vac' + cur + '">–</td>';
-    if(s.vis < min) return '<td class="c gr' + cur + '" title="Pocas visitas · ' + tt + '"' + oc + '">' + P2(s.comp) + '%<small>' + s.vis + ' vis.</small></td>';
+    /* (09-11-2026) Luis: "cambia todo": sin gris por pocas visitas, el color va siempre por el % */ 
     return '<td class="c ' + anCls(s.comp) + cur + '" title="' + tt + '"' + oc + '">' + P2(s.comp) + '%<small>' + s.vis + ' vis.</small></td>';
   };
   const fl = function(d){ if(d === null) return '<td class="fl" style="color:#9ca3af">–</td>';
@@ -20138,7 +20141,7 @@ function anTsPintar(m){
     + '<div style="display:flex;gap:8px;align-items:center"><span class="an-updbox">' + anUpdHtml() + '</span><button class="an-x" onclick="anDetCerrar()">✕ Cerrar</button></div></div>'
     + '<div class="an-tabs">' + AN_FAMS.map(function(f){ return '<span class="an-tab' + (f.f === fam ? ' on' : '') + '" onclick="anTsAbrir(\'' + f.f + '\')">' + f.f + '</span>'; }).join('') + '</div>';
   h += '<div class="an-card pastel"><h3>Completitud de cada técnico, semana a semana · ' + fam + '</h3>'
-    + '<p class="s">Últimas 8 semanas. Cada casilla: % de completitud y visitas (toca una para ver esa semana). Gris: menos de ' + MP_POCAS + ' visitas esa semana. Primero los de peor completitud en las 8 semanas. La tendencia compara las últimas 4 semanas con las 4 anteriores.'
+    + '<p class="s">Últimas 8 semanas. Cada casilla: % de completitud y visitas (toca una para ver esa semana). El color va siempre por el %, aunque tenga pocas visitas. Primero los de peor completitud en las 8 semanas. La tendencia compara las últimas 4 semanas con las 4 anteriores.'
     + (fam === 'Migraciones' ? ' GSA como quiebre, igual que la página MIGRACIONES.' : '') + '</p>';
   if(D.cargando) h += '<div class="an-vac">Cargando el histórico…</div>';
   if(!filas.length) h += '<div class="an-vac">No hay visitas de ' + fam.toLowerCase() + ' en estas 8 semanas.</div>';
@@ -20377,12 +20380,11 @@ function anSegPintar(m){
       const top = n < AN_SEG_TOP;
       const s = t.sems[7], d = s.comp !== null ? s.comp - t.base.comp : null;
       const va = s.vis === 0 ? '<td class="fl" style="color:#9ca3af">sin visitas aún</td>'
-        : s.vis < MP_POCAS ? '<td class="fl" style="color:#9ca3af">pocas visitas</td>'
         : d >= 0 ? '<td class="fl" style="color:#1e7a46">▲ mejorando +' + Math.round(d) + '</td>' : '<td class="fl" style="color:#b42318">▼ peor ' + Math.round(d) + '</td>';
       h += '<tr><td class="l' + (top ? ' top' : '') + '"' + (top ? ' title="Entre los ' + AN_SEG_TOP + ' primeros a auditar"' : '') + '>' + (top ? '<b>' + (n + 1) + '</b>' : '') + escR(anTec(t.k)) + '</td>' + t.sems.map(function(x, i){
           const cur = i === 7 ? ' cur' : '', oc = ' onclick="anDetAbrir(\'Migraciones\', {t:\'sem\', k:\'' + SEMS[i] + '\'}); AN_DET.volverSeg = true; anDetPintar()" title="' + x.co + ' de ' + x.vis + ' visitadas"';
           if(!x.vis) return '<td class="c vac' + cur + '">–</td>';
-          if(x.vis < MP_POCAS) return '<td class="c gr' + cur + '"' + oc + ' style="cursor:pointer">' + P2(x.comp) + '%<small>' + x.vis + ' vis.</small></td>';
+          /* (09-11-2026) Luis: "cambia todo": sin gris por pocas visitas, el color va siempre por el % */ 
           return '<td class="c ' + anCls(x.comp) + cur + '"' + oc + ' style="cursor:pointer">' + P2(x.comp) + '%<small>' + x.vis + ' vis.</small></td>';
         }).join('')
         + '<td class="tot" style="color:' + anColP(t.base.comp) + '">' + mpPc(t.base.comp) + '<small>' + t.base.vis + ' vis.</small></td>' + va + '</tr>';
@@ -20403,7 +20405,7 @@ function anSegPintar(m){
 var AN_DOW6 = ['Lun','Mar','Mié','Jue','Vie','Sáb'];
 function anDow6(iso){ var d = new Date(+iso.slice(0,4), +iso.slice(4,6)-1, +iso.slice(6,8)); return (d.getDay() + 6) % 7; }
 function anDiaStat(D, iso){ return mpSt(D.R.filter(function(x){ return x.fam === 'Migraciones' && x.iso === iso; })); }
-function anDiaCls(s){ if(!s.vis) return 'vac'; if(s.vis < MP_POCAS) return 'gr'; return s.comp >= MP_META ? 'ok' : s.comp >= MP_META - 5 ? 'med' : 'baj'; }
+function anDiaCls(s){ if(!s.vis) return 'vac'; /* (09-11-2026) Luis: "cambia todo": sin gris por pocas visitas, el color va siempre por el % */ return s.comp >= MP_META ? 'ok' : s.comp >= MP_META - 5 ? 'med' : 'baj'; }
 function anDiarioAbrir(){
   AN_DET = { diario:true };
   var m = document.getElementById('anDet');
