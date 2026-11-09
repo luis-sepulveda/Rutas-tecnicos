@@ -18563,6 +18563,9 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarM
   .an-card h3 { margin:0 0 2px; font-size:16px; display:flex; align-items:center; gap:8px; }
   .an-card h3 i.pt { width:10px; height:10px; border-radius:50%; display:inline-block; }
   .an-card p.s { margin:0 0 6px; font-size:12px; color:#94a3b8; }
+  /* (09-11-2026, 14:05) Luis: "elimina las leyendas porfa, deja solo los titulos": en MI ANALISIS se esconde el texto
+     explicativo bajo cada titulo (p.s). Siguen en el codigo: borrar esta linea los devuelve. p.s.keep se ve siempre. */
+  .an-card p.s:not(.keep) { display:none; }
   #anPage .an-clic { cursor:pointer; position:relative; transition:border-color .15s, transform .15s; }
   #anPage .an-clic:hover { border-color:#3b82f6; transform:translateY(-2px); }
   #anPage .an-ver { position:absolute; top:14px; right:14px; font-size:12px; color:#93c5fd; }
@@ -19185,15 +19188,30 @@ function anPintar(){
   h += '<div id="anLinBox">' + anLinSvg(D, 170) + '</div></div></div>';
   h += '</div>';   /* (02-11-2026) Luis: se borro la leyenda "Como se leeria" */
   box.innerHTML = h; box.scrollTop = y;
-  anLinAjustar(D); box.scrollTop = y;
+  anLinAjustar(D); anAjustarPantalla(); box.scrollTop = y;
   if(D.cargando) setTimeout(function(){ anPintar(); anDetPintar(); }, 1500);
 }
+/* (09-11-2026, 14:10) Luis: "asi se ve con un zoom de 100%, ajusta para que se vea la pantalla completa".
+   Achica la portada de MI ANALISIS (zoom) lo justo para que entre entera en el alto de la ventana, sin scroll.
+   No achica menos de AN_ZOOM_MIN (para que se pueda leer); si la ventana es grande queda en 100 %.
+   Se recalcula al cambiar el tamano de la ventana. Solo la portada: las ventanas (detalle, calidad, etc.) no cambian. */
+const AN_ZOOM_MIN = 0.7;
+function anAjustarPantalla(){
+  const box = document.getElementById('anPage'); if(!box || !box.classList.contains('abierto')) return;
+  const w = box.querySelector('.an-wrap'); if(!w) return;
+  w.style.zoom = 1;
+  const alto = w.getBoundingClientRect().height, hay = box.clientHeight;
+  if(!alto || !hay) return;
+  const z = Math.max(AN_ZOOM_MIN, Math.min(1, (hay - 4) / alto));
+  w.style.zoom = z < 0.995 ? String(Math.floor(z * 1000) / 1000) : '';
+}
+window.addEventListener('resize', function(){ try { anAjustarPantalla(); } catch(e){} });
 
 function anOtrasIr(per){ AN_LISTA_Q = 'otra comuna'; anDetAbrir('Migraciones', per); }
 function anOtrasCardHtml(D, SEMS){
   const esOtra = function(x){ return x.ciu === 'Otra comuna'; }, MINV = 5;
   let h = '<div class="an-card an-otras"><h3><i class="pt" style="background:#14b8a6"></i>Migraciones en otras comunas <small style="font-size:12px;color:#94a3b8;font-weight:400">cuentan igual en la completitud de VTR/CLARO</small></h3>';
-  if(AN_COM !== 'Todo') return h + '<p class="s">Con el filtro de comuna en ' + (AN_COM === 'QUILPUE' ? 'Quilpué' : 'Villa Alemana') + ' no entran las de otras comunas. Elige "Todas" para verlas.</p></div>';
+  if(AN_COM !== 'Todo') return h + '<p class="s keep">Con el filtro de comuna en ' + (AN_COM === 'QUILPUE' ? 'Quilpué' : 'Villa Alemana') + ' no entran las de otras comunas. Elige "Todas" para verlas.</p></div>';
   /* resumen del mes */
   const Lm = anPer(D, 'Migraciones', { t:'mes', k:D.mesHoy }), Om = Lm.filter(esOtra), sm = mpSt(Om);
   const Zm = mpSt(Lm.filter(function(x){ return !esOtra(x); })), Tm = mpSt(Lm);
