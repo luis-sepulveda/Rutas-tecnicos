@@ -21766,22 +21766,23 @@
    }
   },
   "09-11-2026": {
-   "hasta": "17:43",
-   "actividades": 154,
+   "hasta": "17:54",
+   "actividades": 155,
    "tecnicos": 30,
    "estados": {
-    "Completado": 67,
-    "No Realizada": 36,
-    "Iniciado": 26,
+    "Completado": 74,
+    "No Realizada": 37,
     "Suspendido": 5,
+    "Iniciado": 19,
     "Cancelado": 11,
-    "Pendiente": 9
+    "Pendiente": 5,
+    "en ruta": 4
    },
-   "rgu": 211.1,
+   "rgu": 212.1,
    "caidas_total": 3,
    "caidas_activas": 2,
    "caidas_resueltas": 1,
-   "nuevas": 32,
+   "nuevas": 33,
    "al_bucket": 19,
    "repetidas": 34,
    "reagendadas": 5,
@@ -21807,6 +21808,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OXGXXSY",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:52",
+      "d": "LAS ROSAS 536, QUILPUE",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3OXFUKZB",
       "tec": "EDGAR VALERO C",
@@ -22146,18 +22156,6 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3OX5KQY7",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "18:40",
-      "d": "MADRID 3186, QUILPUE",
-      "e": "Pendiente",
-      "tec": "CRISTOBAL MIRANDA VALENC",
-      "visitas": 1,
-      "ult_fecha": "09-11-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OX2KKUB",
       "cat": "Alta 1 Play",
       "f": "13-16",
@@ -22365,7 +22363,7 @@
       "f": "13-16",
       "hi": "15:34",
       "d": "GABRIEL DAZAROLA 1373, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JUAN ARRIAGADA C",
       "visitas": 2,
       "ult_fecha": "02-09-2026",
@@ -22394,6 +22392,18 @@
       "visitas": 2,
       "ult_fecha": "25-08-2026",
       "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3OX5KQY7",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "18:08",
+      "d": "MADRID 3186, QUILPUE",
+      "e": "Pendiente",
+      "tec": "LEONEL HERNÁNDEZ OJE",
+      "visitas": 1,
+      "ult_fecha": "09-11-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OVNYDZB",
@@ -22483,7 +22493,7 @@
       "f": "13-16",
       "hi": "15:03",
       "d": "JARDINES DE PASO HONDO 02330 EDIF. A DEPTO 51, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "SEBASTIAN DOSSOW A",
       "visitas": 1,
       "ult_fecha": "07-11-2026",
@@ -22547,9 +22557,9 @@
       "o": "1-3OSIT071",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "18:01",
+      "hi": "18:02",
       "d": "CUMMING 1986, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "SEBASTIAN DOSSOW A",
       "desde": "04-11-2026"
      }
@@ -22557,5 +22567,5 @@
    }
   }
  },
- "generado": "09-11-2026 17:43"
+ "generado": "09-11-2026 17:54"
 }
