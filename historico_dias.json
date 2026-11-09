@@ -21766,24 +21766,24 @@
    }
   },
   "09-11-2026": {
-   "hasta": "10:41",
-   "actividades": 115,
+   "hasta": "10:51",
+   "actividades": 116,
    "tecnicos": 36,
    "estados": {
     "Iniciado": 29,
-    "Pendiente": 67,
-    "Cancelado": 3,
+    "Pendiente": 65,
+    "en ruta": 4,
+    "Cancelado": 4,
     "No Realizada": 10,
-    "Completado": 3,
-    "en ruta": 3
+    "Completado": 4
    },
-   "rgu": 155.5,
+   "rgu": 157.5,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
    "nuevas": 21,
    "al_bucket": 2,
-   "repetidas": 22,
+   "repetidas": 23,
    "reagendadas": 6,
    "detalle": {
     "caidas": [],
@@ -21840,7 +21840,7 @@
       "f": "10-13",
       "hi": "11:37",
       "d": "BELGRANO 1016, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OWDG1X9",
@@ -21858,7 +21858,7 @@
       "f": "10-13",
       "hi": "13:23",
       "d": "LOS ARRAYANES 151, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Cancelado"
      },
      {
       "o": "1-3OW3YBX7",
@@ -22031,7 +22031,7 @@
       "o": "1-3OW91BE6",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "13:00",
       "d": "SANTA ELENA 098 EDIF. 2 DEPTO 408, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "FELIPE SILVA R",
@@ -22079,7 +22079,7 @@
       "o": "1-3OWFAUBY",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "13:00",
       "d": "IGNACIO CARRERA PINTO 0682, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE CASTRO P",
@@ -22091,7 +22091,7 @@
       "o": "1-3OW7K35O",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:57",
       "d": "SEXTA 0437, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE CASTRO P",
@@ -22139,7 +22139,7 @@
       "o": "1-3OVNYDZB",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:03",
+      "hi": "13:03",
       "d": "AZAPA 1190, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
@@ -22151,7 +22151,7 @@
       "o": "1-3OX2M1WF",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:21",
+      "hi": "13:21",
       "d": "PAUL HARRIS 1190, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MARCELO GÓMEZ GÓME",
@@ -22208,6 +22208,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OX2DDD2",
+      "cat": "Migración 2 Play",
+      "f": "13-16",
+      "hi": "13:33",
+      "d": "PJE CASTILLA 0323, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "MATÍAS JAQUE AG",
+      "visitas": 1,
+      "ult_fecha": "20-10-2026",
+      "ult_cierre": "Evento Contingencia"
+     },
+     {
       "o": "1-3OX2D11F",
       "cat": "Migración 3 Play",
       "f": "13-16",
@@ -22234,7 +22246,7 @@
       "o": "1-3OW96BXR",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:00",
+      "hi": "13:00",
       "d": "JARDINES DE PASO HONDO 02330 EDIF. A DEPTO 51, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNAN",
@@ -22308,5 +22320,5 @@
    }
   }
  },
- "generado": "09-11-2026 10:41"
+ "generado": "09-11-2026 10:51"
 }
