@@ -21766,25 +21766,25 @@
    }
   },
   "09-11-2026": {
-   "hasta": "16:18",
-   "actividades": 148,
+   "hasta": "17:23",
+   "actividades": 153,
    "tecnicos": 30,
    "estados": {
-    "Completado": 56,
-    "No Realizada": 32,
-    "Iniciado": 21,
-    "Pendiente": 23,
-    "en ruta": 5,
-    "Cancelado": 8,
-    "Suspendido": 3
+    "Completado": 65,
+    "No Realizada": 34,
+    "Iniciado": 24,
+    "Suspendido": 5,
+    "Cancelado": 11,
+    "Pendiente": 12,
+    "en ruta": 2
    },
-   "rgu": 205.1,
+   "rgu": 210.1,
    "caidas_total": 3,
    "caidas_activas": 2,
    "caidas_resueltas": 1,
-   "nuevas": 28,
+   "nuevas": 31,
    "al_bucket": 19,
-   "repetidas": 33,
+   "repetidas": 34,
    "reagendadas": 5,
    "detalle": {
     "caidas": [
@@ -21809,6 +21809,33 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OXEXJUT",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "16:49",
+      "d": "LAS ROSAS 536, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
+      "o": "1-3OXEWTV7",
+      "tec": "DANIEL NAVARRETE E",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "16:49",
+      "d": "CARTAGENA 1305, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
+      "o": "1-3OXF8ITE",
+      "tec": "LEONEL HERNÁNDEZ OJE",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:10",
+      "d": "JAVIERA CARRERA 1054 DEPTO 21, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
       "o": "1-3OXBMGDQ",
       "tec": "EDGAR VALERO C",
       "cat": "Modificación de Servicio",
@@ -21824,7 +21851,7 @@
       "f": "13-16",
       "hi": "14:10",
       "d": "LAS VIOLETAS 2476 CASA B, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OX8PY3J",
@@ -21995,7 +22022,7 @@
       "f": "13-16",
       "hi": "16:20",
       "d": "OLMUE 20, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OX0XDMG",
@@ -22013,7 +22040,7 @@
       "f": "16-19",
       "hi": "16:00",
       "d": "ANDROMEDA 1024, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OX1CR4H",
@@ -22022,7 +22049,7 @@
       "f": "16-19",
       "hi": "16:00",
       "d": "MARIA MERCEDES 1482 EDIF. 6 DEPTO 203, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OX1TFV5",
@@ -22031,7 +22058,7 @@
       "f": "16-19",
       "hi": "16:00",
       "d": "CALLE 12 1647 CASA B, QUILPUE",
-      "e": "Iniciado"
+      "e": "No Realizada"
      },
      {
       "o": "1-3OX1P6A2",
@@ -22040,7 +22067,7 @@
       "f": "16-19",
       "hi": "16:00",
       "d": "ALACALUFES 261 DEPTO 21, QUILPUE",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OX13K9C",
@@ -22092,7 +22119,7 @@
       "f": "13-16",
       "hi": "16:07",
       "d": "PAUL HARRIS 1190, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "ALFREDO ALCAYAGA F",
       "visitas": 2,
       "ult_fecha": "06-11-2026",
@@ -22102,13 +22129,25 @@
       "o": "1-3OXC35WY",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "18:05",
+      "hi": "16:29",
       "d": "IGNACIO CARRERA PINTO 1237, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Suspendido",
       "tec": "ALFREDO ALCAYAGA F",
       "visitas": 3,
       "ult_fecha": "12-09-2026",
       "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3OX5KQY7",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "17:35",
+      "d": "MADRID 3186, QUILPUE",
+      "e": "Pendiente",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "visitas": 1,
+      "ult_fecha": "09-11-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OX2KKUB",
@@ -22173,9 +22212,9 @@
       "o": "1-3OWRMKJP",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:33",
+      "hi": "16:53",
       "d": "SANTA RITA 985, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "JORGE PEZOA VICUÑA",
       "visitas": 1,
       "ult_fecha": "23-10-2026",
@@ -22211,7 +22250,7 @@
       "f": "13-16",
       "hi": "14:55",
       "d": "SANTA SARA 1620 EDIF. 2B DEPTO 302, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JOSE CASTRO P",
       "visitas": 1,
       "ult_fecha": "09-11-2026",
@@ -22235,11 +22274,23 @@
       "f": "16-19",
       "hi": "16:00",
       "d": "CALLE 12 1647 CASA B, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JOSE GALAZ D",
       "visitas": 1,
       "ult_fecha": "09-11-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OW7K35O",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "17:11",
+      "d": "SEXTA 0437, VILLA ALEMANA",
+      "e": "Iniciado",
+      "tec": "JOSE GALAZ D",
+      "visitas": 2,
+      "ult_fecha": "07-11-2026",
+      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3OX3IWYM",
@@ -22301,6 +22352,18 @@
       "ult_cierre": "Falla Masiva"
      },
      {
+      "o": "1-3OX1FF5S",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "17:17",
+      "d": "ILUSION 7, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JUAN ARRIAGADA C",
+      "visitas": 2,
+      "ult_fecha": "05-11-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3OW3YBX7",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -22313,16 +22376,16 @@
       "ult_cierre": "Sin acceso a vivienda"
      },
      {
-      "o": "1-3OX5KQY7",
-      "cat": "Alta 1 Play",
+      "o": "1-3OXF8ITE",
+      "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "16:25",
-      "d": "MADRID 3186, QUILPUE",
-      "e": "Pendiente",
+      "hi": "17:10",
+      "d": "JAVIERA CARRERA 1054 DEPTO 21, QUILPUE",
+      "e": "Iniciado",
       "tec": "LEONEL HERNÁNDEZ OJE",
-      "visitas": 1,
-      "ult_fecha": "09-11-2026",
-      "ult_cierre": "Sin moradores"
+      "visitas": 2,
+      "ult_fecha": "25-08-2026",
+      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3OVNYDZB",
@@ -22364,9 +22427,9 @@
       "o": "1-3OWFAUBY",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "16:18",
+      "hi": "16:32",
       "d": "IGNACIO CARRERA PINTO 0682, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "MATÍAS JAQUE AG",
       "visitas": 1,
       "ult_fecha": "11-09-2026",
@@ -22376,33 +22439,20 @@
       "o": "1-3OX2DDD2",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "17:41",
       "d": "PJE CASTILLA 0323, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Cancelado",
       "tec": "MATÍAS JAQUE AG",
       "visitas": 1,
       "ult_fecha": "20-10-2026",
       "ult_cierre": "Evento Contingencia"
      },
      {
-      "o": "1-3OX1FF5S",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "20:20",
-      "d": "ILUSION 7, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "MATÍAS JAQUE AG",
-      "visitas": 2,
-      "ult_fecha": "05-11-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
       "o": "1-3OWD3Y9X",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:12",
+      "hi": "16:19",
       "d": "PEDRO AGUIRRE CERDA 974, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "RAFAEL VARGAS B",
       "visitas": 2,
       "ult_fecha": "07-11-2026",
@@ -22442,18 +22492,6 @@
       "visitas": 2,
       "ult_fecha": "06-11-2026",
       "ult_cierre": "Clte desiste motivo comercial"
-     },
-     {
-      "o": "1-3OW7K35O",
-      "cat": "Reparación",
-      "f": "16-19",
-      "hi": "16:56",
-      "d": "SEXTA 0437, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "YENDER BOSCAN CADENAS",
-      "visitas": 2,
-      "ult_fecha": "07-11-2026",
-      "ult_cierre": "Cliente reagenda"
      }
     ],
     "reagendadas": [
@@ -22491,9 +22529,9 @@
       "o": "1-3OW3QARJ",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "17:04",
+      "hi": "17:24",
       "d": "CALLE HERALDO ORREGO 3201 EDIF. A DEPTO 704, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "PABLO HERNANEZ FERNAN",
       "desde": "07-11-2026"
      },
@@ -22511,5 +22549,5 @@
    }
   }
  },
- "generado": "09-11-2026 16:18"
+ "generado": "09-11-2026 17:23"
 }
