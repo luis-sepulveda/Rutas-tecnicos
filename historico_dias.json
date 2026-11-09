@@ -21766,32 +21766,42 @@
    }
   },
   "09-11-2026": {
-   "hasta": "09:13",
-   "actividades": 85,
+   "hasta": "09:23",
+   "actividades": 89,
    "tecnicos": 36,
    "estados": {
-    "Pendiente": 83,
-    "en ruta": 2
+    "en ruta": 19,
+    "Pendiente": 70
    },
-   "rgu": 112.0,
+   "rgu": 120.0,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 0,
+   "nuevas": 1,
    "al_bucket": 0,
-   "repetidas": 13,
+   "repetidas": 14,
    "reagendadas": 6,
    "detalle": {
     "caidas": [],
-    "nuevas": [],
+    "nuevas": [
+     {
+      "o": "1-3OX0U6ZD",
+      "tec": "MATIAS APELEO APELEO",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "12:02",
+      "d": "YUNGAY 871, VILLA ALEMANA",
+      "e": "Pendiente"
+     }
+    ],
     "repetidas": [
      {
       "o": "1-3OW38EUH",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:30",
       "d": "VOLCAN GUALLATIRE 3057, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "ALEXIS JARA",
       "visitas": 3,
       "ult_fecha": "07-11-2026",
@@ -21873,9 +21883,9 @@
       "o": "1-3OWBPSO6",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:30",
       "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JOSE SALAS MEDINA",
       "visitas": 9,
       "ult_fecha": "07-11-2026",
@@ -21918,6 +21928,18 @@
       "ult_cierre": "Cliente Desiste"
      },
      {
+      "o": "1-3OX0U6ZD",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "12:02",
+      "d": "YUNGAY 871, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "MATIAS APELEO APELEO",
+      "visitas": 3,
+      "ult_fecha": "04-11-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OW5AKO5",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -21947,9 +21969,9 @@
       "o": "1-3OW38IGC",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:30",
       "d": "LAGO LAS TORRES 29 DEPTO 906, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "ALFREDO ALCAYAGA F",
       "desde": "07-11-2026"
      },
@@ -21957,9 +21979,9 @@
       "o": "1-3OS6I1N4",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:31",
       "d": "FEDERICO BARREDO 584 EDIF. B-6 DEPTO 101, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "DANIEL NAVARRETE E",
       "desde": "04-11-2026"
      },
@@ -21977,9 +21999,9 @@
       "o": "1-3ORVU2ZI",
       "cat": "Migración 3 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:30",
       "d": "ARMANDO CARRERA 1259, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "MARCELO GÓMEZ GÓME",
       "desde": "04-11-2026"
      },
@@ -22007,5 +22029,5 @@
    }
   }
  },
- "generado": "09-11-2026 09:13"
+ "generado": "09-11-2026 09:23"
 }
