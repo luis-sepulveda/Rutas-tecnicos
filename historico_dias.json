@@ -21766,21 +21766,21 @@
    }
   },
   "09-11-2026": {
-   "hasta": "11:41",
+   "hasta": "11:52",
    "actividades": 126,
    "tecnicos": 36,
    "estados": {
-    "Completado": 16,
-    "en ruta": 6,
-    "Pendiente": 60,
-    "Iniciado": 22,
+    "Completado": 22,
+    "en ruta": 5,
+    "Pendiente": 58,
+    "Iniciado": 19,
     "Cancelado": 6,
     "No Realizada": 14,
     "Suspendido": 2
    },
    "rgu": 171.0,
-   "caidas_total": 1,
-   "caidas_activas": 1,
+   "caidas_total": 2,
+   "caidas_activas": 2,
    "caidas_resueltas": 0,
    "nuevas": 23,
    "al_bucket": 3,
@@ -21795,6 +21795,15 @@
       "f": "13-16",
       "hi": "13:00",
       "d": "COLO COLO 275, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OX2RFCE",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "cat": "Migración 2 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "PEDRO MONTT 1670, QUILPUE",
       "e": "Pendiente"
      }
     ],
@@ -22021,18 +22030,6 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3OW76TCX",
-      "cat": "Alta 1 Play",
-      "f": "10-13",
-      "hi": "12:35",
-      "d": "LOS INCAS 1543, QUILPUE",
-      "e": "Pendiente",
-      "tec": "CESAR MENA OLIVEROS",
-      "visitas": 4,
-      "ult_fecha": "09-11-2026",
-      "ult_cierre": "Orden mal generada"
-     },
-     {
       "o": "1-3OTEBNIL",
       "cat": "Migración 3 Play",
       "f": "10-13",
@@ -22048,7 +22045,7 @@
       "o": "1-3OWFAUBY",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "13:00",
+      "hi": "14:00",
       "d": "IGNACIO CARRERA PINTO 0682, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "FELIPE SILVA R",
@@ -22133,7 +22130,7 @@
       "f": "10-13",
       "hi": "11:00",
       "d": "GREGORIA 186, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JOSE PEREZ RANGEL",
       "visitas": 1,
       "ult_fecha": "29-10-2026",
@@ -22167,13 +22164,25 @@
       "o": "1-3OX0U6ZD",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "11:56",
+      "hi": "12:09",
       "d": "YUNGAY 871, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JUAN ARRIAGADA C",
       "visitas": 3,
       "ult_fecha": "04-11-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OW3YBX7",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "10:55",
+      "d": "LOS INCAS 1543, QUILPUE",
+      "e": "No Realizada",
+      "tec": "LEONEL HERNÁNDEZ OJE",
+      "visitas": 3,
+      "ult_fecha": "07-11-2026",
+      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3OVNYDZB",
@@ -22191,7 +22200,7 @@
       "o": "1-3OX2M1WF",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "13:21",
+      "hi": "14:21",
       "d": "PAUL HARRIS 1190, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MARCELO GÓMEZ GÓME",
@@ -22203,7 +22212,7 @@
       "o": "1-3OWEIPA0",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "13:00",
+      "hi": "14:00",
       "d": "ESMERALDA 1361 DEPTO 44, QUILPUE",
       "e": "Pendiente",
       "tec": "MARCO PEREZ G",
@@ -22372,5 +22381,5 @@
    }
   }
  },
- "generado": "09-11-2026 11:41"
+ "generado": "09-11-2026 11:52"
 }
