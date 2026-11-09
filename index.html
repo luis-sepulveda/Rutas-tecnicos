@@ -3457,6 +3457,10 @@
 .pa-act .nums b { font-size:16px; color:#13213c; } .pa-act .nums b.ok { color:#0e7c6b; } .pa-act .nums b.bad { color:#d04a46; }
 .pa-act .ef { font-size:13px; color:#475569; border-top:1px solid #eef2f7; padding-top:8px; }
 .pa-act .ef b { font-size:16px; color:#13213c; } .pa-act .ef .sd { color:#94a3b8; }
+/* (09-11-2026) leyenda de colores de la barra de cada actividad */
+.pa-ley { font-size:10.5px; color:#64748b; display:flex; flex-wrap:wrap; align-items:center; gap:2px 4px; margin-top:-2px; }
+.pa-ley i { display:inline-block; width:9px; height:9px; border-radius:2px; margin-left:4px; }
+.pa-ley i.c { background:#0e7c6b; } .pa-ley i.n { background:#d04a46; } .pa-ley i.i { background:#1d4ed8; } .pa-ley i.p { background:#93c5fd; } .pa-ley i.x { background:#c3d2e0; }
 @media (max-width:900px){ .pa-grid { grid-template-columns:1fr !important; } }
 
 /* ==== (REDISEÑO 28-10-2026, 15:33) detalle de Migraciones ==== */
@@ -9787,7 +9791,7 @@ function derEqSasHtml(hasta, n, conHoy){
   const p = function(k){ return 100 * t[k].d / t[k].n; };
   const dif = p(ks[ks.length - 1]) - p(ks[0]);
   const f1 = function(v){ return v.toFixed(1).replace('.', ','); };
-  return '<div class="dv-sas dv-hv-eq"><b>' + (derSup === 'Todos' ? 'El equipo' : 'Equipo de ' + escR(derTitulo(derSup))) + ', semana a semana</b>'
+  return '<div class="dv-sas dv-hv-eq"><b>' + (derSup === 'Todos' ? 'El equipo' : 'Equipo de ' + escR(derTitulo(derSup))) + ', semana a semana<br><small style="font-weight:400;color:#64748b">% derivado · derivadas/visitadas</small></b>'
     + ks.map(function(k, j){ const ult = j === ks.length - 1;
         return '<span class="c ' + (ult ? 'eq8' : 'eq') + '" title="Semana ' + derNumSemana(k) + ' (' + derRango(k) + '): ' + t[k].d + ' derivadas de ' + t[k].n + ' visitadas"><u>' + P2(p(k)) + '%</u><small>sem ' + derNumSemana(k)
           + (ult && conHoy && conHoy.n ? ' con hoy' : '') + ' · ' + t[k].d + '/' + t[k].n + '</small></span>'; }).join('')
@@ -10811,7 +10815,7 @@ function pintarFranjas(){
   if(sups.indexOf(fraSup) < 0) fraSup = 'Todos';
   const seg = function(l){ return '<div class="dv-seg">' + l.join('') + '</div>'; };
   supBox.className = 'dv-filtros';
-  supBox.innerHTML = '<div class="fila"><span class="rot">' + (sems.length > 1 ? 'Semanas' : 'Semana') + '</span><div class="sems">' + semanas.map(function(k){
+  supBox.innerHTML = '<div class="fila"><span class="rot">' + (sems.length > 1 ? 'Semanas' : 'Semana') + '<br><small style="text-transform:none;letter-spacing:0">% derivado</small></span><div class="sems">' + semanas.map(function(k){
       const s = porSem[k] || {n:0, d:0}, p = derPct(s.d, s.n);
       return '<button class="' + (usaPer && k === fraSem ? 'on' : (sems.indexOf(k) >= 0 ? 'rng' : '')) + '"' + (usaPer ? ' onclick="setFraSem(\'' + k + '\')"' : ' disabled style="cursor:default"') + ' title="Semana '
         + derNumSemana(k) + ', ' + derRango(k) + ': ' + s.n + ' ' + fraNomAct() + ' visitadas, ' + s.d + ' derivadas">' + derNumSemana(k) + '<b>' + (s.n ? derP2(s.d, s.n) + '%' : '–') + '</b></button>';
@@ -11028,7 +11032,7 @@ function derVistaEvoMesHtml(){
   const cel = function(w, e){
     if(!w || !w.n) return '<td class="cero">–</td>';
     const pw = pc(w), pe = pc(e) || 0;
-    return '<td><span class="dv-ev ' + (pw > pe ? 'r' : 'b') + (w.n < DER_EVO_MIN ? ' p' : '') + '" title="Derivó ' + w.d + ' de ' + w.n + ', ' + P2(pw) + '%; el equipo, ' + P2(pe) + '%"><b>' + P2(pw) + '%</b><small>' + w.d + '/' + w.n + '</small></span></td>';
+    return '<td><span class="dv-ev ' + (pw > pe ? 'r' : 'b') + '' + '" title="Derivó ' + w.d + ' de ' + w.n + ', ' + P2(pw) + '%; el equipo, ' + P2(pe) + '%"><b>' + P2(pw) + '%</b><small>' + w.d + '/' + w.n + '</small></span></td>';
   };
   const nS = {sube:0, baja:0, igual:0};
   let filas = '';
@@ -11060,7 +11064,7 @@ function derVistaEvoMesHtml(){
     + '<button class="' + (derEvoOrd === 'x' ? 'on' : '') + '" onclick="setEvoOrd(\'x\')">Derivadas de más</button></div></div>'
     + '<div class="dv-ley dv-hv-col"><span><i style="background:#fca5a5"></i><b>Casilla roja</b>: ese mes derivó más que el equipo</span>'
     + '<span><i style="background:#86cfa3"></i><b>Casilla verde</b>: derivó menos</span>'
-    + '<span><i style="background:#fff;box-shadow:inset 0 0 0 1px #cbd5e1"></i><b>Casilla apagada</b>: menos de ' + DER_EVO_MIN + ' órdenes</span>'
+    + '<span>El color va siempre por el %, aunque tenga pocas órdenes</span>'   /* (09-11-2026) Luis "cambia porfa": sin apagado por pocas ordenes, el color va siempre por el % */ 
     + '<span><i style="background:#fecaca"></i><b>Fila rosada</b>: ' + DER_8_PUNTOS + ' puntos o más sobre el equipo en los ' + meses.length + ' meses</span></div>'
     + '<table class="dv-evo"><thead><tr><th rowspan="2">Técnico</th><th colspan="' + meses.length + '" class="g g1 bi">Mes a mes</th>'
     + '<th colspan="2" class="g g2 bi">' + per + '</th><th rowspan="2" class="bi">Tendencia</th></tr><tr>'
@@ -11094,7 +11098,7 @@ function derVistaEvoHtml(todasSem, enCurso){
   const cel = function(w, e){
     if(!w || !w.n) return '<td class="cero">–</td>';
     const pw = 100 * w.d / w.n, pe = e && e.n ? 100 * e.d / e.n : 0;
-    return '<td><span class="dv-ev ' + (pw > pe ? 'r' : 'b') + (w.n < DER_EVO_MIN ? ' p' : '') + '" title="Derivó ' + w.d + ' de ' + w.n + ', ' + P2(pw) + '%; el equipo, ' + P2(pe) + '%' + (w.n < DER_EVO_MIN ? '. Pocas órdenes: tómalo como referencia' : '') + '"><b>' + P2(pw) + '%</b><small>' + w.d + '/' + w.n + '</small></span></td>';
+    return '<td><span class="dv-ev ' + (pw > pe ? 'r' : 'b') + '' + '" title="Derivó ' + w.d + ' de ' + w.n + ', ' + P2(pw) + '%; el equipo, ' + P2(pe) + '%' + (w.n < DER_EVO_MIN ? '. Pocas órdenes: tómalo como referencia' : '') + '"><b>' + P2(pw) + '%</b><small>' + w.d + '/' + w.n + '</small></span></td>';
   };
   const nS = {sube:0, baja:0, igual:0};
   let filas = '';
@@ -11170,7 +11174,7 @@ function derVistaEvoHtml(todasSem, enCurso){
     + '<button class="' + (derEvoOrd === 'x' ? 'on' : '') + '" onclick="setEvoOrd(\'x\')">Derivadas de más</button></div></div>'
     + '<div class="dv-ley dv-hv-col"><span><i style="background:#fca5a5"></i><b>Casilla roja</b>: esa semana derivó más que el equipo</span>'
     + '<span><i style="background:#86cfa3"></i><b>Casilla verde</b>: derivó menos</span>'
-    + '<span><i style="background:#fff;box-shadow:inset 0 0 0 1px #cbd5e1"></i><b>Casilla apagada</b>: menos de ' + DER_EVO_MIN + ' órdenes, solo de referencia</span>'
+    + '<span>El color va siempre por el %, aunque tenga pocas órdenes</span>'   /* (09-11-2026) Luis "cambia porfa": sin apagado por pocas ordenes, el color va siempre por el % */ 
     + '<span><i style="background:#fecaca"></i><b>Fila rosada</b>: historial malo</span></div>'
     + '<table class="dv-evo"><thead><tr><th rowspan="2">Técnico</th><th colspan="' + cols.length + '" class="g g1 bi">Semana a semana</th>'
     + '<th colspan="2" class="g g2 bi">En ' + nSem + ' semanas (' + derNumSemana(o8.sems[0]) + ' a ' + derNumSemana(o8.sems[nSem - 1]) + ')</th>'
@@ -11314,9 +11318,9 @@ function derVistaFicHtml(todasSem){
             const w = m8.s[k], e = o8.eqS[k], pe = e && e.n ? 100 * e.d / e.n : 0;
             if(!w) return '<span class="c na" title="Semana ' + derNumSemana(k) + ' (' + derRango(k) + '): sin ' + derNomTipo() + ' visitadas"><u>–</u><small>sem ' + derNumSemana(k) + '</small></span>';
             const pw = 100 * w.d / w.n;
-            return '<span class="c ' + (pw > pe ? 'r' : 'b') + (w.n < DER_EVO_MIN ? ' p' : '') + '" title="Semana ' + derNumSemana(k) + ' (' + derRango(k) + '): derivó ' + w.d + ' de ' + w.n + ', ' + P2(pw) + '%; el equipo, ' + P2(pe) + '%' + (w.n < DER_EVO_MIN ? '. Pocas órdenes: tómalo como referencia' : '') + '"><u>'
+            return '<span class="c ' + (pw > pe ? 'r' : 'b') + '' + '" title="Semana ' + derNumSemana(k) + ' (' + derRango(k) + '): derivó ' + w.d + ' de ' + w.n + ', ' + P2(pw) + '%; el equipo, ' + P2(pe) + '%' + (w.n < DER_EVO_MIN ? '. Pocas órdenes: tómalo como referencia' : '') + '"><u>'
               + P2(pw) + '%</u><small>sem ' + derNumSemana(k) + ' · ' + w.d + '/' + w.n + '</small></span>'; }).join('')
-          + '<span class="ley"><i class="r"></i>derivó más que el equipo esa semana <i class="b"></i>derivó menos · apagadas, menos de ' + DER_EVO_MIN + ' órdenes</span></div>' : '')
+          + '<span class="ley"><i class="r"></i>derivó más que el equipo esa semana <i class="b"></i>derivó menos</span></div>' : '')
         + '<ul class="dv-hv-his' + (s8 || s4 ? ' mal' : '') + '"><li>' + lin.join('</li><li>') + '</li></ul></div>';
     } }
   if(!me.d) return h + '<div class="dv-hv-b"><p class="dv-hv-f" style="margin:0">No derivó ninguna en este período.</p></div></div>';
@@ -11536,7 +11540,7 @@ function derVistaHoyHtml(){
     + '<div class="dv-ley"><span><i style="background:#86cfa3"></i><b>' + T.comp + '</b> completadas</span>'
     + '<span><i style="background:#fca5a5"></i><b>' + T.der + '</b> derivadas (no realizadas)</span>'
     + '<span><i style="background:#cbd5e1"></i><b>' + T.pend + '</b> por visitar</span>'
-    + '<span class="sem">Semana con hoy: ' + (sT.n ? '<b>' + derP2(sT.d, sT.n) + '%</b> (' + sT.d + ' de ' + sT.n + ')' : 'sin visitas aún') + '</span></div>' + derEqSasHtml(kSem, 5, sT) + '</div>';
+    + '<span class="sem">Semana con hoy (% derivado): ' + (sT.n ? '<b>' + derP2(sT.d, sT.n) + '%</b> (' + sT.d + ' de ' + sT.n + ')' : 'sin visitas aún') + '</span></div>' + derEqSasHtml(kSem, 5, sT) + '</div>';
   if(T.der){
     const NOMC = { sm:'sin moradores', re:'cliente reagenda', de:'cliente desiste', ot:'no dependen del técnico' };
     if(derHoyCau && !T[derHoyCau]) derHoyCau = null;
@@ -11575,8 +11579,8 @@ function derVistaHoyHtml(){
   const cel = function(v, c){ return '<td class="' + (v ? (c || '') : 'cero') + '">' + v + '</td>'; };
   h += '<div class="dv-hv-b">' + hvT('Técnico por técnico', 'toca un técnico para ver sus ' + derNomTipo() + ' de hoy')
     + '<table class="dv-hv-tab"><thead><tr><th rowspan="2">Técnico</th><th colspan="5" class="g g1">Hoy</th><th colspan="4" class="g g2">Sus derivadas</th>'
-    + '<th rowspan="2" class="gs" title="Lo de la semana hasta ayer más lo de hoy">Semana con hoy</th></tr>'
-    + '<tr><th class="gi">En bandeja</th><th>Completadas</th><th>Derivadas</th><th>Por visitar</th><th>% de lo visitado</th>'
+    + '<th rowspan="2" class="gs" title="Lo de la semana hasta ayer más lo de hoy">Semana con hoy<br><small style="font-weight:400">% derivado</small></th></tr>'
+    + '<tr><th class="gi">En bandeja</th><th>Completadas</th><th>Derivadas</th><th>Por visitar</th><th title="Derivadas sobre visitadas de hoy">% derivado</th>'
     + '<th class="gi">No dependen del técnico</th><th>Ahí ya falló otro</th><th>Propias</th><th>Propias con señal</th></tr></thead><tbody>';
   tb.forEach(function(o, i){
     const s = semCon(o), ps = derPct(s.d, s.n), alto = o.vis >= 2 && 100 * o.der / o.vis - 100 * T.der / T.vis >= DER_PUNTOS_EQ;
@@ -11816,7 +11820,7 @@ function pintarDeriv(){
   const nD0 = Object.keys(porSem[derSem].dias).length;
   const seg = function(l){ return '<div class="dv-seg">' + l.join('') + '</div>'; };
   supBox.className = 'dv-filtros';
-  supBox.innerHTML = '<div class="fila"><span class="rot">' + (enRango.length > 1 ? 'Semanas' : 'Semana') + '</span><div class="sems">' + semanas.map(function(k){
+  supBox.innerHTML = '<div class="fila"><span class="rot">' + (enRango.length > 1 ? 'Semanas' : 'Semana') + '<br><small style="text-transform:none;letter-spacing:0">% derivado</small></span><div class="sems">' + semanas.map(function(k){
       const s = porSem[k], p = s.n ? 100 * s.d / s.n : 0;   /* exacto: la marca roja es MAS de DER_UMBRAL, sin redondear (04-11-2026) */
       return '<button class="' + (k === derSem ? 'on' : (enRango.indexOf(k) >= 0 ? 'rng' : '')) + (p > DER_UMBRAL ? ' alto' : '') + '" onclick="setSemDeriv(\'' + k + '\')" title="Semana '
         + derNumSemana(k) + ', ' + derRango(k) + ': ' + s.n + ' ' + derNomTipo() + ' visitadas, ' + s.d + ' derivadas' + (s.g ? ' (' + s.g + ' GSA como derivada, como VTR; sin GSA ' + derP2(s.d - s.g, s.n) + '%)' : '') + '">' + derNumSemana(k) + '<b>' + P2(p) + '%</b>' + (s.g ? '<i class="mg-gsa in">' + s.g + ' GSA</i>' : '') + '</button>';
@@ -12571,11 +12575,12 @@ function pintarReporteRepe(){
     + '<div class="pz-cab"><h2>Direcciones ya visitadas · histórico</h2></div>'
     + chips
     + '<div class="rp-cif">'
-    +   c(viajes, 'viajes repetidos')
-    +   c(dirs.length, 'direcciones')
-    +   c(malas.length, 'con dato mal ingresado', true)
-    +   c(viajesMalos, 'viajes a esas', true)
-    +   c(comercial, 'derivadas a Comercial', true)
+    /* (09-11-2026) Luis: "revisa que todo tenga su titulo e indique que es" */
+    +   c(viajes, 'viajes en total a casas que se visitaron más de una vez')
+    +   c(dirs.length, 'direcciones con más de una visita')
+    +   c(malas.length, 'direcciones con al menos un cierre por dato mal ingresado', true)
+    +   c(viajesMalos, 'viajes a esas direcciones mal ingresadas', true)
+    +   c(comercial, 'visitas derivadas a Comercial', true)
     + '</div>'
     + '<div class="rp-dos">'
     +   '<div class="rp-caja"><h3>Cuántas veces se visitó cada dirección</h3>'
@@ -12584,7 +12589,7 @@ function pintarReporteRepe(){
     +     barrasD + '</div>'
     + '</div>'
     + '<div class="pz-rot">Detalle · las ' + Math.min(60, dirs.length)
-    +   ' más visitadas, toca una para ver cada visita</div>'
+    +   ' más visitadas · el número rojo es cuántas veces se visitó · toca una para ver cada visita</div>'
     + '<div class="rp-lista">' + lista + '</div></div>';
   window.scrollTo(0,0);
 }
@@ -13052,8 +13057,10 @@ function actsHoyHtml(filas){
       + '<div class="hd"><span class="nm">' + f + '</span><span class="tot">' + L.length + '</span></div>'
       + '<div class="sb">' + subTx + '</div>'
       + '<div class="br">' + t(co, 'c', 'completadas') + t(nr, 'n', 'no realizadas') + t(ini, 'i', 'iniciadas o en ruta') + t(pen, 'p', 'pendientes') + t(cs, 'x', 'canceladas o suspendidas') + '</div>'
+      /* (09-11-2026) Luis: "revisa que todo tenga su titulo": que dice cada color de la barra */
+      + '<div class="pa-ley"><i class="c"></i>completadas <i class="n"></i>no realizadas <i class="i"></i>en curso <i class="p"></i>por iniciar <i class="x"></i>canc.</div>'
       + '<div class="nums"><span><b class="ok">' + co + '</b> completadas</span><span><b class="bad">' + nr + '</b> no realizadas</span><span><b>' + ab + '</b> sin cerrar</span></div>'
-      + '<div class="ef">' + (pv === null ? '<span class="sd">nadie ha cerrado una visita todavía</span>' : '<b>' + P2(pv) + '%</b> de lo visitado · ' + co + ' de ' + vis) + (activa ? '<span class="ver">Ver detalle ›</span>' : '') + '</div>'
+      + '<div class="ef">' + (pv === null ? '<span class="sd">nadie ha cerrado una visita todavía</span>' : 'completitud <b>' + P2(pv) + '%</b> de lo visitado · ' + co + ' de ' + vis) + (activa ? '<span class="ver">Ver detalle ›</span>' : '') + '</div>'
       + (activa ? '</button>' : '</div>');
   }).join('') + '</section>';
 }
@@ -13366,7 +13373,7 @@ function actMesesHtml(){
       return '<button class="am-card am2" onclick="window.PV_MES=\'' + m.k + '\'; window.PV_MES_DIA=null; window.PV_MES_EST=\'Completado\'; pintarPortada(); window.scrollTo(0,0)" title="Ver el detalle del mes">'
         + '<div class="am2-h"><span class="am-h">' + NOM[+m.k.slice(5) - 1] + ' ' + m.k.slice(0, 4)
         + (m.k === hoyK ? ' <span class="am-cur">En curso · hasta ayer</span>' : '') + '</span><span class="am-ver">Ver el detalle →</span></div>'
-        + '<div class="am2-cols"><div class="am2-c"><i>Actividades</i><div class="am2-big">' + pc + '</div>'
+        + '<div class="am2-cols"><div class="am2-c"><i>Actividades · efectividad</i><div class="am2-big">' + pc + '</div>'
         + '<div class="am2-s">completadas de ' + nf(m.asig) + ' · ' + m.dias + ' días</div>'
         + '<div class="am2-l"><b class="ok">' + nf(m.comp) + '</b> completadas · <b class="ok">' + p(m.comp) + '</b></div>'
         + '<div class="am2-l"><b class="bad">' + nf(m.nr) + '</b> derivadas · <b class="bad">' + p(m.nr) + '</b></div>'
@@ -14094,12 +14101,13 @@ function mesDetalleHtml(k){
     +   '<div class="s">' + nf(S.co) + ' completadas de ' + nf(S.a) + ' asignadas</div>'
     +   '<div class="s2">' + fl(S.ef, SB.ef) + ' vs ' + nAnt + (SB.ef !== null ? ' (' + p1(SB.ef) + ')' : '') + '</div></div>'
     + '<div class="mda-c"><div class="ct">Completitud como VTR · meta ' + MP_META + '%</div><table class="mda-t">'
+    +   '<tr><th>Actividad</th><th>Completitud</th><th>' + bTxt + ' (pts)</th></tr>'   /* (09-11-2026) Luis: "tenemos informacion que se muestra pero no tienen titulos indicando que son": titulos de columna y leyendas */ 
     +   VF.map(o => '<tr><td>' + o.f + (o.s && o.s.g ? ' <span class="mda-gsa" title="sin GSA ' + p1(o.s.compSG) + '">' + o.s.g + ' GSA</span>' : '') + '</td>'
           + '<td>' + (!o.s ? '<span class="mp-fl gr">cargando…</span>' : !o.s.vis ? '–' : '<span class="mda-pc ' + (o.s.comp >= MP_META ? 'ok' : 'bad') + '">' + p1(o.s.comp) + '</span>') + '</td>'
           + '<td>' + (o.s && o.b && o.s.vis && o.b.vis ? fl(o.s.comp, o.b.comp) : '') + '</td></tr>').join('')
     +   '</table></div>'
-    + '<div class="mda-c"><div class="ct">Migraciones</div>'
-    +   (!mig ? '<div class="s">cargando…</div>' : '<div class="big2">' + (mig.vis ? p1(100 - mig.comp) : '–') + '</div><div class="s">derivación · ' + nf(mig.nr) + ' de ' + nf(mig.vis) + ' visitadas</div>'
+    + '<div class="mda-c"><div class="ct">Migraciones · derivación del mes</div>'
+    +   (!mig ? '<div class="s">cargando…</div>' : '<div class="big2">' + (mig.vis ? p1(100 - mig.comp) : '–') + '</div><div class="s">no realizadas (derivadas) · ' + nf(mig.nr) + ' de ' + nf(mig.vis) + ' visitadas</div>'
     +   '<div class="s">' + (migO && migO.vis ? 'Otras comunas: <b>' + nf(migO.vis) + '</b> visitadas · ' + p1(migO.comp) : 'Sin migraciones en otras comunas') + '</div>') + '</div>'
     + '<div class="mda-c"><div class="ct">Cómo terminaron las ' + nf(S.a) + '</div>'
     +   '<div class="mda-stk">' + [[S.co, '#16a34a'], [S.nr, '#dc2626'], [S.ca + S.su, '#94a3b8']].filter(x => x[0]).map(x => '<span style="flex:' + x[0] + ';background:' + x[1] + '">' + (x[0] / (S.a || 1) > 0.06 ? nf(x[0]) : '') + '</span>').join('') + '</div>'
@@ -14113,7 +14121,7 @@ function mesDetalleHtml(k){
   const famOrd = Object.keys(GA).sort((a, b) => GA[b].length - GA[a].length);
   const abF = window.MDA_FAM || null;
   const actHtml = '<div class="mda-c"><div class="ct">Por actividad · efectividad y ' + bTxt + ' <span class="mda-ayu">toca una para ver sus tipos</span></div><table class="mda-t mda-act">'
-    + '<tr><th>Actividad</th><th>Asig.</th><th></th><th>Efect.</th><th>' + bTxt + '</th></tr>'
+    + '<tr><th>Actividad</th><th>Asignadas</th><th style="text-align:left">Barra de efectividad</th><th>Efectividad</th><th>' + bTxt + ' (pts)</th></tr>'
     + famOrd.map(function(f){ const sa = st(GA[f]), sb = GB[f] ? st(GB[f]) : null;
         let r = '<tr class="mda-clk' + (abF === f ? ' on' : '') + '" onclick="window.MDA_FAM=(window.MDA_FAM===\'' + f + '\'?null:\'' + f + '\'); mdaRepintar()"><td>' + (abF === f ? '▾ ' : '▸ ') + f + '</td><td>' + nf(sa.a) + '</td>'
           + '<td class="bar"><span class="mda-bar"><i style="width:' + (sa.ef || 0) + '%"></i></span></td><td>' + p1(sa.ef) + '</td><td>' + fl(sa.ef, sb ? sb.ef : null) + '</td></tr>';
@@ -14128,31 +14136,35 @@ function mesDetalleHtml(k){
   const topC = Object.keys(cods).sort((a, b) => cods[b] - cods[a]);
   const QN = { cli:'Cliente', vtr:'VTR', dom:'Dominion' };
   const nrAb = !!window.MDA_NR;
-  const porQueHtml = '<div class="mda-c"><div class="ct">¿Por qué no se hicieron? · ' + nf(nr.length) + '</div>'
+  const porQueHtml = '<div class="mda-c"><div class="ct">¿Por qué no se hicieron? · ' + nf(nr.length) + ' no realizadas <span class="mda-ayu">de quién es la causa</span></div>'
     + (nr.length ? '<div class="mda-stk">' + ['cli', 'vtr', 'dom'].filter(q => Q[q]).map(q => '<span style="flex:' + Q[q] + ';background:' + MG_RCOL[q] + '" title="' + MG_RNOM[q] + ': ' + Q[q] + '">' + (Q[q] / nr.length > 0.12 ? QN[q] + ' ' + Math.round(100 * Q[q] / nr.length) + '%' : '') + '</span>').join('') + '</div>'
+      + '<div class="mda-ley">' + ['cli', 'vtr', 'dom'].filter(q => Q[q]).map(q => '<b style="color:' + MG_RCOL[q] + '">■ ' + MG_RNOM[q] + ' ' + nf(Q[q]) + ' (' + Math.round(100 * Q[q] / nr.length) + '%)</b>').join(' ') + '</div>'   /* (09-11-2026) Luis: "tenemos informacion que se muestra pero no tienen titulos indicando que son": titulos de columna y leyendas */ 
+      + '<div class="mda-ayu" style="margin:6px 0 2px">Las 4 causas (código de cierre) que más se repiten · cantidad de no realizadas</div>'
       + '<ul class="mda-ul">' + topC.slice(0, 4).map(c => '<li><span class="mda-dot" style="background:' + MG_RCOL[mgResp(c)] + '"></span>' + escR(c) + ' <b>' + cods[c] + '</b></li>').join('') + '</ul>'
       + '<button class="mda-lnk" onclick="window.MDA_NR=!window.MDA_NR; mdaRepintar(); if(window.MDA_NR) setTimeout(function(){ var e=document.getElementById(\'mdaNR\'); if(e) e.scrollIntoView({behavior:\'smooth\'}); }, 60)">' + (nrAb ? 'Ocultar el detalle ▴' : 'Ver el detalle de las ' + nf(nr.length) + ' ›') + '</button>'
       : '<p class="ad-vacio">Ninguna.</p>') + '</div>';
   const SM = S;
-  const diaHtml = '<div class="mda-c"><div class="ct">Día por día · efectividad <span class="mda-ayu">toca un día</span></div><div class="mda-dd">'
+  const diaHtml = '<div class="mda-c"><div class="ct">Día por día · efectividad <span class="mda-ayu">% de completadas sobre asignadas de cada día · toca un día</span></div><div class="mda-dd">'
     + dias.map(function(d, di){ const s = st(L.filter(r => r['Fecha'] === d)); const dw = ['do','lu','ma','mi','ju','vi','sá'][new Date(+d.slice(6), +d.slice(3, 5) - 1, +d.slice(0, 2)).getDay()];
-        return '<button onclick="mdSemAbrir(\'' + d + '\', ' + (SM.ef === null ? 'null' : Math.round(SM.ef * 10) / 10) + ')" title="' + d + ': ' + s.co + ' de ' + s.a + ' (' + p1(s.ef) + ')"><span class="col"><i class="' + (s.ef >= SM.ef ? 'ok' : 'bad') + '" style="height:' + (s.ef || 0) + '%">' + (dias.length <= 14 ? Math.round(s.ef) : '') + '</i></span><span class="l">' + (dias.length <= 10 ? dw + ' ' + d.slice(0, 2) : (dias.length <= 16 || di % 3 === 0) ? d.slice(0, 2) : '&nbsp;') + '</span></button>'; }).join('')
-    + '</div><div class="mda-ayu" style="margin-top:3px">Verde: sobre el promedio del mes (' + p1(SM.ef) + ')</div></div>';
+        return '<button onclick="mdSemAbrir(\'' + d + '\', ' + (SM.ef === null ? 'null' : Math.round(SM.ef * 10) / 10) + ')" title="' + d + ': ' + s.co + ' de ' + s.a + ' (' + p1(s.ef) + ')"><span class="col"><i class="' + (s.ef >= SM.ef ? 'ok' : 'bad') + '" style="height:' + (s.ef || 0) + '%">' + (dias.length <= 14 ? Math.round(s.ef) + '%' : '') + '</i></span><span class="l">' + (dias.length <= 10 ? dw + ' ' + d.slice(0, 2) : (dias.length <= 16 || di % 3 === 0) ? d.slice(0, 2) : '&nbsp;') + '</span></button>'; }).join('')
+    + '</div><div class="mda-ayu" style="margin-top:3px">Verde: sobre el promedio del mes (' + p1(SM.ef) + ') · Rojo: bajo el promedio</div></div>';
   h += '<div class="mda-g mda-f2">' + actHtml + porQueHtml + diaHtml + '</div>';
 
   /* FILA 3: franja, comuna, supervisor */
   const nomBonito = x => String(x).toLowerCase().replace(/(^|\s)\S/g, c => c.toUpperCase());
-  const caja = function(titulo, fn, orden, pie){
+  const caja = function(titulo, fn, orden, pie, col){
     const ga = grupo(L, fn), gb = grupo(B, fn);
     const ks = Object.keys(ga).sort(orden || ((a, b) => ga[b].length - ga[a].length));
-    return '<div class="mda-c"><div class="ct">' + titulo + '</div><table class="mda-t">' + ks.map(function(x){ const s2 = st(ga[x]), b2 = gb[x] ? st(gb[x]) : null;
+    return '<div class="mda-c"><div class="ct">' + titulo + ' <span class="mda-ayu">efectividad = completadas ÷ asignadas</span></div><table class="mda-t">'
+      + '<tr><th>' + (col || '') + '</th><th>Asignadas</th><th>Efectividad</th><th>' + bTxt + ' (pts)</th></tr>'   /* (09-11-2026) Luis: "tenemos informacion que se muestra pero no tienen titulos indicando que son": titulos de columna y leyendas */ 
+      + ks.map(function(x){ const s2 = st(ga[x]), b2 = gb[x] ? st(gb[x]) : null;
       return '<tr><td>' + escR(nomBonito(x)) + '</td><td>' + nf(s2.a) + '</td><td>' + p1(s2.ef) + '</td><td>' + fl(s2.ef, b2 ? b2.ef : null) + '</td></tr>'; }).join('') + '</table>' + (pie || '') + '</div>';
   };
   const tec = r => { const n = String(r['Nombre'] || ''), i = n.indexOf('_DOMI_'); return (i >= 0 ? n.slice(i + 6) : n).replace(/ /g, ' ').trim(); };
   const TA = grupo(L, tec), TB = grupo(B, tec);
   const tecAb = !!window.MD_TEC_AB;
   const pieSup = '<button class="mda-lnk" onclick="window.MD_TEC_AB=!window.MD_TEC_AB; mdaRepintar(); if(window.MD_TEC_AB) setTimeout(function(){ var e=document.getElementById(\'mdaTEC\'); if(e) e.scrollIntoView({behavior:\'smooth\'}); }, 60)">' + (tecAb ? 'Ocultar los técnicos ▴' : 'Ver los ' + Object.keys(TA).length + ' técnicos ›') + '</button>';
-  h += '<div class="mda-g mda-f3">' + caja('Por franja', r => r['Franja'], (a, b) => a.localeCompare(b)) + caja('Por comuna', r => r['Ciudad']) + caja('Por supervisor', r => r['supervisor'], null, pieSup) + '</div>';
+  h += '<div class="mda-g mda-f3">' + caja('Por franja', r => r['Franja'], (a, b) => a.localeCompare(b), null, 'Franja') + caja('Por comuna', r => r['Ciudad'], null, null, 'Comuna') + caja('Por supervisor', r => r['supervisor'], null, pieSup, 'Supervisor') + '</div>';
 
   /* DESPLEGABLE 1: DETALLE DE LAS NO REALIZADAS */
   if(nrAb && nr.length){
@@ -18663,6 +18675,9 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarM
   #anDet .an-dia-act .sb { font-size:12px; color:#94a3b8; } #anDet .an-dia-act .sb b { color:#e2e8f0; }
   #anDet .an-dia-act .br { display:flex; height:16px; border-radius:6px; overflow:hidden; margin:6px 0; background:#0b1324; }
   #anDet .an-dia-act .br span { font-size:10px; line-height:16px; text-align:center; color:#fff; min-width:14px; }
+  #anDet .an-bley { font-size:10px; color:#94a3b8; display:flex; flex-wrap:wrap; align-items:center; gap:1px 3px; margin:-2px 0 4px; }
+  #anDet .an-bley i { display:inline-block; width:8px; height:8px; border-radius:2px; margin-left:3px; }
+  #anDet .an-bley i.c { background:#16a34a; } #anDet .an-bley i.n { background:#dc2626; } #anDet .an-bley i.i { background:#2563eb; } #anDet .an-bley i.p { background:#475569; } #anDet .an-bley i.x { background:#334155; }
   #anDet .an-dia-act .br .c { background:#16a34a; } #anDet .an-dia-act .br .n { background:#dc2626; } #anDet .an-dia-act .br .i { background:#2563eb; } #anDet .an-dia-act .br .p { background:#475569; } #anDet .an-dia-act .br .x { background:#334155; color:#94a3b8; }
   #anDet .an-dia-act .nums { display:flex; gap:12px; font-size:12.5px; color:#cbd5e1; } #anDet .an-dia-act .nums .ok { color:#22c55e; } #anDet .an-dia-act .nums .bad { color:#ef4444; }
   #anDet .an-dia-act .ef { display:flex; justify-content:space-between; font-size:12.5px; margin-top:4px; } #anDet .an-dia-act .ef .ver { color:#93c5fd; }
@@ -19163,7 +19178,7 @@ function anPintar(){
   /* como cierra el mes */
   h += '<div class="an-card"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap"><h3 style="margin:0">¿Cómo cierra ' + AN_NOMMES[+D.mesHoy.slice(4) - 1].toLowerCase() + '?</h3>'
     + '<button class="an-btn" style="background:#0ea5e9" onclick="anDiarioAbrir()" title="Ver migraciones día a día, con el mes completo">📅 Día a día ›</button></div>'
-    + '<p class="s">Línea llena: cómo va la completitud acumulada del mes, día a día. Punteada: hacia dónde va hasta fin de mes si sigue como los últimos 10 días (abiertas de hoy + días hábiles que faltan × visitas por día); la franja es ± 5 pts. La línea blanca es la meta.</p>';
+    + '<p class="s">Abajo: día del mes · a la izquierda: % de completitud. Línea llena: cómo va la completitud acumulada del mes, día a día. Punteada: hacia dónde va hasta fin de mes si sigue como los últimos 10 días (abiertas de hoy + días hábiles que faltan × visitas por día); la franja es ± 5 pts. La línea blanca es la meta.</p>';
   /* (04-11-2026, 15:55) Luis: "¿se podría representar con un gráfico lineal?". Línea = completitud ACUMULADA del mes
      día a día (como va el mes); desde hoy, línea punteada = proyección hasta fin de mes con la completitud de los
      últimos 10 días, y franja = ± 5 pts. Misma cuenta que antes (quedan = abiertas + días hábiles × visitas/día). */
@@ -19197,14 +19212,14 @@ function anOtrasCardHtml(D, SEMS){
   h += '<div class="an-sem"><div></div>' + SEMS.map(function(k){ return '<div class="h">S' + derNumSemana(k) + '</div>'; }).join('');
   const W = SEMS.map(function(k){ const L = anPer(D, 'Migraciones', { t:'sem', k:k }); return { k:k, o:mpSt(L.filter(esOtra)), z:mpSt(L.filter(function(x){ return !esOtra(x); })), t:mpSt(L) }; });
   h += '<div title="Completitud de las migraciones hechas en otras comunas (GSA como quiebre)">Otras comunas</div>';
-  W.forEach(function(w){ const s = w.o, poca = s.vis < MINV;
+  W.forEach(function(w){ /* (09-11-2026) Luis: "cambia todo": sin gris por pocas visitas */ const s = w.o, poca = false;
     h += !s.vis ? '<div class="d vac" title="Sin migraciones en otras comunas esa semana">–</div>'
       : '<div class="d' + (w.k === D.semHoy ? ' act' : '') + '" style="background:' + (poca ? '#64748b' : anCol(s.comp)) + (poca ? ';color:#f1f5f9' : '') + '" title="Semana ' + derNumSemana(w.k) + ' en otras comunas: ' + s.co + ' de ' + s.vis + (poca ? ' (pocas visitas, dice poco)' : '') + '" onclick="anOtrasIr({t:\'sem\', k:\'' + w.k + '\'})">' + P2(s.comp) + '%<small>' + s.vis + ' vis.</small></div>'; });
   h += '<div style="color:#5eead4" title="Puntos que las de otras comunas le restan (−) o suman (+) a la completitud total de la semana">Efecto en el total</div>';
   W.forEach(function(w){ const d = (w.o.vis && w.t.comp !== null && w.z.comp !== null) ? w.t.comp - w.z.comp : null;
     h += d === null ? '<div class="d vac">–</div>'
       : '<div class="d ot' + (w.k === D.semHoy ? ' act' : '') + '" style="color:' + (d < -0.005 ? '#fca5a5' : '#86efac') + '" title="Total ' + P2(w.t.comp) + '% · solo Quilpué + V. Alemana ' + P2(w.z.comp) + '%">' + (d > 0 ? '+' : d < 0 ? '−' : '') + anF1(Math.abs(d)) + ' pts<small>total ' + P2(w.t.comp) + '%</small></div>'; });
-  h += '</div><p class="s" style="margin:6px 0 0">Solo los días con export completo (cuenta del jefe). Gris: menos de ' + MINV + ' visitas en la semana.</p></div>';
+  h += '</div><p class="s" style="margin:6px 0 0">Solo los días con export completo (cuenta del jefe). El color va siempre por el %, aunque tenga pocas visitas.</p></div>';
   return h;
 }
 /* (04-11-2026, 16:00) Luis: "ajusta el gráfico para que quede en línea al finalizar con cuánto nos cuesta la GSA".
@@ -19228,6 +19243,7 @@ function anLinSvg(D, H){
   let g = '<svg viewBox="0 0 ' + W + ' ' + H + '" style="width:100%">';
   [30, 45, 60, 70, 80, 90, 100].forEach(function(v){ g += '<line x1="' + L + '" x2="' + (W - Rr) + '" y1="' + ya(v) + '" y2="' + ya(v) + '" stroke="#1e2a44"/><text x="' + (L - 6) + '" y="' + (ya(v) + 3.5) + '" font-size="10" fill="#94a3b8" text-anchor="end">' + v + '%</text>'; });
   [1, 5, 10, 15, 20, 25, nD].forEach(function(dd){ g += '<text x="' + xa(dd) + '" y="' + (H - 7) + '" font-size="10" fill="#94a3b8" text-anchor="middle">' + dd + '</text>'; });
+  /* (09-11-2026) Luis: "revisa que todo tenga su titulo e indique que es" */ 
   g += '<line x1="' + xa(d0.getDate()) + '" x2="' + xa(d0.getDate()) + '" y1="' + T + '" y2="' + (H - B) + '" stroke="#475569" stroke-dasharray="2 3"/><text x="' + xa(d0.getDate()) + '" y="' + (T + 8) + '" font-size="9.5" fill="#94a3b8" text-anchor="middle"' + halo + '>hoy</text>';
   g += '<line x1="' + L + '" x2="' + (W - Rr) + '" y1="' + ya(MP_META) + '" y2="' + ya(MP_META) + '" stroke="#fff" stroke-width="1.6"/><text x="' + (L + 4) + '" y="' + (ya(MP_META) + 13) + '" font-size="9.5" fill="#fff"' + halo + '>meta ' + MP_META + '%</text>';
   const leyenda = [], etiq = [];
@@ -19566,8 +19582,8 @@ function plCumplenHtml(L, regla, sinDatos, opTxt){
   const k = plCumplen(L), pc = function(a, b){ return b ? P2(100 * a / b) + '%' : '–'; };
   const caja = function(tit, tot, si, no, ay){
     return '<span class="cqm-b" title="' + ay + '"><span class="cqm-t">' + tit + ' <b>' + tot + '</b></span>'
-      + '<span class="cqm-si">✔ ' + si + ' cumplen <b>' + pc(si, tot) + '</b></span>'
-      + '<span class="cqm-no">✖ ' + no + ' no cumplen <b>' + pc(no, tot) + '</b></span></span>'; };
+      + '<span class="cqm-si">✔ ' + si + ' cumplen la meta <b>' + pc(si, tot) + '</b></span>'
+      + '<span class="cqm-no">✖ ' + no + ' no la cumplen <b>' + pc(no, tot) + '</b></span></span>'; };
   return '<span class="cqm pl-cqm">'
     + caja('Plantel', k.pl, k.siPl, k.no, 'Todo el plantel. Cumple = ' + regla + '. ' + k.sinDatos + ' ' + sinDatos + ' cuentan como cumplen (igual que en Calidad).')
     + caja('Operativos', k.op, k.siOp, k.no, opTxt + ' Cumple = ' + regla + '.')
@@ -19982,7 +19998,7 @@ function anDetPintar(){
   let der = '<div class="an-card"><h3>Técnico por técnico</h3><p class="s">Primero los que más derivan.</p>';
   if(!filas.length) der += '<div class="an-vac">No hay órdenes en este período.</div>';
   else {
-    der += '<div class="an-scroll"><table class="an-tb"><tr><th>Técnico</th><th>Visitadas</th><th>Comp.</th><th>No real.</th><th>Por cerrar</th><th>Completitud</th></tr>';
+    der += '<div class="an-scroll"><table class="an-tb"><tr><th>Técnico</th><th>Visitadas</th><th>Completadas</th><th>No realizadas</th><th>Por cerrar</th><th>Completitud</th></tr>';
     filas.forEach(function(t){ /* (09-11-2026) Luis: "cambia todo": sin gris por pocas visitas, el color va siempre por el % */ const gr = false, c = anCol(t.comp);
       der += '<tr class="' + (gr ? 'gr' : '') + '"><td>' + escR(anTec(t.k)) + '</td><td>' + t.vis + '</td><td>' + t.co + '</td><td>' + t.nr + '</td><td>' + (t.ab || '') + '</td>'
         + '<td><span class="an-mini"><i style="width:' + (t.comp || 0) + '%;background:' + c + '"></i></span><b style="color:' + (gr ? '#64748b' : c) + '">' + (t.comp === null ? '–' : mpPc(t.comp)) + '</b></td></tr>'; });
@@ -20157,7 +20173,7 @@ function anTsPintar(m){
       + '<td class="tot" style="color:' + anColP(et.comp) + '">' + mpPc(et.comp) + '<small>' + et.vis + ' vis.</small></td>' + fl(tend(E)) + '</tr></table></div>';
   }
   h += '<div class="an-ts-ley"><span><i style="background:#dcf3e4;border:1px solid #9fd8b4"></i>' + MP_META + ' % o más (meta)</span><span><i style="background:#fdf1d6;border:1px solid #f3d08a"></i>' + (MP_META - 5) + ' a ' + (MP_META - 1) + ' %</span>'
-    + '<span><i style="background:#fde4e4;border:1px solid #f2a7a7"></i>bajo ' + (MP_META - 5) + ' %</span><span><i style="background:#f1f2f4;border:1px solid #e5e7eb"></i>pocas visitas</span><span><i style="background:#fafafa;border:1px dashed #d1d5db"></i>sin visitas</span>'
+    + '<span><i style="background:#fde4e4;border:1px solid #f2a7a7"></i>bajo ' + (MP_META - 5) + ' %</span><span><i style="background:#fafafa;border:1px dashed #d1d5db"></i>sin visitas</span><span>Arriba: % de completitud · abajo: visitas de esa semana</span>'
     + '<span><b style="color:#1e7a46">▲</b> mejorando · <b style="color:#b42318">▼</b> empeorando · <b style="color:#a15c07">=</b> igual (±3 pts)</span></div></div></div>';
   m.innerHTML = h; m.scrollTop = y;
 }
@@ -20326,8 +20342,10 @@ function anDiaPintar(m){
       + '<div class="hd"><span class="nm"><i></i>' + f + '</span><span class="tot">' + L.length + '</span></div>'
       + '<div class="sb">' + subTx + '</div>'
       + '<div class="br">' + t(co, 'c', 'completadas') + t(nr, 'n', 'no realizadas') + t(ini2, 'i', 'iniciadas o en ruta') + t(pen, 'p', 'pendientes') + t(cs, 'x', 'canceladas o suspendidas') + '</div>'
+      /* (09-11-2026) Luis: "revisa que todo tenga su titulo": que dice cada color de la barra */
+      + '<div class="an-bley"><i class="c"></i>completadas <i class="n"></i>no realizadas <i class="i"></i>en curso <i class="p"></i>por iniciar <i class="x"></i>canc.</div>'
       + '<div class="nums"><span><b class="ok">' + co + '</b> completadas</span><span><b class="bad">' + nr + '</b> no realizadas</span><span><b>' + ab + '</b> sin cerrar</span></div>'
-      + '<div class="ef">' + (pv === null ? '<span class="sd">nadie ha cerrado una visita todavía</span>' : '<span><b style="color:' + (meta === null ? '#e2e8f0' : pv >= meta ? '#22c55e' : '#ef4444') + '">' + P2(pv) + '%</b> de lo visitado' + '<small class="sg">sin GSA ' + P2(pvSG) + '% · ' + gg + ' GSA</small>' + '</span>') + '<span class="ver">Ver detalle ›</span></div>'
+      + '<div class="ef">' + (pv === null ? '<span class="sd">nadie ha cerrado una visita todavía</span>' : '<span><b style="color:' + (meta === null ? '#e2e8f0' : pv >= meta ? '#22c55e' : '#ef4444') + '">' + P2(pv) + '%</b> completitud de lo visitado' + '<small class="sg">sin GSA ' + P2(pvSG) + '% · ' + gg + ' GSA</small>' + '</span>') + '<span class="ver">Ver detalle ›</span></div>'
       + '</button>';
   }).join('') + '</div>';
   h += '</div>';
@@ -20390,6 +20408,10 @@ function anSegPintar(m){
         + '<td class="tot" style="color:' + anColP(t.base.comp) + '">' + mpPc(t.base.comp) + '<small>' + t.base.vis + ' vis.</small></td>' + va + '</tr>';
     });
     h += '</table></div>';
+    /* (09-11-2026) Luis: "revisa que todo tenga su titulo e indique que es" */ 
+    h += '<div class="an-ts-ley"><span><i style="background:#dcf3e4;border:1px solid #9fd8b4"></i>' + MP_META + ' % o más (meta)</span><span><i style="background:#fdf1d6;border:1px solid #f3d08a"></i>' + (MP_META - 5) + ' a ' + (MP_META - 1) + ' %</span>'
+      + '<span><i style="background:#fde4e4;border:1px solid #f2a7a7"></i>bajo ' + (MP_META - 5) + ' %</span><span><i style="background:#fafafa;border:1px dashed #d1d5db"></i>sin visitas</span>'
+      + '<span>Cada casilla: % de completitud de la semana · abajo: visitas</span></div>';
   }
   h += '</div></div>';
   m.innerHTML = h; m.scrollTop = y;
@@ -20459,8 +20481,8 @@ function anDiarioPintar(m){
   h += '<div class="an-ts-ley" style="margin-top:12px"><span><i style="background:#dcf3e4;border:1px solid #9fd8b4"></i>' + MP_META + '% o más</span>'
     + '<span><i style="background:#fdf1d6;border:1px solid #f3d08a"></i>' + (MP_META - 5) + ' a ' + (MP_META - 1) + '%</span>'
     + '<span><i style="background:#fde4e4;border:1px solid #f2a7a7"></i>bajo ' + (MP_META - 5) + '%</span>'
-    + '<span><i style="background:#f1f2f4;border:1px solid #e5e7eb"></i>pocas visitas</span>'
-    + '<span><i style="background:#fafafa;border:1px dashed #d1d5db"></i>sin datos aún</span></div>';
+    + '<span><i style="background:#fafafa;border:1px dashed #d1d5db"></i>sin datos aún</span>'
+    + '<span>Cada casilla: % de completitud del día · abajo: día del mes · visitas</span></div>';   /* (09-11-2026) Luis: "revisa que todo tenga su titulo e indique que es" */ 
   h += '</div></div>';
   m.innerHTML = h; m.scrollTop = y;
 }
@@ -21014,10 +21036,11 @@ function cqPintar(){
     + (!R.sinDatos && R.btTot !== R.base ? '<p class="cq-nota">Ojo: por tipo suman ' + R.btTot + ' completadas (datos.json) y el total del registro de Reiterados dice ' + R.base + '. El % total usa ' + R.base + '.</p>' : '');
   h += cqSemanasHtml(R, meta);
   /* por tecnico */
-  h += '<div class="cq-sec">Técnico por técnico<small>el reiterado se le carga al que hizo el trabajo de ' + CQ_NOMMES[+CQ_MES.slice(5, 7) - 1] + ' · toca un técnico para ver sus casas · en gris, menos de ' + MIN_COMP_REIT + ' completadas</small></div>'
+  h += '<div class="cq-sec">Técnico por técnico<small>el reiterado se le carga al que hizo el trabajo de ' + CQ_NOMMES[+CQ_MES.slice(5, 7) - 1] + ' · toca un técnico para ver sus casas · el color va siempre por el %, aunque tenga pocas completadas</small></div>'
     + '<table class="cq-t"><thead><tr><th>Técnico</th><th>Supervisor</th><th>Completadas</th><th>Con reparación</th><th>Calidad</th><th>Lo que más se repite</th></tr></thead><tbody>';
   R.tecs.forEach(function(o, i){
-    const poca = o.c < MIN_COMP_REIT, m = !poca && o.p !== null && o.p > meta;
+    /* (09-11-2026) Luis "cambia porfa": sin apagado por pocas ordenes, el color va siempre por el % */ 
+    const poca = false, m = o.p !== null && o.p > meta;
     h += '<tr class="t' + (m ? ' mal' : '') + '" onclick="cqTec(' + i + ')"><td>' + (CQ_AB === i ? '▾ ' : '▸ ') + escR(derTitulo(o.nom)) + '</td><td><small>' + escR(derTitulo(o.sup || '')) + '</small></td><td>' + o.c + '</td><td>' + o.n + '</td>'
       + '<td class="p ' + (o.p === null ? 'poca' : poca ? 'poca' : m ? 'mal' : 'ok') + '">' + (o.p === null ? '–' : P2(o.p) + '%') + (poca && o.c ? ' <small>pocas</small>' : '') + '</td><td style="text-align:left"><small>' + escR(o.n ? cqPatron(o) : '') + '</small></td></tr>';
     if(CQ_AB === i) h += '<tr class="det"><td colspan="6">' + (o.l.length ? '<table class="cq-d"><thead><tr><th>Trabajo</th><th>Casa</th><th>Reparación</th><th>Días</th><th>Estado de la reparación</th><th>Código</th><th>Quién reparó</th></tr></thead><tbody>'
@@ -21244,8 +21267,8 @@ function cqCumplenHtml(R, meta){
   const k = cqCumplen(R, meta), pc = function(a, b){ return b ? P2(100 * a / b) + '%' : '–'; };
   const caja = function(tit, tot, si, no, ay){
     return '<span class="cqm-b" title="' + ay + '"><span class="cqm-t">' + tit + ' <b>' + tot + '</b></span>'
-      + '<span class="cqm-si">✔ ' + si + ' cumplen <b>' + pc(si, tot) + '</b></span>'
-      + '<span class="cqm-no">✖ ' + no + ' no cumplen <b>' + pc(no, tot) + '</b></span></span>'; };
+      + '<span class="cqm-si">✔ ' + si + ' cumplen la meta <b>' + pc(si, tot) + '</b></span>'
+      + '<span class="cqm-no">✖ ' + no + ' no la cumplen <b>' + pc(no, tot) + '</b></span></span>'; };
   return '<span class="cqm">'
     + caja('Plantel', k.pl, k.siPl, k.no, 'Todo el plantel. ' + k.sinTrab + ' sin trabajos completados en el mes cuentan como cumplen (sin fallas).')
     + caja('Operativos', k.op, k.siOp, k.no, 'Técnicos del plantel con al menos un trabajo completado en el mes.')
@@ -21283,27 +21306,27 @@ function cqGerenciaHtml(R, meta){
   const sup = {}; R.tecs.forEach(function(o){ const k = derTitulo(o.sup || 'Sin supervisor'); const s = sup[k] || (sup[k] = { c: 0, n: 0 }); s.c += o.c; s.n += o.n; });
   const tipos = ['Alta', 'Alta Traslado', 'Migración', 'Reparación'].map(function(k){ const x = L.filter(function(t){ return t.tipo === k; }).length; return [k, x, R.bt[k] || 0]; }).filter(function(f){ return f[2]; });
   const fila = function(nom, x, c, extra){ const p = pc(x, c); return '<tr><td>' + escR(nom) + '</td><td class="n">' + x + ' de ' + c + '</td><td class="n"><b style="color:' + col(p) + '">' + P2(p) + '%</b></td><td class="bb">' + cqBarra(p / (meta * 2) * 100, col(p)) + '</td>' + (extra || '') + '</tr>'; };
-  h += '<div class="cg-2"><div class="cg-sec"><h4>Por supervisor</h4><table class="cg-t"><tbody>'
+  h += '<div class="cg-2"><div class="cg-sec"><h4>Por supervisor</h4><p class="cg-ay">trabajos con reparación de los completados · % de calidad</p><table class="cg-t"><tbody>'   /* (09-11-2026) Luis: "revisa que todo tenga su titulo" */
     + Object.keys(sup).sort(function(a, b){ return pc(sup[b].n, sup[b].c) - pc(sup[a].n, sup[a].c); }).map(function(k){ return fila(k, sup[k].n, sup[k].c); }).join('') + '</tbody></table>'
     + '<p class="cg-ay">La barra llega a la mitad en la meta (' + String(meta).replace('.', ',') + '%).</p></div>'
-    + '<div class="cg-sec"><h4>Por tipo de trabajo</h4><table class="cg-t"><tbody>'
+    + '<div class="cg-sec"><h4>Por tipo de trabajo</h4><p class="cg-ay">trabajos con reparación de los completados · % de calidad</p><table class="cg-t"><tbody>'
     + tipos.map(function(f){ return fila(f[0], f[1], f[2], '<td class="n"><small>' + P2(pc(f[1], n)) + '% de los reiterados</small></td>'); }).join('') + '</tbody></table></div></div>';
   /* 5 cuando y 7 quien */
   const dias = [['0 a 7 días', 0, 7], ['8 a 15 días', 8, 15], ['16 a 30 días', 16, 30]].map(function(d){ return [d[0], L.filter(function(t){ const x = cqPrim(t).dias; return x >= d[1] && x <= d[2]; }).length]; });
   const quien = cqCuenta(L, function(t){ return cqEmpG(cqPrim(t)); });
   const otras = cqCuenta(L.filter(function(t){ return cqEmpG(cqPrim(t)) === 'Otra empresa'; }), function(t){ return cqPrim(t).emp; });
-  h += '<div class="cg-2"><div class="cg-sec"><h4>Cuándo falla</h4><p class="cg-ay">días desde el trabajo hasta la reparación</p>'
+  h += '<div class="cg-2"><div class="cg-sec"><h4>Cuándo falla</h4><p class="cg-ay">días desde el trabajo hasta la reparación · % de los reiterados y, a la derecha, cuántos</p>'
     + dias.map(function(d){ return '<div class="cg-row"><span>' + d[0] + '</span>' + cqBarra(pc(d[1], n), '#7c3aed') + '<b>' + P2(pc(d[1], n)) + '%</b><small>' + d[1] + '</small></div>'; }).join('') + '</div>'
-    + '<div class="cg-sec"><h4>Quién hizo la reparación</h4><p class="cg-ay">' + (otras.length ? 'otras empresas: ' + otras.map(function(f){ return f[0] + ' ' + f[1]; }).join(', ') : '&nbsp;') + '</p>'
+    + '<div class="cg-sec"><h4>Quién hizo la reparación</h4><p class="cg-ay">% de los reiterados y, a la derecha, cuántos' + (otras.length ? ' · otras empresas: ' + otras.map(function(f){ return f[0] + ' ' + f[1]; }).join(', ') : '') + '</p>'
     + quien.map(function(q){ return '<div class="cg-row"><span>' + escR(q[0]) + '</span>' + cqBarra(pc(q[1], n), q[0] === 'Dominion' ? '#2563eb' : q[0] === 'Bucket' ? '#94a3b8' : '#f59e0b') + '<b>' + P2(pc(q[1], n)) + '%</b><small>' + q[1] + '</small></div>'; }).join('') + '</div></div>';
   /* 6 fallas por codigo de cierre, tal cual */
   const cie = cqCuenta(L, function(t){ return cqPrim(t).cie || 'Sin código'; });
   const mx = cie.length ? cie[0][1] : 1;
-  h += '<div class="cg-sec"><h4>Fallas según el cierre de la reparación</h4><p class="cg-ay">código de cierre de la primera reparación de cada trabajo, tal cual viene · % sobre los ' + n + ' reiterados</p>'
+  h += '<div class="cg-sec"><h4>Fallas según el cierre de la reparación</h4><p class="cg-ay">código de cierre de la primera reparación de cada trabajo, tal cual viene · % sobre los ' + n + ' reiterados y, a la derecha, cuántos</p>'
     + cie.map(function(c){ return '<div class="cg-row cg-cie"><span>' + escR(c[0]) + '</span>' + cqBarra(100 * c[1] / mx, '#0f766e') + '<b>' + P2(pc(c[1], n)) + '%</b><small>' + c[1] + '</small></div>'; }).join('') + '</div>';
   /* 8 tecnicos con mas reiterados */
   const top = tec20.filter(function(o){ return o.n; }).slice(0, 8);
-  h += '<div class="cg-sec"><h4>Técnicos con peor calidad</h4><p class="cg-ay">con ' + MIN_COMP_REIT + ' o más trabajos en el mes · ordenados por %</p><table class="cg-t"><tbody>'
+  h += '<div class="cg-sec"><h4>Técnicos con peor calidad</h4><p class="cg-ay">con ' + MIN_COMP_REIT + ' o más trabajos en el mes · ordenados por % · con reparación de los completados</p><table class="cg-t"><tbody>'
     + top.map(function(o){ return fila(derTitulo(o.nom), o.n, o.c, '<td><small>' + escR(derTitulo(o.sup || '')) + '</small></td><td><small>lo que más se repite: <b>' + escR(cqPatron(o)) + '</b></small></td>'); }).join('') + '</tbody></table></div>';
   h += cqReclamoHtml(R, meta) + cqAbiertasHtml(R) + cqAlertaHtml(meta);   /* 5, 6 y 3 (12:20) */
   h += '<p class="cq-nota">Calidad = trabajos completados en ' + cqNomMes(CQ_MES) + ' (altas, traslados, migraciones y reparaciones, en cualquier comuna) que tuvieron una reparación en la misma casa dentro de ' + CQ_DIAS + ' días, de cualquier empresa; solo cuentan las reparaciones completadas (no realizadas, suspendidas y canceladas no cuentan); cada trabajo cuenta una vez. '
