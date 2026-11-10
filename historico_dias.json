@@ -21703,24 +21703,24 @@
    }
   },
   "10-11-2026": {
-   "hasta": "14:12",
-   "actividades": 161,
+   "hasta": "14:22",
+   "actividades": 163,
    "tecnicos": 34,
    "estados": {
-    "Completado": 52,
-    "Iniciado": 16,
-    "Pendiente": 53,
+    "Completado": 55,
+    "Iniciado": 17,
+    "Pendiente": 51,
+    "en ruta": 7,
     "No Realizada": 17,
     "Suspendido": 7,
-    "Cancelado": 9,
-    "en ruta": 7
+    "Cancelado": 9
    },
-   "rgu": 218.2,
+   "rgu": 220.2,
    "caidas_total": 7,
    "caidas_activas": 4,
    "caidas_resueltas": 3,
    "nuevas": 14,
-   "al_bucket": 20,
+   "al_bucket": 21,
    "repetidas": 37,
    "reagendadas": 2,
    "detalle": {
@@ -21851,7 +21851,7 @@
       "f": "13-16",
       "hi": "13:00",
       "d": "EL CIPRES 844, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OXT8HOW",
@@ -21860,7 +21860,7 @@
       "f": "13-16",
       "hi": "13:00",
       "d": "BELUGA 1537, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OXTGASD",
@@ -21895,24 +21895,12 @@
       "o": "1-3OXUSBXG",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:30",
+      "hi": "14:33",
       "d": "EL CIPRES 844, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "ALFREDO ALCAYAGA F",
       "visitas": 1,
       "ult_fecha": "13-10-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OTI4SOL",
-      "cat": "Alta 2 Play",
-      "f": "13-16",
-      "hi": "15:40",
-      "d": "EUGENIO GRANDI 695, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "ALFREDO ALCAYAGA F",
-      "visitas": 2,
-      "ult_fecha": "23-10-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -21976,18 +21964,6 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3OXDERXE",
-      "cat": "Reparación",
-      "f": "13-16",
-      "hi": "14:43",
-      "d": "LAS BARRANCAS 2581 EDIF. A DEPTO 101, QUILPUE",
-      "e": "Pendiente",
-      "tec": "CRISTOBAL MIRANDA VALENC",
-      "visitas": 1,
-      "ult_fecha": "09-11-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
       "o": "1-3OW4AD1H",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -21998,6 +21974,18 @@
       "visitas": 1,
       "ult_fecha": "07-11-2026",
       "ult_cierre": "Ductos tapados"
+     },
+     {
+      "o": "1-3OTI4SOL",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "15:24",
+      "d": "EUGENIO GRANDI 695, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "FELIPE SILVA R",
+      "visitas": 2,
+      "ult_fecha": "23-10-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OUZ7659",
@@ -22051,9 +22039,9 @@
       "o": "1-3OXK7MI6",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "14:16",
+      "hi": "14:15",
       "d": "IGNACIO CARRERA PINTO 839, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JORGE PEZOA VICUÑA",
       "visitas": 1,
       "ult_fecha": "09-11-2026",
@@ -22185,7 +22173,7 @@
       "f": "10-13",
       "hi": "11:41",
       "d": "PJE 801 852, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "LUIS MARTIN NUÑEZ",
       "visitas": 1,
       "ult_fecha": "09-11-2026",
@@ -22195,7 +22183,7 @@
       "o": "1-3OVLQQON",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:01",
+      "hi": "17:19",
       "d": "BILBAO 1290, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
@@ -22291,7 +22279,7 @@
       "o": "1-3OXW8BQE",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:34",
+      "hi": "16:32",
       "d": "LAS BARRANCAS 2581 EDIF. D DEPTO 401, QUILPUE",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -22323,6 +22311,18 @@
       "ult_cierre": "Falta de dotación"
      },
      {
+      "o": "1-3OXDERXE",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "14:58",
+      "d": "LAS BARRANCAS 2581 EDIF. A DEPTO 101, QUILPUE",
+      "e": "Pendiente",
+      "tec": "SEBASTIAN DOSSOW A",
+      "visitas": 1,
+      "ult_fecha": "09-11-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3OXW6E2C",
       "cat": "Reparación",
       "f": "13-16",
@@ -22340,10 +22340,10 @@
       "o": "1-3OTI4SOL",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "15:40",
+      "hi": "15:24",
       "d": "EUGENIO GRANDI 695, VILLA ALEMANA",
       "e": "Pendiente",
-      "tec": "ALFREDO ALCAYAGA F",
+      "tec": "FELIPE SILVA R",
       "desde": "05-11-2026"
      },
      {
@@ -22360,5 +22360,5 @@
    }
   }
  },
- "generado": "10-11-2026 14:12"
+ "generado": "10-11-2026 14:22"
 }
