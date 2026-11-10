@@ -21528,6 +21528,40 @@ function cqExcel(){
   #anCom .ac-bar i { display:block; height:100%; }
   #anCom .ac-nota { font-size:12px; color:#94a3b8; margin-top:10px; line-height:1.5; }
   #anCom .ac-vac { color:#94a3b8; padding:20px 0; text-align:center; }
+  /* (10-11-2026, 10:20) MUESTRA DE ESTILOS: Luis "hay mucho negro, muestrame ejemplos". A clara, B gris azulado, C tarjetas */
+  #anCom .ac-est { display:flex; gap:6px; align-items:center; margin:-4px 0 12px; font-size:12px; }
+  #anCom .ac-est span.l { color:inherit; opacity:.75; margin-right:2px; }
+  #anCom .ac-est b { cursor:pointer; font-weight:600; padding:3px 10px; border-radius:999px; border:1px solid #64748b; }
+  #anCom .ac-est b.on { background:#f59e0b; border-color:#f59e0b; color:#1f2937; }
+  #anCom .est-a, #anCom .est-c { background:#ffffff; color:#0f172a; border-color:#e2e8f0; }
+  #anCom .est-c { background:#f1f5f9; }
+  #anCom .est-a h2 small, #anCom .est-c h2 small { color:#64748b; }
+  #anCom .est-a .ac-x, #anCom .est-c .ac-x { background:#fff; color:#334155; border-color:#cbd5e1; }
+  #anCom .est-a .ac-tab, #anCom .est-c .ac-tab { background:#f1f5f9; border-color:#e2e8f0; color:#475569; }
+  #anCom .est-c .ac-tab { background:#fff; }
+  #anCom .est-a .ac-tab.on, #anCom .est-c .ac-tab.on { background:#1d4ed8; border-color:#1d4ed8; color:#fff; }
+  #anCom .est-a th { color:#64748b; border-bottom-color:#e2e8f0; } #anCom .est-a th.g { color:#94a3b8; }
+  #anCom .est-a td { border-bottom-color:#f1f5f9; } #anCom .est-a td small { color:#64748b; } #anCom .est-a td small.sg { color:#7c3aed; }
+  #anCom .est-a tr.tot td { background:#f8fafc; border-top-color:#cbd5e1; }
+  #anCom .est-a .ac-bar { background:#e2e8f0; }
+  #anCom .est-b { background:#334155; color:#f1f5f9; border-color:#475569; }
+  #anCom .est-b h2 small { color:#cbd5e1; }
+  #anCom .est-b .ac-x { background:#475569; border-color:#64748b; color:#f1f5f9; }
+  #anCom .est-b .ac-tab { background:#475569; border-color:#475569; color:#e2e8f0; } #anCom .est-b .ac-tab.on { background:#3b82f6; border-color:#3b82f6; color:#fff; }
+  #anCom .est-b th { color:#cbd5e1; border-bottom-color:#475569; } #anCom .est-b th.g { color:#94a3b8; }
+  #anCom .est-b td { border-bottom-color:#3f4d63; } #anCom .est-b td small { color:#cbd5e1; } #anCom .est-b td small.sg { color:#ddd6fe; }
+  #anCom .est-b tr.par td { background:#3b4a5f; }
+  #anCom .est-b tr.tot td { background:#2b3646; border-top-color:#64748b; }
+  #anCom .est-b .ac-bar { background:#1e293b; }
+  #anCom .ac-cards { display:grid; grid-template-columns:repeat(auto-fill, minmax(210px, 1fr)); gap:10px; }
+  #anCom .ac-card { border-radius:12px; padding:12px 14px; border:1px solid; }
+  #anCom .ac-card .n { font-weight:700; font-size:14.5px; } #anCom .ac-card .p { font-size:28px; font-weight:700; line-height:1.2; margin-top:2px; }
+  #anCom .ac-card .s { font-size:12.5px; margin-top:2px; } #anCom .ac-card .d { font-size:12.5px; margin-top:8px; line-height:1.55; }
+  #anCom .ac-card.ok { background:#dcfce7; border-color:#86efac; color:#166534; } #anCom .ac-card.ok .n { color:#14532d; } #anCom .ac-card.ok .p { color:#15803d; }
+  #anCom .ac-card.med { background:#fef3c7; border-color:#fcd34d; color:#92400e; } #anCom .ac-card.med .n { color:#78350f; } #anCom .ac-card.med .p { color:#b45309; }
+  #anCom .ac-card.baj { background:#fee2e2; border-color:#fca5a5; color:#991b1b; } #anCom .ac-card.baj .n { color:#7f1d1d; } #anCom .ac-card.baj .p { color:#b91c1c; }
+  #anCom .ac-card.tot { background:#fff; border-color:#cbd5e1; color:#334155; } #anCom .ac-card.tot .n { color:#0f172a; }
+  #anCom .ac-card.nd { background:#fff; border-color:#e2e8f0; color:#64748b; }
 </style>
 <div id="anCom" onclick="if(event.target === this) anComCerrar()"><div class="ac-box" id="anComBox"></div></div>
 <script>
@@ -21556,8 +21590,17 @@ function anComReal(x){
   if(!c && x.ciu === 'Otra comuna') c = 'Otra comuna';
   return c;
 }
+var AN_COM_EST = 'a';   /* (10-11-2026) estilo de la ventana Por comuna: A clara (elegido por Luis). Quedan en el CSS b gris azulado y c tarjetas */
+function anComC(v){   /* color del % segun el estilo: oscuro en fondo claro, claro en fondo oscuro */
+  if(v === null || v === undefined) return '#94a3b8';
+  const claro = AN_COM_EST === 'a' || AN_COM_EST === 'c';
+  if(v >= MP_META) return claro ? '#15803d' : (AN_COM_EST === 'b' ? '#86efac' : '#22c55e');
+  if(v >= MP_META - 5) return claro ? '#b45309' : (AN_COM_EST === 'b' ? '#fcd34d' : '#f59e0b');
+  return claro ? '#b91c1c' : (AN_COM_EST === 'b' ? '#fca5a5' : '#ef4444');
+}
 function anComPintar(){
   const box = document.getElementById('anComBox'); if(!box || !AN_COMV) return;
+  box.className = 'ac-box' + (AN_COM_EST !== 'o' ? ' est-' + AN_COM_EST : '');
   /* las direcciones (visitas_dir.json) se bajan la primera vez; mientras, se repinta */
   try { if(!RDIR || RDIR === 'error'){ anDirAsegurar(); if(anDirBajando) setTimeout(function(){ if(AN_COMV) anComPintar(); }, 1500); } } catch(_){}
   const D = anFilas(), V = AN_COMV, mesAnt = anMesAnt(D.mesHoy);
@@ -21578,28 +21621,43 @@ function anComPintar(){
   let h = '<div class="ac-top"><h2>📍 ' + V.fam + ' por comuna<small>' + P.n + filtros + '</small></h2><button class="ac-x" onclick="anComCerrar()">✕ Cerrar</button></div>'
     + '<div class="ac-tabs">' + PERS.map(function(p){ return '<span class="ac-tab' + (p.t === P.t ? ' on' : '') + '" onclick="AN_COMV.t=\'' + p.t + '\'; anComPintar()">' + p.n + '</span>'; }).join('')
     + '<span class="ac-tab" style="margin-left:auto" onclick="anComCerrar(); anDetAbrir(\'' + V.fam + '\', ' + JSON.stringify(P.per).replace(/"/g, '\'') + ')">Ver detalle de ' + V.fam.toLowerCase() + ' ›</span></div>';
+  /* (10-11-2026, 10:25) Luis eligio el estilo A (clara): fijo, sin los botones de muestra */
   /* (10-11-2026, 08:25) Luis: "en altas y repas no me muestra las de ayer": si se abria antes de que llegara datos.json,
      la ventana quedaba solo con lo de hoy hasta el repintado de cada minuto. Ahora se repinta sola hasta que llega. */
   if(D.cargando){ h += '<div class="ac-vac">Cargando el histórico (datos.json)… lo de hoy ya está, el resto aparece en unos segundos.</div>';
     clearTimeout(window.AN_COM_T); window.AN_COM_T = setTimeout(function(){ if(AN_COMV) anComPintar(); }, 1500); }
   if(!L.length){ box.innerHTML = h + '<div class="ac-vac">No hay ' + V.fam.toLowerCase() + ' en ' + P.n.toLowerCase() + '.</div>'; return; }
   const N = L.length, metaDer = 100 - MP_META;
-  const fila = function(nom, ls, tot){
+  const fila = function(nom, ls, tot, par){
     const s = mpSt(ls), canc = ls.filter(function(x){ return x.e === 'Cancelado' || x.e === 'Suspendido'; }).length;
     const der = s.vis ? 100 * s.nr / s.vis : null;
-    return '<tr' + (tot ? ' class="tot"' : '') + '><td>' + (tot ? 'Total' : '<b>' + escR(nom) + '</b>') + '</td>'
+    return '<tr' + (tot ? ' class="tot"' : (par ? ' class="par"' : '')) + '><td>' + (tot ? 'Total' : '<b>' + escR(nom) + '</b>') + '</td>'
       + '<td><b>' + ls.length + '</b></td>'
       + '<td>' + P2(100 * ls.length / N) + '%</td>'
       + '<td>' + s.vis + (s.ab || canc ? '<small>' + (s.ab ? s.ab + ' por cerrar' : '') + (s.ab && canc ? ' · ' : '') + (canc ? canc + ' canc./susp.' : '') + '</small>' : '') + '</td>'
       + '<td>' + s.co + '</td>'
-      + '<td>' + (s.comp === null ? '–' : '<span class="ac-bar"><i style="width:' + s.comp + '%;background:' + anCol(s.comp) + '"></i></span><b style="color:' + anCol(s.comp) + '">' + P2(s.comp) + '%</b>'
+      + '<td>' + (s.comp === null ? '–' : '<span class="ac-bar"><i style="width:' + s.comp + '%;background:' + anComC(s.comp) + '"></i></span><b style="color:' + anComC(s.comp) + '">' + P2(s.comp) + '%</b>'
           + (s.g ? '<small class="sg">sin GSA ' + P2(s.compSG) + '% · ' + s.g + ' GSA</small>' : '')) + '</td>'
       + '<td>' + s.nr + '</td>'
-      + '<td>' + (der === null ? '–' : '<b style="color:' + (der > metaDer ? '#f87171' : '#4ade80') + '">' + P2(der) + '%</b>') + '</td></tr>';
+      + '<td>' + (der === null ? '–' : '<b style="color:' + anComC(der > metaDer ? 0 : 100) + '">' + P2(der) + '%</b>') + '</td></tr>';
   };
+  if(AN_COM_EST === 'c'){
+    const tarjeta = function(nom, ls, tot){
+      const s = mpSt(ls), der = s.vis ? 100 * s.nr / s.vis : null;
+      const cls = tot ? 'tot' : s.comp === null ? 'nd' : anCls(s.comp);
+      return '<div class="ac-card ' + cls + '"><div class="n">' + escR(nom) + '</div>'
+        + '<div class="p"' + (tot ? ' style="color:' + anComC(s.comp) + '"' : '') + '>' + (s.comp === null ? '–' : P2(s.comp) + '%') + '</div>'
+        + '<div class="s">' + s.co + ' completadas de ' + s.vis + ' visitadas' + (s.g ? ' · ' + s.g + ' GSA' : '') + '</div>'
+        + '<div class="d">' + ls.length + ' actividades · ' + P2(100 * ls.length / N) + '% del total<br>'
+        + s.nr + ' derivadas · ' + (der === null ? '–' : P2(der) + '%')
+        + (s.ab ? '<br>' + s.ab + ' por cerrar' : '') + '</div></div>';
+    };
+    h += '<div class="ac-cards">' + coms.map(function(c){ return tarjeta(c, G[c], false); }).join('') + (coms.length > 1 ? tarjeta('Total', L, true) : '') + '</div>';
+    box.innerHTML = h; return;
+  }
   h += '<div class="ac-wrap"><table><tr><th></th><th class="g" colspan="2">Cantidad</th><th></th><th class="g" colspan="2">Completitud</th><th class="g" colspan="2">Derivación</th></tr>'
     + '<tr><th>Comuna</th><th title="Todas las de la comuna en el período">Actividades</th><th title="Su parte del total del período">% del total</th><th title="Completadas + no realizadas (canceladas y suspendidas no cuentan)">Visitadas</th><th>Completadas</th><th title="Completadas ÷ visitadas, GSA como quiebre (como VTR). Verde desde ' + MP_META + '%">% completitud</th><th title="No realizadas + GSA">Derivadas</th><th title="Derivadas ÷ visitadas. Rojo sobre ' + metaDer + '%">% derivación</th></tr>'
-    + coms.map(function(c){ return fila(c, G[c], false); }).join('')
+    + coms.map(function(c, i){ return fila(c, G[c], false, i % 2 === 0); }).join('')
     + (coms.length > 1 ? fila('Total', L, true) : '') + '</table></div>'
     ;
   box.innerHTML = h;
