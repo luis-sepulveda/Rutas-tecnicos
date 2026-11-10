@@ -18647,6 +18647,19 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarM
   #anDet .an-dia-al:hover { border-color:#3b82f6; }
   #anDet .an-dia-al b { font-size:28px; min-width:44px; text-align:center; font-variant-numeric:tabular-nums; }
   #anDet .an-dia-al.viva b { color:#f87171; } #anDet .an-dia-al.cero b { color:#64748b; }
+  #anDet .an-dia-al.sel { border-color:#3b82f6; background:#16264a; }
+  #anDet .an-dl { margin-top:10px; padding:12px 14px; }
+  #anDet .an-dl-top { display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:6px; }
+  #anDet .an-dl-top h3 { margin:0; font-size:15px; }
+  #anDet .an-dl-f { display:flex; align-items:center; gap:10px; padding:8px 4px; border-top:1px solid #1b2742; font-size:13px; }
+  #anDet .an-dl-f .pt { width:10px; height:10px; border-radius:50%; background:#f59e0b; flex:none; }
+  #anDet .an-dl-f.grave .pt { background:#ef4444; } #anDet .an-dl-f.grave .tm { color:#f87171; }
+  #anDet .an-dl-f .dt { flex:1; min-width:0; } #anDet .an-dl-f .dt span { display:block; color:#94a3b8; font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  #anDet .an-dl-f .dt .nr { display:inline; color:#f87171; }
+  #anDet .an-dl-f .tm { font-weight:700; color:#fbbf24; font-variant-numeric:tabular-nums; min-width:52px; text-align:right; }
+  #anDet .an-dl-m { background:#1e293b; border:1px solid #334155; color:#e2e8f0; border-radius:8px; padding:4px 10px; font-size:12px; cursor:pointer; white-space:nowrap; font-family:inherit; }
+  #anDet .an-dl-m:hover { border-color:#3b82f6; }
+  #anDet .an-dl-v { color:#94a3b8; padding:10px 4px; }
   #anDet .an-dia-al span { display:flex; flex-direction:column; } #anDet .an-dia-al i { font-style:normal; font-weight:700; font-size:14px; } #anDet .an-dia-al small { font-size:11.5px; color:#94a3b8; }
   #anDet .an-dia-map { display:flex; gap:8px; align-items:center; margin-top:10px; font-size:12.5px; color:#475569; font-weight:600; }
   /* (06-11-2026) DIA EN CURSO en MI ANALISIS */
@@ -20361,16 +20374,18 @@ function anDiaPintar(m){
   const nz = function(fn){ try { const v = fn(); return (v === null || v === undefined) ? null : v; } catch(x){ return null; } };
   const AT = [
     ['caidas', nz(function(){ return nCaidas(); }), 'Salieron de la bandeja', 'actividades que se las sacaron al técnico sin cerrarlas', 'anDiaIr(toggleCaidas)'],
-    ['sc', nz(function(){ return tecnicosSinCompletar().length; }), 'Sin completar', 'técnicos que no han cerrado ninguna todavía hoy (se ve en el mapa)', 'anDiaMapa(\'sc\')'],
-    ['atr', nz(function(){ return trabajosAtrasados().length; }), 'Más de 3 horas', 'actividades iniciadas hace más de 3 horas (se ve en el mapa)', 'anDiaMapa(\'atr\')'],
+    /* (10-11-2026, 14:35) Luis: al tocar "Más de 3 horas" se cerraba Mi análisis y abría el mapa -> "cámbialo".
+       Ahora Sin completar y Más de 3 horas muestran su lista aquí mismo (anDiaLst); cada fila tiene "Ver en el mapa". */
+    ['sc', nz(function(){ return tecnicosSinCompletar().length; }), 'Sin completar', 'técnicos que no han cerrado ninguna todavía hoy', 'anDiaLst(\'sc\')'],
+    ['atr', nz(function(){ return trabajosAtrasados().length; }), 'Más de 3 horas', 'actividades iniciadas hace más de 3 horas', 'anDiaLst(\'atr\')'],
     ['nue', nz(function(){ return contar(nuevasDelDia()).nuevita; }), 'Nuevas', 'entraron a las bandejas después de la primera vuelta', 'anDiaIr(toggleNuevas)'],
     ['dev', nz(function(){ return nRecaidasVivas(); }), 'Devueltas', 'se las sacaron a un técnico y hoy volvieron a una bandeja', 'anDiaIr(toggleReca)'],
     ['rep', nz(function(){ return nRepe(); }), 'Direcciones ya visitadas hoy', 'hoy volvemos a una casa donde ya fallamos antes', 'anDiaIr(toggleRepe)']
   ];
   h += '<div class="an-sec2">Requiere atención <small>cada botón abre lo mismo de la pantalla principal</small></div><div class="an-dia-at">'
     + AT.map(function(a){ const v = a[1];
-        return '<button class="an-dia-al' + (v ? ' viva' : ' cero') + '" onclick="' + a[4] + '" title="' + a[3] + '"><b>' + (v === null ? '–' : v) + '</b><span><i>' + a[2] + '</i><small>' + a[3] + '</small></span></button>'; }).join('')
-    + '</div>'
+        return '<button class="an-dia-al' + (v ? ' viva' : ' cero') + (AN_DIA_LST === a[0] ? ' sel' : '') + '" onclick="' + a[4] + '" title="' + a[3] + '"><b>' + (v === null ? '–' : v) + '</b><span><i>' + a[2] + (a[0] === 'sc' || a[0] === 'atr' ? (AN_DIA_LST === a[0] ? ' ▴' : ' ▾') : '') + '</i><small>' + a[3] + '</small></span></button>'; }).join('')
+    + '</div>' + anDiaLstHtml()
     + '<div class="an-dia-map"><span>Mapa y red:</span>'
     + '<button class="an-x" onclick="anDiaMapa(\'rutas\')" title="Cierra Mi análisis y abre el mapa con las rutas de los técnicos">🗺 Rutas ›</button>'
     + '<button class="an-x" onclick="anDiaIr(toggleRed)" title="Reparaciones del día agrupadas por NAP y nodo">🔌 Nodos y NAP ›</button>'
@@ -20419,6 +20434,51 @@ function anDiaMapa(k){
   } catch(x){ console.warn('dia en curso, panel:', x); }
 }
 function anDiaEst(k){ try { abrirEst(k); } catch(x){ console.warn('dia en curso:', x); } }
+/* (10-11-2026, 14:35) listas de Sin completar y Más de 3 horas DENTRO de Día en curso (mismas cuentas que los paneles
+   del mapa: tecnicosSinCompletar / trabajosAtrasados). "Ver en el mapa" hace lo de antes y además deja elegido al técnico. */
+var AN_DIA_LST = null;
+function anDiaLst(k){ AN_DIA_LST = (AN_DIA_LST === k ? null : k); anDetPintar(); }
+function anDiaMapaTec(k, t){
+  anDiaMapa(k);
+  try { if(t){ if(k === 'sc') verTecnicoSC(t); else verTecnicoAtr(t); } } catch(x){ console.warn('dia en curso, tecnico:', x); }
+}
+function anDiaLstHtml(){
+  if(AN_DIA_LST !== 'sc' && AN_DIA_LST !== 'atr') return '';
+  const k = AN_DIA_LST, esc = function(t){ return String(t).replace(/\\/g, '\\\\').replace(/'/g, "\\'"); };
+  let filas = '', n = 0, tit = '';
+  try {
+    if(k === 'sc'){
+      const L = tecnicosSinCompletar(); n = L.length; tit = 'Sin completar';
+      filas = L.map(function(t){
+        const act = DB[t].filter(function(p){ return p.e !== 'Cancelado' && okCiudad(p); });
+        const c = function(e){ return act.filter(function(p){ return p.e === e; }).length; };
+        const partes = [];
+        if(c('Iniciado')) partes.push(c('Iniciado') + ' iniciada' + (c('Iniciado') > 1 ? 's' : ''));
+        if(c('en ruta')) partes.push(c('en ruta') + ' en ruta');
+        if(c('Pendiente')) partes.push(c('Pendiente') + ' pendiente' + (c('Pendiente') > 1 ? 's' : ''));
+        if(c('Suspendido')) partes.push(c('Suspendido') + ' suspendida' + (c('Suspendido') > 1 ? 's' : ''));
+        if(c('No Realizada')) partes.push('<span class="nr">' + c('No Realizada') + ' no realizada' + (c('No Realizada') > 1 ? 's' : '') + '</span>');
+        return '<div class="an-dl-f"><span class="pt" style="background:' + ((typeof colorOf === 'object' && colorOf[t]) || '#94a3b8') + '"></span>'
+          + '<span class="dt"><b>' + escR(t) + '</b><span>' + partes.join(' · ') + '</span></span>'
+          + '<span class="tm">' + act.length + '</span>'
+          + '<button class="an-dl-m" onclick="anDiaMapaTec(\'sc\', \'' + esc(t) + '\')">Ver en el mapa ›</button></div>';
+      }).join('');
+    } else {
+      const L = trabajosAtrasados(); n = L.length; tit = 'Más de ' + (typeof umbralEnPalabras === 'function' ? umbralEnPalabras() : '3 horas') + ' iniciado';
+      filas = L.map(function(x){
+        const grave = x.m >= UMBRAL_MIN + 90;
+        return '<div class="an-dl-f' + (grave ? ' grave' : '') + '" title="' + escR(x.p.o || '') + ' · franja ' + escR(x.p.f || '') + '"><span class="pt"></span>'
+          + '<span class="dt"><b>' + escR(x.t) + '</b> · ' + escR(x.p.cat || x.p.t || '') + ' · ' + escR(x.p.hi || '') + '<span>' + escR(x.p.d || '') + '</span></span>'
+          + '<span class="tm">' + fmtDur(x.m) + '</span>'
+          + '<button class="an-dl-m" onclick="anDiaMapaTec(\'atr\', \'' + esc(x.t) + '\')">Ver en el mapa ›</button></div>';
+      }).join('');
+    }
+  } catch(x){ filas = '<div class="an-dl-v">No se pudo armar la lista.</div>'; }
+  if(!n) filas = '<div class="an-dl-v">' + (k === 'sc' ? '✅ Todos los técnicos con trabajos tienen al menos uno completado.' : '✅ Ningún técnico lleva más de 3 horas con un trabajo iniciado.') + '</div>';
+  return '<div class="an-card an-dl"><div class="an-dl-top"><h3>' + tit + ' (' + n + ')</h3><span>'
+    + (n ? '<button class="an-dl-m" onclick="anDiaMapa(\'' + k + '\')">Ver todos en el mapa ›</button> ' : '')
+    + '<button class="an-dl-m" onclick="anDiaLst(null)">✕ Ocultar</button></span></div>' + filas + '</div>';
+}
 function anSegAbrir(){
   AN_DET = { seg:true };
   let m = document.getElementById('anDet');
