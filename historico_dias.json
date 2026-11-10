@@ -21703,25 +21703,25 @@
    }
   },
   "10-11-2026": {
-   "hasta": "13:32",
-   "actividades": 147,
+   "hasta": "13:37",
+   "actividades": 157,
    "tecnicos": 34,
    "estados": {
-    "Completado": 41,
-    "Pendiente": 57,
-    "No Realizada": 15,
+    "Completado": 42,
     "Iniciado": 18,
+    "Pendiente": 65,
+    "No Realizada": 15,
     "Suspendido": 7,
     "Cancelado": 8,
-    "en ruta": 1
+    "en ruta": 2
    },
-   "rgu": 202.6,
+   "rgu": 213.6,
    "caidas_total": 6,
    "caidas_activas": 3,
    "caidas_resueltas": 3,
-   "nuevas": 11,
+   "nuevas": 12,
    "al_bucket": 14,
-   "repetidas": 33,
+   "repetidas": 36,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
@@ -21754,6 +21754,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OY0DBAM",
+      "tec": "ALEXIS JARA",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "13:35",
+      "d": "SIRIUS 947, QUILPUE",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3OXZGTNM",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -21907,7 +21916,7 @@
       "o": "1-3OXIFSPK",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:04",
+      "hi": "18:02",
       "d": "MADRID 3186, QUILPUE",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
@@ -21931,7 +21940,7 @@
       "o": "1-3OXDERXE",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:54",
+      "hi": "14:42",
       "d": "LAS BARRANCAS 2581 EDIF. A DEPTO 101, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -21967,7 +21976,7 @@
       "o": "1-3OXKGUBK",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:01",
+      "hi": "14:43",
       "d": "CASTELLON 564, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "GEEYSER PEREZ O",
@@ -22003,7 +22012,7 @@
       "o": "1-3OXGR1TO",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:35",
+      "hi": "14:27",
       "d": "HUANHUALI 1132, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE CASTRO P",
@@ -22015,7 +22024,7 @@
       "o": "1-3OO8Y5AS",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:51",
+      "hi": "17:38",
       "d": "EDUARDO ALQUINTA 1260 CASA 44, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE CASTRO P",
@@ -22039,13 +22048,25 @@
       "o": "1-3OXAW1K6",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "17:13",
+      "hi": "17:10",
       "d": "PJE LA TEPA 0136, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE PEREZ RANGEL",
       "visitas": 2,
       "ult_fecha": "16-10-2026",
       "ult_cierre": "Clte desiste motivo comercial"
+     },
+     {
+      "o": "1-3OXD57OU",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "15:31",
+      "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOSE SALAS MEDINA",
+      "visitas": 11,
+      "ult_fecha": "09-11-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OX6GSLJ",
@@ -22084,10 +22105,22 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OY03V85",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "15:33",
+      "d": "MARGA MARGA 600, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "LUIS GATICA DAVILA",
+      "visitas": 6,
+      "ult_fecha": "14-09-2026",
+      "ult_cierre": "Sin apoyo vivienda-Pierrack"
+     },
+     {
       "o": "1-3OW73K11",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "17:27",
       "d": "HUANHUALI 219 CASA A, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "LUIS GATICA DAVILA",
@@ -22111,7 +22144,7 @@
       "o": "1-3OVLQQON",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "16:50",
+      "hi": "16:39",
       "d": "BILBAO 1290, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
@@ -22147,7 +22180,7 @@
       "o": "1-3OUOBHIP",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "16:35",
+      "hi": "16:26",
       "d": "PJE LAS TACITAS 2379, QUILPUE",
       "e": "Pendiente",
       "tec": "MARCO PEREZ G",
@@ -22171,7 +22204,7 @@
       "o": "1-3OXUR8LU",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "17:53",
+      "hi": "17:49",
       "d": "AV PRESIDENTE MONTT 198 CASA B, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -22195,7 +22228,7 @@
       "o": "1-3OV2HAGS",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "16:05",
+      "hi": "16:00",
       "d": "MANUEL BULNES 969, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNAN",
@@ -22249,6 +22282,18 @@
       "visitas": 1,
       "ult_fecha": "06-11-2026",
       "ult_cierre": "Falta de dotación"
+     },
+     {
+      "o": "1-3OXW6E2C",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "13:45",
+      "d": "CALLE 1 2073, VILLA ALEMANA",
+      "e": "en ruta",
+      "tec": "YENDER BOSCAN CADENAS",
+      "visitas": 3,
+      "ult_fecha": "23-10-2026",
+      "ult_cierre": "Sin moradores"
      }
     ],
     "reagendadas": [
@@ -22258,7 +22303,7 @@
       "f": "10-13",
       "hi": "12:04",
       "d": "MATURANA 208, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "GEEYSER PEREZ O",
       "desde": "06-11-2026"
      },
@@ -22276,5 +22321,5 @@
    }
   }
  },
- "generado": "10-11-2026 13:32"
+ "generado": "10-11-2026 13:37"
 }
