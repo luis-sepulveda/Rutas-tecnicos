@@ -21703,25 +21703,25 @@
    }
   },
   "10-11-2026": {
-   "hasta": "19:11",
-   "actividades": 183,
+   "hasta": "19:16",
+   "actividades": 182,
    "tecnicos": 34,
    "estados": {
-    "Completado": 108,
+    "Completado": 110,
     "No Realizada": 38,
-    "Iniciado": 9,
-    "Pendiente": 2,
+    "Iniciado": 7,
     "Suspendido": 11,
     "Cancelado": 14,
-    "en ruta": 1
+    "en ruta": 1,
+    "Pendiente": 1
    },
-   "rgu": 243.8,
+   "rgu": 242.8,
    "caidas_total": 10,
    "caidas_activas": 7,
    "caidas_resueltas": 3,
    "nuevas": 28,
    "al_bucket": 30,
-   "repetidas": 39,
+   "repetidas": 38,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
@@ -22117,18 +22117,6 @@
       "ult_cierre": "Direccion incorrecta"
      },
      {
-      "o": "1-3OV2HAGS",
-      "cat": "Modificación de Servicio",
-      "f": "16-19",
-      "hi": "18:52",
-      "d": "MANUEL BULNES 969, QUILPUE",
-      "e": "Pendiente",
-      "tec": "CESAR MENA OLIVEROS",
-      "visitas": 1,
-      "ult_fecha": "05-11-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
       "o": "1-3OXCF8K8",
       "cat": "Reparación",
       "f": "10-13",
@@ -22218,7 +22206,7 @@
       "f": "16-19",
       "hi": "17:06",
       "d": "PJE LAS TACITAS 2379, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "GEEYSER PEREZ O",
       "visitas": 1,
       "ult_fecha": "05-11-2026",
@@ -22537,5 +22525,5 @@
    }
   }
  },
- "generado": "10-11-2026 19:11"
+ "generado": "10-11-2026 19:16"
 }
