@@ -16224,7 +16224,9 @@ async function bajarMigGer(){
           fx.push({ iso: iso, mes: iso.slice(0, 6),
             sem: lun.getFullYear() + '-' + String(lun.getMonth() + 1).padStart(2, '0') + '-' + String(lun.getDate()).padStart(2, '0'),
             ot: ot, e: e, cod: d.cods[r[2]] || '', otra: !!r[4], tec: d.tecs[r[5]] || '', gsa: !!gsaOT[ot + '|' + iso],
-            fr: (d.frs && r[6] !== undefined ? d.frs[r[6]] : '') || (porOT[ot] && porOT[ot].fr) || '' });
+            fr: (d.frs && r[6] !== undefined ? d.frs[r[6]] : '') || (porOT[ot] && porOT[ot].fr) || '',
+            /* (10-11-2026) comuna del export (columna nueva "ciu" de seguimiento_autonomia.py); vacia si el json es viejo */
+            ciu: (d.cius && r[7] !== undefined ? d.cius[r[7]] : '') || '' });
           if(ot && !(ot in porOT && porOT[ot].iso >= iso)) porOT[ot] = { iso: iso, e: e, tec: d.tecs[r[5]] || '' };
         });
         filas = fx;
@@ -16236,6 +16238,8 @@ async function bajarMigGer(){
         if(mj.dir_canc) dirCa = mj.dir_canc;
         /* (06-11-2026) visitas de Dominion en OTRAS comunas (solo las usa MI ANALISIS) */
         if(mj.otras_dir) try { anOtrasCargar(mj.otras_dir); } catch(e){}
+        /* (10-11-2026) altas y reparaciones de los dias con export completo (incluye otras comunas): solo MI ANALISIS */
+        window.AN_ACTCOMP = (mj.act_completos && Array.isArray(mj.act_completos.filas)) ? mj.act_completos : null;
       }
     }
   } catch(e){ console.warn('migger completos:', e); }
@@ -18994,14 +18998,29 @@ function anFilas(){
     R.push({ fam:'Migraciones', iso:x.iso, sem:x.sem, mes:x.mes, e:x.e, cod:x.cod, gsa:!!x.gsa, fr:x.fr || '', tec:x.tec || '',
       /* (04-11-2026) si datos.json no trae la orden (vino de los export completos), se saca la comuna de la direccion
          del historial (DER_UNI) cuando esta. Las que siguen sin comuna se avisan arriba al filtrar por comuna. */
-      ciu: x.otra ? 'Otra comuna' : (ciuOT[x.ot] || (typeof DER_UNI === 'object' && DER_UNI && DER_UNI[x.ot] ? anCiuDir(DER_UNI[x.ot]).toUpperCase() : '')), ot:x.ot || '', dir:'' });
+      ciu: x.otra ? 'Otra comuna' : (ciuOT[x.ot] || (typeof DER_UNI === 'object' && DER_UNI && DER_UNI[x.ot] ? anCiuDir(DER_UNI[x.ot]).toUpperCase() : '')), ot:x.ot || '', dir:'', cx:x.ciu || '' });   /* (10-11-2026) cx: comuna que trae el export (solo para mostrar) */
   });
+  /* (10-11-2026) Luis: "que muestre el detalle de las comunas" -> los dias con export completo, las altas y reparaciones
+     salen de migraciones_semanas.json (act_completos, armado por seguimiento_autonomia.py con el export del jefe:
+     incluye las de OTRAS comunas, como las cuenta VTR/CLARO). Los demas dias, de datos.json como siempre. */
+  const AC = window.AN_ACTCOMP, acDias = {};
+  if(AC){ (AC.dias || []).forEach(function(k){ acDias[String(k)] = 1; });
+    AC.filas.forEach(function(r){
+      const iso = String(r[0]); if(!(iso < hoyIso)) return;
+      const fam = familiaCat(AC.tipos[r[4]]); if(fam !== 'Altas' && fam !== 'Reparaciones') return;
+      const est = String(r[1] || '').trim(); if(['Completado','No Realizada','Cancelado','Suspendido'].indexOf(est) < 0) return;
+      const ciu = String(AC.cius[r[7]] || '');
+      R.push({ fam:fam, iso:iso, sem:mgLunes(iso), mes:iso.slice(0, 6), e:est, cod:String(AC.cods[r[2]] || '').trim(), gsa:!!r[8],
+        fr:String(AC.frs[r[6]] || ''), tec:String(AC.tecs[r[5]] || ''), ciu:ciu, ot:String(r[3] || ''), dir:'', cx:ciu, comp:true });
+    });
+  }
   /* altas y reparaciones de dias anteriores: datos.json, solo _DOMI_ */
   AF.forEach(function(r){
     const nom = String(r['Nombre'] || ''); if(nom.indexOf('_DOMI_') < 0) return;
     const fam = familiaCat(r['Tipo de Actividad']); if(fam !== 'Altas' && fam !== 'Reparaciones') return;
     const p = /^(\d{2})-(\d{2})-(\d{4})$/.exec(String(r['Fecha'] || '')); if(!p) return;
     const iso = p[3] + p[2] + p[1]; if(!(iso < hoyIso)) return;
+    if(acDias[iso]) return;      /* (10-11-2026) ese dia ya vino del export completo */
     const est = String(r['Estado'] || '').trim();
     if(['Completado','No Realizada','Cancelado','Suspendido'].indexOf(est) < 0) return;      // dias pasados: solo estados cerrados
     R.push({ fam:fam, iso:iso, sem:mgLunes(iso), mes:iso.slice(0, 6), e:String(r['Estado'] || '').trim(), cod:String(r['Código de Cierre'] || '').trim(),
@@ -19137,7 +19156,11 @@ function anPintar(){
     const sa = mpSt(anPer(D, F.f, { t:'sem', k:semAnt }));
     const dl = ss.comp !== null && sa.comp !== null ? ss.comp - sa.comp : null;
     h += '<div class="an-card an-clic" onclick="anDetAbrir(\'' + F.f + '\', {t:\'sem\', k:\'' + D.semHoy + '\'})" title="Toca para ver el detalle de ' + F.f.toLowerCase() + '">'
-      + '<h3><i class="pt" style="background:' + F.c + '"></i>' + F.f + '</h3><span class="an-ver">ver detalle ›</span>'
+      + '<h3><i class="pt" style="background:' + F.c + '"></i>' + F.f
+      /* (10-11-2026) Luis: "en cada tarjeta agrega un boton que muestre el detalle de cada actividad por comuna donde se
+         ejecuto: cantidad, completitud, derivacion con la cantidad y su %". Abre anComAbrir (bloque al final del archivo). */
+      + '<button class="an-combtn" onclick="event.stopPropagation(); anComAbrir(\'' + F.f + '\')" title="Detalle de ' + F.f.toLowerCase() + ' por comuna">📍 Por comuna</button>'
+      + '</h3><span class="an-ver">ver detalle ›</span>'
 
       + '<div class="an-rel">' + anReloj(sh.comp, 52, 'HOY', false, sh.vis) + anReloj(ss.comp, 80, 'SEMANA ' + derNumSemana(D.semHoy), true, ss.vis) + anReloj(sm.comp, 52, AN_NOMMES[+D.mesHoy.slice(4) - 1].toUpperCase(), false, sm.vis) + '</div>'
       /* (05-11-2026) bajo cada reloj, el mismo % sin castigar la GSA (como Dominion) */
@@ -20008,6 +20031,21 @@ function anDetPintar(){
   if(!frk.length) izq += '<div class="an-vac">Sin franja en los datos.</div>';
   frk.forEach(function(k){ const sf = mpSt(frs[k]);
     izq += '<div class="an-bar"><span>' + escR(k) + '</span><span class="t"><i style="width:' + (sf.comp || 0) + '%;background:' + anCol(sf.comp) + '"></i></span><b>' + (sf.comp === null ? '–' : mpPc(sf.comp)) + '</b></div>'; });
+  /* (10-11-2026) Luis: "que en todas partes me muestre las comunas en los detalles de cada tarjeta". Misma cuenta que
+     la ventana Por comuna (anComReal + mpSt, GSA como quiebre): cantidad, completitud y derivacion con su % */
+  izq += '<h3 style="margin-top:14px">Por comuna</h3>';
+  const cmG = {}; L.forEach(function(x){ const n = anComNom(anComReal(x)); (cmG[n] = cmG[n] || []).push(x); });
+  const cmO = function(a){ return a === 'Quilpué' ? 0 : a === 'Villa Alemana' ? 1 : a === 'Sin comuna' ? 9 : 2; };
+  const cmK = Object.keys(cmG).sort(function(a, b){ return cmO(a) - cmO(b) || cmG[b].length - cmG[a].length || a.localeCompare(b); });
+  if(!cmK.length) izq += '<div class="an-vac">No hay órdenes en este período.</div>';
+  else {
+    izq += '<table class="an-tb"><tr><th>Comuna</th><th title="Todas las del período y su % del total">Cantidad</th><th title="Completadas ÷ visitadas (GSA como quiebre)">Completitud</th><th title="No realizadas + GSA ÷ visitadas">Derivación</th></tr>';
+    cmK.forEach(function(k){ const sc = mpSt(cmG[k]), dv = sc.vis ? 100 * sc.nr / sc.vis : null;
+      izq += '<tr><td><b>' + escR(k) + '</b></td><td>' + cmG[k].length + ' <small style="color:#94a3b8">· ' + P2(100 * cmG[k].length / L.length) + '%</small></td>'
+        + '<td>' + sc.co + ' de ' + sc.vis + ' · <b style="color:' + anCol(sc.comp) + '">' + (sc.comp === null ? '–' : mpPc(sc.comp)) + '</b></td>'
+        + '<td>' + sc.nr + ' · <b style="color:' + (dv === null ? '#94a3b8' : dv > 100 - MP_META ? '#f87171' : '#4ade80') + '">' + (dv === null ? '–' : mpPc(dv)) + '</b></td></tr>'; });
+    izq += '</table>';
+  }
   izq += '</div>';
   /* tecnico por tecnico */
   const T = {}; L.forEach(function(x){ (T[x.tec] = T[x.tec] || []).push(x); });
@@ -20076,7 +20114,7 @@ function anDetPintar(){
     if(O.c){
       const val = function(i){ const x = lista[i];
         switch(O.c){ case 'ot': return x.ot; case 'fecha': return x.iso + ' ' + x.fr; case 'est': return ord(x) + x.e; case 'tec': return anTec(x.tec);
-          case 'fr': return x.fr; case 'dir': return DIRS[i] || ''; case 'vis': return VD[i] ? VD[i].n : -1; case 'ciu': return anTec(x.ciu);
+          case 'fr': return x.fr; case 'dir': return DIRS[i] || ''; case 'vis': return VD[i] ? VD[i].n : -1; case 'ciu': return anComNom(anComReal(x));
           case 'mot': return motDe(x); case 'resp': return respDe(x); } return ''; };
       idx.sort(function(a, b){ const va = val(a), vb = val(b);
         /* las vacias (sin direccion, sin motivo) siempre al final */
@@ -20090,13 +20128,13 @@ function anDetPintar(){
       const V = VD[i], ab = V && AN_DIR_AB[AN_DIR_KEYS[i]];
       const mHoy = V ? anHoyMarca(V.k, x.ot, i) : '';   /* (09-11-2026) */
       if(mHoy) nHoy++;
-      const dataB = anNormQ([x.ot, anTec(x.tec), DIRS[i], x.ciu, motDe(x), respDe(x), x.iso.slice(6, 8) + '-' + x.iso.slice(4, 6), x.fr, mHoy ? 'hoy' : ''].join(' '));
+      const dataB = anNormQ([x.ot, anTec(x.tec), DIRS[i], anComReal(x), motDe(x), respDe(x), x.iso.slice(6, 8) + '-' + x.iso.slice(4, 6), x.fr, mHoy ? 'hoy' : ''].join(' '));
       /* (06-11-2026) la direccion se toca y lleva sus marcas (Hoy, Semana y Mes) */
       const celDir = V
         ? '<span class="an-dir' + (ab ? ' ab' : '') + '" onclick="anDirToggle(' + i + ')">' + (ab ? '▾ ' : '▸ ') + escR(DIRS[i]) + '</span>' + anDirMarcas(V, i) + mHoy
         : '<span style="color:#64748b" title="Esta petición no está en el historial de visitas">' + (RDIR && RDIR !== 'error' && !anDirBajando ? 'sin dirección en el historial' : '…') + '</span>';
       h += '<tr' + (V && V.nivel === 'rojo' ? ' class="al-rojo"' : '') + ' id="anDirFila' + i + '" data-b="' + escR(dataB) + '"><td>' + escR(x.ot) + '</td>' + (esHoy ? '' : '<td>' + x.iso.slice(6, 8) + '-' + x.iso.slice(4, 6) + '</td>') + '<td>' + est(x) + '</td><td>' + escR(anTec(x.tec)) + '</td><td>' + escR(x.fr) + '</td>'
-        + '<td>' + celDir + '</td>' + (esHoy ? '' : '<td>' + escR(anTec(x.ciu)) + '</td>') + '<td>' + (nr ? escR(x.gsa ? 'GSA · Falla Aprovisionamiento' : (x.cod || 'Sin código')) : '') + '</td>'
+        + '<td>' + celDir + '</td>' + (esHoy ? '' : '<td>' + escR(anComNom(anComReal(x))) + '</td>')   /* (10-11-2026) comuna real, sacada de la direccion si no viene */ + '<td>' + (nr ? escR(x.gsa ? 'GSA · Falla Aprovisionamiento' : (x.cod || 'Sin código')) : '') + '</td>'
         + '<td style="color:' + (r ? AN_RCOL[r] : 'inherit') + '">' + (r ? AN_RNOM[r] : '') + '</td></tr>';
       if(ab) h += anDirDetalle(V, esHoy ? 7 : 9, x.ot);
     });
@@ -21455,6 +21493,124 @@ function cqExcel(){
 
 </script>
 
+
+<!-- ==== (10-11-2026) MI ANALISIS: BOTON "POR COMUNA" EN CADA TARJETA DE RELOJ ====
+     Luis: "en cada tarjeta agrega un boton que muestre el detalle de cada actividad por comuna donde se ejecuto,
+     ejemplo migraciones: cantidad, completitud, derivacion, con la cantidad y su %".
+     Ventana encima de MI ANALISIS con pestañas Hoy / Semana / Mes / Mes anterior y una tabla por comuna:
+     Cantidad (y % del total), Visitadas, Completadas, Completitud %, Derivadas, Derivación %.
+     Misma cuenta de los relojes: mpSt (GSA como quiebre, como VTR), mismas filas (anFilas) y respeta los filtros
+     de Comuna y Supervisor. Se cierra con ✕, Esc o tocando afuera. Para sacarlo: borrar este bloque y el boton
+     "Por comuna" en anPintar (marcado 10-11-2026). -->
+<style>
+  #anPage .an-card h3 .an-combtn { margin-left:6px; background:#0f766e; color:#fff; border:0; border-radius:999px; padding:3px 10px; font-size:11.5px; font-weight:600; cursor:pointer; }
+  #anPage .an-card h3 .an-combtn:hover { background:#115e59; }
+  #anCom { position:fixed; inset:0; z-index:3800; display:none; background:rgba(15,23,42,.5); overflow:auto; padding:30px 16px; font-family:'Segoe UI',Arial,sans-serif; }
+  #anCom.abierto { display:block; }
+  #anCom .ac-box { max-width:1000px; margin:0 auto; background:#111a2e; border:1px solid #22304f; border-radius:14px; padding:16px 18px; color:#e2e8f0; box-shadow:0 10px 40px rgba(0,0,0,.4); }
+  #anCom .ac-top { display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
+  #anCom h2 { margin:0; font-size:19px; } #anCom h2 small { font-size:12.5px; color:#94a3b8; font-weight:400; margin-left:6px; }
+  #anCom .ac-x { background:#1e293b; border:1px solid #334155; color:#e2e8f0; border-radius:8px; padding:5px 12px; cursor:pointer; font-size:13px; }
+  #anCom .ac-tabs { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px; }
+  #anCom .ac-tab { background:#16213a; border:1px solid #22304f; color:#94a3b8; border-radius:999px; padding:5px 13px; cursor:pointer; font-size:12.5px; }
+  #anCom .ac-tab.on { background:#1d4ed8; border-color:#1d4ed8; color:#fff; }
+  #anCom .ac-wrap { overflow-x:auto; }
+  #anCom table { width:100%; border-collapse:collapse; font-size:13px; min-width:720px; }
+  #anCom th { color:#94a3b8; font-weight:600; padding:7px 8px; border-bottom:1px solid #22304f; text-align:right; white-space:nowrap; }
+  #anCom th.g { text-align:center; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:#64748b; border-bottom:0; padding-bottom:0; }
+  #anCom th:first-child, #anCom td:first-child { text-align:left; }
+  #anCom td { padding:8px; border-bottom:1px solid #1b2742; text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
+  #anCom td b { font-size:14.5px; }
+  #anCom td small { display:block; color:#94a3b8; font-size:11px; }
+  #anCom td small.sg { color:#c4b5fd; }
+  #anCom tr.tot td { border-top:2px solid #334155; border-bottom:0; background:#0b1324; font-weight:700; }
+  #anCom .ac-bar { display:inline-block; width:70px; height:8px; background:#16213a; border-radius:4px; overflow:hidden; vertical-align:middle; margin-right:6px; }
+  #anCom .ac-bar i { display:block; height:100%; }
+  #anCom .ac-nota { font-size:12px; color:#94a3b8; margin-top:10px; line-height:1.5; }
+  #anCom .ac-vac { color:#94a3b8; padding:20px 0; text-align:center; }
+</style>
+<div id="anCom" onclick="if(event.target === this) anComCerrar()"><div class="ac-box" id="anComBox"></div></div>
+<script>
+var AN_COMV = null;   // { fam, t:'hoy'|'sem'|'mes'|'mesant' }
+function anComAbrir(fam){ AN_COMV = { fam:fam, t:(AN_COMV && AN_COMV.t) || 'sem' }; document.getElementById('anCom').classList.add('abierto'); anComPintar(); }
+function anComCerrar(){ AN_COMV = null; const m = document.getElementById('anCom'); if(m) m.classList.remove('abierto'); }
+/* nombre de la comuna para mostrar: Quilpué, Villa Alemana, Viña Del Mar... ('' -> Sin comuna) */
+function anComNom(c){
+  const k = mpNorm(c);
+  if(!k) return 'Sin comuna';
+  if(k === 'QUILPUE') return 'Quilpué';
+  if(k === 'OTRA COMUNA') return 'Otra comuna';
+  if(k === 'VINA DEL MAR') return 'Viña del Mar';
+  if(k === 'CONCEPCION') return 'Concepción';
+  if(k === 'VALPARAISO') return 'Valparaíso';
+  return k.toLowerCase().replace(/(^|\s)\S/g, function(t){ return t.toUpperCase(); });
+}
+/* (10-11-2026, 08:00) Luis: "no me muestra las otras comunas, tampoco dentro del detalle". Las migraciones de dias
+   anteriores que vienen del export completo no traen comuna (x.ciu vacio, o "Otra comuna" sin nombre). Se saca de la
+   DIRECCION de la peticion con anDirDe (visitas_dir.json, otras_dir de los export completos, historial de Derivacion):
+   lo que va despues de la ultima coma. No cambia x.ciu ni los filtros: solo lo que se MUESTRA. */
+function anComReal(x){
+  if(x.cx) return x.cx;      /* (10-11-2026) primero la comuna que trae el export (migraciones_semanas.json, columna ciu) */
+  let c = x.ciu && x.ciu !== 'Otra comuna' ? x.ciu : '';
+  if(!c){ let d = ''; try { d = anDirDe(x); } catch(_){} if(d) c = anCiuDir(d); }
+  if(!c && x.ciu === 'Otra comuna') c = 'Otra comuna';
+  return c;
+}
+function anComPintar(){
+  const box = document.getElementById('anComBox'); if(!box || !AN_COMV) return;
+  /* las direcciones (visitas_dir.json) se bajan la primera vez; mientras, se repinta */
+  try { if(!RDIR || RDIR === 'error'){ anDirAsegurar(); if(anDirBajando) setTimeout(function(){ if(AN_COMV) anComPintar(); }, 1500); } } catch(_){}
+  const D = anFilas(), V = AN_COMV, mesAnt = anMesAnt(D.mesHoy);
+  const PERS = [
+    { t:'hoy', n:'Hoy', per:{ t:'hoy' } },
+    { t:'sem', n:'Semana ' + derNumSemana(D.semHoy), per:{ t:'sem', k:D.semHoy } },
+    { t:'mes', n:AN_NOMMES[+D.mesHoy.slice(4) - 1], per:{ t:'mes', k:D.mesHoy } },
+    { t:'mesant', n:AN_NOMMES[+mesAnt.slice(4) - 1], per:{ t:'mes', k:mesAnt } }
+  ];
+  const P = PERS.filter(function(p){ return p.t === V.t; })[0] || PERS[1];
+  const L = anPer(D, V.fam, P.per);
+  /* agrupar por comuna */
+  const G = {};
+  L.forEach(function(x){ const n = anComNom(anComReal(x)); (G[n] = G[n] || []).push(x); });
+  const orden = function(a){ return a === 'Quilpué' ? 0 : a === 'Villa Alemana' ? 1 : a === 'Sin comuna' ? 9 : 2; };
+  const coms = Object.keys(G).sort(function(a, b){ return orden(a) - orden(b) || G[b].length - G[a].length || a.localeCompare(b); });
+  const filtros = (AN_COM !== 'Todo' ? ' · comuna ' + anComNom(AN_COM) : '') + (AN_SUP !== 'Todo' ? ' · supervisor ' + anTec(AN_SUP) : '');
+  let h = '<div class="ac-top"><h2>📍 ' + V.fam + ' por comuna<small>' + P.n + filtros + '</small></h2><button class="ac-x" onclick="anComCerrar()">✕ Cerrar</button></div>'
+    + '<div class="ac-tabs">' + PERS.map(function(p){ return '<span class="ac-tab' + (p.t === P.t ? ' on' : '') + '" onclick="AN_COMV.t=\'' + p.t + '\'; anComPintar()">' + p.n + '</span>'; }).join('')
+    + '<span class="ac-tab" style="margin-left:auto" onclick="anComCerrar(); anDetAbrir(\'' + V.fam + '\', ' + JSON.stringify(P.per).replace(/"/g, '\'') + ')">Ver detalle de ' + V.fam.toLowerCase() + ' ›</span></div>';
+  /* (10-11-2026, 08:25) Luis: "en altas y repas no me muestra las de ayer": si se abria antes de que llegara datos.json,
+     la ventana quedaba solo con lo de hoy hasta el repintado de cada minuto. Ahora se repinta sola hasta que llega. */
+  if(D.cargando){ h += '<div class="ac-vac">Cargando el histórico (datos.json)… lo de hoy ya está, el resto aparece en unos segundos.</div>';
+    clearTimeout(window.AN_COM_T); window.AN_COM_T = setTimeout(function(){ if(AN_COMV) anComPintar(); }, 1500); }
+  if(!L.length){ box.innerHTML = h + '<div class="ac-vac">No hay ' + V.fam.toLowerCase() + ' en ' + P.n.toLowerCase() + '.</div>'; return; }
+  const N = L.length, metaDer = 100 - MP_META;
+  const fila = function(nom, ls, tot){
+    const s = mpSt(ls), canc = ls.filter(function(x){ return x.e === 'Cancelado' || x.e === 'Suspendido'; }).length;
+    const der = s.vis ? 100 * s.nr / s.vis : null;
+    return '<tr' + (tot ? ' class="tot"' : '') + '><td>' + (tot ? 'Total' : '<b>' + escR(nom) + '</b>') + '</td>'
+      + '<td><b>' + ls.length + '</b></td>'
+      + '<td>' + P2(100 * ls.length / N) + '%</td>'
+      + '<td>' + s.vis + (s.ab || canc ? '<small>' + (s.ab ? s.ab + ' por cerrar' : '') + (s.ab && canc ? ' · ' : '') + (canc ? canc + ' canc./susp.' : '') + '</small>' : '') + '</td>'
+      + '<td>' + s.co + '</td>'
+      + '<td>' + (s.comp === null ? '–' : '<span class="ac-bar"><i style="width:' + s.comp + '%;background:' + anCol(s.comp) + '"></i></span><b style="color:' + anCol(s.comp) + '">' + P2(s.comp) + '%</b>'
+          + (s.g ? '<small class="sg">sin GSA ' + P2(s.compSG) + '% · ' + s.g + ' GSA</small>' : '')) + '</td>'
+      + '<td>' + s.nr + '</td>'
+      + '<td>' + (der === null ? '–' : '<b style="color:' + (der > metaDer ? '#f87171' : '#4ade80') + '">' + P2(der) + '%</b>') + '</td></tr>';
+  };
+  h += '<div class="ac-wrap"><table><tr><th></th><th class="g" colspan="2">Cantidad</th><th></th><th class="g" colspan="2">Completitud</th><th class="g" colspan="2">Derivación</th></tr>'
+    + '<tr><th>Comuna</th><th title="Todas las de la comuna en el período">Actividades</th><th title="Su parte del total del período">% del total</th><th title="Completadas + no realizadas (canceladas y suspendidas no cuentan)">Visitadas</th><th>Completadas</th><th title="Completadas ÷ visitadas, GSA como quiebre (como VTR). Verde desde ' + MP_META + '%">% completitud</th><th title="No realizadas + GSA">Derivadas</th><th title="Derivadas ÷ visitadas. Rojo sobre ' + metaDer + '%">% derivación</th></tr>'
+    + coms.map(function(c){ return fila(c, G[c], false); }).join('')
+    + (coms.length > 1 ? fila('Total', L, true) : '') + '</table></div>'
+    ;
+  box.innerHTML = h;
+}
+/* Esc cierra primero esta ventana (antes que el detalle o MI ANALISIS) */
+window.addEventListener('keydown', function(e){
+  if(e.key === 'Escape' && AN_COMV){ anComCerrar(); e.stopImmediatePropagation(); e.preventDefault(); }
+}, true);
+/* lo de hoy cambia con rutas.json: si esta abierta se repinta cada minuto */
+setInterval(function(){ try { if(AN_COMV) anComPintar(); } catch(_){} }, 60000);
+</script>
 
 </body>
 </html>
