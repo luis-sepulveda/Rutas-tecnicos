@@ -21703,25 +21703,25 @@
    }
   },
   "10-11-2026": {
-   "hasta": "13:47",
-   "actividades": 152,
+   "hasta": "13:52",
+   "actividades": 159,
    "tecnicos": 34,
    "estados": {
-    "Completado": 45,
-    "Iniciado": 19,
-    "Pendiente": 56,
+    "Completado": 48,
+    "en ruta": 3,
+    "Pendiente": 59,
     "No Realizada": 15,
     "Suspendido": 7,
     "Cancelado": 8,
-    "en ruta": 2
+    "Iniciado": 19
    },
-   "rgu": 207.2,
+   "rgu": 214.7,
    "caidas_total": 6,
    "caidas_activas": 3,
    "caidas_resueltas": 3,
    "nuevas": 13,
    "al_bucket": 18,
-   "repetidas": 34,
+   "repetidas": 36,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
@@ -21770,7 +21770,7 @@
       "f": "13-16",
       "hi": "13:35",
       "d": "SIRIUS 947, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OXZGTNM",
@@ -21903,7 +21903,7 @@
       "f": "10-13",
       "hi": "11:33",
       "d": "NORMANDIA 1031, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "ANTONHY MORALES MENDOZA",
       "visitas": 1,
       "ult_fecha": "09-11-2026",
@@ -21925,7 +21925,7 @@
       "o": "1-3OXIFSPK",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "18:02",
+      "hi": "17:33",
       "d": "MADRID 3186, QUILPUE",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
@@ -21985,13 +21985,25 @@
       "o": "1-3OXKGUBK",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "13:43",
+      "hi": "13:48",
       "d": "CASTELLON 564, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "GEEYSER PEREZ O",
       "visitas": 1,
       "ult_fecha": "09-11-2026",
       "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3OY03V85",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "15:39",
+      "d": "MARGA MARGA 600, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "GEEYSER PEREZ O",
+      "visitas": 6,
+      "ult_fecha": "14-09-2026",
+      "ult_cierre": "Sin apoyo vivienda-Pierrack"
      },
      {
       "o": "1-3OX576ML",
@@ -22066,6 +22078,18 @@
       "ult_cierre": "Clte desiste motivo comercial"
      },
      {
+      "o": "1-3OXD57OU",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "15:31",
+      "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOSE SALAS MEDINA",
+      "visitas": 11,
+      "ult_fecha": "09-11-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OX6GSLJ",
       "cat": "Migración 1 Play",
       "f": "10-13",
@@ -22093,9 +22117,9 @@
       "o": "1-3OXE16CK",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "13:54",
+      "hi": "13:47",
       "d": "PAUL HARRIS 1190, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "LUIS GATICA DAVILA",
       "visitas": 3,
       "ult_fecha": "09-11-2026",
@@ -22129,7 +22153,7 @@
       "o": "1-3OVLQQON",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "16:57",
+      "hi": "17:01",
       "d": "BILBAO 1290, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
@@ -22165,7 +22189,7 @@
       "o": "1-3OUOBHIP",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "16:46",
+      "hi": "16:48",
       "d": "PJE LAS TACITAS 2379, QUILPUE",
       "e": "Pendiente",
       "tec": "MARCO PEREZ G",
@@ -22177,7 +22201,7 @@
       "o": "1-3OTI4SOL",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "15:33",
+      "hi": "15:27",
       "d": "EUGENIO GRANDI 695, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -22189,7 +22213,7 @@
       "o": "1-3OXUR8LU",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "18:00",
+      "hi": "17:54",
       "d": "AV PRESIDENTE MONTT 198 CASA B, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -22213,7 +22237,7 @@
       "o": "1-3OV2HAGS",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "16:09",
+      "hi": "16:19",
       "d": "MANUEL BULNES 969, QUILPUE",
       "e": "Pendiente",
       "tec": "PABLO HERNANEZ FERNAN",
@@ -22296,7 +22320,7 @@
       "o": "1-3OTI4SOL",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "15:33",
+      "hi": "15:27",
       "d": "EUGENIO GRANDI 695, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -22306,5 +22330,5 @@
    }
   }
  },
- "generado": "10-11-2026 13:47"
+ "generado": "10-11-2026 13:52"
 }
