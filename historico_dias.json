@@ -21703,15 +21703,15 @@
    }
   },
   "10-11-2026": {
-   "hasta": "17:45",
+   "hasta": "17:55",
    "actividades": 181,
    "tecnicos": 34,
    "estados": {
-    "Completado": 93,
-    "Iniciado": 22,
-    "No Realizada": 33,
+    "Completado": 97,
+    "No Realizada": 34,
+    "Iniciado": 18,
     "en ruta": 2,
-    "Pendiente": 6,
+    "Pendiente": 5,
     "Suspendido": 11,
     "Cancelado": 14
    },
@@ -21932,7 +21932,7 @@
       "f": "16-19",
       "hi": "16:00",
       "d": "LAGO LLANQUIHUE 3024, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OXZ4OGL",
@@ -22351,6 +22351,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OXW8BQE",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "18:12",
+      "d": "LAS BARRANCAS 2581 EDIF. D DEPTO 401, QUILPUE",
+      "e": "en ruta",
+      "tec": "LUIS CASTRO TORRES",
+      "visitas": 1,
+      "ult_fecha": "12-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OXE16CK",
       "cat": "Alta 1 Play",
       "f": "13-16",
@@ -22421,18 +22433,6 @@
       "visitas": 1,
       "ult_fecha": "12-10-2026",
       "ult_cierre": "Cliente reagenda"
-     },
-     {
-      "o": "1-3OXW8BQE",
-      "cat": "Reparación",
-      "f": "16-19",
-      "hi": "18:00",
-      "d": "LAS BARRANCAS 2581 EDIF. D DEPTO 401, QUILPUE",
-      "e": "Pendiente",
-      "tec": "RAFAEL VARGAS B",
-      "visitas": 1,
-      "ult_fecha": "12-09-2026",
-      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OX7DLDS",
@@ -22519,5 +22519,5 @@
    }
   }
  },
- "generado": "10-11-2026 17:45"
+ "generado": "10-11-2026 17:55"
 }
