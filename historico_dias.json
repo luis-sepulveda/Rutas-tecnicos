@@ -21823,23 +21823,23 @@
    }
   },
   "11-11-2026": {
-   "hasta": "13:20",
-   "actividades": 133,
+   "hasta": "13:40",
+   "actividades": 135,
    "tecnicos": 32,
    "estados": {
-    "Completado": 34,
-    "en ruta": 2,
-    "Pendiente": 63,
+    "Completado": 37,
+    "Iniciado": 22,
+    "Pendiente": 59,
     "No Realizada": 9,
-    "Iniciado": 20,
+    "Cancelado": 4,
     "Suspendido": 2,
-    "Cancelado": 3
+    "en ruta": 2
    },
-   "rgu": 199.6,
+   "rgu": 201.6,
    "caidas_total": 6,
    "caidas_activas": 6,
    "caidas_resueltas": 0,
-   "nuevas": 14,
+   "nuevas": 15,
    "al_bucket": 15,
    "repetidas": 35,
    "reagendadas": 2,
@@ -21902,6 +21902,15 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OY8F9Q0",
+      "tec": "GEEYSER PEREZ O",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "13:53",
+      "d": "PJE CATALUNA 1843, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3OYUVM2B",
       "tec": "MARCO PEREZ G",
       "cat": "Alta 1 Play",
@@ -21948,7 +21957,7 @@
      },
      {
       "o": "1-3OYO328D",
-      "tec": "JOSE CASTRO P",
+      "tec": "GEEYSER PEREZ O",
       "cat": "Reparación",
       "f": "13-16",
       "hi": "13:50",
@@ -21998,7 +22007,7 @@
       "f": "13-16",
       "hi": "14:59",
       "d": "PJE RIO AYSEN 1953, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OYCGS8Z",
@@ -22045,7 +22054,7 @@
       "o": "1-3OSMN3DT",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "16:55",
+      "hi": "16:49",
       "d": "CONDELL SUR 01565 CASA G, QUILPUE",
       "e": "Pendiente",
       "tec": "ALEXIS JARA",
@@ -22069,7 +22078,7 @@
       "o": "1-3OY43MHO",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "17:10",
       "d": "LUIS URIBE 150 CASA 27, QUILPUE",
       "e": "Pendiente",
       "tec": "ANTONHY MORALES MENDOZA",
@@ -22093,7 +22102,7 @@
       "o": "1-3OY0F72I",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:43",
+      "hi": "14:51",
       "d": "LAS BARRANCAS 2581 EDIF. B DEPTO 101, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -22174,6 +22183,18 @@
       "ult_cierre": "Clte desiste motivo comercial"
      },
      {
+      "o": "1-3OY1RD7D",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "15:33",
+      "d": "LAS BARRANCAS 2581 EDIF. B DEPTO 401, QUILPUE",
+      "e": "Pendiente",
+      "tec": "EDGAR VALERO C",
+      "visitas": 1,
+      "ult_fecha": "10-11-2026",
+      "ult_cierre": "NAP Problema niveles PO"
+     },
+     {
       "o": "1-3OY5WLRV",
       "cat": "Reparación",
       "f": "10-13",
@@ -22198,10 +22219,22 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3OYO328D",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "13:54",
+      "d": "LOS ANDES 235, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "GEEYSER PEREZ O",
+      "visitas": 1,
+      "ult_fecha": "11-11-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OXFWG8T",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:51",
+      "hi": "17:10",
       "d": "SEXTA 0437, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "GEEYSER PEREZ O",
@@ -22220,18 +22253,6 @@
       "visitas": 2,
       "ult_fecha": "10-11-2026",
       "ult_cierre": "Falla Masiva"
-     },
-     {
-      "o": "1-3OY1RD7D",
-      "cat": "Reparación",
-      "f": "13-16",
-      "hi": "13:32",
-      "d": "LAS BARRANCAS 2581 EDIF. B DEPTO 401, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JORDAN ROA PEREZ",
-      "visitas": 1,
-      "ult_fecha": "10-11-2026",
-      "ult_cierre": "NAP Problema niveles PO"
      },
      {
       "o": "1-3OVIIYUY",
@@ -22258,24 +22279,12 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OYO328D",
-      "cat": "Reparación",
-      "f": "13-16",
-      "hi": "15:57",
-      "d": "LOS ANDES 235, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOSE CASTRO P",
-      "visitas": 1,
-      "ult_fecha": "11-11-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OXW0Z9P",
       "cat": "Alta 2 Play",
       "f": "10-13",
       "hi": "11:33",
       "d": "ORELLA 597 CASA B, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JOSE PEREZ RANGEL",
       "visitas": 1,
       "ult_fecha": "10-11-2026",
@@ -22285,7 +22294,7 @@
       "o": "1-3OV159SV",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "14:34",
+      "hi": "14:52",
       "d": "SAN ENRIQUE 1780 EDIF. 9 DEPTO 304, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE SALAS MEDINA",
@@ -22357,7 +22366,7 @@
       "o": "1-3OYAZ8KA",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:41",
+      "hi": "14:58",
       "d": "LOS LUNES 028 CASA B, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
@@ -22393,7 +22402,7 @@
       "o": "1-3OYQ5JES",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:44",
+      "hi": "14:52",
       "d": "PJE SOTAQUI 01163, QUILPUE",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -22405,7 +22414,7 @@
       "o": "1-3OVF3Y8C",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:33",
+      "hi": "16:41",
       "d": "ANTOFAGASTA 01733, QUILPUE",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -22455,9 +22464,9 @@
       "o": "1-3OY265ZA",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "13:00",
+      "hi": "13:20",
       "d": "AV VICEPRESIDENTE BDO LEIGHTON 551 CASA A DEPTO A35, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "FELIPE SILVA R",
       "desde": "10-11-2026"
      },
@@ -22475,5 +22484,5 @@
    }
   }
  },
- "generado": "11-11-2026 13:20"
+ "generado": "11-11-2026 13:40"
 }
