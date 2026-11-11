@@ -21823,17 +21823,18 @@
    }
   },
   "11-11-2026": {
-   "hasta": "10:19",
-   "actividades": 115,
+   "hasta": "10:29",
+   "actividades": 117,
    "tecnicos": 33,
    "estados": {
-    "Iniciado": 26,
+    "Iniciado": 28,
     "Pendiente": 80,
-    "en ruta": 6,
-    "No Realizada": 2,
+    "en ruta": 3,
+    "No Realizada": 4,
+    "Suspendido": 1,
     "Cancelado": 1
    },
-   "rgu": 182.5,
+   "rgu": 185.0,
    "caidas_total": 3,
    "caidas_activas": 3,
    "caidas_resueltas": 0,
@@ -21874,7 +21875,7 @@
     "nuevas": [
      {
       "o": "1-3OYO328D",
-      "tec": "JOSE GALAZ D",
+      "tec": "JOEL GUSTAVE GUSTA",
       "cat": "Reparación",
       "f": "13-16",
       "hi": "13:50",
@@ -22055,9 +22056,9 @@
       "o": "1-3OY6J7GE",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "09:48",
+      "hi": "10:26",
       "d": "SAN ENRIQUE 1780 EDIF. 7 DEPTO 203, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "EDGAR VALERO C",
       "visitas": 1,
       "ult_fecha": "10-11-2026",
@@ -22067,7 +22068,7 @@
       "o": "1-3OXW0Z9P",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "11:48",
+      "hi": "12:26",
       "d": "ORELLA 597 CASA B, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "EDGAR VALERO C",
@@ -22136,6 +22137,18 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3OYO328D",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "14:31",
+      "d": "LOS ANDES 235, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "visitas": 1,
+      "ult_fecha": "11-11-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OY44D99",
       "cat": "Reparación",
       "f": "10-13",
@@ -22181,18 +22194,6 @@
       "tec": "JOSE GALAZ D",
       "visitas": 1,
       "ult_fecha": "10-11-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OYO328D",
-      "cat": "Reparación",
-      "f": "13-16",
-      "hi": "13:50",
-      "d": "LOS ANDES 235, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOSE GALAZ D",
-      "visitas": 1,
-      "ult_fecha": "11-11-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -22331,9 +22332,9 @@
       "o": "1-3OW3QDYF",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "09:54",
+      "hi": "10:21",
       "d": "MANUEL ANTONIO MATTA 572, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "YENDER BOSCAN CADENAS",
       "visitas": 1,
       "ult_fecha": "07-11-2026",
@@ -22343,7 +22344,7 @@
       "o": "1-3OXI93VY",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:01",
+      "hi": "17:21",
       "d": "AVENIDA BELLOTO 421, QUILPUE",
       "e": "Pendiente",
       "tec": "YENDER BOSCAN CADENAS",
@@ -22377,5 +22378,5 @@
    }
   }
  },
- "generado": "11-11-2026 10:19"
+ "generado": "11-11-2026 10:29"
 }
