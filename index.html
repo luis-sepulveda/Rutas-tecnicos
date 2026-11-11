@@ -18737,6 +18737,13 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarM
   #anDet .an-dl-m { background:#1e293b; border:1px solid #334155; color:#e2e8f0; border-radius:8px; padding:4px 10px; font-size:12px; cursor:pointer; white-space:nowrap; font-family:inherit; }
   #anDet .an-dl-m:hover { border-color:#3b82f6; }
   #anDet .an-dl-v { color:#94a3b8; padding:10px 4px; }
+  /* (11-11-2026) Luis: "achicar esta pantalla" */
+  #anDet .an-dl { max-width:760px; }
+  /* (11-11-2026) Mas de 3 horas iniciado: hora de inicio y lo que lleva en columnas cortas, con su titulo encima */
+  #anDet .an-dl-f .hi2, #anDet .an-dl-f .tm small { }
+  #anDet .an-dl-f .hi2 { color:#e2e8f0; font-weight:700; font-variant-numeric:tabular-nums; min-width:62px; text-align:center; }
+  #anDet .an-dl-f .hi2 small, #anDet .an-dl-f .tm small { display:block; font-size:10.5px; font-weight:400; color:#94a3b8; text-transform:uppercase; letter-spacing:.05em; }
+  #anDet .an-dl-f .tm small { text-align:right; }
   #anDet .an-dia-al span { display:flex; flex-direction:column; } #anDet .an-dia-al i { font-style:normal; font-weight:700; font-size:14px; } #anDet .an-dia-al small { font-size:11.5px; color:#94a3b8; }
   #anDet .an-dia-map { display:flex; gap:8px; align-items:center; margin-top:10px; font-size:12.5px; color:#475569; font-weight:600; }
   /* (06-11-2026) DIA EN CURSO en MI ANALISIS */
@@ -20550,8 +20557,10 @@ function anDiaLstHtml(){
       filas = L.map(function(x){
         const grave = x.m >= UMBRAL_MIN + 90;
         return '<div class="an-dl-f' + (grave ? ' grave' : '') + '" title="' + escR(x.p.o || '') + ' · franja ' + escR(x.p.f || '') + '"><span class="pt"></span>'
-          + '<span class="dt"><b>' + escR(x.t) + '</b> · ' + escR(x.p.cat || x.p.t || '') + ' · ' + escR(x.p.hi || '') + '<span>' + escR(x.p.d || '') + '</span></span>'
-          + '<span class="tm">' + fmtDur(x.m) + '</span>'
+          + '<span class="dt"><b>' + escR(x.t) + '</b> · ' + escR(x.p.cat || x.p.t || '') + '<span>' + escR(x.p.d || '') + '</span></span>'
+          /* (11-11-2026) Luis: "dejar la palabra iniciada encima de la hora en que se inicio y al lado derecho lo que lleva" */
+          + '<span class="hi2"><small>Iniciada</small>' + escR(x.p.hi || '–') + '</span>'
+          + '<span class="tm"><small>Lleva</small>' + fmtDur(x.m) + '</span>'
           + '<button class="an-dl-m" onclick="anDiaMapaTec(\'atr\', \'' + esc(x.t) + '\')">Ver en el mapa ›</button></div>';
       }).join('');
     }
