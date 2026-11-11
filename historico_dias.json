@@ -21823,25 +21823,25 @@
    }
   },
   "11-11-2026": {
-   "hasta": "14:35",
-   "actividades": 135,
+   "hasta": "14:40",
+   "actividades": 142,
    "tecnicos": 32,
    "estados": {
-    "Completado": 51,
-    "Iniciado": 17,
-    "Pendiente": 41,
-    "en ruta": 8,
+    "Completado": 52,
+    "Iniciado": 18,
+    "Pendiente": 47,
+    "en ruta": 7,
     "No Realizada": 10,
     "Cancelado": 5,
     "Suspendido": 3
    },
-   "rgu": 196.5,
+   "rgu": 202.6,
    "caidas_total": 6,
    "caidas_activas": 6,
    "caidas_resueltas": 0,
-   "nuevas": 21,
+   "nuevas": 22,
    "al_bucket": 23,
-   "repetidas": 35,
+   "repetidas": 37,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
@@ -21901,6 +21901,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OZ086YS",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "15:33",
+      "d": "ISLA NAVARINO 629, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OYYH550",
       "tec": "JOSE CASTRO P",
@@ -21993,12 +22002,12 @@
      },
      {
       "o": "1-3OY0F72I",
-      "tec": "CRISTOBAL MIRANDA VALENC",
+      "tec": "DANIEL NAVARRETE E",
       "cat": "Reparación",
       "f": "13-16",
       "hi": "14:38",
       "d": "LAS BARRANCAS 2581 EDIF. B DEPTO 101, QUILPUE",
-      "e": "Pendiente (ya no está)"
+      "e": "Pendiente"
      },
      {
       "o": "1-3OYQ5JES",
@@ -22007,16 +22016,16 @@
       "f": "13-16",
       "hi": "14:44",
       "d": "PJE SOTAQUI 01163, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OYO328D",
-      "tec": "GEEYSER PEREZ O",
+      "tec": "SAMUEL FERNANDEZ VIDAL",
       "cat": "Reparación",
       "f": "13-16",
       "hi": "13:50",
       "d": "LOS ANDES 235, VILLA ALEMANA",
-      "e": "Pendiente (ya no está)"
+      "e": "Pendiente"
      },
      {
       "o": "1-3OXTRZF8",
@@ -22047,12 +22056,12 @@
      },
      {
       "o": "1-3OYB22C9",
-      "tec": "JOSE ROJO A",
+      "tec": "RAFAEL VARGAS B",
       "cat": "Upgrade promoción",
       "f": "13-16",
       "hi": "13:00",
       "d": "PJE CHERCAN 2745, QUILPUE",
-      "e": "Pendiente (ya no está)"
+      "e": "Pendiente"
      },
      {
       "o": "1-3OYL50H5",
@@ -22168,9 +22177,9 @@
       "o": "1-3OY5177G",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:35",
+      "hi": "14:39",
       "d": "VINA DEL MAR 74, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "CRISTOBAL SILVA LEIVA",
       "visitas": 2,
       "ult_fecha": "06-10-2026",
@@ -22180,7 +22189,7 @@
       "o": "1-3OYCWGR2",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:58",
+      "hi": "17:02",
       "d": "MENA 1695, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
@@ -22189,10 +22198,22 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3OY0F72I",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "15:55",
+      "d": "LAS BARRANCAS 2581 EDIF. B DEPTO 101, QUILPUE",
+      "e": "Pendiente",
+      "tec": "DANIEL NAVARRETE E",
+      "visitas": 1,
+      "ult_fecha": "10-11-2026",
+      "ult_cierre": "NAP Problema niveles PO"
+     },
+     {
       "o": "1-3OOPL8R8",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "16:03",
+      "hi": "17:03",
       "d": "EL ALBA 1183 EDIF. B-36 DEPTO 303, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -22393,27 +22414,27 @@
       "ult_cierre": "NAP Puerto PON Cruzado"
      },
      {
-      "o": "1-3OXI93VY",
-      "cat": "Modificación de Servicio",
-      "f": "16-19",
-      "hi": "16:13",
-      "d": "AVENIDA BELLOTO 421, QUILPUE",
-      "e": "Pendiente",
-      "tec": "LUIS CASTRO TORRES",
-      "visitas": 1,
-      "ult_fecha": "09-11-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
       "o": "1-3OYZ2361",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "17:12",
+      "hi": "16:15",
       "d": "LOS ALMENDROS 2915 EDIF. A DEPTO 23, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS CASTRO TORRES",
       "visitas": 1,
       "ult_fecha": "11-11-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3OXI93VY",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "19:00",
+      "d": "AVENIDA BELLOTO 421, QUILPUE",
+      "e": "Pendiente",
+      "tec": "LUIS CASTRO TORRES",
+      "visitas": 1,
+      "ult_fecha": "09-11-2026",
       "ult_cierre": "Cliente reagenda"
      },
      {
@@ -22432,7 +22453,7 @@
       "o": "1-3OUMXVL6",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "17:34",
       "d": "JULIO VELASCO 1268, QUILPUE",
       "e": "Pendiente",
       "tec": "MARCO PEREZ G",
@@ -22453,10 +22474,22 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OYO328D",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "15:58",
+      "d": "LOS ANDES 235, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "visitas": 1,
+      "ult_fecha": "11-11-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OVF3Y8C",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "17:31",
       "d": "ANTOFAGASTA 01733, QUILPUE",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -22504,9 +22537,9 @@
       "o": "1-3OYQ5JES",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:46",
+      "hi": "14:38",
       "d": "PJE SOTAQUI 01163, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "YENDER BOSCAN CADENAS",
       "visitas": 2,
       "ult_fecha": "09-11-2026",
@@ -22520,7 +22553,7 @@
       "f": "13-16",
       "hi": "13:20",
       "d": "AV VICEPRESIDENTE BDO LEIGHTON 551 CASA A DEPTO A35, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "FELIPE SILVA R",
       "desde": "10-11-2026"
      },
@@ -22538,5 +22571,5 @@
    }
   }
  },
- "generado": "11-11-2026 14:35"
+ "generado": "11-11-2026 14:40"
 }
