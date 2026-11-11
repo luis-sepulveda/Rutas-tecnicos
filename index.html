@@ -9466,7 +9466,10 @@ const DER_TIPOS = [['MIGRA', 'Migraciones'], ['ALTA', 'Altas'], ['AMBAS', 'Altas
 const DER_MESES = ['ene','feb','mar','abr','may','jun','jul','ago','sept','oct','nov','dic'];
 
 /* (29-10-2026, 19:15) ¿esta fila de DER es una MIGRACION cerrada por GSA que VTR cuenta como quiebre? */
-function mpGsaQ(tp, gsa){ return (typeof MP_GSA_QUIEBRE === 'undefined' || MP_GSA_QUIEBRE) && tp === 'MIGRA' && String(gsa || '') === '1'; }
+/* (11-11-2026) la GSA es quiebre tambien en altas, traslados y reparaciones (regla de Luis del 05-11: "con la regla GSA tal como
+   lo mide VTR", ya aplicada en MI ANALISIS y en el detalle del mes). Antes aqui solo migraciones: Derivacion y Franjas con
+   Altas contaban la GSA como completada y no calzaban con los relojes. Para volver a solo migraciones: dejar tp === 'MIGRA'. */
+function mpGsaQ(tp, gsa){ return (typeof MP_GSA_QUIEBRE === 'undefined' || MP_GSA_QUIEBRE) && (tp === 'MIGRA' || tp === 'ALTA' || tp === 'TRAS' || tp === 'REP') && String(gsa || '') === '1'; }
 function derGrupo(cod){
   const c = String(cod || '').toLowerCase();
   if(c.indexOf('sin moradores') >= 0) return 'sm';
@@ -9514,6 +9517,54 @@ async function bajarDeriv(){
       g: est === 'No Realizada' ? derGrupo(cod) : mpGsaQ(tp, val(row, 'gsa')) ? 'ot' : '', gsa: String(val(row, 'gsa') || '') === '1'
     });
   });
+  /* (11-11-2026) Luis: "revisar cada dato". Las migraciones que SOLO estan en los export completos (otras comunas,
+     tecnicos movidos) no venian en datos.json y faltaban aqui: Derivacion (semanas, Por tecnico, A quien auditar,
+     Evolucion, Ficha) y la lista automatica de Seguimiento VTR contaban menos visitas que la portada y MIGRACIONES
+     (semana 46: 25 visitadas aqui vs 29 alla; 26 menos en la semana 44). Se suman desde migraciones_semanas.json ->
+     detalle (mismo archivo que usan MIGRACIONES y Gerencia), sin repetir las que ya trae datos.json (orden + dia).
+     Lo mismo con las Altas (y Altas traslado) de los dias con export completo (act_completos, como MI ANALISIS).
+     Blindado: si el archivo no baja, todo sigue como antes. */
+  try {
+    const rx = await fetch(URL_ACTIVIDADES + 'migraciones_semanas.json?t=' + Date.now(), { cache:'no-store' });
+    const mx = rx.ok ? ((await rx.json()) || {}) : {}, dx = mx.detalle, ax = mx.act_completos;
+    const ya = {}, supDe = {}, supIso = {};
+    filas.forEach(function(x){
+      ya[x.tp + '|' + x.ot + '|' + x.iso] = 1;
+      if(x.sup && !(supIso[x.tec] > x.iso)){ supDe[x.tec] = x.sup; supIso[x.tec] = x.iso; }
+    });
+    const semDe = function(iso){ const dd = new Date(+iso.slice(0, 4), +iso.slice(4, 6) - 1, +iso.slice(6, 8));
+      const lun = new Date(dd); lun.setDate(dd.getDate() - (dd.getDay() + 6) % 7);
+      return lun.getFullYear() + '-' + String(lun.getMonth() + 1).padStart(2, '0') + '-' + String(lun.getDate()).padStart(2, '0'); };
+    /* altas (y altas traslado) de los dias con export completo: act_completos, mismo archivo que usa MI ANALISIS */
+    if(ax && Array.isArray(ax.filas)) ax.filas.forEach(function(r){
+      const iso = String(r[0] || ''), e = String(r[1] || ''), ot = String(r[3] || ''), tipo = String((ax.tipos || [])[r[4]] || '');
+      if(iso.length !== 8 || tipo.toUpperCase().indexOf('ALTA') !== 0) return;
+      if(e === 'Completado' && ot) (compl[ot] = compl[ot] || []).push(iso);
+      if((e !== 'Completado' && e !== 'No Realizada') || ya['ALTA|' + ot + '|' + iso]) return;
+      ya['ALTA|' + ot + '|' + iso] = 1;
+      const tec = String((ax.tecs || [])[r[5]] || '').replace(/\u00a0/g, ' ').replace(/\s+/g, ' ').trim();
+      const cod = String((ax.cods || [])[r[2]] || '').trim();
+      filas.push({ sem: semDe(iso), iso: iso, f: iso.slice(6, 8) + '-' + iso.slice(4, 6), ot: ot, tec: tec, sup: supDe[tec] || '', tp: 'ALTA',
+        act: tipo, fr: String((ax.frs || [])[r[6]] || ''), ciu: String((ax.cius || [])[r[7]] || ''),
+        der: e === 'No Realizada' || mpGsaQ('ALTA', r[8] ? '1' : ''), cod: mpGsaQ('ALTA', r[8] ? '1' : '') ? 'GSA · Falla Aprovisionamiento' : (cod || 'Sin código'),
+        g: e === 'No Realizada' ? derGrupo(cod) : mpGsaQ('ALTA', r[8] ? '1' : '') ? 'ot' : '', gsa: !!r[8], xc: 1 });
+    });
+    if(dx && Array.isArray(dx.filas)){
+      dx.filas.forEach(function(r){
+        const iso = String(r[0] || ''), e = String(r[1] || ''), ot = String(r[3] || '');
+        if(iso.length !== 8 || (e !== 'Completado' && e !== 'No Realizada') || ya['MIGRA|' + ot + '|' + iso]) return;
+        ya['MIGRA|' + ot + '|' + iso] = 1;
+        if(e === 'Completado' && ot) (compl[ot] = compl[ot] || []).push(iso);
+        const tec = String((dx.tecs || [])[r[5]] || '').replace(/ /g, ' ').replace(/\s+/g, ' ').trim();
+        const cod = String((dx.cods || [])[r[2]] || '').trim();
+        filas.push({
+          sem: semDe(iso), iso: iso, f: iso.slice(6, 8) + '-' + iso.slice(4, 6), ot: ot, tec: tec, sup: supDe[tec] || '', tp: 'MIGRA',
+          act: 'Migración', fr: String((dx.frs || [])[r[6]] || ''), ciu: String((dx.cius || [])[r[7]] || ''),
+          der: e === 'No Realizada', cod: cod || 'Sin código', g: e === 'No Realizada' ? derGrupo(cod) : '', gsa: false, xc: 1
+        });
+      });
+    }
+  } catch(e){ console.warn('derivacion, migraciones del export completo:', e); }
   filas.forEach(function(x){
     if(!x.der) return;
     const l = (compl[x.ot] || []).filter(function(i){ return i > x.iso; }).sort();
@@ -9730,6 +9781,8 @@ function derRango(k){
     : a.getDate() + ' ' + DER_MESES[a.getMonth()] + ' al ' + b.getDate() + ' ' + DER_MESES[b.getMonth()];
 }
 function derTitulo(s){ return String(s || '').toLowerCase().replace(/(^|\s)\S/g, function(c){ return c.toUpperCase(); }); }
+/* (11-11-2026) nombre de comuna bien escrito (Quilpué, Viña del Mar, Valparaíso...): anComNom esta en el ultimo <script>; si no esta, derTitulo */
+function derCiuNom(c){ return typeof anComNom === 'function' && c ? anComNom(c) : derTitulo(c); }
 function derPct(a, b){ return b ? Math.round(100 * a / b) : 0; }
 
 function abrirDeriv(){
@@ -9901,7 +9954,7 @@ function derDetalleHtml(o, i){
   h += '</div>';
   o.l.slice().sort(function(a, b){ return a.iso.localeCompare(b.iso) || a.ot.localeCompare(b.ot); }).forEach(function(x){
     const hi = derHist(x), sn = derSenales(x, hi);
-    h += '<div class="dv-ord"><div class="c1"><b>' + x.f + '</b> · <b>' + escR(x.ot) + '</b> · ' + escR(x.act) + ' · franja ' + escR(x.fr) + ' · ' + escR(derTitulo(x.ciu))
+    h += '<div class="dv-ord"><div class="c1"><b>' + x.f + '</b> · <b>' + escR(x.ot) + '</b> · ' + escR(x.act) + ' · franja ' + escR(x.fr) + ' · ' + escR(derCiuNom(x.ciu))
       + ' <span class="tg ' + (x.g === 'ot' ? 'na' : 'at') + '">' + escR(x.cod) + '</span>'
       + (x.desp ? ' <span class="tg ok">la misma orden se completó el ' + x.desp + '</span>' : '') + derSenalesHtml(sn) + '</div>';
     if(hi){
@@ -11369,7 +11422,7 @@ function derVistaFicHtml(todasSem){
     let o = '<div class="dv-card ' + cls + (sn.n ? ' sen' : '') + '">'
       + '<div class="cab"><span class="dir">' + (nom ? escR(derTitulo(nom)) : 'Dirección sin registro en el histórico') + '</span>'
       + '<span class="tg ' + (x.g === 'ot' ? 'na' : 'at') + '">' + escR(x.cod) + '</span></div>'
-      + '<div class="meta">' + x.f + ' · ' + escR(x.act) + ' · orden ' + escR(x.ot) + (nom ? '' : ' · ' + escR(derTitulo(x.ciu))) + '</div>'
+      + '<div class="meta">' + x.f + ' · ' + escR(x.act) + ' · orden ' + escR(x.ot) + (nom ? '' : ' · ' + escR(derCiuNom(x.ciu))) + '</div>'
       + '<div class="pas"><b>Qué pasó:</b> ' + (yo && yo.hi >= 0
           ? 'llegó a las <b>' + hora(yo) + '</b> (franja ' + escR(x.fr) + ')' + (yo.dur >= 0 ? ', estuvo <b>' + yo.dur + ' min</b>' : '') + ' y cerró como <b>' + escR(x.cod) + '</b>.'
           : 'franja ' + escR(x.fr) + ', cerró como <b>' + escR(x.cod) + '</b>.')
@@ -11443,7 +11496,7 @@ function derHoyDatos(){
       const tp = u.indexOf('MIGRA') === 0 ? 'MIGRA' : u.indexOf('ALTA') === 0 ? 'ALTA' : '';
       if(!tp || (derTipo !== 'AMBAS' && tp !== derTipo)) return;
       const e = String(j.e || ''), cer = e === 'Completado' || e === 'No Realizada';
-      const gq = cer && tp === 'MIGRA' && (!!j.gsa && (typeof MP_GSA_QUIEBRE === 'undefined' || MP_GSA_QUIEBRE));   /* (04-11-2026) GSA = quiebre, como el historico */
+      const gq = cer && mpGsaQ(tp, j.gsa ? '1' : '');   /* (04-11-2026) GSA = quiebre, como el historico. (11-11-2026) tambien en altas (mpGsaQ) */
       const hi = derMinH(j.hi), hf = derMinH(j.hf);
       const x = { tec: tec, sup: sup, ot: String(j.o || ''), act: String(j.cat || j.t || ''), fr: String(j.f || ''), d: String(j.d || ''), e: e,
         vis: cer, der: e === 'No Realizada' || gq, gsa: gq, pend: e === 'Pendiente' || e === 'Iniciado' || e === 'en ruta', ini: e === 'Iniciado',
@@ -11747,7 +11800,7 @@ function derCausalesSemHtml(tb, tot){
     const hi = derHist(x), sn = derSenales(x, hi), yo = hi ? hi.yo : null, nom = hi ? hi.d : DER_UNI[x.ot];
     const ot = hi ? Object.keys(hi.otros).sort() : [];
     h += '<tr' + (x.tec !== ant ? ' class="pri"' : '') + '><td>' + x.f + '</td><td>' + (x.tec !== ant ? '<b>' + escR(derTitulo(x.tec)) + '</b> <small>' + porTec[x.tec] + '</small>' : '') + '</td>'
-      + '<td>' + (nom ? escR(derTitulo(nom)) : '<span class="gr">' + escR(derTitulo(x.ciu)) + ', sin dirección en el histórico</span>') + '</td><td class="pet">' + escR(x.ot) + '</td><td>' + escR(x.act) + '</td><td>' + escR(x.fr) + '</td>'
+      + '<td>' + (nom ? escR(derTitulo(nom)) : '<span class="gr">' + escR(derCiuNom(x.ciu)) + ', sin dirección en el histórico</span>') + '</td><td class="pet">' + escR(x.ot) + '</td><td>' + escR(x.act) + '</td><td>' + escR(x.fr) + '</td>'
       + '<td>' + (yo && yo.hi >= 0 ? derHM(yo.hi) + (yo.dur >= 0 ? ' · ' + yo.dur + ' min' : '') : '') + '</td>'
       + '<td><span class="tg ' + (x.g === 'ot' ? 'na' : 'at') + '">' + escR(x.cod) + '</span>' + (x.desp ? ' <span class="tg ok">se completó el ' + x.desp + '</span>' : '') + derSenalesHtml(sn) + '</td>'
       + '<td>' + (ot.length ? ot.map(function(t){ return escR(derTitulo(t)); }).join(', ') : '<span class="gr">nadie más</span>') + '</td></tr>';
@@ -13675,7 +13728,7 @@ function mdSemHtml(k, dia, ref){
   const L = dia ? D[dia] : TODO, s = st(L), sT = st(TODO);
   const B = dia ? sT : (PREV.length ? st(PREV) : null);
   const bTxt = dia ? 'el total de la semana' : 'la semana ' + derNumSemana(ant);
-  const dif = (v, b) => v === null || !b || b.ef === null ? '' : Math.abs(v - b.ef) < 0.5 ? '<span class="mp-fl gr">= igual que ' + bTxt + '</span>'
+  const dif = (v, b) => v === null || !b || b.ef === null ? '' : Math.abs(v - b.ef) < 0.005 ? '<span class="mp-fl gr">= igual que ' + bTxt + '</span>'
     : '<span class="mp-fl ' + (v > b.ef ? 'ok' : 'bad') + '">' + (v > b.ef ? '▲ ' : '▼ ') + p1(Math.abs(v - b.ef)).replace('%', '') + ' pts vs ' + bTxt + ' (' + p1(b.ef) + ')</span>';
   const tile = (cl, l, v, sub) => '<div class="ms-k ' + cl + '"><span class="l">' + l + '</span><span class="v">' + v + '</span><span class="s">' + sub + '</span></div>';
   const qTit = dia ? MD_DIAS[fDia(dia)] + ' ' + ddmm(dia) : 'Total de la semana';
@@ -13723,7 +13776,7 @@ function mdSemHtml(k, dia, ref){
     + Object.keys(G).sort((a, b) => G[b].length - G[a].length).map(function(f){ const t = st(G[f]), tb = GB[f] ? st(GB[f]) : null, d = tb && tb.ef !== null ? t.ef - tb.ef : null;
         return '<tr><td><b>' + f + '</b></td><td class="nu">' + nf(t.a) + '</td><td class="nu ok">' + nf(t.co) + '</td><td class="nu bad">' + nf(t.nr) + '</td><td class="nu">' + ((t.ca + t.su) || '–') + '</td>'
           + '<td class="nu"><span class="ad-tag ' + col(t.ef) + '">' + p1(t.ef) + '</span></td>'
-          + '<td class="nu">' + (d === null ? '<span class="mp-fl gr">–</span>' : Math.abs(d) < 0.5 ? '<span class="mp-fl gr">= igual</span>' : '<span class="mp-fl ' + (d > 0 ? 'ok' : 'bad') + '">' + (d > 0 ? '▲ ' : '▼ ') + p1(Math.abs(d)).replace('%', '') + ' pts</span>') + '</td></tr>'; }).join('')
+          + '<td class="nu">' + (d === null ? '<span class="mp-fl gr">–</span>' : Math.abs(d) < 0.005 ? '<span class="mp-fl gr">= igual</span>' : '<span class="mp-fl ' + (d > 0 ? 'ok' : 'bad') + '">' + (d > 0 ? '▲ ' : '▼ ') + p1(Math.abs(d)).replace('%', '') + ' pts</span>') + '</td></tr>'; }).join('')
     + '</tbody></table></div></div>';
 
   /* 4. TECNICOS (desplegable, son muchos) */
@@ -13953,7 +14006,7 @@ function mesDetalleHtmlV2(k){
     l.forEach(r => { const e = r['Estado']; if(e === 'Completado') s.co++; else if(e === 'No Realizada') s.nr++; else if(e === 'Cancelado') s.ca++; else if(e === 'Suspendido') s.su++; });
     s.ef = s.a ? 100 * s.co / s.a : null; return s; };
   const fl = function(a, b, chico){ if(a === null || b === null) return '<span class="mp-fl gr">' + (chico ? '' : 'sin datos') + '</span>';
-    const d = a - b; return Math.abs(d) < 0.5 ? '<span class="mp-fl gr">= igual</span>' : d > 0 ? '<span class="mp-fl ok">▲ ' + p1(d).replace('%', '') + ' pts</span>' : '<span class="mp-fl bad">▼ ' + p1(-d).replace('%', '') + ' pts</span>'; };
+    const d = a - b; return Math.abs(d) < 0.005 ? '<span class="mp-fl gr">= igual</span>' : d > 0 ? '<span class="mp-fl ok">▲ ' + p1(d).replace('%', '') + ' pts</span>' : '<span class="mp-fl bad">▼ ' + p1(-d).replace('%', '') + ' pts</span>'; };
   const S = st(L), SB = st(B);
   h += '<span class="ad-sub">' + nf(S.a) + ' actividades · ' + (dia ? 'día ' + dia : 'todo el mes') + ' · efectividad = completadas ÷ asignadas</span></div>';
 
@@ -14069,7 +14122,7 @@ function mesDetalleHtml(k){
     s.ef = s.a ? 100 * s.co / s.a : null; return s; };
   /* flecha en puntos; alReves = true cuando subir es malo (no realizadas) */
   const fl = function(a, b, alReves){ if(a === null || b === null || a === undefined || b === undefined) return '<span class="mp-fl gr"></span>';
-    const d = a - b; if(Math.abs(d) < 0.5) return '<span class="mp-fl gr">= igual</span>';
+    const d = a - b; if(Math.abs(d) < 0.005) return '<span class="mp-fl gr">= igual</span>';
     const bueno = alReves ? d < 0 : d > 0;
     return '<span class="mp-fl ' + (bueno ? 'ok' : 'bad') + '">' + (d > 0 ? '▲ ' : '▼ ') + P2(Math.abs(d)) + '</span>'; };
   const grupo = function(lista, fn){ const g = {}; lista.forEach(r => { const v = fn(r) || 'Sin dato'; (g[v] = g[v] || []).push(r); }); return g; };
@@ -14085,9 +14138,17 @@ function mesDetalleHtml(k){
     if(f === 'Migraciones'){ if(!MG || !MG.filas) return null;
       MG.filas.forEach(x => { if(x.mes === mk && x.iso < hoyIso) l.push({ e:x.e, cod:x.cod, gsa:!!x.gsa, otra:!!x.otra }); });
     } else {
+      /* (11-11-2026) los dias con export completo salen de ahi (act_completos, incluye otras comunas), igual que MI ANALISIS:
+         antes solo datos.json y Altas/Reparaciones del mes no calzaban con los relojes (noviembre: 63,44 % vs 63,28 %) */
+      const AC = window.AN_ACTCOMP, diasC = {};
+      if(AC && Array.isArray(AC.dias)) AC.dias.forEach(function(d){ diasC[String(d)] = 1; });
+      if(AC && Array.isArray(AC.filas)) AC.filas.forEach(function(r){
+        const iso = String(r[0] || ''); if(iso.slice(0, 6) !== mk || !(iso < hoyIso)) return;
+        if(familiaCat((AC.tipos || [])[r[4]]) !== f) return;
+        l.push({ e:String(r[1] || '').trim(), cod:String((AC.cods || [])[r[2]] || '').trim(), gsa:!!r[8] }); });
       window.ACT_FILAS.forEach(function(r){ const nom = String(r['Nombre'] || ''); if(nom.indexOf('_DOMI_') < 0 || familiaCat(r['Tipo de Actividad']) !== f) return;
         const pz = /^(\d{2})-(\d{2})-(\d{4})$/.exec(String(r['Fecha'] || '')); if(!pz) return; const iso = pz[3] + pz[2] + pz[1];
-        if(iso.slice(0, 6) !== mk || !(iso < hoyIso)) return;
+        if(iso.slice(0, 6) !== mk || !(iso < hoyIso) || diasC[iso]) return;
         l.push({ e:String(r['Estado'] || '').trim(), cod:String(r['Código de Cierre'] || '').trim(), gsa:String(r['gsa'] || '') === '1' }); });
     }
     const s = mpSt(l); s.L = l; return s;
@@ -14152,13 +14213,14 @@ function mesDetalleHtml(k){
 
   /* FILA 3: franja, comuna, supervisor */
   const nomBonito = x => String(x).toLowerCase().replace(/(^|\s)\S/g, c => c.toUpperCase());
+  const nomCom = x => typeof anComNom === 'function' && x && x !== 'Sin dato' ? anComNom(x) : nomBonito(x);   /* (11-11-2026) Quilpué, Viña del Mar, Concepción con tilde */
   const caja = function(titulo, fn, orden, pie, col){
     const ga = grupo(L, fn), gb = grupo(B, fn);
     const ks = Object.keys(ga).sort(orden || ((a, b) => ga[b].length - ga[a].length));
     return '<div class="mda-c"><div class="ct">' + titulo + ' <span class="mda-ayu">efectividad = completadas ÷ asignadas</span></div><table class="mda-t">'
       + '<tr><th>' + (col || '') + '</th><th>Asignadas</th><th>Efectividad</th><th>' + bTxt + ' (pts)</th></tr>'   /* (09-11-2026) Luis: "tenemos informacion que se muestra pero no tienen titulos indicando que son": titulos de columna y leyendas */ 
       + ks.map(function(x){ const s2 = st(ga[x]), b2 = gb[x] ? st(gb[x]) : null;
-      return '<tr><td>' + escR(nomBonito(x)) + '</td><td>' + nf(s2.a) + '</td><td>' + p1(s2.ef) + '</td><td>' + fl(s2.ef, b2 ? b2.ef : null) + '</td></tr>'; }).join('') + '</table>' + (pie || '') + '</div>';
+      return '<tr><td>' + escR(col === 'Comuna' ? nomCom(x) : nomBonito(x)) + '</td><td>' + nf(s2.a) + '</td><td>' + p1(s2.ef) + '</td><td>' + fl(s2.ef, b2 ? b2.ef : null) + '</td></tr>'; }).join('') + '</table>' + (pie || '') + '</div>';
   };
   const tec = r => { const n = String(r['Nombre'] || ''), i = n.indexOf('_DOMI_'); return (i >= 0 ? n.slice(i + 6) : n).replace(/ /g, ' ').trim(); };
   const TA = grupo(L, tec), TB = grupo(B, tec);
@@ -15321,7 +15383,22 @@ function rguOrden(p){
 }
 
 // Calcula y guarda p.rgu en toda la base. Si el pipeline ya trae p.rgu, lo respeta.
+/* (11-11-2026) Luis: "solo que se cuenten como esta en boton RGU". El mapa, Día en curso y la columna oscura usan
+   la MISMA regla del boton 📈 RGU de MI ANALISIS (rguDe): alta, alta traslado y migracion = su play (1, 2 o 3; sin play
+   = 1), reparacion = 1, lo demas (modificaciones, upgrade, downgrade) = 0. Ya no se usa el rgu de rutas.json (regla
+   por componentes D-box/extensor/planes de generar_rutas.py). Para volver a la de antes: borrar la linea que llama a
+   rguComoBoton() al principio de aplicarRGU. */
+function rguComoBoton(p){
+  const t = String(p.t || '').trim().toUpperCase();
+  if(t.indexOf('REPARA') === 0) return 1;
+  if(t.indexOf('ALTA') === 0 || t.indexOf('MIGRA') === 0){
+    const m = String(p.cat || p.sub || '').match(/([123])\s*play/i);
+    return m ? parseInt(m[1], 10) : 1;
+  }
+  return 0;
+}
 function aplicarRGU(db){
+  Object.values(db).forEach(a => a.forEach(p => { p.rgu = rguComoBoton(p); })); rguDisponible = true; return;   /* (11-11-2026) regla del boton RGU */
   const arrs = Object.values(db);
   const yaTraeRGU  = arrs.some(a=>a.some(p=>p.rgu!=null && p.rgu!==''));
   const tieneDetalle = arrs.some(a=>a.some(p=>p.sub!=null || p.pasos!=null));
@@ -16874,7 +16951,7 @@ function mgCard(tit, n, sub, cmp, cls, info){
 function mgCmp(v, va, malo, nomA){
   if(va === null || va === undefined || isNaN(va)) return '';
   const d = v - va, vs = nomA ? ' vs ' + nomA : '';
-  if(Math.abs(d) < 0.5) return '<i class="eq">= igual' + (nomA ? ' que ' + nomA : '') + '</i>';
+  if(Math.abs(d) < 0.005) return '<i class="eq">= igual' + (nomA ? ' que ' + nomA : '') + '</i>';
   const peor = malo ? d > 0 : d < 0;
   return '<i class="' + (peor ? 'peor' : 'mejor') + '">' + (d > 0 ? '▲' : '▼') + ' ' + P2(Math.abs(d)) + ' pts' + vs + '</i>';
 }
@@ -19252,7 +19329,12 @@ function anOtrasCardHtml(D, SEMS){
   const Lm = anPer(D, 'Migraciones', { t:'mes', k:D.mesHoy }), Om = Lm.filter(esOtra), sm = mpSt(Om);
   const Zm = mpSt(Lm.filter(function(x){ return !esOtra(x); })), Tm = mpSt(Lm);
   const ciu = {}, tec = {};
-  Om.forEach(function(x){ const d = (typeof AN_OTRAS_OT === 'object' && AN_OTRAS_OT[x.ot]) || ''; const c = d.indexOf(',') >= 0 ? d.slice(d.lastIndexOf(',') + 1).trim() : 'sin dirección';
+  Om.forEach(function(x){ if(x.e !== 'Completado' && x.e !== 'No Realizada') return;   /* (11-11-2026) solo las visitadas, para que sumen lo mismo que "N visitadas" */
+    const d = (typeof AN_OTRAS_OT === 'object' && AN_OTRAS_OT[x.ot]) || '';
+    /* (11-11-2026) la comuna sale primero de la columna Ciudad del export (anComReal), con su nombre bien escrito (anComNom):
+       antes se sacaba de la direccion y salia "Vina Del Mar" o "sin dirección" */
+    let c = ''; try { const r = anComReal(x); if(r && r !== 'Otra comuna') c = anComNom(r); } catch(_){}
+    if(!c) c = d.indexOf(',') >= 0 ? anComNom(d.slice(d.lastIndexOf(',') + 1).trim()) : 'sin dirección';
     ciu[c] = (ciu[c] || 0) + 1; const t = anTec(x.tec); tec[t] = (tec[t] || 0) + 1; });
   const top = function(o, n){ return Object.keys(o).sort(function(a, b){ return o[b] - o[a]; }).slice(0, n).map(function(k){ return escR(k.replace(/\b([A-ZÁÉÍÓÚÑ])([A-ZÁÉÍÓÚÑ]+)/g, function(_, a, b){ return a + b.toLowerCase(); })) + ' ' + o[k]; }).join(' · '); };
   if(sm.vis){
@@ -21118,7 +21200,7 @@ function cqPintar(){
   else h += '<div class="cq-est curso"><b>' + (CQ_MES < hoyM ? 'Es la calidad que se está midiendo ahora' : 'En curso') + ':</b> se termina de medir el ' + escR(fechaCL(R.cierre)) + ' (faltan ' + dQ + ' día' + (dQ === 1 ? '' : 's') + '). Todavía pueden caer reparaciones de los trabajos hechos desde el ' + escR(fechaCL(R.desde > CQ_MES + '-01' ? R.desde : CQ_MES + '-01')) + ', así que el % puede subir.'
     + (R.abiertos ? ' Hay <b>' + R.abiertos + '</b> ' + (R.abiertos === 1 ? 'reparación abierta' : 'reparaciones abiertas') + ' (cuentan; si la cancelan, sale sola).' : '') + '</div>';
   if(R.json) h += '<div class="cq-est">Fuente: <b>export completos</b> (todas las empresas y comunas) del ' + escR(fechaCL(R.registro)) + ' al ' + escR(fechaCL(R.hasta)) + (R.nHoy ? ', más <b>' + R.nHoy + '</b> ' + (R.nHoy === 1 ? 'reparación' : 'reparaciones') + ' de hoy en vivo' : '') + '. '
-    + 'Entran <b>' + R.otras + '</b> trabajos en otras comunas' + (R.otras ? ' (' + Object.keys(R.ciu).filter(function(c){ return c !== 'QUILPUE' && c !== 'VILLA ALEMANA'; }).sort(function(a, b){ return R.ciu[b] - R.ciu[a]; }).map(function(c){ return derTitulo(c) + ' ' + R.ciu[c]; }).join(', ') + ')' : '')
+    + 'Entran <b>' + R.otras + '</b> trabajos en otras comunas' + (R.otras ? ' (' + Object.keys(R.ciu).filter(function(c){ return c !== 'QUILPUE' && c !== 'VILLA ALEMANA'; }).sort(function(a, b){ return R.ciu[b] - R.ciu[a]; }).map(function(c){ return (typeof anComNom === 'function' ? anComNom(c) : derTitulo(c)) + ' ' + R.ciu[c]; }).join(', ') + ')' : '')
     + ' y <b>' + R.otraEps + '</b> trabajo' + (R.otraEps === 1 ? '' : 's') + ' con reparación de otra empresa.'
     + (R.tapadas.length ? ' <b>' + R.tapadas.length + '</b> ' + (R.tapadas.length === 1 ? 'reparación' : 'reparaciones') + ' no se le' + (R.tapadas.length === 1 ? '' : 's') + ' carga' + (R.tapadas.length === 1 ? '' : 'n') + ' a Dominion porque otra empresa trabajó después en la casa (abajo).' : '')
     + (R.faltan.length ? ' <b style="color:#b42318">Faltan los export de: ' + R.faltan.map(function(d){ return fechaCL(d).slice(0, 5); }).join(', ') + '.</b>' : '') + '</div>';
