@@ -1,9 +1,9 @@
 {
-  "actualizado": "2026-11-11T12:45:39",
+  "actualizado": "2026-11-11T13:15:47",
   "resumen": {
     "cancelada": 1,
     "reagendada": 3,
-    "sin informacion": 1
+    "sin informacion": 2
   },
   "estados": {
     "1-3OU5BBX7": {
@@ -45,6 +45,27 @@
       "color": "rgb(255, 222, 0)",
       "detalle": "1-3OYDEF90 - 10-13-Alta-2 Play-LAS MORAS 2450Sab, 14 Nov",
       "franja_nueva": "10-13"
+    },
+    "1-3OXGH430": {
+      "tec": "JOSE GALAZ D",
+      "cat": "Alta 1 Play",
+      "franja_original": "16-19",
+      "d": "LA PLACE 042, QUILPUE",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "LA PLACE 042",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3OWAMK5I",
+            "franja": "16-19",
+            "texto": "1-3OWAMK5I - 16-19-Alta-1 Play-LA PLACE 042Lun, 9 Nov"
+          }
+        ]
+      }
     },
     "1-3OY26B93": {
       "tec": "JOSE SALAS MEDINA",
