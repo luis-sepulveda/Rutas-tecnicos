@@ -21823,15 +21823,15 @@
    }
   },
   "11-11-2026": {
-   "hasta": "11:54",
+   "hasta": "11:59",
    "actividades": 124,
    "tecnicos": 32,
    "estados": {
     "Completado": 19,
-    "en ruta": 4,
-    "Pendiente": 67,
-    "Iniciado": 24,
-    "No Realizada": 6,
+    "en ruta": 3,
+    "Pendiente": 66,
+    "Iniciado": 25,
+    "No Realizada": 7,
     "Suspendido": 2,
     "Cancelado": 2
    },
@@ -21839,9 +21839,9 @@
    "caidas_total": 3,
    "caidas_activas": 3,
    "caidas_resueltas": 0,
-   "nuevas": 11,
+   "nuevas": 12,
    "al_bucket": 12,
-   "repetidas": 36,
+   "repetidas": 35,
    "reagendadas": 2,
    "detalle": {
     "caidas": [
@@ -21874,6 +21874,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3OYSJLNF",
+      "tec": "FELIPE SILVA R",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "11:59",
+      "d": "PRIMERA 358, VILLA ALEMANA",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3OY0F72I",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -21917,7 +21926,7 @@
       "f": "10-13",
       "hi": "13:09",
       "d": "LAS BARRANCAS 2581 EDIF. A DEPTO 101, QUILPUE",
-      "e": "en ruta"
+      "e": "Pendiente"
      },
      {
       "o": "1-3OYB72U4",
@@ -22000,18 +22009,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OU5BBX7",
-      "cat": "Migración 1 Play",
-      "f": "16-19",
-      "hi": "16:12",
-      "d": "PJE 2 260, QUILPUE",
-      "e": "Pendiente",
-      "tec": "ALEXIS JARA",
-      "visitas": 5,
-      "ult_fecha": "04-11-2026",
-      "ult_cierre": "Direccion no encontrada"
-     },
-     {
       "o": "1-3OY43MHO",
       "cat": "Reparación",
       "f": "16-19",
@@ -22053,7 +22050,7 @@
       "f": "10-13",
       "hi": "10:51",
       "d": "CALLE 2 2287, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "CRISTOBAL SILVA LEIVA",
       "visitas": 2,
       "ult_fecha": "06-11-2026",
@@ -22063,9 +22060,9 @@
       "o": "1-3OY5177G",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "13:47",
+      "hi": "12:11",
       "d": "VINA DEL MAR 74, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "CRISTOBAL SILVA LEIVA",
       "visitas": 2,
       "ult_fecha": "06-10-2026",
@@ -22075,7 +22072,7 @@
       "o": "1-3OYCWGR2",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:02",
+      "hi": "16:00",
       "d": "MENA 1695, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
@@ -22123,7 +22120,7 @@
       "o": "1-3OYC968O",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "12:10",
+      "hi": "12:19",
       "d": "IGNACIO CARRERA PINTO 839, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
@@ -22147,7 +22144,7 @@
       "o": "1-3OYBO585",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "12:44",
+      "hi": "12:57",
       "d": "LOS ESPINOS 19, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "FELIPE SILVA R",
@@ -22183,7 +22180,7 @@
       "o": "1-3OYO328D",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "13:26",
+      "hi": "14:20",
       "d": "LOS ANDES 235, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOEL GUSTAVE GUSTA",
@@ -22197,7 +22194,7 @@
       "f": "10-13",
       "hi": "12:03",
       "d": "LAS BARRANCAS 2581 EDIF. A DEPTO 101, QUILPUE",
-      "e": "en ruta",
+      "e": "Pendiente",
       "tec": "JORDAN ROA PEREZ",
       "visitas": 2,
       "ult_fecha": "10-11-2026",
@@ -22433,5 +22430,5 @@
    }
   }
  },
- "generado": "11-11-2026 11:54"
+ "generado": "11-11-2026 11:59"
 }
