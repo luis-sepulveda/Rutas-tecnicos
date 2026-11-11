@@ -21823,23 +21823,23 @@
    }
   },
   "11-11-2026": {
-   "hasta": "14:40",
-   "actividades": 142,
+   "hasta": "14:45",
+   "actividades": 143,
    "tecnicos": 32,
    "estados": {
-    "Completado": 52,
-    "Iniciado": 18,
-    "Pendiente": 47,
-    "en ruta": 7,
+    "Completado": 53,
+    "Iniciado": 20,
+    "Pendiente": 45,
     "No Realizada": 10,
+    "en ruta": 7,
     "Cancelado": 5,
     "Suspendido": 3
    },
-   "rgu": 202.6,
+   "rgu": 203.6,
    "caidas_total": 6,
    "caidas_activas": 6,
    "caidas_resueltas": 0,
-   "nuevas": 22,
+   "nuevas": 23,
    "al_bucket": 23,
    "repetidas": 37,
    "reagendadas": 2,
@@ -21902,13 +21902,22 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OZ0EDVJ",
+      "tec": "JOSE PEREZ RANGEL",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "14:44",
+      "d": "SAN ENRIQUE 1370, VILLA ALEMANA",
+      "e": "Iniciado"
+     },
+     {
       "o": "1-3OZ086YS",
       "tec": "CRISTOBAL MIRANDA VALENC",
       "cat": "Modificación de Servicio",
       "f": "13-16",
       "hi": "15:33",
       "d": "ISLA NAVARINO 629, QUILPUE",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OYYH550",
@@ -21917,7 +21926,7 @@
       "f": "13-16",
       "hi": "14:14",
       "d": "CANAL MORALEDA 684, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OYYRK94",
@@ -22129,7 +22138,7 @@
       "o": "1-3OY6CV4O",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:49",
+      "hi": "17:03",
       "d": "MARGA MARGA 600, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -22285,7 +22294,7 @@
       "o": "1-3OXFWG8T",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:53",
+      "hi": "17:03",
       "d": "SEXTA 0437, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "GEEYSER PEREZ O",
@@ -22357,9 +22366,9 @@
       "o": "1-3OV159SV",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "15:02",
+      "hi": "14:56",
       "d": "SAN ENRIQUE 1780 EDIF. 9 DEPTO 304, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JOSE SALAS MEDINA",
       "visitas": 1,
       "ult_fecha": "05-11-2026",
@@ -22414,27 +22423,27 @@
       "ult_cierre": "NAP Puerto PON Cruzado"
      },
      {
-      "o": "1-3OYZ2361",
-      "cat": "Migración 1 Play",
-      "f": "16-19",
-      "hi": "16:15",
-      "d": "LOS ALMENDROS 2915 EDIF. A DEPTO 23, QUILPUE",
-      "e": "Pendiente",
-      "tec": "LUIS CASTRO TORRES",
-      "visitas": 1,
-      "ult_fecha": "11-11-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
       "o": "1-3OXI93VY",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "19:00",
+      "hi": "16:13",
       "d": "AVENIDA BELLOTO 421, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS CASTRO TORRES",
       "visitas": 1,
       "ult_fecha": "09-11-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3OYZ2361",
+      "cat": "Migración 1 Play",
+      "f": "16-19",
+      "hi": "17:12",
+      "d": "LOS ALMENDROS 2915 EDIF. A DEPTO 23, QUILPUE",
+      "e": "Pendiente",
+      "tec": "LUIS CASTRO TORRES",
+      "visitas": 1,
+      "ult_fecha": "11-11-2026",
       "ult_cierre": "Cliente reagenda"
      },
      {
@@ -22571,5 +22580,5 @@
    }
   }
  },
- "generado": "11-11-2026 14:40"
+ "generado": "11-11-2026 14:45"
 }
