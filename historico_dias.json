@@ -21823,19 +21823,19 @@
    }
   },
   "11-11-2026": {
-   "hasta": "14:20",
-   "actividades": 138,
+   "hasta": "14:30",
+   "actividades": 142,
    "tecnicos": 32,
    "estados": {
-    "Completado": 44,
-    "Iniciado": 22,
-    "Pendiente": 51,
+    "Completado": 48,
+    "Iniciado": 19,
+    "Pendiente": 49,
+    "en ruta": 8,
     "No Realizada": 10,
     "Cancelado": 5,
-    "en ruta": 3,
     "Suspendido": 3
    },
-   "rgu": 199.5,
+   "rgu": 205.5,
    "caidas_total": 6,
    "caidas_activas": 6,
    "caidas_resueltas": 0,
@@ -21921,7 +21921,7 @@
      },
      {
       "o": "1-3OYZ2361",
-      "tec": "YENDER BOSCAN CADENAS",
+      "tec": "LUIS CASTRO TORRES",
       "cat": "Migración 1 Play",
       "f": "16-19",
       "hi": "16:00",
@@ -21935,7 +21935,7 @@
       "f": "16-19",
       "hi": "16:00",
       "d": "AVIADOR ACEVEDO 2233, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OYQI9N5",
@@ -21953,7 +21953,7 @@
       "f": "16-19",
       "hi": "16:00",
       "d": "VOLCAN LASCAR 2632, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OY8F9Q0",
@@ -22002,12 +22002,12 @@
      },
      {
       "o": "1-3OYQ5JES",
-      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "tec": "YENDER BOSCAN CADENAS",
       "cat": "Alta 1 Play",
       "f": "13-16",
       "hi": "14:44",
       "d": "PJE SOTAQUI 01163, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OYO328D",
@@ -22120,7 +22120,7 @@
       "o": "1-3OY6CV4O",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:46",
+      "hi": "16:49",
       "d": "MARGA MARGA 600, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -22132,7 +22132,7 @@
       "o": "1-3OY43MHO",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "17:10",
+      "hi": "17:06",
       "d": "LUIS URIBE 150 CASA 27, QUILPUE",
       "e": "Pendiente",
       "tec": "ANTONHY MORALES MENDOZA",
@@ -22146,7 +22146,7 @@
       "f": "10-13",
       "hi": "11:06",
       "d": "ISLA NAVARINO 629, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "CRISTOBAL MIRANDA VALENC",
       "visitas": 1,
       "ult_fecha": "10-11-2026",
@@ -22156,7 +22156,7 @@
       "o": "1-3OY0F72I",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:15",
+      "hi": "15:39",
       "d": "LAS BARRANCAS 2581 EDIF. B DEPTO 101, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -22180,9 +22180,9 @@
       "o": "1-3OY5177G",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:10",
+      "hi": "14:35",
       "d": "VINA DEL MAR 74, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "CRISTOBAL SILVA LEIVA",
       "visitas": 2,
       "ult_fecha": "06-10-2026",
@@ -22192,7 +22192,7 @@
       "o": "1-3OYCWGR2",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:25",
+      "hi": "16:50",
       "d": "MENA 1695, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
@@ -22240,7 +22240,7 @@
       "o": "1-3OY1RD7D",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:33",
+      "hi": "15:46",
       "d": "LAS BARRANCAS 2581 EDIF. B DEPTO 401, QUILPUE",
       "e": "Pendiente",
       "tec": "EDGAR VALERO C",
@@ -22276,7 +22276,7 @@
       "o": "1-3OYO328D",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:26",
+      "hi": "15:52",
       "d": "LOS ANDES 235, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "GEEYSER PEREZ O",
@@ -22288,7 +22288,7 @@
       "o": "1-3OXFWG8T",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "17:30",
+      "hi": "17:56",
       "d": "SEXTA 0437, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "GEEYSER PEREZ O",
@@ -22429,6 +22429,18 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3OYZ2361",
+      "cat": "Migración 1 Play",
+      "f": "16-19",
+      "hi": "17:12",
+      "d": "LOS ALMENDROS 2915 EDIF. A DEPTO 23, QUILPUE",
+      "e": "Pendiente",
+      "tec": "LUIS CASTRO TORRES",
+      "visitas": 1,
+      "ult_fecha": "11-11-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3OYAZ8KA",
       "cat": "Alta 1 Play",
       "f": "13-16",
@@ -22444,7 +22456,7 @@
       "o": "1-3OUMXVL6",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "17:34",
       "d": "JULIO VELASCO 1268, QUILPUE",
       "e": "Pendiente",
       "tec": "MARCO PEREZ G",
@@ -22465,22 +22477,10 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OYQ5JES",
-      "cat": "Alta 1 Play",
-      "f": "13-16",
-      "hi": "15:17",
-      "d": "PJE SOTAQUI 01163, QUILPUE",
-      "e": "Pendiente",
-      "tec": "SAMUEL FERNANDEZ VIDAL",
-      "visitas": 2,
-      "ult_fecha": "09-11-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OVF3Y8C",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:06",
+      "hi": "16:00",
       "d": "ANTOFAGASTA 01733, QUILPUE",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -22504,7 +22504,7 @@
       "o": "1-3OYV20NM",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:21",
+      "hi": "15:47",
       "d": "NUEVA ZELANDIA 151, QUILPUE",
       "e": "Pendiente",
       "tec": "SEBASTIAN DOSSOW A",
@@ -22525,16 +22525,16 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3OYZ2361",
-      "cat": "Migración 1 Play",
-      "f": "16-19",
-      "hi": "16:59",
-      "d": "LOS ALMENDROS 2915 EDIF. A DEPTO 23, QUILPUE",
-      "e": "Pendiente",
+      "o": "1-3OYQ5JES",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "14:46",
+      "d": "PJE SOTAQUI 01163, QUILPUE",
+      "e": "en ruta",
       "tec": "YENDER BOSCAN CADENAS",
-      "visitas": 1,
-      "ult_fecha": "11-11-2026",
-      "ult_cierre": "Cliente reagenda"
+      "visitas": 2,
+      "ult_fecha": "09-11-2026",
+      "ult_cierre": "Sin moradores"
      }
     ],
     "reagendadas": [
@@ -22562,5 +22562,5 @@
    }
   }
  },
- "generado": "11-11-2026 14:20"
+ "generado": "11-11-2026 14:30"
 }
