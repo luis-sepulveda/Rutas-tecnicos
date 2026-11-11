@@ -21776,11 +21776,11 @@ function anComPintar(){
     return '<tr' + (tot ? ' class="tot"' : (par ? ' class="par"' : '')) + '><td>' + (tot ? 'Total' : '<b>' + escR(nom) + '</b>') + '</td>'
       + '<td><b>' + ls.length + '</b></td>'
       + '<td>' + P2(100 * ls.length / N) + '%</td>'
-      + '<td>' + s.vis + (s.ab || canc ? '<small>' + (s.ab ? s.ab + ' por cerrar' : '') + (s.ab && canc ? ' · ' : '') + (canc ? canc + ' canc./susp.' : '') + '</small>' : '') + '</td>'
-      + '<td>' + s.co + '</td>'
+      + '<td><b style="color:#15803d">' + s.vis + '</b>' + (s.ab || canc ? '<small>' + (s.ab ? s.ab + ' por cerrar' : '') + (s.ab && canc ? ' · ' : '') + (canc ? canc + ' canc./susp.' : '') + '</small>' : '') + '</td>'
+      + '<td><b style="color:#1d4ed8">' + s.co + '</b></td>'   /* (11-11-2026) Luis: "visitadas en verde, completadas en azul, derivadas en rojo" */
       + '<td>' + (s.comp === null ? '–' : '<span class="ac-bar"><i style="width:' + s.comp + '%;background:' + anComC(s.comp) + '"></i></span><b style="color:' + anComC(s.comp) + '">' + P2(s.comp) + '%</b>'
           + (s.g ? '<small class="sg">sin GSA ' + P2(s.compSG) + '% · ' + s.g + ' GSA</small>' : '')) + '</td>'
-      + '<td>' + s.nr + '</td>'
+      + '<td><b style="color:#b91c1c">' + s.nr + '</b></td>'
       + '<td>' + (der === null ? '–' : '<b style="color:' + anComC(der > metaDer ? 0 : 100) + '">' + P2(der) + '%</b>') + '</td></tr>';
   };
   if(AN_COM_EST === 'c'){
