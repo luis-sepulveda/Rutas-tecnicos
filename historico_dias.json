@@ -21823,16 +21823,16 @@
    }
   },
   "11-11-2026": {
-   "hasta": "15:10",
+   "hasta": "15:25",
    "actividades": 144,
    "tecnicos": 32,
    "estados": {
-    "Completado": 56,
-    "Iniciado": 24,
+    "Completado": 59,
+    "Iniciado": 22,
     "Pendiente": 43,
-    "No Realizada": 10,
+    "No Realizada": 11,
+    "en ruta": 1,
     "Cancelado": 5,
-    "en ruta": 3,
     "Suspendido": 3
    },
    "rgu": 203.7,
@@ -21908,7 +21908,7 @@
       "f": "13-16",
       "hi": "15:04",
       "d": "PAUL HARRIS 37 CASA 1, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OZ0EDVJ",
@@ -21984,7 +21984,7 @@
      },
      {
       "o": "1-3OY8F9Q0",
-      "tec": "GEEYSER PEREZ O",
+      "tec": "FELIPE SILVA R",
       "cat": "Reparación",
       "f": "13-16",
       "hi": "13:53",
@@ -22002,7 +22002,7 @@
      },
      {
       "o": "1-3OYUM0B5",
-      "tec": "JUAN ARRIAGADA C",
+      "tec": "EDGAR VALERO C",
       "cat": "Upgrade promoción",
       "f": "13-16",
       "hi": "15:37",
@@ -22020,7 +22020,7 @@
      },
      {
       "o": "1-3OY0F72I",
-      "tec": "DANIEL NAVARRETE E",
+      "tec": "SAMUEL FERNANDEZ VIDAL",
       "cat": "Reparación",
       "f": "13-16",
       "hi": "14:38",
@@ -22038,7 +22038,7 @@
      },
      {
       "o": "1-3OYO328D",
-      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "tec": "JOEL GUSTAVE GUSTA",
       "cat": "Reparación",
       "f": "13-16",
       "hi": "13:50",
@@ -22074,12 +22074,12 @@
      },
      {
       "o": "1-3OYB22C9",
-      "tec": "RAFAEL VARGAS B",
+      "tec": "ANTONHY MORALES MENDOZA",
       "cat": "Upgrade promoción",
       "f": "13-16",
       "hi": "13:00",
       "d": "PJE CHERCAN 2745, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OYL50H5",
@@ -22092,7 +22092,7 @@
      },
      {
       "o": "1-3OYCGS8Z",
-      "tec": "EDGAR VALERO C",
+      "tec": "LUIS GATICA DAVILA",
       "cat": "Alta 2 Play",
       "f": "16-19",
       "hi": "16:35",
@@ -22110,7 +22110,7 @@
      },
      {
       "o": "1-3OY8N9GB",
-      "tec": "KEVIN TAPIA RETAMAL",
+      "tec": "LEONEL HERNÁNDEZ OJE",
       "cat": "Alta 2 Play",
       "f": "16-19",
       "hi": "17:00",
@@ -22132,39 +22132,15 @@
       "ult_cierre": "Falla Masiva"
      },
      {
-      "o": "1-3OSMN3DT",
-      "cat": "Migración 2 Play",
-      "f": "16-19",
-      "hi": "16:49",
-      "d": "CONDELL SUR 01565 CASA G, QUILPUE",
-      "e": "Pendiente",
-      "tec": "ALEXIS JARA",
-      "visitas": 5,
-      "ult_fecha": "03-11-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OY6CV4O",
+      "o": "1-3OVF3Y8C",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:03",
-      "d": "MARGA MARGA 600, VILLA ALEMANA",
+      "hi": "16:43",
+      "d": "ANTOFAGASTA 01733, QUILPUE",
       "e": "Pendiente",
-      "tec": "ALFREDO ALCAYAGA F",
-      "visitas": 7,
-      "ult_fecha": "10-11-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OY43MHO",
-      "cat": "Reparación",
-      "f": "16-19",
-      "hi": "17:28",
-      "d": "LUIS URIBE 150 CASA 27, QUILPUE",
-      "e": "Pendiente",
-      "tec": "ANTONHY MORALES MENDOZA",
+      "tec": "ALEXIS JARA",
       "visitas": 2,
-      "ult_fecha": "20-08-2026",
+      "ult_fecha": "06-11-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -22178,6 +22154,18 @@
       "visitas": 1,
       "ult_fecha": "10-11-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OXI93VY",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "18:45",
+      "d": "AVENIDA BELLOTO 421, QUILPUE",
+      "e": "Pendiente",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "visitas": 1,
+      "ult_fecha": "09-11-2026",
+      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3OVM543Q",
@@ -22207,7 +22195,7 @@
       "o": "1-3OYCWGR2",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:02",
+      "hi": "16:54",
       "d": "MENA 1695, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
@@ -22216,28 +22204,28 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3OY0F72I",
-      "cat": "Reparación",
-      "f": "13-16",
-      "hi": "15:55",
-      "d": "LAS BARRANCAS 2581 EDIF. B DEPTO 101, QUILPUE",
-      "e": "Pendiente",
-      "tec": "DANIEL NAVARRETE E",
-      "visitas": 1,
-      "ult_fecha": "10-11-2026",
-      "ult_cierre": "NAP Problema niveles PO"
-     },
-     {
       "o": "1-3OOPL8R8",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "17:03",
+      "hi": "16:00",
       "d": "EL ALBA 1183 EDIF. B-36 DEPTO 303, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
       "visitas": 2,
       "ult_fecha": "28-10-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OUMXVL6",
+      "cat": "Migración 1 Play",
+      "f": "16-19",
+      "hi": "18:41",
+      "d": "JULIO VELASCO 1268, QUILPUE",
+      "e": "Pendiente",
+      "tec": "DANIEL NAVARRETE E",
+      "visitas": 1,
+      "ult_fecha": "05-11-2026",
+      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3OY6J7GE",
@@ -22262,18 +22250,6 @@
       "visitas": 2,
       "ult_fecha": "28-08-2026",
       "ult_cierre": "Clte desiste motivo comercial"
-     },
-     {
-      "o": "1-3OY1RD7D",
-      "cat": "Reparación",
-      "f": "13-16",
-      "hi": "16:34",
-      "d": "LAS BARRANCAS 2581 EDIF. B DEPTO 401, QUILPUE",
-      "e": "Pendiente",
-      "tec": "EDGAR VALERO C",
-      "visitas": 1,
-      "ult_fecha": "10-11-2026",
-      "ult_cierre": "NAP Problema niveles PO"
      },
      {
       "o": "1-3OY5WLRV",
@@ -22303,7 +22279,7 @@
       "o": "1-3OXFWG8T",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "18:05",
+      "hi": "16:23",
       "d": "SEXTA 0437, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "GEEYSER PEREZ O",
@@ -22322,6 +22298,18 @@
       "visitas": 2,
       "ult_fecha": "10-11-2026",
       "ult_cierre": "Falla Masiva"
+     },
+     {
+      "o": "1-3OYO328D",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "16:21",
+      "d": "LOS ANDES 235, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "visitas": 1,
+      "ult_fecha": "11-11-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OVIIYUY",
@@ -22351,7 +22339,7 @@
       "o": "1-3OYQI9N5",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:56",
+      "hi": "15:35",
       "d": "AV LOS CARRERA 301, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -22370,6 +22358,18 @@
       "visitas": 1,
       "ult_fecha": "10-11-2026",
       "ult_cierre": "Sin apoyo vivienda-Pierrack"
+     },
+     {
+      "o": "1-3OY1RD7D",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "16:03",
+      "d": "LAS BARRANCAS 2581 EDIF. B DEPTO 401, QUILPUE",
+      "e": "Pendiente",
+      "tec": "JOSE PEREZ RANGEL",
+      "visitas": 1,
+      "ult_fecha": "10-11-2026",
+      "ult_cierre": "NAP Problema niveles PO"
      },
      {
       "o": "1-3OV159SV",
@@ -22399,13 +22399,25 @@
       "o": "1-3OYN5GXB",
       "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "17:22",
+      "hi": "17:33",
       "d": "PJE CASTILLA 0323, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JUAN ARRIAGADA C",
       "visitas": 1,
       "ult_fecha": "20-10-2026",
       "ult_cierre": "Evento Contingencia"
+     },
+     {
+      "o": "1-3OY43MHO",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "16:39",
+      "d": "LUIS URIBE 150 CASA 27, QUILPUE",
+      "e": "Pendiente",
+      "tec": "LEONEL HERNÁNDEZ OJE",
+      "visitas": 2,
+      "ult_fecha": "20-08-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OY8BMZX",
@@ -22435,7 +22447,7 @@
       "o": "1-3OYZ2361",
       "cat": "Migración 1 Play",
       "f": "16-19",
-      "hi": "16:37",
+      "hi": "16:43",
       "d": "LOS ALMENDROS 2915 EDIF. A DEPTO 23, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS CASTRO TORRES",
@@ -22444,22 +22456,10 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3OXI93VY",
-      "cat": "Modificación de Servicio",
-      "f": "16-19",
-      "hi": "19:22",
-      "d": "AVENIDA BELLOTO 421, QUILPUE",
-      "e": "Pendiente",
-      "tec": "LUIS CASTRO TORRES",
-      "visitas": 1,
-      "ult_fecha": "09-11-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
       "o": "1-3OYAZ8KA",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:38",
+      "hi": "15:39",
       "d": "LOS LUNES 028 CASA B, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
@@ -22468,16 +22468,28 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OUMXVL6",
-      "cat": "Migración 1 Play",
+      "o": "1-3OSMN3DT",
+      "cat": "Migración 2 Play",
       "f": "16-19",
-      "hi": "17:34",
-      "d": "JULIO VELASCO 1268, QUILPUE",
+      "hi": "17:29",
+      "d": "CONDELL SUR 01565 CASA G, QUILPUE",
       "e": "Pendiente",
-      "tec": "MARCO PEREZ G",
-      "visitas": 1,
-      "ult_fecha": "05-11-2026",
-      "ult_cierre": "Cliente reagenda"
+      "tec": "LUIS MARTIN NUÑEZ",
+      "visitas": 5,
+      "ult_fecha": "03-11-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OY6CV4O",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "17:02",
+      "d": "MARGA MARGA 600, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "MATIAS APELEO APELEO",
+      "visitas": 7,
+      "ult_fecha": "10-11-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OY9JCAY",
@@ -22492,28 +22504,16 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OYO328D",
+      "o": "1-3OY0F72I",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:58",
-      "d": "LOS ANDES 235, VILLA ALEMANA",
+      "hi": "15:43",
+      "d": "LAS BARRANCAS 2581 EDIF. B DEPTO 101, QUILPUE",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
       "visitas": 1,
-      "ult_fecha": "11-11-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OVF3Y8C",
-      "cat": "Alta 1 Play",
-      "f": "16-19",
-      "hi": "17:31",
-      "d": "ANTOFAGASTA 01733, QUILPUE",
-      "e": "Pendiente",
-      "tec": "SAMUEL FERNANDEZ VIDAL",
-      "visitas": 2,
-      "ult_fecha": "06-11-2026",
-      "ult_cierre": "Sin moradores"
+      "ult_fecha": "10-11-2026",
+      "ult_cierre": "NAP Problema niveles PO"
      },
      {
       "o": "1-3OVPBMVA",
@@ -22531,7 +22531,7 @@
       "o": "1-3OYV20NM",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "16:29",
+      "hi": "16:50",
       "d": "NUEVA ZELANDIA 151, QUILPUE",
       "e": "Pendiente",
       "tec": "SEBASTIAN DOSSOW A",
@@ -22589,5 +22589,5 @@
    }
   }
  },
- "generado": "11-11-2026 15:10"
+ "generado": "11-11-2026 15:25"
 }
