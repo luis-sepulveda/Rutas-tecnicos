@@ -18940,6 +18940,10 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarM
   #anDet .an-mdtop h2 { margin:0; font-size:22px; display:flex; align-items:center; gap:10px; color:#0f172a; }
   #anDet .an-mdtop h2 small { font-size:13px; color:#64748b; font-weight:400; }
   #anDet .an-x { background:#f1f5f9; border:1px solid #cbd5e1; color:#334155; border-radius:8px; padding:6px 12px; cursor:pointer; font-size:14px; }
+  /* (11-11-2026) aviso en los botones "Mapa y red" de Día en curso (mismo latido rojo que el boton Red del mapa) */
+  #anDet .an-x.an-alerta { background:#dc2626; border-color:#fca5a5; color:#fff; font-weight:700; animation:redLate 1.2s ease-in-out infinite; }
+  #anDet .an-x.an-alerta.an-conf { background:#7f1d1d; animation-duration:.8s; }
+  #anDet .an-x .an-bdg { display:inline-block; margin-left:4px; padding:0 6px; border-radius:9px; background:#fff; color:#b91c1c; font-size:12px; font-weight:800; }
   #anDet .an-tabs { display:flex; gap:6px; margin:12px 0; flex-wrap:wrap; }
   /* (06-11-2026) periodos (Hoy / Semana / Mes) en la linea del titulo del detalle */
   #anDet .an-mdtop-per { margin-bottom:12px; }
@@ -20477,8 +20481,16 @@ function anDiaPintar(m){
     + '</div>' + anDiaLstHtml()
     + '<div class="an-dia-map"><span>Mapa y red:</span>'
     + '<button class="an-x" onclick="anDiaMapa(\'rutas\')" title="Cierra Mi análisis y abre el mapa con las rutas de los técnicos">🗺 Rutas ›</button>'
-    + '<button class="an-x" onclick="anDiaIr(toggleRed)" title="Reparaciones del día agrupadas por NAP y nodo">🔌 Nodos y NAP ›</button>'
-    + '<button class="an-x" onclick="anDiaIr(abrirVistaRed)" title="Mapa de la red">🛰 Mapa de red ›</button></div>';
+    /* (11-11-2026) Luis: "estos botones ya no me avisan cuando algo pasa". Llevan el MISMO aviso que los botones del mapa:
+       Nodos y NAP = numero de grupos en rojo (gruposRojos, como #btnRed) y late en rojo; Mapa de red = late si hay
+       posible falla masiva (alertaRedMasiva, como el boton Red del mapa), mas oscuro y rapido si esta confirmada. */
+    + (function(){
+        let nR = 0, A = { n:0, conf:0, txt:[] };
+        try { nR = gruposRojos(); } catch(e){}
+        try { A = alertaRedMasiva(); } catch(e){}
+        return '<button class="an-x' + (nR ? ' an-alerta' : '') + '" onclick="anDiaIr(toggleRed)" title="' + (nR ? nR + ' grupo' + (nR > 1 ? 's' : '') + ' en rojo (3 o más reparaciones en el mismo NAP o nodo)' : 'Reparaciones del día agrupadas por NAP y nodo') + '">🔌 Nodos y NAP' + (nR ? ' <span class="an-bdg">' + nR + '</span>' : '') + ' ›</button>'
+          + '<button class="an-x' + (A.n ? ' an-alerta' : '') + (A.conf ? ' an-conf' : '') + '" onclick="anDiaIr(abrirVistaRed)" title="' + escR(A.n ? 'Posible falla masiva:\n' + A.txt.join('\n') : 'Mapa de la red') + '">🛰 Mapa de red' + (A.n ? ' <span class="an-bdg">' + (A.conf ? '¡falla masiva!' : 'posible falla') + '</span>' : '') + ' ›</button></div>';
+      })();
   /* 2. una tarjeta por actividad (mismas cuentas que la pantalla principal, actsHoyHtml) */
   const ORD = ['Migraciones','Altas','Reparaciones','Modificaciones','Otras'];
   const COL = { Migraciones:'#3b82f6', Altas:'#14b8a6', Reparaciones:'#f97316', Modificaciones:'#a78bfa', Otras:'#94a3b8' };
