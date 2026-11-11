@@ -1,147 +1,75 @@
 {
-  "actualizado": "2026-11-10T20:17:28",
+  "actualizado": "2026-11-11T09:44:28",
   "resumen": {
-    "sin informacion": 2,
-    "reagendada": 4,
-    "cancelada": 2
+    "reagendada": 1,
+    "sin informacion": 1
   },
   "estados": {
-    "1-3OXB9Q2C": {
-      "tec": "ALFREDO ALCAYAGA F",
+    "1-3OYEQ5C0": {
+      "tec": "FELIPE SILVA R",
+      "cat": "Alta 2 Play",
+      "franja_original": "10-13",
+      "d": "LAS AMERICAS 1015 EDIF. 18 DEPTO 5, VILLA ALEMANA",
+      "estado": "reagendada",
+      "color": "rgb(255, 170, 170)",
+      "detalle": "1-3OYEQ5C0 - 10-13-Alta-2 Play-LAS AMERICAS 1015 EDIF. 18 DEPTO 5Jue, 12 Nov",
+      "franja_nueva": "10-13"
+    },
+    "1-3OY26B93": {
+      "tec": "JOSE SALAS MEDINA",
       "cat": "Alta 1 Play",
-      "franja_original": "13-16",
-      "d": "LO GODOY 25 CASA 9, VILLA ALEMANA",
+      "franja_original": "10-13",
+      "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
       "estado": "sin informacion",
       "nota": "la OT ya no existe en TOA",
       "contexto": {
-        "buscado": "LO GODOY 25",
+        "buscado": "AVENIDA BALMACEDA 171",
         "aviso": "historial de la direccion, NO es el estado de esta orden",
         "filas": [
           {
             "estado": "no realizada",
             "color": "rgb(96, 206, 206)",
-            "ot": "1-3OX6YT6C",
+            "ot": "1-3OXD57OU",
             "franja": "13-16",
-            "texto": "1-3OX6YT6C - 13-16-Alta-1 Play-LO GODOY 25 CASA 9Lun, 9 Nov"
-          }
-        ]
-      }
-    },
-    "1-3OV2HAGS": {
-      "tec": "CESAR MENA OLIVEROS",
-      "cat": "Modificación de Servicio",
-      "franja_original": "16-19",
-      "d": "MANUEL BULNES 969, QUILPUE",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3OV2HAGS - 16-19-Modificación de Servicio-Modificación-MANUEL BULNES 969Vie, 13 Nov",
-      "franja_nueva": "16-19"
-    },
-    "1-3OXYRD5Y": {
-      "tec": "JOEL GUSTAVE GUSTA",
-      "cat": "Reparación",
-      "franja_original": "13-16",
-      "d": "DINAMARCA 1451 EDIF. 8 DEPTO 202, VILLA ALEMANA",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3OXYRD5Y - 10-13-Reparación-3 Play Sin Servicio-DINAMARCA 1451 EDIF. 8 DEPTO 202Jue, 12 Nov",
-      "franja_nueva": "10-13"
-    },
-    "1-3OY265ZA": {
-      "tec": "JORGE PEZOA VICUÑA",
-      "cat": "Alta 1 Play",
-      "franja_original": "16-19",
-      "d": "AV VICEPRESIDENTE BDO LEIGHTON 551 CASA A DEPTO A35, VILLA ALEMANA",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3OY265ZA - 13-16-Alta-1 Play-AV VICEPRESIDENTE BDO LEIGHTON 551 CASA A DEPTO A35Mie, 11 Nov",
-      "franja_nueva": "13-16"
-    },
-    "1-3OY0SZNH": {
-      "tec": "JOSE ROJO A",
-      "cat": "Reparación",
-      "franja_original": "13-16",
-      "d": "AV LOS CARRERA 01074 EDIF. 1 DEPTO 1001, QUILPUE",
-      "estado": "cancelada",
-      "color": "rgb(128, 255, 128)",
-      "detalle": "1-3OY0SZNH - 10-13-Reparación-1 Play Servicio Degradado-AV LOS CARRERA 01074 EDIF. 1 DEPTO 1001Jue, 12 Nov",
-      "franja_nueva": "10-13"
-    },
-    "1-3OUI9854": {
-      "tec": "MARCELO GÓMEZ GÓME",
-      "cat": "Alta 1 Play",
-      "franja_original": "13-16",
-      "d": "HIPODROMO(NODO 77) 53 EDIF. 10 DEPTO 1054, VILLA ALEMANA",
-      "estado": "sin informacion",
-      "nota": "la OT ya no existe en TOA",
-      "contexto": {
-        "buscado": "HIPODROMO(NODO 77) 53",
-        "aviso": "historial de la direccion, NO es el estado de esta orden",
-        "filas": [
-          {
-            "estado": "completada",
-            "color": "rgb(121, 182, 235)",
-            "ot": "1-3OKEN3CE",
-            "franja": "10-13",
-            "texto": "1-3OKEN3CE - 10-13-Alta-1 Play-HIPODROMO(NODO 77) 53 EDIF. 10 DEPTO 1024Vie, 23 Oct"
-          },
-          {
-            "estado": "cancelada",
-            "color": "rgb(128, 255, 128)",
-            "ot": "1-3OHRQVL9",
-            "franja": "10-13",
-            "texto": "1-3OHRQVL9 - 10-13-Alta-1 Play-HIPODROMO(NODO 77) 53 EDIF. 5 DEPTO 532Mar, 20 Oct"
-          },
-          {
-            "estado": "completada",
-            "color": "rgb(121, 182, 235)",
-            "ot": "1-3OI2LZOY",
-            "franja": "13-16",
-            "texto": "1-3OI2LZOY - 13-16-Alta-1 Play-HIPODROMO(NODO 77) 53 EDIF. 5 DEPTO 532Mar, 20 Oct"
+            "texto": "1-3OXD57OU - 13-16-Alta-1 Play-AVENIDA BALMACEDA 171Mar, 10 Nov"
           },
           {
             "estado": "no realizada",
             "color": "rgb(96, 206, 206)",
-            "ot": "1-3OFI9KO3",
+            "ot": "1-3OX2KKUB",
             "franja": "13-16",
-            "texto": "1-3OFI9KO3 - 13-16-Alta-1 Play-HIPODROMO(NODO 77) 53 EDIF. 5 DEPTO 532Sab, 17 Oct"
+            "texto": "1-3OX2KKUB - 13-16-Alta-1 Play-AVENIDA BALMACEDA 171Lun, 9 Nov"
           },
           {
-            "estado": "completada",
-            "color": "rgb(121, 182, 235)",
-            "ot": "1-3NPIFKOT",
-            "franja": "13-16",
-            "texto": "1-3NPIFKOT - 13-16-Reparación-2 Play Servicio Degradado-HIPODROMO(NODO 77) 53 EDIF. 9 DEPTO 914Lun, 7 Sep"
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3OWBPSO6",
+            "franja": "10-13",
+            "texto": "1-3OWBPSO6 - 10-13-Alta-1 Play-AVENIDA BALMACEDA 171Lun, 9 Nov"
           },
           {
-            "estado": "completada",
-            "color": "rgb(121, 182, 235)",
-            "ot": "1-3N5S5E6T",
-            "franja": "16-19",
-            "texto": "1-3N5S5E6T - 16-19-Alta-1 Play-HIPODROMO(NODO 77) 53 EDIF. 1 DEPTO 123Mie, 12 Ago"
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3OW45YFJ",
+            "franja": "13-16",
+            "texto": "1-3OW45YFJ - 13-16-Alta-1 Play-AVENIDA BALMACEDA 171Sab, 7 Nov"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3OVDPTDP",
+            "franja": "10-13",
+            "texto": "1-3OVDPTDP - 10-13-Alta-1 Play-AVENIDA BALMACEDA 171Sab, 7 Nov"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3OTC59LC",
+            "franja": "10-13",
+            "texto": "1-3OTC59LC - 10-13-Alta-1 Play-AVENIDA BALMACEDA 171Vie, 6 Nov"
           }
         ]
       }
-    },
-    "1-3OX6NR0E": {
-      "tec": "MARCO PEREZ G",
-      "cat": "Reparación",
-      "franja_original": "13-16",
-      "d": "MAGISTERIO ORIENTE 598, VILLA ALEMANA",
-      "estado": "cancelada",
-      "color": "rgb(128, 255, 128)",
-      "detalle": "1-3OX6NR0E - 13-16-Reparación-1 Play Sin Servicio-MAGISTERIO ORIENTE 598Mie, 11 Nov",
-      "franja_nueva": "13-16"
-    },
-    "1-3OY1N788": {
-      "tec": "RAFAEL VARGAS B",
-      "cat": "Alta 1 Play",
-      "franja_original": "16-19",
-      "d": "PLUTON 0482, QUILPUE",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3OY1N788 - 10-13-Alta-1 Play-PLUTON 0482Mie, 11 Nov",
-      "franja_nueva": "10-13"
     }
   }
 }
