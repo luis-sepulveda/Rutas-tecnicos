@@ -8016,7 +8016,7 @@ function renderReitTec(){
     + '<span class="fchip"><b>' + g.nRep + '</b> reparaciones</span>'
     + (g.nFort ? '<span class="fchip"><b>' + g.nFort + '</b> en colegios con Fortinet</span>' : '')
     + (totComp ? '<span class="fchip">Equipo: <b>' + gP.nTrab + ' de ' + totComp + ' · ' + pctReit(gP.nTrab, totComp)
-        + '</b> (meta ' + String(META_REIT).replace('.', ',') + '%)</span>' : '');
+        + '</b>' + (CQ_CON_META ? ' (meta ' + String(META_REIT).replace('.', ',') + '%)' : '') + '</span>' : '');   /* (12-11-2026, 11:40) sin la meta 5,32 (CQ_CON_META) */
   intro.innerHTML = 'Reiterados de <b>' + nomPer + '</b>, contados al técnico que hizo el <b>trabajo anterior</b> '
     + '(el alta, traslado, migración o reparación), no al que fue a reparar. Presione un técnico para ver el detalle.'
     + (desde ? ' El registro parte el <b>' + escR(desde) + '</b>.' : '')
@@ -8035,7 +8035,7 @@ function renderReitTec(){
       let pct = '';
       if(nc){
         const nr = nP[t.nom] || 0;   /* reiterados hasta el mismo dia que las completadas */
-        const mal = nc >= MIN_COMP_REIT && (100 * nr / nc) > META_REIT;
+        const mal = CQ_CON_META && nc >= MIN_COMP_REIT && (100 * nr / nc) > META_REIT;
         pct = '<span class="rt-pct' + (mal ? ' mal' : '') + (nc < MIN_COMP_REIT ? ' poco' : '') + '">'
           + nr + ' de ' + nc + ' · <b>' + pctReit(nr, nc) + '</b>'
           + (nc < MIN_COMP_REIT ? '<br><small>pocas órdenes</small>' : '') + '</span>';
@@ -8066,8 +8066,8 @@ function renderReitTec(){
     + 'trabajo, cuenta una y las dos se ven en el detalle. Una reparación reagendada cuenta una vez, con el '
     + 'estado en que quedó su último día. Incluye las que quedaron en el bucket o atendió otro técnico. '
     + 'El % es reiterados dividido por las altas, traslados, migraciones y reparaciones que el técnico completó '
-    + 'en Quilpué y Villa Alemana en los mismos días (hasta ayer); en rojo si pasa la meta de '
-    + String(META_REIT).replace('.', ',') + '% con al menos ' + MIN_COMP_REIT + ' completadas. Es la misma fórmula de la '
+    + 'en Quilpué y Villa Alemana en los mismos días (hasta ayer)' + (CQ_CON_META ? '; en rojo si pasa la meta de '
+    + String(META_REIT).replace('.', ',') + '% con al menos ' + MIN_COMP_REIT + ' completadas' : '') + '. Es la misma fórmula de la '
     + 'página de metas (fallas / actividades), pero puede no dar idéntico. '
     + '"Colegio · Fortinet" = en esa dirección se instaló un router Fortinet (plan Fibra Lite Escuelas), según los '
     + 'Pasos de la orden; se reconocen los colegios instalados por Dominion que estén en los export guardados. '
@@ -13392,7 +13392,7 @@ function infTarjetasHtml(){
     /* (REDISEÑO 28-10-2026, 18:10) Luis: Quiebres por tecnico pasa aca; la fila "Tambien" se elimina */
     ['link', URL_ACTIVIDADES + '?t=' + Date.now() + '#quiebres', 'Quiebres por técnico', 'Quiebres de cada técnico en el Dashboard de Actividades'],
     /* (04-11-2026) Calidad del mes: lo completado en un mes con reparacion dentro de 30 dias (bloque CALIDAD DEL MES) */
-    ['fn', 'cqAbrir()', 'Calidad del mes', 'Lo completado en el mes que tuvo reparación dentro de 30 días · meta 5,32%']
+    ['fn', 'cqAbrir()', 'Calidad del mes', 'Lo completado en el mes que tuvo reparación dentro de 30 días']
   ];
   /* (REDISEÑO 28-10-2026, 18:08) Luis: "desentona con todo". Ahora es un bloque
      grande como HOY y MIGRACIONES, con los informes como botones adentro. */
@@ -19214,7 +19214,7 @@ function anPintar(){
        Boton "Informes" que abre un menu con los tres (Calidad 04-11, RGU 05-11, Asistencia 05-11). */
     + '<span class="an-inf"><button class="an-btn inf' + (AN_INF_AB ? ' ab' : '') + '" onclick="anInfToggle(event)" title="Calidad, RGU y Asistencia">📑 Informes ' + (AN_INF_AB ? '▴' : '▾') + '</button>'
     + (AN_INF_AB ? '<span class="an-infm"><small class="an-infh">Mi análisis</small><span class="an-inf3">'
-      + '<button class="an-btn cal" onclick="anInfIr(cqAbrirGerencia)" title="Resumen gerencia de la calidad del mes (meta 5,32%)">🛠 Calidad ›</button>'
+      + '<button class="an-btn cal" onclick="anInfIr(cqAbrirGerencia)" title="Resumen gerencia de la calidad del mes">🛠 Calidad ›</button>'
       + '<button class="an-btn rgu" onclick="anInfIr(rguAbrir)" title="RGU por técnico al día (meta ' + RGU_META + ')">📈 RGU ›</button>'
       + '<button class="an-btn asis" onclick="anInfIr(asAbrir)" title="Marcación de entrada día a día (tope 09:50)">⏰ Asistencia ›</button></span>'
       /* (06-11-2026) Luis: "todos estos botones de informes agrégalos dentro del botón informes" -> los 9 informes del bloque
@@ -19864,6 +19864,7 @@ function anMesPintar(m){
   const y = m.scrollTop, k = AN_DET.mes;
   let h = mesDetalleHtml(k);
   h = h.replace('<button class="ad-volver" onclick="window.PV_MES=null; mdaRepintar(); window.scrollTo(0,0)">← Volver</button>', '');
+  try { h += cqMesSecHtml(k); } catch(e){ console.warn('calidad en el detalle del mes:', e); }   /* (12-11-2026, 12:10) calidad del mes, abajo */
   const chips = anMesesLista().slice().reverse().map(function(x){ return '<span class="an-chip' + (x === k ? ' on' : '') + '" onclick="AN_DET.mes=\'' + x + '\'; window.MDA_FAM=null; anDetPintar(); document.getElementById(\'anDet\').scrollTop=0">' + AN_MES_NOM[+x.slice(5) - 1] + '</span>'; }).join('');
   m.innerHTML = '<div class="an-md an-md-ancho mda-an"><div class="an-mdtop"><h2>📅 Detalle del mes</h2><div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">' + chips
     + '<span class="an-updbox">' + anUpdHtml() + '</span><button class="an-x" onclick="anDetCerrar()">✕ Cerrar</button></div></div>' + h + '</div>';
@@ -19910,7 +19911,7 @@ function AN_INF_PORTADA(){ return [
   ['fn', 'anCerrar(); desdePortada(verReporteRepe)', 'Direcciones ya visitadas', 'Histórico de las casas donde ya se falló antes'],
   ['link', URL_EQUIPO, 'Carga de Play por técnico', 'Si a un técnico le cargan más de un Play que al resto, por supervisor'],
   ['link', URL_ACTIVIDADES + '?t=' + Date.now() + '#quiebres', 'Quiebres por técnico', 'Quiebres de cada técnico en el Dashboard de Actividades'],
-  ['fn', 'cqAbrir()', 'Calidad del mes', 'Lo completado en el mes que tuvo reparación dentro de 30 días · meta 5,32%']
+  ['fn', 'cqAbrir()', 'Calidad del mes', 'Lo completado en el mes que tuvo reparación dentro de 30 días']
 ]; }
 document.addEventListener('click', function(e){
   /* clic fuera del menu Informes: se cierra */
@@ -20767,6 +20768,14 @@ setInterval(function(){ try { anPintar(); anDetPintar(); } catch(e){ console.war
   /* (04-11-2026) clave de Calidad: mismo aspecto que la de Reiterados, encima de MI ANALISIS */
   #cqClave { position:fixed; inset:0; z-index:3800; background:rgba(2,6,23,.72); display:none; align-items:center; justify-content:center; padding:16px; }
   #cqClave.on { display:flex; }
+  /* (12-11-2026, 12:10) calidad dentro del Detalle del mes */
+  .mda-cq { margin-top:14px; background:#fff; border:1px solid #e2e8f0; border-radius:14px; padding:14px 18px; }
+  .mda-cq-t b { font:800 15px 'Archivo',sans-serif; color:#0f172a; } .mda-cq-t small { display:block; color:#64748b; font-size:12px; margin-top:2px; }
+  .mda-cq .cg { border:0; padding:0; margin-top:10px; }
+  .mda-cq .cq-est { margin-top:10px; }
+  .mda-cq-btn { margin-top:10px; border:1px dashed #94a3b8; background:#f8fafc; color:#1e3a5f; border-radius:10px; padding:10px 16px; font:600 13.5px inherit; cursor:pointer; }
+  .mda-cq-btn:hover { background:#eff6ff; border-color:#2563eb; } .mda-cq-btn small { color:#64748b; font-weight:500; }
+  .mda-cq-full { display:block; margin-top:10px; }
   #cqClave .rk-box { background:#fff; color:#0f172a; border-radius:14px; padding:22px 22px 18px; width:min(360px,100%); box-shadow:0 20px 60px rgba(0,0,0,.4); font-family:'DM Sans',system-ui,sans-serif; }
   #cqClave h3 { margin:0 0 4px; font:700 20px 'Archivo',sans-serif; } #cqClave p { margin:0 0 12px; color:#475569; font-size:14px; }
   #cqClave input[type=password] { width:100%; box-sizing:border-box; padding:10px 12px; border:1px solid #cbd5e1; border-radius:9px; font-size:16px; }
@@ -21004,7 +21013,7 @@ function cqPedirClave(){
   d.classList.add('on'); setTimeout(function(){ document.getElementById('cqkIn').focus(); }, 30);
   cqDespertar();
 }
-function cqCerrarClave(){ const d = document.getElementById('cqClave'); if(d) d.classList.remove('on'); CQ_SOLO_GER = false; }
+function cqCerrarClave(){ const d = document.getElementById('cqClave'); if(d) d.classList.remove('on'); CQ_SOLO_GER = false; CQ_DESTINO = null; }
 let CQ_VALIDANDO = false;
 /* (04-11-2026, 18:00) Google se demora en "despertar" si lleva rato sin uso: al abrir la ventana de la clave se le manda
    un aviso (accion=ping, no anota nada) para que ya este despierto cuando se aprieta Entrar. */
@@ -21032,6 +21041,7 @@ async function cqProbarClave2(){
   err.textContent = 'Clave incorrecta.';
   cqOkSesion = true;
   const d = document.getElementById('cqClave'); if(d) d.classList.remove('on');
+  if(CQ_DESTINO === 'mes'){ CQ_DESTINO = null; cqOkSesion = false; if(AN_DET && AN_DET.mes){ AN_DET.cq = true; cqCargar(); anDetPintar(); } return; }
   cqAbrir();
 }
 function cqOlvidarClave(){ try { localStorage.removeItem(CQ_LS); } catch(e){} cqOkSesion = false; }
@@ -21053,6 +21063,38 @@ function cqCerrar(){ document.getElementById('modalCQ').classList.remove('abiert
    Desde INFORMES -> Calidad del mes se sigue abriendo la ventana completa. */
 let CQ_SOLO_GER = false;
 function cqAbrirGerencia(){ CQ_SOLO_GER = true; cqAbrir(); }
+/* ===== CALIDAD DENTRO DEL DETALLE DEL MES (12-11-2026, 12:10) =====
+   Luis: "que la calidad de cada mes se muestre dentro del detalle por meses asi vemos un todo dentro de cada mes ...
+   tal como esta dentro del boton calidad: octubre se mide en noviembre, noviembre se mide en diciembre ... lo que a mi
+   me interesa es el analisis". Al final del Detalle del mes (Mi analisis) va la calidad de LO COMPLETADO en ese mes,
+   con el mismo calculo del boton Calidad (cqCalc) y el analisis del resumen gerencia (cqGerenciaHtml), sin meta
+   (CQ_CON_META). La calidad pide clave: la seccion parte cerrada con un candado; con la clave correcta se abre ahi
+   mismo y queda abierta mientras no se cierre el Detalle del mes (AN_DET.cq). Cambiar de mes no la vuelve a pedir. */
+let CQ_DESTINO = null, CQ_SIN_CAB = false;   // 'mes' = la clave se pidio desde el Detalle del mes
+function cqMesPedir(){ CQ_DESTINO = 'mes'; cqPedirClave(); }
+function cqMesSig(k){ const y = +k.slice(0, 4), m = +k.slice(5, 7); return m === 12 ? (y + 1) + '-01' : y + '-' + String(m + 1).padStart(2, '0'); }
+function cqMesCompleto(k){ CQ_MES = k; CQ_AB = null; CQ_VISTA = 'tec'; CQ_SOLO_GER = false; cqOkSesion = true; cqAbrir(); }
+function cqMesSecHtml(k){
+  const nom = cqNomMes(k), sig = cqNomMes(cqMesSig(k)), hoyM = cqIsoHoy().slice(0, 7);
+  let h = '<div class="mda-cq"><div class="mda-cq-t"><b>🛠 Calidad de lo completado en ' + nom + '</b><small>se mide en ' + sig
+    + ' · trabajos con una reparación en la misma casa dentro de ' + CQ_DIAS + ' días · análisis de los reiterados</small></div>';
+  if(!(AN_DET && AN_DET.cq)) return h + '<button class="mda-cq-btn" onclick="cqMesPedir()">🔒 Ver la calidad de ' + nom + ' <small>(pide la clave)</small></button></div>';
+  if(CQ_J === undefined) cqCargar();
+  if(CQ_J === null) return h + '<div class="cq-est inc">Bajando calidad.json…</div></div>';
+  if(cqMeses().indexOf(k) < 0) return h + '<div class="cq-est inc">Todavía no hay calidad para ' + nom + '.</div></div>';
+  const guard = CQ_MES; let x = '';
+  CQ_MES = k;   /* las funciones de calidad leen el mes de CQ_MES */
+  try {
+    const R = cqCalc(k);
+    if(k === hoyM) x += '<div class="cq-est inc"><b>Este mes todavía no se mide:</b> lo de ' + nom + ' se mide en ' + sig + '. Acá ves cómo viene; los reiterados siguen cayendo hasta el ' + escR(fechaCL(R.cierre)) + '.</div>';
+    else if(!R.cerrado) x += '<div class="cq-est curso"><b>Es la calidad que se está midiendo ahora</b> (en ' + sig + '): se termina de medir el ' + escR(fechaCL(R.cierre)) + '. Todavía pueden caer reparaciones.</div>';
+    if(R.incompleto) x += '<div class="cq-est inc"><b>Mes incompleto:</b> el registro parte el ' + escR(fechaCL(R.registro)) + ', así que faltan reparaciones de antes de esa fecha.</div>';
+    CQ_SIN_CAB = true;
+    try { x += cqGerenciaHtml(R, META_REIT); } finally { CQ_SIN_CAB = false; }
+  } catch(e){ x = '<div class="cq-est inc">No se pudo armar la calidad de ' + nom + '.</div>'; console.warn('cqMesSecHtml:', e); }
+  CQ_MES = guard;
+  return h + x + '<button class="mda-lnk mda-cq-full" onclick="cqMesCompleto(\'' + k + '\')">Ver el análisis completo de ' + nom + ' (todos los reiterados, técnico por técnico, casa por casa) ›</button></div>';
+}
 document.addEventListener('keydown', function(e){ if(e.key === 'Escape'){ const m = document.getElementById('modalCQ'); if(m && m.classList.contains('abierto')) cqCerrar(); } });
 function cqVer(m){ CQ_MES = m; CQ_AB = null; cqPintar(); }
 function cqTec(i){ CQ_AB = CQ_AB === i ? null : i; cqPintar(); }
@@ -21092,8 +21134,8 @@ function cqCargar(){
   CQ_J = null;
   fetch(URL_ACTIVIDADES + 'calidad.json?t=' + Date.now(), { cache:'no-store' })
     .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
-    .then(function(j){ CQ_J = j; cqPintar(); })
-    .catch(function(){ CQ_J = 'error'; cqPintar(); });
+    .then(function(j){ CQ_J = j; cqPintar(); try { if(AN_DET && AN_DET.cq) anDetPintar(); } catch(e){} })
+    .catch(function(){ CQ_J = 'error'; cqPintar(); try { if(AN_DET && AN_DET.cq) anDetPintar(); } catch(e){} });
 }
 function norm2tipo(t){ const u = String(t || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase(); return u.indexOf('alta traslado') === 0 ? 'alta traslado' : u.indexOf('alta') === 0 ? 'alta' : u.indexOf('migra') === 0 ? 'migracion' : u.indexOf('repara') === 0 ? 'reparacion' : u; }
 function cqUsaJson(){ return CQ_J && typeof CQ_J === 'object'; }
@@ -21217,7 +21259,7 @@ function cqPintar(){
       + '<div class="cq-tabs">' + meses.slice(-3).map(function(m){ return '<button class="' + (m === CQ_MES ? 'on' : '') + '" onclick="cqVer(\'' + m + '\')">' + cqNomMes(m, true) + '<small>' + (m === hoyM ? 'se mide en ' + CQ_NOMMES[(+m.slice(5, 7)) % 12] + ' · va armándose' : cqIsoHoy() > cqMasDias(cqFinMes(m), CQ_DIAS) ? 'cerrado' : '● se está midiendo ahora') + '</small></button>'; }).join('') + '</div>';
     cqPonBody(body, cqGerenciaHtml(R, meta)); return; }
   head.innerHTML = '<h2>🛠 Calidad de ' + cqNomMes(CQ_MES) + '<button class="cq-x" onclick="cqCerrar()">✕ Cerrar</button></h2>'
-    + '<p>Trabajos completados en ' + cqNomMes(CQ_MES) + ' (altas, traslados, migraciones y reparaciones) que tuvieron una reparación en la misma casa dentro de ' + CQ_DIAS + ' días · solo cuentan las reparaciones completadas · meta ' + String(meta).replace('.', ',') + '% o menos</p>'
+    + '<p>Trabajos completados en ' + cqNomMes(CQ_MES) + ' (altas, traslados, migraciones y reparaciones) que tuvieron una reparación en la misma casa dentro de ' + CQ_DIAS + ' días · solo cuentan las reparaciones completadas' + (CQ_CON_META ? ' · meta ' + String(meta).replace('.', ',') + '% o menos' : '') + '</p>'
     + '<div class="cq-tabs">' + meses.map(function(m){ const c = cqMasDias(cqFinMes(m), CQ_DIAS), cer = cqIsoHoy() > c, inc = !!R0reg && R0reg > m + '-01';
         return '<button class="' + (m === CQ_MES ? 'on' : '') + '" onclick="cqVer(\'' + m + '\')">' + cqNomMes(m, true) + '<small>' + (inc ? 'incompleto' : cer ? 'cerrado' : m === hoyM ? 'se mide en ' + CQ_NOMMES[(+m.slice(5, 7)) % 12] + ' · va armándose' : '● se está midiendo ahora · cierra el ' + fechaCL(c).slice(0, 5)) + '</small></button>'; }).join('') + '</div>';
   let h = '';
@@ -21237,15 +21279,15 @@ function cqPintar(){
   else if(CQ_J === 'error') h += '<div class="cq-est inc"><b>No bajó calidad.json</b> (falta subirlo a Actividades-diario): se muestra solo Quilpué y Villa Alemana con lo que ven tus export, sin otras comunas ni reparaciones de otras empresas.</div>';
   if(R.sinDatos) h += '<div class="cq-est inc">Bajando datos.json para ver el estado final de cada reparación (las canceladas)… mientras tanto se usa el estado del día en que se anotó.</div>';
   /* tarjetas */
-  const mal = R.p !== null && R.p > meta;
+  const mal = CQ_CON_META && R.p !== null && R.p > meta;
   h += '<div class="cq-kpis">'
-    + '<div class="cq-k big ' + (R.p === null ? '' : mal ? 'mal' : 'ok') + '"><small>Calidad ' + cqNomMes(CQ_MES) + (R.cerrado ? '' : ' · hasta hoy') + '</small><b>' + (R.p === null ? '–' : P2(R.p) + '%') + '</b><span>' + R.n + ' de ' + R.base + ' trabajos con reparación · meta ' + String(meta).replace('.', ',') + '%'
-    + (R.p === null ? '' : mal ? ' · <b style="display:inline;font-size:inherit;color:#b42318">' + P2(R.p - meta) + ' pts sobre la meta</b>' : ' · ' + P2(meta - R.p) + ' pts bajo la meta') + '</span></div>'
+    + '<div class="cq-k big ' + cqCls(R.p, meta) + '"><small>Calidad ' + cqNomMes(CQ_MES) + (R.cerrado ? '' : ' · hasta hoy') + '</small><b>' + (R.p === null ? '–' : P2(R.p) + '%') + '</b><span>' + R.n + ' de ' + R.base + ' trabajos con reparación' + (CQ_CON_META ? ' · meta ' + String(meta).replace('.', ',') + '%' : '')
+    + (R.p === null || !CQ_CON_META ? '' : mal ? ' · <b style="display:inline;font-size:inherit;color:#b42318">' + P2(R.p - meta) + ' pts sobre la meta</b>' : ' · ' + P2(meta - R.p) + ' pts bajo la meta') + '</span></div>'
     + '<div class="cq-k"><small>Completadas en ' + CQ_NOMMES[+CQ_MES.slice(5, 7) - 1] + '</small><b>' + R.base + '</b><span>la base del %</span></div>'
     + '<div class="cq-k"><small>Trabajos con reparación</small><b>' + R.n + '</b><span>' + R.L.reduce(function(a, t){ return a + t.reps.length; }, 0) + ' reparaciones</span></div>'
-    + (function(){ const tope = R.base ? Math.floor(R.base * meta / 100) : null, x = tope === null ? null : tope - R.n;   /* tope = trabajos con reparacion que caben en la meta */
+    + (!CQ_CON_META ? '' : function(){ const tope = R.base ? Math.floor(R.base * meta / 100) : null, x = tope === null ? null : tope - R.n;   /* tope = trabajos con reparacion que caben en la meta */
         return x === null ? '<div class="cq-k"><small>Meta</small><b>–</b></div>' : x >= 0 ? '<div class="cq-k"><small>Para no pasar la meta</small><b>' + x + '</b><span>trabajos con reparación más que aguanta el mes (tope ' + tope + ')</span></div>'
-          : '<div class="cq-k mal"><small>Sobre la meta</small><b>' + (-x) + '</b><span>trabajos con reparación de más (el tope para ' + String(meta).replace('.', ',') + '% es ' + tope + ')</span></div>'; })()
+          : '<div class="cq-k mal"><small>Sobre la meta</small><b>' + (-x) + '</b><span>trabajos con reparación de más (el tope para ' + String(meta).replace('.', ',') + '% es ' + tope + ')</span></div>'; }())
     + '<div class="cq-k"><small>Canceladas</small><b>' + R.canc.length + '</b><span>reparaciones que se cancelaron: no cuentan</span></div></div>';
   /* (04-11-2026) Luis: "en calidad del mes mostrar todos los detalles referente a reiterados" */
   h += '<div class="cq-tabs cq-vis"><button class="' + (CQ_VISTA !== 'det' ? 'on' : '') + '" onclick="cqSetVista(\'tec\')">📊 Resumen y técnicos</button><button class="' + (CQ_VISTA === 'det' ? 'on' : '') + '" onclick="cqSetVista(\'det\')">🔎 Todos los reiterados (' + R.n + ')</button><button class="' + (CQ_VISTA === 'casa' ? 'on' : '') + '" onclick="cqSetVista(\'casa\')">🏠 Casa por casa</button><button class="ger' + (CQ_VISTA === 'ger' ? ' on' : '') + '" onclick="cqSetVista(\'ger\')">📄 Resumen gerencia</button></div>';
@@ -21259,18 +21301,18 @@ function cqPintar(){
   h += '<div class="cq-sec">Por tipo de trabajo<small>completadas de ' + cqNomMes(CQ_MES) + ' y cuántas tuvieron reparación</small></div>'
     + '<table class="cq-t"><thead><tr><th>Trabajo</th><th>Completadas</th><th>Con reparación</th><th>Calidad</th></tr></thead><tbody>'
     + ['Alta', 'Alta Traslado', 'Migración', 'Reparación'].map(function(k){ const n = R.L.filter(function(t){ return t.tipo === k; }).length, c = R.bt[k] || 0, p = c ? 100 * n / c : null;
-        return '<tr><td>' + k + '</td><td>' + (R.sinDatos ? '…' : c) + '</td><td>' + n + '</td><td class="p ' + (p === null ? 'poca' : p > meta ? 'mal' : 'ok') + '">' + (p === null ? '–' : P2(p) + '%') + '</td></tr>'; }).join('')
-    + '<tr class="tot"><td>Total</td><td>' + R.base + '</td><td>' + R.n + '</td><td class="p ' + (R.p === null ? '' : mal ? 'mal' : 'ok') + '">' + (R.p === null ? '–' : P2(R.p) + '%') + '</td></tr></tbody></table>'
+        return '<tr><td>' + k + '</td><td>' + (R.sinDatos ? '…' : c) + '</td><td>' + n + '</td><td class="p ' + (p === null ? 'poca' : cqCls(p, meta)) + '">' + (p === null ? '–' : P2(p) + '%') + '</td></tr>'; }).join('')
+    + '<tr class="tot"><td>Total</td><td>' + R.base + '</td><td>' + R.n + '</td><td class="p ' + cqCls(R.p, meta) + '">' + (R.p === null ? '–' : P2(R.p) + '%') + '</td></tr></tbody></table>'
     + (!R.sinDatos && R.btTot !== R.base ? '<p class="cq-nota">Ojo: por tipo suman ' + R.btTot + ' completadas (datos.json) y el total del registro de Reiterados dice ' + R.base + '. El % total usa ' + R.base + '.</p>' : '');
   h += cqSemanasHtml(R, meta);
   /* por tecnico */
-  h += '<div class="cq-sec">Técnico por técnico<small>el reiterado se le carga al que hizo el trabajo de ' + CQ_NOMMES[+CQ_MES.slice(5, 7) - 1] + ' · toca un técnico para ver sus casas · el color va siempre por el %, aunque tenga pocas completadas</small></div>'
+  h += '<div class="cq-sec">Técnico por técnico<small>el reiterado se le carga al que hizo el trabajo de ' + CQ_NOMMES[+CQ_MES.slice(5, 7) - 1] + ' · toca un técnico para ver sus casas' + (CQ_CON_META ? ' · el color va siempre por el %, aunque tenga pocas completadas' : '') + '</small></div>'
     + '<table class="cq-t"><thead><tr><th>Técnico</th><th>Supervisor</th><th>Completadas</th><th>Con reparación</th><th>Calidad</th><th>Lo que más se repite</th></tr></thead><tbody>';
   R.tecs.forEach(function(o, i){
     /* (09-11-2026) Luis "cambia porfa": sin apagado por pocas ordenes, el color va siempre por el % */ 
-    const poca = false, m = o.p !== null && o.p > meta;
+    const poca = false, m = CQ_CON_META && o.p !== null && o.p > meta;
     h += '<tr class="t' + (m ? ' mal' : '') + '" onclick="cqTec(' + i + ')"><td>' + (CQ_AB === i ? '▾ ' : '▸ ') + escR(derTitulo(o.nom)) + '</td><td><small>' + escR(derTitulo(o.sup || '')) + '</small></td><td>' + o.c + '</td><td>' + o.n + '</td>'
-      + '<td class="p ' + (o.p === null ? 'poca' : poca ? 'poca' : m ? 'mal' : 'ok') + '">' + (o.p === null ? '–' : P2(o.p) + '%') + (poca && o.c ? ' <small>pocas</small>' : '') + '</td><td style="text-align:left"><small>' + escR(o.n ? cqPatron(o) : '') + '</small></td></tr>';
+      + '<td class="p ' + (o.p === null ? 'poca' : poca ? 'poca' : cqCls(o.p, meta)) + '">' + (o.p === null ? '–' : P2(o.p) + '%') + (poca && o.c ? ' <small>pocas</small>' : '') + '</td><td style="text-align:left"><small>' + escR(o.n ? cqPatron(o) : '') + '</small></td></tr>';
     if(CQ_AB === i) h += '<tr class="det"><td colspan="6">' + (o.l.length ? '<table class="cq-d"><thead><tr><th>Trabajo</th><th>Casa</th><th>Reparación</th><th>Días</th><th>Estado de la reparación</th><th>Código</th><th>Quién reparó</th></tr></thead><tbody>'
       + o.l.slice().sort(function(a, b){ return a.fecha.localeCompare(b.fecha); }).map(function(t){ return t.reps.map(function(r, j){
           return '<tr><td>' + (j ? '' : escR(fechaCL(t.fecha)).slice(0, 5) + ' · ' + escR(t.cat || t.tipo) + '<br><small>' + escR(t.ot) + '</small>') + '</td><td>' + (j ? '' : escR(t.dir) + (t.ciu && t.ciu !== 'QUILPUE' && t.ciu !== 'VILLA ALEMANA' ? ' <small>· ' + escR(derTitulo(t.ciu)) + '</small>' : '')) + '</td>'
@@ -21342,7 +21384,7 @@ function cqCorte(tit, sub, k, filas, conBase){
   return '<div class="cq-ct"><div class="cq-ct-t">' + tit + (sub ? '<small>' + sub + '</small>' : '') + '</div><table><tbody>'
     + filas.map(function(f){ const on = k && CQ_F[k] === f[0], pc = conBase && f[2] ? 100 * f[1] / f[2] : null;
         return '<tr class="' + (on ? 'on' : '') + (k ? ' clic' : '') + '"' + (k ? ' onclick="cqF(\'' + k + '\', \'' + String(f[0]).replace(/\\/g, '\\\\').replace(/'/g, "\\'") + '\')"' : '') + '><td>' + escR(f[0]) + '</td><td class="n">' + f[1] + '</td>'
-          + (conBase ? '<td class="n"><small>de ' + (f[2] || 0) + '</small></td><td class="n ' + (pc === null ? '' : pc > META_REIT ? 'mal' : 'ok') + '">' + (pc === null ? '–' : P2(pc) + '%') + '</td>' : '<td class="n"><small>' + P2(tot ? 100 * f[1] / tot : 0) + '%</small></td>') + '</tr>'; }).join('')
+          + (conBase ? '<td class="n"><small>de ' + (f[2] || 0) + '</small></td><td class="n ' + (pc === null ? '' : cqCls(pc, META_REIT)) + '">' + (pc === null ? '–' : P2(pc) + '%') + '</td>' : '<td class="n"><small>' + P2(tot ? 100 * f[1] / tot : 0) + '%</small></td>') + '</tr>'; }).join('')
     + '</tbody></table></div>';
 }
 function cqCuenta(L, fn){ const c = {}; L.forEach(function(t){ [].concat(fn(t)).forEach(function(k){ if(k) c[k] = (c[k] || 0) + 1; }); }); return Object.keys(c).map(function(k){ return [k, c[k]]; }).sort(function(a, b){ return b[1] - a[1] || String(a[0]).localeCompare(String(b[0])); }); }
@@ -21480,6 +21522,14 @@ function cqUlt(t){ return t.reps.slice().sort(function(a, b){ return b.fecha.loc
    cual vienen (una barra por codigo, sin juntar), quien reparo y los tecnicos
    con mas reiterados. Todo del mes elegido y SIN los filtros de las otras
    vistas. Cada trabajo cuenta una vez: su primera reparacion (cqPrim). */
+/* (12-11-2026, 11:30) Luis: "dentro del boton de calidad, elimina lo que indique o muestre el % de calidad referente al 5,32% como meta,
+   solo necesito ver todo el analisis". Con CQ_CON_META = false no sale la meta, ni los pts sobre/bajo, ni el tope, ni quienes cumplen,
+   y los % van en un solo color (antes rojo/verde segun la meta). Para volver a como era: CQ_CON_META = true. */
+var CQ_CON_META = false;
+function cqCls(p, meta){ return !CQ_CON_META || p === null ? '' : p > meta ? 'mal' : 'ok'; }
+function cqCol(p, meta){ return !CQ_CON_META ? '#1e3a5f' : p > meta ? '#dc2626' : '#16a34a'; }
+function cqEsc(p, meta){ return CQ_CON_META ? p / (meta * 2) * 100 : p * 10; }   /* sin meta: barra de 0 a 10% */
+function cqEscTxt(meta){ return CQ_CON_META ? 'La barra llega a la mitad en la meta (' + String(meta).replace('.', ',') + '%).' : 'La barra va de 0 a 10%.'; }
 function cqBarra(p, col){ return '<span class="cg-bar"><i style="width:' + Math.max(0, Math.min(100, p)).toFixed(2) + '%;background:' + col + '"></i></span>'; }
 /* (04-11-2026, 15:35) Luis: al lado del titulo del resumen gerencia, tecnicos que cumplen y no cumplen (cantidad y %),
    mirando el plantel total (rutas.json -> plantel, hoy 37) y los operativos (tecnicos del plantel con al menos un
@@ -21492,6 +21542,7 @@ function cqCumplen(R, meta){
   return { pl: nPl, op: op.length, no: no, siOp: op.length - no, siPl: nPl - no, sinTrab: nPl - op.length };
 }
 function cqCumplenHtml(R, meta){
+  if(!CQ_CON_META) return '';
   const k = cqCumplen(R, meta), pc = function(a, b){ return b ? P2(100 * a / b) + '%' : '–'; };
   const caja = function(tit, tot, si, no, ay){
     return '<span class="cqm-b" title="' + ay + '"><span class="cqm-t">' + tit + ' <b>' + tot + '</b></span>'
@@ -21508,35 +21559,40 @@ function cqCumplenHtml(R, meta){
    cantidad de trabajos completados. El tope del equipo (y de cada supervisor) se calcula sobre su total. */
 function cqGerenciaHtml(R, meta){
   const L = R.L, n = R.n || 0, base = R.base || 0, pc = function(a, b){ return b ? 100 * a / b : 0; };
-  const mal = R.p !== null && R.p > meta, tope = base ? Math.floor(base * meta / 100) : 0;
+  const mal = CQ_CON_META && R.p !== null && R.p > meta, tope = base ? Math.floor(base * meta / 100) : 0;
   const tec20 = R.tecs.filter(function(o){ return o.c >= MIN_COMP_REIT; });
   const sobre = tec20.filter(function(o){ return o.p !== null && o.p > meta; });
   const nS = sobre.reduce(function(a, o){ return a + o.n; }, 0);
   const ajus = n - nS + sobre.reduce(function(a, o){ return a + Math.floor(o.c * meta / 100); }, 0);
   const hoy = cqIsoHoy(), dQ = Math.max(0, Math.round((new Date(+R.cierre.slice(0, 4), +R.cierre.slice(5, 7) - 1, +R.cierre.slice(8, 10)) - new Date(+hoy.slice(0, 4), +hoy.slice(5, 7) - 1, +hoy.slice(8, 10))) / 864e5));
-  const col = function(p){ return p > meta ? '#dc2626' : '#16a34a'; };
+  const col = function(p){ return cqCol(p, meta); };
+  /* (12-11-2026, 12:10) en el Detalle del mes (CQ_SIN_CAB) no va la parte de arriba: titulo con el %, las 3 tarjetas y "¿Como cierra?" */
+  if(CQ_SIN_CAB){ let h = '<div class="cg">' + cqSemanasHtml(R, meta); return cqGerenciaResto(R, meta, h, L, n, base, pc, col, tec20); }
   let h = '<div class="cg"><div class="cg-head"><div><small>Resumen para gerencia · Dominion · Quilpué y Villa Alemana</small><h3>Calidad de ' + cqNomMes(CQ_MES) + '</h3>'
     + '<span>' + (R.cerrado ? 'Mes cerrado el ' + fechaCL(R.cierre) : 'Datos al ' + fechaCL(hoy) + ' · se mide hasta el ' + fechaCL(R.cierre) + ' (faltan ' + dQ + ' días): el % todavía puede subir') + '</span></div>'
-    + '<div class="cg-big ' + (mal ? 'mal' : 'ok') + '"><b>' + (R.p === null ? '–' : P2(R.p) + '%') + '</b><span>meta ' + String(meta).replace('.', ',') + '% o menos · ' + (R.p === null ? '' : mal ? P2(R.p - meta) + ' pts sobre la meta' : P2(meta - R.p) + ' pts bajo la meta') + '</span></div></div>';
+    + '<div class="cg-big ' + cqCls(R.p, meta) + '"><b>' + (R.p === null ? '–' : P2(R.p) + '%') + '</b><span>' + (!CQ_CON_META ? 'trabajos con reparación de los completados' : 'meta ' + String(meta).replace('.', ',') + '% o menos · ' + (R.p === null ? '' : mal ? P2(R.p - meta) + ' pts sobre la meta' : P2(meta - R.p) + ' pts bajo la meta')) + '</span></div></div>';
   /* 1 como vamos */
   h += '<div class="cg-kp"><div><b>' + base + '</b><span>trabajos completados en ' + CQ_NOMMES[+CQ_MES.slice(5, 7) - 1] + '</span></div>'
     + '<div><b>' + n + '</b><span>tuvieron una reparación dentro de ' + CQ_DIAS + ' días</span></div>'
-    + '<div class="' + (n > tope ? 'mal' : 'ok') + '"><b>' + (n > tope ? '+' + (n - tope) : (tope - n)) + '</b><span>' + (n > tope ? 'trabajos con reparación sobre el tope de ' + tope : 'reparaciones más que aguanta (tope ' + tope + ')') + '</span></div>'
+    + (!CQ_CON_META ? '' : '<div class="' + (n > tope ? 'mal' : 'ok') + '"><b>' + (n > tope ? '+' + (n - tope) : (tope - n)) + '</b><span>' + (n > tope ? 'trabajos con reparación sobre el tope de ' + tope : 'reparaciones más que aguanta (tope ' + tope + ')') + '</span></div>')
     + '<div><b>' + P2(pc(L.filter(function(t){ return cqPrim(t).dias <= 7; }).length, n)) + '%</b><span>falló en los primeros 7 días</span></div></div>';
   h += cqCierreHtml(R, meta);   /* 1 (12:20) */
   /* 2 donde se concentra */
-  h += '<div class="cg-sec"><h4>Dónde se concentra</h4><p><b>' + sobre.length + ' de ' + tec20.length + '</b> técnicos (con ' + MIN_COMP_REIT + ' o más trabajos) están sobre la meta y juntan el <b>' + P2(pc(nS, n)) + '%</b> de los reiterados (' + nS + ' de ' + n + '). '
+  if(CQ_CON_META) h += '<div class="cg-sec"><h4>Dónde se concentra</h4><p><b>' + sobre.length + ' de ' + tec20.length + '</b> técnicos (con ' + MIN_COMP_REIT + ' o más trabajos) están sobre la meta y juntan el <b>' + P2(pc(nS, n)) + '%</b> de los reiterados (' + nS + ' de ' + n + '). '
     + 'Si esos técnicos estuvieran justo en la meta, el equipo quedaría en <b class="ok">' + P2(pc(ajus, base)) + '%</b>.</p>'
     + '<div class="cg-row"><span>Técnicos sobre la meta</span>' + cqBarra(pc(nS, n), '#dc2626') + '<b>' + P2(pc(nS, n)) + '%</b></div>'
     + '<div class="cg-row"><span>El resto del equipo</span>' + cqBarra(pc(n - nS, n), '#94a3b8') + '<b>' + P2(pc(n - nS, n)) + '%</b></div></div>';
   h += cqSemanasHtml(R, meta);   /* 2 (12:20) */
+  return cqGerenciaResto(R, meta, h, L, n, base, pc, col, tec20);
+}
+function cqGerenciaResto(R, meta, h, L, n, base, pc, col, tec20){
   /* 3 por supervisor y 4 por tipo */
   const sup = {}; R.tecs.forEach(function(o){ const k = derTitulo(o.sup || 'Sin supervisor'); const s = sup[k] || (sup[k] = { c: 0, n: 0 }); s.c += o.c; s.n += o.n; });
   const tipos = ['Alta', 'Alta Traslado', 'Migración', 'Reparación'].map(function(k){ const x = L.filter(function(t){ return t.tipo === k; }).length; return [k, x, R.bt[k] || 0]; }).filter(function(f){ return f[2]; });
-  const fila = function(nom, x, c, extra){ const p = pc(x, c); return '<tr><td>' + escR(nom) + '</td><td class="n">' + x + ' de ' + c + '</td><td class="n"><b style="color:' + col(p) + '">' + P2(p) + '%</b></td><td class="bb">' + cqBarra(p / (meta * 2) * 100, col(p)) + '</td>' + (extra || '') + '</tr>'; };
+  const fila = function(nom, x, c, extra){ const p = pc(x, c); return '<tr><td>' + escR(nom) + '</td><td class="n">' + x + ' de ' + c + '</td><td class="n"><b style="color:' + col(p) + '">' + P2(p) + '%</b></td><td class="bb">' + cqBarra(cqEsc(p, meta), col(p)) + '</td>' + (extra || '') + '</tr>'; };
   h += '<div class="cg-2"><div class="cg-sec"><h4>Por supervisor</h4><p class="cg-ay">trabajos con reparación de los completados · % de calidad</p><table class="cg-t"><tbody>'   /* (09-11-2026) Luis: "revisa que todo tenga su titulo" */
     + Object.keys(sup).sort(function(a, b){ return pc(sup[b].n, sup[b].c) - pc(sup[a].n, sup[a].c); }).map(function(k){ return fila(k, sup[k].n, sup[k].c); }).join('') + '</tbody></table>'
-    + '<p class="cg-ay">La barra llega a la mitad en la meta (' + String(meta).replace('.', ',') + '%).</p></div>'
+    + '<p class="cg-ay">' + cqEscTxt(meta) + '</p></div>'
     + '<div class="cg-sec"><h4>Por tipo de trabajo</h4><p class="cg-ay">trabajos con reparación de los completados · % de calidad</p><table class="cg-t"><tbody>'
     + tipos.map(function(f){ return fila(f[0], f[1], f[2], '<td class="n"><small>' + P2(pc(f[1], n)) + '% de los reiterados</small></td>'); }).join('') + '</tbody></table></div></div>';
   /* 5 cuando y 7 quien */
@@ -21585,13 +21641,13 @@ function cqCierreHtml(R, meta){
   const P = cqProyeccion(R); if(!P) return '';
   const tope = Math.floor(R.base * meta / 100), q = function(x){ return P2(100 * x / R.base); };
   const llega = 100 * P.hi / R.base <= meta, no = 100 * P.lo / R.base > meta;
-  return '<div class="cg-sec cg-cierre ' + (no ? 'mal' : llega ? 'ok' : 'med') + '"><h4>¿Cómo cierra ' + CQ_NOMMES[+CQ_MES.slice(5, 7) - 1] + '?</h4>'
+  return '<div class="cg-sec cg-cierre ' + (!CQ_CON_META ? '' : no ? 'mal' : llega ? 'ok' : 'med') + '"><h4>¿Cómo cierra ' + CQ_NOMMES[+CQ_MES.slice(5, 7) - 1] + '?</h4>'
     + '<p>Si sigue el ritmo de reparaciones que lleva el mes, ' + cqNomMes(CQ_MES) + ' cerraría el ' + fechaCL(R.cierre) + ' cerca de <b>' + q(P.med) + '%</b> (entre ' + q(P.lo) + '% y ' + q(P.hi) + '%). '
     + 'Todavía hay <b>' + P.abiertos + '</b> trabajos dentro de sus ' + CQ_DIAS + ' días y se esperan unas <b>' + Math.round(P.extra) + '</b> reparaciones más. '
-    + (R.n > tope ? 'Ya va <b>' + (R.n - tope) + ' sobre el tope</b> de ' + tope + ': aunque no caiga ninguna más, cierra sobre la meta.' : 'Para cumplir la meta pueden caer como máximo <b>' + (tope - R.n) + '</b> más.') + '</p>'
-    + '<div class="cg-rng"><span style="left:0;width:' + Math.min(100, 100 * meta / 10) + '%" class="ok"></span><span style="left:' + Math.min(100, 100 * meta / 10) + '%;right:0" class="mal"></span>'
+    + (!CQ_CON_META ? '' : R.n > tope ? 'Ya va <b>' + (R.n - tope) + ' sobre el tope</b> de ' + tope + ': aunque no caiga ninguna más, cierra sobre la meta.' : 'Para cumplir la meta pueden caer como máximo <b>' + (tope - R.n) + '</b> más.') + '</p>'
+    + '<div class="cg-rng">' + (CQ_CON_META ? '<span style="left:0;width:' + Math.min(100, 100 * meta / 10) + '%" class="ok"></span><span style="left:' + Math.min(100, 100 * meta / 10) + '%;right:0" class="mal"></span>' : '<span style="left:0;right:0;background:#e2e8f0"></span>')
     + '<i class="rg" style="left:' + Math.min(100, 10 * 100 * P.lo / R.base) + '%;width:' + Math.max(1, Math.min(100, 10 * 100 * (P.hi - P.lo) / R.base)) + '%"></i>'
-    + '<i class="pt" style="left:' + Math.min(100, 10 * R.p) + '%" title="hoy"></i><b class="mt" style="left:' + (10 * meta) + '%">meta ' + String(meta).replace('.', ',') + '%</b></div>'
+    + '<i class="pt" style="left:' + Math.min(100, 10 * R.p) + '%" title="hoy"></i>' + (CQ_CON_META ? '<b class="mt" style="left:' + (10 * meta) + '%">meta ' + String(meta).replace('.', ',') + '%</b>' : '') + '</div>'
     + '<p class="cg-ay">Escala de 0 a 10%. Punto = hoy (' + P2(R.p) + '%); franja = dónde cerraría. El "ritmo" sale de los trabajos del mismo mes que ya cumplieron cada día.</p></div>';
 }
 /* 2. Semana a semana: calidad segun la semana en que se hizo el trabajo */
@@ -21602,9 +21658,9 @@ function cqSemanasHtml(R, meta){
   const ks = Object.keys(S).sort(); if(!ks.length) return '';
   return '<div class="cg-sec"><h4>Semana a semana</h4><p class="cg-ay">según la semana en que se hizo el trabajo · las semanas que todavía no cumplen ' + CQ_DIAS + ' días pueden subir</p>'
     + ks.map(function(k){ const s = S[k], p = s.c ? 100 * s.n / s.c : 0, lleva = cqDiasEntre(s.d1, hoy), ab = lleva < CQ_DIAS;
-        return '<div class="cg-row cg-sem"><span>Sem ' + derNumSemana(k) + ' <small>' + fechaCL(s.d0).slice(0, 5) + ' al ' + fechaCL(s.d1).slice(0, 5) + '</small></span>' + cqBarra(p / (meta * 2) * 100, p > meta ? '#dc2626' : '#16a34a')
-          + '<b style="color:' + (p > meta ? '#dc2626' : '#16a34a') + '">' + P2(p) + '%</b><small>' + s.n + ' de ' + s.c + (ab ? ' · abierta (' + Math.max(0, lleva) + ' de ' + CQ_DIAS + ' días)' : '') + '</small></div>'; }).join('')
-    + '<p class="cg-ay">La barra llega a la mitad en la meta (' + String(meta).replace('.', ',') + '%).</p></div>';
+        return '<div class="cg-row cg-sem"><span>Sem ' + derNumSemana(k) + ' <small>' + fechaCL(s.d0).slice(0, 5) + ' al ' + fechaCL(s.d1).slice(0, 5) + '</small></span>' + cqBarra(cqEsc(p, meta), cqCol(p, meta))
+          + '<b style="color:' + cqCol(p, meta) + '">' + P2(p) + '%</b><small>' + s.n + ' de ' + s.c + (ab ? ' · abierta (' + Math.max(0, lleva) + ' de ' + CQ_DIAS + ' días)' : '') + '</small></div>'; }).join('')
+    + '<p class="cg-ay">' + cqEscTxt(meta) + '</p></div>';
 }
 /* 3. Alerta temprana: el mes siguiente, que se mide despues */
 function cqAlertaHtml(meta){
@@ -21613,10 +21669,10 @@ function cqAlertaHtml(meta){
   if(!(CQ_J.meses || {})[sig]) return '';
   const N = cqCalcJson(sig), mesG = CQ_MES; CQ_MES = mesG;
   const l = N.tecs.filter(function(o){ return o.n; }).sort(function(a, b){ return b.n - a.n || (b.p || 0) - (a.p || 0); }).slice(0, 10);
-  return '<div class="cg-sec"><h4>Alerta temprana: ' + cqNomMes(sig) + '</h4><p>Lo que se completa en ' + CQ_NOMMES[+sig.slice(5, 7) - 1] + ' se mide recién el mes siguiente, pero ya va en <b style="color:' + ((N.p || 0) > meta ? '#dc2626' : '#16a34a') + '">' + (N.p === null ? '–' : P2(N.p) + '%') + '</b> (' + N.n + ' de ' + N.base + ' trabajos con reparación hasta hoy).'
+  return '<div class="cg-sec"><h4>Alerta temprana: ' + cqNomMes(sig) + '</h4><p>Lo que se completa en ' + CQ_NOMMES[+sig.slice(5, 7) - 1] + ' se mide recién el mes siguiente, pero ya va en <b style="color:' + cqCol(N.p || 0, meta) + '">' + (N.p === null ? '–' : P2(N.p) + '%') + '</b> (' + N.n + ' de ' + N.base + ' trabajos con reparación hasta hoy).'
     + (l.length ? ' Estos técnicos ya tienen reiterados:' : ' Ningún técnico tiene reiterados todavía.') + '</p>'
     + (l.length ? '<table class="cg-t"><tbody>' + l.map(function(o){ const p = o.c ? 100 * o.n / o.c : 0;
-        return '<tr><td>' + escR(derTitulo(o.nom)) + '</td><td><small>' + escR(derTitulo(o.sup || '')) + '</small></td><td class="n">' + o.n + ' de ' + o.c + '</td><td class="n"><b style="color:' + (p > meta ? '#dc2626' : '#16a34a') + '">' + P2(p) + '%</b></td><td><small>' + escR(cqPatron(o)) + '</small></td></tr>'; }).join('') + '</tbody></table>' : '') + '</div>';
+        return '<tr><td>' + escR(derTitulo(o.nom)) + '</td><td><small>' + escR(derTitulo(o.sup || '')) + '</small></td><td class="n">' + o.n + ' de ' + o.c + '</td><td class="n"><b style="color:' + cqCol(p, meta) + '">' + P2(p) + '%</b></td><td><small>' + escR(cqPatron(o)) + '</small></td></tr>'; }).join('') + '</tbody></table>' : '') + '</div>';
 }
 /* 4. Patron: la causa que mas se repite en los reiterados del tecnico */
 function cqPatron(o){
