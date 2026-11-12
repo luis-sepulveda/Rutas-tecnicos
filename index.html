@@ -20790,6 +20790,36 @@ setInterval(function(){ try { anPintar(); anDetPintar(); } catch(e){ console.war
   .cqm-f0 { grid-template-columns:1.5fr 1fr 1fr; margin-top:10px; }
   .cqm-gt td small { color:#64748b; font-size:11px; } .cqm-gt td:first-child { white-space:normal; }
   .mda-cq .cg-row { grid-template-columns:88px minmax(0,1fr) 58px 30px; gap:8px; font-size:13px; }   /* filas de "¿Cuando falla?" dentro de la tarjeta */
+  .cqm-vbt { float:right; display:inline-flex; margin-left:10px; border:1px solid #cbd5e1; border-radius:999px; overflow:hidden; }
+  .cqm-vbt button { border:0; background:#fff; color:#334155; font:600 12.5px inherit; padding:6px 14px; cursor:pointer; } .cqm-vbt button.on { background:#1d4ed8; color:#fff; }
+  .cqm-v2a { grid-template-columns:minmax(0,1fr) minmax(0,2.6fr); margin-top:10px; } .cqm-v2a .cqm-res { margin-top:0; height:100%; box-sizing:border-box; }
+  .cqm-v2r { display:flex; flex-direction:column; gap:8px; min-width:0; }
+  .cqm-viene { background:#f8fafc; border:1px dashed #cbd5e1; border-radius:10px; padding:7px 12px; font-size:13px; color:#334155; }
+  .cqm-v2b { grid-template-columns:minmax(0,1.4fr) minmax(0,1fr); } .cqm-v2 .mda-g { margin-top:10px; margin-bottom:0; }
+  .cqm-v2 .cqm-res ul { font-size:14px; }
+  .cqm-nd.g-ins { background:#ede9fe; color:#5b21b6; } .cqm-nd.g-equ { background:#e0f2fe; color:#075985; } .cqm-nd.g-cli { background:#fef3c7; color:#92400e; }
+  .cqm-nd.g-red { background:#e2e8f0; color:#334155; } .cqm-nd.g-otr { background:#f1f5f9; color:#94a3b8; }
+  .cqm-v2 .cqm-nd { border-left:0 !important; font-weight:700; }
+  .cqm-vacio { font-size:13px; color:#475569; margin:6px 0; }
+  /* (12-11-2026, 14:25) Luis: "se ve como muy blanca": fondo gris azulado detras de las tarjetas, barras de color arriba de cada fila, titulos en azul, encabezados de tabla con fondo */
+  .cqm-v2 { background:#e3e9f2; border-radius:14px; padding:4px 12px 12px; margin-top:10px; }
+  .cqm-v2 .mda-c { border-color:#cfd9e6; box-shadow:0 1px 3px rgba(15,34,54,.08); }
+  .cqm-v2 .mda-c .ct { color:#1e3a8a; }
+  .cqm-v2 .mda-osc .ct { color:#93c5fd; }
+  .cqm-v2 .cqm-res { background:#eaf2ff; border:1px solid #bfdbfe; border-left:6px solid #1d4ed8; }
+  .cqm-v2 .cqm-res ul li::marker { color:#1d4ed8; }
+  .cqm-v2 .cqm-viene { background:#fff7e6; border:1px solid #fcd9a0; color:#7c4a03; }
+  .cqm-v2 .cqm-v2b > .mda-c:first-child { border-top:4px solid #7c3aed; }
+  .cqm-v2 .cqm-v2b > .mda-c:last-child { border-top:4px solid #1d4ed8; }
+  .cqm-v2 > .mda-g:nth-of-type(3) > .mda-c { border-top:4px solid #0ea5e9; }
+  .cqm-v2 > .mda-g:nth-of-type(4) > .mda-c { border-top:4px solid #a855f7; }
+  .cqm-v2 > .mda-g:nth-of-type(5) > .mda-c { border-top:4px solid #14b8a6; }
+  .cqm-v2 .mda-t thead th { background:#eef3f9; color:#334155; padding-top:4px; padding-bottom:4px; }
+  .cqm-v2 .mda-t td b { color:#0f172a; }
+  .cqm-v2 .mda-clk:hover td, .cqm-v2 .cqm-li:hover { background:#e0ecff; }
+  .cqm-v2 .mda-bar { background:#dbe4ef; }
+  .cqm-v2 .cqm-det { background:#fff; border:2px solid #1d4ed8; }
+  @media (max-width:900px){ .cqm-v2a, .cqm-v2b { grid-template-columns:1fr; } }
   .cqm-up { color:#b91c1c; font-weight:700; } .cqm-dn { color:#15803d; font-weight:700; } .cqm-ig { color:#64748b; }
   .cqm-l td, .cqm-l th { text-align:left !important; white-space:normal !important; vertical-align:top; } .cqm-l td.d { text-align:center !important; font-size:14px; }
   .cqm-l td small { color:#64748b; } .cqm-l tr.r2 td { border-top:1px dashed #e2e8f0; }
@@ -21170,16 +21200,50 @@ function cqmGerenteHtml(R, k, filtro){
   /* lo que viene: el mes siguiente */
   const ks2 = cqMesSig(k); let N = null; try { if(cqMeses().indexOf(ks2) >= 0 && cqUsaJson()) N = cqCalc(ks2); } catch(e){}
   const mesN = CQ_NOMMES[+ks2.slice(5, 7) - 1];
+  CQM_VIENE = (N && N.L.length) ? null : '<b>Lo que viene:</b> ' + (k >= cqIsoHoy().slice(0, 7) ? mesN + ' todavía no empieza.' : 'todavía no hay reiterados de ' + mesN + '.');
   if(N && N.L.length){ const tn = N.tecs.filter(function(o){ return o.n; }).sort(function(a, b){ return b.n - a.n; });
     const iN = cqmOp('Lo que ya cae de ' + mesN, function(){ return cqmListaHtml(N.L); });
+    CQM_VIENE = '<b>Lo que viene, ' + mesN + ':</b> ya caen <b>' + N.L.length + '</b> reiterados en ' + N.base + ' trabajos completados' + (tn.length ? ' · ' + tn.slice(0, 3).map(function(o){ return escR(derTitulo(o.nom).split(' ')[0]) + ' ' + o.n; }).join(', ') : '') + ' <span class="cqm-k" onclick="cqmSel(' + iN + ')">ver ›</span>';
     h += '<div class="mda-c"><div class="ct">Lo que viene: ' + mesN + ' <span class="mda-ayu">se mide después, pero ya está cayendo</span></div><div class="big2">' + N.L.length + '</div>'
       + '<div class="s">reiterados en ' + N.base + ' trabajos completados hasta hoy</div><ul class="mda-ul">'
       + tn.slice(0, 4).map(function(o){ return '<li>' + escR(derTitulo(o.nom)) + ' <b>' + o.n + '</b> <small style="color:#94a3b8">' + escR(cqPatron(o)) + '</small></li>'; }).join('') + '</ul>'
       + '<button class="mda-lnk" onclick="cqmSel(' + iN + ')">Ver los ' + N.L.length + ' de ' + mesN + ' ›</button></div>';
-  } else h += '<div class="mda-c"><div class="ct">Lo que viene: ' + mesN + '</div><p class="s">' + (k >= cqIsoHoy().slice(0, 7) ? 'Es el mes en curso.' : 'Todavía no hay reiterados de ' + mesN + '.') + '</p></div>';
+  } else h += '<div class="mda-c"><div class="ct">Lo que viene: ' + mesN + '</div><p class="s">' + (k >= cqIsoHoy().slice(0, 7) ? mesN.charAt(0).toUpperCase() + mesN.slice(1) + ' todavía no empieza: acá aparecerán los reiterados de lo que se complete en ' + mesN + '.' : 'Todavía no hay reiterados de ' + mesN + '.') + '</p></div>';
   return h + '</div>';
 }
 function cqmCambio(a, b){ if(window._cqmSinCambio) return ''; const d = b - a; return d === 0 ? '<span class="cqm-ig">=</span>' : d > 0 ? '<span class="cqm-up">▲ ' + d + '</span>' : '<span class="cqm-dn">▼ ' + (-d) + '</span>'; }
+
+/* ===== VISTA NUEVA (MUESTRA, 12-11-2026, 14:20) =====
+   Luis: "me muestras en un index con un boton por vista". Botones "Vista actual" / "Vista nueva" en la seccion de
+   calidad del Detalle del mes (AN_DET.cqV). La vista nueva reordena las mismas tarjetas (no recalcula nada):
+   1) tarjeta oscura + "Lo principal" en la misma fila, con "Lo que viene" como una linea; 2) "¿Depende de nosotros?"
+   y "Comparado con" lado a lado; 3) tipo, cuando y quien; 4) por que, tecnicos y domicilios; 5) supervisor, semana y
+   nodos. Ademas: pastillas de color por grupo, la causa de cada tecnico aunque sea una sola vez, y "Domicilios"
+   chico cuando ninguno se repite. */
+let CQM_VIENE = null;
+function cqmV2(){ return true; }   /* (12-11-2026, 14:30) Luis eligio la vista nueva: queda fija (sin botones Vista actual / Vista nueva) */
+function cqmSetV(v){ if(!AN_DET) return; AN_DET.cqV = v; anDetPintar(); }
+function cqmPill(g){ return '<span class="cqm-nd g-' + g + '">' + cqmGNom(g) + '</span>'; }
+function cqmPat2(o){
+  const c = cqCuenta(o.l || [], function(t){ return cqPrim(t).cie || 'Sin código'; });
+  if(!c.length) return '';
+  return escR(c[0][0]) + (c[0][1] >= 2 ? ' <b>(' + c[0][1] + ' de ' + o.n + ')</b>' : '') + ' ' + cqmPill(cqmGrupo(c[0][0]));
+}
+function cqmV2Armar(h){
+  const T = document.createElement('div'); T.innerHTML = h;
+  const res = T.querySelector('.cqm-res'), f0 = T.querySelector('.cqm-f0'), det = T.querySelector('#cqmDet');
+  const filas = Array.prototype.filter.call(T.querySelectorAll('.cqm-g'), function(g){ return !g.classList.contains('cqm-f0'); });
+  if(filas.length < 3) return h;
+  const c1 = Array.prototype.slice.call(filas[0].children), dark = c1[0];
+  const dep = f0 ? f0.children[0] : null, comp = f0 ? f0.children[1] : null;
+  const html = function(e){ return e ? e.outerHTML : ''; };
+  let o = '<div class="cqm-v2">';
+  o += '<div class="mda-g cqm-g cqm-v2a">' + html(dark) + '<div class="cqm-v2r">' + html(res) + (CQM_VIENE ? '<div class="cqm-viene">' + CQM_VIENE + '</div>' : '') + '</div></div>';
+  if(dep || comp) o += '<div class="mda-g cqm-g cqm-v2b">' + html(dep) + html(comp) + '</div>';
+  o += '<div class="mda-g mda-f3 cqm-g">' + c1.slice(1).map(html).join('') + '</div>';
+  o += html(filas[1]) + html(filas[2]) + html(det) + '</div>';
+  return o;
+}
 let CQM_OPS = [];
 function cqmOp(t, fn){ CQM_OPS.push({ t: t, fn: fn }); return CQM_OPS.length - 1; }
 function cqmSel(i){
@@ -21207,7 +21271,7 @@ function cqmListaHtml(L){
               + '<td>' + escR(derTitulo(t.tec)) + '<br><small>' + escR(derTitulo(t.sup || '')) + '</small></td>'
               + '<td>' + escR(t.dir || '') + '<br><small>' + escR(cqCiuT(t.ciu)) + (t.nodo ? ' · nodo ' + escR(t.nodo) : '') + (t.nap ? ' · NAP ' + escR(t.nap) : '') + '</small></td>')
             + '<td class="d"><b>' + r.dias + '</b></td><td>' + escR(fechaCL(r.fecha)).slice(0, 5) + '<br><small>' + escR(r.ot) + '</small></td>'
-            + '<td>' + escR(r.cie || 'Sin código') + ' <span class="cqm-nd" style="border-left:3px solid ' + cqmGCol(cqmGrupo(r.cie)) + '">' + cqmGNom(cqmGrupo(r.cie)) + '</span></td>'
+            + '<td>' + escR(r.cie || 'Sin código') + ' <span class="cqm-nd g-' + cqmGrupo(r.cie) + '" style="border-left:3px solid ' + cqmGCol(cqmGrupo(r.cie)) + '">' + cqmGNom(cqmGrupo(r.cie)) + '</span></td>'
             + '<td>' + escR(derTitulo(r.tec || '')) + (cqEmpG(r) !== 'Dominion' ? ' <span class="cq-e a">' + escR(cqEmpG(r) === 'Otra empresa' ? r.emp : 'Bucket') + '</span>' : '') + '<br>' + cqEstHtml(r) + '</td></tr>'; }).join(''); }).join('')
     + '</tbody></table></div>';
 }
@@ -21277,13 +21341,13 @@ function cqmPanelHtml(R, k){
   const iCies = cqmOp('Todas las causas (cierre de la reparación)', function(){
     return '<table class="mda-t cqm-l"><thead><tr><th>Cierre de la reparación</th><th>Cantidad</th><th>Técnicos</th><th>Cuándo</th></tr></thead><tbody>' + cie.map(function(c){
       const l = L.filter(function(t){ return (cqPrim(t).cie || 'Sin código') === c[0]; });
-      return '<tr class="mda-clk" onclick="cqmSel(' + CQM_OPS.map(function(o){ return o.t; }).indexOf('Por qué: ' + c[0]) + ')"><td>' + escR(c[0]) + ' <span class="cqm-nd" style="border-left:3px solid ' + cqmGCol(cqmGrupo(c[0])) + '">' + cqmGNom(cqmGrupo(c[0])) + '</span></td><td><b>' + c[1] + '</b></td><td>'
+      return '<tr class="mda-clk" onclick="cqmSel(' + CQM_OPS.map(function(o){ return o.t; }).indexOf('Por qué: ' + c[0]) + ')"><td>' + escR(c[0]) + ' <span class="cqm-nd g-' + cqmGrupo(c[0]) + '" style="border-left:3px solid ' + cqmGCol(cqmGrupo(c[0])) + '">' + cqmGNom(cqmGrupo(c[0])) + '</span></td><td><b>' + c[1] + '</b></td><td>'
         + cqCuenta(l, function(t){ return derTitulo(t.tec); }).map(function(x){ return escR(x[0]) + (x[1] > 1 ? ' (' + x[1] + ')' : ''); }).join(', ') + '</td><td>'
         + CQM_DIAS.map(function(d, i){ const x = l.filter(function(t){ return cqmDiaG(cqPrim(t).dias) === i; }).length; return x ? x + ' en ' + d[0] : ''; }).filter(Boolean).join(' · ') + '</td></tr>'; }).join('') + '</tbody></table>'; });
   const iCie = cie.map(function(c){ return filtro('Por qué: ' + c[0], function(t){ return (cqPrim(t).cie || 'Sin código') === c[0]; }); });
   const nd = L.filter(function(t){ return cqmNoDep(cqPrim(t).cie); }).length;
   h += '<div class="mda-g mda-f3 cqm-g"><div class="mda-c"><div class="ct">¿Por qué se repite? <span class="mda-ayu">cierre de la reparación · toca uno</span></div><ul class="mda-ul">'
-    + cie.slice(0, 6).map(function(c, i){ return '<li class="cqm-li" onclick="cqmSel(' + iCie[i] + ')"><i class="mda-dot" style="background:' + cqmGCol(cqmGrupo(c[0])) + '" title="' + cqmGNom(cqmGrupo(c[0])) + '"></i>' + escR(c[0]) + ' <b>' + c[1] + '</b></li>'; }).join('') + '</ul>'
+    + cie.slice(0, 6).map(function(c, i){ return '<li class="cqm-li" onclick="cqmSel(' + iCie[i] + ')"><i class="mda-dot" style="background:' + cqmGCol(cqmGrupo(c[0])) + '" title="' + cqmGNom(cqmGrupo(c[0])) + '"></i>' + escR(c[0]) + ' <b>' + c[1] + '</b>' + (cqmV2() ? ' ' + cqmPill(cqmGrupo(c[0])) : '') + '</li>'; }).join('') + '</ul>'
     + '<div class="mda-ley" style="margin-top:4px">' + CQ_GRUPOS.slice(0, 4).map(function(g){ return '<span><i class="mda-dot" style="background:' + g[2] + '"></i>' + g[1] + '</span>'; }).join('') + '</div>'
     + '<button class="mda-lnk" onclick="cqmSel(' + iCies + ')">Ver las ' + cie.length + ' causas con sus técnicos ›</button></div>';
   /* tecnicos */
@@ -21291,10 +21355,10 @@ function cqmPanelHtml(R, k){
   const iTec = tecs.map(function(o){ return cqmOp('Técnico: ' + derTitulo(o.nom), function(){ return cqmFichaHtml(o, mesNom); }); });
   const iTecs = cqmOp('Técnico por técnico', function(){
     return '<table class="mda-t cqm-l"><thead><tr><th>Técnico</th><th>Supervisor</th><th>Completados</th><th>Reiterados</th><th>Lo que más se repite</th></tr></thead><tbody>'
-      + tecs.map(function(o, i){ return '<tr class="mda-clk" onclick="cqmSel(' + iTec[i] + ')"><td><b>' + escR(derTitulo(o.nom)) + '</b></td><td>' + escR(derTitulo(o.sup || '')) + '</td><td>' + o.c + '</td><td><b>' + o.n + '</b></td><td>' + escR(cqPatron(o)) + '</td></tr>'; }).join('') + '</tbody></table>'
+      + tecs.map(function(o, i){ return '<tr class="mda-clk" onclick="cqmSel(' + iTec[i] + ')"><td><b>' + escR(derTitulo(o.nom)) + '</b></td><td>' + escR(derTitulo(o.sup || '')) + '</td><td>' + o.c + '</td><td><b>' + o.n + '</b></td><td>' + (cqmV2() ? cqmPat2(o) : escR(cqPatron(o))) + '</td></tr>'; }).join('') + '</tbody></table>'
       + '<p class="s">Toca un técnico para ver su ficha. ' + (R.tecs.length - tecs.length) + ' técnicos con trabajos en ' + mesC + ' no tienen reiterados.</p>'; });
   h += '<div class="mda-c"><div class="ct">Técnicos con más reiterados <span class="mda-ayu">toca uno para ver por qué</span></div><table class="mda-t"><thead><tr><th>Técnico</th><th>Reit.</th><th>Lo que más se repite</th></tr></thead><tbody>'
-    + tecs.slice(0, 6).map(function(o, i){ return '<tr class="mda-clk" onclick="cqmSel(' + iTec[i] + ')"><td>' + escR(derTitulo(o.nom)) + '</td><td><b>' + o.n + '</b> <small style="color:#94a3b8">de ' + o.c + '</small></td><td class="cqm-pat">' + escR(cqPatron(o)) + '</td></tr>'; }).join('') + '</tbody></table>'
+    + tecs.slice(0, 6).map(function(o, i){ return '<tr class="mda-clk" onclick="cqmSel(' + iTec[i] + ')"><td>' + escR(derTitulo(o.nom)) + '</td><td><b>' + o.n + '</b> <small style="color:#94a3b8">de ' + o.c + '</small></td><td class="cqm-pat">' + (cqmV2() ? cqmPat2(o) : escR(cqPatron(o))) + '</td></tr>'; }).join('') + '</tbody></table>'
     + '<button class="mda-lnk" onclick="cqmSel(' + iTecs + ')">Ver los ' + tecs.length + ' técnicos con reiterados ›</button></div>';
   /* domicilios */
   const casas = {}; L.forEach(function(t){ const kk = cqmCasaK(t), c = casas[kk] || (casas[kk] = { dir: t.dir || 'Sin dirección', ciu: t.ciu, l: [], r: 0 }); c.l.push(t); c.r += t.reps.length; });
@@ -21304,6 +21368,9 @@ function cqmPanelHtml(R, k){
   const iCasas = cqmOp('Domicilios con 2 o más reparaciones', function(){
     return rep2.length ? '<table class="mda-t cqm-l"><thead><tr><th>Domicilio</th><th>Reparaciones</th><th>Trabajos</th><th>Técnicos</th></tr></thead><tbody>' + rep2.map(function(c){ const i = cs.indexOf(c);
       return '<tr class="mda-clk" onclick="cqmSel(' + iCasa[i] + ')"><td>' + escR(c.dir) + ' <small>' + escR(cqCiuT(c.ciu)) + '</small></td><td><b>' + c.r + '</b></td><td>' + c.l.length + '</td><td>' + cqUnicos(c.l.map(function(t){ return escR(derTitulo(t.tec)); })).join(', ') + '</td></tr>'; }).join('') + '</tbody></table>' : '<p class="s">Ningún domicilio tiene 2 o más reparaciones.</p>'; });
+  if(cqmV2() && !rep2.length){ const iTodas = cqmOp('Todos los domicilios con reparación', function(){ return cqmListaHtml(L); });
+    h += '<div class="mda-c"><div class="ct">Domicilios que se repiten</div><p class="cqm-vacio">Ningún domicilio se repite todavía: los ' + cs.length + ' tienen una sola reparación.</p><button class="mda-lnk" onclick="cqmSel(' + iTodas + ')">Ver los ' + cs.length + ' domicilios ›</button></div></div>';
+  } else
   h += '<div class="mda-c"><div class="ct">Domicilios con más reparaciones <span class="mda-ayu">toca uno</span></div><ul class="mda-ul">'
     + cs.slice(0, 6).map(function(c, i){ return '<li class="cqm-li" onclick="cqmSel(' + iCasa[i] + ')"><b>' + c.r + '</b> · ' + escR(c.dir) + ' <small style="color:#94a3b8">' + escR(cqCiuT(c.ciu)) + (c.l.length > 1 ? ' · ' + c.l.length + ' trabajos' : '') + '</small></li>'; }).join('') + '</ul>'
     + '<button class="mda-lnk" onclick="cqmSel(' + iCasas + ')">' + rep2.length + ' domicilio' + (rep2.length === 1 ? '' : 's') + ' con 2 o más reparaciones ›</button></div></div>';
@@ -21330,6 +21397,7 @@ function cqmPanelHtml(R, k){
   /* detalle de lo elegido */
   const sel = AN_DET && AN_DET.cqSelMes === k ? AN_DET.cqSel : null, op = sel ? CQM_OPS.filter(function(o){ return o.t === sel; })[0] : null;
   if(op) h += '<div id="cqmDet" class="mda-c cqm-det"><div class="cqm-dh"><b>' + escR(op.t) + '</b><button class="an-x" onclick="cqmCerrarDet()">✕ Cerrar detalle</button></div>' + op.fn() + '</div>';
+  if(cqmV2()) try { h = cqmV2Armar(h); } catch(e){ console.warn('vista nueva:', e); }
   return h;
 }
    // 'mes' = la clave se pidio desde el Detalle del mes
@@ -21345,7 +21413,8 @@ function cqMesSecHtml(k){
   /* (12-11-2026, 13:00) Luis: "agregale un boton cerrar detalle para no cerrar la ventana completa". Cierra solo la calidad;
      mientras siga abierto el Detalle del mes se vuelve a abrir sin pedir la clave. */
   if(AN_DET.cqOc) return h + '<button class="mda-cq-btn" onclick="cqMesMostrar(true)">🛠 Ver la calidad de ' + nom + '</button></div>';
-  h = h.replace('<div class="mda-cq-t">', '<div class="mda-cq-t"><button class="an-x mda-cq-x" onclick="cqMesMostrar(false)">✕ Cerrar detalle</button>');
+  h = h.replace('<div class="mda-cq-t">', '<div class="mda-cq-t"><button class="an-x mda-cq-x" onclick="cqMesMostrar(false)">✕ Cerrar detalle</button>'
+    );
   if(CQ_J === undefined) cqCargar();
   if(CQ_J === null) return h + '<div class="cq-est inc">Bajando calidad.json…</div></div>';
   if(cqMeses().indexOf(k) < 0) return h + '<div class="cq-est inc">Todavía no hay calidad para ' + nom + '.</div></div>';
