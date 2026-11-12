@@ -18605,6 +18605,25 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarM
   #anPage .an-par .an-col > .an-card:first-child { flex:1; display:flex; flex-direction:column; }
   /* (06-11-2026, 20:10) casillas del semaforo con GSA: etiqueta morada y el sin GSA con la diferencia */
   #anPage .an-sem .d.sgsa { position:relative; box-shadow:inset 0 0 0 2px #a78bfa; }
+  /* (12-11-2026, 14:45) MUESTRA vista nueva de Mi analisis */
+  #anPage .an-vbt { float:right; display:inline-flex; border:1px solid #334155; border-radius:999px; overflow:hidden; text-transform:none; letter-spacing:0; }
+  #anPage .an-vbt button { border:0; background:#0f172a; color:#cbd5e1; font:600 12px inherit; padding:5px 12px; cursor:pointer; } #anPage .an-vbt button.on { background:#1d4ed8; color:#fff; }
+  #anPage .an-wrap.v2 .an-sec { margin:22px 0 10px; color:#64748b; border-bottom:1px solid #1e293b; padding-bottom:6px; }
+  #anPage .an-wrap.v2 .an-g3, #anPage .an-wrap.v2 .an-g2 { gap:14px; }
+  #anPage .an-sem .d.v2 { position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; border-radius:8px; cursor:pointer; box-shadow:none; }
+  #anPage .an-sem .d.v2 b { font-size:17px; font-weight:800; line-height:1.1; } #anPage .an-sem .d.v2 small { font-size:11px; font-weight:600; opacity:.95; }
+  #anPage .an-sem .d.v2.c-ok { background:#14532d !important; color:#bbf7d0; } #anPage .an-sem .d.v2.c-ok small { color:#86efac; }
+  #anPage .an-sem .d.v2.c-med { background:#78350f !important; color:#fde68a; } #anPage .an-sem .d.v2.c-med small { color:#fcd34d; }
+  #anPage .an-sem .d.v2.c-mal { background:#7f1d1d !important; color:#fecaca; } #anPage .an-sem .d.v2.c-mal small { color:#fca5a5; }
+  #anPage .an-sem .d.v2.act { outline:2px solid #93c5fd; outline-offset:-2px; }
+  #anPage .an-sem .d.v2:hover { filter:brightness(1.18); }
+  #anPage .gdot { position:absolute; top:6px; right:7px; width:9px; height:9px; border-radius:50%; background:#a78bfa; box-shadow:0 0 0 2px rgba(167,139,250,.25); vertical-align:-1px; }
+  #anPage .an-relsg span.v2g { color:#c4b5fd; } #anPage .an-relsg span.v2g b { color:#ddd6fe; }
+  #anPage .an-otras.cerr .an-sem, #anPage .an-otras.cerr > p.s { display:none; }
+  #anPage .an-plg { float:right; border:1px solid #334155; background:#0f172a; color:#93c5fd; border-radius:8px; font:600 12px inherit; padding:3px 10px; cursor:pointer; }
+  .an-lin-ley.v2 { display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:8px; }
+  .an-lin-ley.v2 .lc { background:#1e293b; border-radius:10px; padding:8px 10px; display:flex; flex-direction:column; gap:2px; }
+  .an-lin-ley.v2 .lc > span { font-size:12.5px; color:#e2e8f0; } .an-lin-ley.v2 .lc > b { font-size:22px; line-height:1.1; } .an-lin-ley.v2 .lc small { font-size:11.5px; color:#94a3b8; line-height:1.35; }
   #anPage .an-sem .d .gtag { position:absolute; top:2px; right:3px; font-style:normal; font-size:9px; font-weight:800; background:#6d28d9; color:#fff; border-radius:4px; padding:0 4px; line-height:13px; }
   #anPage .an-sem .d.sgsa small.sg { color:#3b0764; font-weight:800; }
   #anPage .an-sem .d.sgsa small.sg.dif { color:#4c1d95; }
@@ -19076,6 +19095,14 @@ var AN_RCOL = { cli:'#f59e0b', vtr:'#3b82f6', dom:'#ef4444' };
 /* (03-11-2026) version pastel para fondo blanco (Seguimiento y Tecnicos semana a semana) */
 function anColP(v){ return v === null || v === undefined ? '#9ca3af' : v >= MP_META ? '#1e7a46' : v >= MP_META - 5 ? '#a15c07' : '#b42318'; }
 function anCls(v){ return v >= MP_META ? 'ok' : v >= MP_META - 5 ? 'med' : 'baj'; }
+/* ===== MUESTRA VISTA NUEVA DE MI ANALISIS (12-11-2026, 14:45) =====
+   Luis: "arma las muestras para verlas como index". Botones "Vista actual / Vista nueva" arriba de los relojes (AN_V2).
+   Vista nueva: semaforo solo con % y visitas (GSA = punto morado, el detalle al pasar el mouse) y colores oscuros
+   suaves; "sin GSA" bajo los relojes solo cuando hay GSA; leyenda de "¿Como cierra?" en cajitas; "Migraciones en otras
+   comunas" plegable; un poco mas de aire entre bloques. La escala del grafico NO se cambio (Luis la pidio asi el 04-11). */
+var AN_V2 = true, AN_OTRAS_AB = false;   /* (12-11-2026, 15:05) queda fija la vista nueva; AN_V2 = false vuelve a la anterior */
+function anSetV(v){ AN_V2 = v; anPintar(); }
+function anCol2(v){ return v === null || v === undefined ? 'n' : v >= MP_META ? 'ok' : v >= MP_META - 5 ? 'med' : 'mal'; }
 function anCol(v){ return v === null || v === undefined ? '#64748b' : v >= MP_META ? '#22c55e' : v >= MP_META - 5 ? '#f59e0b' : '#ef4444'; }
 function anF1(v){ return (Math.round(v * 10) / 10).toFixed(1).replace('.', ','); }
 function anIso(d){ return d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0'); }
@@ -19198,7 +19225,7 @@ function anPintar(){
   const y = box.scrollTop, D = anFilas(), fd = (typeof FECHA_DATOS !== 'undefined' && FECHA_DATOS) ? FECHA_DATOS : new Date();
   const hh = String(fd.getHours()).padStart(2, '0') + ':' + String(fd.getMinutes()).padStart(2, '0');
   /* (06-11-2026, 17:47) Luis: los 3 clics en el titulo abren Reiterados, igual que en la pantalla principal (reitEntradaSecreta) */
-  let h = '<div class="an-wrap"><div class="an-head"><h1 onclick="if(event.detail === 3){ try { reitEntradaSecreta(); } catch(x){} }" style="user-select:none"><span style="color:#4b5563;font-weight:800">ANÁLISIS DE GESTIÓN:</span> <span style="color:#6b7280;font-weight:400">Luis Sepúlveda</span></h1>'
+  let h = '<div class="an-wrap' + (AN_V2 ? ' v2' : '') + '"><div class="an-head"><h1 onclick="if(event.detail === 3){ try { reitEntradaSecreta(); } catch(x){} }" style="user-select:none"><span style="color:#4b5563;font-weight:800">ANÁLISIS DE GESTIÓN:</span> <span style="color:#6b7280;font-weight:400">Luis Sepúlveda</span></h1>'
   /* (05-11-2026) Luis: "que quede en 1 sola linea si no los dejas al lado derecho, la hora arriba": comuna y supervisor
      van en la fila del titulo (a la derecha) y los botones de ventanas en la fila de abajo */
     /* (06-11-2026, 18:06) Luis: rotulo "Comuna" y "Supervisor" para que los dos "Todo el equipo" no se confundan */
@@ -19260,7 +19287,8 @@ function anPintar(){
   if(AN_COM !== 'Todo' && !D.cargando){ const sc = (D.R || []).filter(function(x){ return x.fam === 'Migraciones' && !x.ciu; }).length;
     if(sc) h += '<div class="an-carga">Ojo: ' + sc + ' migraci' + (sc === 1 ? 'ón' : 'ones') + ' de días anteriores no ' + (sc === 1 ? 'trae' : 'traen') + ' comuna (vienen de los export completos y no están en datos.json): cuentan en Todo el equipo, no en este filtro.</div>'; }
   const semAnt = anSemAnt(D.semHoy), mesAnt = anMesAnt(D.mesHoy);
-  h += '<div class="an-sec">Relojes de completitud · completadas ÷ visitadas · GSA como quiebre (como VTR) · meta ' + MP_META + '%</div><div class="an-g3">';
+  h += '<div class="an-sec">Relojes de completitud · completadas ÷ visitadas · GSA como quiebre (como VTR) · meta ' + MP_META + '%'
+    + '</div><div class="an-g3">';   /* (12-11-2026, 15:05) Luis eligio la vista nueva con el fondo actual: sin botones */
   AN_FAMS.forEach(function(F){
     const sh = mpSt(anPer(D, F.f, { t:'hoy' })), ss = mpSt(anPer(D, F.f, { t:'sem', k:D.semHoy })), sm = mpSt(anPer(D, F.f, { t:'mes', k:D.mesHoy }));
     const sa = mpSt(anPer(D, F.f, { t:'sem', k:semAnt }));
@@ -19274,7 +19302,7 @@ function anPintar(){
 
       + '<div class="an-rel">' + anReloj(sh.comp, 52, 'HOY', false, sh.vis) + anReloj(ss.comp, 80, 'SEMANA ' + derNumSemana(D.semHoy), true, ss.vis) + anReloj(sm.comp, 52, AN_NOMMES[+D.mesHoy.slice(4) - 1].toUpperCase(), false, sm.vis) + '</div>'
       /* (05-11-2026) bajo cada reloj, el mismo % sin castigar la GSA (como Dominion) */
-      + '<div class="an-rel an-relsg">' + [sh, ss, sm].map(function(x){ return '<span title="' + (x.g ? x.g + ' cerrada' + (x.g === 1 ? '' : 's') + ' por GSA: VTR las cuenta como quiebre' : 'Sin cierres por GSA') + '">sin GSA <b>' + (x.compSG === null ? '–' : P2(x.compSG) + '%') + '</b>' + (x.g ? ' · ' + x.g + ' GSA' : '') + '</span>'; }).join('') + '</div>'
+      + '<div class="an-rel an-relsg">' + [sh, ss, sm].map(function(x){ if(AN_V2 && !x.g) return '<span></span>'; return '<span' + (AN_V2 ? ' class="v2g"' : '') + ' title="' + (x.g ? x.g + ' cerrada' + (x.g === 1 ? '' : 's') + ' por GSA: VTR las cuenta como quiebre' : 'Sin cierres por GSA') + '">sin GSA <b>' + (x.compSG === null ? '–' : P2(x.compSG) + '%') + '</b>' + (x.g ? ' · ' + x.g + ' GSA' : '') + '</span>'; }).join('') + '</div>'
       + '<div class="an-pie"><span>vs Sem ' + derNumSemana(semAnt) + ': ' + (dl === null ? '<b>–</b>' : '<b style="color:' + (dl >= 0 ? '#22c55e' : '#ef4444') + '" title="' + (ss.vis < AN_MIN_VIS ? 'Con pocas visitas todavía' : '') + '">' + (dl >= 0 ? '▲' : '▼') + ' ' + P2(Math.abs(dl)) + ' pts</b>')
       + '</span><span><b>' + ss.vis + '</b> visitadas en la semana' + (ss.ab ? ' · <b>' + ss.ab + '</b> por cerrar' : '') + '</span></div>'
       /* (06-11-2026) los meses anteriores se sacaron de la tarjeta (Luis: "solo deja los meses dentro del detalle"): quedan como pestañas del detalle */
@@ -19284,12 +19312,15 @@ function anPintar(){
   /* semaforo 8 semanas */
   const SEMS = []; for(let i = 7; i >= 0; i--) SEMS.push(anSemAnt(D.semHoy, i));
   h += '<div class="an-sec">Una mirada distinta</div><div class="an-g2 an-par"><div class="an-col"><div class="an-card"><h3>Semáforo de las últimas 8 semanas</h3>'
-    + '<p class="s">Completitud semana a semana, con la GSA como quiebre (como VTR). Las casillas con <b style="color:#c4b5fd">GSA</b> muestran además cuánto daría sin GSA y los puntos que restó. Verde: sobre la meta. Ámbar: a menos de 5 pts. Rojo: bajo eso. El color va siempre por el porcentaje, aunque tenga pocas visitas. Toca una casilla para ver esa semana.</p>'
+    + (AN_V2 ? '<p class="s">Completitud semana a semana (GSA como quiebre, como VTR). Verde: sobre la meta · ámbar: a menos de 5 pts · rojo: bajo eso. <i class="gdot" style="position:static;display:inline-block"></i> = tuvo GSA (pasa el mouse para ver cuánto restó). Toca una casilla para ver esa semana.</p>' : '')
+    + (AN_V2 ? '' : '<p class="s">Completitud semana a semana, con la GSA como quiebre (como VTR). Las casillas con <b style="color:#c4b5fd">GSA</b> muestran además cuánto daría sin GSA y los puntos que restó. Verde: sobre la meta. Ámbar: a menos de 5 pts. Rojo: bajo eso. El color va siempre por el porcentaje, aunque tenga pocas visitas. Toca una casilla para ver esa semana.</p>')
     + '<div class="an-sem"><div></div>' + SEMS.map(function(k){ return '<div class="h">S' + derNumSemana(k) + (k === D.semHoy ? '<br><small>en curso</small>' : '') + '</div>'; }).join('');
   AN_FAMS.forEach(function(F){
     h += '<div>' + F.f + '</div>';
     SEMS.forEach(function(k){
       const s = mpSt(anPer(D, F.f, { t:'sem', k:k }));
+      if(AN_V2 && s.comp !== null){ h += '<div class="d v2 c-' + anCol2(s.comp) + (k === D.semHoy ? ' act' : '') + '" title="' + F.f + ' semana ' + derNumSemana(k) + ': ' + s.co + ' de ' + s.vis + ' visitadas' + (s.g ? ' · ' + s.g + ' cerrada' + (s.g === 1 ? '' : 's') + ' por GSA (quiebre para VTR); sin GSA: ' + P2(s.compSG) + '% (−' + P2(s.compSG - s.comp) + ' pts)' : '') + '" onclick="anDetAbrir(\'' + F.f + '\', {t:\'sem\', k:\'' + k + '\'})">'
+          + (s.g ? '<i class="gdot"></i>' : '') + '<b>' + P2(s.comp) + '%</b><small>' + s.vis + ' visitas</small></div>'; return; }
       h += s.comp === null ? '<div class="d vac">–</div>'
         /* (06-11-2026, 20:10) Luis: "solo marcar en el semaforo cuando tengamos quiebres con el item de gsa": el "sin GSA"
            y la diferencia solo salen en las casillas con GSA, marcadas con la etiqueta morada "GSA" */
@@ -19343,7 +19374,8 @@ window.addEventListener('resize', function(){ try { anAjustarPantalla(); } catch
 function anOtrasIr(per){ AN_LISTA_Q = 'otra comuna'; anDetAbrir('Migraciones', per); }
 function anOtrasCardHtml(D, SEMS){
   const esOtra = function(x){ return x.ciu === 'Otra comuna'; }, MINV = 5;
-  let h = '<div class="an-card an-otras"><h3><i class="pt" style="background:#14b8a6"></i>Migraciones en otras comunas <small style="font-size:12px;color:#94a3b8;font-weight:400">cuentan igual en la completitud de VTR/CLARO</small></h3>';
+  let h = '<div class="an-card an-otras' + (AN_V2 && !AN_OTRAS_AB ? ' cerr' : '') + '"><h3><i class="pt" style="background:#14b8a6"></i>Migraciones en otras comunas <small style="font-size:12px;color:#94a3b8;font-weight:400">cuentan igual en la completitud de VTR/CLARO</small>'
+    + (AN_V2 ? '<button class="an-plg" onclick="AN_OTRAS_AB = !AN_OTRAS_AB; anPintar()">' + (AN_OTRAS_AB ? 'Ocultar semanas ▴' : 'Ver semana a semana ▾') + '</button>' : '') + '</h3>';
   if(AN_COM !== 'Todo') return h + '<p class="s keep">Con el filtro de comuna en ' + (AN_COM === 'QUILPUE' ? 'Quilpué' : 'Villa Alemana') + ' no entran las de otras comunas. Elige "Todas" para verlas.</p></div>';
   /* resumen del mes */
   const Lm = anPer(D, 'Migraciones', { t:'mes', k:D.mesHoy }), Om = Lm.filter(esOtra), sm = mpSt(Om);
@@ -19431,6 +19463,8 @@ function anLinSvg(D, H){
       acu.forEach(function(q){ g += '<circle cx="' + xa(q[0]) + '" cy="' + ya(q[1]) + '" r="2.6" fill="' + F.c + '"><title>' + F.f + ' al ' + q[0] + ': ' + P2(q[1]) + '% (' + q[2] + ' de ' + q[3] + ')</title></circle>'; });
     }
     etiq.push({ y: ya(m), t: P2(m) + '%', c: F.c });
+    if(AN_V2){ leyenda.push('<div class="lc"><span><i style="background:' + F.c + '"></i>' + F.f + '</span><b style="color:' + F.c + '">' + P2(m) + '%</b><small>cerraría (' + P2(a) + '–' + P2(b) + '%) · va ' + (sm.comp === null ? '–' : P2(sm.comp) + '%') + '</small>'
+      + '<small style="color:' + c + '">' + (a >= MP_META ? '✓ llega a la meta' : b >= MP_META ? 'puede llegar' : '✗ no llega') + ' · quedan ~' + quedan + ' visitas</small></div>'); return; }
     leyenda.push('<div><i style="background:' + F.c + '"></i><b>' + F.f + '</b> va ' + (sm.comp === null ? '–' : P2(sm.comp) + '%' + ' <span style="color:#94a3b8">(sin GSA ' + P2(sm.compSG) + '%)</span>') + ' · cerraría ~<b>' + P2(m) + '%</b> (' + P2(a) + '–' + P2(b) + '%) · <span style="color:' + c + '">'
       + (a >= MP_META ? 'llega a la meta' : b >= MP_META ? 'puede llegar' : 'no llega') + '</span> · quedan ~' + quedan + ' visitas' + (sm.vis >= AN_MIN_MES ? '' : ' · el mes lleva ' + sm.vis + ' visitas') + '</div>');
   });
@@ -19439,7 +19473,7 @@ function anLinSvg(D, H){
   etiq.sort(function(p, q){ return p.y - q.y; });
   for(let i = 1; i < etiq.length; i++){ const dy = etiq[i].y - etiq[i - 1].y; if(dy < 13){ const m = (13 - dy) / 2; etiq[i - 1].y -= m; etiq[i].y += m; for(let j = i - 1; j > 0; j--) if(etiq[j].y - etiq[j - 1].y < 13) etiq[j - 1].y = etiq[j].y - 13; } }
   etiq.forEach(function(e){ g += '<text x="' + (W - Rr + 5) + '" y="' + (e.y + 4) + '" font-size="11" font-weight="700" fill="' + e.c + '"' + halo + '>' + e.t + '</text>'; });
-  g += '</svg><div class="an-lin-ley">' + leyenda.join('') + '</div>';
+  g += '</svg><div class="an-lin-ley' + (AN_V2 ? ' v2' : '') + '">' + leyenda.join('') + '</div>';
   return g;
 }
 let AN_LIN_D = null, AN_LIN_T = 0;
