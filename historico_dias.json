@@ -22085,17 +22085,17 @@
    }
   },
   "12-11-2026": {
-   "hasta": "14:45",
+   "hasta": "14:55",
    "actividades": 165,
    "tecnicos": 32,
    "estados": {
-    "Completado": 55,
+    "Completado": 58,
     "Iniciado": 16,
-    "Pendiente": 57,
+    "Pendiente": 53,
     "No Realizada": 18,
     "Suspendido": 6,
     "Cancelado": 6,
-    "en ruta": 7
+    "en ruta": 8
    },
    "rgu": 231.9,
    "caidas_total": 4,
@@ -22215,7 +22215,7 @@
       "f": "13-16",
       "hi": "13:07",
       "d": "ALBERTO NAVARRO 1531, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OZVQD8P",
@@ -22368,7 +22368,7 @@
       "f": "13-16",
       "hi": "14:34",
       "d": "PARIS 974 CASA 1, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OZNUIG6",
@@ -22415,22 +22415,10 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OWBNBT5",
-      "cat": "Migración 2 Play",
-      "f": "10-13",
-      "hi": "15:51",
-      "d": "MANUEL PLAZA 1554 CASA A, QUILPUE",
-      "e": "Pendiente",
-      "tec": "CRISTOBAL SILVA LEIVA",
-      "visitas": 1,
-      "ult_fecha": "16-09-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OX49RKV",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "18:42",
+      "hi": "18:50",
       "d": "LOS INCAS 1543, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL SILVA LEIVA",
@@ -22478,9 +22466,9 @@
       "o": "1-3OZ6L7TK",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:54",
+      "hi": "15:04",
       "d": "PARIS 974 CASA 1, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "GEEYSER PEREZ O",
       "visitas": 1,
       "ult_fecha": "11-11-2026",
@@ -22538,7 +22526,7 @@
       "o": "1-3OY44D99",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "17:42",
+      "hi": "18:03",
       "d": "LAS BARRANCAS 2581 EDIF. A DEPTO 101, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -22562,7 +22550,7 @@
       "o": "1-3OY26B93",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "16:27",
+      "hi": "15:54",
       "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JUAN ARRIAGADA C",
@@ -22703,10 +22691,22 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3OWBNBT5",
+      "cat": "Migración 2 Play",
+      "f": "10-13",
+      "hi": "10:57",
+      "d": "MANUEL PLAZA 1554 CASA A, QUILPUE",
+      "e": "Suspendido",
+      "tec": "YENDER BOSCAN CADENAS",
+      "visitas": 1,
+      "ult_fecha": "16-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OZATTSM",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:17",
+      "hi": "20:32",
       "d": "BELLAVISTA 254 CASA 4, QUILPUE",
       "e": "Pendiente",
       "tec": "YENDER BOSCAN CADENAS",
@@ -22718,7 +22718,7 @@
       "o": "1-3OZWNVPD",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "18:36",
+      "hi": "21:51",
       "d": "BARCELONA 1380, QUILPUE",
       "e": "Pendiente",
       "tec": "YENDER BOSCAN CADENAS",
@@ -22752,7 +22752,7 @@
       "o": "1-3OY44D99",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "17:42",
+      "hi": "18:03",
       "d": "LAS BARRANCAS 2581 EDIF. A DEPTO 101, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -22772,7 +22772,7 @@
       "o": "1-3OY26B93",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "16:27",
+      "hi": "15:54",
       "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JUAN ARRIAGADA C",
@@ -22792,5 +22792,5 @@
    }
   }
  },
- "generado": "12-11-2026 14:45"
+ "generado": "12-11-2026 14:55"
 }
