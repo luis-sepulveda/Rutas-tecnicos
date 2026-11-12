@@ -22085,24 +22085,36 @@
    }
   },
   "12-11-2026": {
-   "hasta": "08:45",
-   "actividades": 2,
-   "tecnicos": 2,
+   "hasta": "08:50",
+   "actividades": 77,
+   "tecnicos": 33,
    "estados": {
-    "Pendiente": 2
+    "Pendiente": 77
    },
-   "rgu": 2.0,
+   "rgu": 115.0,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
    "nuevas": 0,
    "al_bucket": 0,
-   "repetidas": 2,
-   "reagendadas": 0,
+   "repetidas": 15,
+   "reagendadas": 4,
    "detalle": {
     "caidas": [],
     "nuevas": [],
     "repetidas": [
+     {
+      "o": "1-3OXCH0N4",
+      "cat": "Migración 1 Play",
+      "f": "13-16",
+      "hi": "14:30",
+      "d": "EL BOSQUE 399 CASA 31, QUILPUE",
+      "e": "Pendiente",
+      "tec": "CESAR MENA OLIVEROS",
+      "visitas": 1,
+      "ult_fecha": "10-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
      {
       "o": "1-3OX49RKV",
       "cat": "Alta 1 Play",
@@ -22116,6 +22128,138 @@
       "ult_cierre": "Sin acceso a vivienda"
      },
      {
+      "o": "1-3OWBNBT5",
+      "cat": "Migración 2 Play",
+      "f": "10-13",
+      "hi": "10:00",
+      "d": "MANUEL PLAZA 1554 CASA A, QUILPUE",
+      "e": "Pendiente",
+      "tec": "JORDAN ROA PEREZ",
+      "visitas": 1,
+      "ult_fecha": "16-09-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OXB4ZCI",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "10:00",
+      "d": "ANTONIO VARAS 1418, QUILPUE",
+      "e": "Pendiente",
+      "tec": "JOSE GALAZ D",
+      "visitas": 1,
+      "ult_fecha": "09-11-2026",
+      "ult_cierre": "Orden mal generada"
+     },
+     {
+      "o": "1-3OU5LMC8",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "VALLE DEL PARAISO 2746, QUILPUE",
+      "e": "Pendiente",
+      "tec": "JOSE ROJO A",
+      "visitas": 3,
+      "ult_fecha": "04-11-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OYEQ5C0",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "10:00",
+      "d": "LAS AMERICAS 1015 EDIF. 18 DEPTO 5, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOSE SALAS MEDINA",
+      "visitas": 3,
+      "ult_fecha": "17-10-2026",
+      "ult_cierre": "Clte desiste motivo comercial"
+     },
+     {
+      "o": "1-3OYUNR3B",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "10:00",
+      "d": "AVENIDA TRABAJADOR 091, QUILPUE",
+      "e": "Pendiente",
+      "tec": "KEVIN TAPIA RETAMAL",
+      "visitas": 1,
+      "ult_fecha": "11-11-2026",
+      "ult_cierre": "Casa sin medidor-remarcador"
+     },
+     {
+      "o": "1-3OW7XASY",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "10:00",
+      "d": "FUENTE CLARA ORIENTE 905, QUILPUE",
+      "e": "Pendiente",
+      "tec": "LEONEL HERNÁNDEZ OJE",
+      "visitas": 1,
+      "ult_fecha": "07-11-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3OYT3H65",
+      "cat": "Migración 1 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "PJE 2 260, QUILPUE",
+      "e": "Pendiente",
+      "tec": "LEONEL HERNÁNDEZ OJE",
+      "visitas": 5,
+      "ult_fecha": "04-11-2026",
+      "ult_cierre": "Direccion no encontrada"
+     },
+     {
+      "o": "1-3OXU97EE",
+      "cat": "Reparación",
+      "f": "10-13",
+      "hi": "10:00",
+      "d": "HUANHUALI 1191, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "LUIS GATICA DAVILA",
+      "visitas": 1,
+      "ult_fecha": "10-11-2026",
+      "ult_cierre": "Sin acceso a vivienda"
+     },
+     {
+      "o": "1-3OY26B93",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "10:50",
+      "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "LUIS GATICA DAVILA",
+      "visitas": 12,
+      "ult_fecha": "10-11-2026",
+      "ult_cierre": "Direccion incorrecta"
+     },
+     {
+      "o": "1-3OY69IAM",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "10:00",
+      "d": "LEUCOTON 1100 EDIF. 3 DEPTO 407, QUILPUE",
+      "e": "Pendiente",
+      "tec": "LUIS MARTIN NUÑEZ",
+      "visitas": 1,
+      "ult_fecha": "10-11-2026",
+      "ult_cierre": "Clte desiste motivo comercial"
+     },
+     {
+      "o": "1-3OY6OOZT",
+      "cat": "Migración 1 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "MARTIN CONTRERAS 1, QUILPUE",
+      "e": "Pendiente",
+      "tec": "MARCO PEREZ G",
+      "visitas": 1,
+      "ult_fecha": "10-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3OY55UL5",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -22126,11 +22270,64 @@
       "visitas": 1,
       "ult_fecha": "10-11-2026",
       "ult_cierre": "Direccion incorrecta"
+     },
+     {
+      "o": "1-3OXXOVN3",
+      "cat": "Migración 1 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "LIBERTAD 352, QUILPUE",
+      "e": "Pendiente",
+      "tec": "RAFAEL VARGAS B",
+      "visitas": 1,
+      "ult_fecha": "11-09-2026",
+      "ult_cierre": "Cliente reagenda"
      }
     ],
-    "reagendadas": []
+    "reagendadas": [
+     {
+      "o": "1-3OXYRD5Y",
+      "cat": "Reparación",
+      "f": "10-13",
+      "hi": "11:51",
+      "d": "DINAMARCA 1451 EDIF. 8 DEPTO 202, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "ALFREDO ALCAYAGA F",
+      "desde": "10-11-2026"
+     },
+     {
+      "o": "1-3OYQWZ4R",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "GLACIAR GREY 2078, QUILPUE",
+      "e": "Pendiente",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "desde": "11-11-2026"
+     },
+     {
+      "o": "1-3OYEQ5C0",
+      "cat": "Alta 2 Play",
+      "f": "10-13",
+      "hi": "10:00",
+      "d": "LAS AMERICAS 1015 EDIF. 18 DEPTO 5, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOSE SALAS MEDINA",
+      "desde": "11-11-2026"
+     },
+     {
+      "o": "1-3OY26B93",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "10:50",
+      "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "LUIS GATICA DAVILA",
+      "desde": "11-11-2026"
+     }
+    ]
    }
   }
  },
- "generado": "12-11-2026 08:45"
+ "generado": "12-11-2026 08:50"
 }
