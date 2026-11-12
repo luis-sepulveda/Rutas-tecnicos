@@ -22085,24 +22085,25 @@
    }
   },
   "12-11-2026": {
-   "hasta": "10:58",
-   "actividades": 118,
+   "hasta": "11:24",
+   "actividades": 122,
    "tecnicos": 32,
    "estados": {
-    "Completado": 9,
+    "Completado": 12,
+    "Iniciado": 22,
+    "Pendiente": 62,
+    "No Realizada": 15,
+    "Suspendido": 2,
     "en ruta": 5,
-    "Pendiente": 66,
-    "No Realizada": 12,
-    "Iniciado": 24,
-    "Cancelado": 2
+    "Cancelado": 4
    },
-   "rgu": 172.0,
+   "rgu": 176.5,
    "caidas_total": 1,
    "caidas_activas": 1,
    "caidas_resueltas": 0,
    "nuevas": 10,
-   "al_bucket": 4,
-   "repetidas": 21,
+   "al_bucket": 6,
+   "repetidas": 22,
    "reagendadas": 4,
    "detalle": {
     "caidas": [
@@ -22128,7 +22129,7 @@
      },
      {
       "o": "1-3OZPYW7R",
-      "tec": "JUAN ARRIAGADA C",
+      "tec": "GEEYSER PEREZ O",
       "cat": "Alta 2 Play",
       "f": "16-19",
       "hi": "16:31",
@@ -22151,7 +22152,7 @@
       "f": "10-13",
       "hi": "10:45",
       "d": "MENA 1002, QUILPUE",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OZFN94G",
@@ -22225,7 +22226,7 @@
       "o": "1-3OXCH0N4",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "13:40",
+      "hi": "13:50",
       "d": "EL BOSQUE 399 CASA 31, QUILPUE",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
@@ -22249,13 +22250,37 @@
       "o": "1-3OZ6L7TK",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:49",
+      "hi": "13:00",
       "d": "PARIS 974 CASA 1, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
       "visitas": 1,
       "ult_fecha": "11-11-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OZPYW7R",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "16:21",
+      "d": "PJE LOS CANALES 1579, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "GEEYSER PEREZ O",
+      "visitas": 1,
+      "ult_fecha": "12-11-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OZOZKRK",
+      "cat": "Upgrade promoción",
+      "f": "13-16",
+      "hi": "14:02",
+      "d": "EL ROCIO 1177, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JORGE PEZOA VICUÑA",
+      "visitas": 1,
+      "ult_fecha": "07-08-2026",
+      "ult_cierre": "Clte desiste motivo comercial"
      },
      {
       "o": "1-3OXB4ZCI",
@@ -22268,18 +22293,6 @@
       "visitas": 1,
       "ult_fecha": "09-11-2026",
       "ult_cierre": "Orden mal generada"
-     },
-     {
-      "o": "1-3OU5LMC8",
-      "cat": "Reparación",
-      "f": "13-16",
-      "hi": "13:10",
-      "d": "VALLE DEL PARAISO 2746, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JOSE ROJO A",
-      "visitas": 3,
-      "ult_fecha": "04-11-2026",
-      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OY44D99",
@@ -22299,23 +22312,11 @@
       "f": "10-13",
       "hi": "09:45",
       "d": "LAS AMERICAS 1015 EDIF. 18 DEPTO 5, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JOSE SALAS MEDINA",
       "visitas": 3,
       "ult_fecha": "17-10-2026",
       "ult_cierre": "Clte desiste motivo comercial"
-     },
-     {
-      "o": "1-3OZPYW7R",
-      "cat": "Alta 2 Play",
-      "f": "16-19",
-      "hi": "16:31",
-      "d": "PJE LOS CANALES 1579, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JUAN ARRIAGADA C",
-      "visitas": 1,
-      "ult_fecha": "12-11-2026",
-      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OYUNR3B",
@@ -22328,6 +22329,18 @@
       "visitas": 1,
       "ult_fecha": "11-11-2026",
       "ult_cierre": "Casa sin medidor-remarcador"
+     },
+     {
+      "o": "1-3OU5LMC8",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "13:28",
+      "d": "VALLE DEL PARAISO 2746, QUILPUE",
+      "e": "Pendiente",
+      "tec": "KEVIN TAPIA RETAMAL",
+      "visitas": 3,
+      "ult_fecha": "04-11-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OW7XASY",
@@ -22378,16 +22391,16 @@
       "ult_cierre": "Clte desiste motivo comercial"
      },
      {
-      "o": "1-3OZOZKRK",
-      "cat": "Upgrade promoción",
+      "o": "1-3OZCP8A4",
+      "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "13:13",
-      "d": "EL ROCIO 1177, VILLA ALEMANA",
+      "hi": "15:40",
+      "d": "PJE 1 431, QUILPUE",
       "e": "Pendiente",
       "tec": "MARCELO GÓMEZ GÓME",
-      "visitas": 1,
-      "ult_fecha": "07-08-2026",
-      "ult_cierre": "Clte desiste motivo comercial"
+      "visitas": 2,
+      "ult_fecha": "20-10-2026",
+      "ult_cierre": "Cliente Desiste"
      },
      {
       "o": "1-3OY6OOZT",
@@ -22429,9 +22442,9 @@
       "o": "1-3OZ23MKR",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "11:10",
+      "hi": "11:00",
       "d": "AV LOS CARRERA 745, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "RAFAEL VARGAS B",
       "visitas": 1,
       "ult_fecha": "11-11-2026",
@@ -22469,7 +22482,7 @@
       "f": "10-13",
       "hi": "10:29",
       "d": "DINAMARCA 1451 EDIF. 8 DEPTO 202, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "ALFREDO ALCAYAGA F",
       "desde": "10-11-2026"
      },
@@ -22499,7 +22512,7 @@
       "f": "10-13",
       "hi": "09:45",
       "d": "LAS AMERICAS 1015 EDIF. 18 DEPTO 5, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JOSE SALAS MEDINA",
       "desde": "11-11-2026"
      }
@@ -22507,5 +22520,5 @@
    }
   }
  },
- "generado": "12-11-2026 10:58"
+ "generado": "12-11-2026 11:24"
 }
