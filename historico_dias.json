@@ -22085,28 +22085,37 @@
    }
   },
   "12-11-2026": {
-   "hasta": "15:35",
+   "hasta": "15:45",
    "actividades": 162,
    "tecnicos": 32,
    "estados": {
-    "Completado": 63,
-    "Pendiente": 45,
+    "Completado": 64,
+    "Pendiente": 40,
     "No Realizada": 19,
     "Suspendido": 6,
+    "en ruta": 5,
     "Cancelado": 6,
-    "Iniciado": 22,
-    "en ruta": 1
+    "Iniciado": 22
    },
    "rgu": 227.9,
-   "caidas_total": 6,
-   "caidas_activas": 5,
-   "caidas_resueltas": 1,
+   "caidas_total": 7,
+   "caidas_activas": 7,
+   "caidas_resueltas": 0,
    "nuevas": 29,
    "al_bucket": 27,
    "repetidas": 27,
    "reagendadas": 5,
    "detalle": {
     "caidas": [
+     {
+      "o": "1-3OX49RKV",
+      "tec": "CRISTOBAL SILVA LEIVA",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "18:47",
+      "d": "LOS INCAS 1543, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OTVAXO0",
       "tec": "FELIPE SILVA R",
@@ -22123,6 +22132,15 @@
       "f": "13-16",
       "hi": "13:07",
       "d": "MARIA MERCEDES 1482 EDIF. 10 DEPTO 303, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OY26B93",
+      "tec": "LUIS GATICA DAVILA",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "10:50",
+      "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
       "e": "Pendiente"
      },
      {
@@ -22421,7 +22439,7 @@
       "o": "1-3OZWNVPD",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:16",
+      "hi": "17:16",
       "d": "BARCELONA 1380, QUILPUE",
       "e": "Pendiente",
       "tec": "ALEXIS JARA",
@@ -22435,7 +22453,7 @@
       "f": "13-16",
       "hi": "13:17",
       "d": "PJE 1 431, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "DANIEL NAVARRETE E",
       "visitas": 2,
       "ult_fecha": "20-10-2026",
@@ -22445,7 +22463,7 @@
       "o": "1-3OYWZSTK",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "18:21",
+      "hi": "18:27",
       "d": "PLUTON 0482, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
@@ -22469,7 +22487,7 @@
       "o": "1-3OZPYW7R",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "17:44",
+      "hi": "17:55",
       "d": "PJE LOS CANALES 1579, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "FELIPE SILVA R",
@@ -22517,7 +22535,7 @@
       "o": "1-3OYT3H65",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "15:51",
+      "hi": "16:02",
       "d": "PJE 2 260, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE PEREZ RANGEL",
@@ -22577,9 +22595,9 @@
       "o": "1-3OZX4VQL",
       "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "15:59",
+      "hi": "15:53",
       "d": "LOS ALMENDROS (LEIGHTON) 01, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JUAN ARRIAGADA C",
       "visitas": 1,
       "ult_fecha": "07-11-2026",
@@ -22797,5 +22815,5 @@
    }
   }
  },
- "generado": "12-11-2026 15:35"
+ "generado": "12-11-2026 15:45"
 }
