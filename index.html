@@ -18697,6 +18697,10 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarM
   #anPage .an-ver { position:absolute; top:14px; right:14px; font-size:12px; color:#93c5fd; }
   #anPage .an-rel { display:grid; grid-template-columns:1fr 1.5fr 1fr; align-items:end; gap:4px; }
   #anPage .an-rel svg { width:100%; height:auto; display:block; }
+  /* (12-11-2026, 15:26) Luis: "dejalo en 1700". La portada de Mi analisis pasa de 1500 a 1700 px de ancho maximo, y los
+     relojes llevan tope de alto (150 / 190 px) para que al ensanchar no crezcan hacia abajo y el zoom no achique todo. */
+  #anPage .an-wrap { max-width:1700px; }
+  #anPage .an-rel svg { max-height:150px; margin:0 auto; } #anPage .an-rel > svg:nth-child(2) { max-height:190px; }
   .an-card svg text { font-family:'Segoe UI',Arial,sans-serif; }
   #anPage .an-pie { display:flex; justify-content:space-between; gap:8px; flex-wrap:wrap; font-size:12px; color:#94a3b8; margin-top:6px; border-top:1px dashed #22304f; padding-top:6px; }
   #anPage .an-pie b { color:#e2e8f0; }
