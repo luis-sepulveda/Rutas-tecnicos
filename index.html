@@ -2313,6 +2313,9 @@
   #avisoDer .l { font-size:13px; line-height:1.4; padding:5px 0; border-top:1px solid #f1f5f9; }
   #avisoDer .l small { display:block; color:#5f7386; font-size:12px; }
   #avisoDer .p { font-size:12px; color:#5f7386; margin-top:6px; }
+  /* (12-11-2026, 10:35) derivada por GSA: VTR/CLARO la cuenta quiebre, para Dominion es completada */
+  #avisoDer .h.gsa { color:#b45309; }
+  #avisoDer .gs { display:inline-block; margin-left:4px; padding:0 6px; border-radius:6px; background:#fef3c7; color:#92400e; font-size:11.5px; font-weight:600; }
   #avisoDer .x { position:absolute; top:8px; right:8px; border:0; background:none; color:#8fa1b3; font-size:13px; cursor:pointer; padding:4px 6px; }
   /* con la pastilla nueva son doce en la fila: se aprieta un poco para que sigan cabiendo sin cortar nombres */
   .pv-linea { gap:4px; }
@@ -11680,7 +11683,7 @@ function derHoyMigDer(){
     /* (04-11-2026) GSA = quiebre, igual que DIA EN CURSO, MIGRACIONES y el historico (DER). Antes la GSA de hoy
        contaba como completada aca y el panel 🔁, la barra roja y Hoy en vivo daban otra completitud. */
     if(j.e === 'Completado' || j.e === 'No Realizada'){ const gq = (!!j.gsa && (typeof MP_GSA_QUIEBRE === 'undefined' || MP_GSA_QUIEBRE));
-      l.push({ tec:k, o:String(j.o || ''), d:String(j.d || ''), cie: gq ? 'GSA · Falla Aprovisionamiento' : String(j.cie || ''), der:j.e === 'No Realizada' || gq, gsa:!!j.gsa, fr:String(j.f || ''), hf:String(j.hf || '') }); }
+      l.push({ tec:k, o:String(j.o || ''), d:String(j.d || ''), cie: gq ? 'Derivada por GSA' : String(j.cie || ''), der:j.e === 'No Realizada' || gq, nr:j.e === 'No Realizada', gq:gq, gsa:!!j.gsa, fr:String(j.f || ''), hf:String(j.hf || '') }); }
   }); });
   return l;
 }
@@ -11754,13 +11757,19 @@ function revisarAvisoDer(){
   const nuevas = ders.filter(function(x){ return !DER_VISTAS_HOY[x.o]; });
   if(!nuevas.length) return;
   nuevas.forEach(function(x){ DER_VISTAS_HOY[x.o] = 1; DER_AVISO.push(x); });
-  derSonar();
+  /* (12-11-2026, 10:25) Luis: "que solo suene cuando se deriva de manera normal". Suena solo si entre las
+     nuevas hay alguna No Realizada; la Completada por GSA sigue saliendo en el aviso y contando como quiebre, pero sin pitido. */
+  if(nuevas.some(function(x){ return x.nr; })) derSonar();
   let a = document.getElementById('avisoDer');
   if(!a){ a = document.createElement('div'); a.id = 'avisoDer'; document.body.appendChild(a); }
   const c = derHoyConteo();
   a.innerHTML = '<button class="x" title="Cerrar" onclick="event.stopPropagation(); cerrarAvisoDer()">✖</button>'
-    + '<div class="h">' + (DER_AVISO.length === 1 ? 'Se derivó una migración' : 'Se derivaron ' + DER_AVISO.length + ' migraciones') + '</div>'
+    /* (12-11-2026, 10:35) Luis: "que el mensaje indique derivada por GSA, asi sabemos a la interna que en nuestra mirada es completada" */
+    + (function(){ const n = DER_AVISO.length, ng = DER_AVISO.filter(function(x){ return x.gq; }).length;
+        if(ng === n) return '<div class="h gsa">' + (n === 1 ? 'Derivada por GSA' : n + ' derivadas por GSA') + ' · para nosotros, completada' + (n === 1 ? '' : 's') + '</div>';
+        return '<div class="h">' + (n === 1 ? 'Se derivó una migración' : 'Se derivaron ' + n + ' migraciones') + (ng ? ' (' + ng + ' por GSA)' : '') + '</div>'; })()
     + DER_AVISO.slice(-4).map(function(x){ return '<div class="l"><b>' + escR(derTitulo(x.tec)) + '</b> · ' + escR(x.cie || 'No realizada')
+        + (x.gq ? '<span class="gs" title="VTR/CLARO la cuenta como quiebre por falla de aprovisionamiento; el técnico la completó">completada en terreno</span>' : '')
         + '<small>' + escR(derTitulo(x.d)) + ' · franja ' + escR(x.fr) + ' · ' + escR(x.o) + '</small></div>'; }).join('')
     + (DER_AVISO.length > 4 ? '<div class="l"><small>y ' + (DER_AVISO.length - 4) + ' más</small></div>' : '')
     + '<div class="p">Van ' + c.d + ' de ' + c.v + ' visitadas hoy · toca para ver el detalle</div>';
