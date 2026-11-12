@@ -22085,24 +22085,24 @@
    }
   },
   "12-11-2026": {
-   "hasta": "10:38",
-   "actividades": 114,
-   "tecnicos": 33,
+   "hasta": "10:58",
+   "actividades": 118,
+   "tecnicos": 32,
    "estados": {
-    "Completado": 7,
-    "en ruta": 4,
-    "Pendiente": 70,
-    "No Realizada": 7,
+    "Completado": 9,
+    "en ruta": 5,
+    "Pendiente": 66,
+    "No Realizada": 12,
     "Iniciado": 24,
     "Cancelado": 2
    },
-   "rgu": 167.0,
+   "rgu": 172.0,
    "caidas_total": 1,
    "caidas_activas": 1,
    "caidas_resueltas": 0,
-   "nuevas": 8,
-   "al_bucket": 1,
-   "repetidas": 20,
+   "nuevas": 10,
+   "al_bucket": 4,
+   "repetidas": 21,
    "reagendadas": 4,
    "detalle": {
     "caidas": [
@@ -22118,22 +22118,40 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OZPGOLX",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "cat": "Reparación",
+      "f": "10-13",
+      "hi": "11:09",
+      "d": "DEL ARRAYAN 1565, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OZPYW7R",
+      "tec": "JUAN ARRIAGADA C",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "16:31",
+      "d": "PJE LOS CANALES 1579, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
       "o": "1-3OZO564X",
       "tec": "LUIS GATICA DAVILA",
       "cat": "Alta 1 Play",
       "f": "10-13",
       "hi": "10:51",
       "d": "PJE LOS YUYOS 1571, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3OZFGUSI",
-      "tec": "JOSE GALAZ D",
+      "tec": "LEONEL HERNÁNDEZ OJE",
       "cat": "Reparación",
       "f": "10-13",
       "hi": "10:45",
       "d": "MENA 1002, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OZFN94G",
@@ -22142,7 +22160,7 @@
       "f": "10-13",
       "hi": "11:23",
       "d": "PJE LOS CARRERAS 544 CASA 992, QUILPUE",
-      "e": "Pendiente"
+      "e": "No Realizada"
      },
      {
       "o": "1-3OZNV9AS",
@@ -22151,7 +22169,7 @@
       "f": "10-13",
       "hi": "12:22",
       "d": "FUENTE CLARA NORTE 825, QUILPUE",
-      "e": "Iniciado"
+      "e": "No Realizada"
      },
      {
       "o": "1-3OZF7CSO",
@@ -22207,7 +22225,7 @@
       "o": "1-3OXCH0N4",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "13:18",
+      "hi": "13:40",
       "d": "EL BOSQUE 399 CASA 31, QUILPUE",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
@@ -22240,18 +22258,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OWBNBT5",
-      "cat": "Migración 2 Play",
-      "f": "10-13",
-      "hi": "10:52",
-      "d": "MANUEL PLAZA 1554 CASA A, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JORDAN ROA PEREZ",
-      "visitas": 1,
-      "ult_fecha": "16-09-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OXB4ZCI",
       "cat": "Alta 1 Play",
       "f": "10-13",
@@ -22267,7 +22273,7 @@
       "o": "1-3OU5LMC8",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "13:00",
+      "hi": "13:10",
       "d": "VALLE DEL PARAISO 2746, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -22298,6 +22304,18 @@
       "visitas": 3,
       "ult_fecha": "17-10-2026",
       "ult_cierre": "Clte desiste motivo comercial"
+     },
+     {
+      "o": "1-3OZPYW7R",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "16:31",
+      "d": "PJE LOS CANALES 1579, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JUAN ARRIAGADA C",
+      "visitas": 1,
+      "ult_fecha": "12-11-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OYUNR3B",
@@ -22341,7 +22359,7 @@
       "f": "10-13",
       "hi": "09:48",
       "d": "HUANHUALI 1191, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "LUIS GATICA DAVILA",
       "visitas": 1,
       "ult_fecha": "10-11-2026",
@@ -22411,9 +22429,9 @@
       "o": "1-3OZ23MKR",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "10:47",
+      "hi": "11:10",
       "d": "AV LOS CARRERA 745, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "RAFAEL VARGAS B",
       "visitas": 1,
       "ult_fecha": "11-11-2026",
@@ -22423,13 +22441,25 @@
       "o": "1-3OXXOVN3",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "13:23",
+      "hi": "13:00",
       "d": "LIBERTAD 352, QUILPUE",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
       "visitas": 1,
       "ult_fecha": "11-09-2026",
       "ult_cierre": "Cliente reagenda"
+     },
+     {
+      "o": "1-3OWBNBT5",
+      "cat": "Migración 2 Play",
+      "f": "10-13",
+      "hi": "10:57",
+      "d": "MANUEL PLAZA 1554 CASA A, QUILPUE",
+      "e": "Iniciado",
+      "tec": "YENDER BOSCAN CADENAS",
+      "visitas": 1,
+      "ult_fecha": "16-09-2026",
+      "ult_cierre": "Sin moradores"
      }
     ],
     "reagendadas": [
@@ -22477,5 +22507,5 @@
    }
   }
  },
- "generado": "12-11-2026 10:38"
+ "generado": "12-11-2026 10:58"
 }
