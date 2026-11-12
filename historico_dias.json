@@ -22085,25 +22085,25 @@
    }
   },
   "12-11-2026": {
-   "hasta": "15:55",
+   "hasta": "16:00",
    "actividades": 162,
    "tecnicos": 32,
    "estados": {
-    "Completado": 65,
-    "Pendiente": 39,
+    "Completado": 66,
+    "Iniciado": 25,
+    "Pendiente": 37,
     "No Realizada": 19,
     "Suspendido": 6,
-    "Iniciado": 25,
     "Cancelado": 6,
-    "en ruta": 2
+    "en ruta": 3
    },
-   "rgu": 227.9,
+   "rgu": 226.9,
    "caidas_total": 7,
    "caidas_activas": 7,
    "caidas_resueltas": 0,
-   "nuevas": 29,
+   "nuevas": 30,
    "al_bucket": 27,
-   "repetidas": 27,
+   "repetidas": 26,
    "reagendadas": 5,
    "detalle": {
     "caidas": [
@@ -22172,6 +22172,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3P03T9Y2",
+      "tec": "ALEXIS JARA",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "15:58",
+      "d": "AV LOS CARRERA 01512 DEPTO 11, QUILPUE",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3P01IV22",
       "tec": "JOSE SALAS MEDINA",
@@ -22439,7 +22448,7 @@
       "o": "1-3OZWNVPD",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:53",
+      "hi": "16:59",
       "d": "BARCELONA 1380, QUILPUE",
       "e": "Pendiente",
       "tec": "ALEXIS JARA",
@@ -22667,9 +22676,9 @@
       "o": "1-3OZATTSM",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "16:24",
+      "hi": "16:02",
       "d": "BELLAVISTA 254 CASA 4, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "LUIS MARTIN NUÑEZ",
       "visitas": 1,
       "ult_fecha": "11-11-2026",
@@ -22733,18 +22742,6 @@
       "tec": "RAFAEL VARGAS B",
       "visitas": 1,
       "ult_fecha": "12-11-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OXCH0N4",
-      "cat": "Migración 1 Play",
-      "f": "13-16",
-      "hi": "17:11",
-      "d": "EL BOSQUE 399 CASA 31, QUILPUE",
-      "e": "Pendiente",
-      "tec": "SEBASTIAN DOSSOW A",
-      "visitas": 1,
-      "ult_fecha": "10-09-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -22815,5 +22812,5 @@
    }
   }
  },
- "generado": "12-11-2026 15:55"
+ "generado": "12-11-2026 16:00"
 }
