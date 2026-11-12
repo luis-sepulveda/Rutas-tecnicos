@@ -22085,24 +22085,24 @@
    }
   },
   "12-11-2026": {
-   "hasta": "10:28",
-   "actividades": 110,
+   "hasta": "10:38",
+   "actividades": 114,
    "tecnicos": 33,
    "estados": {
-    "Iniciado": 28,
+    "Completado": 7,
+    "en ruta": 4,
     "Pendiente": 70,
-    "No Realizada": 5,
-    "en ruta": 3,
-    "Completado": 3,
-    "Cancelado": 1
+    "No Realizada": 7,
+    "Iniciado": 24,
+    "Cancelado": 2
    },
-   "rgu": 159.0,
+   "rgu": 167.0,
    "caidas_total": 1,
    "caidas_activas": 1,
    "caidas_resueltas": 0,
    "nuevas": 8,
    "al_bucket": 1,
-   "repetidas": 19,
+   "repetidas": 20,
    "reagendadas": 4,
    "detalle": {
     "caidas": [
@@ -22128,7 +22128,7 @@
      },
      {
       "o": "1-3OZFGUSI",
-      "tec": "YENDER BOSCAN CADENAS",
+      "tec": "JOSE GALAZ D",
       "cat": "Reparación",
       "f": "10-13",
       "hi": "10:45",
@@ -22142,7 +22142,7 @@
       "f": "10-13",
       "hi": "11:23",
       "d": "PJE LOS CARRERAS 544 CASA 992, QUILPUE",
-      "e": "en ruta"
+      "e": "Pendiente"
      },
      {
       "o": "1-3OZNV9AS",
@@ -22178,7 +22178,7 @@
       "f": "16-19",
       "hi": "09:46",
       "d": "LOS FLAMENCOS 2292, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OZN3YJS",
@@ -22231,7 +22231,7 @@
       "o": "1-3OZ6L7TK",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:49",
+      "hi": "15:49",
       "d": "PARIS 974 CASA 1, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
@@ -22305,7 +22305,7 @@
       "f": "10-13",
       "hi": "09:55",
       "d": "AVENIDA TRABAJADOR 091, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "KEVIN TAPIA RETAMAL",
       "visitas": 1,
       "ult_fecha": "11-11-2026",
@@ -22353,10 +22353,22 @@
       "f": "10-13",
       "hi": "09:53",
       "d": "LEUCOTON 1100 EDIF. 3 DEPTO 407, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "LUIS MARTIN NUÑEZ",
       "visitas": 1,
       "ult_fecha": "10-11-2026",
+      "ult_cierre": "Clte desiste motivo comercial"
+     },
+     {
+      "o": "1-3OZOZKRK",
+      "cat": "Upgrade promoción",
+      "f": "13-16",
+      "hi": "13:13",
+      "d": "EL ROCIO 1177, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "MARCELO GÓMEZ GÓME",
+      "visitas": 1,
+      "ult_fecha": "07-08-2026",
       "ult_cierre": "Clte desiste motivo comercial"
      },
      {
@@ -22399,7 +22411,7 @@
       "o": "1-3OZ23MKR",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "11:39",
+      "hi": "10:47",
       "d": "AV LOS CARRERA 745, QUILPUE",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -22411,7 +22423,7 @@
       "o": "1-3OXXOVN3",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "13:00",
+      "hi": "13:23",
       "d": "LIBERTAD 352, QUILPUE",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -22425,9 +22437,9 @@
       "o": "1-3OXYRD5Y",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "10:14",
+      "hi": "10:29",
       "d": "DINAMARCA 1451 EDIF. 8 DEPTO 202, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "ALFREDO ALCAYAGA F",
       "desde": "10-11-2026"
      },
@@ -22465,5 +22477,5 @@
    }
   }
  },
- "generado": "12-11-2026 10:28"
+ "generado": "12-11-2026 10:38"
 }
