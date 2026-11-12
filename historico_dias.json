@@ -22085,27 +22085,46 @@
    }
   },
   "12-11-2026": {
-   "hasta": "09:48",
-   "actividades": 105,
+   "hasta": "09:58",
+   "actividades": 107,
    "tecnicos": 33,
    "estados": {
-    "Iniciado": 12,
-    "Pendiente": 78,
-    "en ruta": 13,
+    "Iniciado": 28,
+    "Pendiente": 75,
+    "en ruta": 2,
     "Cancelado": 1,
     "Completado": 1
    },
-   "rgu": 153.0,
-   "caidas_total": 0,
-   "caidas_activas": 0,
+   "rgu": 155.0,
+   "caidas_total": 1,
+   "caidas_activas": 1,
    "caidas_resueltas": 0,
-   "nuevas": 7,
+   "nuevas": 8,
    "al_bucket": 0,
    "repetidas": 19,
    "reagendadas": 4,
    "detalle": {
-    "caidas": [],
+    "caidas": [
+     {
+      "o": "1-3OY26B93",
+      "tec": "LUIS GATICA DAVILA",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "10:50",
+      "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
+      "e": "Pendiente"
+     }
+    ],
     "nuevas": [
+     {
+      "o": "1-3OZO564X",
+      "tec": "LUIS GATICA DAVILA",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "10:51",
+      "d": "PJE LOS YUYOS 1571, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3OZFGUSI",
       "tec": "YENDER BOSCAN CADENAS",
@@ -22187,7 +22206,7 @@
       "o": "1-3OXCH0N4",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "13:05",
+      "hi": "13:18",
       "d": "EL BOSQUE 399 CASA 31, QUILPUE",
       "e": "Pendiente",
       "tec": "CESAR MENA OLIVEROS",
@@ -22211,7 +22230,7 @@
       "o": "1-3OZ6L7TK",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "14:34",
+      "hi": "14:49",
       "d": "PARIS 974 CASA 1, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
@@ -22247,7 +22266,7 @@
       "o": "1-3OU5LMC8",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "13:00",
+      "hi": "13:03",
       "d": "VALLE DEL PARAISO 2746, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -22283,9 +22302,9 @@
       "o": "1-3OYUNR3B",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:55",
       "d": "AVENIDA TRABAJADOR 091, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "KEVIN TAPIA RETAMAL",
       "visitas": 1,
       "ult_fecha": "11-11-2026",
@@ -22331,9 +22350,9 @@
       "o": "1-3OY69IAM",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:53",
       "d": "LEUCOTON 1100 EDIF. 3 DEPTO 407, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "LUIS MARTIN NUÑEZ",
       "visitas": 1,
       "ult_fecha": "10-11-2026",
@@ -22445,5 +22464,5 @@
    }
   }
  },
- "generado": "12-11-2026 09:48"
+ "generado": "12-11-2026 09:58"
 }
