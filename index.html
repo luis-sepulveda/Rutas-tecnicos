@@ -20776,6 +20776,30 @@ setInterval(function(){ try { anPintar(); anDetPintar(); } catch(e){ console.war
   .mda-cq-btn { margin-top:10px; border:1px dashed #94a3b8; background:#f8fafc; color:#1e3a5f; border-radius:10px; padding:10px 16px; font:600 13.5px inherit; cursor:pointer; }
   .mda-cq-btn:hover { background:#eff6ff; border-color:#2563eb; } .mda-cq-btn small { color:#64748b; font-weight:500; }
   .mda-cq-full { display:block; margin-top:10px; }
+  .mda-cq-x { float:right; margin-left:10px; } .mda-cq-x2 { float:right; margin-top:10px; }
+  .mda-cq .cqm-g { margin-top:10px; margin-bottom:0; }
+  .mda-cq.mda { color:#15293e; }   /* (12-11-2026, 12:40) letras oscuras como el resto del Detalle del mes (antes heredaba el gris claro de la ventana) */
+  .cqm-clk, .cqm-k, .cqm-li { cursor:pointer; } .mda-osc.cqm-clk:hover { background:#16304d; } .cqm-li:hover, .cqm-k:hover { color:#2563eb; }
+  .cqm-k { margin-right:8px; } .mda-stk .cqm-clk:hover { filter:brightness(1.12); }
+  .cqm-pat { white-space:normal !important; font-size:11.5px; color:#5d7389; text-align:left !important; }
+  .cqm-nd { background:#f1f5f9; color:#64748b; border-radius:5px; padding:0 5px; font-size:10.5px; white-space:nowrap; }
+  .cqm-det { margin-top:10px; border:2px solid #2563eb; }
+  .cqm-dh { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:6px; } .cqm-dh b { font-size:15px; color:#13213c; }
+  .cqm-scroll { overflow-x:auto; }
+  .cqm-res { margin-top:10px; border-left:4px solid #1d4ed8; } .cqm-res ul { margin:4px 0 0; padding-left:18px; font-size:13.5px; line-height:1.65; }
+  .cqm-f0 { grid-template-columns:1.5fr 1fr 1fr; margin-top:10px; }
+  .cqm-gt td small { color:#64748b; font-size:11px; } .cqm-gt td:first-child { white-space:normal; }
+  .mda-cq .cg-row { grid-template-columns:88px minmax(0,1fr) 58px 30px; gap:8px; font-size:13px; }   /* filas de "¿Cuando falla?" dentro de la tarjeta */
+  .cqm-up { color:#b91c1c; font-weight:700; } .cqm-dn { color:#15803d; font-weight:700; } .cqm-ig { color:#64748b; }
+  .cqm-l td, .cqm-l th { text-align:left !important; white-space:normal !important; vertical-align:top; } .cqm-l td.d { text-align:center !important; font-size:14px; }
+  .cqm-l td small { color:#64748b; } .cqm-l tr.r2 td { border-top:1px dashed #e2e8f0; }
+  .cqm-fh { display:flex; align-items:center; gap:12px; } .cqm-fh small { color:#5d7389; }
+  .cqm-av { width:40px; height:40px; border-radius:50%; background:#ede9fe; color:#5b21b6; display:flex; align-items:center; justify-content:center; font-weight:800; }
+  .cqm-fn { margin-left:auto; text-align:right; } .cqm-fn b { display:block; font-size:28px; line-height:1; } .cqm-fn small { color:#5d7389; }
+  .cqm-frase { background:#f5f3ff; color:#3b0764; border-radius:10px; padding:10px 12px; margin:10px 0; font-size:13.5px; line-height:1.55; }
+  .cqm-minis { display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:8px; margin-bottom:10px; }
+  .cqm-mini { background:#f8fafc; border-radius:8px; padding:7px 10px; font-size:12.5px; line-height:1.5; } .cqm-mini small { display:block; font-size:11px; color:#5d7389; font-weight:700; }
+  @media (max-width:900px){ .cqm-minis { grid-template-columns:1fr 1fr; } .mda-cq .mda-f1, .mda-cq .mda-f3, .mda-cq .cqm-f0 { grid-template-columns:1fr; } }
   #cqClave .rk-box { background:#fff; color:#0f172a; border-radius:14px; padding:22px 22px 18px; width:min(360px,100%); box-shadow:0 20px 60px rgba(0,0,0,.4); font-family:'DM Sans',system-ui,sans-serif; }
   #cqClave h3 { margin:0 0 4px; font:700 20px 'Archivo',sans-serif; } #cqClave p { margin:0 0 12px; color:#475569; font-size:14px; }
   #cqClave input[type=password] { width:100%; box-sizing:border-box; padding:10px 12px; border:1px solid #cbd5e1; border-radius:9px; font-size:16px; }
@@ -21070,15 +21094,258 @@ function cqAbrirGerencia(){ CQ_SOLO_GER = true; cqAbrir(); }
    con el mismo calculo del boton Calidad (cqCalc) y el analisis del resumen gerencia (cqGerenciaHtml), sin meta
    (CQ_CON_META). La calidad pide clave: la seccion parte cerrada con un candado; con la clave correcta se abre ahi
    mismo y queda abierta mientras no se cierre el Detalle del mes (AN_DET.cq). Cambiar de mes no la vuelve a pedir. */
-let CQ_DESTINO = null, CQ_SIN_CAB = false;   // 'mes' = la clave se pidio desde el Detalle del mes
+let CQ_DESTINO = null, CQ_SIN_CAB = false;
+/* ===== TABLERO DE REITERADOS EN EL DETALLE DEL MES (12-11-2026, 12:35) =====
+   Luis: "que se vea con el detalle de cada mes ... que nos permita revisar cada detalle de los reiterados, tecnico por
+   tecnico, los dias que se demora en caer un reiterado, domicilios con mas reiterados ... una ventana principal que
+   muestre detalle resumido y que cada resumen nos permita dar clic sobre el y nos muestre el detalle". Sin % (eso lo ve
+   el depto de calidad): cantidades y el porque. Mismo estilo de tarjetas del Detalle del mes (mda-*).
+   Cada cosa que se toca es una "opcion" (CQM_OPS: titulo + funcion que arma el detalle). La elegida se guarda por
+   titulo en AN_DET.cqSel, asi sobrevive al repintado; abajo de las tarjetas sale el detalle (#cqmDet). */
+
+/* ===== VISTA GERENTE ARRIBA DEL TABLERO (12-11-2026, 12:50) =====
+   Luis: "la idea es que sea una ventana principal pensando en la vista de gerente" y "no me hagas pensar ... solo quiero
+   que sea un detalle que nos permita revisar el analisis". Grupos de causa: PROPUESTA de Claude segun el cierre de la
+   reparacion (Luis no los reviso). Para cambiar uno, editar CQ_GRUPO: ins = instalacion (depende del tecnico),
+   equ = equipo, cli = cliente, red = red o plataforma. Un cierre que no este aca sale como "Sin clasificar". */
+const CQ_GRUPO = {
+  'configuracion equipo particular cliente': 'cli', 'falla en cable interno domiciliario': 'ins', 'equipo defectuoso iptv': 'equ',
+  'falla reset plataforma': 'red', 'problemas de cobertura wifi': 'ins', 'falla en cable externo domiciliario': 'ins',
+  'equipo defectuoso ont': 'equ', 'configuracion ssid/clave/canal': 'cli', 'falla insumo telefono': 'equ',
+  'equipo defectuoso (control mta cm dbox vp fono)': 'equ', 'equipo defectuoso control remoto iptv': 'equ',
+  'problema configuracion o ubicacion de extensor': 'ins', 'falla cableado particular del cliente': 'cli' };
+const CQ_GRUPOS = [['ins', 'Instalación', '#7c3aed', 'depende del técnico: lo podemos corregir'], ['equ', 'Equipo', '#0ea5e9', 'ONT, decodificador, control, insumos'],
+  ['cli', 'Cliente', '#f59e0b', 'equipo o configuración del cliente'], ['red', 'Red o plataforma', '#64748b', 'reset de plataforma, red'], ['otr', 'Sin clasificar', '#cbd5e1', 'cierre nuevo o sin código']];
+function cqmGrupo(cie){ const k = String(cie || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim(); return CQ_GRUPO[k] || (k && CQ_RE_RED.test(k) ? 'red' : 'otr'); }
+function cqmGNom(g){ return (CQ_GRUPOS.filter(function(x){ return x[0] === g; })[0] || CQ_GRUPOS[4])[1]; }
+function cqmGCol(g){ return (CQ_GRUPOS.filter(function(x){ return x[0] === g; })[0] || CQ_GRUPOS[4])[2]; }
+function cqmMesAnt(k){ const y = +k.slice(0, 4), m = +k.slice(5, 7); return m === 1 ? (y - 1) + '-12' : y + '-' + String(m - 1).padStart(2, '0'); }
+function cqmCada(c, n){ return n ? '1 cada ' + Math.round(c / n) : 'ninguno'; }
+function cqmGerenteHtml(R, k, filtro){
+  const L = R.L, n = L.length, mesC = CQ_NOMMES[+k.slice(5, 7) - 1];
+  if(!n) return '<div class="mda-c cqm-res"><div class="ct">Lo principal de ' + mesC + '</div><p>Sin reiterados en los trabajos de ' + mesC + '.</p></div>';
+  const gr = {}; CQ_GRUPOS.forEach(function(g){ gr[g[0]] = 0; }); L.forEach(function(t){ gr[cqmGrupo(cqPrim(t).cie)]++; });
+  const cie = cqCuenta(L, function(t){ return cqPrim(t).cie || 'Sin código'; });
+  const r7 = L.filter(function(t){ return cqPrim(t).dias <= 7; }).length;
+  const tecs = R.tecs.filter(function(o){ return o.n; }).sort(function(a, b){ return b.n - a.n; }), top = tecs.slice(0, 6), sTop = top.reduce(function(a, o){ return a + o.n; }, 0);
+  /* mes anterior */
+  const ka = cqmMesAnt(k); let A = null, Ainc = null; try { if(cqMeses().indexOf(ka) >= 0) A = cqCalc(ka); } catch(e){}
+  if(A && A.incompleto){ Ainc = A; A = null; }   /* mes anterior incompleto (el registro parte a mitad de mes): no sirve para comparar */
+  const grA = {}; CQ_GRUPOS.forEach(function(g){ grA[g[0]] = 0; }); if(A) A.L.forEach(function(t){ grA[cqmGrupo(cqPrim(t).cie)]++; });
+  const mesA = CQ_NOMMES[+ka.slice(5, 7) - 1], enCurso = k >= cqIsoHoy().slice(0, 7);   /* el mes en curso recien parte: no se compara con flechas */
+  /* semana que se disparo */
+  const S = {}; L.forEach(function(t){ const kk = cqSemK(t.fecha); S[kk] = (S[kk] || 0) + 1; });
+  const ks = Object.keys(S).sort(); let pico = null;
+  if(ks.length >= 3){ ks.forEach(function(kk){ const otras = ks.filter(function(x){ return x !== kk; }), pr = otras.reduce(function(a, x){ return a + S[x]; }, 0) / otras.length;
+    if(S[kk] >= 1.4 * pr && S[kk] - pr >= 5 && (!pico || S[kk] > S[pico.k])) pico = { k: kk, pr: pr }; }); }
+  /* frases */
+  const fr = [];
+  fr.push('<b>' + n + ' reiterados</b> en los trabajos de ' + mesC + ' (' + cqmCada(R.base, n) + ' trabajos completados)'
+    + (Ainc ? '; ' + mesA + ' está incompleto, no se compara' : '') + (A ? '; ' + mesA + ' tuvo <b>' + A.L.length + '</b> (' + cqmCada(A.base, A.L.length) + ')' + (A.cerrado ? '' : ', todavía abierto') : '') + (R.cerrado ? '.' : '. Pueden caer más hasta el ' + escR(fechaCL(R.cierre)) + '.'));
+  fr.push('<b>' + gr.ins + ' de ' + n + '</b> son de <b>instalación</b> (lo que depende del técnico). El resto: equipo ' + gr.equ + ', cliente ' + gr.cli + ', red o plataforma ' + gr.red + (gr.otr ? ', sin clasificar ' + gr.otr : '') + '.');
+  fr.push('La causa que más se repite es <b>' + escR(cie[0][0]) + '</b> (' + cie[0][1] + ')' + (cie[1] ? ', después ' + escR(cie[1][0]) + ' (' + cie[1][1] + ')' : '') + '.');
+  fr.push('<b>' + r7 + ' de ' + n + '</b> cayeron en los primeros 7 días' + (r7 * 2 > n ? ': la mayoría falla pronto, apunta a la instalación o al equipo entregado.' : '.'));
+  fr.push('Los <b>' + top.length + ' técnicos</b> con más reiterados suman <b>' + sTop + ' de ' + n + '</b>' + (top.length ? ' (' + top.map(function(o){ return escR(derTitulo(o.nom).split(' ')[0]) + ' ' + o.n; }).join(', ') + ')' : '') + '; ' + tecs.length + ' técnicos tienen al menos uno.');
+  if(pico) fr.push('La <b>semana ' + derNumSemana(pico.k) + '</b> se disparó: ' + S[pico.k] + ' reiterados (las otras semanas promedian ' + Math.round(pico.pr) + ').');
+  let h = '<div class="mda-c cqm-res"><div class="ct">Lo principal de ' + mesC + ' <span class="mda-ayu">se arma solo con los datos</span></div><ul>' + fr.map(function(x){ return '<li>' + x + '</li>'; }).join('') + '</ul></div>';
+  /* grupos + comparacion */
+  const iG = {}; CQ_GRUPOS.forEach(function(g){ iG[g[0]] = filtro('Reiterados de ' + g[1].toLowerCase(), function(t){ return cqmGrupo(cqPrim(t).cie) === g[0]; }); });
+  h += '<div class="mda-g cqm-g cqm-f0"><div class="mda-c"><div class="ct">¿Depende de nosotros? <span class="mda-ayu">según el cierre de la reparación · toca uno</span></div>'
+    + '<div class="mda-stk" style="height:26px">' + CQ_GRUPOS.map(function(g){ return gr[g[0]] ? '<span class="cqm-clk" style="flex:' + gr[g[0]] + ';background:' + g[2] + '" onclick="cqmSel(' + iG[g[0]] + ')" title="' + g[1] + '">' + g[1].split(' ')[0] + ' ' + gr[g[0]] + '</span>' : ''; }).join('') + '</div>'
+    + '<table class="mda-t cqm-gt"><tbody>' + CQ_GRUPOS.filter(function(g){ return gr[g[0]]; }).map(function(g){
+        const cs = cqCuenta(L.filter(function(t){ return cqmGrupo(cqPrim(t).cie) === g[0]; }), function(t){ return cqPrim(t).cie || 'Sin código'; });
+        return '<tr class="mda-clk" onclick="cqmSel(' + iG[g[0]] + ')"><td><i class="mda-dot" style="background:' + g[2] + '"></i><b>' + g[1] + '</b> <small>' + g[3] + '</small></td><td><b>' + gr[g[0]] + '</b></td><td class="cqm-pat">' + cs.slice(0, 3).map(function(c){ return escR(c[0]) + ' ' + c[1]; }).join(' · ') + '</td></tr>'; }).join('') + '</tbody></table>'
+    + '<div class="s" style="margin-top:4px">Los grupos son una propuesta según el código de cierre de la reparación.</div></div>';
+  h += '<div class="mda-c"><div class="ct">Comparado con ' + mesA + ' <span class="mda-ayu">' + (A ? (A.cerrado ? mesA + ' ya cerrado' : mesA + ' todavía abierto') : Ainc ? mesA + ' incompleto' : 'sin datos de ' + mesA) + '</span></div>'
+    + (A ? '<table class="mda-t"><thead><tr><th></th><th>' + mesA + '</th><th>' + mesC + '</th><th>Cambio</th></tr></thead><tbody>'
+      + (window._cqmSinCambio = enCurso, '')
+      + '<tr><td>Trabajos completados</td><td>' + A.base + '</td><td>' + R.base + '</td><td></td></tr>'
+      + '<tr><td><b>Reiterados</b></td><td>' + A.L.length + '</td><td><b>' + n + '</b></td><td>' + cqmCambio(A.L.length, n) + '</td></tr>'
+      + '<tr><td>Uno cada</td><td>' + (A.L.length ? Math.round(A.base / A.L.length) : '–') + ' trabajos</td><td>' + Math.round(R.base / n) + ' trabajos</td><td></td></tr>'
+      + CQ_GRUPOS.filter(function(g){ return gr[g[0]] || grA[g[0]]; }).map(function(g){ return '<tr><td><i class="mda-dot" style="background:' + g[2] + '"></i>' + g[1] + '</td><td>' + grA[g[0]] + '</td><td>' + gr[g[0]] + '</td><td>' + cqmCambio(grA[g[0]], gr[g[0]]) + '</td></tr>'; }).join('')
+      + '</tbody></table>' + (window._cqmSinCambio = false, '') + (enCurso ? '<div class="s" style="margin-top:4px">' + mesC + ' recién va armándose (lleva ' + R.base + ' trabajos completados): se compara cuando termine el mes.</div>' : A.cerrado === R.cerrado ? '' : '<div class="s" style="margin-top:4px">Ojo: ' + (R.cerrado ? mesA : mesC) + ' todavía puede sumar reiterados.</div>')
+      : Ainc ? '<p class="s">' + mesA + ' está incompleto: el registro parte el ' + escR(fechaCL(Ainc.registro)) + ' (solo ' + Ainc.base + ' trabajos completados), así que no sirve para comparar. Desde el próximo mes ya se compara.</p>'
+      : '<p class="s">No hay datos de calidad de ' + mesA + '.</p>')
+    + '</div>';
+  /* lo que viene: el mes siguiente */
+  const ks2 = cqMesSig(k); let N = null; try { if(cqMeses().indexOf(ks2) >= 0 && cqUsaJson()) N = cqCalc(ks2); } catch(e){}
+  const mesN = CQ_NOMMES[+ks2.slice(5, 7) - 1];
+  if(N && N.L.length){ const tn = N.tecs.filter(function(o){ return o.n; }).sort(function(a, b){ return b.n - a.n; });
+    const iN = cqmOp('Lo que ya cae de ' + mesN, function(){ return cqmListaHtml(N.L); });
+    h += '<div class="mda-c"><div class="ct">Lo que viene: ' + mesN + ' <span class="mda-ayu">se mide después, pero ya está cayendo</span></div><div class="big2">' + N.L.length + '</div>'
+      + '<div class="s">reiterados en ' + N.base + ' trabajos completados hasta hoy</div><ul class="mda-ul">'
+      + tn.slice(0, 4).map(function(o){ return '<li>' + escR(derTitulo(o.nom)) + ' <b>' + o.n + '</b> <small style="color:#94a3b8">' + escR(cqPatron(o)) + '</small></li>'; }).join('') + '</ul>'
+      + '<button class="mda-lnk" onclick="cqmSel(' + iN + ')">Ver los ' + N.L.length + ' de ' + mesN + ' ›</button></div>';
+  } else h += '<div class="mda-c"><div class="ct">Lo que viene: ' + mesN + '</div><p class="s">' + (k >= cqIsoHoy().slice(0, 7) ? 'Es el mes en curso.' : 'Todavía no hay reiterados de ' + mesN + '.') + '</p></div>';
+  return h + '</div>';
+}
+function cqmCambio(a, b){ if(window._cqmSinCambio) return ''; const d = b - a; return d === 0 ? '<span class="cqm-ig">=</span>' : d > 0 ? '<span class="cqm-up">▲ ' + d + '</span>' : '<span class="cqm-dn">▼ ' + (-d) + '</span>'; }
+let CQM_OPS = [];
+function cqmOp(t, fn){ CQM_OPS.push({ t: t, fn: fn }); return CQM_OPS.length - 1; }
+function cqmSel(i){
+  if(!AN_DET) return; const o = CQM_OPS[i]; if(!o) return;
+  AN_DET.cqSel = (AN_DET.cqSel === o.t && AN_DET.cqSelMes === AN_DET.mes) ? null : o.t; AN_DET.cqSelMes = AN_DET.mes;
+  anDetPintar();
+  if(AN_DET.cqSel) setTimeout(function(){ const e = document.getElementById('cqmDet'); if(e) e.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 40);
+}
+function cqmCerrarDet(){ if(AN_DET){ AN_DET.cqSel = null; anDetPintar(); } }
+function cqmClk(i, txt, cls){ return '<span class="cqm-k' + (cls ? ' ' + cls : '') + '" onclick="cqmSel(' + i + ')">' + txt + '</span>'; }
+function cqmNoDep(c){ return CQ_RE_RED.test(c || '') || CQ_RE_CLI.test(c || ''); }
+const CQM_DIAS = [['0 a 7 días', 0, 7, '#7c3aed'], ['8 a 15 días', 8, 15, '#7c3aed'], ['16 a 30 días', 16, 30, '#7c3aed']];   /* (12-11-2026, 12:55) los mismos 3 tramos del resumen gerencia */
+function cqmDiaG(d){ for(let i = 0; i < CQM_DIAS.length; i++) if(d >= CQM_DIAS[i][1] && d <= CQM_DIAS[i][2]) return i; return CQM_DIAS.length - 1; }
+function cqmCasaK(t){ return cqCiuT(t.ciu) + '|' + String(t.dir || 'Sin dirección').toUpperCase().replace(/\s+/g, ' ').trim(); }
+/* lista de reiterados: un renglon por reparacion, ordenado por los dias que demoro en caer */
+function cqmListaHtml(L){
+  if(!L.length) return '<p class="s">No hay reiterados.</p>';
+  const nR = L.reduce(function(a, t){ return a + t.reps.length; }, 0);
+  return '<p class="s">' + L.length + ' trabajo' + (L.length === 1 ? '' : 's') + ' con reparación · ' + nR + ' reparaci' + (nR === 1 ? 'ón' : 'ones') + ' · ordenado por los días que demoró en caer</p>'
+    + '<div class="cqm-scroll"><table class="mda-t cqm-l"><thead><tr><th>Trabajo</th><th>Técnico</th><th>Casa</th><th>Días</th><th>Reparación</th><th>Cierre de la reparación</th><th>Quién reparó</th></tr></thead><tbody>'
+    + L.slice().sort(function(a, b){ return cqPrim(a).dias - cqPrim(b).dias || a.fecha.localeCompare(b.fecha); }).map(function(t){
+        return t.reps.slice().sort(function(a, b){ return a.dias - b.dias; }).map(function(r, j){
+          return '<tr' + (j ? ' class="r2"' : '') + '>' + (j ? '<td></td><td></td><td></td>'
+              : '<td><b>' + escR(fechaCL(t.fecha)).slice(0, 5) + '</b> · ' + escR(t.cat || t.tipo) + '<br><small>' + escR(t.ot) + (t.cie ? ' · ' + escR(t.cie) : '') + '</small></td>'
+              + '<td>' + escR(derTitulo(t.tec)) + '<br><small>' + escR(derTitulo(t.sup || '')) + '</small></td>'
+              + '<td>' + escR(t.dir || '') + '<br><small>' + escR(cqCiuT(t.ciu)) + (t.nodo ? ' · nodo ' + escR(t.nodo) : '') + (t.nap ? ' · NAP ' + escR(t.nap) : '') + '</small></td>')
+            + '<td class="d"><b>' + r.dias + '</b></td><td>' + escR(fechaCL(r.fecha)).slice(0, 5) + '<br><small>' + escR(r.ot) + '</small></td>'
+            + '<td>' + escR(r.cie || 'Sin código') + ' <span class="cqm-nd" style="border-left:3px solid ' + cqmGCol(cqmGrupo(r.cie)) + '">' + cqmGNom(cqmGrupo(r.cie)) + '</span></td>'
+            + '<td>' + escR(derTitulo(r.tec || '')) + (cqEmpG(r) !== 'Dominion' ? ' <span class="cq-e a">' + escR(cqEmpG(r) === 'Otra empresa' ? r.emp : 'Bucket') + '</span>' : '') + '<br>' + cqEstHtml(r) + '</td></tr>'; }).join(''); }).join('')
+    + '</tbody></table></div>';
+}
+/* ficha de un tecnico: el porque en una frase, y sus casas */
+function cqmFichaHtml(o, mesNom){
+  const L = o.l || [], n = L.length;
+  if(!n) return '<p class="s">' + escR(derTitulo(o.nom)) + ' no tiene reiterados en los trabajos de ' + mesNom + ' (' + o.c + ' completados).</p>';
+  const cau = cqCuenta(L, function(t){ return cqPrim(t).cie || 'Sin código'; }), tip = cqCuenta(L, function(t){ return t.tipo; });
+  const quien = cqCuenta(L, function(t){ return cqEmpG(cqPrim(t)); }), nodos = cqCuenta(L, function(t){ return t.nodo ? cqCiuT(t.ciu) + ' · nodo ' + t.nodo : ''; });
+  const r7 = L.filter(function(t){ return cqPrim(t).dias <= 7; }).length, nd = L.filter(function(t){ const g = cqmGrupo(cqPrim(t).cie); return g !== 'ins' && g !== 'otr'; }).length, ni = L.filter(function(t){ return cqmGrupo(cqPrim(t).cie) === 'ins'; }).length;
+  const prom = L.reduce(function(a, t){ return a + cqPrim(t).dias; }, 0) / n;
+  let f = 'Lleva <b>' + n + ' reiterado' + (n === 1 ? '' : 's') + '</b> en ' + o.c + ' trabajos completados en ' + mesNom + '. ';
+  f += cau[0][1] >= 2 ? '<b>' + cau[0][1] + ' de ' + n + '</b> son por <b>' + escR(cau[0][0]) + '</b>' : 'Ninguna causa se repite';
+  f += '; lo que más le falla: <b>' + escR(tip[0][0].toLowerCase()) + '</b> (' + tip[0][1] + ' de ' + n + '). ';
+  f += r7 === n ? 'Todos cayeron en los primeros 7 días. ' : r7 ? r7 + ' cayeron en los primeros 7 días. ' : 'Ninguno cayó antes de 7 días. ';
+  f += ni === n ? 'Todos son de instalación. ' : ni ? ni + ' de ' + n + ' son de instalación' + (nd ? ' y ' + nd + ' no dependen de él (equipo, cliente o red)' : '') + '. ' : 'Ninguno es de instalación' + (nd ? ': ' + nd + ' son de equipo, cliente o red' : '') + '. ';
+  if(nodos.length && nodos[0][1] >= 2) f += nodos[0][1] + ' en el mismo nodo (' + escR(nodos[0][0]) + '): puede ser la red.';
+  const caja = function(t, l){ return '<div class="cqm-mini"><small>' + t + '</small>' + l + '</div>'; };
+  const dias = CQM_DIAS.map(function(d, i){ const x = L.filter(function(t){ return cqmDiaG(cqPrim(t).dias) === i; }).length; return x ? d[0] + ': <b>' + x + '</b>' : ''; }).filter(Boolean).join('<br>');
+  return '<div class="cqm-fh"><div class="cqm-av">' + escR(derTitulo(o.nom).split(' ').map(function(w){ return w[0] || ''; }).slice(0, 2).join('')) + '</div><div><b>' + escR(derTitulo(o.nom)) + '</b><br><small>' + escR(derTitulo(o.sup || 'Sin supervisor')) + '</small></div>'
+    + '<div class="cqm-fn"><b>' + n + '</b><small>reiterado' + (n === 1 ? '' : 's') + '</small></div></div>'
+    + '<div class="cqm-frase">' + f + '</div>'
+    + '<div class="cqm-minis">' + caja('Qué trabajo', tip.map(function(x){ return escR(x[0]) + ': <b>' + x[1] + '</b>'; }).join('<br>'))
+    + caja('Cuándo cayó · promedio ' + Math.round(prom) + ' días', dias)
+    + caja('Por qué', cau.map(function(x){ return escR(x[0]) + ': <b>' + x[1] + '</b>'; }).join('<br>'))
+    + caja('Quién reparó', quien.map(function(x){ return escR(x[0]) + ': <b>' + x[1] + '</b>'; }).join('<br>')) + '</div>'
+    + cqmListaHtml(L);
+}
+function cqmPanelHtml(R, k){
+  CQM_OPS = [];
+  const L = R.L, n = L.length, mesNom = cqNomMes(k), mesC = CQ_NOMMES[+k.slice(5, 7) - 1];
+  const nRep = L.reduce(function(a, t){ return a + t.reps.length; }, 0);
+  const filtro = function(t, fn){ return cqmOp(t, function(){ return cqmListaHtml(L.filter(fn)); }); };
+  const fila = function(i, a, b, c){ return '<tr class="mda-clk" onclick="cqmSel(' + i + ')"><td>' + a + '</td><td>' + b + '</td><td>' + c + '</td></tr>'; };
+  const barra = function(x, mx, col){ return '<span class="mda-bar"><i style="width:' + (mx ? Math.round(100 * x / mx) : 0) + '%' + (col ? ';background:' + col : '') + '"></i></span>'; };
+  const iTodos = filtro('Todos los reiterados de ' + mesC, function(){ return true; });
+  let hG = ''; try { hG = cqmGerenteHtml(R, k, filtro); } catch(e){ console.warn('vista gerente:', e); }
+  /* --- fila 1 --- */
+  const prom = n ? L.reduce(function(a, t){ return a + cqPrim(t).dias; }, 0) / n : 0;
+  const ds = L.map(function(t){ return cqPrim(t).dias; }).sort(function(a, b){ return a - b; }), med = n ? ds[Math.floor((n - 1) / 2)] : 0;
+  let h = hG + '<div class="mda-g mda-f1 cqm-g">'
+    + '<div class="mda-c mda-osc cqm-clk" onclick="cqmSel(' + iTodos + ')" title="Toca para ver todos"><div class="ct">Reiterados de ' + escR(mesC) + '</div><div class="big">' + n + '</div>'
+    + '<div class="s">trabajos con reparación dentro de ' + CQ_DIAS + ' días · ' + nRep + ' reparaci' + (nRep === 1 ? 'ón' : 'ones') + '</div>'
+    + '<div class="s2">de ' + R.base + ' trabajos completados · ' + (R.cerrado ? 'cerrado' : 'pueden caer más hasta el ' + escR(fechaCL(R.cierre))) + '</div>'
+    + '<div class="s2" style="margin-top:6px;color:#93c5fd">Ver todos ›</div></div>';
+  /* por tipo */
+  h += '<div class="mda-c"><div class="ct">Por tipo de trabajo <span class="mda-ayu">toca uno</span></div><table class="mda-t"><thead><tr><th>Trabajo</th><th>Completados</th><th>Con reiterado</th></tr></thead><tbody>'
+    + ['Alta', 'Alta Traslado', 'Migración', 'Reparación'].map(function(tp){ const x = L.filter(function(t){ return t.tipo === tp; }).length;
+        return fila(filtro('Reiterados en ' + tp.toLowerCase(), function(t){ return t.tipo === tp; }), escR(tp), R.sinDatos ? '…' : (R.bt[tp] || 0), '<b>' + x + '</b>'); }).join('')
+    + '</tbody></table></div>';
+  /* cuando cae */
+  const cd = CQM_DIAS.map(function(d, i){ return L.filter(function(t){ return cqmDiaG(cqPrim(t).dias) === i; }).length; });
+  /* (12-11-2026, 12:55) Luis: "ocupa este mismo detalle, es mas simple": como "Cuando falla" del resumen gerencia (barra, % y cantidad por tramo) */
+  h += '<div class="mda-c"><div class="ct">¿Cuándo falla? <span class="mda-ayu">días desde el trabajo hasta la reparación · % de los reiterados y cuántos · toca uno</span></div>'
+    + CQM_DIAS.map(function(d, i){ const x = cd[i], pc = n ? 100 * x / n : 0, op = filtro('Reiterados que cayeron en ' + d[0], function(t){ return cqmDiaG(cqPrim(t).dias) === i; });
+        return '<div class="cg-row cqm-clk" onclick="cqmSel(' + op + ')"><span>' + d[0] + '</span>' + cqBarra(pc, d[3]) + '<b>' + P2(pc) + '%</b><small>' + x + '</small></div>'; }).join('')
+    + '<div class="s" style="margin-top:6px">En promedio cae a los <b>' + Math.round(prom) + ' días</b> · la mitad antes de <b>' + med + ' días</b></div></div>';
+  /* quien reparo */
+  const qr = cqCuenta(L, function(t){ return cqEmpG(cqPrim(t)); }), colQ = { 'Dominion': '#2563eb', 'Otra empresa': '#f59e0b', 'Bucket': '#94a3b8' };
+  const otras = cqCuenta(L.filter(function(t){ return cqEmpG(cqPrim(t)) === 'Otra empresa'; }), function(t){ return cqPrim(t).emp; });
+  h += '<div class="mda-c"><div class="ct">¿Quién hizo la reparación?</div>'
+    + '<div class="mda-stk">' + qr.map(function(q){ return '<span class="cqm-clk" style="flex:' + q[1] + ';background:' + (colQ[q[0]] || '#64748b') + '" onclick="cqmSel(' + filtro('Reparados por ' + q[0], function(t){ return cqEmpG(cqPrim(t)) === q[0]; }) + ')">' + q[1] + '</span>'; }).join('') + '</div>'
+    + '<div class="mda-ley">' + qr.map(function(q){ return '<span><i class="mda-dot" style="background:' + (colQ[q[0]] || '#64748b') + '"></i>' + escR(q[0]) + ' <b>' + q[1] + '</b></span>'; }).join('') + '</div>'
+    + (otras.length ? '<div class="s" style="margin-top:6px">Otras empresas: ' + otras.map(function(o){ return escR(o[0]) + ' ' + o[1]; }).join(', ') + '</div>' : '') + '</div></div>';
+  /* --- fila 2 --- */
+  const cie = cqCuenta(L, function(t){ return cqPrim(t).cie || 'Sin código'; });
+  const iCies = cqmOp('Todas las causas (cierre de la reparación)', function(){
+    return '<table class="mda-t cqm-l"><thead><tr><th>Cierre de la reparación</th><th>Cantidad</th><th>Técnicos</th><th>Cuándo</th></tr></thead><tbody>' + cie.map(function(c){
+      const l = L.filter(function(t){ return (cqPrim(t).cie || 'Sin código') === c[0]; });
+      return '<tr class="mda-clk" onclick="cqmSel(' + CQM_OPS.map(function(o){ return o.t; }).indexOf('Por qué: ' + c[0]) + ')"><td>' + escR(c[0]) + ' <span class="cqm-nd" style="border-left:3px solid ' + cqmGCol(cqmGrupo(c[0])) + '">' + cqmGNom(cqmGrupo(c[0])) + '</span></td><td><b>' + c[1] + '</b></td><td>'
+        + cqCuenta(l, function(t){ return derTitulo(t.tec); }).map(function(x){ return escR(x[0]) + (x[1] > 1 ? ' (' + x[1] + ')' : ''); }).join(', ') + '</td><td>'
+        + CQM_DIAS.map(function(d, i){ const x = l.filter(function(t){ return cqmDiaG(cqPrim(t).dias) === i; }).length; return x ? x + ' en ' + d[0] : ''; }).filter(Boolean).join(' · ') + '</td></tr>'; }).join('') + '</tbody></table>'; });
+  const iCie = cie.map(function(c){ return filtro('Por qué: ' + c[0], function(t){ return (cqPrim(t).cie || 'Sin código') === c[0]; }); });
+  const nd = L.filter(function(t){ return cqmNoDep(cqPrim(t).cie); }).length;
+  h += '<div class="mda-g mda-f3 cqm-g"><div class="mda-c"><div class="ct">¿Por qué se repite? <span class="mda-ayu">cierre de la reparación · toca uno</span></div><ul class="mda-ul">'
+    + cie.slice(0, 6).map(function(c, i){ return '<li class="cqm-li" onclick="cqmSel(' + iCie[i] + ')"><i class="mda-dot" style="background:' + cqmGCol(cqmGrupo(c[0])) + '" title="' + cqmGNom(cqmGrupo(c[0])) + '"></i>' + escR(c[0]) + ' <b>' + c[1] + '</b></li>'; }).join('') + '</ul>'
+    + '<div class="mda-ley" style="margin-top:4px">' + CQ_GRUPOS.slice(0, 4).map(function(g){ return '<span><i class="mda-dot" style="background:' + g[2] + '"></i>' + g[1] + '</span>'; }).join('') + '</div>'
+    + '<button class="mda-lnk" onclick="cqmSel(' + iCies + ')">Ver las ' + cie.length + ' causas con sus técnicos ›</button></div>';
+  /* tecnicos */
+  const tecs = R.tecs.filter(function(o){ return o.n; }).sort(function(a, b){ return b.n - a.n || b.c - a.c; });
+  const iTec = tecs.map(function(o){ return cqmOp('Técnico: ' + derTitulo(o.nom), function(){ return cqmFichaHtml(o, mesNom); }); });
+  const iTecs = cqmOp('Técnico por técnico', function(){
+    return '<table class="mda-t cqm-l"><thead><tr><th>Técnico</th><th>Supervisor</th><th>Completados</th><th>Reiterados</th><th>Lo que más se repite</th></tr></thead><tbody>'
+      + tecs.map(function(o, i){ return '<tr class="mda-clk" onclick="cqmSel(' + iTec[i] + ')"><td><b>' + escR(derTitulo(o.nom)) + '</b></td><td>' + escR(derTitulo(o.sup || '')) + '</td><td>' + o.c + '</td><td><b>' + o.n + '</b></td><td>' + escR(cqPatron(o)) + '</td></tr>'; }).join('') + '</tbody></table>'
+      + '<p class="s">Toca un técnico para ver su ficha. ' + (R.tecs.length - tecs.length) + ' técnicos con trabajos en ' + mesC + ' no tienen reiterados.</p>'; });
+  h += '<div class="mda-c"><div class="ct">Técnicos con más reiterados <span class="mda-ayu">toca uno para ver por qué</span></div><table class="mda-t"><thead><tr><th>Técnico</th><th>Reit.</th><th>Lo que más se repite</th></tr></thead><tbody>'
+    + tecs.slice(0, 6).map(function(o, i){ return '<tr class="mda-clk" onclick="cqmSel(' + iTec[i] + ')"><td>' + escR(derTitulo(o.nom)) + '</td><td><b>' + o.n + '</b> <small style="color:#94a3b8">de ' + o.c + '</small></td><td class="cqm-pat">' + escR(cqPatron(o)) + '</td></tr>'; }).join('') + '</tbody></table>'
+    + '<button class="mda-lnk" onclick="cqmSel(' + iTecs + ')">Ver los ' + tecs.length + ' técnicos con reiterados ›</button></div>';
+  /* domicilios */
+  const casas = {}; L.forEach(function(t){ const kk = cqmCasaK(t), c = casas[kk] || (casas[kk] = { dir: t.dir || 'Sin dirección', ciu: t.ciu, l: [], r: 0 }); c.l.push(t); c.r += t.reps.length; });
+  const cs = Object.keys(casas).map(function(kk){ return casas[kk]; }).sort(function(a, b){ return b.r - a.r || b.l.length - a.l.length; });
+  const iCasa = cs.map(function(c){ return cqmOp('Domicilio: ' + c.dir + ' (' + cqCiuT(c.ciu) + ')', function(){ return cqmListaHtml(c.l); }); });
+  const rep2 = cs.filter(function(c){ return c.r >= 2; });
+  const iCasas = cqmOp('Domicilios con 2 o más reparaciones', function(){
+    return rep2.length ? '<table class="mda-t cqm-l"><thead><tr><th>Domicilio</th><th>Reparaciones</th><th>Trabajos</th><th>Técnicos</th></tr></thead><tbody>' + rep2.map(function(c){ const i = cs.indexOf(c);
+      return '<tr class="mda-clk" onclick="cqmSel(' + iCasa[i] + ')"><td>' + escR(c.dir) + ' <small>' + escR(cqCiuT(c.ciu)) + '</small></td><td><b>' + c.r + '</b></td><td>' + c.l.length + '</td><td>' + cqUnicos(c.l.map(function(t){ return escR(derTitulo(t.tec)); })).join(', ') + '</td></tr>'; }).join('') + '</tbody></table>' : '<p class="s">Ningún domicilio tiene 2 o más reparaciones.</p>'; });
+  h += '<div class="mda-c"><div class="ct">Domicilios con más reparaciones <span class="mda-ayu">toca uno</span></div><ul class="mda-ul">'
+    + cs.slice(0, 6).map(function(c, i){ return '<li class="cqm-li" onclick="cqmSel(' + iCasa[i] + ')"><b>' + c.r + '</b> · ' + escR(c.dir) + ' <small style="color:#94a3b8">' + escR(cqCiuT(c.ciu)) + (c.l.length > 1 ? ' · ' + c.l.length + ' trabajos' : '') + '</small></li>'; }).join('') + '</ul>'
+    + '<button class="mda-lnk" onclick="cqmSel(' + iCasas + ')">' + rep2.length + ' domicilio' + (rep2.length === 1 ? '' : 's') + ' con 2 o más reparaciones ›</button></div></div>';
+  /* --- fila 3 --- */
+  const sup = {}; R.tecs.forEach(function(o){ const kk = derTitulo(o.sup || 'Sin supervisor'), x = sup[kk] || (sup[kk] = { c: 0, n: 0, t: 0 }); x.c += o.c; x.n += o.n; if(o.n) x.t++; });
+  h += '<div class="mda-g mda-f3 cqm-g"><div class="mda-c"><div class="ct">Por supervisor <span class="mda-ayu">toca uno</span></div><table class="mda-t"><thead><tr><th>Supervisor</th><th>Completados</th><th>Reiterados</th><th>Uno cada</th><th>Técnicos con reit.</th></tr></thead><tbody>'
+    + Object.keys(sup).sort(function(a, b){ return sup[b].n - sup[a].n; }).map(function(kk){ const i = filtro('Reiterados del equipo de ' + kk, function(t){ return derTitulo(t.sup || 'Sin supervisor') === kk; });
+        return '<tr class="mda-clk" onclick="cqmSel(' + i + ')"><td>' + escR(kk) + '</td><td>' + sup[kk].c + '</td><td><b>' + sup[kk].n + '</b></td><td>' + (sup[kk].n ? Math.round(sup[kk].c / sup[kk].n) : '–') + '</td><td>' + sup[kk].t + '</td></tr>'; }).join('') + '</tbody></table></div>';
+  /* semana a semana */
+  const dias = R.dias || {}, S = {}, hoy = cqIsoHoy();
+  Object.keys(dias).forEach(function(f){ const kk = cqSemK(f), x = S[kk] || (S[kk] = { c: 0, n: 0, d0: f, d1: f }); x.c += dias[f]; if(f < x.d0) x.d0 = f; if(f > x.d1) x.d1 = f; });
+  L.forEach(function(t){ const kk = cqSemK(t.fecha); (S[kk] || (S[kk] = { c: 0, n: 0, d0: t.fecha, d1: t.fecha })).n++; });
+  const ks = Object.keys(S).sort(), mxS = Math.max.apply(null, [1].concat(ks.map(function(kk){ return S[kk].n; })));
+  h += '<div class="mda-c"><div class="ct">Semana a semana <span class="mda-ayu">según la semana del trabajo · toca una</span></div><table class="mda-t"><thead><tr><th>Semana</th><th>Completados</th><th>Reiterados</th><th></th></tr></thead><tbody>'
+    + ks.map(function(kk){ const x = S[kk], ab = cqDiasEntre(x.d1, hoy) < CQ_DIAS, i = filtro('Reiterados de los trabajos de la semana ' + derNumSemana(kk), function(t){ return cqSemK(t.fecha) === kk; });
+        return '<tr class="mda-clk" onclick="cqmSel(' + i + ')"><td>Sem ' + derNumSemana(kk) + ' <small style="color:#94a3b8">' + fechaCL(x.d0).slice(0, 5) + ' al ' + fechaCL(x.d1).slice(0, 5) + (ab ? ' · abierta' : '') + '</small></td><td>' + x.c + '</td><td><b>' + x.n + '</b></td><td class="bar">' + barra(x.n, mxS, ab ? '#93c5fd' : '') + '</td></tr>'; }).join('')
+    + '</tbody></table><div class="s" style="margin-top:4px">Abierta = sus trabajos todavía no cumplen ' + CQ_DIAS + ' días: pueden caer más.</div></div>';
+  /* nodos */
+  const nod = cqCuenta(L, function(t){ return t.nodo ? cqCiuT(t.ciu) + ' · nodo ' + t.nodo : ''; });
+  h += '<div class="mda-c"><div class="ct">Nodos con más reiterados <span class="mda-ayu">3 o más puede ser la red · toca uno</span></div>'
+    + (nod.length ? '<ul class="mda-ul">' + nod.slice(0, 6).map(function(x){ const i = filtro('Reiterados en ' + x[0], function(t){ return (t.nodo ? cqCiuT(t.ciu) + ' · nodo ' + t.nodo : '') === x[0]; });
+        return '<li class="cqm-li" onclick="cqmSel(' + i + ')"><i class="mda-dot" style="background:' + (x[1] >= 3 ? '#f59e0b' : '#cbd5e1') + '"></i>' + escR(x[0]) + ' <b>' + x[1] + '</b></li>'; }).join('') + '</ul>' : '<p class="s">Los reiterados no traen nodo.</p>')
+    + '</div></div>';
+  /* detalle de lo elegido */
+  const sel = AN_DET && AN_DET.cqSelMes === k ? AN_DET.cqSel : null, op = sel ? CQM_OPS.filter(function(o){ return o.t === sel; })[0] : null;
+  if(op) h += '<div id="cqmDet" class="mda-c cqm-det"><div class="cqm-dh"><b>' + escR(op.t) + '</b><button class="an-x" onclick="cqmCerrarDet()">✕ Cerrar detalle</button></div>' + op.fn() + '</div>';
+  return h;
+}
+   // 'mes' = la clave se pidio desde el Detalle del mes
 function cqMesPedir(){ CQ_DESTINO = 'mes'; cqPedirClave(); }
+function cqMesMostrar(si){ if(!AN_DET) return; AN_DET.cqOc = !si; AN_DET.cqSel = null; anDetPintar(); }
 function cqMesSig(k){ const y = +k.slice(0, 4), m = +k.slice(5, 7); return m === 12 ? (y + 1) + '-01' : y + '-' + String(m + 1).padStart(2, '0'); }
 function cqMesCompleto(k){ CQ_MES = k; CQ_AB = null; CQ_VISTA = 'tec'; CQ_SOLO_GER = false; cqOkSesion = true; cqAbrir(); }
 function cqMesSecHtml(k){
   const nom = cqNomMes(k), sig = cqNomMes(cqMesSig(k)), hoyM = cqIsoHoy().slice(0, 7);
-  let h = '<div class="mda-cq"><div class="mda-cq-t"><b>🛠 Calidad de lo completado en ' + nom + '</b><small>se mide en ' + sig
+  let h = '<div class="mda-cq mda"><div class="mda-cq-t"><b>🛠 Calidad de lo completado en ' + nom + '</b><small>se mide en ' + sig
     + ' · trabajos con una reparación en la misma casa dentro de ' + CQ_DIAS + ' días · análisis de los reiterados</small></div>';
   if(!(AN_DET && AN_DET.cq)) return h + '<button class="mda-cq-btn" onclick="cqMesPedir()">🔒 Ver la calidad de ' + nom + ' <small>(pide la clave)</small></button></div>';
+  /* (12-11-2026, 13:00) Luis: "agregale un boton cerrar detalle para no cerrar la ventana completa". Cierra solo la calidad;
+     mientras siga abierto el Detalle del mes se vuelve a abrir sin pedir la clave. */
+  if(AN_DET.cqOc) return h + '<button class="mda-cq-btn" onclick="cqMesMostrar(true)">🛠 Ver la calidad de ' + nom + '</button></div>';
+  h = h.replace('<div class="mda-cq-t">', '<div class="mda-cq-t"><button class="an-x mda-cq-x" onclick="cqMesMostrar(false)">✕ Cerrar detalle</button>');
   if(CQ_J === undefined) cqCargar();
   if(CQ_J === null) return h + '<div class="cq-est inc">Bajando calidad.json…</div></div>';
   if(cqMeses().indexOf(k) < 0) return h + '<div class="cq-est inc">Todavía no hay calidad para ' + nom + '.</div></div>';
@@ -21089,10 +21356,10 @@ function cqMesSecHtml(k){
     if(k === hoyM) x += '<div class="cq-est inc"><b>Este mes todavía no se mide:</b> lo de ' + nom + ' se mide en ' + sig + '. Acá ves cómo viene; los reiterados siguen cayendo hasta el ' + escR(fechaCL(R.cierre)) + '.</div>';
     else if(!R.cerrado) x += '<div class="cq-est curso"><b>Es la calidad que se está midiendo ahora</b> (en ' + sig + '): se termina de medir el ' + escR(fechaCL(R.cierre)) + '. Todavía pueden caer reparaciones.</div>';
     if(R.incompleto) x += '<div class="cq-est inc"><b>Mes incompleto:</b> el registro parte el ' + escR(fechaCL(R.registro)) + ', así que faltan reparaciones de antes de esa fecha.</div>';
-    CQ_SIN_CAB = true;
-    try { x += cqGerenciaHtml(R, META_REIT); } finally { CQ_SIN_CAB = false; }
+    x += cqmPanelHtml(R, k);   /* (12-11-2026, 12:35) tablero resumido con detalle al tocar */
   } catch(e){ x = '<div class="cq-est inc">No se pudo armar la calidad de ' + nom + '.</div>'; console.warn('cqMesSecHtml:', e); }
   CQ_MES = guard;
+  x += '<button class="an-x mda-cq-x2" onclick="cqMesMostrar(false)">✕ Cerrar detalle</button>';
   return h + x + '<button class="mda-lnk mda-cq-full" onclick="cqMesCompleto(\'' + k + '\')">Ver el análisis completo de ' + nom + ' (todos los reiterados, técnico por técnico, casa por casa) ›</button></div>';
 }
 document.addEventListener('keydown', function(e){ if(e.key === 'Escape'){ const m = document.getElementById('modalCQ'); if(m && m.classList.contains('abierto')) cqCerrar(); } });
