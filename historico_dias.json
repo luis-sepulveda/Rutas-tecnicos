@@ -22085,23 +22085,23 @@
    }
   },
   "12-11-2026": {
-   "hasta": "13:44",
-   "actividades": 159,
+   "hasta": "13:54",
+   "actividades": 160,
    "tecnicos": 32,
    "estados": {
-    "Completado": 39,
-    "Pendiente": 71,
+    "Completado": 43,
+    "en ruta": 4,
+    "Pendiente": 68,
     "No Realizada": 17,
     "Suspendido": 4,
-    "Iniciado": 21,
-    "Cancelado": 5,
-    "en ruta": 2
+    "Iniciado": 19,
+    "Cancelado": 5
    },
-   "rgu": 225.9,
+   "rgu": 226.9,
    "caidas_total": 4,
    "caidas_activas": 3,
    "caidas_resueltas": 1,
-   "nuevas": 25,
+   "nuevas": 26,
    "al_bucket": 27,
    "repetidas": 28,
    "reagendadas": 5,
@@ -22137,8 +22137,17 @@
     ],
     "nuevas": [
      {
+      "o": "1-3OZY0SUB",
+      "tec": "LUIS CASTRO TORRES",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "13:54",
+      "d": "COOPERACION 140 EDIF. 8 DEPTO 13, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
       "o": "1-3OZXMF60",
-      "tec": "MARCO PEREZ G",
+      "tec": "RAFAEL VARGAS B",
       "cat": "Alta 2 Play",
       "f": "13-16",
       "hi": "17:11",
@@ -22170,7 +22179,7 @@
       "f": "13-16",
       "hi": "14:29",
       "d": "MANUEL ORTIZ DE ZARATE 2516, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OZQHSDL",
@@ -22219,7 +22228,7 @@
      },
      {
       "o": "1-3OZVR9AZ",
-      "tec": "RAFAEL VARGAS B",
+      "tec": "LUIS MARTIN NUÑEZ",
       "cat": "Alta 2 Play",
       "f": "13-16",
       "hi": "17:30",
@@ -22260,7 +22269,7 @@
       "f": "16-19",
       "hi": "16:00",
       "d": "ARRIETA 413, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OZSMABW",
@@ -22336,7 +22345,7 @@
      },
      {
       "o": "1-3OZ6L7TK",
-      "tec": "EDGAR VALERO C",
+      "tec": "JORDAN ROA PEREZ",
       "cat": "Alta 1 Play",
       "f": "13-16",
       "hi": "14:34",
@@ -22367,7 +22376,7 @@
       "o": "1-3OYWZSTK",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "18:05",
+      "hi": "18:33",
       "d": "PLUTON 0482, QUILPUE",
       "e": "Pendiente",
       "tec": "ALEXIS JARA",
@@ -22376,16 +22385,16 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3OY26B93",
+      "o": "1-3OZOKEUA",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "16:38",
-      "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
+      "hi": "16:27",
+      "d": "SAN ENRIQUE 1890 EDIF. 7 DEPTO 201, VILLA ALEMANA",
       "e": "Pendiente",
-      "tec": "CRISTOBAL MIRANDA VALENC",
-      "visitas": 12,
-      "ult_fecha": "10-11-2026",
-      "ult_cierre": "Direccion incorrecta"
+      "tec": "ALFREDO ALCAYAGA F",
+      "visitas": 1,
+      "ult_fecha": "12-11-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OWBNBT5",
@@ -22424,30 +22433,6 @@
       "ult_cierre": "Cliente Desiste"
      },
      {
-      "o": "1-3OZ6L7TK",
-      "cat": "Alta 1 Play",
-      "f": "13-16",
-      "hi": "15:46",
-      "d": "PARIS 974 CASA 1, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "EDGAR VALERO C",
-      "visitas": 1,
-      "ult_fecha": "11-11-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OZOKEUA",
-      "cat": "Alta 1 Play",
-      "f": "13-16",
-      "hi": "16:13",
-      "d": "SAN ENRIQUE 1890 EDIF. 7 DEPTO 201, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "ESTEBAN PIZARRO QUINTANA",
-      "visitas": 1,
-      "ult_fecha": "12-11-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OZOZKRK",
       "cat": "Upgrade promoción",
       "f": "13-16",
@@ -22475,12 +22460,24 @@
       "o": "1-3OZPYW7R",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:45",
+      "hi": "18:09",
       "d": "PJE LOS CANALES 1579, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOEL GUSTAVE GUSTA",
       "visitas": 1,
       "ult_fecha": "12-11-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OZ6L7TK",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "15:40",
+      "d": "PARIS 974 CASA 1, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JORDAN ROA PEREZ",
+      "visitas": 1,
+      "ult_fecha": "11-11-2026",
       "ult_cierre": "Sin moradores"
      },
      {
@@ -22544,6 +22541,18 @@
       "ult_cierre": "Clte desiste motivo comercial"
      },
      {
+      "o": "1-3OY26B93",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "16:27",
+      "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JUAN ARRIAGADA C",
+      "visitas": 12,
+      "ult_fecha": "10-11-2026",
+      "ult_cierre": "Direccion incorrecta"
+     },
+     {
       "o": "1-3OYUNR3B",
       "cat": "Alta 2 Play",
       "f": "10-13",
@@ -22583,7 +22592,7 @@
       "o": "1-3OU5LMC8",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:24",
+      "hi": "14:53",
       "d": "VALLE DEL PARAISO 2746, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS CASTRO TORRES",
@@ -22619,7 +22628,7 @@
       "o": "1-3OZVMI51",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:53",
+      "hi": "15:03",
       "d": "CHIANG 1944, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -22679,7 +22688,7 @@
       "o": "1-3OZATTSM",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:04",
+      "hi": "17:10",
       "d": "BELLAVISTA 254 CASA 4, QUILPUE",
       "e": "Pendiente",
       "tec": "YENDER BOSCAN CADENAS",
@@ -22691,7 +22700,7 @@
       "o": "1-3OZWNVPD",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "18:23",
+      "hi": "18:29",
       "d": "BARCELONA 1380, QUILPUE",
       "e": "Pendiente",
       "tec": "YENDER BOSCAN CADENAS",
@@ -22722,16 +22731,6 @@
       "desde": "11-11-2026"
      },
      {
-      "o": "1-3OY26B93",
-      "cat": "Alta 1 Play",
-      "f": "13-16",
-      "hi": "16:38",
-      "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "CRISTOBAL MIRANDA VALENC",
-      "desde": "11-11-2026"
-     },
-     {
       "o": "1-3OY44D99",
       "cat": "Reparación",
       "f": "16-19",
@@ -22750,10 +22749,20 @@
       "e": "No Realizada",
       "tec": "JOSE SALAS MEDINA",
       "desde": "11-11-2026"
+     },
+     {
+      "o": "1-3OY26B93",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "16:27",
+      "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JUAN ARRIAGADA C",
+      "desde": "11-11-2026"
      }
     ]
    }
   }
  },
- "generado": "12-11-2026 13:44"
+ "generado": "12-11-2026 13:54"
 }
