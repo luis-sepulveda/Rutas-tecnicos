@@ -22085,21 +22085,22 @@
    }
   },
   "12-11-2026": {
-   "hasta": "19:47",
-   "actividades": 163,
+   "hasta": "19:52",
+   "actividades": 164,
    "tecnicos": 32,
    "estados": {
     "Completado": 119,
     "No Realizada": 24,
     "Suspendido": 6,
     "Cancelado": 6,
-    "Iniciado": 8
+    "Iniciado": 8,
+    "en ruta": 1
    },
-   "rgu": 224.1,
+   "rgu": 224.2,
    "caidas_total": 16,
    "caidas_activas": 16,
    "caidas_resueltas": 0,
-   "nuevas": 39,
+   "nuevas": 40,
    "al_bucket": 27,
    "repetidas": 24,
    "reagendadas": 5,
@@ -22251,6 +22252,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3P0CB42I",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "cat": "Modificación de Servicio",
+      "f": "19-21",
+      "hi": "19:50",
+      "d": "CERRO CALAN 1830, QUILPUE",
+      "e": "en ruta"
+     },
      {
       "o": "1-3P0BUPI6",
       "tec": "KEVIN TAPIA RETAMAL",
@@ -22948,5 +22958,5 @@
    }
   }
  },
- "generado": "12-11-2026 19:47"
+ "generado": "12-11-2026 19:52"
 }
