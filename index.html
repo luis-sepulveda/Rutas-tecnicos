@@ -18620,6 +18620,23 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarM
   #anPage .gdot { position:absolute; top:6px; right:7px; width:9px; height:9px; border-radius:50%; background:#a78bfa; box-shadow:0 0 0 2px rgba(167,139,250,.25); vertical-align:-1px; }
   #anPage .an-relsg span.v2g { color:#c4b5fd; } #anPage .an-relsg span.v2g b { color:#ddd6fe; }
   #anPage .an-otras.cerr .an-sem, #anPage .an-otras.cerr > p.s { display:none; }
+  /* (12-11-2026, 15:10) MUESTRA encabezado A */
+  #anPage .an-hbt { margin-left:auto; display:inline-flex; border:1px solid #334155; border-radius:999px; overflow:hidden; font-size:12px; }
+  #anPage .an-hbt b { background:#1e293b; color:#94a3b8; font-size:11px; padding:5px 8px; display:flex; align-items:center; }
+  #anPage .an-hbt button { border:0; background:#0f172a; color:#cbd5e1; font:600 12px inherit; padding:5px 12px; cursor:pointer; } #anPage .an-hbt button.on { background:#1d4ed8; color:#fff; }
+  #anPage .hA .an-head { background:#111a2e; border:1px solid #22304f; border-bottom:0; border-radius:14px 14px 0 0; padding:12px 16px 10px; margin-bottom:0; }
+  #anPage .hA .an-head h1 span:first-child { color:#f1f5f9 !important; } #anPage .hA .an-head h1 span:last-child { color:#94a3b8 !important; }
+  #anPage .hA .an-btns { background:#111a2e; border:1px solid #22304f; border-top:1px solid #22304f; border-radius:0 0 14px 14px; padding:9px 16px 11px; margin:0 0 16px; }
+  #anPage .hA .an-fecha { color:#94a3b8; }
+  #anPage .hA .an-fil { background:#0b1220; border:1px solid #22304f; border-radius:999px; padding:3px 4px 3px 6px; gap:3px; }
+  #anPage .hA .an-fil .an-chip { background:transparent; border-color:transparent; color:#cbd5e1; }
+  #anPage .hA .an-fil .an-chip:hover { background:#16213a; }
+  #anPage .hA .an-fil .an-chip.on { background:#1d4ed8; border-color:#1d4ed8; color:#fff; } #anPage .hA .an-fil .an-chip.sup.on { background:#7c3aed; border-color:#7c3aed; }
+  #anPage .hA .an-fil .an-x { background:#1e293b; border-color:#334155; color:#e2e8f0; border-radius:999px; font-size:13px; padding:5px 12px; }
+  #anPage .hA .an-btns .an-btn.inf, #anPage .hA .an-btns .an-btn.her, #anPage .hA .an-btns .an-btn.mes { background:#1e293b; border:1px solid #334155; color:#e2e8f0; border-radius:8px; }
+  #anPage .hA .an-btns .an-btn.inf:hover, #anPage .hA .an-btns .an-btn.her:hover, #anPage .hA .an-btns .an-btn.mes:hover,
+  #anPage .hA .an-btns .an-btn.ab { background:#273449; border-color:#475569; }
+
   #anPage .an-plg { float:right; border:1px solid #334155; background:#0f172a; color:#93c5fd; border-radius:8px; font:600 12px inherit; padding:3px 10px; cursor:pointer; }
   .an-lin-ley.v2 { display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:8px; }
   .an-lin-ley.v2 .lc { background:#1e293b; border-radius:10px; padding:8px 10px; display:flex; flex-direction:column; gap:2px; }
@@ -19100,7 +19117,10 @@ function anCls(v){ return v >= MP_META ? 'ok' : v >= MP_META - 5 ? 'med' : 'baj'
    Vista nueva: semaforo solo con % y visitas (GSA = punto morado, el detalle al pasar el mouse) y colores oscuros
    suaves; "sin GSA" bajo los relojes solo cuando hay GSA; leyenda de "¿Como cierra?" en cajitas; "Migraciones en otras
    comunas" plegable; un poco mas de aire entre bloques. La escala del grafico NO se cambio (Luis la pidio asi el 04-11). */
-var AN_V2 = true, AN_OTRAS_AB = false;   /* (12-11-2026, 15:05) queda fija la vista nueva; AN_V2 = false vuelve a la anterior */
+var AN_V2 = true, AN_OTRAS_AB = false;
+/* (12-11-2026, 15:10) MUESTRA encabezado opcion A: barra oscura del mismo azul de las tarjetas (AN_HA) */
+var AN_HA = true;   /* (12-11-2026, 15:12) Luis eligio el encabezado A: queda fijo, sin botones. AN_HA = false vuelve al anterior */
+function anSetHA(v){ AN_HA = v; anPintar(); }   /* (12-11-2026, 15:05) queda fija la vista nueva; AN_V2 = false vuelve a la anterior */
 function anSetV(v){ AN_V2 = v; anPintar(); }
 function anCol2(v){ return v === null || v === undefined ? 'n' : v >= MP_META ? 'ok' : v >= MP_META - 5 ? 'med' : 'mal'; }
 function anCol(v){ return v === null || v === undefined ? '#64748b' : v >= MP_META ? '#22c55e' : v >= MP_META - 5 ? '#f59e0b' : '#ef4444'; }
@@ -19225,7 +19245,7 @@ function anPintar(){
   const y = box.scrollTop, D = anFilas(), fd = (typeof FECHA_DATOS !== 'undefined' && FECHA_DATOS) ? FECHA_DATOS : new Date();
   const hh = String(fd.getHours()).padStart(2, '0') + ':' + String(fd.getMinutes()).padStart(2, '0');
   /* (06-11-2026, 17:47) Luis: los 3 clics en el titulo abren Reiterados, igual que en la pantalla principal (reitEntradaSecreta) */
-  let h = '<div class="an-wrap' + (AN_V2 ? ' v2' : '') + '"><div class="an-head"><h1 onclick="if(event.detail === 3){ try { reitEntradaSecreta(); } catch(x){} }" style="user-select:none"><span style="color:#4b5563;font-weight:800">ANÁLISIS DE GESTIÓN:</span> <span style="color:#6b7280;font-weight:400">Luis Sepúlveda</span></h1>'
+  let h = '<div class="an-wrap' + (AN_V2 ? ' v2' : '') + (AN_HA ? ' hA' : '') + '"><div class="an-head"><h1 onclick="if(event.detail === 3){ try { reitEntradaSecreta(); } catch(x){} }" style="user-select:none"><span style="color:#4b5563;font-weight:800">ANÁLISIS DE GESTIÓN:</span> <span style="color:#6b7280;font-weight:400">Luis Sepúlveda</span></h1>'
   /* (05-11-2026) Luis: "que quede en 1 sola linea si no los dejas al lado derecho, la hora arriba": comuna y supervisor
      van en la fila del titulo (a la derecha) y los botones de ventanas en la fila de abajo */
     /* (06-11-2026, 18:06) Luis: rotulo "Comuna" y "Supervisor" para que los dos "Todo el equipo" no se confundan */
