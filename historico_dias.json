@@ -22085,21 +22085,21 @@
    }
   },
   "12-11-2026": {
-   "hasta": "16:15",
+   "hasta": "16:25",
    "actividades": 161,
    "tecnicos": 32,
    "estados": {
-    "Completado": 69,
-    "Iniciado": 24,
-    "Pendiente": 33,
+    "Completado": 71,
+    "Iniciado": 25,
+    "Pendiente": 32,
     "No Realizada": 19,
     "Suspendido": 6,
     "Cancelado": 6,
-    "en ruta": 4
+    "en ruta": 2
    },
    "rgu": 225.9,
-   "caidas_total": 8,
-   "caidas_activas": 8,
+   "caidas_total": 9,
+   "caidas_activas": 9,
    "caidas_resueltas": 0,
    "nuevas": 30,
    "al_bucket": 27,
@@ -22123,6 +22123,15 @@
       "f": "13-16",
       "hi": "15:28",
       "d": "NAVARRA 1814 EDIF. D DEPTO 31, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OZCQ2OC",
+      "tec": "FELIPE SILVA R",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "16:05",
+      "d": "AVENIDA VALPARAISO 853, VILLA ALEMANA",
       "e": "Pendiente"
      },
      {
@@ -22215,7 +22224,7 @@
       "f": "16-19",
       "hi": "16:00",
       "d": "EL ROCIO 1177, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3OZY0SUB",
@@ -22269,7 +22278,7 @@
       "f": "13-16",
       "hi": "16:21",
       "d": "PJE LOS CARRERAS 544 CASA 992, QUILPUE",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3OZWEZL3",
@@ -22505,7 +22514,7 @@
       "o": "1-3OZPYW7R",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:09",
+      "hi": "16:32",
       "d": "PJE LOS CANALES 1579, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "FELIPE SILVA R",
@@ -22553,25 +22562,13 @@
       "o": "1-3OYT3H65",
       "cat": "Migración 1 Play",
       "f": "13-16",
-      "hi": "16:26",
+      "hi": "16:36",
       "d": "PJE 2 260, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE PEREZ RANGEL",
       "visitas": 5,
       "ult_fecha": "04-11-2026",
       "ult_cierre": "Direccion no encontrada"
-     },
-     {
-      "o": "1-3OY44D99",
-      "cat": "Reparación",
-      "f": "16-19",
-      "hi": "16:53",
-      "d": "LAS BARRANCAS 2581 EDIF. A DEPTO 101, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JOSE ROJO A",
-      "visitas": 2,
-      "ult_fecha": "10-11-2026",
-      "ult_cierre": "Falla Masiva"
      },
      {
       "o": "1-3OYEQ5C0",
@@ -22601,7 +22598,7 @@
       "o": "1-3OZOKEUA",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "16:02",
+      "hi": "16:28",
       "d": "SAN ENRIQUE 1890 EDIF. 7 DEPTO 201, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE SALAS MEDINA",
@@ -22745,13 +22742,25 @@
       "o": "1-3OZQHSDL",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "16:18",
+      "hi": "16:35",
       "d": "PJE LOS CARRERAS 544 CASA 992, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "RAFAEL VARGAS B",
       "visitas": 1,
       "ult_fecha": "12-11-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3OY44D99",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "17:39",
+      "d": "LAS BARRANCAS 2581 EDIF. A DEPTO 101, QUILPUE",
+      "e": "Pendiente",
+      "tec": "SEBASTIAN DOSSOW A",
+      "visitas": 2,
+      "ult_fecha": "10-11-2026",
+      "ult_cierre": "Falla Masiva"
      },
      {
       "o": "1-3OWBNBT5",
@@ -22788,16 +22797,6 @@
       "desde": "11-11-2026"
      },
      {
-      "o": "1-3OY44D99",
-      "cat": "Reparación",
-      "f": "16-19",
-      "hi": "16:53",
-      "d": "LAS BARRANCAS 2581 EDIF. A DEPTO 101, QUILPUE",
-      "e": "Pendiente",
-      "tec": "JOSE ROJO A",
-      "desde": "11-11-2026"
-     },
-     {
       "o": "1-3OYEQ5C0",
       "cat": "Alta 2 Play",
       "f": "10-13",
@@ -22816,10 +22815,20 @@
       "e": "Completado",
       "tec": "RAFAEL VARGAS B",
       "desde": "11-11-2026"
+     },
+     {
+      "o": "1-3OY44D99",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "17:39",
+      "d": "LAS BARRANCAS 2581 EDIF. A DEPTO 101, QUILPUE",
+      "e": "Pendiente",
+      "tec": "SEBASTIAN DOSSOW A",
+      "desde": "11-11-2026"
      }
     ]
    }
   }
  },
- "generado": "12-11-2026 16:15"
+ "generado": "12-11-2026 16:25"
 }
