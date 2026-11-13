@@ -22295,26 +22295,25 @@
    }
   },
   "13-11-2026": {
-   "hasta": "17:45",
-   "actividades": 153,
+   "hasta": "17:50",
+   "actividades": 155,
    "tecnicos": 31,
    "estados": {
-    "Completado": 85,
-    "Suspendido": 3,
-    "No Realizada": 35,
+    "Completado": 86,
+    "Suspendido": 4,
+    "No Realizada": 36,
     "Iniciado": 18,
-    "Pendiente": 6,
-    "en ruta": 2,
+    "Pendiente": 7,
     "Cancelado": 4
    },
-   "rgu": 207.2,
+   "rgu": 208.3,
    "caidas_total": 6,
    "caidas_activas": 6,
    "caidas_resueltas": 0,
-   "nuevas": 23,
+   "nuevas": 24,
    "al_bucket": 25,
    "repetidas": 37,
-   "reagendadas": 11,
+   "reagendadas": 12,
    "detalle": {
     "caidas": [
      {
@@ -22374,6 +22373,15 @@
     ],
     "nuevas": [
      {
+      "o": "1-3P18TPUR",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:48",
+      "d": "LUIS URIBE 150 CASA 6, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
       "o": "1-3P184M8Z",
       "tec": "GEEYSER PEREZ O",
       "cat": "Modificación de Servicio",
@@ -22389,7 +22397,7 @@
       "f": "16-19",
       "hi": "17:20",
       "d": "ALCALDE RODOLFO GALLEGUILLOS GATICA 2322, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3P168HB7",
@@ -22731,7 +22739,7 @@
       "f": "13-16",
       "hi": "15:46",
       "d": "PJE INTERIOR 1 635, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JORDAN ROA PEREZ",
       "visitas": 1,
       "ult_fecha": "26-10-2026",
@@ -22875,7 +22883,7 @@
       "f": "16-19",
       "hi": "17:15",
       "d": "MANUEL BULNES 969, QUILPUE",
-      "e": "Iniciado",
+      "e": "Suspendido",
       "tec": "LUIS CASTRO TORRES",
       "visitas": 1,
       "ult_fecha": "05-11-2026",
@@ -23092,7 +23100,16 @@
       "f": "16-19",
       "hi": "17:15",
       "d": "MANUEL BULNES 969, QUILPUE",
-      "e": "Iniciado",
+      "e": "Suspendido",
+      "tec": "LUIS CASTRO TORRES",
+      "desde": "10-11-2026"
+     },
+     {
+      "o": "1-3OV2HAGS",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "d": "MANUEL BULNES 969, QUILPUE",
+      "e": "Pendiente",
       "tec": "LUIS CASTRO TORRES",
       "desde": "10-11-2026"
      },
@@ -23139,5 +23156,5 @@
    }
   }
  },
- "generado": "13-11-2026 17:45"
+ "generado": "13-11-2026 17:50"
 }
