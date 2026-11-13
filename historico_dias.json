@@ -22295,25 +22295,25 @@
    }
   },
   "13-11-2026": {
-   "hasta": "12:33",
-   "actividades": 138,
+   "hasta": "12:38",
+   "actividades": 146,
    "tecnicos": 32,
    "estados": {
     "Completado": 25,
     "Suspendido": 2,
-    "Iniciado": 22,
-    "Pendiente": 67,
+    "Iniciado": 24,
+    "Pendiente": 72,
     "No Realizada": 20,
-    "Cancelado": 1,
+    "Cancelado": 2,
     "en ruta": 1
    },
-   "rgu": 198.5,
+   "rgu": 206.6,
    "caidas_total": 1,
    "caidas_activas": 1,
    "caidas_resueltas": 0,
-   "nuevas": 12,
+   "nuevas": 13,
    "al_bucket": 8,
-   "repetidas": 38,
+   "repetidas": 40,
    "reagendadas": 11,
    "detalle": {
     "caidas": [
@@ -22328,6 +22328,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3P0V76II",
+      "tec": "JOSE GALAZ D",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "12:37",
+      "d": "ALPACA 913, QUILPUE",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3P0TVZEH",
       "tec": "MARCELO GÓMEZ GÓME",
@@ -22439,6 +22448,18 @@
     ],
     "repetidas": [
      {
+      "o": "1-3P0TA2Q0",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "14:00",
+      "d": "ASADO AL PALO 143, QUILPUE",
+      "e": "Pendiente",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "visitas": 1,
+      "ult_fecha": "30-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3P0AQYNL",
       "cat": "Alta 1 Play",
       "f": "16-19",
@@ -22473,6 +22494,18 @@
       "visitas": 2,
       "ult_fecha": "10-11-2026",
       "ult_cierre": "Ductos tapados"
+     },
+     {
+      "o": "1-3P0S9O3B",
+      "cat": "Alta 1 Play",
+      "f": "16-19",
+      "hi": "17:57",
+      "d": "PJE 2 (EPSILON) 2181, QUILPUE",
+      "e": "Pendiente",
+      "tec": "CRISTOBAL SILVA LEIVA",
+      "visitas": 2,
+      "ult_fecha": "13-11-2026",
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3OVFM1VJ",
@@ -22526,7 +22559,7 @@
       "o": "1-3OZY7OUR",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:51",
+      "hi": "16:42",
       "d": "PATRICIO LYNCH 560 EDIF. 2 DEPTO 2303, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "GEEYSER PEREZ O",
@@ -22535,28 +22568,27 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3P09UC01",
-      "cat": "Alta 2 Play",
-      "f": "13-16",
-      "hi": "14:00",
-      "d": "COLO COLO 275, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JOEL GUSTAVE GUSTA",
-      "visitas": 2,
-      "ult_fecha": "09-11-2026",
-      "ult_cierre": "Sin apoyo vivienda-Pierrack"
-     },
-     {
       "o": "1-3OY71JZY",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:14",
+      "hi": "16:47",
       "d": "EDUARDO ALQUINTA 1260 CASA 44, QUILPUE",
       "e": "Pendiente",
       "tec": "JOEL GUSTAVE GUSTA",
       "visitas": 2,
       "ult_fecha": "10-11-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3P09UC01",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "d": "COLO COLO 275, VILLA ALEMANA",
+      "e": "Cancelado",
+      "tec": "JOEL GUSTAVE GUSTA",
+      "visitas": 2,
+      "ult_fecha": "09-11-2026",
+      "ult_cierre": "Sin apoyo vivienda-Pierrack"
      },
      {
       "o": "1-3OZPRW1M",
@@ -22646,7 +22678,7 @@
       "o": "1-3P0D4XD2",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "16:03",
+      "hi": "15:50",
       "d": "AV LOS CARRERA 2375 CASA A, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -22775,18 +22807,6 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3P06RE0B",
-      "cat": "Alta 1 Play",
-      "f": "10-13",
-      "hi": "11:20",
-      "d": "PJE 2 (EPSILON) 2181, QUILPUE",
-      "e": "No Realizada",
-      "tec": "MARCO PEREZ G",
-      "visitas": 1,
-      "ult_fecha": "12-11-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3OW55XQ2",
       "cat": "Migración 1 Play",
       "f": "16-19",
@@ -22838,7 +22858,7 @@
       "o": "1-3OZBL8PS",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "16:13",
+      "hi": "16:21",
       "d": "NUEVA ZELANDIA 151, QUILPUE",
       "e": "Pendiente",
       "tec": "RAFAEL VARGAS B",
@@ -22874,13 +22894,25 @@
       "o": "1-3OX49RKV",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "12:47",
+      "hi": "12:54",
       "d": "LOS INCAS 1543, QUILPUE",
       "e": "Pendiente",
       "tec": "SEBASTIAN DOSSOW A",
       "visitas": 5,
       "ult_fecha": "09-11-2026",
       "ult_cierre": "Sin acceso a vivienda"
+     },
+     {
+      "o": "1-3OZC3BUB",
+      "cat": "Migración 1 Play",
+      "f": "16-19",
+      "hi": "16:27",
+      "d": "CALLE 2 2287, QUILPUE",
+      "e": "Pendiente",
+      "tec": "SEBASTIAN DOSSOW A",
+      "visitas": 3,
+      "ult_fecha": "11-11-2026",
+      "ult_cierre": "Direccion no encontrada"
      },
      {
       "o": "1-3P0NWDUA",
@@ -22990,7 +23022,7 @@
       "o": "1-3OX49RKV",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "12:47",
+      "hi": "12:54",
       "d": "LOS INCAS 1543, QUILPUE",
       "e": "Pendiente",
       "tec": "SEBASTIAN DOSSOW A",
@@ -23010,5 +23042,5 @@
    }
   }
  },
- "generado": "13-11-2026 12:33"
+ "generado": "13-11-2026 12:38"
 }
