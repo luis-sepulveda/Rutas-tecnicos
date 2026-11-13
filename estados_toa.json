@@ -1,208 +1,50 @@
 {
-  "actualizado": "2026-11-12T21:14:58",
+  "actualizado": "2026-11-13T12:28:43",
   "resumen": {
-    "sin informacion": 4,
-    "reagendada": 12
+    "sin informacion": 1
   },
   "estados": {
-    "1-3OX49RKV": {
-      "tec": "CRISTOBAL SILVA LEIVA",
+    "1-3OZTMHU3": {
+      "tec": "JORDAN ROA PEREZ",
       "cat": "Alta 1 Play",
-      "franja_original": "16-19",
-      "d": "LOS INCAS 1543, QUILPUE",
+      "franja_original": "13-16",
+      "d": "COLO COLO 275, VILLA ALEMANA",
       "estado": "sin informacion",
       "nota": "la OT ya no existe en TOA",
       "contexto": {
-        "buscado": "LOS INCAS 1543",
+        "buscado": "COLO COLO 275",
         "aviso": "historial de la direccion, NO es el estado de esta orden",
         "filas": [
           {
-            "estado": "no realizada",
-            "color": "rgb(96, 206, 206)",
-            "ot": "1-3OW76TCX",
+            "estado": "cancelada",
+            "color": "rgb(128, 255, 128)",
+            "ot": "1-3OX92PZS",
             "franja": "10-13",
-            "texto": "1-3OW76TCX - 10-13-Alta-1 Play-LOS INCAS 1543Lun, 9 Nov"
+            "texto": "1-3OX92PZS - 10-13-Alta-1 Play-COLO COLO 275"
+          },
+          {
+            "estado": "reagendada",
+            "color": "rgb(255, 222, 0)",
+            "ot": "1-3P09UC01",
+            "franja": "13-16",
+            "texto": "1-3P09UC01 - 13-16-Alta-2 Play-COLO COLO 275"
           },
           {
             "estado": "no realizada",
             "color": "rgb(96, 206, 206)",
-            "ot": "1-3OW3YBX7",
-            "franja": "10-13",
-            "texto": "1-3OW3YBX7 - 10-13-Alta-1 Play-LOS INCAS 1543Lun, 9 Nov"
+            "ot": "1-3OX1TFMK",
+            "franja": "13-16",
+            "texto": "1-3OX1TFMK - 13-16-Alta-1 Play-COLO COLO 275Lun, 9 Nov"
           },
           {
             "estado": "no realizada",
             "color": "rgb(96, 206, 206)",
-            "ot": "1-3OVKQAXA",
+            "ot": "1-3ONWR8H9",
             "franja": "10-13",
-            "texto": "1-3OVKQAXA - 10-13-Alta-1 Play-LOS INCAS 1543Sab, 7 Nov"
-          },
-          {
-            "estado": "no realizada",
-            "color": "rgb(96, 206, 206)",
-            "ot": "1-3OVKCZ8R",
-            "franja": "10-13",
-            "texto": "1-3OVKCZ8R - 10-13-Alta-1 Play-LOS INCAS 1543Sab, 7 Nov"
+            "texto": "1-3ONWR8H9 - 10-13-Alta-1 Play-COLO COLO 275Lun, 9 Nov"
           }
         ]
       }
-    },
-    "1-3OZ1LSUA": {
-      "tec": "DANIEL NAVARRETE E",
-      "cat": "Reparación",
-      "franja_original": "16-19",
-      "d": "PJE DE GUINEA 1226, QUILPUE",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3OZ1LSUA - 10-13-Reparación-2 Play Servicio Degradado-PJE DE GUINEA 1226Sab, 14 Nov",
-      "franja_nueva": "10-13"
-    },
-    "1-3OTVAXO0": {
-      "tec": "FELIPE SILVA R",
-      "cat": "Alta 1 Play",
-      "franja_original": "13-16",
-      "d": "NAVARRA 1814 EDIF. D DEPTO 31, VILLA ALEMANA",
-      "estado": "sin informacion",
-      "nota": "la OT ya no existe en TOA",
-      "contexto": {
-        "buscado": "NAVARRA 1814",
-        "aviso": "historial de la direccion, NO es el estado de esta orden",
-        "filas": [
-          {
-            "estado": "completada",
-            "color": "rgb(121, 182, 235)",
-            "ot": "1-3NHVNHJ2",
-            "franja": "16-19",
-            "texto": "1-3NHVNHJ2 - 16-19-Modificación de Servicio-Mod Peticion-NAVARRA 1814 EDIF. D DEPTO 12Lun, 31 Ago"
-          }
-        ]
-      }
-    },
-    "1-3OZCQ2OC": {
-      "tec": "FELIPE SILVA R",
-      "cat": "Alta 1 Play",
-      "franja_original": "13-16",
-      "d": "AVENIDA VALPARAISO 853, VILLA ALEMANA",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3OZCQ2OC - 10-13-Alta-1 Play-AVENIDA VALPARAISO 853Vie, 13 Nov",
-      "franja_nueva": "10-13"
-    },
-    "1-3OZRAM3N": {
-      "tec": "FELIPE SILVA R",
-      "cat": "Alta 1 Play",
-      "franja_original": "16-19",
-      "d": "ISMAEL HUERTA LIRA 1473 CASA B, QUILPUE",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3OZRAM3N - 16-19-Alta-1 Play-ISMAEL HUERTA LIRA 1473 CASA BVie, 13 Nov",
-      "franja_nueva": "16-19"
-    },
-    "1-3OZV5BLA": {
-      "tec": "JOEL GUSTAVE GUSTA",
-      "cat": "Reparación",
-      "franja_original": "13-16",
-      "d": "MARIA MERCEDES 1482 EDIF. 10 DEPTO 303, VILLA ALEMANA",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3OZV5BLA - 10-13-Reparación-1 Play Servicio Degradado-MARIA MERCEDES 1482 EDIF. 10 DEPTO 303Vie, 13 Nov",
-      "franja_nueva": "10-13"
-    },
-    "1-3OYT3H65": {
-      "tec": "JOSE PEREZ RANGEL",
-      "cat": "Migración 1 Play",
-      "franja_original": "13-16",
-      "d": "PJE 2 260, QUILPUE",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3OYT3H65 - 13-16-Migración-Migración-PJE 2 260Mar, 17 Nov",
-      "franja_nueva": "13-16"
-    },
-    "1-3OZOKEUA": {
-      "tec": "JOSE SALAS MEDINA",
-      "cat": "Alta 1 Play",
-      "franja_original": "13-16",
-      "d": "SAN ENRIQUE 1890 EDIF. 7 DEPTO 201, VILLA ALEMANA",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3OZOKEUA - 10-13-Alta-1 Play-SAN ENRIQUE 1890 EDIF. 7 DEPTO 201Vie, 13 Nov",
-      "franja_nueva": "10-13"
-    },
-    "1-3OZ5ZN11": {
-      "tec": "JOSE SALAS MEDINA",
-      "cat": "Alta 1 Play",
-      "franja_original": "16-19",
-      "d": "PJE MALLORCA 57, VILLA ALEMANA",
-      "estado": "sin informacion",
-      "nota": "la OT ya no existe en TOA"
-    },
-    "1-3OZUGL2W": {
-      "tec": "KEVIN TAPIA RETAMAL",
-      "cat": "Alta 2 Play",
-      "franja_original": "16-19",
-      "d": "GABRIEL GONZALEZ VIDELA 1831 CASA B, QUILPUE",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3OZUGL2W - 10-13-Alta-2 Play-GABRIEL GONZALEZ VIDELA 1831 CASA BVie, 13 Nov",
-      "franja_nueva": "10-13"
-    },
-    "1-3OY26B93": {
-      "tec": "LUIS GATICA DAVILA",
-      "cat": "Alta 1 Play",
-      "franja_original": "10-13",
-      "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
-      "estado": "reagendada",
-      "color": "rgb(255, 170, 170)",
-      "detalle": "1-3OY26B93 - 10-13-Alta-1 Play-AVENIDA BALMACEDA 171Vie, 13 Nov",
-      "franja_nueva": "10-13"
-    },
-    "1-3OZ5DQ33": {
-      "tec": "LUIS GATICA DAVILA",
-      "cat": "Upgrade promoción",
-      "franja_original": "13-16",
-      "d": "LOS TREBOLES 210 CASA 291, VILLA ALEMANA",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3OZ5DQ33 - 13-16-Upgrade promoción-Upgrade promoción-LOS TREBOLES 210 CASA 291Mar, 17 Nov",
-      "franja_nueva": "13-16"
-    },
-    "1-3OZPBRJ4": {
-      "tec": "LUIS GATICA DAVILA",
-      "cat": "Alta 2 Play",
-      "franja_original": "13-16",
-      "d": "EL TAMARINDO 1436, VILLA ALEMANA",
-      "estado": "sin informacion",
-      "nota": "la OT ya no existe en TOA"
-    },
-    "1-3OZCTYF2": {
-      "tec": "MARCELO GÓMEZ GÓME",
-      "cat": "Reparación",
-      "franja_original": "16-19",
-      "d": "JUAN LUIS MARTINEZ 1177, VILLA ALEMANA",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3OZCTYF2 - 13-16-Reparación-3 Play Servicio Degradado-JUAN LUIS MARTINEZ 1177Vie, 13 Nov",
-      "franja_nueva": "13-16"
-    },
-    "1-3OZS18RN": {
-      "tec": "MARCO PEREZ G",
-      "cat": "Alta 1 Play",
-      "franja_original": "16-19",
-      "d": "ISIDORA 2805 DEPTO 43, QUILPUE",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3OZS18RN - 16-19-Alta-1 Play-ISIDORA 2805 DEPTO 43Vie, 13 Nov",
-      "franja_nueva": "16-19"
-    },
-    "1-3OXCH0N4": {
-      "tec": "SEBASTIAN DOSSOW A",
-      "cat": "Migración 1 Play",
-      "franja_original": "13-16",
-      "d": "EL BOSQUE 399 CASA 31, QUILPUE",
-      "estado": "reagendada",
-      "color": "rgb(255, 222, 0)",
-      "detalle": "1-3OXCH0N4 - 10-13-Migración-Migración-EL BOSQUE 399 CASA 31Lun, 16 Nov",
-      "franja_nueva": "10-13"
     }
   }
 }
