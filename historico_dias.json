@@ -22295,28 +22295,37 @@
    }
   },
   "13-11-2026": {
-   "hasta": "10:02",
-   "actividades": 122,
+   "hasta": "10:07",
+   "actividades": 123,
    "tecnicos": 33,
    "estados": {
-    "Iniciado": 27,
-    "Pendiente": 91,
+    "Iniciado": 25,
+    "Pendiente": 90,
+    "Completado": 3,
+    "en ruta": 3,
     "Cancelado": 1,
-    "Completado": 1,
-    "No Realizada": 1,
-    "en ruta": 1
+    "No Realizada": 1
    },
-   "rgu": 180.0,
+   "rgu": 181.0,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
-   "nuevas": 3,
+   "nuevas": 4,
    "al_bucket": 3,
    "repetidas": 35,
    "reagendadas": 9,
    "detalle": {
     "caidas": [],
     "nuevas": [
+     {
+      "o": "1-3P0OHNWB",
+      "tec": "JORGE PEZOA VICUÑA",
+      "cat": "Reparación",
+      "f": "10-13",
+      "hi": "11:33",
+      "d": "AV BAQUEDANO 1044 CASA 2, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3P0NWDUA",
       "tec": "YENDER BOSCAN CADENAS",
@@ -22374,7 +22383,7 @@
       "o": "1-3OZOQI72",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:57",
+      "hi": "16:21",
       "d": "FUENTE CLARA ORIENTE 905, QUILPUE",
       "e": "Pendiente",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -22822,7 +22831,7 @@
       "o": "1-3OZCQ2OC",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "10:06",
       "d": "AVENIDA VALPARAISO 853, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MARCELO GÓMEZ GÓME",
@@ -22862,5 +22871,5 @@
    }
   }
  },
- "generado": "13-11-2026 10:02"
+ "generado": "13-11-2026 10:07"
 }
