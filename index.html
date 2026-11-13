@@ -14344,7 +14344,8 @@ function mdaMigDiaHtml(mk, hoyIso){
   const ks = Object.keys(D).sort();
   const btns = '<span class="mdd-acts">' + ['Migraciones','Altas','Reparaciones'].map(function(f){
       return '<button class="' + (f === fam ? 'on' : '') + '" onclick="window.MDD_ACT=\'' + f + '\'; mdaRepintar()">' + f + '</button>'; }).join('') + '</span>';
-  const tit = '<div class="ct mdd-ct">' + fam + ' día a día ' + btns + '</div>';
+  /* (13-11-2026) Luis: "cambia el titulo a uno que haga referencia al detalle que mostramos" */
+  const tit = '<div class="ct mdd-ct">Estado de las actividades ' + btns + '</div>';
   if(!ks.length) return '<div class="mda-c mdd">' + tit + '<p class="mdd-nota">' + (cargando ? 'Cargando los datos de Actividades…' : 'Sin ' + fam.toLowerCase() + ' en este mes (hasta ayer).') + '</p></div>';
   const DW = ['do','lu','ma','mi','ju','vi','sá'], col = function(v){ return v === null ? '#94a3b8' : v >= MP_META ? '#15803d' : v >= MP_META - 5 ? '#b45309' : '#b91c1c'; };
   const nrNom = esMig ? 'Derivadas' : 'No realizadas', nrMin = nrNom.toLowerCase();
