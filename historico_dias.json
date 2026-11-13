@@ -22295,16 +22295,17 @@
    }
   },
   "13-11-2026": {
-   "hasta": "17:50",
+   "hasta": "18:00",
    "actividades": 155,
    "tecnicos": 31,
    "estados": {
-    "Completado": 86,
+    "Completado": 89,
     "Suspendido": 4,
-    "No Realizada": 36,
-    "Iniciado": 18,
-    "Pendiente": 7,
-    "Cancelado": 4
+    "No Realizada": 37,
+    "Iniciado": 15,
+    "Cancelado": 6,
+    "Pendiente": 2,
+    "en ruta": 2
    },
    "rgu": 208.3,
    "caidas_total": 6,
@@ -22424,7 +22425,7 @@
       "f": "16-19",
       "hi": "16:44",
       "d": "PATRICIO LYNCH 48, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "en ruta"
      },
      {
       "o": "1-3P16ADMA",
@@ -22596,23 +22597,11 @@
       "f": "16-19",
       "hi": "17:26",
       "d": "CALLE 2 01549 EDIF. E3 DEPTO 11, QUILPUE",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "ALEXIS JARA",
       "visitas": 1,
       "ult_fecha": "12-11-2026",
       "ult_cierre": "Zona Roja"
-     },
-     {
-      "o": "1-3OZB0R9V",
-      "cat": "Modificación de Servicio",
-      "f": "16-19",
-      "hi": "17:57",
-      "d": "AV LOS CARRERA 0567 CASA I, QUILPUE",
-      "e": "Pendiente",
-      "tec": "ALFREDO ALCAYAGA F",
-      "visitas": 1,
-      "ult_fecha": "11-11-2026",
-      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3P0TA2Q0",
@@ -22644,7 +22633,7 @@
       "f": "13-16",
       "hi": "15:37",
       "d": "ESPERANZA 1159, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "CRISTOBAL MIRANDA VALENC",
       "visitas": 1,
       "ult_fecha": "24-09-2026",
@@ -22685,6 +22674,18 @@
       "visitas": 1,
       "ult_fecha": "07-11-2026",
       "ult_cierre": "Direccion incorrecta"
+     },
+     {
+      "o": "1-3OZB0R9V",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "19:06",
+      "d": "AV LOS CARRERA 0567 CASA I, QUILPUE",
+      "e": "Pendiente",
+      "tec": "FELIPE SILVA R",
+      "visitas": 1,
+      "ult_fecha": "11-11-2026",
+      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3P09UC01",
@@ -22869,7 +22870,7 @@
       "o": "1-3P0S9O3B",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "18:44",
+      "hi": "19:09",
       "d": "PJE 2 (EPSILON) 2181, QUILPUE",
       "e": "Pendiente",
       "tec": "LEONEL HERNÁNDEZ OJE",
@@ -23109,7 +23110,7 @@
       "cat": "Modificación de Servicio",
       "f": "16-19",
       "d": "MANUEL BULNES 969, QUILPUE",
-      "e": "Pendiente",
+      "e": "Cancelado",
       "tec": "LUIS CASTRO TORRES",
       "desde": "10-11-2026"
      },
@@ -23146,9 +23147,9 @@
       "o": "1-3OZRAM3N",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:45",
+      "hi": "18:15",
       "d": "ISMAEL HUERTA LIRA 1473 CASA B, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "YENDER BOSCAN CADENAS",
       "desde": "12-11-2026"
      }
@@ -23156,5 +23157,5 @@
    }
   }
  },
- "generado": "13-11-2026 17:50"
+ "generado": "13-11-2026 18:00"
 }
