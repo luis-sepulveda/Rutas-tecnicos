@@ -14285,28 +14285,41 @@ function mesDetalleHtml(k){
     const FO = famOrd.filter(f => !hayF || GAd[f]);
     const famNR = grupo(nr, fam), famNRB = grupo(nrB, fam);
     const chip = q => '<span class="mda-q" style="background:' + MG_RCOL[q] + '">' + QN[q] + '</span>';
-    /* a) por actividad x quien */
-    let a = '<h4>Por actividad y de quién es la causa</h4><div class="ad-tbl"><table class="mda-tt"><thead><tr><th>Actividad</th><th>Asignadas</th><th>No realizadas</th><th>% de lo asignado</th><th>' + bTxt2 + '</th>'
-      + '<th style="color:' + MG_RCOL.cli + '">Cliente</th><th style="color:' + MG_RCOL.vtr + '">VTR/CLARO</th><th style="color:' + MG_RCOL.dom + '">Dominion</th><th>Códigos que más se repiten</th></tr></thead><tbody>';
+    /* (13-11-2026) Luis eligio la OPCION 2 de la muestra ("Mapa de calor"):
+       a) Por actividad: no realizadas grande, de cuantas asignadas, %, comparacion y una barra con la causa (cliente / VTR / Dominion).
+       b) Codigo x actividad: mapa de calor, mas oscuro = mas no realizadas, el color dice de quien es la causa.
+       Las dos van una al lado de la otra. Version anterior: index_antes_op2 (CONTEXTO, 13-11-2026). */
+    const pT = 100 * nr.length / (SA || 1), pTB = SBa ? 100 * nrB.length / SBa : null;
+    const rgb = hx => { const v = parseInt(String(hx).slice(1), 16); return [(v >> 16) & 255, (v >> 8) & 255, v & 255].join(','); };
+    const barCausa = function(q, tot){ return '<span class="mnr-stk">' + ['cli', 'vtr', 'dom'].map(x => q[x] ? '<i style="flex:' + q[x] + ';background:' + MG_RCOL[x] + '" title="' + MG_RNOM[x] + ': ' + q[x] + '"></i>' : '').join('') + '</span>'
+      + (tot ? '<span class="mnr-stkt">' + ['cli', 'vtr', 'dom'].map(x => '<b style="color:' + MG_RCOL[x] + '">' + Math.round(100 * q[x] / tot) + '%</b> ' + QN[x].toLowerCase()).join(' · ') + '</span>' : ''); };
+    const leyCausa = '<div class="mnr-ley">' + ['cli', 'vtr', 'dom'].map(x => '<span><i style="background:' + MG_RCOL[x] + '"></i>' + MG_RNOM[x] + '</span>').join('') + '</div>';
+    let a = '<div class="mnr-c"><h4>Por actividad <span class="mda-ayu">de quién es la causa · pasa el mouse por una fila para ver sus códigos</span></h4>' + leyCausa
+      + '<table class="mda-tt mnr-act"><thead><tr><th>Actividad</th><th>No realiz.</th><th>de</th><th>%</th><th>' + bTxt2 + '</th><th class="izq">Causa</th></tr></thead><tbody>';
     FO.forEach(function(f){ const l = famNR[f] || [], asig = (GAd[f] || []).length, pa = 100 * l.length / (asig || 1);
       const lb = famNRB[f] || [], ab2 = (GBd[f] || []).length, pb = ab2 ? 100 * lb.length / ab2 : null;
       const q = { cli:0, vtr:0, dom:0 }, cc = {}; l.forEach(r => { q[quien(r)]++; const c = r['Código de Cierre'] || 'Sin código'; cc[c] = (cc[c] || 0) + 1; });
-      a += '<tr><td><b>' + f + '</b></td><td class="nu">' + nf(asig) + '</td><td class="nu bad">' + nf(l.length) + '</td><td class="nu">' + p1(pa) + '</td><td class="nu">' + fl(pa, pb, true) + '</td>'
-        + ['cli', 'vtr', 'dom'].map(x => '<td class="nu">' + (q[x] ? nf(q[x]) + ' <small>' + Math.round(100 * q[x] / (l.length || 1)) + '%</small>' : '–') + '</td>').join('')
-        + '<td>' + Object.keys(cc).sort((x, y) => cc[y] - cc[x]).slice(0, 3).map(c => '<span class="mda-cod"><i style="background:' + MG_RCOL[mgResp(c)] + '"></i>' + escR(c) + ' <b>' + cc[c] + '</b></span>').join('') + '</td></tr>'; });
-    const pT = 100 * nr.length / (SA || 1), pTB = SBa ? 100 * nrB.length / SBa : null;
-    a += '<tr class="mda-tot"><td>Total</td><td class="nu">' + nf(SA) + '</td><td class="nu">' + nf(nr.length) + '</td><td class="nu">' + p1(pT) + '</td><td class="nu">' + fl(pT, pTB, true) + '</td>'
-      + ['cli', 'vtr', 'dom'].map(x => '<td class="nu">' + nf(Q[x]) + ' <small>' + Math.round(100 * Q[x] / nr.length) + '%</small></td>').join('') + '<td></td></tr></tbody></table></div>';
-    /* b) por codigo x actividad */
+      const tip = Object.keys(cc).sort((x, y) => cc[y] - cc[x]).slice(0, 5).map(c => c + ': ' + cc[c]).join('\n');
+      a += '<tr title="' + escR(tip || 'sin no realizadas') + '"><td><b>' + f + '</b></td><td class="nu mnr-n">' + nf(l.length) + '</td><td class="nu mnr-de">' + nf(asig) + '</td><td class="nu"><b>' + p1(pa) + '</b></td><td class="nu">' + fl(pa, pb, true) + '</td>'
+        + '<td class="mnr-cau">' + (l.length ? barCausa(q, l.length) : '<span class="mda-cero">–</span>') + '</td></tr>'; });
+    a += '<tr class="mda-tot"><td>Total</td><td class="nu mnr-n">' + nf(nr.length) + '</td><td class="nu">' + nf(SA) + '</td><td class="nu">' + p1(pT) + '</td><td class="nu">' + fl(pT, pTB, true) + '</td><td class="mnr-cau">' + barCausa(Q, nr.length) + '</td></tr></tbody></table></div>';
+    /* b) codigo x actividad: mapa de calor */
     const codsB = {}; nrB.forEach(r => { const c = r['Código de Cierre'] || 'Sin código'; codsB[c] = (codsB[c] || 0) + 1; });
-    let b = '<h4>Por código de cierre</h4><div class="ad-tbl"><table class="mda-tt"><thead><tr><th>Código</th><th>De quién</th><th>Total</th><th>% de las no realizadas</th>'
-      + FO.map(f => '<th>' + f + '</th>').join('') + '<th>% ' + bTxt2 + '</th></tr></thead><tbody>';
-    topC.forEach(function(c){ const l = nr.filter(r => (r['Código de Cierre'] || 'Sin código') === c), g = grupo(l, fam);
-      const d = codsB[c] || 0;
-      b += '<tr><td>' + escR(c) + '</td><td>' + chip(mgResp(c)) + '</td><td class="nu"><b>' + cods[c] + '</b></td><td class="nu">' + p1(100 * cods[c] / nr.length) + '</td>'
-        + FO.map(f => '<td class="nu">' + (g[f] ? g[f].length : '<span class="mda-cero">–</span>') + '</td>').join('')
-        + '<td class="nu">' + (nrB.length ? fl(100 * cods[c] / nr.length, 100 * d / nrB.length, true) + ' <span class="mda-ayu">(' + P2(100 * d / nrB.length) + '%)</span>' : '') + '</td></tr>'; });
-    b += '</tbody></table></div>';
+    const CX = {}; topC.forEach(c => { CX[c] = grupo(nr.filter(r => (r['Código de Cierre'] || 'Sin código') === c), fam); });
+    let mxC = 1; topC.forEach(c => FO.forEach(f => { const v = CX[c][f] ? CX[c][f].length : 0; if(v > mxC) mxC = v; }));
+    const celda = function(v, q){
+      if(!v) return '<td class="mnr-hc mnr-0">·</td>';
+      const k = v / mxC, al = (0.12 + 0.78 * Math.sqrt(k)).toFixed(2);
+      return '<td class="mnr-hc" style="background:rgba(' + rgb(MG_RCOL[q]) + ',' + al + ');color:' + (k > 0.35 ? '#fff' : '#1f2937') + '">' + v + '</td>'; };
+    let b = '<div class="mnr-c"><h4>Código × actividad <span class="mda-ayu">más oscuro = más no realizadas · el color dice de quién es la causa</span></h4>'
+      + '<table class="mda-tt mnr-hm"><thead><tr><th>Código</th>' + FO.map(f => '<th>' + f + '</th>').join('') + '<th>Total</th><th>' + bTxt2 + '</th></tr></thead><tbody>';
+    topC.forEach(function(c){ const q = mgResp(c), d = codsB[c] || 0, pc = 100 * cods[c] / nr.length, pcB = nrB.length ? 100 * d / nrB.length : null;
+      b += '<tr><td class="mnr-cod" title="' + escR(MG_RNOM[q]) + '"><i style="background:' + MG_RCOL[q] + '"></i>' + escR(c) + '</td>'
+        + FO.map(f => celda(CX[c][f] ? CX[c][f].length : 0, q)).join('')
+        + '<td class="nu"><b>' + cods[c] + '</b> <small class="mnr-pc">' + p1(pc) + '</small></td>'
+        + '<td class="nu"' + (pcB !== null ? ' title="' + bTxt2 + ': ' + P2(pcB) + '% de las no realizadas"' : '') + '>' + (pcB !== null ? fl(pc, pcB, true) : '') + '</td></tr>'; });
+    b += '<tr class="mda-tot"><td>Total</td>' + FO.map(f => '<td class="nu mnr-hcT">' + nf((famNR[f] || []).length) + '</td>').join('') + '<td class="nu">' + nf(nr.length) + '</td><td class="nu">' + fl(pT, pTB, true) + '</td></tr></tbody></table></div>';
+    a = '<div class="mnr-g">' + a; b = b + '</div>';
     /* c) por franja x quien */
     const frs = Object.keys(grupo(LL, r => r['Franja'])).sort();
     let c = '<h4>Por franja</h4><div class="ad-tbl"><table class="mda-tt"><thead><tr><th>Franja</th><th>Asignadas</th><th>No realizadas</th><th>% de lo asignado</th><th style="color:' + MG_RCOL.cli + '">Cliente</th><th style="color:' + MG_RCOL.vtr + '">VTR/CLARO</th><th style="color:' + MG_RCOL.dom + '">Dominion</th><th>Sin moradores</th></tr></thead><tbody>';
@@ -21028,6 +21041,26 @@ setInterval(function(){ try { anPintar(); anDetPintar(); } catch(e){ console.war
   .mdd-acts button.on { background:#1e3a5f; border-color:#1e3a5f; color:#fff; }
   .mdd-ayu { display:block; margin:0 0 6px; }
   /* (13-11-2026) botones de dia (lunes a sabado) del Detalle de las no realizadas */
+  /* (13-11-2026) OPCION 2 del Detalle de las no realizadas: actividad + mapa de calor codigo x actividad */
+  .mnr-g { display:grid; grid-template-columns:auto auto; justify-content:start; gap:28px; align-items:start; margin-bottom:14px; }
+  @media(max-width:1350px){ .mnr-g { grid-template-columns:1fr; } }
+  .mnr-c { min-width:0; overflow-x:auto; }
+  .mnr-c table { width:auto; }
+  .mnr-ley { display:flex; gap:14px; font-size:11.5px; color:#64748b; margin:0 0 6px; flex-wrap:wrap; }
+  .mnr-ley i { display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:4px; vertical-align:-1px; }
+  .mnr-act td { padding-top:7px; padding-bottom:7px; }
+  .mnr-n { color:#b91c1c; font-weight:800; font-size:15px; } .mda-tot .mnr-n { color:inherit; }
+  .mnr-de { color:#94a3b8; }
+  .mnr-cau { min-width:210px; }
+  .mnr-stk { display:flex; height:9px; border-radius:5px; overflow:hidden; background:#eef2f6; }
+  .mnr-stk i { display:block; height:100%; }
+  .mnr-stkt { display:block; font-size:10.5px; color:#64748b; margin-top:3px; white-space:nowrap; }
+  .mnr-hm th { text-align:center; } .mnr-hm th:first-child { text-align:left; }
+  .mnr-hm td.mnr-hc { min-width:64px; text-align:center; font-weight:700; border:2px solid #fff; border-radius:6px; }
+  .mnr-hm td.mnr-0 { background:#f8fafc; color:#d5dde7; font-weight:400; }
+  .mnr-hm td.mnr-hcT { text-align:center; }
+  .mnr-cod { min-width:220px; white-space:nowrap; } .mnr-cod i { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:7px; }
+  .mnr-pc { color:#94a3b8; font-weight:500; }
   .mda-nrd { margin:4px 0 12px; display:flex; flex-direction:column; gap:6px; }
   .mda-nrd-f { display:flex; flex-wrap:wrap; align-items:center; gap:6px; }
   .mda-nrd-dias { padding:6px 8px; background:#f1f5f9; border-radius:10px; align-self:flex-start; }
