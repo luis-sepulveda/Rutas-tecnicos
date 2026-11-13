@@ -14303,6 +14303,107 @@ function mesDetalleHtml(k){
    Visitadas = completadas + no realizadas (con GSA). Derivacion = derivadas / visitadas = 100 - completitud. */
 function mdaMigDiaHtml(mk, hoyIso){
   if(!MG || !MG.filas) return '';
+  /* (13-11-2026) Luis: "agregame el estado de todas las migraciones, cargadas, las que desaparecen de las bandejas, las reagendadas".
+     Mismas reglas de la vista Gerencia (mgAgrupar):
+     - Cargadas = las que terminaron el dia en una bandeja de Dominion + las que nos sacaron y no volvieron ese mismo dia (o.u de Gerencia)
+     - Nos sacaron = desaparecieron de la bandeja del tecnico sin que la tocara (historico_dias.json del monitor, desde el 15-09)
+     - Reagendadas = vienen de otro dia: misma orden que el monitor ya habia visto en un dia anterior (historico_dias.json)
+     - Completitud y derivacion NO cambian: completadas / (completadas + derivadas), GSA como derivada.
+     Para volver a la tabla de antes: MDD_ESTADOS = false. */
+  if(typeof MDD_ESTADOS !== 'undefined' && !MDD_ESTADOS) return mdaMigDiaHtmlViejo(mk, hoyIso);
+  if(!DIAS && !diasFallo && !window.MDD_ESPERA){ window.MDD_ESPERA = 1; try { asegurarDias(); } catch(e){}
+    let n = 0; const t = setInterval(function(){ n++; if(DIAS || diasFallo || n > 40){ clearInterval(t); window.MDD_ESPERA = 0; try { mdaRepintar(); } catch(e){} } }, 500); }
+  /* (13-11-2026) Luis: "coloca 3 botones, migraciones, altas y reparaciones, que me muestren este mismo detalle por actividad".
+     Altas y Reparaciones: mismas fuentes que "Completitud como VTR" (vtrFam): act_completos los dias con export completo
+     (incluye otras comunas) y datos.json el resto. Altas incluye Alta Traslado (familiaCat). */
+  const fam = window.MDD_ACT || 'Migraciones', esMig = fam === 'Migraciones';
+  const D = {}, M = {}, pon = function(x){ (D[x.iso] = D[x.iso] || []).push(x); };
+  let cargando = false;
+  if(esMig) MG.filas.forEach(function(x){ if(x.mes === mk && x.iso < hoyIso) pon(x); });
+  else {
+    const AC = window.AN_ACTCOMP, diasC = {};
+    if(AC && Array.isArray(AC.dias)) AC.dias.forEach(function(d){ diasC[String(d)] = 1; });
+    if(AC && Array.isArray(AC.filas)) AC.filas.forEach(function(r){
+      const iso = String(r[0] || ''); if(iso.slice(0, 6) !== mk || !(iso < hoyIso)) return;
+      if(familiaCat((AC.tipos || [])[r[4]]) !== fam) return;
+      pon({ iso: iso, e: String(r[1] || '').trim(), cod: String((AC.cods || [])[r[2]] || '').trim(), gsa: !!r[8], ot: String(r[3] || '') }); });
+    if(Array.isArray(window.ACT_FILAS)) window.ACT_FILAS.forEach(function(r){
+      const nom = String(r['Nombre'] || ''); if(nom.indexOf('_DOMI_') < 0 || familiaCat(r['Tipo de Actividad']) !== fam) return;
+      const pz = /^(\d{2})-(\d{2})-(\d{4})$/.exec(String(r['Fecha'] || '')); if(!pz) return; const iso = pz[3] + pz[2] + pz[1];
+      if(iso.slice(0, 6) !== mk || !(iso < hoyIso) || diasC[iso]) return;
+      pon({ iso: iso, e: String(r['Estado'] || '').trim(), cod: String(r['Código de Cierre'] || '').trim(), gsa: String(r['gsa'] || '') === '1', ot: String(r['Orden de Trabajo'] || '') }); });
+    else { try { mesCargar(); } catch(e){} cargando = true; }
+  }
+  if(DIAS) Object.keys(DIAS).forEach(function(f){
+    const det = DIAS[f] && DIAS[f].detalle; if(!det) return;
+    const iso = mgIsoDia(f); if(iso.slice(0, 6) !== mk || iso >= hoyIso) return;
+    const o = M[iso] = { des:[], desOk:false, reag:0, reagOk:false };
+    if(Array.isArray(det.caidas)){ o.desOk = true; det.caidas.forEach(function(c){ if(familiaCat(c.cat) === fam) o.des.push({ c: c, iso: iso }); }); }
+    if(Array.isArray(det.reagendadas)){ o.reagOk = true; det.reagendadas.forEach(function(c){ if(familiaCat(c.cat) === fam) o.reag++; }); }
+  });
+  const ks = Object.keys(D).sort();
+  const btns = '<span class="mdd-acts">' + ['Migraciones','Altas','Reparaciones'].map(function(f){
+      return '<button class="' + (f === fam ? 'on' : '') + '" onclick="window.MDD_ACT=\'' + f + '\'; mdaRepintar()">' + f + '</button>'; }).join('') + '</span>';
+  const tit = '<div class="ct mdd-ct">' + fam + ' día a día ' + btns + '</div>';
+  if(!ks.length) return '<div class="mda-c mdd">' + tit + '<p class="mdd-nota">' + (cargando ? 'Cargando los datos de Actividades…' : 'Sin ' + fam.toLowerCase() + ' en este mes (hasta ayer).') + '</p></div>';
+  const DW = ['do','lu','ma','mi','ju','vi','sá'], col = function(v){ return v === null ? '#94a3b8' : v >= MP_META ? '#15803d' : v >= MP_META - 5 ? '#b45309' : '#b91c1c'; };
+  const nrNom = esMig ? 'Derivadas' : 'No realizadas', nrMin = nrNom.toLowerCase();
+  /* estado de cada dia */
+  const est = function(L, m){
+    const s = mpSt(L); s.ca = 0; s.su = 0;
+    L.forEach(function(x){ if(x.e === 'Cancelado') s.ca++; else if(x.e === 'Suspendido') s.su++; });
+    s.a = L.length; s.desOk = !!(m && m.desOk); s.reagOk = !!(m && m.reagOk);
+    s.des = m ? m.des : []; s.reag = m ? m.reag : 0; s.dest = {};
+    s.des.forEach(function(d){ const t = mgDestino(d); s.dest[t] = (s.dest[t] || 0) + 1; });
+    s.fuera = s.des.length - (s.dest.otro || 0) - (s.dest.canc || 0) - (s.dest.mismo || 0);
+    s.u = s.a + s.fuera;
+    return s;
+  };
+  const S = ks.map(function(k){ return est(D[k], M[k]); });
+  const T = { co:0, nr:0, g:0, ca:0, su:0, ab:0, a:0, fuera:0, u:0, des:[], reag:0, dest:{}, desOk:false, reagOk:false };
+  S.forEach(function(s){ ['co','nr','g','ca','su','ab','a','fuera','u','reag'].forEach(function(c){ T[c] += s[c]; });
+    T.des = T.des.concat(s.des); if(s.desOk) T.desOk = true; if(s.reagOk) T.reagOk = true;
+    Object.keys(s.dest).forEach(function(t){ T.dest[t] = (T.dest[t] || 0) + s.dest[t]; }); });
+  T.vis = T.co + T.nr; T.comp = T.vis ? 100 * T.co / T.vis : null;
+  const mx = Math.max.apply(null, S.map(function(s){ return s.u; }).concat([1]));
+  const cero = function(n, cls){ return n ? '<span class="' + (cls || '') + '">' + n + '</span>' : '<span class="mdd-0">0</span>'; };
+  const tipDes = function(s){ return Object.keys(MG_DEST).filter(function(t){ return s.dest[t]; }).map(function(t){ return s.dest[t] + ' · ' + MG_DEST[t][0]; }).join('\n'); };
+  const fila = function(lab, s, tot){
+    const de = s.vis ? 100 - s.comp : null, otras = s.ca + s.su + s.ab;
+    return '<tr' + (tot ? ' class="tot"' : '') + '><td>' + lab + '</td>'
+      + '<td class="mdd-car" title="' + s.a + ' terminaron el día en una bandeja de Dominion' + (s.fuera ? ' + ' + s.fuera + ' que nos sacaron y no volvieron ese día' : '') + '"><b>' + s.u + '</b></td>'
+      + '<td>' + s.co + '</td>'
+      + '<td>' + s.nr + (s.g ? ' <span class="mda-gsa" title="de ellas, cerradas por GSA (VTR las cuenta como quiebre)">' + s.g + ' GSA</span>' : '') + '</td>'
+      + '<td>' + cero(s.ca) + '</td><td>' + cero(s.su) + '</td><td>' + cero(s.ab) + '</td>'
+      + '<td class="mdd-sep"' + (s.des.length ? ' title="' + tipDes(s) + '"' : '') + '>' + (s.desOk ? cero(s.des.length, 'mdd-am') : '<span class="mdd-0" title="sin registro del monitor ese día">–</span>') + '</td>'
+      + '<td>' + (s.reagOk ? cero(s.reag, 'mdd-az') : '<span class="mdd-0" title="sin registro del monitor ese día">–</span>') + '</td>'
+      + '<td class="mdd-sep"><b style="color:' + col(s.comp) + '">' + (s.comp === null ? '–' : P2(s.comp) + '%') + '</b></td><td>' + (de === null ? '–' : P2(de) + '%') + '</td>'
+      + (tot ? '<td></td>' : '<td class="bar"><span class="mda-bar mdd-bar">'
+          + '<i style="width:' + (100 * s.co / mx) + '%;background:#22c55e" title="completadas ' + s.co + '"></i>'
+          + '<i style="width:' + (100 * s.nr / mx) + '%;background:#ef4444" title="' + nrMin + ' ' + s.nr + '"></i>'
+          + '<i style="width:' + (100 * otras / mx) + '%;background:#cbd5e1" title="canceladas, suspendidas y sin cerrar ' + otras + '"></i>'
+          + '<i style="width:' + (100 * s.fuera / mx) + '%;background:#f59e0b" title="nos las sacaron y no volvieron ese día ' + s.fuera + '"></i></span></td>') + '</tr>';
+  };
+  const ayu = 'como VTR: GSA cuenta como ' + (esMig ? 'derivada' : 'no realizada') + ' · incluye otras comunas' + (fam === 'Altas' ? ' · incluye Alta Traslado' : '') + ' · hasta ayer · barra: verde completadas, rojo ' + nrMin + ', gris canceladas/suspendidas/sin cerrar, ámbar nos las sacaron'
+    + (!DIAS ? (diasFallo ? ' · <b>no se pudo bajar historico_dias.json</b>' : ' · cargando las que se sacaron y reagendadas…') : '');
+  return '<div class="mda-c mdd">' + tit + '<div class="mda-ayu mdd-ayu">' + ayu + '</div>'
+    + '<div class="mdd-scroll"><table class="mda-t mdd-t"><thead>'
+    + '<tr class="mdd-g"><th></th><th colspan="6">Estado de las que se cargaron</th><th colspan="2" class="mdd-sep">Movimientos en las bandejas</th><th colspan="2" class="mdd-sep">Como mide VTR</th><th></th></tr>'
+    + '<tr><th>Día</th>'
+    + '<th title="Todo lo que llegó a una bandeja de un técnico de Dominion, pasara lo que pasara: también las que nos sacaron y no volvieron ese día">Cargadas</th>'
+    + '<th>Completadas</th><th>' + nrNom + '</th><th>Canceladas</th><th>Suspendidas</th><th title="quedaron sin cerrar (pendiente, iniciada o en ruta) al final del día">Sin cerrar</th>'
+    + '<th class="mdd-sep" title="Desaparecieron de la bandeja del técnico sin que la tocara (pasa el mouse por el número para ver qué pasó después)">Nos sacaron</th>'
+    + '<th title="Vienen de otro día: misma orden que el monitor ya había visto en un día anterior (la plataforma las reagendó)">Reagendadas</th>'
+    + '<th class="mdd-sep">Completitud</th><th>' + (esMig ? 'Derivación' : '% no realizadas') + '</th><th></th></tr></thead><tbody>'
+    + ks.map(function(k, i){ const dt = new Date(+k.slice(0, 4), +k.slice(4, 6) - 1, +k.slice(6, 8)); return fila(DW[dt.getDay()] + ' ' + k.slice(6, 8) + '-' + k.slice(4, 6), S[i]); }).join('')
+    + fila('<b>Total del mes</b>', T, true)
+    + '</tbody></table></div>'
+    + '<p class="mdd-nota">Cargadas = completadas + ' + nrMin + ' + canceladas + suspendidas + sin cerrar + las que nos sacaron y no volvieron ese día. '
+    + '"Nos sacaron" y "Reagendadas" salen del monitor (solo Quilpué y Villa Alemana); no cambian la completitud.</p></div>';
+}
+var MDD_ESTADOS = true;
+function mdaMigDiaHtmlViejo(mk, hoyIso){
+  if(!MG || !MG.filas) return '';
   const D = {}; MG.filas.forEach(function(x){ if(x.mes === mk && x.iso < hoyIso) (D[x.iso] = D[x.iso] || []).push(x); });
   const ks = Object.keys(D).sort(); if(!ks.length) return '';
   const DW = ['do','lu','ma','mi','ju','vi','sá'], col = function(v){ return v === null ? '#94a3b8' : v >= MP_META ? '#15803d' : v >= MP_META - 5 ? '#b45309' : '#b91c1c'; };
@@ -20866,6 +20967,19 @@ setInterval(function(){ try { anPintar(); anDetPintar(); } catch(e){ console.war
   .mdd-t th { position:sticky; top:0; background:#fff; } .mdd-t td.bar { width:32%; }
   .mdd-t tr.tot td { border-top:2px solid #cbd5e1; font-weight:700; background:#f8fafc; }
   .mdd-bar { display:flex; } .mdd-bar i { display:block; height:100%; }
+  /* (13-11-2026) estado de todas las migraciones en el dia a dia */
+  .mdd-t tr.mdd-g th { font-size:10px; color:#64748b; text-transform:uppercase; letter-spacing:.04em; text-align:center; border-bottom:1px solid #e2e8f0; top:auto; position:static; }
+  .mdd-t .mdd-sep { border-left:1px solid #e2e8f0; }
+  .mdd-t td.mdd-car b { color:#1e3a8a; }
+  .mdd-0 { color:#cbd5e1; } .mdd-am { color:#b45309; font-weight:700; } .mdd-az { color:#1d4ed8; font-weight:700; }
+  .mdd-nota { margin:6px 2px 0; font-size:11px; color:#64748b; }
+  /* (13-11-2026) botones Migraciones / Altas / Reparaciones del dia a dia */
+  .mdd-ct { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  .mdd-acts { display:inline-flex; gap:6px; text-transform:none; letter-spacing:0; }
+  .mdd-acts button { border:1px solid #cbd5e1; background:#fff; color:#334155; border-radius:999px; padding:3px 12px; font:600 12px/1.4 inherit; cursor:pointer; }
+  .mdd-acts button:hover { border-color:#2563eb; color:#1d4ed8; }
+  .mdd-acts button.on { background:#1e3a5f; border-color:#1e3a5f; color:#fff; }
+  .mdd-ayu { display:block; margin:0 0 6px; }
   .mda-cq-full { display:block; margin-top:10px; }
   .mda-cq-x { float:right; margin-left:10px; } .mda-cq-x2 { float:right; margin-top:10px; }
   .mda-cq .cqm-g { margin-top:10px; margin-bottom:0; }
