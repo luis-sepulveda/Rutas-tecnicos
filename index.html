@@ -14239,26 +14239,68 @@ function mesDetalleHtml(k){
   h += '<div class="mda-g mda-f3">' + caja('Por franja', r => r['Franja'], (a, b) => a.localeCompare(b), null, 'Franja') + caja('Por comuna', r => r['Ciudad'], null, null, 'Comuna') + caja('Por supervisor', r => r['supervisor'], null, pieSup, 'Supervisor') + '</div>';
 
   /* DESPLEGABLE 1: DETALLE DE LAS NO REALIZADAS */
+  const nrMes = nr, nrMesB = nrB;     /* (13-11-2026) para los botones de dia de abajo */
   if(nrAb && nr.length){
-    const FO = famOrd;
+    /* (13-11-2026) Luis: botones de cada dia, de lunes a sabado, para ver este detalle dia a dia.
+       Con un dia elegido (window.MDA_NR_DIA = 'dd-mm-aaaa') todo el desplegable se calcula solo con ese dia, y la
+       columna de comparacion pasa a ser contra el MES (el promedio del mes en curso), en vez de contra el mes anterior. */
+    /* (13-11-2026, v2) Luis: "al lado de Todo el mes los botones de las semanas, y dentro de cada semana los botones de cada dia".
+       Fila 1: Todo el mes · Semana NN · Semana NN ... Al tocar una semana se filtra esa semana y abajo aparecen sus dias (lu a sá).
+       Al tocar un dia se filtra solo ese dia. Semana o dia elegido se comparan contra el mes en curso ("vs mes"). */
+    const dwDe = d => new Date(+d.slice(6), +d.slice(3, 5) - 1, +d.slice(0, 2)).getDay();
+    const DWN = ['do','lu','ma','mi','ju','vi','sá'];
+    const semDe = d => mgLunes(d.slice(6) + d.slice(3, 5) + d.slice(0, 2));
+    const diasLS = dias.filter(d => dwDe(d) !== 0);
+    const SEMS = {}, semOrd = [];
+    diasLS.forEach(function(d){ const k = semDe(d); if(!SEMS[k]){ SEMS[k] = {}; semOrd.push(k); } SEMS[k][dwDe(d)] = d; });
+    let dSel = window.MDA_NR_DIA && diasLS.indexOf(window.MDA_NR_DIA) >= 0 ? window.MDA_NR_DIA : null;
+    const sSel = dSel ? semDe(dSel) : (window.MDA_NR_SEM && SEMS[window.MDA_NR_SEM] ? window.MDA_NR_SEM : null);
+    const enSel = r => dSel ? r['Fecha'] === dSel : sSel ? semDe(String(r['Fecha'] || '')) === sSel : true;
+    const hayF = !!(dSel || sSel);
+    const LL = hayF ? L.filter(enSel) : L;
+    const nr0 = nrMes, nrB0 = nrMesB;
+    const nr = hayF ? nr0.filter(enSel) : nr0;                                  // las no realizadas que se muestran
+    const nrB = hayF ? nr0 : nrB0;                                               // contra que se compara
+    const bTxt2 = hayF ? 'vs mes' : bTxt;
+    const GAd = grupo(LL, fam), GBd = hayF ? GA : GB, SA = LL.length, SBa = hayF ? S.a : SB.a;
+    const Q = { cli:0, vtr:0, dom:0 }; nr.forEach(r => Q[quien(r)]++);
+    const cods = {}; nr.forEach(r => { const c = r['Código de Cierre'] || 'Sin código'; cods[c] = (cods[c] || 0) + 1; });
+    const topC = Object.keys(cods).sort((x, y) => cods[y] - cods[x]);
+    const dm = x => String(x.getDate()).padStart(2, '0') + '-' + String(x.getMonth() + 1).padStart(2, '0');
+    const rangoSem = function(k){ const lun = new Date(+k.slice(0, 4), +k.slice(5, 7) - 1, +k.slice(8, 10)), sab = new Date(lun); sab.setDate(lun.getDate() + 5); return dm(lun) + ' al ' + dm(sab); };
+    const nSem = k => nr0.filter(r => semDe(String(r['Fecha'] || '')) === k).length;
+    const botD = '<div class="mda-nrd">'
+      + '<div class="mda-nrd-f"><span class="mda-nrd-l">Ver</span>'
+      +   '<button class="' + (!hayF ? 'on' : '') + '" onclick="window.MDA_NR_SEM=null; window.MDA_NR_DIA=null; mdaRepintar()">Todo el mes<small>' + nr0.length + '</small></button>'
+      +   semOrd.map(k => '<button class="sem' + (sSel === k ? ' on' : '') + '" onclick="window.MDA_NR_SEM=\'' + k + '\'; window.MDA_NR_DIA=null; mdaRepintar()" title="' + rangoSem(k) + ': ' + nSem(k) + ' no realizadas">Semana ' + derNumSemana(k) + '<em>' + rangoSem(k) + '</em><small>' + nSem(k) + '</small></button>').join('')
+      + '</div>'
+      + (sSel ? '<div class="mda-nrd-f mda-nrd-dias"><span class="mda-nrd-l">Días de la semana ' + derNumSemana(sSel) + '</span>'
+          + '<button class="' + (!dSel ? 'on' : '') + '" onclick="window.MDA_NR_DIA=null; mdaRepintar()">Toda la semana<small>' + nSem(sSel) + '</small></button>'
+          + [1, 2, 3, 4, 5, 6].map(function(w){ const d = SEMS[sSel][w];
+              if(!d) return '<span class="mda-nrd-v" title="sin datos">' + DWN[w] + ' –</span>';
+              const n = nr0.filter(r => r['Fecha'] === d).length;
+              return '<button class="' + (dSel === d ? 'on' : '') + '" onclick="window.MDA_NR_SEM=\'' + sSel + '\'; window.MDA_NR_DIA=\'' + d + '\'; mdaRepintar()" title="' + d + ': ' + n + ' no realizadas">' + DWN[w] + ' ' + d.slice(0, 2) + '<small>' + n + '</small></button>'; }).join('')
+          + '</div>' : '')
+      + '</div>';
+    const FO = famOrd.filter(f => !hayF || GAd[f]);
     const famNR = grupo(nr, fam), famNRB = grupo(nrB, fam);
     const chip = q => '<span class="mda-q" style="background:' + MG_RCOL[q] + '">' + QN[q] + '</span>';
     /* a) por actividad x quien */
-    let a = '<h4>Por actividad y de quién es la causa</h4><div class="ad-tbl"><table class="mda-tt"><thead><tr><th>Actividad</th><th>Asignadas</th><th>No realizadas</th><th>% de lo asignado</th><th>' + bTxt + '</th>'
+    let a = '<h4>Por actividad y de quién es la causa</h4><div class="ad-tbl"><table class="mda-tt"><thead><tr><th>Actividad</th><th>Asignadas</th><th>No realizadas</th><th>% de lo asignado</th><th>' + bTxt2 + '</th>'
       + '<th style="color:' + MG_RCOL.cli + '">Cliente</th><th style="color:' + MG_RCOL.vtr + '">VTR/CLARO</th><th style="color:' + MG_RCOL.dom + '">Dominion</th><th>Códigos que más se repiten</th></tr></thead><tbody>';
-    FO.forEach(function(f){ const l = famNR[f] || [], asig = GA[f].length, pa = 100 * l.length / (asig || 1);
-      const lb = famNRB[f] || [], ab2 = (GB[f] || []).length, pb = ab2 ? 100 * lb.length / ab2 : null;
+    FO.forEach(function(f){ const l = famNR[f] || [], asig = (GAd[f] || []).length, pa = 100 * l.length / (asig || 1);
+      const lb = famNRB[f] || [], ab2 = (GBd[f] || []).length, pb = ab2 ? 100 * lb.length / ab2 : null;
       const q = { cli:0, vtr:0, dom:0 }, cc = {}; l.forEach(r => { q[quien(r)]++; const c = r['Código de Cierre'] || 'Sin código'; cc[c] = (cc[c] || 0) + 1; });
       a += '<tr><td><b>' + f + '</b></td><td class="nu">' + nf(asig) + '</td><td class="nu bad">' + nf(l.length) + '</td><td class="nu">' + p1(pa) + '</td><td class="nu">' + fl(pa, pb, true) + '</td>'
         + ['cli', 'vtr', 'dom'].map(x => '<td class="nu">' + (q[x] ? nf(q[x]) + ' <small>' + Math.round(100 * q[x] / (l.length || 1)) + '%</small>' : '–') + '</td>').join('')
         + '<td>' + Object.keys(cc).sort((x, y) => cc[y] - cc[x]).slice(0, 3).map(c => '<span class="mda-cod"><i style="background:' + MG_RCOL[mgResp(c)] + '"></i>' + escR(c) + ' <b>' + cc[c] + '</b></span>').join('') + '</td></tr>'; });
-    const pT = 100 * nr.length / (S.a || 1), pTB = SB.a ? 100 * nrB.length / SB.a : null;
-    a += '<tr class="mda-tot"><td>Total</td><td class="nu">' + nf(S.a) + '</td><td class="nu">' + nf(nr.length) + '</td><td class="nu">' + p1(pT) + '</td><td class="nu">' + fl(pT, pTB, true) + '</td>'
+    const pT = 100 * nr.length / (SA || 1), pTB = SBa ? 100 * nrB.length / SBa : null;
+    a += '<tr class="mda-tot"><td>Total</td><td class="nu">' + nf(SA) + '</td><td class="nu">' + nf(nr.length) + '</td><td class="nu">' + p1(pT) + '</td><td class="nu">' + fl(pT, pTB, true) + '</td>'
       + ['cli', 'vtr', 'dom'].map(x => '<td class="nu">' + nf(Q[x]) + ' <small>' + Math.round(100 * Q[x] / nr.length) + '%</small></td>').join('') + '<td></td></tr></tbody></table></div>';
     /* b) por codigo x actividad */
     const codsB = {}; nrB.forEach(r => { const c = r['Código de Cierre'] || 'Sin código'; codsB[c] = (codsB[c] || 0) + 1; });
     let b = '<h4>Por código de cierre</h4><div class="ad-tbl"><table class="mda-tt"><thead><tr><th>Código</th><th>De quién</th><th>Total</th><th>% de las no realizadas</th>'
-      + FO.map(f => '<th>' + f + '</th>').join('') + '<th>% ' + bTxt + '</th></tr></thead><tbody>';
+      + FO.map(f => '<th>' + f + '</th>').join('') + '<th>% ' + bTxt2 + '</th></tr></thead><tbody>';
     topC.forEach(function(c){ const l = nr.filter(r => (r['Código de Cierre'] || 'Sin código') === c), g = grupo(l, fam);
       const d = codsB[c] || 0;
       b += '<tr><td>' + escR(c) + '</td><td>' + chip(mgResp(c)) + '</td><td class="nu"><b>' + cods[c] + '</b></td><td class="nu">' + p1(100 * cods[c] / nr.length) + '</td>'
@@ -14266,16 +14308,16 @@ function mesDetalleHtml(k){
         + '<td class="nu">' + (nrB.length ? fl(100 * cods[c] / nr.length, 100 * d / nrB.length, true) + ' <span class="mda-ayu">(' + P2(100 * d / nrB.length) + '%)</span>' : '') + '</td></tr>'; });
     b += '</tbody></table></div>';
     /* c) por franja x quien */
-    const frs = Object.keys(grupo(L, r => r['Franja'])).sort();
+    const frs = Object.keys(grupo(LL, r => r['Franja'])).sort();
     let c = '<h4>Por franja</h4><div class="ad-tbl"><table class="mda-tt"><thead><tr><th>Franja</th><th>Asignadas</th><th>No realizadas</th><th>% de lo asignado</th><th style="color:' + MG_RCOL.cli + '">Cliente</th><th style="color:' + MG_RCOL.vtr + '">VTR/CLARO</th><th style="color:' + MG_RCOL.dom + '">Dominion</th><th>Sin moradores</th></tr></thead><tbody>';
-    frs.forEach(function(fr){ const asig = L.filter(r => r['Franja'] === fr).length, l = nr.filter(r => r['Franja'] === fr);
+    frs.forEach(function(fr){ const asig = LL.filter(r => r['Franja'] === fr).length, l = nr.filter(r => r['Franja'] === fr);
       const q = { cli:0, vtr:0, dom:0 }; l.forEach(r => q[quien(r)]++); const sm = l.filter(r => /sin morador/i.test(r['Código de Cierre'] || '')).length;
       c += '<tr><td><b>' + escR(fr) + '</b></td><td class="nu">' + nf(asig) + '</td><td class="nu bad">' + nf(l.length) + '</td><td class="nu">' + p1(100 * l.length / (asig || 1)) + '</td>'
         + ['cli', 'vtr', 'dom'].map(x => '<td class="nu">' + (q[x] || '–') + '</td>').join('') + '<td class="nu">' + (sm || '–') + '</td></tr>'; });
     c += '</tbody></table></div>';
-    h += '<div class="ad-card mda-desp" id="mdaNR"><div class="mda-dh"><h3>Detalle de las no realizadas · ' + nf(nr.length) + '</h3><span class="mda-ayu">'
-      + p1(pT) + ' de lo asignado · ' + bTxt + ': ' + fl(pT, pTB, true) + ' · la causa se reparte con la misma regla de MIGRACIONES</span>'
-      + '<button class="mda-lnk" onclick="window.MDA_NR=false; mdaRepintar()">Ocultar ▴</button></div>' + a + b + c + '</div>';
+    h += '<div class="ad-card mda-desp" id="mdaNR"><div class="mda-dh"><h3>Detalle de las no realizadas · ' + nf(nr.length) + (dSel ? ' · ' + DWN[dwDe(dSel)] + ' ' + dSel.slice(0, 5) : sSel ? ' · semana ' + derNumSemana(sSel) + ' (' + rangoSem(sSel) + ')' : '') + '</h3><span class="mda-ayu">'
+      + p1(pT) + ' de lo asignado · ' + bTxt2 + ': ' + fl(pT, pTB, true) + ' · la causa se reparte con la misma regla de MIGRACIONES</span>'
+      + '<button class="mda-lnk" onclick="window.MDA_NR=false; mdaRepintar()">Ocultar ▴</button></div>' + botD + (nr.length ? a + b + c : '<p class="ad-vacio">' + (dSel ? 'Ese día' : 'Esa semana') + ' no hubo no realizadas.</p>') + '</div>';
   }
 
   /* DESPLEGABLE 2: TECNICO POR TECNICO (igual que antes) */
@@ -20985,6 +21027,17 @@ setInterval(function(){ try { anPintar(); anDetPintar(); } catch(e){ console.war
   .mdd-acts button:hover { border-color:#2563eb; color:#1d4ed8; }
   .mdd-acts button.on { background:#1e3a5f; border-color:#1e3a5f; color:#fff; }
   .mdd-ayu { display:block; margin:0 0 6px; }
+  /* (13-11-2026) botones de dia (lunes a sabado) del Detalle de las no realizadas */
+  .mda-nrd { margin:4px 0 12px; display:flex; flex-direction:column; gap:6px; }
+  .mda-nrd-f { display:flex; flex-wrap:wrap; align-items:center; gap:6px; }
+  .mda-nrd-dias { padding:6px 8px; background:#f1f5f9; border-radius:10px; align-self:flex-start; }
+  .mda-nrd-l { font-size:11px; font-weight:700; color:#64748b; margin-right:2px; }
+  .mda-nrd-v { font-size:12px; color:#cbd5e1; padding:4px 8px; }
+  .mda-nrd button { border:1px solid #cbd5e1; background:#fff; color:#334155; border-radius:8px; padding:4px 10px; font:600 12px/1.3 inherit; cursor:pointer; display:inline-flex; gap:6px; align-items:baseline; }
+  .mda-nrd button em { font-style:normal; font-weight:500; font-size:10.5px; color:#64748b; }
+  .mda-nrd button small { color:#dc2626; font-weight:700; font-size:10.5px; }
+  .mda-nrd button:hover { border-color:#2563eb; color:#1d4ed8; }
+  .mda-nrd button.on { background:#1e3a5f; border-color:#1e3a5f; color:#fff; } .mda-nrd button.on small { color:#fecaca; } .mda-nrd button.on em { color:#cbd5e1; }
   .mda-cq-full { display:block; margin-top:10px; }
   .mda-cq-x { float:right; margin-left:10px; } .mda-cq-x2 { float:right; margin-top:10px; }
   .mda-cq .cqm-g { margin-top:10px; margin-bottom:0; }
@@ -22444,5 +22497,48 @@ window.addEventListener('keydown', function(e){
 setInterval(function(){ try { if(AN_COMV) anComPintar(); } catch(_){} }, 60000);
 </script>
 
+<style>
+  /* (13-11-2026) CRUZ DE LECTURA en todas las tablas: al pasar el mouse por una casilla se marcan su fila y su columna.
+     Se pinta con una capa transparente (box-shadow) para no tapar los colores de semaforo de las casillas. */
+  tr.xh-row > td, tr.xh-row > th, td.xh-col, th.xh-col { box-shadow: inset 0 0 0 999px rgba(59,130,246,.13); }
+  tr > td.xh-cel, tr > th.xh-cel, tr.xh-row > .xh-cel { box-shadow: inset 0 0 0 999px rgba(37,99,235,.28); outline: 2px solid #2563eb; outline-offset: -2px; }
+</style>
+<script>
+/* (13-11-2026) Luis: "como el detalle es harto podriamos demarcar la fila y la columna ... si me posiciono con el mouse
+   en la columna de migraciones y en la fila de falla masiva justo en el 1, demarcar esta fila y columna con algun color".
+   Funciona solo en todas las tablas del Modulo (tambien las que se dibujan despues). Se salta tablas chicas
+   (menos de 3 columnas o menos de 2 filas). Para apagarlo: XH_ACTIVO = false. */
+var XH_ACTIVO = true;
+(function(){
+  let tabla = null, cel = null, marcadas = [];
+  const limpiar = function(){ marcadas.forEach(function(e){ e.classList.remove('xh-row', 'xh-col', 'xh-cel'); }); marcadas = []; tabla = null; cel = null; };
+  /* posicion real de la casilla en la fila, contando las que ocupan varias columnas (colspan) */
+  const colDe = function(c){ let i = 0, x = c.parentElement.firstElementChild; while(x && x !== c){ i += x.colSpan || 1; x = x.nextElementSibling; } return i; };
+  document.addEventListener('mouseover', function(ev){
+    if(!XH_ACTIVO) return;
+    const c = ev.target.closest && ev.target.closest('td, th');
+    if(!c){ if(tabla) limpiar(); return; }
+    if(c === cel) return;
+    const t = c.closest('table'); if(!t){ limpiar(); return; }
+    const filas = t.rows; if(filas.length < 3) { limpiar(); return; }
+    limpiar();
+    const ci = colDe(c), span = c.colSpan || 1;
+    let maxCol = 0;
+    for(let r = 0; r < Math.min(filas.length, 5); r++){ let n = 0; for(const x of filas[r].cells) n += x.colSpan || 1; if(n > maxCol) maxCol = n; }
+    if(maxCol < 3) return;
+    tabla = t; cel = c;
+    const tr = c.parentElement; if(tr.parentElement && tr.parentElement.tagName !== 'THEAD'){ tr.classList.add('xh-row'); marcadas.push(tr); }
+    if(filas.length <= 2000) for(let r = 0; r < filas.length; r++){
+      if(filas[r].closest('table') !== t) continue;
+      let i = 0;
+      for(const x of filas[r].cells){ const sp = x.colSpan || 1;
+        if(i <= ci && ci < i + sp && sp <= span + 1){ x.classList.add('xh-col'); marcadas.push(x); break; }
+        i += sp; if(i > ci) break; }
+    }
+    c.classList.add('xh-cel'); marcadas.push(c);
+  });
+  document.addEventListener('mouseleave', limpiar);
+})();
+</script>
 </body>
 </html>
