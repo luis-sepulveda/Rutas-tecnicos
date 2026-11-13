@@ -1,10 +1,20 @@
 {
-  "actualizado": "2026-11-13T16:46:05",
+  "actualizado": "2026-11-13T17:16:16",
   "resumen": {
-    "reagendada": 1,
+    "reagendada": 4,
     "sin informacion": 2
   },
   "estados": {
+    "1-3P0S1E1W": {
+      "tec": "ALFREDO ALCAYAGA F",
+      "cat": "Alta 1 Play",
+      "franja_original": "13-16",
+      "d": "ALCALDE ALEJANDRO PERALTA 812, VILLA ALEMANA",
+      "estado": "reagendada",
+      "color": "rgb(255, 222, 0)",
+      "detalle": "1-3P0S1E1W - 10-13-Alta-1 Play-ALCALDE ALEJANDRO PERALTA 812Sab, 14 Nov",
+      "franja_nueva": "10-13"
+    },
     "1-3OXU97SC": {
       "tec": "CRISTOBAL SILVA LEIVA",
       "cat": "Alta 2 Play",
@@ -72,8 +82,8 @@
             "estado": "reagendada",
             "color": "rgb(255, 222, 0)",
             "ot": "1-3P16BXV7",
-            "franja": "10-13",
-            "texto": "1-3P16BXV7 - 10-13-Alta-2 Play-COLO COLO 275Sab, 14 Nov"
+            "franja": "13-16",
+            "texto": "1-3P16BXV7 - 13-16-Alta-2 Play-COLO COLO 275Lun, 16 Nov"
           },
           {
             "estado": "cancelada",
@@ -105,6 +115,26 @@
           }
         ]
       }
+    },
+    "1-3P0RJV6T": {
+      "tec": "MATIAS APELEO APELEO",
+      "cat": "Alta 1 Play",
+      "franja_original": "13-16",
+      "d": "PJE ALTAMIRA 110, VILLA ALEMANA",
+      "estado": "reagendada",
+      "color": "rgb(255, 222, 0)",
+      "detalle": "1-3P0RJV6T - 16-19-Alta-1 Play-PJE ALTAMIRA 110Lun, 16 Nov",
+      "franja_nueva": "16-19"
+    },
+    "1-3OZOQI72": {
+      "tec": "RAFAEL VARGAS B",
+      "cat": "Alta 2 Play",
+      "franja_original": "16-19",
+      "d": "FUENTE CLARA ORIENTE 905, QUILPUE",
+      "estado": "reagendada",
+      "color": "rgb(255, 222, 0)",
+      "detalle": "1-3OZOQI72 - 10-13-Alta-2 Play-FUENTE CLARA ORIENTE 905Sab, 14 Nov",
+      "franja_nueva": "10-13"
     }
   }
 }
