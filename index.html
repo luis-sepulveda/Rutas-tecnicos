@@ -14373,9 +14373,9 @@ function mdaMigDiaHtml(mk, hoyIso){
     const de = s.vis ? 100 - s.comp : null, otras = s.ca + s.su + s.ab;
     return '<tr' + (tot ? ' class="tot"' : '') + '><td>' + lab + '</td>'
       + '<td class="mdd-car" title="' + s.a + ' terminaron el día en una bandeja de Dominion' + (s.fuera ? ' + ' + s.fuera + ' que nos sacaron y no volvieron ese día' : '') + '"><b>' + s.u + '</b></td>'
-      + '<td>' + s.co + '</td>'
-      + '<td>' + s.nr + (s.g ? ' <span class="mda-gsa" title="de ellas, cerradas por GSA (VTR las cuenta como quiebre)">' + s.g + ' GSA</span>' : '') + '</td>'
-      + '<td>' + cero(s.ca) + '</td><td>' + cero(s.su) + '</td><td>' + cero(s.ab) + '</td>'
+      + '<td>' + cero(s.co, 'mdd-co') + '</td>'
+      + '<td>' + cero(s.nr, 'mdd-nr') + (s.g ? ' <span class="mda-gsa" title="de ellas, cerradas por GSA (VTR las cuenta como quiebre)">' + s.g + ' GSA</span>' : '') + '</td>'
+      + '<td>' + cero(s.ca, 'mdd-ca') + '</td><td>' + cero(s.su, 'mdd-su') + '</td><td>' + cero(s.ab) + '</td>'
       + '<td class="mdd-sep"' + (s.des.length ? ' title="' + tipDes(s) + '"' : '') + '>' + (s.desOk ? cero(s.des.length, 'mdd-am') : '<span class="mdd-0" title="sin registro del monitor ese día">–</span>') + '</td>'
       + '<td>' + (s.reagOk ? cero(s.reag, 'mdd-az') : '<span class="mdd-0" title="sin registro del monitor ese día">–</span>') + '</td>'
       + '<td class="mdd-sep"><b style="color:' + col(s.comp) + '">' + (s.comp === null ? '–' : P2(s.comp) + '%') + '</b></td><td>' + (de === null ? '–' : P2(de) + '%') + '</td>'
@@ -20972,7 +20972,11 @@ setInterval(function(){ try { anPintar(); anDetPintar(); } catch(e){ console.war
   .mdd-t tr.mdd-g th { font-size:10px; color:#64748b; text-transform:uppercase; letter-spacing:.04em; text-align:center; border-bottom:1px solid #e2e8f0; top:auto; position:static; }
   .mdd-t .mdd-sep { border-left:1px solid #e2e8f0; }
   .mdd-t td.mdd-car b { color:#1e3a8a; }
-  .mdd-0 { color:#cbd5e1; } .mdd-am { color:#b45309; font-weight:700; } .mdd-az { color:#1d4ed8; font-weight:700; }
+  .mdd-0 { color:#cbd5e1; } .mdd-am { color:#b45309; font-weight:700; } .mdd-az { color:#7c3aed; font-weight:700; }
+  /* (13-11-2026) colores por estado: completadas azul (distinto del azul marino de cargadas), derivadas rojo, canceladas gris, suspendidas calipso.
+     Reagendadas pasa de azul a morado para no confundirse con completadas. */
+  .mdd-co { color:#2563eb; font-weight:700; } .mdd-nr { color:#dc2626; font-weight:700; }
+  .mdd-ca { color:#64748b; font-weight:700; } .mdd-su { color:#0891b2; font-weight:700; }
   .mdd-nota { margin:6px 2px 0; font-size:11px; color:#64748b; }
   /* (13-11-2026) botones Migraciones / Altas / Reparaciones del dia a dia */
   .mdd-ct { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
