@@ -14219,6 +14219,7 @@ function mesDetalleHtml(k){
         return '<button onclick="mdSemAbrir(\'' + d + '\', ' + (SM.ef === null ? 'null' : Math.round(SM.ef * 10) / 10) + ')" title="' + d + ': ' + s.co + ' de ' + s.a + ' (' + p1(s.ef) + ')"><span class="col"><i class="' + (s.ef >= SM.ef ? 'ok' : 'bad') + '" style="height:' + (s.ef || 0) + '%">' + (dias.length <= 14 ? Math.round(s.ef) + '%' : '') + '</i></span><span class="l">' + (dias.length <= 10 ? dw + ' ' + d.slice(0, 2) : (dias.length <= 16 || di % 3 === 0) ? d.slice(0, 2) : '&nbsp;') + '</span></button>'; }).join('')
     + '</div><div class="mda-ayu" style="margin-top:3px">Verde: sobre el promedio del mes (' + p1(SM.ef) + ') · Rojo: bajo el promedio</div></div>';
   h += '<div class="mda-g mda-f2">' + actHtml + porQueHtml + diaHtml + '</div>';
+  try { h += mdaMigDiaHtml(mesK, hoyIso); } catch(e){ console.warn('migraciones dia a dia:', e); }   /* (12-11-2026, 21:20) */
 
   /* FILA 3: franja, comuna, supervisor */
   const nomBonito = x => String(x).toLowerCase().replace(/(^|\s)\S/g, c => c.toUpperCase());
@@ -14295,6 +14296,30 @@ function mesDetalleHtml(k){
 
 /* (07-11-2026, 11:40) el detalle del mes se puede abrir en la pantalla principal (PV_MES) o dentro de Mi análisis (AN_DET.mes).
    Los clics de adentro llaman a mdaRepintar(), que repinta donde esté abierto. */
+
+/* ===== MIGRACIONES DIA A DIA DENTRO DEL DETALLE DEL MES (12-11-2026, 21:20) =====
+   Luis: "agrega una que muestre dia a dia porfa dentro de cada mes" (completadas, derivadas y sus %). Misma cuenta que
+   "Completitud como VTR" de la fila 1: migraciones de MG (incluye otras comunas), GSA como quiebre, solo dias hasta ayer.
+   Visitadas = completadas + no realizadas (con GSA). Derivacion = derivadas / visitadas = 100 - completitud. */
+function mdaMigDiaHtml(mk, hoyIso){
+  if(!MG || !MG.filas) return '';
+  const D = {}; MG.filas.forEach(function(x){ if(x.mes === mk && x.iso < hoyIso) (D[x.iso] = D[x.iso] || []).push(x); });
+  const ks = Object.keys(D).sort(); if(!ks.length) return '';
+  const DW = ['do','lu','ma','mi','ju','vi','sá'], col = function(v){ return v === null ? '#94a3b8' : v >= MP_META ? '#15803d' : v >= MP_META - 5 ? '#b45309' : '#b91c1c'; };
+  const T = mpSt([].concat.apply([], ks.map(function(k){ return D[k]; })));
+  const mx = Math.max.apply(null, ks.map(function(k){ return mpSt(D[k]).vis; }).concat([1]));
+  const fila = function(lab, s, tot){
+    const de = s.vis ? 100 - s.comp : null;
+    return '<tr' + (tot ? ' class="tot"' : '') + '><td>' + lab + '</td><td>' + s.vis + '</td><td>' + s.co + '</td><td>' + s.nr + (s.g ? ' <span class="mda-gsa" title="de ellas, cerradas por GSA (VTR las cuenta como quiebre)">' + s.g + ' GSA</span>' : '') + '</td>'
+      + '<td><b style="color:' + col(s.comp) + '">' + (s.comp === null ? '–' : P2(s.comp) + '%') + '</b></td><td>' + (de === null ? '–' : P2(de) + '%') + '</td>'
+      + (tot ? '<td></td>' : '<td class="bar"><span class="mda-bar mdd-bar"><i style="width:' + Math.round(100 * s.co / mx) + '%;background:#22c55e"></i><i style="width:' + Math.round(100 * s.nr / mx) + '%;background:#ef4444"></i></span></td>') + '</tr>';
+  };
+  return '<div class="mda-c mdd"><div class="ct">Migraciones día a día <span class="mda-ayu">como VTR: GSA cuenta como derivada · incluye otras comunas · hasta ayer · barra: verde completadas, rojo derivadas</span></div>'
+    + '<div class="mdd-scroll"><table class="mda-t mdd-t"><thead><tr><th>Día</th><th>Visitadas</th><th>Completadas</th><th>Derivadas</th><th>Completitud</th><th>Derivación</th><th></th></tr></thead><tbody>'
+    + ks.map(function(k){ const dt = new Date(+k.slice(0, 4), +k.slice(4, 6) - 1, +k.slice(6, 8)); return fila(DW[dt.getDay()] + ' ' + k.slice(6, 8) + '-' + k.slice(4, 6), mpSt(D[k])); }).join('')
+    + fila('<b>Total del mes</b>', T, true)
+    + '</tbody></table></div></div>';
+}
 function mdaRepintar(){ const m = document.getElementById('anDet');
   if(typeof AN_DET !== 'undefined' && AN_DET && AN_DET.mes && m && m.classList.contains('abierto')) anDetPintar(); else pintarPortada(); }
 
@@ -20836,6 +20861,11 @@ setInterval(function(){ try { anPintar(); anDetPintar(); } catch(e){ console.war
   .mda-cq .cq-est { margin-top:10px; }
   .mda-cq-btn { margin-top:10px; border:1px dashed #94a3b8; background:#f8fafc; color:#1e3a5f; border-radius:10px; padding:10px 16px; font:600 13.5px inherit; cursor:pointer; }
   .mda-cq-btn:hover { background:#eff6ff; border-color:#2563eb; } .mda-cq-btn small { color:#64748b; font-weight:500; }
+  /* (12-11-2026, 21:20) Migraciones dia a dia en el Detalle del mes */
+  .mdd { margin-bottom:12px; } .mdd-scroll { max-height:420px; overflow-y:auto; }
+  .mdd-t th { position:sticky; top:0; background:#fff; } .mdd-t td.bar { width:32%; }
+  .mdd-t tr.tot td { border-top:2px solid #cbd5e1; font-weight:700; background:#f8fafc; }
+  .mdd-bar { display:flex; } .mdd-bar i { display:block; height:100%; }
   .mda-cq-full { display:block; margin-top:10px; }
   .mda-cq-x { float:right; margin-left:10px; } .mda-cq-x2 { float:right; margin-top:10px; }
   .mda-cq .cqm-g { margin-top:10px; margin-bottom:0; }
