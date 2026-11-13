@@ -22295,22 +22295,23 @@
    }
   },
   "13-11-2026": {
-   "hasta": "09:37",
-   "actividades": 114,
+   "hasta": "09:47",
+   "actividades": 118,
    "tecnicos": 33,
    "estados": {
-    "en ruta": 19,
-    "Pendiente": 92,
+    "en ruta": 12,
+    "Pendiente": 93,
+    "Iniciado": 11,
     "Cancelado": 1,
-    "Iniciado": 2
+    "Completado": 1
    },
-   "rgu": 171.0,
+   "rgu": 176.0,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
    "nuevas": 2,
    "al_bucket": 3,
-   "repetidas": 31,
+   "repetidas": 33,
    "reagendadas": 9,
    "detalle": {
     "caidas": [],
@@ -22351,9 +22352,9 @@
       "o": "1-3P028BGZ",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "09:30",
+      "hi": "09:42",
       "d": "LEUCOTON 1100 EDIF. 3 DEPTO 407, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "CESAR MENA OLIVEROS",
       "visitas": 2,
       "ult_fecha": "12-11-2026",
@@ -22492,12 +22493,24 @@
       "ult_cierre": "Falta de dotación"
      },
      {
+      "o": "1-3P0NFJHM",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "13:04",
+      "d": "MARGA MARGA 2305 CASA 27, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOSE CASTRO P",
+      "visitas": 1,
+      "ult_fecha": "07-11-2026",
+      "ult_cierre": "Direccion incorrecta"
+     },
+     {
       "o": "1-3P05FYBL",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "09:33",
+      "hi": "09:40",
       "d": "FLAMARION 01042, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JOSE ROJO A",
       "visitas": 2,
       "ult_fecha": "04-11-2026",
@@ -22507,7 +22520,7 @@
       "o": "1-3P0AIDX8",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "11:17",
+      "hi": "11:24",
       "d": "ALEMPARTE 0492 CASA A, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -22519,9 +22532,9 @@
       "o": "1-3OY26B93",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "09:30",
+      "hi": "09:45",
       "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JOSE SALAS MEDINA",
       "visitas": 12,
       "ult_fecha": "10-11-2026",
@@ -22543,7 +22556,7 @@
       "o": "1-3OXW685N",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "10:26",
+      "hi": "10:28",
       "d": "ARANDA 0490 CASA 1, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JUAN ARRIAGADA C",
@@ -22627,8 +22640,20 @@
       "o": "1-3OZOKEUA",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:47",
       "d": "SAN ENRIQUE 1890 EDIF. 7 DEPTO 201, VILLA ALEMANA",
+      "e": "Iniciado",
+      "tec": "MATIAS APELEO APELEO",
+      "visitas": 1,
+      "ult_fecha": "12-11-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3P01YI55",
+      "cat": "Alta 1 Play",
+      "f": "10-13",
+      "hi": "11:41",
+      "d": "ESPERANZA 1134, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
       "visitas": 1,
@@ -22723,7 +22748,7 @@
       "o": "1-3OZV5BLA",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "12:01",
+      "hi": "11:50",
       "d": "MARIA MERCEDES 1482 EDIF. 10 DEPTO 303, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE CASTRO P",
@@ -22733,9 +22758,9 @@
       "o": "1-3OY26B93",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "09:30",
+      "hi": "09:45",
       "d": "AVENIDA BALMACEDA 171, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JOSE SALAS MEDINA",
       "desde": "11-11-2026"
      },
@@ -22748,16 +22773,6 @@
       "e": "Pendiente",
       "tec": "LUIS CASTRO TORRES",
       "desde": "10-11-2026"
-     },
-     {
-      "o": "1-3OZCTYF2",
-      "cat": "Reparación",
-      "f": "13-16",
-      "hi": "13:00",
-      "d": "JUAN LUIS MARTINEZ 1177, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "LUIS GATICA DAVILA",
-      "desde": "12-11-2026"
      },
      {
       "o": "1-3OZUGL2W",
@@ -22780,12 +22795,22 @@
       "desde": "12-11-2026"
      },
      {
+      "o": "1-3OZCTYF2",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "14:09",
+      "d": "JUAN LUIS MARTINEZ 1177, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "MARCELO GÓMEZ GÓME",
+      "desde": "12-11-2026"
+     },
+     {
       "o": "1-3OZOKEUA",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:47",
       "d": "SAN ENRIQUE 1890 EDIF. 7 DEPTO 201, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "MATIAS APELEO APELEO",
       "desde": "12-11-2026"
      },
@@ -22803,5 +22828,5 @@
    }
   }
  },
- "generado": "13-11-2026 09:37"
+ "generado": "13-11-2026 09:47"
 }
