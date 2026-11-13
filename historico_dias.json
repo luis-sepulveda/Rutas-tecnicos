@@ -22295,20 +22295,21 @@
    }
   },
   "13-11-2026": {
-   "hasta": "09:27",
-   "actividades": 115,
+   "hasta": "09:37",
+   "actividades": 114,
    "tecnicos": 33,
    "estados": {
     "en ruta": 19,
-    "Pendiente": 95,
-    "Cancelado": 1
+    "Pendiente": 92,
+    "Cancelado": 1,
+    "Iniciado": 2
    },
-   "rgu": 172.0,
+   "rgu": 171.0,
    "caidas_total": 0,
    "caidas_activas": 0,
    "caidas_resueltas": 0,
    "nuevas": 2,
-   "al_bucket": 0,
+   "al_bucket": 3,
    "repetidas": 31,
    "reagendadas": 9,
    "detalle": {
@@ -22325,12 +22326,12 @@
      },
      {
       "o": "1-3P0N9M5Q",
-      "tec": "LUIS CASTRO TORRES",
+      "tec": "LEONEL HERNÁNDEZ OJE",
       "cat": "Modificación de Servicio",
       "f": "16-19",
       "hi": "17:29",
       "d": "LIBERTAD 352, QUILPUE",
-      "e": "Pendiente"
+      "e": "Iniciado"
      }
     ],
     "repetidas": [
@@ -22551,6 +22552,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3P0N9M5Q",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "09:32",
+      "d": "LIBERTAD 352, QUILPUE",
+      "e": "Iniciado",
+      "tec": "LEONEL HERNÁNDEZ OJE",
+      "visitas": 1,
+      "ult_fecha": "11-09-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3OV2HAGS",
       "cat": "Modificación de Servicio",
       "f": "16-19",
@@ -22560,18 +22573,6 @@
       "tec": "LUIS CASTRO TORRES",
       "visitas": 1,
       "ult_fecha": "05-11-2026",
-      "ult_cierre": "Cliente reagenda"
-     },
-     {
-      "o": "1-3P0N9M5Q",
-      "cat": "Modificación de Servicio",
-      "f": "16-19",
-      "hi": "17:29",
-      "d": "LIBERTAD 352, QUILPUE",
-      "e": "Pendiente",
-      "tec": "LUIS CASTRO TORRES",
-      "visitas": 1,
-      "ult_fecha": "11-09-2026",
       "ult_cierre": "Cliente reagenda"
      },
      {
@@ -22635,18 +22636,6 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3P01YI55",
-      "cat": "Alta 1 Play",
-      "f": "10-13",
-      "hi": "11:46",
-      "d": "ESPERANZA 1134, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "MATIAS APELEO APELEO",
-      "visitas": 1,
-      "ult_fecha": "12-11-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3P08LC4Q",
       "cat": "Reparación",
       "f": "10-13",
@@ -22656,6 +22645,18 @@
       "tec": "RAFAEL VARGAS B",
       "visitas": 2,
       "ult_fecha": "12-11-2026",
+      "ult_cierre": "Falta de dotación"
+     },
+     {
+      "o": "1-3OZBL8PS",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "13:00",
+      "d": "NUEVA ZELANDIA 151, QUILPUE",
+      "e": "Pendiente",
+      "tec": "RAFAEL VARGAS B",
+      "visitas": 2,
+      "ult_fecha": "11-11-2026",
       "ult_cierre": "Falta de dotación"
      },
      {
@@ -22762,7 +22763,7 @@
       "o": "1-3OZUGL2W",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "10:53",
+      "hi": "10:38",
       "d": "GABRIEL GONZALEZ VIDELA 1831 CASA B, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
@@ -22802,5 +22803,5 @@
    }
   }
  },
- "generado": "13-11-2026 09:27"
+ "generado": "13-11-2026 09:37"
 }
