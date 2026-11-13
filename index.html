@@ -14294,7 +14294,7 @@ function mesDetalleHtml(k){
     const barCausa = function(q, tot){ return '<span class="mnr-stk">' + ['cli', 'vtr', 'dom'].map(x => q[x] ? '<i style="flex:' + q[x] + ';background:' + MG_RCOL[x] + '" title="' + MG_RNOM[x] + ': ' + q[x] + '"></i>' : '').join('') + '</span>'
       + (tot ? '<span class="mnr-stkt">' + ['cli', 'vtr', 'dom'].map(x => '<b style="color:' + MG_RCOL[x] + '">' + Math.round(100 * q[x] / tot) + '%</b> ' + QN[x].toLowerCase()).join(' · ') + '</span>' : ''); };
     const leyCausa = '<div class="mnr-ley">' + ['cli', 'vtr', 'dom'].map(x => '<span><i style="background:' + MG_RCOL[x] + '"></i>' + MG_RNOM[x] + '</span>').join('') + '</div>';
-    let a = '<div class="mnr-c"><h4>Por actividad <span class="mda-ayu">de quién es la causa · pasa el mouse por una fila para ver sus códigos</span></h4>' + leyCausa
+    let a = '<div class="mnr-c ad-tbl"><h4>Por actividad <span class="mda-ayu">de quién es la causa · pasa el mouse por una fila para ver sus códigos</span></h4>' + leyCausa
       + '<table class="mda-tt mnr-act"><thead><tr><th>Actividad</th><th>No realiz.</th><th>de</th><th>%</th><th>' + bTxt2 + '</th><th class="izq">Causa</th></tr></thead><tbody>';
     FO.forEach(function(f){ const l = famNR[f] || [], asig = (GAd[f] || []).length, pa = 100 * l.length / (asig || 1);
       const lb = famNRB[f] || [], ab2 = (GBd[f] || []).length, pb = ab2 ? 100 * lb.length / ab2 : null;
@@ -14311,7 +14311,7 @@ function mesDetalleHtml(k){
       if(!v) return '<td class="mnr-hc mnr-0">·</td>';
       const k = v / mxC, al = (0.12 + 0.78 * Math.sqrt(k)).toFixed(2);
       return '<td class="mnr-hc" style="background:rgba(' + rgb(MG_RCOL[q]) + ',' + al + ');color:' + (k > 0.35 ? '#fff' : '#1f2937') + '">' + v + '</td>'; };
-    let b = '<div class="mnr-c"><h4>Código × actividad <span class="mda-ayu">más oscuro = más no realizadas · el color dice de quién es la causa</span></h4>'
+    let b = '<div class="mnr-c ad-tbl"><h4>Código × actividad <span class="mda-ayu">más oscuro = más no realizadas · el color dice de quién es la causa</span></h4>'
       + '<table class="mda-tt mnr-hm"><thead><tr><th>Código</th>' + FO.map(f => '<th>' + f + '</th>').join('') + '<th>Total</th><th>' + bTxt2 + '</th></tr></thead><tbody>';
     topC.forEach(function(c){ const q = mgResp(c), d = codsB[c] || 0, pc = 100 * cods[c] / nr.length, pcB = nrB.length ? 100 * d / nrB.length : null;
       b += '<tr><td class="mnr-cod" title="' + escR(MG_RNOM[q]) + '"><i style="background:' + MG_RCOL[q] + '"></i>' + escR(c) + '</td>'
@@ -19429,6 +19429,93 @@ function anReloj(v, r, label, big, nv, min, ref){
   return s;
 }
 
+/* ===================== (13-11-2026) MI ANALISIS ORDENADO ===================== */
+var AN_ORDEN = true, AN_ORD = null, AN_ORD_Q = '';
+const AN_ORD_G = { hoy:['📍','Hoy','Lo del día en curso','#0ea5e9'], mes:['📅','El mes','Cómo vamos: meses, semanas y días','#2563eb'],
+  tec:['👷','Técnicos','Todo lo de cada técnico en un solo lugar','#7c3aed'], dir:['🏠','Direcciones','Casas donde se falla y su historial','#0f8b7d'],
+  cal:['🛠','Calidad','Reiterados y calidad del mes (con clave)','#dc2626'], otr:['📤','Para mostrar','Informes para la jefatura y respaldos','#64748b'] };
+/* [grupo, nombre, descripcion, accion (codigo) o enlace, es enlace] */
+function anOrdLista(){
+  const L = [
+    ['hoy','Día en curso','Inicio de jornada, cifras del día, cierres de las 13:00 y detalle por actividad','anDiaAbrir()'],
+    ['hoy','Resumen WhatsApp','El resumen del día para mandar por WhatsApp','anDiaIr(abrirResumenWsp)'],
+    ['hoy','Derivadas de hoy','Visitadas, derivadas y por visitar, tal como van',"migDer('hoy')"],
+    ['hoy','Resumen supervisores','Por qué y quién, con filtro por supervisor y fotos',"migIr('abrirResMig')"]];
+  anMesesLista().slice().reverse().forEach(function(k){ L.push(['mes', anMesNom(k), (anMesEnCurso(k) ? 'En curso, hasta ayer' : 'Mes completo') + ' · todo el detalle del mes', "anMesAbrir('" + k + "')"]); });
+  L.push(['mes','Migraciones día a día','Completitud de cada día con el mes completo','anDiarioAbrir()'],
+    ['mes','Derivaciones por franja','En qué franja se deriva más: actividad, semana, día, técnico y comuna','abrirFranjas()'],
+    ['mes','Resumen de derivación','Cómo vamos y con quién conversar',"migDer('res')"],
+    ['tec','Ficha del técnico','Todo sobre un técnico y qué revisar primero',"migDer('fic')"],
+    ['tec','Seguimiento VTR','Los técnicos bajo 60 %, rojo y amarillo',"migIr('abrirSegVtr')"],
+    ['tec','Técnicos semana a semana','Completitud de cada técnico en las últimas 8 semanas',"anTsAbrir('Migraciones')"],
+    ['tec','A quién auditar','Lo derivado propio de cada técnico',"migDer('aud')"],
+    ['tec','Por técnico (derivación)','Quién deriva más y la historia de cada dirección',"migDer('tec')"],
+    ['tec','RGU','RGU por técnico al día (meta ' + (typeof RGU_META !== 'undefined' ? RGU_META : 4) + ')','rguAbrir()'],
+    ['tec','Asistencia','Marcación de entrada día a día (tope 09:50)','asAbrir()'],
+    ['tec','Tiempos en terreno','Cuánto demora cada técnico por tipo de trabajo', typeof URL_TIEMPOS !== 'undefined' ? URL_TIEMPOS : '', 1],
+    ['tec','Tabla del mes por técnico','Todas las órdenes del mes, técnico por técnico', typeof URL_TABLA_HIST !== 'undefined' ? URL_TABLA_HIST : '', 1],
+    ['tec','Carga de Play por técnico','Si a un técnico le cargan más Play que al resto', typeof URL_EQUIPO !== 'undefined' ? URL_EQUIPO : '', 1],
+    ['tec','Quiebres por técnico','Quiebres de cada técnico en el Dashboard de Actividades', typeof URL_ACTIVIDADES !== 'undefined' ? URL_ACTIVIDADES + '#quiebres' : '', 1],
+    ['dir','Por dirección','Qué direcciones fallan y con qué técnicos',"migDer('dir')"],
+    ['dir','Direcciones ya visitadas','Histórico de las casas donde ya se falló antes','anCerrar(); desdePortada(verReporteRepe)'],
+    ['cal','Calidad','Calidad del mes: resumen gerencia, técnico por técnico, casa por casa (pide la clave)','cqAbrirGerencia()'],
+    ['cal','Calidad dentro del Detalle del mes','El análisis de reiterados de cada mes, al final del detalle', "anMesAbrir('" + anMesesLista()[anMesesLista().length - 1] + "')"],
+    ['otr','Migraciones · Gerencia','Por mes, semana y hoy. Con Modo reunión',"migIr('abrirMigGer')"],
+    ['otr','Negocios','Órdenes y tiempos de los clientes de Negocios', typeof URL_NEGOCIOS !== 'undefined' ? URL_NEGOCIOS : '', 1],
+    ['otr','Planilla de respaldos','Lo que mandan los técnicos desde la app', typeof URL_PLANILLA_RESP !== 'undefined' ? URL_PLANILLA_RESP : '', 1],
+    ['otr','App Respaldo en terreno','La app que usan los técnicos', typeof URL_APP_RESP !== 'undefined' ? URL_APP_RESP : '', 1]);
+  return L.filter(function(x){ return !x[4] || x[3]; });
+}
+/* (13-11-2026) para distinguir las tarjetas a simple vista: icono propio y sub-grupo dentro de cada boton */
+const AN_ORD_IC = { 'Día en curso':['🗓','Del día'], 'Resumen WhatsApp':['💬','Para enviar'], 'Derivadas de hoy':['🔴','Migraciones de hoy'], 'Resumen supervisores':['🧑‍💼','Migraciones de hoy'],
+  'Migraciones día a día':['📈','Migraciones'], 'Derivaciones por franja':['🕒','Migraciones'], 'Resumen de derivación':['🧾','Migraciones'],
+  'Ficha del técnico':['🪪','Migraciones'], 'Seguimiento VTR':['🎯','Migraciones'], 'Técnicos semana a semana':['📊','Migraciones'], 'A quién auditar':['🔍','Migraciones'], 'Por técnico (derivación)':['👥','Migraciones'],
+  'RGU':['📦','Producción y asistencia'], 'Asistencia':['⏰','Producción y asistencia'],
+  'Tiempos en terreno':['⏱','En otra página'], 'Tabla del mes por técnico':['📋','En otra página'], 'Carga de Play por técnico':['⚖️','En otra página'], 'Quiebres por técnico':['💥','En otra página'],
+  'Por dirección':['📍','Direcciones'], 'Direcciones ya visitadas':['🏚','Direcciones'], 'Calidad':['🛠','Calidad'], 'Calidad dentro del Detalle del mes':['🔁','Calidad'],
+  'Migraciones · Gerencia':['🏢','Para la jefatura'], 'Negocios':['🏬','En otra página'], 'Planilla de respaldos':['📸','Respaldos'], 'App Respaldo en terreno':['📱','Respaldos'] };
+function anOrdIc(x){ return AN_ORD_IC[x[1]] || (/^\D+ \d{4}$/.test(x[1]) ? ['📅','Detalle de cada mes'] : ['•', '']); }
+function anOrdHtml(){
+  const L = anOrdLista();
+  return '<span class="an-ord" onclick="event.stopPropagation()">'
+    + Object.keys(AN_ORD_G).map(function(k){ const g = AN_ORD_G[k], n = L.filter(function(x){ return x[0] === k; }).length;
+        return '<button class="an-ordb' + (AN_ORD === k ? ' on' : '') + '" onclick="anOrdTab(\'' + k + '\')" title="' + g[2] + '">' + g[0] + ' ' + g[1] + '<small>' + n + '</small></button>'; }).join('')
+    + '<span class="an-ordq"><input id="anOrdQ" type="search" placeholder="Buscar: técnico, calidad, franja, WhatsApp…" value="' + escR(AN_ORD_Q) + '" oninput="anOrdBuscar(this.value)" onkeydown="if(event.key===\'Escape\'){ this.value=\'\'; anOrdBuscar(\'\'); }"></span>'
+    + '<span id="anOrdPanel" class="an-ordp' + (AN_ORD || AN_ORD_Q ? ' on' : '') + '">' + anOrdPanel() + '</span></span>';
+}
+function anOrdNorm(t){ return String(t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); }
+function anOrdPanel(){
+  const L = anOrdLista();
+  let tit, sub, V;
+  if(AN_ORD_Q.trim()){ const w = anOrdNorm(AN_ORD_Q).split(/\s+/).filter(Boolean);
+    V = L.filter(function(x){ const t = anOrdNorm(x[1] + ' ' + x[2] + ' ' + AN_ORD_G[x[0]][1]); return w.every(function(v){ return t.indexOf(v) >= 0; }); });
+    tit = 'Resultados para "' + escR(AN_ORD_Q) + '"'; sub = V.length + (V.length === 1 ? ' resultado' : ' resultados'); }
+  else if(AN_ORD){ const g = AN_ORD_G[AN_ORD]; V = L.filter(function(x){ return x[0] === AN_ORD; }); tit = g[0] + ' ' + g[1]; sub = g[2]; }
+  else return '';
+  return '<div class="an-ordh"><b>' + tit + '</b><span>' + sub + '</span><button onclick="anOrdCerrar()">✕</button></div>'
+    + (V.length ? (function(){
+        const busc = !!AN_ORD_Q.trim(), subs = [];
+        V.forEach(function(x){ const k = busc ? AN_ORD_G[x[0]][1] : anOrdIc(x)[1]; if(subs.indexOf(k) < 0) subs.push(k); });
+        return subs.map(function(sb){
+          const VV = V.filter(function(x){ return (busc ? AN_ORD_G[x[0]][1] : anOrdIc(x)[1]) === sb; });
+          const conT = subs.length > 1 || busc;
+          return '<div class="an-ords' + (conT ? '' : ' sin') + '">' + (conT ? '<div class="an-ordst">' + sb + '</div>' : '') + '<div class="an-ordg">' + VV.map(function(x){
+            const g = AN_ORD_G[x[0]], ic = anOrdIc(x)[0];
+            const cuerpo = '<span class="an-ordic" style="background:' + g[3] + '1a;color:' + g[3] + '">' + ic + '</span><span class="an-ordtx"><b>' + x[1] + '</b><span>' + x[2] + '</span></span><em>' + (x[4] ? '↗' : '›') + '</em>';
+            if(x[4]) return '<a class="an-ordi" style="border-left-color:' + g[3] + '" href="' + x[3] + '" target="_blank" rel="noopener" onclick="anOrdCerrar()" title="Abre otra página">' + cuerpo + '</a>';
+            return '<button class="an-ordi" style="border-left-color:' + g[3] + '" title="' + escR(x[2]) + '" onclick="anOrdIr(' + L.indexOf(x) + ')">' + cuerpo + '</button>'; }).join('') + '</div></div>'; }).join('');
+      })()
+      : '<p class="an-ordv">No encontré nada con esa palabra.</p>');
+}
+function anOrdTab(k){ AN_ORD = AN_ORD === k ? null : k; AN_ORD_Q = ''; anPintar(); }
+function anOrdBuscar(v){ AN_ORD_Q = v; if(v) AN_ORD = null;
+  document.querySelectorAll('.an-ordb').forEach(function(b){ b.classList.remove('on'); });
+  const p = document.getElementById('anOrdPanel'); if(!p) return; p.innerHTML = anOrdPanel(); p.classList.toggle('on', !!(AN_ORD || AN_ORD_Q)); }
+function anOrdCerrar(){ AN_ORD = null; AN_ORD_Q = ''; anPintar(); }
+function anOrdIr(i){ const x = anOrdLista()[i]; if(!x) return; AN_ORD = null; AN_ORD_Q = ''; anPintar();
+  try { (new Function(x[3]))(); } catch(e){ console.warn('mi analisis:', x[1], e); } }
+document.addEventListener('click', function(e){ if((AN_ORD || AN_ORD_Q) && !(e.target.closest && e.target.closest('.an-ord'))){ AN_ORD = null; AN_ORD_Q = ''; anPintar(); } });
+
 function anPintar(){
   const box = document.getElementById('anPage'); if(!box || !box.classList.contains('abierto')) return;
   const y = box.scrollTop, D = anFilas(), fd = (typeof FECHA_DATOS !== 'undefined' && FECHA_DATOS) ? FECHA_DATOS : new Date();
@@ -19448,42 +19535,11 @@ function anPintar(){
   h += '<div class="an-chips an-btns"><span class="an-fecha">' + fd.toLocaleDateString('es-CL', { weekday:'long', day:'2-digit', month:'2-digit', year:'numeric' }) + ' · datos de las ' + hh + '</span><span class="an-updbox">' + anUpdHtml() + '</span>'
     /* (06-11-2026) Luis: "los botones de calidad, rgu, asistencia dejalos dentro de un boton llamado informes".
        Boton "Informes" que abre un menu con los tres (Calidad 04-11, RGU 05-11, Asistencia 05-11). */
-    + '<span class="an-inf"><button class="an-btn inf' + (AN_INF_AB ? ' ab' : '') + '" onclick="anInfToggle(event)" title="Calidad, RGU y Asistencia">📑 Informes ' + (AN_INF_AB ? '▴' : '▾') + '</button>'
-    + (AN_INF_AB ? '<span class="an-infm"><small class="an-infh">Mi análisis</small><span class="an-inf3">'
-      + '<button class="an-btn cal" onclick="anInfIr(cqAbrirGerencia)" title="Resumen gerencia de la calidad del mes">🛠 Calidad ›</button>'
-      + '<button class="an-btn rgu" onclick="anInfIr(rguAbrir)" title="RGU por técnico al día (meta ' + RGU_META + ')">📈 RGU ›</button>'
-      + '<button class="an-btn asis" onclick="anInfIr(asAbrir)" title="Marcación de entrada día a día (tope 09:50)">⏰ Asistencia ›</button></span>'
-      /* (06-11-2026) Luis: "todos estos botones de informes agrégalos dentro del botón informes" -> los 9 informes del bloque
-         INFORMES de la pantalla principal (infTarjetasHtml). Abren LO MISMO (mismo enlace o misma función); la pantalla
-         principal no se toca. */
-      + '<small class="an-infh">Informes del Módulo</small><span class="an-infl">' + AN_INF_PORTADA().map(function(t){
-          const cuerpo = '<b>' + t[2] + ' <i>›</i></b><span>' + t[3] + '</span>';
-          return t[0] === 'link' ? '<a class="an-infi" href="' + t[1] + '" target="_blank" onclick="anInfCerrar()">' + cuerpo + '</a>'
-                                 : '<button class="an-infi" onclick="anInfIr(function(){ ' + t[1] + '; })">' + cuerpo + '</button>';
-        }).join('') + '</span>'
-      /* (07-11-2026, 12:31) Luis: "el boton informes dentro de migraciones, todos esos informes agregalos dentro del boton informes
-         que esta en la pantalla principal de mi analisis pero separados: informes de migraciones, abajo de este titulo los demas".
-         Abren lo mismo que en el detalle de Migraciones (anMigInfSecciones). */
-      + '<small class="an-infh an-infh-mig">Informes de migraciones</small>'
-      + anMigInfSecciones(
-          function(onc, t, d){ return '<button class="an-infi" onclick="anInfIr(function(){ ' + onc + '; })"><b>' + t + ' <i>›</i></b><span>' + d + '</span></button>'; },
-          function(url, t, d){ return url ? '<a class="an-infi" href="' + url + '" target="_blank" rel="noopener" onclick="anInfCerrar()"><b>' + t + ' <i>↗</i></b><span>' + d + '</span></a>' : ''; },
-          function(t, cuerpo){ return '<small class="an-infsub">' + t + '</small><span class="an-infl">' + cuerpo + '</span>'; })
-      + '</span>' : '') + '</span>'
-    /* (07-11-2026, 11:40) Luis: "crea un boton desplegable para guardar estos" (Resumen WhatsApp, Día en curso, Seguimiento,
-       Técnicos semana a semana) -> boton "Herramientas". "Otro boton desplegable que diga detalle meses y dentro cada mes"
-       -> abre el mismo detalle del mes de la pantalla principal (mesDetalleHtml) dentro de Mi analisis. */
-    + '<span class="an-inf" onclick="event.stopPropagation()"><button class="an-btn her' + (AN_HER_AB ? ' ab' : '') + '" onclick="anHerToggle(event)" title="Resumen WhatsApp, Día en curso, Seguimiento y Técnicos semana a semana">🧰 Herramientas ' + (AN_HER_AB ? '▴' : '▾') + '</button>'
-    + (AN_HER_AB ? '<span class="an-infm an-herm">'
-      + '<button class="an-infi" onclick="anHerIr(function(){ anDiaIr(abrirResumenWsp); })"><b>💬 Resumen WhatsApp <i>›</i></b><span>El resumen del día para mandar por WhatsApp</span></button>'
-      + '<button class="an-infi" onclick="anHerIr(anDiaAbrir)"><b>🗓 Día en curso <i>›</i></b><span>Inicio de jornada, cifras del día, cierres de las 13:00 y detalle por actividad</span></button>'
-      + '<button class="an-infi" onclick="anHerIr(anSegAbrir)"><b>🎯 Seguimiento <i>›</i></b><span>Técnicos de migraciones bajo 60 %: cómo se mueve la aguja</span></button>'
-      + '<button class="an-infi" onclick="anHerIr(function(){ anTsAbrir(\'Migraciones\'); })"><b>👥 Técnicos semana a semana <i>›</i></b><span>Completitud de cada técnico en las últimas 8 semanas</span></button>'
-      + '</span>' : '') + '</span>'
-    + '<span class="an-inf" onclick="event.stopPropagation()"><button class="an-btn mes' + (AN_MES_AB ? ' ab' : '') + '" onclick="anMesToggle(event)" title="El detalle de cada mes: efectividad, completitud, no realizadas, franja, comuna, supervisor y técnicos">📅 Detalle meses ' + (AN_MES_AB ? '▴' : '▾') + '</button>'
-    + (AN_MES_AB ? '<span class="an-infm an-mesm">' + anMesesLista().map(function(k){
-        return '<button class="an-infi" onclick="anHerIr(function(){ anMesAbrir(\'' + k + '\'); })"><b>' + anMesNom(k) + ' <i>›</i></b><span>' + (anMesEnCurso(k) ? 'En curso · hasta ayer' : 'Mes completo') + '</span></button>'; }).join('')
-      + '</span>' : '') + '</span>'
+    /* (13-11-2026) "Mi análisis ordenado": los menus Informes, Herramientas y Detalle meses se reemplazan por
+       6 botones segun la pregunta (Hoy, El mes, Tecnicos, Direcciones, Calidad, Para mostrar) + un buscador. Abren LO MISMO
+       que antes. Salen de Mi analisis los repetidos: Seguimiento, Evolucion, Calidad del mes y Resumen dia por dia
+       (la pantalla principal no se toca). AN_ORDEN = false esconde los 6 botones (no devuelve los menus antiguos). */
+    + (AN_ORDEN ? anOrdHtml() : '<span class="an-inf"></span>')
     + '</div>';
 
   /* (06-11-2026, 17:10) Luis: "en pantalla principal mi analisis, cuando se deriva 1 migra, archivo dañado".
@@ -21045,7 +21101,8 @@ setInterval(function(){ try { anPintar(); anDetPintar(); } catch(e){ console.war
   .mnr-g { display:grid; grid-template-columns:auto auto; justify-content:start; gap:28px; align-items:start; margin-bottom:14px; }
   @media(max-width:1350px){ .mnr-g { grid-template-columns:1fr; } }
   .mnr-c { min-width:0; overflow-x:auto; }
-  .mnr-c table { width:auto; }
+  .mnr-c table, .ad-tbl.mnr-c table { width:auto; }
+  .mnr-c td { vertical-align:middle; } .mnr-act td.nu, .mnr-hm td.nu { text-align:right; } .mnr-hm th { text-align:center; }
   .mnr-ley { display:flex; gap:14px; font-size:11.5px; color:#64748b; margin:0 0 6px; flex-wrap:wrap; }
   .mnr-ley i { display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:4px; vertical-align:-1px; }
   .mnr-act td { padding-top:7px; padding-bottom:7px; }
@@ -22573,5 +22630,35 @@ var XH_ACTIVO = true;
   document.addEventListener('mouseleave', limpiar);
 })();
 </script>
+<style>
+  /* (13-11-2026) Mi analisis ordenado: 6 botones + buscador */
+  .an-ord { display:contents; }
+  .an-ordb { border:1px solid #24344f; background:#13213a; color:#e2e8f0; border-radius:10px; padding:6px 12px; font:600 12.5px/1.2 inherit; cursor:pointer; display:inline-flex; gap:7px; align-items:center; }
+  .an-ordb small { background:#24344f; border-radius:999px; padding:0 7px; font-size:10.5px; color:#cbd5e1; }
+  .an-ordb:hover { border-color:#60a5fa; } .an-ordb.on { background:#fff; color:#0f1b2d; border-color:#fff; } .an-ordb.on small { background:#e2e8f0; color:#0f1b2d; }
+  .an-ordq { margin-left:auto; } .an-ordq input { width:290px; max-width:60vw; background:#0b1424; border:1px solid #3b4d6b; color:#fff; border-radius:10px; padding:7px 12px; font:13px inherit; }
+  .an-ordq input::placeholder { color:#94a3b8; }
+  .an-ordp { display:none; flex-basis:100%; width:100%; background:#13213a; border:1px solid #24344f; border-radius:12px; padding:12px 14px; margin-top:6px; text-align:left; }
+  .an-ordp.on { display:block; }
+  .an-ordh { display:flex; align-items:baseline; gap:10px; color:#e2e8f0; margin-bottom:10px; } .an-ordh b { font-size:15px; } .an-ordh span { font-size:12px; color:#94a3b8; }
+  .an-ordh button { margin-left:auto; background:none; border:0; color:#94a3b8; font-size:15px; cursor:pointer; }
+  /* ordenado: cada sub-grupo es una fila (titulo a la izquierda, tarjetas a la derecha); todas las tarjetas del mismo alto y ancho */
+  .an-ords { display:grid; grid-template-columns:150px 1fr; gap:12px; align-items:stretch; padding:10px 0; border-top:1px solid #24344f; }
+  .an-ords:first-of-type { border-top:0; padding-top:2px; }
+  .an-ordst { font-size:10.5px; font-weight:800; color:#cbd5e1; text-transform:uppercase; letter-spacing:.08em; padding-top:14px; line-height:1.4; }
+  .an-ords.sin { grid-template-columns:1fr; }
+  .an-ordg { display:grid; grid-template-columns:repeat(5, minmax(0, 1fr)); grid-auto-rows:84px; gap:10px; }
+  @media(max-width:1700px){ .an-ordg { grid-template-columns:repeat(4, minmax(0, 1fr)); } }
+  @media(max-width:1300px){ .an-ordg { grid-template-columns:repeat(3, minmax(0, 1fr)); } }
+  @media(max-width:950px){ .an-ords { grid-template-columns:1fr; } .an-ordst { padding-top:0; } .an-ordg { grid-template-columns:repeat(2, minmax(0, 1fr)); } }
+  .an-ordi { display:flex; align-items:center; gap:12px; height:84px; text-align:left; background:#fff; border:1px solid #e2e8f0; border-left:5px solid #94a3b8; border-radius:12px; padding:0 14px; color:#0f1b2d; cursor:pointer; text-decoration:none; font:inherit; box-shadow:0 2px 6px rgba(0,0,0,.25); transition:transform .12s, box-shadow .12s; overflow:hidden; }
+  .an-ordi:hover { transform:translateY(-2px); box-shadow:0 8px 18px rgba(0,0,0,.35); }
+  .an-ordic { flex:0 0 40px; height:40px; border-radius:10px; display:grid; place-items:center; font-size:20px; }
+  .an-ordtx { flex:1; min-width:0; }
+  .an-ordtx b { display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; font-size:14px; font-weight:800; color:#0f1b2d; line-height:1.2; }
+  .an-ordtx span { display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; margin-top:2px; font-size:11.5px; color:#475569; line-height:1.35; }
+  .an-ordi em { font-style:normal; font-size:18px; font-weight:700; color:#94a3b8; } .an-ordi:hover em { color:#2563eb; }
+  .an-ordv { color:#94a3b8; font-size:13px; margin:0; }
+</style>
 </body>
 </html>
