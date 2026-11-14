@@ -22589,25 +22589,25 @@
    }
   },
   "14-11-2026": {
-   "hasta": "12:09",
-   "actividades": 138,
+   "hasta": "12:14",
+   "actividades": 139,
    "tecnicos": 33,
    "estados": {
     "No Realizada": 9,
     "Iniciado": 28,
     "Pendiente": 75,
-    "Completado": 18,
+    "Completado": 19,
     "Suspendido": 1,
     "Cancelado": 5,
     "en ruta": 2
    },
-   "rgu": 201.5,
+   "rgu": 202.5,
    "caidas_total": 7,
    "caidas_activas": 7,
    "caidas_resueltas": 0,
-   "nuevas": 5,
+   "nuevas": 6,
    "al_bucket": 7,
-   "repetidas": 34,
+   "repetidas": 35,
    "reagendadas": 4,
    "detalle": {
     "caidas": [
@@ -22676,6 +22676,15 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3P1QPY44",
+      "tec": "JOSE PEREZ RANGEL",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "13:59",
+      "d": "DEL VALLE 032, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3P1N9P4G",
       "tec": "JOSE SALAS MEDINA",
@@ -22882,19 +22891,31 @@
       "o": "1-3P1NQ5RK",
       "cat": "Reparación",
       "f": "10-13",
-      "hi": "13:07",
+      "hi": "12:27",
       "d": "SANTA MARIA 050, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JOSE PEREZ RANGEL",
       "visitas": 1,
       "ult_fecha": "30-09-2026",
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3P1QPY44",
+      "cat": "Modificación de Servicio",
+      "f": "10-13",
+      "hi": "13:59",
+      "d": "DEL VALLE 032, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOSE PEREZ RANGEL",
+      "visitas": 1,
+      "ult_fecha": "23-10-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3P13B47H",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:31",
+      "hi": "17:48",
       "d": "PROYECTADA (CARRERA) 579, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE PEREZ RANGEL",
@@ -23050,7 +23071,7 @@
       "o": "1-3P0Q5MMN",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "12:35",
+      "hi": "12:17",
       "d": "AVENIDA VALPARAISO 407, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -23062,7 +23083,7 @@
       "o": "1-3OZYSXPB",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:26",
+      "hi": "15:08",
       "d": "LAS ACACIAS 30, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -23074,7 +23095,7 @@
       "o": "1-3P1LSXLX",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "17:10",
+      "hi": "16:52",
       "d": "LAS ACACIAS 1575 CASA 30, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -23176,5 +23197,5 @@
    }
   }
  },
- "generado": "14-11-2026 12:09"
+ "generado": "14-11-2026 12:14"
 }
