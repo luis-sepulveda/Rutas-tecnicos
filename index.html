@@ -20413,7 +20413,8 @@ function anDetPintar(){
   if(per.t === 'sem' && per.k !== D.semHoy) tabs.splice(2, 0, { t:'sem', k:per.k });
   if(per.t === 'dia') tabs.splice(1, 0, { t:'dia', k:per.k });
   /* (06-11-2026) Luis: "dejar los botones hoy, semana y mes al lado derecho del titulo para ganar espacio": los periodos van en la misma linea del titulo */
-  let h = '<div class="an-md an-md-ancho"><div class="an-mdtop an-mdtop-per"><div class="an-titper"><h2><i style="width:12px;height:12px;border-radius:50%;background:' + F.c + ';display:inline-block;border:1px solid #cbd5e1"></i>' + fam + ' · detalle'
+  /* (14-11-2026) Luis: "es mucho negro, fondos de distintos colores": clase mdc = version a color */
+  let h = '<div class="an-md an-md-ancho mdc"><div class="an-mdtop an-mdtop-per"><div class="an-titper"><h2><i style="width:12px;height:12px;border-radius:50%;background:' + F.c + ';display:inline-block;border:1px solid #cbd5e1"></i>' + fam + ' · detalle'
     + (AN_COM !== 'Todo' ? ' <small>' + (AN_COM === 'QUILPUE' ? 'Quilpué' : 'Villa Alemana') + '</small>' : '') + (AN_SUP !== 'Todo' ? ' <small>' + derTitulo(AN_SUP) + '</small>' : '') + '</h2>'
     + '<div class="an-tabs">' + tabs.map(function(p){ const on = p.t === per.t && (p.t === 'hoy' || p.k === per.k);
         return '<span class="an-tab' + (on ? ' on' : '') + '" onclick="anDetPer(\'' + p.t + '\', \'' + p.k + '\')">' + anPerTit(p) + (p.t === 'sem' && p.k === D.semHoy ? ' (en curso)' : '') + '</span>'; }).join('') + '</div></div>'
@@ -22661,6 +22662,61 @@ var XH_ACTIVO = true;
   .an-ordtx span { display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; margin-top:2px; font-size:11.5px; color:#475569; line-height:1.35; }
   .an-ordi em { font-style:normal; font-size:18px; font-weight:700; color:#94a3b8; } .an-ordi:hover em { color:#2563eb; }
   .an-ordv { color:#94a3b8; font-size:13px; margin:0; }
+</style>
+
+<style>
+/* ===== (14-11-2026) DETALLE (Migraciones / Altas / Reparaciones) A COLOR =====
+   Luis: "es mucho negro compa, veamos como queda con fondos de distintos colores y convine".
+   Solo cambia el dibujo de esta ventana (clase .mdc). Los numeros y las reglas son los mismos. */
+#anDet .an-md.mdc { background:#eef2f7; border-color:#dbe3ee; }
+/* recuadros de arriba: cada uno con su color */
+#anDet .mdc .an-kpi { border:1px solid; box-shadow:none; color:#0f172a; border-radius:14px; position:relative; overflow:hidden; }
+#anDet .mdc .an-kpi small { color:inherit; opacity:.85; font-weight:700; }
+#anDet .mdc .an-kpi span { color:#475569; }
+#anDet .mdc .an-kpi:nth-child(1) { background:#dbeafe; border-color:#93c5fd; color:#1e3a8a; }
+#anDet .mdc .an-kpi:nth-child(2) { background:#dcfce7; border-color:#86efac; color:#14532d; }
+#anDet .mdc .an-kpi:nth-child(3) { background:#fee2e2; border-color:#fca5a5; color:#7f1d1d; }
+#anDet .mdc .an-kpi:nth-child(4) { background:#fef3c7; border-color:#fcd34d; color:#78350f; }
+#anDet .mdc .an-kpi:nth-child(5) { background:#ede9fe; border-color:#c4b5fd; color:#4c1d95; }
+#anDet .mdc .an-kpi:nth-child(4) b { color:#92400e; }
+/* tarjetas blancas con una franja de color arriba */
+#anDet .mdc .an-card { background:#fff; border:1px solid #dbe3ee; color:#1e293b; box-shadow:0 2px 8px rgba(15,23,42,.06); border-top:5px solid #94a3b8; }
+#anDet .mdc .an-mg > .an-card:nth-child(1) { border-top-color:#f59e0b; }
+#anDet .mdc .an-mg > .an-card:nth-child(2) { border-top-color:#3b82f6; }
+#anDet .mdc .an-md > .an-card, #anDet .mdc > .an-card { border-top-color:#ef4444; }
+#anDet .mdc .an-card h3 { color:#0f172a; }
+#anDet .mdc .an-mg > .an-card:nth-child(1) h3 { color:#b45309; }
+#anDet .mdc .an-mg > .an-card:nth-child(2) h3 { color:#1d4ed8; }
+#anDet .mdc > .an-card h3.an-h3l { color:#b91c1c; }
+#anDet .mdc .an-bar .t, #anDet .mdc .an-mini { background:#e2e8f0; }
+#anDet .mdc .an-mot, #anDet .mdc .an-dnota { color:#64748b; }
+/* tablas claras, encabezado celeste y filas alternadas */
+#anDet .mdc .an-tb th { background:#eff6ff; color:#1e40af; border-bottom:2px solid #bfdbfe; }
+#anDet .mdc .an-tb td { border-bottom:1px solid #eef2f7; color:#1e293b; }
+#anDet .mdc .an-tb tr:nth-child(even) td { background:#f8fafc; }
+#anDet .mdc .an-tb tr:hover td { background:#e0ecff; }
+#anDet .mdc .an-tb tr.al-rojo td { background:#fef2f2; }
+#anDet .mdc .an-tb tr.an-dirdet td, #anDet .mdc .an-tb tr.an-dirdet:hover td { background:#f1f5f9; }
+#anDet .mdc .an-dvis th { color:#475569; border-bottom-color:#cbd5e1; background:transparent; }
+#anDet .mdc .an-dvis td { border-bottom-color:#e2e8f0; }
+#anDet .mdc .an-dres { color:#334155; }
+#anDet .mdc .an-dir:hover, #anDet .mdc .an-dir.ab, #anDet .mdc .an-ordc:hover, #anDet .mdc .an-ordc.on { color:#1d4ed8; }
+/* etiquetas de estado en version clara */
+#anDet .mdc .e-c { background:#dcfce7; color:#166534; } #anDet .mdc .e-n { background:#fee2e2; color:#b91c1c; }
+#anDet .mdc .e-a { background:#e0e7ff; color:#3730a3; } #anDet .mdc .e-x { background:#f1f5f9; color:#64748b; }
+#anDet .mdc .e-g { background:#f3e8ff; color:#7e22ce; }
+#anDet .mdc .an-vb { background:#f1f5f9; color:#334155; border-color:#cbd5e1; }
+#anDet .mdc .an-hoy { background:#dbeafe; color:#1d4ed8; } #anDet .mdc .an-hoy.ok { background:#dcfce7; color:#166534; } #anDet .mdc .an-hoy.nr { background:#fee2e2; color:#b91c1c; }
+#anDet .mdc .an-hoyn, #anDet .mdc .an-hoydet { color:#1d4ed8; }
+#anDet .mdc .an-al.ambar { background:#fef3c7; color:#92400e; }
+#anDet .mdc .an-busca input { background:#fff; color:#0f172a; border-color:#cbd5e1; }
+#anDet .mdc .an-fullb { background:#f1f5f9; color:#334155; border-color:#cbd5e1; }
+/* los verdes / rojos / amarillos fuertes se oscurecen un poco para que se lean sobre fondo claro */
+#anDet .mdc [style*="color:#22c55e"], #anDet .mdc [style*="color:#4ade80"] { color:#15803d !important; }
+#anDet .mdc [style*="color:#ef4444"], #anDet .mdc [style*="color:#f87171"] { color:#dc2626 !important; }
+#anDet .mdc [style*="color:#f59e0b"] { color:#b45309 !important; }
+#anDet .mdc [style*="color:#94a3b8"] { color:#64748b !important; }
+#anDet .mdc .an-dvis .ok, #anDet .mdc .an-dres b.v { color:#15803d; } #anDet .mdc .an-dvis .nr, #anDet .mdc .an-dres b.r { color:#dc2626; }
 </style>
 </body>
 </html>
