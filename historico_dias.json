@@ -22589,17 +22589,17 @@
    }
   },
   "14-11-2026": {
-   "hasta": "16:30",
+   "hasta": "16:40",
    "actividades": 162,
    "tecnicos": 33,
    "estados": {
-    "No Realizada": 19,
-    "Completado": 92,
+    "No Realizada": 20,
+    "Completado": 94,
     "Iniciado": 24,
-    "Pendiente": 16,
+    "en ruta": 3,
     "Suspendido": 2,
     "Cancelado": 7,
-    "en ruta": 2
+    "Pendiente": 12
    },
    "rgu": 223.4,
    "caidas_total": 8,
@@ -22750,7 +22750,7 @@
      },
      {
       "o": "1-3P1VD0QO",
-      "tec": "JOSE GALAZ D",
+      "tec": "JOSE PEREZ RANGEL",
       "cat": "Alta 1 Play",
       "f": "16-19",
       "hi": "16:30",
@@ -22818,7 +22818,7 @@
       "f": "13-16",
       "hi": "15:44",
       "d": "REGIDOR LUIS MUNOZ 1783, VILLA ALEMANA",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3P1N96GL",
@@ -22907,6 +22907,18 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3OSTX0US",
+      "cat": "Migración 2 Play",
+      "f": "13-16",
+      "hi": "16:52",
+      "d": "ALFONSO LOPEZ EMANUELLI 1544, QUILPUE",
+      "e": "Pendiente",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "visitas": 2,
+      "ult_fecha": "03-11-2026",
+      "ult_cierre": "Cliente reagenda"
+     },
+     {
       "o": "1-3P16A36O",
       "cat": "Reparación",
       "f": "13-16",
@@ -22957,7 +22969,7 @@
       "o": "1-3OXU97SC",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "18:29",
+      "hi": "18:16",
       "d": "MADRID 620 CASA L, QUILPUE",
       "e": "Pendiente",
       "tec": "EDGAR VALERO C",
@@ -23053,7 +23065,7 @@
       "o": "1-3OUZH5WA",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:34",
+      "hi": "17:27",
       "d": "IGNACIO CARRERA PINTO 0650 EDIF. D DEPTO 103, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE CASTRO P",
@@ -23175,23 +23187,11 @@
       "f": "13-16",
       "hi": "14:28",
       "d": "CAUPOLICAN 835, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "LUIS MARTIN NUÑEZ",
       "visitas": 1,
       "ult_fecha": "12-11-2026",
       "ult_cierre": "Zona Roja"
-     },
-     {
-      "o": "1-3OSTX0US",
-      "cat": "Migración 2 Play",
-      "f": "13-16",
-      "hi": "16:30",
-      "d": "ALFONSO LOPEZ EMANUELLI 1544, QUILPUE",
-      "e": "Pendiente",
-      "tec": "LUIS MARTIN NUÑEZ",
-      "visitas": 2,
-      "ult_fecha": "03-11-2026",
-      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3OX1PB59",
@@ -23281,9 +23281,9 @@
       "o": "1-3P1PYJOD",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "16:31",
+      "hi": "16:39",
       "d": "AV LOS CARRERA 301, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "SAMUEL FERNANDEZ VIDAL",
       "visitas": 2,
       "ult_fecha": "11-11-2026",
@@ -23295,7 +23295,7 @@
       "o": "1-3OXU97SC",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "18:29",
+      "hi": "18:16",
       "d": "MADRID 620 CASA L, QUILPUE",
       "e": "Pendiente",
       "tec": "EDGAR VALERO C",
@@ -23325,9 +23325,9 @@
       "o": "1-3OYDEF90",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "16:38",
+      "hi": "16:32",
       "d": "LAS MORAS 2450, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "MARCO PEREZ G",
       "desde": "11-11-2026"
      },
@@ -23345,5 +23345,5 @@
    }
   }
  },
- "generado": "14-11-2026 16:30"
+ "generado": "14-11-2026 16:40"
 }
