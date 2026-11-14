@@ -23150,5 +23150,36 @@ function anP3Regla50(){
 const _anPintarP3 = anPintar;
 anPintar = function(){ const r = _anPintarP3.apply(this, arguments); try { anP3Regla50(); } catch(e){} return r; };
 </script>
+<style>
+/* ===== (14-11-2026) VENTANA DE DETALLE (Migraciones / Altas / Reparaciones) · opcion D3 elegida por Luis =====
+   Cabecera en franja azul marino (titulo blanco, pestanas blancas y la elegida en amarillo, botones a la derecha)
+   y los 5 recuadros blancos con una raya de color a la izquierda. Solo dibujo. */
+/* cabecera azul marino como Analisis de gestion */
+#anDet .an-md.mdc.dh3 .an-mdtop-per { background:#132a4a; margin:-18px -18px 14px; padding:12px 18px; border-radius:16px 16px 0 0; flex-wrap:wrap; gap:10px 12px; }
+#anDet .an-md.mdc.dh3 .an-mdtop h2 { color:#fff; font-size:22px; font-weight:800; white-space:nowrap; }
+#anDet .an-md.mdc.dh3 .an-mdtop h2 small { color:#7dd3fc; }
+#anDet .an-md.mdc.dh3 .an-titper { flex-wrap:wrap; gap:8px 14px; min-width:0; }
+#anDet .an-md.mdc.dh3 .an-tabs { flex-wrap:wrap; }
+#anDet .an-md.mdc.dh3 .an-son.pr { background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.35); color:#fff; font-weight:700; }
+#anDet .an-md.mdc.dh3 .an-tab { background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.28); color:#fff; font-weight:700; white-space:nowrap; padding:6px 13px; }
+#anDet .an-md.mdc.dh3 .an-tab:hover { background:rgba(255,255,255,.2); }
+#anDet .an-md.mdc.dh3 .an-tab.on { background:#fbbf24; border-color:#fbbf24; color:#1c1917; }
+#anDet .an-md.mdc.dh3 .an-mdtop-per > div:last-child { flex-wrap:wrap !important; margin-left:auto; }
+#anDet .an-md.mdc.dh3 .an-x { background:rgba(255,255,255,.12); border-color:rgba(255,255,255,.35); color:#fff; font-weight:700; white-space:nowrap; }
+#anDet .an-md.mdc.dh3 .an-mdtop-per button, #anDet .an-md.mdc.dh3 .an-mdtop-per .an-upd { white-space:nowrap; }
+/* D3 · recuadros blancos con raya de color a la izquierda, sin fondo de color */
+#anDet .an-md.mdc.dh3 .an-kpi { background:#fff !important; border:1px solid #dbe3ee !important; border-left:7px solid !important; color:#0f172a !important; }
+#anDet .an-md.mdc.dh3 .an-kpi small { color:#475569 !important; opacity:1; font-weight:800; }
+#anDet .an-md.mdc.dh3 .an-kpi b { font-size:30px; }
+#anDet .an-md.mdc.dh3 .an-kpi:nth-child(1) { border-left-color:#2563eb !important; } #anDet .an-md.mdc.dh3 .an-kpi:nth-child(2) { border-left-color:#16a34a !important; }
+#anDet .an-md.mdc.dh3 .an-kpi:nth-child(3) { border-left-color:#dc2626 !important; } #anDet .an-md.mdc.dh3 .an-kpi:nth-child(4) { border-left-color:#d97706 !important; } #anDet .an-md.mdc.dh3 .an-kpi:nth-child(5) { border-left-color:#7c3aed !important; }
+#anDet .an-md.mdc.dh3 .an-kpi:nth-child(4) b { color:#b45309 !important; }
+#anDet .an-md.mdc.dh3 .an-kpi span { color:#334155; }
+</style>
+<script>
+/* (14-11-2026) la ventana de detalle lleva la clase dh3 (cabecera azul marino + recuadros con raya al costado) */
+const _anDetPintarD3 = anDetPintar;
+anDetPintar = function(){ const r = _anDetPintarD3.apply(this, arguments); try { const md = document.querySelector('#anDet .an-md.mdc'); if(md) md.classList.add('dh3'); } catch(e){} return r; };
+</script>
 </body>
 </html>
