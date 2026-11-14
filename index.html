@@ -23181,5 +23181,35 @@ anPintar = function(){ const r = _anPintarP3.apply(this, arguments); try { anP3R
 const _anDetPintarD3 = anDetPintar;
 anDetPintar = function(){ const r = _anDetPintarD3.apply(this, arguments); try { const md = document.querySelector('#anDet .an-md.mdc'); if(md) md.classList.add('dh3'); } catch(e){} return r; };
 </script>
+
+<style>
+/* (14-11-2026) Luis: "ajusta la primera linea para que se vea parejo" y despues "necesito que se vea en una sola linea".
+   Cabecera del detalle SIEMPRE en una sola linea: titulo, pestanas y botones a la derecha.
+   En pantallas de menos de 1600 px todo se achica un poco (letra y relleno) para que quepa sin bajar de linea. */
+#anDet .an-md.mdc.dh3 .an-mdtop-per { display:flex; flex-wrap:nowrap; align-items:center; gap:10px; }
+#anDet .an-md.mdc.dh3 .an-titper { display:contents; }
+#anDet .an-md.mdc.dh3 .an-mdtop-per h2 { order:1; white-space:nowrap; flex:none; }
+#anDet .an-md.mdc.dh3 .an-mdtop-per .an-tabs { order:2; flex-wrap:nowrap; margin:0; gap:5px; flex:none; }
+#anDet .an-md.mdc.dh3 .an-mdtop-per > div:last-child { order:3; margin-left:auto; flex-wrap:nowrap !important; gap:6px !important; flex:none; }
+@media (max-width:1600px){
+  #anDet .an-md.mdc.dh3 .an-mdtop-per { padding:10px 14px; gap:8px; }
+  #anDet .an-md.mdc.dh3 .an-mdtop-per h2 { font-size:19px; gap:7px; }
+  #anDet .an-md.mdc.dh3 .an-mdtop-per .an-tab { padding:5px 10px; font-size:12.5px; }
+  #anDet .an-md.mdc.dh3 .an-mdtop-per .an-son, #anDet .an-md.mdc.dh3 .an-mdtop-per .an-x, #anDet .an-md.mdc.dh3 .an-mdtop-per .an-upd { padding:5px 10px; font-size:12.5px; }
+}
+@media (max-width:1350px){
+  #anDet .an-md.mdc.dh3 .an-mdtop-per h2 { font-size:17.5px; }
+  #anDet .an-md.mdc.dh3 .an-mdtop-per .an-tab { padding:4px 8px; font-size:12px; }
+  #anDet .an-md.mdc.dh3 .an-mdtop-per .an-son, #anDet .an-md.mdc.dh3 .an-mdtop-per .an-x, #anDet .an-md.mdc.dh3 .an-mdtop-per .an-upd { padding:4px 8px; font-size:12px; }
+  #anDet .an-md.mdc.dh3 .an-mdtop-per .an-tabs { gap:4px; }
+}
+@media (max-width:1300px){
+  #anDet .an-md.mdc.dh3 .an-mdtop-per { padding:9px 12px; gap:6px; }
+  #anDet .an-md.mdc.dh3 .an-mdtop-per h2 { font-size:16px; }
+  #anDet .an-md.mdc.dh3 .an-mdtop-per .an-tab { padding:4px 7px; font-size:11.5px; }
+  #anDet .an-md.mdc.dh3 .an-mdtop-per .an-son, #anDet .an-md.mdc.dh3 .an-mdtop-per .an-x, #anDet .an-md.mdc.dh3 .an-mdtop-per .an-upd { padding:4px 7px; font-size:11.5px; }
+  #anDet .an-md.mdc.dh3 .an-mdtop-per .an-tabs, #anDet .an-md.mdc.dh3 .an-mdtop-per > div:last-child { gap:3px !important; }
+}
+</style>
 </body>
 </html>
