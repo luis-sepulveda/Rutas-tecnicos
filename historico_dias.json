@@ -22589,24 +22589,44 @@
    }
   },
   "14-11-2026": {
-   "hasta": "09:28",
+   "hasta": "09:43",
    "actividades": 122,
    "tecnicos": 33,
    "estados": {
-    "en ruta": 19,
-    "Pendiente": 102,
+    "en ruta": 24,
+    "Pendiente": 96,
+    "Iniciado": 1,
     "Cancelado": 1
    },
    "rgu": 182.0,
-   "caidas_total": 0,
-   "caidas_activas": 0,
+   "caidas_total": 2,
+   "caidas_activas": 2,
    "caidas_resueltas": 0,
    "nuevas": 1,
    "al_bucket": 0,
-   "repetidas": 30,
+   "repetidas": 31,
    "reagendadas": 5,
    "detalle": {
-    "caidas": [],
+    "caidas": [
+     {
+      "o": "1-3P13TNYT",
+      "tec": "CRISTOBAL MIRANDA VALENC",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "15:02",
+      "d": "VALENTIN LETELIER 1715 CASA 3, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3P1EKI2S",
+      "tec": "CRISTOBAL SILVA LEIVA",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "16:44",
+      "d": "FLORENCIA 1394, QUILPUE",
+      "e": "Pendiente"
+     }
+    ],
     "nuevas": [
      {
       "o": "1-3P1054QR",
@@ -22659,7 +22679,7 @@
       "o": "1-3P18OZHW",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "15:15",
+      "hi": "15:12",
       "d": "AVENIDA VALPARAISO 2121 CASA B, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
@@ -22911,9 +22931,9 @@
       "o": "1-3P15U809",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:49",
       "d": "GLACIAR GREY 2000 EDIF. E DEPTO 601, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "MARCO PEREZ G",
       "visitas": 1,
       "ult_fecha": "13-11-2026",
@@ -22923,9 +22943,9 @@
       "o": "1-3P0Q5MMN",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "09:23",
+      "hi": "10:00",
       "d": "AVENIDA VALPARAISO 407, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
       "visitas": 1,
       "ult_fecha": "13-11-2026",
@@ -22935,13 +22955,25 @@
       "o": "1-3OZOQI72",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:43",
       "d": "FUENTE CLARA ORIENTE 905, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "PABLO HERNANEZ FERNAN",
       "visitas": 2,
       "ult_fecha": "12-11-2026",
       "ult_cierre": "Sin moradores"
+     },
+     {
+      "o": "1-3P1FAV5D",
+      "cat": "Reparación",
+      "f": "13-16",
+      "hi": "14:30",
+      "d": "ALCALDE RODOLFO GALLEGUILLOS GATICA 2350 CASA 40, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "PABLO HERNANEZ FERNAN",
+      "visitas": 1,
+      "ult_fecha": "30-10-2026",
+      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3P08T2L9",
@@ -22995,9 +23027,9 @@
       "o": "1-3P0S1E1W",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:38",
       "d": "ALCALDE ALEJANDRO PERALTA 812, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "ESTEBAN PIZARRO QUINTANA",
       "desde": "13-11-2026"
      },
@@ -23025,9 +23057,9 @@
       "o": "1-3OZOQI72",
       "cat": "Alta 2 Play",
       "f": "10-13",
-      "hi": "10:00",
+      "hi": "09:43",
       "d": "FUENTE CLARA ORIENTE 905, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "PABLO HERNANEZ FERNAN",
       "desde": "13-11-2026"
      }
@@ -23035,5 +23067,5 @@
    }
   }
  },
- "generado": "14-11-2026 09:28"
+ "generado": "14-11-2026 09:43"
 }
