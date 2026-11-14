@@ -22589,18 +22589,20 @@
    }
   },
   "14-11-2026": {
-   "hasta": "10:08",
-   "actividades": 123,
+   "hasta": "10:18",
+   "actividades": 127,
    "tecnicos": 33,
    "estados": {
     "Iniciado": 31,
-    "Pendiente": 89,
-    "en ruta": 2,
-    "Cancelado": 1
+    "Pendiente": 92,
+    "Cancelado": 1,
+    "No Realizada": 1,
+    "en ruta": 1,
+    "Completado": 1
    },
-   "rgu": 183.0,
-   "caidas_total": 3,
-   "caidas_activas": 3,
+   "rgu": 188.0,
+   "caidas_total": 4,
+   "caidas_activas": 4,
    "caidas_resueltas": 0,
    "nuevas": 3,
    "al_bucket": 0,
@@ -22633,6 +22635,15 @@
       "f": "13-16",
       "hi": "15:11",
       "d": "PJE 1 (M.TORO Y ZAMAMBRANO) 1066, QUILPUE",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3OY0HVQ4",
+      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "cat": "Upgrade promoción",
+      "f": "13-16",
+      "hi": "13:00",
+      "d": "LAGO BERTRAND 120 EDIF. J DEPTO 404, QUILPUE",
       "e": "Pendiente"
      }
     ],
@@ -22910,7 +22921,7 @@
       "o": "1-3P0DJKDY",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "13:15",
+      "hi": "13:00",
       "d": "CAUPOLICAN 835, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
@@ -22922,7 +22933,7 @@
       "o": "1-3P0OY8GX",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:24",
+      "hi": "16:09",
       "d": "LEUCOTON 1100 EDIF. 3 DEPTO 407, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
@@ -23030,7 +23041,7 @@
       "o": "1-3P16A36O",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "13:00",
+      "hi": "14:11",
       "d": "THOMPSON 927 DEPTO 603, QUILPUE",
       "e": "Pendiente",
       "tec": "YENDER BOSCAN CADENAS",
@@ -23094,5 +23105,5 @@
    }
   }
  },
- "generado": "14-11-2026 10:08"
+ "generado": "14-11-2026 10:18"
 }
