@@ -23119,5 +23119,33 @@ anReloj = function(v, r, label, big, nv, min, ref){
   return s + '</svg>';
 };
 </script>
+
+<script>
+/* ===== (14-11-2026) PANTALLA 3 · SEMAFORO CON LA REGLA DE LOS ANILLOS =====
+   Luis: "deja el semaforo como los anillos porfa". En la Pantalla 3 el semaforo (y la fila "Otras comunas",
+   que va igual al semaforo) usan: verde 60 % o mas, amarillo/ambar de 50 a 59,99 %, rojo bajo 50 %.
+   Antes: ambar de 55 a 59,99 y rojo bajo 55 (sigue asi en la Pantalla 2 y en el resto del Modulo).
+   Se hace despues de pintar: se lee el % de cada casilla y se le pone el color con la regla nueva. */
+function anP3Est(v){ return v >= MP_META ? 'ok' : v >= 50 ? 'med' : 'mal'; }
+function anP3Num(t){ const m = /(-?\d+(?:[.,]\d+)?)\s*%/.exec(String(t || '')); return m ? parseFloat(m[1].replace(',', '.')) : null; }
+function anP3Regla50(){
+  if(!anP3()) return;
+  const p = document.getElementById('anPage'); if(!p) return;
+  /* semaforo: casillas .d.v2 con clase c-ok / c-med / c-mal */
+  p.querySelectorAll('.an-g2 .an-col > .an-card:first-child .an-sem .d.v2').forEach(function(d){
+    const b = d.querySelector('b'), v = anP3Num(b ? b.textContent : ''); if(v === null) return;
+    d.classList.remove('c-ok', 'c-med', 'c-mal'); d.classList.add('c-' + anP3Est(v));
+  });
+  /* otras comunas: la primera fila lleva el color en el fondo (anCol) */
+  const col = { ok:'#22c55e', med:'#f59e0b', mal:'#ef4444' };
+  p.querySelectorAll('.an-otras .an-sem .d:not(.vac):not(.ot)').forEach(function(d){
+    const v = anP3Num(d.firstChild ? d.firstChild.textContent : d.textContent); if(v === null) return;
+    const st = d.getAttribute('style') || '', nu = st.replace(/background:\s*#[0-9a-fA-F]{6}/, 'background:' + col[anP3Est(v)]);
+    if(nu !== st) d.setAttribute('style', nu);   /* se cambia el texto del style para que el CSS de la Pantalla 3 lo siga reconociendo */
+  });
+}
+const _anPintarP3 = anPintar;
+anPintar = function(){ const r = _anPintarP3.apply(this, arguments); try { anP3Regla50(); } catch(e){} return r; };
+</script>
 </body>
 </html>
