@@ -1,7 +1,7 @@
 {
-  "actualizado": "2026-11-14T14:20:58",
+  "actualizado": "2026-11-14T14:51:13",
   "resumen": {
-    "sin informacion": 4,
+    "sin informacion": 5,
     "reagendada": 3
   },
   "estados": {
@@ -25,8 +25,8 @@
         "aviso": "historial de la direccion, NO es el estado de esta orden",
         "filas": [
           {
-            "estado": "reagendada",
-            "color": "rgb(255, 222, 0)",
+            "estado": "?",
+            "color": "rgb(93, 190, 63)",
             "ot": "1-3P0W0A98",
             "franja": "13-16",
             "texto": "1-3P0W0A98 - 13-16-Alta-2 Play-VALENTIN LETELIER 1715 CASA 65"
@@ -114,6 +114,62 @@
             "ot": "1-3P10NAMD",
             "franja": "13-16",
             "texto": "1-3P10NAMD - 13-16-Migración-Migración-PERU 496"
+          }
+        ]
+      }
+    },
+    "1-3P19CXJ6": {
+      "tec": "LUIS MARTIN NUÑEZ",
+      "cat": "Alta 1 Play",
+      "franja_original": "16-19",
+      "d": "CALLE 2 01549 EDIF. E3 DEPTO 11, QUILPUE",
+      "estado": "sin informacion",
+      "nota": "la OT ya no existe en TOA",
+      "contexto": {
+        "buscado": "CALLE 2 01549",
+        "aviso": "historial de la direccion, NO es el estado de esta orden",
+        "filas": [
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3P0AQYNL",
+            "franja": "16-19",
+            "texto": "1-3P0AQYNL - 16-19-Alta-1 Play-CALLE 2 01549 EDIF. E3 DEPTO 11Vie, 13 Nov"
+          },
+          {
+            "estado": "no realizada",
+            "color": "rgb(96, 206, 206)",
+            "ot": "1-3OYTAYBJ",
+            "franja": "16-19",
+            "texto": "1-3OYTAYBJ - 16-19-Alta-1 Play-CALLE 2 01549 EDIF. E3 DEPTO 11Jue, 12 Nov"
+          },
+          {
+            "estado": "completada",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3NB3T83G",
+            "franja": "13-16",
+            "texto": "1-3NB3T83G - 13-16-Modificación de Servicio-Modificación-CALLE 2 01549 EDIF. E3 DEPTO 22Mie, 19 Ago"
+          },
+          {
+            "estado": "cancelada",
+            "color": "rgb(128, 255, 128)",
+            "ot": "1-3N9KTZKN",
+            "franja": "13-16",
+            "texto": "1-3N9KTZKN - 13-16-Alta-1 Play-CALLE 2 01549 EDIF. E3 DEPTO 23Mar, 18 Ago"
+          },
+          {
+            "estado": "cancelada",
+            "color": "rgb(128, 255, 128)",
+            "ot": "1-3N740HTX",
+            "franja": "13-16",
+            "texto": "1-3N740HTX - 13-16-Alta-1 Play-CALLE 2 01549 EDIF. E3 DEPTO 23Lun, 17 Ago"
+          },
+          {
+            "estado": "completada",
+            "color": "rgb(121, 182, 235)",
+            "ot": "1-3N76U1M3",
+            "franja": "10-13",
+            "texto": "1-3N76U1M3 - 10-13-Migración-Migración-CALLE 2 01549 EDIF. E3 DEPTO 22Lun, 17 Ago"
           }
         ]
       }
