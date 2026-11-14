@@ -22589,25 +22589,25 @@
    }
   },
   "14-11-2026": {
-   "hasta": "13:24",
-   "actividades": 157,
+   "hasta": "13:39",
+   "actividades": 154,
    "tecnicos": 33,
    "estados": {
     "No Realizada": 13,
-    "Iniciado": 25,
-    "Pendiente": 74,
-    "Completado": 35,
+    "Completado": 44,
+    "Iniciado": 21,
+    "Pendiente": 67,
     "Suspendido": 1,
     "Cancelado": 6,
-    "en ruta": 3
+    "en ruta": 2
    },
-   "rgu": 229.3,
+   "rgu": 219.9,
    "caidas_total": 7,
    "caidas_activas": 7,
    "caidas_resueltas": 0,
-   "nuevas": 8,
-   "al_bucket": 8,
-   "repetidas": 38,
+   "nuevas": 9,
+   "al_bucket": 13,
+   "repetidas": 36,
    "reagendadas": 5,
    "detalle": {
     "caidas": [
@@ -22677,8 +22677,17 @@
     ],
     "nuevas": [
      {
-      "o": "1-3P1SOVE3",
+      "o": "1-3P1T8UES",
       "tec": "JOEL GUSTAVE GUSTA",
+      "cat": "Modificación de Servicio",
+      "f": "13-16",
+      "hi": "13:28",
+      "d": "PJE RIO PALENA 1964, VILLA ALEMANA",
+      "e": "Iniciado"
+     },
+     {
+      "o": "1-3P1SOVE3",
+      "tec": "SEBASTIAN DOSSOW A",
       "cat": "Upgrade promoción",
       "f": "13-16",
       "hi": "14:26",
@@ -22705,7 +22714,7 @@
      },
      {
       "o": "1-3P1N9P4G",
-      "tec": "JOSE SALAS MEDINA",
+      "tec": "ALFREDO ALCAYAGA F",
       "cat": "Alta 1 Play",
       "f": "13-16",
       "hi": "15:44",
@@ -22723,7 +22732,7 @@
      },
      {
       "o": "1-3P1LI8MF",
-      "tec": "ALEXIS JARA",
+      "tec": "NICOLAS MOYANO R",
       "cat": "Alta 2 Play",
       "f": "13-16",
       "hi": "15:16",
@@ -22751,10 +22760,22 @@
     ],
     "repetidas": [
      {
+      "o": "1-3OXZ7R1H",
+      "cat": "Migración 1 Play",
+      "f": "13-16",
+      "hi": "15:41",
+      "d": "ARTURO PRAT (SGTO ALDEA) 170, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "ALEXIS JARA",
+      "visitas": 1,
+      "ult_fecha": "02-11-2026",
+      "ult_cierre": "Sin moradores"
+     },
+     {
       "o": "1-3P1538UH",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:19",
+      "hi": "14:32",
       "d": "ISLA NEGRA 2365, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -22766,7 +22787,7 @@
       "o": "1-3OUZH5WA",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:32",
+      "hi": "18:39",
       "d": "IGNACIO CARRERA PINTO 0650 EDIF. D DEPTO 103, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ALFREDO ALCAYAGA F",
@@ -22799,16 +22820,16 @@
       "ult_cierre": "Sin moradores"
      },
      {
-      "o": "1-3P1PYJOD",
-      "cat": "Alta 1 Play",
+      "o": "1-3P16A36O",
+      "cat": "Reparación",
       "f": "13-16",
-      "hi": "17:22",
-      "d": "AV LOS CARRERA 301, QUILPUE",
+      "hi": "14:43",
+      "d": "THOMPSON 927 DEPTO 603, QUILPUE",
       "e": "Pendiente",
       "tec": "DANIEL NAVARRETE E",
-      "visitas": 2,
-      "ult_fecha": "11-11-2026",
-      "ult_cierre": "NAP Problema ubicación"
+      "visitas": 1,
+      "ult_fecha": "21-08-2026",
+      "ult_cierre": "Falla Masiva"
      },
      {
       "o": "1-3P18PWM6",
@@ -22849,7 +22870,7 @@
       "o": "1-3P18OZHW",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "15:27",
+      "hi": "15:50",
       "d": "AVENIDA VALPARAISO 2121 CASA B, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
@@ -22861,7 +22882,7 @@
       "o": "1-3P11IERX",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:23",
+      "hi": "16:40",
       "d": "PATRICIO LYNCH 560 EDIF. 2 DEPTO 2303, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "FELIPE SILVA R",
@@ -22894,16 +22915,16 @@
       "ult_cierre": "Cliente Desiste"
      },
      {
-      "o": "1-3P16A36O",
+      "o": "1-3P171ALM",
       "cat": "Reparación",
-      "f": "13-16",
-      "hi": "15:41",
-      "d": "THOMPSON 927 DEPTO 603, QUILPUE",
+      "f": "16-19",
+      "hi": "17:57",
+      "d": "FREIRE 959 CASA 2, QUILPUE",
       "e": "Pendiente",
       "tec": "JORDAN ROA PEREZ",
       "visitas": 1,
-      "ult_fecha": "21-08-2026",
-      "ult_cierre": "Falla Masiva"
+      "ult_fecha": "12-11-2026",
+      "ult_cierre": "NAP Problema niveles PO"
      },
      {
       "o": "1-3P0ORSI0",
@@ -22921,7 +22942,7 @@
       "o": "1-3P0OY8GX",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "17:06",
+      "hi": "16:53",
       "d": "LEUCOTON 1100 EDIF. 3 DEPTO 407, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -22957,7 +22978,7 @@
       "o": "1-3P13B47H",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:11",
+      "hi": "17:04",
       "d": "PROYECTADA (CARRERA) 579, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE PEREZ RANGEL",
@@ -22981,7 +23002,7 @@
       "o": "1-3P1QB3JK",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "14:54",
+      "hi": "15:42",
       "d": "MUNOZ GAMERO 620 DEPTO 502, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE ROJO A",
@@ -23002,40 +23023,28 @@
       "ult_cierre": "Cliente Desiste"
      },
      {
-      "o": "1-3OXZ7R1H",
-      "cat": "Migración 1 Play",
+      "o": "1-3P1OAU5P",
+      "cat": "Alta 2 Play",
       "f": "13-16",
-      "hi": "16:27",
-      "d": "ARTURO PRAT (SGTO ALDEA) 170, VILLA ALEMANA",
+      "hi": "15:57",
+      "d": "PEDRO MONTT 334, VILLA ALEMANA",
+      "e": "Pendiente",
+      "tec": "JOSE SALAS MEDINA",
+      "visitas": 1,
+      "ult_fecha": "14-11-2026",
+      "ult_cierre": "Direccion incorrecta"
+     },
+     {
+      "o": "1-3OZYSXPB",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "16:21",
+      "d": "LAS ACACIAS 30, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JUAN ARRIAGADA C",
       "visitas": 1,
-      "ult_fecha": "02-11-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3P171ALM",
-      "cat": "Reparación",
-      "f": "16-19",
-      "hi": "19:18",
-      "d": "FREIRE 959 CASA 2, QUILPUE",
-      "e": "Pendiente",
-      "tec": "KEVIN TAPIA RETAMAL",
-      "visitas": 1,
       "ult_fecha": "12-11-2026",
-      "ult_cierre": "NAP Problema niveles PO"
-     },
-     {
-      "o": "1-3P18G3JS",
-      "cat": "Alta 2 Play",
-      "f": "13-16",
-      "hi": "16:20",
-      "d": "DINAMARCA 1166, QUILPUE",
-      "e": "Pendiente",
-      "tec": "LEONEL HERNÁNDEZ OJE",
-      "visitas": 1,
-      "ult_fecha": "13-11-2026",
-      "ult_cierre": "Direccion incorrecta"
+      "ult_cierre": "Sin moradores"
      },
      {
       "o": "1-3P0DJKDY",
@@ -23050,22 +23059,22 @@
       "ult_cierre": "Zona Roja"
      },
      {
-      "o": "1-3P1OAU5P",
-      "cat": "Alta 2 Play",
+      "o": "1-3P1PYJOD",
+      "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:39",
-      "d": "PEDRO MONTT 334, VILLA ALEMANA",
+      "hi": "15:23",
+      "d": "AV LOS CARRERA 301, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
-      "visitas": 1,
-      "ult_fecha": "14-11-2026",
-      "ult_cierre": "Direccion incorrecta"
+      "visitas": 2,
+      "ult_fecha": "11-11-2026",
+      "ult_cierre": "NAP Problema ubicación"
      },
      {
       "o": "1-3P19CXJ6",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "18:31",
+      "hi": "17:36",
       "d": "CALLE 2 01549 EDIF. E3 DEPTO 11, QUILPUE",
       "e": "Pendiente",
       "tec": "LUIS MARTIN NUÑEZ",
@@ -23089,7 +23098,7 @@
       "o": "1-3P1FAV5D",
       "cat": "Reparación",
       "f": "13-16",
-      "hi": "15:46",
+      "hi": "15:45",
       "d": "ALCALDE RODOLFO GALLEGUILLOS GATICA 2350 CASA 40, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MARCELO GÓMEZ GÓME",
@@ -23101,7 +23110,7 @@
       "o": "1-3OY1PTU5",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "17:03",
+      "hi": "17:02",
       "d": "SAN ENRIQUE 1780 EDIF. 7 DEPTO 201, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MARCELO GÓMEZ GÓME",
@@ -23125,31 +23134,19 @@
       "o": "1-3P0Q5MMN",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "13:37",
+      "hi": "13:30",
       "d": "AVENIDA VALPARAISO 407, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "MATIAS APELEO APELEO",
       "visitas": 1,
       "ult_fecha": "13-11-2026",
       "ult_cierre": "Direccion incorrecta"
      },
      {
-      "o": "1-3OZYSXPB",
-      "cat": "Alta 1 Play",
-      "f": "13-16",
-      "hi": "16:28",
-      "d": "LAS ACACIAS 30, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "MATIAS APELEO APELEO",
-      "visitas": 1,
-      "ult_fecha": "12-11-2026",
-      "ult_cierre": "Sin moradores"
-     },
-     {
       "o": "1-3P1LSXLX",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "18:12",
+      "hi": "18:53",
       "d": "LAS ACACIAS 1575 CASA 30, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "MATIAS APELEO APELEO",
@@ -23175,7 +23172,7 @@
       "f": "10-13",
       "hi": "11:56",
       "d": "LLIU LLIU 1640, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "SAMUEL FERNANDEZ VIDAL",
       "visitas": 1,
       "ult_fecha": "12-11-2026",
@@ -23185,38 +23182,16 @@
       "o": "1-3P0Q91IS",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "15:44",
+      "hi": "15:31",
       "d": "DEL ALHELI 2011, QUILPUE",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
       "visitas": 1,
       "ult_fecha": "13-11-2026",
       "ult_cierre": "Sin moradores"
-     },
-     {
-      "o": "1-3OSTX0US",
-      "cat": "Migración 2 Play",
-      "f": "13-16",
-      "hi": "16:03",
-      "d": "ALFONSO LOPEZ EMANUELLI 1544, QUILPUE",
-      "e": "Pendiente",
-      "tec": "SEBASTIAN DOSSOW A",
-      "visitas": 2,
-      "ult_fecha": "03-11-2026",
-      "ult_cierre": "Cliente reagenda"
      }
     ],
     "reagendadas": [
-     {
-      "o": "1-3OYDEF90",
-      "cat": "Alta 2 Play",
-      "f": "16-19",
-      "hi": "17:36",
-      "d": "LAS MORAS 2450, QUILPUE",
-      "e": "Pendiente",
-      "tec": "CRISTOBAL MIRANDA VALENC",
-      "desde": "11-11-2026"
-     },
      {
       "o": "1-3OXU97SC",
       "cat": "Alta 2 Play",
@@ -23256,10 +23231,20 @@
       "e": "Completado",
       "tec": "PABLO HERNANEZ FERNAN",
       "desde": "13-11-2026"
+     },
+     {
+      "o": "1-3OYDEF90",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "16:39",
+      "d": "LAS MORAS 2450, QUILPUE",
+      "e": "Pendiente",
+      "tec": "SEBASTIAN DOSSOW A",
+      "desde": "11-11-2026"
      }
     ]
    }
   }
  },
- "generado": "14-11-2026 13:24"
+ "generado": "14-11-2026 13:39"
 }
