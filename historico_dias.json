@@ -22589,27 +22589,36 @@
    }
   },
   "14-11-2026": {
-   "hasta": "10:43",
-   "actividades": 131,
+   "hasta": "10:54",
+   "actividades": 133,
    "tecnicos": 33,
    "estados": {
-    "Iniciado": 30,
+    "Iniciado": 31,
     "Pendiente": 91,
-    "No Realizada": 3,
-    "en ruta": 3,
+    "No Realizada": 4,
+    "en ruta": 2,
     "Cancelado": 2,
-    "Completado": 2
+    "Completado": 3
    },
-   "rgu": 190.5,
-   "caidas_total": 4,
-   "caidas_activas": 4,
+   "rgu": 192.5,
+   "caidas_total": 5,
+   "caidas_activas": 5,
    "caidas_resueltas": 0,
-   "nuevas": 3,
+   "nuevas": 5,
    "al_bucket": 0,
    "repetidas": 32,
    "reagendadas": 5,
    "detalle": {
     "caidas": [
+     {
+      "o": "1-3P15OHC6",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "cat": "Alta 2 Play",
+      "f": "13-16",
+      "hi": "13:13",
+      "d": "FIGUEROA LARRAIN 01143, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3P13TNYT",
       "tec": "CRISTOBAL MIRANDA VALENC",
@@ -22648,6 +22657,24 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3P1N9P4G",
+      "tec": "ANTONHY MORALES MENDOZA",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "15:44",
+      "d": "REGIDOR LUIS MUNOZ 1783, VILLA ALEMANA",
+      "e": "Pendiente"
+     },
+     {
+      "o": "1-3P1N96GL",
+      "tec": "SAMUEL FERNANDEZ VIDAL",
+      "cat": "Alta 1 Play",
+      "f": "13-16",
+      "hi": "16:30",
+      "d": "BILBAO 1650, QUILPUE",
+      "e": "Pendiente"
+     },
      {
       "o": "1-3P1LI8MF",
       "tec": "NICOLAS MOYANO R",
@@ -22693,9 +22720,9 @@
       "o": "1-3OY9UJHD",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:36",
+      "hi": "10:48",
       "d": "LAGO LAS TORRES 207 DEPTO 1007, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "CESAR MENA OLIVEROS",
       "visitas": 1,
       "ult_fecha": "10-11-2026",
@@ -22717,7 +22744,7 @@
       "o": "1-3P18OZHW",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "14:12",
+      "hi": "15:12",
       "d": "AVENIDA VALPARAISO 2121 CASA B, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "ESTEBAN PIZARRO QUINTANA",
@@ -22765,9 +22792,9 @@
       "o": "1-3OZZRP25",
       "cat": "Migración 1 Play",
       "f": "10-13",
-      "hi": "10:42",
+      "hi": "10:50",
       "d": "PJE 11 808 CASA I, QUILPUE",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "JORDAN ROA PEREZ",
       "visitas": 1,
       "ult_fecha": "21-10-2026",
@@ -22777,7 +22804,7 @@
       "o": "1-3P19CXJ6",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:00",
+      "hi": "16:10",
       "d": "CALLE 2 01549 EDIF. E3 DEPTO 11, QUILPUE",
       "e": "Pendiente",
       "tec": "JORDAN ROA PEREZ",
@@ -22803,7 +22830,7 @@
       "f": "10-13",
       "hi": "09:50",
       "d": "SAN ENRIQUE 1890 EDIF. 7 DEPTO 201, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "JOSE GALAZ D",
       "visitas": 2,
       "ult_fecha": "13-11-2026",
@@ -22813,7 +22840,7 @@
       "o": "1-3P0P936B",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "12:10",
+      "hi": "12:01",
       "d": "AV LA PALMA 151 EDIF. 9 DEPTO 433, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -22825,7 +22852,7 @@
       "o": "1-3P0Q91IS",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "13:27",
+      "hi": "13:18",
       "d": "DEL ALHELI 2011, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -22837,7 +22864,7 @@
       "o": "1-3P117507",
       "cat": "Migración 2 Play",
       "f": "13-16",
-      "hi": "15:41",
+      "hi": "15:32",
       "d": "PERU 496, QUILPUE",
       "e": "Pendiente",
       "tec": "JOSE GALAZ D",
@@ -23041,7 +23068,7 @@
       "o": "1-3P08T2L9",
       "cat": "Alta 1 Play",
       "f": "10-13",
-      "hi": "10:56",
+      "hi": "11:08",
       "d": "LLIU LLIU 1640, VILLA ALEMANA",
       "e": "Pendiente",
       "tec": "SAMUEL FERNANDEZ VIDAL",
@@ -23117,5 +23144,5 @@
    }
   }
  },
- "generado": "14-11-2026 10:43"
+ "generado": "14-11-2026 10:54"
 }
