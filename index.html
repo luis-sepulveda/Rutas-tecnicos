@@ -14945,6 +14945,8 @@ function pintarPortada(){
       '<header class="pv-bar pz-barra">'
     +   '<div class="pv-marca"><span class="pv-nom">M\u00f3dulo de Actividades</span>'
     +     '<span class="pv-zona">Quilpu\u00e9 \u00b7 Villa Alemana</span></div>'
+    /* (14-11-2026) Luis: 3 botones para cambiar de pantalla */
+    +   (typeof pzPantHtml === 'function' ? pzPantHtml(1) : '')
     +   '<nav class="pv-seg">'
     +     '<a class="aqui" onclick="verMapa()">Rutas</a>'
     /* Red (24-09-2026): abre el mapa de red, pantalla aparte con su propio mapa.
@@ -22718,5 +22720,336 @@ var XH_ACTIVO = true;
 #anDet .mdc [style*="color:#94a3b8"] { color:#64748b !important; }
 #anDet .mdc .an-dvis .ok, #anDet .mdc .an-dres b.v { color:#15803d; } #anDet .mdc .an-dvis .nr, #anDet .mdc .an-dres b.r { color:#dc2626; }
 </style>
+
+<style>
+/* ===== (14-11-2026) PANTALLAS 1 · 2 · 3 =====
+   Luis: "en la primera pantalla coloques 3 botones, pantalla 1, pantalla 2, pantalla 3 para cambiar de pantallas, y arma la ultima pantalla".
+   Pantalla 1 = portada (Modulo de Actividades). Pantalla 2 = Analisis de gestion como estaba (oscuro).
+   Pantalla 3 = Analisis de gestion nuevo: Opcion 4 (clara, semaforo que solo grita lo malo) + cabecera azul marino
+   contraste maximo (K3) + anillos A6 (color de la actividad en meta; 50-59,99 % amarillo; bajo 50 % rojo).
+   Los numeros y las reglas son los mismos; solo cambia el dibujo. La pantalla elegida se recuerda en este computador. */
+.pz-pant { display:inline-flex; gap:4px; margin-left:16px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18); border-radius:999px; padding:3px; vertical-align:middle; }
+.pz-pant button { border:0; background:transparent; color:#e2e8f0; font:700 12.5px 'Segoe UI',Arial,sans-serif; padding:5px 12px; border-radius:999px; cursor:pointer; white-space:nowrap; }
+.pz-pant button:hover { background:rgba(255,255,255,.14); }
+.pz-pant button.on { background:#fbbf24; color:#1c1917; }
+#anPage .an-head h1 + .pz-pant { margin-left:14px; }
+#anPage .an-head > .pz-izq { display:flex; align-items:center; gap:0; flex-wrap:wrap; }
+
+/* ===== (14-11-2026) PANTALLA 3 · MI ANALISIS A COLOR =====
+   Luis: "revisa esta ventana con que colores podriamos modificar la vista, y muestrame ejemplos".
+   Solo cambia el dibujo. Clase en #anPage: pc1 = clara con franjas, pc2 = tarjetas a color, pc3 = azul suave. */
+/* ---- base clara (opciones 1 y 2) ---- */
+#anPage:is(.pc1,.pc2,.pc4) { background:#eef2f7; }
+#anPage:is(.pc1,.pc2,.pc4) .an-card { background:#fff; border-color:#dbe3ee; color:#1e293b; box-shadow:0 2px 8px rgba(15,23,42,.06); }
+#anPage:is(.pc1,.pc2,.pc4) .an-card h3 { color:#0f172a; }
+#anPage:is(.pc1,.pc2,.pc4) .an-ver { color:#1d4ed8; font-weight:600; }
+#anPage:is(.pc1,.pc2,.pc4) .an-sec { color:#475569; }
+#anPage:is(.pc1,.pc2,.pc4) .an-wrap.v2 .an-sec { border-bottom-color:#cbd5e1; }
+#anPage:is(.pc1,.pc2,.pc4) .an-pie { color:#475569; border-top-color:#e2e8f0; } #anPage:is(.pc1,.pc2,.pc4) .an-pie b { color:#0f172a; }
+#anPage:is(.pc1,.pc2,.pc4) .an-sem .h, #anPage:is(.pc1,.pc2,.pc4) .an-sem > div:not(.d):not(.h) { color:#334155; }
+#anPage:is(.pc1,.pc2,.pc4) .an-relsg span.v2g { color:#6d28d9; } #anPage:is(.pc1,.pc2,.pc4) .an-relsg span.v2g b { color:#5b21b6; }
+#anPage:is(.pc1,.pc2,.pc4) .an-gsa-res { color:#334155; }
+#anPage:is(.pc1,.pc2,.pc4) .an-lin-ley { color:#334155; } #anPage:is(.pc1,.pc2,.pc4) .an-lin-ley b { color:#0f172a; }
+#anPage:is(.pc1,.pc2,.pc4) .an-lin-ley.v2 .lc { background:#f1f5f9; border:1px solid #e2e8f0; }
+#anPage:is(.pc1,.pc2,.pc4) .an-lin-ley.v2 .lc > span { color:#0f172a; font-weight:600; } #anPage:is(.pc1,.pc2,.pc4) .an-lin-ley.v2 .lc small { color:#475569; }
+#anPage.pc2 .hA .an-filrot { color:#dbeafe; }
+#anPage:is(.pc1,.pc2,.pc4) .an-vbt, #anPage:is(.pc1,.pc2,.pc4) .an-hbt { border-color:#cbd5e1; }
+#anPage:is(.pc1,.pc2,.pc4) .an-vbt button, #anPage:is(.pc1,.pc2,.pc4) .an-hbt button, #anPage:is(.pc1,.pc2,.pc4) .an-plg { background:#f1f5f9; color:#1e40af; border-color:#cbd5e1; }
+#anPage:is(.pc1,.pc2,.pc4) .an-vbt button.on, #anPage:is(.pc1,.pc2,.pc4) .an-hbt button.on { background:#1d4ed8; color:#fff; }
+#anPage:is(.pc1,.pc2,.pc4) .an-otras .an-sem .d.ot { background:#ccfbf1; }
+/* dibujos (relojes y grafico) sobre fondo claro */
+#anPage:is(.pc1,.pc2,.pc4) .an-card svg [stroke="#e2e8f0"] { stroke:#334155; }
+#anPage:is(.pc1,.pc2,.pc4) .an-card svg [fill="#e2e8f0"] { fill:#334155; }
+#anPage:is(.pc1,.pc2,.pc4) .an-card svg [fill="#94a3b8"] { fill:#64748b; }
+#anPage:is(.pc1,.pc2,.pc4) .an-card svg line[stroke="#fff"] { stroke:#0f172a; }
+#anPage:is(.pc1,.pc2,.pc4) .an-card svg text[fill="#fff"] { fill:#0f172a; }
+#anPage:is(.pc1,.pc2,.pc4) .an-card svg [stroke="#111a2e"] { stroke:#fff; }
+#anPage:is(.pc1,.pc2,.pc4) .an-card svg [stroke="#1e2a44"] { stroke:#e2e8f0; }
+#anPage:is(.pc1,.pc2,.pc4) .an-card svg [stroke="#475569"] { stroke:#94a3b8; }
+#anPage:is(.pc1,.pc2,.pc4) .an-card svg text[fill="#22c55e"] { fill:#15803d; }
+#anPage:is(.pc1,.pc2,.pc4) .an-card svg text[fill="#ef4444"] { fill:#dc2626; }
+#anPage:is(.pc1,.pc2,.pc4) .an-card svg text[fill="#f59e0b"] { fill:#b45309; }
+#anPage:is(.pc1,.pc2,.pc4) .an-card svg text[fill="#fb923c"] { fill:#ea580c; }
+#anPage:is(.pc1,.pc2,.pc4) [style*="background:#e2e8f0"] { background:#334155 !important; }
+#anPage:is(.pc1,.pc2,.pc4) [style*="color:#e2e8f0"] { color:#334155 !important; }
+#anPage:is(.pc1,.pc2,.pc4) .an-card [style*="color:#22c55e"], #anPage:is(.pc1,.pc2,.pc4) .an-card [style*="color:#4ade80"] { color:#15803d !important; }
+#anPage:is(.pc1,.pc2,.pc4) .an-card [style*="color:#ef4444"], #anPage:is(.pc1,.pc2,.pc4) .an-card [style*="color:#f87171"], #anPage:is(.pc1,.pc2,.pc4) .an-card [style*="color:#fca5a5"] { color:#dc2626 !important; }
+#anPage:is(.pc1,.pc2,.pc4) .an-card [style*="color:#86efac"] { color:#15803d !important; }
+#anPage:is(.pc1,.pc2,.pc4) .an-card [style*="color:#f59e0b"] { color:#b45309 !important; }
+#anPage:is(.pc1,.pc2,.pc4) .an-card [style*="color:#94a3b8"] { color:#64748b !important; }
+#anPage:is(.pc1,.pc2,.pc4) .an-card [style*="color:#5eead4"] { color:#0f766e !important; }
+#anPage:is(.pc1,.pc2,.pc4) .an-card [style*="color:#c4b5fd"] { color:#6d28d9 !important; }
+
+/* ---- OPCION 1: clara, cabecera blanca, tarjetas blancas con franja de color ---- */
+#anPage:is(.pc1,.pc4) .hA .an-head, #anPage:is(.pc1,.pc4) .hA .an-btns { background:#fff; border-color:#dbe3ee; }
+#anPage:is(.pc1,.pc4) .hA .an-head { border-top:5px solid #1d4ed8; }
+#anPage:is(.pc1,.pc4) .hA .an-head h1 span:first-child { color:#0f172a !important; } #anPage:is(.pc1,.pc4) .hA .an-head h1 span:last-child { color:#1d4ed8 !important; }
+#anPage:is(.pc1,.pc4) .hA .an-fecha { color:#64748b; }
+#anPage:is(.pc1,.pc4) .hA .an-fil { background:#f1f5f9; border-color:#dbe3ee; }
+#anPage:is(.pc1,.pc4) .hA .an-fil .an-chip { color:#334155; } #anPage:is(.pc1,.pc4) .hA .an-fil .an-chip:hover { background:#e2e8f0; }
+#anPage:is(.pc1,.pc4) .hA .an-fil .an-chip.on { color:#fff; }
+#anPage:is(.pc1,.pc4) .hA .an-fil .an-x { background:#fff; border-color:#cbd5e1; color:#334155; }
+#anPage:is(.pc1,.pc4) .an-sep { background:#cbd5e1; }
+#anPage:is(.pc1,.pc4) .an-ordb { background:#f1f5f9; border-color:#cbd5e1; color:#1e293b; } #anPage:is(.pc1,.pc4) .an-ordb small { background:#dbeafe; color:#1d4ed8; }
+#anPage:is(.pc1,.pc4) .an-ordb.on { background:#1d4ed8; color:#fff; border-color:#1d4ed8; }
+#anPage:is(.pc1,.pc4) .an-ordq input { background:#fff; border-color:#cbd5e1; color:#0f172a; }
+#anPage:is(.pc1,.pc4) .an-g3 > .an-card { border-top:5px solid #64748b; }
+#anPage:is(.pc1,.pc4) .an-g3 > .an-card:nth-child(2) { border-top-color:#3b82f6; }
+#anPage:is(.pc1,.pc4) .an-g3 > .an-card:nth-child(3) { border-top-color:#fb923c; }
+#anPage:is(.pc1,.pc4) .an-g2 .an-col > .an-card:first-child { border-top:5px solid #22c55e; }
+#anPage:is(.pc1,.pc4) .an-g2 .an-otras { border-top:5px solid #14b8a6; }
+#anPage:is(.pc1,.pc4) .an-g2 > .an-card { border-top:5px solid #0ea5e9; }
+#anPage:is(.pc1,.pc4) .an-sem .d.v2.c-ok { background:#dcfce7 !important; color:#14532d; } #anPage:is(.pc1,.pc4) .an-sem .d.v2.c-ok small { color:#166534; }
+#anPage:is(.pc1,.pc4) .an-sem .d.v2.c-med { background:#fef3c7 !important; color:#78350f; } #anPage:is(.pc1,.pc4) .an-sem .d.v2.c-med small { color:#92400e; }
+#anPage:is(.pc1,.pc4) .an-sem .d.v2.c-mal { background:#fee2e2 !important; color:#7f1d1d; } #anPage:is(.pc1,.pc4) .an-sem .d.v2.c-mal small { color:#991b1b; }
+#anPage:is(.pc1,.pc4) .an-sem .d.v2.act { outline-color:#1d4ed8; }
+
+/* ---- OPCION 2: cabecera azul, relojes en tarjetas de color, semaforo de colores fuertes ---- */
+#anPage.pc2 .hA .an-head, #anPage.pc2 .hA .an-btns { background:linear-gradient(90deg,#1e3a8a,#1d4ed8); border-color:#1e40af; }
+#anPage.pc2 .hA .an-fil { background:rgba(255,255,255,.12); border-color:rgba(255,255,255,.25); }
+#anPage.pc2 .hA .an-fecha { color:#dbeafe; }
+#anPage.pc2 .hA .an-fil .an-chip.on { background:#fff; color:#1e3a8a; border-color:#fff; }
+#anPage.pc2 .hA .an-fil .an-chip.sup.on { background:#c4b5fd; color:#2e1065; border-color:#c4b5fd; }
+#anPage.pc2 .an-ordb { background:rgba(255,255,255,.12); border-color:rgba(255,255,255,.3); } #anPage.pc2 .an-ordb small { background:rgba(255,255,255,.2); color:#fff; }
+#anPage.pc2 .an-ordq input { background:rgba(255,255,255,.12); border-color:rgba(255,255,255,.35); } #anPage.pc2 .an-ordq input::placeholder { color:#dbeafe; }
+#anPage.pc2 .an-g3 > .an-card:nth-child(1) { background:#f5f3ff; border-color:#ddd6fe; }
+#anPage.pc2 .an-g3 > .an-card:nth-child(2) { background:#eff6ff; border-color:#bfdbfe; }
+#anPage.pc2 .an-g3 > .an-card:nth-child(3) { background:#fff7ed; border-color:#fed7aa; }
+#anPage.pc2 .an-g3 > .an-card .an-pie { border-top-color:rgba(15,23,42,.12); }
+#anPage.pc2 .an-sem .d.v2.c-ok { background:#16a34a !important; color:#fff; } #anPage.pc2 .an-sem .d.v2.c-ok small { color:#dcfce7; }
+#anPage.pc2 .an-sem .d.v2.c-med { background:#d97706 !important; color:#fff; } #anPage.pc2 .an-sem .d.v2.c-med small { color:#fef3c7; }
+#anPage.pc2 .an-sem .d.v2.c-mal { background:#dc2626 !important; color:#fff; } #anPage.pc2 .an-sem .d.v2.c-mal small { color:#fee2e2; }
+#anPage.pc2 .an-sem .d.v2.act { outline:3px solid #1e3a8a; outline-offset:-3px; }
+
+/* ---- OPCION 3: sigue oscura pero en azul (sin negro), semaforo de colores fuertes ---- */
+#anPage.pc3 { background:#e8eef7; }
+#anPage.pc3 .an-card, #anPage.pc3 .hA .an-head, #anPage.pc3 .hA .an-btns { background:#1f3a63; border-color:#2f5288; }
+#anPage.pc3 .hA .an-head { background:linear-gradient(90deg,#1e3a8a,#1f3a63); }
+#anPage.pc3 .hA .an-fil, #anPage.pc3 .an-ordq input { background:#173058; border-color:#2f5288; }
+#anPage.pc3 .an-ordb { background:#24477a; border-color:#3a609b; } #anPage.pc3 .an-ordb small { background:#3a609b; }
+#anPage.pc3 .an-pie { border-top-color:#2f5288; }
+#anPage.pc3 .an-lin-ley.v2 .lc { background:#24477a; }
+#anPage.pc3 .an-card svg [stroke="#111a2e"] { stroke:#1f3a63; }
+#anPage.pc3 .an-card svg [stroke="#1e2a44"] { stroke:#2f5288; }
+#anPage.pc3 .an-sem .d.v2.c-ok { background:#16a34a !important; color:#fff; } #anPage.pc3 .an-sem .d.v2.c-ok small { color:#dcfce7; }
+#anPage.pc3 .an-sem .d.v2.c-med { background:#d97706 !important; color:#fff; } #anPage.pc3 .an-sem .d.v2.c-med small { color:#fef3c7; }
+#anPage.pc3 .an-sem .d.v2.c-mal { background:#dc2626 !important; color:#fff; } #anPage.pc3 .an-sem .d.v2.c-mal small { color:#fee2e2; }
+#anPage.pc3 .an-sem .d.v2.act { outline:3px solid #fff; outline-offset:-3px; }
+#anPage.pc3 .an-mes { background:#173058; border-color:#2f5288; }
+
+/* ---- OPCION 4: la clara (1) + semaforo que solo grita lo malo: en meta casi de fondo, ambar y rojo fuertes ---- */
+#anPage.pc4 .an-sem .d.v2.c-ok { background:#f0fdf4 !important; color:#15803d; box-shadow:inset 0 0 0 1px #bbf7d0; } #anPage.pc4 .an-sem .d.v2.c-ok small { color:#4d7c5f; }
+#anPage.pc4 .an-sem .d.v2.c-med { background:#f59e0b !important; color:#fff; } #anPage.pc4 .an-sem .d.v2.c-med small { color:#fffbeb; }
+#anPage.pc4 .an-sem .d.v2.c-mal { background:#dc2626 !important; color:#fff; } #anPage.pc4 .an-sem .d.v2.c-mal small { color:#fee2e2; }
+#anPage.pc4 .an-sem .d.v2.act { outline:3px solid #1d4ed8; outline-offset:-3px; }
+/* ---- (14-11-2026) PASO 1: color de fondo de la CABECERA (sobre la opcion 4) ---- */
+#anPage.hcA .hA .an-head, #anPage.hcA .hA .an-btns { background:linear-gradient(90deg,#1e3a8a,#2563eb); }
+#anPage.hcC .hA .an-head, #anPage.hcC .hA .an-btns { background:#1e3a5f; }
+#anPage.hcD .hA .an-head, #anPage.hcD .hA .an-btns { background:linear-gradient(90deg,#115e59,#0d9488); }
+#anPage:is(.hcA,.hcC,.hcD) .hA .an-head, #anPage:is(.hcA,.hcC,.hcD) .hA .an-btns { border-color:transparent; }
+#anPage:is(.hcA,.hcC,.hcD) .hA .an-head { border-top:0; border-bottom:1px solid rgba(255,255,255,.15); }
+#anPage:is(.hcA,.hcC,.hcD) .hA .an-head h1 span:first-child { color:#fff !important; } #anPage:is(.hcA,.hcC,.hcD) .hA .an-head h1 span:last-child { color:#bfdbfe !important; }
+#anPage.hcD .hA .an-head h1 span:last-child { color:#99f6e4 !important; }
+#anPage:is(.hcA,.hcC,.hcD) .hA .an-fecha, #anPage:is(.hcA,.hcC,.hcD) .hA .an-filrot { color:rgba(255,255,255,.75); }
+#anPage:is(.hcA,.hcC,.hcD) .hA .an-fil { background:rgba(255,255,255,.12); border-color:rgba(255,255,255,.25); }
+#anPage:is(.hcA,.hcC,.hcD) .hA .an-fil .an-chip { color:#fff; } #anPage:is(.hcA,.hcC,.hcD) .hA .an-fil .an-chip:hover { background:rgba(255,255,255,.15); }
+#anPage:is(.hcA,.hcC,.hcD) .hA .an-fil .an-chip.on { background:#fff; color:#1e3a8a; border-color:#fff; }
+#anPage:is(.hcA,.hcC,.hcD) .hA .an-fil .an-chip.sup.on { background:#ddd6fe; color:#4c1d95; border-color:#ddd6fe; }
+#anPage:is(.hcA,.hcC,.hcD) .hA .an-fil .an-x { background:rgba(255,255,255,.15); border-color:rgba(255,255,255,.3); color:#fff; }
+#anPage:is(.hcA,.hcC,.hcD) .an-sep { background:rgba(255,255,255,.3); }
+#anPage:is(.hcA,.hcC,.hcD) .an-ordb { background:rgba(255,255,255,.12); border-color:rgba(255,255,255,.3); color:#fff; }
+#anPage:is(.hcA,.hcC,.hcD) .an-ordb small { background:rgba(255,255,255,.22); color:#fff; }
+#anPage:is(.hcA,.hcC,.hcD) .an-ordb.on { background:#fff; color:#0f172a; }
+#anPage:is(.hcA,.hcC,.hcD) .an-ordq input { background:rgba(255,255,255,.12); border-color:rgba(255,255,255,.35); color:#fff; }
+#anPage:is(.hcA,.hcC,.hcD) .an-ordq input::placeholder { color:rgba(255,255,255,.7); }
+/* claras */
+#anPage.hcB .hA .an-head, #anPage.hcB .hA .an-btns { background:linear-gradient(90deg,#dbeafe,#eff6ff); border-color:#bfdbfe; }
+#anPage.hcE .hA .an-head, #anPage.hcE .hA .an-btns { background:linear-gradient(90deg,#ede9fe,#f5f3ff); border-color:#ddd6fe; }
+#anPage.hcE .hA .an-head { border-top-color:#7c3aed; } #anPage.hcE .hA .an-head h1 span:last-child { color:#6d28d9 !important; }
+#anPage:is(.hcB,.hcE) .hA .an-head { border-bottom:1px solid rgba(15,23,42,.08); }
+#anPage:is(.hcB,.hcE) .hA .an-fil, #anPage:is(.hcB,.hcE) .an-ordb, #anPage:is(.hcB,.hcE) .an-ordq input { background:rgba(255,255,255,.75); }
+/* ---- (14-11-2026) PASO 1b: contraste de letras y numeros en la cabecera azul marino (C) ---- */
+/* K2 · Alto: todo en blanco puro y mas grueso; los numeritos en burbuja blanca */
+#anPage.hcC.k2 .hA .an-head h1 span:last-child, #anPage.hcC.k3 .hA .an-head h1 span:last-child { color:#e0f2fe !important; font-weight:600; }
+#anPage.hcC:is(.k2,.k3,.k4) .hA .an-fecha { color:#fff; font-weight:600; }
+#anPage.hcC:is(.k2,.k3,.k4) .hA .an-filrot { color:#fff; opacity:.9; }
+#anPage.hcC:is(.k2,.k3,.k4) .hA .an-fil .an-chip { color:#fff; font-weight:600; }
+#anPage.hcC:is(.k2,.k3,.k4) .hA .an-fil { border-color:rgba(255,255,255,.45); }
+#anPage.hcC:is(.k2,.k3,.k4) .an-ordb { color:#fff; font-weight:700; border-color:rgba(255,255,255,.55); background:rgba(255,255,255,.14); }
+#anPage.hcC.k2 .an-ordb small { background:#fff; color:#1e3a5f; font-weight:800; font-size:11px; }
+#anPage.hcC:is(.k2,.k3,.k4) .an-ordq input { border-color:rgba(255,255,255,.6); color:#fff; font-weight:600; }
+#anPage.hcC:is(.k2,.k3,.k4) .an-ordq input::placeholder { color:#fff; opacity:.9; }
+#anPage.hcC:is(.k2,.k3,.k4) .hA .an-fil .an-x { color:#fff; font-weight:700; border-color:rgba(255,255,255,.6); }
+#anPage.hcC:is(.k2,.k3) .hA .an-fil .an-chip.on { color:#132a4a; font-weight:700; }
+#anPage.hcC:is(.k2,.k3) .hA .an-fil .an-chip.sup.on { color:#2e1065; }
+#anPage.hcC:is(.k2,.k3,.k4) .an-ordq input { width:300px; font-weight:500; }
+/* K3 · Maximo: fondo mas oscuro, letras mas grandes, numeritos en amarillo */
+#anPage.hcC.k3 .hA .an-head, #anPage.hcC.k3 .hA .an-btns { background:#132a4a; }
+#anPage.hcC.k3 .hA .an-head h1 { font-size:22px; } #anPage.hcC.k3 .hA .an-head h1 span:last-child { color:#7dd3fc !important; font-weight:700; }
+#anPage.hcC.k3 .hA .an-fecha { font-size:13px; }
+#anPage.hcC.k3 .hA .an-fil .an-chip { font-size:13px; }
+#anPage.hcC.k3 .an-ordb { font-size:13px; background:#24426d; border-color:#5b80b8; }
+#anPage.hcC.k3 .an-ordb small { background:#fbbf24; color:#1c1917; font-weight:800; font-size:11.5px; }
+#anPage.hcC.k3 .an-ordq input { background:#0d2140; font-size:13px; width:270px; }
+/* K4 · Alto con acento celeste: como K2, pero el nombre y los numeritos en celeste */
+#anPage.hcC.k4 .hA .an-head h1 span:last-child { color:#38bdf8 !important; font-weight:700; }
+#anPage.hcC.k4 .an-ordb small { background:#38bdf8; color:#0c2340; font-weight:800; font-size:11px; }
+#anPage.hcC.k4 .hA .an-fil .an-chip.on { background:#38bdf8; color:#0c2340; border-color:#38bdf8; font-weight:700; }
+#anPage.hcC.k4 .hA .an-fil .an-chip.sup.on { background:#c4b5fd; color:#2e1065; border-color:#c4b5fd; }
+/* ---- (14-11-2026) PASO 2: tarjetas de los relojes, para que combinen con la cabecera azul marino ---- */
+/* franja azul marino con el titulo (R1, R3, R4) */
+#anPage:is(.rv1,.rv3,.rv4) .an-g3 > .an-card { border-top:0; padding-top:0; overflow:hidden; border:1px solid #c7d2e3; }
+#anPage:is(.rv1,.rv3,.rv4) .an-g3 > .an-card > h3 { background:#132a4a; color:#fff; margin:0 -14px 8px; padding:11px 14px; font-size:17px; font-weight:800; }
+#anPage:is(.rv1,.rv3,.rv4) .an-g3 > .an-card:nth-child(1) > h3 { box-shadow:inset 0 -4px 0 #94a3b8; }
+#anPage:is(.rv1,.rv3,.rv4) .an-g3 > .an-card:nth-child(2) > h3 { box-shadow:inset 0 -4px 0 #3b82f6; }
+#anPage:is(.rv1,.rv3,.rv4) .an-g3 > .an-card:nth-child(3) > h3 { box-shadow:inset 0 -4px 0 #fb923c; }
+#anPage:is(.rv1,.rv3,.rv4) .an-g3 > .an-card > h3 i.pt[style*="#e2e8f0"] { background:#e2e8f0 !important; }
+#anPage:is(.rv1,.rv3,.rv4) .an-g3 > .an-card > .an-ver { top:12px; color:#7dd3fc; font-weight:700; }
+/* mas contraste en letras y numeros (todas las R) */
+#anPage[class*="rv"] .an-g3 .an-pie { color:#1e293b; font-size:12.5px; border-top:1px solid #e2e8f0; }
+#anPage[class*="rv"] .an-g3 .an-pie b { color:#0f172a; font-weight:800; }
+#anPage[class*="rv"] .an-g3 .an-relsg span { font-size:12px; }
+#anPage[class*="rv"] .an-g3 .an-relsg span.v2g { color:#6d28d9; font-weight:600; }
+#anPage:is(.rv1,.rv2) .an-g3 svg text[font-size="24"] { font-weight:800; font-size:27px; }
+#anPage:is(.rv1,.rv2) .an-g3 svg text[font-size="15"] { font-weight:800; font-size:16.5px; }
+#anPage.rv1 .an-g3 .an-card svg text[fill="#94a3b8"] { fill:#1e293b; font-weight:700; }
+#anPage.rv1 .an-g3 .an-card svg [stroke="#e2e8f0"] { stroke:#132a4a; } #anPage.rv1 .an-g3 .an-card svg [fill="#e2e8f0"] { fill:#132a4a; }
+#anPage.rv1 .an-g3 .an-card svg line[stroke="#fff"] { stroke:#132a4a; stroke-width:3.5; }
+/* R2: tarjeta azul marino completa, igual a la cabecera */
+#anPage.rv2 .an-g3 > .an-card { background:#132a4a; border:1px solid #2b4a75; border-top:5px solid #94a3b8; color:#fff; }
+#anPage.rv2 .an-g3 > .an-card:nth-child(2) { border-top-color:#3b82f6; } #anPage.rv2 .an-g3 > .an-card:nth-child(3) { border-top-color:#fb923c; }
+#anPage.rv2 .an-g3 > .an-card h3 { color:#fff; font-size:17px; font-weight:800; }
+#anPage.rv2 .an-g3 > .an-card h3 i.pt[style*="#e2e8f0"] { background:#e2e8f0 !important; }
+#anPage.rv2 .an-g3 .an-ver { color:#7dd3fc; font-weight:700; }
+#anPage.rv2 .an-g3 .an-pie { color:#e2e8f0; border-top:1px solid #2b4a75; } #anPage.rv2 .an-g3 .an-pie b { color:#fff; }
+#anPage.rv2 .an-g3 .an-card svg [stroke="#e2e8f0"] { stroke:#fff; } #anPage.rv2 .an-g3 .an-card svg [fill="#e2e8f0"] { fill:#fff; }
+#anPage.rv2 .an-g3 .an-card svg line[stroke="#fff"] { stroke:#fff; stroke-width:3.5; }
+#anPage.rv2 .an-g3 .an-card svg text[fill="#94a3b8"] { fill:#e2e8f0; font-weight:700; }
+#anPage.rv2 .an-g3 .an-card svg text[fill="#22c55e"] { fill:#4ade80; } #anPage.rv2 .an-g3 .an-card svg text[fill="#ef4444"] { fill:#f87171; } #anPage.rv2 .an-g3 .an-card svg text[fill="#f59e0b"] { fill:#fbbf24; }
+#anPage.rv2 .an-g3 .an-card [style*="color:#22c55e"] { color:#4ade80 !important; } #anPage.rv2 .an-g3 .an-card [style*="color:#ef4444"] { color:#f87171 !important; }
+#anPage.rv2 .an-g3 .an-relsg span.v2g { color:#c4b5fd; } #anPage.rv2 .an-g3 .an-relsg span.v2g b { color:#ede9fe; }
+/* ---- (14-11-2026) PASO 2b: anillos con el color de cada actividad (Migraciones azul, Altas verde, Reparaciones gris) ---- */
+#anPage.rv3[class*="av"] .an-g3 > .an-card:nth-child(1) > h3 { box-shadow:inset 0 -4px 0 #2563eb; } #anPage.rv3[class*="av"] .an-g3 > .an-card:nth-child(2) > h3 { box-shadow:inset 0 -4px 0 #16a34a; } #anPage.rv3[class*="av"] .an-g3 > .an-card:nth-child(3) > h3 { box-shadow:inset 0 -4px 0 #94a3b8; }
+#anPage.rv3[class*="av"] .an-g3 > .an-card:nth-child(1) > h3 i.pt { background:#3b82f6 !important; } #anPage.rv3[class*="av"] .an-g3 > .an-card:nth-child(2) > h3 i.pt { background:#22c55e !important; } #anPage.rv3[class*="av"] .an-g3 > .an-card:nth-child(3) > h3 i.pt { background:#cbd5e1 !important; }
+#anPage.rv3[class*="av"] .an-g3 > .an-card:nth-child(1) .rp { stroke:#2563eb; } #anPage.rv3[class*="av"] .an-g3 > .an-card:nth-child(2) .rp { stroke:#16a34a; } #anPage.rv3[class*="av"] .an-g3 > .an-card:nth-child(3) .rp { stroke:#64748b; }
+/* AV2: el % tambien del color de la actividad */
+#anPage.rv3.av2 .an-g3 > .an-card:nth-child(1) .rt { fill:#1d4ed8 !important; } #anPage.rv3.av2 .an-g3 > .an-card:nth-child(2) .rt { fill:#15803d !important; } #anPage.rv3.av2 .an-g3 > .an-card:nth-child(3) .rt { fill:#334155 !important; }
+/* AV3, AV4, AV5: si esta bajo la meta el anillo se pone ambar o rojo (alarma) */
+#anPage.rv3:is(.av3,.av4,.av5) .an-g3 > .an-card .rp.st-med { stroke:#d97706; }
+#anPage.rv3:is(.av3,.av4,.av5) .an-g3 > .an-card .rp.st-mal { stroke:#dc2626; }
+/* AV4: la franja del titulo y un fondo suave del color de la actividad */
+#anPage.rv3.av4 .an-g3 > .an-card:nth-child(1) > h3 { background:#1e40af; box-shadow:none; } #anPage.rv3.av4 .an-g3 > .an-card:nth-child(1) { background:#f5f9ff; border-color:#bfdbfe; }
+#anPage.rv3.av4 .an-g3 > .an-card:nth-child(2) > h3 { background:#166534; box-shadow:none; } #anPage.rv3.av4 .an-g3 > .an-card:nth-child(2) { background:#f6fdf8; border-color:#bbf7d0; }
+#anPage.rv3.av4 .an-g3 > .an-card:nth-child(3) > h3 { background:#475569; box-shadow:none; } #anPage.rv3.av4 .an-g3 > .an-card:nth-child(3) { background:#f8fafc; border-color:#cbd5e1; }
+#anPage.rv3.av4 .an-g3 > .an-card > h3 i.pt { background:#fff !important; }
+/* AV5: la semana fuerte, hoy y el mes mas claros; el fondo del anillo del color de la actividad */
+#anPage.rv3.av5 .an-g3 > .an-card:nth-child(1) .rp:not(.rbig):not(.st-med):not(.st-mal) { stroke:#93c5fd; } #anPage.rv3.av5 .an-g3 > .an-card:nth-child(1) .rk { stroke:#e0ecff; }
+#anPage.rv3.av5 .an-g3 > .an-card:nth-child(2) .rp:not(.rbig):not(.st-med):not(.st-mal) { stroke:#86efac; } #anPage.rv3.av5 .an-g3 > .an-card:nth-child(2) .rk { stroke:#dcfce7; }
+#anPage.rv3.av5 .an-g3 > .an-card:nth-child(3) .rp:not(.rbig):not(.st-med):not(.st-mal) { stroke:#cbd5e1; } #anPage.rv3.av5 .an-g3 > .an-card:nth-child(3) .rk { stroke:#f1f5f9; }
+/* ---- (14-11-2026) PASO 2c · A6 (elegida por Luis): anillo del color de la actividad cuando cumple la meta;
+   bajo 50 % rojo y de 50 a 59,99 % amarillo. El % va con el mismo color (verde / amarillo / rojo). ---- */
+#anPage.rv3.av6 .an-g3 > .an-card .rp.rg-med { stroke:#eab308; }
+#anPage.rv3.av6 .an-g3 > .an-card .rp.rg-mal { stroke:#dc2626; }
+#anPage.rv3.av6 .an-g3 > .an-card .rt.rg-ok { fill:#15803d !important; }
+#anPage.rv3.av6 .an-g3 > .an-card .rt.rg-med { fill:#a16207 !important; }
+#anPage.rv3.av6 .an-g3 > .an-card .rt.rg-mal { fill:#b91c1c !important; }
+
+</style>
+<script>
+/* (14-11-2026) PANTALLAS: cual se ve en Analisis de gestion (2 = como estaba, 3 = nueva). Se recuerda en este computador. */
+var AN_PANT = 3;
+try { const v = localStorage.getItem('anPantalla'); if(v === '2' || v === '3') AN_PANT = +v; } catch(e){}
+function anP3(){ return AN_PANT === 3; }
+const AN_P3_CLS = ['pc4', 'hcC', 'k3', 'rv3', 'av6', 'lv3'];
+function anPantClases(){ const p = document.getElementById('anPage'); if(!p) return; AN_P3_CLS.forEach(function(c){ p.classList.toggle(c, AN_PANT === 3); }); }
+function pzPantHtml(on){
+  return '<span class="pz-pant">' + [1, 2, 3].map(function(n){ return '<button class="' + (n === on ? 'on' : '') + '" onclick="event.stopPropagation(); irPantalla(' + n + ')">Pantalla ' + n + '</button>'; }).join('') + '</span>';
+}
+function irPantalla(n){
+  if(n === 1){ anCerrar(); return; }
+  AN_PANT = n; try { localStorage.setItem('anPantalla', String(n)); } catch(e){}
+  const m = document.getElementById('anPage');
+  if(m && m.classList.contains('abierto')) anPintar(); else anAbrir();
+}
+/* el anillo de la pantalla 3 (en la 2 queda el reloj de siempre) */
+const _anRelojOrig = anReloj;
+function _rCol(v){ return v === null || v === undefined ? '#94a3b8' : v >= MP_META ? '#16a34a' : v >= MP_META - 5 ? '#d97706' : '#dc2626'; }
+function _rTx(v){ return v === null || v === undefined ? '#64748b' : v >= MP_META ? '#15803d' : v >= MP_META - 5 ? '#b45309' : '#b91c1c'; }
+anReloj = function(v, r, label, big, nv, min, ref){
+  if(!anP3()) return _anRelojOrig(v, r, label, big, nv, min, ref);
+  const pocas = v !== null && v !== undefined && nv !== undefined && nv < (min === undefined ? AN_MIN_VIS : min);
+  const pc = v === null || v === undefined ? '–' : P2(v) + '%', c = _rCol(v), tc = _rTx(v);
+  const vv = v === null || v === undefined ? 0 : Math.max(0, Math.min(100, v)), _st = (v === null || v === undefined ? 'st-n' : v >= MP_META ? 'st-ok' : v >= MP_META - 5 ? 'st-med' : 'st-mal'); const _rg = v === null || v === undefined ? 'rg-n' : v >= MP_META ? 'rg-ok' : v >= 50 ? 'rg-med' : 'rg-mal';  /* (14-11-2026) Luis: bajo 50 rojo, 50 a 59 amarillo */
+  if(true){ /* anillo (A6) */
+    const rr = big ? r * .78 : r * .82, sw = big ? 15 : 11, w = rr * 2 + sw + 8, cx = w / 2, cy = rr + sw / 2 + 4, h = cy * 2 + (big ? 26 : 22) + (pocas ? 14 : 0);
+    const C = 2 * Math.PI * rr, a = Math.PI * 2 * MP_META / 100 - Math.PI / 2;
+    const m1 = [cx + (rr - sw / 2 - 3) * Math.cos(a), cy + (rr - sw / 2 - 3) * Math.sin(a)], m2 = [cx + (rr + sw / 2 + 3) * Math.cos(a), cy + (rr + sw / 2 + 3) * Math.sin(a)];
+    return '<svg viewBox="0 0 ' + w + ' ' + h + '"><circle class="rk' + (big ? ' rbig' : '') + '" cx="' + cx + '" cy="' + cy + '" r="' + rr + '" fill="none" stroke="#e5e7eb" stroke-width="' + sw + '"/>'
+      + '<circle class="rp ' + _st + ' ' + _rg + (big ? ' rbig' : '') + '" cx="' + cx + '" cy="' + cy + '" r="' + rr + '" fill="none" stroke="' + c + '" stroke-width="' + sw + '" stroke-linecap="round" stroke-dasharray="' + (C * vv / 100) + ' ' + C + '" transform="rotate(-90 ' + cx + ' ' + cy + ')"/>'
+      + '<line x1="' + m1[0] + '" y1="' + m1[1] + '" x2="' + m2[0] + '" y2="' + m2[1] + '" stroke="#132a4a" stroke-width="3"><title>meta ' + MP_META + '%</title></line>'
+      + '<text class="rt ' + _st + ' ' + _rg + '" x="' + cx + '" y="' + (cy + (big ? 9 : 6)) + '" text-anchor="middle" font-size="' + (big ? 24 : 14.5) + '" font-weight="800" style="fill:' + tc + '">' + pc + '</text>'
+      + '<text x="' + cx + '" y="' + (cy * 2 + (big ? 18 : 15)) + '" text-anchor="middle" font-size="' + (big ? 13 : 11.5) + '" font-weight="700" letter-spacing="1" style="fill:#1e293b">' + label + '</text>'
+      + (pocas ? '<text x="' + cx + '" y="' + (cy * 2 + (big ? 32 : 28)) + '" text-anchor="middle" font-size="10.5" style="fill:#475569">' + nv + ' visita' + (nv === 1 ? '' : 's') + '</text>' : '') + '</svg>';
+  }
+  const w = r * 2 + 20, h = r + (big ? 60 : 50) + (pocas ? 14 : 0), cx = w / 2, cy = r + 10, sw = big ? 18 : 13;
+  const ang = function(p){ return Math.PI * (1 - p / 100); }, pt = function(p, rr){ return [cx + rr * Math.cos(ang(p)), cy - rr * Math.sin(ang(p))]; };
+  const arc = function(a, b, rr){ const p1 = pt(a, rr), p2 = pt(b, rr); return 'M' + p1[0] + ' ' + p1[1] + ' A' + rr + ' ' + rr + ' 0 0 1 ' + p2[0] + ' ' + p2[1]; };
+  const m1 = pt(MP_META, r - sw / 2 - 4), m2 = pt(MP_META, r + sw / 2 + 4);
+  return '<svg viewBox="0 0 ' + w + ' ' + h + '"><path d="' + arc(0, 100, r) + '" stroke="#e5e7eb" stroke-width="' + sw + '" fill="none" stroke-linecap="round"/>'
+    + (vv > 0 ? '<path d="' + arc(0, Math.max(0.6, vv), r) + '" stroke="' + c + '" stroke-width="' + sw + '" fill="none" stroke-linecap="round"/>' : '')
+    + '<line x1="' + m1[0] + '" y1="' + m1[1] + '" x2="' + m2[0] + '" y2="' + m2[1] + '" stroke="#132a4a" stroke-width="3"><title>meta ' + MP_META + '%</title></line>'
+    + '<text x="' + cx + '" y="' + (cy - (big ? 6 : 3)) + '" text-anchor="middle" font-size="' + (big ? 28 : 17) + '" font-weight="800" style="fill:' + tc + '">' + pc + '</text>'
+    + '<text x="' + cx + '" y="' + (cy + (big ? 22 : 18)) + '" text-anchor="middle" font-size="' + (big ? 13 : 11.5) + '" font-weight="700" letter-spacing="1" style="fill:#1e293b">' + label + '</text>'
+    + (pocas ? '<text x="' + cx + '" y="' + (cy + (big ? 38 : 32)) + '" text-anchor="middle" font-size="10.5" style="fill:#475569">' + nv + ' visita' + (nv === 1 ? '' : 's') + '</text>' : '') + '</svg>';
+};
+
+/* cada vez que se pinta Analisis de gestion: clases de la pantalla y los 3 botones al lado del titulo */
+const _anPintarOrig = anPintar;
+anPintar = function(){
+  anPantClases();
+  const r = _anPintarOrig.apply(this, arguments);
+  const h1 = document.querySelector('#anPage .an-head h1');
+  if(h1 && !h1.parentNode.querySelector('.pz-pant')) h1.insertAdjacentHTML('afterend', pzPantHtml(AN_PANT));
+  return r;
+};
+</script>
+
+<style>
+/* ===== (14-11-2026) PANTALLA 3 · contraste MAXIMO (L3) de las tarjetas de abajo (Semaforo, Como cierra, Otras comunas) =====
+   Luis eligio "maximo". Franja azul marino en el titulo, letras y numeros mas oscuros y gruesos, % del semaforo mas grandes,
+   colores mas fuertes y lineas del grafico mas gruesas. Las reglas lv2/lv4 quedan por si se quiere cambiar (clase en AN_P3_CLS). */
+#anPage.rv3:is(.lv2,.lv3,.lv4) .an-g2 .an-col > .an-card:first-child, #anPage.rv3:is(.lv2,.lv3,.lv4) .an-g2 > .an-card, #anPage.rv3:is(.lv2,.lv3,.lv4) .an-g2 .an-otras { border-top:0; padding-top:0; overflow:hidden; border:1px solid #c7d2e3; }
+#anPage.rv3:is(.lv2,.lv3,.lv4) .an-g2 .an-col > .an-card:first-child > h3, #anPage.rv3:is(.lv2,.lv3,.lv4) .an-g2 .an-otras > h3, #anPage.rv3:is(.lv2,.lv3,.lv4) .an-g2 > .an-card > div:first-child { background:#132a4a; color:#fff; margin:0 -14px 10px !important; padding:10px 14px; }
+#anPage.rv3:is(.lv2,.lv3,.lv4) .an-g2 > .an-card > div:first-child h3 { color:#fff; }
+#anPage.rv3:is(.lv2,.lv3,.lv4) .an-g2 .an-col > .an-card:first-child > h3 { box-shadow:inset 0 -4px 0 #22c55e; font-size:17px; font-weight:800; }
+#anPage.rv3:is(.lv2,.lv3,.lv4) .an-g2 > .an-card > div:first-child { box-shadow:inset 0 -4px 0 #0ea5e9; } #anPage.rv3:is(.lv2,.lv3,.lv4) .an-g2 > .an-card > div:first-child h3 { font-size:17px; font-weight:800; }
+#anPage.rv3:is(.lv2,.lv3,.lv4) .an-g2 .an-otras > h3 { box-shadow:inset 0 -4px 0 #14b8a6; font-size:16px; font-weight:800; }
+#anPage.rv3:is(.lv2,.lv3,.lv4) .an-g2 .an-otras > h3 small { color:#cbd5e1 !important; }
+#anPage.rv3:is(.lv2,.lv3,.lv4) .an-g2 .an-sem .h { color:#0f172a; font-weight:800; font-size:12.5px; }
+#anPage.rv3:is(.lv2,.lv3,.lv4) .an-g2 .an-sem > div:not(.d):not(.h) { color:#0f172a; font-weight:800; font-size:13px; }
+#anPage.rv3:is(.lv2,.lv3,.lv4) .an-g2 .an-sem .d.v2.c-ok { background:#dcfce7 !important; color:#14532d; box-shadow:inset 0 0 0 1px #86efac; } #anPage.rv3:is(.lv2,.lv3,.lv4) .an-g2 .an-sem .d.v2.c-ok small { color:#166534; }
+#anPage.rv3:is(.lv2,.lv3,.lv4) .an-g2 .an-sem .d.v2 small { font-weight:700; }
+#anPage.rv3:is(.lv2,.lv3,.lv4) .an-g2 .an-card svg text[fill="#94a3b8"] { fill:#1e293b; font-weight:700; }
+#anPage.rv3:is(.lv2,.lv3,.lv4) .an-g2 .an-card svg [stroke="#1e2a44"] { stroke:#cbd5e1; }
+#anPage.rv3:is(.lv2,.lv3,.lv4) .an-g2 .an-card svg [stroke="#475569"] { stroke:#475569; }
+#anPage.rv3:is(.lv2,.lv3,.lv4) .an-g2 .an-lin-ley.v2 .lc { background:#fff; border:1px solid #cbd5e1; }
+#anPage.rv3:is(.lv2,.lv3,.lv4) .an-g2 .an-lin-ley.v2 .lc > span { font-weight:800; } #anPage.rv3:is(.lv2,.lv3,.lv4) .an-g2 .an-lin-ley.v2 .lc small { color:#1e293b; font-weight:500; }
+#anPage.rv3:is(.lv2,.lv3,.lv4) .an-g2 .an-gsa-res { color:#0f172a; } #anPage.rv3:is(.lv2,.lv3,.lv4) .an-g2 .an-gsa-res [style*="color:#94a3b8"] { color:#334155 !important; }
+#anPage.rv3.lv3 .an-g2 .an-sem .d.v2 b { font-size:19px; } #anPage.rv3.lv3 .an-g2 .an-sem .d.v2 small { font-size:11.5px; }
+#anPage.rv3.lv3 .an-g2 .an-sem .d.v2.c-ok { background:#bbf7d0 !important; }
+#anPage.rv3.lv3 .an-g2 .an-sem .d.v2.c-mal { background:#b91c1c !important; } #anPage.rv3.lv3 .an-g2 .an-sem .d.v2.c-med { background:#d97706 !important; }
+#anPage.rv3.lv3 .an-g2 .an-card svg text { font-weight:800; }
+#anPage.rv3.lv3 .an-g2 .an-card svg path[fill="none"] { stroke-width:3.4; }
+#anPage.rv3.lv3 .an-g2 .an-card svg circle { r:3.4px; }
+#anPage.rv3.lv3 .an-g2 .an-lin-ley.v2 .lc > b { font-size:25px; } #anPage.rv3.lv3 .an-g2 .an-lin-ley.v2 .lc small { font-size:12.5px; }
+#anPage.rv3.lv3 .an-g2 .an-gsa-res { font-size:13.5px; }
+#anPage.rv3.lv4 .an-g2 .an-card svg [stroke="#3b82f6"] { stroke:#16a34a; } #anPage.rv3.lv4 .an-g2 .an-card svg [fill="#3b82f6"] { fill:#16a34a; }
+#anPage.rv3.lv4 .an-g2 .an-card svg [stroke="#e2e8f0"] { stroke:#2563eb; } #anPage.rv3.lv4 .an-g2 .an-card svg [fill="#e2e8f0"] { fill:#2563eb; }
+#anPage.rv3.lv4 .an-g2 .an-card svg [stroke="#fb923c"] { stroke:#64748b; } #anPage.rv3.lv4 .an-g2 .an-card svg [fill="#fb923c"] { fill:#64748b; }
+#anPage.rv3.lv4 .an-g2 .an-card svg text[fill="#3b82f6"] { fill:#15803d; } #anPage.rv3.lv4 .an-g2 .an-card svg text[fill="#e2e8f0"] { fill:#1d4ed8; } #anPage.rv3.lv4 .an-g2 .an-card svg text[fill="#fb923c"] { fill:#334155; }
+#anPage.rv3.lv4 .an-g2 .an-lin-ley [style*="background:#3b82f6"] { background:#16a34a !important; } #anPage.rv3.lv4 .an-g2 .an-lin-ley [style*="background:#e2e8f0"] { background:#2563eb !important; } #anPage.rv3.lv4 .an-g2 .an-lin-ley [style*="background:#fb923c"] { background:#64748b !important; }
+#anPage.rv3.lv4 .an-g2 .an-lin-ley [style*="color:#3b82f6"] { color:#15803d !important; } #anPage.rv3.lv4 .an-g2 .an-lin-ley [style*="color:#e2e8f0"] { color:#1d4ed8 !important; } #anPage.rv3.lv4 .an-g2 .an-lin-ley [style*="color:#fb923c"] { color:#334155 !important; }
+#anPage.rv3.lv4 .an-g2 .an-lin-ley.v2 .lc:nth-child(1) { border-top:4px solid #2563eb; } #anPage.rv3.lv4 .an-g2 .an-lin-ley.v2 .lc:nth-child(2) { border-top:4px solid #16a34a; } #anPage.rv3.lv4 .an-g2 .an-lin-ley.v2 .lc:nth-child(3) { border-top:4px solid #64748b; }
+body:has(#anPage.abierto.rv3) </style>
 </body>
 </html>
