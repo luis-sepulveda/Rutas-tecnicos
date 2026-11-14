@@ -22960,7 +22960,7 @@ var XH_ACTIVO = true;
 var AN_PANT = 3;
 try { const v = localStorage.getItem('anPantalla'); if(v === '2' || v === '3') AN_PANT = +v; } catch(e){}
 function anP3(){ return AN_PANT === 3; }
-const AN_P3_CLS = ['pc4', 'hcC', 'k3', 'rv3', 'av6', 'lv3'];
+const AN_P3_CLS = ['pc4', 'hcC', 'k3', 'rv3', 'av6', 'lv3', 'ov2'];
 function anPantClases(){ const p = document.getElementById('anPage'); if(!p) return; AN_P3_CLS.forEach(function(c){ p.classList.toggle(c, AN_PANT === 3); }); }
 function pzPantHtml(on){
   return '<span class="pz-pant">' + [1, 2, 3].map(function(n){ return '<button class="' + (n === on ? 'on' : '') + '" onclick="event.stopPropagation(); irPantalla(' + n + ')">Pantalla ' + n + '</button>'; }).join('') + '</span>';
@@ -23050,6 +23050,38 @@ anPintar = function(){
 #anPage.rv3.lv4 .an-g2 .an-lin-ley [style*="background:#3b82f6"] { background:#16a34a !important; } #anPage.rv3.lv4 .an-g2 .an-lin-ley [style*="background:#e2e8f0"] { background:#2563eb !important; } #anPage.rv3.lv4 .an-g2 .an-lin-ley [style*="background:#fb923c"] { background:#64748b !important; }
 #anPage.rv3.lv4 .an-g2 .an-lin-ley [style*="color:#3b82f6"] { color:#15803d !important; } #anPage.rv3.lv4 .an-g2 .an-lin-ley [style*="color:#e2e8f0"] { color:#1d4ed8 !important; } #anPage.rv3.lv4 .an-g2 .an-lin-ley [style*="color:#fb923c"] { color:#334155 !important; }
 #anPage.rv3.lv4 .an-g2 .an-lin-ley.v2 .lc:nth-child(1) { border-top:4px solid #2563eb; } #anPage.rv3.lv4 .an-g2 .an-lin-ley.v2 .lc:nth-child(2) { border-top:4px solid #16a34a; } #anPage.rv3.lv4 .an-g2 .an-lin-ley.v2 .lc:nth-child(3) { border-top:4px solid #64748b; }
+body:has(#anPage.abierto.rv3) </style>
+
+<style>
+/* ===== (14-11-2026) PANTALLA 3 · Migraciones en otras comunas (semana a semana) =====
+   Luis eligio O2 ("efecto con fondo"): semanas sin datos en gris claro; en meta verde suave, bajo la meta rojo/ambar fuerte;
+   "Efecto en el total" con fondo rojo suave si resta y verde suave si suma. ov1/ov3 quedan por si se quiere cambiar. */
+/* comun a las 3: semanas sin datos en gris claro (no negro), titulos de fila oscuros */
+#anPage.rv3:is(.ov1,.ov2,.ov3) .an-otras .an-sem .d.vac { background:#f1f5f9 !important; color:#94a3b8 !important; box-shadow:inset 0 0 0 1px #e2e8f0; border-radius:8px; }
+#anPage.rv3:is(.ov1,.ov2,.ov3) .an-otras .an-sem > div:not(.d):not(.h) { color:#0f172a !important; font-weight:800; font-size:13px; }
+#anPage.rv3:is(.ov1,.ov2,.ov3) .an-otras .an-sem .h { color:#0f172a; font-weight:800; font-size:12.5px; }
+#anPage.rv3:is(.ov1,.ov2,.ov3) .an-otras .an-sem .d { height:46px; border-radius:8px; font-size:14px; font-weight:800; }
+#anPage.rv3:is(.ov1,.ov2,.ov3) .an-otras .an-sem .d small { font-size:10.5px; font-weight:700; }
+/* O1 · igual al semaforo: en meta verde suave, bajo la meta fuerte; efecto en blanco con numero de color */
+#anPage.rv3.ov1 .an-otras .an-sem .d[style*="background:#22c55e"] { background:#bbf7d0 !important; color:#14532d; box-shadow:inset 0 0 0 1px #86efac; }
+#anPage.rv3.ov1 .an-otras .an-sem .d[style*="background:#ef4444"] { background:#b91c1c !important; color:#fff; }
+#anPage.rv3.ov1 .an-otras .an-sem .d[style*="background:#f59e0b"] { background:#d97706 !important; color:#fff; }
+#anPage.rv3.ov1 .an-otras .an-sem .d.ot { background:#fff !important; box-shadow:inset 0 0 0 1px #cbd5e1; }
+#anPage.rv3:is(.ov1,.ov2,.ov3) .an-otras .an-sem .d.ot[style*="#fca5a5"] { color:#b91c1c !important; }
+#anPage.rv3:is(.ov1,.ov2,.ov3) .an-otras .an-sem .d.ot[style*="#86efac"] { color:#15803d !important; }
+#anPage.rv3:is(.ov1,.ov2,.ov3) .an-otras .an-sem .d.ot small { color:#475569; }
+/* O2 · como O1, pero el efecto con fondo: rojo suave si resta, verde suave si suma */
+#anPage.rv3.ov2 .an-otras .an-sem .d[style*="background:#22c55e"] { background:#bbf7d0 !important; color:#14532d; box-shadow:inset 0 0 0 1px #86efac; }
+#anPage.rv3.ov2 .an-otras .an-sem .d[style*="background:#ef4444"] { background:#b91c1c !important; color:#fff; }
+#anPage.rv3.ov2 .an-otras .an-sem .d[style*="background:#f59e0b"] { background:#d97706 !important; color:#fff; }
+#anPage.rv3.ov2 .an-otras .an-sem .d.ot[style*="#fca5a5"] { background:#fee2e2 !important; box-shadow:inset 0 0 0 1px #fca5a5; }
+#anPage.rv3.ov2 .an-otras .an-sem .d.ot[style*="#86efac"] { background:#dcfce7 !important; box-shadow:inset 0 0 0 1px #86efac; }
+/* O3 · neutra: casillas blancas, el color va en el numero y en una raya abajo */
+#anPage.rv3.ov3 .an-otras .an-sem .d:not(.vac) { background:#fff !important; box-shadow:inset 0 0 0 1px #cbd5e1; }
+#anPage.rv3.ov3 .an-otras .an-sem .d[style*="background:#22c55e"] { color:#15803d; box-shadow:inset 0 0 0 1px #cbd5e1, inset 0 -4px 0 #22c55e; }
+#anPage.rv3.ov3 .an-otras .an-sem .d[style*="background:#ef4444"] { color:#b91c1c; box-shadow:inset 0 0 0 1px #cbd5e1, inset 0 -4px 0 #dc2626; }
+#anPage.rv3.ov3 .an-otras .an-sem .d[style*="background:#f59e0b"] { color:#b45309; box-shadow:inset 0 0 0 1px #cbd5e1, inset 0 -4px 0 #d97706; }
+#anPage.rv3.ov3 .an-otras .an-sem .d small { color:#475569; }
 body:has(#anPage.abierto.rv3) </style>
 </body>
 </html>
