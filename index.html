@@ -23083,5 +23083,41 @@ body:has(#anPage.abierto.rv3) </style>
 #anPage.rv3.ov3 .an-otras .an-sem .d[style*="background:#f59e0b"] { color:#b45309; box-shadow:inset 0 0 0 1px #cbd5e1, inset 0 -4px 0 #d97706; }
 #anPage.rv3.ov3 .an-otras .an-sem .d small { color:#475569; }
 body:has(#anPage.abierto.rv3) </style>
+
+<script>
+/* ===== (14-11-2026) PANTALLA 3 · ANILLO N1 (reemplaza al anillo A6) =====
+   Luis: "si pero en forma de anillo" (rojo / amarillo / verde con indicador) → eligio N1: "me gusta dale porfa".
+   - Anillo grueso que se llena hasta el % y toma el color de la zona donde cae: verde 60 % o mas (meta),
+     amarillo de 50 a 59,99 %, rojo bajo 50 % (regla de Luis para los anillos).
+   - Banda fina por fuera con las 3 zonas (escala). Marcador blanco donde va el %. Raya azul marino = meta.
+   - El % del centro con el mismo color. Mismos datos; solo cambia el dibujo. En la Pantalla 2 sigue el reloj de siempre. */
+const _anRelojA6 = anReloj;
+anReloj = function(v, r, label, big, nv, min, ref){
+  if(!anP3()) return _anRelojA6(v, r, label, big, nv, min, ref);
+  const lim = 50, M = MP_META;
+  const pocas = v !== null && v !== undefined && nv !== undefined && nv < (min === undefined ? AN_MIN_VIS : min);
+  const tc = v === null || v === undefined ? '#64748b' : v >= M ? '#15803d' : v >= lim ? '#a16207' : '#b91c1c';
+  const pc = v === null || v === undefined ? '–' : P2(v) + '%', vv = v === null || v === undefined ? null : Math.max(0.3, Math.min(99.7, v));
+  const rr = big ? r * .78 : r * .82, sw = big ? 15 : 11, zb = big ? 5 : 4;
+  const w = rr * 2 + sw + 30, cx = w / 2, cy = rr + sw / 2 + 14, h = cy * 2 + (big ? 26 : 22) + (pocas ? 14 : 0);
+  const ang = function(p){ return (-90 + 360 * p / 100) * Math.PI / 180; };
+  const pt = function(p, R){ return [cx + R * Math.cos(ang(p)), cy + R * Math.sin(ang(p))]; };
+  const arc = function(a, b, R){ const p1 = pt(a, R), p2 = pt(b, R), lg = 3.6 * (b - a) > 180 ? 1 : 0; return 'M' + p1[0] + ' ' + p1[1] + ' A' + R + ' ' + R + ' 0 ' + lg + ' 1 ' + p2[0] + ' ' + p2[1]; };
+  const seg = function(a, b, col, R, wd){ return b - a <= 0 ? '' : '<path d="' + arc(a, b, R) + '" style="stroke:' + col + '" stroke-width="' + wd + '" fill="none"/>'; };
+  const ROJO = '#dc2626', AMA = '#eab308', VERDE = '#16a34a';
+  const cst = vv === null ? '#94a3b8' : vv >= M ? VERDE : vv >= lim ? AMA : ROJO, Rz = rr + sw / 2 + zb / 2 + 3;
+  let s = '<svg viewBox="0 0 ' + w + ' ' + h + '">'
+    + seg(0, lim, ROJO, Rz, zb) + seg(lim, M, AMA, Rz, zb) + seg(M, 100, VERDE, Rz, zb)
+    + '<circle cx="' + cx + '" cy="' + cy + '" r="' + rr + '" fill="none" style="stroke:#e5e7eb" stroke-width="' + sw + '"/>'
+    + (vv !== null ? seg(0, vv, cst, rr, sw) : '');
+  const m1 = pt(M, rr - sw / 2 - 3), m2 = pt(M, rr + sw / 2 + (big ? 12 : 10));
+  s += '<line x1="' + m1[0] + '" y1="' + m1[1] + '" x2="' + m2[0] + '" y2="' + m2[1] + '" style="stroke:#132a4a" stroke-width="3.5"><title>meta ' + M + '%</title></line>';
+  if(vv !== null){ const q = pt(vv, rr); s += '<circle cx="' + q[0] + '" cy="' + q[1] + '" r="' + (sw * .72) + '" style="fill:#fff;stroke:#132a4a" stroke-width="' + (big ? 4 : 3) + '"/>'; }
+  s += '<text x="' + cx + '" y="' + (cy + (big ? 9 : 6)) + '" text-anchor="middle" font-size="' + (big ? 24 : 14.5) + '" font-weight="800" style="fill:' + tc + '">' + pc + '</text>'
+    + '<text x="' + cx + '" y="' + (cy * 2 + (big ? 18 : 15)) + '" text-anchor="middle" font-size="' + (big ? 13 : 11.5) + '" font-weight="700" letter-spacing="1" style="fill:#1e293b">' + label + '</text>'
+    + (pocas ? '<text x="' + cx + '" y="' + (cy * 2 + (big ? 32 : 28)) + '" text-anchor="middle" font-size="10.5" style="fill:#475569">' + nv + ' visita' + (nv === 1 ? '' : 's') + '</text>' : '');
+  return s + '</svg>';
+};
+</script>
 </body>
 </html>
