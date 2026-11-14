@@ -22589,25 +22589,25 @@
    }
   },
   "14-11-2026": {
-   "hasta": "17:00",
-   "actividades": 163,
+   "hasta": "17:05",
+   "actividades": 164,
    "tecnicos": 33,
    "estados": {
     "No Realizada": 26,
-    "Completado": 95,
+    "Completado": 96,
     "Suspendido": 2,
-    "Iniciado": 23,
+    "Iniciado": 25,
     "Cancelado": 7,
-    "en ruta": 4,
-    "Pendiente": 6
+    "Pendiente": 6,
+    "en ruta": 2
    },
-   "rgu": 225.4,
+   "rgu": 226.4,
    "caidas_total": 8,
    "caidas_activas": 8,
    "caidas_resueltas": 0,
    "nuevas": 19,
    "al_bucket": 23,
-   "repetidas": 36,
+   "repetidas": 37,
    "reagendadas": 5,
    "detalle": {
     "caidas": [
@@ -22755,7 +22755,7 @@
       "f": "16-19",
       "hi": "16:30",
       "d": "PATRICIO LYNCH 406 EDIF. C DEPTO 303, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3P1VNO8U",
@@ -22854,7 +22854,7 @@
       "f": "16-19",
       "hi": "16:59",
       "d": "EL TAMARINDO 1404, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      }
     ],
     "repetidas": [
@@ -23122,6 +23122,18 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
+      "o": "1-3P20G4MF",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:04",
+      "d": "ESPERANZA 1159, VILLA ALEMANA",
+      "e": "Iniciado",
+      "tec": "JOSE PEREZ RANGEL",
+      "visitas": 1,
+      "ult_fecha": "24-09-2026",
+      "ult_cierre": "Cliente Desiste"
+     },
+     {
       "o": "1-3P1352N9",
       "cat": "Reparación",
       "f": "10-13",
@@ -23345,5 +23357,5 @@
    }
   }
  },
- "generado": "14-11-2026 17:00"
+ "generado": "14-11-2026 17:05"
 }
