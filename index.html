@@ -13525,6 +13525,9 @@ function frComHtml(){
    (cliente / VTR-CLARO / Dominion).
    Los accesos de abajo abren lo MISMO de la ventana de siempre. */
 const MP_META = 60;
+/* (14-11-2026) Luis: "deja todo como se muestran en los anillos y los semaforos": umbral del ambar/amarillo.
+   Verde = MP_META (60) o mas · ambar/amarillo = MP_AMB (50) a 59,99 · rojo = bajo MP_AMB. Antes el ambar era MP_META - 5 (55). */
+var MP_AMB = 50;
 const MP_POCAS = 3;     // con menos visitas que esto, el % del tecnico va en gris      // = 100 - MG_META_DER (40 % de derivacion)
 function mpCargar(){
   try { mesCargar(); } catch(e){}
@@ -14402,7 +14405,7 @@ function mdaMigDiaHtml(mk, hoyIso){
   /* (13-11-2026) Luis: "cambia el titulo a uno que haga referencia al detalle que mostramos" */
   const tit = '<div class="ct mdd-ct">Estado de las actividades ' + btns + '</div>';
   if(!ks.length) return '<div class="mda-c mdd">' + tit + '<p class="mdd-nota">' + (cargando ? 'Cargando los datos de Actividades…' : 'Sin ' + fam.toLowerCase() + ' en este mes (hasta ayer).') + '</p></div>';
-  const DW = ['do','lu','ma','mi','ju','vi','sá'], col = function(v){ return v === null ? '#94a3b8' : v >= MP_META ? '#15803d' : v >= MP_META - 5 ? '#b45309' : '#b91c1c'; };
+  const DW = ['do','lu','ma','mi','ju','vi','sá'], col = function(v){ return v === null ? '#94a3b8' : v >= MP_META ? '#15803d' : v >= MP_AMB ? '#b45309' : '#b91c1c'; };
   const nrNom = esMig ? 'Derivadas' : 'No realizadas', nrMin = nrNom.toLowerCase();
   /* estado de cada dia */
   const est = function(L, m){
@@ -14462,7 +14465,7 @@ function mdaMigDiaHtmlViejo(mk, hoyIso){
   if(!MG || !MG.filas) return '';
   const D = {}; MG.filas.forEach(function(x){ if(x.mes === mk && x.iso < hoyIso) (D[x.iso] = D[x.iso] || []).push(x); });
   const ks = Object.keys(D).sort(); if(!ks.length) return '';
-  const DW = ['do','lu','ma','mi','ju','vi','sá'], col = function(v){ return v === null ? '#94a3b8' : v >= MP_META ? '#15803d' : v >= MP_META - 5 ? '#b45309' : '#b91c1c'; };
+  const DW = ['do','lu','ma','mi','ju','vi','sá'], col = function(v){ return v === null ? '#94a3b8' : v >= MP_META ? '#15803d' : v >= MP_AMB ? '#b45309' : '#b91c1c'; };
   const T = mpSt([].concat.apply([], ks.map(function(k){ return D[k]; })));
   const mx = Math.max.apply(null, ks.map(function(k){ return mpSt(D[k]).vis; }).concat([1]));
   const fila = function(lab, s, tot){
@@ -19301,8 +19304,8 @@ var AN_RNOM = { cli:'Cliente', vtr:'VTR/CLARO', dom:'Dominion' };
 var AN_RCOL = { cli:'#f59e0b', vtr:'#3b82f6', dom:'#ef4444' };
 
 /* (03-11-2026) version pastel para fondo blanco (Seguimiento y Tecnicos semana a semana) */
-function anColP(v){ return v === null || v === undefined ? '#9ca3af' : v >= MP_META ? '#1e7a46' : v >= MP_META - 5 ? '#a15c07' : '#b42318'; }
-function anCls(v){ return v >= MP_META ? 'ok' : v >= MP_META - 5 ? 'med' : 'baj'; }
+function anColP(v){ return v === null || v === undefined ? '#9ca3af' : v >= MP_META ? '#1e7a46' : v >= MP_AMB ? '#a15c07' : '#b42318'; }
+function anCls(v){ return v >= MP_META ? 'ok' : v >= MP_AMB ? 'med' : 'baj'; }
 /* ===== MUESTRA VISTA NUEVA DE MI ANALISIS (12-11-2026, 14:45) =====
    Luis: "arma las muestras para verlas como index". Botones "Vista actual / Vista nueva" arriba de los relojes (AN_V2).
    Vista nueva: semaforo solo con % y visitas (GSA = punto morado, el detalle al pasar el mouse) y colores oscuros
@@ -19313,8 +19316,8 @@ var AN_V2 = true, AN_OTRAS_AB = false;
 var AN_HA = true;   /* (12-11-2026, 15:12) Luis eligio el encabezado A: queda fijo, sin botones. AN_HA = false vuelve al anterior */
 function anSetHA(v){ AN_HA = v; anPintar(); }   /* (12-11-2026, 15:05) queda fija la vista nueva; AN_V2 = false vuelve a la anterior */
 function anSetV(v){ AN_V2 = v; anPintar(); }
-function anCol2(v){ return v === null || v === undefined ? 'n' : v >= MP_META ? 'ok' : v >= MP_META - 5 ? 'med' : 'mal'; }
-function anCol(v){ return v === null || v === undefined ? '#64748b' : v >= MP_META ? '#22c55e' : v >= MP_META - 5 ? '#f59e0b' : '#ef4444'; }
+function anCol2(v){ return v === null || v === undefined ? 'n' : v >= MP_META ? 'ok' : v >= MP_AMB ? 'med' : 'mal'; }
+function anCol(v){ return v === null || v === undefined ? '#64748b' : v >= MP_META ? '#22c55e' : v >= MP_AMB ? '#f59e0b' : '#ef4444'; }
 function anF1(v){ return (Math.round(v * 10) / 10).toFixed(1).replace('.', ','); }
 function anIso(d){ return d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0'); }
 function anHoyIso(){ return anIso((typeof FECHA_DATOS !== 'undefined' && FECHA_DATOS) ? FECHA_DATOS : new Date()); }
@@ -19411,8 +19414,8 @@ function anReloj(v, r, label, big, nv, min, ref){
      aguja marca dónde va. Las zonas se atenúan solo cuando hay pocas visitas. */
   const zop = poca ? '.28' : '.92';
   let s = '<svg viewBox="0 0 ' + w + ' ' + h + '">'
-    + '<path d="' + arc(0, m - 5, r) + '" stroke="#ef4444" stroke-opacity="' + zop + '" stroke-width="' + sw + '" fill="none"/>'
-    + '<path d="' + arc(m - 5, m, r) + '" stroke="#f59e0b" stroke-opacity="' + zop + '" stroke-width="' + sw + '" fill="none"/>'
+    + '<path d="' + arc(0, MP_AMB, r) + '" stroke="#ef4444" stroke-opacity="' + zop + '" stroke-width="' + sw + '" fill="none"/>'
+    + '<path d="' + arc(MP_AMB, m, r) + '" stroke="#f59e0b" stroke-opacity="' + zop + '" stroke-width="' + sw + '" fill="none"/>'
     + '<path d="' + arc(m, 100, r) + '" stroke="#22c55e" stroke-opacity="' + zop + '" stroke-width="' + sw + '" fill="none"/>';
   if(v !== null && v !== undefined){
     const vv = Math.max(0.5, Math.min(99.5, v)), n = pt(vv, r - sw - 8);
@@ -19579,8 +19582,8 @@ function anPintar(){
   /* semaforo 8 semanas */
   const SEMS = []; for(let i = 7; i >= 0; i--) SEMS.push(anSemAnt(D.semHoy, i));
   h += '<div class="an-sec">Una mirada distinta</div><div class="an-g2 an-par"><div class="an-col"><div class="an-card"><h3>Semáforo de las últimas 8 semanas</h3>'
-    + (AN_V2 ? '<p class="s">Completitud semana a semana (GSA como quiebre, como VTR). Verde: sobre la meta · ámbar: a menos de 5 pts · rojo: bajo eso. <i class="gdot" style="position:static;display:inline-block"></i> = tuvo GSA (pasa el mouse para ver cuánto restó). Toca una casilla para ver esa semana.</p>' : '')
-    + (AN_V2 ? '' : '<p class="s">Completitud semana a semana, con la GSA como quiebre (como VTR). Las casillas con <b style="color:#c4b5fd">GSA</b> muestran además cuánto daría sin GSA y los puntos que restó. Verde: sobre la meta. Ámbar: a menos de 5 pts. Rojo: bajo eso. El color va siempre por el porcentaje, aunque tenga pocas visitas. Toca una casilla para ver esa semana.</p>')
+    + (AN_V2 ? '<p class="s">Completitud semana a semana (GSA como quiebre, como VTR). Verde: sobre la meta · ámbar: de ' + MP_AMB + ' a ' + (MP_META - 1) + ',99 % · rojo: bajo eso. <i class="gdot" style="position:static;display:inline-block"></i> = tuvo GSA (pasa el mouse para ver cuánto restó). Toca una casilla para ver esa semana.</p>' : '')
+    + (AN_V2 ? '' : '<p class="s">Completitud semana a semana, con la GSA como quiebre (como VTR). Las casillas con <b style="color:#c4b5fd">GSA</b> muestran además cuánto daría sin GSA y los puntos que restó. Verde: sobre la meta. Ámbar: de ' + MP_AMB + ' a ' + (MP_META - 1) + ',99 %. Rojo: bajo eso. El color va siempre por el porcentaje, aunque tenga pocas visitas. Toca una casilla para ver esa semana.</p>')
     + '<div class="an-sem"><div></div>' + SEMS.map(function(k){ return '<div class="h">S' + derNumSemana(k) + (k === D.semHoy ? '<br><small>en curso</small>' : '') + '</div>'; }).join('');
   AN_FAMS.forEach(function(F){
     h += '<div>' + F.f + '</div>';
@@ -20646,8 +20649,8 @@ function anTsPintar(m){
     h += '<tr class="eq"><td class="l">Todo el equipo</td>' + E.map(function(a, i){ return celda(mpSt(a), i, AN_MIN_VIS); }).join('')
       + '<td class="tot" style="color:' + anColP(et.comp) + '">' + mpPc(et.comp) + '<small>' + et.vis + ' vis.</small></td>' + fl(tend(E)) + '</tr></table></div>';
   }
-  h += '<div class="an-ts-ley"><span><i style="background:#dcf3e4;border:1px solid #9fd8b4"></i>' + MP_META + ' % o más (meta)</span><span><i style="background:#fdf1d6;border:1px solid #f3d08a"></i>' + (MP_META - 5) + ' a ' + (MP_META - 1) + ' %</span>'
-    + '<span><i style="background:#fde4e4;border:1px solid #f2a7a7"></i>bajo ' + (MP_META - 5) + ' %</span><span><i style="background:#fafafa;border:1px dashed #d1d5db"></i>sin visitas</span><span>Arriba: % de completitud · abajo: visitas de esa semana</span>'
+  h += '<div class="an-ts-ley"><span><i style="background:#dcf3e4;border:1px solid #9fd8b4"></i>' + MP_META + ' % o más (meta)</span><span><i style="background:#fdf1d6;border:1px solid #f3d08a"></i>' + (MP_AMB) + ' a ' + (MP_META - 1) + ' %</span>'
+    + '<span><i style="background:#fde4e4;border:1px solid #f2a7a7"></i>bajo ' + (MP_AMB) + ' %</span><span><i style="background:#fafafa;border:1px dashed #d1d5db"></i>sin visitas</span><span>Arriba: % de completitud · abajo: visitas de esa semana</span>'
     + '<span><b style="color:#1e7a46">▲</b> mejorando · <b style="color:#b42318">▼</b> empeorando · <b style="color:#a15c07">=</b> igual (±3 pts)</span></div></div></div>';
   m.innerHTML = h; m.scrollTop = y;
 }
@@ -20940,8 +20943,8 @@ function anSegPintar(m){
     });
     h += '</table></div>';
     /* (09-11-2026) Luis: "revisa que todo tenga su titulo e indique que es" */ 
-    h += '<div class="an-ts-ley"><span><i style="background:#dcf3e4;border:1px solid #9fd8b4"></i>' + MP_META + ' % o más (meta)</span><span><i style="background:#fdf1d6;border:1px solid #f3d08a"></i>' + (MP_META - 5) + ' a ' + (MP_META - 1) + ' %</span>'
-      + '<span><i style="background:#fde4e4;border:1px solid #f2a7a7"></i>bajo ' + (MP_META - 5) + ' %</span><span><i style="background:#fafafa;border:1px dashed #d1d5db"></i>sin visitas</span>'
+    h += '<div class="an-ts-ley"><span><i style="background:#dcf3e4;border:1px solid #9fd8b4"></i>' + MP_META + ' % o más (meta)</span><span><i style="background:#fdf1d6;border:1px solid #f3d08a"></i>' + (MP_AMB) + ' a ' + (MP_META - 1) + ' %</span>'
+      + '<span><i style="background:#fde4e4;border:1px solid #f2a7a7"></i>bajo ' + (MP_AMB) + ' %</span><span><i style="background:#fafafa;border:1px dashed #d1d5db"></i>sin visitas</span>'
       + '<span>Cada casilla: % de completitud de la semana · abajo: visitas</span></div>';
   }
   h += '</div></div>';
@@ -20958,7 +20961,7 @@ function anSegPintar(m){
 var AN_DOW6 = ['Lun','Mar','Mié','Jue','Vie','Sáb'];
 function anDow6(iso){ var d = new Date(+iso.slice(0,4), +iso.slice(4,6)-1, +iso.slice(6,8)); return (d.getDay() + 6) % 7; }
 function anDiaStat(D, iso){ return mpSt(D.R.filter(function(x){ return x.fam === 'Migraciones' && x.iso === iso; })); }
-function anDiaCls(s){ if(!s.vis) return 'vac'; /* (09-11-2026) Luis: "cambia todo": sin gris por pocas visitas, el color va siempre por el % */ return s.comp >= MP_META ? 'ok' : s.comp >= MP_META - 5 ? 'med' : 'baj'; }
+function anDiaCls(s){ if(!s.vis) return 'vac'; /* (09-11-2026) Luis: "cambia todo": sin gris por pocas visitas, el color va siempre por el % */ return s.comp >= MP_META ? 'ok' : s.comp >= MP_AMB ? 'med' : 'baj'; }
 function anDiarioAbrir(){
   AN_DET = { diario:true };
   var m = document.getElementById('anDet');
@@ -21010,8 +21013,8 @@ function anDiarioPintar(m){
     h += '</div>';
   });
   h += '<div class="an-ts-ley" style="margin-top:12px"><span><i style="background:#dcf3e4;border:1px solid #9fd8b4"></i>' + MP_META + '% o más</span>'
-    + '<span><i style="background:#fdf1d6;border:1px solid #f3d08a"></i>' + (MP_META - 5) + ' a ' + (MP_META - 1) + '%</span>'
-    + '<span><i style="background:#fde4e4;border:1px solid #f2a7a7"></i>bajo ' + (MP_META - 5) + '%</span>'
+    + '<span><i style="background:#fdf1d6;border:1px solid #f3d08a"></i>' + (MP_AMB) + ' a ' + (MP_META - 1) + '%</span>'
+    + '<span><i style="background:#fde4e4;border:1px solid #f2a7a7"></i>bajo ' + (MP_AMB) + '%</span>'
     + '<span><i style="background:#fafafa;border:1px dashed #d1d5db"></i>sin datos aún</span>'
     + '<span>Cada casilla: % de completitud del día · abajo: día del mes · visitas</span></div>';   /* (09-11-2026) Luis: "revisa que todo tenga su titulo e indique que es" */ 
   h += '</div></div>';
@@ -22515,7 +22518,7 @@ function anComC(v){   /* color del % segun el estilo: oscuro en fondo claro, cla
   if(v === null || v === undefined) return '#94a3b8';
   const claro = AN_COM_EST === 'a' || AN_COM_EST === 'c';
   if(v >= MP_META) return claro ? '#15803d' : (AN_COM_EST === 'b' ? '#86efac' : '#22c55e');
-  if(v >= MP_META - 5) return claro ? '#b45309' : (AN_COM_EST === 'b' ? '#fcd34d' : '#f59e0b');
+  if(v >= MP_AMB) return claro ? '#b45309' : (AN_COM_EST === 'b' ? '#fcd34d' : '#f59e0b');
   return claro ? '#b91c1c' : (AN_COM_EST === 'b' ? '#fca5a5' : '#ef4444');
 }
 function anComPintar(){
@@ -22973,13 +22976,13 @@ function irPantalla(n){
 }
 /* el anillo de la pantalla 3 (en la 2 queda el reloj de siempre) */
 const _anRelojOrig = anReloj;
-function _rCol(v){ return v === null || v === undefined ? '#94a3b8' : v >= MP_META ? '#16a34a' : v >= MP_META - 5 ? '#d97706' : '#dc2626'; }
-function _rTx(v){ return v === null || v === undefined ? '#64748b' : v >= MP_META ? '#15803d' : v >= MP_META - 5 ? '#b45309' : '#b91c1c'; }
+function _rCol(v){ return v === null || v === undefined ? '#94a3b8' : v >= MP_META ? '#16a34a' : v >= MP_AMB ? '#d97706' : '#dc2626'; }
+function _rTx(v){ return v === null || v === undefined ? '#64748b' : v >= MP_META ? '#15803d' : v >= MP_AMB ? '#b45309' : '#b91c1c'; }
 anReloj = function(v, r, label, big, nv, min, ref){
   if(!anP3()) return _anRelojOrig(v, r, label, big, nv, min, ref);
   const pocas = v !== null && v !== undefined && nv !== undefined && nv < (min === undefined ? AN_MIN_VIS : min);
   const pc = v === null || v === undefined ? '–' : P2(v) + '%', c = _rCol(v), tc = _rTx(v);
-  const vv = v === null || v === undefined ? 0 : Math.max(0, Math.min(100, v)), _st = (v === null || v === undefined ? 'st-n' : v >= MP_META ? 'st-ok' : v >= MP_META - 5 ? 'st-med' : 'st-mal'); const _rg = v === null || v === undefined ? 'rg-n' : v >= MP_META ? 'rg-ok' : v >= 50 ? 'rg-med' : 'rg-mal';  /* (14-11-2026) Luis: bajo 50 rojo, 50 a 59 amarillo */
+  const vv = v === null || v === undefined ? 0 : Math.max(0, Math.min(100, v)), _st = (v === null || v === undefined ? 'st-n' : v >= MP_META ? 'st-ok' : v >= MP_AMB ? 'st-med' : 'st-mal'); const _rg = v === null || v === undefined ? 'rg-n' : v >= MP_META ? 'rg-ok' : v >= 50 ? 'rg-med' : 'rg-mal';  /* (14-11-2026) Luis: bajo 50 rojo, 50 a 59 amarillo */
   if(true){ /* anillo (A6) */
     const rr = big ? r * .78 : r * .82, sw = big ? 15 : 11, w = rr * 2 + sw + 8, cx = w / 2, cy = rr + sw / 2 + 4, h = cy * 2 + (big ? 26 : 22) + (pocas ? 14 : 0);
     const C = 2 * Math.PI * rr, a = Math.PI * 2 * MP_META / 100 - Math.PI / 2;
