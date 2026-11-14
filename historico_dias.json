@@ -22589,19 +22589,19 @@
    }
   },
   "14-11-2026": {
-   "hasta": "16:15",
-   "actividades": 161,
+   "hasta": "16:25",
+   "actividades": 162,
    "tecnicos": 33,
    "estados": {
-    "No Realizada": 16,
-    "Completado": 89,
+    "No Realizada": 17,
+    "Completado": 92,
     "Iniciado": 24,
-    "Pendiente": 19,
+    "Pendiente": 16,
     "Suspendido": 2,
     "Cancelado": 7,
     "en ruta": 4
    },
-   "rgu": 222.4,
+   "rgu": 223.4,
    "caidas_total": 8,
    "caidas_activas": 8,
    "caidas_resueltas": 0,
@@ -22719,7 +22719,7 @@
       "f": "13-16",
       "hi": "15:32",
       "d": "CUATRO PINOS 2767, QUILPUE",
-      "e": "Iniciado"
+      "e": "Completado"
      },
      {
       "o": "1-3P1XC8WI",
@@ -22764,7 +22764,7 @@
       "f": "16-19",
       "hi": "16:59",
       "d": "LIMACHE 1330, VILLA ALEMANA",
-      "e": "en ruta"
+      "e": "Iniciado"
      },
      {
       "o": "1-3P1U5XNS",
@@ -22845,7 +22845,7 @@
       "f": "16-19",
       "hi": "16:47",
       "d": "PATRICIO LYNCH 560 EDIF. 2 DEPTO 2303, VILLA ALEMANA",
-      "e": "Pendiente"
+      "e": "Iniciado"
      },
      {
       "o": "1-3P1054QR",
@@ -22898,9 +22898,9 @@
       "o": "1-3P11IERX",
       "cat": "Alta 1 Play",
       "f": "16-19",
-      "hi": "16:11",
+      "hi": "16:18",
       "d": "PATRICIO LYNCH 560 EDIF. 2 DEPTO 2303, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "CRISTOBAL MIRANDA VALENC",
       "visitas": 1,
       "ult_fecha": "09-11-2026",
@@ -22912,7 +22912,7 @@
       "f": "13-16",
       "hi": "15:30",
       "d": "THOMPSON 927 DEPTO 603, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "CRISTOBAL SILVA LEIVA",
       "visitas": 1,
       "ult_fecha": "21-08-2026",
@@ -22922,9 +22922,9 @@
       "o": "1-3P171ALM",
       "cat": "Reparación",
       "f": "16-19",
-      "hi": "16:35",
+      "hi": "16:21",
       "d": "FREIRE 959 CASA 2, QUILPUE",
-      "e": "Pendiente",
+      "e": "Iniciado",
       "tec": "CRISTOBAL SILVA LEIVA",
       "visitas": 1,
       "ult_fecha": "12-11-2026",
@@ -22957,7 +22957,7 @@
       "o": "1-3OXU97SC",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "18:27",
+      "hi": "18:29",
       "d": "MADRID 620 CASA L, QUILPUE",
       "e": "Pendiente",
       "tec": "EDGAR VALERO C",
@@ -23127,7 +23127,7 @@
       "f": "13-16",
       "hi": "16:13",
       "d": "PEDRO MONTT 334, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "JOSE ROJO A",
       "visitas": 1,
       "ult_fecha": "14-11-2026",
@@ -23281,9 +23281,9 @@
       "o": "1-3P1PYJOD",
       "cat": "Alta 1 Play",
       "f": "13-16",
-      "hi": "16:36",
+      "hi": "16:31",
       "d": "AV LOS CARRERA 301, QUILPUE",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "SAMUEL FERNANDEZ VIDAL",
       "visitas": 2,
       "ult_fecha": "11-11-2026",
@@ -23292,20 +23292,10 @@
     ],
     "reagendadas": [
      {
-      "o": "1-3OYDEF90",
-      "cat": "Alta 2 Play",
-      "f": "16-19",
-      "hi": "17:12",
-      "d": "LAS MORAS 2450, QUILPUE",
-      "e": "Pendiente",
-      "tec": "CESAR MENA OLIVEROS",
-      "desde": "11-11-2026"
-     },
-     {
       "o": "1-3OXU97SC",
       "cat": "Alta 2 Play",
       "f": "16-19",
-      "hi": "18:27",
+      "hi": "18:29",
       "d": "MADRID 620 CASA L, QUILPUE",
       "e": "Pendiente",
       "tec": "EDGAR VALERO C",
@@ -23332,6 +23322,16 @@
       "desde": "12-11-2026"
      },
      {
+      "o": "1-3OYDEF90",
+      "cat": "Alta 2 Play",
+      "f": "16-19",
+      "hi": "16:38",
+      "d": "LAS MORAS 2450, QUILPUE",
+      "e": "en ruta",
+      "tec": "MARCO PEREZ G",
+      "desde": "11-11-2026"
+     },
+     {
       "o": "1-3OZOQI72",
       "cat": "Alta 2 Play",
       "f": "10-13",
@@ -23345,5 +23345,5 @@
    }
   }
  },
- "generado": "14-11-2026 16:15"
+ "generado": "14-11-2026 16:25"
 }
