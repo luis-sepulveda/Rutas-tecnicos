@@ -22589,23 +22589,23 @@
    }
   },
   "14-11-2026": {
-   "hasta": "17:05",
-   "actividades": 164,
+   "hasta": "17:25",
+   "actividades": 167,
    "tecnicos": 33,
    "estados": {
-    "No Realizada": 26,
-    "Completado": 96,
-    "Suspendido": 2,
-    "Iniciado": 25,
+    "No Realizada": 28,
+    "Completado": 100,
+    "Iniciado": 23,
+    "en ruta": 4,
+    "Suspendido": 3,
     "Cancelado": 7,
-    "Pendiente": 6,
-    "en ruta": 2
+    "Pendiente": 2
    },
-   "rgu": 226.4,
+   "rgu": 229.4,
    "caidas_total": 8,
    "caidas_activas": 8,
    "caidas_resueltas": 0,
-   "nuevas": 19,
+   "nuevas": 21,
    "al_bucket": 23,
    "repetidas": 37,
    "reagendadas": 5,
@@ -22685,6 +22685,24 @@
      }
     ],
     "nuevas": [
+     {
+      "o": "1-3P2047N3",
+      "tec": "ALEXIS JARA",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:18",
+      "d": "BARROS ARANA 946, QUILPUE",
+      "e": "Iniciado"
+     },
+     {
+      "o": "1-3P20LIAK",
+      "tec": "CRISTOBAL SILVA LEIVA",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:18",
+      "d": "FREIRE 959 CASA 2, QUILPUE",
+      "e": "Iniciado"
+     },
      {
       "o": "1-3P1YDL8U",
       "tec": "DANIEL NAVARRETE E",
@@ -22871,6 +22889,18 @@
       "ult_cierre": "Sin moradores"
      },
      {
+      "o": "1-3P1LSXLX",
+      "cat": "Reparación",
+      "f": "16-19",
+      "hi": "17:27",
+      "d": "LAS ACACIAS 1575 CASA 30, VILLA ALEMANA",
+      "e": "en ruta",
+      "tec": "ALFREDO ALCAYAGA F",
+      "visitas": 1,
+      "ult_fecha": "25-08-2026",
+      "ult_cierre": "Falla Aprovisionamiento"
+     },
+     {
       "o": "1-3OS8X3RY",
       "cat": "Migración 1 Play",
       "f": "10-13",
@@ -22907,16 +22937,16 @@
       "ult_cierre": "Cliente reagenda"
      },
      {
-      "o": "1-3OSTX0US",
-      "cat": "Migración 2 Play",
-      "f": "13-16",
-      "hi": "17:54",
-      "d": "ALFONSO LOPEZ EMANUELLI 1544, QUILPUE",
-      "e": "Pendiente",
+      "o": "1-3P20G4MF",
+      "cat": "Modificación de Servicio",
+      "f": "16-19",
+      "hi": "17:09",
+      "d": "ESPERANZA 1159, VILLA ALEMANA",
+      "e": "Iniciado",
       "tec": "CRISTOBAL MIRANDA VALENC",
-      "visitas": 2,
-      "ult_fecha": "03-11-2026",
-      "ult_cierre": "Cliente reagenda"
+      "visitas": 1,
+      "ult_fecha": "24-09-2026",
+      "ult_cierre": "Cliente Desiste"
      },
      {
       "o": "1-3P16A36O",
@@ -22936,7 +22966,7 @@
       "f": "16-19",
       "hi": "16:21",
       "d": "FREIRE 959 CASA 2, QUILPUE",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "CRISTOBAL SILVA LEIVA",
       "visitas": 1,
       "ult_fecha": "12-11-2026",
@@ -22983,7 +23013,7 @@
       "f": "13-16",
       "hi": "14:50",
       "d": "AVENIDA VALPARAISO 2121 CASA B, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "ESTEBAN PIZARRO QUINTANA",
       "visitas": 2,
       "ult_fecha": "12-10-2026",
@@ -22993,9 +23023,9 @@
       "o": "1-3P13B47H",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:03",
+      "hi": "17:13",
       "d": "PROYECTADA (CARRERA) 579, VILLA ALEMANA",
-      "e": "en ruta",
+      "e": "Iniciado",
       "tec": "FELIPE SILVA R",
       "visitas": 1,
       "ult_fecha": "03-11-2026",
@@ -23019,7 +23049,7 @@
       "f": "13-16",
       "hi": "15:40",
       "d": "ARTURO PRAT (SGTO ALDEA) 170, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "Completado",
       "tec": "GEEYSER PEREZ O",
       "visitas": 1,
       "ult_fecha": "02-11-2026",
@@ -23050,24 +23080,24 @@
       "ult_cierre": "Cliente Desiste"
      },
      {
-      "o": "1-3P1LSXLX",
-      "cat": "Reparación",
-      "f": "16-19",
-      "hi": "17:19",
-      "d": "LAS ACACIAS 1575 CASA 30, VILLA ALEMANA",
-      "e": "Pendiente",
-      "tec": "JORGE PEZOA VICUÑA",
-      "visitas": 1,
-      "ult_fecha": "25-08-2026",
-      "ult_cierre": "Falla Aprovisionamiento"
+      "o": "1-3OSTX0US",
+      "cat": "Migración 2 Play",
+      "f": "13-16",
+      "hi": "17:27",
+      "d": "ALFONSO LOPEZ EMANUELLI 1544, QUILPUE",
+      "e": "en ruta",
+      "tec": "JORDAN ROA PEREZ",
+      "visitas": 2,
+      "ult_fecha": "03-11-2026",
+      "ult_cierre": "Cliente reagenda"
      },
      {
       "o": "1-3OUZH5WA",
       "cat": "Modificación de Servicio",
       "f": "16-19",
-      "hi": "17:40",
+      "hi": "17:16",
       "d": "IGNACIO CARRERA PINTO 0650 EDIF. D DEPTO 103, VILLA ALEMANA",
-      "e": "Pendiente",
+      "e": "en ruta",
       "tec": "JOSE CASTRO P",
       "visitas": 3,
       "ult_fecha": "05-11-2026",
@@ -23120,18 +23150,6 @@
       "visitas": 1,
       "ult_fecha": "30-09-2026",
       "ult_cierre": "Cliente reagenda"
-     },
-     {
-      "o": "1-3P20G4MF",
-      "cat": "Modificación de Servicio",
-      "f": "16-19",
-      "hi": "17:04",
-      "d": "ESPERANZA 1159, VILLA ALEMANA",
-      "e": "Iniciado",
-      "tec": "JOSE PEREZ RANGEL",
-      "visitas": 1,
-      "ult_fecha": "24-09-2026",
-      "ult_cierre": "Cliente Desiste"
      },
      {
       "o": "1-3P1352N9",
@@ -23247,7 +23265,7 @@
       "f": "13-16",
       "hi": "16:06",
       "d": "LAS ACACIAS 30, VILLA ALEMANA",
-      "e": "Iniciado",
+      "e": "No Realizada",
       "tec": "MATIAS APELEO APELEO",
       "visitas": 1,
       "ult_fecha": "12-11-2026",
@@ -23357,5 +23375,5 @@
    }
   }
  },
- "generado": "14-11-2026 17:05"
+ "generado": "14-11-2026 17:25"
 }
