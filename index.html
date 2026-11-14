@@ -22960,7 +22960,7 @@ var XH_ACTIVO = true;
 var AN_PANT = 3;
 try { const v = localStorage.getItem('anPantalla'); if(v === '2' || v === '3') AN_PANT = +v; } catch(e){}
 function anP3(){ return AN_PANT === 3; }
-const AN_P3_CLS = ['pc4', 'hcC', 'k3', 'rv3', 'av6', 'lv3', 'ov2'];
+const AN_P3_CLS = ['pc4', 'hcC', 'k3', 'rv3', 'av6', 'lv3', 'ov2', 'lv4'];  /* (14-11-2026) lv4: grafico ¿Como cierra? con los colores de cada actividad */
 function anPantClases(){ const p = document.getElementById('anPage'); if(!p) return; AN_P3_CLS.forEach(function(c){ p.classList.toggle(c, AN_PANT === 3); }); }
 function pzPantHtml(on){
   return '<span class="pz-pant">' + [1, 2, 3].map(function(n){ return '<button class="' + (n === on ? 'on' : '') + '" onclick="event.stopPropagation(); irPantalla(' + n + ')">Pantalla ' + n + '</button>'; }).join('') + '</span>';
