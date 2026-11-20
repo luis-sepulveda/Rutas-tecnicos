@@ -1,0 +1,2856 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rutas Técnicos DOMI</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Segoe UI',Arial,sans-serif; background:#0a1930; color:#dbeafe; height:100vh; display:flex; flex-direction:column; }
+  header { background:#132845; padding:10px 16px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; border-bottom:2px solid #1e3a5f; z-index:1001;}
+  header h1 { font-size:16px; color:#60a5fa; white-space:nowrap; }
+  select { background:#0a1930; color:#dbeafe; border:1px solid #2c5282; border-radius:6px; padding:6px 10px; font-size:13px; max-width:280px;}
+  /* --- filtros con casillas (multi-seleccion) --- */
+  .msel { position:relative; display:inline-block; }
+  .mbtn { background:#0a1930; color:#dbeafe; border:1px solid #2c5282; border-radius:6px; padding:6px 10px; font-size:13px; cursor:pointer; display:flex; align-items:center; gap:6px; white-space:nowrap; }
+  .mbtn:hover { border-color:#4a7ab0; }
+  .msel.activo .mbtn { border-color:#60a5fa; color:#93c5fd; }
+  .mcar { font-size:10px; color:#8ab4dd; }
+  .mmenu { display:none; position:absolute; top:calc(100% + 4px); left:0; z-index:1200; background:#132845; border:1px solid #2c5282; border-radius:8px; padding:6px; min-width:190px; box-shadow:0 6px 20px rgba(0,0,0,.6); }
+  .msel.abierto .mmenu { display:block; }
+  .mop { display:flex; align-items:center; gap:8px; padding:6px 8px; border-radius:5px; cursor:pointer; font-size:13px; color:#dbeafe; }
+  .mop:hover { background:#1e3a5f; }
+  .mop input { accent-color:#60a5fa; width:15px; height:15px; cursor:pointer; margin:0; }
+  .mop .pt { width:9px; height:9px; border-radius:50%; flex:0 0 auto; }
+  .mtodos { border-bottom:1px solid #2c5282; margin-bottom:4px; padding-bottom:8px; color:#8ab4dd; font-size:12px; }
+  .stats { font-size:12px; color:#8ab4dd; margin-left:auto;
+    display:flex; align-items:center; flex-wrap:wrap; gap:4px; justify-content:flex-end; }
+  .stats .st-base { white-space:nowrap; }
+  .stats .st-sep { color:#2c5282; }
+  .stats .bes { white-space:nowrap; }
+  .stats .st-tot { color:#b8d4ee; font-weight:bold; white-space:nowrap; margin-left:2px; }
+  /* el sello de "Actualizado" se pone ambar cuando el dato pasa de 15 min:
+     no es un error, pero avisa que lo que estas mirando ya no es de ahora */
+  #lastUpd.viejo { color:#fbbf24; }
+  #map { flex:1; }
+  /* Las juntas entre tiles dejaban rayas blancas verticales: Leaflet pinta el
+     contenedor de #ddd por defecto y ese gris claro se asomaba por el pixel
+     que queda entre tile y tile. Con el fondo del tono del basemap oscuro la
+     junta sigue existiendo pero deja de verse. Se toca .leaflet-container y no
+     #map porque el gris lo pone la hoja de estilos de Leaflet. */
+  .leaflet-container { background:#0a1220; }
+  /* Oscurece los tiles de Esri para dejarlos parecidos al dark_all de CARTO.
+     Solo se aplica al basemap de respaldo: los marcadores y las rutas son
+     elementos aparte de Leaflet y no los toca el filtro. Si algun dia se pone
+     la CARTO_KEY, esta clase deja de usarse sola.
+
+     EL ORDEN IMPORTA: los filtros se aplican de izquierda a derecha. Con
+     brightness primero, calle y terreno quedan aplastados en el mismo gris
+     oscuro y despues no hay nada que separar. Poniendo contrast PRIMERO se
+     abre la distancia entre los dos (en el tile de Esri la calle es mas clara
+     que el terreno) y recien despues se baja el brillo del conjunto: el fondo
+     queda negro y la calle conserva su ventaja.
+
+     Para ajustar: contrast sube o baja cuanto se ven las calles, brightness
+     que tan oscuro queda el fondo. */
+  .tiles-esri { filter:contrast(2.4) brightness(.42); }
+  .num-icon { display:flex; align-items:center; justify-content:center; border-radius:50%; color:#fff; font-weight:bold; font-size:12px; border:2px solid #fff; box-shadow:0 1px 4px rgba(0,0,0,.6); width:26px; height:26px; }
+  .mk-iniciado { border:3px solid #4ade80 !important; box-shadow:0 0 10px 3px rgba(74,222,128,.9) !important; }
+  .mk-enruta { border:3px solid #fb923c !important; animation:pulso 1.5s infinite; }
+  .mk-completado { opacity:.45; border:2px solid #8ab4dd !important; }
+  .mk-norealizada { opacity:.5; border:2px dashed #ef4444 !important; }
+  .num-icon { position:relative; }
+  .btn.on-repemapa { background:#4c1d95; border-color:#a78bfa; font-weight:bold; }
+  #modalReca { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); }
+  #modalReca.abierto { display:flex; align-items:flex-start; justify-content:center; padding:4vh 2vw; }
+  #modalReca .mc-body { display:block; }
+  #modalBuscar { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); }
+  #modalBuscar.abierto { display:flex; align-items:flex-start; justify-content:center; padding:4vh 2vw; }
+  #modalBuscar .mc-body { display:block; }
+  #modalReca .vacio { color:#8ab4dd; text-align:center; padding:28px 6px; font-size:14px; }
+  .btn.on-reca { background:#7c2d12; border-color:#fb923c; font-weight:bold; }
+  #btnReca .badge { display:inline-block; min-width:16px; padding:0 5px; margin-left:5px;
+    background:#fb923c; color:#431407; border-radius:9px; font-size:11px; font-weight:bold;
+    line-height:16px; text-align:center; }
+  @keyframes pulso { 0%{box-shadow:0 0 0 0 rgba(251,146,60,.9)} 70%{box-shadow:0 0 0 12px rgba(251,146,60,0)} 100%{box-shadow:0 0 0 0 rgba(251,146,60,0)} }
+  .estados { position:absolute; bottom:16px; right:10px; z-index:1000; background:rgba(30,41,59,.92); border-radius:8px; padding:8px 12px; font-size:11px;}
+  .estados div { display:flex; align-items:center; gap:8px; margin:4px 0;}
+  .estados .mini { width:16px; height:16px; border-radius:50%; background:#4a7ab0; flex-shrink:0;}
+  .leaflet-popup-content-wrapper { background:#132845; color:#dbeafe; border-radius:8px; }
+  .leaflet-popup-tip { background:#132845; }
+  .pp b { color:#60a5fa; }
+  .pp .est { display:inline-block; padding:1px 8px; border-radius:10px; font-size:11px; margin-top:4px; background:#2c5282;}
+  .est-Pendiente{background:#2c5282}.est-Iniciado{background:#16a34a}.est-enruta{background:#d97706}.est-Cancelado{background:#dc2626}.est-Completado{background:#1e3a5f}.est-NoRealizada{background:#7f1d1d}
+  .btn { background:#0a1930; color:#dbeafe; border:1px solid #2c5282; border-radius:6px; padding:6px 12px; font-size:13px; cursor:pointer; }
+  .btn.on { background:#dc2626; border-color:#f87171; font-weight:bold; }
+  #panel { position:absolute; top:70px; right:10px; z-index:1000; background:rgba(30,41,59,.96); border:1px solid #2c5282; border-radius:10px; padding:12px; width:300px; max-height:70vh; overflow-y:auto; display:none; font-size:12px;}
+  #panel h2 { font-size:13px; color:#f87171; margin-bottom:6px;}
+  #panel .hint { color:#8ab4dd; font-size:11px; margin-bottom:8px;}
+  #panel select { width:100%; margin-bottom:8px;}
+  .cand { border-left:4px solid #60a5fa; background:#0a1930; border-radius:6px; padding:6px 8px; margin:6px 0; cursor:pointer;}
+  .cand:hover { background:#1e3a5f;}
+  .cand .km { font-size:15px; font-weight:bold; color:#4ade80;}
+  .cand.top1 { border-left-color:#4ade80; box-shadow:0 0 6px rgba(74,222,128,.4);}
+  .dist-label { background:transparent; border:none; box-shadow:none; color:#4ade80; font-weight:bold; font-size:12px; text-shadow:0 1px 3px #000;}
+  .btn.on3 { background:#b45309; border-color:#fbbf24; font-weight:bold; }
+  #panelSC { position:absolute; top:70px; right:10px; z-index:1000; background:rgba(30,41,59,.96); border:1px solid #2c5282; border-radius:10px; padding:12px; width:290px; max-height:75vh; overflow-y:auto; display:none; font-size:12px;}
+  #panelSC h2 { font-size:13px; color:#fbbf24; margin-bottom:6px;}
+  #panelSC .hint { color:#8ab4dd; font-size:11px; margin-bottom:8px;}
+  #panelSC .vertodos { color:#60a5fa; font-size:12px; cursor:pointer; margin-bottom:8px; display:inline-block;}
+  #panelSC .vertodos:hover { text-decoration:underline;}
+  #panelSC .vacio { color:#4ade80; text-align:center; padding:12px 4px; line-height:1.4;}
+  .sccard { border-left:4px solid #fbbf24; background:#0a1930; border-radius:6px; padding:6px 8px; margin:6px 0; cursor:pointer;}
+  .sccard:hover { background:#3a2e12;}
+  .sccard .nom { font-weight:bold; color:#dbeafe; font-size:13px;}
+  .sccard .badge { display:inline-block; padding:1px 7px; border-radius:10px; font-size:10px; margin:3px 3px 0 0; background:#1e3a5f;}
+  .sccard .badge.ini { background:#166534;} .sccard .badge.ruta{ background:#92400e;} .sccard .badge.pend{ background:#2c5282;} .sccard .badge.nr{ background:#7f1d1d;}
+  .btn.on4 { background:#047857; border-color:#34d399; font-weight:bold; }
+  .rgucard { border-left:4px solid #34d399; background:#0a1930; border-radius:6px; padding:6px 8px; margin:5px 0; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:8px;}
+  .rgucard:hover { background:#0d2e24;}
+  .rgucard .nom { font-weight:bold; color:#dbeafe; font-size:12px;}
+  .rgucard .sub { color:#8ab4dd; font-size:10px; margin-top:2px;}
+  .rgucard .val { font-size:17px; font-weight:bold; color:#34d399; flex-shrink:0;}
+  .btn.on5 { background:#be123c; border-color:#fb7185; font-weight:bold; }
+  .btn.on6 { background:#0e7490; border-color:#22d3ee; font-weight:bold; }
+  #panelComp { position:absolute; top:70px; right:10px; z-index:1000; background:rgba(30,41,59,.96); border:1px solid #2c5282; border-radius:10px; padding:12px; width:300px; max-height:78vh; overflow-y:auto; display:none; font-size:12px;}
+  #panelComp h2 { font-size:13px; color:#22d3ee; margin-bottom:6px;}
+  #panelComp .hint { color:#8ab4dd; font-size:11px; margin-bottom:8px; line-height:1.4;}
+  #panelComp .marcador { text-align:center; background:#0a1930; border-radius:10px; padding:12px 8px; margin-bottom:10px; border:1px solid #1e3a5f;}
+  #panelComp .pctnum { font-size:38px; font-weight:bold; line-height:1;}
+  #panelComp .frac { font-size:13px; color:#b8d4ee; margin-top:4px;}
+  #panelComp .barra { height:8px; background:#0a1930; border-radius:5px; margin-top:10px; overflow:hidden; position:relative; border:1px solid #1e3a5f;}
+  #panelComp .barra .fill { height:100%; border-radius:5px; transition:width .4s;}
+  #panelComp .barra .meta { position:absolute; top:-2px; bottom:-2px; width:2px; background:#f8fbff; left:85%;}
+  #panelComp .veredicto { border-radius:8px; padding:8px 10px; margin-bottom:10px; font-size:12px; line-height:1.45;}
+  #panelComp .vok { background:#052e16; border:1px solid #16a34a; color:#86efac;}
+  #panelComp .vfalta { background:#450a0a; border:1px solid #dc2626; color:#fca5a5;}
+  #panelComp .vcerrado { background:#132845; border:1px solid #4a7ab0; color:#b8d4ee;}
+  #panelComp .subt { color:#8ab4dd; font-size:11px; margin:10px 0 5px; text-transform:uppercase; letter-spacing:.5px;}
+  #panelComp .tec { display:flex; justify-content:space-between; align-items:center; gap:6px; background:#0a1930; border-left:3px solid #dc2626; border-radius:6px; padding:6px 8px; margin:5px 0; cursor:pointer;}
+  #panelComp .tec:hover { background:#1e3a5f;}
+  #panelComp .tec .nom { font-size:11px; font-weight:bold; color:#dbeafe;}
+  #panelComp .tec .det { font-size:10px; color:#8ab4dd; margin-top:2px;}
+  #panelComp .tec .ch { font-size:10px; color:#fbbf24; white-space:nowrap;}
+  #panelComp .ciu { display:flex; justify-content:space-between; background:#0a1930; border-radius:6px; padding:5px 8px; margin:4px 0; font-size:11px;}
+  #panelComp .vacio { color:#4ade80; text-align:center; padding:12px 6px; line-height:1.5;}
+  .btn .pill { display:inline-block; background:#f43f5e; color:#fff; border-radius:10px; padding:0 6px; font-size:11px; margin-left:5px; font-weight:bold; }
+  #panelAtr { position:absolute; top:70px; right:10px; z-index:1000; background:rgba(30,41,59,.96); border:1px solid #2c5282; border-radius:10px; padding:12px; width:300px; max-height:78vh; overflow-y:auto; display:none; font-size:12px;}
+  #panelAtr h2 { font-size:13px; color:#fb7185; margin-bottom:6px;}
+  #panelAtr .hint { color:#8ab4dd; font-size:11px; margin-bottom:8px;}
+  #panelAtr .vertodos { color:#60a5fa; font-size:12px; cursor:pointer; margin-bottom:8px; display:inline-block;}
+  #panelAtr .vertodos:hover { text-decoration:underline;}
+  #panelAtr .vacio { color:#4ade80; text-align:center; padding:14px 6px; line-height:1.5;}
+  #panelAtr .aviso { background:#422006; border:1px solid #b45309; color:#fbbf24; border-radius:6px; padding:6px 8px; font-size:10px; margin-bottom:8px; line-height:1.4;}
+  #panelAtr .umbral { display:flex; gap:4px; margin-bottom:8px;}
+  #panelAtr .umbral button { flex:1; background:#0a1930; border:1px solid #1e3a5f; color:#8ab4dd; border-radius:6px; padding:5px 3px; font-size:11px; font-weight:bold; cursor:pointer;}
+  #panelAtr .umbral button:hover { border-color:#4a7ab0;}
+  #panelAtr .umbral button.act { background:#fb7185; border-color:#fb7185; color:#0a1930;}
+  .atrcard { border-left:4px solid #fb7185; background:#0a1930; border-radius:6px; padding:6px 8px; margin:6px 0; cursor:pointer;}
+  .atrcard:hover { background:#3b1220;}
+  .atrcard.grave { border-left-color:#dc2626; box-shadow:0 0 8px rgba(220,38,38,.45);}
+  .atrcard .fila1 { display:flex; justify-content:space-between; align-items:center; gap:8px;}
+  .atrcard .nom { font-weight:bold; color:#dbeafe; font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .atrcard .tiempo { font-size:15px; font-weight:bold; color:#fb7185; flex-shrink:0;}
+  .atrcard.grave .tiempo { color:#f87171;}
+  .atrcard .sub { color:#8ab4dd; font-size:10px; margin-top:3px; line-height:1.35;}
+  .atrcard .sub b { color:#b8d4ee; font-weight:bold;}
+  /* --- Caidas del dia (ordenes que se salieron de la bandeja) --- */
+  .btn.on-caidas { background:#7f1d1d; border-color:#ef4444; font-weight:bold; }
+  #btnCaidas .badge { display:inline-block; min-width:16px; padding:0 5px; margin-left:5px;
+    background:#ef4444; color:#fff; border-radius:9px; font-size:11px; font-weight:bold; line-height:16px; text-align:center; }
+  /* Etiqueta con el nombre del tecnico bajo el pin. Cuelga del .num-icon (que
+     ya es position:relative) para no alterar el iconSize de Leaflet: si se
+     cambiara el tamano del icono, se corre el anclaje y los pines dejan de
+     caer sobre su coordenada. pointer-events:none para que no tape el click
+     del marcador.
+
+     El texto va BLANCO fijo y el color de la ruta queda en la barrita
+     izquierda. Antes el texto se pintaba del color de la ruta y 8 de los 38
+     colores de la paleta quedaban ilegibles sobre el mapa oscuro: #000075 y
+     #800000 no llegaban ni a 2:1 de contraste. Asi cualquier color de la
+     paleta se lee igual de bien.
+
+     Sin border-radius a proposito: con borde en un solo lado marcado, las
+     esquinas redondeadas se ven cortadas. */
+  .num-icon .mk-nom { position:absolute; top:28px; left:50%; transform:translateX(-50%);
+    white-space:nowrap; font-size:9px; font-weight:bold; letter-spacing:.2px;
+    color:#eff6ff; background:rgba(2,6,23,.9); border-radius:0;
+    padding:0 4px 0 3px; line-height:14px; pointer-events:none;
+    text-shadow:0 1px 2px rgba(0,0,0,.9); }
+  /* --- Modal de caidas a pantalla completa --- */
+  #modalCaidas { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); }
+  #modalCaidas.abierto { display:flex; align-items:flex-start; justify-content:center; padding:4vh 2vw; }
+  .mc-box { background:#0a1930; border:1px solid #4a7ab0; border-radius:14px; width:min(1280px,97vw); max-height:92vh;
+    display:flex; flex-direction:column; box-shadow:0 20px 60px rgba(0,0,0,.6); }
+  .mc-head { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 16px; border-bottom:1px solid #1e3a5f; }
+  .mc-head h2 { font-size:17px; color:#b8d4ee; }
+  .mc-close { background:#132845; border:1px solid #2c5282; color:#dbeafe; border-radius:8px; width:34px; height:34px; font-size:15px; cursor:pointer; flex-shrink:0; }
+  .mc-close:hover { background:#1e3a5f; border-color:#4a7ab0; }
+  .mc-body { padding:12px 16px; overflow-y:auto; display:grid; grid-template-columns:repeat(auto-fill,minmax(235px,1fr)); gap:9px; }
+  /* Caidas pasa a lista, igual que Nuevas: reusa .nfila para que las dos se
+     lean igual. El grid de tarjetas queda solo para los paneles que todavia
+     lo usan. */
+  #modalCaidas .mc-body { display:block; }
+  .nfila.cai { border-left-color:#ef4444; cursor:pointer; }
+  .nfila.cai:hover { background:#132845; }
+  .nfila .nsub .ntec { color:#6ee7b7; }
+  .nfila .nsub .ndir { color:#93c5fd; }
+  .mc-body .vacio { grid-column:1/-1; color:#4ade80; text-align:center; padding:28px 6px; line-height:1.6; font-size:14px; }
+  .mc-resnota { color:#8ab4dd; font-size:11.5px; padding:0 16px 14px; border-top:1px solid #1e3a5f; margin-top:2px; padding-top:10px; }
+  .caidacard { border-left:3px solid #4a7ab0; background:#111c33; border-radius:0 7px 7px 0; padding:8px 10px; cursor:pointer; }
+  .caidacard:hover { background:#16233f; }
+  .caidacard .fila1 { display:flex; justify-content:space-between; align-items:baseline; gap:8px; margin-bottom:3px; }
+  .caidacard .ot { font-family:'Consolas',monospace; font-size:10.5px; color:#93c5fd; flex-shrink:0; }
+  .caidacard .cat { font-weight:bold; color:#eff6ff; font-size:13.5px; }
+  .caidacard .sub { color:#b8d4ee; font-size:11px; margin-top:2px; line-height:1.4; }
+  .caidacard .sub b { color:#fff; font-weight:bold; }
+  .caidacard .horas { color:#8ab4dd; font-size:11px; margin-top:4px; font-weight:600; }
+  /* contador por franja (chips) y separadores de grupo dentro del modal de caidas */
+  .mc-head-left { display:flex; align-items:center; gap:12px; flex-wrap:wrap; min-width:0; }
+  .mc-cont { display:flex; gap:6px; flex-wrap:wrap; }
+  .fchip { background:#132845; border:1px solid #2c5282; color:#dbeafe; border-radius:999px; padding:3px 11px; font-size:11.5px; white-space:nowrap; }
+  .fchip b { color:#b8d4ee; }
+  .mc-body .fgrupo { grid-column:1/-1; color:#8ab4dd; font-size:12px; font-weight:bold; margin-top:7px; padding-top:7px; border-top:1px solid #1e3a5f; }
+  .mc-body .fgrupo span { color:#8ab4dd; font-weight:normal; }
+  /* --- Tarjetas del historico: las usan 'Repetidas hoy' y 'Sectores' --- */
+  .rcard { border-left:3px solid #f59e0b; background:#111c33; border-radius:0 7px 7px 0;
+    padding:9px 11px; margin-bottom:7px; }
+  .rcard .rtop { display:flex; align-items:baseline; gap:10px; cursor:pointer; }
+  .rcard .rn { background:#7f1d1d; color:#fff; border-radius:6px; padding:2px 8px;
+    font-size:12px; font-weight:bold; flex-shrink:0; }
+  .rcard .rdir { font-weight:bold; color:#eff6ff; font-size:13.5px; flex:1; min-width:0; }
+  .rcard .rult { color:#8ab4dd; font-size:11px; white-space:nowrap; }
+  .rsep { width:1px; background:#1e3a5f; margin:0 3px; align-self:stretch; }
+  /* --- Modal de direcciones REPETIDAS HOY (las de la bandeja de hoy que ya
+         se habian caido antes). Reusa .rcard/.rvis del modal de arriba y solo
+         cambia el color, para que se note al tiro que es otra cosa. --- */
+  #modalRepe { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); }
+  #modalRepe.abierto { display:flex; align-items:flex-start; justify-content:center; padding:4vh 2vw; }
+  #modalRepe .mc-body { display:block; }
+  #modalRepe .vacio { color:#8ab4dd; text-align:center; padding:28px 6px; font-size:14px; line-height:1.6; }
+  .btn.on-repe { background:#4c1d95; border-color:#a78bfa; font-weight:bold; }
+  #btnRepe .badge { display:inline-block; min-width:16px; padding:0 5px; margin-left:5px;
+    background:#a78bfa; color:#1e1b4b; border-radius:9px; font-size:11px; font-weight:bold;
+    line-height:16px; text-align:center; }
+  .pchip { background:#132845; border:1px solid #2c5282; color:#dbeafe; border-radius:999px;
+    padding:3px 11px; font-size:11.5px; cursor:pointer; white-space:nowrap; }
+  .pchip:hover { background:#1e3a5f; }
+  .pchip.act { background:#4c1d95; border-color:#a78bfa; color:#fff; font-weight:bold; }
+  .rcard.repe { border-left-color:#a78bfa; }
+  .rcard.repe .rn { background:#4c1d95; }
+  .rvh { color:#8ab4dd; font-size:10.5px; font-weight:bold; text-transform:uppercase;
+    letter-spacing:.4px; margin:5px 0 2px; }
+  .rvis .rv .rh { color:#b8d4ee; font-family:'Consolas',monospace; flex-shrink:0; }
+  .rvis .rv .re { border-radius:4px; padding:0 6px; font-size:10px; background:#2c5282; color:#dbeafe; }
+  .rvis .rv .re.ini { background:#166534; } .rvis .rv .re.ruta { background:#92400e; }
+  .rvis .rv .re.ok { background:#065f46; } .rvis .rv .re.nr { background:#7f1d1d; }
+  .rmapa { color:#93c5fd; font-size:11.5px; cursor:pointer; margin-top:6px; display:inline-block; }
+  /* --- Modal de SECTORES (agrupado por calle) --- */
+  .btn.on-sec { background:#0c4a6e; border-color:#60a5fa; font-weight:bold; }
+  .schip { background:#132845; border:1px solid #2c5282; color:#dbeafe; border-radius:999px;
+    padding:3px 11px; font-size:11.5px; cursor:pointer; white-space:nowrap; }
+  .schip:hover { background:#1e3a5f; }
+  .schip.act { background:#0c4a6e; border-color:#60a5fa; color:#fff; font-weight:bold; }
+  .rcard.sec { border-left-color:#60a5fa; }
+  .rcard.sec .rn { background:#0c4a6e; }
+  .rcard.sec.alerta { border-left-color:#f87171; }
+  .rcard.sec.alerta .rn { background:#7f1d1d; }
+  .fam { display:inline-block; border-radius:4px; padding:0 6px; font-size:10px; margin-right:4px; }
+  .fam.red { background:#7f1d1d; color:#fecaca; }
+  .fam.cliente { background:#1e3a5f; color:#bfdbfe; }
+  .fam.datos { background:#4c1d95; color:#ddd6fe; }
+  .fam.otro { background:#1e3a5f; color:#b8d4ee; }
+  .shoy { background:#065f46; color:#a7f3d0; border-radius:4px; padding:0 6px; font-size:10px; }
+  .sdom { display:flex; gap:9px; font-size:11.5px; color:#b8d4ee; padding:2px 0; }
+  .sdom .sn { color:#93c5fd; font-family:'Consolas',monospace; flex-shrink:0; }
+  .rmapa:hover { text-decoration:underline; }
+  /* --- Ordenes nuevas del dia --- */
+  #modalNuevas { position:fixed; inset:0; z-index:3000; display:none; background:rgba(2,6,23,.72); }
+  #modalNuevas.abierto { display:flex; align-items:flex-start; justify-content:center; padding:4vh 2vw; }
+  #modalNuevas .mc-body { display:block; }
+  .btn.on-nuevas { background:#065f46; border-color:#10b981; font-weight:bold; }
+  #btnNuevas .badge { display:inline-block; min-width:16px; padding:0 5px; margin-left:5px;
+    background:#10b981; color:#022c22; border-radius:9px; font-size:11px; font-weight:bold;
+    line-height:16px; text-align:center; }
+  .nchip { background:#132845; border:1px solid #2c5282; color:#dbeafe; border-radius:999px;
+    padding:3px 11px; font-size:11.5px; cursor:pointer; white-space:nowrap; }
+  .nchip:hover { background:#1e3a5f; }
+  .nchip.act { background:#065f46; border-color:#10b981; color:#fff; font-weight:bold; }
+  .nfila { display:grid; grid-template-columns:105px 1fr 62px 58px; align-items:center;
+    gap:12px; padding:6px 10px; border-radius:6px; border-left:3px solid #10b981;
+    background:#111c33; margin-bottom:4px; font-size:12.5px; }
+  .nfila .npet { font-family:'Consolas',monospace; font-size:11px; color:#93c5fd;
+    background:#132845; border:1px solid #1e3a5f; border-radius:5px;
+    padding:1px 6px; text-align:center; }
+  .nfila .ncat { font-weight:bold; color:#eff6ff; }
+  .nfila .nfr { color:#8ab4dd; font-size:11.5px; font-family:'Consolas',monospace; text-align:right; }
+  .nfila .nde { color:#6ee7b7; font-size:11.5px; font-family:'Consolas',monospace; text-align:right; }
+  /* Salio de la bandeja estando ABIERTA. Ya no se apaga tanto la fila: el
+     gris fuerte decia "esto importa menos", justo al reves de lo que es —
+     una orden que desaparece sin cerrar es una caida. Se deja apenas
+     atenuada, con el borde rojo y la etiqueta fija. */
+  .nfila.ida { border-left-color:#ef4444; opacity:.82; }
+  .nfila .nida { display:inline-block; margin-left:8px; padding:1px 7px;
+    border-radius:999px; background:#450a0a; border:1px solid #ef4444;
+    color:#fca5a5; font-size:10px; font-weight:bold; vertical-align:middle; }
+  /* etiquetas de clasificacion: naranjo = reingreso, azul = reagendada.
+     Van DENTRO de la celda .ncat para no tocar el grid de 4 columnas. */
+  .nfila .nre, .nfila .nrg { display:inline-block; margin-left:8px; padding:1px 7px;
+    border-radius:999px; font-size:10px; font-weight:bold;
+    vertical-align:middle; cursor:help; }
+  .nfila .nre { background:#78350f; border:1px solid #f59e0b; color:#fde68a; }
+  .nfila .nrg { background:#3730a3; border:1px solid #818cf8; color:#e0e7ff; }
+  .nfila.rein { border-left-color:#f59e0b; }
+  /* boton de descarga en la cabecera del modal, al lado del cerrar */
+  .mc-xls { background:#065f46; border:1px solid #10b981; color:#d1fae5; cursor:pointer;
+    border-radius:7px; padding:5px 11px; font-size:12px; font-weight:bold;
+    margin-left:auto; margin-right:8px; white-space:nowrap; }
+  .mc-xls:hover { background:#047857; }
+  .mc-xls:disabled { opacity:.5; cursor:default; }
+  /* la pildora de estado reusa las clases .bes del buscador para que el codigo
+     de color sea el mismo en todo el tablero: un "No Realizada" se ve igual
+     aca, en el buscador y en las caidas */
+  .nfila .ncat .bes { margin-left:8px; vertical-align:middle; }
+  /* ---------------- BUSCADOR ---------------- */
+  .buscador { display:flex; gap:5px; align-items:center; margin-left:6px; }
+  .buscador input { background:#0a1930; border:1px solid #1e3a5f; color:#dbeafe;
+    border-radius:7px; padding:6px 10px; font-size:12px; width:210px; outline:none; }
+  .buscador input:focus { border-color:#60a5fa; }
+  .buscador input::placeholder { color:#4a7ab0; }
+  /* una tarjeta por direccion; dentro, un bloque por seccion del tablero */
+  .bcard { background:#0a1930; border:1px solid #132845; border-left:3px solid #60a5fa;
+    border-radius:8px; margin-bottom:12px; padding:10px 12px; }
+  .bcard h3 { margin:0 0 3px; font-size:14px; color:#dbeafe; }
+  .bcard .bmeta { font-size:11px; color:#4a7ab0; margin-bottom:8px; }
+  .bsec { margin-top:9px; }
+  .bsec .bt { font-size:11px; font-weight:bold; letter-spacing:.4px;
+    text-transform:uppercase; color:#8ab4dd; margin-bottom:4px; }
+  .bsec.hoy   .bt { color:#60a5fa; }
+  .bsec.caida .bt { color:#f87171; }
+  .bsec.nueva .bt { color:#4ade80; }
+  .bsec.hist  .bt { color:#f59e0b; }
+  .bsec.red   .bt { color:#c084fc; }
+  .bsec.reca  .bt { color:#fb923c; }
+  .brow { font-size:12px; color:#b8d4ee; padding:3px 0 3px 9px;
+    border-left:2px solid #132845; line-height:1.5; }
+  .brow .bord { font-family:'Consolas',monospace; font-size:11px; color:#93c5fd; }
+  .brow .bfec { font-family:'Consolas',monospace; color:#8ab4dd; }
+  .brow .btec { color:#6ee7b7; }
+  .brow .bmot { color:#fbbf24; }
+  .brow .bsep { color:#2c5282; margin:0 5px; }
+  .brow .bcat { color:#dbeafe; font-weight:bold; }
+  /* el estado se pinta con el mismo codigo de color del resto del tablero */
+  /* Codigo de color de los estados, compartido por el buscador y el modal de
+     nuevas. Verificado con contraste texto/fondo: todos sobre 5.7:1, y los
+     pares que se podian confundir quedaron separados —
+     Completado (azul) vs Suspendido (calipso), e Iniciado (verde) vs
+     Cancelado (lima). */
+  .bes { padding:0 6px; border-radius:999px; font-size:10px; font-weight:bold; }
+  .bes.ini  { background:#052e16; color:#4ade80; }   /* trabajando */
+  .bes.ruta { background:#431407; color:#fb923c; }   /* en ruta */
+  .bes.ok   { background:#1e3a8a; color:#93c5fd; }   /* completado */
+  .bes.susp { background:#134e4a; color:#5eead4; }   /* suspendido */
+  .bes.nr   { background:#450a0a; color:#f87171; }   /* no realizada */
+  .bes.can  { background:#1a2e05; color:#bef264; }   /* cancelado */
+  .bes.pen  { background:#132845; color:#8ab4dd; }   /* pendiente */
+  .bvacio { color:#4a7ab0; font-size:12px; padding:18px; text-align:center; }
+  .bhl { background:#78350f; color:#fde68a; border-radius:3px; padding:0 2px; }
+  /* Detalle del reingreso EN LA MISMA LINEA, no en tooltip: el tooltip no
+     existe en celular ni sale al imprimir, y este es justo el dato que el
+     despachador necesita leer de un vistazo antes de asignar. Va dentro de
+     .ncat (la columna elastica), asi que hace wrap solo si no cabe. */
+  .nfila .nsub { font-weight:normal; font-size:11px; color:#b8d4ee; }
+  .nfila .nsub .ndir { color:#93c5fd; }
+  .nfila .nsub .nfec { color:#8ab4dd; font-family:'Consolas',monospace; }
+  .nfila .nsub .nmot { color:#fbbf24; }
+  .nfila .nsub .ntec { color:#6ee7b7; }
+  .nfila .nsub .nord { color:#4a7ab0; font-family:'Consolas',monospace; font-size:10px; }
+  .nfila .nsub .nsep { color:#2c5282; margin:0 6px; }
+  .nfila .nsub .nmas { color:#8ab4dd; font-style:italic; }
+  /* la celda de tipo deja de truncar y el texto respira si cae en dos lineas */
+  .nfila .ncat { line-height:1.6; }
+  .nfila.reag { border-left-color:#818cf8; }
+  .nchip.re.act { background:#78350f; border-color:#f59e0b; }
+  .nchip.rg.act { background:#3730a3; border-color:#818cf8; }
+  #btnNuevas .badge.mix { background:#f59e0b; color:#451a03; }
+  #modalNuevas .vacio { color:#8ab4dd; text-align:center; padding:28px 6px; font-size:14px; line-height:1.6; }
+  .rnum { font-family:'Consolas',monospace; font-size:11px; color:#93c5fd;
+    background:#132845; border:1px solid #1e3a5f; border-radius:5px;
+    padding:1px 6px; white-space:nowrap; flex-shrink:0; }
+  .rcard .rvis { display:none; margin-top:7px; border-top:1px solid #1e3a5f; padding-top:6px; }
+  .rcard.abierta .rvis { display:block; }
+  .rvis .rv { display:flex; gap:9px; font-size:11.5px; color:#b8d4ee; padding:3px 0; flex-wrap:wrap; }
+  .rvis .rv .rf { color:#93c5fd; font-family:'Consolas',monospace; flex-shrink:0; }
+  .rvis .rv .rc { color:#fca5a5; }
+  .rvis .rv .rgsa { background:#1e3a5f; color:#93c5fd; border-radius:4px; padding:0 5px; font-size:10px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>🚐 Rutas Técnicos DOMI <span style="font-size:11px;color:#34d399;font-weight:normal;vertical-align:middle;">· regla GSA ✓ (v2)</span></h1>
+  <select id="selTec"><option value="__ALL__">Todos los técnicos</option></select>
+  <div class="msel" id="mselCiudad"><button type="button" class="mbtn" onclick="abrirMenu(event,'Ciudad')"><span class="mtxt">Ambas ciudades</span><span class="mcar">▼</span></button><div class="mmenu"></div></div>
+  <div class="msel" id="mselFranja"><button type="button" class="mbtn" onclick="abrirMenu(event,'Franja')"><span class="mtxt">Todas las franjas</span><span class="mcar">▼</span></button><div class="mmenu"></div></div>
+  <div class="msel" id="mselEstado"><button type="button" class="mbtn" onclick="abrirMenu(event,'Estado')"><span class="mtxt">Todos los estados</span><span class="mcar">▼</span></button><div class="mmenu"></div></div>
+  <button class="btn" onclick="document.getElementById('inExcel').click()">📂 Cargar Excel</button>
+  <input type="file" id="inExcel" accept=".xlsx" style="display:none">
+  <button class="btn" id="btnLibre" onclick="toggleLibre()">🚐 Técnico libre</button>
+  <button class="btn" id="btnSC" onclick="toggleSinCompletar()">🚩 Sin completar</button>
+  <button class="btn" id="btnAtr" onclick="toggleAtrasados()">⏱️ +2h30 iniciado</button>
+  <button class="btn" id="btnCaidas" onclick="toggleCaidas()">🚨 Caídas</button>
+  <button class="btn" id="btnRepe" onclick="toggleRepe()">🔁 Direcciones repetidas hoy</button>
+  <button class="btn" id="btnNombres" onclick="toggleNombres()">👷 Nombres</button>
+  <button class="btn" id="btnReca" onclick="toggleReca()">🔄 Recaídas hoy</button>
+  <button class="btn" id="btnNuevas" onclick="toggleNuevas()">🆕 Nuevas</button>
+  <button class="btn" id="btnComp" onclick="toggleComp()">📊 Completitud</button>
+  <div class="buscador">
+    <input id="qBuscar" type="search" placeholder="Buscar dirección u orden…"
+           autocomplete="off" spellcheck="false"
+           onkeydown="if(event.key==='Enter') hacerBusqueda(); if(event.key==='Escape') this.blur();">
+    <button class="btn" onclick="hacerBusqueda()" title="Buscar en todo el tablero">🔎</button>
+  </div>
+  <div class="stats" id="stats"></div>
+  <div class="stats" id="lastUpd" style="margin-left:0;">⏳ cargando datos...</div>
+</header>
+<div id="map"></div>
+<div id="modalCaidas" onclick="if(event.target===this) cerrarCaidas()">
+  <div class="mc-box">
+    <div class="mc-head">
+      <div class="mc-head-left">
+        <h2 id="mcTitulo">🚨 Se cayeron de la bandeja</h2>
+        <div id="mcContadores" class="mc-cont"></div>
+      </div>
+      <button class="mc-close" onclick="cerrarCaidas()" title="Cerrar (Esc)">✖</button>
+    </div>
+    <div id="listaCaidas" class="mc-body"></div>
+    <div id="mcResnota" class="mc-resnota" style="display:none;"></div>
+  </div>
+</div>
+<div id="modalNuevas" onclick="if(event.target===this) cerrarNuevas()">
+  <div class="mc-box">
+    <div class="mc-head">
+      <div class="mc-head-left">
+        <h2>🆕 Órdenes nuevas de hoy</h2>
+        <div id="nuevasChips" class="mc-cont"></div>
+      </div>
+      <button class="mc-xls" onclick="bajarNuevasXlsx()" title="Descargar en Excel lo que se está mostrando">⬇️ Excel</button>
+      <button class="mc-close" onclick="cerrarNuevas()" title="Cerrar (Esc)">✖</button>
+    </div>
+    <div id="listaNuevas" class="mc-body"></div>
+    <div id="nuevasNota" class="mc-resnota"></div>
+  </div>
+</div>
+<div id="modalBuscar" onclick="if(event.target===this) cerrarBuscar()">
+  <div class="mc-box">
+    <div class="mc-head">
+      <div class="mc-head-left"><h2>🔎 Buscar</h2><span id="buscarChips"></span></div>
+      <button class="mc-close" onclick="cerrarBuscar()" title="Cerrar (Esc)">✖</button>
+    </div>
+    <div id="listaBuscar" class="mc-body"></div>
+    <div id="buscarNota" class="mc-resnota"></div>
+  </div>
+</div>
+<div id="modalReca" onclick="if(event.target===this) cerrarReca()">
+  <div class="mc-box">
+    <div class="mc-head">
+      <div class="mc-head-left"><h2>🔄 Recaídas del mismo día</h2></div>
+      <button class="mc-close" onclick="cerrarReca()" title="Cerrar (Esc)">✖</button>
+    </div>
+    <div id="listaReca" class="mc-body"></div>
+    <div id="recaNota" class="mc-resnota"></div>
+  </div>
+</div>
+<div id="modalRepe" onclick="if(event.target===this) cerrarRepe()">
+  <div class="mc-box">
+    <div class="mc-head">
+      <div class="mc-head-left">
+        <h2>🔁 Direcciones repetidas hoy</h2>
+        <div id="repeChips" class="mc-cont"></div>
+      </div>
+      <button class="mc-close" onclick="cerrarRepe()" title="Cerrar (Esc)">✖</button>
+    </div>
+    <div id="listaRepe" class="mc-body"></div>
+    <div id="repeNota" class="mc-resnota"></div>
+  </div>
+</div>
+<div id="panelSC">
+  <h2>🚩 Sin completar</h2>
+  <div class="hint">Técnicos que aún no tienen ningún trabajo <b>Completado</b>. Toca un nombre para verlo solo a él en el mapa. Respeta el filtro de ciudad de arriba.</div>
+  <div id="listaSC"></div>
+</div>
+<div id="panelComp">
+  <h2>📊 Completitud al corte de las 13:00</h2>
+  <div class="hint">Meta <b>85%</b>. Cuenta cada técnico que cerró <b>al menos 1 orden antes de las 13:00</b>. Sobre el total de técnicos con trabajo asignado hoy — no le afectan los filtros de arriba.</div>
+  <div id="cuerpoComp"></div>
+</div>
+<div id="panelAtr">
+  <h2>⏱️ Llevan mucho rato iniciado</h2>
+  <div id="avisoAtr"></div>
+  <div class="umbral">
+    <button id="umb120" onclick="setUmbral(120)">+2h</button>
+    <button id="umb150" onclick="setUmbral(150)">+2h30</button>
+    <button id="umb180" onclick="setUmbral(180)">+3h</button>
+  </div>
+  <div class="hint">Órdenes en estado <b>Iniciado</b> cuya hora de inicio ya lleva más del umbral. Respeta el filtro de ciudad de arriba. Toca una tarjeta para ver al técnico en el mapa.</div>
+  <div id="listaAtr"></div>
+</div>
+<div class="estados" id="estadosBox">
+  <div><span class="mini mk-iniciado"></span> Iniciado (trabajando)</div>
+  <div><span class="mini mk-enruta"></span> En ruta (parpadea)</div>
+  <div><span class="mini"></span> Pendiente</div>
+  <div><span class="mini mk-completado"></span> Completado</div>
+  <div><span class="mini mk-norealizada"></span> No realizada</div>
+</div>
+<div id="panel">
+  <h2>🚐 Técnico libre</h2>
+  <div class="hint">Escribe el nombre del técnico que quedó libre y aprieta <b>Iniciar</b>. Se marca dónde terminó y los pendientes más cercanos. Respeta los filtros de <b>ciudad</b> y <b>franja</b> de arriba.</div>
+  <input id="inTecLibre" list="listaTecs" placeholder="Nombre del técnico (ej: JOSE SALAS)" autocomplete="off"
+         style="width:100%; background:#0f172a; color:#e2e8f0; border:1px solid #475569; border-radius:6px; padding:7px 8px; font-size:13px; margin-bottom:6px;">
+  <datalist id="listaTecs"></datalist>
+  <button onclick="iniciarLibre()" style="width:100%; background:#dc2626; border:none; color:#fff; border-radius:6px; padding:8px; font-size:13px; cursor:pointer; font-weight:bold; margin-bottom:6px;">▶️ Iniciar</button>
+  <div id="resultados"></div>
+</div>
+<script>
+let DB = {"ALEXIS JARA": [{"o": "1-3MHOPKCV", "t": "Migración", "f": "10-13", "hi": "10:00", "hf": "11:59", "d": "GABRIEL GONZALEZ VIDELA 1890 CASA 06, QUILPUE", "lat": -33.0585051, "lng": -71.4278527, "e": "Pendiente"}, {"o": "1-3MJ9ZX6H", "t": "Reparación", "f": "13-16", "hi": "14:00", "hf": "14:47", "d": "VOLCAN YELCHO 2865, QUILPUE", "lat": -33.0707773, "lng": -71.4240541, "e": "Pendiente"}, {"o": "1-3MJP7YIF", "t": "Alta", "f": "13-16", "hi": "14:53", "hf": "16:12", "d": "LAGO LAS TORRES 170 DEPTO 905, QUILPUE", "lat": -33.0680161, "lng": -71.4118334, "e": "Pendiente"}], "ALFREDO ALCAYAGA F": [{"o": "1-3MKLAQ72", "t": "Reparación", "f": "10-13", "hi": "09:41", "hf": "10:26", "d": "BUENOS AIRES 1288, QUILPUE", "lat": -33.0526261, "lng": -71.4360141, "e": "Iniciado"}, {"o": "1-3MHB3KAC", "t": "Alta", "f": "10-13", "hi": "10:41", "hf": "12:26", "d": "PJE CAMPO LINDO 2685, QUILPUE", "lat": -33.0747125, "lng": -71.4264412, "e": "Pendiente"}, {"o": "1-3MKAW5XU", "t": "Alta", "f": "13-16", "hi": "14:00", "hf": "15:45", "d": "LOS CORCHOS 2809, QUILPUE", "lat": -33.0741664, "lng": -71.4232634, "e": "Pendiente"}, {"o": "1-3MGFHFQ3", "t": "Modificación de Servicio", "f": "16-19", "hi": "16:00", "hf": "16:33", "d": "LA VEGA 528, QUILPUE", "lat": -33.0542915, "lng": -71.3974036, "e": "Pendiente"}], "ANTONHY MORALES MENDOZA": [{"o": "1-3MILAKVS", "t": "Migración", "f": "10-13", "hi": "10:00", "hf": "12:10", "d": "HILDA MADRID 735, QUILPUE", "lat": -33.0319936, "lng": -71.4267824, "e": "Pendiente"}, {"o": "1-3MK4ZFX2", "t": "Reparación", "f": "13-16", "hi": "14:00", "hf": "14:59", "d": "SOR TERESA DE LOS ANDES 699, QUILPUE", "lat": -33.0327381, "lng": -71.429126, "e": "Pendiente"}], "CESAR MENA OLIVEROS": [{"o": "1-3MIKF3KD", "t": "Migración", "f": "10-13", "hi": "09:42", "hf": "11:43", "d": "RENE RODRIGUEZ 571 EDIF. B-33 DEPTO 201, QUILPUE", "lat": -33.0609677, "lng": -71.4067701, "e": "Iniciado"}, {"o": "1-3MK0SXZB", "t": "Reparación", "f": "13-16", "hi": "14:00", "hf": "14:58", "d": "ALFREDO HELSBY 2647, QUILPUE", "lat": -33.0515452, "lng": -71.397817, "e": "Pendiente"}, {"o": "1-3MI58EKZ", "t": "Alta", "f": "16-19", "hi": "16:00", "hf": "18:03", "d": "ISLOTE SNIPE 1041, QUILPUE", "lat": -33.0587742, "lng": -71.4011387, "e": "Pendiente"}], "CRISTOBAL MIRANDA VALENC": [{"o": "1-3MK564IQ", "t": "Alta", "f": "10-13", "hi": "10:15", "hf": "11:59", "d": "JOHN KENNEDY 1936 CASA B, QUILPUE", "lat": -33.0617802, "lng": -71.4223883, "e": "en ruta"}, {"o": "1-3MK8CEK0", "t": "Reparación", "f": "13-16", "hi": "14:00", "hf": "15:02", "d": "IRMA JOHNSON MOLINA 110 EDIF. D-E DEPTO 413, QUILPUE", "lat": -33.0660094, "lng": -71.4176402, "e": "Pendiente"}, {"o": "1-3MH7XQK6", "t": "Alta", "f": "16-19", "hi": "16:00", "hf": "17:44", "d": "VALENTIN LETELIER 1715 CASA 8, QUILPUE", "lat": -33.0576794, "lng": -71.4469562, "e": "Pendiente"}], "CRISTOBAL SILVA LEIVA": [{"o": "1-3MJOWPBE", "t": "Reparación", "f": "10-13", "hi": "09:56", "hf": "10:48", "d": "EDUARDO ALQUINTA 1260 CASA 131, QUILPUE", "lat": -33.0302627, "lng": -71.3997717, "e": "en ruta"}, {"o": "1-3MKCUU2J", "t": "Alta", "f": "10-13", "hi": "10:55", "hf": "13:10", "d": "LEUCOTON 1100 EDIF. 2 DEPTO 104, QUILPUE", "lat": -33.0330049, "lng": -71.413635, "e": "Pendiente"}, {"o": "1-3MKLO2HD", "t": "Reparación", "f": "13-16", "hi": "14:28", "hf": "15:20", "d": "MARISOL 1881, QUILPUE", "lat": -33.059061, "lng": -71.4281576, "e": "Pendiente"}], "DANIEL NAVARRETE E": [{"o": "1-3MKLHLZT", "t": "Alta", "f": "10-13", "hi": "09:49", "hf": "11:50", "d": "LOS ALAMOS 849 EDIF. I DEPTO 22, QUILPUE", "lat": -33.0477263, "lng": -71.4243583, "e": "en ruta"}, {"o": "1-3MK983AH", "t": "Reparación", "f": "13-16", "hi": "14:00", "hf": "14:54", "d": "PJE 610 962, QUILPUE", "lat": -33.0587368, "lng": -71.4144029, "e": "Pendiente"}, {"o": "1-3MKBIEO5", "t": "Alta", "f": "16-19", "hi": "16:00", "hf": "18:01", "d": "PEYRONNET 1392, QUILPUE", "lat": -33.0533633, "lng": -71.4316765, "e": "Pendiente"}], "EDGAR VALERO C": [{"o": "1-3MHTLFXS", "t": "Migración", "f": "10-13", "hi": "09:50", "hf": "12:08", "d": "CONDELL SUR 01583, QUILPUE", "lat": -33.0395289, "lng": -71.4697494, "e": "en ruta"}, {"o": "1-3MK6NSUM", "t": "Reparación", "f": "13-16", "hi": "14:00", "hf": "14:56", "d": "ALFONSO LOPEZ EMANUELLI 1462, QUILPUE", "lat": -33.0404846, "lng": -71.4330166, "e": "Pendiente"}, {"o": "1-3MJ4WCBM", "t": "Alta", "f": "16-19", "hi": "16:00", "hf": "17:42", "d": "FREIRE 250, QUILPUE", "lat": -33.0457294, "lng": -71.4009391, "e": "Pendiente"}], "ELIAS ARMIJO L": [{"o": "1-3MJMIGPA", "t": "Reparación", "f": "10-13", "hi": "09:47", "hf": "10:54", "d": "ESMERALDA 145, VILLA ALEMANA", "lat": -33.046076, "lng": -71.3825221, "e": "en ruta"}, {"o": "1-3MK7M71C", "t": "Migración", "f": "10-13", "hi": "11:06", "hf": "13:30", "d": "LAS ACACIAS 240 CASA 12, VILLA ALEMANA", "lat": -33.0532286, "lng": -71.3544792, "e": "Pendiente"}, {"o": "1-3MKE4GJE", "t": "Migración", "f": "10-13", "hi": "14:45", "hf": "17:09", "d": "VILLA ESMERALDA 1473 DEPTO 13, VILLA ALEMANA", "lat": -33.0645652, "lng": -71.3806068, "e": "Pendiente"}], "ESTEBAN PIZARRO QUINTANA": [{"o": "1-3MK57C5Q", "t": "Alta", "f": "10-13", "hi": "09:39", "hf": "11:21", "d": "ALTO MANQUEHUE 3194 EDIF. C DEPTO 403, QUILPUE", "lat": -33.0721596, "lng": -71.4334353, "e": "en ruta"}, {"o": "1-3MKD41PI", "t": "Reparación", "f": "10-13", "hi": "11:39", "hf": "12:37", "d": "EGANA 395, QUILPUE", "lat": -33.0438774, "lng": -71.4481778, "e": "Pendiente"}, {"o": "1-3MK4SWP5", "t": "Alta", "f": "13-16", "hi": "14:00", "hf": "15:42", "d": "LOS CORCHOS 2769, QUILPUE", "lat": -33.0739119, "lng": -71.4236785, "e": "Pendiente"}, {"o": "1-3MJMDEYX", "t": "Alta", "f": "16-19", "hi": "16:00", "hf": "17:42", "d": "PJE BUSTOS 1230, QUILPUE", "lat": -33.0505743, "lng": -71.4544185, "e": "Pendiente"}], "FELIPE SILVA R": [{"o": "1-3MJW7JAV", "t": "Reparación", "f": "10-13", "hi": "09:35", "hf": "10:28", "d": "CAMINO DEL SOL 2400 EDIF. A DEPTO 37, QUILPUE", "lat": -33.0323942, "lng": -71.4795251, "e": "Iniciado"}, {"o": "1-3MHKEE3I", "t": "Migración", "f": "10-13", "hi": "10:46", "hf": "13:26", "d": "LAS HORTENCIAS 1532, QUILPUE", "lat": -33.0561248, "lng": -71.4250019, "e": "Pendiente"}, {"o": "1-3MK6YKME", "t": "Reparación", "f": "13-16", "hi": "14:42", "hf": "15:33", "d": "MONTEVIDEO 1478 CASA 1, QUILPUE", "lat": -33.0534017, "lng": -71.4543012, "e": "Pendiente"}], "FREDERIC OVALLE V": [{"o": "1-3MK80VH6", "t": "Migración", "f": "10-13", "hi": "09:47", "hf": "12:27", "d": "FREIRE 1188, QUILPUE", "lat": -33.0439992, "lng": -71.4358145, "e": "Iniciado"}, {"o": "1-3MK74U3M", "t": "Reparación", "f": "13-16", "hi": "14:00", "hf": "14:54", "d": "AV BLANCO ENCALADA 970 CASA A, QUILPUE", "lat": -33.0465103, "lng": -71.4403658, "e": "Pendiente"}], "GEEYSER PEREZ O": [{"o": "1-3MHSKT5E", "t": "Migración", "f": "10-13", "hi": "10:00", "hf": "12:06", "d": "PJE LARGO 0263, QUILPUE", "lat": -33.0381861, "lng": -71.4833634, "e": "Pendiente"}, {"o": "1-3MK5L27U", "t": "Reparación", "f": "13-16", "hi": "14:00", "hf": "14:42", "d": "COOPERACION 383, QUILPUE", "lat": -33.0454017, "lng": -71.4709992, "e": "Pendiente"}, {"o": "1-3MIVSDT3", "t": "Reparación", "f": "13-16", "hi": "14:45", "hf": "15:55", "d": "FRANCISCO DE ASIS 01039 CASA B, QUILPUE", "lat": -33.0501057, "lng": -71.4686903, "e": "Pendiente"}], "HERNAN CORTES HERRERA": [{"o": "1-3MKCFZGW", "t": "Reparación", "f": "10-13", "hi": "09:43", "hf": "10:36", "d": "AVENIDA LAS FLORES 1650 CASA 7, VILLA ALEMANA", "lat": -33.0413362, "lng": -71.3870496, "e": "Iniciado"}, {"o": "1-3MK9GD58", "t": "Alta", "f": "10-13", "hi": "10:46", "hf": "12:43", "d": "LOS QUELTEHUES 2248, VILLA ALEMANA", "lat": -33.0515372, "lng": -71.3931696, "e": "Pendiente"}, {"o": "1-3MIRKROV", "t": "Alta", "f": "10-13", "hi": "12:54", "hf": "15:13", "d": "SANTA ANA 26 CASA A, VILLA ALEMANA", "lat": -33.0447724, "lng": -71.3809074, "e": "Pendiente"}, {"o": "1-3MK7F65N", "t": "Alta", "f": "16-19", "hi": "16:28", "hf": "17:58", "d": "VIA UNO SIETE 2065 EDIF. D DEPTO 23, VILLA ALEMANA", "lat": -33.0635448, "lng": -71.3911937, "e": "Pendiente"}], "JEAN ROODLY ORELIEN": [{"o": "1-3MK2LEX4", "t": "Reparación", "f": "10-13", "hi": "09:30", "hf": "10:28", "d": "BILBAO 1290, QUILPUE", "lat": -33.0457617, "lng": -71.4349166, "e": "Iniciado"}, {"o": "1-3MJWIOHF", "t": "Alta", "f": "10-13", "hi": "10:46", "hf": "12:29", "d": "CALLE 3 0262, QUILPUE", "lat": -33.0439562, "lng": -71.4732311, "e": "Pendiente"}, {"o": "1-3MK4GJQH", "t": "Reparación", "f": "13-16", "hi": "14:00", "hf": "14:58", "d": "VOLCAN LINZOR 2679, QUILPUE", "lat": -33.0716565, "lng": -71.4247767, "e": "Pendiente"}, {"o": "1-3MK5BI4T", "t": "Alta", "f": "16-19", "hi": "16:00", "hf": "17:43", "d": "ISIDORA 2801 DEPTO 11, QUILPUE", "lat": -33.0662025, "lng": -71.417058, "e": "Pendiente"}], "JOEL GUSTAVE GUSTA": [{"o": "1-3MK4R4BO", "t": "Alta", "f": "10-13", "hi": "09:45", "hf": "12:01", "d": "LAGO BERTRAND 120 EDIF. B DEPTO 403, QUILPUE", "lat": -33.0687641, "lng": -71.4118761, "e": "Iniciado"}, {"o": "1-3MJ6CK39", "t": "Reparación", "f": "13-16", "hi": "14:00", "hf": "15:07", "d": "QUINTRAL 2948, QUILPUE", "lat": -33.0730047, "lng": -71.4231168, "e": "Pendiente"}], "JORDAN ROA PEREZ": [{"o": "1-3MKDQ81D", "t": "Reparación", "f": "10-13", "hi": "09:49", "hf": "10:37", "d": "PJE HUALA 2665, QUILPUE", "lat": -33.0673542, "lng": -71.4259827, "e": "en ruta"}, {"o": "1-3MK8XB7A", "t": "Alta", "f": "10-13", "hi": "10:49", "hf": "12:39", "d": "GENERAL VELASQUEZ 395, QUILPUE", "lat": -33.0425796, "lng": -71.4444863, "e": "Pendiente"}, {"o": "1-3MK426YH", "t": "Alta", "f": "13-16", "hi": "14:00", "hf": "16:10", "d": "AV LOS CARRERA 311 DEPTO 11, QUILPUE", "lat": -33.0469086, "lng": -71.4483368, "e": "Pendiente"}], "JORGE PEZOA VICUÑA": [{"o": "1-3MJ2RJ4O", "t": "Alta", "f": "10-13", "hi": "09:48", "hf": "11:20", "d": "DARWIN 0742, QUILPUE", "lat": -33.0521641, "lng": -71.4603273, "e": "Iniciado"}, {"o": "1-3MGS5C9N", "t": "Migración", "f": "10-13", "hi": "11:36", "hf": "13:39", "d": "MANUEL BULNES 1140, QUILPUE", "lat": -33.0508547, "lng": -71.4435269, "e": "Pendiente"}, {"o": "1-3MHTJ02O", "t": "Alta", "f": "13-16", "hi": "14:43", "hf": "16:46", "d": "LOS ESTANQUES 1129, QUILPUE", "lat": -33.0556953, "lng": -71.4379976, "e": "Pendiente"}], "JOSE CASTRO P": [{"o": "1-3MK3Y4RA", "t": "Reparación", "f": "10-13", "hi": "09:52", "hf": "10:39", "d": "GUACOLDA 1745 DEPTO 23, VILLA ALEMANA", "lat": -33.0456494, "lng": -71.3870283, "e": "en ruta"}, {"o": "1-3MK95N5G", "t": "Alta", "f": "10-13", "hi": "10:46", "hf": "13:05", "d": "PATRICIO LYNCH 406 EDIF. E DEPTO 304, VILLA ALEMANA", "lat": -33.0484393, "lng": -71.3699211, "e": "Pendiente"}, {"o": "1-3MK6KZX9", "t": "Alta", "f": "10-13", "hi": "13:23", "hf": "15:42", "d": "FRANCISCA 674, VILLA ALEMANA", "lat": -33.064773, "lng": -71.371774, "e": "Pendiente"}, {"o": "1-3MJY9ANR", "t": "Reparación", "f": "13-16", "hi": "17:00", "hf": "17:47", "d": "IGNACIO CARRERA PINTO 321, VILLA ALEMANA", "lat": -33.0492659, "lng": -71.3653782, "e": "Pendiente"}, {"o": "1-3MK0SZ9E", "t": "Reparación", "f": "13-16", "hi": "17:50", "hf": "18:46", "d": "IGNACIO CARRERA PINTO 055, VILLA ALEMANA", "lat": -33.0430971, "lng": -71.3651929, "e": "Pendiente"}], "JOSE GALAZ D": [{"o": "1-3MJZVW5E", "t": "Reparación", "f": "10-13", "hi": "09:50", "hf": "10:34", "d": "AV VICEPRESIDENTE BDO LEIGHTON 1431 EDIF. 5 DEPTO 32, VILLA ALEMANA", "lat": -33.0572491, "lng": -71.3539648, "e": "en ruta"}, {"o": "1-3MIDNGZW", "t": "Migración", "f": "10-13", "hi": "10:49", "hf": "12:48", "d": "18 DE SEPTIEMBRE 227, VILLA ALEMANA", "lat": -33.0461611, "lng": -71.3567164, "e": "Pendiente"}, {"o": "1-3MK9LYNP", "t": "Reparación", "f": "13-16", "hi": "14:03", "hf": "15:02", "d": "TACNA 405, VILLA ALEMANA", "lat": -33.0518039, "lng": -71.3705287, "e": "Pendiente"}, {"o": "1-3MK2B9SY", "t": "Reparación", "f": "13-16", "hi": "", "hf": "", "d": "TERESIANAS 119, VILLA ALEMANA", "lat": -33.0546931, "lng": -71.3386415, "e": "Cancelado"}], "JOSE PEREZ RANGEL": [{"o": "1-3MFE1ACT", "t": "Migración", "f": "10-13", "hi": "10:02", "hf": "11:52", "d": "ABTAO 163, VILLA ALEMANA", "lat": -33.0389929, "lng": -71.3550638, "e": "en ruta"}, {"o": "1-3MKL6KKQ", "t": "Alta", "f": "10-13", "hi": "12:08", "hf": "13:49", "d": "PREBISTERIO O. LIRA PEREZ 0326, VILLA ALEMANA", "lat": -33.049433, "lng": -71.3370236, "e": "Pendiente"}, {"o": "1-3MJM7FR2", "t": "Alta", "f": "13-16", "hi": "15:07", "hf": "16:27", "d": "MADRID 225, VILLA ALEMANA", "lat": -33.052, "lng": -71.3669, "e": "Pendiente"}, {"o": "1-3MGCJH9S", "t": "Migración", "f": "16-19", "hi": "16:30", "hf": "18:20", "d": "PEDRO MONTT 0150 CASA 7, VILLA ALEMANA", "lat": -33.0476056, "lng": -71.3623313, "e": "Pendiente"}, {"o": "1-3MK6QGJ6", "t": "Alta", "f": "10-13", "hi": "", "hf": "", "d": "PREBISTERIO O. LIRA PEREZ 0326, VILLA ALEMANA", "lat": -33.049433, "lng": -71.3370236, "e": "Cancelado"}], "JOSE ROJO A": [{"o": "1-3MK95P4Y", "t": "Reparación", "f": "10-13", "hi": "09:47", "hf": "10:37", "d": "FERNANDA 568, VILLA ALEMANA", "lat": -33.0643753, "lng": -71.3714958, "e": "Iniciado"}, {"o": "1-3MHZN5D1", "t": "Migración", "f": "10-13", "hi": "10:47", "hf": "13:10", "d": "MILAN 575, VILLA ALEMANA", "lat": -33.0445475, "lng": -71.3505167, "e": "Pendiente"}, {"o": "1-3MILY8Q0", "t": "Alta", "f": "13-16", "hi": "14:14", "hf": "16:25", "d": "GABRIEL DAZAROLA 312, VILLA ALEMANA", "lat": -33.0477012, "lng": -71.3617509, "e": "Pendiente"}], "JOSE SALAS MEDINA": [{"o": "1-3MK6EYI7", "t": "Reparación", "f": "10-13", "hi": "09:42", "hf": "10:41", "d": "SAN MARTIN 310, VILLA ALEMANA", "lat": -33.0472166, "lng": -71.3729263, "e": "Iniciado"}, {"o": "1-3MHJ8P3V", "t": "Alta", "f": "10-13", "hi": "10:55", "hf": "13:31", "d": "PAUL HARRIS 883 EDIF. B DEPTO 206, VILLA ALEMANA", "lat": -33.0550837, "lng": -71.362757, "e": "Pendiente"}, {"o": "1-3MHKNKDR", "t": "Migración", "f": "13-16", "hi": "14:46", "hf": "17:21", "d": "LAS VERBENAS 2727, VILLA ALEMANA", "lat": -33.0455259, "lng": -71.3969529, "e": "Pendiente"}], "JUAN ARRIAGADA C": [{"o": "1-3MK2WK90", "t": "Alta", "f": "10-13", "hi": "09:37", "hf": "11:27", "d": "VILLA ESMERALDA 1462 DEPTO 202, VILLA ALEMANA", "lat": -33.0637756, "lng": -71.380588, "e": "Iniciado"}, {"o": "1-3MHL2Y1C", "t": "Reparación", "f": "10-13", "hi": "11:43", "hf": "12:30", "d": "SANTA ROSA 35 CASA MK, VILLA ALEMANA", "lat": -33.0250869, "lng": -71.390277, "e": "Pendiente"}, {"o": "1-3MK16VQM", "t": "Reparación", "f": "13-16", "hi": "14:00", "hf": "14:47", "d": "PARIS 810, VILLA ALEMANA", "lat": -33.0409208, "lng": -71.3749361, "e": "Pendiente"}, {"o": "1-3MK1FSOB", "t": "Reparación", "f": "13-16", "hi": "14:55", "hf": "15:41", "d": "SEVILLA 11, VILLA ALEMANA", "lat": -33.0516036, "lng": -71.3634216, "e": "Pendiente"}, {"o": "1-3MKA5RVE", "t": "Alta", "f": "13-16", "hi": "15:48", "hf": "17:24", "d": "SANTA RITA 950 EDIF. B DEPTO 106, VILLA ALEMANA", "lat": -33.0481572, "lng": -71.3759328, "e": "Pendiente"}], "KEVIN TAPIA RETAMAL": [{"o": "1-3MK1FA4D", "t": "Reparación", "f": "10-13", "hi": "09:32", "hf": "10:23", "d": "FRODDEN 01572, QUILPUE", "lat": -33.0537252, "lng": -71.4686143, "e": "Iniciado"}, {"o": "1-3MJVPTN3", "t": "Migración", "f": "10-13", "hi": "10:41", "hf": "13:24", "d": "SAN PEDRO 1933, QUILPUE", "lat": -33.0613214, "lng": -71.4196937, "e": "Pendiente"}, {"o": "1-3MHM9WAS", "t": "Reparación", "f": "13-16", "hi": "14:40", "hf": "15:32", "d": "PEYRONNET 1401, QUILPUE", "lat": -33.0538669, "lng": -71.4315421, "e": "Pendiente"}, {"o": "1-3MGHKRQS", "t": "Modificación de Servicio", "f": "16-19", "hi": "16:00", "hf": "16:40", "d": "PARINACOTA 2690 EDIF. F DEPTO 402, QUILPUE", "lat": -33.0618884, "lng": -71.4184608, "e": "Pendiente"}], "LEONEL HERNÁNDEZ OJE": [{"o": "1-3MFHFEL0", "t": "Migración", "f": "10-13", "hi": "09:45", "hf": "12:08", "d": "LOS PERALES 1027, QUILPUE", "lat": -33.0350599, "lng": -71.4105197, "e": "Iniciado"}, {"o": "1-3MK959DU", "t": "Reparación", "f": "13-16", "hi": "14:00", "hf": "14:58", "d": "TARRAGONA 1371, QUILPUE", "lat": -33.031457, "lng": -71.4087509, "e": "Pendiente"}, {"o": "1-3MHJ4YJ8", "t": "Modificación de Servicio", "f": "16-19", "hi": "16:00", "hf": "16:43", "d": "ESTER SORE 1330, QUILPUE", "lat": -33.031235, "lng": -71.4004116, "e": "Pendiente"}], "LUIS CASTRO TORRES": [{"o": "1-3MJKY77T", "t": "Migración", "f": "10-13", "hi": "09:47", "hf": "12:08", "d": "GRANADA 1550, QUILPUE", "lat": -33.0360348, "lng": -71.440818, "e": "en ruta"}, {"o": "1-3MDTUK1Y", "t": "Modificación de Servicio", "f": "13-16", "hi": "14:00", "hf": "15:02", "d": "PJE SEGOVIA 879, QUILPUE", "lat": -33.0316876, "lng": -71.4093376, "e": "Pendiente"}], "MARCELO GÓMEZ GÓME": [{"o": "1-3MK8A6Y5", "t": "Reparación", "f": "10-13", "hi": "09:46", "hf": "11:00", "d": "PAUL HARRIS 462 CASA 4, VILLA ALEMANA", "lat": -33.0498836, "lng": -71.3631312, "e": "Iniciado"}, {"o": "1-3MK5AJSS", "t": "Alta", "f": "10-13", "hi": "11:17", "hf": "14:06", "d": "LOURDES 1021 EDIF. F DEPTO 401, VILLA ALEMANA", "lat": -33.0618837, "lng": -71.3748244, "e": "Pendiente"}], "MARCO PEREZ G": [{"o": "1-3MJMUCBK", "t": "Reparación", "f": "10-13", "hi": "09:38", "hf": "10:36", "d": "AV LOS CARRERA (BTO 2000) 1641, QUILPUE", "lat": -33.0497411, "lng": -71.4201928, "e": "Iniciado"}, {"o": "1-3MKCY1M7", "t": "Alta", "f": "10-13", "hi": "10:47", "hf": "12:16", "d": "LOS ALAMOS 849 EDIF. I DEPTO 21, QUILPUE", "lat": -33.0477263, "lng": -71.4243583, "e": "Pendiente"}, {"o": "1-3MJHIL3S", "t": "Alta", "f": "13-16", "hi": "14:00", "hf": "15:29", "d": "PJE MILANO 940 EDIF. L DEPTO 22, QUILPUE", "lat": -33.051667, "lng": -71.4203117, "e": "Pendiente"}, {"o": "1-3MGZ6G48", "t": "Alta", "f": "16-19", "hi": "16:00", "hf": "17:58", "d": "SAN LUIS 1519, QUILPUE", "lat": -33.0369801, "lng": -71.4404758, "e": "Pendiente"}], "MATIAS APELEO APELEO": [{"o": "1-3MIL0CK0", "t": "Migración", "f": "10-13", "hi": "10:00", "hf": "12:18", "d": "SAN MIGUEL 25, VILLA ALEMANA", "lat": -33.0501912, "lng": -71.3903609, "e": "Pendiente"}, {"o": "1-3MK7PP3O", "t": "Migración", "f": "10-13", "hi": "12:28", "hf": "14:46", "d": "LOS ALGARROBOS 830, VILLA ALEMANA", "lat": -33.0570331, "lng": -71.392637, "e": "Pendiente"}, {"o": "1-3MFPL1OA", "t": "Migración", "f": "16-19", "hi": "16:01", "hf": "18:19", "d": "AV JOHN KENNEDY 1720 EDIF. A DEPTO 403, VILLA ALEMANA", "lat": -33.0556735, "lng": -71.3853685, "e": "Pendiente"}], "MATIAS CORNEJO D": [{"o": "1-3MJWQPJK", "t": "Alta", "f": "10-13", "hi": "09:42", "hf": "12:10", "d": "SANTIAGO 585 EDIF. LOCAL 9, QUILPUE", "lat": -33.038295, "lng": -71.4054407, "e": "en ruta"}, {"o": "1-3MFTQUWA", "t": "Modificación de Servicio", "f": "13-16", "hi": "14:00", "hf": "14:53", "d": "LOS LUCUMOS 3152, QUILPUE", "lat": -33.0343106, "lng": -71.3984476, "e": "Pendiente"}, {"o": "1-3MKLRZB2", "t": "Alta", "f": "13-16", "hi": "15:06", "hf": "17:14", "d": "LOS OLIVOS 3162, QUILPUE", "lat": -33.0339948, "lng": -71.3988127, "e": "Pendiente"}], "MATÍAS JAQUE AG": [{"o": "1-3MKCC8MQ", "t": "Alta", "f": "10-13", "hi": "09:48", "hf": "11:44", "d": "IGNACIO CARRERA PINTO 1650 EDIF. 5 DEPTO 44, VILLA ALEMANA", "lat": -33.0664994, "lng": -71.3649129, "e": "en ruta"}, {"o": "1-3MKBIG8X", "t": "Alta", "f": "10-13", "hi": "11:48", "hf": "13:44", "d": "AV LA PALMA 426 EDIF. B DEPTO 201, VILLA ALEMANA", "lat": -33.0618604, "lng": -71.3594238, "e": "Pendiente"}, {"o": "1-3MK2U9DT", "t": "Alta", "f": "16-19", "hi": "16:00", "hf": "17:38", "d": "CALLE 1 1150 EDIF. 1 DEPTO 203, VILLA ALEMANA", "lat": -33.0565369, "lng": -71.3587408, "e": "Pendiente"}], "NICOLAS MOYANO R": [{"o": "1-3MHSUBLR", "t": "Alta", "f": "10-13", "hi": "10:00", "hf": "11:40", "d": "VILLA ESMERALDA 1531 DEPTO 103, VILLA ALEMANA", "lat": -33.064614, "lng": -71.3813851, "e": "Pendiente"}, {"o": "1-3MK9VNY0", "t": "Alta", "f": "10-13", "hi": "11:48", "hf": "13:52", "d": "IGNACIO CARRERA PINTO 1364, VILLA ALEMANA", "lat": -33.0671, "lng": -71.3641, "e": "Pendiente"}, {"o": "1-3MI1QZ08", "t": "Alta", "f": "16-19", "hi": "16:00", "hf": "17:40", "d": "PJE LOS CANALES 1596, VILLA ALEMANA", "lat": -33.0623581, "lng": -71.3856079, "e": "Pendiente"}], "PABLO HERNANEZ FERNANDEZ": [{"o": "1-3MJXW5H5", "t": "Alta", "f": "10-13", "hi": "09:48", "hf": "11:37", "d": "JOSE MIGUEL CARRERA 846, VILLA ALEMANA", "lat": -33.0539138, "lng": -71.370301, "e": "Iniciado"}, {"o": "1-3MK4622G", "t": "Alta", "f": "10-13", "hi": "11:44", "hf": "13:48", "d": "LAS PALMAS 1, VILLA ALEMANA", "lat": -33.0605312, "lng": -71.3572359, "e": "Pendiente"}, {"o": "1-3MK3LTVW", "t": "Alta", "f": "16-19", "hi": "16:00", "hf": "18:04", "d": "LOS NARCISOS 1798 DEPTO 501, VILLA ALEMANA", "lat": -33.0553452, "lng": -71.3598554, "e": "Pendiente"}], "RAFAEL VARGAS B": [{"o": "1-3MJXKATE", "t": "Migración", "f": "10-13", "hi": "09:45", "hf": "11:33", "d": "M FERNANDEZ 2442, QUILPUE", "lat": -33.0658072, "lng": -71.423742, "e": "Iniciado"}, {"o": "1-3MK6ZN31", "t": "Alta", "f": "10-13", "hi": "11:49", "hf": "13:13", "d": "ARTURO ALESSANDRI 709 DEPTO 31, QUILPUE", "lat": -33.0615999, "lng": -71.4436965, "e": "Pendiente"}, {"o": "1-3MFJ9HNC", "t": "Migración", "f": "16-19", "hi": "16:00", "hf": "17:48", "d": "CUMMING 937 DEPTO 30, QUILPUE", "lat": -33.0486912, "lng": -71.4408095, "e": "Pendiente"}], "SAMUEL FERNANDEZ VIDAL": [{"o": "1-3MJWIX37", "t": "Reparación", "f": "10-13", "hi": "09:45", "hf": "10:43", "d": "ARTURO PRAT (SGTO ALDEA) 484, VILLA ALEMANA", "lat": -33.0368253, "lng": -71.3596842, "e": "Iniciado"}, {"o": "1-3MFNYAY3", "t": "Upgrade promoción", "f": "10-13", "hi": "10:55", "hf": "11:42", "d": "LONGITUDINAL 789 CASA 14, VILLA ALEMANA", "lat": -33.0319577, "lng": -71.3902913, "e": "Pendiente"}, {"o": "1-3MJ7XWVG", "t": "Alta", "f": "10-13", "hi": "11:55", "hf": "13:45", "d": "VALDIVIA 378 EDIF. B DEPTO 401, VILLA ALEMANA", "lat": -33.0354943, "lng": -71.3583654, "e": "Pendiente"}, {"o": "1-3MK51GFF", "t": "Alta", "f": "16-19", "hi": "16:00", "hf": "17:50", "d": "PRIMERA 1181 CASA D, VILLA ALEMANA", "lat": -33.0483493, "lng": -71.3797632, "e": "Pendiente"}], "SEBASTIAN DOSSOW A": [{"o": "1-3MJMFFV8", "t": "Reparación", "f": "10-13", "hi": "09:47", "hf": "10:44", "d": "PJE 2 (MADRID) 1650, VILLA ALEMANA", "lat": -33.0373628, "lng": -71.386743, "e": "Iniciado"}, {"o": "1-3MJYQ0BW", "t": "Alta", "f": "10-13", "hi": "10:45", "hf": "13:23", "d": "JOSE JOAQUIN PRIETO 298, VILLA ALEMANA", "lat": -33.0383984, "lng": -71.384513, "e": "Pendiente"}, {"o": "1-3MK5ITJ0", "t": "Reparación", "f": "13-16", "hi": "14:27", "hf": "15:24", "d": "LATORRE 533, VILLA ALEMANA", "lat": -33.0374049, "lng": -71.3726031, "e": "Pendiente"}, {"o": "1-3MHJKBKN", "t": "Modificación de Servicio", "f": "16-19", "hi": "16:00", "hf": "17:06", "d": "MATURANA 855, VILLA ALEMANA", "lat": -33.0527681, "lng": -71.3739072, "e": "Pendiente"}], "YENDER BOSCAN CADENAS": [{"o": "1-3MKAZFOL", "t": "Alta", "f": "10-13", "hi": "09:42", "hf": "11:55", "d": "LIBANO 692, QUILPUE", "lat": -33.0312104, "lng": -71.4820532, "e": "Iniciado"}]};
+const COLORS = ["#e6194b","#3cb44b","#4363d8","#f58231","#911eb4","#42d4f4","#f032e6","#bfef45","#fabed4","#469990","#dcbeff","#9a6324","#fffac8","#800000","#aaffc3","#808000","#ffd8b1","#000075","#a9a9a9","#ff4500","#2e8b57","#1e90ff","#ff69b4","#8b4513","#00ced1","#ffa500","#7b68ee","#20b2aa","#dc143c","#00fa9a","#ba55d3","#ff6347","#4682b4","#daa520","#5f9ea0","#d2691e","#6495ed","#adff2f"];
+let tecs = Object.keys(DB).sort();
+let colorOf = {}; tecs.forEach((t,i)=>colorOf[t]=COLORS[i%COLORS.length]);
+let rgu = false, rguDisponible = false;   // RGU: bandera de panel y si el origen trae datos de RGU
+let rguModo = 'comp';                      // RGU: modo activo del panel -> 'comp' | 'pend' | 'tot'
+// ATRASADOS: se declaran ACA (y no junto a sus funciones mas abajo) porque el
+// primer render() ya las lee. Con 'let' declarado despues, JS tira ReferenceError
+// por temporal dead zone y se cae el script completo.
+let atr = false;                 // panel de atrasados abierto
+let comp = false;                // panel de completitud abierto
+let ALERTAS = null;              // llave 'alertas' del rutas.json (caidas del dia)
+let caidasAbierto = false;       // panel de caidas abierto
+let UMBRAL_MIN = 150;            // 2h30 por defecto
+let FECHA_DATOS = null;          // momento del snapshot de datos (rutas.json)
+
+const map = L.map('map').setView([-33.05,-71.41],13);
+/* ---- Basemap ----
+   CARTO empezo a exigir API key en sus basemaps raster (antes eran abiertos).
+   Sin llave los tiles llegan tapados con la marca de agua "API key required".
+   Es gratis y sin cola: se pide en carto.com/basemaps/apikey y cubre 5 millones
+   de tiles al mes, muchisimo mas de lo que gasta este tablero.
+
+   Pega la llave aca abajo y listo. Si se deja vacia, el mapa cae solo a los
+   tiles de Esri, que no piden llave y tambien son oscuros, para que el tablero
+   nunca quede sin fondo.
+
+   Nota para mas adelante: CARTO esta retirando el servicio raster en favor del
+   vectorial. El dia que lo apaguen habria que pasar de Leaflet a MapLibre, que
+   es un cambio mayor. Por ahora el raster con llave sigue funcionando. */
+const CARTO_KEY = '';   // <-- pegar aca la llave de carto.com/basemaps/apikey
+
+if(CARTO_KEY){
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png?key='+CARTO_KEY,
+    {attribution:'&copy; OpenStreetMap &copy; CARTO', maxZoom:19}).addTo(map);
+} else {
+  // El "Dark Gray" de Esri es bastante mas claro que el dark_all de CARTO, y
+  // con ese gris los pines de colores pierden contraste. Se oscurece por CSS
+  // (ver .tiles-esri) para dejarlo parecido al fondo de siempre. Es un parche
+  // mientras llega la llave: con CARTO_KEY puesta vuelve el basemap real y
+  // este filtro no se aplica.
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}',
+    {attribution:'&copy; OpenStreetMap &copy; Esri', maxZoom:16,
+     className:'tiles-esri'}).addTo(map);
+  console.warn('[mapa] Sin CARTO_KEY: se usan los tiles de Esri oscurecidos. '
+    + 'Pide la llave gratis en carto.com/basemaps/apikey y pegala en CARTO_KEY.');
+}
+
+const sel = document.getElementById('selTec');
+
+/* ============ FILTROS CON CASILLAS (multi-seleccion) ============
+   Un Set vacio significa "todos". Al marcar casillas, solo pasan las
+   opciones marcadas. Reemplaza a los antiguos <select> de una opcion. */
+const FILTROS = { Ciudad:new Set(), Franja:new Set(), Estado:new Set() };
+const OPCIONES = {
+  Ciudad: { todos:'Ambas ciudades', items:[
+    {v:'QUILPUE', t:'Quilpué'}, {v:'VILLA ALEMANA', t:'Villa Alemana'} ] },
+  Franja: { todos:'Todas las franjas', items:[
+    {v:'10-13', t:'10-13 (Mañana)'}, {v:'13-16', t:'13-16 (Mediodía)'}, {v:'16-19', t:'16-19 (Tarde)'} ] },
+  Estado: { todos:'Todos los estados', items:[
+    {v:'Pendiente', t:'Pendiente', c:'#94a3b8'}, {v:'Iniciado', t:'Iniciado', c:'#4ade80'},
+    {v:'en ruta', t:'En ruta', c:'#fb923c'}, {v:'Completado', t:'Completado', c:'#64748b'},
+    {v:'No Realizada', t:'No Realizada', c:'#ef4444'}, {v:'Suspendido', t:'Suspendido', c:'#a78bfa'} ] }
+};
+
+function construirMenus(){
+  Object.keys(OPCIONES).forEach(k=>{
+    const menu = document.querySelector('#msel'+k+' .mmenu');
+    let html = '<label class="mop mtodos"><input type="checkbox" data-f="'+k+'" data-v="__ALL__"><span>'+OPCIONES[k].todos+'</span></label>';
+    html += OPCIONES[k].items.map(o=>
+      '<label class="mop"><input type="checkbox" data-f="'+k+'" data-v="'+o.v+'">'+
+      (o.c ? '<span class="pt" style="background:'+o.c+'"></span>' : '')+'<span>'+o.t+'</span></label>').join('');
+    menu.innerHTML = html;
+    menu.onclick = e=> e.stopPropagation();   // no cerrar al marcar
+    menu.querySelectorAll('input').forEach(ch=> ch.onchange = ()=> marcar(k, ch.dataset.v, ch.checked));
+    pintarFiltro(k);
+  });
+}
+
+function marcar(k, valor, activo){
+  if(valor === '__ALL__'){ FILTROS[k].clear(); }        // "todos" limpia el resto
+  else if(activo) FILTROS[k].add(valor);
+  else FILTROS[k].delete(valor);
+  pintarFiltro(k);
+  cambioFiltro();
+}
+
+// deja el boton y las casillas reflejando el estado real del Set
+function pintarFiltro(k){
+  const cont = document.getElementById('msel'+k);
+  const n = FILTROS[k].size;
+  const items = OPCIONES[k].items;
+  cont.querySelector('.mtxt').textContent =
+    n===0 ? OPCIONES[k].todos :
+    n===1 ? (items.find(o=>FILTROS[k].has(o.v))||{}).t :
+    n+' seleccionados';
+  cont.classList.toggle('activo', n>0);
+  cont.querySelectorAll('input').forEach(ch=>{
+    ch.checked = ch.dataset.v==='__ALL__' ? n===0 : FILTROS[k].has(ch.dataset.v);
+  });
+}
+
+function abrirMenu(ev, k){
+  ev.stopPropagation();
+  const yo = document.getElementById('msel'+k);
+  const estaba = yo.classList.contains('abierto');
+  document.querySelectorAll('.msel').forEach(m=> m.classList.remove('abierto'));
+  if(!estaba) yo.classList.add('abierto');
+}
+document.addEventListener('click', ()=> document.querySelectorAll('.msel').forEach(m=> m.classList.remove('abierto')));
+
+// se llama cada vez que cambia cualquier filtro (reemplaza los onchange)
+function cambioFiltro(){
+  render();
+  if(libre && posActual) buscarCercanos(posActual);
+  if(atr) renderPanelAtr();
+  if(sinComp) renderPanelSC();
+}
+
+// --- predicados: un Set vacio deja pasar todo ---
+function okCiudad(p){
+  if(!FILTROS.Ciudad.size) return true;
+  const d = String(p.d).toUpperCase();
+  for(const c of FILTROS.Ciudad) if(d.includes(c)) return true;
+  return false;
+}
+function okFranja(p){ return !FILTROS.Franja.size || FILTROS.Franja.has(p.f); }
+function okEstado(p){ return !FILTROS.Estado.size || FILTROS.Estado.has(p.e); }
+tecs.forEach(t=>{ const o=document.createElement('option'); o.value=t; o.textContent=t; sel.appendChild(o); });
+
+let layer = L.layerGroup().addTo(map);
+
+function estClass(e){ return 'est-'+e.replace(/\s/g,''); }
+
+/* ====== NORMALIZACIÓN (espejo de norm_txt / norm_estado de generar_rutas.py) ====== */
+// minúsculas, sin tildes, sin espacios sobrantes
+function txtN(s){
+  if(s===null || s===undefined) return null;
+  return String(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+                  .replace(/\s+/g,' ').trim().toLowerCase();
+}
+// busca una columna del Excel comparando sin tildes ni mayúsculas
+function col(fila, ...alias){
+  const mapa = {};
+  Object.keys(fila).forEach(k=> mapa[txtN(k)] = fila[k]);
+  for(const a of alias){ const v = mapa[txtN(a)]; if(v!==undefined) return v; }
+  return null;
+}
+// estados canónicos: el panel "Sin completar" compara con estos strings EXACTOS
+const _ESTADOS = {
+  'completado':'Completado', 'completada':'Completado',
+  'no realizada':'No Realizada', 'no realizado':'No Realizada',
+  'pendiente':'Pendiente', 'iniciado':'Iniciado', 'iniciada':'Iniciado',
+  'en ruta':'en ruta', 'enruta':'en ruta',
+  'cancelado':'Cancelado', 'cancelada':'Cancelado',
+  'suspendido':'Suspendido', 'suspendida':'Suspendido'
+};
+function normEstado(e){ return _ESTADOS[txtN(e)] || String(e||'').trim(); }
+function normEstadosDB(db){ Object.values(db).forEach(a=>a.forEach(p=> p.e = normEstado(p.e))); }
+/* ================================================================================= */
+
+/* ============ MODO SIN COMPLETAR ============ */
+let sinComp = false;
+
+// técnicos con al menos un trabajo activo (no Cancelado) y CERO Completado, según filtro de ciudad
+function tecnicosSinCompletar(){
+  return tecs.filter(t=>{
+    const act = DB[t].filter(p=> p.e!=='Cancelado' && okCiudad(p));
+    return act.length>0 && !act.some(p=> p.e==='Completado');
+  });
+}
+
+function cerrarSC(){
+  if(!sinComp) return;
+  sinComp = false;
+  document.getElementById('btnSC').classList.remove('on3');
+  document.getElementById('btnSC').textContent = '🚩 Sin completar';
+  document.getElementById('panelSC').style.display = 'none';
+}
+
+function toggleSinCompletar(){
+  cerrarPaneles('sc');                 // modos excluyentes
+  sinComp = !sinComp;
+  document.getElementById('btnSC').classList.toggle('on3', sinComp);
+  document.getElementById('btnSC').textContent = sinComp ? '✖ Salir sin completar' : '🚩 Sin completar';
+  document.getElementById('panelSC').style.display = sinComp ? 'block' : 'none';
+  document.getElementById('estadosBox').style.display = sinComp ? 'none' : '';
+  if(sinComp){ sel.value='__ALL__'; FILTROS.Estado.clear(); pintarFiltro('Estado'); }
+  render();
+}
+
+function verTecnicoSC(t){ sel.value = t; render(); }
+
+/* ============ CAIDAS DEL DIA (ordenes que salieron de la bandeja) ============ */
+// Deriva la franja (10-13 / 13-16 / 16-19) desde una hora "HH:MM" — fallback si la caida no trae c.f
+function franjaDeHora(hi){
+  if(!hi) return '';
+  const h = parseInt(String(hi).slice(0,2),10);
+  if(isNaN(h)) return '';
+  if(h < 13) return '10-13';
+  if(h < 16) return '13-16';
+  return '16-19';
+}
+// orden de franjas para agrupar las caidas (s/franja siempre al final)
+function rankFranja(f){ return {'10-13':1,'13-16':2,'16-19':3}[f] || 9; }
+function nCaidas(){ return (ALERTAS && ALERTAS.activas) ? ALERTAS.activas.length : 0; }
+
+function renderBannerCaidas(){
+  // El banner rojo se saco: duplicaba el globo del boton 🚨 Caídas y comia
+  // una franja del mapa. El conteo vive solo en el boton.
+  const n = nCaidas();
+  const btn = document.getElementById('btnCaidas');
+  btn.innerHTML = '🚨 Caídas' + (n>0 ? ' <span class="badge">'+n+'</span>' : '');
+  btn.classList.toggle('on-caidas', n>0 && !caidasAbierto);
+  renderBotonNuevas();
+  if(nuevasAbierto) renderNuevas();   // el modal abierto se refresca solo
+}
+
+function abrirCaidas(){ if(!caidasAbierto) toggleCaidas(); }
+
+function cerrarCaidas(){
+  if(!caidasAbierto) return;
+  caidasAbierto = false;
+  document.getElementById('modalCaidas').classList.remove('abierto');
+  renderBannerCaidas();
+}
+
+function toggleCaidas(){
+  // el modal tapa todo: no puede quedar nada abierto detras
+  cerrarPaneles('caidas');
+  caidasAbierto = !caidasAbierto;
+  document.getElementById('modalCaidas').classList.toggle('abierto', caidasAbierto);
+  if(caidasAbierto) renderPanelCaidas();
+  renderBannerCaidas();
+}
+
+function verTecnicoCaida(t){
+  // cerramos el modal y, si el tecnico sigue con trabajos hoy, lo enfocamos en el mapa
+  cerrarCaidas();
+  if(DB && DB[t]){ sel.value = t; render(); }
+}
+
+// cerrar los modales con la tecla Esc
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape'){ cerrarCaidas(); cerrarNuevas(); cerrarRepe(); cerrarReca(); cerrarBuscar(); }
+});
+
+/* ======================= ORDENES NUEVAS DEL DIA =======================
+   Lo que el portal fue cargando DURANTE la jornada, sin la bandeja con la
+   que se arranco en la manana.
+
+   No baja ningun archivo: viaja dentro de rutas.json (ALERTAS.nuevas), que
+   el dashboard ya recarga en cada ciclo. Lo calcula alertas_rutas.py con el
+   mismo diff que usa para las caidas, pero al reves: en vez de "estaba y ya
+   no esta", es "no estaba y ahora si".
+
+   El estado que se muestra es el ACTUAL, no el que traia al entrar: una
+   orden que llego a las 10:00 y ya esta cerrada sale como Completado.      */
+let nuevasAbierto = false;
+let nuevasFiltro = 'todas';
+
+function nuevasDelDia(){
+  const todas = (ALERTAS && ALERTAS.nuevas) ? ALERTAS.nuevas : [];
+  // Las Modificaciones de Servicio se sacan del conteo: entran a chorros
+  // durante el dia (17 de 83 el 21-08) y no son carga real de terreno, asi
+  // que solo inflaban el numero del boton.
+  return todas.filter(function(x){ return familiaCat(x.cat) !== 'Modificaciones'; });
+}
+
+// agrupa la categoria en familias para los chips de tipo
+function familiaCat(cat){
+  const c = String(cat||'').toLowerCase();
+  if(c.indexOf('alta') === 0) return 'Altas';
+  if(c.indexOf('migra') === 0) return 'Migraciones';
+  if(c.indexOf('repara') === 0) return 'Reparaciones';
+  if(c.indexOf('modific') === 0) return 'Modificaciones';
+  return 'Otras';
+}
+
+/* Clasificacion en CASCADA: cada orden cae en UNA sola categoria, por eso los
+   numeros suman el total exacto y ninguna orden se cuenta dos veces.
+
+   El orden importa: 'reagendada' manda sobre 'reingreso' porque si es la MISMA
+   orden que ya estuvo en una bandeja anterior, no es carga nueva aunque la
+   direccion tenga historia de caidas.
+
+     reag -> misma OT vista en la bandeja de otro dia   (historial_dir)
+     prev -> otra OT, misma direccion, la anterior cayo No Realizada
+     ninguna de las dos -> nuevita, sin ningun antecedente
+
+   OJO - por que 'reagendada' sigue aca si no se muestra:
+   Se midio contra 3054 OTs de tres semanas y dio 0 de 230. En esta operacion
+   el reagendamiento NUNCA conserva el numero: la orden se cierra No Realizada
+   con codigo "Cliente reagenda" y la plataforma emite una nueva (por eso el
+   Area de derivacion dice "Plataforma Reagendamiento"). O sea que esos casos
+   ya salen contados como REINGRESO, que es lo correcto.
+   El chip se saco de la cabecera porque un contador clavado en 0 solo hace
+   dudar de si esta roto. La rama se deja viva y ots_vistas.json se sigue
+   llenando solo: si algun dia el portal cambia y conserva la OT, las
+   reagendadas dejan de contarse como reingresos sin tocar nada, y el chip se
+   vuelve a poner con dos lineas.                                           */
+function clase(x){
+  if(x.reag) return 'reagendada';
+  if(x.prev && x.prev.length) return 'reingreso';
+  return 'nuevita';
+}
+
+function contar(lista){
+  const c = { nuevita:0, reingreso:0, reagendada:0 };
+  lista.forEach(function(x){ c[clase(x)]++; });
+  return c;
+}
+
+function pasaFiltro(x){
+  if(nuevasFiltro === 'todas')       return true;
+  if(nuevasFiltro === 'nuevitas')    return clase(x) === 'nuevita';
+  if(nuevasFiltro === 'reingresos')  return clase(x) === 'reingreso';
+  if(nuevasFiltro === 'reagendadas') return clase(x) === 'reagendada';
+  return familiaCat(x.cat) === nuevasFiltro;
+}
+
+function renderBotonNuevas(){
+  const todas = nuevasDelDia();
+  const c = contar(todas);
+  const btn = document.getElementById('btnNuevas');
+  if(!btn) return;
+  // el badge muestra las NUEVITAS, que es el numero que sirve para dimensionar
+  // carga entrante. El desglose completo va en el tooltip.
+  const mix = c.reingreso > 0;
+  btn.innerHTML = '🆕 Nuevas' + (todas.length>0
+    ? ' <span class="badge'+(mix?' mix':'')+'">'+c.nuevita+'</span>' : '');
+  btn.title = todas.length
+    ? c.nuevita+' nuevas · '+c.reingreso+' reingresos — '
+      +todas.length+' en total (sin modificaciones)'
+    : 'Todavía no entra nada nuevo hoy';
+  btn.classList.toggle('on-nuevas', todas.length>0 && !nuevasAbierto);
+}
+
+function cerrarNuevas(){
+  if(!nuevasAbierto) return;
+  nuevasAbierto = false;
+  document.getElementById('modalNuevas').classList.remove('abierto');
+  renderBotonNuevas();
+}
+
+function toggleNuevas(){
+  cerrarPaneles('nuevas');
+  nuevasAbierto = !nuevasAbierto;
+  document.getElementById('modalNuevas').classList.toggle('abierto', nuevasAbierto);
+  if(nuevasAbierto) renderNuevas();
+  renderBotonNuevas();
+}
+
+function setNuevasFiltro(f){ nuevasFiltro = f; renderNuevas(); }
+
+function renderNuevas(){
+  const cont = document.getElementById('listaNuevas');
+  const chips = document.getElementById('nuevasChips');
+  const nota = document.getElementById('nuevasNota');
+  const todas = nuevasDelDia();
+  const c = contar(todas);
+
+  // conteo por familia para los chips de tipo (siempre sobre el total, no
+  // sobre lo filtrado)
+  const cuenta = {};
+  todas.forEach(function(x){ const f = familiaCat(x.cat); cuenta[f] = (cuenta[f]||0)+1; });
+  const fams = Object.keys(cuenta).sort();
+
+  chips.innerHTML =
+      '<span class="nchip'+(nuevasFiltro==='todas'?' act':'')+'" onclick="setNuevasFiltro(\'todas\')">'
+    + 'todas · '+todas.length+'</span>'
+    + '<span class="nchip'+(nuevasFiltro==='nuevitas'?' act':'')+'" onclick="setNuevasFiltro(\'nuevitas\')" '
+    + 'title="sin ningún antecedente: ni la orden ni la dirección aparecen antes">'
+    + '\u2728 nuevas · '+c.nuevita+'</span>'
+    + '<span class="nchip re'+(nuevasFiltro==='reingresos'?' act':'')+'" onclick="setNuevasFiltro(\'reingresos\')" '
+    + 'title="otra orden, misma dirección: la visita anterior quedó No Realizada">'
+    + '\u21a9 reingresos · '+c.reingreso+'</span>'
+    + '<span class="rsep"></span>'
+    + fams.map(function(f){
+        return '<span class="nchip'+(nuevasFiltro===f?' act':'')+'" onclick="setNuevasFiltro(\''+f+'\')">'
+             + f+' · '+cuenta[f]+'</span>';
+      }).join('')
+    + '<span class="rsep"></span>';
+
+  // Orden por HORA DE DETECCION, lo mas reciente arriba: el modal es el
+  // registro de lo que va entrando, asi que lo ultimo en llegar es lo que
+  // todavia no viste. Se compara el sello completo (fecha + hora) y no solo
+  // la hora suelta.
+  // Desempate por franja y hora de cita: el portal suelta las ordenes de a
+  // lote, asi que varias comparten el mismo minuto de deteccion y sin
+  // desempate saldrian en orden distinto en cada refresco.
+  const lista = todas.filter(pasaFiltro).sort(function(a,b){
+      return String(b.visto||'').localeCompare(String(a.visto||''))
+          || String(a.f||'').localeCompare(String(b.f||''))
+          || String(a.hi||'').localeCompare(String(b.hi||''));
+    });
+
+  // Contador por franja: va SIEMPRE sobre las NUEVAS, no sobre lo que este
+  // filtrado. Es el reparto de la carga entrante real del dia, o sea el dato
+  // que sirve para dimensionar; no tiene por que cambiar cuando miras los
+  // reingresos. Por eso lleva el mismo icono del chip de nuevas.
+  const porFr = {};
+  todas.filter(function(x){ return clase(x) === 'nuevita'; })
+       .forEach(function(x){ const f = x.f || 's/f'; porFr[f] = (porFr[f]||0)+1; });
+  chips.innerHTML += Object.keys(porFr).sort().map(function(f){
+    return '<span class="fchip">\u2728 ' + escR(f) + ' · <b>'+porFr[f]+'</b></span>';
+  }).join('');
+
+  if(!lista.length){
+    cont.innerHTML = '<div class="vacio">Nada que mostrar con este filtro.<br>'
+      + 'Aquí aparece lo que el portal va cargando después de la bandeja inicial.</div>';
+  } else {
+    cont.innerHTML = lista.map(function(x){
+      // el sufijo "(ya no está)" no va dentro de la pildora: ensucia el texto y
+      // esa condicion ya se comunica con la fila en gris
+      const est = String(x.e||'').replace(/\s*\(ya no está\)\s*/, '').trim();
+      // Salir de la bandeja solo es raro si la orden estaba ABIERTA. Una
+      // completada o cancelada que desaparece es el curso normal, asi que no
+      // se marca: si se grisara igual, se leeria como sospechosa y mandaria a
+      // buscarla al boton de Caidas, donde no esta ni tiene por que estar.
+      const fue = String(x.e||'').indexOf('ya no está') >= 0;
+      const cerrada = ['Completado','No Realizada','Cancelado'].indexOf(est) >= 0;
+      const ida = fue && !cerrada;
+      const det = String(x.visto||'').split(' ')[1] || '—';
+      const k = clase(x);
+      let badge = '', extra = '';
+      // aviso fijo, no tooltip: el tooltip no existe en celular ni sale al
+      // imprimir, y este es el dato que manda a mirar el boton de Caidas
+      const avisoIda = ida
+        ? '<span class="nida">🚨 salió de la bandeja sin cerrar · está en Caídas</span>'
+        : '';
+
+      if(k === 'reagendada'){
+        extra = ' reag';
+        badge = '<span class="nrg" title="misma orden, ya estaba en la bandeja del '
+              + escR(x.reag)+'">\u21bb desde '+escR(x.reag)+'</span>';
+      } else if(k === 'reingreso'){
+        extra = ' rein';
+        badge = '<span class="nre">\u21a9 reingreso</span>';
+        // El detalle va EN LA MISMA LINEA, a continuacion del badge: con una
+        // sola visita previa (10 de 13 casos) ocupaba un bloque aparte al
+        // pedo. La celda .ncat es la columna elastica del grid, asi que si el
+        // texto no cabe hace wrap solo y las demas columnas se mantienen.
+        // Las visitas van de la mas VIEJA a la mas nueva, que es como se lee
+        // una historia. Se muestran las 3 ultimas; el resto se resume.
+        const vis = x.prev.slice(-3);
+        const ocultas = x.prev.length - vis.length;
+        badge += '<span class="nsub">'
+            + '<span class="nsep">·</span>'
+            + '<span class="ndir">\ud83d\udccd '+escR(x.d || '')+'</span>'
+            + vis.map(function(p){
+                return '<span class="nsep">·</span>'
+                  + '<span class="nfec">'+escR(p.f||'?')+'</span> '
+                  + '<span class="nmot">'+escR(p.cierre||'sin código')+'</span>'
+                  + (p.tec ? ' <span class="ntec">'+escR(p.tec)+'</span>' : '')
+                  + (p.num ? ' <span class="nord">'+escR(p.num)+'</span>' : '');
+              }).join('')
+            + (ocultas > 0
+                ? '<span class="nsep">·</span><span class="nmas">+'+ocultas
+                  +' antes</span>' : '')
+            + '</span>';
+      }
+
+      return '<div class="nfila'+(ida?' ida':'')+extra+'">'
+        + '<span class="npet">'+escR(x.pet || x.o || '')+'</span>'
+        + '<span class="ncat">'+escR(x.cat)+pill(est)+avisoIda+badge+'</span>'
+        + '<span class="nfr">'+escR(x.f)+'</span>'
+        // hora en que el CICLO la detecto (campo 'visto'), no la hora de la
+        // cita. Sirve de referencia de cuando cayo en la bandeja.
+        + '<span class="nde" title="detectada a las '+escR(det)+'">'+escR(det)+'</span>'
+        + '</div>';
+    }).join('');
+  }
+
+  nota.textContent = 'Lo que entró después de la bandeja inicial · jornada '
+    + (ALERTAS && ALERTAS.fecha ? ALERTAS.fecha : '')
+    + ' · sin Modificaciones de Servicio · lo último detectado arriba. '
+    + '✨ nuevas = sin antecedentes · ↩ reingreso = misma dirección, la anterior se cayó '
+    + '(la fecha, el motivo, el técnico y la orden anterior van en la misma fila).';
+}
+/* ---------------------- DESCARGA A EXCEL ----------------------
+   Exporta lo que se esta MOSTRANDO, respetando el chip activo: si tienes
+   filtrado "reingresos", baja esos 13 y no los 66. Es lo que uno espera de un
+   boton de descarga que vive dentro de la vista filtrada.
+
+   Sale .xlsx y no .csv a proposito: SheetJS ya esta cargado para el "Cargar
+   Excel", y el csv en Excel-es se rompe por partida doble — separador (aca el
+   sistema espera ; y no ,) y acentos, que sin BOM salen como simbolos raros.
+
+   Dos hojas: el detalle una fila por orden, y un resumen con los conteos por
+   clasificacion, tipo, franja y estado, mas el desglose de motivos de las
+   caidas anteriores, que es el dato que sirve para levantar el tema.       */
+function bajarNuevasXlsx(){
+  if(typeof XLSX === 'undefined'){
+    alert('No se pudo cargar la librería de Excel. Revisa la conexión y recarga.');
+    return;
+  }
+  const todas = nuevasDelDia();
+  const lista = todas.filter(pasaFiltro);
+  if(!lista.length){ alert('No hay órdenes que descargar con este filtro.'); return; }
+
+  const nombreClase = { nuevita:'Nueva', reingreso:'Reingreso', reagendada:'Reagendada' };
+
+  // ---- hoja 1: una fila por orden ----
+  const detalle = lista.map(function(x){
+    const k = clase(x);
+    // de todas las caidas previas se lleva la MAS RECIENTE a columnas propias,
+    // que es la que se mira para decidir. El resto va concatenado al final
+    // para no perder el historial sin inflar la tabla con columnas vacias.
+    const p = (k === 'reingreso') ? x.prev[x.prev.length-1] : null;
+    const otras = (k === 'reingreso' && x.prev.length > 1)
+      ? x.prev.slice(0, -1).map(function(v){
+          return v.f+' '+(v.cierre||'sin código')+(v.tec ? ' ('+v.tec+')' : '');
+        }).join(' | ')
+      : '';
+    return {
+      'Orden':            x.o || '',
+      'Petición':         x.pet || '',
+      'Clasificación':    nombreClase[k] || k,
+      'Tipo':             x.cat || '',
+      'Franja':           x.f || '',
+      'Hora cita':        x.hi || '',
+      'Detectada':        String(x.visto||'').split(' ')[1] || '',
+      'Técnico':          x.tec || '',
+      'Estado':           String(x.e||'').replace(/\s*\(ya no está\)\s*/, '').trim(),
+      'Salió de bandeja': String(x.e||'').indexOf('ya no está') >= 0 ? 'Sí' : '',
+      'Dirección':        x.d || '',
+      'Caídas previas':   (k === 'reingreso') ? x.prev.length : 0,
+      'Última caída':     p ? (p.f || '') : '',
+      'Motivo anterior':  p ? (p.cierre || 'sin código') : '',
+      'Técnico anterior': p ? (p.tec || '') : '',
+      'Orden anterior':   p ? (p.num || '') : '',
+      'Caídas anteriores': otras,
+      'Reagendada desde': x.reag || ''
+    };
+  });
+
+  // ---- hoja 2: resumen ----
+  function cuentaPor(fn){
+    const c = {};
+    lista.forEach(function(x){ const k = fn(x) || '—'; c[k] = (c[k]||0)+1; });
+    return Object.keys(c).sort().map(function(k){ return [k, c[k]]; });
+  }
+  const cls = contar(lista);
+  const motivos = {};
+  lista.forEach(function(x){
+    if(clase(x) !== 'reingreso') return;
+    x.prev.forEach(function(p){
+      const m = p.cierre || 'sin código';
+      motivos[m] = (motivos[m]||0)+1;
+    });
+  });
+
+  const filtroTxt = nuevasFiltro === 'todas' ? 'todas' : nuevasFiltro;
+  const resumen = [
+    ['Órdenes nuevas de hoy'], [],
+    ['Jornada', (ALERTAS && ALERTAS.fecha) ? ALERTAS.fecha : ''],
+    ['Generado', new Date().toLocaleString('es-CL')],
+    ['Filtro aplicado', filtroTxt],
+    ['Órdenes exportadas', lista.length],
+    ['Total del día (sin Modificaciones de Servicio)', todas.length],
+    [],
+    ['CLASIFICACIÓN', 'Cantidad'],
+    ['Nuevas (sin antecedentes)', cls.nuevita],
+    ['Reingresos (misma dirección, la anterior se cayó)', cls.reingreso],
+    ['Reagendadas (misma orden de otro día)', cls.reagendada],
+    [],
+    ['POR TIPO', 'Cantidad'],
+  ].concat(cuentaPor(function(x){ return x.cat; }))
+   .concat([[], ['POR FRANJA', 'Cantidad']])
+   .concat(cuentaPor(function(x){ return x.f; }))
+   .concat([[], ['POR ESTADO', 'Cantidad']])
+   .concat(cuentaPor(function(x){
+      return String(x.e||'').replace(/\s*\(ya no está\)\s*/, '').trim(); }));
+
+  if(Object.keys(motivos).length){
+    resumen.push([], ['MOTIVO DE LA CAÍDA ANTERIOR', 'Visitas']);
+    Object.keys(motivos).sort(function(a,b){ return motivos[b]-motivos[a]; })
+      .forEach(function(m){ resumen.push([m, motivos[m]]); });
+  }
+
+  const wb = XLSX.utils.book_new();
+  const hd = XLSX.utils.json_to_sheet(detalle);
+  // ancho de columna a ojo por campo; sin esto Excel las deja todas iguales y
+  // la direccion sale cortada
+  hd['!cols'] = [{wch:12},{wch:12},{wch:13},{wch:22},{wch:8},{wch:9},{wch:10},
+                 {wch:24},{wch:14},{wch:15},{wch:38},{wch:13},{wch:13},{wch:26},
+                 {wch:24},{wch:14},{wch:46},{wch:16}];
+  const hr = XLSX.utils.aoa_to_sheet(resumen);
+  hr['!cols'] = [{wch:48},{wch:10}];
+  XLSX.utils.book_append_sheet(wb, hd, 'Detalle');
+  XLSX.utils.book_append_sheet(wb, hr, 'Resumen');
+
+  const f = ((ALERTAS && ALERTAS.fecha) ? ALERTAS.fecha : 'sin-fecha').replace(/[^\d]/g,'-');
+  XLSX.writeFile(wb, 'ordenes-nuevas_'+f+(nuevasFiltro!=='todas' ? '_'+nuevasFiltro : '')+'.xlsx');
+}
+
+/* =================== HISTORICO DE DIRECCIONES (descarga) ===================
+   historial_dir.json vive APARTE de rutas.json: rutas.json es la foto de un
+   dia y se sobreescribe cada 5 min, asi que no sirve para contar entre dias.
+   Se baja una sola vez, la primera vez que se abre 'Direcciones repetidas
+   hoy' o 'Sectores', porque cambia pocas veces al dia y pesa mas.
+
+   (El modal viejo de "Direcciones" se saco: mostraba el historico completo,
+   incluidas casas que hoy no tienen orden. Lo que se usa a diario es el cruce
+   con la bandeja del dia. Los datos siguen publicandose igual.)         */
+const URL_HIST_API = 'https://api.github.com/repos/luis-sepulveda/Rutas-tecnicos/contents/historial_dir.json?ref=main';
+const URL_HIST_RAW = 'https://raw.githubusercontent.com/luis-sepulveda/Rutas-tecnicos/main/historial_dir.json';
+
+let HIST = null;             // contenido de historial_dir.json
+
+async function bajarHistorial(){
+  try {
+    const r = await fetch(URL_HIST_API,
+      { headers:{'Accept':'application/vnd.github.raw'}, cache:'no-store' });
+    if(r.ok) return await r.json();
+  } catch(e) { /* plan B */ }
+  const r2 = await fetch(URL_HIST_RAW + '?t=' + Date.now(), { cache:'no-store' });
+  if(!r2.ok) throw new Error(r2.status);
+  return await r2.json();
+}
+
+// 'dd-mm-yyyy' -> numero comparable (yyyymmdd). Sirve para ordenar sin
+// construir un Date por fila; ademas evita el lio de que new Date('12-08-2026')
+// lo interprete como mes 12 al estilo gringo.
+function fnum(f){
+  const p = String(f||'').split('-');
+  return p.length === 3 ? (+p[2])*10000 + (+p[1])*100 + (+p[0]) : 0;
+}
+
+// esc(): escapa texto para meterlo en HTML sin romper nada
+function escR(t){ return String(t==null?'':t)
+  .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+/* ======================= DIRECCIONES REPETIDAS HOY =======================
+   Las direcciones que estan HOY en la bandeja y que YA se habian caido antes:
+   la casa que no se pudo cerrar y que VTR/Claro volvio a crear.
+
+   Diferencia con el boton "Direcciones": ese es el historico completo, mira
+   hacia atras y solo lista las de 2+ visitas. Este mira la jornada de HOY y
+   desde UNA visita previa, que es cuando todavia sirve hacer algo (mandar al
+   mismo tecnico que ya fue, avisar antes al cliente, escalar a cuadrilla).
+
+   No baja ningun archivo: el dato viaja dentro de rutas.json, en el campo
+   'prev' de cada orden, que calcula historial_dir.marcar_repetidas() cruzando
+   contra el historico local. Si el rutas.json viene de la version vieja del
+   pipeline no trae 'prev' y el boton simplemente queda en cero.            */
+let repeAbierto = false;
+let repeMin = 1;            // minimo de visitas previas para listar
+let repeGSA = true;         // contar tambien las previas reclasificadas por GSA
+let repeAbiertas = false;   // solo las que hoy siguen sin cerrar
+let repeOrden = 'n';        // 'n' = mas caidas primero | 'h' = por hora de hoy
+
+// misma normalizacion que _dirbase() en Python: asi dos ordenes del mismo
+// domicilio caen en una sola tarjeta
+function claveDir(d){
+  return String(d||'').toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/\s+/g,' ').trim();
+}
+
+function estClase(e){
+  const x = String(e||'').toLowerCase();
+  if(x === 'iniciado') return 'ini';
+  if(x === 'en ruta') return 'ruta';
+  if(x === 'completado') return 'ok';
+  if(x === 'no realizada') return 'nr';
+  return '';
+}
+
+// direcciones distintas con al menos una visita previa. Sin filtros a proposito:
+// el globo del boton tiene que ser un numero fijo, no cambiar segun los chips.
+function nRepe(){
+  const s = {};
+  Object.keys(DB || {}).forEach(function(t){
+    (DB[t] || []).forEach(function(w){
+      if(w.prev && w.prev.length) s[claveDir(w.d)] = 1;
+    });
+  });
+  return Object.keys(s).length;
+}
+
+function renderBotonRepe(){
+  const btn = document.getElementById('btnRepe');
+  if(!btn) return;
+  const n = nRepe();
+  btn.innerHTML = '🔁 Direcciones repetidas hoy'
+    + (n > 0 ? ' <span class="badge">'+n+'</span>' : '');
+  btn.classList.toggle('on-repe', n > 0 && !repeAbierto);
+}
+
+function agruparRepe(){
+  const g = {};
+  Object.keys(DB || {}).forEach(function(tec){
+    (DB[tec] || []).forEach(function(w){
+      if(!w.prev || !w.prev.length) return;
+      const prev = repeGSA ? w.prev : w.prev.filter(function(p){ return !p.gsa; });
+      if(prev.length < repeMin) return;
+      const k = claveDir(w.d);
+      if(!g[k]) g[k] = { d:w.d, lat:w.lat, lng:w.lng, prev:prev, hoy:[] };
+      // dos ordenes hoy en la misma casa comparten historial; se deja el mas largo
+      if(prev.length > g[k].prev.length) g[k].prev = prev;
+      g[k].hoy.push({ num:(w.pet || w.o || ''), cat:(w.cat || w.t || ''), e:w.e,
+                      f:w.f, hi:w.hi, tec:tec });
+    });
+  });
+
+  let lista = Object.keys(g).map(function(k){ return g[k]; });
+  if(repeAbiertas){
+    lista = lista.filter(function(x){
+      return x.hoy.some(function(w){
+        const e = String(w.e || '').toLowerCase();
+        return e !== 'completado' && e !== 'cancelado';
+      });
+    });
+  }
+  lista.forEach(function(x){
+    // se ordena por franja y, dentro de la franja, por la hora de la cita
+    // (la hora NO se muestra: en terreno se trabaja por bloque, no al minuto)
+    x.hoy.sort(function(a,b){
+      return rankFranja(a.f) - rankFranja(b.f) || (a.hi||'99:99').localeCompare(b.hi||'99:99');
+    });
+    x.fr0 = x.hoy.length ? (x.hoy[0].f || '') : '';
+  });
+  if(repeOrden === 'h'){
+    lista.sort(function(a,b){ return rankFranja(a.fr0) - rankFranja(b.fr0) || b.prev.length - a.prev.length; });
+  } else {
+    lista.sort(function(a,b){ return b.prev.length - a.prev.length || a.d.localeCompare(b.d); });
+  }
+  return lista;
+}
+
+function cerrarRepe(){
+  if(!repeAbierto) return;
+  repeAbierto = false;
+  document.getElementById('modalRepe').classList.remove('abierto');
+  renderBotonRepe();
+}
+
+function toggleRepe(){
+  cerrarPaneles('repe');
+  repeAbierto = !repeAbierto;
+  document.getElementById('modalRepe').classList.toggle('abierto', repeAbierto);
+  if(repeAbierto) renderRepe();
+  renderBotonRepe();
+}
+
+function setRepeMin(n){ repeMin = n; renderRepe(); }
+function toggleRepeGSA(){ repeGSA = !repeGSA; renderRepe(); }
+function toggleRepeAbiertas(){ repeAbiertas = !repeAbiertas; renderRepe(); }
+function setRepeOrden(o){ repeOrden = o; renderRepe(); }
+
+function verEnMapaRepe(lat, lng){
+  cerrarRepe();
+  if(lat && lng) map.setView([lat, lng], 17);
+}
+
+function renderRepe(){
+  const cont = document.getElementById('listaRepe');
+  const chips = document.getElementById('repeChips');
+  const nota = document.getElementById('repeNota');
+  const lista = agruparRepe();
+
+  chips.innerHTML =
+      [1,2,3].map(function(n){
+        return '<span class="pchip'+(repeMin===n?' act':'')+'" onclick="setRepeMin('+n+')">'
+             + n+'+ caída'+(n>1?'s':'')+' antes</span>';
+      }).join('')
+    + '<span class="pchip'+(repeGSA?' act':'')+'" onclick="toggleRepeGSA()">incluir GSA</span>'
+    + '<span class="pchip'+(repeAbiertas?' act':'')+'" onclick="toggleRepeAbiertas()">solo sin cerrar hoy</span>'
+    + '<span class="rsep"></span>'
+    + '<span class="pchip'+(repeOrden==='n'?' act':'')+'" onclick="setRepeOrden(\'n\')">↕ más caídas</span>'
+    + '<span class="pchip'+(repeOrden==='h'?' act':'')+'" onclick="setRepeOrden(\'h\')">🕘 por franja</span>';
+
+  if(!lista.length){
+    const hayCampo = Object.keys(DB||{}).some(function(t){
+      return (DB[t]||[]).some(function(w){ return w.prev !== undefined; }); });
+    cont.innerHTML = '<div class="vacio">'
+      + (nRepe() === 0 && !hayCampo
+          ? '⚠️ El rutas.json no trae el cruce con el histórico.<br>'
+            + 'Corre el pipeline con la versión nueva de generar_rutas.py.'
+          : '✅ Ninguna dirección de hoy con '+repeMin+' o más caídas previas'
+            + (repeGSA?'':' (sin contar GSA)')+(repeAbiertas?' y todavía sin cerrar':'')+'.')
+      + '</div>';
+  } else {
+    cont.innerHTML = lista.map(function(d, i){
+      const filasHoy = d.hoy.map(function(w){
+        return '<div class="rv">'
+          + '<span class="rh">'+escR(w.f || 's/franja')+'</span>'
+          + '<span class="rnum">'+escR(w.num)+'</span>'
+          + '<span>'+escR(w.cat)+'</span>'
+          + '<span>· '+escR(w.tec)+'</span>'
+          + '<span class="re '+estClase(w.e)+'">'+escR(w.e)+'</span>'
+          + '</div>';
+      }).join('');
+      const filasPrev = d.prev.slice().reverse().map(function(v){
+        return '<div class="rv">'
+          + '<span class="rf">'+escR(v.f)+'</span>'
+          + '<span class="rnum">'+escR(v.num)+'</span>'
+          + '<span>'+escR(v.cat)+'</span>'
+          + '<span>· '+escR(v.tec)+'</span>'
+          + (v.cierre ? '<span class="rc">· '+escR(v.cierre)+'</span>' : '')
+          + (v.gsa ? '<span class="rgsa">GSA</span>' : '')
+          + '</div>';
+      }).join('');
+      const estHoy = d.hoy.map(function(w){ return w.e; }).join(' / ');
+      return '<div class="rcard repe" id="pc'+i+'">'
+        + '<div class="rtop" onclick="document.getElementById(\'pc'+i+'\').classList.toggle(\'abierta\')">'
+        +   '<span class="rn">'+d.prev.length+'x antes</span>'
+        +   '<span class="rdir">'+escR(d.d)+'</span>'
+        +   '<span class="rnum">'+escR(d.hoy[0] ? d.hoy[0].num : '')+'</span>'
+        +   '<span class="rult">hoy '+escR(d.fr0 || 's/franja')
+        +     ' · '+escR(estHoy)+' ▾</span>'
+        + '</div>'
+        + '<div class="rvis">'
+        +   '<div class="rvh">Hoy en bandeja</div>'+filasHoy
+        +   '<div class="rvh">No realizadas anteriores ('+d.prev.length+')</div>'+filasPrev
+        +   '<span class="rmapa" onclick="verEnMapaRepe('+(d.lat||0)+','+(d.lng||0)+')">📍 ver en el mapa</span>'
+        + '</div>'
+        + '</div>';
+    }).join('');
+  }
+
+  const nOrd = lista.reduce(function(a, x){ return a + x.hoy.length; }, 0);
+  let total = 0;
+  Object.keys(DB||{}).forEach(function(t){ total += (DB[t]||[]).length; });
+  nota.textContent = lista.length + ' dirección(es) · ' + nOrd + ' orden(es) de hoy'
+    + ' sobre ' + total + ' en bandeja. Cuenta visitas No Realizadas anteriores '
+    + 'de la misma dirección, incluidas las de hoy si son de otra orden: '
+    + 'ninguna orden se cuenta a sí misma. '
+    + 'El número azul es la petición (o la OT si el export no la trae).';
+}
+
+/* ============================ BUSCADOR GLOBAL ============================
+   Responde una sola pregunta: "que pasa con esta casa". En vez de abrir cinco
+   modales y cruzarlos a ojo, junta TODO lo que el tablero sabe de una
+   direccion y lo agrupa en una ficha.
+
+   No agrega datos al pipeline: lee lo que ya esta cargado en memoria.
+     DB              -> bandeja de hoy (tecnico, franja, estado, cierre)
+     ALERTAS.activas -> caidas de hoy
+     ALERTAS.nuevas  -> entradas despues de la bandeja inicial
+     gruposRecaida() -> se cayo y volvio a entrar hoy
+     HIST.dirs       -> historico de No Realizadas (se baja on-demand)
+     HIST.planta     -> fallas de red
+
+   Busca por direccion (parcial, sin acentos) O por numero de orden, asi que
+   sirve igual para "tolten" que para pegar un 1-3ND... del portal.          */
+let buscarAbierto = false;
+let ultimaBusqueda = '';
+// se marca aparte y NO se toca HIST: si la bajada falla, HIST tiene que
+// quedar en null para que Fallas de red la reintente. Ponerle false lo dejaba
+// distinto de null y ese modal se saltaba la descarga para siempre, mostrando
+// vacio sin avisar hasta recargar la pagina.
+let histFallo = false;
+
+function normQ(s){
+  return String(s||'').toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/\s+/g,' ').trim();
+}
+
+function resaltar(txt, q){
+  const t = String(txt||'');
+  if(!q) return escR(t);
+  const i = normQ(t).indexOf(q);
+  if(i < 0) return escR(t);
+  return escR(t.slice(0,i)) + '<span class="bhl">' + escR(t.slice(i, i+q.length))
+       + '</span>' + escR(t.slice(i+q.length));
+}
+
+function esClase(e){
+  const x = String(e||'').toLowerCase();
+  if(x === 'iniciado') return 'ini';
+  if(x === 'en ruta') return 'ruta';
+  if(x === 'completado') return 'ok';
+  if(x === 'suspendido') return 'susp';
+  if(x === 'no realizada') return 'nr';
+  if(x === 'cancelado') return 'can';
+  return 'pen';                       // pendiente y cualquier estado no previsto
+}
+
+function pill(e){
+  return '<span class="bes '+esClase(e)+'">'+escR(e||'—')+'</span>';
+}
+
+/* Junta por direccion todo lo que matchea. La llave es claveDir(), la MISMA
+   que usan repetidas y recaidas: si el buscador normalizara distinto,
+   encontraria cosas en un modal y no en el otro.
+
+   Va en DOS pasadas y el orden importa:
+     1) buscar el texto en direcciones Y en numeros de orden, de toda fuente
+     2) para cada direccion encontrada, traer SU historial completo
+   Sin la segunda, buscar la OT de hoy mostraba la casa pero con el historial
+   vacio: el historico esta indexado con las ordenes VIEJAS, que son otras.   */
+function buscarTodo(q){
+  const res = {};   // claveDir -> ficha
+
+  function ficha(d){
+    const k = claveDir(d);
+    if(!res[k]) res[k] = { d:d, k:k, hoy:[], caidas:[], nuevas:[],
+                           hist:[], red:null, reca:null };
+    return res[k];
+  }
+  // el texto puede ser parte de la calle o un numero de orden pegado del
+  // portal; se prueban las dos cosas siempre, no cuesta nada
+  function calza(d, ord){
+    return claveDir(d).indexOf(q) >= 0 || normQ(ord).indexOf(q) >= 0;
+  }
+
+  // ---------- PASADA 1: buscar el texto ----------
+  Object.keys(DB || {}).forEach(function(tec){
+    (DB[tec] || []).forEach(function(w){
+      if(calza(w.d, w.o)) ficha(w.d).hoy.push(Object.assign({ tec: tec }, w));
+    });
+  });
+
+  ((ALERTAS && ALERTAS.activas) || []).forEach(function(a){
+    if(calza(a.d, a.o)) ficha(a.d).caidas.push(a);
+  });
+
+  ((ALERTAS && ALERTAS.nuevas) || []).forEach(function(n){
+    if(calza(n.d, n.o) || normQ(n.pet||'').indexOf(q) >= 0) ficha(n.d).nuevas.push(n);
+  });
+
+  gruposRecaida().forEach(function(c){
+    const porOrd = c.caidas.concat(c.sig).some(function(w){
+      return normQ(w.o).indexOf(q) >= 0; });
+    if(claveDir(c.d).indexOf(q) >= 0 || porOrd) ficha(c.d).reca = c;
+  });
+
+  if(HIST){
+    // el historico tambien se busca por texto: asi encontras la casa aunque
+    // hoy no tenga ninguna orden en la bandeja
+    (HIST.dirs || []).forEach(function(h){
+      const porOrd = (h.v||[]).some(function(v){ return normQ(v.o).indexOf(q) >= 0; });
+      if(claveDir(h.d).indexOf(q) >= 0 || porOrd) ficha(h.d);
+    });
+    (HIST.planta || []).forEach(function(p){
+      const porOrd = (p.v||[]).some(function(v){ return normQ(v.num).indexOf(q) >= 0; });
+      if(claveDir(p.d).indexOf(q) >= 0 || porOrd) ficha(p.d);
+    });
+
+    // ---------- PASADA 2: completar cada direccion encontrada ----------
+    const idxH = {}, idxP = {};
+    (HIST.dirs || []).forEach(function(h){ idxH[claveDir(h.d)] = h; });
+    (HIST.planta || []).forEach(function(p){ idxP[claveDir(p.d)] = p; });
+    Object.keys(res).forEach(function(k){
+      if(idxH[k]) res[k].hist = idxH[k].v || [];
+      if(idxP[k]) res[k].red  = idxP[k];
+    });
+  }
+
+  // primero las que tienen actividad HOY: es lo accionable
+  return Object.keys(res).map(function(k){ return res[k]; })
+    .sort(function(a,b){
+      const pa = a.hoy.length + a.caidas.length, pb = b.hoy.length + b.caidas.length;
+      return (pb - pa) || a.d.localeCompare(b.d);
+    });
+}
+
+function cerrarBuscar(){
+  if(!buscarAbierto) return;
+  buscarAbierto = false;
+  document.getElementById('modalBuscar').classList.remove('abierto');
+}
+
+async function hacerBusqueda(){
+  const q = normQ(document.getElementById('qBuscar').value);
+  if(q.length < 3){
+    alert('Escribe al menos 3 caracteres.');
+    return;                       // se valida ANTES de cerrar nada: escribir
+  }                               // dos letras no tiene por que borrarte la vista
+  cerrarPaneles('buscar');
+  ultimaBusqueda = q;
+  buscarAbierto = true;
+  document.getElementById('modalBuscar').classList.add('abierto');
+  document.getElementById('listaBuscar').innerHTML =
+    '<div class="bvacio">Buscando…</div>';
+
+  // el historico pesa y vive aparte, asi que se baja la primera vez que hace
+  // falta. Sin el, la ficha saldria sin caidas viejas ni fallas de red, que
+  // es justo la mitad interesante.
+  if(HIST === null){
+    try { HIST = await bajarHistorial(); histFallo = false; }
+    catch(e){ histFallo = true; }   // HIST queda en null a proposito
+  }
+  renderBusqueda();
+}
+
+function renderBusqueda(){
+  const cont = document.getElementById('listaBuscar');
+  const chips = document.getElementById('buscarChips');
+  const nota = document.getElementById('buscarNota');
+  const q = ultimaBusqueda;
+  const fichas = buscarTodo(q);
+
+  chips.innerHTML = '<span class="nchip act">"'+escR(q)+'" · '
+    + fichas.length + ' dirección(es)</span>';
+
+  if(!fichas.length){
+    cont.innerHTML = '<div class="bvacio">Sin resultados para <b>'+escR(q)+'</b>.<br>'
+      + 'Prueba con parte del nombre de la calle, o pega un número de orden.</div>';
+    nota.textContent = 'Busca en la bandeja de hoy, caídas, nuevas, recaídas, '
+      + 'histórico de caídas y fallas de red.';
+    return;
+  }
+
+  cont.innerHTML = fichas.map(function(F){
+    let h = '<div class="bcard"><h3>📍 '+resaltar(F.d, q)+'</h3>';
+    const tot = F.hoy.length + F.caidas.length + F.nuevas.length
+              + F.hist.length + (F.red?1:0) + (F.reca?1:0);
+    h += '<div class="bmeta">'+tot+' registro(s) en el tablero</div>';
+
+    // ---- hoy en bandeja ----
+    if(F.hoy.length){
+      h += '<div class="bsec hoy"><div class="bt">📋 Hoy en bandeja ('+F.hoy.length+')</div>';
+      h += F.hoy.map(function(w){
+        return '<div class="brow">'
+          + '<span class="bord">'+resaltar(w.o, q)+'</span><span class="bsep">·</span>'
+          + '<span class="bcat">'+escR(w.cat || w.t || '')+'</span><span class="bsep">·</span>'
+          + escR(w.f||'')+' '+escR(w.hi||'')+'<span class="bsep">·</span>'
+          + '<span class="btec">'+escR(w.tec)+'</span><span class="bsep">·</span>'
+          + pill(w.e)
+          + (w.cie ? '<span class="bsep">·</span><span class="bmot">'+escR(w.cie)+'</span>' : '')
+          + (w.der ? '<span class="bsep">·</span>'+escR(w.der) : '')
+          + (w.prev && w.prev.length
+              ? '<span class="bsep">·</span><span class="bmot">↩ '+w.prev.length
+                +' caída(s) antes</span>' : '')
+          + '</div>';
+      }).join('');
+      h += '</div>';
+    }
+
+    // ---- caidas de hoy ----
+    if(F.caidas.length){
+      h += '<div class="bsec caida"><div class="bt">🚨 Se cayó de la bandeja ('
+         + F.caidas.length+')</div>';
+      h += F.caidas.map(function(a){
+        return '<div class="brow">'
+          + '<span class="bord">'+resaltar(a.o, q)+'</span><span class="bsep">·</span>'
+          + '<span class="bcat">'+escR(a.cat||'')+'</span><span class="bsep">·</span>'
+          + escR(a.f||'')+'<span class="bsep">·</span>'
+          + '<span class="btec">'+escR(a.tec||'')+'</span><span class="bsep">·</span>'
+          + pill(a.e) + '<span class="bsep">·</span>'
+          + 'salió <span class="bfec">'+escR(String(a.visto||'').split(' ')[1]||'')+'</span>'
+          + '</div>';
+      }).join('');
+      h += '</div>';
+    }
+
+    // ---- nuevas del dia ----
+    if(F.nuevas.length){
+      h += '<div class="bsec nueva"><div class="bt">🆕 Entró después de la bandeja inicial ('
+         + F.nuevas.length+')</div>';
+      h += F.nuevas.map(function(n){
+        const k = clase(n);
+        return '<div class="brow">'
+          + '<span class="bord">'+resaltar(n.pet || n.o, q)+'</span><span class="bsep">·</span>'
+          + '<span class="bcat">'+escR(n.cat||'')+'</span><span class="bsep">·</span>'
+          + escR(n.f||'')+'<span class="bsep">·</span>'
+          + '<span class="btec">'+escR(n.tec||'')+'</span><span class="bsep">·</span>'
+          + pill(n.e) + '<span class="bsep">·</span>'
+          + (k==='reingreso' ? '<span class="bmot">↩ reingreso</span>'
+            : k==='reagendada' ? '<span class="bmot">↻ reagendada desde '+escR(n.reag)+'</span>'
+            : '✨ nueva')
+          + '</div>';
+      }).join('');
+      h += '</div>';
+    }
+
+    // ---- recaida del mismo dia ----
+    if(F.reca){
+      h += '<div class="bsec reca"><div class="bt">🔄 Recaída del mismo día</div>'
+        + '<div class="brow">se cayó '+F.reca.caidas.length+' vez(ces) y volvió a entrar '
+        + F.reca.sig.length+' vez(ces) hoy'
+        + (F.reca.viva ? '<span class="bsep">·</span><span class="bmot">todavía sin cerrar</span>' : '')
+        + '</div></div>';
+    }
+
+    // ---- historico de caidas (incluye las de hoy: es el registro completo) --
+    if(F.hist.length){
+      h += '<div class="bsec hist"><div class="bt">↩ Historial de caídas ('
+         + F.hist.length+')</div>';
+      h += F.hist.map(function(v){
+        return '<div class="brow">'
+          + '<span class="bfec">'+escR(v.f||'')+'</span><span class="bsep">·</span>'
+          + '<span class="bord">'+resaltar(v.o||'', q)+'</span><span class="bsep">·</span>'
+          + escR(v.cat||'')+'<span class="bsep">·</span>'
+          + '<span class="bmot">'+escR(v.cierre||'sin código')+'</span><span class="bsep">·</span>'
+          + '<span class="btec">'+escR(v.tec||'')+'</span>'
+          + (v.deriv ? '<span class="bsep">·</span>'+escR(v.deriv) : '')
+          + (v.gsa ? '<span class="bsep">·</span><span class="bmot">GSA</span>' : '')
+          + '</div>';
+      }).join('');
+      h += '</div>';
+    }
+
+    // ---- falla de red ----
+    if(F.red){
+      const mot = (F.red.mot||[]).map(function(m){ return m[0]+' ×'+m[1]; }).join(', ');
+      h += '<div class="bsec red"><div class="bt">📡 Falla de red ('+F.red.n+')</div>'
+        + '<div class="brow">'+escR(mot||'—')+'<span class="bsep">·</span>última '
+        + '<span class="bfec">'+escR(F.red.ult||'')+'</span></div></div>';
+    }
+
+    return h + '</div>';
+  }).join('');
+
+  const conHoy = fichas.filter(function(F){ return F.hoy.length; }).length;
+  nota.textContent = fichas.length+' dirección(es) · '+conHoy+' con órdenes hoy. '
+    + 'Busca en la bandeja, caídas, nuevas, recaídas, histórico de caídas y fallas de red. '
+    + (histFallo ? 'Ojo: no se pudo bajar el histórico, faltan las caídas viejas y las fallas de red.' : '');
+}
+
+/* ============ PANELES DE CAIDAS Y SIN COMPLETAR ============
+   Quedaron aparte al sacar el modal de Fallas de red: son los
+   renderers de "Caidas" y "Sin completar", nada que ver con planta. */
+function renderPanelCaidas(){
+  const cont = document.getElementById('listaCaidas');
+  const nota = document.getElementById('mcResnota');
+  const activas = (ALERTAS && ALERTAS.activas) ? ALERTAS.activas : [];
+  const res = (ALERTAS && ALERTAS.resueltas) ? ALERTAS.resueltas : 0;
+  const cont2 = document.getElementById('mcContadores');
+  document.getElementById('mcTitulo').textContent =
+    '🚨 Se cayeron de la bandeja ('+activas.length+')';
+  if(!activas.length){
+    cont2.innerHTML = '';
+    cont.innerHTML = '<div class="vacio">✅ Ninguna orden se ha caído sin cerrar hoy.</div>';
+  } else {
+    /* Mismo formato de fila que "Órdenes nuevas": una linea por orden y lo
+       ultimo detectado arriba. Antes eran tarjetas agrupadas por franja, que
+       ocupaban tres veces el alto y obligaban a leer en zigzag para saber que
+       se acaba de caer — que es justo la pregunta del modal.
+       La franja no se pierde: sigue en la fila y en los chips de arriba. */
+    const items = activas.map(function(c){
+      return { c: c, fr: (c.f || franjaDeHora(c.hi) || 's/franja') };
+    }).sort(function(a,b){
+      // desempate por franja y hora de cita: el ciclo confirma varias caidas
+      // en el mismo minuto y sin esto bailarian entre refrescos
+      return String(b.c.visto||'').localeCompare(String(a.c.visto||''))
+          || rankFranja(a.fr)-rankFranja(b.fr)
+          || String(a.c.hi||'').localeCompare(String(b.c.hi||''));
+    });
+
+    const cuenta = {};
+    items.forEach(function(x){ cuenta[x.fr] = (cuenta[x.fr]||0)+1; });
+    cont2.innerHTML = ['10-13','13-16','16-19','s/franja']
+      .filter(function(k){ return cuenta[k]; })
+      .map(function(k){ return '<span class="fchip">🕒 '+k+' · <b>'+cuenta[k]+'</b></span>'; })
+      .join('');
+
+    cont.innerHTML = items.map(function(x){
+      const c = x.c;
+      const salio = String(c.visto||'').split(' ').pop();   // solo HH:MM
+      return '<div class="nfila cai" onclick="verTecnicoCaida(\''
+           + String(c.tec).replace(/'/g,"\\'")+'\')" title="Ver a '+escR(c.tec)+' en el mapa">'
+        + '<span class="npet">'+escR(c.o||'')+'</span>'
+        + '<span class="ncat">'+escR(c.cat||'')+pill(c.e)
+          + '<span class="nsub"><span class="nsep">·</span>'
+          + '<span class="ntec">👷 '+escR(c.tec||'')+'</span>'
+          + '<span class="nsep">·</span><span class="ndir">📍 '+escR(c.d||'')+'</span>'
+          + '</span></span>'
+        + '<span class="nfr">'+escR(x.fr)+'</span>'
+        + '<span class="nde" title="salió de la bandeja a las '+escR(salio||'?')+'">'
+          + escR(salio||'?')+'</span>'
+        + '</div>';
+    }).join('');
+  }
+  if(res){
+    nota.textContent = res+' orden(es) se cayó(eron) y ya volvió(eron) a una bandeja hoy '
+      + '— no cuentan arriba. Lo último detectado va primero; toca una fila para ver al técnico en el mapa.';
+    nota.style.display = 'block';
+  } else {
+    nota.textContent = 'Lo último detectado va primero. Toca una fila para ver al técnico en el mapa.';
+    nota.style.display = 'block';
+  }
+}
+
+function renderPanelSC(){
+  const lista = tecnicosSinCompletar();
+  const cont = document.getElementById('listaSC');
+  document.querySelector('#panelSC h2').textContent = '🚩 Sin completar ('+lista.length+')';
+  if(!lista.length){
+    cont.innerHTML = '<div class="vacio">✅ Todos los técnicos con trabajos tienen al menos uno completado.</div>';
+    return;
+  }
+  let html = '';
+  if(sel.value!=='__ALL__') html += '<div class="vertodos" onclick="verTecnicoSC(\'__ALL__\')">👥 Ver todos en el mapa</div>';
+  html += lista.map(t=>{
+    const act = DB[t].filter(p=> p.e!=='Cancelado' && okCiudad(p));
+    const nIni = act.filter(p=>p.e==='Iniciado').length;
+    const nRuta = act.filter(p=>p.e==='en ruta').length;
+    const nPend = act.filter(p=>p.e==='Pendiente').length;
+    const nNR = act.filter(p=>p.e==='No Realizada').length;
+    let b = '';
+    if(nIni)  b += '<span class="badge ini">🟢 '+nIni+' iniciado</span>';
+    if(nRuta) b += '<span class="badge ruta">🟠 '+nRuta+' en ruta</span>';
+    if(nPend) b += '<span class="badge pend">'+nPend+' pendiente'+(nPend>1?'s':'')+'</span>';
+    if(nNR)   b += '<span class="badge nr">'+nNR+' no realizada'+(nNR>1?'s':'')+'</span>';
+    const tEsc = t.replace(/'/g,"\\'");
+    return '<div class="sccard" onclick="verTecnicoSC(\''+tEsc+'\')">'+
+      '<div class="nom"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:'+colorOf[t]+';margin-right:5px;"></span>'+t+' ('+act.length+')</div>'+
+      '<div>'+b+'</div></div>';
+  }).join('');
+  cont.innerHTML = html;
+}
+
+/* ======================= RECAIDAS DEL MISMO DIA =======================
+   Caso: una orden se cae No Realizada en la manana y a la tarde aparece OTRA
+   orden en la MISMA direccion, con otro tecnico. El segundo parte de cero: no
+   sabe que el cliente no estaba, que faltaba un pierrack o que la NAP no da
+   niveles. El que ya fue lo sabe.
+
+   Esto lo detecta en vivo, cruzando la bandeja contra si misma: no necesita
+   historico ni pipeline, con el rutas.json de cada ciclo basta.
+
+   Se ignoran a proposito:
+     - la MISMA OT repetida (suspendida/cancelada y vuelta a cargar): no es
+       una segunda visita, es la misma orden cambiando de estado
+     - las que ya se cerraron: si la segunda quedo Completada, se resolvio
+       sola y no hay nada que avisar                                        */
+let recaAbierto = false;
+
+function gruposRecaida(){
+  const porDir = {};
+  Object.keys(DB || {}).forEach(function(tec){
+    (DB[tec] || []).forEach(function(w){
+      const k = claveDir(w.d);
+      if(!k) return;
+      (porDir[k] = porDir[k] || []).push(Object.assign({ tec: tec }, w));
+    });
+  });
+
+  const casos = [];
+  Object.keys(porDir).forEach(function(k){
+    const filas = porDir[k];
+    if(filas.length < 2) return;
+    // pet (o la OT) identifica la orden: la misma repetida no cuenta
+    const idOrden = function(w){ return String(w.pet || w.o || ''); };
+    const caidas = filas.filter(function(w){ return w.e === 'No Realizada' || w.gsa; });
+    if(!caidas.length) return;
+    const idsCaidos = caidas.map(idOrden);
+    const abiertas = filas.filter(function(w){
+      return idsCaidos.indexOf(idOrden(w)) < 0
+          && w.e !== 'Cancelado' && w.e !== 'No Realizada' && !w.gsa;
+    });
+    if(!abiertas.length) return;
+    // pendiente/iniciado/en ruta = todavia se puede intervenir
+    const vivas = abiertas.filter(function(w){ return w.e !== 'Completado'; });
+    casos.push({
+      d: filas[0].d, lat: filas[0].lat, lng: filas[0].lng,
+      caidas: caidas.sort(function(a,b){ return rankFranja(a.f) - rankFranja(b.f); }),
+      sig: abiertas.sort(function(a,b){ return rankFranja(a.f) - rankFranja(b.f); }),
+      viva: vivas.length > 0
+    });
+  });
+  // primero las que todavia se pueden salvar, y dentro de esas las mas caidas
+  casos.sort(function(a,b){
+    return (b.viva - a.viva) || (b.caidas.length - a.caidas.length) || a.d.localeCompare(b.d);
+  });
+  return casos;
+}
+
+function nRecaidasVivas(){
+  return gruposRecaida().filter(function(c){ return c.viva; }).length;
+}
+
+function renderBotonReca(){
+  const btn = document.getElementById('btnReca');
+  if(!btn) return;
+  const n = nRecaidasVivas();
+  btn.innerHTML = '🔄 Recaídas hoy' + (n > 0 ? ' <span class="badge">'+n+'</span>' : '');
+  btn.classList.toggle('on-reca', n > 0 && !recaAbierto);
+}
+
+function cerrarReca(){
+  if(!recaAbierto) return;
+  recaAbierto = false;
+  document.getElementById('modalReca').classList.remove('abierto');
+  renderBotonReca();
+}
+
+/* Cierra todos los paneles menos el que se esta abriendo.
+
+   Reemplaza la lista de cerrarX() que cada toggle repetia a mano. Ese patron
+   se rompia solo: cada modal nuevo cerraba a los que ya existian, pero los
+   viejos no sabian del nuevo, asi que quedaban dos abiertos encimados (mismo
+   z-index, gana el ultimo del DOM) y al cerrar el de arriba aparecia el otro.
+
+   El parametro 'salvo' es indispensable: si el helper cerrara tambien el
+   propio panel, le pondria su flag en false justo antes de que el toggle haga
+   !flag, y el boton nunca cerraria — siempre reabriria.                     */
+function cerrarPaneles(salvo){
+  const todos = {
+    comp:   cerrarComp,   rgu:    cerrarRGU,    atr:    cerrarAtr,
+    sc:     cerrarSC,     caidas: cerrarCaidas, repe:   cerrarRepe,
+    nuevas: cerrarNuevas, reca:   cerrarReca,   buscar: cerrarBuscar
+  };
+  Object.keys(todos).forEach(function(k){
+    if(k !== salvo && typeof todos[k] === 'function') todos[k]();
+  });
+  if(libre) toggleLibre();
+}
+
+function toggleReca(){
+  cerrarPaneles('reca');
+  recaAbierto = !recaAbierto;
+  document.getElementById('modalReca').classList.toggle('abierto', recaAbierto);
+  if(recaAbierto) renderReca();
+  renderBotonReca();
+}
+
+function verEnMapaReca(lat, lng){ cerrarReca(); if(lat && lng) map.setView([lat, lng], 17); }
+
+function renderReca(){
+  const cont = document.getElementById('listaReca');
+  const nota = document.getElementById('recaNota');
+  const casos = gruposRecaida();
+
+  if(!casos.length){
+    cont.innerHTML = '<div class="vacio">✅ Ninguna dirección se cayó y volvió a cargarse hoy.</div>';
+    nota.textContent = '';
+    return;
+  }
+
+  cont.innerHTML = casos.map(function(c, i){
+    const caidas = c.caidas.map(function(w){
+      const motivo = w.cie ? escR(w.cie) : (w.gsa ? 'Falla de aprovisionamiento (GSA)' : 'sin código');
+      return '<div class="rv">'
+        + '<span class="rh">'+escR(w.f || 's/franja')+'</span>'
+        + '<span class="rnum">'+escR(w.pet || w.o)+'</span>'
+        + '<span>'+escR(w.cat || w.t)+'</span>'
+        + '<span>· '+escR(w.tec)+'</span>'
+        + '<span class="rc">· '+motivo+'</span>'
+        + (w.der ? '<span class="fam otro">'+escR(w.der)+'</span>' : '')
+        + '</div>';
+    }).join('');
+    const sig = c.sig.map(function(w){
+      return '<div class="rv">'
+        + '<span class="rh">'+escR(w.f || 's/franja')+'</span>'
+        + '<span class="rnum">'+escR(w.pet || w.o)+'</span>'
+        + '<span>'+escR(w.cat || w.t)+'</span>'
+        + '<span>· '+escR(w.tec)+'</span>'
+        + '<span class="re '+estClase(w.e)+'">'+escR(w.e)+'</span>'
+        + '</div>';
+    }).join('');
+    // el tecnico que ya fue es el candidato natural para la segunda
+    const quien = c.caidas[0].tec;
+    const mismo = c.sig.some(function(w){ return w.tec === quien; });
+    const consejo = c.viva
+      ? (mismo
+          ? '<div class="rvh" style="color:#4ade80">✔ va el mismo técnico que ya fue</div>'
+          : '<div class="rvh" style="color:#fbbf24">⚠ la toma otro técnico · '+escR(quien)+' ya estuvo ahí</div>')
+      : '<div class="rvh">— ya cerrada, sin acción</div>';
+    return '<div class="rcard'+(c.viva?' repe':'')+'" id="rc'+i+'">'
+      + '<div class="rtop" onclick="document.getElementById(\'rc'+i+'\').classList.toggle(\'abierta\')">'
+      +   '<span class="rn">'+c.caidas.length+'↺</span>'
+      +   '<span class="rdir">'+escR(c.d)+'</span>'
+      +   (c.viva ? '<span class="shoy">recuperable</span>' : '')
+      +   '<span class="rult">'+escR(c.caidas[0].cie || (c.caidas[0].gsa ? 'GSA' : 'sin código'))+' ▾</span>'
+      + '</div>'
+      + '<div class="rvis">'
+      +   consejo
+      +   '<div class="rvh">Se cayó ('+c.caidas.length+')</div>'+caidas
+      +   '<div class="rvh">Volvió a cargarse ('+c.sig.length+')</div>'+sig
+      +   '<span class="rmapa" onclick="verEnMapaReca('+(c.lat||0)+','+(c.lng||0)+')">📍 ver en el mapa</span>'
+      + '</div>'
+      + '</div>';
+  }).join('');
+
+  const vivas = casos.filter(function(c){ return c.viva; }).length;
+  nota.textContent = casos.length + ' dirección(es) que se cayeron y volvieron a cargarse hoy · '
+    + vivas + ' todavía sin cerrar. Se ignora la misma OT repetida por cambio de '
+    + 'estado: solo cuenta cuando es otra orden en la misma puerta.';
+}
+
+/* ============ NOMBRES DE TECNICOS EN EL MAPA ============
+   Nombre del tecnico bajo cada pin.
+
+   Va detras de un boton y no fijo, porque con los 40 tecnicos en pantalla son
+   ~220 etiquetas encimadas y no se lee nada. Sirve para dos cosas: filtrar a
+   un tecnico y seguir su ruta, o hacer zoom a un sector y ver de quien son los
+   pines sin ir clickeando uno por uno.
+
+   Se recorta a nombre + apellido ("NICOLAS MOYANO R" -> "NICOLAS MOYANO"): la
+   tercera palabra del export es una inicial o un apellido abreviado que no
+   aporta y estira la etiqueta. Verificado sobre los 40 tecnicos: 0 colisiones
+   y 17 caracteres el mas largo. El popup sigue trayendo el nombre entero. */
+let verNombres = false;
+
+function nombreCorto(t){
+  return String(t||'').trim().split(/\s+/).slice(0, 2).join(' ');
+}
+
+function toggleNombres(){
+  verNombres = !verNombres;
+  const btn = document.getElementById('btnNombres');
+  btn.classList.toggle('on-repemapa', verNombres);
+  render(true);          // true = no reencuadrar, se respeta el zoom actual
+}
+
+// Bloque de caidas previas que se agrega al popup del marcador.
+function popupPrev(p){
+  if(!p.prev || !p.prev.length) return '';
+  const filas = p.prev.slice().reverse().slice(0, 6).map(function(v){
+    return '<div style="margin-top:2px">· ' + escR(v.f) + ' — ' + escR(v.cierre || 's/código')
+      + ' <span style="color:#94a3b8">(' + escR(v.tec) + ')</span></div>';
+  }).join('');
+  const mas = p.prev.length > 6 ? '<div style="color:#94a3b8">y ' + (p.prev.length-6) + ' más…</div>' : '';
+  return '<div style="margin-top:6px; padding-top:5px; border-top:1px solid #334155">'
+    + '<b style="color:#c4b5fd">🔁 ' + p.prev.length + ' caída(s) antes en esta dirección</b>'
+    + filas + mas + '</div>';
+}
+
+function render(mantenerVista){
+  layer.clearLayers();
+  const ft = sel.value;
+  let show = ft==='__ALL__' ? tecs : [ft];
+  if(sinComp && ft==='__ALL__') show = tecnicosSinCompletar();
+  let bounds=[], nTrab=0, nTec=0, nIni=0, nRuta=0, nComp=0, nRGU=0;
+  show.forEach(t=>{
+    // Se numera ANTES del filtro de repetidas: el globo tiene que decir la
+    // parada real del dia. Si no, la parada 6 de un tecnico aparece como "2"
+    // solo porque las cinco anteriores no eran repetidas.
+    const ruta = DB[t].filter(p=> p.e!=='Cancelado' && okCiudad(p) && okFranja(p) && okEstado(p));
+    ruta.forEach((p, i) => { p._np = i + 1; });
+    let pts = ruta.slice();
+    if(!pts.length) return;
+    nTec++; nTrab+=pts.length;
+    const col = colorOf[t];
+    const latlngs = pts.map(p=>[p.lat,p.lng]);
+    // En modo repetidas no se dibuja la ruta: al sacar las paradas del medio,
+    // la linea uniria puntos que el tecnico no recorre seguidos y engania.
+    if(latlngs.length>1) L.polyline(latlngs,{color:col,weight:3,opacity:.75,dashArray:'6 6'}).addTo(layer);
+    pts.forEach((p,i)=>{
+      if(p.e==='Iniciado') nIni++;
+      if(p.e==='en ruta') nRuta++;
+      if(p.e==='Completado'){ nComp++; nRGU += Number(p.rgu||0); }
+      const stCls = p.e==='Iniciado' ? ' mk-iniciado' : (p.e==='en ruta' ? ' mk-enruta' : (p.e==='Completado' ? ' mk-completado' : (p.e==='No Realizada' ? ' mk-norealizada' : '')));
+      // el color de la ruta va en la barrita izquierda, no en el texto: asi
+      // el nombre se lee igual con cualquiera de los 38 colores de la paleta
+      const nom = verNombres
+        ? '<span class="mk-nom" style="border-left:3px solid '+col+'">'
+          + escR(nombreCorto(t)) + '</span>' : '';
+      const icon = L.divIcon({className:'', html:'<div class="num-icon'+stCls+'" style="background:'+col+'">'+p._np+nom+'</div>', iconSize:[26,26], iconAnchor:[13,13]});
+      L.marker([p.lat,p.lng],{icon}).addTo(layer).bindPopup(
+        '<div class="pp"><b>'+t+'</b> — parada '+p._np+' de '+ruta.length+'<br>'+
+        '📋 '+p.o+' · '+p.t+'<br>'+
+        '🕐 franja '+(p.f||'s/franja')+'<br>'+
+        '📍 '+p.d+'<br>'+
+        '<span class="est '+estClass(p.e)+'">'+p.e+'</span>'+
+        popupPrev(p)+'</div>');
+      bounds.push([p.lat,p.lng]);
+    });
+  });
+  /* Contador de actividades por estado.
+
+     Se cuenta APARTE del bucle del mapa por dos razones:
+       - las canceladas no se dibujan (se filtran arriba con p.e!=='Cancelado'),
+         asi que contarlas ahi habria dado siempre cero;
+       - respeta ciudad, franja y tecnico, pero NO el filtro de estado: si
+         filtras "Completado", lo util es seguir viendo cuantas quedan
+         pendientes, no un contador que dice "35 completadas" y nada mas.
+     Por eso la suma de las pildoras no tiene por que cuadrar con "trabajos",
+     que si respeta todos los filtros y excluye canceladas. */
+  const tally = {};
+  show.forEach(function(t){
+    (DB[t] || []).forEach(function(p){
+      if(!okCiudad(p) || !okFranja(p)) return;
+      const e = String(p.e || 'Pendiente').trim() || 'Pendiente';
+      tally[e] = (tally[e] || 0) + 1;
+    });
+  });
+  // orden fijo: primero lo cerrado, despues lo que sigue vivo. Los estados que
+  // no aparecen hoy no se pintan, para no llenar la barra de ceros.
+  const ordenEst = ['Completado','No Realizada','Cancelado','Suspendido',
+                    'Iniciado','en ruta','Pendiente'];
+  const vistos = ordenEst.filter(function(e){ return tally[e]; })
+    .concat(Object.keys(tally).filter(function(e){ return ordenEst.indexOf(e) < 0; }));
+  const totalAct = Object.keys(tally).reduce(function(a,e){ return a + tally[e]; }, 0);
+
+  document.getElementById('stats').innerHTML =
+      '<span class="st-base">'+nTec+' técnicos · '+nTrab+' trabajos</span>'
+    + '<span class="st-sep">·</span>'
+    + vistos.map(function(e){
+        return '<span class="bes '+esClase(e)+'" title="'+escR(e)+'">'
+             + tally[e]+' '+escR(e)+'</span>';
+      }).join('')
+    + '<span class="st-tot" title="total de actividades con los filtros de ciudad, franja y técnico">'
+    + totalAct+' act.</span>';
+  // En el refresco automatico NO se reencuadra el mapa: si estabas mirando
+  // un sector con zoom, se respeta donde tenias la vista.
+  if(bounds.length && !mantenerVista) map.fitBounds(bounds,{padding:[40,40]});
+  renderLegend(show);
+  if(sinComp) renderPanelSC();
+  if(atr) renderPanelAtr();
+  actualizarBadgeAtr();
+}
+
+function renderLegend(show){
+  // Leyenda de técnicos eliminada: ya existe el filtro por técnico arriba y ocupaba pantalla.
+}
+
+sel.onchange=render;
+construirMenus();
+render();
+
+/* ============ MODO TÉCNICO LIBRE ============ */
+// Reemplaza a los antiguos "Modo Despacho" y "Asignar trabajo nuevo".
+// Se escribe el nombre del técnico -> Iniciar -> se marca dónde terminó y se
+// buscan los pendientes más cercanos, respetando ciudad y franja.
+let libre = false, posActual = null;
+let despLayer = L.layerGroup();
+
+// llena el autocompletado del input con los técnicos cargados
+function llenarListaTecs(){
+  const dl = document.getElementById('listaTecs');
+  if(!dl) return;
+  dl.innerHTML = tecs.map(t=>'<option value="'+t.replace(/"/g,'&quot;')+'">').join('');
+}
+llenarListaTecs();
+
+function toggleLibre(){
+  cerrarSC(); cerrarRGU(); cerrarAtr(); cerrarComp(); cerrarCaidas();
+  libre = !libre;
+  document.getElementById('btnLibre').classList.toggle('on', libre);
+  document.getElementById('btnLibre').textContent = libre ? '✖ Salir técnico libre' : '🚐 Técnico libre';
+  document.getElementById('panel').style.display = libre ? 'block' : 'none';
+  document.getElementById('estadosBox').style.display = libre ? 'none' : '';
+  if(libre){
+    map.removeLayer(layer); despLayer.addTo(map);
+    posActual = null; despLayer.clearLayers();
+    document.getElementById('resultados').innerHTML = '';
+    llenarListaTecs();
+    setTimeout(()=>document.getElementById('inTecLibre').focus(), 50);
+  } else {
+    map.removeLayer(despLayer); layer.addTo(map);
+    render();
+  }
+}
+
+// busca el técnico escrito: exacto, empieza con, o contiene (sin tildes)
+function buscarTecnico(txt){
+  const q = norm(txt);
+  if(!q) return [];
+  let m = tecs.filter(t=> norm(t)===q);
+  if(m.length) return m;
+  m = tecs.filter(t=> norm(t).startsWith(q));
+  if(m.length) return m;
+  return tecs.filter(t=> norm(t).includes(q));
+}
+
+function iniciarLibre(){
+  const out = document.getElementById('resultados');
+  const txt = document.getElementById('inTecLibre').value.trim();
+  if(!txt){ out.innerHTML = '<div class="hint">⚠️ Escribe el nombre del técnico.</div>'; return; }
+
+  const m = buscarTecnico(txt);
+  if(!m.length){
+    out.innerHTML = '<div class="hint">⚠️ No encuentro ningún técnico que calce con "'+txt+'".</div>';
+    return;
+  }
+  if(m.length > 1){
+    out.innerHTML = '<div class="hint">Hay '+m.length+' que calzan, elige uno:</div>' +
+      m.map(t=>'<div class="cand" onclick="usarTecnico(\''+t.replace(/'/g,"\\'")+'\')">🔧 <b>'+t+'</b></div>').join('');
+    return;
+  }
+  usarTecnico(m[0]);
+}
+
+function usarTecnico(t){
+  document.getElementById('inTecLibre').value = t;
+  const pt = posTecnico(t);
+  if(!pt){
+    document.getElementById('resultados').innerHTML =
+      '<div class="hint">⚠️ '+t+' no tiene trabajos con coordenadas hoy, no puedo ubicarlo.</div>';
+    return;
+  }
+  const r = pt.ref;
+  const estado = r.e==='Iniciado' ? 'está trabajando en'
+               : (r.e==='en ruta' ? 'va en ruta a' : 'terminó en');
+  buscarCercanos({lat:pt.lat, lng:pt.lng, tec:t,
+                  nombre:t+' — '+estado+': '+r.d+' ('+r.e+(r.hi?' · '+r.hi:'')+')'});
+  document.getElementById('resultados').insertAdjacentHTML('afterbegin',
+    '<div class="hint">📍 <b>'+t+'</b> '+estado+' <b>'+r.d+'</b>. Arrastra el 🚐 si necesitas ajustar la posición.</div>');
+}
+
+// permite apretar Enter en vez del botón
+document.getElementById('inTecLibre').addEventListener('keydown', function(e){
+  if(e.key === 'Enter') iniciarLibre();
+});
+
+function hav(a,b){
+  const R=6371, rad=Math.PI/180;
+  const dLat=(b.lat-a.lat)*rad, dLng=(b.lng-a.lng)*rad;
+  const h=Math.sin(dLat/2)**2 + Math.cos(a.lat*rad)*Math.cos(b.lat*rad)*Math.sin(dLng/2)**2;
+  return 2*R*Math.asin(Math.sqrt(h));
+}
+
+function buscarCercanos(pos){
+  posActual = pos;
+  despLayer.clearLayers();
+  // candidatos: todos los trabajos Pendientes (de cualquier técnico) según filtros
+  let cands = [];
+  tecs.forEach(t=>{
+    DB[t].forEach(p=>{
+      if(p.e!=='Pendiente') return;
+      if(pos.tec && t===pos.tec) return;
+      if(!okCiudad(p) || !okFranja(p)) return;
+      cands.push({...p, tec:t, km: hav(pos,p)});
+    });
+  });
+  cands.sort((a,b)=>a.km-b.km);
+  const top = cands.slice(0,6);
+
+  // marcador de posición del técnico libre (arrastrable para ajuste fino)
+  const vanIcon = L.divIcon({className:'', html:'<div style="font-size:28px; text-shadow:0 2px 6px #000;">🚐</div>', iconSize:[30,30], iconAnchor:[15,15]});
+  const van = L.marker([pos.lat,pos.lng],{icon:vanIcon, draggable:true}).addTo(despLayer).bindPopup('<b>'+pos.nombre+'</b><br>Técnico libre<br><i>Arrástrame para ajustar</i>');
+  van.on('dragend', function(e){ const ll=e.target.getLatLng(); buscarCercanos({lat:ll.lat, lng:ll.lng, nombre:pos.nombre}); });
+
+  // resto de pendientes como puntitos grises de contexto
+  cands.slice(6).forEach(p=>{
+    L.circleMarker([p.lat,p.lng],{radius:4,color:'#64748b',fillColor:'#64748b',fillOpacity:.6,weight:1}).addTo(despLayer)
+      .bindPopup('<div class="pp"><b>'+p.tec+'</b><br>📋 '+p.o+' · '+p.t+'<br>📍 '+p.d+'<br>'+p.km.toFixed(1)+' km</div>');
+  });
+
+  // top cercanos: línea + número + distancia
+  top.forEach((p,i)=>{
+    const col = i===0 ? '#4ade80' : '#38bdf8';
+    const line = L.polyline([[pos.lat,pos.lng],[p.lat,p.lng]],{color:col,weight:i===0?4:2,opacity:.85,dashArray:i===0?null:'5 7'}).addTo(despLayer);
+    line.bindTooltip(p.km.toFixed(1)+' km',{permanent:true,direction:'center',className:'dist-label'});
+    const icon = L.divIcon({className:'', html:'<div class="num-icon" style="background:'+col+'; color:#0f172a;">'+(i+1)+'</div>', iconSize:[26,26], iconAnchor:[13,13]});
+    L.marker([p.lat,p.lng],{icon}).addTo(despLayer).bindPopup(
+      '<div class="pp"><b>#'+(i+1)+' más cercano — '+p.km.toFixed(1)+' km</b><br>'+
+      '📋 '+p.o+' · '+p.t+'<br>🕐 '+(p.hi||'--')+' - '+(p.hf||'--')+' (franja '+p.f+')<br>'+
+      '📍 '+p.d+'<br>'+
+      '🔧 Asignado a: '+p.tec+'</div>');
+  });
+
+  // panel de resultados
+  document.getElementById('resultados').innerHTML = top.length ? top.map((p,i)=>
+    '<div class="cand'+(i===0?' top1':'')+'" onclick="map.setView(['+p.lat+','+p.lng+'],16)">'+
+    '<span class="km">'+(i+1)+'º · '+p.km.toFixed(1)+' km</span><br>'+
+    '📋 <b>'+p.o+'</b> · '+p.t+' · franja '+p.f+'<br>'+
+    '📍 '+p.d+'<br>'+
+    '🔧 Hoy asignado a: <b>'+p.tec+'</b></div>'
+  ).join('') : '<div class="hint">No hay trabajos pendientes con los filtros actuales.</div>';
+
+  const b = [[pos.lat,pos.lng], ...top.map(p=>[p.lat,p.lng])];
+  if(b.length>1) map.fitBounds(b,{padding:[60,60]});
+  document.getElementById('stats').textContent = cands.length+' pendientes evaluados';
+}
+
+// posición estimada actual de cada técnico: Iniciado > en ruta > última parada
+function posTecnico(t){
+  const jobs = DB[t].filter(p=>p.e!=='Cancelado');
+  if(!jobs.length) return null;
+  let j = jobs.find(p=>p.e==='Iniciado') || jobs.find(p=>p.e==='en ruta');
+  if(!j){ const comp = jobs.filter(p=>p.e==='Completado'); if(comp.length) j = comp[comp.length-1]; }
+  if(!j) j = jobs[jobs.length-1];
+  return {lat:j.lat, lng:j.lng, ref:j};
+}
+
+// normalizar texto: mayúsculas sin tildes
+function norm(s){ return s.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ').trim(); }
+
+// buscar la calle en los trabajos del día (nuestros propios datos con coordenadas)
+function buscarEnDatos(dir, ciudad){
+  const nd = norm(dir);
+  const calle = nd.replace(/\s+\d+[A-Z]?(\s|$).*/,'').trim(); // sacar numeración y lo que siga
+  const numIn = (nd.match(/\d+/)||[null])[0];
+  let matches = [];
+  tecs.forEach(t=> DB[t].forEach(p=>{
+    const pd = norm(p.d);
+    if(pd.includes(ciudad) && calle.length>3 && pd.includes(calle)) matches.push(p);
+  }));
+  if(!matches.length) return null;
+  if(numIn){
+    matches.sort((a,b)=>{
+      const na=parseInt((norm(a.d).match(/\d+/)||[99999])[0]), nb=parseInt((norm(b.d).match(/\d+/)||[99999])[0]);
+      return Math.abs(na-numIn)-Math.abs(nb-numIn);
+    });
+  }
+  return {lat:matches[0].lat, lng:matches[0].lng, fuente:'datos del día ('+matches[0].d+')'};
+}
+
+// zona operativa Quilpué - Villa Alemana (rechaza resultados fuera de ella)
+const ZONA = {left:-71.52, top:-32.99, right:-71.30, bottom:-33.11};
+
+/* ============ RGU (unidades generadoras de ingreso) ============ */
+function tipoN(t){ return (t||'').toString().trim().toLowerCase(); }
+function dirBase(p){
+  const base = (p.dir_raw!=null ? p.dir_raw : String(p.d||'').split(',')[0]);
+  return base.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ').trim();
+}
+function fmtRGU(n){ return (Math.round(n*10)/10).toString().replace('.',','); }
+
+// RGU de UNA orden — REGLA DE COMPONENTES (calibrada contra Power BI).
+// IDÉNTICA a rgu_componentes()/rgu_orden() de generar_rutas.py -> mantener en sincronía.
+//  Reparación                       = 1 (plano)
+//  Alta/Traslado/Migración/Upgrade  = suma de componentes de los Pasos:
+//      D-Box IPTV : 1º = 1, cada adicional = 0,5 · Extensor = 0,5 c/u
+//      Plan Banda Ancha = 1 · Plan de telefonía = 1
+//      Gateway NextGen y ONT GPON: NO cuentan · (solo pasos Instalar/Actualizar)
+//  Modificación                     = 0,1 si hay Alta/Migración completada misma dir+fecha; si no 1
+//  Colación / No inicia ...         = 0
+function rguComponentes(pasos){
+  const desc = (String(pasos||'').match(/<descripcion>(.*?)<\/descripcion>/gi)||[])
+    .map(s=>s.replace(/<\/?descripcion>/gi,''))
+    .filter(d=>/^\s*(instalar|actualizar)\b/i.test(d));
+  const dbox = desc.filter(d=>/d-?box/i.test(d)).length;
+  const ext  = desc.filter(d=>/extensor/i.test(d)).length;
+  const ba   = desc.filter(d=>/plan banda ancha/i.test(d)).length;
+  const tel  = desc.filter(d=>/plan de telefon|telefon[ií]a/i.test(d)).length;
+  let r = 0;
+  if(dbox) r += 1 + 0.5*(dbox-1);
+  r += 0.5*ext + ba + tel;
+  return r;
+}
+function rguOrden(p){
+  const t = tipoN(p.t);
+  if(t.includes('reparaci')) return 1;
+  if(t==='alta' || t.includes('traslado') || t.includes('migraci') || t.includes('upgrade')){
+    const r = rguComponentes(p.pasos);
+    if(r>0) return r;
+    const m = String(p.sub||'').match(/(\d+)\s*play/i);   // respaldo si no hay Pasos
+    return m ? parseInt(m[1],10) : 1;
+  }
+  if(t.includes('modifica')) return 1;   // se ajusta a 0,1 en aplicarRGU si corresponde
+  return 0;                              // Colación, No inicia, etc.
+}
+
+// Calcula y guarda p.rgu en toda la base. Si el pipeline ya trae p.rgu, lo respeta.
+function aplicarRGU(db){
+  const arrs = Object.values(db);
+  const yaTraeRGU  = arrs.some(a=>a.some(p=>p.rgu!=null && p.rgu!==''));
+  const tieneDetalle = arrs.some(a=>a.some(p=>p.sub!=null || p.pasos!=null));
+  rguDisponible = yaTraeRGU || tieneDetalle;
+  if(yaTraeRGU){ arrs.forEach(a=>a.forEach(p=>{ if(p.rgu!=null && p.rgu!=='') p.rgu = Number(p.rgu); })); return; }
+  if(!tieneDetalle) return;
+  // órdenes "generadoras" completadas (para la regla 0,1 de las modificaciones)
+  const gener = new Set();
+  arrs.forEach(a=>a.forEach(p=>{
+    const t = tipoN(p.t);
+    if(p.e==='Completado' && (t==='alta' || t.includes('traslado') || t.includes('migraci')))
+      gener.add(dirBase(p)+'|'+(p.fecha||''));
+  }));
+  arrs.forEach(a=>a.forEach(p=>{
+    let r = rguOrden(p);
+    if(tipoN(p.t).includes('modifica'))
+      r = gener.has(dirBase(p)+'|'+(p.fecha||'')) ? 0.1 : 1;
+    p.rgu = r;
+  }));
+}
+
+function categoriaTipo(t){
+  const n = tipoN(t);
+  if(n==='alta' || n.includes('traslado')) return 'Alta';
+  if(n.includes('migraci'))  return 'Migración';
+  if(n.includes('reparaci')) return 'Reparación';
+  if(n.includes('modifica')) return 'Modificación';
+  return 'Otros';
+}
+
+/* El panel de RGU se saco del dashboard (boton y ventana). Estas dos quedan
+   como no-op porque las llaman los demas paneles al abrirse (cerrarComp,
+   Tecnico libre, Caidas, etc.); borrarlas obligaria a tocar 5 sitios mas. */
+function cerrarRGU(){ rgu = false; }
+
+function toggleRGU(){ rgu = false; }
+
+// Modos del panel RGU. Pendiente = órdenes activas sin cerrar (proyección).
+const RGU_MODOS = {
+  comp: {estados:['Completado'],                                  label:'RGU completados',           color:'#34d399'},
+  pend: {estados:['Pendiente','Iniciado','en ruta'],             label:'RGU pendientes (proyección)', color:'#fbbf24'},
+  tot:  {estados:['Completado','Pendiente','Iniciado','en ruta'], label:'RGU total proyectado',      color:'#38bdf8'}
+};
+
+
+function rguPasaFiltro(p){
+  return okCiudad(p) && okFranja(p);
+}
+
+// suma de RGU y nº de órdenes para un conjunto de estados, respetando filtros
+function rguSuma(estados){
+  let tot=0, ord=0;
+  tecs.forEach(t=>DB[t].forEach(p=>{
+    if(!estados.includes(p.e)) return;
+    if(!rguPasaFiltro(p)) return;
+    tot += Number(p.rgu||0); ord++;
+  }));
+  return {tot, ord};
+}
+
+// --- Etiqueta de tipo de actividad con su tramo de Play ---
+// Alta: N Play del Subtipo · Migración: nº de servicios (Internet+TV+Teléfono) de los Pasos
+// (misma lógica que generar_rutas.py; en datos en vivo usa p.cat ya calculado)
+function playSub(sub){ const m = String(sub||'').match(/(\d+)\s*play/i); return m ? m[1] : ''; }
+function catsMigr(pasos){
+  const desc = (String(pasos||'').match(/<descripcion>(.*?)<\/descripcion>/gi)||[])
+    .map(s=>s.replace(/<\/?descripcion>/gi,''))
+    .filter(d=>/^\s*(instalar|actualizar)\b/i.test(d));
+  let c = 0;
+  if(desc.some(d=>/plan banda ancha/i.test(d)))            c++;
+  if(desc.some(d=>/d-?box/i.test(d)))                      c++;
+  if(desc.some(d=>/plan de telefon|telefon[ií]a/i.test(d))) c++;
+  return c || 1;
+}
+function etiquetaOrden(p){
+  if(p.cat) return p.cat;                       // ya viene calculada del pipeline
+  const t = tipoN(p.t);
+  if(t.includes('reparaci')) return 'Reparación';
+  if(t==='alta'){ const pl = playSub(p.sub); return pl ? 'Alta '+pl+' Play' : 'Alta'; }
+  if(t.includes('traslado')){ const pl = playSub(p.sub); return pl ? 'Alta Traslado '+pl+' Play' : 'Alta Traslado'; }
+  if(t.includes('migraci'))  return 'Migración '+catsMigr(p.pasos)+' Play';
+  if(t.includes('upgrade'))  return 'Upgrade promoción';
+  if(t.includes('modifica')) return 'Modificación de Servicio';
+  return String(p.t||'Otros');
+}
+function catOrden(c){
+  let base;
+  if(/^Reparaci/.test(c))         base = 0;
+  else if(/^Alta Traslado/.test(c)) base = 2;
+  else if(/^Alta/.test(c))        base = 1;
+  else if(/^Migraci/.test(c))     base = 3;
+  else if(/^Modifica/.test(c))    base = 4;
+  else if(/^Upgrade/.test(c))     base = 5;
+  else                            base = 6;
+  const m = c.match(/(\d+)\s*Play/);
+  return base*10 + (m ? parseInt(m[1],10) : 0);
+}
+
+// Detalle de las CERRADAS agrupado por TIPO DE ACTIVIDAD (con Play) y su RGU.
+// Dos secciones: Completadas y No Realizadas. Respeta ciudad/franja.
+function detalleCerradas(){
+  const grupos = {
+    'Completado':   {icon:'✅', label:'Completadas',   color:'#34d399', tipos:{}, n:0, sum:0},
+    'No Realizada': {icon:'🚫', label:'No realizadas', color:'#ef4444', tipos:{}, n:0, sum:0}
+  };
+  tecs.forEach(t=>DB[t].forEach(p=>{
+    const g = grupos[p.e]; if(!g) return;
+    if(!rguPasaFiltro(p)) return;
+    const cat = etiquetaOrden(p);
+    const r = Number(p.rgu||0);
+    if(!g.tipos[cat]) g.tipos[cat] = {n:0, rgu:0};
+    g.tipos[cat].n++; g.tipos[cat].rgu += r;
+    g.n++; g.sum += r;
+  }));
+  let html = '';
+  ['Completado','No Realizada'].forEach(est=>{
+    const g = grupos[est];
+    html += '<div class="det-grupo"><div class="det-head" style="color:'+g.color+'">'+
+            '<span style="color:'+g.color+'">'+g.icon+' '+g.label+'</span>'+
+            '<span>'+g.n+' órden'+(g.n===1?'':'es')+' · '+fmtRGU(g.sum)+' RGU</span></div>';
+    if(!g.n){
+      html += '<div class="det-vacia">— sin órdenes con estos filtros —</div>';
+    } else {
+      const cats = Object.keys(g.tipos).sort((a,b)=>catOrden(a)-catOrden(b));
+      html += cats.map(c=>{
+        const it = g.tipos[c];
+        return '<div class="det-fila">'+
+          '<div class="det-info"><span class="det-tec">'+c+'</span>'+
+          '<span class="det-sub">'+it.n+' orden'+(it.n===1?'':'es')+'</span></div>'+
+          '<span class="det-rgu" style="color:'+g.color+'">'+fmtRGU(it.rgu)+'</span></div>';
+      }).join('');
+    }
+    html += '</div>';
+  });
+  return '<div class="rgu-det"><div class="det-titulo">📋 Detalle por tipo de actividad</div>'+html+'</div>';
+}
+
+/* ============ COMPLETITUD (meta 85% antes de las 13:00) ============
+   Cuenta cada tecnico que cerro AL MENOS UNA orden antes del corte.
+   Ej: 23 de 38 tecnicos = 60,5%.
+   A proposito NO respeta los filtros de la barra: el numero que mide la
+   empresa es sobre el equipo completo. */
+const COMP_CORTE = '13:00';
+const COMP_META = 0.85;
+
+function calcularCompletitud(){
+  let total=0, cumplen=0, faltantes=[], porCiudad={};
+  tecs.forEach(t=>{
+    const act = DB[t].filter(p=> p.e!=='Cancelado');
+    if(!act.length) return;
+    total++;
+    const cerradas = act.filter(p=> p.e==='Completado' && p.hf && p.hf <= COMP_CORTE);
+    const ciu = act[0].d && act[0].d.toUpperCase().includes('VILLA ALEMANA') ? 'VILLA ALEMANA' : 'QUILPUE';
+    if(!porCiudad[ciu]) porCiudad[ciu] = {tot:0, ok:0};
+    porCiudad[ciu].tot++;
+    if(cerradas.length){ cumplen++; porCiudad[ciu].ok++; }
+    else faltantes.push({
+      t,
+      ini:  act.filter(p=> p.e==='Iniciado').length,
+      ruta: act.filter(p=> p.e==='en ruta').length,
+      pend: act.filter(p=> p.e==='Pendiente').length,
+      // completadas DESPUES del corte: alcanzo a cerrar, pero tarde
+      tarde: act.filter(p=> p.e==='Completado' && p.hf && p.hf > COMP_CORTE).length
+    });
+  });
+  const pct = total ? cumplen/total*100 : 0;
+  const necesarios = Math.ceil(COMP_META*total);
+  // los mas cerca de cerrar primero: iniciado > en ruta > pendiente
+  faltantes.sort((a,b)=> (b.ini-a.ini) || (b.ruta-a.ruta) || (b.pend-a.pend));
+  return {total, cumplen, pct, necesarios, faltan:Math.max(0, necesarios-cumplen), faltantes, porCiudad};
+}
+
+// minutos que quedan para el corte segun la hora de los datos (null si ya paso)
+function minutosParaCorte(){
+  const ref = ahoraRef();
+  if(!ref) return null;
+  const corte = new Date(ref.getFullYear(), ref.getMonth(), ref.getDate(), 13, 0);
+  const min = Math.round((corte - ref)/60000);
+  return min > 0 ? min : null;
+}
+
+function renderPanelComp(){
+  const c = calcularCompletitud();
+  const cont = document.getElementById('cuerpoComp');
+  if(!c.total){ cont.innerHTML = '<div class="vacio">Todavía no hay técnicos con trabajo asignado.</div>'; return; }
+
+  const logrado = c.pct >= COMP_META*100;
+  const color = logrado ? '#4ade80' : (c.pct >= 70 ? '#fbbf24' : '#f87171');
+  const restan = minutosParaCorte();
+
+  const marcador =
+    '<div class="marcador">'+
+      '<div class="pctnum" style="color:'+color+'">'+c.pct.toFixed(1)+'%</div>'+
+      '<div class="frac">'+c.cumplen+' de '+c.total+' técnicos</div>'+
+      '<div class="barra"><div class="fill" style="width:'+Math.min(100,c.pct)+'%; background:'+color+'"></div><div class="meta"></div></div>'+
+    '</div>';
+
+  let veredicto;
+  if(logrado){
+    veredicto = '<div class="veredicto vok">✅ Meta cumplida. Se necesitaban '+c.necesarios+
+      ' y van '+c.cumplen+'.'+(restan ? ' Quedan '+restan+' min de margen.' : '')+'</div>';
+  } else if(restan){
+    veredicto = '<div class="veredicto vfalta">⚠️ Faltan <b>'+c.faltan+' técnico'+(c.faltan>1?'s':'')+
+      '</b> con al menos 1 cierre para llegar al 85%.<br>Quedan <b>'+restan+' min</b> antes del corte.</div>';
+  } else {
+    veredicto = '<div class="veredicto vcerrado">🔒 El corte de las 13:00 ya pasó. Cifra final del día: '+
+      c.cumplen+'/'+c.total+'. Faltaron '+c.faltan+' para la meta.</div>';
+  }
+
+  let lista = '';
+  if(c.faltantes.length){
+    lista = '<div class="subt">Sin cierre antes del corte ('+c.faltantes.length+')</div>'+
+      c.faltantes.map(f=>{
+        let ch = [];
+        if(f.ini)  ch.push('🟢 '+f.ini+' iniciada'+(f.ini>1?'s':''));
+        if(f.ruta) ch.push('🟠 '+f.ruta+' en ruta');
+        if(f.pend) ch.push('⏳ '+f.pend+' pend.');
+        const tEsc = f.t.replace(/'/g,"\\'");
+        return '<div class="tec" onclick="verTecnicoSC(\''+tEsc+'\')">'+
+          '<div><div class="nom">'+f.t+'</div><div class="det">'+(ch.join(' · ')||'sin órdenes activas')+'</div></div>'+
+          (f.tarde ? '<div class="ch">cerró '+f.tarde+' tarde</div>' : '')+
+        '</div>';
+      }).join('');
+  } else {
+    lista = '<div class="vacio">🎉 Todos los técnicos cerraron al menos una antes de las 13:00.</div>';
+  }
+
+  const ciudades = Object.keys(c.porCiudad).sort().map(k=>{
+    const v = c.porCiudad[k], p = v.tot ? v.ok/v.tot*100 : 0;
+    return '<div class="ciu"><span>'+k+'</span><span style="color:'+(p>=85?'#4ade80':'#f87171')+'"><b>'+
+      p.toFixed(0)+'%</b> · '+v.ok+'/'+v.tot+'</span></div>';
+  }).join('');
+
+  cont.innerHTML = marcador + veredicto + lista +
+    '<div class="subt">Por ciudad</div>' + ciudades;
+}
+
+function cerrarComp(){
+  if(!comp) return;
+  comp = false;
+  document.getElementById('btnComp').classList.remove('on6');
+  document.getElementById('panelComp').style.display = 'none';
+  document.getElementById('estadosBox').style.display = '';
+}
+
+function toggleComp(){
+  cerrarPaneles('comp');
+  comp = !comp;
+  document.getElementById('btnComp').classList.toggle('on6', comp);
+  document.getElementById('panelComp').style.display = comp ? 'block' : 'none';
+  document.getElementById('estadosBox').style.display = comp ? 'none' : '';
+  if(comp) renderPanelComp();
+}
+
+/* ============ MODO ATRASADOS (iniciados hace mucho rato) ============ */
+
+// "dd-mm-yyyy HH:MM" -> Date
+function setFechaDatos(txt){
+  const m = String(txt||'').match(/(\d{2})-(\d{2})-(\d{4})\D+(\d{1,2}):(\d{2})/);
+  FECHA_DATOS = m ? new Date(+m[3], +m[2]-1, +m[1], +m[4], +m[5]) : null;
+}
+
+// Contra qué hora se mide. Si los datos son de HOY se usa la hora real (el
+// reloj sigue corriendo aunque el .bat actualice cada 30 min). Si son de otro
+// día se usa la hora del snapshot, para no inventar atrasos de 20 horas.
+function ahoraRef(){
+  const n = new Date();
+  if(!FECHA_DATOS) return n;
+  const mismoDia = FECHA_DATOS.getFullYear()===n.getFullYear()
+                && FECHA_DATOS.getMonth()===n.getMonth()
+                && FECHA_DATOS.getDate()===n.getDate();
+  return mismoDia ? n : FECHA_DATOS;
+}
+
+// minutos transcurridos desde la hora de inicio ("HH:MM"); null si no aplica
+function minutosDesde(hi){
+  if(!hi || !/^\d{1,2}:\d{2}/.test(hi)) return null;
+  const ref = ahoraRef();
+  const p = hi.split(':');
+  const ini = new Date(ref.getFullYear(), ref.getMonth(), ref.getDate(), +p[0], +p[1]);
+  const d = (ref - ini)/60000;
+  return d < 0 ? null : d;      // inicio en el futuro = hora estimada, no real
+}
+
+function fmtDur(m){
+  const h = Math.floor(m/60), r = Math.round(m%60);
+  return h ? h+'h '+('0'+r).slice(-2)+'m' : r+'m';
+}
+
+function etiquetaUmbral(){
+  return UMBRAL_MIN===120 ? '+2h' : (UMBRAL_MIN===180 ? '+3h' : '+2h30');
+}
+
+// [{t: tecnico, p: orden, m: minutos}] ordenado del más atrasado al menos
+function trabajosAtrasados(){
+  const out = [];
+  tecs.forEach(t=>{
+    DB[t].forEach(p=>{
+      if(p.e!=='Iniciado') return;
+      if(!okCiudad(p)) return;
+      const m = minutosDesde(p.hi);
+      if(m!==null && m>=UMBRAL_MIN) out.push({t:t, p:p, m:m});
+    });
+  });
+  return out.sort((a,b)=> b.m - a.m);
+}
+
+function setUmbral(v){
+  UMBRAL_MIN = v;
+  renderPanelAtr();
+  actualizarBadgeAtr();
+}
+
+function actualizarBadgeAtr(){
+  const b = document.getElementById('btnAtr');
+  if(!b) return;
+  if(atr){ b.textContent = '✖ Salir '+etiquetaUmbral(); return; }
+  const n = trabajosAtrasados().length;
+  b.innerHTML = '⏱️ '+etiquetaUmbral()+' iniciado' + (n ? '<span class="pill">'+n+'</span>' : '');
+}
+
+function cerrarAtr(){
+  if(!atr) return;
+  atr = false;
+  document.getElementById('btnAtr').classList.remove('on5');
+  document.getElementById('panelAtr').style.display = 'none';
+  document.getElementById('estadosBox').style.display = '';
+  actualizarBadgeAtr();
+}
+
+function toggleAtrasados(){
+  cerrarPaneles('atr');                // modos excluyentes
+  atr = !atr;
+  document.getElementById('btnAtr').classList.toggle('on5', atr);
+  document.getElementById('panelAtr').style.display = atr ? 'block' : 'none';
+  document.getElementById('estadosBox').style.display = atr ? 'none' : '';
+  actualizarBadgeAtr();
+  if(atr) renderPanelAtr();
+}
+
+function verTecnicoAtr(t){ sel.value = t; render(); }
+
+function renderPanelAtr(){
+  ['120','150','180'].forEach(v=>{
+    const b = document.getElementById('umb'+v);
+    if(b) b.classList.toggle('act', UMBRAL_MIN===+v);
+  });
+
+  // aviso de datos viejos: el .bat sube rutas.json cada 30 min
+  const av = document.getElementById('avisoAtr');
+  av.innerHTML = '';
+  if(FECHA_DATOS){
+    const edad = Math.round((new Date() - FECHA_DATOS)/60000);
+    if(edad > 40){
+      av.innerHTML = '<div class="aviso">⚠️ Los datos son de hace '+fmtDur(edad)+
+        '. Puede que alguna orden ya se haya cerrado en el portal.</div>';
+    }
+  }
+
+  const lista = trabajosAtrasados();
+  const cont = document.getElementById('listaAtr');
+  document.querySelector('#panelAtr h2').textContent =
+    '⏱️ Iniciado hace '+etiquetaUmbral().replace('+','más de ')+' ('+lista.length+')';
+
+  if(!lista.length){
+    cont.innerHTML = '<div class="vacio">✅ Ningún técnico lleva más de '+
+      etiquetaUmbral().replace('+','')+' con un trabajo iniciado.</div>';
+    return;
+  }
+
+  let html = '';
+  if(sel.value!=='__ALL__') html += '<div class="vertodos" onclick="verTecnicoAtr(\'__ALL__\')">👥 Ver todos en el mapa</div>';
+  html += lista.map(x=>{
+    const grave = x.m >= UMBRAL_MIN + 90 ? ' grave' : '';
+    const tEsc = x.t.replace(/'/g,"\\'");
+    return '<div class="atrcard'+grave+'" onclick="verTecnicoAtr(\''+tEsc+'\')">'+
+      '<div class="fila1">'+
+        '<div class="nom"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:'+colorOf[x.t]+';margin-right:5px;"></span>'+x.t+'</div>'+
+        '<div class="tiempo">'+fmtDur(x.m)+'</div>'+
+      '</div>'+
+      '<div class="sub">📋 '+x.p.o+' · '+x.p.t+'<br>'+
+        '🕐 inició <b>'+x.p.hi+'</b> · franja '+x.p.f+'<br>'+
+        '📍 '+x.p.d+'</div>'+
+    '</div>';
+  }).join('');
+  cont.innerHTML = html;
+}
+
+// el reloj sigue corriendo aunque no lleguen datos nuevos
+setInterval(function(){
+  actualizarBadgeAtr();
+  if(atr) renderPanelAtr();
+  // la edad del dato tambien avanza sola: si el monitor deja de publicar, el
+  // sello se pone ambar aunque no entre ningun refresco
+  const lu = document.getElementById('lastUpd');
+  if(lu && SELLO_ULTIMO) marcarEdad(lu, SELLO_ULTIMO);
+}, 60000);
+/* ==================================================================== */
+
+/* ============ CARGA DE DATOS EN VIVO (rutas.json) ============ */
+/* Se ejecuta al abrir la pagina y despues sola cada REFRESCO_MIN minutos,
+   asi no hay que apretar F5.
+
+   ORDEN DE LAS FUENTES — importa, y estaba al reves:
+   Se probaba primero la API de Contents de GitHub. Sin token esa API permite
+   60 llamadas por HORA y por IP, no por pestaña. Con un refresco de 3 minutos
+   una sola pestaña gasta 20, asi que con tres despachadores mirando el tablero
+   desde la misma oficina (misma IP de salida) se llega al tope y GitHub
+   empieza a devolver 403. Ahi el codigo caia al plan B... y encima perdia un
+   viaje de ida y vuelta en cada refresco antes de hacerlo.
+
+   raw.githubusercontent no tiene limite de llamadas. Su unico problema es un
+   cache de CDN de 5 minutos, y eso ya se resuelve con el ?t= de abajo: al ser
+   una URL distinta cada vez, el CDN no puede servir una copia guardada. O sea
+   que raw es a la vez ilimitado y fresco, y le corresponde ir primero.
+
+   La API queda de respaldo por si raw falla. */
+/* Cada cuanto pregunta el tablero por datos nuevos.
+
+   Estaba en 3 minutos por el tope de la API de GitHub: con 60 llamadas/hora
+   por IP no se podia apurar mas sin que varios despachadores se pisaran entre
+   ellos. Ahora que se baja de raw, que no tiene tope, esa restriccion no
+   existe y bajarlo sale gratis.
+
+   La cuenta de la demora: el monitor produce un rutas.json nuevo cada 5 min y
+   el tablero pregunta cada REFRESCO_MIN. En el peor caso se suman. Con 3 el
+   techo era de 8 minutos; con 1 baja a 6, y el caso tipico se acerca al ciclo
+   del monitor en vez de sumarle media espera de gratis.
+
+   Por debajo de 1 no tiene sentido: el dato solo cambia cada 5 minutos, asi
+   que preguntar mas seguido es gastar llamadas para recibir lo mismo. */
+const REFRESCO_MIN = 1;
+const URL_RAW = 'https://raw.githubusercontent.com/luis-sepulveda/Rutas-tecnicos/main/rutas.json';
+const URL_API = 'https://api.github.com/repos/luis-sepulveda/Rutas-tecnicos/contents/rutas.json?ref=main';
+let ORIGEN_DATOS = '';   // de donde salio el ultimo refresco, para diagnosticar
+let SELLO_ULTIMO = null; // 'actualizado' del ultimo snapshot que se pinto
+
+/* Escribe el sello con la edad del dato. Sirve para saber DONDE esta la demora
+   sin adivinar: si la edad crece pero el sello no cambia, el atraso esta en la
+   subida (el monitor no publico); si la edad se mantiene baja, la bajada anda
+   bien. El tooltip delata si se cayo al respaldo por tope de llamadas. */
+function marcarEdad(lu, sello){
+  let edad = null;
+  if(FECHA_DATOS) edad = Math.round((new Date() - FECHA_DATOS)/60000);
+  lu.textContent = '🔄 Actualizado: ' + sello
+    + (edad !== null ? '  ·  hace ' + fmtDur(edad) : '');
+  lu.title = 'Origen: ' + (ORIGEN_DATOS === 'raw'
+      ? 'raw.githubusercontent (sin tope de llamadas)'
+      : 'API de Contents — se cayó al respaldo, probablemente por el tope de 60 llamadas/hora por IP')
+    + '. El tablero pregunta cada ' + REFRESCO_MIN + ' min y el monitor publica cada 5.';
+  lu.classList.toggle('viejo', edad !== null && edad > 15);
+}
+
+async function bajarRutasJson(){
+  // 1) raw con ?t= -> sin tope de llamadas y sin cache
+  try {
+    const r = await fetch(URL_RAW + '?t=' + Date.now(), { cache:'no-store' });
+    if(r.ok){ ORIGEN_DATOS = 'raw'; return await r.json(); }
+  } catch(e) { /* cae al plan B */ }
+  // 2) API de Contents -> respaldo, ojo con las 60/hora por IP
+  const r2 = await fetch(URL_API,
+    { headers:{'Accept':'application/vnd.github.raw'}, cache:'no-store' });
+  if(!r2.ok) throw new Error(r2.status);
+  ORIGEN_DATOS = 'api';
+  return await r2.json();
+}
+
+async function cargarDatosVivos(auto){
+  const lu = document.getElementById('lastUpd');
+  try {
+    const js = await bajarRutasJson();
+    if(!js.tecnicos) throw new Error('formato');
+
+    // El monitor publica cada 5 min y el tablero pregunta cada minuto, asi que
+    // cuatro de cada cinco respuestas traen exactamente lo mismo. Si el sello
+    // no cambio no se repinta: reconstruir el mapa, los selectores y los
+    // modales de gratis hace parpadear la pantalla y pierde el zoom. Igual se
+    // refresca la edad del dato, que es lo unico que si avanza.
+    if(auto && SELLO_ULTIMO && js.actualizado === SELLO_ULTIMO){
+      marcarEdad(lu, js.actualizado);
+      return;
+    }
+    SELLO_ULTIMO = js.actualizado;
+    // guardar lo que el usuario tenia seleccionado para no perderselo
+    const tecSel = sel.value;
+
+    DB = js.tecnicos;
+    normEstadosDB(DB);
+    tecs = Object.keys(DB).sort();
+    aplicarRGU(DB);
+    colorOf = {}; tecs.forEach((t,i)=>colorOf[t]=COLORS[i%COLORS.length]);
+    // reconstruir selectores de tecnicos
+    sel.innerHTML = '<option value="__ALL__">Todos los técnicos</option>';
+    tecs.forEach(t=>{ const o=document.createElement('option'); o.value=t; o.textContent=t; sel.appendChild(o); });
+    // devolver la seleccion si ese tecnico sigue existiendo
+    sel.value = tecs.includes(tecSel) ? tecSel : '__ALL__';
+
+    llenarListaTecs();
+    setFechaDatos(js.actualizado);
+    marcarEdad(lu, js.actualizado);
+    ALERTAS = js.alertas || null;      // caidas del dia (si el pipeline las trae)
+    renderBannerCaidas();
+    renderBotonRepe();                 // globo con las direcciones repetidas de hoy
+    renderBotonReca();                 // globo con las recaidas del mismo dia
+    if(recaAbierto) renderReca();
+    if(repeAbierto) renderRepe();      // si el modal esta abierto, se refresca solo
+    if(caidasAbierto) renderPanelCaidas();
+    if(comp) renderPanelComp();
+    render(auto);          // auto = true -> no reencuadra el mapa
+  } catch(e) {
+    // si falla un refresco automatico se deja lo que ya estaba en pantalla
+    // (mejor datos de hace un rato que la pagina en blanco)
+    if(!auto) lu.textContent = '⚠️ Mostrando datos de respaldo (embebidos)';
+  }
+}
+
+cargarDatosVivos(false);
+setInterval(function(){ cargarDatosVivos(true); }, REFRESCO_MIN*60*1000);
+// al volver a la pestaña despues de un rato, refrescar al tiro
+document.addEventListener('visibilitychange', function(){
+  if(!document.hidden) cargarDatosVivos(true);
+});
+
+
+/* ============ CARGA LOCAL DE EXCEL (independiente por despacho) ============ */
+document.getElementById('inExcel').addEventListener('change', function(ev){
+  const file = ev.target.files[0];
+  if(!file) return;
+  const lector = new FileReader();
+  lector.onload = function(e){
+    try {
+      const wb = XLSX.read(e.target.result, {type:'array'});
+      const hoja = wb.Sheets[wb.SheetNames[0]];
+      const filas = XLSX.utils.sheet_to_json(hoja, {raw:false, defval:''});
+      if(!filas.length) throw new Error('vacio');
+      const req = ['Técnico','Orden de Trabajo','Tipo de Actividad','Franja','Dirección','Ciudad','Coordenada X','Coordenada Y','Estado'];
+      const falta = req.filter(c=> !(c in filas[0]));
+      if(falta.length){ alert('El Excel no tiene el formato esperado. Faltan columnas: '+falta.join(', ')); return; }
+
+      const nuevo = {};
+      let nGSA = 0, nNR = 0, hayCols = false;
+      filas.forEach(f=>{
+        const tecRaw = String(f['Técnico']);
+        if(!/_DOMI_/i.test(tecRaw)) return;              // _DOMI_ con guiones (igual que el .py)
+        const ciu = String(f['Ciudad']||'').trim().toUpperCase();
+        if(ciu!=='QUILPUE' && ciu!=='VILLA ALEMANA') return;
+        const tec = tecRaw.replace(/^(QA_)?(B2B_)?(FS_)?MM_NFTT_(DOMI|TRAZ)_/,'').trim();
+        const lat = parseFloat(f['Coordenada Y']), lng = parseFloat(f['Coordenada X']);
+        if(!tec || isNaN(lat) || isNaN(lng)) return;
+        if(!nuevo[tec]) nuevo[tec] = [];
+        // Regla GSA: "No Realizada" + Código de Cierre "Falla Aprovisionamiento"
+        // + Área derivación "GSA"  ->  cuenta como Completado (igual que generar_rutas.py)
+        // Los encabezados se buscan sin tildes y los valores por CONTENIDO.
+        let est = normEstado(f['Estado']);
+        const _cierre = txtN(col(f,'Código de Cierre','Codigo de Cierre','Cod. de Cierre','Motivo de Cierre'));
+        const _deriv  = txtN(col(f,'Area derivación','Área derivación','Area de derivación','Area derivacion','Derivación'));
+        if(_cierre!==null || _deriv!==null) hayCols = true;
+        let esGSA = false;
+        if(est==='No Realizada'){
+          nNR++;
+          // mismas dos senales que generar_rutas.py: se buscan en las DOS
+          // columnas juntas, y 'provision' sin la 'a' para que calce tanto
+          // "Falla de Aprovisionamiento" como "Falla Provisionamiento".
+          const _amb = (_cierre||'') + ' | ' + (_deriv||'');
+          if(/falla/.test(_amb) && /provision/.test(_amb) && /\bgsa\b/.test(_amb)){
+            est = 'Completado'; esGSA = true; nGSA++;
+          }
+        }
+        nuevo[tec].push({
+          o: f['Orden de Trabajo'], t: f['Tipo de Actividad'], f: f['Franja'],
+          hi: f['Inicio']||'', hf: f['Fin']||'',
+          d: String(f['Dirección']).trim()+', '+String(f['Ciudad']).trim(),
+          lat: lat, lng: lng, e: est, gsa: esGSA?1:0,
+          sub: f['Subtipo']||'', pasos: f['Pasos']||'', fecha: f['Fecha']||'',
+          dir_raw: String(f['Dirección']).trim()
+        });
+      });
+      if(!hayCols && nNR){
+        alert('Aviso: este Excel no trae las columnas "Código de Cierre" / "Área derivación".\n'+
+              'Hay '+nNR+' orden(es) No Realizada que NO se pudieron evaluar con la regla GSA.\n'+
+              'Exporta el archivo completo desde el portal si necesitas que apliquen.');
+      }
+      console.log('Regla GSA: '+nGSA+' de '+nNR+' No Realizada reclasificadas como Completado');
+      Object.keys(nuevo).forEach(t=> nuevo[t].sort((a,b)=> (a.hi||'99:99').localeCompare(b.hi||'99:99')));
+
+      DB = nuevo;
+      renderBotonRepe();   // el Excel local no trae el cruce: el globo vuelve a 0
+      tecs = Object.keys(DB).sort();
+      aplicarRGU(DB);
+      colorOf = {}; tecs.forEach((t,i)=>colorOf[t]=COLORS[i%COLORS.length]);
+      sel.innerHTML = '<option value="__ALL__">Todos los técnicos</option>';
+      tecs.forEach(t=>{ const o=document.createElement('option'); o.value=t; o.textContent=t; sel.appendChild(o); });
+      llenarListaTecs();
+          const ahora = new Date();
+      FECHA_DATOS = new Date();
+      document.getElementById('lastUpd').textContent = '📂 Excel local: '+('0'+ahora.getHours()).slice(-2)+':'+('0'+ahora.getMinutes()).slice(-2)+' (solo en este PC)';
+      render();
+    } catch(err){ alert('No se pudo leer el Excel. Verifica que sea el export del portal.'); }
+  };
+  lector.readAsArrayBuffer(file);
+  ev.target.value = '';
+});
+
+</script>
+</body>
+</html>
