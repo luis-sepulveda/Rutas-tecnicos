@@ -23964,10 +23964,25 @@ function cqUbiCargar(){
       try {
         const h = await pzHash(inp.value);
         const quien = pzQuien(h);
-        if(!quien){ err.hidden = false; inp.select(); pzRegistrar('clave incorrecta'); return; }
+        if(!quien){ err.textContent = 'Clave incorrecta.'; err.hidden = false; inp.select(); pzRegistrar('clave incorrecta'); return; }
+        /* (21-11-2026) EQUIPOS AUTORIZADOS: con la clave buena, ademas el equipo tiene que estar en "Equipos conocidos"
+           (la misma hoja de Calidad). Esta consulta deja la fila en el Registro (con "sí" o "NO · BLOQUEADO") y, si el
+           equipo no esta, le llega el correo a Luis. */
+        if(PZ_EQUIPOS){
+          err.hidden = true; const btn = f.querySelector('button[type=submit]'); const tb = btn.textContent;
+          btn.textContent = 'Revisando equipo…'; btn.disabled = true;
+          const v = await pzEquipoOk(quien);
+          btn.textContent = tb; btn.disabled = false;
+          if(!v.ok){
+            err.innerHTML = v.error ? 'No se pudo revisar el equipo. Intenta de nuevo en un rato.'
+              : 'Este equipo no está autorizado.<br>Pídele a Luis que lo registre. Código del equipo: <b>' + v.equipo + '</b>';
+            err.hidden = false; return;
+          }
+          try { localStorage.setItem(PZ_LS_EQDIA, pzHoy()); } catch(x){}
+        }
         let llave = '';
         try { llave = await pzAbrirLlave(inp.value, h); } catch(x){ console.warn('llave datos:', x); }
-        pzRegistrar(quien);
+        if(!PZ_EQUIPOS) pzRegistrar(quien);
         try { const st = document.getElementById('pzRec').checked ? localStorage : sessionStorage;
           st.setItem(PZ_LS, h); if(llave) st.setItem(PZ_LS_DATOS, llave); } catch(x){}
         /* (20-11-2026) con la llave recien puesta se recarga la pagina: asi TODOS los json cifrados (rutas, historial,
@@ -23981,6 +23996,54 @@ function cqUbiCargar(){
     setTimeout(function(){ try { inp.focus(); } catch(x){} }, 50);
   }
   if(document.body) pzMostrar(); else document.addEventListener('DOMContentLoaded', pzMostrar);
+})();
+</script>
+<script>
+/* ===== (21-11-2026) EQUIPOS AUTORIZADOS PARA ENTRAR A LA PAGINA =====
+   Luis: "cuando necesiten ingresar desde otro equipo que yo no tenga registrado, no los deje ingresar, asi controlo
+   quien es el que intenta ingresar a la pagina". Ademas de la clave de la persona, el equipo tiene que estar en la
+   hoja "Equipos conocidos" de la planilla Registro Calidad (la misma que usa Calidad: codigo EQ o huella PC).
+   - Al poner la clave: se pregunta a Google (registro_calidad.gs, accion=entrar, Boton "Entrada a la página"). Queda
+     la fila en el Registro con "sí" o "NO · BLOQUEADO" y, si el equipo no esta, llega el correo. Bloqueado: se muestra
+     el codigo EQ del equipo para que Luis lo agregue a "Equipos conocidos".
+   - Equipos que ya tenian la clave recordada: se revisan UNA vez al dia, al abrir la pagina (sin esperar, por detras).
+     Si Google dice que el equipo no esta, se borra la clave recordada y se vuelve a pedir. Si Google no responde, se
+     deja pasar (para no dejar a todos afuera por una caida de Google).
+   - Agregar un equipo a "Equipos conocidos" tambien deja pasar el paso del equipo en Calidad, pero Calidad sigue
+     pidiendo SU clave (solo Luis y Rafael).
+   - Para apagarlo: PZ_EQUIPOS = false. */
+var PZ_EQUIPOS = true, PZ_LS_EQDIA = 'pzEquipoDia';
+function pzHoy(){ const d = new Date(); return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate(); }
+async function pzEquipoOk(quien){
+  const eq = (function(){ try { return cqEquipo(); } catch(e){ return '?'; } })();
+  if(typeof CQ_REG_URL === 'undefined' || !CQ_REG_URL) return { ok:true, equipo:eq };
+  try {
+    try { if(typeof cqUbiCargar === 'function') await cqUbiCargar(); } catch(e){}
+    const det = cqDetallePC(), hu = await cqHuella(det);
+    const q = 'accion=entrar&equipo=' + encodeURIComponent(eq) + '&tipo=' + encodeURIComponent(cqTipoEquipo())
+      + '&quien=' + encodeURIComponent(quien) + '&boton=' + encodeURIComponent('Entrada a la página')
+      + '&huella=' + encodeURIComponent(hu) + '&detalle=' + encodeURIComponent(det.slice(0, 200)) + '&t=' + Date.now();
+    const ctl = new AbortController(), tm = setTimeout(function(){ ctl.abort(); }, 25000);
+    const r = await fetch(CQ_REG_URL + (CQ_REG_URL.indexOf('?') < 0 ? '?' : '&') + q, { signal: ctl.signal });
+    clearTimeout(tm);
+    const j = JSON.parse(await r.text());
+    if(j && typeof j.permitido === 'boolean') return { ok:j.permitido, equipo:eq };
+    return { ok:false, error:true, equipo:eq };
+  } catch(e){ return { ok:false, error:true, equipo:eq }; }
+}
+(function(){
+  if(!PZ_ACTIVA || !PZ_EQUIPOS || !pzAbierta()) return;
+  let hecho = ''; try { hecho = localStorage.getItem(PZ_LS_EQDIA) || ''; } catch(e){}
+  if(hecho === pzHoy()) return;
+  let h = ''; try { h = localStorage.getItem(PZ_LS) || sessionStorage.getItem(PZ_LS) || ''; } catch(e){}
+  const quien = pzQuien(h); if(!quien) return;
+  setTimeout(async function(){
+    const v = await pzEquipoOk(quien);
+    if(v.ok){ try { localStorage.setItem(PZ_LS_EQDIA, pzHoy()); } catch(e){} return; }
+    if(v.error) return;   /* Google no respondio: se deja pasar hoy y se vuelve a revisar la proxima vez */
+    try { [localStorage, sessionStorage].forEach(function(st){ st.removeItem(PZ_LS); st.removeItem(PZ_LS_DATOS); }); localStorage.removeItem(PZ_LS_EQDIA); } catch(e){}
+    location.reload();
+  }, 1500);
 })();
 </script>
 </body>
