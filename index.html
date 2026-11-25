@@ -24669,6 +24669,87 @@ setTimeout(mdPorDireccion, 1500);
 #r4Page .rm-hist { font-size:12.5px; color:#334155; }
 #r4Page .rm-hist .c-ok { color:#15803d; font-weight:700; } #r4Page .rm-hist .c-nr { color:#b91c1c; }
 @media (max-width:900px){ #r4Page .rm-g2, #r4Page .rm-g3 { grid-template-columns:1fr; } #r4Page .rm-body { padding:12px; } #r4Page .rm-wrap { overflow-x:auto; } }
+/* ===== (25-11-2026) PANTALLA 4 · dibujo como la Pantalla 2 ===== */
+#r4Page { background:#eef2f6; }
+#r4Page .r4-wrap { max-width:1640px; margin:0 auto; padding:16px 18px 40px; }
+#r4Page .r4-top { position:sticky; top:8px; z-index:5; background:#162b4d; color:#fff; border-radius:16px; padding:12px 18px; box-shadow:0 6px 18px rgba(15,23,42,.18); }
+#r4Page .r4-f1 { display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px; }
+#r4Page .r4-f1 h1 { margin:0; font-size:23px; font-weight:800; letter-spacing:.01em; }
+#r4Page .r4-f1 h1 span { color:#7dd3fc; font-weight:600; }
+#r4Page .r4-f1 .pz-pant { margin-left:6px; }
+#r4Page .r4-fil { margin-left:auto; display:flex; flex-wrap:wrap; align-items:center; gap:4px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.18); border-radius:999px; padding:4px 6px 4px 12px; }
+#r4Page .r4-fil b { font-size:11px; letter-spacing:.08em; color:#cbd5e1; margin-right:4px; }
+#r4Page .r4-fil button { border:0; background:transparent; color:#e2e8f0; font:700 13px 'DM Sans','Segoe UI',Arial,sans-serif; padding:5px 11px; border-radius:999px; cursor:pointer; }
+#r4Page .r4-fil button.on { background:#fff; color:#0f1d33; }
+#r4Page .r4-fil select { background:#1e3a64; color:#fff; border:1px solid rgba(255,255,255,.25); border-radius:999px; padding:4px 8px; font:600 12.5px 'DM Sans','Segoe UI',Arial,sans-serif; }
+#r4Page .r4-fil .r4-x { border:1px solid rgba(255,255,255,.3); margin-left:6px; }
+#r4Page .r4-x { background:rgba(255,255,255,.12); color:#fff; border:1px solid rgba(255,255,255,.3); border-radius:999px; padding:5px 12px; font:700 13px 'DM Sans','Segoe UI',Arial,sans-serif; cursor:pointer; }
+#r4Page .r4-f2 { position:relative; display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin-top:10px; padding-top:10px; border-top:1px solid rgba(255,255,255,.12); }
+#r4Page .r4-fecha { font-size:13.5px; font-weight:700; margin-right:6px; }
+#r4Page .r4-mb { background:#1e3a64; color:#fff; border:1px solid rgba(255,255,255,.22); border-radius:8px; padding:6px 12px; font:700 13.5px 'DM Sans','Segoe UI',Arial,sans-serif; cursor:pointer; }
+#r4Page .r4-mb i { font-style:normal; background:#fbbf24; color:#1c1917; border-radius:999px; padding:0 7px; font-size:11.5px; margin-left:4px; }
+#r4Page .r4-mb.on, #r4Page .r4-mb:hover { background:#2a4f86; }
+#r4Page .r4-mb.r4-volver { background:#fbbf24; color:#1c1917; border-color:#fbbf24; }
+#r4Page .r4-q { margin-left:auto; min-width:280px; background:#fff; border:0; border-radius:8px; padding:7px 11px; font:13.5px 'DM Sans','Segoe UI',Arial,sans-serif; color:#0f172a; }
+#r4Page .r4-pop { position:absolute; left:0; top:100%; margin-top:8px; width:min(720px, 96vw); max-height:70vh; overflow:auto; background:#fff; color:#0f172a; border-radius:14px; box-shadow:0 18px 40px rgba(15,23,42,.35); z-index:20; padding-bottom:8px; }
+#r4Page .r4-poph { display:flex; align-items:center; padding:12px 16px; border-bottom:1px solid #e2e8f0; font-size:16px; }
+#r4Page .r4-poph button { margin-left:auto; border:0; background:#f1f5f9; border-radius:8px; padding:4px 10px; cursor:pointer; font-weight:700; }
+#r4Page .r4-popsub { padding:10px 16px 4px; font-size:11.5px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:#64748b; }
+#r4Page .r4-popit { display:flex; align-items:center; gap:12px; margin:4px 10px; padding:9px 12px; border:1px solid #e2e8f0; border-radius:10px; cursor:pointer; }
+#r4Page .r4-popit:hover { background:#eff6ff; border-color:#93c5fd; }
+#r4Page .r4-popit .ic { font-size:20px; } #r4Page .r4-popit b { display:block; font-size:14.5px; } #r4Page .r4-popit small { color:#475569; font-size:12.5px; } #r4Page .r4-popit .fl { margin-left:auto; color:#2563eb; font-size:22px; font-weight:700; }
+#r4Page .r4-sec { display:flex; flex-wrap:wrap; align-items:center; gap:10px 18px; margin:18px 2px 10px; font-size:12.5px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:#475569; }
+#r4Page .r4-ley { display:inline-flex; flex-wrap:wrap; gap:8px 18px; text-transform:none; letter-spacing:0; font-size:14px; font-weight:700; color:#0f172a; background:#fff; border:1px solid #cbd5e1; border-radius:10px; padding:6px 14px; }
+#r4Page .r4-ley span, #r4Page .r4-ley2 span { display:inline-flex; align-items:center; gap:7px; }
+#r4Page .r4-ley i { display:inline-block; width:15px; height:15px; border-radius:3px; }
+#r4Page .r4-filtro { text-transform:none; letter-spacing:0; font-size:13px; background:#fef9c3; border:1px solid #fde68a; border-radius:8px; padding:4px 10px; color:#0f172a; }
+#r4Page .r4-filtro button, #r4Page .r4-lnk { border:0; background:transparent; color:#2563eb; font-weight:700; cursor:pointer; }
+#r4Page .r4-g3 { display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; }
+#r4Page .r4-g2 { display:grid; grid-template-columns:1.15fr 1fr; gap:16px; align-items:start; }
+#r4Page .r4-col { display:flex; flex-direction:column; gap:16px; }
+#r4Page .r4-card { background:#fff; border:1px solid #c7d2e3; border-radius:14px; overflow:hidden; box-shadow:0 1px 3px rgba(15,23,42,.06); }
+#r4Page .r4-ch { display:flex; align-items:center; gap:10px; background:#162b4d; color:#fff; padding:10px 14px; border-bottom:4px solid var(--c, #2563eb); }
+#r4Page .r4-ch h3 { margin:0; font-size:17px; font-weight:800; }
+#r4Page .r4-ch > i { width:11px; height:11px; border-radius:50%; display:inline-block; }
+#r4Page .r4-ch a { margin-left:auto; color:#93c5fd; font-size:13px; font-weight:700; cursor:pointer; }
+#r4Page .r4-chs { color:#cbd5e1; font-size:12.5px; }
+#r4Page .r4-chip { background:#16a34a33; color:#bbf7d0; border:1px solid #16a34a; border-radius:999px; padding:2px 10px; font:700 12px inherit; cursor:pointer; }
+#r4Page .r4-chip2 { margin-left:auto; background:#fff; color:#1d4ed8; border:0; border-radius:8px; padding:4px 10px; font:700 12.5px inherit; cursor:pointer; }
+#r4Page .r4-chip3 { margin-left:auto; background:#0ea5e9; color:#fff; border:0; border-radius:999px; padding:5px 12px; font:700 12.5px inherit; cursor:pointer; }
+#r4Page .r4-rel { display:grid; grid-template-columns:1fr 1.5fr 1fr; align-items:end; gap:4px; padding:12px 10px 4px; }
+#r4Page .r4-rel svg { width:100%; height:auto; }
+#r4Page .r4-cf { display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; border-top:1px solid #e2e8f0; margin:0 14px; padding:9px 0 11px; font-size:13.5px; color:#0f172a; }
+#r4Page .r4-cf small { color:#64748b; }
+#r4Page .r4-cb { padding:12px 14px; }
+#r4Page .r4-semw { padding:10px 12px 14px; overflow-x:auto; }
+#r4Page .r4-sem { width:100%; border-collapse:separate; border-spacing:6px; }
+#r4Page .r4-sem th { font-size:13px; color:#0f172a; font-weight:800; } #r4Page .r4-sem th small { display:block; font-size:10.5px; color:#64748b; font-weight:600; }
+#r4Page .r4-sem td.nm { font-size:14px; font-weight:700; color:#0f172a; white-space:nowrap; padding-right:6px; } #r4Page .r4-sem td.nm.dom { color:#c2410c; }
+#r4Page .r4-sem .d { border-radius:8px; text-align:center; padding:9px 4px; min-width:66px; }
+#r4Page .r4-sem .d b { display:block; font-size:15px; } #r4Page .r4-sem .d small { font-size:11px; }
+#r4Page .r4-sem .c-ok { background:#dcfce7; color:#166534; box-shadow:inset 0 0 0 1px #bbf7d0; }
+#r4Page .r4-sem .c-med { background:#fef3c7; color:#b45309; box-shadow:inset 0 0 0 1px #fde68a; }
+#r4Page .r4-sem .c-mal { background:#fee2e2; color:#b91c1c; box-shadow:inset 0 0 0 1px #fecaca; }
+#r4Page .r4-sem .c-n, #r4Page .r4-sem .c-z { background:#f1f5f9; color:#94a3b8; }
+#r4Page .r4-semsep td { font-size:11.5px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:#64748b; padding-top:8px; }
+#r4Page .r4-ley2 { display:flex; flex-wrap:wrap; gap:8px 18px; font-size:13.5px; margin-top:4px; } #r4Page .r4-ley2 i { width:12px; height:12px; border-radius:50%; display:inline-block; }
+#r4Page .r4-bar { display:grid; grid-template-columns:80px 1fr 70px 46px; align-items:center; gap:8px; padding:5px 0; font-size:14px; }
+#r4Page .r4-bar.dom { font-weight:800; } #r4Page .r4-bar .b { position:relative; height:14px; background:#f1f5f9; border-radius:7px; }
+#r4Page .r4-bar .b i { position:absolute; left:0; top:0; bottom:0; border-radius:7px; } #r4Page .r4-bar .b u { position:absolute; top:-3px; bottom:-3px; width:3px; background:#0f1d33; border-radius:2px; }
+#r4Page .r4-bar .p { text-align:right; } #r4Page .r4-bar small { color:#94a3b8; font-size:11.5px; }
+#r4Page .r4-vh { display:flex; align-items:center; gap:14px; margin:18px 0 12px; }
+#r4Page .r4-vh button { background:#0f1d33; color:#fff; border:0; border-radius:8px; padding:7px 12px; font:700 13px inherit; cursor:pointer; }
+#r4Page .r4-vh h2 { margin:0; font-size:21px; } #r4Page .r4-vh small { color:#64748b; font-size:13px; }
+#r4Page .r4-ul { margin:0; padding-left:20px; font-size:14px; line-height:1.6; }
+#r4Page .r4-ger { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:14px; }
+#r4Page .r4-gc { background:#fff; border:1px solid #c7d2e3; border-radius:14px; padding:16px 18px; }
+#r4Page .r4-gc .t { font-size:14px; font-weight:800; text-transform:uppercase; letter-spacing:.05em; color:#334155; } #r4Page .r4-gc .t small { text-transform:none; color:#64748b; font-weight:600; }
+#r4Page .r4-gc .n { font-size:46px; font-weight:800; line-height:1.1; margin:4px 0; } #r4Page .r4-gc .p { color:#475569; font-size:13.5px; }
+#r4Page .r4-gr { display:flex; gap:14px; flex-wrap:wrap; margin-top:8px; font-size:14px; }
+#r4Page .r4-reu { font-size:115%; } #r4Page .r4-reu .rm-tabla { font-size:16px; } #r4Page .r4-reu .r4-gc .n { font-size:60px; }
+#r4Page .r4-carga { padding:60px 20px; text-align:center; color:#475569; font-size:15px; }
+@media (max-width:1100px){ #r4Page .r4-g3, #r4Page .r4-g2 { grid-template-columns:1fr; } #r4Page .r4-q { min-width:0; flex:1; } }
+
 </style>
 <script>
 /* ===== (25-11-2026) PANTALLA 4 · MIGRACIONES RM (solo Luis) =====
@@ -24684,10 +24765,16 @@ setTimeout(mdPorDireccion, 1500);
      ambar, bajo 50 rojo (sin gris por pocas visitas). % con 2 decimales. Semanas de lunes a sabado; las 4 semanas cerradas
      son las 4 anteriores a la semana del ultimo dia con datos. Seguimiento = 8 visitas o mas en la base y bajo 60 %
      (regla de la V Region); bajo 60 % con menos de 8 visitas = marca "pocas visitas".
-   - Vistas: Resumen, Comunas, Cuándo (franja, dia, vivienda), Técnicos, Direcciones. */
+   - (25-11-2026, 12:30) Luis: "se podria armar esta pantalla como la de la pantalla 2?? obviamente dejando afuera lo del dia en
+     curso que es el automatizado??? con todo el detalle que vemos ahi". Tablero con el dibujo de la Pantalla 2: cabecera azul
+     marino (comuna y menus El mes / Tecnicos / Direcciones / Para mostrar, buscador), relojes Dominion / CREA / Resto
+     (semana anterior, semana del ultimo export, mes), semaforo de 8 semanas, Dominion por comuna, ¿Como cierra el mes?
+     y empresas del area. Cada menu abre su vista (detalle del mes, dia a dia, franjas, resumen de derivacion, ficha,
+     seguimiento, semana a semana, a quien auditar, por tecnico, por direccion, ya visitadas, gerencia, empresas, comunas).
+     Sin "Hoy": el dia en curso es del monitor y aqui no hay. */
 const URL_R4 = 'https://raw.githubusercontent.com/luis-sepulveda/Rutas-tecnicos/data/rm_migraciones.json';   /* mismo repo y rama que rutas.json (REPO_BASE / RAMA_DATOS) */
 var R4 = null, R4_R = null, R4_ERR = '', R4_T = 0, R4_PROM = null;
-var R4_VISTA = 'res', R4_PER = '', R4_COM = 'Todas', R4_TEC = '', R4_BUS = '', R4_ORD = 'base', R4_DIRV = 'deriv';
+var R4_VISTA = '', R4_PER = '', R4_COM = 'Todas', R4_TEC = '', R4_BUS = '', R4_ORD = 'base', R4_DIRV = 'deriv';
 const R4_GEST = ['SIN MORADORES', 'CLIENTE REAGENDA', 'CLIENTE DESISTE'];
 const R4_DOW = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
 const R4_EMPN = { DOMI:'Dominion', CREA:'CREA', ATLA:'ATLA', XR3:'XR3', TECH:'TECH', TRAZ:'TRAZ', EMCO:'EMCO', OTRAS:'Otras' };
@@ -24780,7 +24867,7 @@ function r4Abrir(){
   try { if(typeof anCerrar === 'function') anCerrar(); } catch(e){}
   try { if(typeof mdAbierta === 'function' && mdAbierta()) mdCerrar(); } catch(e){}
   let m = document.getElementById('r4Page');
-  if(!m){ m = document.createElement('div'); m.id = 'r4Page'; document.body.appendChild(m); }
+  if(!m){ m = document.createElement('div'); m.id = 'r4Page'; document.body.appendChild(m); m.addEventListener('click', function(){ if(R4_MENU){ R4_MENU = ''; r4Pintar(); } }); }
   m.classList.add('abierto'); document.body.style.overflow = 'hidden'; r4Pintar();
   r4Cargar().then(function(){ r4Pintar(); });
 }
@@ -24788,42 +24875,189 @@ function r4Cerrar(){
   const m = document.getElementById('r4Page'); if(m) m.classList.remove('abierto'); document.body.style.overflow = '';
   if((location.hash || '').toLowerCase() === '#rm'){ try { history.replaceState(null, '', location.pathname + location.search); } catch(x){} }
 }
-function r4Vista(v){ R4_VISTA = v; R4_TEC = ''; r4Pintar(); const m = document.getElementById('r4Page'); if(m) m.scrollTop = 0; }
-function r4Per(p){ R4_PER = p; R4_TEC = ''; r4Pintar(); }
+var R4_MENU = '', R4_Q = '', R4_FICHA = '', R4_REUNION = false, R4_SEMVER = false;
+/* menu como el de la Pantalla 2 (sin el grupo Hoy: el dia en curso es del monitor, aqui no hay) */
+const R4_GRUPOS = [['mes','📅','El mes'], ['tec','👷','Técnicos'], ['dir','🏠','Direcciones'], ['mos','📤','Para mostrar']];
+function r4Menu(){
+  const L = [];
+  if(R4_R) R4_R.meses.slice().reverse().forEach(function(m){ L.push(['mes', 'mes:' + m, '📅', 'Detalle de cada mes', r4MesTxt(m).replace(/^./, function(c){ return c.toUpperCase(); }),
+    (m === R4_R.ult.slice(0, 6) ? 'Hasta el ' + r4Fecha(R4_R.ult) : 'Mes completo') + ' · todo el detalle del mes']); });
+  L.push(['mes', 'diario', '📈', 'Migraciones', 'Migraciones día a día', 'Completitud de cada día con el mes acumulado'],
+    ['mes', 'franja', '🕒', 'Migraciones', 'Derivaciones por franja', 'En qué franja se deriva más: semana, día, técnico y comuna'],
+    ['mes', 'resder', '🧾', 'Migraciones', 'Resumen de derivación', 'Cómo vamos y con quién conversar'],
+    ['tec', 'ficha', '🪪', 'Migraciones', 'Ficha del técnico', 'Todo sobre un técnico y qué revisar primero'],
+    ['tec', 'seg', '🎯', 'Migraciones', 'Seguimiento bajo 60 %', 'Los técnicos bajo la meta en las 4 semanas cerradas, rojo y amarillo'],
+    ['tec', 'tss', '📊', 'Migraciones', 'Técnicos semana a semana', 'Completitud de cada técnico en las últimas 8 semanas, con tendencia'],
+    ['tec', 'aud', '🔍', 'Migraciones', 'A quién auditar', 'Lo derivado propio de cada técnico'],
+    ['tec', 'dtec', '👥', 'Migraciones', 'Por técnico (derivación)', 'Quién deriva más y la historia de cada dirección'],
+    ['tec', 'tecs', '📋', 'Migraciones', 'Todos los técnicos', 'Semanas, base, meses y período de cada técnico'],
+    ['dir', 'pdir', '📍', 'Direcciones', 'Por dirección', 'Qué pasó después con cada casa derivada (y cuáles completó otra empresa)'],
+    ['dir', 'yav', '🏚', 'Direcciones', 'Direcciones ya visitadas', 'Las casas que se visitaron más de una vez, con su historia'],
+    ['mos', 'ger', '🏢', 'Para la jefatura', 'Migraciones · Gerencia', 'Por mes y semana, con Modo reunión'],
+    ['mos', 'emp', '🏁', 'Para la jefatura', 'Empresas del área', 'Dominion contra CREA, ATLA, XR3, TECH, TRAZ y EMCO'],
+    ['mos', 'com', '🗺', 'Para la jefatura', 'Comunas', 'Dominion contra el resto en cada comuna y quién hace cada comuna'],
+    ['mos', 'cuando', '🕓', 'Para la jefatura', 'Franja, día y vivienda', 'Cuándo y dónde se completa menos']);
+  return L;
+}
+function r4MenuAbrir(g, ev){ if(ev) ev.stopPropagation(); R4_MENU = R4_MENU === g ? '' : g; r4Pintar(); }
+function r4Ir(v){ R4_MENU = ''; R4_Q = ''; R4_VISTA = v; R4_TEC = ''; R4_BUS = '';
+  if(v.indexOf('mes:') === 0){ R4_PER = v; }
+  if(v === 'seg' || v === 'aud') R4_PER = 'base4';
+  r4Pintar(); const m = document.getElementById('r4Page'); if(m) m.scrollTop = 0; }
+function r4Tablero(){ R4_VISTA = ''; R4_MENU = ''; R4_TEC = ''; r4Pintar(); const m = document.getElementById('r4Page'); if(m) m.scrollTop = 0; }
+function r4Vista(v){ r4Ir(v); }
+function r4Per(p){ R4_PER = p; R4_TEC = ''; if(R4_VISTA.indexOf('mes:') === 0 && p.indexOf('mes:') === 0) R4_VISTA = p; r4Pintar(); }
 function r4Comuna(c){ R4_COM = c; R4_TEC = ''; r4Pintar(); }
 function r4VerTec(t){ R4_TEC = (R4_TEC === t ? '' : t); r4Pintar(); if(R4_TEC) setTimeout(function(){ const b = document.getElementById('r4TecDet'); if(b) b.scrollIntoView({ behavior:'smooth', block:'start' }); }, 30); }
 function r4Buscar(v){ R4_BUS = v; const q = mpNorm(v); document.querySelectorAll('#r4Page tr[data-b]').forEach(function(r){ r.style.display = !q || mpNorm(r.dataset.b).indexOf(q) >= 0 ? '' : 'none'; }); }
+function r4BuscarMenu(v){ R4_Q = v; R4_MENU = v ? '*' : ''; r4Pintar(); const b = document.getElementById('r4Q'); if(b){ b.focus(); b.setSelectionRange(b.value.length, b.value.length); } }
 function r4Orden(o){ R4_ORD = o; r4Pintar(); }
 function r4DirV(v){ R4_DIRV = v; r4Pintar(); }
 function r4Recargar(){ R4_T = 0; r4Cargar(true).then(function(){ r4Pintar(); }); r4Pintar(); }
+function r4Ficha(t){ R4_FICHA = t; R4_VISTA = 'ficha'; R4_MENU = ''; r4Pintar(); const m = document.getElementById('r4Page'); if(m) m.scrollTop = 0; }
+function r4Reunion(){ R4_REUNION = !R4_REUNION; r4Pintar(); }
+function r4SemVer(){ R4_SEMVER = !R4_SEMVER; r4Pintar(); }
 
 /* ---- pintar ---- */
 function r4Pintar(){
   const m = document.getElementById('r4Page'); if(!m || !m.classList.contains('abierto')) return;
-  const y = m.scrollTop, foco = document.activeElement && document.activeElement.id === 'r4Bus';
-  let h = '<div class="rm-head"><h1>🏙️ Migraciones RM</h1><span class="rm-sub">Dominion · Área Operación Metropolitana' + (R4 ? ' · export hasta el ' + r4FechaL(R4_R.ult) + ' · armado ' + r4Esc(R4.gen) : '') + '</span>'
-    + (typeof pzPantHtml === 'function' ? pzPantHtml(5) : '') + '<button class="rm-cerrar" onclick="r4Cerrar()">✕ Cerrar</button></div><div class="rm-body">';
+  const y = m.scrollTop, act = document.activeElement ? document.activeElement.id : '';
+  const comunas = R4_R ? r4ComunasTop() : [];
+  let h = '<div class="r4-wrap' + (R4_REUNION ? ' r4-reu' : '') + '"><div class="r4-top"><div class="r4-f1"><h1>MIGRACIONES RM: <span>Dominion</span></h1>'
+    + (typeof pzPantHtml === 'function' ? pzPantHtml(5) : '')
+    + '<div class="r4-fil"><b>COMUNA</b>' + ['Todas'].concat(comunas.slice(0, 4)).map(function(c){ return '<button class="' + (R4_COM === c ? 'on' : '') + '" data-c="' + r4Esc(c) + '" onclick="event.stopPropagation(); r4Comuna(this.dataset.c)">' + r4Esc(c) + '</button>'; }).join('')
+    + (comunas.length > 4 ? '<select onclick="event.stopPropagation()" onchange="r4Comuna(this.value)"><option value="">' + (comunas.slice(0, 4).indexOf(R4_COM) < 0 && R4_COM !== 'Todas' ? r4Esc(R4_COM) : 'Otras…') + '</option>' + comunas.slice(4).map(function(c){ return '<option value="' + r4Esc(c) + '">' + r4Esc(c) + '</option>'; }).join('') + '</select>' : '')
+    + '<button class="r4-x" onclick="event.stopPropagation(); r4Cerrar()">✕ Cerrar</button></div></div>';
+  h += '<div class="r4-f2"><span class="r4-fecha">' + (R4 ? 'Export hasta el ' + r4FechaL(R4_R.ult) + ' · armado ' + r4Esc(R4.gen) : 'Cargando…') + '</span>';
+  if(R4){
+    const M = r4Menu();
+    R4_GRUPOS.forEach(function(g){ const n = M.filter(function(x){ return x[0] === g[0]; }).length;
+      h += '<button class="r4-mb' + (R4_MENU === g[0] ? ' on' : '') + '" onclick="r4MenuAbrir(\'' + g[0] + '\', event)">' + g[1] + ' ' + g[2] + ' <i>' + n + '</i></button>'; });
+    if(R4_VISTA) h += '<button class="r4-mb r4-volver" onclick="event.stopPropagation(); r4Tablero()">‹ Tablero</button>';
+    h += '<input id="r4Q" class="r4-q" placeholder="Buscar: técnico, franja, comuna, dirección…" value="' + r4Esc(R4_Q) + '" onclick="event.stopPropagation()" oninput="r4BuscarMenu(this.value)">';
+    if(R4_MENU) h += r4MenuPop(M);
+  }
+  h += '</div></div>';
   if(!R4){
-    h += '<div class="rm-carga">' + (R4_ERR ? R4_ERR + '<br><br><button class="rm-cerrar" style="margin:0;background:#0f1d33" onclick="r4Recargar()">Reintentar</button>' : 'Cargando los datos de la RM…') + '</div></div>';
+    h += '<div class="r4-carga">' + (R4_ERR ? R4_ERR + '<br><br><button class="r4-x" style="background:#0f1d33;color:#fff" onclick="r4Recargar()">Reintentar</button>' : 'Cargando los datos de la RM…') + '</div></div>';
     m.innerHTML = h; return;
   }
   let cuerpo = '';
-  try {
-    const D = R4_R, chip = function(fn, v, t, on){ return '<button class="' + (on ? 'on' : '') + '" onclick="' + fn + '(\'' + v + '\')">' + t + '</button>'; };
-    h += '<div class="rm-chips"><b>Período</b>' + r4Periodos().map(function(p){ return chip('r4Per', p[0], r4Esc(p[1]), R4_PER === p[0]); }).join('')
-      + '<select onchange="if(this.value) r4Per(this.value)"><option value="">Una semana…</option>' + D.sems.slice().reverse().map(function(s){ const n = Object.keys(D.diasSem[s]).length;
-          return '<option value="sem:' + s + '"' + (R4_PER === 'sem:' + s ? ' selected' : '') + '>' + r4SemTxt(s) + (s === D.semEnCurso ? ' (en curso)' : n < 6 ? ' (' + n + ' días)' : '') + '</option>'; }).join('') + '</select></div>';
-    const comD = {}; D.R.forEach(function(x){ if(x.dom && x.vis) comD[x.com] = (comD[x.com] || 0) + 1; });
-    const coms = Object.keys(comD).sort(function(a, b){ return comD[b] - comD[a]; });
-    h += '<div class="rm-chips"><b>Comuna</b><select onchange="r4Comuna(this.value)"><option value="Todas">Todas</option>' + coms.map(function(c){ return '<option value="' + r4Esc(c) + '"' + (R4_COM === c ? ' selected' : '') + '>' + r4Esc(c) + ' (' + comD[c] + ')</option>'; }).join('') + '</select></div>';
-    h += '<div class="rm-tabs">' + [['res','Resumen'],['com','Comunas'],['cuando','Cuándo: franja, día, vivienda'],['tec','Técnicos'],['dir','Direcciones']].map(function(v){ return '<button class="' + (R4_VISTA === v[0] ? 'on' : '') + '" onclick="r4Vista(\'' + v[0] + '\')">' + v[1] + '</button>'; }).join('') + '</div>';
-    h += '<div class="rm-per">' + r4Esc(r4PerTxt()) + (R4_VISTA === 'tec' ? ' · la tabla trae además las semanas y los meses' : '') + '</div>';
-    if(R4_COM !== 'Todas') h += '<div class="rm-activos">Filtrando la comuna <b>' + r4Esc(R4_COM) + '</b> <button onclick="r4Comuna(\'Todas\')">Quitar</button></div>';
-    cuerpo = R4_VISTA === 'com' ? r4VComunas() : R4_VISTA === 'cuando' ? r4VCuando() : R4_VISTA === 'tec' ? r4VTecnicos() : R4_VISTA === 'dir' ? r4VDirecciones() : r4VResumen();
-  } catch(e){ console.warn('rm pintar:', e); cuerpo = '<div class="rm-carga">No se pudo armar esta vista (' + r4Esc(e.message) + ').</div>'; }
-  h += cuerpo + '<div class="rm-nota">Completitud como VTR/CLARO: completadas ÷ (completadas + no realizadas), con GSA como quiebre. Canceladas y suspendidas no cuentan. Solo migraciones. Datos: export diarios del Área Operación Metropolitana (carpeta Migraciones RM) → actualizar_rm.bat.</div></div>';
+  try { cuerpo = R4_VISTA ? r4VistaHtml() : r4TableroHtml(); }
+  catch(e){ console.warn('rm pintar:', e); cuerpo = '<div class="r4-carga">No se pudo armar esta vista (' + r4Esc(e.message) + ').</div>'; }
+  h += cuerpo + '<div class="rm-nota">Completitud como VTR/CLARO: completadas ÷ (completadas + no realizadas), con GSA como quiebre. Canceladas y suspendidas no cuentan. Solo migraciones. Datos: export diarios del Área Operación Metropolitana (carpeta Migraciones RM) → actualizar_rm.bat. Sin día en curso: llega hasta el último export.</div></div>';
   m.innerHTML = h; m.scrollTop = y;
-  if(R4_BUS){ r4Buscar(R4_BUS); if(foco){ const b = document.getElementById('r4Bus'); if(b){ b.focus(); b.setSelectionRange(b.value.length, b.value.length); } } }
+  if(R4_BUS) r4Buscar(R4_BUS);
+  if(act === 'r4Bus' || act === 'r4Q'){ const b = document.getElementById(act); if(b){ b.focus(); b.setSelectionRange(b.value.length, b.value.length); } }
+}
+function r4MenuPop(M){
+  let L = M, tit = '';
+  if(R4_MENU === '*'){ const q = mpNorm(R4_Q); L = M.filter(function(x){ return mpNorm(x[4] + ' ' + x[5] + ' ' + x[3]).indexOf(q) >= 0; }); tit = 'Resultados para "' + r4Esc(R4_Q) + '"';
+    /* tecnicos que calzan con lo buscado: abre su ficha */
+    const tq = R4_R ? Object.keys(R4_R.R.reduce(function(a, x){ if(x.dom && x.tec && mpNorm(x.tec).indexOf(q) >= 0) a[x.tec] = 1; return a; }, {})).slice(0, 8) : [];
+    tq.forEach(function(t){ L = L.concat([['tec', 'ficha:' + t, '🪪', 'Técnico', t, 'Abrir la ficha del técnico']]); });
+  } else { const g = R4_GRUPOS.filter(function(g){ return g[0] === R4_MENU; })[0]; tit = g[1] + ' ' + g[2]; L = M.filter(function(x){ return x[0] === R4_MENU; }); }
+  let h = '<div class="r4-pop" onclick="event.stopPropagation()"><div class="r4-poph"><b>' + tit + '</b><button onclick="r4MenuAbrir(\'\', event)">✕</button></div>';
+  if(!L.length) return h + '<div class="rm-nota" style="padding:10px 16px">Nada con ese texto.</div></div>';
+  let sub = '';
+  L.forEach(function(x){
+    if(x[3] !== sub){ sub = x[3]; h += '<div class="r4-popsub">' + r4Esc(sub) + '</div>'; }
+    const accion = x[1].indexOf('ficha:') === 0 ? 'r4Ficha(this.dataset.t)' : 'r4Ir(this.dataset.v)';
+    h += '<div class="r4-popit" data-v="' + r4Esc(x[1]) + '" data-t="' + r4Esc(x[1].slice(6)) + '" onclick="' + accion + '"><span class="ic">' + x[2] + '</span><span><b>' + r4Esc(x[4]) + '</b><small>' + r4Esc(x[5]) + '</small></span><span class="fl">›</span></div>';
+  });
+  return h + '</div>';
+}
+function r4ComunasTop(){ if(R4_R._ct) return R4_R._ct; const c = {}; R4_R.R.forEach(function(x){ if(x.dom && x.vis) c[x.com] = (c[x.com] || 0) + 1; });
+  return (R4_R._ct = Object.keys(c).sort(function(a, b){ return c[b] - c[a]; })); }
+
+/* ---- tablero (como la Pantalla 2, sin el dia en curso) ---- */
+const R4_GRP = [['dom', 'Dominion', '#d9480f', function(x){ return x.dom; }], ['crea', 'CREA', '#2f9e44', function(x){ return x.emp === 'CREA'; }], ['resto', 'Resto de empresas', '#64748b', function(x){ return !x.dom; }]];
+function r4Pc2(L, fn){ let v = 0, o = 0; L.forEach(function(x){ if(x.vis && fn(x)){ v++; if(x.ok) o++; } }); return { v:v, o:o, p:v ? o * 100 / v : null }; }
+function r4TableroHtml(){
+  const D = R4_R, sem = D.semEnCurso, semAnt = D.cerr[D.cerr.length - 1], mes = D.ult.slice(0, 6);
+  const nDia = (r4D(D.ult).getDay() + 6) % 7;   /* 0 = lunes */
+  const corte = r4Fmt(new Date(r4D(semAnt).getTime() + nDia * 864e5)), diaTxt = ['lun', 'lun a mar', 'lun a mié', 'lun a jue', 'lun a vie', 'lun a sáb', 'lun a dom'][nDia];
+  const B = D.R.filter(function(x){ return r4Com(x); });
+  let h = '<div class="r4-sec">Relojes de completitud · completadas ÷ visitadas · GSA como quiebre (como VTR) · meta 60%'
+    + '<span class="r4-ley">' + [['#16a34a','60 % o más'],['#eab308','50 a 59,99 %'],['#dc2626','bajo 50 %']].map(function(c){ return '<span><i style="background:' + c[0] + '"></i>' + c[1] + '</span>'; }).join('')
+    + '<span><i style="width:4px;height:18px;border-radius:2px;background:#132a4a"></i>meta</span><span><i style="border-radius:50%;background:#fff;border:3px solid #132a4a;box-sizing:border-box"></i>cómo vamos</span></span>'
+    + (R4_COM !== 'Todas' ? '<span class="r4-filtro">Comuna: <b>' + r4Esc(R4_COM) + '</b> <button onclick="r4Comuna(\'Todas\')">Quitar</button></span>' : '') + '</div>';
+  h += '<div class="r4-g3">';
+  R4_GRP.forEach(function(g){
+    const a = r4Pc2(B, function(x){ return g[3](x) && x.sem === semAnt; }), s = r4Pc2(B, function(x){ return g[3](x) && x.sem === sem; }), mm = r4Pc2(B, function(x){ return g[3](x) && x.mes === mes; });
+    const sc = r4Pc2(B, function(x){ return g[3](x) && x.sem === semAnt && x.iso <= corte; });
+    const dif = s.p !== null && sc.p !== null ? s.p - sc.p : null;
+    h += '<div class="r4-card"><div class="r4-ch" style="--c:' + g[2] + '"><i style="background:' + g[2] + '"></i><h3>' + g[1] + '</h3>'
+      + (g[0] === 'dom' ? '<button class="r4-chip" onclick="r4Ir(\'com\')">📍 Por comuna</button><a onclick="r4Ir(\'mes:' + mes + '\')">ver detalle ›</a>' : '<a onclick="r4Ir(\'emp\')">ver empresas ›</a>') + '</div>'
+      + '<div class="r4-rel">' + anReloj(a.p, 52, 'SEMANA ' + r4SemNum(semAnt), false, a.v) + anReloj(s.p, 80, 'SEMANA ' + r4SemNum(sem), true, s.v) + anReloj(mm.p, 52, r4MesTxt(mes).split(' ')[0].toUpperCase(), false, mm.v) + '</div>'
+      + '<div class="r4-cf"><span>vs Sem ' + r4SemNum(semAnt) + ' <small>(' + diaTxt + ')</small>: ' + (dif === null ? '–' : '<b class="' + (dif >= 0 ? 'ok' : 'mal') + '">' + (dif >= 0 ? '▲ +' : '▼ −') + P2(Math.abs(dif)) + ' pts</b>') + '</span><span><b>' + s.v + '</b> visitadas en la semana · <b>' + mm.v + '</b> en el mes</span></div></div>';
+  });
+  h += '</div>';
+  /* una mirada distinta */
+  h += '<div class="r4-sec">Una mirada distinta</div><div class="r4-g2"><div class="r4-col">' + r4SemaforoHtml(B) + r4PorComunaHtml() + '</div><div class="r4-col">' + r4CierraHtml(B, mes) + r4EmpresasMiniHtml(mes) + '</div></div>';
+  return h;
+}
+function r4SemaforoHtml(B){
+  const D = R4_R, S = D.sems.slice(-8), coms = R4_COM === 'Todas' ? r4ComunasTop().slice(0, 4) : [];
+  const filas = R4_GRP.map(function(g){ return [g[1], g[3], g[0] === 'dom']; })
+    .concat(coms.map(function(c){ return ['Dominion · ' + c, function(x){ return x.dom && x.com === c; }, false, c]; }));
+  let h = '<div class="r4-card"><div class="r4-ch" style="--c:#16a34a"><h3>Semáforo de las últimas 8 semanas</h3><a onclick="r4Ir(\'tss\')">técnicos semana a semana ›</a></div><div class="r4-semw"><table class="r4-sem"><thead><tr><th></th>'
+    + S.map(function(s){ const n = Object.keys(D.diasSem[s]).length; return '<th>S' + r4SemNum(s) + '<small>' + (s === D.semEnCurso ? 'en curso' : n < 6 ? n + ' días' : r4Fecha(s)) + '</small></th>'; }).join('') + '</tr></thead><tbody>';
+  filas.forEach(function(f, i){
+    if(i === 3) h += '<tr class="r4-semsep"><td colspan="' + (S.length + 1) + '">Dominion en sus comunas con más migraciones (toca una para filtrar)</td></tr>';
+    h += '<tr><td class="nm' + (f[2] ? ' dom' : '') + '"' + (f[3] ? ' data-c="' + r4Esc(f[3]) + '" onclick="r4Comuna(this.dataset.c)" style="cursor:pointer"' : '') + '>' + r4Esc(f[0]) + '</td>';
+    S.forEach(function(s){ const c = r4Pc2(B, function(x){ return x.sem === s && f[1](x); });
+      h += '<td><div class="d c-' + (c.p === null ? 'n' : r4Cls(c.p)) + '"><b>' + (c.p === null ? '–' : P2(c.p) + '%') + '</b>' + (c.v ? '<small>' + c.o + '/' + c.v + '</small>' : '') + '</div></td>'; });
+    h += '</tr>';
+  });
+  return h + '</tbody></table></div></div>';
+}
+function r4PorComunaHtml(){
+  const D = R4_R, mes = D.ult.slice(0, 6), S = D.sems.slice(-6), cm = {};
+  D.R.forEach(function(x){ if(x.dom && x.vis && x.mes === mes) cm[x.com] = (cm[x.com] || 0) + 1; });
+  const coms = Object.keys(cm).sort(function(a, b){ return cm[b] - cm[a]; }).slice(0, 8);
+  let h = '<div class="r4-card"><div class="r4-ch" style="--c:#0ea5a4"><i style="background:#0ea5a4"></i><h3>Dominion por comuna</h3><span class="r4-chs">' + r4MesTxt(mes) + ' contra las otras empresas en la misma comuna</span>'
+    + '<button class="r4-chip2" onclick="r4SemVer()">' + (R4_SEMVER ? 'Ocultar semanas ▴' : 'Ver semana a semana ▾') + '</button></div><div class="r4-cb"><table class="rm-tabla"><thead><tr><th>Comuna</th><th>Visitadas</th><th>Dominion</th><th>Otras empresas</th><th>Dif.</th>'
+    + (R4_SEMVER ? S.map(function(s){ return '<th>S' + r4SemNum(s) + '</th>'; }).join('') : '') + '</tr></thead><tbody>';
+  coms.forEach(function(c){
+    const a = r4Pc2(D.R, function(x){ return x.dom && x.com === c && x.mes === mes; }), o = r4Pc2(D.R, function(x){ return !x.dom && x.com === c && x.mes === mes; });
+    h += '<tr class="' + (R4_COM === c ? 'dom' : '') + '"><td class="cl" data-c="' + r4Esc(c) + '" onclick="r4Comuna(this.dataset.c)">' + r4Esc(c) + '</td><td>' + a.v + '</td><td>' + r4PcH(a.o, a.v) + '</td><td>' + r4PcH(o.o, o.v) + '</td><td>'
+      + (a.p !== null && o.p !== null ? '<span class="' + (a.p >= o.p ? 'ok' : 'mal') + '">' + (a.p >= o.p ? '+' : '−') + P2(Math.abs(a.p - o.p)) + '</span>' : '–') + '</td>'
+      + (R4_SEMVER ? S.map(function(s){ const w = r4Pc2(D.R, function(x){ return x.dom && x.com === c && x.sem === s; }); return '<td>' + (w.v ? r4PcH(w.o, w.v) + '<small>' + w.v + '</small>' : '<span class="z">–</span>') + '</td>'; }).join('') : '') + '</tr>';
+  });
+  return h + '</tbody></table><div class="rm-nota" style="margin:6px 0 0">Las 8 comunas con más migraciones de Dominion en el mes. Todas las comunas en 📤 Para mostrar → Comunas.</div></div></div>';
+}
+function r4CierraHtml(B, mes){
+  const D = R4_R, y = +mes.slice(0, 4), mo = +mes.slice(4), nd = new Date(y, mo, 0).getDate(), W = 640, H = 300, pl = 44, pr = 16, pt = 16, pb = 40;
+  const X = function(d){ return pl + (d - 1) * (W - pl - pr) / (nd - 1); }, ys = [30, 45, 60, 70, 80, 90, 100];
+  const Y = function(v){ v = Math.max(30, Math.min(100, v)); let i = 0; while(i < ys.length - 2 && v > ys[i + 1]) i++; const a = ys[i], b = ys[i + 1], ya = pt + (H - pt - pb) * (1 - i / (ys.length - 1)), yb = pt + (H - pt - pb) * (1 - (i + 1) / (ys.length - 1)); return ya + (yb - ya) * (v - a) / (b - a); };
+  let g = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%">';
+  ys.forEach(function(v){ g += '<line x1="' + pl + '" x2="' + (W - pr) + '" y1="' + Y(v) + '" y2="' + Y(v) + '" stroke="' + (v === 60 ? '#0f1d33' : '#e2e8f0') + '" stroke-width="' + (v === 60 ? 2.5 : 1) + '"/><text x="' + (pl - 6) + '" y="' + (Y(v) + 4) + '" font-size="12" font-weight="700" text-anchor="end" fill="#334155">' + v + '%</text>'; });
+  g += '<text x="' + (W - pr - 4) + '" y="' + (Y(60) - 7) + '" font-size="12" font-weight="800" text-anchor="end" fill="#0f1d33">meta 60%</text>';
+  [1, 5, 10, 15, 20, 25, 30].filter(function(d){ return d <= nd; }).forEach(function(d){ g += '<text x="' + X(d) + '" y="' + (H - 18) + '" font-size="12" font-weight="700" text-anchor="middle" fill="#334155">' + d + '</text>'; });
+  const ud = D.ult.slice(0, 6) === mes ? +D.ult.slice(6) : nd;
+  g += '<line x1="' + X(ud) + '" x2="' + X(ud) + '" y1="' + pt + '" y2="' + (H - pb) + '" stroke="#475569" stroke-dasharray="3 4"/><text x="' + X(ud) + '" y="' + (pt + 2) + '" font-size="11" font-weight="700" text-anchor="middle" fill="#334155">último export</text>';
+  const ley = [];
+  R4_GRP.forEach(function(gr){
+    let v = 0, o = 0, d = '', ult = null;
+    for(let k = 1; k <= ud; k++){ const iso = mes + String(k).padStart(2, '0');
+      B.forEach(function(x){ if(x.iso === iso && x.vis && gr[3](x)){ v++; if(x.ok) o++; } });
+      if(v && r4DiaHay(iso)){ const p = o * 100 / v; d += (d ? ' L' : 'M') + X(k).toFixed(1) + ' ' + Y(p).toFixed(1); ult = p; } }
+    if(d) g += '<path d="' + d + '" fill="none" stroke="' + gr[2] + '" stroke-width="' + (gr[0] === 'dom' ? 3.5 : 2.5) + '"/>';
+    ley.push('<span><i style="background:' + gr[2] + '"></i><b>' + gr[1] + '</b> · ' + (ult === null ? 'sin datos' : '<b class="' + r4Cls(ult) + '">' + P2(ult) + '%</b> acumulado') + '</span>');
+  });
+  g += '</svg>';
+  return '<div class="r4-card"><div class="r4-ch" style="--c:#0ea5e9"><h3>¿Cómo cierra ' + r4MesTxt(mes).split(' ')[0] + '?</h3><button class="r4-chip3" onclick="r4Ir(\'diario\')">📅 Día a día ›</button></div><div class="r4-cb">' + g + '<div class="r4-ley2">' + ley.join('') + '</div><div class="rm-nota" style="margin:4px 0 0">Completitud acumulada del mes, día a día (desde el día 1 hasta cada día).</div></div></div>';
+}
+function r4DiaHay(iso){ return R4.dias.indexOf(iso) >= 0; }
+function r4EmpresasMiniHtml(mes){
+  const E = {}; R4_R.R.forEach(function(x){ if(x.mes !== mes || !x.vis || !r4Com(x)) return; const e = E[x.emp] || (E[x.emp] = { v:0, o:0 }); e.v++; if(x.ok) e.o++; });
+  const ks = Object.keys(E).sort(function(a, b){ return E[b].o / E[b].v - E[a].o / E[a].v; }), pos = ks.indexOf('DOMI') + 1;
+  let h = '<div class="r4-card"><div class="r4-ch" style="--c:#7c3aed"><i style="background:#7c3aed"></i><h3>Empresas del área · ' + r4MesTxt(mes) + '</h3><span class="r4-chs">Dominion ' + (pos ? pos + '° de ' + ks.length : '') + '</span><a onclick="r4Ir(\'emp\')">ver más ›</a></div><div class="r4-cb">';
+  const max = Math.max.apply(null, ks.map(function(k){ return E[k].o * 100 / E[k].v; }).concat([60]));
+  ks.forEach(function(k){ const p = E[k].o * 100 / E[k].v;
+    h += '<div class="r4-bar' + (k === 'DOMI' ? ' dom' : '') + '"><span class="n">' + (R4_EMPN[k] || k) + '</span><span class="b"><i style="width:' + (p * 100 / max).toFixed(1) + '%;background:' + (k === 'DOMI' ? '#d9480f' : k === 'CREA' ? '#2f9e44' : '#94a3b8') + '"></i><u style="left:' + (60 * 100 / max).toFixed(1) + '%"></u></span><span class="p ' + r4Cls(p) + '">' + P2(p) + '%</span><small>' + E[k].v + '</small></div>'; });
+  return h + '</div></div>';
 }
 
 /* ---- Resumen ---- */
@@ -24947,7 +25181,7 @@ function r4VCuando(){
 }
 
 /* ---- Técnicos ---- */
-function r4VTecnicos(){
+function r4VTecnicos(soloSeg){
   const D = R4_R, fp = r4FiltroPer(), meses = D.meses, cerr = D.cerr, T = {};
   D.R.forEach(function(x){ if(!x.dom || !r4Com(x)) return; const t = T[x.tec] || (T[x.tec] = { per:[], sem:{}, mes:{}, base:{ v:0, o:0, cau:{} }, cur:{ v:0, o:0 } });
     if(fp(x)) t.per.push(x);
@@ -24958,6 +25192,7 @@ function r4VTecnicos(){
     if(x.sem === D.semEnCurso){ t.cur.v++; if(x.ok) t.cur.o++; }
   });
   const ks = Object.keys(T).filter(function(k){ const t = T[k]; return t.per.some(function(x){ return x.vis; }) || t.base.v; });
+  if(soloSeg){ const kk = ks.filter(function(k){ const b = T[k].base; return b.v && b.o * 100 / b.v < MP_META; }); ks.length = 0; kk.forEach(function(k){ ks.push(k); }); }
   const per = function(k){ const c = r4Cuenta(T[k].per); return { v:c.vis, o:c.ok, p:r4Pc(c.ok, c.vis) }; };
   const sortv = function(k){ if(R4_ORD === 'per'){ const p = per(k).p; return p === null ? 999 : p; } if(R4_ORD === 'nom') return k; const b = T[k].base; return b.v ? b.o * 100 / b.v : 999; };
   ks.sort(function(a, b){ const x = sortv(a), y = sortv(b); return R4_ORD === 'nom' ? String(x).localeCompare(String(y)) : (x - y) || (T[b].base.v - T[a].base.v) || a.localeCompare(b); });
@@ -25043,6 +25278,233 @@ function r4VDirecciones(){
   return h;
 }
 
+/* ---- vistas de los menus ---- */
+function r4VHead(t, sub){ return '<div class="r4-vh"><button onclick="r4Tablero()">‹ Tablero</button><div><h2>' + t + '</h2>' + (sub ? '<small>' + sub + '</small>' : '') + '</div></div>'; }
+function r4PerChips(sinSemana){
+  const D = R4_R, chip = function(v, t){ return '<button class="' + (R4_PER === v ? 'on' : '') + '" onclick="r4Per(\'' + v + '\')">' + r4Esc(t) + '</button>'; };
+  let h = '<div class="rm-chips"><b>Período</b>' + r4Periodos().map(function(p){ return chip(p[0], p[1]); }).join('');
+  if(!sinSemana) h += '<select onchange="if(this.value) r4Per(this.value)"><option value="">Una semana…</option>' + D.sems.slice().reverse().map(function(s){ const n = Object.keys(D.diasSem[s]).length;
+    return '<option value="sem:' + s + '"' + (R4_PER === 'sem:' + s ? ' selected' : '') + '>' + r4SemTxt(s) + (s === D.semEnCurso ? ' (en curso)' : n < 6 ? ' (' + n + ' días)' : '') + '</option>'; }).join('') + '</select>';
+  return h + '</div><div class="rm-per">' + r4Esc(r4PerTxt()) + (R4_COM !== 'Todas' ? ' · comuna <b>' + r4Esc(R4_COM) + '</b> <button class="r4-lnk" onclick="r4Comuna(\'Todas\')">quitar</button>' : '') + '</div>';
+}
+function r4VistaHtml(){
+  const v = R4_VISTA;
+  if(v.indexOf('mes:') === 0){ R4_PER = v; return r4VHead('📅 ' + r4MesTxt(v.slice(4)).replace(/^./, function(c){ return c.toUpperCase(); }), 'Todo el detalle del mes') + r4PerChips(true) + r4VResumen() + r4VMesTec(); }
+  if(v === 'diario') return r4VHead('📈 Migraciones día a día', 'Completitud de cada día y acumulado del mes') + r4VDiario();
+  if(v === 'franja') return r4VHead('🕒 Derivaciones por franja', 'En qué franja se deriva más') + r4PerChips() + r4VFranja();
+  if(v === 'resder') return r4VHead('🧾 Resumen de derivación', 'Cómo vamos y con quién conversar') + r4PerChips() + r4VResDer();
+  if(v === 'ficha') return r4VHead('🪪 Ficha del técnico', 'Todo sobre un técnico y qué revisar primero') + r4VFicha();
+  if(v === 'seg') return r4VHead('🎯 Seguimiento bajo 60 %', 'Base: las ' + R4_R.cerr.length + ' semanas cerradas') + r4VTecnicos(true);
+  if(v === 'tss') return r4VHead('📊 Técnicos semana a semana', 'Últimas 8 semanas, con tendencia') + r4VTss();
+  if(v === 'aud') return r4VHead('🔍 A quién auditar', 'Lo derivado propio de cada técnico') + r4PerChips() + r4VAud();
+  if(v === 'dtec') return r4VHead('👥 Por técnico (derivación)', 'Quién deriva más y la historia de cada dirección') + r4PerChips() + r4VDtec();
+  if(v === 'tecs') return r4VHead('📋 Todos los técnicos', 'Semanas cerradas, base, meses y período') + r4PerChips() + r4VTecnicos(false);
+  if(v === 'pdir') return r4VHead('📍 Por dirección', 'Qué pasó después con cada casa derivada') + r4PerChips() + r4VDirecciones();
+  if(v === 'yav') return r4VHead('🏚 Direcciones ya visitadas', 'Casas visitadas más de una vez (cualquier empresa) con al menos una visita de Dominion') + r4PerChips() + r4VYav();
+  if(v === 'ger') return r4VHead('🏢 Migraciones · Gerencia', 'Por mes y semana') + r4VGer();
+  if(v === 'emp') return r4VHead('🏁 Empresas del área', 'Dominion contra las otras empresas') + r4PerChips() + r4VEmp();
+  if(v === 'com') return r4VHead('🗺 Comunas', 'Dominion contra el resto en cada comuna') + r4PerChips() + r4VComunas();
+  if(v === 'cuando') return r4VHead('🕓 Franja, día y vivienda', 'Cuándo y dónde se completa menos') + r4PerChips() + r4VCuando();
+  return r4TableroHtml();
+}
+/* datos por tecnico (con el filtro de comuna) */
+function r4TecDatos(){
+  const D = R4_R, fp = r4FiltroPer(), T = {};
+  D.R.forEach(function(x){ if(!x.dom || !r4Com(x)) return; const t = T[x.tec] || (T[x.tec] = { per:[], todo:[], sem:{}, mes:{}, base:{ v:0, o:0, cau:{} }, cur:{ v:0, o:0 } });
+    t.todo.push(x); if(fp(x)) t.per.push(x);
+    if(!x.vis) return;
+    const s = t.sem[x.sem] || (t.sem[x.sem] = { v:0, o:0 }); s.v++; if(x.ok) s.o++;
+    const mm = t.mes[x.mes] || (t.mes[x.mes] = { v:0, o:0 }); mm.v++; if(x.ok) mm.o++;
+    if(D.cerr.indexOf(x.sem) >= 0){ t.base.v++; if(x.ok) t.base.o++; else { const k = x.cod || '(sin código)'; t.base.cau[k] = (t.base.cau[k] || 0) + 1; } }
+    if(x.sem === D.semEnCurso){ t.cur.v++; if(x.ok) t.cur.o++; }
+  });
+  return T;
+}
+function r4VMesTec(){
+  const fp = r4FiltroPer(), T = {};
+  R4_R.R.forEach(function(x){ if(!x.dom || !x.vis || !fp(x) || !r4Com(x)) return; const t = T[x.tec] || (T[x.tec] = { v:0, o:0, cau:{} }); t.v++; if(x.ok) t.o++; else { const k = r4Causa(x); t.cau[k] = (t.cau[k] || 0) + 1; } });
+  const ks = Object.keys(T).sort(function(a, b){ return T[a].o / T[a].v - T[b].o / T[b].v || T[b].v - T[a].v; });
+  let h = '<h2>Técnicos del mes (' + ks.length + ')</h2><div class="rm-wrap"><table class="rm-tabla"><thead><tr><th>Técnico</th><th>Visitadas</th><th>Completadas</th><th>Completitud</th><th>Sin moradores</th><th>Reagenda</th><th>Desiste</th><th>Red / terreno</th></tr></thead><tbody>';
+  ks.forEach(function(k){ const t = T[k];
+    h += '<tr><td class="nom" data-t="' + r4Esc(k) + '" onclick="r4Ficha(this.dataset.t)">' + r4Esc(k) + '</td><td>' + t.v + '</td><td>' + t.o + '</td><td class="bk-' + r4Cls(t.o * 100 / t.v) + '">' + r4PcH(t.o, t.v) + '</td><td>' + (t.cau['SIN MORADORES'] || 0) + '</td><td>' + (t.cau['CLIENTE REAGENDA'] || 0) + '</td><td>' + (t.cau['CLIENTE DESISTE'] || 0) + '</td><td>' + ((t.cau.RED || 0) + (t.cau.GSA || 0)) + '</td></tr>'; });
+  return h + '</tbody></table></div><div class="rm-nota">Toca un técnico para abrir su ficha.</div>';
+}
+function r4VDiario(){
+  const D = R4_R;
+  if(!D._mesD) D._mesD = D.ult.slice(0, 6);
+  let h = '<div class="rm-chips"><b>Mes</b>' + D.meses.slice().reverse().map(function(m){ return '<button class="' + (D._mesD === m ? 'on' : '') + '" onclick="R4_R._mesD=\'' + m + '\'; r4Pintar()">' + r4MesTxt(m) + '</button>'; }).join('') + '</div>';
+  const mes = D._mesD, dias = R4.dias.filter(function(d){ return d.slice(0, 6) === mes; });
+  h += '<div class="rm-wrap"><table class="rm-tabla"><thead><tr><th>Día</th><th>Dominion visitadas</th><th>Completadas</th><th>Derivadas</th><th>Dominion del día</th><th>Acumulado del mes</th><th>CREA del día</th><th>Resto del día</th><th>Resto acumulado</th></tr></thead><tbody>';
+  let av = 0, ao = 0, rv = 0, ro = 0;
+  dias.forEach(function(d){
+    const a = r4Pc2(D.R, function(x){ return x.iso === d && x.dom && r4Com(x); }), c = r4Pc2(D.R, function(x){ return x.iso === d && x.emp === 'CREA' && r4Com(x); }), r = r4Pc2(D.R, function(x){ return x.iso === d && !x.dom && r4Com(x); });
+    av += a.v; ao += a.o; rv += r.v; ro += r.o;
+    h += '<tr><td>' + r4Fecha(d) + ' ' + R4_DOW[(r4D(d).getDay() + 6) % 7] + '</td><td>' + a.v + '</td><td>' + a.o + '</td><td>' + (a.v - a.o) + '</td><td class="bk-' + r4Cls(a.p) + '">' + r4PcH(a.o, a.v) + '</td><td><b>' + r4PcH(ao, av) + '</b></td><td>' + r4PcH(c.o, c.v) + '</td><td>' + r4PcH(r.o, r.v) + '</td><td>' + r4PcH(ro, rv) + '</td></tr>';
+  });
+  return h + '<tr class="tot"><td>Mes</td><td>' + av + '</td><td>' + ao + '</td><td>' + (av - ao) + '</td><td colspan="2">' + r4PcH(ao, av) + '</td><td></td><td colspan="2">' + r4PcH(ro, rv) + '</td></tr></tbody></table></div>';
+}
+function r4Matriz(titulo, filasFn, colsFn, L, colsOrden){
+  const F = {}, Cs = {};
+  L.forEach(function(x){ const f = filasFn(x), c = colsFn(x); Cs[c] = 1; const k = F[f] || (F[f] = {}); const z = k[c] || (k[c] = { v:0, o:0 }); z.v++; if(x.ok) z.o++; const t = k._t || (k._t = { v:0, o:0 }); t.v++; if(x.ok) t.o++; });
+  const cols = colsOrden || Object.keys(Cs).sort(), filas = Object.keys(F).sort(function(a, b){ return F[b]._t.v - F[a]._t.v; });
+  let h = '<h2>' + titulo + '</h2><div class="rm-wrap"><table class="rm-tabla"><thead><tr><th></th>' + cols.map(function(c){ return '<th>' + r4Esc(c) + '</th>'; }).join('') + '<th>Total</th></tr></thead><tbody>';
+  filas.forEach(function(f){ h += '<tr data-b="' + r4Esc(f) + '"><td>' + r4Esc(f) + '</td>' + cols.map(function(c){ const z = F[f][c]; return '<td class="' + (z ? 'bk-' + r4Cls(z.o * 100 / z.v) : '') + '">' + (z ? r4PcH(z.o, z.v, true) : '<span class="z">–</span>') + '</td>'; }).join('') + '<td><b>' + r4PcH(F[f]._t.o, F[f]._t.v, true) + '</b></td></tr>'; });
+  return h + '</tbody></table></div>';
+}
+function r4VFranja(){
+  const fp = r4FiltroPer(), L = R4_R.R.filter(function(x){ return x.dom && x.vis && fp(x) && r4Com(x); });
+  const frs = Object.keys(L.reduce(function(a, x){ a[x.fr] = 1; return a; }, {})).sort();
+  let h = r4Matriz('Franja por semana', function(x){ return x.fr; }, function(x){ return 'S' + r4SemNum(x.sem); }, L);
+  h += r4Matriz('Franja por día de la semana', function(x){ return x.fr; }, function(x){ return x.dow + ' ' + R4_DOW[x.dow]; }, L).replace(/<th>(\d) /g, '<th>');
+  h += r4Matriz('Comuna por franja (Dominion)', function(x){ return x.com; }, function(x){ return x.fr; }, L, frs);
+  h += '<input id="r4Bus" class="rm-buscar" placeholder="Buscar técnico…" value="' + r4Esc(R4_BUS) + '" oninput="r4Buscar(this.value)">' + r4Matriz('Técnico por franja', function(x){ return x.tec; }, function(x){ return x.fr; }, L, frs);
+  return h + '<div class="rm-nota">Cada casilla: completitud y completadas/visitadas. Más rojo = se deriva más.</div>';
+}
+function r4VResDer(){
+  const fp = r4FiltroPer(), P = R4_R.R.filter(function(x){ return x.dom && fp(x) && r4Com(x); }), c = r4Cuenta(P), pd = r4Pc(c.ok, c.vis);
+  const gest = (c.cau['SIN MORADORES'] || 0) + (c.cau['CLIENTE REAGENDA'] || 0) + (c.cau['CLIENTE DESISTE'] || 0);
+  let h = '<div class="rm-cards"><div class="rm-card big"><div class="t">Completitud</div><div class="n" style="color:' + (pd >= MP_META ? '#4ade80' : pd >= MP_AMB ? '#fbbf24' : '#f87171') + '">' + r4P(pd) + '</div><div class="p">' + c.ok + ' de ' + c.vis + ' visitadas</div></div>'
+    + '<div class="rm-card"><div class="t">Derivadas</div><div class="n mal">' + c.nr + '</div><div class="p">' + (c.vis ? P2(c.nr * 100 / c.vis) + '% de derivación' : '') + '</div></div>'
+    + '<div class="rm-card"><div class="t">De gestión en la casa</div><div class="n">' + gest + '</div><div class="p">' + (c.nr ? P2(gest * 100 / c.nr) + '% de las derivadas' : '') + '</div></div>'
+    + '<div class="rm-card"><div class="t">Para llegar a 60 %</div><div class="n">' + (pd !== null && pd < MP_META ? Math.ceil(c.vis * MP_META / 100) - c.ok : 0) + '</div><div class="p">completadas más (con las mismas visitas)</div></div></div>';
+  h += '<div class="rm-g2"><div><h2>Causas</h2><table class="rm-tabla"><thead><tr><th>Causa</th><th>Derivadas</th><th>% de las derivadas</th></tr></thead><tbody>'
+    + ['SIN MORADORES', 'CLIENTE REAGENDA', 'CLIENTE DESISTE', 'RED', 'GSA'].filter(function(k){ return c.cau[k]; }).map(function(k){ return '<tr><td>' + r4CausaTxt(k) + '</td><td>' + c.cau[k] + '</td><td>' + P2(c.cau[k] * 100 / c.nr) + '%</td></tr>'; }).join('') + '</tbody></table>';
+  const Cm = {}; P.forEach(function(x){ if(!x.vis) return; const z = Cm[x.com] || (Cm[x.com] = { v:0, o:0 }); z.v++; if(x.ok) z.o++; });
+  h += '<h2>Comunas donde más se deriva</h2><table class="rm-tabla"><thead><tr><th>Comuna</th><th>Visitadas</th><th>Derivadas</th><th>Completitud</th></tr></thead><tbody>'
+    + Object.keys(Cm).sort(function(a, b){ return (Cm[b].v - Cm[b].o) - (Cm[a].v - Cm[a].o); }).slice(0, 8).map(function(k){ const z = Cm[k]; return '<tr><td class="cl" data-c="' + r4Esc(k) + '" onclick="r4Comuna(this.dataset.c)">' + r4Esc(k) + '</td><td>' + z.v + '</td><td>' + (z.v - z.o) + '</td><td>' + r4PcH(z.o, z.v) + '</td></tr>'; }).join('') + '</tbody></table></div>';
+  const T = {}; P.forEach(function(x){ if(!x.vis) return; const t = T[x.tec] || (T[x.tec] = { v:0, o:0, cau:{} }); t.v++; if(x.ok) t.o++; else { const k = r4Causa(x); t.cau[k] = (t.cau[k] || 0) + 1; } });
+  const ks = Object.keys(T).sort(function(a, b){ return (T[b].v - T[b].o) - (T[a].v - T[a].o) || T[a].o / T[a].v - T[b].o / T[b].v; }).slice(0, 12);
+  const tot = Object.keys(T).reduce(function(s, k){ return s + T[k].v - T[k].o; }, 0), top = ks.reduce(function(s, k){ return s + T[k].v - T[k].o; }, 0);
+  h += '<div><h2>Con quién conversar · los que más derivan</h2><table class="rm-tabla"><thead><tr><th>Técnico</th><th>Derivadas</th><th>Completitud</th><th>Lo que más deriva</th></tr></thead><tbody>'
+    + ks.map(function(k){ const t = T[k], top2 = Object.keys(t.cau).sort(function(a, b){ return t.cau[b] - t.cau[a]; }).slice(0, 2).map(function(z){ return r4CausaTxt(z).toLowerCase() + ' ' + t.cau[z]; }).join(', ');
+      return '<tr><td class="nom" data-t="' + r4Esc(k) + '" onclick="r4Ficha(this.dataset.t)">' + r4Esc(k) + '</td><td><b>' + (t.v - t.o) + '</b></td><td>' + r4PcH(t.o, t.v, true) + '</td><td class="izq">' + r4Esc(top2) + '</td></tr>'; }).join('')
+    + '</tbody></table><div class="rm-nota">Estos ' + ks.length + ' suman ' + top + ' de las ' + tot + ' derivadas (' + (tot ? P2(top * 100 / tot) : '0') + '%). Toca un nombre para abrir su ficha.</div></div></div>';
+  return h;
+}
+function r4VFicha(){
+  const T = r4TecDatos(), D = R4_R, ks = Object.keys(T).sort();
+  if(!R4_FICHA || !T[R4_FICHA]){ const peor = ks.filter(function(k){ return T[k].base.v >= 8; }).sort(function(a, b){ return T[a].base.o / T[a].base.v - T[b].base.o / T[b].base.v; })[0]; R4_FICHA = peor || ks[0] || ''; }
+  let h = '<div class="rm-chips"><b>Técnico</b><select onchange="r4Ficha(this.value)">' + ks.map(function(k){ const b = T[k].base; return '<option value="' + r4Esc(k) + '"' + (k === R4_FICHA ? ' selected' : '') + '>' + r4Esc(k) + (b.v ? ' · ' + P2(b.o * 100 / b.v) + '%' : '') + '</option>'; }).join('') + '</select></div>';
+  const t = T[R4_FICHA]; if(!t) return h + '<div class="rm-nota">Sin técnicos.</div>';
+  const vis = t.todo.filter(function(x){ return x.vis; }), c = r4Cuenta(t.todo), b = t.base, pb = r4Pc(b.o, b.v), mes = D.ult.slice(0, 6), mA = D.meses[D.meses.length - 2];
+  const mc = t.mes[mes] || { v:0, o:0 }, ma = mA ? t.mes[mA] || { v:0, o:0 } : null;
+  const enSeg = b.v >= 8 && pb < MP_META;
+  h += '<div class="rm-cards"><div class="rm-card big"><div class="t">' + r4Esc(R4_FICHA) + '</div><div class="n" style="color:' + (pb === null ? '#fff' : pb >= MP_META ? '#4ade80' : pb >= MP_AMB ? '#fbbf24' : '#f87171') + '">' + r4P(pb) + '</div><div class="p">base ' + D.cerr.length + ' semanas · ' + b.o + '/' + b.v + (enSeg ? ' · en seguimiento' : '') + '</div></div>'
+    + '<div class="rm-card"><div class="t">' + r4MesTxt(mes) + '</div><div class="n ' + r4Cls(r4Pc(mc.o, mc.v)) + '">' + r4P(r4Pc(mc.o, mc.v)) + '</div><div class="p">' + mc.o + '/' + mc.v + '</div></div>'
+    + (ma ? '<div class="rm-card"><div class="t">' + r4MesTxt(mA) + '</div><div class="n ' + r4Cls(r4Pc(ma.o, ma.v)) + '">' + r4P(r4Pc(ma.o, ma.v)) + '</div><div class="p">' + ma.o + '/' + ma.v + '</div></div>' : '')
+    + '<div class="rm-card"><div class="t">Todo lo guardado</div><div class="n ' + r4Cls(r4Pc(c.ok, c.vis)) + '">' + r4P(r4Pc(c.ok, c.vis)) + '</div><div class="p">' + c.ok + '/' + c.vis + ' · ' + c.can + ' canceladas · ' + c.sus + ' suspendidas</div></div></div>';
+  /* que revisar primero */
+  const V = r4VisitasDir(), nr = vis.filter(function(x){ return !x.ok; });
+  const otraOk = nr.filter(function(x){ return x.dir && (V[x.dir] || []).some(function(y){ return y.ok && y.iso >= x.iso && y !== x; }); });
+  const gest = nr.filter(function(x){ return ['SIN MORADORES', 'CLIENTE REAGENDA', 'CLIENTE DESISTE'].indexOf(mpNorm(x.cod)) >= 0; });
+  const cauT = {}; nr.forEach(function(x){ const k = r4Causa(x); cauT[k] = (cauT[k] || 0) + 1; }); const top = Object.keys(cauT).sort(function(a, z){ return cauT[z] - cauT[a]; })[0];
+  h += '<div class="rm-caja"><h3>Qué revisar primero</h3><ul class="r4-ul">'
+    + (top ? '<li>Lo que más deriva: <b>' + r4CausaTxt(top).toLowerCase() + '</b> (' + cauT[top] + ' de ' + nr.length + ' derivadas).</li>' : '<li>Sin derivadas guardadas.</li>')
+    + '<li><b>' + gest.length + '</b> de sus ' + nr.length + ' derivadas son de gestión en la casa (sin moradores, reagenda, desiste).</li>'
+    + '<li><b>' + otraOk.length + '</b> casa' + (otraOk.length === 1 ? '' : 's') + ' que derivó se completaron después (por Dominion u otra empresa): ahí el cliente sí estaba o sí quería.</li>'
+    + (pb !== null ? '<li>Base de ' + D.cerr.length + ' semanas: <b class="' + r4Cls(pb) + '">' + P2(pb) + '%</b>' + (enSeg ? ' → <b>en seguimiento</b> (8 visitas o más y bajo 60 %).' : b.v < 8 && pb < MP_META ? ' → pocas visitas para concluir.' : '.') + '</li>' : '') + '</ul></div>';
+  /* 8 semanas */
+  const S = D.sems.slice(-8);
+  h += '<h2>Semana a semana</h2><div class="rm-wrap"><table class="rm-tabla"><thead><tr>' + S.map(function(s){ return '<th>' + r4SemTxt(s) + '</th>'; }).join('') + '</tr></thead><tbody><tr>'
+    + S.map(function(s){ const z = t.sem[s]; return '<td class="' + (z ? 'bk-' + r4Cls(z.o * 100 / z.v) : '') + '">' + (z ? r4PcH(z.o, z.v, true) : '<span class="z">–</span>') + '</td>'; }).join('') + '</tr></tbody></table></div>';
+  /* comunas y franjas */
+  const grp = function(fn){ const G = {}; vis.forEach(function(x){ const k = fn(x), z = G[k] || (G[k] = { v:0, o:0 }); z.v++; if(x.ok) z.o++; }); return G; };
+  const tabla = function(tit, G){ return '<div><h2>' + tit + '</h2><table class="rm-tabla"><thead><tr><th></th><th>Visitadas</th><th>Completitud</th></tr></thead><tbody>' + Object.keys(G).sort(function(a, z){ return G[z].v - G[a].v; }).map(function(k){ return '<tr><td>' + r4Esc(k) + '</td><td>' + G[k].v + '</td><td>' + r4PcH(G[k].o, G[k].v, true) + '</td></tr>'; }).join('') + '</tbody></table></div>'; };
+  h += '<div class="rm-g3">' + tabla('Por comuna', grp(function(x){ return x.com; })) + tabla('Por franja', grp(function(x){ return x.fr; })) + tabla('Por vivienda', grp(function(x){ return x.viv; })) + '</div>';
+  /* ordenes */
+  h += '<div style="margin-top:14px">' + r4TecDetalle(R4_FICHA, t.todo).replace('<button onclick="r4VerTec(R4_TEC)">Cerrar</button>', '').replace(' · ' + r4Esc(r4PerTxt()), ' · todas las órdenes guardadas') + '</div>';
+  return h;
+}
+function r4VTss(){
+  const T = r4TecDatos(), D = R4_R, S = D.sems.slice(-8);
+  const ks = Object.keys(T).filter(function(k){ return S.some(function(s){ return T[k].sem[s]; }); });
+  const tot = function(k, ws){ let v = 0, o = 0; ws.forEach(function(s){ const z = T[k].sem[s]; if(z){ v += z.v; o += z.o; } }); return { v:v, o:o, p:v ? o * 100 / v : null }; };
+  const c4 = D.cerr, a4 = D.sems.filter(function(s){ return s < c4[0]; }).slice(-4);
+  ks.sort(function(a, b){ const x = tot(a, c4).p, y = tot(b, c4).p; return (x === null ? 999 : x) - (y === null ? 999 : y) || a.localeCompare(b); });
+  let h = '<input id="r4Bus" class="rm-buscar" placeholder="Buscar técnico…" value="' + r4Esc(R4_BUS) + '" oninput="r4Buscar(this.value)"><div class="rm-wrap"><table class="rm-tabla"><thead><tr><th>Técnico</th>'
+    + S.map(function(s){ return '<th>' + r4SemTxt(s) + (s === D.semEnCurso ? '<br><small>en curso</small>' : '') + '</th>'; }).join('') + '<th>8 semanas</th><th>Últimas 4 cerradas</th><th>4 anteriores</th><th>Tendencia</th></tr></thead><tbody>';
+  ks.forEach(function(k){
+    const n4 = tot(k, c4), p4 = tot(k, a4), t8 = tot(k, S);
+    let tend = '<span class="z">–</span>';
+    if(n4.p !== null && p4.p !== null){ const d = n4.p - p4.p; tend = Math.abs(d) < 2 ? '<span class="med">► igual</span>' : d > 0 ? '<span class="ok">▲ mejora ' + P2(d) + '</span>' : '<span class="mal">▼ empeora ' + P2(-d) + '</span>'; }
+    h += '<tr data-b="' + r4Esc(k) + '"><td class="nom" data-t="' + r4Esc(k) + '" onclick="r4Ficha(this.dataset.t)">' + r4Esc(k) + (n4.v >= 8 && n4.p < MP_META ? '<span class="rm-tag t-seg">seguimiento</span>' : '') + '</td>'
+      + S.map(function(s){ const z = T[k].sem[s]; return '<td class="' + (z ? 'bk-' + r4Cls(z.o * 100 / z.v) : '') + '">' + (z ? r4PcH(z.o, z.v, true) : '<span class="z">–</span>') + '</td>'; }).join('')
+      + '<td><b>' + r4PcH(t8.o, t8.v, true) + '</b></td><td>' + (n4.v ? r4PcH(n4.o, n4.v, true) : '–') + '</td><td>' + (p4.v ? r4PcH(p4.o, p4.v, true) : '–') + '</td><td>' + tend + '</td></tr>';
+  });
+  return h + '</tbody></table></div><div class="rm-nota">Tendencia: últimas 4 semanas cerradas contra las 4 anteriores (±2 puntos = igual). Ordenado de peor a mejor en las últimas 4 cerradas.</div>';
+}
+function r4VAud(){
+  const fp = r4FiltroPer(), V = r4VisitasDir(), T = {};
+  R4_R.R.forEach(function(x){
+    if(!x.dom || !x.vis || !fp(x) || !r4Com(x)) return;
+    const t = T[x.tec] || (T[x.tec] = { v:0, o:0, prop:[], comp:[], red:0, ok2:0 }); t.v++; if(x.ok){ t.o++; return; }
+    if(r4Causa(x) === 'RED' || r4Causa(x) === 'GSA'){ t.red++; return; }
+    const L = x.dir ? V[x.dir] || [] : [], otrosDom = L.some(function(y){ return y.dom && !y.ok && y.tec !== x.tec; }), luegoOk = L.some(function(y){ return y.ok && y.iso >= x.iso; });
+    if(luegoOk) t.ok2++;
+    (otrosDom ? t.comp : t.prop).push(x);
+  });
+  const ks = Object.keys(T).filter(function(k){ return T[k].prop.length || T[k].comp.length; }).sort(function(a, b){ return T[b].prop.length - T[a].prop.length || T[b].ok2 - T[a].ok2; });
+  let h = '<div class="rm-wrap"><table class="rm-tabla"><thead><tr><th>Técnico</th><th>Visitadas</th><th>Completitud</th><th>Derivadas propias</th><th>…y después se completó</th><th>En direcciones compartidas</th><th>Red / terreno</th></tr></thead><tbody>';
+  ks.forEach(function(k){ const t = T[k];
+    h += '<tr data-b="' + r4Esc(k) + '"><td class="nom" data-t="' + r4Esc(k) + '" onclick="r4VerTec(this.dataset.t)">' + r4Esc(k) + '</td><td>' + t.v + '</td><td>' + r4PcH(t.o, t.v) + '</td><td class="' + (t.prop.length >= 4 ? 'bk-mal' : t.prop.length >= 2 ? 'bk-med' : '') + '"><b>' + t.prop.length + '</b></td><td>' + (t.ok2 ? '<b class="mal">' + t.ok2 + '</b>' : '0') + '</td><td>' + t.comp.length + '</td><td>' + t.red + '</td></tr>';
+    if(R4_TEC === k){ h += '<tr><td colspan="7" class="izq" id="r4TecDet" style="background:#f8fafc">' + t.prop.concat(t.comp).sort(function(a, b){ return b.iso.localeCompare(a.iso); }).map(function(x){ const L = V[x.dir] || [];
+      return '<div class="rm-hist" style="margin:4px 0"><b>' + r4Fecha(x.iso) + '</b> ' + r4Esc(x.cod) + ' · ' + r4Esc(x.dir.split('|')[0]) + ' (' + r4Esc(x.com) + ')' + (t.comp.indexOf(x) >= 0 ? ' <span class="rm-tag t-poc">compartida</span>' : '') + '<br>' + L.map(function(y){ return '<span class="' + (y.ok ? 'c-ok' : 'c-nr') + '">' + r4Fecha(y.iso) + ' ' + (y.dom ? r4Esc(y.tec) : (R4_EMPN[y.emp] || y.emp)) + ' · ' + (y.ok ? 'completada' : r4Esc(y.cod)) + '</span>'; }).join(' → ') + '</div>'; }).join('') + '</td></tr>'; }
+  });
+  return h + '</tbody></table></div><div class="rm-nota">Derivadas propias = sin moradores, reagenda o desiste en una dirección donde ningún otro técnico de Dominion falló (en todo lo guardado). "En direcciones compartidas" = otros técnicos de Dominion también fallaron ahí (casa difícil, no se le atribuye). "…y después se completó" = esa casa se completó después (Dominion u otra empresa). Toca un técnico para ver sus casas.</div>';
+}
+function r4VDtec(){
+  const fp = r4FiltroPer(), V = r4VisitasDir(), T = {};
+  R4_R.R.forEach(function(x){ if(!x.dom || !x.vis || !fp(x) || !r4Com(x)) return; const t = T[x.tec] || (T[x.tec] = { v:0, o:0, cau:{}, nr:[] }); t.v++; if(x.ok) t.o++; else { const k = r4Causa(x); t.cau[k] = (t.cau[k] || 0) + 1; t.nr.push(x); } });
+  const ks = Object.keys(T).sort(function(a, b){ return T[b].nr.length - T[a].nr.length || (T[b].v - T[b].o) / T[b].v - (T[a].v - T[a].o) / T[a].v; });
+  let h = '<input id="r4Bus" class="rm-buscar" placeholder="Buscar técnico…" value="' + r4Esc(R4_BUS) + '" oninput="r4Buscar(this.value)"><div class="rm-wrap"><table class="rm-tabla"><thead><tr><th>Técnico</th><th>Visitadas</th><th>Derivadas</th><th>% derivación</th><th>Sin moradores</th><th>Reagenda</th><th>Desiste</th><th>Red / terreno</th><th>Casas con más de una visita</th></tr></thead><tbody>';
+  ks.forEach(function(k){ const t = T[k], pd = t.v ? (t.v - t.o) * 100 / t.v : null, rep = t.nr.filter(function(x){ return x.dir && (V[x.dir] || []).length > 1; }).length;
+    h += '<tr data-b="' + r4Esc(k) + '"><td class="nom" data-t="' + r4Esc(k) + '" onclick="r4VerTec(this.dataset.t)">' + r4Esc(k) + '</td><td>' + t.v + '</td><td><b>' + t.nr.length + '</b></td><td class="' + (pd === null ? '' : pd > 40 ? 'mal' : 'ok') + '">' + r4P(pd) + '</td><td>' + (t.cau['SIN MORADORES'] || 0) + '</td><td>' + (t.cau['CLIENTE REAGENDA'] || 0) + '</td><td>' + (t.cau['CLIENTE DESISTE'] || 0) + '</td><td>' + ((t.cau.RED || 0) + (t.cau.GSA || 0)) + '</td><td>' + rep + '</td></tr>';
+    if(R4_TEC === k) h += '<tr><td colspan="9" class="izq" id="r4TecDet" style="background:#f8fafc">' + t.nr.slice().sort(function(a, b){ return b.iso.localeCompare(a.iso); }).map(function(x){ const L = V[x.dir] || [];
+      return '<div class="rm-hist" style="margin:4px 0"><b>' + r4Fecha(x.iso) + ' ' + r4Esc(x.fr) + '</b> ' + r4Esc(x.cod) + (x.gsa ? ' (GSA)' : '') + ' · OT ' + r4Esc(x.ot) + ' · ' + r4Esc(x.dir.split('|')[0]) + ' (' + r4Esc(x.com) + ') · <b>' + L.length + ' visita' + (L.length === 1 ? '' : 's') + '</b><br>' + L.map(function(y){ return '<span class="' + (y.ok ? 'c-ok' : 'c-nr') + '">' + r4Fecha(y.iso) + ' ' + (y.dom ? r4Esc(y.tec) : (R4_EMPN[y.emp] || y.emp)) + ' · ' + (y.ok ? 'completada' : r4Esc(y.cod)) + '</span>'; }).join(' → ') + '</div>'; }).join('') + '</td></tr>';
+  });
+  return h + '</tbody></table></div><div class="rm-nota">Meta de derivación: 40 % o menos. Toca un técnico para ver cada derivada con la historia de esa dirección.</div>';
+}
+function r4VYav(){
+  const fp = r4FiltroPer(), V = r4VisitasDir();
+  let F = Object.keys(V).map(function(d){ return { d:d, L:V[d] }; }).filter(function(f){ return f.L.length >= 2 && f.L.some(function(y){ return y.dom; }) && f.L.some(function(y){ return !y.ok; }) && f.L.some(function(y){ return fp(y) && r4Com(y); }); });
+  F.sort(function(a, b){ return b.L.length - a.L.length || a.d.localeCompare(b.d); });
+  const sinOk = F.filter(function(f){ return !f.L.some(function(y){ return y.ok; }); }).length;
+  let h = '<div class="rm-cards"><div class="rm-card big"><div class="t">Direcciones ya visitadas</div><div class="n">' + F.length + '</div><div class="p">2 visitas o más, alguna de Dominion</div></div><div class="rm-card"><div class="t">Sin completar todavía</div><div class="n mal">' + sinOk + '</div></div><div class="rm-card"><div class="t">Con 3 visitas o más</div><div class="n">' + F.filter(function(f){ return f.L.length >= 3; }).length + '</div></div></div>';
+  h += '<input id="r4Bus" class="rm-buscar" placeholder="Buscar dirección, técnico o código…" value="' + r4Esc(R4_BUS) + '" oninput="r4Buscar(this.value)"><div class="rm-wrap"><table class="rm-tabla"><thead><tr><th>Dirección</th><th>Comuna</th><th>Visitas</th><th>Historial (todas las empresas)</th><th>Cómo terminó</th></tr></thead><tbody>';
+  F.slice(0, 600).forEach(function(f){ const p = f.d.split('|'), ok = f.L.filter(function(y){ return y.ok; }).slice(-1)[0];
+    h += '<tr data-b="' + r4Esc(f.d + ' ' + f.L.map(function(y){ return y.tec + ' ' + y.cod; }).join(' ')) + '"><td class="izq">' + r4Esc(p[0]) + '</td><td class="izq">' + r4Esc(p[1] || '') + '</td><td><b>' + f.L.length + '</b></td><td class="izq rm-hist">'
+      + f.L.map(function(y){ return '<span class="' + (y.ok ? 'c-ok' : 'c-nr') + '">' + r4Fecha(y.iso) + ' ' + (y.dom ? r4Esc(y.tec) : (R4_EMPN[y.emp] || y.emp)) + ' · ' + (y.ok ? 'completada' : r4Esc(y.cod || 'no realizada')) + '</span>'; }).join(' → ')
+      + '</td><td>' + (ok ? (ok.dom ? '<span class="ok">Completada Dominion</span>' : '<span class="mal">Completada ' + (R4_EMPN[ok.emp] || ok.emp) + '</span>') : 'Sin completar') + '</td></tr>'; });
+  return h + '</tbody></table></div>' + (F.length > 600 ? '<div class="rm-nota">Se muestran las primeras 600.</div>' : '');
+}
+function r4VGer(){
+  const D = R4_R, B = D.R.filter(function(x){ return r4Com(x); });
+  let h = '<div class="rm-chips"><button class="' + (R4_REUNION ? 'on' : '') + '" onclick="r4Reunion()">🖥 Modo reunión ' + (R4_REUNION ? '(activo)' : '') + '</button></div><div class="r4-ger">';
+  D.meses.slice().reverse().forEach(function(m){
+    const a = r4Pc2(B, function(x){ return x.dom && x.mes === m; }), c = r4Pc2(B, function(x){ return x.emp === 'CREA' && x.mes === m; }), r = r4Pc2(B, function(x){ return !x.dom && x.mes === m; });
+    const E = {}; B.forEach(function(x){ if(x.mes !== m || !x.vis) return; const e = E[x.emp] || (E[x.emp] = { v:0, o:0 }); e.v++; if(x.ok) e.o++; });
+    const rk = Object.keys(E).sort(function(p, q){ return E[q].o / E[q].v - E[p].o / E[p].v; });
+    h += '<div class="r4-gc"><div class="t">' + r4MesTxt(m) + (m === D.ult.slice(0, 6) ? ' <small>al ' + r4Fecha(D.ult) + '</small>' : '') + '</div><div class="n ' + r4Cls(a.p) + '">' + r4P(a.p) + '</div><div class="p">' + a.o + ' de ' + a.v + ' visitadas · ' + (rk.indexOf('DOMI') + 1) + '° de ' + rk.length + ' empresas</div>'
+      + '<div class="r4-gr"><span>CREA <b class="' + r4Cls(c.p) + '">' + r4P(c.p) + '</b></span><span>Resto <b class="' + r4Cls(r.p) + '">' + r4P(r.p) + '</b></span><span>vs resto <b class="' + (a.p >= r.p ? 'ok' : 'mal') + '">' + (a.p >= r.p ? '+' : '−') + P2(Math.abs(a.p - r.p)) + '</b></span></div></div>';
+  });
+  h += '</div><h2>Semana a semana</h2>' + r4GraficoSem();
+  h += '<div class="rm-wrap" style="margin-top:10px"><table class="rm-tabla"><thead><tr><th>Semana</th><th>Dominion visitadas</th><th>Dominion</th><th>CREA</th><th>Resto</th><th>Diferencia vs resto</th></tr></thead><tbody>';
+  D.sems.slice().reverse().forEach(function(s){ const a = r4Pc2(B, function(x){ return x.dom && x.sem === s; }), c = r4Pc2(B, function(x){ return x.emp === 'CREA' && x.sem === s; }), r = r4Pc2(B, function(x){ return !x.dom && x.sem === s; });
+    h += '<tr><td>' + r4SemTxt(s) + (s === D.semEnCurso ? ' <small>en curso</small>' : '') + '</td><td>' + a.v + '</td><td class="bk-' + r4Cls(a.p) + '">' + r4PcH(a.o, a.v, true) + '</td><td>' + r4PcH(c.o, c.v) + '</td><td>' + r4PcH(r.o, r.v) + '</td><td>' + (a.p !== null && r.p !== null ? '<span class="' + (a.p >= r.p ? 'ok' : 'mal') + '">' + (a.p >= r.p ? '+' : '−') + P2(Math.abs(a.p - r.p)) + '</span>' : '–') + '</td></tr>'; });
+  return h + '</tbody></table></div>';
+}
+function r4VEmp(){
+  const D = R4_R, fp = r4FiltroPer(), E = {};
+  D.R.forEach(function(x){ if(!x.vis || !r4Com(x)) return; const e = E[x.emp] || (E[x.emp] = { per:{ v:0, o:0 }, mes:{}, cau:{} }); const m = e.mes[x.mes] || (e.mes[x.mes] = { v:0, o:0 }); m.v++; if(x.ok) m.o++;
+    if(fp(x)){ e.per.v++; if(x.ok) e.per.o++; else { const k = r4Causa(x); e.cau[k] = (e.cau[k] || 0) + 1; } } });
+  const ks = Object.keys(E).filter(function(k){ return E[k].per.v; }).sort(function(a, b){ return E[b].per.o / E[b].per.v - E[a].per.o / E[a].per.v; });
+  let h = '<div class="rm-wrap"><table class="rm-tabla"><thead><tr><th>#</th><th>Empresa</th><th>Visitadas</th><th>Completitud</th>' + D.meses.map(function(m){ return '<th>' + r4MesTxt(m) + '</th>'; }).join('') + '<th>Sin moradores c/100</th><th>Reagenda c/100</th><th>Desiste c/100</th><th>Red c/100</th></tr></thead><tbody>';
+  ks.forEach(function(k, i){ const e = E[k], v = e.per.v, c100 = function(z){ return P2((e.cau[z] || 0) * 100 / v); };
+    h += '<tr class="' + (k === 'DOMI' ? 'dom' : '') + '"><td>' + (i + 1) + '</td><td>' + (R4_EMPN[k] || k) + '</td><td>' + v + '</td><td class="bk-' + r4Cls(e.per.o * 100 / v) + '">' + r4PcH(e.per.o, v) + '</td>' + D.meses.map(function(m){ const z = e.mes[m]; return '<td>' + (z ? r4PcH(z.o, z.v) + '<small>' + z.v + '</small>' : '–') + '</td>'; }).join('')
+      + '<td>' + c100('SIN MORADORES') + '</td><td>' + c100('CLIENTE REAGENDA') + '</td><td>' + c100('CLIENTE DESISTE') + '</td><td>' + P2(((e.cau.RED || 0) + (e.cau.GSA || 0)) * 100 / v) + '</td></tr>'; });
+  return h + '</tbody></table></div><div class="rm-nota">Las otras empresas vienen sin nombres de técnicos (solo para comparar). "c/100" = derivadas por esa causa cada 100 visitas.</div>';
+}
+
 /* ---- botones de pantallas: "Pantalla 4" solo para Luis (se suma a la Pantalla 3) ---- */
 (function(){
   if(typeof pzPantHtml !== 'function' || typeof irPantalla !== 'function') return;
@@ -25059,7 +25521,7 @@ function r4VDirecciones(){
   };
 })();
 setTimeout(function(){ try { if(mdSoyLuis() && typeof pintarPortada === 'function') pintarPortada(); } catch(e){} }, 0);
-document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && r4Abierta()){ if(R4_TEC){ R4_TEC = ''; r4Pintar(); } else r4Cerrar(); } });
+document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && r4Abierta()){ if(R4_MENU){ R4_MENU = ''; R4_Q = ''; r4Pintar(); } else if(R4_TEC){ R4_TEC = ''; r4Pintar(); } else if(R4_VISTA) r4Tablero(); else r4Cerrar(); } });
 function r4PorDireccion(){ if((location.hash || '').toLowerCase() === '#rm' && mdSoyLuis() && !r4Abierta()) r4Abrir(); }
 window.addEventListener('hashchange', r4PorDireccion);
 setTimeout(r4PorDireccion, 1600);
