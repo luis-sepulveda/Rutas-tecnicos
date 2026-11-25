@@ -24971,6 +24971,7 @@ function r4ComunasTop(){ if(R4_R._ct) return R4_R._ct; const c = {}; R4_R.R.forE
   return (R4_R._ct = Object.keys(c).sort(function(a, b){ return c[b] - c[a]; })); }
 
 /* ---- tablero (como la Pantalla 2, sin el dia en curso) ---- */
+var R4_RELOJES = false;   /* (25-11-2026) tarjetas de relojes Dominion / CREA / Resto: apagadas a pedido de Luis */
 const R4_GRP = [['dom', 'Dominion', '#d9480f', function(x){ return x.dom; }], ['crea', 'CREA', '#2f9e44', function(x){ return x.emp === 'CREA'; }], ['resto', 'Resto de empresas', '#64748b', function(x){ return !x.dom; }]];
 function r4Pc2(L, fn){ let v = 0, o = 0; L.forEach(function(x){ if(x.vis && fn(x)){ v++; if(x.ok) o++; } }); return { v:v, o:o, p:v ? o * 100 / v : null }; }
 function r4TableroHtml(){
@@ -24978,6 +24979,14 @@ function r4TableroHtml(){
   const nDia = (r4D(D.ult).getDay() + 6) % 7;   /* 0 = lunes */
   const corte = r4Fmt(new Date(r4D(semAnt).getTime() + nDia * 864e5)), diaTxt = ['lun', 'lun a mar', 'lun a mié', 'lun a jue', 'lun a vie', 'lun a sáb', 'lun a dom'][nDia];
   const B = D.R.filter(function(x){ return r4Com(x); });
+  /* (25-11-2026, 13:56) Luis: "elimina estas tarjetas de la pantalla 4 porfa" (captura de los relojes Dominion / CREA / Resto).
+     Se sacan las 3 tarjetas de relojes y su titulo; arriba queda solo la regla y los colores. Para volver: R4_RELOJES = true. */
+  if(!R4_RELOJES){
+    return '<div class="r4-sec">Completitud de migraciones · completadas ÷ visitadas · GSA como quiebre (como VTR) · meta 60%'
+      + '<span class="r4-ley">' + [['#16a34a','60 % o más'],['#eab308','50 a 59,99 %'],['#dc2626','bajo 50 %']].map(function(c){ return '<span><i style="background:' + c[0] + '"></i>' + c[1] + '</span>'; }).join('') + '</span>'
+      + (R4_COM !== 'Todas' ? '<span class="r4-filtro">Comuna: <b>' + r4Esc(R4_COM) + '</b> <button onclick="r4Comuna(\'Todas\')">Quitar</button></span>' : '') + '</div>'
+      + '<div class="r4-g2"><div class="r4-col">' + r4SemaforoHtml(B) + r4PorComunaHtml() + '</div><div class="r4-col">' + r4CierraHtml(B, mes) + r4EmpresasMiniHtml(mes) + '</div></div>';
+  }
   let h = '<div class="r4-sec">Relojes de completitud · completadas ÷ visitadas · GSA como quiebre (como VTR) · meta 60%'
     + '<span class="r4-ley">' + [['#16a34a','60 % o más'],['#eab308','50 a 59,99 %'],['#dc2626','bajo 50 %']].map(function(c){ return '<span><i style="background:' + c[0] + '"></i>' + c[1] + '</span>'; }).join('')
     + '<span><i style="width:4px;height:18px;border-radius:2px;background:#132a4a"></i>meta</span><span><i style="border-radius:50%;background:#fff;border:3px solid #132a4a;box-sizing:border-box"></i>cómo vamos</span></span>'
