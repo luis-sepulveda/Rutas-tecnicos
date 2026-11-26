@@ -7704,7 +7704,12 @@ function toggleReit(){
    Para volver a mostrar el boton: REIT_VISIBLE = true y quitar el
    style="display:none" del btnReit del mapa. */
 var REIT_VISIBLE = false;
+/* (26-11-2026) Luis: "elimina tambien la vista de los reiterados del titulo con 3 clics". Con false, los 3 clics en el titulo
+   de la portada ("Modulo de Actividades") y en el titulo de Analisis de gestion ya no abren Reiterados (ninguna otra entrada
+   queda: el boton btnReit sigue oculto). La ventana y sus funciones quedan en el archivo sin uso. Para volver: true. */
+var REIT_3CLICS = false;
 function reitEntradaSecreta(){
+  if(!REIT_3CLICS) return;
   try { toggleReit(); } catch(e){ console.warn('reit:', e); }
   try { marcarAlertasPortada(); } catch(e){}
 }
@@ -24352,6 +24357,15 @@ async function pzEquipoOk(quien){
 #mdPage .md-buscar { width:100%; box-sizing:border-box; border:1px solid #cbd5e1; border-radius:8px; padding:7px 10px; font:13px inherit; margin:0 0 10px; }
 #mdPage .md-tabla.tec td.nom { cursor:pointer; color:#1d4ed8; } #mdPage .md-tabla.tec td.nom:hover { text-decoration:underline; }
 #mdPage .md-pc-ok { color:#15803d; font-weight:800; } #mdPage .md-pc-med { color:#b45309; font-weight:800; } #mdPage .md-pc-mal { color:#b91c1c; font-weight:800; }
+/* (26-11-2026) quiebres reales */
+#mdPage .c-qr { border-top-color:#7f1d1d; background:#fff7f7; }
+#mdPage .c-qr .n { color:#7f1d1d; }
+#mdPage .md-qbar { display:flex; height:6px; border-radius:3px; overflow:hidden; margin-top:7px; background:#f1f5f9; } #mdPage .md-qbar i { display:block; }
+#mdPage .md-qley { font-size:11.5px; color:#64748b; margin-top:3px; }
+#mdPage .md-tabla th.qr { color:#7f1d1d; } #mdPage .md-tabla td.qr { color:#7f1d1d; font-weight:800; background:#fff7f7; }
+#mdPage .md-tabla td.qr .z { color:#cbd5e1; font-weight:400; }
+#mdPage .md-qp { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:5px; vertical-align:middle; }
+#mdPage .md-qc { background:#dcfce7; color:#166534; border-radius:6px; padding:1px 6px; font-size:11px; font-weight:700; white-space:nowrap; }
 #mdPage details.md-tec { margin:0 0 22px; } #mdPage details.md-tec summary { cursor:pointer; font-size:16px; font-weight:700; margin:0 0 8px; }
 @media (max-width:700px){ #mdPage .md-sel { display:flex; margin-right:0; } #mdPage .md-sel select, #mdPage .md-sel input { max-width:none; flex:1; } #mdPage .md-tabla.tec { display:block; overflow-x:auto; } }
 </style>
@@ -24500,6 +24514,49 @@ function mdVer(fam, est){ MD_SEL = (fam === null || (MD_SEL && MD_SEL.fam === fa
 function mdBuscar(v){ MD_BUS = v; const t = document.querySelectorAll('#mdPage .md-lista tbody tr'), q = mpNorm(v);
   let n = 0; t.forEach(function(r){ const ok = !q || mpNorm(r.textContent).indexOf(q) >= 0; r.style.display = ok ? '' : 'none'; if(ok) n++; });
   const c = document.getElementById('mdCuenta'); if(c) c.textContent = n; }
+/* (26-11-2026) Luis: "necesito que en la pantalla 3 muestre los quiebres reales de ayer porfa".
+   QUIEBRES REALES en Mi despacho, con las MISMAS 3 reglas del desplegable "Quiebres reales" del Detalle del mes (Pantalla 2):
+     1) se quita la no realizada si la MISMA peticion aparece despues como Completado (mismo dia o despues; GSA cuenta como completada);
+     2) si la misma peticion quedo no realizada varias veces, cuenta UNA vez: la ultima;
+     3) se quita si en la MISMA DIRECCION hay una visita completada de la MISMA ACTIVIDAD el mismo dia o despues, con otra peticion
+        (visitas_dir.json: anDirDe / anDirVisitas). Mientras baja visitas_dir.json dice "revisando direcciones…".
+   Ademas se cuenta una sola vez cada peticion por dia. Completadas que se miran: datos.json (todas las actividades), MIGRACIONES (MG),
+   el export completo (AN_ACTCOMP) y las bandejas de HOY (DB): si una derivada de ayer se completa hoy, sale de quiebres al tiro.
+   Vale para cualquier periodo (Hoy, Ayer, semana, mes, dia). Marca cada fila no realizada: x._qr = true (quiebre real) o
+   x._qc = { f, o, misma } (se completo despues). De quien es la causa: mgResp (cliente / VTR/CLARO / Dominion). */
+function mdQuiebres(L){
+  const isoF = d => { const m = /^(\d{2})-(\d{2})-(\d{4})$/.exec(String(d || '')); return m ? m[3] + m[2] + m[1] : ''; };
+  const hoyIso = anHoyIso(), compUlt = {}, compF = {}, nrUlt = {};
+  const pon = function(o, iso, e, f){ o = String(o || '').trim(); if(!o || !iso) return;
+    if(e === 'Completado'){ if(!compUlt[o] || iso > compUlt[o]){ compUlt[o] = iso; compF[o] = f || mdIsoFecha(iso); } }
+    else if(e === 'No Realizada'){ if(!nrUlt[o] || iso > nrUlt[o]) nrUlt[o] = iso; } };
+  (Array.isArray(window.ACT_FILAS) ? window.ACT_FILAS : []).forEach(function(r){ pon(r['Orden de Trabajo'], isoF(r['Fecha']), String(r['Estado'] || '').trim(), r['Fecha']); });
+  if(typeof MG === 'object' && MG && MG.filas) MG.filas.forEach(function(x){ pon(x.ot, x.iso, x.e); });
+  const AC = window.AN_ACTCOMP; if(AC && AC.filas) AC.filas.forEach(function(r){ pon(r[3], String(r[0]), String(r[1] || '').trim()); });
+  Object.keys(typeof DB === 'object' && DB ? DB : {}).forEach(function(t){ (DB[t] || []).forEach(function(o){ pon(o.o, hoyIso, String(o.e || '')); }); });
+  const rdirOk = typeof RDIR !== 'undefined' && RDIR && RDIR !== 'error';
+  if(!rdirOk && !window.MDA_RDIR_PEND && !window.MDA_RDIR_ERR && typeof bajarRdir === 'function'){ window.MDA_RDIR_PEND = 1;   /* se baja UNA vez (lo comparte con la Pantalla 2) */
+    try { bajarRdir().then(function(){ window.MDA_RDIR_PEND = 0; if(RDIR === 'error') window.MDA_RDIR_ERR = 1; try { mdPintar(); } catch(e){} }); } catch(e){ window.MDA_RDIR_PEND = 0; window.MDA_RDIR_ERR = 1; } }
+  const famK = t => String(t || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim().slice(0, 4);
+  const dirComp = function(x){ if(!rdirOk || !x.ot) return null;
+    let d = ''; try { d = anDirDe({ ot:x.ot }) || ''; } catch(e){} if(!d) return null;
+    let V = null; try { V = anDirVisitas(d, hoyIso); } catch(e){} if(!V || !V.v) return null;
+    const fk = famK(x.fam);
+    const c = V.v.filter(v => v.ok && v.o !== x.ot && String(v.iso) >= x.iso && famK(v.cat) === fk).sort((a, b) => String(a.iso).localeCompare(String(b.iso)))[0];
+    return c ? { f:c.f, o:c.o, misma:false } : null; };
+  const R = { n:0, quit:0, comp:0, dir:0, rep:0, dup:0, q:{ cli:0, vtr:0, dom:0 }, rdir:rdirOk ? 'ok' : window.MDA_RDIR_ERR ? 'error' : 'cargando' };
+  const visto = {};
+  L.forEach(function(x){ x._qr = false; x._qc = null;
+    if(mdEstKey(x.e) !== 'nr') return;
+    const o = String(x.ot || '').trim();
+    if(o){ const k = o + '|' + x.iso; if(visto[k]){ R.dup++; return; } visto[k] = 1; }
+    if(o && compUlt[o] && compUlt[o] >= x.iso){ x._qc = { f:compF[o], o:o, misma:true }; R.comp++; return; }   /* 1) */
+    if(o && nrUlt[o] && nrUlt[o] > x.iso){ R.rep++; return; }                                                  /* 2) */
+    const c = dirComp(x); if(c){ x._qc = c; R.dir++; return; }                                                 /* 3) */
+    x._qr = true; R.n++; R.q[mgResp(x.cod)]++; });
+  R.quit = R.comp + R.dir + R.rep + R.dup;
+  return R;
+}
 function mdPintar(){
   const m = document.getElementById('mdPage'); if(!m || !m.classList.contains('abierto')) return;
   const y = m.scrollTop, foco = document.activeElement && document.activeElement.id === 'mdBus';
@@ -24532,42 +24589,56 @@ function mdPintar(){
   /* conteos */
   const C = {}; MD_FAM.concat(['Total']).forEach(function(f){ C[f] = { tot:0, com:0, nr:0, can:0, sus:0, cur:0, gsa:0 }; });
   X.L.forEach(function(x){ const k = mdEstKey(x.e); [x.fam, 'Total'].forEach(function(f){ if(!C[f]) return; C[f].tot++; C[f][k]++; if(k === 'com' && x.gsa) C[f].gsa++; }); });
+  /* (26-11-2026) quiebres reales (mdQuiebres marca x._qr) */
+  let QR = null; try { QR = mdQuiebres(X.L); } catch(e){ console.warn('quiebres reales:', e); }
+  MD_FAM.concat(['Total']).forEach(function(f){ C[f].qr = 0; C[f].qq = { cli:0, vtr:0, dom:0 }; });
+  if(QR) X.L.forEach(function(x){ if(!x._qr) return; [x.fam, 'Total'].forEach(function(f){ if(!C[f]) return; C[f].qr++; C[f].qq[mgResp(x.cod)]++; }); });
   const T = C.Total, pc = function(n, d){ return d ? (Math.round(n * 1000 / d) / 10).toFixed(1).replace('.', ',') + '%' : '–'; };
+  const qrTip = function(c){ return 'Del cliente: ' + c.qq.cli + ' · De VTR/CLARO: ' + c.qq.vtr + ' · De Dominion: ' + c.qq.dom; };
   h += '<div class="md-cards">'
     + '<div class="md-card c-tot" onclick="mdVer(\'Total\',\'tot\')"><div class="t">Total actividades</div><div class="n">' + T.tot + '</div><div class="p">' + MD_FAM.filter(function(f){ return C[f].tot; }).length + ' tipos de actividad</div></div>';
   MD_EST.forEach(function(s){
     if(s[0] === 'cur' && !T.cur) return;
     h += '<div class="md-card c-' + s[0] + '" onclick="mdVer(\'Total\',\'' + s[0] + '\')"><div class="t">' + s[1] + '</div><div class="n">' + T[s[0]] + '</div><div class="p">' + pc(T[s[0]], T.tot) + ' del total'
       + (s[0] === 'com' && T.gsa ? ' · ' + T.gsa + ' por GSA' : '') + '</div></div>';
+    if(s[0] === 'nr' && QR) h += '<div class="md-card c-qr" onclick="mdVer(\'Total\',\'qr\')" title="' + qrTip(T) + '"><div class="t">Quiebres reales</div><div class="n">' + T.qr + '</div><div class="p">' + pc(T.qr, T.tot) + ' del total · se quitaron ' + QR.quit + '</div>'
+      + (T.qr ? '<div class="md-qbar">' + ['cli', 'vtr', 'dom'].map(function(q){ return T.qq[q] ? '<i style="flex:' + T.qq[q] + ';background:' + MG_RCOL[q] + '"></i>' : ''; }).join('') + '</div><div class="md-qley">' + ['cli', 'vtr', 'dom'].map(function(q){ return '<b style="color:' + MG_RCOL[q] + '">' + T.qq[q] + '</b> ' + { cli:'cliente', vtr:'vtr', dom:'dominion' }[q]; }).join(' · ') + '</div>' : '') + '</div>';
   });
   h += '</div>';
   /* tabla por actividad */
   const fams = MD_ACT === 'Todas' ? MD_FAM.filter(function(f){ return C[f].tot; }).concat(['Total']) : [MD_ACT];
-  h += '<h2>Detalle por actividad</h2><table class="md-tabla"><thead><tr><th>Actividad</th><th>Total</th>' + MD_EST.map(function(s){ return (s[0] === 'cur' && !T.cur) ? '' : '<th>' + s[1] + '</th>'; }).join('') + '</tr></thead><tbody>';
+  const colQR = function(f){ const c = C[f], n = c.qr; if(!QR) return '';
+    return n ? '<td class="cl qr" onclick="mdVer(\'' + f + '\',\'qr\')" title="' + qrTip(c) + '">' + n + '<small>' + pc(n, c.tot) + '</small></td>' : '<td class="z">0</td>'; };
+  h += '<h2>Detalle por actividad</h2><table class="md-tabla"><thead><tr><th>Actividad</th><th>Total</th>' + MD_EST.map(function(s){ return (s[0] === 'cur' && !T.cur) ? '' : '<th>' + s[1] + '</th>' + (s[0] === 'nr' && QR ? '<th class="qr">Quiebres reales</th>' : ''); }).join('') + '</tr></thead><tbody>';
   fams.forEach(function(f){
     const c = C[f];
     h += '<tr class="' + (f === 'Total' ? 'tot' : '') + '"><td>' + f + '</td><td class="cl" onclick="mdVer(\'' + f + '\',\'tot\')">' + c.tot + '</td>'
       + MD_EST.map(function(s){ if(s[0] === 'cur' && !T.cur) return ''; const n = c[s[0]];
-          return n ? '<td class="cl" onclick="mdVer(\'' + f + '\',\'' + s[0] + '\')">' + n + '<small>' + pc(n, c.tot) + '</small>' + (s[0] === 'com' && c.gsa ? '<small>(' + c.gsa + ' GSA)</small>' : '') + '</td>' : '<td class="z">0</td>'; }).join('') + '</tr>';
+          return (n ? '<td class="cl" onclick="mdVer(\'' + f + '\',\'' + s[0] + '\')">' + n + '<small>' + pc(n, c.tot) + '</small>' + (s[0] === 'com' && c.gsa ? '<small>(' + c.gsa + ' GSA)</small>' : '') + '</td>' : '<td class="z">0</td>') + (s[0] === 'nr' ? colQR(f) : ''); }).join('') + '</tr>';
   });
-  h += '</tbody></table><div class="md-nota">Toca cualquier número para ver el detalle de esas órdenes. Días anteriores: solo órdenes cerradas. GSA = completada por falla de aprovisionamiento (VTR/CLARO la cuenta como quiebre).</div>';
+  h += '</tbody></table><div class="md-nota">Toca cualquier número para ver el detalle de esas órdenes. Días anteriores: solo órdenes cerradas. GSA = completada por falla de aprovisionamiento (VTR/CLARO la cuenta como quiebre).'
+    + (QR ? '<br><b>Quiebres reales</b> = no realizadas sin las que se completaron después (' + QR.comp + ' con la misma petición · ' + QR.dir + ' en la misma dirección con otra petición' + (QR.rdir === 'cargando' ? ', revisando direcciones…' : QR.rdir === 'error' ? ', no se pudo bajar el historial de direcciones' : '') + ') y una vez por petición (' + (QR.rep + QR.dup) + ' repetidas). Mismas reglas que en la Pantalla 2; aquí también cuenta lo que se completó hoy.' : '') + '</div>';
   /* lista */
   if(MD_SEL){
-    const sl = MD_SEL, nomE = sl.est === 'tot' ? 'Todas' : MD_EST.filter(function(s){ return s[0] === sl.est; })[0][1];
-    const LL = X.L.filter(function(x){ return (sl.fam === 'Total' || x.fam === sl.fam) && (sl.est === 'tot' || mdEstKey(x.e) === sl.est); })
+    const sl = MD_SEL, nomE = sl.est === 'tot' ? 'Todas' : sl.est === 'qr' ? 'Quiebres reales' : MD_EST.filter(function(s){ return s[0] === sl.est; })[0][1];
+    const LL = X.L.filter(function(x){ return (sl.fam === 'Total' || x.fam === sl.fam) && (sl.est === 'tot' || (sl.est === 'qr' ? x._qr : mdEstKey(x.e) === sl.est)); })
       .sort(function(a, b){ return (b.iso + (b.fr || '')).localeCompare(a.iso + (a.fr || '')) || String(a._t).localeCompare(String(b._t)); });
     h += '<div class="md-lista"><h3>' + (sl.fam === 'Total' ? 'Todas las actividades' : sl.fam) + ' · ' + nomE + ' · <span id="mdCuenta">' + LL.length + '</span><button onclick="mdVer(null,null)">Cerrar detalle</button></h3>';
-    if(sl.est === 'nr' || sl.est === 'can' || sl.est === 'sus'){
+    if(sl.est === 'nr' || sl.est === 'can' || sl.est === 'sus' || sl.est === 'qr'){
       const mot = {}; LL.forEach(function(x){ const k = x.cod || '(sin código)'; mot[k] = (mot[k] || 0) + 1; });
       const mm = Object.keys(mot).sort(function(a, b){ return mot[b] - mot[a]; });
-      if(mm.length) h += '<div class="md-mot">' + mm.map(function(k){ return '<span>' + mdEsc(k) + ' · <b>' + mot[k] + '</b></span>'; }).join('') + '</div>';
+      const pto = function(k){ return (sl.est === 'qr' || sl.est === 'nr') ? '<i class="md-qp" style="background:' + MG_RCOL[mgResp(k === '(sin código)' ? '' : k)] + '"></i>' : ''; };
+      if(mm.length) h += '<div class="md-mot">' + mm.map(function(k){ return '<span>' + pto(k) + mdEsc(k) + ' · <b>' + mot[k] + '</b></span>'; }).join('') + '</div>';
+      if(sl.est === 'qr' || sl.est === 'nr') h += '<div class="md-nota" style="margin:-4px 0 10px">' + ['cli', 'vtr', 'dom'].map(function(q){ return '<i class="md-qp" style="background:' + MG_RCOL[q] + '"></i>' + MG_RNOM[q]; }).join(' &nbsp; ') + (sl.est === 'nr' ? ' &nbsp;·&nbsp; <span class="md-qc">✓</span> = se completó después (no es quiebre real)' : '') + '</div>';
     }
     if(!LL.length) h += '<div class="md-nota">No hay órdenes.</div>';
     else {
       h += '<input id="mdBus" class="md-buscar" placeholder="Buscar en esta lista: OT, técnico, comuna o código de cierre…" value="' + mdEsc(MD_BUS) + '" oninput="mdBuscar(this.value)">';
       h += '<table><thead><tr><th>Fecha</th><th>Franja</th><th>Actividad</th><th>Estado</th><th>Técnico</th><th>Comuna</th><th>OT</th><th>Código de cierre</th></tr></thead><tbody>';
       LL.slice(0, 800).forEach(function(x){
-        h += '<tr><td>' + mdIsoFecha(x.iso) + '</td><td>' + mdEsc(x.fr) + '</td><td>' + x.fam + '</td><td>' + mdEsc(x.e) + (x.gsa && x.e === 'Completado' ? ' <span class="md-gsa">GSA</span>' : '') + '</td><td>' + mdEsc(x._t) + '</td><td>' + mdEsc(x.ciu || x.cx || '') + '</td><td>' + mdEsc(x.ot) + '</td><td>' + mdEsc(x.cod) + '</td></tr>';
+        const qc = x._qc ? ' <span class="md-qc" title="se completó el ' + mdEsc(x._qc.f) + (x._qc.misma ? ' (misma petición)' : ' con la petición ' + mdEsc(x._qc.o) + ' en la misma dirección') + '">✓ ' + mdEsc(String(x._qc.f || '').slice(0, 5)) + '</span>' : '';
+        const qp = mdEstKey(x.e) === 'nr' ? '<i class="md-qp" style="background:' + MG_RCOL[mgResp(x.cod)] + '" title="' + mdEsc(MG_RNOM[mgResp(x.cod)]) + '"></i>' : '';
+        h += '<tr><td>' + mdIsoFecha(x.iso) + '</td><td>' + mdEsc(x.fr) + '</td><td>' + x.fam + '</td><td>' + mdEsc(x.e) + (x.gsa && x.e === 'Completado' ? ' <span class="md-gsa">GSA</span>' : '') + qc + '</td><td>' + mdEsc(x._t) + '</td><td>' + mdEsc(x.ciu || x.cx || '') + '</td><td>' + mdEsc(x.ot) + '</td><td>' + qp + mdEsc(x.cod) + '</td></tr>';
       });
       h += '</tbody></table>' + (LL.length > 800 ? '<div class="md-nota">Se muestran las primeras 800: usa los filtros para acotar.</div>' : '');
     }
@@ -24576,12 +24647,12 @@ function mdPintar(){
   /* por tecnico */
   if(MD_TEC === 'Todos' && X.L.length){
     const PT = {};
-    X.L.forEach(function(x){ const k = mdEstKey(x.e), p = PT[x._t] || (PT[x._t] = { tot:0, com:0, nr:0, can:0, sus:0, cur:0, s:x._s }); p.tot++; p[k]++; });
+    X.L.forEach(function(x){ const k = mdEstKey(x.e), p = PT[x._t] || (PT[x._t] = { tot:0, com:0, nr:0, can:0, sus:0, cur:0, qr:0, s:x._s }); p.tot++; p[k]++; if(x._qr) p.qr++; });
     const ts = Object.keys(PT).sort(function(a, b){ return PT[b].tot - PT[a].tot || a.localeCompare(b); });
-    h += '<details class="md-tec"' + (MD_SUP !== 'Todos' ? ' open' : '') + '><summary>Por técnico (' + ts.length + ')</summary><table class="md-tabla tec"><thead><tr><th>Técnico</th><th>Supervisor</th><th>Total</th><th>Completadas</th><th>No realizadas</th><th>Canceladas</th><th>Suspendidas</th>' + (T.cur ? '<th>En curso</th>' : '') + '<th>% completadas*</th></tr></thead><tbody>';
+    h += '<details class="md-tec"' + (MD_SUP !== 'Todos' ? ' open' : '') + '><summary>Por técnico (' + ts.length + ')</summary><table class="md-tabla tec"><thead><tr><th>Técnico</th><th>Supervisor</th><th>Total</th><th>Completadas</th><th>No realizadas</th>' + (QR ? '<th class="qr">Quiebres reales</th>' : '') + '<th>Canceladas</th><th>Suspendidas</th>' + (T.cur ? '<th>En curso</th>' : '') + '<th>% completadas*</th></tr></thead><tbody>';
     ts.forEach(function(t){ const p = PT[t], vis = p.com + p.nr, v = vis ? p.com * 100 / vis : null;
       const cls = v === null ? '' : v >= 60 ? 'md-pc-ok' : v >= 50 ? 'md-pc-med' : 'md-pc-mal';
-      h += '<tr><td class="nom" data-t="' + mdEsc(t) + '" onclick="mdVerTec(this.dataset.t)" title="Ver solo este técnico">' + mdEsc(t) + '</td><td style="text-align:left">' + mdEsc(p.s ? mdNomSup(p.s) : '—') + '</td><td>' + p.tot + '</td><td>' + p.com + '</td><td>' + p.nr + '</td><td>' + p.can + '</td><td>' + p.sus + '</td>' + (T.cur ? '<td>' + p.cur + '</td>' : '')
+      h += '<tr><td class="nom" data-t="' + mdEsc(t) + '" onclick="mdVerTec(this.dataset.t)" title="Ver solo este técnico">' + mdEsc(t) + '</td><td style="text-align:left">' + mdEsc(p.s ? mdNomSup(p.s) : '—') + '</td><td>' + p.tot + '</td><td>' + p.com + '</td><td>' + p.nr + '</td>' + (QR ? '<td class="qr">' + (p.qr || '<span class="z">0</span>') + '</td>' : '') + '<td>' + p.can + '</td><td>' + p.sus + '</td>' + (T.cur ? '<td>' + p.cur + '</td>' : '')
         + '<td class="' + cls + '">' + (v === null ? '–' : (Math.round(v * 10) / 10).toFixed(1).replace('.', ',') + '%') + '</td></tr>'; });
     h += '</tbody></table><div class="md-nota">* % completadas = completadas ÷ (completadas + no realizadas). Es una referencia simple: la completitud oficial (con la regla de GSA de VTR/CLARO) está en Análisis de gestión. Toca un técnico para ver solo lo suyo.</div></details>';
   }
