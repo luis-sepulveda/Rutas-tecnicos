@@ -24762,6 +24762,7 @@ setTimeout(mdPorDireccion, 1500);
 #r4Page .r4-mb i { font-style:normal; background:#fbbf24; color:#1c1917; border-radius:999px; padding:0 7px; font-size:11.5px; margin-left:4px; }
 #r4Page .r4-mb.on, #r4Page .r4-mb:hover { background:#2a4f86; }
 #r4Page .r4-mb.r4-volver { background:#fbbf24; color:#1c1917; border-color:#fbbf24; }
+#r4Page .r4-mb.r4-negb { background:#7c2d12; border-color:#fdba74; } #r4Page .r4-mb.r4-negb.on, #r4Page .r4-mb.r4-negb:hover { background:#9a3412; }   /* (26-11-2026) boton Negocios */
 #r4Page .r4-q { margin-left:auto; min-width:280px; background:#fff; border:0; border-radius:8px; padding:7px 11px; font:13.5px 'DM Sans','Segoe UI',Arial,sans-serif; color:#0f172a; }
 #r4Page .r4-pop { position:absolute; left:0; top:100%; margin-top:8px; width:min(720px, 96vw); max-height:70vh; overflow:auto; background:#fff; color:#0f172a; border-radius:14px; box-shadow:0 18px 40px rgba(15,23,42,.35); z-index:20; padding-bottom:8px; }
 #r4Page .r4-poph { display:flex; align-items:center; padding:12px 16px; border-bottom:1px solid #e2e8f0; font-size:16px; }
@@ -24875,7 +24876,7 @@ function r4Preparar(j){
     diasSem[sem] = diasSem[sem] || {}; diasSem[sem][iso] = 1;
     R.push({ iso:iso, sem:sem, mes:iso.slice(0, 6), dow:(r4D(iso).getDay() + 6) % 7, emp:j.emp[a[1]], dom:j.emp[a[1]] === 'DOMI', tec:a[2] >= 0 ? j.tec[a[2]] : '',
       e:e, cod:j.cod[a[4]] || '', gsa:!!a[5], com:j.com[a[6]] || '', fr:j.fr[a[7]] || '(sin franja)', viv:j.viv[a[8]] || '(sin dato)',
-      dir:a[9] >= 0 ? j.dir[a[9]] : '', ot:a[10] || '', vis:e === 0 || e === 1, ok:e === 0 && !a[5] });
+      dir:a[9] >= 0 ? j.dir[a[9]] : '', ot:a[10] || '', vis:e === 0 || e === 1, ok:e === 0 && !a[5], neg:+(a[11] || 0) });   /* (26-11-2026) neg: 0 no, 1 Negocios, 2 Negocios - Reiterado */
   });
   const ult = j.dias[j.dias.length - 1], semEnCurso = r4Lunes(ult);
   const sems = Object.keys(diasSem).sort(), cerr = sems.filter(function(s){ return s < semEnCurso; }).slice(-4);
@@ -25005,6 +25006,9 @@ function r4Pintar(){
     const M = r4Menu();
     R4_GRUPOS.forEach(function(g){ const n = M.filter(function(x){ return x[0] === g[0]; }).length;
       h += '<button class="r4-mb' + (R4_MENU === g[0] ? ' on' : '') + '" onclick="r4MenuAbrir(\'' + g[0] + '\', event)">' + g[1] + ' ' + g[2] + ' <i>' + n + '</i></button>'; });
+    /* (26-11-2026) Luis: "creame un boton que me muestre las ordenes negocios". Boton directo (fuera de los menus). */
+    const nNeg = R4_R.R.filter(function(x){ return x.dom && x.neg && x.mes === R4_R.ult.slice(0, 6) && r4Com(x); }).length;
+    h += '<button class="r4-mb r4-negb' + (R4_VISTA === 'neg' ? ' on' : '') + '" onclick="event.stopPropagation(); r4Ir(\'neg\')" title="Migraciones de Negocios de Dominion (columna Tipo de Actividad en Siebel del export)">🏪 Negocios <i>' + (R4.neg ? nNeg : '?') + '</i></button>';
     if(R4_VISTA) h += '<button class="r4-mb r4-volver" onclick="event.stopPropagation(); r4Tablero()">‹ Tablero</button>';
     h += '<input id="r4Q" class="r4-q" placeholder="Buscar: técnico, franja, comuna, dirección…" value="' + r4Esc(R4_Q) + '" onclick="event.stopPropagation()" oninput="r4BuscarMenu(this.value)">';
     if(R4_MENU) h += r4MenuPop(M);
@@ -25359,6 +25363,50 @@ function r4VDirecciones(){
   return h;
 }
 
+/* ===== (26-11-2026) NEGOCIOS =====
+   Luis: "creame un boton que me muestre las ordenes negocios o colegios porfa" (en la Pantalla 4).
+   - Dato: columna "Tipo de Actividad en Siebel" del export de la RM: "Negocios" o "Negocios - Reiterado" (el resto es "Terreno").
+     generar_rm.py la guarda en la posicion 11 de cada fila (0 / 1 / 2). Con un rm_migraciones.json viejo (sin la marca) avisa.
+   - COLEGIOS: el export de la RM no trae nada que los distinga (no hay rubro ni Fortinet como en la V Region); quedan dentro de Negocios.
+   - Respeta periodo y comuna. Lista: todas las ordenes de Negocios de Dominion, con filtro por estado y buscador. */
+var R4_NEGV = 'todas';
+function r4NegV(v){ R4_NEGV = v; r4Pintar(); }
+function r4VNeg(){
+  if(!R4.neg) return '<div class="rm-caja">Este archivo de datos todavía no trae la marca de Negocios. En el PC: carpeta <b>Migraciones RM</b> → doble clic en <b>actualizar_rm.bat</b> (con el generar_rm.py nuevo) y vuelve a abrir la Pantalla 4 (GitHub puede tardar hasta 5 min).</div>';
+  const fp = r4FiltroPer(), P = R4_R.R.filter(function(x){ return fp(x) && r4Com(x); });
+  const N = P.filter(function(x){ return x.dom && x.neg; }), cN = r4Cuenta(N);
+  const cT = r4Cuenta(P.filter(function(x){ return x.dom && !x.neg; })), cO = r4Cuenta(P.filter(function(x){ return !x.dom && x.neg; }));
+  const reit = N.filter(function(x){ return x.neg === 2; }).length;
+  let h = '<div class="rm-cards"><div class="rm-card big"><div class="t">Negocios Dominion</div><div class="n">' + cN.tot + '</div><div class="p">' + cN.vis + ' visitadas' + (reit ? ' · ' + reit + ' reiterado' + (reit === 1 ? '' : 's') : '') + '</div></div>'
+    + '<div class="rm-card"><div class="t">Completitud negocios</div><div class="n">' + r4PcH(cN.ok, cN.vis) + '</div><div class="p">' + cN.ok + ' de ' + cN.vis + (cN.gsa ? ' · ' + cN.gsa + ' GSA' : '') + '</div></div>'
+    + '<div class="rm-card"><div class="t">Derivadas</div><div class="n mal">' + cN.nr + '</div><div class="p">' + (cN.can || cN.sus ? cN.can + ' canceladas · ' + cN.sus + ' suspendidas' : 'sin canceladas ni suspendidas') + '</div></div>'
+    + '<div class="rm-card"><div class="t">Dominion sin negocios</div><div class="n">' + r4PcH(cT.ok, cT.vis) + '</div><div class="p">' + cT.ok + ' de ' + cT.vis + ' (casas y deptos)</div></div>'
+    + '<div class="rm-card"><div class="t">Negocios otras empresas</div><div class="n">' + r4PcH(cO.ok, cO.vis) + '</div><div class="p">' + cO.ok + ' de ' + cO.vis + '</div></div></div>';
+  if(!N.length) return h + '<div class="rm-nota">En este período' + (R4_COM !== 'Todas' ? ' y comuna' : '') + ' Dominion no tuvo migraciones de Negocios.</div>';
+  const cods = Object.keys(cN.cod).sort(function(a, b){ return cN.cod[b] - cN.cod[a]; });
+  if(cods.length) h += '<h2>¿Por qué se derivaron?</h2><div class="rm-mot">' + cods.map(function(k){ return '<span>' + r4Esc(k) + ' · <b>' + cN.cod[k] + '</b></span>'; }).join('') + '</div>';
+  /* por comuna */
+  const G = {}; N.forEach(function(x){ const g = G[x.com] || (G[x.com] = []); g.push(x); });
+  h += '<h2>Por comuna</h2><table class="rm-tabla" style="max-width:720px"><thead><tr><th>Comuna</th><th>Negocios</th><th>Visitadas</th><th>Completadas</th><th>Derivadas</th><th>Completitud</th></tr></thead><tbody>'
+    + Object.keys(G).sort(function(a, b){ return G[b].length - G[a].length || a.localeCompare(b); }).map(function(k){ const c = r4Cuenta(G[k]);
+        return '<tr><td>' + r4Esc(k) + '</td><td>' + c.tot + '</td><td>' + c.vis + '</td><td>' + c.ok + '</td><td>' + c.nr + '</td><td>' + r4PcH(c.ok, c.vis) + '</td></tr>'; }).join('') + '</tbody></table>';
+  /* lista */
+  const okV = function(x){ return R4_NEGV === 'ok' ? x.ok : R4_NEGV === 'nr' ? x.vis && !x.ok : R4_NEGV === 'cs' ? !x.vis : true; };
+  const L = N.filter(okV).sort(function(a, b){ return b.iso.localeCompare(a.iso) || a.fr.localeCompare(b.fr); });
+  const vis = r4VisitasDir();
+  h += '<h2>Órdenes de Negocios</h2><div class="rm-chips"><b>Mostrar</b>' + [['todas','Todas (' + N.length + ')'], ['ok','Completadas (' + cN.ok + ')'], ['nr','Derivadas (' + cN.nr + ')'], ['cs','Canceladas y suspendidas (' + (cN.can + cN.sus) + ')']]
+      .map(function(v){ return '<button class="' + (R4_NEGV === v[0] ? 'on' : '') + '" onclick="r4NegV(\'' + v[0] + '\')">' + v[1] + '</button>'; }).join('') + '</div>';
+  h += '<input id="r4Bus" class="rm-buscar" placeholder="Buscar técnico, dirección, OT o código…" value="' + r4Esc(R4_BUS) + '" oninput="r4Buscar(this.value)">';
+  h += '<div class="rm-wrap"><table class="rm-tabla"><thead><tr><th>Fecha</th><th>Franja</th><th>Comuna</th><th>Vivienda</th><th>Técnico</th><th>Estado</th><th>Código de cierre</th><th>OT</th><th>Dirección</th><th>Visitas a la dirección</th></tr></thead><tbody>';
+  L.forEach(function(x){ const est = R4.est[x.e] || '', vv = x.dir ? (vis[x.dir] || []).length : 0;
+    h += '<tr data-b="' + r4Esc([x.tec, x.dir, x.ot, x.cod, x.com, x.fr].join(' ')) + '"><td>' + r4Fecha(x.iso) + ' ' + R4_DOW[x.dow] + '</td><td>' + r4Esc(x.fr) + '</td><td>' + r4Esc(x.com) + '</td><td>' + r4Esc(x.viv) + '</td>'
+      + '<td class="nom izq" data-t="' + r4Esc(x.tec) + '" onclick="r4Ficha(this.dataset.t)" title="Ver la ficha del técnico">' + r4Esc(x.tec) + '</td>'
+      + '<td class="' + (x.ok ? 'ok' : x.vis ? 'mal' : '') + '">' + r4Esc(est) + (x.gsa ? '<span class="rm-tag t-gsa">GSA</span>' : '') + (x.neg === 2 ? '<span class="rm-tag t-seg">Reiterado</span>' : '') + '</td>'
+      + '<td class="izq">' + r4Esc(x.cod) + '</td><td>' + r4Esc(x.ot) + '</td><td class="izq">' + r4Esc(x.dir.split('|')[0]) + '</td><td>' + (vv > 1 ? '<b>' + vv + '</b>' : vv) + '</td></tr>'; });
+  h += '</tbody></table></div><div class="rm-nota">Negocios = migraciones que el export marca como "Negocios" o "Negocios - Reiterado" (columna Tipo de Actividad en Siebel). Los colegios van dentro de Negocios: el export de la RM no trae un dato que los separe. Completitud como VTR/CLARO (GSA = quiebre). Toca un técnico para ver su ficha.</div>';
+  return h;
+}
+
 /* ---- vistas de los menus ---- */
 function r4VHead(t, sub){ return '<div class="r4-vh"><button onclick="r4Tablero()">‹ Tablero</button><div><h2>' + t + '</h2>' + (sub ? '<small>' + sub + '</small>' : '') + '</div></div>'; }
 function r4PerChips(sinSemana){
@@ -25386,6 +25434,7 @@ function r4VistaHtml(){
   if(v === 'emp') return r4VHead('🏁 Empresas del área', 'Dominion contra las otras empresas') + r4PerChips() + r4VEmp();
   if(v === 'com') return r4VHead('🗺 Comunas', 'Dominion contra el resto en cada comuna') + r4PerChips() + r4VComunas();
   if(v === 'cuando') return r4VHead('🕓 Franja, día y vivienda', 'Cuándo y dónde se completa menos') + r4PerChips() + r4VCuando();
+  if(v === 'neg') return r4VHead('🏪 Negocios', 'Migraciones de Negocios de Dominion (el export las marca como "Negocios" en Tipo de Actividad en Siebel)') + r4PerChips() + r4VNeg();
   return r4TableroHtml();
 }
 /* datos por tecnico (con el filtro de comuna) */
