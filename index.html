@@ -24526,10 +24526,11 @@ function mdBuscar(v){ MD_BUS = v; const t = document.querySelectorAll('#mdPage .
    x._qc = { f, o, misma } (se completo despues). De quien es la causa: mgResp (cliente / VTR/CLARO / Dominion). */
 function mdQuiebres(L){
   const isoF = d => { const m = /^(\d{2})-(\d{2})-(\d{4})$/.exec(String(d || '')); return m ? m[3] + m[2] + m[1] : ''; };
-  const hoyIso = anHoyIso(), compUlt = {}, compF = {}, nrUlt = {};
-  const pon = function(o, iso, e, f){ o = String(o || '').trim(); if(!o || !iso) return;
-    if(e === 'Completado'){ if(!compUlt[o] || iso > compUlt[o]){ compUlt[o] = iso; compF[o] = f || mdIsoFecha(iso); } }
-    else if(e === 'No Realizada'){ if(!nrUlt[o] || iso > nrUlt[o]) nrUlt[o] = iso; } };
+  /* (26-11-2026, 10:46) Luis: "solo elimina como quiebres las que se completan el mismo dia porfa". Se guardan los DIAS en que
+     cada peticion se completo (compDia[o][iso]); ya no se usa "la ultima completada" ni "la ultima no realizada". */
+  const hoyIso = anHoyIso(), compDia = {};
+  const pon = function(o, iso, e){ o = String(o || '').trim(); if(!o || !iso) return;
+    if(e === 'Completado') (compDia[o] = compDia[o] || {})[iso] = 1; };
   (Array.isArray(window.ACT_FILAS) ? window.ACT_FILAS : []).forEach(function(r){ pon(r['Orden de Trabajo'], isoF(r['Fecha']), String(r['Estado'] || '').trim(), r['Fecha']); });
   if(typeof MG === 'object' && MG && MG.filas) MG.filas.forEach(function(x){ pon(x.ot, x.iso, x.e); });
   const AC = window.AN_ACTCOMP; if(AC && AC.filas) AC.filas.forEach(function(r){ pon(r[3], String(r[0]), String(r[1] || '').trim()); });
@@ -24542,7 +24543,7 @@ function mdQuiebres(L){
     let d = ''; try { d = anDirDe({ ot:x.ot }) || ''; } catch(e){} if(!d) return null;
     let V = null; try { V = anDirVisitas(d, hoyIso); } catch(e){} if(!V || !V.v) return null;
     const fk = famK(x.fam);
-    const c = V.v.filter(v => v.ok && v.o !== x.ot && String(v.iso) >= x.iso && famK(v.cat) === fk).sort((a, b) => String(a.iso).localeCompare(String(b.iso)))[0];
+    const c = V.v.filter(v => v.ok && v.o !== x.ot && String(v.iso) === x.iso && famK(v.cat) === fk)[0];   /* (26-11, 10:46) solo el MISMO dia */
     return c ? { f:c.f, o:c.o, misma:false } : null; };
   const R = { n:0, quit:0, comp:0, dir:0, rep:0, dup:0, q:{ cli:0, vtr:0, dom:0 }, rdir:rdirOk ? 'ok' : window.MDA_RDIR_ERR ? 'error' : 'cargando' };
   const visto = {};
@@ -24550,9 +24551,9 @@ function mdQuiebres(L){
     if(mdEstKey(x.e) !== 'nr') return;
     const o = String(x.ot || '').trim();
     if(o){ const k = o + '|' + x.iso; if(visto[k]){ R.dup++; return; } visto[k] = 1; }
-    if(o && compUlt[o] && compUlt[o] >= x.iso){ x._qc = { f:compF[o], o:o, misma:true }; R.comp++; return; }   /* 1) */
-    if(o && nrUlt[o] && nrUlt[o] > x.iso){ R.rep++; return; }                                                  /* 2) */
-    const c = dirComp(x); if(c){ x._qc = c; R.dir++; return; }                                                 /* 3) */
+    if(o && compDia[o] && compDia[o][x.iso]){ x._qc = { f:mdIsoFecha(x.iso), o:o, misma:true }; R.comp++; return; }   /* 1) misma peticion, completada el MISMO dia */
+    /* 2) (26-11, 10:46) ya no se quita: si la misma peticion se derivo otro dia, cada dia cuenta como quiebre */
+    const c = dirComp(x); if(c){ x._qc = c; R.dir++; return; }                                                        /* 3) misma direccion, completada el MISMO dia */
     x._qr = true; R.n++; R.q[mgResp(x.cod)]++; });
   R.quit = R.comp + R.dir + R.rep + R.dup;
   return R;
@@ -24617,7 +24618,7 @@ function mdPintar(){
           return (n ? '<td class="cl" onclick="mdVer(\'' + f + '\',\'' + s[0] + '\')">' + n + '<small>' + pc(n, c.tot) + '</small>' + (s[0] === 'com' && c.gsa ? '<small>(' + c.gsa + ' GSA)</small>' : '') + '</td>' : '<td class="z">0</td>') + (s[0] === 'nr' ? colQR(f) : ''); }).join('') + '</tr>';
   });
   h += '</tbody></table><div class="md-nota">Toca cualquier número para ver el detalle de esas órdenes. Días anteriores: solo órdenes cerradas. GSA = completada por falla de aprovisionamiento (VTR/CLARO la cuenta como quiebre).'
-    + (QR ? '<br><b>Quiebres reales</b> = no realizadas sin las que se completaron después (' + QR.comp + ' con la misma petición · ' + QR.dir + ' en la misma dirección con otra petición' + (QR.rdir === 'cargando' ? ', revisando direcciones…' : QR.rdir === 'error' ? ', no se pudo bajar el historial de direcciones' : '') + ') y una vez por petición (' + (QR.rep + QR.dup) + ' repetidas). Mismas reglas que en la Pantalla 2; aquí también cuenta lo que se completó hoy.' : '') + '</div>';
+    + (QR ? '<br><b>Quiebres reales</b> = no realizadas sin las que se completaron el MISMO día (' + QR.comp + ' con la misma petición · ' + QR.dir + ' en la misma dirección con otra petición' + (QR.rdir === 'cargando' ? ', revisando direcciones…' : QR.rdir === 'error' ? ', no se pudo bajar el historial de direcciones' : '') + ')' + (QR.dup ? ' y una vez por petición en el día (' + QR.dup + ' repetidas)' : '') + '. Si se completó otro día, sigue siendo quiebre.' : '') + '</div>';
   /* lista */
   if(MD_SEL){
     const sl = MD_SEL, nomE = sl.est === 'tot' ? 'Todas' : sl.est === 'qr' ? 'Quiebres reales' : MD_EST.filter(function(s){ return s[0] === sl.est; })[0][1];
@@ -24629,7 +24630,7 @@ function mdPintar(){
       const mm = Object.keys(mot).sort(function(a, b){ return mot[b] - mot[a]; });
       const pto = function(k){ return (sl.est === 'qr' || sl.est === 'nr') ? '<i class="md-qp" style="background:' + MG_RCOL[mgResp(k === '(sin código)' ? '' : k)] + '"></i>' : ''; };
       if(mm.length) h += '<div class="md-mot">' + mm.map(function(k){ return '<span>' + pto(k) + mdEsc(k) + ' · <b>' + mot[k] + '</b></span>'; }).join('') + '</div>';
-      if(sl.est === 'qr' || sl.est === 'nr') h += '<div class="md-nota" style="margin:-4px 0 10px">' + ['cli', 'vtr', 'dom'].map(function(q){ return '<i class="md-qp" style="background:' + MG_RCOL[q] + '"></i>' + MG_RNOM[q]; }).join(' &nbsp; ') + (sl.est === 'nr' ? ' &nbsp;·&nbsp; <span class="md-qc">✓</span> = se completó después (no es quiebre real)' : '') + '</div>';
+      if(sl.est === 'qr' || sl.est === 'nr') h += '<div class="md-nota" style="margin:-4px 0 10px">' + ['cli', 'vtr', 'dom'].map(function(q){ return '<i class="md-qp" style="background:' + MG_RCOL[q] + '"></i>' + MG_RNOM[q]; }).join(' &nbsp; ') + (sl.est === 'nr' ? ' &nbsp;·&nbsp; <span class="md-qc">✓</span> = se completó el mismo día (no es quiebre real)' : '') + '</div>';
     }
     if(!LL.length) h += '<div class="md-nota">No hay órdenes.</div>';
     else {
