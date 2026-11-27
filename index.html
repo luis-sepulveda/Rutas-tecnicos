@@ -20006,6 +20006,8 @@ function anOrdLista(){
     ['hoy','Derivadas de hoy','Visitadas, derivadas y por visitar, tal como van',"migDer('hoy')"],
     ['hoy','Resumen supervisores','Por qué y quién, con filtro por supervisor y fotos',"migIr('abrirResMig')"],
     ['hoy','Quiebre por RGU','Como el BI: quiebre, efectividad, derivaciones por cierre y el valor de cada orden','qgAbrir()']];   /* (27-11-2026) */
+  /* (27-11-2026, 12:45) Luis: "cambialo porfa solo yo lo veo": Quiebre por RGU solo con la clave de Luis (mdSoyLuis, como la Pantalla 3) */
+  if(!(typeof mdSoyLuis === 'function' && mdSoyLuis())) L.splice(L.length - 1, 1);
   anMesesLista().slice().reverse().forEach(function(k){ L.push(['mes', anMesNom(k), (anMesEnCurso(k) ? 'En curso, hasta ayer' : 'Mes completo') + ' · todo el detalle del mes', "anMesAbrir('" + k + "')"]); });
   L.push(['mes','Migraciones día a día','Completitud de cada día con el mes completo','anDiarioAbrir()'],
     ['mes','Derivaciones por franja','En qué franja se deriva más: actividad, semana, día, técnico y comuna','abrirFranjas()'],
@@ -24763,6 +24765,7 @@ function qgDatos(){
   return L;
 }
 function qgAbrir(){
+  if(!(typeof mdSoyLuis === 'function' && mdSoyLuis())) return;   /* (27-11-2026, 12:45) solo Luis */
   try { if(typeof anCerrarMenus === 'function') anCerrarMenus(); } catch(e){}
   QG_AB = true; document.getElementById('modalQrgu').classList.add('abierto'); qgPintar();
   if(!QG_T) QG_T = setInterval(function(){ if(QG_AB) qgPintar(); }, 60000);
