@@ -24790,6 +24790,17 @@ function qgPintar(){
     + '<div class="qg-card"><div class="t">Quiebre GSA</div><div class="n neu">' + qgP(rG, tot) + '</div><div class="p">' + qgN(rG) + ' RGU completadas por GSA</div></div>'
     + '<div class="qg-card"><div class="t">Efectividad</div><div class="n ' + (q > 40 ? 'mal' : 'ok') + '">' + qgP(rC - rG, tot) + '</div><div class="p">' + qgN(rC - rG) + ' RGU completadas de ' + qgN(tot) + '</div></div>'
     + '<div class="qg-card"><div class="t">Total RGU</div><div class="n neu">' + qgN(tot) + '</div><div class="p">' + oC + ' completadas · ' + oNR + ' no realizadas</div></div></div>';
+  /* (27-11-2026, 14:10) Luis: "ejemplo un duo basico 2 rgu y su % de impacto, pero este % va variando" -> "si dale porfs".
+     Cuanto pesa cada tipo AHORA (v / total RGU cerrados), en cuanto queda el quiebre si se cae una mas ahora ((NR+v)/(total+v)),
+     y peso estimado al cierre (v / RGU programados del dia: todo menos canceladas y suspendidas). */
+  let prog = 0; Object.keys(typeof DB === 'object' && DB ? DB : {}).forEach(function(t){ (DB[t] || []).forEach(function(p){
+    const e = String(p.e || ''); if(e === 'Cancelado' || e === 'Suspendido') return; prog += qgValor(p); }); });
+  const TIP = [[1, 'Alta o migración 1 play · reparación'], [2, 'Dúo básico (2 play)'], [2.5, 'Dúo con D-box o extensor extra'], [3, 'Trío (3 play)']]
+    .filter(function(r){ return QG_MODO === 'bi' || r[0] !== 2.5; });
+  h += '<h3>Cuánto pesa cada tipo ahora</h3><div class="qg-wrap"><table><thead><tr><th class="izq">Tipo de orden</th><th>RGU</th><th title="RGU ÷ total de RGU cerrados ahora">Pesa ahora</th><th title="Si se cae una orden más de este tipo en este momento">Si se cae una más, el quiebre queda en</th><th title="RGU ÷ RGU programados del día (cerradas + en curso + pendientes; sin canceladas ni suspendidas)">Peso estimado al cierre</th></tr></thead><tbody>';
+  TIP.forEach(function(r){ const v = r[0];
+    h += '<tr><td class="izq">' + r[1] + '</td><td class="v">' + qgN(v) + '</td><td class="v mal">' + qgP(v, tot) + '</td><td>' + qgP(rNR + v, tot + v) + ' <span style="color:#64748b">(+' + (tot ? (100 * (rNR + v) / (tot + v) - q).toFixed(2).replace('.', ',') : '–') + ' pts)</span></td><td>' + qgP(v, prog) + '</td></tr>'; });
+  h += '</tbody></table></div><div class="qg-nota">Ahora: ' + qgN(tot) + ' RGU cerrados · ' + qgN(Math.round(prog * 10) / 10) + ' RGU programados en el día. Mientras más se completa, menos pesa cada orden que se cae. <b>Pesa ahora</b> es lo mismo que la columna "% del total RGU" del detalle.</div>';
   h += '<div class="qg-chips"><b>Cómo contar los RGU</b>'
     + '<button class="' + (QG_MODO === 'bi' ? 'on' : '') + '" onclick="qgModo(\'bi\')">Como el BI (con decimales)</button><button class="' + (QG_MODO === 'play' ? 'on' : '') + '" onclick="qgModo(\'play\')">Por play (1, 2 o 3)</button></div>';
   /* derivaciones por cierre (area de derivacion), como el BI */
