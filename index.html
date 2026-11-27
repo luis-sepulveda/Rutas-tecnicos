@@ -20004,7 +20004,8 @@ function anOrdLista(){
     ['hoy','Día en curso','Inicio de jornada, cifras del día, cierres de las 13:00 y detalle por actividad','anDiaAbrir()'],
     ['hoy','Resumen WhatsApp','El resumen del día para mandar por WhatsApp','anDiaIr(abrirResumenWsp)'],
     ['hoy','Derivadas de hoy','Visitadas, derivadas y por visitar, tal como van',"migDer('hoy')"],
-    ['hoy','Resumen supervisores','Por qué y quién, con filtro por supervisor y fotos',"migIr('abrirResMig')"]];
+    ['hoy','Resumen supervisores','Por qué y quién, con filtro por supervisor y fotos',"migIr('abrirResMig')"],
+    ['hoy','Quiebre por RGU','Como el BI: quiebre, efectividad, derivaciones por cierre y el valor de cada orden','qgAbrir()']];   /* (27-11-2026) */
   anMesesLista().slice().reverse().forEach(function(k){ L.push(['mes', anMesNom(k), (anMesEnCurso(k) ? 'En curso, hasta ayer' : 'Mes completo') + ' · todo el detalle del mes', "anMesAbrir('" + k + "')"]); });
   L.push(['mes','Migraciones día a día','Completitud de cada día con el mes completo','anDiarioAbrir()'],
     ['mes','Derivaciones por franja','En qué franja se deriva más: actividad, semana, día, técnico y comuna','abrirFranjas()'],
@@ -20034,7 +20035,7 @@ function anOrdLista(){
   return L.filter(function(x){ return !x[4] || x[3]; });
 }
 /* (13-11-2026) para distinguir las tarjetas a simple vista: icono propio y sub-grupo dentro de cada boton */
-const AN_ORD_IC = { 'Día en curso':['🗓','Del día'], 'Resumen WhatsApp':['💬','Para enviar'], 'Derivadas de hoy':['🔴','Migraciones de hoy'], 'Resumen supervisores':['🧑‍💼','Migraciones de hoy'],
+const AN_ORD_IC = { 'Día en curso':['🗓','Del día'], 'Resumen WhatsApp':['💬','Para enviar'], 'Derivadas de hoy':['🔴','Migraciones de hoy'], 'Resumen supervisores':['🧑‍💼','Migraciones de hoy'], 'Quiebre por RGU':['💥','Del día'],
   'Migraciones día a día':['📈','Migraciones'], 'Derivaciones por franja':['🕒','Migraciones'], 'Resumen de derivación':['🧾','Migraciones'],
   'Ficha del técnico':['🪪','Migraciones'], 'Seguimiento VTR':['🎯','Migraciones'], 'Técnicos semana a semana':['📊','Migraciones'], 'A quién auditar':['🔍','Migraciones'], 'Por técnico (derivación)':['👥','Migraciones'],
   'RGU':['📦','Producción y asistencia'], 'Asistencia':['⏰','Producción y asistencia'],
@@ -24683,6 +24684,130 @@ setInterval(function(){ if(mdAbierta()) mdPintar(); }, 60000);
 function mdPorDireccion(){ if((location.hash || '').toLowerCase() === '#md' && mdSoyLuis() && !mdAbierta()) mdAbrir(); }
 window.addEventListener('hashchange', mdPorDireccion);
 setTimeout(mdPorDireccion, 1500);
+</script>
+
+<style>
+/* ===== (27-11-2026) QUIEBRE POR RGU (como el BI) ===== */
+#modalQrgu { position:fixed; inset:0; z-index:3760; display:none; background:rgba(2,6,23,.72); font-family:'DM Sans',system-ui,sans-serif; }
+#modalQrgu.abierto { display:flex; align-items:flex-start; justify-content:center; padding:3vh 14px; }
+#modalQrgu .qg-box { background:#f4f7fa; color:#16232f; border-radius:14px; width:min(1150px,100%); max-height:94vh; overflow:auto; box-shadow:0 20px 60px rgba(0,0,0,.35); }
+#modalQrgu .qg-top { position:sticky; top:0; background:#13213c; color:#fff; padding:14px 18px; display:flex; flex-wrap:wrap; gap:8px 14px; align-items:center; z-index:2; }
+#modalQrgu .qg-top h2 { margin:0; font-size:19px; flex:1 1 auto; }
+#modalQrgu .qg-top h2 small { display:block; font-size:12px; font-weight:500; color:#aab6c8; margin-top:2px; }
+#modalQrgu .qg-x { background:#fff; color:#13213c; border:0; border-radius:8px; padding:7px 12px; font-weight:700; cursor:pointer; font-family:inherit; }
+#modalQrgu .qg-in { padding:14px 18px 20px; }
+#modalQrgu .qg-cards { display:grid; grid-template-columns:repeat(auto-fit, minmax(170px, 1fr)); gap:12px; margin-bottom:16px; }
+#modalQrgu .qg-card { background:#fff; border:1px solid #dbe3ee; border-radius:12px; padding:12px 14px; text-align:center; }
+#modalQrgu .qg-card .t { font-size:13px; font-weight:700; color:#1e3a8a; }
+#modalQrgu .qg-card .n { font-size:30px; font-weight:800; line-height:1.2; margin-top:4px; }
+#modalQrgu .qg-card .p { font-size:12px; color:#64748b; margin-top:2px; }
+#modalQrgu .mal { color:#c81e1e; } #modalQrgu .ok { color:#15803d; } #modalQrgu .neu { color:#334155; }
+#modalQrgu h3 { font-size:15px; margin:18px 0 8px; color:#1e3a8a; }
+#modalQrgu .qg-wrap { overflow-x:auto; }
+#modalQrgu table { width:100%; border-collapse:collapse; background:#fff; border-radius:10px; overflow:hidden; font-size:13.5px; }
+#modalQrgu th { background:#e8eef5; text-align:right; padding:8px 10px; font-size:12px; text-transform:uppercase; letter-spacing:.03em; color:#475569; white-space:nowrap; }
+#modalQrgu th.izq, #modalQrgu td.izq { text-align:left; }
+#modalQrgu td { padding:7px 10px; border-top:1px solid #edf1f6; text-align:right; white-space:nowrap; }
+#modalQrgu tr.tot td { font-weight:800; background:#f1f5f9; }
+#modalQrgu td.ot { font-family:ui-monospace,Consolas,monospace; }
+#modalQrgu td.v { font-weight:800; }
+#modalQrgu .qg-chips { display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin:4px 0 10px; font-size:13px; }
+#modalQrgu .qg-chips b { font-size:12px; color:#475569; text-transform:uppercase; letter-spacing:.04em; margin-right:4px; }
+#modalQrgu .qg-chips button { border:1px solid #cbd5e1; background:#fff; color:#0f172a; border-radius:999px; padding:5px 12px; font:600 13px 'DM Sans',system-ui,sans-serif; cursor:pointer; }
+#modalQrgu .qg-chips button.on { background:#13213c; color:#fff; border-color:#13213c; }
+#modalQrgu .qg-e { display:inline-block; border-radius:6px; padding:2px 8px; font-size:12px; font-weight:700; }
+#modalQrgu .qg-e.c { background:#dcfce7; color:#166534; } #modalQrgu .qg-e.n { background:#fee2e2; color:#991b1b; }
+#modalQrgu .qg-nota { font-size:12.5px; color:#475569; margin-top:8px; line-height:1.45; }
+#modalQrgu .qg-bar { height:6px; border-radius:4px; background:#e2e8f0; overflow:hidden; margin-top:4px; }
+#modalQrgu .qg-bar i { display:block; height:100%; background:#c81e1e; }
+</style>
+<div id="modalQrgu" onclick="if(event.target===this) qgCerrar()"><div class="qg-box"><div id="qgBody"></div></div></div>
+<script>
+/* ===== (27-11-2026) QUIEBRE POR RGU (como el BI) =====
+   Luis (con captura del BI de Dominion: Quiebre 40,11 %, Efectividad 59,89 %, Derivaciones por cierre por "Area derivacion"):
+   "me podrias crear un boton en la pantalla de analisis de gestion que vea esto porfa y me muestre el detalle de cada actividad y su valor".
+   - Boton en Analisis de gestion -> grupo "Hoy" -> "Quiebre por RGU". Solo el DIA EN CURSO (bandejas de hoy, DB = rutas.json).
+   - Valor de cada orden (regla por play, la que mas se acerco al BI el 27-11: 40,00 % vs 40,11 %):
+     alta, alta traslado y migracion = su play (1, 2 o 3; sin play = 1), reparacion = 1. Otras actividades (modificacion, upgrade...)
+     = 0, con un boton para contarlas como 1.
+   - Quiebre = RGU no realizadas / (RGU completadas + RGU no realizadas). Efectividad = RGU completadas / el mismo total.
+     Quiebre GSA = RGU completadas por GSA / total (se muestra aparte, como en el BI). Canceladas, suspendidas y en curso no cuentan.
+   - "Derivaciones por cierre" = por Area de derivacion (campo der de rutas.json), igual que la tabla del BI.
+   - Se repinta solo cada minuto mientras esta abierta (las bandejas se actualizan durante el dia). */
+var QG_AB = false, QG_OTRAS = 0, QG_VER = 'nr', QG_T = null;
+function qgPlay(p){
+  const t = String(p.t || '').toUpperCase().normalize('NFD').replace(/[̀-ͯ]/g, '').trim();
+  if(t.indexOf('REPARA') === 0) return 1;
+  if(t.indexOf('ALTA') === 0 || t.indexOf('MIGRA') === 0 || t.indexOf('TRASLADO') === 0){
+    const m = String(p.cat || p.sub || '').match(/([123])\s*play/i); return m ? parseInt(m[1], 10) : 1; }
+  return QG_OTRAS;
+}
+function qgFam(p){ try { if(typeof mdCat === 'function') return mdCat(p.cat || p.t); } catch(e){} return String(p.t || 'Otras'); }
+function qgEsc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]; }); }
+function qgN(x){ return (Math.round(x * 100) / 100).toString().replace('.', ','); }
+function qgP(a, b){ return b ? (100 * a / b).toFixed(2).replace('.', ',') + ' %' : '–'; }
+function qgDatos(){
+  const L = [];
+  Object.keys(typeof DB === 'object' && DB ? DB : {}).forEach(function(t){ (DB[t] || []).forEach(function(p){
+    const e = String(p.e || ''); if(e !== 'Completado' && e !== 'No Realizada') return;
+    L.push({ ot:p.o, tec:String(t).replace(/^.*?_DOMI_/i, '').replace(/_/g, ' ').trim(), fam:qgFam(p), tipo:p.cat || p.t || '', e:e, nr:e === 'No Realizada',
+      gsa:!!p.gsa && e === 'Completado', v:qgPlay(p), cie:String(p.cie || ''), der:String(p.der || ''), fr:String(p.f || ''), hf:String(p.hf || '') });
+  }); });
+  return L;
+}
+function qgAbrir(){
+  try { if(typeof anCerrarMenus === 'function') anCerrarMenus(); } catch(e){}
+  QG_AB = true; document.getElementById('modalQrgu').classList.add('abierto'); qgPintar();
+  if(!QG_T) QG_T = setInterval(function(){ if(QG_AB) qgPintar(); }, 60000);
+}
+function qgCerrar(){ QG_AB = false; document.getElementById('modalQrgu').classList.remove('abierto'); if(QG_T){ clearInterval(QG_T); QG_T = null; } }
+function qgOtras(v){ QG_OTRAS = v; qgPintar(); }
+function qgVer(v){ QG_VER = v; qgPintar(); }
+document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && QG_AB) qgCerrar(); });
+function qgPintar(){
+  const box = document.getElementById('qgBody'); if(!box) return;
+  const y = box.parentNode.scrollTop;
+  const L = qgDatos(), act = (typeof SELLO_ULTIMO !== 'undefined' && SELLO_ULTIMO) ? String(SELLO_ULTIMO).split(' ').pop() : '';
+  const sum = function(f){ return L.filter(f).reduce(function(a, x){ return a + x.v; }, 0); };
+  const rNR = sum(function(x){ return x.nr; }), rC = sum(function(x){ return !x.nr; }), rG = sum(function(x){ return x.gsa; }), tot = rNR + rC;
+  const oNR = L.filter(function(x){ return x.nr; }).length, oC = L.length - oNR;
+  let h = '<div class="qg-top"><h2>💥 Quiebre por RGU · HOY<small>Como el BI de Dominion: RGU de las no realizadas sobre el total (completadas + no realizadas)' + (act ? ' · datos de las ' + qgEsc(act) : '') + ' · se actualiza solo</small></h2>'
+    + '<button class="qg-x" onclick="qgCerrar()">✕ Cerrar</button></div><div class="qg-in">';
+  if(!L.length){ box.innerHTML = h + '<div class="qg-nota">Todavía no hay órdenes completadas ni no realizadas hoy (o no han llegado las bandejas).</div></div>'; return; }
+  const q = tot ? rNR * 100 / tot : 0;
+  h += '<div class="qg-cards">'
+    + '<div class="qg-card"><div class="t">Quiebre</div><div class="n ' + (q > 40 ? 'mal' : 'ok') + '">' + qgP(rNR, tot) + '</div><div class="p">' + qgN(rNR) + ' RGU en ' + oNR + ' órdenes no realizadas</div></div>'
+    + '<div class="qg-card"><div class="t">Quiebre GSA</div><div class="n neu">' + qgP(rG, tot) + '</div><div class="p">' + qgN(rG) + ' RGU completadas por GSA</div></div>'
+    + '<div class="qg-card"><div class="t">Efectividad</div><div class="n ' + (q > 40 ? 'mal' : 'ok') + '">' + qgP(rC - rG, tot) + '</div><div class="p">' + qgN(rC - rG) + ' RGU completadas de ' + qgN(tot) + '</div></div>'
+    + '<div class="qg-card"><div class="t">Total RGU</div><div class="n neu">' + qgN(tot) + '</div><div class="p">' + oC + ' completadas · ' + oNR + ' no realizadas</div></div></div>';
+  h += '<div class="qg-chips"><b>Otras actividades</b> (modificación, upgrade…)'
+    + '<button class="' + (QG_OTRAS === 0 ? 'on' : '') + '" onclick="qgOtras(0)">valen 0</button><button class="' + (QG_OTRAS === 1 ? 'on' : '') + '" onclick="qgOtras(1)">valen 1</button></div>';
+  /* derivaciones por cierre (area de derivacion), como el BI */
+  const D = {}; L.filter(function(x){ return x.nr; }).forEach(function(x){ const k = x.der || '(sin área)'; const d = D[k] || (D[k] = { r:0, o:0, c:{} }); d.r += x.v; d.o++; const c = x.cie || '(sin código)'; d.c[c] = (d.c[c] || 0) + 1; });
+  const dk = Object.keys(D).sort(function(a, b){ return D[b].r - D[a].r || a.localeCompare(b); });
+  h += '<h3>Derivaciones por cierre</h3><div class="qg-wrap"><table><thead><tr><th class="izq">Área derivación</th><th class="izq">Códigos de cierre</th><th>% por área</th><th>RGU</th><th>Órdenes</th></tr></thead><tbody>';
+  dk.forEach(function(k){ const d = D[k]; h += '<tr><td class="izq">' + qgEsc(k) + '</td><td class="izq">' + Object.keys(d.c).map(function(c){ return qgEsc(c) + ' (' + d.c[c] + ')'; }).join(' · ') + '</td><td>' + qgP(d.r, rNR) + '</td><td class="v">' + qgN(d.r) + '</td><td>' + d.o + '</td></tr>'; });
+  h += '<tr class="tot"><td class="izq">Total</td><td></td><td>' + (rNR ? '100,00 %' : '–') + '</td><td>' + qgN(rNR) + '</td><td>' + oNR + '</td></tr></tbody></table></div>';
+  /* por actividad */
+  const F = {}; L.forEach(function(x){ const f = F[x.fam] || (F[x.fam] = { oc:0, rc:0, on:0, rn:0 }); if(x.nr){ f.on++; f.rn += x.v; } else { f.oc++; f.rc += x.v; } });
+  const fk = Object.keys(F).sort(function(a, b){ return (F[b].rc + F[b].rn) - (F[a].rc + F[a].rn) || a.localeCompare(b); });
+  h += '<h3>Por actividad</h3><div class="qg-wrap"><table><thead><tr><th class="izq">Actividad</th><th>Completadas</th><th>RGU completadas</th><th>No realizadas</th><th>RGU no realizadas</th><th>Total RGU</th><th>Quiebre</th><th>Peso en el quiebre</th></tr></thead><tbody>';
+  fk.forEach(function(k){ const f = F[k], t = f.rc + f.rn;
+    h += '<tr><td class="izq">' + qgEsc(k) + '</td><td>' + f.oc + '</td><td>' + qgN(f.rc) + '</td><td>' + f.on + '</td><td class="v ' + (f.rn ? 'mal' : '') + '">' + qgN(f.rn) + '</td><td>' + qgN(t) + '</td><td>' + qgP(f.rn, t) + '</td><td>' + qgP(f.rn, tot)
+      + '<div class="qg-bar"><i style="width:' + (tot ? Math.min(100, f.rn * 100 / tot) : 0) + '%"></i></div></td></tr>'; });
+  h += '<tr class="tot"><td class="izq">Total</td><td>' + oC + '</td><td>' + qgN(rC) + '</td><td>' + oNR + '</td><td>' + qgN(rNR) + '</td><td>' + qgN(tot) + '</td><td>' + qgP(rNR, tot) + '</td><td>' + qgP(rNR, tot) + '</td></tr></tbody></table></div>'
+    + '<div class="qg-nota"><b>Peso en el quiebre</b> = cuánto aporta esa actividad al quiebre total (la suma da el quiebre del día).</div>';
+  /* detalle orden por orden */
+  const V = L.filter(function(x){ return QG_VER === 'todas' || (QG_VER === 'nr' ? x.nr : !x.nr); })
+    .sort(function(a, b){ return (b.nr - a.nr) || (b.v - a.v) || a.tec.localeCompare(b.tec); });
+  h += '<h3>Detalle de cada orden y su valor</h3><div class="qg-chips">'
+    + [['nr', 'No realizadas (' + oNR + ')'], ['com', 'Completadas (' + oC + ')'], ['todas', 'Todas (' + L.length + ')']].map(function(o){ return '<button class="' + (QG_VER === o[0] ? 'on' : '') + '" onclick="qgVer(\'' + o[0] + '\')">' + o[1] + '</button>'; }).join('') + '</div>';
+  h += '<div class="qg-wrap"><table><thead><tr><th class="izq">OT</th><th class="izq">Técnico</th><th class="izq">Actividad</th><th class="izq">Estado</th><th>RGU</th><th class="izq">Código de cierre</th><th class="izq">Área derivación</th><th class="izq">Franja</th></tr></thead><tbody>';
+  V.forEach(function(x){ h += '<tr><td class="izq ot">' + qgEsc(x.ot) + '</td><td class="izq">' + qgEsc(x.tec) + '</td><td class="izq">' + qgEsc(x.tipo) + '</td><td class="izq"><span class="qg-e ' + (x.nr ? 'n' : 'c') + '">' + (x.nr ? 'No realizada' : 'Completada') + '</span>' + (x.gsa ? ' <span class="qg-e n">GSA</span>' : '') + '</td><td class="v">' + qgN(x.v) + '</td><td class="izq">' + qgEsc(x.cie) + '</td><td class="izq">' + qgEsc(x.der) + '</td><td class="izq">' + qgEsc(x.fr) + '</td></tr>'; });
+  h += '<tr class="tot"><td class="izq" colspan="4">Total</td><td>' + qgN(V.reduce(function(a, x){ return a + x.v; }, 0)) + '</td><td colspan="3"></td></tr></tbody></table></div>';
+  h += '<div class="qg-nota">Valor de cada orden: alta, alta traslado y migración = su play (1, 2 o 3; sin play = 1) · reparación = 1 · otras = ' + QG_OTRAS + '. Solo las órdenes de tus técnicos (Quilpué y Villa Alemana) del día en curso: el BI de la empresa mira toda la región, así que puede dar algo distinto. Canceladas, suspendidas y en curso no cuentan.</div></div>';
+  box.innerHTML = h; box.parentNode.scrollTop = y;
+}
 </script>
 
 </body>
