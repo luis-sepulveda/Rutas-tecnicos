@@ -19710,6 +19710,9 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') cerrarM
   #anDet .pastel .an-ts td.l.top b { display:inline-block; min-width:18px; color:#a15c07; font-size:11px; }
   #anDet .pastel .an-top-ley { display:inline-block; background:#fdf1d6; color:#8a4b06; font-weight:700; border-radius:6px; padding:1px 8px; box-shadow:inset 3px 0 0 #e8a33a; }
   /* (03-11-2026) ventana "Noviembre día a día" (migraciones) */
+  #anDet .an-dia-meses { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 12px; }
+  #anDet .an-dia-meses button { border:1px solid #d1d5db; background:#fff; color:#1f2937; border-radius:999px; padding:6px 14px; font:600 13px 'DM Sans',system-ui,sans-serif; cursor:pointer; }
+  #anDet .an-dia-meses button.on { background:#1f2937; color:#fff; border-color:#1f2937; }
   #anDet .an-dia-res { background:#f8fafc; border:1px solid #eef0f3; border-radius:12px; padding:10px 14px; font-size:13px; color:#374151; margin:4px 0 16px; }
   #anDet .an-dia-res b { color:#0f172a; }
   #anDet .an-dia-sec { font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:#64748b; margin:6px 0 8px; }
@@ -20005,7 +20008,7 @@ function anOrdLista(){
     ['hoy','Resumen WhatsApp','El resumen del día para mandar por WhatsApp','anDiaIr(abrirResumenWsp)'],
     ['hoy','Derivadas de hoy','Visitadas, derivadas y por visitar, tal como van',"migDer('hoy')"],
     ['hoy','Resumen supervisores','Por qué y quién, con filtro por supervisor y fotos',"migIr('abrirResMig')"],
-    ['hoy','Quiebre por RGU','Como el BI: quiebre, efectividad, derivaciones por cierre y el valor de cada orden','qgAbrir()']];   /* (27-11-2026) */
+    ['hoy','Quiebre por RGU','Como el BI: hoy y día a día del mes y el anterior (quiebre, efectividad, causas y el valor de cada orden)','qgAbrir()']];   /* (27-11-2026) */
   /* (27-11-2026, 12:45) Luis: "cambialo porfa solo yo lo veo": Quiebre por RGU solo con la clave de Luis (mdSoyLuis, como la Pantalla 3) */
   if(!(typeof mdSoyLuis === 'function' && mdSoyLuis())) L.splice(L.length - 1, 1);
   anMesesLista().slice().reverse().forEach(function(k){ L.push(['mes', anMesNom(k), (anMesEnCurso(k) ? 'En curso, hasta ayer' : 'Mes completo') + ' · todo el detalle del mes', "anMesAbrir('" + k + "')"]); });
@@ -21003,7 +21006,7 @@ function anDetPintar(){
     + '<div style="display:flex;gap:8px;align-items:center">' + (fam === 'Migraciones' ? /* (07-11-2026, 12:35) Luis: "saca el boton informes que esta dentro de la tarjeta de migraciones" (quedan en Informes de la pantalla principal) */ anSonidoHtml() : '') + '<span class="an-updbox">' + anUpdHtml() + '</span>'
     + (AN_DET.volver ? '<button class="an-x" onclick="anTsAbrir(\'' + AN_DET.volver + '\')">‹ Volver a técnicos</button>' : '')
     + (AN_DET.volverSeg ? '<button class="an-x" onclick="anSegAbrir()">‹ Volver a Seguimiento</button>' : '')
-    + (AN_DET.volverDiario ? '<button class="an-x" onclick="anDiarioAbrir()">‹ Volver a día a día</button>' : '')
+    + (AN_DET.volverDiario ? '<button class="an-x" onclick="anDiarioAbrir(1)">‹ Volver a día a día</button>' : '')
     + '<button class="an-x" onclick="anDetCerrar()">✕ Cerrar</button></div></div>';
   h += '<div class="an-kpis">'
     + '<div class="an-kpi"><small>Completitud</small><b style="color:' + anCol(s.comp) + '">' + mpPc(s.comp) + '</b><br><span>' + (dl === null ? 'sin período para comparar' : (dl >= 0 ? '▲ ' : '▼ ') + P2(Math.abs(dl)) + ' pts ' + antTx) + '</span></div>'
@@ -21538,8 +21541,13 @@ var AN_DOW6 = ['Lun','Mar','Mié','Jue','Vie','Sáb'];
 function anDow6(iso){ var d = new Date(+iso.slice(0,4), +iso.slice(4,6)-1, +iso.slice(6,8)); return (d.getDay() + 6) % 7; }
 function anDiaStat(D, iso){ return mpSt(D.R.filter(function(x){ return x.fam === 'Migraciones' && x.iso === iso; })); }
 function anDiaCls(s){ if(!s.vis) return 'vac'; /* (09-11-2026) Luis: "cambia todo": sin gris por pocas visitas, el color va siempre por el % */ return s.comp >= MP_META ? 'ok' : s.comp >= MP_AMB ? 'med' : 'baj'; }
-function anDiarioAbrir(){
-  AN_DET = { diario:true };
+/* (28-11-2026) Luis (captura de "Noviembre día a día"): "en esta pantalla agrega los meses porfa para ver dia a dia".
+   Botones de mes arriba (todos los meses con migraciones en el histórico, el en curso primero). AN_DIA_MES = 'AAAAMM' elegido
+   ('' = mes en curso). En un mes anterior no se muestra "Esta semana": solo el resumen del mes y su cuadro día a día. */
+var AN_DIA_MES = '';
+function anDiaMes(k){ AN_DIA_MES = k; const m = document.getElementById('anDet'); if(m) m.scrollTop = 0; anDetPintar(); }
+function anDiarioAbrir(volver){
+  AN_DET = { diario:true }; if(!volver) AN_DIA_MES = '';   /* al volver desde un dia se queda en el mes que estaba */
   var m = document.getElementById('anDet');
   if(!m){ m = document.createElement('div'); m.id = 'anDet'; m.onclick = function(e){ if(e.target === m) anDetCerrar(); }; document.body.appendChild(m); }
   m.classList.add('abierto'); m.scrollTop = 0; anDetPintar();
@@ -21547,15 +21555,26 @@ function anDiarioAbrir(){
 function anDiarioPintar(m){
   var y = m.scrollTop, D = anFilas();
   var semIni = D.semHoy.replace(/-/g, '');                 // lunes de la semana en curso, YYYYMMDD
-  var nomMes = AN_NOMMES[+D.mesHoy.slice(4) - 1];
+  /* (28-11-2026) meses con migraciones en el historico; el elegido (por defecto el mes en curso) */
+  var mesesSet = {}; mesesSet[D.mesHoy] = 1; D.R.forEach(function(x){ if(x.fam === 'Migraciones' && x.mes) mesesSet[x.mes] = 1; });
+  var meses = Object.keys(mesesSet).sort().reverse();
+  var MES = (AN_DIA_MES && mesesSet[AN_DIA_MES]) ? AN_DIA_MES : D.mesHoy, esCur = MES === D.mesHoy;
+  var nomMes = AN_NOMMES[+MES.slice(4) - 1];
   var semTot = mpSt(D.R.filter(function(x){ return x.fam === 'Migraciones' && x.sem === D.semHoy; }));
-  var mesTot = mpSt(D.R.filter(function(x){ return x.fam === 'Migraciones' && x.mes === D.mesHoy; }));
+  var mesTot = mpSt(D.R.filter(function(x){ return x.fam === 'Migraciones' && x.mes === MES; }));
   var clickDia = function(iso){ return ' onclick="anDetAbrir(\'Migraciones\', {t:\'dia\', k:\'' + iso + '\'}); AN_DET.volverDiario = true; anDetPintar()"'; };
-  var h = '<div class="an-md"><div class="an-mdtop"><h2>📅 ' + nomMes + ' día a día <small>· migraciones'
+  var h = '<div class="an-md"><div class="an-mdtop"><h2>📅 ' + nomMes + (esCur ? '' : ' ' + MES.slice(0, 4)) + ' día a día <small>· migraciones'
     + (AN_COM !== 'Todo' ? ' · ' + (AN_COM === 'QUILPUE' ? 'Quilpué' : 'Villa Alemana') : '') + (AN_SUP !== 'Todo' ? ' · ' + derTitulo(AN_SUP) : '') + '</small></h2>'
     + '<div style="display:flex;gap:8px;align-items:center"><span class="an-updbox">' + anUpdHtml() + '</span><button class="an-x" onclick="anDetCerrar()">✕ Cerrar</button></div></div>'
     + '<div class="an-card pastel" style="margin-top:12px">';
   if(D.cargando){ h += '<div class="an-vac">Cargando el histórico…</div></div></div>'; m.innerHTML = h; m.scrollTop = y; return; }
+  /* (28-11-2026) botones de mes */
+  h += '<div class="an-dia-meses">' + meses.map(function(k){ var t = mpSt(D.R.filter(function(x){ return x.fam === 'Migraciones' && x.mes === k; }));
+      return '<button class="' + (k === MES ? 'on' : '') + '" onclick="anDiaMes(\'' + k + '\')">' + AN_NOMMES[+k.slice(4) - 1] + ' ' + k.slice(0, 4) + (k === D.mesHoy ? ' · en curso' : '')
+        + (t.vis ? ' <b style="color:' + (k === MES ? '#fff' : anColP(t.comp)) + '">' + mpPc(t.comp) + '</b>' : '') + '</button>'; }).join('') + '</div>';
+  if(!esCur){
+    h += '<div class="an-dia-res">' + nomMes + ' cerró en <b style="color:' + anColP(mesTot.comp) + '">' + mpPc(mesTot.comp) + '</b> (' + mesTot.co + ' de ' + mesTot.vis + ' visitadas). Meta ' + MP_META + '%.</div>';
+  } else {
   h += '<div class="an-dia-res">' + nomMes + ' va en <b style="color:' + anColP(mesTot.comp) + '">' + mpPc(mesTot.comp) + '</b> (' + mesTot.co + ' de ' + mesTot.vis + ' visitadas) · esta semana (S' + derNumSemana(D.semHoy) + ') <b style="color:' + anColP(semTot.comp) + '">' + mpPc(semTot.comp) + '</b> (' + semTot.co + ' de ' + semTot.vis + '). Meta ' + MP_META + '%.</div>';
   /* semana en curso */
   h += '<div class="an-dia-sec">Esta semana · S' + derNumSemana(D.semHoy) + '</div><div class="an-dia-sem">';
@@ -21565,8 +21584,9 @@ function anDiarioPintar(m){
       + (s.vis ? '<div class="pp">' + P2(s.comp) + '%</div><div class="vv">' + s.vis + ' vis.</div>' : '<div class="pp">–</div><div class="vv">sin datos aún</div>') + '</div>';
   }
   h += '</div>';
+  }
   /* mes completo, una fila por semana */
-  var ym = D.mesHoy, fin = new Date(+ym.slice(0, 4), +ym.slice(4), 0).getDate(), weeks = {}, worder = [];
+  var ym = MES, fin = new Date(+ym.slice(0, 4), +ym.slice(4), 0).getDate(), weeks = {}, worder = [];
   for(var d = 1; d <= fin; d++){
     var di = ym + String(d).padStart(2, '0'), dw = anDow6(di);
     if(dw === 6) continue;                                  // domingo
@@ -21574,10 +21594,10 @@ function anDiarioPintar(m){
     if(!weeks[lun]){ weeks[lun] = [null, null, null, null, null, null]; worder.push(lun); }
     weeks[lun][dw] = di;
   }
-  h += '<div class="an-dia-sec">Todo el mes · ' + nomMes.toLowerCase() + ' (se va guardando día a día)</div>';
+  h += '<div class="an-dia-sec">Todo el mes · ' + nomMes.toLowerCase() + (esCur ? ' (se va guardando día a día)' : ' ' + MES.slice(0, 4)) + '</div>';
   h += '<div class="an-dia-meshd"><div></div>' + AN_DOW6.map(function(n){ return '<div>' + n + '</div>'; }).join('') + '</div>';
   worder.forEach(function(lun){
-    var cur = lun === D.semHoy;
+    var cur = esCur && lun === D.semHoy;
     h += '<div class="an-dia-mesrow"><div class="wk">S' + derNumSemana(lun) + (cur ? ' <b style="color:#374151">•</b>' : '') + '</div>';
     for(var c = 0; c < 6; c++){
       var di = weeks[lun][c];
@@ -24775,6 +24795,7 @@ function qgModo(v){ QG_MODO = v; qgPintar(); }
 function qgVer(v){ QG_VER = v; qgPintar(); }
 document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && QG_AB) qgCerrar(); });
 function qgPintar(){
+  if(QG_VISTA === 'dia'){ qgdPintar(); return; }   /* (28-11-2026) vista Dia a dia */
   const box = document.getElementById('qgBody'); if(!box) return;
   const y = box.parentNode.scrollTop;
   const L = qgDatos(), act = (typeof SELLO_ULTIMO !== 'undefined' && SELLO_ULTIMO) ? String(SELLO_ULTIMO).split(' ').pop() : '';
@@ -24782,7 +24803,7 @@ function qgPintar(){
   const rNR = sum(function(x){ return x.nr; }), rC = sum(function(x){ return !x.nr; }), rG = sum(function(x){ return x.gsa; }), tot = rNR + rC;
   const oNR = L.filter(function(x){ return x.nr; }).length, oC = L.length - oNR;
   let h = '<div class="qg-top"><h2>💥 Quiebre por RGU · HOY<small>Como el BI de Dominion: RGU de las no realizadas sobre el total (completadas + no realizadas)' + (act ? ' · datos de las ' + qgEsc(act) : '') + ' · se actualiza solo</small></h2>'
-    + '<button class="qg-x" onclick="qgCerrar()">✕ Cerrar</button></div><div class="qg-in">';
+    + '<button class="qg-x" onclick="qgCerrar()">✕ Cerrar</button>' + qgTabs() + '</div><div class="qg-in">';
   if(!L.length){ box.innerHTML = h + '<div class="qg-nota">Todavía no hay órdenes completadas ni no realizadas hoy (o no han llegado las bandejas).</div></div>'; return; }
   const q = tot ? rNR * 100 / tot : 0;
   h += '<div class="qg-cards">'
@@ -24830,6 +24851,181 @@ function qgPintar(){
     + '<div class="qg-nota"><b>% de ' + qgEsc(nomV.toLowerCase()) + '</b> = el RGU de la orden sobre el total de esta lista (suma 100 %, como el %PorAreaDerivacion del BI). <b>% del total RGU</b> = sobre todo lo del día (completadas + no realizadas)' + (QG_VER === 'nr' ? ': en las no realizadas suma el quiebre (' + qgP(rV, tot) + ')' : '') + '.</div>';
   h += '<div class="qg-nota">Valor de cada orden: ' + (QG_MODO === 'bi' ? '<b>como el BI</b> = los RGU del monitor (por componentes: plan banda ancha 1, telefonía 1, primer D-box 1, cada D-box adicional o extensor 0,5; reparación 1; modificación 1)' : '<b>por play</b> = alta, alta traslado y migración su play (1, 2 o 3; sin play = 1) · reparación 1 · otras 0') + '. Solo las órdenes de tus técnicos (Quilpué y Villa Alemana) del día en curso: el BI de la empresa mira toda la región, así que puede dar algo distinto. Canceladas, suspendidas y en curso no cuentan.</div></div>';
   box.innerHTML = h; box.parentNode.scrollTop = y;
+}
+</script>
+
+<style>
+/* ===== (28-11-2026) QUIEBRE POR RGU · DIA A DIA ===== */
+#modalQrgu .qg-tabs { flex:1 1 100%; display:flex; gap:6px; }
+#modalQrgu .qg-tabs button { border:1px solid #3b4d70; background:transparent; color:#dbe4f0; border-radius:999px; padding:5px 14px; font:700 13px 'DM Sans',system-ui,sans-serif; cursor:pointer; }
+#modalQrgu .qg-tabs button.on { background:#fff; color:#13213c; border-color:#fff; }
+#modalQrgu .qgd-graf { background:#fff; border:1px solid #dbe3ee; border-radius:12px; padding:12px 12px 6px; margin-bottom:6px; }
+#modalQrgu .qgd-bars { position:relative; height:170px; display:flex; align-items:flex-end; gap:4px; border-bottom:1px solid #cbd5e1; }
+#modalQrgu .qgd-meta { position:absolute; left:0; right:0; border-top:2px dashed #c81e1e; pointer-events:none; }
+#modalQrgu .qgd-meta span { position:absolute; left:0; top:-17px; font-size:11px; color:#c81e1e; font-weight:700; background:#fff; padding:0 3px; }
+#modalQrgu .qgd-b { flex:1 1 0; min-width:10px; display:flex; flex-direction:column; justify-content:flex-end; align-items:center; height:100%; cursor:pointer; }
+#modalQrgu .qgd-b i { display:block; width:100%; border-radius:4px 4px 0 0; background:#16a34a; }
+#modalQrgu .qgd-b.mal i { background:#dc2626; }
+#modalQrgu .qgd-b.hoy i { opacity:.55; }
+#modalQrgu .qgd-b.sel i { outline:3px solid #13213c; outline-offset:1px; }
+#modalQrgu .qgd-b em { font-style:normal; font-size:10px; color:#334155; font-weight:700; margin-bottom:2px; white-space:nowrap; }
+#modalQrgu .qgd-lbl { display:flex; gap:4px; margin-top:3px; }
+#modalQrgu .qgd-lbl span { flex:1 1 0; min-width:10px; text-align:center; font-size:10px; color:#64748b; }
+#modalQrgu tr.qgd-f { cursor:pointer; }
+#modalQrgu tr.qgd-f:hover td { background:#f8fafc; }
+#modalQrgu tr.qgd-f.sel td { background:#e0e7ff; }
+#modalQrgu tr.qgd-sem td { background:#f1f5f9; font-weight:700; color:#334155; }
+#modalQrgu .qgd-det { background:#fff; border:2px solid #13213c; border-radius:12px; padding:12px 14px; margin-top:16px; }
+#modalQrgu .qgd-det h3:first-child { margin-top:0; }
+#modalQrgu .qg-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:5px; vertical-align:middle; }
+</style>
+<script>
+/* ===== (28-11-2026) QUIEBRE POR RGU · DIA A DIA =====
+   Luis: "me puedes armar en el boton quiebres por rgu, para ver el dia a dia de octubre y noviembre??"
+   - Mismo boton (Analisis de gestion -> Hoy -> Quiebre por RGU), pestana nueva "Dia a dia" (la de HOY queda igual).
+   - Meses: el mes en curso y el anterior (hoy: noviembre y octubre; en diciembre pasa solo a noviembre y diciembre).
+   - Datos: los mismos de la Pantalla 3 (mdFilas): migraciones de dias anteriores = MG, altas/altas traslado/reparaciones
+     = export completo (AN_ACTCOMP) o datos.json, lo demas = datos.json (_DOMI_), y HOY = bandejas (DB).
+   - Valor por play (el RGU con decimales del monitor solo existe en el rutas.json del dia, no queda guardado):
+     alta, alta traslado y migracion = Play de datos.json (1, 2 o 3; sin play = 1); reparacion = 1;
+     otras (modificaciones, upgrade...) = 0, con boton para contarlas como 1.
+   - Quiebre = RGU no realizadas / (RGU completadas + no realizadas). GSA completada = va en Quiebre GSA (como el BI).
+   - Tocar un dia (barra o fila) = detalle de ese dia: causas, por actividad, por tecnico y orden por orden. */
+var QG_VISTA = 'hoy', QG_DMES = '', QG_DDIA = '', QG_DOTRAS = false, QG_DVER = 'nr', QG_DT = null;
+function qgTabs(){
+  return '<div class="qg-tabs"><button class="' + (QG_VISTA === 'hoy' ? 'on' : '') + '" onclick="qgVista(\'hoy\')">Hoy</button>'
+    + '<button class="' + (QG_VISTA === 'dia' ? 'on' : '') + '" onclick="qgVista(\'dia\')">📅 Día a día (este mes y el anterior)</button></div>';
+}
+function qgVista(v){ QG_VISTA = v; const b = document.getElementById('qgBody'); if(b) b.parentNode.scrollTop = 0; qgPintar(); }
+function qgdMes(k){ QG_DMES = k; QG_DDIA = ''; qgPintar(); }
+function qgdDia(iso){ QG_DDIA = (QG_DDIA === iso) ? '' : iso; qgPintar();
+  if(QG_DDIA) setTimeout(function(){ const d = document.querySelector('#modalQrgu .qgd-det'); if(d) d.scrollIntoView({ behavior:'smooth', block:'start' }); }, 30); }
+function qgdOtras(v){ QG_DOTRAS = v; qgPintar(); }
+function qgdVer(v){ QG_DVER = v; qgPintar(); }
+function qgdNom(t){ return String(t || '').toLowerCase().replace(/(^|\s)\S/g, function(c){ return c.toUpperCase(); }); }
+function qgdValor(fam, pl){
+  if(fam === 'Reparaciones') return 1;
+  if(fam === 'Altas' || fam === 'Altas traslado' || fam === 'Migraciones') return (pl >= 1 && pl <= 3) ? pl : 1;
+  return QG_DOTRAS ? 1 : 0;
+}
+/* todas las completadas y no realizadas de Dominion, dia por dia, con su RGU */
+function qgdFilas(){
+  const D = mdFilas(), play = {}, catHoy = {};
+  if(Array.isArray(window.ACT_FILAS)) window.ACT_FILAS.forEach(function(r){
+    const ot = String(r['Orden de Trabajo'] || ''), n = parseInt(r['Play'], 10); if(ot && n >= 1 && n <= 3) play[ot] = n; });
+  Object.keys(typeof DB === 'object' && DB ? DB : {}).forEach(function(t){ (DB[t] || []).forEach(function(o){
+    const m = String(o.cat || o.sub || '').match(/([123])\s*play/i); if(o.o && m) catHoy[String(o.o)] = parseInt(m[1], 10); }); });
+  const L = [];
+  D.R.forEach(function(x){
+    if(x.e !== 'Completado' && x.e !== 'No Realizada') return;
+    const pl = x.hoy ? (catHoy[x.ot] || play[x.ot] || 0) : (play[x.ot] || 0);
+    L.push({ iso:x.iso, mes:x.mes, sem:x.sem, hoy:!!x.hoy, ot:x.ot, tec:qgdNom(mdTec(x.tec)), fam:x.fam, pl:pl,
+      e:x.e, nr:x.e === 'No Realizada', gsa:!!x.gsa && x.e === 'Completado', v:qgdValor(x.fam, pl),
+      cie:x.cod || '', fr:x.fr || '', ciu:x.ciu || x.cx || '' });
+  });
+  return { L:L, cargando:D.cargando, hoyIso:D.hoyIso, mesHoy:D.mesHoy };
+}
+function qgdSt(L){
+  const s = { oc:0, on:0, rc:0, rn:0, rg:0 };
+  L.forEach(function(x){ if(x.nr){ s.on++; s.rn += x.v; } else { s.oc++; s.rc += x.v; if(x.gsa) s.rg += x.v; } });
+  s.tot = s.rc + s.rn; s.q = s.tot ? 100 * s.rn / s.tot : null; return s;
+}
+function qgdFecha(iso){ return iso.slice(6, 8) + '-' + iso.slice(4, 6); }
+function qgdDiaSem(iso){ return ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'][new Date(+iso.slice(0, 4), +iso.slice(4, 6) - 1, +iso.slice(6, 8)).getDay()]; }
+function qgdPintar(){
+  const box = document.getElementById('qgBody'); if(!box) return;
+  const y = box.parentNode.scrollTop;
+  const X = qgdFilas(), mesAnt = anMesAnt(X.mesHoy), meses = [mesAnt, X.mesHoy];
+  if(meses.indexOf(QG_DMES) < 0) QG_DMES = X.mesHoy;
+  const nomMes = function(k){ return MD_MES[+k.slice(4) - 1]; };
+  let h = '<div class="qg-top"><h2>💥 Quiebre por RGU · DÍA A DÍA<small>RGU de las no realizadas sobre el total (completadas + no realizadas), día por día · toca un día para ver su detalle</small></h2>'
+    + '<button class="qg-x" onclick="qgCerrar()">✕ Cerrar</button>' + qgTabs() + '</div><div class="qg-in">';
+  h += '<div class="qg-chips"><b>Mes</b>' + meses.map(function(k){ return '<button class="' + (QG_DMES === k ? 'on' : '') + '" onclick="qgdMes(\'' + k + '\')">' + qgdNom(nomMes(k)) + ' ' + k.slice(0, 4) + (k === X.mesHoy ? ' (con hoy)' : '') + '</button>'; }).join('')
+    + '<b style="margin-left:14px">Otras actividades</b><button class="' + (!QG_DOTRAS ? 'on' : '') + '" onclick="qgdOtras(false)">Valen 0</button><button class="' + (QG_DOTRAS ? 'on' : '') + '" onclick="qgdOtras(true)">Valen 1 (más parecido al BI)</button></div>';
+  if(X.cargando){
+    box.innerHTML = h + '<div class="qg-nota">Cargando los días anteriores (datos.json y el histórico de migraciones)…</div></div>';
+    if(!QG_DT) QG_DT = setTimeout(function(){ QG_DT = null; if(QG_AB && QG_VISTA === 'dia') qgPintar(); }, 1500);
+    return;
+  }
+  const LM = X.L.filter(function(x){ return x.mes === QG_DMES; });
+  const porDia = {}; LM.forEach(function(x){ (porDia[x.iso] = porDia[x.iso] || []).push(x); });
+  const dias = Object.keys(porDia).sort();
+  if(!dias.length){ box.innerHTML = h + '<div class="qg-nota">No hay datos de ' + nomMes(QG_DMES) + '.</div></div>'; return; }
+  const SM = qgdSt(LM), st = {}; dias.forEach(function(d){ st[d] = qgdSt(porDia[d]); });
+  const SMh = qgdSt(LM.filter(function(x){ return !x.hoy; }));
+  const cls = function(q){ return q === null ? 'neu' : q > 40 ? 'mal' : 'ok'; };
+  /* tarjetas del mes */
+  const qd = dias.filter(function(d){ return st[d].q !== null && d !== X.hoyIso; });
+  const peor = qd.slice().sort(function(a, b){ return st[b].q - st[a].q; })[0], mejor = qd.slice().sort(function(a, b){ return st[a].q - st[b].q; })[0];
+  const sobre = qd.filter(function(d){ return st[d].q > 40; }).length;
+  h += '<div class="qg-cards">'
+    + '<div class="qg-card"><div class="t">Quiebre de ' + nomMes(QG_DMES) + '</div><div class="n ' + cls(SM.q) + '">' + qgP(SM.rn, SM.tot) + '</div><div class="p">' + qgN(SM.rn) + ' RGU en ' + SM.on + ' órdenes no realizadas' + (QG_DMES === X.mesHoy && SMh.tot !== SM.tot ? ' · hasta ayer ' + qgP(SMh.rn, SMh.tot) : '') + '</div></div>'
+    + '<div class="qg-card"><div class="t">Quiebre GSA</div><div class="n neu">' + qgP(SM.rg, SM.tot) + '</div><div class="p">' + qgN(SM.rg) + ' RGU completadas por GSA</div></div>'
+    + '<div class="qg-card"><div class="t">Efectividad</div><div class="n ' + cls(SM.q) + '">' + qgP(SM.rc - SM.rg, SM.tot) + '</div><div class="p">' + qgN(SM.rc - SM.rg) + ' RGU completadas de ' + qgN(SM.tot) + '</div></div>'
+    + '<div class="qg-card"><div class="t">Días sobre 40 %</div><div class="n ' + (sobre ? 'mal' : 'ok') + '">' + sobre + ' de ' + qd.length + '</div><div class="p">' + (peor ? 'Peor: ' + qgdDiaSem(peor) + ' ' + qgdFecha(peor) + ' (' + qgP(st[peor].rn, st[peor].tot) + ')' : '') + (mejor ? '<br>Mejor: ' + qgdDiaSem(mejor) + ' ' + qgdFecha(mejor) + ' (' + qgP(st[mejor].rn, st[mejor].tot) + ')' : '') + '</div></div></div>';
+  /* grafico de barras */
+  const maxQ = Math.max(50, Math.ceil(Math.max.apply(null, dias.map(function(d){ return st[d].q || 0; })) / 10) * 10);
+  h += '<div class="qgd-graf"><div class="qgd-bars"><div class="qgd-meta" style="bottom:' + (40 * 100 / maxQ) + '%"><span>40 %</span></div>';
+  dias.forEach(function(d){ const q = st[d].q || 0;
+    h += '<div class="qgd-b ' + (q > 40 ? 'mal' : '') + (d === X.hoyIso ? ' hoy' : '') + (d === QG_DDIA ? ' sel' : '') + '" onclick="qgdDia(\'' + d + '\')" title="' + qgdDiaSem(d) + ' ' + qgdFecha(d) + ': ' + qgP(st[d].rn, st[d].tot) + ' (' + qgN(st[d].rn) + ' de ' + qgN(st[d].tot) + ' RGU)' + (d === X.hoyIso ? ' · hoy, en curso' : '') + '"><em>' + (st[d].q === null ? '–' : st[d].q.toFixed(0)) + '</em><i style="height:' + (q * 100 / maxQ) + '%"></i></div>'; });
+  h += '</div><div class="qgd-lbl">' + dias.map(function(d){ return '<span>' + d.slice(6, 8) + '</span>'; }).join('') + '</div></div>'
+    + '<div class="qg-nota">Rojo = quiebre sobre 40 %, verde = 40 % o menos.' + (porDia[X.hoyIso] ? ' La barra clara es hoy (todavía en curso).' : '') + '</div>';
+  /* tabla dia por dia, con subtotal por semana */
+  h += '<h3>Día por día</h3><div class="qg-wrap"><table><thead><tr><th class="izq">Día</th><th>Completadas</th><th>RGU completadas</th><th>No realizadas</th><th>RGU no realizadas</th><th>Total RGU</th><th>Quiebre</th><th>Quiebre GSA</th><th>Efectividad</th></tr></thead><tbody>';
+  const fila = function(s, lbl, extra, on){ return '<tr' + extra + '><td class="izq">' + lbl + '</td><td>' + s.oc + '</td><td>' + qgN(s.rc) + '</td><td>' + s.on + '</td><td class="v ' + (s.rn ? 'mal' : '') + '">' + qgN(s.rn) + '</td><td>' + qgN(s.tot) + '</td><td class="v ' + cls(s.q) + '">' + qgP(s.rn, s.tot) + '</td><td>' + qgP(s.rg, s.tot) + '</td><td>' + qgP(s.rc - s.rg, s.tot) + '</td></tr>'; };
+  let semAct = null, semL = [];
+  const cierraSem = function(){ if(!semL.length) return; const s = qgdSt(semL); h += fila(s, 'Semana del lunes ' + qgdFecha(semAct.replace(/-/g, '')), ' class="qgd-sem"'); semL = []; };
+  dias.forEach(function(d){
+    const sem = porDia[d][0].sem; if(semAct !== null && sem !== semAct) cierraSem(); semAct = sem; semL = semL.concat(porDia[d]);
+    h += fila(st[d], qgdDiaSem(d) + ' ' + qgdFecha(d) + (d === X.hoyIso ? ' <span class="qg-e c">hoy, en curso</span>' : ''), ' class="qgd-f' + (d === QG_DDIA ? ' sel' : '') + '" onclick="qgdDia(\'' + d + '\')"');
+  });
+  cierraSem();
+  h = h + fila(SM, 'Total ' + nomMes(QG_DMES), ' class="tot"') + '</tbody></table></div>';
+  /* detalle del dia elegido */
+  if(QG_DDIA && porDia[QG_DDIA]) h += qgdDetalle(porDia[QG_DDIA], QG_DDIA, X.hoyIso);
+  h += '<div class="qg-nota">Valor de cada orden <b>por play</b>: alta, alta traslado y migración = su play (1, 2 o 3, del export; sin play = 1) · reparación 1 · otras actividades ' + (QG_DOTRAS ? '1' : '0') + '. Los RGU con decimales del monitor (D-box adicional o extensor 0,5) solo existen en las bandejas del día, no quedan guardados: por eso aquí todos los días (también hoy) van por play y la pestaña <b>Hoy</b> puede dar un poco distinto. '
+    + 'Son todas las órdenes de técnicos de Dominion que tienes en los datos (Quilpué y Villa Alemana, y las de otras comunas que trae el export completo); el BI mira toda la región. La GSA completada va en Quiebre GSA, como en el BI. Canceladas y suspendidas no cuentan.</div></div>';
+  box.innerHTML = h; box.parentNode.scrollTop = y;
+}
+function qgdDetalle(L, iso, hoyIso){
+  const s = qgdSt(L), cls = function(q){ return q === null ? 'neu' : q > 40 ? 'mal' : 'ok'; };
+  let h = '<div class="qgd-det"><h3>Detalle del ' + qgdDiaSem(iso) + ' ' + qgdFecha(iso) + (iso === hoyIso ? ' (hoy, en curso)' : '') + ' <button class="qg-x" style="float:right;background:#13213c;color:#fff" onclick="qgdDia(\'' + iso + '\')">✕ Cerrar detalle</button></h3>';
+  h += '<div class="qg-cards">'
+    + '<div class="qg-card"><div class="t">Quiebre</div><div class="n ' + cls(s.q) + '">' + qgP(s.rn, s.tot) + '</div><div class="p">' + qgN(s.rn) + ' RGU en ' + s.on + ' órdenes</div></div>'
+    + '<div class="qg-card"><div class="t">Quiebre GSA</div><div class="n neu">' + qgP(s.rg, s.tot) + '</div><div class="p">' + qgN(s.rg) + ' RGU</div></div>'
+    + '<div class="qg-card"><div class="t">Efectividad</div><div class="n ' + cls(s.q) + '">' + qgP(s.rc - s.rg, s.tot) + '</div><div class="p">' + qgN(s.rc - s.rg) + ' de ' + qgN(s.tot) + ' RGU</div></div>'
+    + '<div class="qg-card"><div class="t">Total RGU</div><div class="n neu">' + qgN(s.tot) + '</div><div class="p">' + s.oc + ' completadas · ' + s.on + ' no realizadas</div></div></div>';
+  /* por que se cayeron (codigo de cierre y de quien es) */
+  const C = {}; L.filter(function(x){ return x.nr; }).forEach(function(x){ const k = x.cie || '(sin código)'; const c = C[k] || (C[k] = { r:0, o:0, q:mgResp(x.cie) }); c.r += x.v; c.o++; });
+  const ck = Object.keys(C).sort(function(a, b){ return C[b].r - C[a].r || a.localeCompare(b); });
+  const QN = { cli:'Cliente', vtr:'VTR/CLARO', dom:'Dominion' };
+  h += '<h3>Por qué se cayeron</h3><div class="qg-wrap"><table><thead><tr><th class="izq">Código de cierre</th><th class="izq">De quién</th><th>Órdenes</th><th>RGU</th><th>% del quiebre</th><th>Pts del quiebre</th></tr></thead><tbody>';
+  ck.forEach(function(k){ const c = C[k]; h += '<tr><td class="izq">' + qgEsc(k) + '</td><td class="izq"><span class="qg-dot" style="background:' + MG_RCOL[c.q] + '"></span>' + QN[c.q] + '</td><td>' + c.o + '</td><td class="v">' + qgN(c.r) + '</td><td>' + qgP(c.r, s.rn) + '</td><td>' + qgP(c.r, s.tot) + '</td></tr>'; });
+  const R3 = { cli:0, vtr:0, dom:0 }; ck.forEach(function(k){ R3[C[k].q] += C[k].r; });
+  h += '<tr class="tot"><td class="izq">Total</td><td class="izq">' + ['cli', 'vtr', 'dom'].filter(function(k){ return R3[k]; }).map(function(k){ return QN[k] + ' ' + qgN(R3[k]); }).join(' · ') + '</td><td>' + s.on + '</td><td>' + qgN(s.rn) + '</td><td>' + (s.rn ? '100,00 %' : '–') + '</td><td>' + qgP(s.rn, s.tot) + '</td></tr></tbody></table></div>'
+    + '<div class="qg-nota"><b>Pts del quiebre</b> = cuánto aporta ese código al quiebre del día (la columna suma el quiebre).</div>';
+  /* por actividad */
+  const F = {}; L.forEach(function(x){ (F[x.fam] = F[x.fam] || []).push(x); });
+  const fk = Object.keys(F).sort(function(a, b){ return qgdSt(F[b]).tot - qgdSt(F[a]).tot || a.localeCompare(b); });
+  h += '<h3>Por actividad</h3><div class="qg-wrap"><table><thead><tr><th class="izq">Actividad</th><th>Completadas</th><th>RGU completadas</th><th>No realizadas</th><th>RGU no realizadas</th><th>Quiebre de la actividad</th><th>Pts del quiebre</th></tr></thead><tbody>';
+  fk.forEach(function(k){ const f = qgdSt(F[k]); h += '<tr><td class="izq">' + qgEsc(k) + '</td><td>' + f.oc + '</td><td>' + qgN(f.rc) + '</td><td>' + f.on + '</td><td class="v ' + (f.rn ? 'mal' : '') + '">' + qgN(f.rn) + '</td><td>' + qgP(f.rn, f.tot) + '</td><td>' + qgP(f.rn, s.tot) + '<div class="qg-bar"><i style="width:' + (s.tot ? Math.min(100, f.rn * 100 / s.tot) : 0) + '%"></i></div></td></tr>'; });
+  h += '</tbody></table></div>';
+  /* por tecnico */
+  const T = {}; L.forEach(function(x){ (T[x.tec] = T[x.tec] || []).push(x); });
+  const tk = Object.keys(T).sort(function(a, b){ return qgdSt(T[b]).rn - qgdSt(T[a]).rn || a.localeCompare(b); });
+  h += '<h3>Por técnico</h3><div class="qg-wrap"><table><thead><tr><th class="izq">Técnico</th><th>Completadas</th><th>RGU completadas</th><th>No realizadas</th><th>RGU no realizadas</th><th>Quiebre del técnico</th><th>Pts del quiebre del día</th></tr></thead><tbody>';
+  tk.forEach(function(k){ const f = qgdSt(T[k]); h += '<tr><td class="izq">' + qgEsc(k) + '</td><td>' + f.oc + '</td><td>' + qgN(f.rc) + '</td><td>' + f.on + '</td><td class="v ' + (f.rn ? 'mal' : '') + '">' + qgN(f.rn) + '</td><td class="' + cls(f.q) + '">' + qgP(f.rn, f.tot) + '</td><td>' + qgP(f.rn, s.tot) + '</td></tr>'; });
+  h += '</tbody></table></div>';
+  /* orden por orden */
+  const V = L.filter(function(x){ return QG_DVER === 'todas' || (QG_DVER === 'nr' ? x.nr : !x.nr); })
+    .sort(function(a, b){ return (b.nr - a.nr) || (b.v - a.v) || a.tec.localeCompare(b.tec); });
+  const rV = V.reduce(function(a, x){ return a + x.v; }, 0);
+  h += '<h3>Orden por orden</h3><div class="qg-chips">' + [['nr', 'No realizadas (' + s.on + ')'], ['com', 'Completadas (' + s.oc + ')'], ['todas', 'Todas (' + L.length + ')']]
+    .map(function(o){ return '<button class="' + (QG_DVER === o[0] ? 'on' : '') + '" onclick="qgdVer(\'' + o[0] + '\')">' + o[1] + '</button>'; }).join('') + '</div>';
+  h += '<div class="qg-wrap"><table><thead><tr><th class="izq">OT</th><th class="izq">Técnico</th><th class="izq">Actividad</th><th>Play</th><th class="izq">Estado</th><th>RGU</th><th>% del total RGU</th><th class="izq">Código de cierre</th><th class="izq">Franja</th><th class="izq">Comuna</th></tr></thead><tbody>';
+  V.forEach(function(x){ h += '<tr><td class="izq ot">' + qgEsc(x.ot) + '</td><td class="izq">' + qgEsc(x.tec) + '</td><td class="izq">' + qgEsc(x.fam) + '</td><td>' + (x.pl ? x.pl : '–') + '</td><td class="izq"><span class="qg-e ' + (x.nr ? 'n' : 'c') + '">' + (x.nr ? 'No realizada' : 'Completada') + '</span>' + (x.gsa ? ' <span class="qg-e n">GSA</span>' : '') + '</td><td class="v">' + qgN(x.v) + '</td><td>' + qgP(x.v, s.tot) + '</td><td class="izq">' + qgEsc(x.cie) + '</td><td class="izq">' + qgEsc(x.fr) + '</td><td class="izq">' + qgEsc(qgdNom(x.ciu)) + '</td></tr>'; });
+  h += '<tr class="tot"><td class="izq" colspan="5">Total</td><td>' + qgN(rV) + '</td><td>' + qgP(rV, s.tot) + '</td><td colspan="3"></td></tr></tbody></table></div></div>';
+  return h;
 }
 </script>
 
