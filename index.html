@@ -24867,6 +24867,7 @@ function qgPintar(){
 #modalQrgu .qgd-b i { display:block; width:100%; border-radius:4px 4px 0 0; background:#16a34a; }
 #modalQrgu .qgd-b.mal i { background:#dc2626; }
 #modalQrgu .qgd-b.hoy i { opacity:.55; }
+#modalQrgu .qgd-b.inc i { background:repeating-linear-gradient(45deg,#cbd5e1 0 5px,#e2e8f0 5px 10px); }
 #modalQrgu .qgd-b.sel i { outline:3px solid #13213c; outline-offset:1px; }
 #modalQrgu .qgd-b em { font-style:normal; font-size:10px; color:#334155; font-weight:700; margin-bottom:2px; white-space:nowrap; }
 #modalQrgu .qgd-lbl { display:flex; gap:4px; margin-top:3px; }
@@ -24923,7 +24924,13 @@ function qgdFilas(){
       e:x.e, nr:x.e === 'No Realizada', gsa:!!x.gsa && x.e === 'Completado', v:qgdValor(x.fam, pl),
       cie:x.cod || '', fr:x.fr || '', ciu:x.ciu || x.cx || '' });
   });
-  return { L:L, cargando:D.cargando, hoyIso:D.hoyIso, mesHoy:D.mesHoy };
+  /* (28-11-2026, revision con datos reales) dias que SI estan completos: los que trae datos.json o el export completo.
+     Un dia anterior que no esta en ninguno (ej. 27-11 cuando datos.json llega hasta el 26-11) solo tiene las migraciones (MG):
+     se marca "incompleto" y no entra en Dias sobre 40 % ni en peor / mejor dia. */
+  const ok = {};
+  if(Array.isArray(window.ACT_FILAS)) window.ACT_FILAS.forEach(function(r){ const q = /^(\d{2})-(\d{2})-(\d{4})$/.exec(String(r['Fecha'] || '')); if(q) ok[q[3] + q[2] + q[1]] = 1; });
+  if(window.AN_ACTCOMP && Array.isArray(window.AN_ACTCOMP.dias)) window.AN_ACTCOMP.dias.forEach(function(k){ ok[String(k)] = 1; });
+  return { L:L, cargando:D.cargando, hoyIso:D.hoyIso, mesHoy:D.mesHoy, ok:ok };
 }
 function qgdSt(L){
   const s = { oc:0, on:0, rc:0, rn:0, rg:0 };
@@ -24954,8 +24961,10 @@ function qgdPintar(){
   const SM = qgdSt(LM), st = {}; dias.forEach(function(d){ st[d] = qgdSt(porDia[d]); });
   const SMh = qgdSt(LM.filter(function(x){ return !x.hoy; }));
   const cls = function(q){ return q === null ? 'neu' : q > 40 ? 'mal' : 'ok'; };
+  const inc = function(d){ return d !== X.hoyIso && !X.ok[d]; };
+  const sinPl = function(d){ return porDia[d].filter(function(x){ return !x.pl && (x.fam === 'Altas' || x.fam === 'Altas traslado' || x.fam === 'Migraciones'); }).length; };
   /* tarjetas del mes */
-  const qd = dias.filter(function(d){ return st[d].q !== null && d !== X.hoyIso; });
+  const qd = dias.filter(function(d){ return st[d].q !== null && d !== X.hoyIso && !inc(d); });
   const peor = qd.slice().sort(function(a, b){ return st[b].q - st[a].q; })[0], mejor = qd.slice().sort(function(a, b){ return st[a].q - st[b].q; })[0];
   const sobre = qd.filter(function(d){ return st[d].q > 40; }).length;
   h += '<div class="qg-cards">'
@@ -24967,9 +24976,9 @@ function qgdPintar(){
   const maxQ = Math.max(50, Math.ceil(Math.max.apply(null, dias.map(function(d){ return st[d].q || 0; })) / 10) * 10);
   h += '<div class="qgd-graf"><div class="qgd-bars"><div class="qgd-meta" style="bottom:' + (40 * 100 / maxQ) + '%"><span>40 %</span></div>';
   dias.forEach(function(d){ const q = st[d].q || 0;
-    h += '<div class="qgd-b ' + (q > 40 ? 'mal' : '') + (d === X.hoyIso ? ' hoy' : '') + (d === QG_DDIA ? ' sel' : '') + '" onclick="qgdDia(\'' + d + '\')" title="' + qgdDiaSem(d) + ' ' + qgdFecha(d) + ': ' + qgP(st[d].rn, st[d].tot) + ' (' + qgN(st[d].rn) + ' de ' + qgN(st[d].tot) + ' RGU)' + (d === X.hoyIso ? ' · hoy, en curso' : '') + '"><em>' + (st[d].q === null ? '–' : st[d].q.toFixed(0)) + '</em><i style="height:' + (q * 100 / maxQ) + '%"></i></div>'; });
+    h += '<div class="qgd-b ' + (inc(d) ? 'inc' : q > 40 ? 'mal' : '') + (d === X.hoyIso ? ' hoy' : '') + (d === QG_DDIA ? ' sel' : '') + '" onclick="qgdDia(\'' + d + '\')" title="' + qgdDiaSem(d) + ' ' + qgdFecha(d) + ': ' + qgP(st[d].rn, st[d].tot) + ' (' + qgN(st[d].rn) + ' de ' + qgN(st[d].tot) + ' RGU)' + (d === X.hoyIso ? ' · hoy, en curso' : '') + (inc(d) ? ' · INCOMPLETO: solo migraciones (falta este día en datos.json)' : '') + '"><em>' + (st[d].q === null ? '–' : st[d].q.toFixed(0)) + '</em><i style="height:' + (q * 100 / maxQ) + '%"></i></div>'; });
   h += '</div><div class="qgd-lbl">' + dias.map(function(d){ return '<span>' + d.slice(6, 8) + '</span>'; }).join('') + '</div></div>'
-    + '<div class="qg-nota">Rojo = quiebre sobre 40 %, verde = 40 % o menos.' + (porDia[X.hoyIso] ? ' La barra clara es hoy (todavía en curso).' : '') + '</div>';
+    + '<div class="qg-nota">Rojo = quiebre sobre 40 %, verde = 40 % o menos.' + (porDia[X.hoyIso] ? ' La barra clara es hoy (todavía en curso).' : '') + (dias.some(inc) ? ' <b style="color:#92400e">Gris rayado = día incompleto</b>: todavía no está en datos.json, así que solo trae las migraciones; se completa cuando actualices datos.json con la rutina de la mañana.' : '') + '</div>';
   /* tabla dia por dia, con subtotal por semana */
   h += '<h3>Día por día</h3><div class="qg-wrap"><table><thead><tr><th class="izq">Día</th><th>Completadas</th><th>RGU completadas</th><th>No realizadas</th><th>RGU no realizadas</th><th>Total RGU</th><th>Quiebre</th><th>Quiebre GSA</th><th>Efectividad</th></tr></thead><tbody>';
   const fila = function(s, lbl, extra, on){ return '<tr' + extra + '><td class="izq">' + lbl + '</td><td>' + s.oc + '</td><td>' + qgN(s.rc) + '</td><td>' + s.on + '</td><td class="v ' + (s.rn ? 'mal' : '') + '">' + qgN(s.rn) + '</td><td>' + qgN(s.tot) + '</td><td class="v ' + cls(s.q) + '">' + qgP(s.rn, s.tot) + '</td><td>' + qgP(s.rg, s.tot) + '</td><td>' + qgP(s.rc - s.rg, s.tot) + '</td></tr>'; };
@@ -24977,7 +24986,10 @@ function qgdPintar(){
   const cierraSem = function(){ if(!semL.length) return; const s = qgdSt(semL); h += fila(s, 'Semana del lunes ' + qgdFecha(semAct.replace(/-/g, '')), ' class="qgd-sem"'); semL = []; };
   dias.forEach(function(d){
     const sem = porDia[d][0].sem; if(semAct !== null && sem !== semAct) cierraSem(); semAct = sem; semL = semL.concat(porDia[d]);
-    h += fila(st[d], qgdDiaSem(d) + ' ' + qgdFecha(d) + (d === X.hoyIso ? ' <span class="qg-e c">hoy, en curso</span>' : ''), ' class="qgd-f' + (d === QG_DDIA ? ' sel' : '') + '" onclick="qgdDia(\'' + d + '\')"');
+    const nsp = d === X.hoyIso ? 0 : sinPl(d);
+    h += fila(st[d], qgdDiaSem(d) + ' ' + qgdFecha(d) + (d === X.hoyIso ? ' <span class="qg-e c">hoy, en curso</span>' : '')
+      + (inc(d) ? ' <span class="qg-e" style="background:#fef3c7;color:#92400e" title="Este día todavía no está en datos.json: solo trae las migraciones">⚠ incompleto · solo migraciones</span>' : '')
+      + (nsp && !inc(d) ? ' <span style="font-size:11px;color:#94a3b8" title="Altas, altas traslado o migraciones sin play en el export de ese día: se cuentan como 1 RGU">' + nsp + ' sin play</span>' : ''), ' class="qgd-f' + (d === QG_DDIA ? ' sel' : '') + '" onclick="qgdDia(\'' + d + '\')"');
   });
   cierraSem();
   h = h + fila(SM, 'Total ' + nomMes(QG_DMES), ' class="tot"') + '</tbody></table></div>';
