@@ -106,11 +106,30 @@ if(PZ_ACTIVA && !pzAbierta()) document.documentElement.classList.add('pz-cerrada
    - si vuelve a decir true -> la pagina vuelve a funcionar y cada persona pone su clave de nuevo.
    - si estado.json no se puede leer (sin internet, GitHub caido o el archivo no existe) no hace nada.
    GitHub guarda ese archivo hasta ~5 minutos en su cache: el cambio llega a todos en un maximo de unos 5 minutos.
-   Esta en: Modulo (index.html), Actividades-diario (index.html y pantalla.html) y el Historial (index + generador). */
+   Esta en: Modulo (index.html), Actividades-diario (index.html y pantalla.html) y el Historial (index + generador).
+   (28-11-2026) Luis: "hay alguna manera que si activo este bloqueo afecte a todo el que quiera ingresar a la pagina menos a mi?"
+   -> con "activo": false la pagina se apaga para TODOS MENOS para el navegador que entro con la clave de Luis
+   (pzLlave = huella de su clave, la misma de PZ_CLAVES quien 'Luis'; la clave no esta escrita aqui, solo su huella).
+   A Luis se le muestra una franja roja arriba "Bloqueo activado: solo tu estas entrando". Ojo: en un equipo nuevo Luis
+   tiene que entrar con su clave ANTES de activar el bloqueo (con el bloqueo puesto no aparece la pantalla de la clave). */
 (function(){
   if(window.__pzInterruptor) return; window.__pzInterruptor = 1;
   const URL_ESTADO = 'https://raw.githubusercontent.com/luis-sepulveda/Rutas-tecnicos/main/estado.json';
   const MARCA = 'pzApagado';
+  const DUENO = '05c23bdb5b7e381eb44ff451dd761c13bb7db361995fb4af9e90d9380f6be806';   /* huella de la clave de Luis */
+  const esDueno = function(){ try { return localStorage.getItem('pzLlave') === DUENO || sessionStorage.getItem('pzLlave') === DUENO; } catch(e){ return false; } };
+  const franja = function(on){
+    const poner = function(){
+      let f = document.getElementById('pzSoloYo');
+      if(!on){ if(f) f.remove(); return; }
+      if(f) return;
+      f = document.createElement('div'); f.id = 'pzSoloYo';
+      f.setAttribute('style', 'position:fixed;top:0;left:50%;transform:translateX(-50%);z-index:2147483646;background:#b91c1c;color:#fff;font:700 12.5px system-ui,sans-serif;padding:4px 14px;border-radius:0 0 10px 10px;box-shadow:0 4px 14px rgba(0,0,0,.3);pointer-events:none');
+      f.textContent = '🔒 Bloqueo activado: solo tú estás entrando';
+      document.body.appendChild(f);
+    };
+    if(document.body) poner(); else document.addEventListener('DOMContentLoaded', poner);
+  };
   const borrar = function(){ try { [localStorage, sessionStorage].forEach(function(st){ ['pzLlave','pzDatos','pzEquipoDia'].forEach(function(k){ st.removeItem(k); }); }); } catch(e){} };
   const tapar = function(){
     const poner = function(){
@@ -125,6 +144,7 @@ if(PZ_ACTIVA && !pzAbierta()) document.documentElement.classList.add('pz-cerrada
     if(document.body) poner(); else document.addEventListener('DOMContentLoaded', poner);
   };
   let apagado = false; try { apagado = localStorage.getItem(MARCA) === '1'; } catch(e){}
+  if(apagado && esDueno()){ apagado = false; franja(true); }        /* (28-11-2026) Luis pasa */
   if(apagado){ borrar(); tapar(); }
   const revisar = function(){
     const x = new XMLHttpRequest();          /* XHR y no fetch: asi no pasa por el lector de datos cifrados */
@@ -136,10 +156,14 @@ if(PZ_ACTIVA && !pzAbierta()) document.documentElement.classList.add('pz-cerrada
       if(!j || typeof j.activo !== 'boolean') return;
       if(j.activo === false){
         try { localStorage.setItem(MARCA, '1'); } catch(e){}
+        if(esDueno()){ franja(true); return; }                     /* (28-11-2026) Luis pasa: no se le borra nada */
         borrar(); if(!apagado){ apagado = true; tapar(); }
       } else if(apagado){
         try { localStorage.removeItem(MARCA); } catch(e){}
         location.reload();
+      } else {
+        try { localStorage.removeItem(MARCA); } catch(e){}
+        franja(false);
       }
     };
     x.send();
